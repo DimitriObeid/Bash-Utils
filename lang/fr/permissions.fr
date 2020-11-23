@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Lisez les fichiers "lib/variables/permissions.var" et "docs/variables/variables.pdf"
+# pour plus d'informations sur ces variables. 
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################### DÉFINITION DES MESSAGES DU FICHIER  ##########################
+
+#### FONCTIONS DE TRAITEMENT DE PERMISSIONS DE DOSSIERS
+
+## FONCTION "ChownDir"
+
+# Changement de propriété
+MSG_PERM_CHOWN_DIR="Transfert récursif des droits de propriété du nouveau dossier $(DechoN "$path/") de $(DechoN "$USER") en $(DechoN "$ARG_USERNAME")"    
+
+# Issue
+MSG_PERM_CHOWN_DIR_SUCCESS="Les droits de propriété du dossier $(DechoS "$name") ont été transférées de $(DechoS "$USER") à $(DechoS "$ARG_USERNAME") avec succès "
+MSG_PERM_CHOWN_DIR_FAIL="Impossible de transférer la propriété les droits du dossier $(DechoE "$path/") à $(DechoE "$ARG_USERNAME")"
+MSG_PERM_CHOWN_DIR_FAIL_ADVICE="Pour transférer récursivement la propriété du dossier $(DechoE "$path/") de manière récursive, utilisez la commande suivante"
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### FONCTIONS DE TRAITEMENT DE PERMISSIONS DE FICHIERS
+
+## FONCTION "ChowFile"
+
+# Changement des droits
+MSG_PERM_CHOWN_FILE=""
