@@ -6,34 +6,30 @@
 case "$LANG" in
     # English
     en_*)
-        for f in "$MAIN_PROJECT_ROOT/$MAIN_L_LANG/en/*.en"; do
+        for f in "$MAIN_PROJECT_LIB_LANG/en/*.en"; do
             source $f
             
             if test "$?" -ne 0; then
-                echo "$f : Unable to source this translation file"
-                echo
+                echo "$f : Unable to source this translation file"; echo
                 
                 exit 1
             else
-                echo "Included translation file : $f"
-                echo
+                echo "Included translation file : $f"; echo
             fi
         done
         ;;
 
     # French
     fr_*)
-        for f in "$MAIN_PROJECT_ROOT/$MAIN_L_LANG/fr/*.fr"; do
+        for f in "$MAIN_PROJECT_LIB_LANG/fr/*.fr"; do
             source $f
             
             if test "$?" -ne 0; then
-                echo "$f : Impossible de sourcer ce fichier de traduction"
-                echo
+                echo "$f : Impossible de sourcer ce fichier de traduction"; echo
                 
                 exit 1
             else
-                echo "Fichier de traduction sourcé : $f"
-                echo
+                echo "Fichier de traduction sourcé : $f"; echo
             fi
         done
         ;;

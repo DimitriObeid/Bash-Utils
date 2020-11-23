@@ -61,3 +61,61 @@ Included file : src/installcat
 Included file : src/lang
 Included file : src/variables
 
+/usr/local/bin
+/usr/local/bin/Linux-reinstall.sh
+Script parent : /usr/local/bin
+Script path : /usr/local/bin/Linux-reinstall.sh
+Script parent : /usr/local/bin
+Script path : /usr/local/bin/Linux-reinstall.sh
+Script parent : /usr/local/bin
+Script name : 
+Script path : /usr/local/bin/
+Script parent : /usr/local/bin
+Script name : 
+Script path : /usr/local/bin/Linux-reinstall.sh
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/installcat
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/variables
+Existing sub-folder : /usr/local/bin/Bash-Utils/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/installcat
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/variables
+Existing sub-folder : /usr/local/bin/Bash-Utils/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/installcat
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/variables
+Existing sub-folder : /usr/local/bin/Bash-Utils/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+Script parent : /usr/local/bin
+Script name : Linux-reinstall.sh
+Script path : 
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/installcat
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/variables
+Existing sub-folder : /usr/local/bin/Bash-Utils/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+
