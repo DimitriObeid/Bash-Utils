@@ -23,7 +23,7 @@
 source "/usr/local/bin/Bash-Utils/src/main.sh"
 
 if test "$?" -ne 0; then
-    echo "Error : unable to include the basic main file"; echo; exit 1
+    echo "${BASH_SOURCE[0]}, Error : unable to include the initializer file"; echo; exit 1
 fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

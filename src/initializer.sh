@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Main file, initalizing all you need for your scripts.
-
+# Script initializer file, initalizing all you need for your scripts.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -16,7 +16,7 @@ BASH_UTILS_ROOT="/usr/local/bin/Bash-Utils"
 
 # In case the Bash-Utils folder doesn't exists or is not located in the correct path
 if test ! -d "$BASH_UTILS_ROOT"; then
-    echo 'Error : the "Bash-Utils" folder was not found in the "/usr/local/bin" folder'; exit 1
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/bin' folder"; exit 1
 fi
 
 # -----------------------------------------------
@@ -37,28 +37,29 @@ BASH_UTILS_LIB_VARS="$BASH_UTILS_ROOT/lib/variables"
 ## SCRIPT ROOT PATH
 
 # Defining script's root path
-MAIN_SCRIPT_SRC_ROOT="$BASH_UTILS_ROOT/src/public/$(basename "$0" | cut -f 1 -d '.')"  # Cutting the eventual file extension to match with the project directory's name in the "src/public" folder.
+INITIALIZER_SRC_ROOT="$BASH_UTILS_ROOT/src/public/$(basename "$0" | cut -f 1 -d '.')"  # Cutting the eventual file extension to match with the project directory's name in the "src/public" folder.
 
 # Checking if the script's sources folder exists
-if test ! -d "$MAIN_SCRIPT_SRC_ROOT"; then
-    echo "Error : The main script's resources source folder '/usr/local/bin/Bash-Utils/src/public/$(basename "$0" | cut -f 1 -d '.')' doesn't exists"; exit 1 
+lineno=$LINENO; if test ! -d "$INITIALIZER_SRC_ROOT"; then
+    echo "In ${BASH_SOURCE[0]}, $lineno --> Error : The main script's resources source folder
+        '/usr/local/bin/Bash-Utils/src/public/$(basename "$0" | cut -f 1 -d '.')' doesn't exists"; exit 1 
 fi
 
 # Checking if the main script is located if the "/usr/local/bin/Bash-Utils/src/public/<script name>" to make sure it will be executed by its ".desktop" file
-if test ! -f "$MAIN_SCRIPT_SRC_ROOT/$(basename "$0")"; then
-    echo "Error : the '$(basename "$0")' file doesn't exists in the '$MAIN_SCRIPT_SRC_ROOT' folder"; exit 1
+lineno=$LINENO; if test ! -f "$INITIALIZER_SRC_ROOT/$(basename "$0")"; then
+    echo "From ${BASH_SOURCE[0]} --> Error : the '$(basename "$0")' file doesn't exists in the '$INITIALIZER_SRC_ROOT' folder"; exit 1
 fi
 
 # 
-MAIN_SCRIPT_SRC_INST="$MAIN_SCRIPT_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
-MAIN_SCRIPT_SRC_LANG="$MAIN_SCRIPT_SRC_ROOT/lang"
-MAIN_SCRIPT_SRC_VARS="$MAIN_SCRIPT_SRC_ROOT/lib/variables"
+INITIALIZER_SRC_INST="$INITIALIZER_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
+INITIALIZER_SRC_LANG="$INITIALIZER_SRC_ROOT/lang"
+INITIALIZER_SRC_VARS="$INITIALIZER_SRC_ROOT/lib/variables"
 
 # Script initialization log file
-MAIN_SCRIPT_LOG_PATH="$MAIN_SCRIPT_SRC_ROOT/initscript.log"
+INITIALIZER_LOG_PATH="$INITIALIZER_SRC_ROOT/initscript.log"
 
-if test -f "$MAIN_SCRIPT_LOG_PATH"; then
-
+if test -f "$INITIALIZER_LOG_PATH"; then
+    true > "$INITIALIZER_LOG_PATH"
 fi
 
 # -----------------------------------------------
@@ -78,22 +79,22 @@ function CheckSubFolder()
 
     #***** Code *****
     if test -d "$path"; then
-        echo "Existing sub-folder : $path" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+        echo "Existing sub-folder : $path" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
     else
         echo "FATAL : Cannot include $path, abort"; exit 1
     fi
 }
 
 # Calling the above function and passing targeted directories paths as argument
-echo "$LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
-CheckSubFolder "$MAIN_SCRIPT_SRC_INST"
-CheckSubFolder "$MAIN_SCRIPT_SRC_LANG"
-CheckSubFolder "$MAIN_SCRIPT_SRC_VARS"; echo 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+echo "${BASH_SOURCE[0]}, $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+CheckSubFolder "$INITIALIZER_SRC_INST"
+CheckSubFolder "$INITIALIZER_SRC_LANG"
+CheckSubFolder "$INITIALIZER_SRC_VARS"; echo 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
 
-echo "$LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+echo "${BASH_SOURCE[0]}, $LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
 CheckSubFolder "$BASH_UTILS_LIB_LANG"
 CheckSubFolder "$BASH_UTILS_LIB_FUNCTS"
-CheckSubFolder "$BASH_UTILS_LIB_VARS"; echo 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+CheckSubFolder "$BASH_UTILS_LIB_VARS"; echo 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
 
 # -----------------------------------------------
 
@@ -112,6 +113,7 @@ function SourceFile()
     #***** Parameters *****
     local path=$1
     local info=$2
+    local lineno=$3
     
     #***** Code *****
     
@@ -119,19 +121,19 @@ function SourceFile()
         source "$path"
         
         if test "$?" -ne 0 && test -z "$info"; then
-            echo "$path : Unable to source this file" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; echo
+            echo "In ${BASH_SOURCE[0]}, $lineno --> $path : Unable to source this file"; echo
             exit 1
         fi
     else
         source "$path"
 
         if test "$?" -ne 0; then
-            echo "$path : Unable to source the $info" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; echo
+            echo "$path : Unable to source the $info"; echo
             exit 1
         fi
     fi
     
-    echo "Included file : $path" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; echo
+    echo "Included file : $path" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo
 }
 
 # -----------------------------------------------
