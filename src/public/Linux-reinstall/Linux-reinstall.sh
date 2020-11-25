@@ -18,13 +18,41 @@
 
 ############################### CALLING INSTALL SCRIPT'S DEPENDENCES ##############################
 
-#### INCLUDING MAIN FILE
+#### INITIALIZING LINUX-REINSTALL
 
-source "/usr/local/bin/Bash-Utils/src/main.sh"
+## DEFINING PROJECT SETTINGS
 
-if test "$?" -ne 0; then
+# Private or public project
+PROJECT_ACCESSIBILITY="public"
+
+# Determines whether text from library functions has to be redirected into a log file, and how (into the log file only or to the file AND to the terminal)
+PROJECT_LOG_STATUS=""
+
+# -----------------------------------------------
+
+## INCLUDING THE INITALIZER FILE
+
+source "/usr/local/bin/Bash-Utils/lib/init/initializer.sh"
+
+if [ "$?" -ne 0 ]; then
     echo "${BASH_SOURCE[0]}, Error : unable to include the initializer file"; echo; exit 1
 fi
+
+# 
+LINUX_REINSTALL_INST="$INITIALIZER_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
+LINUX_REINSTALL_LANG="$INITIALIZER_SRC_ROOT/lang"
+LINUX_REINSTALL_VARS="$INITIALIZER_SRC_ROOT/lib/variables"
+
+# Calling the above function and passing targeted directories paths as argument
+echo "${BASH_SOURCE[0]}, $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+CheckSubFolder "$LINUX_REINSTALL_INST"
+CheckSubFolder "$LINUX_REINSTALL_LANG"
+CheckSubFolder "$LINUX_REINSTALL_VARS"; echo 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+
+# shellcheck source="$MAIN_PROJECT_ROOT/$MAIN_S_LANG/SetMainLang.sh"
+echo "$LINENO : DEFINING $(basename "$0" | cut -f 1 -d '.')'s LIBRARY FOLDER" \
+    && SourceFile "$MAIN_SCRIPT_SRC_LANG/SetMainLang.sh" ""
+
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 

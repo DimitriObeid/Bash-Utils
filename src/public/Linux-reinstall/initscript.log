@@ -1,33 +1,7 @@
-89 : CHECKING FOR Linux-reinstall's SUB-FOLDERS
-Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/install/categories
-Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
-Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lib/variables
-
-94 : CHECKING FOR BASH-UTILS SUB-FOLDERS
+/usr/local/bin/Bash-Utils/src/initializer.sh, 90 : CHECKING FOR BASH-UTILS SUB-FOLDERS
 Existing sub-folder : /usr/local/bin/Bash-Utils/lang
 Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
 Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
 
-In ./Linux-reinstall.sh, line 6
-Included file : /usr/local/bin/Bash-Utils/lib/variables/colors.var
-Included file : /usr/local/bin/Bash-Utils/lib/variables/date.var
-Included file : /usr/local/bin/Bash-Utils/lib/variables/directories.var
-Included file : /usr/local/bin/Bash-Utils/lib/variables/files.var
-Included file : /usr/local/bin/Bash-Utils/lib/variables/text.var
-In ./Linux-reinstall.sh, line 19
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Directories.lib
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Echo.lib
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Files.lib
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Headers.lib
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Keyboard.lib
-Included file : /usr/local/bin/Bash-Utils/lib/functions/Permissions.lib
 Included file : /usr/local/bin/Bash-Utils/lib/link_fncts_vars.sh
-Included translation file : /usr/local/bin/Bash-Utils/lang/en/config.en
-Included translation file : /usr/local/bin/Bash-Utils/lang/en/directories.en
-Included translation file : /usr/local/bin/Bash-Utils/lang/en/files.en
-Included translation file : /usr/local/bin/Bash-Utils/lang/en/headers.en
-Included translation file : /usr/local/bin/Bash-Utils/lang/en/keyboard_inputs.en
 Included file : /usr/local/bin/Bash-Utils/lang/SetLibLang.sh
-In /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang/SetMainLang.sh, line 13
-/usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang/en/main.en : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang/en/args.en
-Included file : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang/SetMainLang.sh

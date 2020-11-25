@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -56,7 +56,7 @@ function Makefile()
 	echo
 
 	# Si le fichier à traiter n'existe pas, on le crée avec l'aide de la commande "touch".
-	if test ! -f "$path"; then
+	if [ ! -f "$path" ]; then
         EchoNewstep "Création du fichier $(DechoN "$name") dans le dossier $(DechoN "$parent/")." "$sleep_txt"
 		echo
 
@@ -77,10 +77,8 @@ function Makefile()
 		EchoNewstep "Changement des droits du nouveau fichier $(DechoN "$path") de $(DechoN "$USER") en $(DechoN "$ARG_USERNAME")." "$sleep_txt"
 		echo
 
-		chown -v "${ARG_USERNAME}" "$path"
-
 		# On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
-		if test "$?" -eq "0"; then
+		if chown -v "${ARG_USERNAME}" "$path"; then
 			echo
 
 			EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
@@ -109,7 +107,7 @@ function Makefile()
 		fi
 	
 	# Sinon, si le fichier à créer existe déjà ET qu'il n'est pas vide.
-	elif test -f "$path" && test -s "$path"; then
+	elif [ -f "$path" ] && [ -s "$path" ]; then
 		EchoNewstep "$MSG_FILE_NONEMPTY_1." "$sleep_txt"
 		EchoNewstep "$MSG_FILE_NONEMPTY_2." "$sleep_txt"
 		echo
@@ -117,7 +115,7 @@ function Makefile()
 		true > "$path"
 
 		# On vérifie que le contenu du fichier cible a bien été supprimé en testant le code de retour de la commande "true".
-		if test "$?" -eq "0"; then
+		if [ "$?" -eq "0" ]; then
 			EchoSuccess "$MSG_FILE_NONEMPTY_SUCC." "$sleep_txt"
 			echo
 
@@ -138,7 +136,7 @@ function Makefile()
 		return
 
 	# Sinon, si le fichier à créer existe déjà ET qu'il est vide.
-	elif test -f "$path" && test ! -s "$path"; then
+	elif [ -f "$path" ] && [ ! -s "$path" ]; then
 		EchoSuccess "$MSG_MKFILE_EMPTY." "$sleep_txt"
 		echo
 

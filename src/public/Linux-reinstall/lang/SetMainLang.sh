@@ -14,7 +14,7 @@ function SetMainLang()
         for f in "$path"; do
         source "$f"
             
-        if test "$?" -ne 0; then
+        if [ "$?" -ne 0 ]; then
             echo "$f : $error_msg"; echo
                 
             exit 1
