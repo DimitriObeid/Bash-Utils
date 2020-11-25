@@ -3,11 +3,27 @@
 # This script was made to avoid oversizing the main script with all the files sourcing.
 
 # Including variables first.
-for _ in $MAIN_PROJECT_ROOT/$MAIN_L_VARS; do
-    source "$MAIN_PROJECT_ROOT/$MAIN_L_VARS/*.var" && echo "Included file : $MAIN_PROJECT_ROOT/$MAIN_L_VARS/$_" 2>&1 | tee -a "$MAIN_LOG"
+echo "In $0, line $LINENO" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; for f in "$BASH_UTILS_ROOT/lib/variables/"*.var; do
+    source "$f"
+    
+    if test "$?" -ne 0; then
+        echo "$f : Unable to source this file"
+    else
+        echo "Included file : $f" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+    fi
 done
 
+echo
+
 # Including functions next.
-for _ in $MAIN_PROJECT_ROOT/$MAIN_L_FNCTS; do
-    source "$MAIN_PROJECT_ROOT/$MAIN_L_FNCTS/*.lib" && echo "Included file : $MAIN_PROJECT_ROOT/$MAIN_L_VARS/$_" 2>&1 | tee -a "$MAIN_LOG"
+echo "In $0, line $LINENO" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; for f in "$BASH_UTILS_ROOT/lib/functions/"*.lib; do
+    source "$f"
+    
+    if test "$?" -ne 0; then
+        echo "$f : Unable to source this file"
+    else
+        echo "Included file : $f" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+    fi
 done
+
+echo

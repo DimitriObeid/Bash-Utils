@@ -31,23 +31,3 @@ function CheckArgUsername()
 }
 
 # -----------------------------------------------
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### FILES
-
-## LOG FILE
-
-# Checking the recording of a value in the variable "$FILE_LOG_PATH".
-function CheckLog()
-{
-    if test -z "$FILE_LOG_PATH"; then
-        EchoError "No path provided for the log file."; echo; exit 1
-    fi
-}
-
-# -----------------------------------------------
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #

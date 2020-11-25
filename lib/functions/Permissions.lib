@@ -1,2 +1,123 @@
 #!/usr/bin/env bash
 
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+## RECURSIVE OWNERSHIP SWAPPING
+
+# Calling the "chown" command to change recursively directory ownership
+function ChownRec()
+{
+    #***** Paramètres *****
+    current_owner=$1
+    new_owner=$2
+    path=$3
+    timer=$4
+
+    #***** Code *****
+    # As the "chown" command has to be used with super-user privileges,
+    # it's necessary to check if the current effective user identifiant is equal to 0 (root EUID)
+    if test "$EUID" -ne 0; then
+        HandleError "" "" "" ""
+    
+    # Else, if the EUID is equal to 0, 
+    elif test -z "$timer"; then
+        timer="0"
+    fi
+    
+    EchoNewstep "$MSG_BU_PERM_CHOWNREC." "$timer"
+	echo
+
+	chown -Rv "$current_owner" "$path"
+
+    # On vérifie que les droits du dossier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
+	if test "$?" -eq "0"; then
+		echo
+
+		EchoSuccess "$MSG_BU_PERM_CHOWNREC_SUCCESS." "$timer"
+		echo
+
+		return
+	else
+        echo
+
+		EchoError "$MSG_BU_PERM_CHOWNREC_FAIL." "$timer"
+		EchoError "$MSG_BU_PERM_CHOWNREC_FAIL_ADVICE :" "$timer"
+		echo "	chown -R $current_owner $path"
+		echo
+
+		return
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+## NON-RECURSIVE OWNERSHIP SWAPPING
+
+# Fonctions d'attribution de propriété de fichier à l'utilisateur.
+
+# Required functions and files :
+#   - EchoErrorTimer    -> Bash-Utils/lib/functions/Echo.lib
+#   - EchoNewstepTimer  -> Bash-Utils/lib/functions/Echo.lib 
+#   - EchoSuccessTimer  -> Bash-Utils/lib/functions/Echo.lib           -> 
+#   - DrawLine          -> Bash-Utils/lib/functions/Headers.lib   
+#   - HandleErrors      -> Bash-Utils/lib/functions/Headers.sh
+function Chown()
+{
+    #***** Parameters *****
+    current_ownwer=$1
+    new_owner=$2
+    path=$3
+    
+    #***** Code *****
+    # As the "chown" command has to be used with super-user privileges, it's necessary to check if the current UID is equal to 0 (root UID)
+    if test "$EUID" -ne 0; then
+        HandleErrors "$?" "" "" ""
+    fi
+    
+    EchoNewstep "$MSG_BU_PERM_CHOWN_FILE." "$timer"
+	echo
+
+    chown -v "$username" "$path"
+
+    # On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
+    if test "$?" -eq "0"; then
+        echo
+
+        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
+        echo
+
+        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        echo
+
+        return
+    else
+        echo
+
+        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$sleep_txt"
+        EchoError "Pour changer les droits du fichier $(DechoE "$path")," "$sleep_txt"
+        EchoError "utilisez la commande :" "$sleep_txt"
+        echo "	chown username chemin"
+
+        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        echo
+
+        return
+    fi
+}
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+

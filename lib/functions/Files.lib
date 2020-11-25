@@ -10,61 +10,14 @@
 
 function Chmod()
 {
-
+    return
 }
 
 # -----------------------------------------------
 
 ## PROPERTY PROCESSING FUNCTIONS
 
-# Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
-# Required files and functions :
-#   - Echo.sh       -> EchoErrorTimer
-#   - Echo.sh       -> EchoNewstepTimer
-#   - Echo.sh       -> EchoSuccessTimer
-#   - Headers.sh    -> DrawLine   
-#   - Headers.sh    -> HandleErrors
-function ChownFile()
-{
-    #***** Parameters *****
-    
-
-    #***** Code *****
-    EchoNewstep "$MSG_MKFILE_CHMOD." "$timer"
-	echo
-
-    chown -v "$username" "$path"
-
-    # On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
-    if test "$?" -eq "0"; then
-        echo
-
-        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
-        echo
-
-        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
-        DrawLine "$COL_RESET" "$block_char"
-        sleep "$sleep_blk"
-        echo
-
-        return
-    else
-        echo
-
-        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$sleep_txt"
-        EchoError "Pour changer les droits du fichier $(DechoE "$path")," "$sleep_txt"
-        EchoError "utilisez la commande :" "$sleep_txt"
-        echo "	chown username chemin"
-
-        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"
-        DrawLine "$COL_RESET" "$block_char"
-        sleep "$sleep_blk"
-        echo
-
-        return
-    fi
-}
 
 # -----------------------------------------------
 

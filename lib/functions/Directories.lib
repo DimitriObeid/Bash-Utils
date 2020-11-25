@@ -1,51 +1,5 @@
 #!/usr/bin/env bash
 
-# Change directory owner
-function ChownDir()
-{
-    #***** Paramètres *****
-    username=$1
-    path=$2
-    timer=$3
-
-    #***** Code *****
-    # Since it's mandatory to be logged as root while 
-    
-    EchoNewstepTimer "$MSG_MKDIR_CHMOD." "$timer"
-	echo
-
-	chown -Rv "${ARG_USERNAME}" "$path"
-
-    # On vérifie que les droits du dossier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
-	if test "$?" -eq "0"; then
-		echo
-
-		EchoSuccessTimer "$MSG_MKDIR_CHMOD_SUCC." "$timer"
-		echo
-
-		EchoSuccessTimer "$MSG_MKDIR_PROCESSING_END_SUCC." "$timer"
-		DrawLine "$COL_RESET" "$block_char"
-		sleep "$sleep_blk"
-		echo
-
-		return
-	else
-        echo
-
-		EchoErrorTimer "$MSG_MKDIR_CHMOD_FAIL_1." "$timer"
-		EchoErrorTimer "$MSG_MKDIR_CHMOD_FAIL_2 :" "$timer"
-		echo "	chown -R ${ARG_USERNAME} $path"
-		echo
-
-		EchoErrorTimer "$MSG_MKDIR_PROCESSING_END_FAIL." "$timer"
-		DrawLine "$COL_RESET" "$block_char"		# On dessine la deuxième et dernière ligne du bloc.
-		sleep "$sleep_blk"
-		echo
-
-		return
-    fi
-}
-
 
 
 ## TREATMENT FUNCTIONS
@@ -53,7 +7,7 @@ function ChownDir()
 
 function OverwriteDir()
 {
-
+    return
 }
 
 

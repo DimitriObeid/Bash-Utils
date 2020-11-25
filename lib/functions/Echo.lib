@@ -17,6 +17,30 @@ function DechoS() { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Su
 
 ## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
 
+# Avoid repetiting code
+function EchoBase()
+{
+    #***** Parameters *****
+    local string=$1
+    
+    #***** Code *****
+    if test -z "$MAIN_SCRIPT_LOG_STATUS" || test -z "$BU_FILE_LOG_PATH"; then
+        echo "$string"
+    else
+        if test "$BU_FILE_LOG_STATUS" = "log"; then
+            echo "$string" >> "$BU_FILE_LOG_PATH"
+            
+        elif test "$BU_FILE_LOG_STATUS" = "tee"; then
+            echo "$string" 2>&1 | tee -a "$BU_FILE_LOG_PATH"
+            
+        else
+            echo "EchoError : no valid write output mode defined"
+        
+            return
+        fi
+    fi
+}
+
 # Error message
 function EchoError() {
     #***** Parameters *****
@@ -28,23 +52,7 @@ function EchoError() {
         timer=".5"
     fi
     
-    if test -z "$MAIN_SCRIPT_LOG" || test -z "$FILE_LOG_PATH"; then
-        echo "$TXT_R_TAB $string$COL_RESET"
-    else
-        CheckLog
-        
-        if test "$MAIN_SCRIPT_LOG" = "log"; then
-            echo "$TXT_R_TAB $string$COL_RESET" >> "$FILE_LOG_PATH"
-            
-        elif test "$MAIN_SCRIPT_LOG" = "tee"; then
-            echo "$TXT_R_TAB $string$COL_RESET" 2>&1 | tee -a "$FILE_LOG_PATH"
-            
-        else
-            echo "EchoError : no valid write output mode defined"
-        
-            return
-        fi
-    fi
+    EchoBase "$BU_TXT_RED_TAB $string$BU_COL_RESET"
 
     sleep "$timer"
 }
@@ -60,23 +68,7 @@ function EchoNewstep() { local string=$1;
         timer=".5"
     fi
     
-    if test -z "$MAIN_SCRIPT_LOG" || test -z "$FILE_LOG_PATH"; then
-        echo "$TXT_N_TAB $string$COL_RESET"
-    else
-        CheckLog
-        
-        if test "$MAIN_SCRIPT_LOG" = "log"; then
-            echo "$TXT_N_TAB $string$COL_RESET" >> "$FILE_LOG_PATH"
-            
-        elif test "$MAIN_SCRIPT_LOG" = "tee"; then
-            echo "$TXT_N_TAB $string$COL_RESET" 2>&1 | tee -a "$FILE_LOG_PATH"
-            
-        else
-            echo "EchoNewstep: no valid write output mode defined"
-        
-            return
-        fi
-    fi
+    EchoBase "$TXT_N_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -92,22 +84,7 @@ function EchoSuccess() {
         timer=".5"
     fi
     
-    if test -z "$MAIN_SCRIPT_LOG" || test -z "$FILE_LOG_PATH"; then
-        echo "$TXT_S_TAB $string$COL_RESET"
-    else
-        if test "$MAIN_SCRIPT_LOG" = "log"; then
-            echo "$TXT_S_TAB $string$COL_RESET" >> "$FILE_LOG_PATH"
-            
-        elif test "$MAIN_SCRIPT_LOG" = "tee"; then
-            echo "$TXT_S_TAB $string$COL_RESET" 2>&1 | tee -a "$FILE_LOG_PATH"
-            
-        else
-            echo "EchoSuccess : no valid write output mode defined"
-            echo
-
-            return
-        fi
-    fi
+    EchoBase "$TXT_S_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -122,19 +99,5 @@ function EchoSuccess() {
 # Redirecting the output of the "echo" command
 function Newline()
 {
-    if test -z "$MAIN_SCRIPT_LOG" || test -z "$FILE_LOG_PATH"; then
-        echo
-    else
-        CheckLog
-        
-        if test "$MAIN_SCRIPT_LOG" = "log"; then
-            echo "" >> "$FILE_LOG_PATH"
-        elif test "$MAIN_SCRIPT_LOG" = "tee"; then
-            echo "" 2>&1 | tee -a "$FILE_LOG_PATH"
-        else
-            echo "No valid write output mode defined"
-        
-            return
-        fi
-    fi
+    EchoBase ""
 }

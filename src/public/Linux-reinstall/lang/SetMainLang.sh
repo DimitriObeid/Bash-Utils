@@ -1,40 +1,43 @@
 #!/usr/bin/env bash
 
+# Optimizing the code with a function
+function SetMainLang()
+{
+    #**** Parameters ****
+    local path=$1
+    local error_msg=$2
+    local success_msg=$3
+
+    #***** Code *****
+    # Don't double quote what follows the path variable, or else, the loop will only run once.
+    echo "In $MAIN_SCRIPT_SRC_LANG/SetMainLang.sh, line $LINENO" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; \
+        for f in "$path"; do
+        source "$f"
+            
+        if test "$?" -ne 0; then
+            echo "$f : $error_msg"; echo
+                
+            exit 1
+        else
+            echo "$success_msg : $f" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+        fi
+    done; echo
+}
+
 # Detecting user's language with the "$LANG" environment variable.
 case "$LANG" in
-# English
     en_*)
-        for f in "$MAIN_PROJECT_SRC_LANG/en/*.en"; do
-            source $f
-            
-            if test "$?" -ne 0; then
-                echo "$f : Unable to source this translation file"; echo
-                
-                exit 1
-            else
-                echo "Included translation file : $f"; echo
-            fi
-        done
+        # English
+        SetMainLang "$MAIN_SCRIPT_SRC_LANG"/en/*.en "Unable to source this translation file" "Included translation file"
         ;;
-
-    # French
     fr_*)
-        for f in "$MAIN_PROJECT_SRC_LANG/fr/*.fr"; do
-            source $f
-            
-            if test "$?" -ne 0; then
-                echo "$f : Impossible de sourcer ce fichier de traduction"; echo
-                
-                exit 1
-            else
-                echo "Fichier de traduction sourcé : $f"; echo
-            fi
-        done
+        # French
+        "$MAIN_SCRIPT_SRC_LANG"/fr/*.fr "Impossible de sourcer ce fichier de traduction" "Fichier de traduction sourcé"
         ;;
 
     # Unsupported language
     *)
-        echo "Sorry, your language is not (yet) supported."
+        echo "Sorry, your language is not (yet) supported."; echo
         
         exit 1
         ;;

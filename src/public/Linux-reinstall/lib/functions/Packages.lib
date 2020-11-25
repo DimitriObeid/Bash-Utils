@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# shellcheck source="Echo.sh"
-source Echo.sh || echo "Echo.sh : not found" && exit 1
-
-# shellcheck source="Filesystem.sh"
-source Filesystem.sh || echo "Filesystem.sh : not found" && exit 1
-
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -16,13 +10,18 @@ source Filesystem.sh || echo "Filesystem.sh : not found" && exit 1
 
 # Writing the installation wizard script.
 
-# Required files and functions :
-#   - EchoNewstep   -> Echo.lib
-#   - EchoSuccess   -> Echo.lib
-#   - HeaderBase    -> Headers.lib
-#   - Makedir       -> Directories.lib
-#   - Makefile      -> Files.lib
-#   - Newline       -> Echo.lib
+# Required functions, variables and files :
+#   - EchoNewstep   -> Bash-Utils/lib/functions/Echo.lib
+#   - EchoSuccess   -> Bash-Utils/lib/functions/Echo.lib
+#   - HeaderBase    -> Bash-Utils/lib/functions/Headers.lib
+#   - Makedir       -> Bash-Utils/lib/functions/Directories.lib
+#   - Makefile      -> Bash-Utils/lib/functions/Files.lib
+#   - Newline       -> Bash-Utils/lib/functions/Echo.lib
+
+#   - 
+#   - 
+#   - 
+#   - 
 function WriteInstallScript()
 {
     #***** Parameters *****
@@ -31,9 +30,9 @@ function WriteInstallScript()
     #***** Code *****
 	# Creating the folder containing the packages treatment script and the files containing the packages search and installation commands.
 	{
-		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"
+		HeaderBase "$BU_COL_BLUE" "-" "$BU_COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"
 
-		Makedir "$DIR_TMP_PATH" "$DIR_INSTALL_NAME" "0" "0"						# On crée le dossier contenant les fichiers temporaires contenant les commandes de recherche et d'installation des paquets.
+		Makedir "$SC_DIR_TMP_PATH" "$SC_DIR_INSTALL_NAME" "0" "0"						# On crée le dossier contenant les fichiers temporaires contenant les commandes de recherche et d'installation des paquets.
 		Makefile "$DIR_TMP_PATH/$DIR_INSTALL_NAME" "$FILE_SCRIPT_NAME" "0" "0"	# On crée le fichier de script.
 	} >> "$FILE_LOG_PATH"
 

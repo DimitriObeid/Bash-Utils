@@ -101,7 +101,8 @@ function HandleErrors()
     if test "$return_code" -eq 0; then
         return
     else
-
+        return
+    fi
 }
 
 # Fonction de gestion d'erreurs fatales (impossibles à corriger).
@@ -153,7 +154,7 @@ function HeaderStepLog() { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_
 function HeaderStepTee() { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
 
 function HeaderInstallLog() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" >> "$FILE_LOG_PATH"; }
-function HeaderInstallTee() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH;"}
+function HeaderInstallTee() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
 
 function HandleFatalErrorsTee()
 {

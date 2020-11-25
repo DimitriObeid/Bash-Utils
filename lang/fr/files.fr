@@ -12,35 +12,35 @@
 ## GÉNÉRAL
 
 # Traitement
-    MSG_FILE_PROCESSING_BEGIN="Traitement du fichier $(DechoN "$name")"
-    MSG_FILE_PROCESSING_END_FAIL="Fin de traitement du ficier $(DechoE "$name")"
-    MSG_FILE_PROCESSING_END_SUCCESS="Fin de traitement du fichier $(DechoS "$name")"
+    MSG_BU_FILE_PROCESSING_BEGIN="Traitement du fichier $(DechoN "$name")"
+    MSG_BU_FILE_PROCESSING_END_FAIL="Fin de traitement du ficier $(DechoE "$name")"
+    MSG_BU_FILE_PROCESSING_END_SUCCESS="Fin de traitement du fichier $(DechoS "$name")"
 
 # -----------------------------------------------
 
 ## FONCTION "OverwriteFile"
 
 # Fichier existant ET non-vide
-    MSG_FILE_OVRWRT_DETECTED="Le fichier $(DechoN "$path") existe déjà et n'est pas vide"
+    MSG_BU_FILE_OVRWRT_DETECTED="Le fichier $(DechoN "$path") existe déjà et n'est pas vide"
 
 # Écrasement des données
-    MSG_FILE_OVRWRT_OVERWRITE="Écrasement des données du fichier $(DechoN "$path")"
+    MSG_BU_FILE_OVRWRT_OVERWRITE="Écrasement des données du fichier $(DechoN "$path")"
 
 # Issues
-    MSG_FILE_OVRWRT_SUCCESS="Le contenu du fichier $(DechoS "$path") a été écrasé avec succès"
-    MSG_FILE_OVRWRT_FAIL="Le contenu du fichier $(DechoE "$path") n'a pas été écrasé"
+    MSG_BU_FILE_OVRWRT_SUCCESS="Le contenu du fichier $(DechoS "$path") a été écrasé avec succès"
+    MSG_BU_FILE_OVRWRT_FAIL="Le contenu du fichier $(DechoE "$path") n'a pas été écrasé"
 
 # -----------------------------------------------
 
 ## FONCTION "Makefile"
 
 # Fichier inexistant : création
-    MSG_FILE_MKFILE_CREATE="Création du fichier $(DechoN "$name") dans le dossier $(DechoN "$parent/")"
+    MSG_BU_FILE_MKFILE_CREATE="Création du fichier $(DechoN "$name") dans le dossier $(DechoN "$parent/")"
 
 # Issues
-    MSG_FILE_MKFILE_SUCCESS=""
-    MSG_FILE_MKFILE_FAIL=""
-    MSG_FILE_MKFILE_FAIL_ADV=""
+    MSG_BU_FILE_MKFILE_SUCCESS=""
+    MSG_BU_FILE_MKFILE_FAIL=""
+    MSG_BU_FILE_MKFILE_FAIL_ADV=""
 
 # Fichier existant ET vide
-    MSG_FILE_MKFILE_EMPTY="Le fichier $(DechoS "$name") existe déjà dans le dossier $(DechoS "$parent/")"
+    MSG_BU_FILE_MKFILE_EMPTY="Le fichier $(DechoS "$name") existe déjà dans le dossier $(DechoS "$parent/")"

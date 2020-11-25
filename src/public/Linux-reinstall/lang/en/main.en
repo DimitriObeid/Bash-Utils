@@ -1,1 +1,12 @@
 #!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################ DEFINING THE MAIN SCRIPT VARIABLES ###############################
+
+# TODO : Mettre ça dans les fichiers de traduction du script principal
+declare -A MSG_LANG_YES
+declare -A MSG_LANG_NO
+
+MSG_LANG_YES=("oui" "yes")
+MSG_LANG_NO=("non" "no")
