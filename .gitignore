@@ -8,6 +8,9 @@
 # Personnal scripts folder
 src/private/*
 
+# Temporary folder
+tmp/
+
 
 ## FICHIERS
 # Backup files

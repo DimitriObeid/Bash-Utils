@@ -22,7 +22,7 @@ function SetMainLang()
             exit 1
         fi
     else
-        echo "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the '$parent_dir_path' folder" \
+        echo "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the '$parent_dir_path/$sub_dir' folder" \
             2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo; exit 1
     fi
     
