@@ -24,13 +24,13 @@ function EchoBase()
     local string=$1
     
     #***** Code *****
-    if test -z "$MAIN_SCRIPT_LOG_STATUS" || test -z "$BU_FILE_LOG_PATH"; then
+    if [ -z "$BU_FILE_LOG_PATH" ]; then
         echo "$string"
     else
-        if test "$BU_FILE_LOG_STATUS" = "log"; then
+        if [ "$BU_FILE_LOG_STATUS" = "log" ]; then
             echo "$string" >> "$BU_FILE_LOG_PATH"
             
-        elif test "$BU_FILE_LOG_STATUS" = "tee"; then
+        elif [ "$BU_FILE_LOG_STATUS" = "tee" ]; then
             echo "$string" 2>&1 | tee -a "$BU_FILE_LOG_PATH"
             
         else
@@ -48,7 +48,7 @@ function EchoError() {
     local timer=$2
     
     #***** Code *****
-    if test -z "$timer"; then
+    if [ -z "$timer" ]; then
         timer=".5"
     fi
     
@@ -64,7 +64,7 @@ function EchoNewstep() { local string=$1;
     local timer=$2
     
     #***** Code *****
-    if test -z "$timer"; then
+    if [ -z "$timer" ]; then
         timer=".5"
     fi
     
@@ -80,7 +80,7 @@ function EchoSuccess() {
     local timer=$2
 
     #***** Code *****
-    if test -z "$timer"; then
+    if [ -z "$timer" ]; then
         timer=".5"
     fi
     

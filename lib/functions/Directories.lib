@@ -7,7 +7,37 @@
 
 function OverwriteDir()
 {
-    return
+    EchoNewstep "$MSG_MKDIR_NONEMPTY_1." "$sleep_txt"
+	EchoNewstep "$MSG_MKDIR_NONEMPTY_2." "$sleep_txt"
+	Newline
+
+    # ATTENTION À NE PAS MODIFIER LA COMMANDE SUIVANTE", À MOINS DE SAVOIR EXACTEMENT CE QUE VOUS FAITES !!!
+	# Pour plus d'informations sur cette commande complète --> https://github.com/koalaman/shellcheck/wiki/SC2115
+	rm -rfv "${path/:?}/"*
+
+	if test "$?" -eq "0"; then
+		Newline
+
+		EchoSuccess "$MSG_MKDIR_NONEMPTY_SUCC." "$sleep_txt"
+        Newline
+
+        EchoSuccess "$MSG_MKDIR_PROCESSING_END_SUCC." "$sleep_txt"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        Newline
+
+    else
+        Newline
+
+        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_1." "$sleep_txt";
+        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_2" "$sleep_txt"
+		Newline
+
+        EchoError "$MSG_MKDIR_PROCESSING_END_FAIL." "$sleep_txt"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        Newline
+    fi
 }
 
 
@@ -42,7 +72,7 @@ function Makedir()
 	echo   # On ne redirige aucun saut de ligne vers le fichier de logs, pour éviter de les afficher en double, étant donné que la fonction est appelée avec une redirection (directement dans le fichier de logs ou dans ce dernier PLUS sur le terminal).
 
 	# Si le dossier à traiter n'existe pas, alors le script le crée.
-	if test ! -d "$path"; then
+	if [ ! -d "$path" ]; then
 		EchoNewstepTimer "$MSG_MKDIR_CREATE." "$sleep_txt"
 		echo
 
@@ -97,45 +127,12 @@ function Makedir()
         fi
 	
     # Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier contient AU MOINS un fichier ou dossier.
-	elif test -d "$path" && test "$(ls -A "$path")"; then
-		EchoNewstepTimer "$MSG_MKDIR_NONEMPTY_1." "$sleep_txt"
-		EchoNewstepTimer "$MSG_MKDIR_NONEMPTY_2." "$sleep_txt"
-		echo
-
-		# ATTENTION À NE PAS MODIFIER LA COMMANDE SUIVANTE", À MOINS DE SAVOIR EXACTEMENT CE QUE VOUS FAITES !!!
-		# Pour plus d'informations sur cette commande complète --> https://github.com/koalaman/shellcheck/wiki/SC2115
-		rm -rfv "${path/:?}/"*
-
-		if test "$?" -eq "0"; then
-			echo
-
-			EchoSuccessTimer "$MSG_MKDIR_NONEMPTY_SUCC." "$sleep_txt"
-			echo
-
-			EchoSuccessTimer "$MSG_MKDIR_PROCESSING_END_SUCC." "$sleep_txt"
-			DrawLine "$COL_RESET" "$block_char"
-			sleep "$sleep_blk"
-			echo
-
-		else
-            echo
-
-            EchoErrorTimer "$MSG_MKDIR_NONEMPTY_FAIL_1." "$sleep_txt";
-			EchoErrorTimer "$MSG_MKDIR_NONEMPTY_FAIL_2" "$sleep_txt"
-			echo
-
-			EchoErrorTimer "$MSG_MKDIR_PROCESSING_END_FAIL." "$sleep_txt"
-			DrawLine "$COL_RESET" "$block_char"
-			sleep "$sleep_blk"
-			echo
-
-			return
-		fi
-
+	elif [ -d "$path" ] && [ "$(ls -A "$path")" ]; then
+        OverwriteDir
 		return
 
 	# Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier est vide.
-	elif test -d "$path" && test ! "$(ls -A "$path")"; then
+	elif [ -d "$path" ] && [ ! "$(ls -A "$path")" ]; then
 		EchoSuccessTimer "$MSG_MKDIR_EMPTY." "$sleep_txt"
 		echo
 

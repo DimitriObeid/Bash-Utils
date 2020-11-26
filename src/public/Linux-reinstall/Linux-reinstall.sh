@@ -32,26 +32,24 @@ PROJECT_LOG_STATUS=""
 
 ## INCLUDING THE INITALIZER FILE
 
-source "/usr/local/bin/Bash-Utils/lib/init/initializer.sh"
-
-if [ "$?" -ne 0 ]; then
-    echo "${BASH_SOURCE[0]}, Error : unable to include the initializer file"; echo; exit 1
+if ! source "/usr/local/bin/Bash-Utils/lib/init/initializer.sh"; then
+    echo "In $(basename $0), line $LINENO --> Error : unable to include the initializer file"; echo; exit 1
 fi
 
 # 
-LINUX_REINSTALL_INST="$INITIALIZER_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
-LINUX_REINSTALL_LANG="$INITIALIZER_SRC_ROOT/lang"
-LINUX_REINSTALL_VARS="$INITIALIZER_SRC_ROOT/lib/variables"
+LINUX_REINSTALL_INST="$PROJECT_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
+LINUX_REINSTALL_LANG="$PROJECT_SRC_ROOT/lang"
+LINUX_REINSTALL_VARS="$PROJECT_SRC_ROOT/lib/variables"
 
-# Calling the above function and passing targeted directories paths as argument
-echo "${BASH_SOURCE[0]}, $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+# Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument
+WriteInitLog "In $(basename "$0"), line $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS"
 CheckSubFolder "$LINUX_REINSTALL_INST"
 CheckSubFolder "$LINUX_REINSTALL_LANG"
 CheckSubFolder "$LINUX_REINSTALL_VARS"; echo 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
 
-# shellcheck source="$MAIN_PROJECT_ROOT/$MAIN_S_LANG/SetMainLang.sh"
-echo "$LINENO : DEFINING $(basename "$0" | cut -f 1 -d '.')'s LIBRARY FOLDER" \
-    && SourceFile "$MAIN_SCRIPT_SRC_LANG/SetMainLang.sh" ""
+# Sourcing the
+echo "In $(basename "$0"), line $LINENO : DEFINING $(basename "$0" | cut -f 1 -d '.')'s LIBRARY FOLDER" \
+    && SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" ""
 
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
@@ -97,7 +95,7 @@ function CheckArgs()
 		echo
 
 		exit 1
-
+echo
 	# Else, if the username argument doesn't match to any existing user account.
 	elif ! id -u "$ARG_USERNAME" > /dev/null; then
         echo

@@ -22,7 +22,7 @@
 
 # Existing and non-empty directory
     MSG_BU_DIR_OVRWRT_DETECTED="A non-empty folder with exactly the same name ($(DechoN "$name")) is already in the target folder $(DechoN "$parent/")"
-    
+
 # Deleting existing data
     MSG_BU_DIR_OVRWRT_OVERWRITE="Deleting the contents of the $(DechoN "$path/") folder"
 

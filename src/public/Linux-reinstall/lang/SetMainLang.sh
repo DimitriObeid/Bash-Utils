@@ -3,42 +3,48 @@
 # Optimizing the code with a function
 function SetMainLang()
 {
-    #**** Parameters ****
-    local path=$1
-    local error_msg=$2
-    local success_msg=$3
-
+    #***** Parameters *****
+    local parent_dir_path=$1
+    local sub_dir=$2
+    local error_msg=$3
+    local success_msg=$4
+    local lineno=$5
+    
     #***** Code *****
     # Don't double quote what follows the path variable, or else, the loop will only run once.
-    echo "In $MAIN_SCRIPT_SRC_LANG/SetMainLang.sh, line $LINENO" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"; \
-        for f in "$path"; do
-        source "$f"
-            
-        if [ "$?" -ne 0 ]; then
-            echo "$f : $error_msg"; echo
-                
-            exit 1
+    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir_path/$sub_dir; do
+    
+    if [ -d "$parent_dir_path/$sub_dir" ]; then
+        if source "$f"; then
+            WriteInitLog "$success_msg : $f"
         else
-            echo "$success_msg : $f" 2>&1 | tee -a "$MAIN_SCRIPT_LOG_PATH"
+            echo "$f : $error_msg" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo
+            exit 1
         fi
-    done; echo
+    else
+        echo "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the '$parent_dir_path' folder" \
+            2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo; exit 1
+    fi
+    
+    done; WriteInitLog
 }
 
 # Detecting user's language with the "$LANG" environment variable.
 case "$LANG" in
     en_*)
         # English
-        SetMainLang "$MAIN_SCRIPT_SRC_LANG"/en/*.en "Unable to source this translation file" "Included translation file"
+        SetMainLang "$LINUX_REINSTALL_LANG" "en/*.en" "Unable to source this translation file" "Included translation file" "$LINENO"
         ;;
     fr_*)
         # French
-        "$MAIN_SCRIPT_SRC_LANG"/fr/*.fr "Impossible de sourcer ce fichier de traduction" "Fichier de traduction sourcé"
+        SetMainLang "$LINUX_REINSTALL_LANG" "fr/*.fr" "Impossible de sourcer ce fichier de traduction" "Fichier de traduction sourcé" "$LINENO"
         ;;
-
-    # Unsupported language
     *)
-        echo "Sorry, your language is not (yet) supported."; echo
+        # Else, if the detected language is not yet supported, the default language will be English.
+        # As it's an important information, the "echo" command's output has to be redirected to the terminal too, no matter if
+        echo "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+        echo "The $(basename "$0" | cut -f 1 -d '.') library language will be set in English" 2>&1 | tee -a ""
         
-        exit 1
+        SetLibLang "$BASH_UTILS_LIB_LANG" "en/*.en" "Unable to source this translation file" "Sourced translation file" "$LINENO"
         ;;
 esac

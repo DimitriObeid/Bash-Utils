@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -77,8 +77,10 @@ function Makefile()
 		EchoNewstep "Changement des droits du nouveau fichier $(DechoN "$path") de $(DechoN "$USER") en $(DechoN "$ARG_USERNAME")." "$sleep_txt"
 		echo
 
+		chown -v "${ARG_USERNAME}" "$path"
+
 		# On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
-		if chown -v "${ARG_USERNAME}" "$path"; then
+		if test "$?" -eq "0"; then
 			echo
 
 			EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
@@ -115,7 +117,7 @@ function Makefile()
 		true > "$path"
 
 		# On vérifie que le contenu du fichier cible a bien été supprimé en testant le code de retour de la commande "true".
-		if [ "$?" -eq "0" ]; then
+		if test "$?" -eq "0"; then
 			EchoSuccess "$MSG_FILE_NONEMPTY_SUCC." "$sleep_txt"
 			echo
 

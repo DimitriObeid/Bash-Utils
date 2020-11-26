@@ -9,7 +9,7 @@
 ## RECURSIVE OWNERSHIP SWAPPING
 
 # Calling the "chown" command to change recursively directory ownership
-function ChownRec()
+ChownRec()
 {
     #***** Paramètres *****
     current_owner=$1
@@ -68,7 +68,7 @@ function ChownRec()
 #   - EchoSuccessTimer  -> Bash-Utils/lib/functions/Echo.lib           -> 
 #   - DrawLine          -> Bash-Utils/lib/functions/Headers.lib   
 #   - HandleErrors      -> Bash-Utils/lib/functions/Headers.sh
-function Chown()
+Chown()
 {
     #***** Parameters *****
     current_ownwer=$1

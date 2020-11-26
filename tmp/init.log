@@ -1,0 +1,19 @@
+In /usr/local/bin/Bash-Utils/lib/init/initializer.sh, line 100 : CHECKING FOR BASH-UTILS SUB-FOLDERS
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+
+Included file : /usr/local/bin/Bash-Utils/lib/LinkFnctsVars.sh
+In /usr/local/bin/Bash-Utils/lib/lang/SetLibLang.sh, line 
+39 : Unable
+39 : to
+39 : source
+39 : this
+39 : translation
+39 : file
+Included file : /usr/local/bin/Bash-Utils/lib/lang/SetLibLang.sh
+./Linux-reinstall.sh, 45 : CHECKING FOR Linux-reinstall's SUB-FOLDERS
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/install/categories
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/src/public/Linux-reinstall/lib/variables
+
