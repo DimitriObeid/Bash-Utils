@@ -18,7 +18,7 @@ function DechoS() { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Su
 ## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
 
 # Avoid repetiting code
-function EchoBase()
+function Redirect()
 {
     #***** Parameters *****
     local string=$1
@@ -52,7 +52,7 @@ function EchoError() {
         timer=".5"
     fi
     
-    EchoBase "$BU_TXT_RED_TAB $string$BU_COL_RESET"
+    Redirect "$BU_TXT_RED_TAB $string$BU_COL_RESET"
 
     sleep "$timer"
 }
@@ -68,7 +68,7 @@ function EchoNewstep() { local string=$1;
         timer=".5"
     fi
     
-    EchoBase "$TXT_N_TAB $string$COL_RESET"
+    Redirect "$TXT_N_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -84,7 +84,7 @@ function EchoSuccess() {
         timer=".5"
     fi
     
-    EchoBase "$TXT_S_TAB $string$COL_RESET"
+    Redirect "$TXT_S_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -99,5 +99,5 @@ function EchoSuccess() {
 # Redirecting the output of the "echo" command
 function Newline()
 {
-    EchoBase ""
+    Redirect ""
 }

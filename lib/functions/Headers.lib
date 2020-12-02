@@ -5,6 +5,7 @@
 #### FUNCTIONS WITHOUT REDIRECTIONS TOWARDS A LOG FILE
 
 ## DÉFINITION DES FONCTIONS DE CRÉATION DE HEADERS
+
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function DrawLine()
 {
@@ -70,12 +71,12 @@ function HeaderBase()
 	local wait_t=$5			# Temps de pause après l'affichage du header/
 
 	#***** Code *****
-	echo
+	Redirect
 
-	DrawLine "$line_color" "$line_char"
-	echo "$string_color" "##>" "$string$COL_RESET"
-	DrawLine "$line_color" "$line_char"
-	echo
+	Redirect "$(DrawLine "$line_color" "$line_char")"
+	Redirect "$string_color##>" "$string$COL_RESET"
+	Redirect "$(DrawLine "$line_color" "$line_char")"
+	Redirect
 
 	sleep "$wait_t"
 

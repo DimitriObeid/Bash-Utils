@@ -16,7 +16,7 @@
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-############################### CALLING INSTALL SCRIPT'S DEPENDENCES ##############################
+############################## CALLING INSTALL SCRIPT'S DEPENDENCIES ##############################
 
 #### INITIALIZING LINUX-REINSTALL
 
@@ -32,11 +32,11 @@ PROJECT_LOG_STATUS=""
 
 ## INCLUDING THE INITALIZER FILE
 
-if ! source "/usr/local/bin/Bash-Utils/lib/init/initializer.sh"; then
+if ! source "/usr/local/lib/Bash-Utils/lib/init/initializer.sh"; then
     echo "In $(basename $0), line $LINENO --> Error : unable to include the initializer file"; echo; exit 1
 fi
 
-# 
+#
 LINUX_REINSTALL_INST="$PROJECT_SRC_ROOT/install/categories"   # TODO : Retirer ce dossier du template de fichier principal une fois le script de réinstallation fini
 LINUX_REINSTALL_LANG="$PROJECT_SRC_ROOT/lang"
 LINUX_REINSTALL_VARS="$PROJECT_SRC_ROOT/lib/variables"
@@ -61,7 +61,7 @@ echo "In $(basename "$0"), line $LINENO : DEFINING $(basename "$0" | cut -f 1 -d
 ## DÉFINITION DES FONCTIONS D'INITIALISATION
 # Détection du passage des arguments au script
 function CheckArgs()
-{    
+{
 	# If the script is not run as super-user (root)
 	if test "$EUID" -ne 0; then
 		EchoError "$MSG_MAIN_INIT_ROOT_ZERO."
@@ -83,7 +83,7 @@ function CheckArgs()
 
 		exit 1
     fi
-		
+
 	# If no value is passed as username argument.
 	if test -z "$ARG_USERNAME"; then
 		EchoError "$MSG_MAIN_INIT_USERNAME_ZERO :"
@@ -114,12 +114,12 @@ echo
         EchoError "$MSG_MAIN_INIT_INSTALL_ZERO !"
         EchoError "$MSG_MAIN_INIT_INSTALL_ZERO_ADVICE."
         echo
-        
+
         EchoError "$MSG_MAIN_INIT_INSTALL_AWAITED."
         echo
-        
+
         exit 1
-	    
+
     # Else, if the second argument is passed, the script checks if the value is equal to only one of the awaited values ("custom" or "sio"). They are not case sensitive.
    	else
         case ${ARG_INSTALL,,} in
@@ -131,11 +131,11 @@ echo
                 ;;
             *)
                 echo
-        
+
                 EchoError "$MSG_MAIN_INIT_INSTALL_DIFFERENT !"
                 EchoError "$MSG_MAIN_INIT_INSTALL_AWAITED."
                 echo
-            
+
                 exit 1
                 ;;
         esac
@@ -182,7 +182,7 @@ function CreateLogFile()
 
 	# Le script crée d'abord le fichier de logs dans le dossier actuel (pour cela, on passe la valeur de la variable d'environnement $PWD en premier argument de la fonction "Makefile").
 	lineno=$LINENO; Makefile "$PWD" "$FILE_LOG_NAME" "0" "0" > /dev/null
-	
+
 	# On vérifie si le fichier de logs a bien été créé.
 	if test -f "$FILE_LOG_PATH"; then
 		EchoSuccessLog "$MSG_CRLOGFILE_SUCCESS"
@@ -200,10 +200,10 @@ function CreateLogFile()
         EchoError "$MSG_CRLOGFILE_FAIL"
         EchoError "$MSG_CRLOGFILE_ADVICE"
         echo
-        
+
         EchoError "$MSG_LINENO $lineno."
         echo
-        
+
         exit 1
     fi
 }
@@ -223,11 +223,11 @@ function Mktmpdir()
 
 	# Avant de déplacer le fichier de logs, on vérifie si l'utilisateur n'a pas passé la valeur "debug" en tant que dernier argument (vérification importante, étant donné que le chemin et le nom du fichier sont redéfinis dans ce cas).
     EchoNewstepLog "Déplacement du fichier de logs dans le dossier $(DechoN "$DIR_LOG_PATH")" >> "$FILE_LOG_PATH"
-	
+
 	# Dans le cas où l'utilisateur ne le passe pas, une fois le dossier temporaire créé, on y déplace le fichier de logs tout en vérifiant s'il ne s'y trouve pas déjà, puis on redéfinit le chemin du fichier de logs de la variable "$FILE_LOG_PATH". Sinon, le fichier de logs n'est déplacé nulle part ailleurs dans l'arborescence.
 	if test -z "${ARGV[2]}"; then
 		FILE_LOG_PATH="$DIR_LOG_PATH/$FILE_LOG_NAME"
-		
+
 		# On vérifie que le fichier de logs a bien été déplacé vers le dossier temporaire en vérifiant le code de retour de la commande "mv".
 		local lineno=$LINENO; mv "$PWD/$FILE_LOG_NAME" "$FILE_LOG_PATH"
 
@@ -380,7 +380,7 @@ function CheckInternetConnection()
 
 	# On vérifie si l'ordinateur est connecté à Internet (pour le savoir, on ping le serveur DNS d'OpenDNS avec la commande ping 1.1.1.1).
 	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$FILE_LOG_PATH"
-    
+
     HandleErrors "$?" "AUCUNE CONNEXION À INTERNET" "Vérifiez que vous êtes bien connecté à Internet, puis relancez le script." "$lineno"
     EchoSuccessTee "Votre ordinateur est connecté à Internet."
 

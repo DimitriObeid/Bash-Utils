@@ -24,11 +24,11 @@ fi
 ## BASH-UTILS PATH
 
 # Bash-Utils root directory path
-BASH_UTILS_ROOT="/usr/local/bin/Bash-Utils"
+BASH_UTILS_ROOT="/usr/local/lib/Bash-Utils"
 
 # In case the Bash-Utils folder doesn't exists or is not located in the correct path
 if [ ! -d "$BASH_UTILS_ROOT" ]; then
-    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/bin' folder"; exit 1
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/lib' folder"; exit 1
 fi
 
 # Bash-Utils sub-folders
@@ -94,7 +94,7 @@ function WriteInitLog()
     initlog_status="tee"
     
     #***** Code *****
-    if [ ! -z "$initlog_status" ]; then
+    if [ -n "$initlog_status" ]; then
         if [ "$initlog_status" = "log" ]; then
             echo "$string" >> "$INITIALIZER_LOG_PATH"
         elif [ "$initlog_status" = "tee" ]; then
@@ -157,20 +157,21 @@ function SourceFile()
     #***** Code *****
     
     if [ -z "$info" ]; then
-        if ! source "$path"; then
-            echo "In ${BASH_SOURCE[0]}, $lineno --> $path : Unable to source this file"; echo
+        if source "$path"; then
+            WriteInitLog "Sourced file : $path"
+        else
+            echo "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source this file"; echo
             exit 1
         fi
     else
-        source "$path"
-
-        if test "$?" -ne 0; then
-            echo "$path : Unable to source the $info"; echo
+        if source "$path"; then
+            WriteInitLog "Sourced file : $path"
+        else
+            echo "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source the $info"; echo
             exit 1
         fi
     fi
     
-    WriteInitLog "Sourced file : $path"
 }
 
 # -----------------------------------------------
