@@ -18,9 +18,9 @@ fi
 
 ## TEMPORARY FOLDER'S INFORMATIONS.
 
-BU_DIR_TMP_NAME="Linux-reinstall.tmp.d"			# Name
-BU_DIR_TMP_PARENT="/tmp"							# Parent folder
-BU_DIR_TMP_PATH="$DIR_TMP_PARENT/$DIR_TMP_NAME"	# Full path
+DIR_TMP_NAME="Linux-reinstall.tmp.d"			# Name
+DIR_TMP_PARENT="/tmp"							# Parent folder
+DIR_TMP_PATH="$DIR_TMP_PARENT/$DIR_TMP_NAME"	# Full path
 
 # -----------------------------------------------
 
@@ -33,8 +33,8 @@ SC_DIR_INSTALL_NAME="Install"                              # Name
 SC_DIR_INSTALL_PATH="$DIR_TMP_PATH/$DIR_INSTALL_NAME"      # Path
 
 # Folder containing the logs file.
-BU_DIR_LOG_NAME="Logs"
-BU_DIR_LOG_PATH="$DIR_TMP_PATH/$DIR_LOG_NAME"
+DIR_LOG_NAME="Logs"
+DIR_LOG_PATH="$DIR_TMP_PATH/$DIR_LOG_NAME"
 
 # Folder containing the files that registers registering packages not found in the package manager's database or whose installation failed
 SC_DIR_PACKAGES_NAME="Packages"

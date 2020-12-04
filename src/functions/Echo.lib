@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### TEXT WRITING AND DECORATION
+
+## COLOR A PART OF A TEXT WITH ANOTHER COLOR.
+## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (header (H), moving to a new sub-step (N), error (E) or success (S)).
+
+function Decho { local string=$1; echo "$COL_CYAN$string$COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+function DechoE { local string=$1; echo "$COL_CYAN$string$COL_RED"; }     # Error message
+function DechoH { local string=$1; echo "$COL_BLUE$string$COL_CYAN"; }    # Header text
+function DechoN { local string=$1; echo "$COL_CYAN$string$COL_YELLOW"; }  # New sub-step message
+function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Success message
+
+# -----------------------------------------------
+
+## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
+
+# Avoid repetiting code
+function Redirect
+{
+    #***** Parameters *****
+    local string=$1
+    local redirect=$2
+    
+    #***** Code *****
+    if [ -z "$redirect" ]; then
+        echo "$string"
+    else
+        if [ "$redirect" = "log" ]; then
+            echo "$string" >> "$PROJECT_LOG_FILE_PATH"
+            
+        elif [ "$redirect" = "tee" ]; then
+            echo "$string" 2>&1 | tee -a "$PROJECT_LOG_FILE_PATH"
+            
+        else
+            echo "Error : no valid write output mode defined"; echo
+            exit 1
+        fi
+    fi
+}
+
+# Error message
+function EchoError
+{
+    #***** Parameters *****
+    local string=$1
+    local redirect=$2
+    local timer=$3
+    
+    #***** Code *****
+    if [ -z "$timer" ]; then
+        timer=".5"
+    fi
+    
+    Redirect "$TXT_RED_TAB $string$COL_RESET" "$redirect"
+
+    sleep "$timer"
+}
+
+# New sub-step message
+function EchoNewstep
+{
+    #***** Parameters *****
+    local string=$1
+    local redirect=$2
+    local timer=$3
+    
+    #***** Code *****
+    if [ -z "$timer" ]; then
+        timer=".5"
+    fi
+    
+    Redirect "$TXT_YELLOW_TAB $string$COL_RESET" "$redirect"
+
+    sleep "$timer"
+}
+
+# Success message
+function EchoSuccess
+{
+    #***** Parameters *****
+    local string=$1
+    local redirect=$2
+    local timer=$3
+
+    #***** Code *****
+    if [ -z "$timer" ]; then
+        timer=".5"
+    fi
+    
+    Redirect "$TXT_GREEN_TAB $string$COL_RESET" "$redirect"
+
+    sleep "$timer"
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### LINE BREAKS
+
+## LINE BREAKS ACCORDING TO THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
+
+# Redirecting the output of the "echo" command
+function Newline
+{
+    #***** Parameters *****
+    redirect=$1
+    
+    #***** Code *****
+    Redirect "" "$redirect"
+}

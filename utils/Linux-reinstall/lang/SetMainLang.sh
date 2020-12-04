@@ -26,11 +26,11 @@ function SetMainLang()
 case "$LANG" in
     en_*)
         # English
-        SetMainLang "$LINUX_REINSTALL_LANG/en/" "*.en" "Unable to source this translation file" "Included translation file" "$LINENO"
+        SetMainLang "$LINUX_REINSTALL_LANG/en" "*.en" "Unable to source this translation file" "Included translation file" "$LINENO"
         ;;
     fr_*)
         # French
-        SetMainLang "$LINUX_REINSTALL_LANG/fr/" "*.fr" "Impossible de sourcer ce fichier de traduction" "Fichier de traduction sourcé" "$LINENO"
+        SetMainLang "$LINUX_REINSTALL_LANG/fr" "*.fr" "Impossible de sourcer ce fichier de traduction" "Fichier de traduction sourcé" "$LINENO"
         ;;
     *)
         # Else, if the detected language is not yet supported, the default language will be English.
@@ -38,6 +38,6 @@ case "$LANG" in
         echo "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
         echo "The $(basename "$0" | cut -f 1 -d '.') library language will be set in English" 2>&1 | tee -a ""
         
-        SetLibLang "$BASH_UTILS_LANG/en/" "*.en" "Unable to source this translation file" "Sourced translation file" "$LINENO"
+        SetLibLang "$BASH_UTILS_LANG/en" "*.en" "Unable to source this translation file" "Sourced translation file" "$LINENO"
         ;;
 esac

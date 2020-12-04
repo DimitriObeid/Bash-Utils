@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+## RECURSIVE OWNERSHIP SWAPPING
+
+# Calling the "chown" command to change recursively directory ownership
+
+# Required functions and files :
+#   - EchoError    -> Bash-Utils/src/functions/Echo.lib
+#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib 
+#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib           -> 
+#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib   
+#   - HandleErrors -> Bash-Utils/src/functions/Headers.sh
+function ChownRec
+{
+    #***** Paramètres *****
+    current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
+    new_owner=$2
+    path=$3
+    timer=$4
+
+    #***** Code *****
+    # As the "chown" command has to be used with super-user privileges,
+    # it's necessary to check if the current effective user identifiant is equal to 0 (root user's EUID)
+    if test "$EUID" -ne 0; then
+        HandleError "" "" "" ""
+    # Else, if the EUID is equal to the root user's EUID (0).
+    # If the path passed as argument doesn't exists.
+    elif [ ! -d "$path" ]; then
+        HandleError "" "" "" ""
+    fi
+    
+    # Defining a timer for pausing script after displaying text.
+    if test -z "$timer"; then
+        timer="0"
+    fi
+    
+    EchoNewstep "$MSG_PERM_CHOWNREC." "$timer"
+	echo
+
+	chown -Rv "$current_owner" "$path"
+
+    # Verifying if the rights were correctly modified, by checking the "chown" command's return value.
+	if test "$?" -eq "0"; then
+		echo
+
+		EchoSuccess "$MSG_PERM_CHOWNREC_SUCCESS." "$timer"
+		echo
+
+		return
+    # Else (for example, if the path given as argument is incorrect le chemin passé en argument est invalide)
+	else
+        echo
+
+		EchoError "$MSG_PERM_CHOWNREC_FAIL." "$timer"
+		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :" "$timer"
+		echo "	chown -R $current_owner $path"
+		echo
+
+		return
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+## NON-RECURSIVE OWNERSHIP SWAPPING
+
+# Fonctions d'attribution de propriété de fichier à l'utilisateur.
+
+# Required functions and files :
+#   - EchoError    -> Bash-Utils/src/functions/Echo.lib
+#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib 
+#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib           -> 
+#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib   
+#   - HandleErrors -> Bash-Utils/src/functions/Headers.sh
+function Chown
+{
+    #***** Parameters *****
+    current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
+    new_owner=$2
+    path=$3
+    timer=$4
+    
+    #***** Code *****
+    # As the "chown" command has to be used with super-user privileges,
+    # it's necessary to check if the current effective user identifiant is equal to 0 (root user's EUID)
+    if test "$EUID" -ne 0; then
+        HandleError "" "" "" ""
+    # Else, if the EUID is equal to the root user's EUID (0).
+    # If the path passed as argument doesn't exists.
+    elif [ ! -d "$path" ]; then
+        HandleError "" "" "" ""
+    fi
+    
+    # Defining a timer for pausing script after displaying text.
+    if test -z "$timer"; then
+        timer="0"
+    fi
+    
+    EchoNewstep "$MSG_PERM_CHOWN_FILE." "$timer"
+	echo
+
+    chown -v "$username" "$path"
+
+    # On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
+    if test "$?" -eq "0"; then
+        echo
+
+        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
+        echo
+
+        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        echo
+
+        return
+    else
+        echo
+
+        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$sleep_txt"
+        EchoError "Pour changer les droits du fichier $(DechoE "$path")," "$sleep_txt"
+        EchoError "utilisez la commande :" "$sleep_txt"
+        echo "	chown username chemin"
+
+        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"
+        DrawLine "$COL_RESET" "$block_char"
+        sleep "$sleep_blk"
+        echo
+
+        return
+    fi
+}
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+

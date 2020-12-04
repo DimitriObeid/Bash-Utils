@@ -1,0 +1,7 @@
+1) Le fichier de script principal doit être exécuté.
+
+2) Ce fichier peut être localisé n'importe où dans l'arborescence de l'ordinateur de l'utilisateur.
+
+3) Il doit contenir <X> variables, qui seront utiliées par le fichier d'initialisation une fois ce dernier appelé :
+    - PROJECT_PATH : Chemin du script principal. Il ne doit pas être écrit en dur, pour éviter de devoir changer le chemin à chaque fois que le fichier est déplacé. Pour cela, la valeur de cette variable est un appel d'une fonction qui cherche et affiche le nom du dossier parent du script, suivi du nom du fichier, obtenu en appelant la commande "basename" et en lui passant en argument le nom du script via l'argument "$0"
+    - 

@@ -26,7 +26,7 @@ ARG_INSTALL_INDEX='2'   # Installation kind argument's index.
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### OPTIONAL ARGUMENTS
-ARG_DEBUG=$4            # Argument servant d'utilitaire de déboguage.
+ARG_DEBUG=$3            # Argument servant d'utilitaire de déboguage.
 ARG_DEBUG_INDEX='3'     # Debug argument's index.
 
 ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
