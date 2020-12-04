@@ -1,0 +1,7 @@
+/usr/local/bin/Bash-Utils/src/initializer.sh, 90 : CHECKING FOR BASH-UTILS SUB-FOLDERS
+Existing sub-folder : /usr/local/bin/Bash-Utils/lang
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/functions
+Existing sub-folder : /usr/local/bin/Bash-Utils/lib/variables
+
+Included file : /usr/local/bin/Bash-Utils/lib/link_fncts_vars.sh
+Included file : /usr/local/bin/Bash-Utils/lang/SetLibLang.sh
