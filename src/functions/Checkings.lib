@@ -1,0 +1,53 @@
+#/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### CHECKING FOR EFFECTIVE USER IDENTIFIANT (EUID)
+
+## CHECKING FOR SUPER-USER PRIVILEGES
+
+# Checking if the current effective UID is not equal to 0 (root user's account)
+
+# Required functions and files :
+#   - HandleErrors      -> Bash-Utils/src/functions/Headers.lib
+function CheckRootEUID
+{
+    if [ "$EUID" -ne 0 ]; then
+        HandleErrors "" "" "" "" ""
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CHECKING VARIABLES STATUS
+
+## CHECKING FOR FILES AND FOLDERS
+
+# Checking for project's log file's status, then write
+function CheckProjectLogStatus
+{
+    #***** Parameters *****
+    string=$1
+
+    #**** Code *****
+    if [ -n "$PROJECT_LOG_STATUS" ]; then
+        if [ "$PROJECT_LOG_STATUS" = "log" ] || [ "$PROJECT_LOG_STATUS" -eq 1 ]; then
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_FILE_PATH"
+        elif [ "$PROJECT_LOG_STATUS" = "tee" ] || [ "$PROJECT_LOG_STATUS" -eq 2 ]; then
+            echo "$string"
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH"
+        else
+            echo "Error : no valid write output mode defined"; echo
+            exit 1
+        fi
+    else
+        echo "$string"
+    fi
+}
+
+# -----------------------------------------------
+
+## CHECKING FOR TIME STATUS

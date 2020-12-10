@@ -1,0 +1,47 @@
+VARIABLE,COMMENTS, en, fr
+,Directory processing,,
+MSG_DIR_PROCESSING_BEGIN,,,"Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")"
+MSG_DIR_PROCESSING_END_FAIL,,,"Fin du traitement du dossier $(DechoE ""$path/"")"
+MSG_DIR_PROCESSING_END_SUCCESS,,,"Fin du traitement du dossier $(DechoS ""$path/"")"
+,« OverwriteDir » function (overwriting directory’s content),,
+MSG_DIR_OVRWRT_DETECTED,,,"Un dossier non-vide portant exactement le même nom ($(DechoN ""$name"")) se trouve déjà dans le dossier cible $(DechoN ""$parent/"")"
+MSG_DIR_OVRWRT_OVERWRITE,,,"Suppression du contenu du dossier $(DechoN ""$path/"")"
+MSG_DIR_OVRWRT_SUCCESS,,,"Suppression du contenu du dossier $(DechoS ""$path/"") effectuée avec succès"
+MSG_DIR_OVRWRT_FAIL,,,"Impossible de supprimer le contenu du dossier $(DechoE ""$path/"")"
+,« Makedir » function (directory creation),,
+MSG_DIR_MKDIR,,,"Création du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")"
+MSG_DIR_MKDIR_SUCCESS,,,"Le dossier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")"
+MSG_DIR_MKDIR_FAIL,,,"IMPOSSIBLE DE CRÉER LE DOSSIER $(DechoE ""$name"") DANS LE DOSSIER PARENT $(DechoE ""$parent/"")"
+MSG_DIR_MKDIR_EMPTY,,,"Le dossier $(DechoS ""$path/"") existe déjà dans le dossier $(DechoS ""$parent/"") et est vide"
+,,,
+,File processing,,
+MSG_FILE_PROCESSING_BEGIN,,,"Traitement du fichier $(DechoN ""$name"")"
+MSG_FILE_PROCESSING_END_FAIL,,,"Fin de traitement du ficier $(DechoE ""$name"")"
+MSG_FILE_PROCESSING_END_SUCCESS,,,"Fin de traitement du fichier $(DechoS ""$name"")"
+,« OverwriteFile » function (overwriting file’s content),,
+MSG_FILE_OVRWRT_DETECTED,,,"Le fichier $(DechoN ""$path"") existe déjà et n'est pas vide"
+MSG_FILE_OVRWRT_OVERWRITE,,,"Écrasement des données du fichier $(DechoN ""$path"")"
+MSG_FILE_OVRWRT_SUCCESS,,,"Le contenu du fichier $(DechoS ""$path"") a été écrasé avec succès"
+MSG_FILE_OVRWRT_FAIL,,,"Le contenu du fichier $(DechoE ""$path"") n'a pas été écrasé"
+,« Makefile » function (file creation),,
+MSG_FILE_MKFILE_CREATE,,,"Création du fichier $(DechoN ""$name"") dans le dossier $(DechoN ""$parent/"")"
+MSG_FILE_MKFILE_SUCCESS,,,"Le fichier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")"
+MSG_FILE_MKFILE_FAIL,,,"LE FICHIER $(DechoE ""$name"") N'A PAS PU ÊTRE CRÉÉ DANS LE DOSSIER $(DechoE ""$parent/"")"
+MSG_FILE_MKFILE_EMPTY,,,"Le fichier $(DechoS ""$name"") existe déjà dans le dossier $(DechoS ""$parent/"")"
+,,,
+,,,
+MSG_HEADERS_ERR_ERROR,,,ERREUR FATALE
+MSG_HEADERS_ERR_TYPE,,,Une erreur fatale s'est produite
+MSG_HEADERS_ERR_LINE,,,L’erreur en question s'est produite à la ligne
+MSG_HEADERS_ERR_STOP,,,Arrêt de l'installation
+,,,
+,,,
+MSG_PERMISSIONS_CHOWNREC,,,"Transfert récursif des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
+MSG_PERMISSIONS_CHOWNREC_SUCCESS,,,"Les droits de propriété du dossier $(DechoS ""$name"") ont été transférées de $(DechoS ""$current_owner"") à $(DechoS ""$new_owner"") avec succès"
+MSG_PERMISSIONS_CHOWNREC_FAIL,,,"Impossible de transférer la propriété les droits du dossier $(DechoE ""$path/"") de $(DechoE ""$current_owner"") à $(DechoE ""$new_owner"")"
+MSG_PERMISSIONS_CHOWNREC_FAIL_ADVICE,,,"Pour transférer récursivement la propriété du dossier $(DechoE ""$path/"") de manière récursive, utilisez la commande suivante"
+,,,
+MSG_PERMISSIONS_CHOWN_FILE,,,"Transfert des droits de propriété du nouveau dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
+MSG_PERMISSIONS_CHOWN_FILE_SUCCESS,,,
+MSG_PERMISSIONS_CHOWN_FILE_FAIL,,,
+MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE,,,

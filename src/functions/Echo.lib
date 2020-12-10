@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT WRITING AND DECORATION
 
@@ -18,43 +20,20 @@ function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Succ
 ## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
 
 # Avoid repetiting code
-function Redirect
-{
-    #***** Parameters *****
-    local string=$1
-    local redirect=$2
-    
-    #***** Code *****
-    if [ -z "$redirect" ]; then
-        echo "$string"
-    else
-        if [ "$redirect" = "log" ]; then
-            echo "$string" >> "$PROJECT_LOG_FILE_PATH"
-            
-        elif [ "$redirect" = "tee" ]; then
-            echo "$string" 2>&1 | tee -a "$PROJECT_LOG_FILE_PATH"
-            
-        else
-            echo "Error : no valid write output mode defined"; echo
-            exit 1
-        fi
-    fi
-}
 
 # Error message
 function EchoError
 {
     #***** Parameters *****
     local string=$1
-    local redirect=$2
-    local timer=$3
+    local timer=$2
     
     #***** Code *****
     if [ -z "$timer" ]; then
         timer=".5"
     fi
     
-    Redirect "$TXT_RED_TAB $string$COL_RESET" "$redirect"
+    CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -64,15 +43,14 @@ function EchoNewstep
 {
     #***** Parameters *****
     local string=$1
-    local redirect=$2
-    local timer=$3
+    local timer=$2
     
     #***** Code *****
     if [ -z "$timer" ]; then
         timer=".5"
     fi
     
-    Redirect "$TXT_YELLOW_TAB $string$COL_RESET" "$redirect"
+    CheckProjectLogStatus "$TXT_YELLOW_TAB $string$COL_RESET"
 
     sleep "$timer"
 }
@@ -82,15 +60,14 @@ function EchoSuccess
 {
     #***** Parameters *****
     local string=$1
-    local redirect=$2
-    local timer=$3
+    local timer=$2
 
     #***** Code *****
     if [ -z "$timer" ]; then
         timer=".5"
     fi
     
-    Redirect "$TXT_GREEN_TAB $string$COL_RESET" "$redirect"
+    CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET" "$redirect"
 
     sleep "$timer"
 }
@@ -105,9 +82,5 @@ function EchoSuccess
 # Redirecting the output of the "echo" command
 function Newline
 {
-    #***** Parameters *****
-    redirect=$1
-    
-    #***** Code *****
-    Redirect "" "$redirect"
+    CheckProjectLogStatus
 }

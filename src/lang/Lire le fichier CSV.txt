@@ -1,0 +1,4 @@
+1) Parcourir la toute première ligne (contenant les informations de chaque colonne) jusqu'à obtenir EXACTEMENT la même valeur que celle enregistrée dans la variable "$LANG", contenant le code de la langue cible, dans le fichier "SetLibLang.sh".
+
+2) Une fois la colonne cible obtenue, parcourir la colonne des variables et y assigner la valeur contenue sur la même ligne, dans la colonne de la langue cible.
+    - Procédure : dans un double tableau, 

@@ -10,57 +10,51 @@
 
 # Calling the "chown" command to change recursively directory ownership
 
-# Required functions and files :
-#   - EchoError    -> Bash-Utils/src/functions/Echo.lib
-#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib 
-#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib           -> 
-#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib   
-#   - HandleErrors -> Bash-Utils/src/functions/Headers.sh
+# Required functions and files into "Bash-Utils/src/functions" folder :
+#   - CheckRootEUID -> Checkings.lib
+#   - EchoError     -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
+#   - EchoNewstep   -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
+#   - EchoSuccess   -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
+#   - DrawLine      -> Headers.lib
+#   - HandleErrors  -> Headers.lib      ->  EchoError
 function ChownRec
 {
     #***** Paramètres *****
     current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
     new_owner=$2
     path=$3
-    timer=$4
+    
+    #***** Variables *****
+    timer="$PROJECT_PAUSE"
 
     #***** Code *****
-    # As the "chown" command has to be used with super-user privileges,
-    # it's necessary to check if the current effective user identifiant is equal to 0 (root user's EUID)
-    if test "$EUID" -ne 0; then
-        HandleError "" "" "" ""
-    # Else, if the EUID is equal to the root user's EUID (0).
-    # If the path passed as argument doesn't exists.
-    elif [ ! -d "$path" ]; then
-        HandleError "" "" "" ""
-    fi
+    # The "chown" command has to be used with super-user privileges,
+    CheckRootEUID
     
-    # Defining a timer for pausing script after displaying text.
-    if test -z "$timer"; then
-        timer="0"
+    # If the path passed as argument doesn't exists.
+    if [ ! -d "$path" ]; then
+        HandleError "" "" "" ""
     fi
     
     EchoNewstep "$MSG_PERM_CHOWNREC." "$timer"
-	echo
+	Newline
 
-	chown -Rv "$current_owner" "$path"
-
-    # Verifying if the rights were correctly modified, by checking the "chown" command's return value.
-	if test "$?" -eq "0"; then
-		echo
-
+    # On change les droits du fichier créé par le script.
+	# Comme il est exécuté en mode super-utilisateur, tout dossier ou fichier créé appartient à l'utilisateur root.
+	# Pour attribuer les droits de lecture, d'écriture et d'exécution (rwx) à l'utilisateur normal, on appelle
+	# la commande chown avec pour arguments :
+	#		- Le nom de l'utilisateur à qui donner les droits.
+	#		- Le chemin du dossier cible.
+	if chown -Rv "$new_owner" "$path"; then
 		EchoSuccess "$MSG_PERM_CHOWNREC_SUCCESS." "$timer"
-		echo
+		Newline
 
 		return
-    # Else (for example, if the path given as argument is incorrect le chemin passé en argument est invalide)
 	else
-        echo
-
-		EchoError "$MSG_PERM_CHOWNREC_FAIL." "$timer"
+        EchoError "$MSG_PERM_CHOWNREC_FAIL." "$timer"
 		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :" "$timer"
-		echo "	chown -R $current_owner $path"
-		echo
+		Newline "	chown -R $current_owner $path"
+		Newline
 
 		return
     fi
@@ -77,10 +71,10 @@ function ChownRec
 
 # Required functions and files :
 #   - EchoError    -> Bash-Utils/src/functions/Echo.lib
-#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib 
-#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib           -> 
-#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib   
-#   - HandleErrors -> Bash-Utils/src/functions/Headers.sh
+#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib
+#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib
+#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib
+#   - HandleErrors -> Bash-Utils/src/functions/Headers.lib
 function Chown
 {
     #***** Parameters *****
@@ -90,32 +84,28 @@ function Chown
     timer=$4
     
     #***** Code *****
-    # As the "chown" command has to be used with super-user privileges,
-    # it's necessary to check if the current effective user identifiant is equal to 0 (root user's EUID)
-    if test "$EUID" -ne 0; then
-        HandleError "" "" "" ""
-    # Else, if the EUID is equal to the root user's EUID (0).
+    # The "chown" command has to be used with super-user privileges,
+    CheckRootEUID
+    
     # If the path passed as argument doesn't exists.
-    elif [ ! -d "$path" ]; then
-        HandleError "" "" "" ""
+    if [ ! -d "$path" ]; then
+        # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
+        if [ ! -f "$path" ]; then
+            HandleError "" "" "" ""
+        fi
     fi
     
     # Defining a timer for pausing script after displaying text.
     if test -z "$timer"; then
-        timer="0"
+        timer=".5"
     fi
     
     EchoNewstep "$MSG_PERM_CHOWN_FILE." "$timer"
-	echo
+	Newline
 
-    chown -v "$username" "$path"
-
-    # On vérifie que les droits du fichier nouvellement créé ont bien été changés, en vérifiant le code de retour de la commande "chown".
-    if test "$?" -eq "0"; then
-        echo
-
-        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$sleep_txt"
-        echo
+    if chown -v "$new_owner" "$path"; then
+        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$timer"
+        Newline
 
         EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
         DrawLine "$COL_RESET" "$block_char"
@@ -124,12 +114,11 @@ function Chown
 
         return
     else
-        echo
 
-        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$sleep_txt"
+        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$timer"
         EchoError "Pour changer les droits du fichier $(DechoE "$path")," "$sleep_txt"
         EchoError "utilisez la commande :" "$sleep_txt"
-        echo "	chown username chemin"
+        echo '	chown $username $path'
 
         EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"
         DrawLine "$COL_RESET" "$block_char"
@@ -144,4 +133,3 @@ function Chown
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
-

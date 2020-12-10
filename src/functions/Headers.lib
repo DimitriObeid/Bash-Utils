@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### FUNCTIONS WITHOUT REDIRECTIONS TOWARDS A LOG FILE
 
 ## DÉFINITION DES FONCTIONS DE CRÉATION DE HEADERS
 
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
-function DrawLine()
+function DrawLine
 {
 	#***** Parameters *****
 	local line_color=$1			# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
@@ -61,7 +63,7 @@ function DrawLine()
 }
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
-function HeaderBase()
+function HeaderBase
 {
 	#***** Parameters *****
 	local line_color=$1		# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
@@ -84,13 +86,13 @@ function HeaderBase()
 }
 
 # Fonction d'affichage des headers lors d'un changement d'étape.
-function HeaderStep() { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5"; }
+function HeaderStep { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5"; }
 
 # Fonction d'affichage de headers lors du passage à une nouvelle catégorie de paquets lors de l'installation de ces derniers.
-function HeaderInstall() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5"; }
+function HeaderInstall { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5"; }
 
 # 
-function HandleErrors()
+function HandleErrors
 {
     #***** Parameters *****
     local return_code=$1
@@ -107,7 +109,7 @@ function HandleErrors()
 }
 
 # Fonction de gestion d'erreurs fatales (impossibles à corriger).
-function HandleFatalErrors()
+function HandleFatalErrors
 {
 	#***** Paramètres *****
 	local return_code=$1       # Code de retour de la dernière commande lancée
@@ -171,17 +173,17 @@ function HandleFatalErrorsTee()
     else
         HeaderBase "$COL_RED" "$TXT_HEADER_LINE_CHAR" "$COL_RED" "$(EchoError "$MSG_HNDERR_FATAL") : $error_string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"
 
-        EchoErrorTee "$MSG_HNDFATERR_HAPPENED :" 2>&1 | tee -a "$FILE_LOG_PATH"
-        EchoErrorTee "$error_string"
+        EchoError "$MSG_HNDFATERR_HAPPENED :" 2>&1 | tee -a "$FILE_LOG_PATH"
+        EchoError "$error_string"
         Newline
 
-        EchoErrorTee "$advise_string"
+        EchoError "$advise_string"
         Newline
 
-        EchoErrorTee "$MSG_HNDFATERR_LINE $lineno."
+        EchoError "$MSG_HNDFATERR_LINE $lineno."
         Newline
 
-        EchoErrorTee "$MSG_HNDFATERR_STOP."
+        EchoError "$MSG_HNDFATERR_STOP."
         Newline
 
         # TODO : Modifier la détection d'arguments

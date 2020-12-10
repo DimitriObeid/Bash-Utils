@@ -20,40 +20,20 @@
 
 #### INITIALIZING LINUX-REINSTALL
 
-## DEFINING PROJECT SETTINGS
-
-# Getting parent folder's path
-function GetProjectParentPath
-{
-    SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-    dirname="$SCRIPTPATH"
-    
-    shopt -s extglob           # enable +(...) glob syntax
-    result=${dirname%%+(/)}    # trim however many trailing slashes exist
-    echo "$result"
-}
-
-# Script's path
-PROJECT_FILE=$(basename "$0")
-PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')
-PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"
-echo "$PROJECT_PATH"
-
-# Script's name
-
-
-# -----------------------------------------------
-
 ## INCLUDING THE INITALIZER FILE
 
 lineno=$LINENO; if ! source "/usr/local/lib/Bash-Utils/src/Initializer.sh"; then
-    echo "In $(basename $0), line $lineno --> Error : unable to include the initializer file"; echo; exit 1
+    echo "In $(basename "$0"), line $lineno --> Error : unable to include the initializer file"; echo; exit 1
 fi
+
+# -----------------------------------------------
+
+## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
 LINUX_REINSTALL_INST="$(GetProjectParentPath)/install/categories"
 LINUX_REINSTALL_LANG="$(GetProjectParentPath)/lang"
-LINUX_REINSTALL_VARS="$(GetProjectParentPath)/lib/variables"
+LINUX_REINSTALL_VARS="$(GetProjectParentPath)/variables"
 
 # Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument
 WriteInitLog "In $(basename "$0"), line $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS"
@@ -64,17 +44,51 @@ CheckSubFolder "$LINUX_REINSTALL_VARS"; WriteInitLog
 # Sourcing the Linux-reinstall language files.
 echo "In $(basename "$0"), line $LINENO : DEFINING $(basename "$0" | cut -f 1 -d '.')'s LIBRARY FOLDER"
 SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-SourceFile "$LINUX_REINSTALL_VARS/args.var" "" "$LINENO"
-
 WriteInitLog; WriteInitLog
+
+WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2";
+WriteInitLog "END OF THE $(Decho "${PROJECT_NAME^^}")'S INITIALIZATION";
+WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"; WriteInitLog;
+
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ####################################### INITIALIZING SCRIPT #######################################
 
+#### DEFINING SCRIPT'S ARGUMENTS
+
+## ARGUMENT VALUES ARRAY
+ARGV=("$@")
+
+# -----------------------------------------------
+
+## ARGUMENT VALUES
+
+# Arguments to call after the script's execution command to make it running correctly.
+ARG_USERNAME=$1         # First argument : username's account.
+ARG_USERNAME_INDEX='1'  # Username argument's index.
+
+ARG_INSTALL=$2          # Second argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
+ARG_INSTALL_INDEX='2'   # Packages installation argument's index.
+
+# -----------------------------------------------
+
+## OPTIONAL ARGUMENTS
+
+ARG_DEBUG=$3            # Debug utilitary  | Argument servant d'utilitaire de déboguage.
+ARG_DEBUG_INDEX='3'     # Debug argument's index.
+
+ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### DÉFINITION DES FONCTIONS DÉPENDANTES DE L'AVANCEMENT DU SCRIPT ####
 
 ## DÉFINITION DES FONCTIONS D'INITIALISATION
+
 # Détection du passage des arguments au script
 function CheckArgs
 {
@@ -86,16 +100,16 @@ function CheckArgs
 		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
 		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
 		echo "$MSG_LR_CHKARGS_ARGS_SUDO"
-		echo
+		Newline
 
 		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO_OR_1,"
 		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO_OR_2 :"
 		echo "    $MSG_LR_CHKARGS_ARGS"
-		echo
+		Newline
 
 		EchoError "$MSG_LR_CHKARGS_ROOT_FAIL !"
 		EchoError "$MSG_LR_CHKARGS_ROOT_FAIL_ADVICE."
-		echo
+		Newline
 
 		exit 1
     fi
@@ -104,36 +118,31 @@ function CheckArgs
 	if [ -z "$ARG_USERNAME" ]; then
 		EchoError "$MSG_LR_CHKARGS_USERNAME_ZERO :"
 		echo "$MSG_LR_CHKARGS_ARGS_SUDO"
-		echo
+		Newline
 
 		EchoError "$MSG_LR_CHKARGS_USERNAME_FAIL !"
 		EchoError "$MSG_LR_CHKARGS_USERNAME_FAIL_ADVICE."
-		echo
+		Newline
 
 		exit 1
 
 	# Else, if the username argument doesn't match to any existing user account.
 	elif ! id -u "$ARG_USERNAME" > /dev/null; then
-        echo
-        echo "$ARG_USERNAME"
-
-		EchoError "$MSG_LR_CHKARGS_USERNAME_INCORRECT !"
+        Newline; EchoError "$MSG_LR_CHKARGS_USERNAME_INCORRECT !"
 		EchoError "$MSG_LR_CHKARGS_USERNAME_INCORRECT_ADVICE."
-		echo
+		Newline
 
 		exit 1
 	fi
 
 	# If the second mandatory argument is not passed.
 	if [ -z "$ARG_INSTALL" ]; then
-        echo
-
-        EchoError "$MSG_LR_CHKARGS_INSTALL_ZERO !"
+        Newline; EchoError "$MSG_LR_CHKARGS_INSTALL_ZERO !"
         EchoError "$MSG_LR_CHKARGS_INSTALL_ZERO_ADVICE."
-        echo
+        Newline
 
         EchoError "$MSG_LR_CHKARGS_INSTALL_AWAITED."
-        echo
+        Newline
 
         exit 1
 
@@ -147,11 +156,9 @@ function CheckArgs
                 VER_INSTALL="$ARG_INSTALL"
                 ;;
             *)
-                echo
-
-                EchoError "$MSG_LR_CHKARGS_INSTALL_DIFFERENT !"
+                Newline; EchoError "$MSG_LR_CHKARGS_INSTALL_DIFFERENT !"
                 EchoError "$MSG_LR_CHKARGS_INSTALL_AWAITED."
-                echo
+                Newline
 
                 exit 1
                 ;;
@@ -164,7 +171,7 @@ function CheckArgs
 	if test "$ARG_DEBUG_VAL" = "${ARG_DEBUG}"; then
 		# The name of the log file is redefined, THEN we redefine the path, EVEN if the initial value of the variable "$FILE_LOG_PATH" is the same as the new value.
 		# In this case, if the value of the variable "$FILE_LOG_PATH" is not redefined, the old value is called.
-		FILE_LOG_NAME="Linux-reinstall $DATE_TIME.test"
+		FILE_LOG_NAME="Linux-reinstall $TIME_DATE.test"
 		FILE_LOG_PATH="$PWD/$FILE_LOG_NAME"
 
 		## APPEL DES FONCTIONS D'INITIALISATION
@@ -186,7 +193,7 @@ function CheckArgs
 	elif test ! -z "${ARG_DEBUG}" && test "$ARG_DEBUG_VAL" != "${ARG_DEBUG}" ; then
 		EchoError "$MSG_INIT_DEBUG_FAIL : $(DechoE "debug")"
 		EchoError "$MSG_INIT_DEBUG_ADVICE"
-		echo
+		Newline
 
 		exit 1
 	fi
@@ -475,7 +482,7 @@ function SetSudo
 	HeaderStep "DÉTECTION DE SUDO ET AJOUT DE L'UTILISATEUR À LA LISTE DES SUDOERS"
 
 	# On crée une backup du fichier de configuration "sudoers" au cas où l'utilisateur souhaite revenir à son ancienne configuration.
-	local sudoers_old="/etc/sudoers - $DATE_TIME.old"
+	local sudoers_old="/etc/sudoers - $TIME_DATE.old"
 
     EchoNewstep "Détection de la commande sudo $COL_RESET."
     Newline
@@ -506,7 +513,7 @@ function SetSudo
 
 	echo ">>>> REMARQUE : Si vous disposez déjà des droits de super-utilisateur, ce n'est pas la peine de le faire !"
 	echo ">>>> Si vous avez déjà un fichier sudoers modifié, une sauvegarde du fichier actuel sera effectuée dans le même dossier,"
-	echo "	tout en arborant sa date de sauvegarde dans son nom (par exemple :$COL_CYAN sudoers - $DATE_TIME.old $COL_RESET)."
+	echo "	tout en arborant sa date de sauvegarde dans son nom (par exemple :$COL_CYAN sudoers - $TIME_DATE.old $COL_RESET)."
 	Newline
 
 	function ReadSetSudo
@@ -519,7 +526,7 @@ function SetSudo
 		case ${rep_set_sudo,,} in
 			"oui" | "yes")
 				# Sauvegarde du fichier "/etc/sudoers" existant en "/etc/sudoers $date_et_heure.old"
-				EchoNewstep "Création d'une sauvegarde de votre fichier $(DechoN "sudoers") existant nommée $(DechoN "sudoers $DATE_TIME.old")."
+				EchoNewstep "Création d'une sauvegarde de votre fichier $(DechoN "sudoers") existant nommée $(DechoN "sudoers $TIME_DATE.old")."
 				Newline
 
 				cat "/etc/sudoers" > "$sudoers_old"

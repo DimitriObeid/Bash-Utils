@@ -9,7 +9,7 @@
 ## LOG FILE
 
 # Définition du nom et du chemin du fichier de logs.
-FILE_LOG_NAME="Linux-reinstall $DATE_TIME.log"		# Name
+FILE_LOG_NAME="Linux-reinstall $TIME_DATE.log"		# Name
 FILE_LOG_PATH="$PWD/$FILE_LOG_NAME"					# Chemin du fichier de logs depuis la racine, dans le dossier actuel (il est mis à jour pendant l'initialisation du script).
 
 # -----------------------------------------------

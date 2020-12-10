@@ -8,26 +8,3 @@
 #### ARGUMENTS AND EXECUTION
 
 ## CHECK FOR CURRENT UID
-
-# Checking if the current UID is equal to 0 (root account)
-function CheckRoot()
-{
-    if test "$EUID" -ne 0; then
-        HandleErrors "" "" "" "" ""
-    fi
-}
-
-# -----------------------------------------------
-
-## CHECK ARGUMENT PASSAGE
-
-# Check if an username is passed as argument
-function CheckArgUsername()
-{
-    if test -z "$ARG_USERNAME"; then
-        HandleErrors "" "" "" ""
-        EchoError "No username passed as argument"; echo; exit 1
-    fi
-}
-
-# -----------------------------------------------

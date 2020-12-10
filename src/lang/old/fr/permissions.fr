@@ -12,12 +12,12 @@
 ## FONCTION "ChownDir"
 
 # Changement de propriété
-MSG_BU_PERM_CHOWNREC="Transfert récursif des droits de propriété du nouveau dossier $(DechoN "$path/") de $(DechoN "$current_owner") en $(DechoN "$new_owner")"    
+MSG_PERM_CHOWNREC=""    
 
 # Issue
-MSG_BU_PERM_CHOWNREC_SUCCESS="Les droits de propriété du dossier $(DechoS "$name") ont été transférées de $(DechoS "$current_owner") à $(DechoS "$new_owner") avec succès "
-MSG_BU_PERM_CHOWNREC_FAIL="Impossible de transférer la propriété les droits du dossier $(DechoE "$path/") de $(DechoE "$current_owner") à $(DechoE "$new_owner")"
-MSG_BU_PERM_CHOWNREC_FAIL_ADVICE="Pour transférer récursivement la propriété du dossier $(DechoE "$path/") de manière récursive, utilisez la commande suivante"
+MSG_PERM_CHOWNREC_SUCCESS=" "
+MSG_PERM_CHOWNREC_FAIL=
+MSG_PERM_CHOWNREC_FAIL_ADVICE=""
 
 # -----------------------------------------------
 
