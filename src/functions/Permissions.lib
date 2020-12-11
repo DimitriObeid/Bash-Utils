@@ -88,23 +88,27 @@ function Chown
     CheckRootEUID
     
     # If the path passed as argument doesn't exists.
-    if [ ! -d "$path" ]; then
+    if [ -d "$path" ]; then
+        EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_DIR" "$timer"
+        Newline
+    else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
-        if [ ! -f "$path" ]; then
+        if [ -f "$path" ]; then
+            EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_FILE" "$timer"
+            Newline
+        else
             HandleError "" "" "" ""
         fi
+
     fi
     
     # Defining a timer for pausing script after displaying text.
     if test -z "$timer"; then
         timer=".5"
     fi
-    
-    EchoNewstep "$MSG_PERM_CHOWN_FILE." "$timer"
-	Newline
 
     if chown -v "$new_owner" "$path"; then
-        EchoSuccess "Les droits du fichier $(DechoS "$parent") ont été changés avec succès." "$timer"
+        EchoSuccess "$MSG_PERMISSIONS_CHOWN_FILE_SUCCESS" "$timer"
         Newline
 
         EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
@@ -115,9 +119,8 @@ function Chown
         return
     else
 
-        EchoError "Impossible de changer les droits du fichier $(DechoE "$path")." "$timer"
-        EchoError "Pour changer les droits du fichier $(DechoE "$path")," "$sleep_txt"
-        EchoError "utilisez la commande :" "$sleep_txt"
+        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL" "$timer"
+        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE" "$sleep_txt"
         echo '	chown $username $path'
 
         EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"

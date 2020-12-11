@@ -7,7 +7,7 @@
 ## PROCESSING FUNCTIONS
 
 # Overwriting an existing directory's content
-function OverwriteDir()
+function OverwriteDir
 {
     #***** Parameters *****
     path=$1
@@ -47,7 +47,7 @@ function OverwriteDir()
 #   - Echo.sh       -> EchoSuccessTimer
 #   - Headers.sh    -> DrawLine   
 #   - Headers.sh    -> HandleErrors
-function Makedir()
+function Makedir
 {
 	#***** Parameters *****
 	local parent=$1		# Emplacement depuis la racine du dossier parent du dossier à traiter.

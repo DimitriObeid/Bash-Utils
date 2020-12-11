@@ -66,12 +66,15 @@ function DrawLine
 function HeaderBase
 {
 	#***** Parameters *****
-	local line_color=$1		# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	local line_char=$2		# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	local string_color=$3	# Définition de la couleur de la chaîne de caractères du header.
-	local string=$4			# Chaîne de caractères affichée dans chaque header.
-	local wait_t=$5			# Temps de pause après l'affichage du header/
+	line_color=$1		# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	line_char=$2		# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	string_color=$3	# Définition de la couleur de la chaîne de caractères du header.
+	string=$4			# Chaîne de caractères affichée dans chaque header.
+	wait_t=$5			# Temps de pause après l'affichage du header/
 
+	#***** Variables *****
+	wait_t="$PROJECT_TIME"
+	
 	#***** Code *****
 	Redirect
 
@@ -146,20 +149,20 @@ function HandleFatalErrors
 ##### LOGS
 
 # Checking the recording of a value in the variable "$FILE_LOG_PATH".
-function CheckLog()
+function CheckLog
 {
     if test -z "$FILE_LOG_PATH"; then
         EchoError "No path provided for the log file."; echo; exit 1
     fi
 }
 
-function HeaderStepLog() { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "$string" "1.5" >> "$FILE_LOG_PATH"; }
-function HeaderStepTee() { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
+function HeaderStepLog { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "$string" "1.5" >> "$FILE_LOG_PATH"; }
+function HeaderStepTee { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
 
-function HeaderInstallLog() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" >> "$FILE_LOG_PATH"; }
-function HeaderInstallTee() { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
+function HeaderInstallLog { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" >> "$FILE_LOG_PATH"; }
+function HeaderInstallTee { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"; }
 
-function HandleFatalErrorsTee()
+function HandleFatalErrorsTee
 {
 	#***** Paramètres *****
 	local return_code=$1       # Code de retour de la dernière commande lancée

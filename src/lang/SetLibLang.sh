@@ -17,7 +17,7 @@ function ParseCSVLibLang
     #***** Parameters *****
     local success_msg=$1
     local error_msg=$2
-    
+
     #***** Variables *****
     col_index=0     # column index
     row_index=0     # line (row)
@@ -29,17 +29,17 @@ function ParseCSVLibLang
         # Getting the language column first, by checking on the very first CSV file's row
         while IFS=, read -ra col_value row_value; do
             col_index=$(( col_index+1 ))
-            
+
             if [ "$col_value" = "VARIABLE" ] && [ "$col_index" -eq 1 ]; then
                 echo "$col_value"
                 echo "$col_index"
-                
+
                 # ÇA NE MARCHE PAS
                 for row_val in "${row_values[$row_index]}"; do
                     echo "$row_val"
                     echo "$row_index"
                 done
-                
+
                 break
             else
                 WriteInitLog "Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
@@ -47,27 +47,28 @@ function ParseCSVLibLang
                 exit 1
             fi
         done < "$LIBLANG_TRANSLATION_FILE"
-        
-        
-        # ANCIEN CODE
-            for col_index in "${!col_values[@]}"; do
-                col_index_2=${col_values[$col_index]}
-                if [ "$col_index" -eq 1 ]; then
-                    for row_index in "${!row_values[@]}"; do
-                        language_val=${row_values[$row_index]}
-                        echo "$language_val"
-                        
-                        if [ "$language_val" = "$LANG" ]; then
-                            echo "Row $row_index, LANGUE : $LANG"
-                        fi
-                    done
-                fi
-            done
-           # (( ++row_index ))
-   #     awk -F "," {print "VARIABLE"}
-        
-        
-        
+
+
+       #     ANCIEN CODE
+
+       #     for col_index in "${!col_values[@]}"; do
+       #         col_index_2=${col_values[$col_index]}
+       #         if [ "$col_index" -eq 1 ]; then
+       #             for row_index in "${!row_values[@]}"; do
+       #                 language_val=${row_values[$row_index]}
+       #                 echo "$language_val"
+       #                 
+       #                 if [ "$language_val" = "$LANG" ]; then
+       #                     echo "Row $row_index, LANGUE : $LANG"
+       #                 fi
+       #             done
+       #         fi
+       #     done
+       #
+       #    (( ++row_index ))
+       #    awk -F "," {print "VARIABLE"}
+
+
         echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE"
  #       exit 1
     else

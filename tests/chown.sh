@@ -1,6 +1,6 @@
 source lib/functions/Filesystem.sh
 
-function Chown()
+function Chown
 {
     #***** Paramètres *****
     username=$1

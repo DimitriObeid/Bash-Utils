@@ -1,6 +1,6 @@
 LOGS="t.log"
 
-function checklog()
+function checklog
 {
 	if test -z "$LOGS"; then
 		echo "Empty"
@@ -10,7 +10,7 @@ function checklog()
 	fi
 }
 
-function echoLOL()
+function echoLOL
 {
 	string=$1; checklog && echo "$(tput setaf 82)$string$(tput sgr0)" 2>&1 | tee -a "$LOGS"
 }

@@ -6,7 +6,7 @@ MAIN_S_INST="../src/install"
 MAIN_S_LANG="src/lang"
 MAIN_S_RES="src/res"
 
-function CheckSubFolder()
+function CheckSubFolder
 {
 	local path=$1;
 

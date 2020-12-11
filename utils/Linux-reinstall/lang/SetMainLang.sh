@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Optimizing the code with a function
-function SetMainLang()
+function SetMainLang
 {
     #***** Parameters *****
     local parent_dir=$1

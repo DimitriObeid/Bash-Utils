@@ -2,7 +2,7 @@
 
 ARGV=("$@")
 
-function foo()
+function foo
 {
 	echo "ARGC : ${#ARGV[@]}"
 	echo "Argument 1 : ${ARGV[0]}"

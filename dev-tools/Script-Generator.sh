@@ -2,7 +2,7 @@
 
 # This Bash script is a code generator. It was developped in order to help you to save time by creating your script
 
-function Separation()
+function Separation
 {
 	for _ in $(tput cols); do
 		echo -ne '-'
@@ -11,7 +11,7 @@ function Separation()
 	echo
 }
 
-function ReadName()
+function ReadName
 {
     read -rp "Enter your script's name (don't put any mimetype, the script will do it) : " rep_name
     echo
@@ -25,7 +25,7 @@ function ReadName()
 	fi
 }
 
-function ReadAccessibility()
+function ReadAccessibility
 {
 	echo "You have to define the script's accessibility in order to determine if you want to share your script, if you decide to commit your changes on Git."
 	echo 'The awaited values are "private" or "public" (Warning, the awaited values are case sensitive)'

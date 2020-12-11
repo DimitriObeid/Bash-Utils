@@ -16,7 +16,80 @@ fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-####################################### INITIALIZING PROJECT ######################################
+######################################## DEFINING VARIABLES #######################################
+
+#### DEFINING BASH-UTILS GLOBAL VARIABLES
+
+## BASH-UTILS PATHS
+
+# Bash-Utils root directory path
+BASH_UTILS_ROOT="/usr/local/lib/Bash-Utils"
+
+# In case the Bash-Utils folder doesn't exists or is not located in the correct path
+if [ ! -d "$BASH_UTILS_ROOT" ]; then
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/lib' folder"; exit 1
+fi
+
+# Bash-Utils sub-folders
+BASH_UTILS="$BASH_UTILS_ROOT/src"
+
+BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
+BASH_UTILS_LANG="$BASH_UTILS/lang"
+BASH_UTILS_VARS="$BASH_UTILS/variables"
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### DEFINING PROJECT'S GLOBAL VARIABLES
+
+## DEFINING PROJECT'S PATH
+
+# Script file's informations
+PROJECT_FILE=$(basename "$0")                           # Project file's name.
+PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project (project file's name without its file extension).
+
+# -----------------------------------------------
+
+## PROJECT'S INITIALIZATION LOG PATH
+
+# Processing the initialization log file.
+INITIALIZER_FILE_LOG_DIR="$BASH_UTILS_ROOT/tmp/$PROJECT_NAME/logs"
+INITIALIZER_FILE_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_NAME - $(date +"%Y-%m-%d %Hh-%Mm-%Ss") - init.log"
+
+# Processing the project's log file
+# shellcheck disable=SC2034
+PROJECT_LOG_NAME="$PROJECT_NAME $TIME_DATE.log"
+
+# shellcheck disable=SC2034
+PROJECT_LOG_NAME="$PROJECT_NAME - $(date +"%Yy-%m-%d %Hh-%Mm-%Ss").log"
+
+# shellcheck disable=SC2034
+PROJECT_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_LOG_NAME"
+
+# -----------------------------------------------
+
+## PROJECT STATUS VARIABLES
+
+# Project's main log file informations
+# shellcheck disable=SC2034
+PROJECT_STATUS_LOG=""
+
+# Project's messages display time.
+# shellcheck disable=SC2034
+PROJECT_STATUS_TIME=""
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING FUNCTIONS #######################################
+
+# Note : these functions have to be defined after defining all script's variables,
+# as the variables cannot be called before their initialization, or else, they won't store any value.
 
 #### DEFINING INITIALIZATION FUNCTIONS
 
@@ -47,6 +120,35 @@ function GetProjectParentPath
     echo "$result"
 }
 
+# Sourcing dependencies
+function SourceFile
+{
+    #***** Parameters *****
+    local path=$1
+    local info=$2
+    local lineno=$3
+
+    #***** Code *****
+
+    if [ -z "$info" ]; then
+        # shellcheck disable=SC1090
+        if source "$path"; then
+            WriteInitLog "Sourced file : $path"
+        else
+            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source this file" "1"; WriteInitLog "" "1"
+            exit 1
+        fi
+    else
+        # shellcheck disable=SC1090
+        if source "$path"; then
+            WriteInitLog "Sourced file : $path"
+        else
+            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source the $info" "1"; WriteInitLog "" "1"
+            exit 1
+        fi
+    fi
+}
+
 # -----------------------------------------------
 
 ## TEXT FUNCTIONS
@@ -59,22 +161,24 @@ function WriteInitLog
     display=$2
 
     #***** Variables *****
-    lineno_stat=$LINENO; initlog_status="tee"
+    lineno_stat=$LINENO; initlog_status="log"
     datelog="[$(date +"%Y-%m-%d %Hh-%Mm-%Ss")]"
     location="In ${BASH_SOURCE[0]}, line $lineno_stat -->"
-    incorrect="Error : the initlog_status variable's value is incorrect"
-    novalue="Error : the initlog_status variable must contain a value"
+    unable="Warning : Unable to write in the initializer's log file."
+    incorrect="Error : the initlog_status variable's value is incorrect."
+    novalue="Error : the initlog_status variable must contain a value."
 
     #***** Code *****
     # If a string is passed as first argument AND the "$initlog_status" variable contains a value AND no value are passed as second argument.
     if [ -n "$string" ] && [ -n "$initlog_status" ] && [ -z "$display" ]; then
         # If the "$initlog_status" variable's value is equal to "log", then the string passed as first argument is redirected towards the initializer process's log path.
         if [ "$initlog_status" = "log" ]; then
-            echo "$datelog $string" >> "$INITIALIZER_LOG_FILE_PATH"
+            # I had a case of (impossbility) to redirect the outputs to the log file because of ( a misplace of functions and variables declaration...), so I added this failsafe in case of impossbility to write into this file.
+            echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || echo "$location $unable" && exit 1
         # Else, if the "$initlog_status" variable's value is equal to "tee", then the string passed as first argument is redirected towards the terminal AND the initializer process's log path, with the date and the hour written before the message.
         elif [ "$initlog_status" = "tee" ]; then
             echo "$string"
-            echo "$datelog $string" >> "$INITIALIZER_LOG_FILE_PATH"
+            echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || echo "$location $unable" && exit 1
         else
             echo "$location $incorrect"
             echo "$datelog $location $incorrect"; exit 1
@@ -86,22 +190,22 @@ function WriteInitLog
     elif [ -n "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ] \
         && [ -n "$display" ] && [ "$display" -eq 1 ]; then
         echo "$string"
-        echo "$datelog $string" >> "$INITIALIZER_LOG_FILE_PATH"
+        echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH"
     
     # Else, if a string is passed as first argument AND the "$initlog_status" variable contains one of the two awaited values AND a value of '2' is passed as second argument.
     # This statement does the same thing than before, except the fact that it doesn't print the date before the string passed as argument, in the initialization process's log file.
     # This statement is useful to display some text decoration without displaying the display's date.
     elif [ -n "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ] \
         && [ -n "$display" ] && [ "$display" -eq 2 ]; then
-        echo "$string" 2>&1 | tee -a "$INITIALIZER_LOG_FILE_PATH"
+        echo "$string" 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH"
     
     # Else, if no value is passed as first argument (which means that no other arguments are passed) AND a value is contained in the "$initlog_status" variable,
     # then a line break is performed.
     elif [ -z "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ]; then
-        echo 2>&1 | tee -a "$INITIALIZER_LOG_FILE_PATH"
+        echo 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH"
     else
         echo "$location $novalue"
-        echo "$datelog $location $novalue" >> "$INITIALIZER_LOG_FILE_PATH"; exit 1
+        echo "$datelog $location $novalue" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
     fi
 }
 
@@ -110,58 +214,29 @@ function WriteInitLog
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### DEFINING BASH-UTILS LIBRARY'S DIRECTORY PATHS, SUB-FOLDERS AND FILES
-
-## BASH-UTILS PATHS
-
-# Bash-Utils root directory path
-BASH_UTILS_ROOT="/usr/local/lib/Bash-Utils"
-
-# In case the Bash-Utils folder doesn't exists or is not located in the correct path
-if [ ! -d "$BASH_UTILS_ROOT" ]; then
-    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/lib' folder"; exit 1
-fi
-
-# Bash-Utils sub-folders
-BASH_UTILS="$BASH_UTILS_ROOT/src"
-
-BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
-BASH_UTILS_LANG="$BASH_UTILS/lang"
-BASH_UTILS_VARS="$BASH_UTILS/variables"
-
-# -----------------------------------------------
 
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-#### DEFINING THE PROJECT SCRIPT'S INFORMATIONS, SUCH AS ITS NAME, ITS PARENT DIRECTORY PATH AND ITS SUB-FOLDERS AND FILES
+####################################### VARIABLES CHECKINGS #######################################
 
-## PROJECT'S INITIALIZATION LOG PATH
+####
 
-# Creating the initialization log file.
-INITIALIZER_LOG_FILE_DIR="$BASH_UTILS_ROOT/tmp/$(basename "$0" | cut -f 1 -d '.')/logs/"
-INITIALIZER_LOG_FILE_PATH="$INITIALIZER_LOG_FILE_DIR/$(basename "$0" | cut -f 1 -d '.') - $(date +"%Y-%m-%d %Hh-%Mm-%Ss") - init.log"
+## LOG FILE
 
-if [ ! -d "$INITIALIZER_LOG_FILE_DIR" ]; then
-    WriteInitLog "$(mkdir -pv "$INITIALIZER_LOG_FILE_DIR")"
+if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
+    WriteInitLog "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")"
     WriteInitLog
 fi
 
 # Checking if the initialization log file exists AND is not empty, to overwrite its content.
-if [ -f "$INITIALIZER_LOG_FILE_PATH" ] && [ -s "$INITIALIZER_LOG_FILE_PATH" ]; then
-    true > "$INITIALIZER_LOG_FILE_PATH"
+if [ -f "$INITIALIZER_FILE_LOG_PATH" ] && [ -s "$INITIALIZER_FILE_LOG_PATH" ]; then
+    true > "$INITIALIZER_FILE_LOG_PATH"
 fi
 
-# -----------------------------------------------
-
-## DEFINING PROJECT'S PATH
-
-# Script file's informations
-PROJECT_FILE=$(basename "$0")                           # Name of the file
-PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project (filename without the file extension)
-PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"    # File path
-
 # Checking the existence of the main script file's path by checking "$PROJECT_PATH" variable value.
+PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"    # File path.
+
 lineno=$LINENO; if [ -z "$PROJECT_PATH" ]; then
     WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the PROJECT_PATH variable in $PROJECT_PATH" "1"; exit 1
 lineno=$LINENO; elif [ ! -f "$PROJECT_PATH" ]; then
@@ -171,19 +246,16 @@ fi
 
 # -----------------------------------------------
 
-## PROJECT FILES
-
-# Project's main log file informations
-PROJECT_LOG_NAME="$PROJECT_NAME $TIME_DATE.log"
-PROJECT_LOG_PATH="$INITIALIZER_LOG_FILE_DIR/$PROJECT_FILE_NAME"
-PROJECT_LOG_STATUS=""
-
-# -----------------------------------------------
-
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CHECKING REQUIRMENTS AND FAILSAFE
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### PROCESSING INITIALIZATION ####################################
+
+#### SOURCING DEPENDENCIES STEP BY STEP
 
 ## CHECKING SUB-FOLDERS PRESENCE
 
@@ -195,46 +267,7 @@ WriteInitLog
 
 # -----------------------------------------------
 
-
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-###################################### INCLUDING DEPENDENCIES #####################################
-
-#### SOURCING FILES
-
-## SOURCING FILES FUNCTIONS
-
-function SourceFile
-{
-    #***** Parameters *****
-    local path=$1
-    local info=$2
-    local lineno=$3
-
-    #***** Code *****
-
-    if [ -z "$info" ]; then
-        if source "$path"; then
-            WriteInitLog "Sourced file : $path"
-        else
-            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source this file" "1"; WriteInitLog "" "1"
-            exit 1
-        fi
-    else
-        if source "$path"; then
-            WriteInitLog "Sourced file : $path"
-        else
-            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source the $info" "1"; WriteInitLog "" "1"
-            exit 1
-        fi
-    fi
-}
-
-# -----------------------------------------------
-
-## SOURCING VARIABLES AND FUNCTIONS FILES
-
+## SOURCING DEPENDENCIES
 
 # Sourcing functions files first to avoid error messages while including the variables first, as some functions are called into these variables.
 WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : LINKING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
@@ -242,7 +275,7 @@ WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : LINKING BASH-UTILS FUNCTIONS 
 done; WriteInitLog
 
 
-# Source the functions and variables linker file first ,
+# Source the functions and variables linker file first,
 # as some messages contain function call (from the library files) to color some parts of this message in another color.
 WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : LINKING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
     SourceFile "$f" "variables file" "$LINENO"

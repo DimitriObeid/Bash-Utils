@@ -22,7 +22,7 @@
 #   - 
 #   - 
 #   - 
-function WriteInstallScript()
+function WriteInstallScript
 {
     #***** Parameters *****
     
@@ -74,7 +74,7 @@ function WriteInstallScript()
 ## DEFINING PACKAGE INSTALLATION FUNCTIONS
 
 # Optimisation de la partie d'installation du script.
-function OptimizeInstallation()
+function OptimizeInstallation
 {
 	#***** Parameters *****
 	local parent=$1            # Dossier parent du fichier script à exécuter.
@@ -227,7 +227,7 @@ EOF
 
 # Installation d'un paquet selon le gestionnaire de paquets, ainsi que sa commande de recherche de paquets dans le système de l'utilisateur,
 # sa commande de recherche de paquets dans sa base de données, ainsi que sa commande d'installation de paquets.
-function PackInstall()
+function PackInstall
 {
 	#***** Paramètres | Parameters *****
 	local package_manager=$1	# Nom du gestionnaire de paquets.
@@ -343,7 +343,7 @@ function PackInstall()
 }
 
 # Redirection des sorties des commandes (pas d'installation) vers le fichier de logs
-function CommandLogs()
+function CommandLogs
 {
     #***** Variables *****
     local cmd="$*"
@@ -359,7 +359,7 @@ function CommandLogs()
 #### INSTALLING FROM WEB
 
 # Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
-function SoftwareInstall()
+function SoftwareInstall
 {
 	#***** Paramètres *****
 	local web_link=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.

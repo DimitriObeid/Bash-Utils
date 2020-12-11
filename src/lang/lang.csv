@@ -1,5 +1,5 @@
 VARIABLE,COMMENTS, en, fr
-,Directory processing,,
+,DIRECTORY PROCESSING,,
 MSG_DIR_PROCESSING_BEGIN,,,"Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")"
 MSG_DIR_PROCESSING_END_FAIL,,,"Fin du traitement du dossier $(DechoE ""$path/"")"
 MSG_DIR_PROCESSING_END_SUCCESS,,,"Fin du traitement du dossier $(DechoS ""$path/"")"
@@ -14,7 +14,7 @@ MSG_DIR_MKDIR_SUCCESS,,,"Le dossier $(DechoS ""$name"") a été créé avec succ
 MSG_DIR_MKDIR_FAIL,,,"IMPOSSIBLE DE CRÉER LE DOSSIER $(DechoE ""$name"") DANS LE DOSSIER PARENT $(DechoE ""$parent/"")"
 MSG_DIR_MKDIR_EMPTY,,,"Le dossier $(DechoS ""$path/"") existe déjà dans le dossier $(DechoS ""$parent/"") et est vide"
 ,,,
-,File processing,,
+,FILE PROCESSING,,
 MSG_FILE_PROCESSING_BEGIN,,,"Traitement du fichier $(DechoN ""$name"")"
 MSG_FILE_PROCESSING_END_FAIL,,,"Fin de traitement du ficier $(DechoE ""$name"")"
 MSG_FILE_PROCESSING_END_SUCCESS,,,"Fin de traitement du fichier $(DechoS ""$name"")"
@@ -29,11 +29,11 @@ MSG_FILE_MKFILE_SUCCESS,,,"Le fichier $(DechoS ""$name"") a été créé avec su
 MSG_FILE_MKFILE_FAIL,,,"LE FICHIER $(DechoE ""$name"") N'A PAS PU ÊTRE CRÉÉ DANS LE DOSSIER $(DechoE ""$parent/"")"
 MSG_FILE_MKFILE_EMPTY,,,"Le fichier $(DechoS ""$name"") existe déjà dans le dossier $(DechoS ""$parent/"")"
 ,,,
-,,,
-MSG_HEADERS_ERR_ERROR,,,ERREUR FATALE
-MSG_HEADERS_ERR_TYPE,,,Une erreur fatale s'est produite
-MSG_HEADERS_ERR_LINE,,,L’erreur en question s'est produite à la ligne
-MSG_HEADERS_ERR_STOP,,,Arrêt de l'installation
+,HEADERS,,
+MSG_HEADERS_HNDERR_ERROR,,,ERREUR FATALE
+MSG_HEADERS_HNDERR_TYPE,,,Une erreur fatale s'est produite
+MSG_HEADERS_HNDERR_LINE,,,L’erreur en question s'est produite à la ligne
+MSG_HEADERS_HNDERR_STOP,,,Arrêt de l'installation
 ,,,
 ,,,
 MSG_PERMISSIONS_CHOWNREC,,,"Transfert récursif des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
@@ -41,7 +41,8 @@ MSG_PERMISSIONS_CHOWNREC_SUCCESS,,,"Les droits de propriété du dossier $(Decho
 MSG_PERMISSIONS_CHOWNREC_FAIL,,,"Impossible de transférer la propriété les droits du dossier $(DechoE ""$path/"") de $(DechoE ""$current_owner"") à $(DechoE ""$new_owner"")"
 MSG_PERMISSIONS_CHOWNREC_FAIL_ADVICE,,,"Pour transférer récursivement la propriété du dossier $(DechoE ""$path/"") de manière récursive, utilisez la commande suivante"
 ,,,
-MSG_PERMISSIONS_CHOWN_FILE,,,"Transfert des droits de propriété du nouveau dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
-MSG_PERMISSIONS_CHOWN_FILE_SUCCESS,,,
-MSG_PERMISSIONS_CHOWN_FILE_FAIL,,,
-MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE,,,
+MSG_PERMISSIONS_CHOWN_PROCESSING_DIR,,,"Transfert des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
+MSG_PERMISSIONS_CHOWN_PROCESSING_FILE,,,"Transfert des droits de propriété du fichier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
+MSG_PERMISSIONS_CHOWN_SUCCESS,,,"Les droits du fichier $(DechoS ""$parent"") ont été changés avec succès."
+MSG_PERMISSIONS_CHOWN_FAIL,,,"Impossible de changer les droits du fichier $(DechoE ""$path"")."
+MSG_PERMISSIONS_CHOWN_FAIL_ADVICE,,,"Utilisez la commande suivante pour changer les droits de propriété du fichier $(DechoE ""$path"")."

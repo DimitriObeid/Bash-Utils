@@ -22,6 +22,7 @@
 
 ## INCLUDING THE INITALIZER FILE
 
+# shellcheck disable=SC1091
 lineno=$LINENO; if ! source "/usr/local/lib/Bash-Utils/src/Initializer.sh"; then
     echo "In $(basename "$0"), line $lineno --> Error : unable to include the initializer file"; echo; exit 1
 fi
@@ -36,13 +37,13 @@ LINUX_REINSTALL_LANG="$(GetProjectParentPath)/lang"
 LINUX_REINSTALL_VARS="$(GetProjectParentPath)/variables"
 
 # Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument
-WriteInitLog "In $(basename "$0"), line $LINENO : CHECKING FOR $(basename "$0" | cut -f 1 -d '.')'s SUB-FOLDERS"
+WriteInitLog "In $PROJECT_FILE, line $LINENO : CHECKING FOR $PROJECT_NAME's SUB-FOLDERS"
 CheckSubFolder "$LINUX_REINSTALL_INST"
 CheckSubFolder "$LINUX_REINSTALL_LANG"
 CheckSubFolder "$LINUX_REINSTALL_VARS"; WriteInitLog
 
 # Sourcing the Linux-reinstall language files.
-echo "In $(basename "$0"), line $LINENO : DEFINING $(basename "$0" | cut -f 1 -d '.')'s LIBRARY FOLDER"
+echo "In $PROJECT_FILE, line $LINENO : DEFINING $PROJECT_NAME's LIBRARY FOLDER"
 SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
 WriteInitLog; WriteInitLog
 
@@ -668,7 +669,7 @@ function LaravelInstall
 EOF
 
     # Mise à jour du fichier de configuration "~/.bashrc" et vérification de l'application de la modification de la variable d'environnement
-    # shellcheck source="$DIR_HOMEDIR/.bashrc"
+    # shellcheck disable=SC1091
     source "$DIR_HOMEDIR/.bashrc"
     echo "$PATH" | grep "$envpath"
     

@@ -33,9 +33,11 @@ function CheckProjectLogStatus
     string=$1
 
     #**** Code *****
+    CheckProjectLogPath
+    
     if [ -n "$PROJECT_LOG_STATUS" ]; then
         if [ "$PROJECT_LOG_STATUS" = "log" ] || [ "$PROJECT_LOG_STATUS" -eq 1 ]; then
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_FILE_PATH"
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH"
         elif [ "$PROJECT_LOG_STATUS" = "tee" ] || [ "$PROJECT_LOG_STATUS" -eq 2 ]; then
             echo "$string"
             echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH"
@@ -45,6 +47,14 @@ function CheckProjectLogStatus
         fi
     else
         echo "$string"
+    fi
+}
+
+# Checking for "$PROJECT_LOG_PATH"
+function CheckProjectLogPath
+{
+    if [ -z "$PROJECT_LOG_PATH" ]; then
+        EchoError "Error : no path provided into the $\PROJECT_LOG_PATH variable."; exit 1
     fi
 }
 
