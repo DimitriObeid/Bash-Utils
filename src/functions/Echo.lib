@@ -22,20 +22,18 @@ function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Succ
 # Avoid repetiting code
 
 # Error message
+
+# Required functions and files into the "Bash-Utils/src/functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
 function EchoError
 {
     #***** Parameters *****
     local string=$1
-    local timer=$2
-    
-    #***** Code *****
-    if [ -z "$timer" ]; then
-        timer=".5"
-    fi
-    
+
+    #***** Code *****   
     CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
 
-    sleep "$timer"
+    sleep "$PROJECT_STATUS_TIME_TXT"
 }
 
 # New sub-step message
@@ -43,16 +41,11 @@ function EchoNewstep
 {
     #***** Parameters *****
     local string=$1
-    local timer=$2
-    
+
     #***** Code *****
-    if [ -z "$timer" ]; then
-        timer=".5"
-    fi
-    
     CheckProjectLogStatus "$TXT_YELLOW_TAB $string$COL_RESET"
 
-    sleep "$timer"
+    sleep "$PROJECT_STATUS_TIME_TXT"
 }
 
 # Success message
@@ -60,16 +53,11 @@ function EchoSuccess
 {
     #***** Parameters *****
     local string=$1
-    local timer=$2
 
     #***** Code *****
-    if [ -z "$timer" ]; then
-        timer=".5"
-    fi
-    
-    CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET" "$redirect"
+    CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET"
 
-    sleep "$timer"
+    sleep "$PROJECT_STATUS_TIME_TXT"
 }
 
 

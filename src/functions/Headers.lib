@@ -95,7 +95,7 @@ function HeaderStep { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_
 function HeaderInstall { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5"; }
 
 # 
-function HandleErrors
+function HandleErrors_OLD
 {
     #***** Parameters *****
     local return_code=$1
@@ -112,7 +112,7 @@ function HandleErrors
 }
 
 # Fonction de gestion d'erreurs fatales (impossibles à corriger).
-function HandleFatalErrors
+function HandleErrors
 {
 	#***** Paramètres *****
 	local return_code=$1       # Code de retour de la dernière commande lancée
@@ -121,7 +121,7 @@ function HandleFatalErrors
     local lineno=$4            # Ligne à laquelle le message d'erreur s'est produite.
 
 	# ***** Code *****
-	if test "$return_code" -eq 0; then
+	if [ "$return_code" -eq 0 ]; then
         return
     else
         HeaderBase "$COL_RED" "$TXT_HEADER_LINE_CHAR" "$COL_RED" "$(EchoError "$MSG_HNDERR_FATAL") : $error_string" "1.5"
@@ -139,7 +139,14 @@ function HandleFatalErrors
         EchoError "$MSG_HNDERR_STOP."
         echo
 
-        exit 1
+		if [ "$PROJECT_STATUS_LOG" = "true" ]; then
+			EchoNewstep "Souhaitez-vous copier le fichier de logs du project $(DechoN "$PROJECT_NAME") vers votre dossier personnel ?"
+			Newline
+
+		
+		fi
+
+		exit 1
     fi
 }
 

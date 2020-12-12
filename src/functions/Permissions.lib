@@ -10,33 +10,30 @@
 
 # Calling the "chown" command to change recursively directory ownership
 
-# Required functions and files into "Bash-Utils/src/functions" folder :
-#   - CheckRootEUID -> Checkings.lib
-#   - EchoError     -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
-#   - EchoNewstep   -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
-#   - EchoSuccess   -> Echo.lib         ->  CheckProjectLogStatus   -> Checkings.lib
-#   - DrawLine      -> Headers.lib
-#   - HandleErrors  -> Headers.lib      ->  EchoError
+# Required functions and files into the "Bash-Utils/src/functions" folder :
+#	- CheckRootEUID		-> Checkings.lib
+#	- EchoError			-> Echo.lib
+#	- EchoNewstep		-> Echo.lib
+#	- EchoSuccess		-> Echo.lib
+#	- Newline			-> Echo.lib
+#	- HandleErrors		-> Headers.lib
 function ChownRec
 {
     #***** Paramètres *****
     current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
     new_owner=$2
     path=$3
-    
-    #***** Variables *****
-    timer="$PROJECT_PAUSE"
 
     #***** Code *****
     # The "chown" command has to be used with super-user privileges,
     CheckRootEUID
-    
+
     # If the path passed as argument doesn't exists.
     if [ ! -d "$path" ]; then
         HandleError "" "" "" ""
     fi
-    
-    EchoNewstep "$MSG_PERM_CHOWNREC." "$timer"
+
+    EchoNewstep "$MSG_PERM_CHOWNREC."
 	Newline
 
     # On change les droits du fichier créé par le script.
@@ -46,14 +43,14 @@ function ChownRec
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$new_owner" "$path"; then
-		EchoSuccess "$MSG_PERM_CHOWNREC_SUCCESS." "$timer"
+		EchoSuccess "$MSG_PERM_CHOWNREC_SUCCESS."
 		Newline
 
 		return
 	else
-        EchoError "$MSG_PERM_CHOWNREC_FAIL." "$timer"
-		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :" "$timer"
-		Newline "	chown -R $current_owner $path"
+        EchoError "$MSG_PERM_CHOWNREC_FAIL."
+		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :"
+		Newline '	chown -R $current_owner $path'
 		Newline
 
 		return
@@ -69,19 +66,19 @@ function ChownRec
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
-# Required functions and files :
-#   - EchoError    -> Bash-Utils/src/functions/Echo.lib
-#   - EchoNewstep  -> Bash-Utils/src/functions/Echo.lib
-#   - EchoSuccess  -> Bash-Utils/src/functions/Echo.lib
-#   - DrawLine     -> Bash-Utils/src/functions/Headers.lib
-#   - HandleErrors -> Bash-Utils/src/functions/Headers.lib
+# Required functions and files into the "Bash-Utils/src/functions" folder :
+#   - CheckRootEUID -> Checkings.lib
+#   - EchoError     -> Echo.lib
+#   - EchoNewstep   -> Echo.lib
+#   - EchoSuccess   -> Echo.lib
+#   - DrawLine      -> Headers.lib
+#   - HandleErrors  -> Headers.lib
 function Chown
 {
     #***** Parameters *****
     current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
     new_owner=$2
     path=$3
-    timer=$4
     
     #***** Code *****
     # The "chown" command has to be used with super-user privileges,
@@ -89,44 +86,38 @@ function Chown
     
     # If the path passed as argument doesn't exists.
     if [ -d "$path" ]; then
-        EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_DIR" "$timer"
+        EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_DIR"
         Newline
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$path" ]; then
-            EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_FILE" "$timer"
+            EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_FILE"
             Newline
         else
             HandleError "" "" "" ""
         fi
 
     fi
-    
-    # Defining a timer for pausing script after displaying text.
-    if test -z "$timer"; then
-        timer=".5"
-    fi
 
+    # Changing ownership
     if chown -v "$new_owner" "$path"; then
-        EchoSuccess "$MSG_PERMISSIONS_CHOWN_FILE_SUCCESS" "$timer"
+        EchoSuccess "$MSG_PERMISSIONS_CHOWN_FILE_SUCCESS"
         Newline
 
-        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$timer"
-        DrawLine "$COL_RESET" "$block_char"
-        sleep "$sleep_blk"
-        echo
+        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC."
+        sleep "$PROJECT_STATUS_TIME_HEADER"
+        Newline
 
         return
     else
 
-        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL" "$timer"
-        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE" "$sleep_txt"
+        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL"
+        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE"
         echo '	chown $username $path'
 
-        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL." "$sleep_txt"
-        DrawLine "$COL_RESET" "$block_char"
-        sleep "$sleep_blk"
-        echo
+        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL."
+		sleep "$PROJECT_STATUS_TIME_HEADER"
+        Newline
 
         return
     fi

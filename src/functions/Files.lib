@@ -9,28 +9,31 @@
 ## OVERWRITING CONTENT
 
 # Overwrite a file
+
+# Required functions and files from the "functions" folder :
+#	- EchoError			-> Echo.lib
+#	- EchoNewstep		-> Echo.lib
+#	- EchoSuccess		-> Echo.lib
+#	- Newline			-> Echo.lib
 function OverwriteFile
 {
     #***** Parameters *****
     path=$1
     
     #***** Code *****
-    EchoNewstep "$MSG_FILE_NONEMPTY_1." "$sleep_txt"
-	EchoNewstep "$MSG_FILE_NONEMPTY_2." "$sleep_txt"
+    EchoNewstep "$MSG_FILE_NONEMPTY_1."
+	EchoNewstep "$MSG_FILE_NONEMPTY_2."
 	Newline
 
 	if true > "$path"; then
-		EchoSuccess "$MSG_FILE_NONEMPTY_SUCC." "$sleep_txt"
+		EchoSuccess "$MSG_FILE_NONEMPTY_SUCC."
 		Newline
 
-		EchoSuccess "$MSG_FILE_PROCESSING_END_SUCC." "$sleep_txt"
+		EchoSuccess "$MSG_FILE_PROCESSING_END_SUCC."
 		DrawLine "$COL_RESET" "$block_char"
     else
-        EchoError "$MSG_FILE_NONEMPTY_FAIL." "$sleep_txt"
+        EchoError "$MSG_FILE_NONEMPTY_FAIL."
 		Newline
-
-		EchoError "$MSG_FILE_PROCESSING_END_FAIL." "$sleep_txt"
-		DrawLine "$COL_RESET" "$block_char"
     fi
 }
 
@@ -64,35 +67,33 @@ function Makefile
 	sleep "$sleep_blk"
 	DrawLine "$COL_RESET" "$block_char"
 
-	EchoNewstep "$MSG_FILE_PROCESSING_BEGIN." "$sleep_txt"
+	EchoNewstep "$MSG_FILE_PROCESSING_BEGIN."
 	Newline
 
 	# Si le fichier à traiter n'existe pas, on le crée avec l'aide de la commande "touch".
 	if [ ! -f "$path" ]; then
-        EchoNewstep "$MSG_FILE_MKFILE_CREATE." "$sleep_txt"
+        EchoNewstep "$MSG_FILE_MKFILE_CREATE."
 		Newline
 
-		local lineno=$LINENO; if touch "$path"; then
-            # On vérifie que le fichier a bien été créé en vérifiant le code de retour de la commande "touch" via la fonction "HandleErrors".
-            # Une erreur peut venir du fait que l'utilisateur n'a pas lancé son script en mode super-utilisateur, script qui a tenté de créer un fichier
-            # dans un dossier où l'utilisateur n'a pas le droit de créer un fichier sans privilèges du super-utilisateur
-            HandleErrors "$?" "$MSG_FILE_MKFILE_FAIL" "" "$lineno"
-            EchoSuccess "$MSG_FILE_MKFILE_SUCCESS." "$sleep_txt"
-            Newline
-        fi
+		touch "$path"
+        # On vérifie que le fichier a bien été créé en vérifiant le code de retour de la commande "touch" via la fonction "HandleErrors".
+        # Une erreur peut venir du fait que l'utilisateur n'a pas lancé son script en mode super-utilisateur, script qui a tenté de créer un fichier
+        # dans un dossier où l'utilisateur n'a pas le droit de créer un fichier sans privilèges du super-utilisateur
+        HandleErrors "$?" "$MSG_FILE_MKFILE_FAIL" "" "$lineno"
+        EchoSuccess "$MSG_FILE_MKFILE_SUCCESS."
+        Newline
 	
 	# Sinon, si le fichier à créer existe déjà ET qu'il n'est pas vide.
 	elif [ -f "$path" ] && [ -s "$path" ]; then
-
-
+        OverwriteFile "$path"
 		return
 
 	# Sinon, si le fichier à créer existe déjà ET qu'il est vide.
 	elif [ -f "$path" ] && [ ! -s "$path" ]; then
-		EchoSuccess "$MSG_MKFILE_EMPTY." "$sleep_txt"
+		EchoSuccess "$MSG_MKFILE_EMPTY."
 		Newline
 
-		EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC." "$sleep_txt"
+		EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC."
 		DrawLine "$COL_RESET" "$block_char"
 
 		return
@@ -119,7 +120,7 @@ function GetLineFromTextFile
         i=$(( i+1 ))
         
         # ... until it reaches the wanted line.
-        if [ $i -eq "$line" ]; then
+        if [ "$i" -eq "$line" ]; then
             # Creating a variable and storing the line's text.
             FILE_GETTXTLINE="$line"
         fi

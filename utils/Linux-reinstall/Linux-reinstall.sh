@@ -63,7 +63,7 @@ ARGV=("$@")
 
 # -----------------------------------------------
 
-## ARGUMENT VALUES
+## MANDATORY ARGUMENTS
 
 # Arguments to call after the script's execution command to make it running correctly.
 ARG_USERNAME=$1         # First argument : username's account.
@@ -74,6 +74,7 @@ ARG_INSTALL_INDEX='2'   # Packages installation argument's index.
 
 # -----------------------------------------------
 
+# TODO : Retirer ces lignes obsolètes
 ## OPTIONAL ARGUMENTS
 
 ARG_DEBUG=$3            # Debug utilitary  | Argument servant d'utilitaire de déboguage.
@@ -86,9 +87,9 @@ ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### DÉFINITION DES FONCTIONS DÉPENDANTES DE L'AVANCEMENT DU SCRIPT ####
+#### DEFINING SCRIPT'S FUNCTIONS
 
-## DÉFINITION DES FONCTIONS D'INITIALISATION
+## DEFINING INITIALIZATION FUNCTIONS
 
 # Détection du passage des arguments au script
 function CheckArgs
