@@ -6,6 +6,40 @@
 
 ## PROCESSING FUNCTIONS
 
+# Separate processing steps displays from the rest of the main script with a line.
+
+# Featured functions and files from the "functions" folder :
+#   - DrawLine      -> Headers.lib
+#   - HandleErrors  -> Headers.lib
+function ProcessingDir
+{
+    #***** Parameters *****
+    function=$1
+    
+    #***** Variables *****
+    char='"'
+    
+    #***** Code *****
+    # On commence par dessiner la première ligne du bloc.
+	sleep "$PROJECT_STATUS_SLEEP_LINE"
+    DrawLine "$COL_RESET" "$char"
+    
+    EchoNewstep "$MSG_DIR_PROCESSING_BEGIN"
+    Newline
+    
+    if $("$function"); then
+        EchoSuccess "$MSG_DIR_PROCESSING_END_SUCC"
+		DrawLine "$COL_RESET" "$char"
+		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		Newline
+    else
+        EchoError "$MSG_DIR_PROCESSING_END_FAIL"
+		DrawLine "$COL_RESET" "$char"
+		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		Newline
+    fi
+}
+
 # Overwriting an existing directory's content
 
 # Featured functions and files from the "functions" folder :
@@ -25,18 +59,19 @@ function OverwriteDir
 	
 	# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU DO !!!
 	# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-	rm -rfv "${path/:?}/"*; then
-	
-	EchoSuccess "$MSG_MKDIR_NONEMPTY_SUCC."
-    Newline
+	if rm -rfv "${path/:?}/"*; then
+	HandleErrors "$?" "" "" ""
+        EchoSuccess "$MSG_MKDIR_NONEMPTY_SUCC."
+        Newline
 
-    EchoSuccess "$MSG_MKDIR_PROCESSING_END_SUCC."
-    Newline
+        return 0
+    else
+        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_1."
+        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_2"
+        Newline
 
-    EchoError "$MSG_MKDIR_NONEMPTY_FAIL_1."
-    EchoError "$MSG_MKDIR_NONEMPTY_FAIL_2"
-	Newline
-
+        return 1
+	fi
     EchoError "$MSG_MKDIR_PROCESSING_END_FAIL."
     Newline
 }
@@ -66,76 +101,40 @@ function Makedir
     local cmd="mkdir -pv $path"
 
 	#***** Code *****
-	# On commence par dessiner la première ligne du bloc.
-	sleep "$sleep_blk"
-	DrawLine "$COL_RESET" "$block_char"
-
-	EchoNewstep "$MSG_MKDIR_PROCESSING_BEGIN."
+	EchoNewstep "$MSG_DIR_MKDIR"
     Newline
 
 	# Si le dossier à traiter n'existe pas, alors le script le crée.
 	if [ ! -d "$path" ]; then
-		EchoNewstep "$MSG_MKDIR_CREATE."
+		EchoNewstep "$MSG_DIR_MKDIR_CREATE"
 		Newline
 
 		# On crée une variable nommée "lineno". Elle enregistre la valeur de la variable globale "$LINENO", qui enregistre le numéro de la ligne dans laquelle est est appelée dans un script.
 		local lineno=$LINENO; for _ in $cmd; do
-            eval "${!cmd}"
+            if eval "${!cmd}"; then
+                EchoSuccess "$MSG_DIR_MKDIR_CREATE_SUCC"
+                Newline
+            else
+            
+                return 1
+            fi
             # On vérifie si le dossier a bien été créé en vérifiant le code de retour de la commande "mkdir" via la fonction "HandleErrors"
-            HandleErrors "$?" "$MSG_MKDIR_CREATE_FAIL." "$MSG_MKDIR_CREATE_FAIL_ADV" "$lineno"
-        done; Newline
-
-        EchoSuccess "$MSG_MKDIR_CREATE_SUCC."
-        Newline
-
-		# On change les droits du dossier nouvellement créé par le script
-		# Comme ce dernier est exécuté en mode super-utilisateur, tout dossier ou fichier créé appartient à l'utilisateur root.
-		# Pour attribuer récursivement la propriété du dossier à l'utilisateur normal, on appelle la commande chown avec pour arguments :
-		#		- Le nom de l'utilisateur à qui donner les droits
-		#		- Le chemin du dossier cible
-
-		EchoNewstep "$MSG_MKDIR_CHMOD."
-		Newline
-
-		lineno=$LINENO; if chown -Rv "${ARG_USERNAME}" "$path"; then
-			EchoSuccess "$MSG_MKDIR_CHMOD_SUCC."
-			Newline
-
-			EchoSuccess "$MSG_MKDIR_PROCESSING_END_SUCC."
-			DrawLine "$COL_RESET" "$block_char"
-			sleep "$sleep_blk"
-			Newline
-
-			return
-		else
-			EchoError "$MSG_MKDIR_CHMOD_FAIL_1."
-			EchoError "$MSG_MKDIR_CHMOD_FAIL_2 :"
-			echo '	chown -R $your_username $path'
-			Newline
-
-			EchoError "$MSG_MKDIR_PROCESSING_END_FAIL."
-			DrawLine "$COL_RESET" "$block_char"		# On dessine la deuxième et dernière ligne du bloc.
-			sleep "$sleep_blk"
-			Newline
-
-			return
-        fi
+            HandleErrors "$?" "$MSG_DIR_MKDIR_CREATE_FAIL" "$MSG_MKDIR_CREATE_FAIL_ADV" "$lineno"
+        done;
 	
     # Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier contient AU MOINS un fichier ou dossier.
 	elif [ -d "$path" ] && [ "$(ls -A "$path")" ]; then
-        OverwriteDir "$path"
-		return
+        if OverwriteDir "$path"; then
+            return 0
+		else
+            return 1
+		fi
 
 	# Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier est vide.
 	elif [ -d "$path" ] && [ ! "$(ls -A "$path")" ]; then
-		EchoSuccess "$MSG_MKDIR_EMPTY."
+		EchoSuccess "$MSG_DIR_MKDIR_EMPTY."
 		Newline
 
-		EchoSuccess "$MSG_MKDIR_PROCESSING_END_SUCC."
-		DrawLine "$COL_RESET" "$block_char"
-		sleep "$sleep_blk"
-		Newline
-
-		return
+		return 0
     fi
 }

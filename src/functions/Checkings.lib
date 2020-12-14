@@ -24,37 +24,89 @@ function CheckRootEUID
 
 #### CHECKING VARIABLES STATUS
 
+## STATUS VARIABLES MODIFICATIONS
+
+# This function modifies the status variables for each value passed as argument,
+# to change variables status faster than calling the variables to modify their values.
+function ModVarStatus
+{
+    #***** Parameters *****
+    b_debug=$1
+    b_log=$2
+    s_redirect=$3
+    f_time_line=$4
+    f_time_txt=$5
+    
+    #***** Code *****
+    
+    CheckVarStatus
+}
+
+# This function, which checks the status variables values, has to be called inside the "ModStatus" function, right at the end of the function.
+function CheckVarStatus
+{
+    if [ "$PROJECT_STATUS_DEBUG" != "true" ] || [ "$PROJECT_STATUS_DEBUG" != "false" ]; then
+        EchoError "$MSG_CHECK_VARSTAT_DEBUG_FAIL"; exit 1
+        
+    elif [ "$PROJECT_STATUS_LOG" != "true" ] || [ "$PROJECT_STATUS_LOG" != "false" ]; then
+        EchoError "$MSG_CHECK_VARSTAT_LOG_FAIL"; exit 1
+        
+    elif [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ] \
+        || [ "$PROJECT_STATUS_LOG_REDIRECT" != "" ]; then
+        # On définit quand même la variable PROJECT_STATUS_LOG_REDIRECT à "tee"
+        # pour afficher sans problèmes le contenu de la chaîne de caractères en rouge.
+        PROJECT_STATUS_LOG_REDIRECT="tee"
+        EchoError "$MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL"; exit 1
+    
+    elif [ "$PROJECT_STATUS_TIME_LINE" != ]; then
+        EchoError "$MSG_CHECK_VARSTAT_TIMELINE_NAN"; exit 1
+    
+    elif [ "$PROJECT_STATUS_TIME_TXT" != ]; then
+        EchoError "$MSG_CHECK_VARSTAT_TIMETXT_NAN"; exit 1
+    
+    fi
+}
+
+
+# -----------------------------------------------
+
 ## CHECKING FOR FILES AND FOLDERS
+
+# Checking for "$PROJECT_LOG_PATH"
+function CheckProjectLogPath
+{
+    if [ -z "$PROJECT_LOG_PATH" ]; then
+        EchoError "$MSG_CHECK_LOG_PATH_FAIL"; exit 1
+    fi
+}
 
 # Checking for project's log file's status, then write
 function CheckProjectLogStatus
 {
     #***** Parameters *****
     string=$1
+    
+    #***** Variables *****
 
     #**** Code *****
     CheckProjectLogPath
     
-    if [ -n "$PROJECT_LOG_STATUS" ]; then
-        if [ "$PROJECT_LOG_STATUS" = "log" ] || [ "$PROJECT_LOG_STATUS" -eq 1 ]; then
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH"
-        elif [ "$PROJECT_LOG_STATUS" = "tee" ] || [ "$PROJECT_LOG_STATUS" -eq 2 ]; then
-            echo "$string"
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH"
+    if [ "$PROJECT_STATUS_LOG" = "true" ]; then
+        if [ -n "$PROJECT_STATUS_LOG_REDIRECT" ]; then
+            if [ "$PROJECT_STATUS_LOG_REDIRECT" = "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 1 ]; then
+                echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "" ; exit 1; }
+            elif [ "$PROJECT_STATUS_LOG_REDIRECT" = "tee" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 2 ]; then
+                echo "$string"
+                echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo ""; exit 1; }
+            else
+                echo "$MSG_CHECK_LOG_STATUS_FAIL"; echo
+                exit 1
+            fi
         else
-            echo "Error : no valid write output mode defined"; echo
-            exit 1
+            echo "$string"
         fi
     else
         echo "$string"
-    fi
-}
-
-# Checking for "$PROJECT_LOG_PATH"
-function CheckProjectLogPath
-{
-    if [ -z "$PROJECT_LOG_PATH" ]; then
-        EchoError "Error : no path provided into the $\PROJECT_LOG_PATH variable."; exit 1
     fi
 }
 

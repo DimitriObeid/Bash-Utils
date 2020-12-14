@@ -14,17 +14,17 @@
 #	On command line interface -> shellcheck beta.sh
 #		--> Shellcheck install command : sudo $package_manager $install_command shellcheck
 
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-############################## CALLING INSTALL SCRIPT'S DEPENDENCIES ##############################
+########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 #### INITIALIZING LINUX-REINSTALL
 
-## INCLUDING THE INITALIZER FILE
+## SOURCING THE INITALIZER FILE
 
 # shellcheck disable=SC1091
 lineno=$LINENO; if ! source "/usr/local/lib/Bash-Utils/src/Initializer.sh"; then
-    echo "In $(basename "$0"), line $lineno --> Error : unable to include the initializer file"; echo; exit 1
+    echo "In $(basename "$0"), line $lineno --> Error : unable to source the initialization file."; echo; exit 1
 fi
 
 # -----------------------------------------------
@@ -36,7 +36,7 @@ LINUX_REINSTALL_INST="$(GetProjectParentPath)/install/categories"
 LINUX_REINSTALL_LANG="$(GetProjectParentPath)/lang"
 LINUX_REINSTALL_VARS="$(GetProjectParentPath)/variables"
 
-# Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument
+# Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument.
 WriteInitLog "In $PROJECT_FILE, line $LINENO : CHECKING FOR $PROJECT_NAME's SUB-FOLDERS"
 CheckSubFolder "$LINUX_REINSTALL_INST"
 CheckSubFolder "$LINUX_REINSTALL_LANG"
@@ -47,14 +47,16 @@ echo "In $PROJECT_FILE, line $LINENO : DEFINING $PROJECT_NAME's LIBRARY FOLDER"
 SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
 WriteInitLog; WriteInitLog
 
+# Ending the initialization process.
 WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2";
 WriteInitLog "END OF THE $(Decho "${PROJECT_NAME^^}")'S INITIALIZATION";
 WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"; WriteInitLog;
 
 
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-####################################### INITIALIZING SCRIPT #######################################
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################################### CODE ########################################################
 
 #### DEFINING SCRIPT'S ARGUMENTS
 
@@ -825,11 +827,7 @@ function IsInstallationDone
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-
-
-################### DÉBUT DE L'EXÉCUTION DU SCRIPT ###################
-
-
+############################################ DÉBUT DE L'EXÉCUTION DU SCRIPT ###########################################
 
 ## APPEL DES FONCTIONS D'INITIALISATION ET DE PRÉ-INSTALLATION
 # Détection du mode super-administrateur (root) et de la présence de l'argument contenant le nom d'utilisateur.

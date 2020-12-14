@@ -50,7 +50,7 @@ function ChownRec
 	else
         EchoError "$MSG_PERM_CHOWNREC_FAIL."
 		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :"
-		Newline '	chown -R $current_owner $path'
+		echo '	chown -R $current_owner $path'
 		Newline
 
 		return

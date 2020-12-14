@@ -76,9 +76,6 @@ fi
 
 # Processing the project's log file
 # shellcheck disable=SC2034
-PROJECT_LOG_NAME="$PROJECT_NAME $TIME_DATE.log"
-
-# shellcheck disable=SC2034
 PROJECT_LOG_NAME="$PROJECT_NAME.log"
 
 # shellcheck disable=SC2034
@@ -120,15 +117,18 @@ function WriteInitLog
     #***** Code *****
     # If a string is passed as first argument AND the "$initlog_status" variable contains a value AND no value are passed as second argument.
     if [ -n "$string" ] && [ -n "$initlog_status" ] && [ -z "$display" ]; then
+
         # If the "$initlog_status" variable's value is equal to "log", then the string passed as first argument is redirected towards the initializer process's log path.
         if [ "$initlog_status" = "log" ]; then
-            # I had a case of (impossbility) to redirect the outputs to the log file because of ( a misplace of functions and variables declaration...), so I added this failsafe in case of impossbility to write into this file, so there won't be any "permission error" messages written anymore.
+            # I had a case of impossbility to redirect the outputs to the initialization file's log file because of a write permission issue,
+            # so I added this failsafe in case of impossbility to write into this file, so there won't be any "permission error" messages written at each initialization step.
             echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
+
         # Else, if the "$initlog_status" variable's value is equal to "tee", then the string passed as first argument is redirected towards the terminal AND the initializer process's log path, with the date and the hour written before the message.
         elif [ "$initlog_status" = "tee" ]; then
             echo "$string"
             echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
-		 else
+        else
             echo "$incorrect"
             echo "$datelog $incorrect"; exit 1
         fi
@@ -236,7 +236,7 @@ if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
         echo
     fi
 
-    touch "$INITIALIZER_FILE_LOG_PATH"
+    WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
 fi
 
 # Checking if the initialization log file exists AND is not empty, to overwrite its content.
