@@ -1,9 +1,9 @@
 VARIABLE,COMMENTS, en, fr
-MSG_CHECK_VARSTAT_DEBUG_FAIL,,Error : PROJECT_STATUS_DEBUG variable's value is incorrect,
-MSG_CHECK_VARSTAT_LOG_FAIL,,Error : PROJECT_STATUS_LOG variable's value is incorrect,
-MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL,,Error : PROJECT_STATUS_LOG_REDIRECT variable's value is incorrect,
-MSG_CHECK_VARSTAT_TIMELINE_NAN,,Error : PROJECT_STATUS_TIME_LINE variable's value is not a number,
-MSG_CHECK_VARSTAT_TIMETXT_NAN,,Error : PROJECT_STATUS_TIME_TXT variable's value is not a number,
+MSG_CHECK_VARSTAT_DEBUG_FAIL,"Checkings.lib → ""CheckVarStatus"" function",Error : PROJECT_STATUS_DEBUG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_DEBUG est incorrecte.
+MSG_CHECK_VARSTAT_LOG_FAIL,"Checkings.lib → ""CheckVarStatus"" function",Error : PROJECT_STATUS_LOG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG est incorrecte.
+MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL,"Checkings.lib → ""CheckVarStatus"" function",Error : PROJECT_STATUS_LOG_REDIRECT variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG_REDIRECT est incorrecte.
+MSG_CHECK_VARSTAT_TIMELINE_NAN,"Checkings.lib → ""CheckVarStatus"" function",Error : PROJECT_STATUS_TIME_LINE variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TIME_LINE n’est pas un nombre.
+MSG_CHECK_VARSTAT_TIMETXT_NAN,"Checkings.lib → ""CheckVarStatus"" function",Error : PROJECT_STATUS_TIME_TXT variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TXT n’est pas un nombre.
 ,,,
 MSG_CHECK_ROOTEUID_FAIL,"Checkings.lib → ""CheckRootEUID"" function",,
 ,,,

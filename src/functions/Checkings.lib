@@ -45,23 +45,24 @@ function ModVarStatus
 # This function, which checks the status variables values, has to be called inside the "ModStatus" function, right at the end of the function.
 function CheckVarStatus
 {
-    if [ "$PROJECT_STATUS_DEBUG" != "true" ] || [ "$PROJECT_STATUS_DEBUG" != "false" ]; then
+    if [ "$PROJECT_STATUS_DEBUG" != "true" ] && [ "$PROJECT_STATUS_DEBUG" != "false" ]; then
         EchoError "$MSG_CHECK_VARSTAT_DEBUG_FAIL"; exit 1
         
-    elif [ "$PROJECT_STATUS_LOG" != "true" ] || [ "$PROJECT_STATUS_LOG" != "false" ]; then
+    elif [ "$PROJECT_STATUS_LOG" != "true" ] && [ "$PROJECT_STATUS_LOG" != "false" ]; then
         EchoError "$MSG_CHECK_VARSTAT_LOG_FAIL"; exit 1
         
-    elif [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ] \
-        || [ "$PROJECT_STATUS_LOG_REDIRECT" != "" ]; then
+    elif [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] && [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ] \
+        && [ "$PROJECT_STATUS_LOG_REDIRECT" != "" ]; then
         # On définit quand même la variable PROJECT_STATUS_LOG_REDIRECT à "tee"
         # pour afficher sans problèmes le contenu de la chaîne de caractères en rouge.
         PROJECT_STATUS_LOG_REDIRECT="tee"
         EchoError "$MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL"; exit 1
     
-    elif [ "$PROJECT_STATUS_TIME_LINE" != ]; then
+    # If the status variable's value is not a float or an integer.
+    elif [[ ! "$PROJECT_STATUS_TIME_LINE" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         EchoError "$MSG_CHECK_VARSTAT_TIMELINE_NAN"; exit 1
     
-    elif [ "$PROJECT_STATUS_TIME_TXT" != ]; then
+    elif [[ ! "$PROJECT_STATUS_TIME_TXT" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         EchoError "$MSG_CHECK_VARSTAT_TIMETXT_NAN"; exit 1
     
     fi
