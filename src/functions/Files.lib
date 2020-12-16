@@ -6,6 +6,40 @@
 
 #### TEXT FILES PROCESSING FUNCTIONS
 
+# Separate processing steps displays from the rest of the main script with a line.
+
+# Featured functions and files from the "functions" folder :
+#   - DrawLine      -> Headers.lib
+#   - HandleErrors  -> Headers.lib
+function ProcessingFile
+{
+    #***** Parameters *****
+    function=$1
+    
+    #***** Variables *****
+    char="'"
+    
+    #***** Code *****
+    # On commence par dessiner la première ligne du bloc.
+	sleep "$PROJECT_STATUS_SLEEP_LINE"
+    DrawLine "$COL_RESET" "$char"
+    
+    EchoNewstep "$MSG_FILE_PROCESSING_BEGIN"
+    Newline
+    
+    if $("$function"); then
+        EchoSuccess "$MSG_FILE_PROCESSING_END_SUCC"
+		DrawLine "$COL_RESET" "$char"
+		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		Newline
+    else
+        EchoError "$MSG_FILE_PROCESSING_END_FAIL"
+		DrawLine "$COL_RESET" "$char"
+		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		Newline
+    fi
+}
+
 ## OVERWRITING CONTENT
 
 # Overwrite a file

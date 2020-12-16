@@ -83,7 +83,7 @@ function Chown
     #***** Code *****
     # The "chown" command has to be used with super-user privileges,
     CheckRootEUID
-    
+
     # If the path passed as argument doesn't exists.
     if [ -d "$path" ]; then
         EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_DIR"
@@ -104,22 +104,12 @@ function Chown
         EchoSuccess "$MSG_PERMISSIONS_CHOWN_FILE_SUCCESS"
         Newline
 
-        EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC."
-        sleep "$PROJECT_STATUS_TIME_HEADER"
-        Newline
-
-        return
+        return 0
     else
-
-        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL"
-        EchoError "$MSG_PERMISSIONS_CHOWN_FILE_FAIL_ADVICE"
-        echo '	chown $username $path'
-
-        EchoError "$MSG_MKFILE_PROCESSING_END_FAIL."
-		sleep "$PROJECT_STATUS_TIME_HEADER"
+        HandleErrors "$?" "$MSG_PERMISSIONS_CHOWN_FILE_FAIL"
         Newline
 
-        return
+        return 1
     fi
 }
 

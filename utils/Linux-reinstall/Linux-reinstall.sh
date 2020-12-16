@@ -172,11 +172,12 @@ function CheckArgs
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
-	if test "$ARG_DEBUG_VAL" = "${ARG_DEBUG}"; then
-		# The name of the log file is redefined, THEN we redefine the path, EVEN if the initial value of the variable "$FILE_LOG_PATH" is the same as the new value.
-		# In this case, if the value of the variable "$FILE_LOG_PATH" is not redefined, the old value is called.
-		FILE_LOG_NAME="Linux-reinstall $TIME_DATE.test"
-		FILE_LOG_PATH="$PWD/$FILE_LOG_NAME"
+	if [ "$PROJECT_STATUS_DEBUG" = "true" ]; then
+		# The name of the log file is redefined, THEN we redefine the path,
+		# EVEN if the initial value of the variable "$PROJECT_LOG_PATH" is the same as the new value.
+		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called.
+		PROJECT_LOG_NAME="$PROJECT_NAME - DEBUG.log"
+		PROJECT_LOG_PATH="$PROJECT_LOG_NAME/$PROJECT_LOG_NAME"
 
 		## APPEL DES FONCTIONS D'INITIALISATION
 		CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
@@ -192,45 +193,49 @@ function CheckArgs
 		PackInstall "apt" "emacs"
 
 		exit 0
-
-	# Si un deuxième argument est passé ET si la valeur attendue ("debug") ne correspond pas à la valeur du dernier argument.
-	elif test ! -z "${ARG_DEBUG}" && test "$ARG_DEBUG_VAL" != "${ARG_DEBUG}" ; then
-		EchoError "$MSG_INIT_DEBUG_FAIL : $(DechoE "debug")"
-		EchoError "$MSG_INIT_DEBUG_ADVICE"
-		Newline
-
-		exit 1
 	fi
 }
 
 # Création du fichier de logs pour répertorier chaque sortie de commande (sortie standard (STDOUT) ou sortie d'erreurs (STDERR)).
 function CreateLogFile
 {
-	# Récupération des informations sur le système d'exploitation de l'utilisateur, me permettant de corriger tout bug pouvant survenir sur une distribution Linux précise.
-
+    #***** Modifying status *****
+    PROJECT_STATUS_ERROR="fatal"
+    PROJECT_STATUS_LOG="true"
+    PROJECT_STATUS_LOG_REDIRECT="log"
+    PROJECT_STATUS_TIME_LINE="0"
+    PROJECT_STATUS_TIME_TXT="0"
+    CheckVarStatus
+    
+    #***** Code *****
+    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+    
 	# Le script crée d'abord le fichier de logs dans le dossier actuel (pour cela, on passe la valeur de la variable d'environnement $PWD en premier argument de la fonction "Makefile").
-	lineno=$LINENO; Makefile "$PWD" "$FILE_LOG_NAME" "0" "0" > /dev/null
-
+	lineno=$LINENO; Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" > /dev/null
+    Chown "$USER" "$ARG_USERNAME" "$PROJECT_LOG_PATH"
+    
+	
 	# On vérifie si le fichier de logs a bien été créé.
-	if test -f "$FILE_LOG_PATH"; then
+	if [ -f "$PROJECT_LOG_PATH" ]; then
 		EchoSuccess "$MSG_CRLOGFILE_SUCCESS"
+		Newline
 
 		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "RÉCUPÉRATION DES INFORMATIONS SUR LE SYSTÈME DE L'UTILISATEUR" "0" >> "$FILE_LOG_PATH"	# Au moment de la création du fichier de logs, la variable "$FILE_LOG_PATH" correspond au dossier actuel de l'utilisateur.
 
 		# Récupération des informations sur le système d'exploitation de l'utilisateur contenues dans le fichier "/etc/os-release".
 		EchoNewstep "$MSG_CRLOGFILE_GETOSINFOS :"
 		cat "/etc/os-release" >> "$FILE_LOG_PATH"
-		EchoLog
+		Newline
 
 		EchoSuccess "$MSG_CRLOGFILE_GOTOSINFOS."
     else
         # Étant donné que le fichier de logs n'existe pas dans ce cas, il est impossible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise (cependant, il ne s'agit pas de bugs importants).
         EchoError "$MSG_CRLOGFILE_FAIL"
         EchoError "$MSG_CRLOGFILE_ADVICE"
-        echo
+        Newline
 
         EchoError "$MSG_LINENO $lineno."
-        echo
+        Newline
 
         exit 1
     fi
@@ -239,18 +244,22 @@ function CreateLogFile
 # Création du dossier temporaire où sont stockés les fichiers et dossiers temporaires.
 function Mktmpdir
 {
+    #***** Modifying status *****
+    # Nothing to do now.
+    
     #***** Code *****
     # Tout ce qui se trouve entre les accolades suivantes est envoyé dans le fichier de logs.
 	{
 		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" \
 			"CRÉATION DU DOSSIER TEMPORAIRE $COL_JAUNE\"$DIR_TMP_NAME$COL_BLUE\" DANS LE DOSSIER $COL_JAUNE\"$DIR_TMP_PARENT\"$COL_RESET" "0"
 
-		Makedir "$DIR_TMP_PARENT" "$DIR_TMP_NAME" "0" "0"     # Dossier principal
-		Makedir "$DIR_TMP_PATH" "$DIR_LOG_NAME" "0" "0"       # Dossier d'enregistrement des fichiers de logs
+		Makedir "$DIR_TMP_PARENT" "$DIR_TMP_NAME"     # Dossier principal
+		Makedir "$DIR_TMP_PATH" "$DIR_LOG_NAME"       # Dossier d'enregistrement des fichiers de logs
 	} >> "$FILE_LOG_PATH"
 
 	# Avant de déplacer le fichier de logs, on vérifie si l'utilisateur n'a pas passé la valeur "debug" en tant que dernier argument (vérification importante, étant donné que le chemin et le nom du fichier sont redéfinis dans ce cas).
     EchoNewstep "Déplacement du fichier de logs dans le dossier $(DechoN "$DIR_LOG_PATH")" >> "$FILE_LOG_PATH"
+    Newline
 
 	# Dans le cas où l'utilisateur ne le passe pas, une fois le dossier temporaire créé, on y déplace le fichier de logs tout en vérifiant s'il ne s'y trouve pas déjà, puis on redéfinit le chemin du fichier de logs de la variable "$FILE_LOG_PATH". Sinon, le fichier de logs n'est déplacé nulle part ailleurs dans l'arborescence.
 	if test -z "${ARGV[2]}"; then
@@ -261,9 +270,8 @@ function Mktmpdir
 
         # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où l'argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
         HandleErrors "$?" "IMPOSSIBLE DE DÉPLACER LE FICHIER DE LOGS VERS LE DOSSIER $(DechoE "$DIR_LOG_PATH")" "" "$lineno"
-        EchoLog
-
         EchoSuccess "Le fichier de logs a été déplacé avec succès dans le dossier $(DechoS "$DIR_LOG_PATH")." >> "$FILE_LOG_PATH"
+        Newline
     else
         # Rappel : Dans cette situation où l'argument de débug est passé, les valeurs des variables "FILE_LOG_NAME" et "$DIR_LOG_PATH" ont été redéfinies dans la fonction "CheckArgs".
         EchoSuccess "Le fichier $(DechoS "$FILE_LOG_NAME") reste dans le dossier $(DechoS "$PWD")." >> "$FILE_LOG_PATH"

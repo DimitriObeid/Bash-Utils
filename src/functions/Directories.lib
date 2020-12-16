@@ -92,8 +92,6 @@ function Makedir
 	#***** Parameters *****
 	local parent=$1		# Emplacement depuis la racine du dossier parent du dossier à traiter.
 	local name=$2		# Nom du dossier à traiter (dans son dossier parent).
-	local sleep_blk=$3	# Temps de pause du script avant et après la création d'une ligne d'un bloc d'informations sur le traitement du dossier.
-	local sleep_txt=$4	# Temps d'affichage des messages de passage à une nouvelle sous-étape, d'échec ou de succès lors du traitement du dossier.
 
 	#***** Variables *****
 	local path="$parent/$name"	# Chemin du dossier à traiter.

@@ -35,7 +35,8 @@ BASH_UTILS="$BASH_UTILS_ROOT/src"
 BASH_UTILS_CONF="$BASH_UTILS_ROOT/config"
 
 # "config" folder's content
-BASH_UTILS_CONF_STATUS="$BASH_UTILS_CONF/StatusAtExecution.conf"
+BASH_UTILS_INIT_CONF_STATUS="$BASH_UTILS_CONF/InitStatus.conf"
+BASH_UTILS_PROJECT_CONF_STATUS="$BASH_UTILS_CONF/ProjectStatus.conf"
 
 # "src" folder's content.
 BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
@@ -79,7 +80,10 @@ fi
 PROJECT_LOG_NAME="$PROJECT_NAME.log"
 
 # shellcheck disable=SC2034
-PROJECT_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_LOG_NAME"
+PROJECT_LOG_PARENT="$INITIALIZER_FILE_LOG_DIR"
+
+# shellcheck disable=SC2034
+PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_NAME"
 
 # -----------------------------------------------
 
@@ -107,54 +111,73 @@ function WriteInitLog
     display=$2
 
     #***** Variables *****
-    lineno_stat=$LINENO; initlog_status="tee"
     datelog="[$(date +"%Y-%m-%d %Hh-%Mm-%Ss")]"
     location="In ${BASH_SOURCE[0]}, line $lineno_stat -->"
     unable="$location Warning : Unable to write in the initializer's log file."
-    incorrect="$location Error : the initlog_status variable's value is incorrect."
-    novalue="$location Error : the initlog_status variable must contain a value."
+    incorrect="$location Error : the INITIALIZER_STATUS_LOG variable's value is incorrect."
 
     #***** Code *****
-    # If a string is passed as first argument AND the "$initlog_status" variable contains a value AND no value are passed as second argument.
-    if [ -n "$string" ] && [ -n "$initlog_status" ] && [ -z "$display" ]; then
+    if [ -n "$INITIALIZER_STATUS_LOG_CREATE" ]; then
+        # If the "$INITIALIZER_STATUS_LOG" variable contains a value AND no value are passed as second argument.
+        if [ -z "$display" ]; then
+            if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
+                echo "$string"
 
-        # If the "$initlog_status" variable's value is equal to "log", then the string passed as first argument is redirected towards the initializer process's log path.
-        if [ "$initlog_status" = "log" ]; then
-            # I had a case of impossbility to redirect the outputs to the initialization file's log file because of a write permission issue,
-            # so I added this failsafe in case of impossbility to write into this file, so there won't be any "permission error" messages written at each initialization step.
-            echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
+            # If the "$INITIALIZER_STATUS_LOG" variable's value is equal to "log", then the string passed as first argument is redirected towards the initializer process's log path.
+            elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ]; then
+                if [ -n "$string" ]; then
+                    # I had a case of impossbility to redirect the outputs to the initialization file's log file because of a write permission issue,
+                    # so I added this failsafe in case of impossbility to write into this file, so there won't be any "permission error" messages written at each initialization step.
+                    echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                else
+                    echo "$string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                fi
+                
+            # Else, if the "$INITIALIZER_STATUS_LOG" variable's value is equal to "tee", then the string passed as first argument is redirected towards the terminal AND the initializer process's log path, with the date and the hour written before the message.
+            elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "tee" ]; then
+                if [ -n "$string" ]; then
+                    echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                else
+                    echo "$string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                fi; echo "$string"
 
-        # Else, if the "$initlog_status" variable's value is equal to "tee", then the string passed as first argument is redirected towards the terminal AND the initializer process's log path, with the date and the hour written before the message.
-        elif [ "$initlog_status" = "tee" ]; then
-            echo "$string"
-            echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
-        else
-            echo "$incorrect"
-            echo "$datelog $incorrect"; exit 1
+            else
+                lineno_stat=$LINENO; echo "$incorrect"; exit 1
+            fi; return
+            
+        # Else, if the "$INITIALIZER_STATUS_LOG" variable contains a value AND a value of '1' is passed as second argument.
+        # This statement forces the displaying of a message if the "$display" argument is passed,
+        # especially to display an error message if an error occured during the initialization process.
+        elif [ "$display" -eq 1 ]; then
+            if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
+                echo "$string"
+            elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ] || [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "tee" ]; then
+                if [ -n "$string" ]; then
+                    echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                else
+                    echo "$string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                fi; echo "$string"
+            else
+                lineno_stat=$LINENO; echo "$incorrect"
+                echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
+            fi; return
+
+        # This statement doesn't print the date in the initialization process's log file, before the string passed as argument.
+        # This statement is useful to display some text decoration without displaying the display's date.
+        elif [ "$display" -eq 2 ]; then
+            if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
+                echo "$string"
+            elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ] || [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "tee" ]; then
+                if [ -n "$string" ] || [ -z "$string" ]; then
+                    echo "$string" 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
+                fi
+            else
+                lineno_stat=$LINENO; echo "$incorrect"
+                echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
+            fi
         fi
-
-    # Else, if a string is passed as first argument AND the "$initlog_status" variable contains one of the two awaited values AND a value of '1' is passed as second argument,
-    # then the string passed as first argument is redirected towards the terminal AND the initializer process's log path, with the date and the hour written before the message.
-    # This statement forces the displaying of a message if the "$display" argument is passed, especially to display an error message if an error occured during the initialization process.
-    elif [ -n "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ] \
-        && [ -n "$display" ] && [ "$display" -eq 1 ]; then
-        echo "$string"
-        echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
-
-    # Else, if a string is passed as first argument AND the "$initlog_status" variable contains one of the two awaited values AND a value of '2' is passed as second argument.
-    # This statement does the same thing than before, except the fact that it doesn't print the date before the string passed as argument, in the initialization process's log file.
-    # This statement is useful to display some text decoration without displaying the display's date.
-    elif [ -n "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ] \
-        && [ -n "$display" ] && [ "$display" -eq 2 ]; then
-        echo "$string" 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable"; exit 1; }
-
-    # Else, if no value is passed as first argument (which means that no other arguments are passed) AND a value is contained in the "$initlog_status" variable,
-    # then a line break is performed.
-    elif [ -z "$string" ] && [ -n "$initlog_status" ] && [ "$initlog_status" = "log" ] || [ "$initlog_status" = "tee" ]; then
-        echo 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH" || { echo "$unable" ; exit 1; }
     else
-        echo "$novalue"
-        echo "$datelog $novalue" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
+        echo "$string"
     fi
 }
 
@@ -196,7 +219,6 @@ function SourceFile
     local lineno=$3
 
     #***** Code *****
-
     if [ -z "$info" ]; then
         # shellcheck disable=SC1090
         if source "$path"; then
@@ -229,14 +251,31 @@ function SourceFile
 
 #### CHECKING
 
-## LOG FILE
-if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
-    if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
-        mkdir -pv "$INITIALIZER_FILE_LOG_DIR"
-        echo
-    fi
+## PROJECT STATUS VARIABLES
 
-    WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
+# Sourcing the confinguration file.
+# lineno=$LINENO; WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : SOURCING $BASH_UTILS_CONF_STATUS"
+
+# shellcheck disable=SC1090
+if ! source "$BASH_UTILS_INIT_CONF_STATUS"; then
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the project initialization's file variables status configuration file"
+fi
+
+# -----------------------------------------------
+
+## LOG FILE
+if [ "$INITIALIZER_STATUS_LOG_CREATE" != "true" ] && [ "$INITIALIZER_STATUS_LOG_CREATE" != "false" ]; then
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect"
+    exit 1
+elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
+    if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
+        if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
+            mkdir -pv "$INITIALIZER_FILE_LOG_DIR"
+            echo
+        fi
+        
+        WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
+    fi
 fi
 
 # Checking if the initialization log file exists AND is not empty, to overwrite its content.
@@ -252,19 +291,6 @@ lineno=$LINENO; if [ -z "$PROJECT_PATH" ]; then
 lineno=$LINENO; elif [ ! -f "$PROJECT_PATH" ]; then
     WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : Incorrect path provided as value for the PROJECT_PATH variable in $PROJECT_PATH" "1"
     WriteInitLog "Current content : $PROJECT_PATH" "1"; exit 1
-fi
-
-# -----------------------------------------------
-
-## PROJECT STATUS VARIABLES
-
-# Sourcing the confinguration file.
-lineno=$LINENO; WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : SOURCING $BASH_UTILS_CONF_STATUS"
-
-# shellcheck disable=SC1090
-if ! source "$BASH_UTILS_CONF_STATUS"; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> Error : unable to source the $PROJECT_NAME's variable status file." "1"
-    exit 1
 fi
 
 # -----------------------------------------------
@@ -323,3 +349,12 @@ WriteInitLog; WriteInitLog
 WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"
 WriteInitLog "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW";
 WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"; WriteInitLog
+
+# shellcheck disable=SC1090
+if ! source "$BASH_UTILS_PROJECT_CONF_STATUS"; then
+    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $PROJECT_NAME's file variables status configuration file."
+    exit 1
+else
+    WriteInitLog "Successfully sourced the $PROJECT_NAME's file variables status configuration file."
+    WriteInitLog
+fi

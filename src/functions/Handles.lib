@@ -26,23 +26,7 @@ function CheckRootEUID
 
 ## STATUS VARIABLES MODIFICATIONS
 
-# This function modifies the status variables for each value passed as argument,
-# to change variables status faster than calling the variables to modify their values.
-function ModVarStatus
-{
-    #***** Parameters *****
-    b_debug=$1
-    b_log=$2
-    s_redirect=$3
-    f_time_line=$4
-    f_time_txt=$5
-    
-    #***** Code *****
-    
-    CheckVarStatus
-}
-
-# This function, which checks the status variables values, has to be called inside the "ModStatus" function, right at the end of the function.
+# This function checks the status variables values.
 function CheckVarStatus
 {
     if [ "$PROJECT_STATUS_DEBUG" != "true" ] && [ "$PROJECT_STATUS_DEBUG" != "false" ]; then
@@ -51,12 +35,15 @@ function CheckVarStatus
     elif [ "$PROJECT_STATUS_LOG" != "true" ] && [ "$PROJECT_STATUS_LOG" != "false" ]; then
         EchoError "$MSG_CHECK_VARSTAT_LOG_FAIL"; exit 1
         
-    elif [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] && [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ] \
-        && [ "$PROJECT_STATUS_LOG_REDIRECT" != "" ]; then
+    elif [ -n "$PROJECT_STATUS_LOG_REDIRECT" ] && [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] \
+        && [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ]; then
         # On définit quand même la variable PROJECT_STATUS_LOG_REDIRECT à "tee"
         # pour afficher sans problèmes le contenu de la chaîne de caractères en rouge.
         PROJECT_STATUS_LOG_REDIRECT="tee"
         EchoError "$MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL"; exit 1
+    
+    elif [ -n "$PROJECT_STATUS_ERROR" ] && [ "$PROJECT_STATUS_ERROR" != "fatal" ]; then
+        EchoError ""; exit 1
     
     # If the status variable's value is not a float or an integer.
     elif [[ ! "$PROJECT_STATUS_TIME_LINE" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
@@ -67,7 +54,6 @@ function CheckVarStatus
     
     fi
 }
-
 
 # -----------------------------------------------
 
@@ -86,25 +72,17 @@ function CheckProjectLogStatus
 {
     #***** Parameters *****
     string=$1
-    
-    #***** Variables *****
 
     #**** Code *****
     CheckProjectLogPath
+    CheckVarStatus
     
-    if [ "$PROJECT_STATUS_LOG" = "true" ]; then
-        if [ -n "$PROJECT_STATUS_LOG_REDIRECT" ]; then
-            if [ "$PROJECT_STATUS_LOG_REDIRECT" = "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 1 ]; then
-                echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "" ; exit 1; }
-            elif [ "$PROJECT_STATUS_LOG_REDIRECT" = "tee" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 2 ]; then
-                echo "$string"
-                echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo ""; exit 1; }
-            else
-                echo "$MSG_CHECK_LOG_STATUS_FAIL"; echo
-                exit 1
-            fi
-        else
+    if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$PROJECT_STATUS_LOG_REDIRECT" ]; then
+        if [ "$PROJECT_STATUS_LOG_REDIRECT" = "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 1 ]; then
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "" ; exit 1; }
+        elif [ "$PROJECT_STATUS_LOG_REDIRECT" = "tee" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 2 ]; then
             echo "$string"
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo ""; exit 1; }
         fi
     else
         echo "$string"
@@ -114,3 +92,52 @@ function CheckProjectLogStatus
 # -----------------------------------------------
 
 ## CHECKING FOR TIME STATUS
+
+
+
+# -----------------------------------------------
+
+## ERROR HANDLING FUNCTIONS
+
+# Handling command outputs.
+function HandleErrors
+{
+	#***** Paramètres *****
+	local return_code=$1       # Code de retour de la dernière commande lancée
+	local error_string=$2      # Chaîne de caractères du type d'erreur à afficher.
+	local advise_string=$3     # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+    local lineno=$4            # Ligne à laquelle le message d'erreur s'est produite.
+
+	# ***** Code *****
+	if [ "$return_code" -eq 0 ]; then
+        return
+    else
+        if [ "$PROJECT_STATUS_ERROR" = "fatal" ]; then
+            HeaderBase "$COL_RED" "-" "$COL_RED" "$MSG_HANDLES_ERR_FATAL_ERROR : $error_string" "1.5"
+
+            EchoError "$MSG_HANDLES_ERR_FATAL_HAPPENED :"
+            EchoError "$error_string"
+            echo
+
+            EchoError "$advise_string"
+            echo
+
+            EchoError "$MSG_HANDLES_ERR_FATAL_LINE $lineno."
+            echo
+
+            EchoError "$MSG_HANDLES_ERR_FATAL_STOP."
+            echo
+
+            if [ "$PROJECT_STATUS_LOG" = "true" ]; then
+                EchoNewstep "Souhaitez-vous copier le fichier de logs du project $(DechoN "$PROJECT_NAME") vers votre dossier personnel ?"
+                Newline
+
+            
+            fi
+
+            exit 1
+        elif [ -z "$PROJECT_STATUS_ERROR" ]; then
+            HeaderBase ""
+		fi
+    fi
+}

@@ -19,8 +19,6 @@ function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Succ
 
 ## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
 
-# Avoid repetiting code
-
 # Error message
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
@@ -32,6 +30,18 @@ function EchoError
 
     #***** Code *****   
     CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
+
+    sleep "$PROJECT_STATUS_TIME_TXT"
+}
+
+# Normal message, with redirection chcking
+function EchoMsg
+{
+    #***** Parameters *****
+    local string=$1
+
+    #***** Code *****
+    CheckProjectLogStatus "$string"
 
     sleep "$PROJECT_STATUS_TIME_TXT"
 }
