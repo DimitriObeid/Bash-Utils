@@ -15,39 +15,52 @@ fi
 function ParseCSVLibLang
 {
     #***** Parameters *****
-    local success_msg=$1
-    local error_msg=$2
+    lang=$1
+    success_msg=$2
+    error_msg=$3
 
     #***** Variables *****
     col_index=0     # column index
     row_index=0     # line (row)
 
     #***** Code *****
+    # Cut the ICU language code, which is at the left of the underscore, then stroing it into a variable.
+    LANG=$("$LANG" | cut -f 1 -d '_')
+    WriteInitLog "Language : $LANG"
+    
     # Parser le fichier CSV contenant les traductions
-    local lineno=$LINENO; if [ -f "$LIBLANG_TRANSLATION_FILE" ]; then
+    lineno=$LINENO; if [ -f "$LIBLANG_TRANSLATION_FILE" ]; then
         # cat "$LIBLANG_TRANSLATION_FILE" | 
         # Getting the language column first, by checking on the very first CSV file's row
-        while IFS=, read -ra col_value row_value; do
+        while IFS=, read -ra col_value; do
             col_index=$(( col_index+1 ))
 
             if [ "$col_value" = "VARIABLE" ] && [ "$col_index" -eq 1 ]; then
                 echo "$col_value"
                 echo "$col_index"
-
-                # ÇA NE MARCHE PAS
-                for row_val in "${row_values[$row_index]}"; do
-                    echo "$row_val"
-                    echo "$row_index"
-                done
-
-                break
             else
-                WriteInitLog "Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
+                WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
                 WriteInitLog "Did you modified the CSV file or the script ?" "1"
                 exit 1
             fi
+            
         done < "$LIBLANG_TRANSLATION_FILE"
 
+        
+        echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE" "1"
+        exit 1
+
+        # Then, getting the language's row.
+        # ÇA NE MARCHE PAS
+        # for row_val in "${row_values[$row_index]}"; do
+        #       echo "$row_val"
+        #       echo "$row_index"
+        # done
+        
+        # Then, reading the VARIABLE column and assign for each variable of the VARIABLE column the value of the $LANG column from the same row.
+        
+        
+        
 
        #     ANCIEN CODE
 
@@ -67,10 +80,6 @@ function ParseCSVLibLang
        #
        #    (( ++row_index ))
        #    awk -F "," {print "VARIABLE"}
-
-
-        echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE"
- #       exit 1
     else
         WriteInitLog "" "1"; exit 1
     fi
@@ -94,13 +103,12 @@ function SetLibLang
     case "$LANG" in
         en_*)
             # English
-            LANG="en"
-            ParseCSVLibLang "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "$LANG" "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
         fr_*)
             # French
-            ParseCSVLibLang "Dans le fichier ${BASH_SOURCE[0]}, à la ligne $lineno --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
+            ParseCSVLibLang "$LANG" "Dans le fichier ${BASH_SOURCE[0]}, à la ligne $lineno --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
                 "Fichier de traduction trouvé : $LIBLANG_TRANSLATION_FILE"
             ;;
         *)
