@@ -23,7 +23,7 @@
 ## SOURCING THE INITALIZER FILE
 
 # shellcheck disable=SC1091
-lineno=$LINENO; if ! source "/usr/local/lib/Bash-Utils/src/Initializer.sh"; then
+lineno=$LINENO; if ! source "/usr/local/lib/Bash-utils/src/Initializer.sh"; then
     echo "In $(basename "$0"), line $lineno --> Error : unable to source the initialization file."; echo; exit 1
 fi
 

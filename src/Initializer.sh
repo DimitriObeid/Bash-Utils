@@ -23,7 +23,7 @@ fi
 ## BASH-UTILS PATHS
 
 # Bash-Utils root directory path.
-BASH_UTILS_ROOT="/usr/local/lib/Bash-Utils"
+BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
 
 # In case the Bash-Utils folder doesn't exists or is not located in the correct path.
 if [ ! -d "$BASH_UTILS_ROOT" ]; then
@@ -273,7 +273,7 @@ elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
             mkdir -pv "$INITIALIZER_FILE_LOG_DIR"
             echo
         fi
-        
+
         WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
     fi
 fi
@@ -335,9 +335,9 @@ done; WriteInitLog; WriteInitLog
 ## SOURCING TRANSLATION FILES
 
 # shellcheck source="$MAIN_PROJECT_ROOT/$MAIN_LANG/SetLibLang.sh"
-WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : DEFINING BASH-UTILS LIBRARY LANGUAGE" \
-    && SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
-WriteInitLog; WriteInitLog
+#WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : DEFINING BASH-UTILS LIBRARY LANGUAGE" \
+#   && SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
+# WriteInitLog; WriteInitLog
 
 # -----------------------------------------------
 
