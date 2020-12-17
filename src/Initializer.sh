@@ -117,7 +117,7 @@ function WriteInitLog
     incorrect="$location Error : the INITIALIZER_STATUS_LOG variable's value is incorrect."
 
     #***** Code *****
-    if [ -n "$INITIALIZER_STATUS_LOG_CREATE" ]; then
+    if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ] && [ -f "$INITIALIZER_FILE_LOG_PATH" ]; then
         # If the "$INITIALIZER_STATUS_LOG" variable contains a value AND no value are passed as second argument.
         if [ -z "$display" ]; then
             if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
@@ -177,6 +177,12 @@ function WriteInitLog
             fi
         fi
     else
+        if [ "$INITIALIZER_FILE_LOG_CREATE" = "true" ] && [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
+            echo "The initialization file's log file's path does not exists."
+            
+            exit 1
+        fi
+        
         echo "$string"
     fi
 }
@@ -274,7 +280,7 @@ elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
             echo
         fi
 
-        WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
+      #  WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
     fi
 fi
 
