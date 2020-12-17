@@ -1,78 +1,78 @@
-VARIABLE,COMMENTS, en, fr
-MSG_INITEND_,Bash-utils/src/Initializer.sh,,
-MSG_INITEND_,Bash-utils/src/Initializer.sh,,
-MSG_INITEND_,Bash-utils/src/Initializer.sh,,
-,,,
-MSG_DIR_PROCESSING_BEGIN,"Directories.lib ==> ""ProcessingDir"" function","Processing the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent"").","Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
-MSG_DIR_PROCESSING_END_FAIL,"Directories.lib ==> ""ProcessingDir"" function","End of processing the $(DechoE ""$path/"") folder.","Fin du traitement du dossier $(DechoE ""$path/"")."
-MSG_DIR_PROCESSING_END_SUCCESS,"Directories.lib ==> ""ProcessingDir"" function","End of processing the $(DechoS ""$path/"") folder.","Fin du traitement du dossier $(DechoS ""$path/"")."
-,,,
-MSG_DIR_OVRWRT_DETECTED,"Directories.lib ==> ""OverwriteDir"" function","A non-empty folder with exactly the same name ($(DechoN ""$name"")) is already in the target folder $(DechoN ""$parent/"")","Un dossier non-vide portant exactement le même nom ($(DechoN ""$name"")) se trouve déjà dans le dossier cible $(DechoN ""$parent/"")"
-MSG_DIR_OVRWRT_OVERWRITE,"Directories.lib ==> ""OverwriteDir"" function","Deleting the contents of the $(DechoN ""$path/"") folder","Suppression du contenu du dossier $(DechoN ""$path/"")"
-MSG_DIR_OVRWRT_SUCCESS,"Directories.lib ==> ""OverwriteDir"" function","Deletion of the contents of the folder $(DechoS ""$path/"") performed successfully","Suppression du contenu du dossier $(DechoS ""$path/"") effectuée avec succès"
-MSG_DIR_OVRWRT_FAIL,"Directories.lib ==> ""OverwriteDir"" function","Unable to delete the contents of the $(DechoE ""$path/"") folder.","Impossible de supprimer le contenu du dossier $(DechoE ""$path/"")"
-,,,
-MSG_DIR_MKDIR,"Directories ==> ""Makedir"" function","Creating the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent/"").","Création du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
-MSG_DIR_MKDIR_SUCCESS,"Directories ==> ""Makedir"" function","The $(DechoS ""$name"") folder was successfully created in the $(DechoS ""$parent"") folder.","Le dossier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")."
-MSG_DIR_MKDIR_FAIL,"Directories ==> ""Makedir"" function","THE $(DechoE ""$name"") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE ""$parent/"").","IMPOSSIBLE DE CRÉER LE DOSSIER $(DechoE ""$name"") DANS LE DOSSIER PARENT $(DechoE ""$parent/"")."
-MSG_DIR_MKDIR_EMPTY,"Directories ==> ""Makedir"" function","The $(DechoS ""$path/"") folder already exists in the $(DechoS ""$parent/"") folder and is empty.","Le dossier $(DechoS ""$path/"") existe déjà dans le dossier $(DechoS ""$parent/"") et est vide."
-,,,
-MSG_FILE_PROCESSING_BEGIN,"Files.lib ==> ""ProcessingFile"" function","Processing the $(DechoN ""$name"") file.","Traitement du fichier $(DechoN ""$name"")"
-MSG_FILE_PROCESSING_END_FAIL,"Files.lib ==> ""ProcessingFile"" function","End of processing the $(DechoE ""$name"") file","Fin de traitement du ficier $(DechoE ""$name"")"
-MSG_FILE_PROCESSING_END_SUCCESS,"Files.lib ==> ""ProcessingFile"" function","End of processing the $(DechoS ""$name"") file","Fin de traitement du fichier $(DechoS ""$name"")"
-,,,
-MSG_FILE_OVRWRT_DETECTED,"Files.lib ==> ""OverwriteFile"" function","The file $(DechoN ""$path"") already exists and is not empty.","Le fichier $(DechoN ""$path"") existe déjà et n'est pas vide"
-MSG_FILE_OVRWRT_OVERWRITE,"Files.lib ==> ""OverwriteFile"" function","Overwriting data from file $(DechoN ""$path"")","Écrasement des données du fichier $(DechoN ""$path"")"
-MSG_FILE_OVRWRT_SUCCESS,"Files.lib ==> ""OverwriteFile"" function","The content of the file $(DechoS ""$path"") has been successfully overwritten","Le contenu du fichier $(DechoS ""$path"") a été écrasé avec succès"
-MSG_FILE_OVRWRT_FAIL,"Files.lib ==> ""OverwriteFile"" function","The content of the $(DechoE ""$path"") file has not been overwritten","Le contenu du fichier $(DechoE ""$path"") n'a pas été écrasé"
-,,,
-MSG_FILE_MKFILE_CREATE,"Files.lib ==> ""Makefile"" function","Creating the $(DechoN ""$name"") file in the parent folder $(DechoN ""$parent/"").","Création du fichier $(DechoN ""$name"") dans le dossier $(DechoN ""$parent/"")"
-MSG_FILE_MKFILE_SUCCESS,"Files.lib ==> ""Makefile"" function","The $(DechoS ""$name"") file was successfully created in the $(DechoS ""$parent"") folder.","Le fichier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")"
-MSG_FILE_MKFILE_FAIL,"Files.lib ==> ""Makefile"" function","THE $(DechoE ""$name"") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE ""$parent/"").","LE FICHIER $(DechoE ""$name"") N'A PAS PU ÊTRE CRÉÉ DANS LE DOSSIER $(DechoE ""$parent/"")"
-MSG_FILE_MKFILE_EMPTY,"Files.lib ==> ""Makefile"" function","The $(DechoS ""$path/"") file already exists in the $(DechoS ""$parent/"") folder and is empty.","Le fichier $(DechoS ""$name"") existe déjà dans le dossier $(DechoS ""$parent/"")"
-,,,
-MSG_HANDLES_VARSTAT_DEBUG_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error : PROJECT_STATUS_DEBUG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_DEBUG est incorrecte.
-MSG_HANDLES_VARSTAT_LOG_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error : PROJECT_STATUS_LOG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG est incorrecte.
-MSG_HANDLES_VARSTAT_LOGREDIRECT_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error : PROJECT_STATUS_LOG_REDIRECT variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG_REDIRECT est incorrecte.
-MSG_HANDLES_VARSTAT_TIMELINE_NAN,"Handles.lib ==> ""CheckVarStatus"" function",Error : PROJECT_STATUS_TIME_LINE variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TIME_LINE n’est pas un nombre.
-MSG_HANDLES_VARSTAT_TIMETXT_NAN,"Handles.lib ==> ""CheckVarStatus"" function",Error : PROJECT_STATUS_TIME_TXT variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TXT n’est pas un nombre.
-,,,
-MSG_HANDLES_ROOTEUID_FAIL,"Handles.lib ==> ""CheckRootEUID"" function",Error : you need root user's privileges to perform this action.,Erreur : vous avez besoin des privilèges du super-utilisateur pour effectuer cette action
-,,,
-MSG_HANDLES_LOG_PATH_FAIL,"Handles.lib ==> ""CheckProjectLogPath"" function",Error : no path provided into the PROJECT_LOG_PATH variable.,Erreur : Aucun chemin fourni dans la variable PROJECT_LOG_PATH
-,,,
-MSG_HANDLES_LOG_STATUS_FAIL_LOCATION,"Handles.lib ==> ""CheckProjectLogStatus"" function","In ${BASH_UTILS[0]}, line $(Decho ""$LINENO"") ==>","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO ==>"
-MSG_HANDLES_LOG_STATUS,"Handles.lib ==> ""CheckProjectLogStatus"" function",,
-MSG_HANDLES_LOG_STATUS_INVALID,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error : no valid write output mode defined in the PROJECT_STATUS_LOG variable,Erreur : aucun mode d’écriture défini dans la variable PROJECT_STATUS_LOG
-,,,
-MSG_HANDLES_ERR_FATAL_ERROR,"Headers.lib ==> ""HandleErrors"" function", FATAL ERROR,ERREUR FATALE
-MSG_HANDLES_ERR_FATAL_TYPE,"Headers.lib ==> ""HandleErrors"" function",A fatal error occured,Une erreur fatale s'est produite
-MSG_HANDLES_ERR_FATAL_LINE,"Headers.lib ==> ""HandleErrors"" function",The fatal error in question occurred in the line,L’erreur fatale en question s'est produite à la ligne
-MSG_HANDLES_ERR_FATAL_STOP,"Headers.lib ==> ""HandleErrors"" function","Stopping the execution of $(DechoE ""$(basename ""$0"")"").","Arrêt de l’exécution du script $(DechoE ""$(basename ""$0"")"")."
-,,,
-MSG_HANDLES_ERR_ERROR,"Headers.lib ==> ""HandleErrors"" function",ERROR,ERREUR
-MSG_HANDLES_ERR_TYPE,"Headers.lib ==> ""HandleErrors"" function",An error occured,Une erreur s'est produite
-MSG_HANDLES_ERR_LINE,"Headers.lib ==> ""HandleErrors"" function",The error in question occurred in the line,L’erreur en question s'est produite à la ligne
-MSG_HANDLES_ERR_STOP_Q,"Headers.lib ==> ""HandleErrors"" function","Do you want to stop the execution of $(DechoE ""$(basename ""$0"")"") ?","Voulez-vous arrêter l’exécution du script $(DechoE ""$(basename ""$0"")"") ?"
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-,,,
-MSG_PERMS_CHOWNREC,"Permissions.lib ==> ""ChownRec"" function","Recursive change of the ownership rights of the new folder $(DechoN ""$path/"") from $(DechoN ""$current_owner"") to $(DechoN ""$new_owner"")","Transfert récursif des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
-MSG_PERMS_CHOWNREC_SUCCESS,"Permissions.lib ==> ""ChownRec"" function","The rights of the $(DechoS ""$name"") folder have been successfully changed from $(DechoS ""$current_owner"") to $(DechoS ""$new_owner"")","Les droits de propriété du dossier $(DechoS ""$name"") ont été transférées de $(DechoS ""$current_owner"") à $(DechoS ""$new_owner"") avec succès"
-MSG_PERMS_CHOWNREC_FAIL,"Permissions.lib ==> ""ChownRec"" function","Unable to change the rights of the $(DechoE ""$path/"") folder","Impossible de transférer la propriété les droits du dossier $(DechoE ""$path/"") de $(DechoE ""$current_owner"") à $(DechoE ""$new_owner"")"
-MSG_PERMS_CHOWNREC_FAIL_ADVICE,"Permissions.lib ==> ""ChownRec"" function","Please use the following command to change ownership recursively,","Pour transférer récursivement la propriété du dossier $(DechoE ""$path/"") de manière récursive, utilisez la commande suivante"
-,,,
-MSG_PERMS_CHOWN_PROCESSING_DIR,"Permissions.lib ==> ""Chown"" function",,"Transfert des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
-MSG_PERMS_CHOWN_PROCESSING_FILE,"Permissions.lib ==> ""Chown"" function",,"Transfert des droits de propriété du fichier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
-MSG_PERMS_CHOWN_SUCCESS,"Permissions.lib ==> ""Chown"" function",,"Les droits du fichier $(DechoS ""$parent"") ont été changés avec succès."
-MSG_PERMS_CHOWN_FAIL,"Permissions.lib ==> ""Chown"" function",,"Impossible de changer les droits du fichier $(DechoE ""$path"")."
-MSG_PERMS_CHOWN_FAIL_ADVICE,"Permissions.lib ==> ""Chown"" function",,"Utilisez la commande suivante pour changer les droits de propriété du fichier $(DechoE ""$path"")."
+VARIABLE,COMMENTS,MESSAGE, en, fr
+MSG_INITEND_END_OF_LIB_INIT,Bash-utils/src/Initializer.sh,None,"END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho ""${PROJECT_NAME^^}"")'S PROJECT RESOURCES NOW","FIN DE L’INITIALISATION DE LA LIBRAIRIE, TRAITEMENT DU PROJET $(Decho ""${PROJECT_NAME^^}"")"
+MSG_INITEND_SOURCE_PROJECT_CONF_FAIL,Bash-utils/src/Initializer.sh,None,"In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $PROJECT_NAME's file variables status configuration file.","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO => Erreur : impossible de sourcer le fichier de configuration des variables de statut du projet $PROJECT_NAME"
+MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS,Bash-utils/src/Initializer.sh,None,Successfully sourced the $PROJECT_NAME's file variables status configuration file.,
+/,/,,/,/
+MSG_DIR_PROCESSING_BEGIN,"Directories.lib ==> ""ProcessingDir"" function",Newstep,"Processing the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent"").","Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
+MSG_DIR_PROCESSING_END_FAIL,"Directories.lib ==> ""ProcessingDir"" function",Error,"End of processing the $(DechoE ""$path/"") folder.","Fin du traitement du dossier $(DechoE ""$path/"")."
+MSG_DIR_PROCESSING_END_SUCCESS,"Directories.lib ==> ""ProcessingDir"" function",Success,"End of processing the $(DechoS ""$path/"") folder.","Fin du traitement du dossier $(DechoS ""$path/"")."
+/,/,,/,/
+MSG_DIR_OVRWRT_DETECTED,"Directories.lib ==> ""OverwriteDir"" function",Newstep,"A non-empty folder with exactly the same name ($(DechoN ""$name"")) is already in the target folder $(DechoN ""$parent/"")","Un dossier non-vide portant exactement le même nom ($(DechoN ""$name"")) se trouve déjà dans le dossier cible $(DechoN ""$parent/"")"
+MSG_DIR_OVRWRT_OVERWRITE,"Directories.lib ==> ""OverwriteDir"" function",Newstep,"Deleting the contents of the $(DechoN ""$path/"") folder","Suppression du contenu du dossier $(DechoN ""$path/"")"
+MSG_DIR_OVRWRT_SUCCESS,"Directories.lib ==> ""OverwriteDir"" function",Success,"Deletion of the contents of the folder $(DechoS ""$path/"") performed successfully","Suppression du contenu du dossier $(DechoS ""$path/"") effectuée avec succès"
+MSG_DIR_OVRWRT_FAIL,"Directories.lib ==> ""OverwriteDir"" function",Error,"Unable to delete the contents of the $(DechoE ""$path/"") folder.","Impossible de supprimer le contenu du dossier $(DechoE ""$path/"")"
+/,/,,/,/
+MSG_DIR_MKDIR,"Directories ==> ""Makedir"" function",Newstep,"Creating the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent/"").","Création du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
+MSG_DIR_MKDIR_SUCCESS,"Directories ==> ""Makedir"" function",Success,"The $(DechoS ""$name"") folder was successfully created in the $(DechoS ""$parent"") folder.","Le dossier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")."
+MSG_DIR_MKDIR_FAIL,"Directories ==> ""Makedir"" function",Error,"THE $(DechoE ""$name"") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE ""$parent/"").","IMPOSSIBLE DE CRÉER LE DOSSIER $(DechoE ""$name"") DANS LE DOSSIER PARENT $(DechoE ""$parent/"")."
+MSG_DIR_MKDIR_EMPTY,"Directories ==> ""Makedir"" function",Success,"The $(DechoS ""$path/"") folder already exists in the $(DechoS ""$parent/"") folder and is empty.","Le dossier $(DechoS ""$path/"") existe déjà dans le dossier $(DechoS ""$parent/"") et est vide."
+/,/,,/,/
+MSG_FILE_PROCESSING_BEGIN,"Files.lib ==> ""ProcessingFile"" function",Newstep,"Processing the $(DechoN ""$name"") file.","Traitement du fichier $(DechoN ""$name"")"
+MSG_FILE_PROCESSING_END_FAIL,"Files.lib ==> ""ProcessingFile"" function",Error,"End of processing the $(DechoE ""$name"") file","Fin de traitement du ficier $(DechoE ""$name"")"
+MSG_FILE_PROCESSING_END_SUCCESS,"Files.lib ==> ""ProcessingFile"" function",Success,"End of processing the $(DechoS ""$name"") file","Fin de traitement du fichier $(DechoS ""$name"")"
+/,/,,/,/
+MSG_FILE_OVRWRT_DETECTED,"Files.lib ==> ""OverwriteFile"" function",Newstep,"The file $(DechoN ""$path"") already exists and is not empty.","Le fichier $(DechoN ""$path"") existe déjà et n'est pas vide"
+MSG_FILE_OVRWRT_OVERWRITE,"Files.lib ==> ""OverwriteFile"" function",Newstep,"Overwriting data from file $(DechoN ""$path"")","Écrasement des données du fichier $(DechoN ""$path"")"
+MSG_FILE_OVRWRT_SUCCESS,"Files.lib ==> ""OverwriteFile"" function",Success,"The content of the file $(DechoS ""$path"") has been successfully overwritten","Le contenu du fichier $(DechoS ""$path"") a été écrasé avec succès"
+MSG_FILE_OVRWRT_FAIL,"Files.lib ==> ""OverwriteFile"" function",Error,"The content of the $(DechoE ""$path"") file has not been overwritten","Le contenu du fichier $(DechoE ""$path"") n'a pas été écrasé"
+/,/,,/,/
+MSG_FILE_MKFILE_CREATE,"Files.lib ==> ""Makefile"" function",Newstep,"Creating the $(DechoN ""$name"") file in the parent folder $(DechoN ""$parent/"").","Création du fichier $(DechoN ""$name"") dans le dossier $(DechoN ""$parent/"")"
+MSG_FILE_MKFILE_SUCCESS,"Files.lib ==> ""Makefile"" function",Success,"The $(DechoS ""$name"") file was successfully created in the $(DechoS ""$parent"") folder.","Le fichier $(DechoS ""$name"") a été créé avec succès dans le dossier $(DechoS ""$parent/"")"
+MSG_FILE_MKFILE_FAIL,"Files.lib ==> ""Makefile"" function",Error,"THE $(DechoE ""$name"") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE ""$parent/"").","LE FICHIER $(DechoE ""$name"") N'A PAS PU ÊTRE CRÉÉ DANS LE DOSSIER $(DechoE ""$parent/"")"
+MSG_FILE_MKFILE_EMPTY,"Files.lib ==> ""Makefile"" function",Success,"The $(DechoS ""$path/"") file already exists in the $(DechoS ""$parent/"") folder and is empty.","Le fichier $(DechoS ""$name"") existe déjà dans le dossier $(DechoS ""$parent/"")"
+/,/,,/,/
+MSG_HANDLES_VARSTAT_DEBUG_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error,Error : PROJECT_STATUS_DEBUG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_DEBUG est incorrecte.
+MSG_HANDLES_VARSTAT_LOG_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error,Error : PROJECT_STATUS_LOG variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG est incorrecte.
+MSG_HANDLES_VARSTAT_LOGREDIRECT_FAIL,"Handles.lib ==> ""CheckVarStatus"" function",Error,Error : PROJECT_STATUS_LOG_REDIRECT variable's value is incorrect.,Erreur : la valeur de la variable PROJECT_STATUS_LOG_REDIRECT est incorrecte.
+MSG_HANDLES_VARSTAT_TIMELINE_NAN,"Handles.lib ==> ""CheckVarStatus"" function",Error,Error : PROJECT_STATUS_TIME_LINE variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TIME_LINE n’est pas un nombre.
+MSG_HANDLES_VARSTAT_TIMETXT_NAN,"Handles.lib ==> ""CheckVarStatus"" function",Error,Error : PROJECT_STATUS_TIME_TXT variable's value is not a number.,Erreur : la valeur de la variable PROJECT_STATUS_TXT n’est pas un nombre.
+/,/,,/,/
+MSG_HANDLES_ROOTEUID_FAIL,"Handles.lib ==> ""CheckRootEUID"" function",Error,Error : you need root user's privileges to perform this action.,Erreur : vous avez besoin des privilèges du super-utilisateur pour effectuer cette action
+/,/,,/,/
+MSG_HANDLES_LOG_PATH_FAIL,"Handles.lib ==> ""CheckProjectLogPath"" function",Error,Error : no path provided into the PROJECT_LOG_PATH variable.,Erreur : Aucun chemin fourni dans la variable PROJECT_LOG_PATH
+/,/,,/,/
+MSG_HANDLES_LOG_STATUS_FAIL_LOCATION,"Handles.lib ==> ""CheckProjectLogStatus"" function",,"In ${BASH_UTILS[0]}, line $(Decho ""$LINENO"") ==>","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO ==>"
+MSG_HANDLES_LOG_STATUS,"Handles.lib ==> ""CheckProjectLogStatus"" function",,,
+MSG_HANDLES_LOG_STATUS_INVALID,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,Error : no valid write output mode defined in the PROJECT_STATUS_LOG variable,Erreur : aucun mode d’écriture défini dans la variable PROJECT_STATUS_LOG
+/,/,,/,/
+MSG_HANDLES_ERR_FATAL_ERROR,"Headers.lib ==> ""HandleErrors"" function",Error, FATAL ERROR,ERREUR FATALE
+MSG_HANDLES_ERR_FATAL_TYPE,"Headers.lib ==> ""HandleErrors"" function",Error,A fatal error occured,Une erreur fatale s'est produite
+MSG_HANDLES_ERR_FATAL_LINE,"Headers.lib ==> ""HandleErrors"" function",Error,The fatal error in question occurred in the line,L’erreur fatale en question s'est produite à la ligne
+MSG_HANDLES_ERR_FATAL_STOP,"Headers.lib ==> ""HandleErrors"" function",Error,"Stopping the execution of $(DechoE ""$(basename ""$0"")"").","Arrêt de l’exécution du script $(DechoE ""$(basename ""$0"")"")."
+/,/,,/,/
+MSG_HANDLES_ERR_ERROR,"Headers.lib ==> ""HandleErrors"" function",Error,ERROR,ERREUR
+MSG_HANDLES_ERR_TYPE,"Headers.lib ==> ""HandleErrors"" function",Error,An error occured,Une erreur s'est produite
+MSG_HANDLES_ERR_LINE,"Headers.lib ==> ""HandleErrors"" function",Error,The error in question occurred in the line,L’erreur en question s'est produite à la ligne
+MSG_HANDLES_ERR_STOP_Q,"Headers.lib ==> ""HandleErrors"" function",Error,"Do you want to stop the execution of $(DechoE ""$(basename ""$0"")"") ?","Voulez-vous arrêter l’exécution du script $(DechoE ""$(basename ""$0"")"") ?"
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+MSG_PERMS_CHOWNREC,"Permissions.lib ==> ""ChownRec"" function",Newstep,"Recursive change of the ownership rights of the new folder $(DechoN ""$path/"") from $(DechoN ""$current_owner"") to $(DechoN ""$new_owner"")","Transfert récursif des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")"
+MSG_PERMS_CHOWNREC_SUCCESS,"Permissions.lib ==> ""ChownRec"" function",Success,"The rights of the $(DechoS ""$name"") folder have been successfully changed from $(DechoS ""$current_owner"") to $(DechoS ""$new_owner"")","Les droits de propriété du dossier $(DechoS ""$name"") ont été transférées de $(DechoS ""$current_owner"") à $(DechoS ""$new_owner"") avec succès"
+MSG_PERMS_CHOWNREC_FAIL,"Permissions.lib ==> ""ChownRec"" function",Error,"Unable to change the rights of the $(DechoE ""$path/"") folder","Impossible de transférer la propriété les droits du dossier $(DechoE ""$path/"") de $(DechoE ""$current_owner"") à $(DechoE ""$new_owner"")"
+MSG_PERMS_CHOWNREC_FAIL_ADVICE,"Permissions.lib ==> ""ChownRec"" function",Error,"Please use the following command to change ownership recursively,","Pour transférer récursivement la propriété du dossier $(DechoE ""$path/"") de manière récursive, utilisez la commande suivante"
+/,/,,/,/
+MSG_PERMS_CHOWN_PROCESSING_DIR,"Permissions.lib ==> ""Chown"" function",Newstep,,"Transfert des droits de propriété du dossier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
+MSG_PERMS_CHOWN_PROCESSING_FILE,"Permissions.lib ==> ""Chown"" function",Newstep,,"Transfert des droits de propriété du fichier $(DechoN ""$path/"") de $(DechoN ""$current_owner"") en $(DechoN ""$new_owner"")."
+MSG_PERMS_CHOWN_SUCCESS,"Permissions.lib ==> ""Chown"" function",Success,,"Les droits du fichier $(DechoS ""$parent"") ont été changés avec succès."
+MSG_PERMS_CHOWN_FAIL,"Permissions.lib ==> ""Chown"" function",Error,,"Impossible de changer les droits du fichier $(DechoE ""$path"")."
+MSG_PERMS_CHOWN_FAIL_ADVICE,"Permissions.lib ==> ""Chown"" function",Error,,"Utilisez la commande suivante pour changer les droits de propriété du fichier $(DechoE ""$path"")."

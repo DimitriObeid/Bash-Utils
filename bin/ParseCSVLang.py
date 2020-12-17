@@ -5,16 +5,18 @@ import sys
 from os import path
 
 # Defining global variables
-CSVPATH=""  # Assign first argument here
-CSVLANG=""  # Assign second argument here
+CSVPATH=sys.argv[1]  # Assign first argument here
+CSVLANG=sys.argv[2]  # Assign second argument here
 
 # Code
 def AssignVarColWithLangColValues(col, row):
 
-def GetColAndRow(col, row):
-    if path.exists(CSVPATH):
+def GetColAndRow():
+    if not path.exists(CSVPATH):
+        print("Error : the CSV file was not found in the", CSVPATH, "path.")
+    else:
         with open(CSVPATH, 'r') as csv_file:
-            # Column
+            # Get CSVLANG language's column from the first row.
 
 def main():
     if len(sys.argv) != 2:
@@ -24,6 +26,8 @@ def main():
         print("Abort")
 
         exit(1)
+    else:
+        GetColAndRow()
 
 
 main()

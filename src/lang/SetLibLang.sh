@@ -11,6 +11,8 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1
 fi
 
+
+## TODO : DÉPLACER CETTE FONCTION DANS LE FICHIER "Initializer.sh", parmi les fonctions, une fois la fonction... fonctionnelle (si vous me cherchez, je suis déjà dehors).
 # Optimizing the "GetLang" function's code with another function.
 function ParseCSVLibLang
 {
@@ -19,37 +21,53 @@ function ParseCSVLibLang
     success_msg=$2
     error_msg=$3
 
-    #***** Variables *****
-    col_index=0     # column index
-    row_index=0     # line (row)
-
     #***** Code *****
-    # Cut the ICU language code, which is at the left of the underscore, then stroing it into a variable.
+    # Cut the ICU language code, which is at the left of the underscore, then storing it into a variable.
     LANG=$("$LANG" | cut -f 1 -d '_')
     WriteInitLog "Language : $LANG"
     
-    # Parser le fichier CSV contenant les traductions
-    lineno=$LINENO; if [ -f "$LIBLANG_TRANSLATION_FILE" ]; then
-        # cat "$LIBLANG_TRANSLATION_FILE" | 
-        # Getting the language column first, by checking on the very first CSV file's row
-        while IFS=, read -ra col_value; do
-            col_index=$(( col_index+1 ))
+    python3 "$BASH_UTILS_BIN/ParseCSVLang.py"   # TODO : Pass CLI arguments
+    
+    # Checking program's return code.
+    if test "$?" -eq 0; then
+        WriteInitLog "Succès."
+        # Display language and temporary file's informations
+    elif test "$?" -eq 1; then
+        WriteInitLog "Python script execution error : incorrect number of arguments." "1"
+        WriteInitLog "Two arguments are awaited." "1"; exit 1
+    elif test "$?" -eq 2; then
+        WriteInitLog "CSV parsing error : the lang.csv file was not found" "1"; exit 1
+    elif test "$?" -eq 3; then
+    # Renvoyer l'index de la colonne et celui de la ligne de la cellule où l'erreur s'est produite via un fichier dans lequel ces informations ont été renvoyées.
+        WriteInitLog "CSV parsing error : the value stored in the X, Y cell is invalid" "1"; exit 1
+    elif test "$?" -eq 4; then
+        WriteInitLog "CSV parsing error : Your language's code was not found in any first row's columns." "1"
+        WriteInitLog "Either you mistyped your language's code or your language is not (yet) supported." "1"; exit 1
+    fi
 
-            if [ "$col_value" = "VARIABLE" ] && [ "$col_index" -eq 1 ]; then
-                echo "$col_value"
-                echo "$col_index"
-            else
-                WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
-                WriteInitLog "Did you modified the CSV file or the script ?" "1"
-                exit 1
-            fi
-            
-        done < "$LIBLANG_TRANSLATION_FILE"
+#         ANCIEN CODE
+#         echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE" "1"
+#         exit 1
+
+#     # Parser le fichier CSV contenant les traductions
+#     lineno=$LINENO; if [ -f "$LIBLANG_TRANSLATION_FILE" ]; then
+#         # cat "$LIBLANG_TRANSLATION_FILE" | 
+#         # Getting the language column first, by checking on the very first CSV file's row
+# #         while IFS=, read -ra col_value; do
+#             col_index=$(( col_index+1 ))
+# 
+#             if [ "$col_value" = "VARIABLE" ] && [ "$col_index" -eq 1 ]; then
+#                 echo "$col_value"
+#                 echo "$col_index"
+#             else
+#                 WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
+#                 WriteInitLog "Did you modified the CSV file or the script ?" "1"
+#                 exit 1
+#             fi
+#             
+#         done < "$LIBLANG_TRANSLATION_FILE"
 
         
-        echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE" "1"
-        exit 1
-
         # Then, getting the language's row.
         # ÇA NE MARCHE PAS
         # for row_val in "${row_values[$row_index]}"; do
