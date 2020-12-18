@@ -22,27 +22,65 @@ function ParseCSVLibLang
     error_msg=$3
 
     #***** Code *****
+    # Since the library files are sourced before the language's definition, it's possible to
+    # call some functions which does not display messages accroding to the user's language.
+    EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"; EchoInit
+    EchoInit "In $(Decho ${BASH_SOURCE[0]}), line $(Decho "$LINENO") : DEFINING BASH-UTILS LIBRARY LANGUAGE"
+    EchoInit "Setting language"
+    EchoInit
+    
     # Cut the ICU language code, which is at the left of the underscore, then storing it into a variable.
     LANG=$("$LANG" | cut -f 1 -d '_')
-    WriteInitLog "Language : $LANG"
+    EchoInit "Language : $LANG"
     
     python3 "$BASH_UTILS_BIN/ParseCSVLang.py"   # TODO : Pass CLI arguments
+    EchoInit
     
     # Checking program's return code.
     if test "$?" -eq 0; then
-        WriteInitLog "Succès."
-        # Display language and temporary file's informations
+        EchoInit "Succès."
+        # Display language and temporary file's informations here, when the Python script will work.
+        
+        
+        EchoInit "$(DrawLine "$COL_GREEN" '"')"
     elif test "$?" -eq 1; then
-        WriteInitLog "Python script execution error : incorrect number of arguments." "1"
-        WriteInitLog "Two arguments are awaited." "1"; exit 1
+        EchoInit "Python script execution error : incorrect number of arguments." "1"
+        EchoInit "Two arguments are awaited." "1"
+        EchoInit "" "1"
+
+        EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
+
+        exit 1
     elif test "$?" -eq 2; then
-        WriteInitLog "CSV parsing error : the lang.csv file was not found" "1"; exit 1
+        EchoInit "CSV parsing error : the lang.csv file was not found" "1";
+        EchoInit "" "1"
+        
+        EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
+
+        exit 1
     elif test "$?" -eq 3; then
     # Renvoyer l'index de la colonne et celui de la ligne de la cellule où l'erreur s'est produite via un fichier dans lequel ces informations ont été renvoyées.
-        WriteInitLog "CSV parsing error : the value stored in the X, Y cell is invalid" "1"; exit 1
+        EchoInit "CSV parsing error : the value stored in the X, Y cell is invalid" "1";
+        EchoInit "" "1"
+        
+        EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
+
+        exit 1
     elif test "$?" -eq 4; then
-        WriteInitLog "CSV parsing error : Your language's code was not found in any first row's columns." "1"
-        WriteInitLog "Either you mistyped your language's code or your language is not (yet) supported." "1"; exit 1
+        EchoInit "CSV parsing error : Your language's code was not found in any first row's columns." "1"
+        EchoInit "Either you mistyped your language's code or your language is not (yet) supported." "1";
+        EchoInit "" "1"
+
+        EchoInit "Defined Language : $LANG" "1"
+        EchoInit "" "1"
+        EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
+        
+        exit 1
+    else
+        EchoInit "An unkonwn error happened during the Python script's execution." "1"
+        # La fonctionnalité de gestion de ce fichier de logs n'est pas implémentée dans le script Python pour le moment.
+        EchoInit "Check the script's log file to see what happened."
+        EchoInit "" "1"
     fi
 
 #         ANCIEN CODE
@@ -60,8 +98,8 @@ function ParseCSVLibLang
 #                 echo "$col_value"
 #                 echo "$col_index"
 #             else
-#                 WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
-#                 WriteInitLog "Did you modified the CSV file or the script ?" "1"
+#                 EchoInit "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
+#                 EchoInit "Did you modified the CSV file or the script ?" "1"
 #                 exit 1
 #             fi
 #             
@@ -98,21 +136,21 @@ function ParseCSVLibLang
        #
        #    (( ++row_index ))
        #    awk -F "," {print "VARIABLE"}
-    else
-        WriteInitLog "" "1"; exit 1
-    fi
+#     else
+#         EchoInit "" "1"; exit 1
+#     fi
 
   
   # Don't double quote what follows the path variable, or else, the loop will only run once.
- #   WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
+ #   EchoInit "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
    #     if source "$f"; then
-   #         WriteInitLog "$success_msg : $f"
+   #         EchoInit "$success_msg : $f"
    #     else
    #         echo "$f : $error_msg"; echo
 #
  #           exit 1
   #      fi
-   # done; WriteInitLog
+   # done; EchoInit
 }
 
 # Detecting user's language with the "$LANG" environment variable.
@@ -121,21 +159,21 @@ function SetLibLang
     case "$LANG" in
         en_*)
             # English
-            ParseCSVLibLang "$LANG" "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "$LANG" "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
         fr_*)
             # French
-            ParseCSVLibLang "$LANG" "Dans le fichier ${BASH_SOURCE[0]}, à la ligne $lineno --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
+            ParseCSVLibLang "$LANG" "Dans le fichier $(Decho "${BASH_SOURCE[0]}"), à la ligne $(Decho "$lineno") --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
                 "Fichier de traduction trouvé : $LIBLANG_TRANSLATION_FILE"
             ;;
         *)
             # Else, if the detected language is not (yet) supported, the default language will be set as English.
             # As it's an important information, the "echo" command's output has to be redirected to the terminal too, no matter if
-            WriteInitLog "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
-            WriteInitLog "The $(basename "$0" | cut -f 1 -d '.') library language will be set in English" "1"
+            EchoInit "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
+            EchoInit "The $PROJECT_NAME library language will be set in English" "1"
 
-            ParseCSVLibLang "In ${BASH_SOURCE[0]}, line $lineno --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
     esac

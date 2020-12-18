@@ -3,6 +3,10 @@
 # Script initializer file, initializing all you need for your scripts.
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
 
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+##################### DECLARING AND DEFINING SCRIPT'S VARIABLES AND FUNCTIONS #####################
+
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo "WARNING !"; echo
@@ -12,23 +16,14 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1
 fi
 
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING VARIABLES #######################################
-
-#### DEFINING BASH-UTILS GLOBAL VARIABLES
+#### DEFINING VARIABLES
 
 ## BASH-UTILS PATHS
 
 # Bash-Utils root directory path.
 BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
-
-# In case the Bash-Utils folder doesn't exists or is not located in the correct path.
-if [ ! -d "$BASH_UTILS_ROOT" ]; then
-    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : the 'Bash-Utils' folder was not found in the '/usr/local/lib' folder"; exit 1
-fi
 
 # Bash-Utils sub-folders paths.
 BASH_UTILS="$BASH_UTILS_ROOT/src"
@@ -36,7 +31,7 @@ BASH_UTILS_BIN="$BASH_UTILS_ROOT/bin"
 BASH_UTILS_CONF="$BASH_UTILS_ROOT/config"
 BASH_UTILS_TMP="$BASH_UTILS_ROOT/tmp"
 
-# "config" folder's content
+# "config" folder's content.
 BASH_UTILS_INIT_CONF_STATUS="$BASH_UTILS_CONF/InitStatus.conf"
 BASH_UTILS_PROJECT_CONF_STATUS="$BASH_UTILS_CONF/ProjectStatus.conf"
 
@@ -47,22 +42,11 @@ BASH_UTILS_VARS="$BASH_UTILS/variables"
 
 # -----------------------------------------------
 
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### DEFINING PROJECT'S GLOBAL VARIABLES
-
-## DEFINING PROJECT'S PATH
+## PROJECT'S PATH
 
 # Script file's informations
 PROJECT_FILE=$(basename "$0")                           # Project file's name.
 PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project (project file's name without its file extension).
-
-# -----------------------------------------------
-
-## PROJECT'S INITIALIZATION LOG PATH
-
-# Processing the initialization log file.
 
 # Checking first if the effective user identifiant (EUID) is equal to super-user's EUID or not.
 # The folders names have to be different according to the EUID, as files and folders created by the root user belong to this user,
@@ -70,22 +54,33 @@ PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project (p
 
 # To remove these folders, please run the "rm -rf $folder" command with sudo if you're not logged as super-user.
 if [ "$EUID" -eq 0 ]; then
-	INITIALIZER_FILE_LOG_DIR="$BASH_UTILS_TMP/$PROJECT_NAME - ROOT/logs"
-	INITIALIZER_FILE_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_NAME - ROOT - init.log"
+    PROJECT_TMP_DIR="$BASH_UTILS_TMP/$PROJECT_NAME - ROOT"
 else
-	INITIALIZER_FILE_LOG_DIR="$BASH_UTILS_TMP/$PROJECT_NAME/logs"
-	INITIALIZER_FILE_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_NAME - init.log"
+    PROJECT_TMP_DIR="$BASH_UTILS_TMP/$PROJECT_NAME"
 fi
+    
+# -----------------------------------------------
+
+## PROJECT'S INITIALIZATION LOG PATH
+
+# Processing the initialization log file.
+
+INITIALIZER_FILE_LOG_DIR="$PROJECT_TMP_DIR/logs"
+INITIALIZER_FILE_LOG_PATH="$INITIALIZER_FILE_LOG_DIR/$PROJECT_NAME - init.log"
+
+# -----------------------------------------------
+
+## PROJECT'S LOG PATH
 
 # Processing the project's log file
 # shellcheck disable=SC2034
 PROJECT_LOG_NAME="$PROJECT_NAME.log"
 
 # shellcheck disable=SC2034
-PROJECT_LOG_PARENT="$INITIALIZER_FILE_LOG_DIR"
+PROJECT_LOG_DIR="$PROJECT_TMP_DIR/logs"
 
 # shellcheck disable=SC2034
-PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_NAME"
+PROJECT_LOG_PATH="$PROJECT_LOG_DIR/$PROJECT_LOG_NAME"
 
 # -----------------------------------------------
 
@@ -106,7 +101,7 @@ PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_NAME"
 ## TEXT FUNCTIONS
 
 # This function is used as debug to display the messages that should normally be redirected to the initializer log file.
-function WriteInitLog
+function EchoInit
 {
     #***** Parameters *****
     string=$1
@@ -183,9 +178,9 @@ function WriteInitLog
             echo "The initialization file's log file's path does not exists."
             
             exit 1
+        else
+            echo "$string"
         fi
-        
-        echo "$string"
     fi
 }
 
@@ -197,20 +192,29 @@ function WriteInitLog
 function CheckSubFolder
 {
     #***** Parameters *****
-    local path=$1;
+    path=$1
+    lineno=$2
 
+    #***** Variables *****
+   # pathinfo="${!path}"
+    
     #***** Code *****
-    if [ -d "$path" ]; then
-        WriteInitLog "Existing sub-folder : $path"
+    if [ -z "$path" ]; then
+        EchoInit ""
     else
-        WriteInitLog "FATAL : Cannot source $path, abort" "1"; exit 1
+        if [ -d "$path" ]; then
+            EchoInit "Existing sub-folder : $path"
+        else
+            EchoInit "In ${BASH_SOURCE[0]}, line $lineno --> Error : the path provided for the $path is incorrect, abort" "1"
+            EchoInit "This path doesn't exists : " "1"; EchoInit; exit 1
+        fi
     fi
 }
 
-# Getting project's parent folder's path
+# Getting project's parent folder's path.
 function GetProjectParentPath
 {
-    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 || { WriteInitLog "Unable to get the project's parent directory, abort." "1"; exit 1; }; pwd -P )"
+    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 || { EchoInit "Unable to get the project's parent directory, abort." "1"; exit 1; }; pwd -P )"
     dirname="$parent"
 
     shopt -s extglob           # enable +(...) glob syntax
@@ -218,31 +222,34 @@ function GetProjectParentPath
     echo "$result"
 }
 
+# Getting errors and step informations along their line.
+function Location
+{
+    #***** Parameters *****
+    line=$1
+
+    #***** Code *****
+}
+
 # Sourcing dependencies
 function SourceFile
 {
     #***** Parameters *****
-    local path=$1
-    local info=$2
-    local lineno=$3
+    path=$1
+    lineno=$2
 
     #***** Code *****
-    if [ -z "$info" ]; then
+    if [ -f "$path" ]; then
         # shellcheck disable=SC1090
         if source "$path"; then
-            WriteInitLog "Sourced file : $path"
+            EchoInit "Sourced file : $path"
         else
-            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source this file" "1"; WriteInitLog "" "1"
+            EchoInit "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source this file" "1"; EchoInit "" "1"
             exit 1
         fi
     else
-        # shellcheck disable=SC1090
-        if source "$path"; then
-            WriteInitLog "Sourced file : $path"
-        else
-            WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to source the $info" "1"; WriteInitLog "" "1"
-            exit 1
-        fi
+        EchoInit "In ${BASH_SOURCE[0]}, line $lineno --> $path : Unable to find the $path path" "1"; EchoInit "" "1"
+        exit 1
     fi
 }
 
@@ -251,7 +258,7 @@ function SourceFile
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-
+################################### THE DISPLAY PART BEGINS HERE ##################################
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -262,40 +269,40 @@ function SourceFile
 ## BASH-UTILS PATHS
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_BIN" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_BIN variable."
-elif [ ! -d "$BASH_UTILS_BIN" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_BIN variable is incorrect."
+    EchoInit "Error : No path provided in the BASH_UTILS_BIN variable."
+else
+    CheckSubFolder "$BASH_UTILS_BIN" "$LINENO"
 fi
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_CONF" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_CONF variable."
-elif [ ! -d "$BASH_UTILS_CONF" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_CONF variable is incorrect."
+    EchoInit "Error : No path provided in the BASH_UTILS_CONF variable."
+else
+    CheckSubFolder "$BASH_UTILS_CONF" "$LINENO"
 fi
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_FUNCTS" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_FUNCTS variable."
-elif [ ! -d "$BASH_UTILS_FUNCTS" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_FUNCTS variable is incorrect."
+    EchoInit "Error : No path provided in the BASH_UTILS_FUNCTS variable."
+else
+    CheckSubFolder "$BASH_UTILS_FUNCTS" "$LINENO"
 fi
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_LANG" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_LANG variable."
-elif [ ! -d "$BASH_UTILS_LANG" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_LANG variable is incorrect."
+    EchoInit "Error : No path provided in the BASH_UTILS_LANG variable."
+else
+    CheckSubFolder "$BASH_UTILS_LANG" "$LINENO"
 fi
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_ROOT" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_ROOT variable."
-elif [ ! -d "$BASH_UTILS_ROOT" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_ROOT variable is incorrect."
+    EchoInit "Error : No path provided in the BASH_UTILS_ROOT variable."
+else
+    CheckSubFolder "$BASH_UTILS_ROOT" "$LINENO"
 fi
 
 lineno=$LINENO; if [ -z "$BASH_UTILS_VARS" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the BASH_UTILS_VARS variable."
-elif [ ! -d "$BASH_UTILS_VARS" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : The path provided for the BASH_UILS_VARS variable is incorrect."
-fi
+    EchoInit "Error : No path provided in the BASH_UTILS_VARS variable."
+else
+    CheckSubFolder "$BASH_UTILS_VARS" "$LINENO"
+fi; EchoInit
 
 # -----------------------------------------------
 
@@ -303,23 +310,23 @@ fi
 
 # shellcheck disable=SC1090
 if ! source "$BASH_UTILS_INIT_CONF_STATUS"; then
-    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the project initialization's file variables status configuration file"
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) --> Error : unable to source the project initialization's file variables status configuration file"
 fi
 
 # -----------------------------------------------
 
 ## INITIALIZATION FILE'S LOG FILE
 if [ "$INITIALIZER_STATUS_LOG_CREATE" != "true" ] && [ "$INITIALIZER_STATUS_LOG_CREATE" != "false" ]; then
-    echo "In ${BASH_SOURCE[0]}, line $LINENO --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect"
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect" ""
     exit 1
 elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
     if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
         if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
-            mkdir -pv "$INITIALIZER_FILE_LOG_DIR"
+            mkdir -pv "$INITIALIZER_FILE_LOG_DIR" || { echo "Unable to create the directory"; exit 1; }
             echo
         fi
 
-        WriteInitLog "$(touch "$INITIALIZER_FILE_LOG_PATH")"
+        EchoInit "$(touch "$INITIALIZER_FILE_LOG_PATH")"
     fi
 fi
 
@@ -335,11 +342,11 @@ fi
 # Checking the existence of the main script file's path by checking "$PROJECT_PATH" variable value.
 PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"    # File path.
 
-lineno=$LINENO; if [ -z "$PROJECT_PATH" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the PROJECT_PATH variable" "1"; exit 1
-lineno=$LINENO; elif [ ! -f "$PROJECT_PATH" ]; then
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno : Incorrect path provided as value for the PROJECT_PATH variable in $PROJECT_PATH" "1"
-    WriteInitLog "Current content : $PROJECT_PATH" "1"; exit 1
+if [ -z "$PROJECT_PATH" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) : No path provided in the PROJECT_PATH variable" "1"; exit 1
+elif [ ! -f "$PROJECT_PATH" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) : Incorrect path provided as value for the PROJECT_PATH variable in $PROJECT_PATH" "1"
+    EchoInit "Current content : $PROJECT_PATH" "1"; exit 1
 fi
 
 # -----------------------------------------------
@@ -357,36 +364,35 @@ fi
 
 ## CHECKING SUB-FOLDERS PRESENCE
 
-WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS"
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS"
 CheckSubFolder "$BASH_UTILS_LANG"
 CheckSubFolder "$BASH_UTILS_FUNCTS"
 CheckSubFolder "$BASH_UTILS_VARS"
-WriteInitLog
+EchoInit
 
 # -----------------------------------------------
 
 ## SOURCING DEPENDENCIES
 
 # Sourcing functions files first to avoid error messages while including the variables first, as some functions are called into these variables.
-WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
     SourceFile "$f" "functions file" "$LINENO"
-done; WriteInitLog
+done; EchoInit
 
 
 # Source the functions and variables linker file first,
 # as some messages contain function call (from the library files) to color some parts of this message in another color.
-WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
     SourceFile "$f" "variables file" "$LINENO"
-done; WriteInitLog; WriteInitLog
+done; EchoInit; EchoInit
 
 # -----------------------------------------------
 
 ## SOURCING TRANSLATION FILES
 
 # shellcheck source="$MAIN_PROJECT_ROOT/$MAIN_LANG/SetLibLang.sh"
-#WriteInitLog "In ${BASH_SOURCE[0]}, line $LINENO : DEFINING BASH-UTILS LIBRARY LANGUAGE" \
-#   && SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
-# WriteInitLog; WriteInitLog
+SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
+EchoInit; EchoInit
 
 # -----------------------------------------------
 
@@ -395,15 +401,15 @@ done; WriteInitLog; WriteInitLog
 
 #### END OF THE INITIALIZER FILE
 
-WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"
-WriteInitLog "$MSG_INITEND_END_OF_LIB_INIT";
-WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"; WriteInitLog
+EchoInit "$(DrawLine "$COL_RESET" "-")" "2"
+EchoInit "$MSG_INITEND_END_OF_LIB_INIT";
+EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit
 
 # shellcheck disable=SC1090
 if ! source "$BASH_UTILS_PROJECT_CONF_STATUS"; then
-    echo "$MSG_INITEND_SOURCE_PROJECT_CONF_FAIL"
+    EchoInit "$MSG_INITEND_SOURCE_PROJECT_CONF_FAIL" "1"; EchoInit "1"
     exit 1
 else
-    WriteInitLog "$MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS"
-    WriteInitLog
+    EchoInit "$MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS"
+    EchoInit
 fi

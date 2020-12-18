@@ -37,20 +37,20 @@ LINUX_REINSTALL_LANG="$(GetProjectParentPath)/lang"
 LINUX_REINSTALL_VARS="$(GetProjectParentPath)/variables"
 
 # Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument.
-WriteInitLog "In $PROJECT_FILE, line $LINENO : CHECKING FOR $PROJECT_NAME's SUB-FOLDERS"
+EchoInit "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
 CheckSubFolder "$LINUX_REINSTALL_INST"
 CheckSubFolder "$LINUX_REINSTALL_LANG"
-CheckSubFolder "$LINUX_REINSTALL_VARS"; WriteInitLog
+CheckSubFolder "$LINUX_REINSTALL_VARS"; EchoInit
 
 # Sourcing the Linux-reinstall language files.
-echo "In $PROJECT_FILE, line $LINENO : DEFINING $PROJECT_NAME's LIBRARY FOLDER"
+EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
 SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-WriteInitLog; WriteInitLog
+EchoInit; EchoInit
 
 # Ending the initialization process.
-WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2";
-WriteInitLog "END OF THE $(Decho "${PROJECT_NAME^^}")'S INITIALIZATION";
-WriteInitLog "$(DrawLine "$COL_RESET" "-")" "2"; WriteInitLog;
+EchoInit "$(DrawLine "$COL_RESET" "-")" "2";
+EchoInit "END OF THE $(Decho "${PROJECT_NAME^^}")'S INITIALIZATION";
+EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit;
 
 
 

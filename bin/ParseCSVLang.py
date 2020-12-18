@@ -9,14 +9,23 @@ CSVPATH=sys.argv[1]  # Assign first argument here
 CSVLANG=sys.argv[2]  # Assign second argument here
 
 # Code
-def AssignVarColWithLangColValues(col, row):
+def AssignVarColWithMessageAndLangColValues(col, row):
 
-def GetColAndRow():
+def GetLanguageColumn():
+    #***** Variables *****
+    i_index=0
+    i_targetCell="VARIABLE"
+    
+    j_index=0
+    j_targetCell=CSVLANG
+    
+    #***** Code *****
     if not path.exists(CSVPATH):
         print("Error : the CSV file was not found in the", CSVPATH, "path.")
     else:
         with open(CSVPATH, 'r') as csv_file:
-            # Get CSVLANG language's column from the first row.
+            # Get "VARIABLE" cell first, then CSVLANG language's column from the first row.
+            for i in range(i_index)
 
 def main():
     if len(sys.argv) != 2:
