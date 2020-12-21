@@ -105,7 +105,9 @@ function EchoInit
     datelog="[$(date +"%Y-%m-%d %Hh-%Mm-%Ss")]"
     location="In ${BASH_SOURCE[0]}, line $lineno_stat -->"
     unable="$location Warning : Unable to write in the initializer's log file."
-    incorrect="$location Error : the INITIALIZER_STATUS_LOG variable's value is incorrect."
+    
+    # Keeping this line in case the "INITIALIZER_STATUS_LOG_REDIRECT" variable's value was changed somewhere in the initialization file.
+    incorrect="$location Error : the INITIALIZER_STATUS_LOG_REDIRECT variable's value is incorrect."
 
     #***** Code *****
     if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ] && [ -f "$INITIALIZER_FILE_LOG_PATH" ]; then
@@ -137,7 +139,8 @@ function EchoInit
                 if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
 
             else
-                lineno_stat=$LINENO; echo "$incorrect"; exit 1
+                lineno_stat=$LINENO; echo "$incorrect"
+                lineno_stat=$LINENO; echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
             fi; return
             
         # Else, if the "$INITIALIZER_STATUS_LOG" variable contains a value AND a value of '1' is passed as second argument.
@@ -160,7 +163,7 @@ function EchoInit
 
             else
                 lineno_stat=$LINENO; echo "$incorrect"
-                echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
+                lineno_stat=$LINENO; echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
             fi; return
 
         # This statement doesn't print the date in the initialization process's log file, before the string passed as argument.
@@ -175,7 +178,7 @@ function EchoInit
                 fi
             else
                 lineno_stat=$LINENO; echo "$incorrect"
-                echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
+                lineno_stat=$LINENO; echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
             fi
         fi
     else
@@ -325,10 +328,7 @@ fi
 # -----------------------------------------------
 
 ## INITIALIZATION SCRIPT'S LOG FILE
-if [ "$INITIALIZER_STATUS_LOG_CREATE" != "true" ] && [ "$INITIALIZER_STATUS_LOG_CREATE" != "false" ]; then
-    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect" ""
-    exit 1
-elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
+if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
     if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
         EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
 
