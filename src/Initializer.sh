@@ -87,16 +87,10 @@ PROJECT_LOG_PATH="$PROJECT_LOG_DIR/$PROJECT_LOG_NAME"
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+# Note : these functions have to be defined after defining all script's variables, as the variables
+# contained inside cannot be called before their initialization, or else, they won't store any value.
 
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING FUNCTIONS #######################################
-
-# Note : these functions have to be defined after defining all script's variables,
-# as the variables cannot be called before their initialization, or else, they won't store any value.
-
-#### DEFINING INITIALIZATION FUNCTIONS
+#### DEFINING FUNCTIONS
 
 ## TEXT FUNCTIONS
 
@@ -119,6 +113,8 @@ function EchoInit
         if [ -z "$display" ]; then
             if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
                 echo "$string"
+                
+                if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
 
             # If the "$INITIALIZER_STATUS_LOG" variable's value is equal to "log", then the string passed as first argument is redirected towards the initializer process's log path.
             elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ]; then
@@ -138,6 +134,8 @@ function EchoInit
                     echo "$string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
                 fi; echo "$string"
 
+                if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
+
             else
                 lineno_stat=$LINENO; echo "$incorrect"; exit 1
             fi; return
@@ -148,12 +146,18 @@ function EchoInit
         elif [ "$display" -eq 1 ]; then
             if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
                 echo "$string"
+
+                if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
+
             elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ] || [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "tee" ]; then
                 if [ -n "$string" ]; then
                     echo "$datelog $string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
                 else
                     echo "$string" >> "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
                 fi; echo "$string"
+
+                if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
+
             else
                 lineno_stat=$LINENO; echo "$incorrect"
                 echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
@@ -164,6 +168,7 @@ function EchoInit
         elif [ "$display" -eq 2 ]; then
             if [ -z "$INITIALIZER_STATUS_LOG_REDIRECT" ]; then
                 echo "$string"
+
             elif [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "log" ] || [ "$INITIALIZER_STATUS_LOG_REDIRECT" = "tee" ]; then
                 if [ -n "$string" ] || [ -z "$string" ]; then
                     echo "$string" 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
@@ -180,6 +185,8 @@ function EchoInit
             exit 1
         else
             echo "$string"
+
+            if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
         fi
     fi
 }
@@ -214,7 +221,9 @@ function CheckSubFolder
 # Getting project's parent folder's path.
 function GetProjectParentPath
 {
-    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 || { EchoInit "Unable to get the project's parent directory, abort." "1"; exit 1; }; pwd -P )"
+    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
+        || { EchoInit "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to get the project's parent directory, abort." "1"; exit 1; }; \
+        pwd -P )"
     dirname="$parent"
 
     shopt -s extglob           # enable +(...) glob syntax
@@ -223,13 +232,13 @@ function GetProjectParentPath
 }
 
 # Getting errors and step informations along their line.
-function Location
-{
+# function Location
+# {
     #***** Parameters *****
-    line=$1
+#     line=$1
 
     #***** Code *****
-}
+#}
 
 # Sourcing dependencies
 function SourceFile
@@ -258,48 +267,48 @@ function SourceFile
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-################################### THE DISPLAY PART BEGINS HERE ##################################
+
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-####################################### VARIABLES CHECKINGS #######################################
+###################################### DISPLAY PART BEGINNING #####################################
 
-#### CHECKING
+#### VARIABLES VALUES CHECKING
 
 ## BASH-UTILS PATHS
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_BIN" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_BIN variable."
+if [ -z "$BASH_UTILS_BIN" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_BIN variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_BIN" "$LINENO"
 fi
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_CONF" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_CONF variable."
+if [ -z "$BASH_UTILS_CONF" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_CONF variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_CONF" "$LINENO"
 fi
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_FUNCTS" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_FUNCTS variable."
+if [ -z "$BASH_UTILS_FUNCTS" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_FUNCTS variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_FUNCTS" "$LINENO"
 fi
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_LANG" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_LANG variable."
+if [ -z "$BASH_UTILS_LANG" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_LANG variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_LANG" "$LINENO"
 fi
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_ROOT" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_ROOT variable."
+if [ -z "$BASH_UTILS_ROOT" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_ROOT variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_ROOT" "$LINENO"
 fi
 
-lineno=$LINENO; if [ -z "$BASH_UTILS_VARS" ]; then
-    EchoInit "Error : No path provided in the BASH_UTILS_VARS variable."
+if [ -z "$BASH_UTILS_VARS" ]; then
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_VARS variable." "1"
 else
     CheckSubFolder "$BASH_UTILS_VARS" "$LINENO"
 fi; EchoInit
@@ -310,23 +319,31 @@ fi; EchoInit
 
 # shellcheck disable=SC1090
 if ! source "$BASH_UTILS_INIT_CONF_STATUS"; then
-    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) --> Error : unable to source the project initialization's file variables status configuration file"
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to source the project initialization's file variables status configuration file"
 fi
 
 # -----------------------------------------------
 
-## INITIALIZATION FILE'S LOG FILE
+## INITIALIZATION SCRIPT'S LOG FILE
 if [ "$INITIALIZER_STATUS_LOG_CREATE" != "true" ] && [ "$INITIALIZER_STATUS_LOG_CREATE" != "false" ]; then
-    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect" ""
+    EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : The INITIALIZER_FILE_LOG_CREATE status variable's value is incorrect" ""
     exit 1
 elif [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
     if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
+        EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
+
         if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
-            mkdir -pv "$INITIALIZER_FILE_LOG_DIR" || { echo "Unable to create the directory"; exit 1; }
-            echo
+            EchoInit "Creating $INITIALIZER_FILE_LOG_DIR as intitialisation process log file's parent directory."
+            EchoInit "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")" || { echo "In ${BASH_SOURCE[0]}, line $(( LINENO-2 )) --> Error : unable to create the directory"; exit 1; }
+            EchoInit
         fi
 
-        EchoInit "$(touch "$INITIALIZER_FILE_LOG_PATH")"
+        if touch "$INITIALIZER_FILE_LOG_PATH"; then
+            EchoInit "Created $INITIALIZER_FILE_LOG_PATH"; EchoInit
+        else
+            EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-3 )) --> Failed to create the initialization process log file."
+            exit 1
+        fi
     fi
 fi
 
@@ -339,13 +356,13 @@ fi
 
 ## PROJECT'S PATHS
 
-# Checking the existence of the main script file's path by checking "$PROJECT_PATH" variable value.
-PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"    # File path.
+# Checking the existence of the project script's path by checking "$PROJECT_PATH" variable value.
+lineno=$LINENO; PROJECT_PATH="$(GetProjectParentPath)/$PROJECT_FILE"    # File path.
 
 if [ -z "$PROJECT_PATH" ]; then
-    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) : No path provided in the PROJECT_PATH variable" "1"; exit 1
+    EchoInit "In ${BASH_SOURCE[0]}, line $lineno : No path provided in the PROJECT_PATH variable" "1"; exit 1
 elif [ ! -f "$PROJECT_PATH" ]; then
-    EchoInit "In ${BASH_SOURCE[0]}, line $(( $LINENO-1 )) : Incorrect path provided as value for the PROJECT_PATH variable in $PROJECT_PATH" "1"
+    EchoInit "In ${BASH_SOURCE[0]}, line $lineno : Incorrect path provided as value for the PROJECT_PATH variable in $PROJECT_PATH" "1"
     EchoInit "Current content : $PROJECT_PATH" "1"; exit 1
 fi
 
@@ -353,12 +370,6 @@ fi
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### PROCESSING INITIALIZATION ####################################
 
 #### SOURCING DEPENDENCIES STEP BY STEP
 
@@ -374,14 +385,13 @@ EchoInit
 
 ## SOURCING DEPENDENCIES
 
-# Sourcing functions files first to avoid error messages while including the variables first, as some functions are called into these variables.
+# Sourcing the functions files first to avoid error messages while including the variables first, as some functions can be called into these variables.
 EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
     SourceFile "$f" "functions file" "$LINENO"
 done; EchoInit
 
 
-# Source the functions and variables linker file first,
-# as some messages contain function call (from the library files) to color some parts of this message in another color.
+# Sourcing the variables files.
 EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
     SourceFile "$f" "variables file" "$LINENO"
 done; EchoInit; EchoInit

@@ -24,7 +24,7 @@ function ParseCSVLibLang
     #***** Code *****
     # Since the library files are sourced before the language's definition, it's possible to
     # call some functions which does not display messages accroding to the user's language.
-    EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"; EchoInit
+    EchoInit "$(DrawLine "$COL_GREEN" '"')" "2";
     EchoInit "In $(Decho ${BASH_SOURCE[0]}), line $(Decho "$LINENO") : DEFINING BASH-UTILS LIBRARY LANGUAGE"
     EchoInit "Setting language"
     EchoInit

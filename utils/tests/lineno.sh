@@ -2,4 +2,4 @@
 
 
 echo "$LINENO"
-echo "$(( $LINENO-8 ))"
+echo "$(( LINENO-8 ))"
