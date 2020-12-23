@@ -23,7 +23,6 @@ function ProcessingFile
     # On commence par dessiner la première ligne du bloc.
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     DrawLine "$COL_RESET" "$char"
-    
     EchoNewstep "Processing the $(DechoN "$name") file."
     Newline
     
@@ -44,7 +43,7 @@ function ProcessingFile
 
 # Overwrite a file
 
-# Required functions and files from the "functions" folder :
+# Featured functions and files from the "functions" folder :
 #	- EchoError			-> Echo.lib
 #	- EchoNewstep		-> Echo.lib
 #	- EchoSuccess		-> Echo.lib
@@ -59,17 +58,12 @@ function OverwriteFile
 	EchoNewstep "Overwriting data from file $(DechoN "$path")"
 	Newline
 
-	if true > "$path"; then
-		EchoSuccess "The content of the $(DechoS "$path") file has been successfully overwritten"
-		Newline
-		
-		return 0
-    else
-        EchoError "The content of the $(DechoE "$path") file has not been overwritten"
-		Newline
-		
-		return 1
-    fi
+	true > "$path"
+	HandleErrors "$?" "The content of the $(DechoE "$path") file has not been overwritten" "$LINENO" ""
+	EchoSuccess "The content of the $(DechoS "$path") file has been successfully overwritten"
+	Newline
+
+	return 0
 }
 
 # -----------------------------------------------
@@ -79,23 +73,20 @@ function OverwriteFile
 # File creation function.
 # LORS DE SON APPEL, LA SORTIE DE CETTE FONCTION DOIT ÊTRE REDIRIGÉE SOIT VERS LE TERMINAL ET LE FICHIER DE LOGS, SOIT VERS LE FICHIER DE LOGS UNIQUEMENT.
 
-# Required files and functions :
-#   - Echo.sh       -> EchoErrorTimer
-#   - Echo.sh       -> EchoNewstepTimer
-#   - Echo.sh       -> EchoSuccessTimer
-#   - Headers.sh    -> DrawLine   
-#   - Headers.sh    -> HandleErrors
+# Featured functions and files from the "functions" folder :
+#   - DrawLine          -> Headers.lib
+#   - EchoError         -> Echo.lib
+#   - EchoNewstep       -> Echo.lib
+#   - EchoSuccess       -> Echo.lib
+#   - HandleErrors      -> Handles.lib
 function Makefile
 {
 	#***** Paramètres *****
 	parent=$1      # Emplacement depuis la racine du dossier parent du fichier à traiter.
 	name=$2        # Nom du fichier à traiter (dans son dossier parent).
-	sleep_blk=$3   # Temps de pause du script avant et après la création d'un bloc d'informations sur le traitement du fichier.
-	sleep_txt=$4   # Temps d'affichage des messages de passage à une nouvelle sous-étape, d'échec ou de succès.
 
 	#***** Autres variables *****
 	path="$parent/$name"	# Chemin du fichier à traiter.
-	block_char="'"		# Caractère composant la ligne.
 
 	#***** Code *****
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
@@ -135,8 +126,8 @@ function Makefile
 function GetLineFromTextFile
 {
     #***** Parameters *****
-    source=$1   # File to parse
-    line=$2     # Line to get in the file
+    source=$1           # File to parse
+    wanted_line=$2      # Line to get in the file
     
     #***** Variables *****
     i=0     # Line incrementer
@@ -147,8 +138,8 @@ function GetLineFromTextFile
         i=$(( i+1 ))
         
         # ... until it reaches the wanted line.
-        if [ "$i" -eq "$line" ]; then
-            # Creating a variable and storing the line's text.
+        if [ "$i" -eq "$wanted_line" ]; then
+            # Creating a variable and storing the wanted line's text.
             FILE_GETTXTLINE="$line"
         fi
     done
@@ -164,6 +155,9 @@ function GetLineFromTextFile
 ## (UN)COMPRESSION FUNCTIONS
 
 # 
+
+# Featured functions and files from the "functions" folder :
+#   - 
 function Compress
 {
     #***** Parameters *****
@@ -179,6 +173,11 @@ function Compress
 }
 
 # Uncompressing archives according to the used compression method.
+
+# Featured functions and files from the "functions" folder :
+#   - HandleErrors      -> Handles.lib
+#   - EchoSuccess       -> Echo.lib
+#   - Newline           -> Echo.lib
 function Uncompress
 {
     #***** Paramètres *****
@@ -190,7 +189,7 @@ function Uncompress
 
     #***** Code *****
     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
-    "$cmd $option $path"
+    "$cmd $opts $path"
     HandleErrors "$?" "LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$name") A ÉCHOUÉE"
     EchoSuccess "La décompression de l'archive $(DechoS "$name") s'est effectuée avec brio."
     Newline

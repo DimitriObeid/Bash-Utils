@@ -20,13 +20,12 @@ MSG_LR_CHKARGS_ARGS_SUDO="    sudo $MSG_LR_CHKARGS_ARGS"
 
 # Script exécuté sans les permissions du super-utilisateur
 MSG_LR_CHKARGS_ROOT_ZERO="Ce script doit être exécuté en tant que super-utilisateur (root)"
-MSG_LR_CHKARGS_ROOT_ZERO_EXEC="Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande"
-MSG_LR_CHKARGS_ROOT_ZERO_OR_1="Ou connectez vous directement en tant que super-utilisateur"
-MSG_LR_CHKARGS_ROOT_ZERO_OR_2="et tapez cette commande"
+MSG_LR_CHKARGS_ROOT_ZERO_EXEC="Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande ."
+MSG_LR_CHKARGS_ROOT_ZERO_OR="Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande :"
 
 # Message d'erreur
-MSG_LR_CHKARGS_ROOT_FAIL="SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL"
-MSG_LR_CHKARGS_ROOT_FAIL_ADVICE="Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en mode root"
+MSG_LR_CHKARGS_ROOT_FAIL="SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !"
+MSG_LR_CHKARGS_ROOT_FAIL_ADVICE="Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en mode root ."
 
 # -----------------------------------------------
 
@@ -36,24 +35,24 @@ MSG_LR_CHKARGS_ROOT_FAIL_ADVICE="Relancez le script avec les droits de super-uti
 MSG_LR_CHKARGS_USERNAME_ZERO="Veuillez lancer le script en plaçant votre nom d'utilisateur après la commande d'exécution du script"
 
 # Message d'erreur : script exécuté sans l'argument de nom d'utilisateur
-MSG_LR_CHKARGS_USERNAME_FAIL="VOUS N'AVEZ PAS PASSÉ VOTRE NOM D'UTILISATEUR EN ARGUMENT"
-MSG_LR_CHKARGS_USERNAME_FAIL_ADVICE="Veuillez entrer votre nom d'utilisateur juste après le nom du script"
+MSG_LR_CHKARGS_USERNAME_FAIL="VOUS N'AVEZ PAS PASSÉ VOTRE NOM D'UTILISATEUR EN ARGUMENT !"
+MSG_LR_CHKARGS_USERNAME_FAIL_ADVICE="Veuillez entrer votre nom d'utilisateur juste après le nom du script."
 
 # Message d'erreur : nom d'utilisateur incorrect
-MSG_LR_CHKARGS_USERNAME_INCORRECT="NOM D'UTILISATEUR INEXISTANT"
-MSG_LR_CHKARGS_USERNAME_INCORRECT_ADVICE="Veuillez entrer correctement votre nom d'utilisateur"
+MSG_LR_CHKARGS_USERNAME_INCORRECT="NOM D'UTILISATEUR INEXISTANT !"
+MSG_LR_CHKARGS_USERNAME_INCORRECT_ADVICE="Veuillez entrer correctement votre nom d'utilisateur."
 
 # -----------------------------------------------
 
 ## VÉRIFICATION DU PASSAGE DE L'ARGUMENT DE TYPE D'INSTALLATION
 
 # Message d'erreur : script exécuté sans l'argument de type d'installation
-MSG_LR_CHKARGS_INSTALL_ZERO="VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN DEUXIÈME ARGUMENT"
-MSG_LR_CHKARGS_INSTALL_ZERO_ADVICE="Veuillez entrez une seule valeur après votre nom d'utilisateur"
+MSG_LR_CHKARGS_INSTALL_ZERO="VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN DEUXIÈME ARGUMENT !"
+MSG_LR_CHKARGS_INSTALL_ZERO_ADVICE="Veuillez entrez une seule valeur après votre nom d'utilisateur."
 
 # Message d'erreur : argument de type d'installation incorrect
-MSG_LR_CHKARGS_INSTALL_DIFFERENT="LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES"
-MSG_LR_CHKARGS_INSTALL_AWAITED="Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")"
+MSG_LR_CHKARGS_INSTALL_DIFFERENT="LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !"
+MSG_LR_CHKARGS_INSTALL_AWAITED="Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")."
 
 
 # -----------------------------------------------

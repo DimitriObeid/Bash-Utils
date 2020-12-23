@@ -12,14 +12,14 @@ function SetMainLang
     
     #***** Code *****
     # Don't double quote what follows the path variable, or else, the loop will only run once.
-    WriteInitLog "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
+    EchoInit "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
         if source "$f"; then
-            WriteInitLog "$success_msg : $f"
+            EchoInit "$success_msg : $f"
         else
             echo "$f : $error_msg" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo
             exit 1
         fi
-    done; WriteInitLog
+    done; EchoInit
 }
 
 # Detecting user's language with the "$LANG" environment variable.

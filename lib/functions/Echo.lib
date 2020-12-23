@@ -31,10 +31,10 @@ function EchoError
     #***** Code *****   
     CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
 
-    sleep "$PROJECT_STATUS_TIME_TXT"
+    sleep "$STAT_TIME_TXT"
 }
 
-# Normal message, with redirection chcking
+# Normal message (without any color, except the terminal's messages default color), with redirection checking.
 function EchoMsg
 {
     #***** Parameters *****
@@ -43,7 +43,7 @@ function EchoMsg
     #***** Code *****
     CheckProjectLogStatus "$string"
 
-    sleep "$PROJECT_STATUS_TIME_TXT"
+    sleep "$STAT_TIME_TXT"
 }
 
 # New sub-step message
@@ -55,7 +55,7 @@ function EchoNewstep
     #***** Code *****
     CheckProjectLogStatus "$TXT_YELLOW_TAB $string$COL_RESET"
 
-    sleep "$PROJECT_STATUS_TIME_TXT"
+    sleep "$STAT_TIME_TXT"
 }
 
 # Success message
@@ -67,7 +67,7 @@ function EchoSuccess
     #***** Code *****
     CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET"
 
-    sleep "$PROJECT_STATUS_TIME_TXT"
+    sleep "$STAT_TIME_TXT"
 }
 
 

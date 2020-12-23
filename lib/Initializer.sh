@@ -280,6 +280,11 @@ function SourceFile
 
 ## BASH-UTILS PATHS
 
+
+## CHECKING SUB-FOLDERS PRESENCE
+
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : CHECKING FOR BASH-UTILS PATHS"
+
 if [ -z "$BASH_UTILS_BIN" ]; then
     EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : No path provided in the BASH_UTILS_BIN variable." "1"
 else
@@ -371,16 +376,6 @@ fi
 
 #### SOURCING DEPENDENCIES STEP BY STEP
 
-## CHECKING SUB-FOLDERS PRESENCE
-
-EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS"
-CheckSubFolder "$BASH_UTILS_LANG" "$LINENO"
-CheckSubFolder "$BASH_UTILS_FUNCTS" "$LINENO"
-CheckSubFolder "$BASH_UTILS_VARS" "$LINENO"
-EchoInit
-
-# -----------------------------------------------
-
 ## SOURCING DEPENDENCIES
 
 # Sourcing the functions files first to avoid error messages while including the variables first, as some functions can be called into these variables.
@@ -390,17 +385,17 @@ done; EchoInit
 
 
 # Sourcing the variables files.
-# EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
-#     SourceFile "$f" "variables file" "$LINENO"
-# done; EchoInit; EchoInit
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
+    SourceFile "$f" "variables file" "$LINENO"
+done; EchoInit; EchoInit
 
 # -----------------------------------------------
 
 ## SOURCING TRANSLATION FILES
 
 # shellcheck source="$MAIN_PROJECT_ROOT/$MAIN_LANG/SetLibLang.sh"
-SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
-EchoInit; EchoInit
+# SourceFile "$BASH_UTILS_LANG/SetLibLang.sh" "library language defining file" "$LINENO"
+# EchoInit; EchoInit
 
 # -----------------------------------------------
 
@@ -415,7 +410,7 @@ EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit
 
 # shellcheck disable=SC1090
 if source "$BASH_UTILS_PROJECT_CONF_STATUS"; then
-    EchoInit "Successfully sourced the $PROJECT_NAME's file variables status configuration file."
+    EchoInit "Successfully sourced the $(Decho "$PROJECT_NAME")'s file variables status configuration file."
     EchoInit
 else
     EchoInit "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $PROJECT_NAME's file variables status configuration file." "1"; EchoInit "1"

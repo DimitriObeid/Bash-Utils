@@ -17,16 +17,16 @@ function CheckSupportedOSType
 
 # -----------------------------------------------
 
-## CHECKING FOR USER IDENTIFIANT
+## CHECKING FOR THE IDENTIFIANTS
 
-# Checking if the current effective UID (EUID) is not equal to 0 (root user's account)
+# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID)
 
 # Required functions and files :
 #   - HandleErrors      -> Bash-Utils/src/functions/Headers.lib
 function CheckRootEUID
 {
     if [ "$EUID" -ne 0 ]; then
-        HandleErrors "" "" "" "" ""
+        HandleErrors "1" "Error : you need root user's privileges to perform this action." ""
     fi
 }
 
@@ -38,6 +38,8 @@ function CheckRootEUID
 ## CHECKING FOR FILES AND FOLDERS
 
 # Checking for "$PROJECT_LOG_PATH"
+
+# Required functions and files :
 function CheckProjectLogPath
 {
     if [ -z "$PROJECT_LOG_PATH" ]; then
@@ -53,7 +55,7 @@ function CheckProjectLogStatus
 
     #**** Code *****
     CheckProjectLogPath
-    CheckVarStatus
+    CheckProjectStatusVars
     
     if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$PROJECT_STATUS_LOG_REDIRECT" ]; then
         if [ "$PROJECT_STATUS_LOG_REDIRECT" = "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 1 ]; then
@@ -66,12 +68,6 @@ function CheckProjectLogStatus
         echo "$string"
     fi
 }
-
-# -----------------------------------------------
-
-## CHECKING FOR TIME STATUS
-
-
 
 # -----------------------------------------------
 
@@ -90,32 +86,61 @@ function HandleErrors
 	if [ "$return_code" -eq 0 ]; then
         return
     else
-        if [ "$PROJECT_STATUS_ERROR" = "fatal" ]; then
-            HeaderBase "$COL_RED" "-" "$COL_RED" "$MSG_HANDLES_ERR_FATAL_ERROR : $error_string" "1.5"
+        if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
+            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : ${error_string^^}"
 
-            EchoError "$MSG_HANDLES_ERR_FATAL_HAPPENED :"
+            EchoError "A fatal error occured :"
             EchoError "$error_string"
-            echo
+            Newline
 
             EchoError "$advise_string"
-            echo
+            Newline
 
-            EchoError "$MSG_HANDLES_ERR_FATAL_LINE $lineno."
-            echo
+            EchoError "The fatal error in question occurred in the line $lineno."
+            Newline
 
-            EchoError "$MSG_HANDLES_ERR_FATAL_STOP."
-            echo
-
-            if [ "$PROJECT_STATUS_LOG" = "true" ]; then
-                EchoNewstep "Souhaitez-vous copier le fichier de logs du project $(DechoN "$PROJECT_NAME") vers votre dossier personnel ?"
-                Newline
-
-            
-            fi
+            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."
+            Newline
 
             exit 1
-        elif [ -z "$PROJECT_STATUS_ERROR" ]; then
-            HeaderBase ""
-		fi
+        elif [ -z "$STAT_ERROR" ]; then
+            HeaderBase "$COL_RED" "-" "$COL_RED" "ERROR : ${error_string^^}"
+            
+            EchoError "An error occured !"
+            EchoError "$error_string"
+            Newline
+            
+            EchoError "The error in question occurred in the line $lineno."
+            Newline
+            
+            EchoNewstep "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")"
+            Newline
+            
+            function ReadExitScript
+            {
+                read -rp "Enter your answer : " ans_exit_script
+            
+                case ${ans_exit_script,,} in
+                    "yes")
+                            EchoError "Aborting script execution."
+                            Newline
+                            
+                            exit 1
+                        ;;
+                    "no")
+                        EchoSuccess "Resuming script execution.s"
+                        Newline
+                        
+                        # In case a "non-fatal" error occured in a function passed in argument while calling the "ProcessingDir" or the "ProcessingFile" functions.
+                        return 1
+                        ;;
+                    *)
+                        EchoError "Please enter a valid answer : $(DechoE "yes") or $(DechoE "no")."
+                        ;;
+                esac
+            }
+        else
+            EchoError
+        fi
     fi
 }

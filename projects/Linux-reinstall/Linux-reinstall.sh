@@ -43,9 +43,9 @@ CheckSubFolder "$LINUX_REINSTALL_LANG"
 CheckSubFolder "$LINUX_REINSTALL_VARS"; EchoInit
 
 # Sourcing the Linux-reinstall language files.
-EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
-SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-EchoInit; EchoInit
+# EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
+# SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
+# EchoInit; EchoInit
 
 # Ending the initialization process.
 EchoInit "$(DrawLine "$COL_RESET" "-")" "2";
@@ -96,57 +96,54 @@ ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
 # Détection du passage des arguments au script
 function CheckArgs
 {
+    #***** Status *****
+    STAT_ERROR="fatal"
+    STAT_LOG="true"; STAT_LOG_REDIRECT="log"
+    STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
+    CheckProjectStatusVars
+    
+    #***** Code *****
 	# If the script is not run as super-user (root)
 	if [ "$EUID" -ne 0 ]; then
-		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO."
-		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO_EXEC :"
+		EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
+		EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
 
 		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
 		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-		echo "$MSG_LR_CHKARGS_ARGS_SUDO"
+		echo "sudo $0 $\username $\installation"
 		Newline
 
-		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO_OR_1,"
-		EchoError "$MSG_LR_CHKARGS_ROOT_ZERO_OR_2 :"
-		echo "    $MSG_LR_CHKARGS_ARGS"
+		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
+		echo "    $0 $\username $\installation"
 		Newline
 
-		EchoError "$MSG_LR_CHKARGS_ROOT_FAIL !"
-		EchoError "$MSG_LR_CHKARGS_ROOT_FAIL_ADVICE."
-		Newline
-
-		exit 1
+		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL" \
+            "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en mode root" \
+            "$LINENO"
     fi
 
 	# If no value is passed as username argument.
 	if [ -z "$ARG_USERNAME" ]; then
-		EchoError "$MSG_LR_CHKARGS_USERNAME_ZERO :"
-		echo "$MSG_LR_CHKARGS_ARGS_SUDO"
+		EchoError "Veuillez lancer le script en plaçant votre nom d'utilisateur après la commande d'exécution du script :"
+		echo "    sudo $MSG_LR_CHKARGS_ARGS"
 		Newline
 
-		EchoError "$MSG_LR_CHKARGS_USERNAME_FAIL !"
-		EchoError "$MSG_LR_CHKARGS_USERNAME_FAIL_ADVICE."
-		Newline
-
-		exit 1
+		HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ VOTRE NOM D'UTILISATEUR EN ARGUMENT !" \
+            "Veuillez entrer votre nom d'utilisateur juste après le nom du script" "$LINENO"
 
 	# Else, if the username argument doesn't match to any existing user account.
 	elif ! id -u "$ARG_USERNAME" > /dev/null; then
-        Newline; EchoError "$MSG_LR_CHKARGS_USERNAME_INCORRECT !"
-		EchoError "$MSG_LR_CHKARGS_USERNAME_INCORRECT_ADVICE."
-		Newline
+        Newline; HandleErrors "NOM D'UTILISATEUR INEXISTANT !" \
+            "Veuillez entrer correctement votre nom d'utilisateur." "$LINENO"
 
 		exit 1
 	fi
 
 	# If the second mandatory argument is not passed.
 	if [ -z "$ARG_INSTALL" ]; then
-        Newline; EchoError "$MSG_LR_CHKARGS_INSTALL_ZERO !"
-        EchoError "$MSG_LR_CHKARGS_INSTALL_ZERO_ADVICE."
-        Newline
-
-        EchoError "$MSG_LR_CHKARGS_INSTALL_AWAITED."
-        Newline
+        Newline; HandleErrors "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN DEUXIÈME ARGUMENT !" \
+            "Veuillez entrez une seule valeur après votre nom d'utilisateur. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
+            "$LINENO"
 
         exit 1
 
@@ -160,9 +157,8 @@ function CheckArgs
                 VER_INSTALL="$ARG_INSTALL"
                 ;;
             *)
-                Newline; EchoError "$MSG_LR_CHKARGS_INSTALL_DIFFERENT !"
-                EchoError "$MSG_LR_CHKARGS_INSTALL_AWAITED."
-                Newline
+                Newline; HandleErrors "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
+                "Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$LINENO"
 
                 exit 1
                 ;;
@@ -181,7 +177,6 @@ function CheckArgs
 
 		## APPEL DES FONCTIONS D'INITIALISATION
 		CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
-		Mktmpdir				# Puis la fonction de création du dossier temporaire.
 		GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur.
 		WriteInstallScript		# Puis la fonction de création de scripts d'installation.
 
@@ -200,21 +195,19 @@ function CheckArgs
 function CreateLogFile
 {
     #***** Modifying status *****
-    PROJECT_STATUS_ERROR="fatal"
-    PROJECT_STATUS_LOG="true"
-    PROJECT_STATUS_LOG_REDIRECT="log"
-    PROJECT_STATUS_TIME_LINE="0"
-    PROJECT_STATUS_TIME_TXT="0"
-    CheckVarStatus
+#     STAT_ERROR="fatal"
+#     STAT_LOG="true"
+#     STAT_LOG_REDIRECT="log"
+#     STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
+#     CheckProjectVarStatus
     
     #***** Code *****
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
     
 	# Le script crée d'abord le fichier de logs dans le dossier actuel (pour cela, on passe la valeur de la variable d'environnement $PWD en premier argument de la fonction "Makefile").
-	lineno=$LINENO; Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" > /dev/null
+	Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" > /dev/null
     Chown "$USER" "$ARG_USERNAME" "$PROJECT_LOG_PATH"
-    
-	
+
 	# On vérifie si le fichier de logs a bien été créé.
 	if [ -f "$PROJECT_LOG_PATH" ]; then
 		EchoSuccess "$MSG_CRLOGFILE_SUCCESS"
@@ -224,8 +217,16 @@ function CreateLogFile
 
 		# Récupération des informations sur le système d'exploitation de l'utilisateur contenues dans le fichier "/etc/os-release".
 		EchoNewstep "$MSG_CRLOGFILE_GETOSINFOS :"
-		cat "/etc/os-release" >> "$FILE_LOG_PATH"
 		Newline
+		
+		EchoNewstep "Operating system general informations :"
+		cat "/etc/os-release" | xargs EchoMsg
+		Newline
+		
+		EchoNewstep "Bash version :"
+		echo "$BASH_VERSION" | xargs EchoMsg
+		Newline
+		
 
 		EchoSuccess "$MSG_CRLOGFILE_GOTOSINFOS."
     else
@@ -241,14 +242,11 @@ function CreateLogFile
     fi
 }
 
-
-
 # Script's initialization.
 function ScriptInit
 {
 	CheckArgs				# On appelle la fonction de vérification des arguments passés au script,
 	CreateLogFile			# Puis la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant,
-	Mktmpdir 				# Puis la fonction de création du dossier temporaire,
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
 	WriteInstallScript		# Puis la fonction de création de scripts d'installation.
 

@@ -23,17 +23,16 @@ function ProcessingDir
     # On commence par dessiner la première ligne du bloc.
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     DrawLine "$COL_RESET" "$char"
-    
-    EchoNewstep "$MSG_DIR_PROCESSING_BEGIN"
+    EchoNewstep "Processing the $(DechoN "$name") folder in the parent folder $(DechoN "$parent")."
     Newline
     
     if $("$function"); then
-        EchoSuccess "$MSG_DIR_PROCESSING_END_SUCC"
+        EchoSuccess "End of processing the $(DechoS "$path/") folder."
 		DrawLine "$COL_RESET" "$char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		Newline
     else
-        EchoError "$MSG_DIR_PROCESSING_END_FAIL"
+        EchoError "End of processing the $(DechoE "$path/") folder."
 		DrawLine "$COL_RESET" "$char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		Newline
@@ -53,27 +52,18 @@ function OverwriteDir
     path=$1
 
     #***** Code *****
-    EchoNewstep "$MSG_MKDIR_NONEMPTY_1."
-	EchoNewstep "$MSG_MKDIR_NONEMPTY_2."
+    EchoNewstep "A non-empty folder with exactly the same name ($(DechoN "$name")) is already in the target folder $(DechoN "$parent/")"
+	EchoNewstep "Deleting the contents of the $(DechoN "$path/") folder"
 	Newline
 	
 	# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU DO !!!
 	# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-	if rm -rfv "${path/:?}/"*; then
-	HandleErrors "$?" "" "" ""
-        EchoSuccess "$MSG_MKDIR_NONEMPTY_SUCC."
-        Newline
-
-        return 0
-    else
-        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_1."
-        EchoError "$MSG_MKDIR_NONEMPTY_FAIL_2"
-        Newline
-
-        return 1
-	fi
-    EchoError "$MSG_MKDIR_PROCESSING_END_FAIL."
+    rm -rfv "${path/:?}/"*
+    HandleErrors "$?" "Unable to delete the contents of the $(DechoE "$path/") folder." "" ""
+    EchoSuccess "Deletion of the contents of the folder $(DechoS "$path/") performed successfully"
     Newline
+
+    return 0
 }
 
 
@@ -81,7 +71,7 @@ function OverwriteDir
 # Folder creation AND recursively assigning read and write rights to the user.
 # When this function is called, if a log file is used in the project, the output of this function must be redirected either to the terminal AND the log file (2>&1 | tee -a "$FILE_LOG_PATH"), or to the log file only (>> "$FILE_LOG_PATH") after passing all the mandatory arguments. Otherwise, leave everything blank after passing the arguments.
 
-# Required files and functions :
+# Featured functions and files from the "functions" folder :
 #   - Echo.sh       -> EchoErrorTimer
 #   - Echo.sh       -> EchoNewstepTimer
 #   - Echo.sh       -> EchoSuccessTimer
@@ -96,30 +86,22 @@ function Makedir
 	#***** Variables *****
 	local path="$parent/$name"	# Chemin du dossier à traiter.
 	local block_char='"'		# Caractère composant la ligne (c'est un double quote (")).
-    local cmd="mkdir -pv $path"
 
 	#***** Code *****
-	EchoNewstep "$MSG_DIR_MKDIR"
-    Newline
-
 	# Si le dossier à traiter n'existe pas, alors le script le crée.
 	if [ ! -d "$path" ]; then
-		EchoNewstep "$MSG_DIR_MKDIR_CREATE"
+		EchoNewstep "Creating the $(DechoN "$name") folder in the parent folder $(DechoN "$parent/")."
 		Newline
 
 		# On crée une variable nommée "lineno". Elle enregistre la valeur de la variable globale "$LINENO", qui enregistre le numéro de la ligne dans laquelle est est appelée dans un script.
-		local lineno=$LINENO; for _ in $cmd; do
-            if eval "${!cmd}"; then
-                EchoSuccess "$MSG_DIR_MKDIR_CREATE_SUCC"
-                Newline
-            else
-            
-                return 1
-            fi
+        mkdir -pv "$path"
+        HandleErrors "$?" "THE $(DechoE "$name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." "$lineno"
+        EchoSuccess "The $(DechoS "$name") folder was successfully created in the $(DechoS "$parent") folder."
+        Newline
+        
+        return 0
             # On vérifie si le dossier a bien été créé en vérifiant le code de retour de la commande "mkdir" via la fonction "HandleErrors"
-            HandleErrors "$?" "$MSG_DIR_MKDIR_CREATE_FAIL" "$MSG_MKDIR_CREATE_FAIL_ADV" "$lineno"
-        done;
-	
+
     # Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier contient AU MOINS un fichier ou dossier.
 	elif [ -d "$path" ] && [ "$(ls -A "$path")" ]; then
         if OverwriteDir "$path"; then
@@ -130,7 +112,7 @@ function Makedir
 
 	# Sinon, si le dossier à créer existe déjà dans son dossier parent ET que ce dossier est vide.
 	elif [ -d "$path" ] && [ ! "$(ls -A "$path")" ]; then
-		EchoSuccess "$MSG_DIR_MKDIR_EMPTY."
+		EchoSuccess "The $(DechoS "$path/") folder already exists in the $(DechoS "$parent/") folder and is empty."
 		Newline
 
 		return 0

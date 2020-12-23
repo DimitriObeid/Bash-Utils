@@ -6,43 +6,31 @@
 
 #### FOLDERS
 
-# TODO : Déplacer dans le fichier lib de Linux-reinstall
 ## USER'S HOME FOLDER.
 
-# Check if the "$ARG_USERNAME" variable is not empty
-if test ! -z "$ARG_USERNAME"; then
-    DIR_HOMEDIR="/home/${ARG_USERNAME}"     # Path
-fi
+# "LOGNAME" is an environment variable that stores the name of the current session's name,
+# whether if there was an user switching (with the "su") command or if a script was executed with root privileges or not.
+DIR_HOME="/home/$LOGNAME"     # Getting the current logged user's home directory.
 
 # -----------------------------------------------
 
-## TEMPORARY FOLDER'S INFORMATIONS.
-
-DIR_TMP_NAME="Linux-reinstall.tmp.d"			# Name
-DIR_TMP_PARENT="/tmp"							# Parent folder
-DIR_TMP_PATH="$DIR_TMP_PARENT/$DIR_TMP_NAME"	# Full path
-
-# -----------------------------------------------
-
-## TEMPORARY FOLDER'S SUD-FOLDERS.
-
-# TODO : Déplacer dans le fichier lib de Linux-reinstall
+## INSTALLATON FOLDERS AND THEIR SUD-FOLDERS / FILES.
 
 # Folder containing the installation files and the installation script
-SC_DIR_INSTALL_NAME="Install"                              # Name
-SC_DIR_INSTALL_PATH="$DIR_TMP_PATH/$DIR_INSTALL_NAME"      # Path
+DIR_INSTALL_NAME="Install"                              # Name
+DIR_INSTALL_PATH="$DIR_TMP_PATH/$DIR_INSTALL_NAME"      # Path
 
 # Folder containing the logs file.
 DIR_LOG_NAME="Logs"
 DIR_LOG_PATH="$DIR_TMP_PATH/$DIR_LOG_NAME"
 
 # Folder containing the files that registers registering packages not found in the package manager's database or whose installation failed
-SC_DIR_PACKAGES_NAME="Packages"
-SC_DIR_PACKAGES_PATH="$DIR_TMP_PATH/$DIR_PACKAGES_NAME"
+DIR_PACKAGES_NAME="Packages"
+DIR_PACKAGES_PATH="$DIR_TMP_PATH/$DIR_PACKAGES_NAME"
 
 # TODO : Déplacer dans le fichier lib de Linux-reinstall
 # Unavailable softwares on package manager's installation folder
-SC_DIR_SOFTWARE_NAME="Software.Linux-reinstall.d"
-SC_DIR_SOFTWARE_PATH="$DIR_HOMEDIR/$DIR_SOFTWARE_NAME"
+DIR_SOFTWARE_NAME="Software.Linux-reinstall.d"
+DIR_SOFTWARE_PATH="$DIR_HOMEDIR/$DIR_SOFTWARE_NAME"
 
 # -----------------------------------------------

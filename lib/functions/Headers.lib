@@ -66,80 +66,26 @@ function DrawLine
 function HeaderBase
 {
 	#***** Parameters *****
-	line_color=$1		# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	line_char=$2		# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	string_color=$3	# Définition de la couleur de la chaîne de caractères du header.
-	string=$4			# Chaîne de caractères affichée dans chaque header.
-	wait_t=$5			# Temps de pause après l'affichage du header/
-
-	#***** Variables *****
-	wait_t="$PROJECT_TIME"
+	line_color=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	line_char=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	string_color=$3	   # Définition de la couleur de la chaîne de caractères du header.
+	string=$4          # Chaîne de caractères affichée dans chaque header.
 	
 	#***** Code *****
-	EchoMsg
+	Newline
 
 	EchoMsg "$(DrawLine "$line_color" "$line_char")"
-	EchoMsg "$string_color##>" "$string$COL_RESET"
+	EchoMsg "$string_color##> $string$COL_RESET"
 	EchoMsg "$(DrawLine "$line_color" "$line_char")"
-	EchoMsg
+	Newline
 
-	sleep "$wait_t"
+	sleep "$STAT_TIME_HEADER"
 
 	return
 }
 
-# Fonction d'affichage des headers lors d'un changement d'étape.
-function HeaderStep { local string=$1; HeaderBase "$COL_CYAN" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" "$string" "1.5"; }
+# Header display function when changing step.
+function HeaderStep { local string=$1; HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$string"; }
 
-# Fonction d'affichage de headers lors du passage à une nouvelle catégorie de paquets lors de l'installation de ces derniers.
-function HeaderInstall { local string=$1; HeaderBase "$COL_YELLOW" "$TXT_HEADER_LINE_CHAR" "$COL_GREEN" "$string" "1.5"; }
-
-# TODO : RÉARRANGER ÇA QUAND J'AURAI FINI LA DÉCORATION DU FICHIER "Echo.lib"
-
-function HandleFatalErrorsTee
-{
-	#***** Paramètres *****
-	local return_code=$1       # Code de retour de la dernière commande lancée
-	local error_string=$2      # Chaîne de caractères du type d'erreur à afficher.
-	local advise_string=$3     # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
-    local lineno=$4            # Ligne à laquelle le message d'erreur s'est produite.
-
-	# ***** Code *****
-	if test "$return_code" -eq 0; then
-        return
-    else
-        HeaderBase "$COL_RED" "$TXT_HEADER_LINE_CHAR" "$COL_RED" "$(EchoError "$MSG_HNDERR_FATAL") : $error_string" "1.5" 2>&1 | tee -a "$FILE_LOG_PATH"
-
-        EchoError "$MSG_HNDFATERR_HAPPENED :" 2>&1 | tee -a "$FILE_LOG_PATH"
-        EchoError "$error_string"
-        Newline
-
-        EchoError "$advise_string"
-        Newline
-
-        EchoError "$MSG_HNDFATERR_LINE $lineno."
-        Newline
-
-        EchoError "$MSG_HNDFATERR_STOP."
-        Newline
-
-        # TODO : Modifier la détection d'arguments
-        # Si l'argument de débug n'est pas passé lors de l'exécution du script.
-        if test -z "${ARG_DEBUG}" 1; then
-            # Si le fichier de logs se trouve toujours dans le dossier actuel (en dehors du dossier personnel de l'utilisateur).
-            if test ! -f "$DIR_HOMEDIR/$FILE_LOG_NAME"; then
-                mv -v "$FILE_LOG_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$FILE_LOG_NAME" || { EchoError "$MSG_HNDERR_MV_FAIL."; Newline; exit 1; }
-
-                FILE_LOG_PATH="$DIR_HOMEDIR/$FILE_LOG_NAME"
-            fi
-            EchoErrorTee "$MSG_HNDFATERR_IFBUG."
-            Newline
-        else
-            EchoErrorTee "$MSG_HNDFATERR_SEND."
-            EchoErrorTee "$MSG_HNDFATERR_SEND_PATH"
-            Newline
-        fi
-
-        exit 1
-    fi
-}
+# Header display function when switching to a new package category during package installation.
+function HeaderInstall { local string=$1; HeaderBase "$COL_YELLOW" "-" "$COL_GREEN" "$string"; }
