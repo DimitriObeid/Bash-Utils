@@ -1,14 +1,49 @@
 #!/usr/bin/env bash
 
+## WARNING !!
+# The current supported operating systems are Linux based OS.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### PACKAGE MANAGERS
+
+## GETTING INFORMATIONS ABOUT PACKAGE MANAGERS
+
+# Getting the user's operating system main package manager.
+function GetMainPackageManager
+{
+	HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0" >> "$FILE_LOG_PATH"
+
+	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
+	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
+
+	# For more informations about the redirections in UNIX Shell, please visit this link -> https://www.tldp.org/LDP/abs/html/io-redirection.html
+
+	# Checking first the operating system type, to avoid running the script in a not (yet) suported UNIX operating system.
+	if [[ "$OSTYPE" = "linux-gnu"* ]]; then
+        command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt"
+        command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
+        command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
+    else
+        EchoError "Your operating system is not (yet) supported !"; Newline
+        exit 1
+    fi
+
+	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
+	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
+        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
+		HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(DechoE "APT"), $(DechoE "DNF") et $(DechoE "Pacman")." "$LINENO"
+	else
+		EchoSuccess "Gestionnaire de paquets principal trouvé : $(DechoS "$PACK_MAIN_PACKAGE_MANAGER")" >> "$FILE_LOG_PATH"
+	fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### INSTALLATIONS FROM PACKAGE MANAGERS
-
-## DEFINING THE INSTALLATION WIZARD SCRIPT
-
-# Writing the installation wizard script.
 
 # Required functions, variables and files :
 #   - EchoNewstep   -> Bash-Utils/lib/functions/Echo.lib
@@ -24,17 +59,11 @@
 #   - 
 function WriteInstallScript
 {
-    #***** Parameters *****
-    
-    
-    #***** Code *****
 	# Creating the folder containing the packages treatment script and the files containing the packages search and installation commands.
-	{
-		HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"
+	HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"
 
-		Makedir "$SC_DIR_TMP_PATH" "$SC_DIR_INSTALL_NAME" "0" "0"						# On crée le dossier contenant les fichiers temporaires contenant les commandes de recherche et d'installation des paquets.
-		Makefile "$DIR_TMP_PATH/$DIR_INSTALL_NAME" "$FILE_SCRIPT_NAME" "0" "0"	# On crée le fichier de script.
-	} >> "$FILE_LOG_PATH"
+	Makedir "$PROJECT_TMP_PATH" "$DIR_INSTALL_NAME"                       # On crée le dossier contenant les fichiers temporaires contenant les commandes de recherche et d'installation des paquets.
+	Makefile "$PROJECT_TMP_PATH/$DIR_INSTALL_NAME" "$FILE_SCRIPT_NAME"    # On crée le fichier de script.
 
 	# Writing the script's content into the script file by using a here document.
 	cat <<-'INSTALL_SCRIPT' > "$FILE_SCRIPT_PATH"
@@ -45,9 +74,9 @@ function WriteInstallScript
 
 	if test "$#" -eq 0; then
 		exit 2
-	elif test -z "${CMD}"; then
+	elif [ -z "${CMD}" ]; then
 		exit 3
-	elif test -s "${LOG}" && test -s "${CMD}"; then
+	elif [ -s "${LOG}" ] && [ -s "${CMD}" ]; then
 		"$CMD" || exit 1
 		exit 0
     elif test "$#" -gt 2; then
@@ -89,6 +118,8 @@ function OptimizeInstallation
 	local block_char="="
 
 	#**** Code *****
+	CheckRootEUID
+	
 	# On vérifie si tous les arguments sont bien appelés (IMPORTANT POUR UNE INSTALLATION SANS PROBLÈMES)
 	if test "$#" -ne 6; then
 		HandleFatalErrors "1" "UN OU PLUSIEURS ARGUMENTS MANQUENT À LA FONCTION $(DechoE "OptimizeInstallation")" \
@@ -238,11 +269,13 @@ function PackInstall
 	LINENO_INST=$LINENO
 
 	#***** Code *****
+	CheckRootEUID
+	
 	DrawLine "$COL_RESET" "$block_char" 2>&1 | tee -a "$FILE_LOG_PATH"
 	sleep 1
 	Newline
 
-	EchoNewstepTee "Traitement du paquet $(DechoN "$package")."
+	EchoNewstep "Traitement du paquet $(DechoN "$package")."
 	Newline
 
 	# On définit les commandes de recherche et d'installation de paquets selon le nom du gestionnaire de paquets passé en premier argument.
@@ -342,17 +375,6 @@ function PackInstall
 	return
 }
 
-# Redirection des sorties des commandes (pas d'installation) vers le fichier de logs
-function CommandLogs
-{
-    #***** Variables *****
-    local cmd="$*"
-
-    #***** Code *****
-    $cmd 2>&1 | tee -a "$FILE_LOG_PATH"
-}
-
-
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -361,25 +383,27 @@ function CommandLogs
 # Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
 function SoftwareInstall
 {
-	#***** Paramètres *****
-	local web_link=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
+	#***** Parameters *****
+	local weblink=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
 	local archive=$2		# Nom de l'archive contenant les fichiers du logiciel.
 	local name=$3			# Nom du logiciel.
 	local comment=$4		# Affichage d'un commentaire descriptif du logiciel lorsque l'utilisateur passe le curseur de sa souris pas dessus le fichier ".desktop".
-	local exe=$5			# Adresse du fichier exécutable du logiciel.
+	local exec=$5			# Adresse du fichier exécutable du logiciel.
 	local icon=$6			# Emplacement du fichier image de l'icône du logiciel.
 	local type=$7			# Détermine si le fichier ".desktop" pointe vers une application, un lien ou un dossier.
 	local category=$8		# Catégorie(s) du logiciel (jeu, développement, bureautique, etc...).
 
-	#***** Autres variables *****
+	#***** Variables *****
 	# Dossiers
  	local inst_path="$DIR_SOFTWARE_PATH/$name"	   # Dossier d'installation du logiciel.
 	local shortcut_dir="$DIR_HOMEDIR/Bureau/Linux-reinstall.links"	   # Dossier de stockage des raccourcis vers les fichiers exécutables des logiciels téléchargés.
 
 	# Fichiers
-	local software_dl_link="$web_link/$archive"		# Lien de téléchargement de l'archive.
+	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
 
 	#***** Code *****
+	CheckRootEUID
+	
 	EchoNewstep "Téléchargement du logiciel $(DechoN "$name")."
 
 	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.
@@ -438,13 +462,13 @@ function SoftwareInstall
 	fi
 
 	EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(DechoN "$name")."
-	ln -s "$exe" "$name"
+	ln -s "$exec" "$name"
 
 	if test "$?" == "0"; then
 		EchoSuccess "Le lien symbolique a été créé avec succès."
 		Newline
 	else
-        EchoError "Impossible de créer un lien symbolique pointant vers $(DechoE "$exe")."
+        EchoError "Impossible de créer un lien symbolique pointant vers $(DechoE "$exec")."
         Newline
 	fi
 
@@ -455,7 +479,7 @@ function SoftwareInstall
 	[Desktop Entry]
 	Name="$name"
 	Comment="$comment"
-	Exec="$inst_path/$exe"
+	Exec="$inst_path/$exec"
 	Icon="$icon"
 	Type="$type"
 	Categories="$category";

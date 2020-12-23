@@ -4,11 +4,22 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### CHECKING FOR EFFECTIVE USER IDENTIFIANT (EUID)
+#### CHECKING FOR OPERATING SYSTEM RELATED INFORMATIONS
 
-## CHECKING FOR SUPER-USER PRIVILEGES
+## CHECKING OPERATING SYSTEM TYPE
 
-# Checking if the current effective UID is not equal to 0 (root user's account)
+function CheckSupportedOSType
+{
+    if [[ "$OSTYPE" = "linux-gnu" ]]; then
+        return
+    fi
+}
+
+# -----------------------------------------------
+
+## CHECKING FOR USER IDENTIFIANT
+
+# Checking if the current effective UID (EUID) is not equal to 0 (root user's account)
 
 # Required functions and files :
 #   - HandleErrors      -> Bash-Utils/src/functions/Headers.lib
@@ -22,40 +33,7 @@ function CheckRootEUID
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CHECKING VARIABLES STATUS
-
-## STATUS VARIABLES MODIFICATIONS
-
-# This function checks the status variables values.
-function CheckVarStatus
-{
-    if [ "$PROJECT_STATUS_DEBUG" != "true" ] && [ "$PROJECT_STATUS_DEBUG" != "false" ]; then
-        EchoError "$MSG_CHECK_VARSTAT_DEBUG_FAIL"; exit 1
-        
-    elif [ "$PROJECT_STATUS_LOG" != "true" ] && [ "$PROJECT_STATUS_LOG" != "false" ]; then
-        EchoError "$MSG_CHECK_VARSTAT_LOG_FAIL"; exit 1
-        
-    elif [ -n "$PROJECT_STATUS_LOG_REDIRECT" ] && [ "$PROJECT_STATUS_LOG_REDIRECT" != "log" ] \
-        && [ "$PROJECT_STATUS_LOG_REDIRECT" != "tee" ]; then
-        # On définit quand même la variable PROJECT_STATUS_LOG_REDIRECT à "tee"
-        # pour afficher sans problèmes le contenu de la chaîne de caractères en rouge.
-        PROJECT_STATUS_LOG_REDIRECT="tee"
-        EchoError "$MSG_CHECK_VARSTAT_LOGREDIRECT_FAIL"; exit 1
-    
-    elif [ -n "$PROJECT_STATUS_ERROR" ] && [ "$PROJECT_STATUS_ERROR" != "fatal" ]; then
-        EchoError ""; exit 1
-    
-    # If the status variable's value is not a float or an integer.
-    elif [[ ! "$PROJECT_STATUS_TIME_LINE" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-        EchoError "$MSG_CHECK_VARSTAT_TIMELINE_NAN"; exit 1
-    
-    elif [[ ! "$PROJECT_STATUS_TIME_TXT" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-        EchoError "$MSG_CHECK_VARSTAT_TIMETXT_NAN"; exit 1
-    
-    fi
-}
-
-# -----------------------------------------------
+#### 
 
 ## CHECKING FOR FILES AND FOLDERS
 

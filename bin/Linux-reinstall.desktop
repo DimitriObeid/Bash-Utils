@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Linux-reinstall
+Comment=A Linux oriented installation script.
+Exec=
+Icon=/usr/local/lib/Bash-utils/res/Linux-reinstall/desktop.png
+Terminal=true
+Type=Application
+Categories=System;

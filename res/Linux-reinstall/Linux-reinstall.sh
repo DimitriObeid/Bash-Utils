@@ -23,8 +23,8 @@
 ## SOURCING THE INITALIZER FILE
 
 # shellcheck disable=SC1091
-lineno=$LINENO; if ! source "/usr/local/lib/Bash-utils/src/Initializer.sh"; then
-    echo "In $(basename "$0"), line $lineno --> Error : unable to source the initialization file."; echo; exit 1
+if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
+    echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
 fi
 
 # -----------------------------------------------
@@ -241,65 +241,7 @@ function CreateLogFile
     fi
 }
 
-# Création du dossier temporaire où sont stockés les fichiers et dossiers temporaires.
-function Mktmpdir
-{
-    #***** Modifying status *****
-    # Nothing to do now.
-    
-    #***** Code *****
-    # Tout ce qui se trouve entre les accolades suivantes est envoyé dans le fichier de logs.
-	{
-		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" \
-			"CRÉATION DU DOSSIER TEMPORAIRE $COL_JAUNE\"$DIR_TMP_NAME$COL_BLUE\" DANS LE DOSSIER $COL_JAUNE\"$DIR_TMP_PARENT\"$COL_RESET" "0"
 
-		Makedir "$DIR_TMP_PARENT" "$DIR_TMP_NAME"     # Dossier principal
-		Makedir "$DIR_TMP_PATH" "$DIR_LOG_NAME"       # Dossier d'enregistrement des fichiers de logs
-	} >> "$FILE_LOG_PATH"
-
-	# Avant de déplacer le fichier de logs, on vérifie si l'utilisateur n'a pas passé la valeur "debug" en tant que dernier argument (vérification importante, étant donné que le chemin et le nom du fichier sont redéfinis dans ce cas).
-    EchoNewstep "Déplacement du fichier de logs dans le dossier $(DechoN "$DIR_LOG_PATH")" >> "$FILE_LOG_PATH"
-    Newline
-
-	# Dans le cas où l'utilisateur ne le passe pas, une fois le dossier temporaire créé, on y déplace le fichier de logs tout en vérifiant s'il ne s'y trouve pas déjà, puis on redéfinit le chemin du fichier de logs de la variable "$FILE_LOG_PATH". Sinon, le fichier de logs n'est déplacé nulle part ailleurs dans l'arborescence.
-	if test -z "${ARGV[2]}"; then
-		FILE_LOG_PATH="$DIR_LOG_PATH/$FILE_LOG_NAME"
-
-		# On vérifie que le fichier de logs a bien été déplacé vers le dossier temporaire en vérifiant le code de retour de la commande "mv".
-		local lineno=$LINENO; mv "$PWD/$FILE_LOG_NAME" "$FILE_LOG_PATH"
-
-        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où l'argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
-        HandleErrors "$?" "IMPOSSIBLE DE DÉPLACER LE FICHIER DE LOGS VERS LE DOSSIER $(DechoE "$DIR_LOG_PATH")" "" "$lineno"
-        EchoSuccess "Le fichier de logs a été déplacé avec succès dans le dossier $(DechoS "$DIR_LOG_PATH")." >> "$FILE_LOG_PATH"
-        Newline
-    else
-        # Rappel : Dans cette situation où l'argument de débug est passé, les valeurs des variables "FILE_LOG_NAME" et "$DIR_LOG_PATH" ont été redéfinies dans la fonction "CheckArgs".
-        EchoSuccess "Le fichier $(DechoS "$FILE_LOG_NAME") reste dans le dossier $(DechoS "$PWD")." >> "$FILE_LOG_PATH"
-	fi
-}
-
-# Détection du gestionnaire de paquets principal utilisée par la distribution de l'utilisateur.
-function GetMainPackageManager
-{
-	HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0" >> "$FILE_LOG_PATH"
-
-	# On cherche la commande du gestionnaire de paquets de la distribution de l'utilisateur dans les chemins de la variable d'environnement "$PATH" en l'exécutant.
-	# On redirige chaque sortie ("STDOUT (sortie standard) si la commande est trouvée" et "STDERR (sortie d'erreurs) si la commande n'est pas trouvée")
-	# de la commande vers /dev/null (vers rien) pour ne pas exécuter la commande.
-
-	# Pour en savoir plus sur les redirections en Shell UNIX, consultez ce lien -> https://www.tldp.org/LDP/abs/html/io-redirection.html
-	command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt"
-	command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
-	command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
-
-	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
-	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
-        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
-		HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(DechoE "APT"), $(DechoE "DNF") et $(DechoE "Pacman")." "$LINENO"
-	else
-		EchoSuccess "Gestionnaire de paquets principal trouvé : $(DechoS "$PACK_MAIN_PACKAGE_MANAGER")" >> "$FILE_LOG_PATH"
-	fi
-}
 
 # Script's initialization.
 function ScriptInit

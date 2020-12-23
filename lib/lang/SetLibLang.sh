@@ -24,7 +24,7 @@ function ParseCSVLibLang
     #***** Code *****
     # Since the library files are sourced before the language's definition, it's possible to
     # call some functions which does not display messages accroding to the user's language.
-    EchoInit "$(DrawLine "$COL_GREEN" '"')" "2";
+    EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"; EchoInit
     EchoInit "In $(Decho ${BASH_SOURCE[0]}), line $(Decho "$LINENO") : DEFINING BASH-UTILS LIBRARY LANGUAGE"
     EchoInit "Setting language"
     EchoInit
@@ -52,7 +52,7 @@ function ParseCSVLibLang
 
         exit 1
     elif test "$?" -eq 2; then
-        EchoInit "CSV parsing error : the lang.csv file was not found" "1";
+        EchoInit "CSV parsing error : the $(Decho "lang.csv") file was not found" "1";
         EchoInit "" "1"
         
         EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
@@ -60,7 +60,7 @@ function ParseCSVLibLang
         exit 1
     elif test "$?" -eq 3; then
     # Renvoyer l'index de la colonne et celui de la ligne de la cellule où l'erreur s'est produite via un fichier dans lequel ces informations ont été renvoyées.
-        EchoInit "CSV parsing error : the value stored in the X, Y cell is invalid" "1";
+        EchoInit "CSV parsing error : the value stored in the $(Decho "X"), $(Decho "Y") cell is invalid" "1";
         EchoInit "" "1"
         
         EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"

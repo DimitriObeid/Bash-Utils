@@ -24,16 +24,16 @@ function ProcessingFile
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     DrawLine "$COL_RESET" "$char"
     
-    EchoNewstep "$MSG_FILE_PROCESSING_BEGIN"
+    EchoNewstep "Processing the $(DechoN "$name") file."
     Newline
     
     if $("$function"); then
-        EchoSuccess "$MSG_FILE_PROCESSING_END_SUCC"
+        EchoSuccess "End of processing the $(DechoS "$name") file"
 		DrawLine "$COL_RESET" "$char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		Newline
     else
-        EchoError "$MSG_FILE_PROCESSING_END_FAIL"
+        EchoError "End of processing the $(DechoE "$name") file"
 		DrawLine "$COL_RESET" "$char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		Newline
@@ -55,19 +55,20 @@ function OverwriteFile
     path=$1
     
     #***** Code *****
-    EchoNewstep "$MSG_FILE_NONEMPTY_1."
-	EchoNewstep "$MSG_FILE_NONEMPTY_2."
+    EchoNewstep "The $(DechoN "$path") file already exists and is not empty."
+	EchoNewstep "Overwriting data from file $(DechoN "$path")"
 	Newline
 
 	if true > "$path"; then
-		EchoSuccess "$MSG_FILE_NONEMPTY_SUCC."
+		EchoSuccess "The content of the $(DechoS "$path") file has been successfully overwritten"
 		Newline
-
-		EchoSuccess "$MSG_FILE_PROCESSING_END_SUCC."
-		DrawLine "$COL_RESET" "$block_char"
+		
+		return 0
     else
-        EchoError "$MSG_FILE_NONEMPTY_FAIL."
+        EchoError "The content of the $(DechoE "$path") file has not been overwritten"
 		Newline
+		
+		return 1
     fi
 }
 
@@ -87,50 +88,42 @@ function OverwriteFile
 function Makefile
 {
 	#***** Paramètres *****
-	local parent=$1		# Emplacement depuis la racine du dossier parent du fichier à traiter.
-	local name=$2		# Nom du fichier à traiter (dans son dossier parent).
-	local sleep_blk=$3	# Temps de pause du script avant et après la création d'un bloc d'informations sur le traitement du fichier.
-	local sleep_txt=$4	# Temps d'affichage des messages de passage à une nouvelle sous-étape, d'échec ou de succès.
+	parent=$1      # Emplacement depuis la racine du dossier parent du fichier à traiter.
+	name=$2        # Nom du fichier à traiter (dans son dossier parent).
+	sleep_blk=$3   # Temps de pause du script avant et après la création d'un bloc d'informations sur le traitement du fichier.
+	sleep_txt=$4   # Temps d'affichage des messages de passage à une nouvelle sous-étape, d'échec ou de succès.
 
 	#***** Autres variables *****
-	local path="$parent/$name"	# Chemin du fichier à traiter.
-	local block_char="'"		# Caractère composant la ligne.
+	path="$parent/$name"	# Chemin du fichier à traiter.
+	block_char="'"		# Caractère composant la ligne.
 
 	#***** Code *****
-	# On commence par dessiner la première ligne du bloc.
-	sleep "$sleep_blk"
-	DrawLine "$COL_RESET" "$block_char"
-
-	EchoNewstep "$MSG_FILE_PROCESSING_BEGIN."
-	Newline
-
-	# Si le fichier à traiter n'existe pas, on le crée avec l'aide de la commande "touch".
+	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$path" ]; then
-        EchoNewstep "$MSG_FILE_MKFILE_CREATE."
+        EchoNewstep "Creating the $(DechoN "$name") file in the parent folder $(DechoN "$parent/")."
 		Newline
 
 		touch "$path"
-        # On vérifie que le fichier a bien été créé en vérifiant le code de retour de la commande "touch" via la fonction "HandleErrors".
-        # Une erreur peut venir du fait que l'utilisateur n'a pas lancé son script en mode super-utilisateur, script qui a tenté de créer un fichier
-        # dans un dossier où l'utilisateur n'a pas le droit de créer un fichier sans privilèges du super-utilisateur
-        HandleErrors "$?" "$MSG_FILE_MKFILE_FAIL" "" "$lineno"
-        EchoSuccess "$MSG_FILE_MKFILE_SUCCESS."
+        # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
+        # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
+        # file in a folder where the user is not allowed to create a file without superuser privileges.
+        HandleErrors "$?" "THE $(DechoE "$name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." "" "$lineno"
+        EchoSuccess "The $(DechoS "$name") file was successfully created in the $(DechoS "$parent") folder."
         Newline
+        
+        return 0
 	
-	# Sinon, si le fichier à créer existe déjà ET qu'il n'est pas vide.
+	# Else, if the file to be created already exists AND it is NOT empty.
 	elif [ -f "$path" ] && [ -s "$path" ]; then
         OverwriteFile "$path"
-		return
+		return 0
 
-	# Sinon, si le fichier à créer existe déjà ET qu'il est vide.
+	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$path" ] && [ ! -s "$path" ]; then
-		EchoSuccess "$MSG_MKFILE_EMPTY."
+		EchoSuccess "The $(DechoS "$path/") file already exists in the $(DechoS "$parent/") folder and is empty."
 		Newline
 
-		EchoSuccess "$MSG_MKFILE_PROCESSING_END_SUCC."
-		DrawLine "$COL_RESET" "$block_char"
-
-		return
+		return 0
 	fi
 }
 
@@ -143,7 +136,7 @@ function GetLineFromTextFile
 {
     #***** Parameters *****
     source=$1   # File to parse
-    line=$2     # Line to get
+    line=$2     # Line to get in the file
     
     #***** Variables *****
     i=0     # Line incrementer
@@ -170,32 +163,37 @@ function GetLineFromTextFile
 
 ## (UN)COMPRESSION FUNCTIONS
 
-# Décompression des archives des logiciels selon la méthode de compression utilisée (voir la fonction "SoftwareInstall").
+# 
+function Compress
+{
+    #***** Parameters *****
+    cmd=$1      # Compression command.
+    opts=$2     # Options of the compression command.
+    path=$3     # Path to the file/folder to archivate.
+    name=$4     # Archive's name (only used into displayed messages).
+    
+    #***** Code *****
+    
+    
+    return 0
+}
+
+# Uncompressing archives according to the used compression method.
 function Uncompress
 {
     #***** Paramètres *****
-    cmd=$1     # Commande de décompression propre à une méthode de compression.
+    cmd=$1      # Compression command.
     # TODO : Vérifier si cette procédure est bonne
-    option=$2  # Option de la commande de décompression (dans le cas où l'appel d'une option n'est pas obligatoire, laisser une chaîne de caractères vide lors de l'appel de la fonction).
-    path=$3    # Chemin vers l'archive à décompresser.
-    name=$4    # Nom de l'archive.
+    opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    path=$3     # Path to the l'archive to uncompress.
+    name=$4     # Archive's name (only used into displayed messages).
 
     #***** Code *****
     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
     "$cmd $option $path"
-
     HandleErrors "$?" "LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$name") A ÉCHOUÉE"
-    
     EchoSuccess "La décompression de l'archive $(DechoS "$name") s'est effectuée avec brio."
     Newline
-}
-
-function Compress
-{
-    #***** Parameters *****
     
-    #***** Code *****
-    
-    
-    return
+    return 0
 }

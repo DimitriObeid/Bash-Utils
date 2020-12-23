@@ -26,7 +26,7 @@ fi
 BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
 
 # Bash-Utils sub-folders paths.
-BASH_UTILS="$BASH_UTILS_ROOT/src"
+BASH_UTILS="$BASH_UTILS_ROOT/lib"
 BASH_UTILS_BIN="$BASH_UTILS_ROOT/bin"
 BASH_UTILS_CONF="$BASH_UTILS_ROOT/config"
 BASH_UTILS_TMP="$BASH_UTILS_ROOT/tmp"
@@ -35,7 +35,7 @@ BASH_UTILS_TMP="$BASH_UTILS_ROOT/tmp"
 BASH_UTILS_INIT_CONF_STATUS="$BASH_UTILS_CONF/InitStatus.conf"
 BASH_UTILS_PROJECT_CONF_STATUS="$BASH_UTILS_CONF/ProjectStatus.conf"
 
-# "src" folder's content.
+# "lib" folder's content.
 BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
 BASH_UTILS_LANG="$BASH_UTILS/lang"
 BASH_UTILS_VARS="$BASH_UTILS/variables"
@@ -328,22 +328,20 @@ fi
 # -----------------------------------------------
 
 ## INITIALIZATION SCRIPT'S LOG FILE
-if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ]; then
-    if [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
-        EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
+if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ] && [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
+    EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
 
-        if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
-            EchoInit "Creating $INITIALIZER_FILE_LOG_DIR as intitialisation process log file's parent directory."
-            EchoInit "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")" || { echo "In ${BASH_SOURCE[0]}, line $(( LINENO-2 )) --> Error : unable to create the directory"; exit 1; }
-            EchoInit
-        fi
+    if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
+        EchoInit "Creating $INITIALIZER_FILE_LOG_DIR as intitialisation process log file's parent directory."
+        EchoInit "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")" || { echo "In ${BASH_SOURCE[0]}, line $(( LINENO-2 )) --> Error : unable to create the directory"; exit 1; }
+        EchoInit
+    fi
 
-        if touch "$INITIALIZER_FILE_LOG_PATH"; then
-            EchoInit "Created $INITIALIZER_FILE_LOG_PATH"; EchoInit
-        else
-            EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-3 )) --> Failed to create the initialization process log file."
-            exit 1
-        fi
+    if touch "$INITIALIZER_FILE_LOG_PATH"; then
+        EchoInit "Created $INITIALIZER_FILE_LOG_PATH"; EchoInit
+    else
+        EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-3 )) --> Failed to create the initialization process log file."
+        exit 1
     fi
 fi
 
@@ -376,9 +374,9 @@ fi
 ## CHECKING SUB-FOLDERS PRESENCE
 
 EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : CHECKING FOR BASH-UTILS SUB-FOLDERS"
-CheckSubFolder "$BASH_UTILS_LANG"
-CheckSubFolder "$BASH_UTILS_FUNCTS"
-CheckSubFolder "$BASH_UTILS_VARS"
+CheckSubFolder "$BASH_UTILS_LANG" "$LINENO"
+CheckSubFolder "$BASH_UTILS_FUNCTS" "$LINENO"
+CheckSubFolder "$BASH_UTILS_VARS" "$LINENO"
 EchoInit
 
 # -----------------------------------------------
@@ -392,9 +390,9 @@ done; EchoInit
 
 
 # Sourcing the variables files.
-EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
-    SourceFile "$f" "variables file" "$LINENO"
-done; EchoInit; EchoInit
+# EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
+#     SourceFile "$f" "variables file" "$LINENO"
+# done; EchoInit; EchoInit
 
 # -----------------------------------------------
 
@@ -412,14 +410,14 @@ EchoInit; EchoInit
 #### END OF THE INITIALIZER FILE
 
 EchoInit "$(DrawLine "$COL_RESET" "-")" "2"
-EchoInit "$MSG_INITEND_END_OF_LIB_INIT";
+EchoInit "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW";
 EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit
 
 # shellcheck disable=SC1090
-if ! source "$BASH_UTILS_PROJECT_CONF_STATUS"; then
-    EchoInit "$MSG_INITEND_SOURCE_PROJECT_CONF_FAIL" "1"; EchoInit "1"
-    exit 1
-else
-    EchoInit "$MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS"
+if source "$BASH_UTILS_PROJECT_CONF_STATUS"; then
+    EchoInit "Successfully sourced the $PROJECT_NAME's file variables status configuration file."
     EchoInit
+else
+    EchoInit "In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $PROJECT_NAME's file variables status configuration file." "1"; EchoInit "1"
+    exit 1
 fi

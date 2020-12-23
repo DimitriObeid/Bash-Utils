@@ -30,10 +30,10 @@ function ChownRec
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$path" ]; then
-        HandleError "" "" "" ""
+        HandleError "1" "" "" ""
     fi
 
-    EchoNewstep "$MSG_PERM_CHOWNREC."
+    EchoNewstep "Recursive change of the ownership rights of the new folder $(DechoN "$path/") from $(DechoN "$current_owner") to $(DechoN "$new_owner")"
 	Newline
 
     # On change les droits du fichier créé par le script.
@@ -43,17 +43,15 @@ function ChownRec
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$new_owner" "$path"; then
-		EchoSuccess "$MSG_PERM_CHOWNREC_SUCCESS."
+		EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
 		Newline
 
-		return
+		return 0
 	else
-        EchoError "$MSG_PERM_CHOWNREC_FAIL."
-		EchoError "$MSG_PERM_CHOWNREC_FAIL_ADVICE :"
-		echo '	chown -R $current_owner $path'
+        EchoError "Unable to change the rights of the $(DechoE "$path/") folder"
 		Newline
 
-		return
+		return 1
     fi
 }
 
@@ -86,30 +84,43 @@ function Chown
 
     # If the path passed as argument doesn't exists.
     if [ -d "$path" ]; then
-        EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_DIR"
+        EchoNewstep "Changing the ownership rights of the  $(DechoN "$path/") folder from $(DechoN "$current_owner") to $(DechoN "$new_owner")."
         Newline
-    else
-        # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
-        if [ -f "$path" ]; then
-            EchoNewstep "$MSG_PERMISSIONS_CHOWN_PROCESSING_FILE"
-            Newline
-        else
-            HandleError "" "" "" ""
-        fi
-
-    fi
-
+        
     # Changing ownership
     if chown -v "$new_owner" "$path"; then
-        EchoSuccess "$MSG_PERMISSIONS_CHOWN_FILE_SUCCESS"
+        EchoSuccess "The rights of the $(DechoS "$path") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
         Newline
 
         return 0
     else
-        HandleErrors "$?" "$MSG_PERMISSIONS_CHOWN_FILE_FAIL"
+        HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path/") folder."
         Newline
 
         return 1
+    fi
+    else
+        # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
+        if [ -f "$path" ]; then
+            EchoNewstep "Changing the ownership rights of the  $(DechoN "$path/") file from $(DechoN "$current_owner") to $(DechoN "$new_owner")."
+            Newline
+            
+                # Changing ownership
+            if chown -v "$new_owner" "$path"; then
+                EchoSuccess "The rights of the $(DechoS "$path") file have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")."
+                Newline
+
+                return 0
+            else
+                HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path/") file."
+                Newline
+
+                return 1
+            fi
+        else
+            HandleError "" "" "" "" && return 1
+        fi
+
     fi
 }
 
