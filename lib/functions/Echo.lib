@@ -21,7 +21,7 @@ function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Succ
 
 # Error message
 
-# Required functions and files into the "Bash-Utils/src/functions" folder :
+# Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     -> Checkings.lib
 function EchoError
 {
@@ -34,7 +34,10 @@ function EchoError
     sleep "$STAT_TIME_TXT"
 }
 
-# Normal message (without any color, except the terminal's messages default color), with redirection checking.
+# Normal message (without any extra color), with redirection checking.
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
 function EchoMsg
 {
     #***** Parameters *****
@@ -47,6 +50,9 @@ function EchoMsg
 }
 
 # New sub-step message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
 function EchoNewstep
 {
     #***** Parameters *****
@@ -59,6 +65,9 @@ function EchoNewstep
 }
 
 # Success message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
 function EchoSuccess
 {
     #***** Parameters *****
@@ -78,6 +87,9 @@ function EchoSuccess
 ## LINE BREAKS ACCORDING TO THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
 
 # Redirecting the output of the "echo" command
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
 function Newline
 {
     CheckProjectLogStatus

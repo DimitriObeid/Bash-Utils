@@ -110,11 +110,11 @@ function CheckArgs
 
 		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
 		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-		echo "sudo $0 $\username $\installation"
+		echo "sudo $0 \$username \$installation"
 		Newline
 
 		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
-		echo "    $0 $\username $\installation"
+		echo "    $0 \$username \$installation"
 		Newline
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL" \
@@ -220,11 +220,11 @@ function CreateLogFile
 		Newline
 		
 		EchoNewstep "Operating system general informations :"
-		cat "/etc/os-release" | xargs EchoMsg
+		EchoMsg "$(cat "/etc/os-release")"
 		Newline
 		
 		EchoNewstep "Bash version :"
-		echo "$BASH_VERSION" | xargs EchoMsg
+		EchoMsg "$BASH_VERSION"
 		Newline
 		
 
@@ -595,22 +595,22 @@ function LaravelInstall
     # PackInstall "$main" php-xml               # Le paquet étant déja installé avec Apache 2, il reste là comme rappel, au cas où vous souhaitez récupérer la fonction "LaravelInstall" pour l'implémenter dans un script personnel
     # PackInstall "$main" php-zip               # Le paquet étant déja installé avec Apache 2, il reste là comme rappel, au cas où vous souhaitez récupérer la fonction "LaravelInstall" pour l'implémenter dans un script personnel
     PackInstall "$main" unzip
-    
+
     # Modification de la valeur de la variable "cgi.fix_pathinfo" (booléen) en la mettant à 0
     local lineno=$LINENO; sed -ie 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' "$php_ini_path"
     HandleErrors "$?" "IMPOSSIBLE DE TROUVER LE FICHIER $(DechoE "$php_ini_path")" \
         "Vérifiez que le dossier $(DechE "/etc/php/7.4") existe." ""
-    
+
     # Redémarrage du serveur Apache après avoir modifié le fichier "php.ini"
     systemctl restart apache2
-    
+
     # Installation de Composer pour gérer les paquets PHP
     curl -sS https://getcomposer.org/installer | php
     mv -v composer.phar /usr/local/bin/composer
-    HandleFatalErrors "$?" "" "" ""
+    HandleErrors "$?" "" "" ""
     composer --version
-    HandleFatalErrors "$?" "" "" ""
-    
+    HandleErrors "$?" "" "" ""
+
     # Installation de Laravel
     composer global require laravel/installer
     
@@ -620,8 +620,8 @@ function LaravelInstall
 EOF
 
     # Mise à jour du fichier de configuration "~/.bashrc" et vérification de l'application de la modification de la variable d'environnement
-    # shellcheck disable=SC1091
-    source "$DIR_HOMEDIR/.bashrc"
+    # shellcheck disable=SC1090
+    source "$DIR_HOME/.bashrc"
     echo "$PATH" | grep "$envpath"
     
     HandleErrors "$?" "LA VARIABLE D'ENVIRONNEMENT $(DechoE "\$PATH") N'A PAS ÉTÉ MODIFÉE" \

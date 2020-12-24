@@ -43,7 +43,8 @@ function CheckRootEUID
 function CheckProjectLogPath
 {
     if [ -z "$PROJECT_LOG_PATH" ]; then
-        EchoError "$MSG_CHECK_LOG_PATH_FAIL"; exit 1
+        EchoError "$TXT_RED_TAB Error : no path provided into the PROJECT_LOG_PATH variable.$COL_RESET"; echo;
+        exit 1
     fi
 }
 
@@ -54,13 +55,13 @@ function CheckProjectLogStatus
     string=$1
 
     #**** Code *****
-    CheckProjectLogPath
     CheckProjectStatusVars
+    CheckProjectLogPath
     
-    if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$PROJECT_STATUS_LOG_REDIRECT" ]; then
-        if [ "$PROJECT_STATUS_LOG_REDIRECT" = "log" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 1 ]; then
+    if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
             echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "" ; exit 1; }
-        elif [ "$PROJECT_STATUS_LOG_REDIRECT" = "tee" ] || [ "$PROJECT_STATUS_LOG_REDIRECT" -eq 2 ]; then
+        elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
             echo "$string"
             echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo ""; exit 1; }
         fi
@@ -79,7 +80,7 @@ function HandleErrors
 	#***** Paramètres *****
 	local return_code=$1       # Code de retour de la dernière commande lancée
 	local error_string=$2      # Chaîne de caractères du type d'erreur à afficher.
-	local advise_string=$3     # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+	local advice_string=$3     # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
     local lineno=$4            # Ligne à laquelle le message d'erreur s'est produite.
 
 	# ***** Code *****
@@ -87,16 +88,21 @@ function HandleErrors
         return
     else
         if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
-            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : ${error_string^^}"
+            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : $(Decho "${error_string^^}") !"
 
             EchoError "A fatal error occured :"
             EchoError "$error_string"
             Newline
 
-            EchoError "$advise_string"
-            Newline
-
-            EchoError "The fatal error in question occurred in the line $lineno."
+            if [ -z "$advice_string" ]; then
+                EchoError "No advice to give."
+                Newline
+            else
+                EchoError "$advice_string"
+                Newline
+            fi
+                
+            EchoError "The fatal error in question occurred in the line $(DechoE "$lineno")."
             Newline
 
             EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."
@@ -110,7 +116,15 @@ function HandleErrors
             EchoError "$error_string"
             Newline
             
-            EchoError "The error in question occurred in the line $lineno."
+            if [ -z "$advice_string" ]; then
+                EchoError "No advice to give."
+                Newline
+            else
+                EchoError "$advice_string"
+                Newline
+            fi
+            
+            EchoError "The error in question occurred in the line $(DechE "$lineno")."
             Newline
             
             EchoNewstep "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")"

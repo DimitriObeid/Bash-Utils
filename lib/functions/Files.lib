@@ -20,13 +20,12 @@ function ProcessingFile
     char="'"
     
     #***** Code *****
-    # On commence par dessiner la première ligne du bloc.
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     DrawLine "$COL_RESET" "$char"
     EchoNewstep "Processing the $(DechoN "$name") file."
     Newline
     
-    if $("$function"); then
+    if "$function"; then
         EchoSuccess "End of processing the $(DechoS "$name") file"
 		DrawLine "$COL_RESET" "$char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
