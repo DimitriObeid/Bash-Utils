@@ -3,3 +3,49 @@
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### READING KEYBOARD INPUTS
+
+## GETTING ANSWERS FROM A QUESTION
+
+# This function allows to test the cases where the user answers by "yes", "no" or something else than "yes" or "no".
+# The two comas following directly the "$ans_yesno" between the braces mean that the answers are not case sensitive.
+
+# Featured functions and files from the "functions" folder :
+#   - EchoError         -> Echo.lib
+#   - EchoNewstep       -> Echo.lib
+#   - EchoSuccess       -> Echo.lib
+#   - Newline           -> Echo.lib
+function YesNo
+{
+    #***** Parameters *****
+    description=$1
+    ans_yes=$2
+    ans_no=$3
+
+    #***** Code *****
+    EchoNewstep "$description"
+    Newline
+    
+    read -rp "Enter your answer : " ans_yesno
+    if [ -n "$STAT_LOG_REDIRECT" ]; then
+        echo "[$TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$PROJECT_LOG_PATH"
+    fi; Newline
+    
+    case ${ans_yesno,,} in
+        "oui" | "yes")
+            EchoSuccess "$ans_yes"
+            Newline
+            ;;
+        "non" | "no")
+            EchoError "$ans_no"
+            Newline
+            ;;
+        *)
+            EchoError "Enter a valid answer"
+            EchoNewstep "The valid answers are $(DechoN "yes") and $(DechoN "no")"
+            Newline
+            
+            YesNo "$description" "$ans_yes" "$ans_no"
+    esac
+}

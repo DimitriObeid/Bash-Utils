@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script de réinstallation | Reinstallation script
+# School and home software and packages installation script
 # Version : 2.0
 
 # To debug this script when needed, type the following command :
@@ -68,19 +68,16 @@ ARGV=("$@")
 ## MANDATORY ARGUMENTS
 
 # Arguments to call after the script's execution command to make it running correctly.
-ARG_USERNAME=$1         # First argument : username's account.
-ARG_USERNAME_INDEX='1'  # Username argument's index.
-
-ARG_INSTALL=$2          # Second argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
-ARG_INSTALL_INDEX='2'   # Packages installation argument's index.
+ARG_INSTALL=$1          # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
+ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 
 # -----------------------------------------------
 
 # TODO : Retirer ces lignes obsolètes
 ## OPTIONAL ARGUMENTS
 
-ARG_DEBUG=$3            # Debug utilitary  | Argument servant d'utilitaire de déboguage.
-ARG_DEBUG_INDEX='3'     # Debug argument's index.
+ARG_DEBUG=$2            # Debug utilitary  | Argument servant d'utilitaire de déboguage.
+ARG_DEBUG_INDEX='2'     # Debug argument's index.
 
 ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
 
@@ -110,39 +107,26 @@ function CheckArgs
 
 		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
 		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-		echo "sudo $0 \$username \$installation"
+		echo "sudo $0 \$installation"
 		Newline
 
 		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
-		echo "    $0 \$username \$installation"
+		echo "    $0 \$installation"
 		Newline
 
-		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL" \
-            "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en mode root" \
+		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
+            "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
             "$LINENO"
     fi
 
-	# If no value is passed as username argument.
-	if [ -z "$ARG_USERNAME" ]; then
-		EchoError "Veuillez lancer le script en plaçant votre nom d'utilisateur après la commande d'exécution du script :"
-		echo "    sudo $MSG_LR_CHKARGS_ARGS"
-		Newline
-
-		HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ VOTRE NOM D'UTILISATEUR EN ARGUMENT !" \
-            "Veuillez entrer votre nom d'utilisateur juste après le nom du script" "$LINENO"
-
-	# Else, if the username argument doesn't match to any existing user account.
-	elif ! id -u "$ARG_USERNAME" > /dev/null; then
-        Newline; HandleErrors "NOM D'UTILISATEUR INEXISTANT !" \
-            "Veuillez entrer correctement votre nom d'utilisateur." "$LINENO"
-
-		exit 1
-	fi
-
-	# If the second mandatory argument is not passed.
+	# If the mandatory installation tye argument is not passed.
 	if [ -z "$ARG_INSTALL" ]; then
-        Newline; HandleErrors "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN DEUXIÈME ARGUMENT !" \
-            "Veuillez entrez une seule valeur après votre nom d'utilisateur. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
+        EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
+        echo "    sudo $0 \$username"
+        Newline
+        
+        HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
+            "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
             "$LINENO"
 
         exit 1
@@ -157,8 +141,8 @@ function CheckArgs
                 VER_INSTALL="$ARG_INSTALL"
                 ;;
             *)
-                Newline; HandleErrors "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
-                "Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$LINENO"
+                Newline; HandleErrors "1" "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
+                "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$LINENO"
 
                 exit 1
                 ;;
@@ -219,6 +203,10 @@ function CreateLogFile
 		EchoNewstep "$MSG_CRLOGFILE_GETOSINFOS :"
 		Newline
 		
+		EchoNewstep "Operating system family :"
+		CheckSupportedOS && EchoMsg "$OSTYPE"
+		Newline
+		
 		EchoNewstep "Operating system general informations :"
 		EchoMsg "$(cat "/etc/os-release")"
 		Newline
@@ -257,93 +245,23 @@ function ScriptInit
 	} >> "$FILE_LOG_PATH"
 
 	# On demande à l'utilisateur de bien confirmer son nom d'utilisateur, au cas où son compte utilisateur cohabite avec d'autres comptes et qu'il n'a pas passé le bon compte en argument.
-	EchoNewstep "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}"
-	EchoNewstep "Est-ce correct ? (oui/non)"
 	Newline
 
-	# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
-	# Les deux virgules suivant directement le "rep_script_init" entre les accolades signifient que les mêmes réponses avec des
-	# majuscules sont permises, peu importe où elles se situent dans la chaîne de caractères (pas de sensibilité à la casse).
-	function ReadScriptInit
-	{
-		read -rp "Entrez votre réponse : " rep_script_init
-		echo "$rep_script_init" >> "$FILE_LOG_PATH"
-		Newline
-
-		case ${rep_script_init,,} in
-			"oui" | "yes")
-				return
-				;;
-			"non" | "no")
-				EchoError "Abandon"
-				Newline
-
-				exit 0
-				;;
-			*)
-				EchoError "Réponses attendues : $(DechoE "oui") ou $(DechoE "non") (pas de sensibilité à la casse)."
-				Newline
-
-				ReadScriptInit
-				;;
-		esac
-	}
-
-	ReadScriptInit
-
-	return
+	YesNo "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}.$(Newline)Est-ce correct ? (oui/non)" \
+        "$(return)" "Abandon $(exit 0)"
 }
 
 # Demande à l'utilisateur s'il souhaite vraiment lancer le script, puis connecte l'utilisateur en mode super-utilisateur.
 function LaunchScript
 {
     # Affichage du header de bienvenue
-    HeaderStep "BIENVENUE DANS L'INSTALLATEUR DE PROGRAMMES POUR LINUX : VERSION $MAIN_SCRIPT_VERSION"
+    HeaderStep "BIENVENUE DANS L'INSTALLATEUR DE PROGRAMMES POUR ${OSTYPE^^} : VERSION $MAIN_SCRIPT_VERSION"
     EchoNewstep "Début de l'installation."
 	Newline
 
-	EchoNewstep "Assurez-vous d'avoir lu au moins le mode d'emploi $(DechoN "(Mode d'emploi.odt)") avant de lancer l'installation."
-    EchoNewstep "Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)."
-	Newline
-
-	# Fonction d'entrée de réponse sécurisée et optimisée demandant à l'utilisateur s'il est sûr de lancer le script.
-	function ReadLaunchScript
-	{
-        # On demande à l'utilisateur d'entrer une réponse.
-		read -rp "Entrez votre réponse : " rep_launch_script
-		echo "$rep_launch_script" >> "$FILE_LOG_PATH"
-		Newline
-
-		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
-		case ${rep_launch_script,,} in
-	        "oui")
-				EchoSuccess "Vous avez confirmé vouloir exécuter ce script."
-				EchoSuccess "C'est parti !!!"
-
-				return
-	            ;;
-	        "non")
-				EchoError "Le script ne sera pas exécuté."
-	            EchoError "Abandon"
-				Newline
-
-				exit 0
-	            ;;
-            # Si une réponse différente de "oui" ou de "non" est rentrée.
-			*)
-				Newline
-
-				EchoNewstep "Veuillez répondre EXACTEMENT par $(DechoN "oui") ou par $(DechoN "non")."
-				Newline
-
-				# On rappelle la fonction "ReadLaunchScript" en boucle tant qu"une réponse différente de "oui" ou de "non" est entrée.
-				ReadLaunchScript
-				;;
-	    esac
-	}
-
-	# Appel de la fonction "ReadLaunchScript", car même si la fonction est définie dans la fonction "LaunchScript", ses instructions ne sont pas lues automatiquement.
-	ReadLaunchScript
+	YesNo "Assurez-vous d'avoir lu au moins le mode d'emploi $(DechoN "(Mode d'emploi.odt)") avant de lancer l'installation.$(Newline)Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)." \
+        "Vous avez confirmé vouloir exécuter ce script.$(Newline)Début de l'exécution. $(return)" \
+        "Le script ne sera pas exécuté.$(Newline)Abandon.$(exit 0)"
 }
 
 # -----------------------------------------------

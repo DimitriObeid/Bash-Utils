@@ -77,6 +77,7 @@ function Chown
     current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
     new_owner=$2
     path=$3
+    method=$4   # Recursive swapping or not.
     
     #***** Code *****
     # The "chown" command has to be used with super-user privileges,
@@ -87,40 +88,57 @@ function Chown
         EchoNewstep "Changing the ownership rights of the  $(DechoN "$path/") folder from $(DechoN "$current_owner") to $(DechoN "$new_owner")."
         Newline
         
-    # Changing ownership
-    if chown -v "$new_owner" "$path"; then
-        EchoSuccess "The rights of the $(DechoS "$path") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
-        Newline
+        # Changing ownership recursively.
+        if [ "$method" = '-R' ]; then
+            if chown -Rv "$new_owner" "$path"; then
+                EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
+                Newline
 
-        return 0
-    else
-        HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path/") folder."
-        Newline
+                return 0
+            
+            else
+                EchoError "Unable to change the rights of the $(DechoE "$path/") folder"
+                Newline
 
-        return 1
-    fi
+                return 1
+            fi
+        else
+            HandleError "1" "" "" ""
+        fi
+        
+        # Changing ownership non-recursively.
+        if chown -v "$new_owner" "$path"; then
+            EchoSuccess "The rights of the $(DechoS "$path") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")."
+            Newline
+
+            return 0
+        else
+            HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path/") folder !"
+            Newline
+
+            return 1
+        fi
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$path" ]; then
             EchoNewstep "Changing the ownership rights of the  $(DechoN "$path/") file from $(DechoN "$current_owner") to $(DechoN "$new_owner")."
             Newline
-            
-                # Changing ownership
+
+            # Changing ownership
             if chown -v "$new_owner" "$path"; then
                 EchoSuccess "The rights of the $(DechoS "$path") file have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")."
                 Newline
 
                 return 0
             else
-                HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path/") file."
+                HandleErrors "$?" "Unable to change the rights of the $(DechoE "$path") file !"
                 Newline
 
                 return 1
             fi
         else
-            HandleError "" "" "" "" && return 1
+            HandleErrors "1" "THE $(DechoE "$path") FILE DOESN'T EXISTS" && return 1
         fi
-
     fi
 }
 

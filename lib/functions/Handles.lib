@@ -4,19 +4,6 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### CHECKING FOR OPERATING SYSTEM RELATED INFORMATIONS
-
-## CHECKING OPERATING SYSTEM TYPE
-
-function CheckSupportedOSType
-{
-    if [[ "$OSTYPE" = "linux-gnu" ]]; then
-        return
-    fi
-}
-
-# -----------------------------------------------
-
 ## CHECKING FOR THE IDENTIFIANTS
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID)
@@ -60,10 +47,10 @@ function CheckProjectLogStatus
     
     if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "" ; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$COL_RED Unable to write into the $PROJECT_LOG_PATH file$COL_RESET"; exit 1; }
         elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
             echo "$string"
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo ""; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$COL_RED Unable to write into the $PROJECT_LOG_PATH file$COL_RESET"; exit 1; }
         fi
     else
         echo "$string"
@@ -88,7 +75,7 @@ function HandleErrors
         return
     else
         if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
-            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : $(Decho "${error_string^^}") !"
+            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : $(Decho "${error_string^^}")"
 
             EchoError "A fatal error occured :"
             EchoError "$error_string"
@@ -101,10 +88,14 @@ function HandleErrors
                 EchoError "$advice_string"
                 Newline
             fi
+            
+            if [ -z "$lineno" ]; then
+                false
+            else
+                EchoError "The fatal error in question occurred in the line $(DechoE "$lineno")."
+                Newline
+            fi
                 
-            EchoError "The fatal error in question occurred in the line $(DechoE "$lineno")."
-            Newline
-
             EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."
             Newline
 
@@ -124,8 +115,12 @@ function HandleErrors
                 Newline
             fi
             
-            EchoError "The error in question occurred in the line $(DechE "$lineno")."
-            Newline
+            if [ -z "$lineno" ]; then
+                false
+            else
+                EchoError "The error in question occurred in the line $(DechE "$lineno")."
+                Newline
+            fi
             
             EchoNewstep "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")"
             Newline

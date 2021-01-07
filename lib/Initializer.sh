@@ -176,6 +176,8 @@ function EchoInit
                 if [ -n "$string" ] || [ -z "$string" ]; then
                     echo "$string" 2>&1 | tee -a "$INITIALIZER_FILE_LOG_PATH" || { lineno_stat=$LINENO; echo "$unable"; exit 1; }
                 fi
+                
+                if [ -n "$INITIALIZER_STATUS_DISPLAY_TIME" ]; then sleep "$INITIALIZER_STATUS_DISPLAY_TIME"; fi
             else
                 lineno_stat=$LINENO; echo "$incorrect"
                 lineno_stat=$LINENO; echo "$datelog $incorrect" >> "$INITIALIZER_FILE_LOG_PATH"; exit 1
@@ -404,8 +406,10 @@ done; EchoInit; EchoInit
 
 #### END OF THE INITIALIZER FILE
 
+# EchoInit "$(HeaderBase "$COL_GREEN" "-" "$COL_GREEN" "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW")"
+
 EchoInit "$(DrawLine "$COL_RESET" "-")" "2"
-EchoInit "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW";
+EchoInit "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW"
 EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit
 
 # shellcheck disable=SC1090

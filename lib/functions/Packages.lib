@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 ## WARNING !!
-# The current supported operating systems are Linux based OS.
+# The currently supported operating systems are Linux based OS.
+
+# The currently supported packages managers are APT (Debian based),
+# DNF (RHEL and Fedora based) and Pacman (Arch Linux and Manjaro based).
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -57,7 +60,7 @@ function GetMainPackageManager
 #   - 
 #   - 
 #   - 
-function WriteInstallScript
+function WritePackageProcessingScript
 {
 	# Creating the folder containing the packages treatment script and the files containing the packages search and installation commands.
 	HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"

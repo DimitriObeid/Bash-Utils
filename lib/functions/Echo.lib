@@ -9,11 +9,28 @@
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR.
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (header (H), moving to a new sub-step (N), error (E) or success (S)).
 
-function Decho { local string=$1; echo "$COL_CYAN$string$COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
-function DechoE { local string=$1; echo "$COL_CYAN$string$COL_RED"; }     # Error message
-function DechoH { local string=$1; echo "$COL_BLUE$string$COL_CYAN"; }    # Header text
-function DechoN { local string=$1; echo "$COL_CYAN$string$COL_YELLOW"; }  # New sub-step message
-function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Success message
+function Decho { string=$1; echo "$COL_CYAN$string$COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+function DechoE { string=$1; echo "$COL_CYAN$string$COL_RED"; }     # Error message
+
+# Header text
+function DechoH
+{
+    #***** Parameters *****
+    string=$1
+    
+    #***** Variables *****
+    new_color="$COL_YELLOW"
+    
+    #***** Code *****
+    if [ "$STAT_COLOR_TXT" = "$COL_CYAN" ]; then
+        echo "$new_color$string$STAT_COLOR_TXT"
+    else
+        echo "$COL_CYAN$string$STAT_COLOR_TXT"
+    fi
+}
+
+function DechoN { string=$1; echo "$COL_CYAN$string$COL_YELLOW"; }  # New sub-step message
+function DechoS { string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Success message
 
 # -----------------------------------------------
 
@@ -26,7 +43,7 @@ function DechoS { local string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Succ
 function EchoError
 {
     #***** Parameters *****
-    local string=$1
+    string=$1
 
     #***** Code *****   
     CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
@@ -41,7 +58,7 @@ function EchoError
 function EchoMsg
 {
     #***** Parameters *****
-    local string=$1
+    string=$1
 
     #***** Code *****
     CheckProjectLogStatus "$string"
@@ -56,7 +73,7 @@ function EchoMsg
 function EchoNewstep
 {
     #***** Parameters *****
-    local string=$1
+    string=$1
 
     #***** Code *****
     CheckProjectLogStatus "$TXT_YELLOW_TAB $string$COL_RESET"
@@ -71,7 +88,7 @@ function EchoNewstep
 function EchoSuccess
 {
     #***** Parameters *****
-    local string=$1
+    string=$1
 
     #***** Code *****
     CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET"
