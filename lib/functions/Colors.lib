@@ -4,9 +4,9 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### COLORING CHARACTERS
+#### COLORS PROCESSING
 
-## 
+## COLORING CHARACTERS
 
 #
 function Color
