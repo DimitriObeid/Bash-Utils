@@ -20,7 +20,9 @@ function DrawLine
     # If the value of the "$line_color" parameter (which stores the text's color encoding) is not empty,
     # then we write the color's encoding into the terminal, which displays the color, and not its encoding in text.
     
-    # The color's encoding can be written via the "tput setaf $value" command. The line is empty before the first ASCII characters if the first parameter "$line_color" is passed as an empty string, which means that no "tput setaf $value" command was executed.
+    # The color's encoding can be written via the "tput setaf $value" command. The line is empty before the first
+    # ASCII characters if the first parameter "$line_color" is passed as an empty string, which means that no
+    # "tput setaf $value" command was executed.
 
     # Since we want to write the characters composing the header line after the color encoding string, we use the options
 	# '-n' (no line breaks) and '-e' (interpret backslashes) of the "echo" command to avoid making a line break after the
@@ -72,8 +74,8 @@ function DrawLine
 function HeaderBase
 {
 	#***** Parameters *****
-	line_color_=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	line_char_=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	line_color=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	line_char=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	string_color=$3	   # Définition de la couleur de la chaîne de caractères du header.
 	string_txt=$4      # Chaîne de caractères affichée dans chaque header.
 	
@@ -83,9 +85,9 @@ function HeaderBase
 	#***** Code *****
 	Newline
 
-	EchoMsg "$(DrawLine "$line_color_" "$line_char_")"
+	EchoMsg "$(DrawLine "$line_color" "$line_char")"
 	EchoMsg "$string_color##> $string_txt$COL_RESET"
-	EchoMsg "$(DrawLine "$line_color_" "$line_char_")"
+	EchoMsg "$(DrawLine "$line_color" "$line_char")"
 	Newline
 
 	sleep "$STAT_TIME_HEADER"

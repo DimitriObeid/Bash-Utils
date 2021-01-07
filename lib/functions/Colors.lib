@@ -14,29 +14,20 @@ function Color
     #***** Parameters *****
     color=$1
     chars=$2
-    
+
     #***** Code *****
-    if [ "$chars" = 'line' ] || [ "$chars" = 'l' ]; then
-        CheckLineColor "$color"
-        
-        # As the "$COL_RESET" variable stores the "tput sgr0" command, calling it here won't change anything.
-        if [ "$color" = "$(tput sgr0)" ]; then
-            # As the command is run in the condition, calling the "tput sgr0" command will execute it for a second time.
-            return
-        else
-            tput setaf "$color"
-        fi
-        
-    elif [ "$chars" = 'text' ] || [ "$chars" = 't' ]; then
-        CheckLineColor "$color"
-        
-        if [ "$color" = "$(tput sgr0)" ]; then
-            return
-        else
-            tput setaf "$color"
-        fi
-        
+    if [ "$color" = "$(tput sgr0)" ]; then
+        # As the command is run in the condition, calling the "tput sgr0" command will execute it for a second time.
+        return
     else
-        echo "$(tput setaf) Error :$(tput sgr0) The \"Color\" function's \"chars\" argument is incorrect."
+        CheckLineColor
+        if [ "$chars" = 'line' ] || [ "$chars" = 'l' ]; then
+            echo "$(tput setaf "$color")"
+        elif [ "$chars" = 'text' ] || [ "$chars" = 't' ]; then
+            echo "$(tput setaf "$color")"
+        else
+            echo "$(tput setaf 196) Error :$(tput sgr0) The \"Color\" function's \"chars\" argument is incorrect."
+            exit 1
+        fi
     fi
 }

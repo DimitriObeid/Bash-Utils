@@ -33,10 +33,15 @@ function CheckLineColor
     color_code=$1
 
     #***** Code *****
-    if [ "$color_code" -lt 0 ] || [ "$color_code" -gt 0 ]; then
-        echo "$TXT_RED_TAB Error : the \"tput setaf\" command's value is incorrect.$COL_RESET"
-    elif [ "$color_code" != "$(tput sgr0)" ]; then
-        echo "$TXT_RED_TAB Error : the \"tput\" command's option is incorrect.$COL_RESET"
+    if [ "$color_code" != "$(tput sgr0)" ]; then
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is not \"sgr0\"."
+        exit 1
+    elif [ "$color_code" -lt 0 ] && [ "$color_code" -gt 0 ]; then
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput setaf\" command's value is incorrect."
+        exit 1
+    else
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is incorrect."
+        exit 1
     fi
 }
 
