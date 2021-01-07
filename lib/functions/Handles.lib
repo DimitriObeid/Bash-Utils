@@ -4,7 +4,9 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-## CHECKING FOR THE IDENTIFIANTS
+#### CHECKING FOR IDENTIFIANTS
+
+## EFFECTIVE USER IDENTIFIANTS CHECKING
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID)
 
@@ -20,9 +22,44 @@ function CheckRootEUID
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### 
+#### CHECKING TEXTS
 
-## CHECKING FOR FILES AND FOLDERS
+## COLOR CHECKINGS
+
+# Checking line colors
+function CheckLineColor
+{
+    #***** Parameters *****
+    color_code=$1
+
+    #***** Code *****
+    if [ "$color_code" -lt 0 ] || [ "$color_code" -gt 0 ]; then
+        echo "$TXT_RED_TAB Error : the \"tput setaf\" command's value is incorrect.$COL_RESET"
+    elif [ "$color_code" != "$(tput sgr0)" ]; then
+        echo "$TXT_RED_TAB Error : the \"tput\" command's option is incorrect.$COL_RESET"
+    fi
+}
+
+# Checking the " variable's value.
+function CheckTextColor
+{
+    #***** Parameters *****
+    color_code=$1
+
+    #***** Code *****
+    if [ "$color_code" -lt 0 ] || [ "$color_code" -gt 0 ]; then
+        echo "$TXT_RED_TAB Error : the \"tput setaf\" command's value is incorrect.$COL_RESET"
+    elif [ "$color_code" != "$(tput sgr0)" ]; then
+        echo "$TXT_RED_TAB Error : the \"tput\" command's option is incorrect.$COL_RESET"
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PATHS CHECKING
+
+## FILE PATHS CHECKING
 
 # Checking for "$PROJECT_LOG_PATH"
 

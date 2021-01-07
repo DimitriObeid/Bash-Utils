@@ -28,8 +28,7 @@ function DrawLine
     
 	# Since all the columns in the row are used, the following characters will be written in the row, as if a line break has been made.
 	if test "$line_color" != ""; then
-		echo -ne "$line_color" # && export STAT_COLOR_LINE="$line_color"
-		# CheckSTAT_COLOR_LINE
+		echo -ne "$line_color"
 	fi
 
     # Displaying the desired character on the whole line. To do this, using a "for" loop, we start reading it from
@@ -60,7 +59,7 @@ function DrawLine
 	# commandes encodée avec la couleur des headers si l'exécution du script est interrompue de force avec la combinaison "CTRL + C"
 	# ou mise en pause avec la combinaison "CTRL + Z", par exemple.
 	if test "$line_color" != ""; then
-        echo -ne "$COL_RESET" && STAT_COLOR_TXT="$COL_RESET"
+        echo -ne "$COL_RESET"
 	fi
 
 	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
@@ -95,51 +94,51 @@ function HeaderBase
 }
 
 # Header display function when changing step.
-function HeaderStep { HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$1"; }
+function HeaderStep { HeaderBase "$(Color "$COL_CYAN" "l")" "-" "$(Color "$COL_CYAN" "t")" "$1"; }
 
 # Header display function when switching to a new package category during package installation.
-function HeaderInstall { HeaderBase "$COL_YELLOW" "-" "$COL_GREEN" "$1"; }
+function HeaderInstall { HeaderBase "$(Color "$YELLOW" "l")" "-" "$(Color "$COL_GREEN" "t")" "$1"; }
 
 # -----------------------------------------------
 
 ## UNICOLOR HEADERS
 
-function HeaderBlue { HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "$1"; }
-function HeaderCyan { HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$1"; }
-function HeaderGreen { HeaderBase "$COL_GREEN" "-" "$COL_GREEN" "$1"; }
-function HeaderRed { HeaderBase "$COL_RED" "-" "$COL_RED" "$1"; }
-function HeaderYellow { HeaderBase "$COL_YELLOW" "-" "$COL_YELLOW" "$1"; }
+function HeaderBlue { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
+function HeaderCyan { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
+function HeaderGreen { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
+function HeaderRed { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
+function HeaderYellow { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
 
 # -----------------------------------------------
 
 ## MULTICOLOR HEADERS
 
 # Blue lines, differently colored text.
-function HeaderBlueCyan { HeaderBase "$COL_BLUE" "-" "$COL_CYAN" "$1"; }
-function HeaderBlueGreen { HeaderBase "$COL_BLUE" "-" "$COL_GREEN" "$1"; }
-function HeaderBlueRed { HeaderBase "$COL_BLUE" "-" "$COL_RED" "$1"; }
-function HeaderBlueYellow { HeaderBase "$COL_BLUE" "-" "$COL_YELLOW" "$1"; }
+function HeaderBlueCyan { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
+function HeaderBlueGreen { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
+function HeaderBlueRed { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
+function HeaderBlueYellow { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
 
 # Cyan lines, differently colored text.
-function HeaderCyanBlue { HeaderBase "$COL_CYAN" "-" "$COL_BLUE" "$1"; }
-function HeaderCyanGreen { HeaderBase "$COL_CYAN" "-" "$COL_GREEN" "$1"; }
-function HeaderCyanRed { HeaderBase "$COL_CYAN" "-" "$COL_RED" "$1"; }
-function HeaderCyanYellow { HeaderBase "$COL_CYAN" "-" "$COL_YELLOW" "$1"; }
+function HeaderCyanBlue { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
+function HeaderCyanGreen { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
+function HeaderCyanRed { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
+function HeaderCyanYellow { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
 
 # Green lines, differently colored text.
-function HeaderGreenBlue { HeaderBase "$COL_GREEN" "-" "$COL_BLUE" "$1"; }
-function HeaderGreenCyan { HeaderBase "$COL_GREEN" "-" "$COL_CYAN" "$1"; }
-function HeaderGreenRed { HeaderBase "$COL_GREEN" "-" "$COL_RED" "$1"; }
-function HeaderGreenYellow { HeaderBase "$COL_GREEN" "-" "$COL_YELLOW" "$1"; }
+function HeaderGreenBlue { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
+function HeaderGreenCyan { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
+function HeaderGreenRed { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
+function HeaderGreenYellow { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
 
 # Red lines, differently colored text.
-function HeaderRedBlue { HeaderBase "$COL_RED" "-" "$COL_BLUE" "$1"; }
-function HeaderRedCyan { HeaderBase "$COL_RED" "-" "$COL_CYAN" "$1"; }
-function HeaderRedGreen { HeaderBase "$COL_RED" "-" "$COL_GREEN" "$1"; }
-function HeaderRedYellow { HeaderBase "$COL_RED" "-" "$COL_YELLOW" "$1"; }
+function HeaderRedBlue { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
+function HeaderRedCyan { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
+function HeaderRedGreen { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
+function HeaderRedYellow { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
 
 # Yellow lines, differently colored text.
-function HeaderYellowBlue { HeaderBase "$COL_YELLOW" "-" "$COL_BLUE" "$1"; }
-function HeaderYellowCyan { HeaderBase "$COL_YELLOW" "-" "$COL_CYAN" "$1"; }
-function HeaderYellowGreen { HeaderBase "$COL_YELLOW" "-" "$COL_GREEN" "$1"; }
-function HeaderYellowRed { HeaderBase "$COL_YELLOW" "-" "$COL_RED" "$1"; }
+function HeaderYellowBlue { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
+function HeaderYellowCyan { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
+function HeaderYellowGreen { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
+function HeaderYellowRed { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
