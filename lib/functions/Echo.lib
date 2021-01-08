@@ -46,9 +46,8 @@ function EchoError
     string=$1
 
     #***** Code *****
-#     set -x
     CheckProjectLogStatus "$(ColorChar "setaf" "$COL_RED")$TXT_TAB$TXT_TAB $string$COL_RESET"
-#     set +x
+
     sleep "$STAT_TIME_TXT"
 }
 

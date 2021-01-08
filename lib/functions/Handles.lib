@@ -106,10 +106,12 @@ function CheckProjectLogStatus
     
     if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || \
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
         elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
             echo "$string"
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || \
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
         fi
     else
         echo "$string"

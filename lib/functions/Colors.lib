@@ -16,8 +16,10 @@ function ColorChar
     color=$2
 
     #***** Code *****
+    set -x
     CheckTextColor "$opt" "$color"
-
+    set +x
+    
     if [ "$opt" = "setaf" ]; then
         tput setaf "$color"
     elif [ "$opt" = "sgr0" ]; then
