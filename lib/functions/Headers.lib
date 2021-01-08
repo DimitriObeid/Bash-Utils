@@ -96,51 +96,51 @@ function HeaderBase
 }
 
 # Header display function when changing step.
-function HeaderStep { HeaderBase "$(Color "$COL_CYAN" "l")" "-" "$(Color "$COL_CYAN" "t")" "$1"; }
+function HeaderStep { HeaderBase "$(ColorChar "setaf" "$COL_CYAN" "l")" "-" "$(ColorChar "setaf" "$COL_CYAN" "t")" "$1"; }
 
 # Header display function when switching to a new package category during package installation.
-function HeaderInstall { HeaderBase "$(Color "$YELLOW" "l")" "-" "$(Color "$COL_GREEN" "t")" "$1"; }
+function HeaderInstall { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW" "l")" "-" "$(ColorChar "setaf" "$COL_GREEN" "t")" "$1"; }
 
 # -----------------------------------------------
 
 ## UNICOLOR HEADERS
 
-function HeaderBlue { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
-function HeaderCyan { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
-function HeaderGreen { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
-function HeaderRed { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
-function HeaderYellow { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
+function HeaderBlue { HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
+function HeaderCyan { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderGreen { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderRed { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }
+function HeaderYellow { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
 
 # -----------------------------------------------
 
 ## MULTICOLOR HEADERS
 
 # Blue lines, differently colored text.
-function HeaderBlueCyan { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
-function HeaderBlueGreen { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
-function HeaderBlueRed { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
-function HeaderBlueYellow { HeaderBase "$(Color "$COL_BLUE" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
+function HeaderBlueCyan { HeaderBase "$(ColorChar  "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderBlueGreen { HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderBlueRed { HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }
+function HeaderBlueYellow { HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
 
 # Cyan lines, differently colored text.
-function HeaderCyanBlue { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
-function HeaderCyanGreen { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
-function HeaderCyanRed { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
-function HeaderCyanYellow { HeaderBase "$(Color "$COL_CYAN" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
+function HeaderCyanBlue { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
+function HeaderCyanGreen { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderCyanRed { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }
+function HeaderCyanYellow { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
 
 # Green lines, differently colored text.
-function HeaderGreenBlue { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
-function HeaderGreenCyan { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
-function HeaderGreenRed { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
-function HeaderGreenYellow { HeaderBase "$(Color "$COL_GREEN" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
+function HeaderGreenBlue { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
+function HeaderGreenCyan { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderGreenRed { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }
+function HeaderGreenYellow { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
 
 # Red lines, differently colored text.
-function HeaderRedBlue { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
-function HeaderRedCyan { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
-function HeaderRedGreen { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
-function HeaderRedYellow { HeaderBase "$(Color "$COL_RED" "line")" "-" "$(Color "$YELLOW" "text")" "$1"; }
+function HeaderRedBlue { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
+function HeaderRedCyan { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderRedGreen { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderRedYellow { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
 
 # Yellow lines, differently colored text.
-function HeaderYellowBlue { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_BLUE" "text")" "$1"; }
-function HeaderYellowCyan { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_CYAN" "text")" "$1"; }
-function HeaderYellowGreen { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_GREEN" "text")" "$1"; }
-function HeaderYellowRed { HeaderBase "$(Color "$YELLOW" "line")" "-" "$(Color "$COL_RED" "text")" "$1"; }
+function HeaderYellowBlue { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
+function HeaderYellowCyan { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderYellowGreen { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderYellowRed { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }

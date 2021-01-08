@@ -9,8 +9,8 @@
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR.
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (header (H), moving to a new sub-step (N), error (E) or success (S)).
 
-function Decho { string=$1; echo "$COL_CYAN$string$COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
-function DechoE { string=$1; echo "$COL_CYAN$string$COL_RED"; }     # Error message
+function Decho { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "setaf" "$COL_RESET")"; }    # Colouring a part of a simple message written via the "echo" command.
+function DechoE { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "setaf" "$COL_RED")"; }     # Error message
 
 # Header text
 function DechoH
@@ -29,8 +29,8 @@ function DechoH
     fi
 }
 
-function DechoN { string=$1; echo "$COL_CYAN$string$COL_YELLOW"; }  # New sub-step message
-function DechoS { string=$1; echo "$COL_CYAN$string$COL_GREEN"; }   # Success message
+function DechoN { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorCode "setaf" "$COL_YELLOW")"; }  # New sub-step message
+function DechoS { string=$1; echo "$(ColorCHar "setaf" "$COL_CYAN")$string$(ColorCode "setaf" "$COL_GREEN")"; }   # Success message
 
 # -----------------------------------------------
 
@@ -45,9 +45,10 @@ function EchoError
     #***** Parameters *****
     string=$1
 
-    #***** Code *****   
-    CheckProjectLogStatus "$TXT_RED_TAB $string$COL_RESET"
-
+    #***** Code *****
+#     set -x
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_RED")$TXT_TAB$TXT_TAB $string$COL_RESET"
+#     set +x
     sleep "$STAT_TIME_TXT"
 }
 
@@ -76,7 +77,7 @@ function EchoNewstep
     string=$1
 
     #***** Code *****
-    CheckProjectLogStatus "$TXT_YELLOW_TAB $string$COL_RESET"
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_YELLOW")$TXT_TAB$TXT_TAB $string$COL_RESET"
 
     sleep "$STAT_TIME_TXT"
 }
@@ -91,7 +92,7 @@ function EchoSuccess
     string=$1
 
     #***** Code *****
-    CheckProjectLogStatus "$TXT_GREEN_TAB $string$COL_RESET"
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_GREEN")$TXT_TAB$TXT_TAB $string$COL_RESET"
 
     sleep "$STAT_TIME_TXT"
 }

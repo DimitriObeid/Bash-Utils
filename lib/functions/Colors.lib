@@ -4,30 +4,24 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### COLORS PROCESSING
+#### TEXT COLORS PROCESSING
 
 ## COLORING CHARACTERS
 
 #
-function Color
+function ColorChar
 {
     #***** Parameters *****
-    color=$1
-    chars=$2
+    opt=$1
+    color=$2
 
     #***** Code *****
-    if [ "$color" = "$(tput sgr0)" ]; then
-        # As the command is run in the condition, calling the "tput sgr0" command will execute it for a second time.
+    CheckTextColor "$opt" "$color"
+
+    if [ "$opt" = "setaf" ]; then
+        tput setaf "$color"
+    elif [ "$opt" = "sgr0" ]; then
+        tput sgr0
         return
-    else
-        CheckLineColor
-        if [ "$chars" = 'line' ] || [ "$chars" = 'l' ]; then
-            echo "$(tput setaf "$color")"
-        elif [ "$chars" = 'text' ] || [ "$chars" = 't' ]; then
-            echo "$(tput setaf "$color")"
-        else
-            echo "$(tput setaf 196) Error :$(tput sgr0) The \"Color\" function's \"chars\" argument is incorrect."
-            exit 1
-        fi
     fi
 }

@@ -34,13 +34,13 @@ function CheckLineColor
 
     #***** Code *****
     if [ "$color_code" != "$(tput sgr0)" ]; then
-        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is not \"sgr0\"."
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is not \"sgr0\"."; echo
         exit 1
     elif [ "$color_code" -lt 0 ] && [ "$color_code" -gt 0 ]; then
-        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput setaf\" command's value is incorrect."
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput setaf\" command's value is incorrect."; echo
         exit 1
     else
-        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is incorrect."
+        echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is incorrect."; echo
         exit 1
     fi
 }
@@ -49,13 +49,26 @@ function CheckLineColor
 function CheckTextColor
 {
     #***** Parameters *****
-    color_code=$1
+    opt=$1
+    color_code=$2
 
     #***** Code *****
-    if [ "$color_code" -lt 0 ] || [ "$color_code" -gt 0 ]; then
-        echo "$TXT_RED_TAB Error : the \"tput setaf\" command's value is incorrect.$COL_RESET"
-    elif [ "$color_code" != "$(tput sgr0)" ]; then
-        echo "$TXT_RED_TAB Error : the \"tput\" command's option is incorrect.$COL_RESET"
+    if [ -n "$opt" ]; then
+        if [ "$opt" = "setaf" ] ; then
+            if [[ "$color_code" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+                if [ "$color_code" -lt 0 ] || [ "$color_code" -gt 255 ]; then
+                    echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput setaf\" command's value is incorrect."
+                    echo "The $(tput setaf 6)tput setaf$(tput sgr0) option's value range is $(tput setaf 6) 0 - 255 $(tput sgr0)"; exit 1
+                fi
+            else
+                echo "$(tput setaf 196)Error :$(tput sgr0) the \"$(tput setaf 6)tput setaf$(tput sgr0) option's value\" is not a number."; exit 1
+            fi
+
+        elif [ "$opt" != "sgr0" ]; then
+            echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is incorrect."; exit 1
+        fi
+    else
+        echo "$(tput setaf 196)Error :$(tput sgr0) no value passed as \"tput\" command's option argument"; exit 1
     fi
 }
 
@@ -84,15 +97,19 @@ function CheckProjectLogStatus
     string=$1
 
     #**** Code *****
-    CheckProjectStatusVars
+    CheckSTAT_LOG
+    CheckSTAT_LOG_REDIRECT
     CheckProjectLogPath
+    CheckSTAT_TIME_HEADER
+    CheckSTAT_TIME_LINE
+    CheckSTAT_TIME_TXT
     
     if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$COL_RED Unable to write into the $PROJECT_LOG_PATH file$COL_RESET"; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
         elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
             echo "$string"
-            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$COL_RED Unable to write into the $PROJECT_LOG_PATH file$COL_RESET"; exit 1; }
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")"; exit 1; }
         fi
     else
         echo "$string"
@@ -113,6 +130,8 @@ function HandleErrors
     local lineno=$4            # Ligne à laquelle le message d'erreur s'est produite.
 
 	# ***** Code *****
+	CheckSTAT_ERROR
+	
 	if [ "$return_code" -eq 0 ]; then
         return
     else
@@ -143,7 +162,7 @@ function HandleErrors
 
             exit 1
         elif [ -z "$STAT_ERROR" ]; then
-            HeaderBase "$COL_RED" "-" "$COL_RED" "ERROR : ${error_string^^}"
+            HeaderBase "$(ColorChar "setaf" "$COL_RED") "-" "$(ColorChar "$COL_RED" "$COL_RED") "ERROR : ${error_string^^}"
             
             EchoError "An error occured !"
             EchoError "$error_string"
