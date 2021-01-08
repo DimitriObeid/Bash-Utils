@@ -22,15 +22,15 @@ function DechoH
     new_color="$COL_YELLOW"
     
     #***** Code *****
-    if [ "$STAT_COLOR_TXT" = "$COL_CYAN" ]; then
-        echo "$new_color$string$STAT_COLOR_TXT"
+    if [ "$HEADERBASE_COLOR_TEXT" = "$COL_CYAN" ]; then
+        echo "$(ColorChar "setaf" "$new_color")$string$(ColorChar "setaf" "$HEADERBASE_COLOR_TEXT")"
     else
-        echo "$COL_CYAN$string$STAT_COLOR_TXT"
+        echo "$COL_CYAN$string$(ColorChar "setaf" "$HEADERBASE_COLOR_TEXT")"
     fi
 }
 
-function DechoN { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorCode "setaf" "$COL_YELLOW")"; }  # New sub-step message
-function DechoS { string=$1; echo "$(ColorCHar "setaf" "$COL_CYAN")$string$(ColorCode "setaf" "$COL_GREEN")"; }   # Success message
+function DechoN { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "setaf" "$COL_YELLOW")"; }  # New sub-step message
+function DechoS { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "setaf" "$COL_GREEN")"; }   # Success message
 
 # -----------------------------------------------
 

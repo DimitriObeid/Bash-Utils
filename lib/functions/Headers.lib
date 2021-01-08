@@ -82,9 +82,13 @@ function HeaderBase
 	# Le problème vient d'ici, c'est parce que la variable "string" d'ici porte le même nom que l'argument de la fonction cible.
 	# TODO : vérifier comment outrepasser ceci sans modifier le nom de la variable quand je serai de nouveau connecté.
 	
+	#***** Variables *****
+	HEADERBASE_COLOR_HEADER="$line_color"
+	HEADERBASE_COLOR_TEXT="$string_color"
+	
 	#***** Code *****
 	Newline
-
+	
 	EchoMsg "$(DrawLine "$line_color" "$line_char")"
 	EchoMsg "$string_color##> $string_txt$COL_RESET"
 	EchoMsg "$(DrawLine "$line_color" "$line_char")"
@@ -105,6 +109,9 @@ function HeaderInstall { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW" "l")" "-"
 
 ## UNICOLOR HEADERS
 
+# Copy-paste this function to avoid losing time while creating unicolor headers :
+# function Header<col> { HeaderBase "$(ColorChar "setaf" "$")" "-" "$(ColorChar "setaf" "$")" "$1"; }
+
 function HeaderBlue { HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }
 function HeaderCyan { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
 function HeaderGreen { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
@@ -114,6 +121,9 @@ function HeaderYellow { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(C
 # -----------------------------------------------
 
 ## MULTICOLOR HEADERS
+
+# Copy-paste this function to avoid losing time while creating multicolor headers :
+# function Header<col1><col2> { HeaderBase "$(ColorChar "setaf" "$")" "-" "$(ColorChar "setaf" "$")" "$1"; }
 
 # Blue lines, differently colored text.
 function HeaderBlueCyan { HeaderBase "$(ColorChar  "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
@@ -132,6 +142,9 @@ function HeaderGreenBlue { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$
 function HeaderGreenCyan { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
 function HeaderGreenRed { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_RED")" "$1"; }
 function HeaderGreenYellow { HeaderBase "$(ColorChar "setaf" "$COL_GREEN")" "-" "$(ColorChar "setaf" "$COL_YELLOW")" "$1"; }
+
+# Purple lines, differently colored text
+function HeaderPurpleBlue { HeaderBase "$(ColorChar "setaf" "$COL_PURPLE")" "-" "$(ColorChar "setaf" "")" "$1"; }
 
 # Red lines, differently colored text.
 function HeaderRedBlue { HeaderBase "$(ColorChar "setaf" "$COL_RED")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "$1"; }

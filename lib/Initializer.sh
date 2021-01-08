@@ -3,6 +3,8 @@
 # Script initializer file, initializing all you need for your scripts.
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
 
+# Version : 1.0
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ##################### DECLARING AND DEFINING SCRIPT'S VARIABLES AND FUNCTIONS #####################
@@ -267,6 +269,32 @@ function SourceFile
     fi
 }
 
+function InitLog
+{
+## INITIALIZATION SCRIPT'S LOG FILE
+if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ] && [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
+    EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
+
+    if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
+        EchoInit "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")" || { echo "In ${BASH_SOURCE[0]}, line $(( LINENO-2 )) --> Error : unable to create the directory"; exit 1; }
+        EchoInit "Created $INITIALIZER_FILE_LOG_DIR as intitialisation process log file's parent directory."
+        EchoInit
+    fi
+
+    if touch "$INITIALIZER_FILE_LOG_PATH"; then
+        EchoInit "Created $INITIALIZER_FILE_LOG_PATH"; EchoInit
+    else
+        EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-3 )) --> Failed to create the initialization process log file."
+        exit 1
+    fi
+fi
+
+# Checking if the initialization log file exists AND is not empty, to overwrite its content.
+if [ -f "$INITIALIZER_FILE_LOG_PATH" ] && [ -s "$INITIALIZER_FILE_LOG_PATH" ]; then
+    true > "$INITIALIZER_FILE_LOG_PATH"
+fi
+}
+
 # -----------------------------------------------
 
 
@@ -278,10 +306,22 @@ function SourceFile
 
 ###################################### DISPLAY PART BEGINNING #####################################
 
-#### VARIABLES VALUES CHECKING
+#### SOURCING DEPENDENCIES STEP BY STEP
 
-## BASH-UTILS PATHS
+## SOURCING DEPENDENCIES
 
+# Sourcing the functions files first to avoid error messages while including the variables first, as some functions can be called into these variables.
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
+    SourceFile "$f" "functions file" "$LINENO"
+done; EchoInit
+
+# Sourcing the variables files.
+EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
+    SourceFile "$f" "variables file" "$LINENO"
+done; EchoInit; EchoInit
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 ## CHECKING SUB-FOLDERS PRESENCE
 
@@ -334,28 +374,7 @@ fi
 
 # -----------------------------------------------
 
-## INITIALIZATION SCRIPT'S LOG FILE
-if [ "$INITIALIZER_STATUS_LOG_CREATE" = "true" ] && [ ! -f "$INITIALIZER_FILE_LOG_PATH" ]; then
-    EchoInit "Creating $INITIALIZER_FILE_LOG_PATH as intitialisation process log file."
 
-    if [ ! -d "$INITIALIZER_FILE_LOG_DIR" ]; then
-        EchoInit "Creating $INITIALIZER_FILE_LOG_DIR as intitialisation process log file's parent directory."
-        EchoInit "$(mkdir -pv "$INITIALIZER_FILE_LOG_DIR")" || { echo "In ${BASH_SOURCE[0]}, line $(( LINENO-2 )) --> Error : unable to create the directory"; exit 1; }
-        EchoInit
-    fi
-
-    if touch "$INITIALIZER_FILE_LOG_PATH"; then
-        EchoInit "Created $INITIALIZER_FILE_LOG_PATH"; EchoInit
-    else
-        EchoInit "In ${BASH_SOURCE[0]}, line $(( LINENO-3 )) --> Failed to create the initialization process log file."
-        exit 1
-    fi
-fi
-
-# Checking if the initialization log file exists AND is not empty, to overwrite its content.
-if [ -f "$INITIALIZER_FILE_LOG_PATH" ] && [ -s "$INITIALIZER_FILE_LOG_PATH" ]; then
-    true > "$INITIALIZER_FILE_LOG_PATH"
-fi
 
 # -----------------------------------------------
 
@@ -374,22 +393,7 @@ fi
 # -----------------------------------------------
 
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOURCING DEPENDENCIES STEP BY STEP
-
-## SOURCING DEPENDENCIES
-
-# Sourcing the functions files first to avoid error messages while including the variables first, as some functions can be called into these variables.
-EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS FUNCTIONS FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
-    SourceFile "$f" "functions file" "$LINENO"
-done; EchoInit
-
-
-# Sourcing the variables files.
-EchoInit "In ${BASH_SOURCE[0]}, line $LINENO : SOURCING BASH-UTILS VARIABLES FILES TO $PROJECT_NAME"; for f in "$BASH_UTILS_VARS/"*.var; do
-    SourceFile "$f" "variables file" "$LINENO"
-done; EchoInit; EchoInit
 
 # -----------------------------------------------
 
@@ -408,9 +412,9 @@ done; EchoInit; EchoInit
 
 # EchoInit "$(HeaderBase "$COL_GREEN" "-" "$COL_GREEN" "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW")"
 
-EchoInit "$(DrawLine "$COL_RESET" "-")" "2"
+EchoInit "$(DrawLine "$(ColorChar "sgr0")" "-")" "2"
 EchoInit "END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho "${PROJECT_NAME^^}")'S PROJECT RESOURCES NOW"
-EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit
+EchoInit "$(DrawLine "$(ColorChar "sgr0")" "-")" "2"; EchoInit
 
 # shellcheck disable=SC1090
 if source "$BASH_UTILS_PROJECT_CONF_STATUS"; then

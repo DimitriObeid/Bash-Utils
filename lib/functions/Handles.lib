@@ -61,14 +61,16 @@ function CheckTextColor
                     echo "The $(tput setaf 6)tput setaf$(tput sgr0) option's value range is $(tput setaf 6) 0 - 255 $(tput sgr0)"; exit 1
                 fi
             else
-                echo "$(tput setaf 196)Error :$(tput sgr0) the \"$(tput setaf 6)tput setaf$(tput sgr0) option's value\" is not a number."; exit 1
+                echo "$(tput setaf 196)Error :$(tput sgr0) the \"$(tput setaf 6)tput setaf$(tput sgr0) option's value\" is not a number."
+                return 1 2>/dev/null; exit 1
             fi
 
         elif [ "$opt" != "sgr0" ]; then
             echo "$(tput setaf 196)Error :$(tput sgr0) the \"tput\" command's option is incorrect."; exit 1
         fi
     else
-        echo "$(tput setaf 196)Error :$(tput sgr0) no value passed as \"tput\" command's option argument"; exit 1
+        echo "$(tput setaf 196)Error :$(tput sgr0) no value passed as \"tput\" command's option argument";
+        return 1
     fi
 }
 
@@ -138,7 +140,7 @@ function HandleErrors
         return
     else
         if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
-            HeaderBase "$COL_RED" "-" "$COL_RED" "FATAL ERROR : $(Decho "${error_string^^}")"
+            HeaderRed "FATAL ERROR : $(DechoE "${error_string^^}")"
 
             EchoError "A fatal error occured :"
             EchoError "$error_string"
