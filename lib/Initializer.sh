@@ -5,14 +5,18 @@
 
 # Version : 2.0
 
-# # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-# if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-#     echo "WARNING !"; echo
-#     echo "This script is not meant to be executed directly !"
-#     echo "Use this script only by sourcing it in your project script."; echo
-# 
-#     exit 1
-# fi
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo "WARNING !"; echo
+    echo "This script is not meant to be executed directly !"
+    echo "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
 
 
 
@@ -59,7 +63,7 @@ if [ "$EUID" -eq 0 ]; then
     PROJECT_LOG_NAME="$PROJECT_NAME - ROOT.log"
 else
     PROJECT_TMP_DIR="$BASH_UTILS_TMP/$PROJECT_NAME"
-    PROJECT_LOG_NAME="$PROJECT_NAME - ROOT.log"
+    PROJECT_LOG_NAME="$PROJECT_NAME.log"
 fi
 
 # Defining project's log file's path.
@@ -87,6 +91,12 @@ INIT_LIST_FILE_PATH="$PROJECT_TMP_DIR/$INIT_FILE_LIST_NAME"
 
 #### SECOND STEP : DEFINING INITIALIZATION FUNCTIONS
 
+# Controlling all the redirections in a single place for a better debugging process.
+function EchoDBG
+{
+    echo "$1" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+}
+
 # Defining the error message's beginning and end.
 function InitErrMsg
 {
@@ -95,7 +105,7 @@ function InitErrMsg
     lineno=$2
     
     #***** Code *****
-    echo "$(tput setaf 196)In ${BASH_SOURCE[0]}, line $lineno --> ERROR : $msg$(tput sgr0)"; echo
+    EchoDBG "$(tput setaf 196)In ${BASH_SOURCE[0]}, line $lineno --> ERROR : $msg$(tput sgr0)"; EchoDBG
     exit 1
 }
 
@@ -109,11 +119,11 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towards a directory.
     if [ -d "$path" ]; then
-        echo "Found directory : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        EchoDBG "Found directory : $(tput setaf 6)$path$(tput sgr0)"
         
     # Else, if the path points towards a file.
     elif [ -f "$path" ]; then
-        echo "Found file : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        EchoDBG "Found file : $(tput setaf 6)$path$(tput sgr0)"
     else
         InitErrMsg "The following path is incorrect : $path" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
         exit 1
@@ -127,7 +137,7 @@ function EchoSourcedDependency
     dep=$1
     
     #***** Code *****
-    echo "Sourced file : $(tput setaf 6)$dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    EchoDBG "Sourced file : $(tput setaf 6)$dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 }
 
 # -----------------------------------------------
@@ -142,18 +152,18 @@ if [ -f "$INIT_LIST_FILE_PATH" ]; then
     true > "$INIT_LIST_FILE_PATH"
 else
     if [ ! -d "$PROJECT_TMP_DIR" ]; then
-        mkdir "$PROJECT_TMP_DIR" || echo "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to create the project's temporary directory."
+        mkdir "$PROJECT_TMP_DIR" || echo "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to create the project's temporary directory." 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
     fi
 fi
 
-echo "CHECKING REQUIRED DIRECTORIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "CHECKING REQUIRED DIRECTORIES"
 CheckBURequirements "$BASH_UTILS_BIN" "$LINENO"
 CheckBURequirements "$BASH_UTILS_CONF" "$LINENO"
 CheckBURequirements "$BASH_UTILS_TMP" "$LINENO"
 CheckBURequirements "$BASH_UTILS_FUNCTS" "$LINENO"
 CheckBURequirements "$BASH_UTILS_FUNCTS_BASIS" "$LINENO"
 CheckBURequirements "$BASH_UTILS_VARS" "$LINENO"
-echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG
 
 # -----------------------------------------------
 
@@ -164,40 +174,40 @@ echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 ## SOURCING DEPENDENCIES
 
-echo "CHECKING DEPENDENCIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "CHECKING DEPENDENCIES"
 
 # Sourcing project's status variables file.
-echo "Sourcing the variables status file :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "Sourcing the variables status file :"
 
 source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
-    && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
 
 # Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
 # Sourcing the very basic fuctions files.
-echo "Sourcing the very basic functions files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "Sourcing the very basic functions files :"
 
 for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
     source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
-done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+done; EchoDBG
 
 # Sourcing the main functions files.
-echo "Sourcing the main functions files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "Sourcing the main functions files :"
 
 for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
     source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
-done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+done; EchoDBG
 
 # Sourcing the variables files.
-echo "Sourcing the variables files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG "Sourcing the variables files :"
 
 for f in "$BASH_UTILS_VARS/"*.var; do
     source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
-done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+done; EchoDBG
 
-echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+EchoDBG
 
 # -----------------------------------------------
 
@@ -221,10 +231,13 @@ CheckProjectStatusVars
 
 # CREATING OR OVERWRITTING THE PATHS LIST FILE
 CheckSTAT_LOG; if [ "$STAT_LOG" = "true" ]; then
-    if [ -f "$PROJECT_LOG_PATH" ] && [ -s "$PROJECT_LOG_PATH" ]; then
-        true > "$PROJECT_LOG_PATH"
+    if [ -f "$PROJECT_LOG_PATH" ]; then
+        if [ -s "$PROJECT_LOG_PATH" ]; then
+            true > "$PROJECT_LOG_PATH"
+        fi
     else
-        Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
+        # Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
+        touch "$PROJECT_LOG_PATH"
     fi
     
     # Redirecting files list into the log file.

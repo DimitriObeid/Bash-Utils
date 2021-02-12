@@ -4,14 +4,11 @@
 # Version : 1.0
 
 # To debug this script when needed, type the following command :
-# sudo <shell> -x <filename>
-
-# Example :
 # sudo bash -x reinstall.sh
 
-# Or debug it by using Shellcheck :
+# Check each syntax error by using Shellcheck :
 #	Online -> https://www.shellcheck.net/
-#	On command line interface -> shellcheck beta.sh
+#	On command line interface -> shellcheck Linux-reinstall.sh
 #		--> Shellcheck install command : sudo $package_manager $install_command shellcheck
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
