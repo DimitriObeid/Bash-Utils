@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+# Script initializer file, initializing all you need for your scripts.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
+
+# Version : 2.0
+
+# # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 # if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
 #     echo "WARNING !"; echo
 #     echo "This script is not meant to be executed directly !"
@@ -8,6 +13,7 @@
 # 
 #     exit 1
 # fi
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -103,13 +109,13 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towards a directory.
     if [ -d "$path" ]; then
-        echo "Found directory : $(tput setaf 6)$path$(tput sgr0)"
+        echo "Found directory : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
         
     # Else, if the path points towards a file.
     elif [ -f "$path" ]; then
-        echo "Found file : $(tput setaf 6)$path$(tput sgr0)"
+        echo "Found file : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
     else
-        InitErrMsg "The following path is incorrect : $path"
+        InitErrMsg "The following path is incorrect : $path" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
         exit 1
     fi
 }
@@ -121,7 +127,7 @@ function EchoSourcedDependency
     dep=$1
     
     #***** Code *****
-    echo "Sourced file : $(tput setaf 6)$dep$(tput sgr0)"
+    echo "Sourced file : $(tput setaf 6)$dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 }
 
 # -----------------------------------------------
@@ -141,14 +147,12 @@ else
 fi
 
 echo "CHECKING REQUIRED DIRECTORIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
-
 CheckBURequirements "$BASH_UTILS_BIN" "$LINENO"
 CheckBURequirements "$BASH_UTILS_CONF" "$LINENO"
 CheckBURequirements "$BASH_UTILS_TMP" "$LINENO"
 CheckBURequirements "$BASH_UTILS_FUNCTS" "$LINENO"
 CheckBURequirements "$BASH_UTILS_FUNCTS_BASIS" "$LINENO"
 CheckBURequirements "$BASH_UTILS_VARS" "$LINENO"
-
 echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 # -----------------------------------------------
@@ -160,38 +164,40 @@ echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 ## SOURCING DEPENDENCIES
 
-{
-    echo "CHECKING DEPENDENCIES"
+echo "CHECKING DEPENDENCIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
-    # Sourcing project's status variables file.
-    echo "Sourcing the variables status file :"
-    source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
-        && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; echo
+# Sourcing project's status variables file.
+echo "Sourcing the variables status file :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
-    # Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
-    # Sourcing the very basic fuctions files.
-    echo "Sourcing the very basic functions files :"
-    for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
-        source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
-        EchoSourcedDependency "$f"
-    done; echo
+source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
+    && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
-    # Sourcing the main functions files.
-    echo "Sourcing the main functions files :"
-    for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
-        source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
-        EchoSourcedDependency "$f"
-    done; echo
+# Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
+# Sourcing the very basic fuctions files.
+echo "Sourcing the very basic functions files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
-    # Sourcing the variables files.
-    echo "Sourcing the variables files :"
-    for f in "$BASH_UTILS_VARS/"*.var; do
-        source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
-        EchoSourcedDependency "$f"
-    done; echo
+for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
+    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
+    EchoSourcedDependency "$f"
+done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
-    echo 
-} 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+# Sourcing the main functions files.
+echo "Sourcing the main functions files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+
+for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
+    source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
+    EchoSourcedDependency "$f"
+done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+
+# Sourcing the variables files.
+echo "Sourcing the variables files :" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+
+for f in "$BASH_UTILS_VARS/"*.var; do
+    source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
+    EchoSourcedDependency "$f"
+done; echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+
+echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -215,10 +221,8 @@ CheckProjectStatusVars
 
 # CREATING OR OVERWRITTING THE PATHS LIST FILE
 CheckSTAT_LOG; if [ "$STAT_LOG" = "true" ]; then
-    if [ -f "$PROJECT_LOG_PATH" ]; then
-        if [ -s "$PROJECT_LOG_PATH" ]; then
-            true > "$PROJECT_LOG_PATH"
-        fi
+    if [ -f "$PROJECT_LOG_PATH" ] && [ -s "$PROJECT_LOG_PATH" ]; then
+        true > "$PROJECT_LOG_PATH"
     else
         Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
     fi

@@ -127,11 +127,32 @@ function Makedir
 
 ## PATH PROCESSING
 
-# Getting parent folder's without its full path.
+# Getting parent folder's name only (without its full path from the root directory).
 function GetParentDirectoryName
 {
-    # There's no need to pass any argument to this function.
-    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
+    #***** Parameters *****
+    p_path=$1
+
+    #***** Code *****
+    parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
+        || { HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME}" "$LINENO"; }; \
+        pwd -P )"
+    dirname="$parent"
+    
+    shopt -s extglob           # enable +(...) glob syntax
+    result=${dirname%%+(/)}    # trim however many trailing slashes exist
+    result=${result##*/}       # remove everything before the last / that still remains
+    echo "$dirname"
+}
+
+# Getting parent folder's path from the root directory.
+function GetParentDirectoryPath
+{
+    #***** Parameters *****
+    p_path=$1
+
+    #***** Code *****
+    parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
         || { HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; }; \
         pwd -P )"
     dirname="$parent"
@@ -141,38 +162,26 @@ function GetParentDirectoryName
     echo "$result"
 }
 
-# Getting parent folder's with its full path.
-function GetParentDirectoryPath
-{
-    # There's no need to pass any argument to this function.
-    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
-        || { HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME}" "$LINENO"; }; \
-        pwd -P )"
-    dirname="$parent"
-
-    echo "$dirname"
-}
-
 # Getting the name of a directory without its path
 function GetDirectoryName
 {
-    dir=""
+    p_dir=$1
 }
 
 # Checking if the directory's sub-folders paths passed as argument exists.
 function GetDirectorySubFolderPath
 {
     #***** Parameters *****
-    path=$1
+    p_path=$1
 
     #***** Code *****
     if [ -z "$path" ]; then
         HandleErrors "1" "${FUNCNAME[0]} : NO PATH ARGUMENT PASSED" "" ""
     else
-        if [ -d "$path" ]; then
-            EchoSuccess "Got this subfolder : $(DechoS "$path")"
+        if [ -d "$p_path" ]; then
+            EchoSuccess "Got this subfolder : $(DechoS "$p_path")"
         else
-            HandleErrors "1" "UNABLE TO GET TH : THE PATH PROVIDED FOR THE $(DechoE "$path") IS INCORRECT !" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")"
+            HandleErrors "1" "UNABLE TO GET TH : THE PATH PROVIDED FOR THE $(DechoE "$p_path") IS INCORRECT !" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")"
         fi
     fi
 }

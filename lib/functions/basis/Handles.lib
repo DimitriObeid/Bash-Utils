@@ -121,8 +121,8 @@ function CheckProjectLogStatus
     CheckSTAT_TIME_HEADER
     CheckSTAT_TIME_LINE
     CheckSTAT_TIME_TXT
-    
-    if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+
+    if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
             echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
                 { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
@@ -173,10 +173,7 @@ function HandleErrors
                 EchoError "Advice : $p_adviceString" >&2
                 Newline >&2
             fi
-            
-            EchoError "STAT_ERROR status : $STAT_ERROR" >&2
-            Newline >&2
-                
+
             EchoError "Stopping the execution of $(DechoE "$(basename "$0")")." >&2
             Newline >&2
 

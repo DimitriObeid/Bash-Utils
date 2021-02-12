@@ -24,7 +24,7 @@
 
 # shellcheck disable=SC1091
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
-    echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
+    echo; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
 fi
 
 # -----------------------------------------------
@@ -32,9 +32,9 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
-LINUX_REINSTALL_INST="$(GetParentDirectoryName)/install/categories"
-LINUX_REINSTALL_LANG="$(GetParentDirectoryName)/lang"
-LINUX_REINSTALL_VARS="$(GetParentDirectoryName)/variables"
+LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$0")/install/categories"
+LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$0")/lang"
+LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$0")/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
 EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
