@@ -16,7 +16,7 @@
 #   - EchoNewstep       -> Echo.lib
 #   - EchoSuccess       -> Echo.lib
 #   - Newline           -> Echo.lib
-function YesNo
+function KbInputYesNo
 {
     #***** Parameters *****
     description=$1

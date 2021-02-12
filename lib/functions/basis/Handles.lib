@@ -1,0 +1,219 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### CHECKING FOR IDENTIFIANTS
+
+## EFFECTIVE USER IDENTIFIANTS CHECKING
+
+# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID)
+
+# Required functions and files :
+#   - HandleErrors      -> Bash-Utils/src/functions/Headers.lib
+function CheckRootEUID
+{
+    if [ "$EUID" -ne 0 ]; then
+        HandleErrors "1" "Error : you need root user's privileges to perform this action." ""
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CHECKING TEXTS
+
+## COLOR CHECKINGS
+
+# Checking line colors
+
+# I'm not sure if i'll keep this function.
+function CheckLineColor
+{
+    #***** Parameters *****
+    color_code=$1
+
+    #***** Code *****
+    if [ "$color_code" != "$(tput sgr0)" ]; then
+        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput$(tput sgr0) command's option is not $(tput setaf "$COL_CYAN")sgr0$(tput sgr0)."; echo
+        exit 1
+    elif [ "$color_code" -lt 0 ] && [ "$color_code" -gt 0 ]; then
+        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput setaf$(tput sgr0) command's value is incorrect."; echo
+        exit 1
+    else
+        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput$(tput sgr0) command's option is incorrect."; echo
+        exit 1
+    fi
+}
+
+# Checking the " variable's value.
+function CheckTextColor
+{
+    #***** Parameters *****
+    param_option=$1
+    param_color_code=$2
+    
+    #***** Variables *****
+    col_cyan="$(tput setaf 6)"
+    col_red="$(tput setaf 196)"
+    col_red_in="$(tput setaf 196)In"
+    col_reset="$(tput sgr0)"
+    funcname="$col_red_in $col_cyan${FUNCNAME[0]}$col_red --> Error :"
+
+    #***** Code *****
+    if [ -n "$param_option" ]; then
+        if [ "$param_option" = "setaf" ] ; then
+            if [[ "$param_color_code" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+                if [ "$param_color_code" -lt 0 ] || [ "$param_color_code" -gt 255 ]; then
+                    echo "$funcname the$col_cyan tput setaf$col_red command's value is incorrect." >&2
+                    echo "The$col_cyan tput setaf$col_red option's value range is $col_cyan 0 - 255 $col_reset" >&2
+                    echo >&2; ExitSourced
+                fi
+            else
+                echo "$funcname the$col_cyan tput setaf$col_red option's value is not a number.$col_reset" >&2; echo >&2; ExitSourced
+            fi
+
+        elif [ "$param_option" != "sgr0" ]; then
+            echo "$funcname the$col_cyan tput$col_red command's option is incorrect.$col_reset" >&2; echo >&2; ExitSourced
+        fi
+        
+    else
+        echo "$funcname no value passed as$col_cyan tput$col_red command's option argument$col_reset" >&2; echo >&2; ExitSourced
+    fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PATHS CHECKING
+
+## FILE PATHS CHECKING
+
+# Checking for "$PROJECT_LOG_PATH"
+
+# Required functions and files :
+function CheckProjectLogPath
+{
+    if [ -z "$PROJECT_LOG_PATH" ]; then
+        echo "$(tput setaf "$COL_RED") Error : no path provided into the PROJECT_LOG_PATH variable.$(tput sgr0)" >&2
+        echo >&2; ExitSourced
+    fi
+}
+
+# Checking for project's log file's status, then write
+function CheckProjectLogStatus
+{
+    #***** Parameters *****
+    string=$1
+
+    #**** Code *****
+    CheckSTAT_LOG
+    CheckSTAT_LOG_REDIRECT
+    CheckProjectLogPath
+    CheckSTAT_TIME_HEADER
+    CheckSTAT_TIME_LINE
+    CheckSTAT_TIME_TXT
+    
+    if [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || \
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+        elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
+            echo "$string"
+            echo "[$TIME_DATE] $string" >> "$PROJECT_LOG_PATH" || \
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+        fi
+    else
+        echo "$string"
+    fi
+}
+
+# -----------------------------------------------
+
+## ERROR HANDLING FUNCTIONS
+
+# Handling exit command from sourced files, as it's impossible to properly exit the script from these.
+function ExitSourced { kill "$$"; }
+
+# Handling command outputs.
+function HandleErrors
+{
+	#***** Paramètres *****
+	param_return_code=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
+	param_error_string=$2    # Chaîne de caractères du type d'erreur à afficher.
+	param_advice_string=$3   # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+	param_file=$4            # The name of the file where the error occured.
+	param_function=$5        # The name of the function where the error occured.
+	param_lineno=$6          # Ligne à laquelle le message d'erreur s'est produite.
+
+    #***** Variables *****
+    var_file="$(DechoE "$param_file")"
+    var_function="$(DechoE "$param_function")"
+    var_lineno="$(DechoE "$param_lineno")"
+    
+    var_string="IN $(DechoE "$var_file"), FUNCTION $(DechoE "$var_function"), LINE $(DechoE "$var_lineno") -->"
+	# ***** Code *****
+	CheckSTAT_ERROR
+	
+	if [ "$param_return_code" -eq 0 ]; then
+        return
+    else
+        if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
+            HeaderRed "$var_string FATAL ERROR : $(DechoE "${param_error_string^^}")" >&2
+
+            EchoError "A fatal error occured :" >&2
+            EchoError "$param_error_string" >&2
+            Newline >&2
+
+            if [ -z "$param_advice_string" ]; then
+                EchoError "No advice to give." >&2
+                Newline >&2
+            else
+                EchoError "$param_advice_string" >&2
+                Newline >&2
+            fi
+            
+            if [ -z "$param_lineno" ]; then
+                false
+            else
+                EchoError "The fatal error in question occurred in the line $(DechoE "$param_lineno")." >&2
+                Newline >&2
+            fi
+            
+            EchoError "STAT_ERROR status : $STAT_ERROR" >&2
+            Newline >&2
+                
+            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")." >&2
+            Newline >&2
+
+            exit 1
+
+        elif [ -z "$STAT_ERROR" ]; then
+            HeaderBase "$(ColorChar "setaf" "$COL_RED") "-" "$(ColorChar "setaf" "$COL_RED") "ERROR : ${param_error_string^^}" >&2
+            
+            EchoError "An error occured !" >&2
+            EchoError "$param_$error_string" >&2
+            Newline >&2
+            
+            if [ -z "$param_advice_string" ]; then
+                EchoError "No advice to give." >&2
+                Newline >&2
+            else
+                EchoError "$param_advice_string" >&2
+                Newline >&2
+            fi
+            
+            if [ -z "$param_lineno" ]; then
+                false
+            else
+                EchoError "The error in question occurred in the line $(DechoE "$param_lineno")." >&2
+                Newline >&2
+            fi
+            
+            KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")" \
+                "$(echo "Aborting script execution." && exit 1)" \
+                "Resuming script execution." >&2
+        fi
+    fi
+}

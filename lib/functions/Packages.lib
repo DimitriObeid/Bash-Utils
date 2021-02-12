@@ -48,335 +48,69 @@ function GetMainPackageManager
 
 #### INSTALLATIONS FROM PACKAGE MANAGERS
 
-# Required functions, variables and files :
-#   - EchoNewstep   -> Bash-Utils/lib/functions/Echo.lib
-#   - EchoSuccess   -> Bash-Utils/lib/functions/Echo.lib
-#   - HeaderBase    -> Bash-Utils/lib/functions/Headers.lib
-#   - Makedir       -> Bash-Utils/lib/functions/Directories.lib
-#   - Makefile      -> Bash-Utils/lib/functions/Files.lib
-#   - Newline       -> Bash-Utils/lib/functions/Echo.lib
 
-#   - 
-#   - 
-#   - 
-#   - 
-function WritePackageProcessingScript
+#### NEW FUNCTIONS :
+
+function APTInstall
 {
-	# Creating the folder containing the packages treatment script and the files containing the packages search and installation commands.
-	HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "ÉCRITURE DU SCRIPT DE TRAITEMENT DE PAQUETS" "0"
-
-	Makedir "$PROJECT_TMP_PATH" "$DIR_INSTALL_NAME"                       # On crée le dossier contenant les fichiers temporaires contenant les commandes de recherche et d'installation des paquets.
-	Makefile "$PROJECT_TMP_PATH/$DIR_INSTALL_NAME" "$FILE_SCRIPT_NAME"    # On crée le fichier de script.
-
-	# Writing the script's content into the script file by using a here document.
-	cat <<-'INSTALL_SCRIPT' > "$FILE_SCRIPT_PATH"
-	#!/usr/bin/env bash
-
-	LOG=$1
-	CMD=$2
-
-	if test "$#" -eq 0; then
-		exit 2
-	elif [ -z "${CMD}" ]; then
-		exit 3
-	elif [ -s "${LOG}" ] && [ -s "${CMD}" ]; then
-		"$CMD" || exit 1
-		exit 0
-    elif test "$#" -gt 2; then
-        exit 4
-    else
-        exit 5
-    fi
-	INSTALL_SCRIPT
-
-	# Making the script executable via the "chmod" command.
-	EchoNewstep "Attribution des droits d'exécution sur le fichier script $(DechoN "$FILE_SCRIPT_PATH")."
-	Newline
-
-	local lineno=$LINENO; chmod +x -v "$FILE_SCRIPT_PATH" >> "$FILE_LOG_PATH" 2>&1
-
-    HandleFatalErrors "$?" "IMPOSSIBLE DE CHANGER LES DROITS D'EXÉCUTION DU FICHIER SCRIPT DE TRAITEMENT DE PAQUETS" "Vérifiez ce qui cause ce problème" "$lineno"
-    echo
-
-    EchoSuccesss "Les droits d'exécution ont été attribués avec succès sur le fichier script de traitement de paquets."
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
 }
 
-# -----------------------------------------------
-
-## DEFINING PACKAGE INSTALLATION FUNCTIONS
-
-# Optimisation de la partie d'installation du script.
-function OptimizeInstallation
+function DNFInstall
 {
-	#***** Parameters *****
-	local parent=$1            # Dossier parent du fichier script à exécuter.
-	local file=$2              # Nom du fichier script à exécuter.
-	local cmd=$3               # Commande du gestionnaire de paquets à exécuter.
-	local package_manager=$4   # Nom du gestionnaire de paquets utilisé.
-	local package=$5           # Nom du paquet.
-	local type=$6              # Type de commande envoyée (recherche sur le disque dur, dans la base de données ou installation de paquets).
-
-	#***** Autres variables *****
-	local parent="$DIR_INSTALL_PATH"
-	local block_char="="
-
-	#**** Code *****
-	CheckRootEUID
-	
-	# On vérifie si tous les arguments sont bien appelés (IMPORTANT POUR UNE INSTALLATION SANS PROBLÈMES)
-	if test "$#" -ne 6; then
-		HandleFatalErrors "1" "UN OU PLUSIEURS ARGUMENTS MANQUENT À LA FONCTION $(DechoE "OptimizeInstallation")" \
-			"Vérifiez quels arguments manquent à la fonction." "$LINENO_INST"
-	fi
-
-	# On vérifie si la valeur de l'argument correspond à un des trois types attendus.
-	case "$type" in
-		"HD")
-			EchoNewstep "Vérification de la présence du paquet $(DechoN "$package") sur votre système."
-			Newline
-			;;
-		"DB")
-			EchoNewstep "Vérification de la présence du paquet $(DechoN "$package") dans la base de données du gestionnaire $(DechoN "$package_manager")."
-			Newline
-			;;
-		"INST")
-			EchoNewstep "Installation du paquet $(DechoN "$package")."
-			Newline
-			;;
-		*)
-			HandleFatalErrors "1" "LA VALEUR DE LA CHAÎNE DE CARACTÈRES PASSÉE EN CINQUIÈME ARGUMENT $(DechoE "$type") NE CORRESPOND À AUCUNE DES TROIS CHAÎNES ATTENDUES" \
-				"Les trois chaînes de caractères attendues sont :
-				 $(DechoE "HD") pour la recherche de paquets sur le système,
-				 $(DechoE "DB") pour la recherche de paquets dans la base de données du gestionnaire de paquets,
-				 $(DechoE "INST") pour l'installation de paquets.
-				 " \
-                "$LINENO_INST"
-
-	esac
-
-	# Exécution du script.
-	local lineno=$LINENO; (cd "$parent" && ./"$file" "$FILE_LOG_PATH" "$cmd" && cat <<-EOF > "$GETVAL_PATH"
-	"$?"
-EOF
-)
-
-	local lineno=$LINENO; GETVAL=$(cat "$GETVAL_PATH" || HandleErrors "$?" "" "" "$lineno")
-
-	case "$GETVAL" in
-		"1")
-			case "$type" in
-				"HD")
-					EchoNewstep "Le paquet $(DechoN "$package") n'est pas installé sur votre système."
-					Newline
-
-					EchoNewstep "Préparation de l'installation du paquet $(DechoN "$package")."
-					Newline
-					sleep 1
-					;;
-				"DB")
-					EchoError "Le paquet $(DechoE "$package") n'a pas été trouvé dans la base de données du gestionnaire $(DechoE "$package_manager")."
-					EchoError "Écriture du nom du paquet $(DechoE "$package") dans le fichier $(DechoE "$DIR_PACKAGES_PATH")."
-					Newline
-
-					# S'il n'existe pas, on crée le fichier contenant les noms des paquets introuvables dans la base de données.
-					if test ! -f "$FILE_PACKAGES_DB_PATH"; then
-						Makefile "$DIR_PACKAGES_PATH" "$FILE_PACKAGES_DB_NAME" "0" "0" >> "$FILE_LOG_PATH"
-						echo "Gestionnaire de paquets : $package_manager" > "$FILE_PACKAGES_DB_PATH"
-						echo "" >> "$FILE_PACKAGES_DB_PATH"
-					fi
-
-					echo "$package" >> "$FILE_PACKAGES_DB_PATH"
-
-					EchoError "Abandon de l'installation du paquet $(DechoE "$package")."
-					Newline
-
-					Drawline "$COL_RESET" "$block_char" 2>&1 | tee -a "$FILE_LOG_PATH"
-					Newline
-					;;
-				"INST")
-					EchoError "Impossible d'installer le paquet $(DechoE "$package")."
-					Newline
-
-					# S'il n'existe pas, on crée le fichier contenant les noms des paquets dont l'installation a échouée
-					if test ! -f "$FILE_PACKAGES_INST_PATH"; then
-						Makefile "$DIR_PACKAGES_PATH" "$FILE_PACKAGES_INST_NAME" "0" "0" >> "$FILE_LOG_PATH"
-
-						echo "Gestionnaire de paquets : $package_manager" > "$FILE_PACKAGES_INST_PATH"
-						echo "" >> "$FILE_PACKAGES_INST_PATH"
-					fi
-
-					echo "$package" >> "$FILE_PACKAGES_INST_PATH"
-
-					EchoError "Abandon de l'installation du paquet $(DechoE "$package")"
-					Newline
-
-					Drawline "$COL_RESET" "$block_char" 2>&1 | tee -a "$FILE_LOG_PATH"
-					Newline
-					;;
-			esac
-			;;
-		"2")
-			HandleFatalErrors "2" "AUCUNE COMMANDE N'EST PASSÉE EN ARGUMENT LORS DE L'APPEL DE LA FONCTION $(DechoE "OptimizeInstallation")" \
-				"Veuillez passer le chemin vers le fichier de logs en premier argument, PUIS la commande souhaitée (recherche (système ou base de données) ou installation) en deuxième argument." "$lineno"
-			;;
-		"3")
-			HandleFatalErrors "3" "AUCUNE COMMANDE N'EST PASSÉE EN DEUXIÈME ARGUMENT LORS DE L'APPEL DE LA FONCTION $(DechoE "OptimizeInstallation")" \
-				"Veuillez passer le nom de la commande souhaitée (recherche (système ou base de données) ou installation) en deuxième argument." \
-				"$lineno"
-			;;
-        "4")
-            HandleFatalErrors "4" "TROP D'ARGUMENTS ONT ÉTÉ PASSÉS LORS DE L'APPEL DU SCRIPT" \
-                "Pour rappel, le script ne prend que deux arguments : le chemin du fichier de logs et la commande à exécuter." \
-                "$lineno"
-            ;;
-		"5")
-			HandleErrors "5" "UNE ERREUR INCONNUE S'EST PRODUITE PENDANT L'EXÉCUTION DU SCRIPT" \
-				"" \
-				"$lineno"
-			;;
-		"0")
-			case "$type" in
-				"HD")
-					EchoSuccess "Le paquet $(DechoS "$package") est déjà installé sur votre système."
-					Newline
-
-					Drawline "$COL_RESET" "$block_char" 2>&1 | tee -a "$FILE_LOG_PATH"
-					Newline
-					;;
-				"DB")
-					EchoSuccess "Le paquet $(DechoS "$package") a été trouvé dans la base de données du gestionnaire $(DechoS "$package_manager")."
-					;;
-				"INST")
-					EchoSuccess "Le paquet $(DechoS "$package") a bien été installé."
-					;;
-			esac
-			;;
-# 		*)
-# 			HandleErrors "1" "UNE ERREUR S'EST PRODUITE LORS DE LA LECTURE DE LA SORTIE DE LA COMMANDE $(DechoE "$cmd")" \
-# 				"Vérifiez ce qui a causé cette erreur en commentant la condition contenant le message d'erreur suivant : $(DechoE "UNE ERREUR S'EST PRODUITE LORS DE LA LECTURE DE LA SORTIE DE LA COMMANDE \$(DechoE \"\$cmd\")"), à la ligne $(DechoE "$LINENO")." \
-# 				"$lineno"
-# 			;;
-	esac
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
 }
 
-# Installation d'un paquet selon le gestionnaire de paquets, ainsi que sa commande de recherche de paquets dans le système de l'utilisateur,
-# sa commande de recherche de paquets dans sa base de données, ainsi que sa commande d'installation de paquets.
+function PacmanInstall
+{
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
+}
+
+function PackHDCheck
+{
+    return
+}
+
+function PackDBCheck
+{
+    return
+}
+
 function PackInstall
 {
-	#***** Paramètres | Parameters *****
-	local package_manager=$1	# Nom du gestionnaire de paquets.
-	local package=$2			# Nom du paquet à installer.
+    #***** Parameters *****
+    manager=$1  # Package manager
+    package=$2  # Package's name
+    
+    #***** Code *****
+    CheckRootEUID
 
-	#***** Autres | Other variables *****
-	local block_char="="	# Caractère composant la ligne.
-	LINENO_INST=$LINENO
-
-	#***** Code *****
-	CheckRootEUID
-	
-	DrawLine "$COL_RESET" "$block_char" 2>&1 | tee -a "$FILE_LOG_PATH"
-	sleep 1
-	Newline
-
-	EchoNewstep "Traitement du paquet $(DechoN "$package")."
-	Newline
-
-	# On définit les commandes de recherche et d'installation de paquets selon le nom du gestionnaire de paquets passé en premier argument.
-	case ${package_manager} in
-		"$PACK_MAIN_PACKAGE_MANAGER")
-			case ${PACK_MAIN_PACKAGE_MANAGER} in
-				"apt")
-                    # Pour enregistrer la commande souhaitée dans un fichier, il faut utiliser un here document. Le tiret après les chevrons "<<" sert à effacer tous les espaces avant le premier caractère d'une ligne du fichier, étant donné qu'il y a plusieurs tabulations servant à indenter le script. Il ne faut pas mettre de guillemets uniques (') avant et après le nom du délimiteur (EOF) pour prendre en compte la valeur de la variable "$package", enregistrant le nom du paquet à installer.
-					cat <<-EOF > "$FILE_INSTALL_HD_PATH"
-					apt-cache policy "$package" | grep "$package"
-					EOF
-
-					cat <<-EOF > "$FILE_INSTALL_DB_PATH"
-					apt-cache show "$package" | grep "$package"
-					EOF
-
-					cat <<-EOF > "$FILE_INSTALL_INST_PATH"
-					apt-get -y install "$package"
-					EOF
-					;;
-			#	"dnf")
-			#		search_pack_hdrive_command=""
-
-			#		search_pack_db_command=""
-
-			#		cat <<-EOF > "$FILE_INSTALL_INST_PATH"
-            #       dnf -y install "$package"
-            #       EOF
-			#		;;
-			#	"pacman")
-			#		cat <<-EOF > "$FILE_INSTALL_HD_PATH"
-			#       pacman -Q "$package"
-			#       EOF
-
-			#		search_pack_db_command=""
-			#		cat <<-EOF > "$FILE_INSTALL_INST_PATH"
-			#       pacman --noconfirm -S "$package"
-            #       EOF
-			esac
-			;;
-		"snap")
-			cat <<-EOF > "$FILE_INSTALL_HD_PATH" snap list "$package"
-			EOF
-			# search_pack_db_command=""
-			cat <<-EOF > "$FILE_INSTALL_INST_PATH" snap install "$*"
-			EOF
-			;;
-		"")
-			HandleFatalErrors "1" "AUCUN NOM DE GESTIONNAIRE DE PAQUETS N'A ÉTÉ PASSÉ EN ARGUMENT" \
-				"Passez un gestionnaire de paquets supporté en argument (pour rappel, les gestionnaires de paquets supportés sont $(DechoE "APT"), $(DechoE "DNF") et $(DechoE "Pacman"). Si vous avez rajouté un gestionnaire de paquets, n'oubliez pas d'inclure ses commandes de recherche et d'installation de paquets)." \
-				"$LINENO, avec le paquet $(DechoE "$package")"
-				;;
-			*)
-			EchoError "Le nom du gestionnaire de paquets passé en premier argument $(DechoE "$package_manager") ne correspond à aucun gestionnaire de paquets présent sur votre système."
-			EchoError "Vérifiez que le nom du gestionnaire de paquets passé en arguments ne contienne pas de majuscules et corresponde EXACTEMENT au nom de la commande."
-			Newline
-
-			HandleFatalErrors "1" "LE NOM DU GESTIONNAIRE DE PAQUETS PASSÉ EN PREMIER ARGUMENT ($(DechoE "$package_manager")) NE CORRESPOND À AUCUN GESTIONNAIRE DE PAQUETS PRÉSENT SUR VOTRE SYSTÈME" \
-				"Désolé, ce gestionnaire de paquets n'est pas supporté ¯\_(ツ)_/¯" \
-				"$LINENO, avec le paquet $(DechoE "$package")"
-			;;
-	esac
-
-	## RECHERCHE DU PAQUET SUR LE SYSTÈME DE L'UTILISATEUR
-	var_file_content=$(cat "$FILE_INSTALL_HD_PATH")	# On récupère la commande stockée dans le fichier contenant la commande de recherche sur le système, puis on assigne son contenu en tant que valeur d'une variable à passer en argument lors de l'appel de la fonction "OptimizeInstallation".
-	var_type="HD"	# On enregistre la valeur du troisième paramètre de la fonction "OptimizeInstallation" pour mieux le récupérer lors du test.
-
-	# On appelle en premier lieu la commande de recherche de paquets installés sur le système de l'utilisateur, puis on quitte la fonction "PackInstall" si le paquet recherché est déjà installé sur le disque dur de l'utilisateur.
-	OptimizeInstallation "$DIR_INSTALL_PATH" "$FILE_SCRIPT_NAME" "$var_file_content" "$package_manager" "$package" "$var_type"
-
-	if test "$var_type" = "HD" && test "$GETVAL" -eq "1"; then
-		return
-	fi
-
-	## RECHERCHE DU PAQUET DANS LA BASE DE DONNÉES DU GESTIONNAIRE DE PAQUETS DE L'UTILISATEUR
-	var_file_content=$(cat "$FILE_INSTALL_DB_PATH")	# On récupère la commande stockée dans le fichier contenant la commande de recherche dans la base de données, puis on assigne son contenu en tant que valeur d'une variable à passer en argument lors de l'appel de la fonction "OptimizeInstallation".
-	var_type="DB"
-
-	# On appelle en deuxième lieu la commande de recherche de paquets dans la base de données du gestionnaire de paquets de l'utilisateur, puis on quitte la fonction "PackInstall" si le paquet recherché est absent de la base de données.
-	OptimizeInstallation "$DIR_INSTALL_PATH" "$FILE_SCRIPT_NAME" "$var_file_content" "$package_manager" "$package" "$var_type"
-
-	if test "$var_type" = "DB" && test "$GETVAL" -eq "1"; then
-		return
-	fi
-
-	## INSTALLATION DU PAQUET SUR LE SYSTÈME DE L'UTILISATEUR
-	var_file_content=$(cat "$FILE_INSTALL_INST_PATH")	# On récupère la commande stockée dans le fichier contenant la commande d'installation de paquets, puis on assigne son contenu en tant que valeur d'une variable à passer en argument lors de l'appel de la fonction "OptimizeInstallation".
-	var_type="INST"
-
-	# On appelle en troisième et dernier lieu la commande d'installation de paquets, puis on quitte la fonction "PackInstall" si le paquet n'a pas pu être installé.
-	OptimizeInstallation "$DIR_INSTALL_PATH" "$FILE_SCRIPT_NAME" "$var_file_content" "$package_manager" "$package" "$var_type"
-
-	if test "$var_type" = "INST" && test "$GETVAL" -eq "1"; then
-		return
-	fi
-
-	return
+    if [ "$OSTYPE" = "linux-gnu" ]; then
+        if [ "$manager" = "apt" ]; then APTInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" = "dnf" ]; then DNFInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" = "pacman" ]; then PacmanInstall
+        fi
+    fi
 }
+
+
+
+
+
+
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

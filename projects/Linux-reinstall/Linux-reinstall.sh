@@ -32,25 +32,26 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
-LINUX_REINSTALL_INST="$(GetProjectParentPath)/install/categories"
-LINUX_REINSTALL_LANG="$(GetProjectParentPath)/lang"
-LINUX_REINSTALL_VARS="$(GetProjectParentPath)/variables"
+LINUX_REINSTALL_INST="$(GetParentDirectoryName)/install/categories"
+LINUX_REINSTALL_LANG="$(GetParentDirectoryName)/lang"
+LINUX_REINSTALL_VARS="$(GetParentDirectoryName)/variables"
 
-# Calling the "CheckSubFolder" function from the initializer script and passing targeted directories paths as argument.
-EchoInit "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
-CheckSubFolder "$LINUX_REINSTALL_INST"
-CheckSubFolder "$LINUX_REINSTALL_LANG"
-CheckSubFolder "$LINUX_REINSTALL_VARS"; EchoInit
+# Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
+EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
+GetDirectorySubfoldersPath "$LINUX_REINSTALL_INST"
+GetDirectorySubfoldersPath "$LINUX_REINSTALL_LANG"
+GetDirectorySubfoldersPath "$LINUX_REINSTALL_VARS"; Newline
+EchoNewstep "All the needed directories are found !"; Newline
 
 # Sourcing the Linux-reinstall language files.
 # EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
 # SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-# EchoInit; EchoInit
+Newline #; Newline
 
 # Ending the initialization process.
-EchoInit "$(DrawLine "$COL_RESET" "-")" "2";
-EchoInit "END OF THE $(Decho "${PROJECT_NAME^^}")'S INITIALIZATION";
-EchoInit "$(DrawLine "$COL_RESET" "-")" "2"; EchoInit;
+HeaderGreen "END OF THE $(DechoGreen "${PROJECT_NAME^^}")'S INITIALIZATION";
+
+# -----------------------------------------------
 
 
 
@@ -93,7 +94,8 @@ ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
 # Détection du passage des arguments au script
 function CheckArgs
 {
-    #***** Status *****
+    #***** Status *****            fi
+
     STAT_ERROR="fatal"
     STAT_LOG="true"; STAT_LOG_REDIRECT="log"
     STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
@@ -102,21 +104,21 @@ function CheckArgs
     #***** Code *****
 	# If the script is not run as super-user (root)
 	if [ "$EUID" -ne 0 ]; then
-		EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
-		EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
+		EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)" >&2
+		EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :" >&2
 
 		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
 		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-		echo "sudo $0 \$installation"
-		Newline
+		echo "sudo $0 \$installation" >&2
+		Newline >&2
 
-		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
-		echo "    $0 \$installation"
-		Newline
+		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande" >&2
+		echo "    $0 \$installation" >&2
+		Newline >&2
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
             "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
-            "$LINENO"
+            "${FUNCNAME[0]}" "$LINENO" >&2
     fi
 
 	# If the mandatory installation tye argument is not passed.
@@ -153,9 +155,13 @@ function CheckArgs
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
 	if [ "$PROJECT_STATUS_DEBUG" = "true" ]; then
+		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
+		Newline
+		
 		# The name of the log file is redefined, THEN we redefine the path,
 		# EVEN if the initial value of the variable "$PROJECT_LOG_PATH" is the same as the new value.
-		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called.
+		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called,
+		# because the "$PROJECT_LOG_NAME" stored in the former "$$PROJECT_LOG_PATH" is the former one (its value was not updated).
 		PROJECT_LOG_NAME="$PROJECT_NAME - DEBUG.log"
 		PROJECT_LOG_PATH="$PROJECT_LOG_NAME/$PROJECT_LOG_NAME"
 
@@ -175,60 +181,7 @@ function CheckArgs
 	fi
 }
 
-# Création du fichier de logs pour répertorier chaque sortie de commande (sortie standard (STDOUT) ou sortie d'erreurs (STDERR)).
-function CreateLogFile
-{
-    #***** Modifying status *****
-#     STAT_ERROR="fatal"
-#     STAT_LOG="true"
-#     STAT_LOG_REDIRECT="log"
-#     STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
-#     CheckProjectVarStatus
-    
-    #***** Code *****
-    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
-    
-	# Le script crée d'abord le fichier de logs dans le dossier actuel (pour cela, on passe la valeur de la variable d'environnement $PWD en premier argument de la fonction "Makefile").
-	Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" > /dev/null
-    Chown "$USER" "$ARG_USERNAME" "$PROJECT_LOG_PATH"
-
-	# On vérifie si le fichier de logs a bien été créé.
-	if [ -f "$PROJECT_LOG_PATH" ]; then
-		EchoSuccess "$MSG_CRLOGFILE_SUCCESS"
-		Newline
-
-		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "RÉCUPÉRATION DES INFORMATIONS SUR LE SYSTÈME DE L'UTILISATEUR" "0" >> "$FILE_LOG_PATH"	# Au moment de la création du fichier de logs, la variable "$FILE_LOG_PATH" correspond au dossier actuel de l'utilisateur.
-
-		# Récupération des informations sur le système d'exploitation de l'utilisateur contenues dans le fichier "/etc/os-release".
-		EchoNewstep "$MSG_CRLOGFILE_GETOSINFOS :"
-		Newline
-		
-		EchoNewstep "Operating system family :"
-		CheckSupportedOS && EchoMsg "$OSTYPE"
-		Newline
-		
-		EchoNewstep "Operating system general informations :"
-		EchoMsg "$(cat "/etc/os-release")"
-		Newline
-		
-		EchoNewstep "Bash version :"
-		EchoMsg "$BASH_VERSION"
-		Newline
-		
-
-		EchoSuccess "$MSG_CRLOGFILE_GOTOSINFOS."
-    else
-        # Étant donné que le fichier de logs n'existe pas dans ce cas, il est impossible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise (cependant, il ne s'agit pas de bugs importants).
-        EchoError "$MSG_CRLOGFILE_FAIL"
-        EchoError "$MSG_CRLOGFILE_ADVICE"
-        Newline
-
-        EchoError "$MSG_LINENO $lineno."
-        Newline
-
-        exit 1
-    fi
-}
+# CreateLogFile --> Old
 
 # Script's initialization.
 function ScriptInit

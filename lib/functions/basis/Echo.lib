@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### TEXT WRITING AND DECORATION
+
+## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
+function DechoBasis
+{
+    #***** Parameters *****
+    string=$1           # The string to display.
+    original_color=$2   # The original text's color.
+    
+    #***** Code *****
+    
+    #***** Variables *****
+    # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
+    new_color="$COL_YELLOW"
+    
+    #***** Code *****
+    if [ "$original_color" = "$COL_BLUE" ] || [ "$original_color" = "$COL_CYAN" ]; then
+        # TODO : adapting this line of code when the aforementioned function will be ready.
+        echo "$(ColorChar "setaf" "$new_color")$string$(ColorChar "setaf" "$original_color")"
+    else
+        echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "setaf" "$original_color")"
+    fi
+}
+
+function Decho { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "sgr0")"; }    # Colouring a part of a simple message written via the "echo" command.
+
+## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
+function DechoE { string=$1; DechoBasis "$string" "$COL_RED"; }
+function DechoN { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
+function DechoS { string=$1; DechoBasis "$string" "$COL_GREEN"; }
+
+# -----------------------------------------------
+
+## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
+function DechoBlue { string=$1; DechoBasis "$string" "$COL_BLUE"; }
+function DechoCyan { string=$1; DechoBasis "$string" "$COL_CYAN"; }
+function DechoGreen { string=$1; DechoBasis "$string" "$COL_GREEN"; }
+function DechoOrange { string=$1; DechoBasis "$string" "$COL_ORANGE"; }
+function DechoPurple { string=$1; DechoBasis "$string" "$COL_PURPLE"; }
+function DechoRed { string=$1; DechoBasis "$string" "$COL_RED"; }
+function DechoYellow { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
+
+# -----------------------------------------------
+
+## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
+
+# Error message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function EchoError
+{
+    #***** Parameters *****
+    string=$1
+
+    #***** Code *****
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_RED")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")"
+
+    sleep "$STAT_TIME_TXT"
+}
+
+# Normal message (without any extra color), with redirection checking.
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function EchoMsg
+{
+    #***** Parameters *****
+    string=$1
+
+    #***** Code *****
+    CheckProjectLogStatus "$string"
+
+    sleep "$STAT_TIME_TXT"
+}
+
+# New sub-step message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function EchoNewstep
+{
+    #***** Parameters *****
+    string=$1
+
+    #***** Code *****
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_YELLOW")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")"
+
+    sleep "$STAT_TIME_TXT"
+}
+
+# Success message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function EchoSuccess
+{
+    #***** Parameters *****
+    string=$1
+
+    #***** Code *****
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_GREEN")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")"
+
+    sleep "$STAT_TIME_TXT"
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### LINE BREAKS
+
+## LINE BREAKS ACCORDING TO THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
+
+# Redirecting the output of the "echo" command
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function Newline
+{
+    #***** Parameters *****
+    number=$1
+
+    #***** Code *****
+    if [ -n "$number" ] && [[ ! "$number" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+        HandleErrors "1" "The number of line breaks must be an integer." "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"
+    fi
+    
+    CheckProjectLogStatus
+}

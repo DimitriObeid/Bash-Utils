@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
+#### DIRECTORIES FUNCTIONS
 
 ## PROCESSING FUNCTIONS
 
@@ -39,6 +39,10 @@ function ProcessingDir
     fi
 }
 
+# -----------------------------------------------
+
+## FOLDER CREATION FUNCTIONS
+
 # Overwriting an existing directory's content
 
 # Featured functions and files from the "functions" folder :
@@ -59,7 +63,7 @@ function OverwriteDir
 	# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU DO !!!
 	# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
     rm -rfv "${path/:?}/"*
-    HandleErrors "$?" "Unable to delete the contents of the $(DechoE "$path/") folder." "" ""
+    HandleErrors "$?" "${FUNCNAME[0]} : UNABLE TO DELETE THE CONTENT OF THE $(DechoE "$path/") FOLDER." "" ""
     EchoSuccess "Deletion of the contents of the folder $(DechoS "$path/") performed successfully"
     Newline
 
@@ -95,7 +99,7 @@ function Makedir
 
 		# On crée une variable nommée "lineno". Elle enregistre la valeur de la variable globale "$LINENO", qui enregistre le numéro de la ligne dans laquelle est est appelée dans un script.
         mkdir -pv "$path"
-        HandleErrors "$?" "THE $(DechoE "$name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." "$lineno"
+        HandleErrors "$?" "${FUNCNAME[0]} : THE $(DechoE "$name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/") !" "" ""
         EchoSuccess "The $(DechoS "$name") folder was successfully created in the $(DechoS "$parent") folder."
         Newline
         
@@ -116,5 +120,57 @@ function Makedir
 		Newline
 
 		return 0
+    fi
+}
+
+# -----------------------------------------------
+
+## PATH PROCESSING
+
+# Getting parent folder's without its full path.
+function GetParentDirectoryName
+{
+    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
+        || { HandleErrors "1" "UNABLE TO GET THE PROJECT'S PARENT DIRECTORY" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; }; \
+        pwd -P )"
+    dirname="$parent"
+
+    shopt -s extglob           # enable +(...) glob syntax
+    result=${dirname%%+(/)}    # trim however many trailing slashes exist
+    echo "$result"
+}
+
+# Getting parent folder's with its full path.
+function GetParentDirectoryPath
+{
+    parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
+        || { HandleErrors "1" "UNABLE TO GET THE PROJECT'S PARENT DIRECTORY" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME}" "$LINENO"; }; \
+        pwd -P )"
+    dirname="$parent"
+
+    echo "$dirname"
+}
+
+# Getting the name of a directory without its path
+function GetDirectoryName
+{
+    dir=""
+}
+
+# Checking if the directory's sub-folders paths passed as argument exists.
+function GetDirectorySubFoldersPath
+{
+    #***** Parameters *****
+    path=$1
+
+    #***** Code *****
+    if [ -z "$path" ]; then
+        HandleErrors "1" "${FUNCNAME[0]} : NO PATH ARGUMENT PASSED" "" ""
+    else
+        if [ -d "$path" ]; then
+            EchoSuccess "Got this folder : $(DechoS "$path")"
+        else
+            HandleErrors "1" "${FUNCNAME[0]} : THE PATH PROVIDED FOR THE $(DechoE "$path") IS INCORRECT !" "" ""
+        fi
     fi
 }

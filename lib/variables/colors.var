@@ -18,3 +18,11 @@ COL_RESET=$(tput sgr0)	# Restauration de la couleur originelle d'affichage de te
 COL_YELLOW="226"        # Light yellow    --> Couleur d'affichage des messages de passage à la prochaine sous-étapes.
 
 # -----------------------------------------------
+
+## MEMORIZER
+
+# Current color
+COL_CURRENT=""
+
+# Memorizing last color
+COL_MEM=""

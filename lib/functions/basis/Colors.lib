@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### TEXT COLORS PROCESSING
+
+## CHARACTERS COLORATION
+
+# Coloring a character
+function ColorChar
+{
+    #***** Parameters *****
+    option=$1
+    color_code=$2
+
+    #***** Code *****
+#    CheckTextColor "$opt" "$color"
+    
+    if CheckTextColor "$option" "$color_code"; then
+        if [ "$option" = "setaf" ]; then
+            SetCurrentColor "$color_code"
+            tput setaf "$color_code"
+        elif [ "$option" = "sgr0" ]; then
+            tput sgr0
+            
+            return
+        fi
+    else
+        echo "test"
+        kill "$$"
+    fi
+}
+
+# Memorizing color code.
+function MemorizeColor
+{
+    #***** Parameters *****
+    color=$1
+    
+    #***** Code *****
+    COL_MEM="$COL_CURRENT"
+}
+
+function GetMemorizedColor
+{
+    COL_CURRENT="$COL_MEM"
+}
+
+function SetCurrentColor
+{
+    #***** Parameters *****
+    color_code=$1    # Tput command's color code (integer).
+    
+    #**** Code *****
+#     if [[ ! "$color_code" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+#         echo "$(tput setaf 196)In ${FUNCNAME[0]} --> Error : the$(tput setaf 6) tput setaf$(tput setaf 196) command's value is incorrect.$(tput sgr0)" >&2
+#         echo >&2
+#         ExitSourced
+#     fi
+    COL_CURRENT="$color"
+}

@@ -83,7 +83,7 @@ function HeaderBase
 	# TODO : vérifier comment outrepasser ceci sans modifier le nom de la variable quand je serai de nouveau connecté.
 	
 	#***** Variables *****
-	HEADERBASE_COLOR_HEADER="$line_color"
+	HEADERBASE_COLOR_LINE="$line_color"
 	HEADERBASE_COLOR_TEXT="$string_color"
 	
 	#***** Code *****
@@ -100,10 +100,10 @@ function HeaderBase
 }
 
 # Header display function when changing step.
-function HeaderStep { HeaderBase "$(ColorChar "setaf" "$COL_CYAN" "l")" "-" "$(ColorChar "setaf" "$COL_CYAN" "t")" "$1"; }
+function HeaderStep { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
 
 # Header display function when switching to a new package category during package installation.
-function HeaderInstall { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW" "l")" "-" "$(ColorChar "setaf" "$COL_GREEN" "t")" "$1"; }
+function HeaderInstall { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
 
 # -----------------------------------------------
 

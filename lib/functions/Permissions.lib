@@ -77,7 +77,7 @@ function Chown
     current_owner=$1    # This parameter is used in the translated messages, stored into their own variables.
     new_owner=$2
     path=$3
-    method=$4   # Recursive swapping or not.
+    option=$4   # Recursive swapping or not.
     
     #***** Code *****
     # The "chown" command has to be used with super-user privileges,
@@ -89,7 +89,7 @@ function Chown
         Newline
         
         # Changing ownership recursively.
-        if [ "$method" = '-R' ]; then
+        if [ "$option" = 'R' ]; then
             if chown -Rv "$new_owner" "$path"; then
                 EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
                 Newline
@@ -97,13 +97,27 @@ function Chown
                 return 0
             
             else
-                EchoError "Unable to change the rights of the $(DechoE "$path/") folder"
+                HandleErrors "1" "Unable to change the rights of the $(DechoE "$path/") folder"
                 Newline
 
                 return 1
             fi
+        elif [ -z "$option" ]; then
+            if chown -v "$new_owner" "$path"; then
+                EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$current_owner") to $(DechoS "$new_owner")"
+                Newline
+
+                return 0
+            
+            else
+                HandleErrors "1" "Unable to change the rights of the $(DechoE "$path/") folder"
+                Newline
+
+                return 1
+            fi
+
         else
-            HandleError "1" "" "" ""
+            HandleError "1" "The $(DechoE "${FUNCNAME[0]}")'s function $(DechoE "$option") option passed as 4th argument is not supported."
         fi
         
         # Changing ownership non-recursively.
