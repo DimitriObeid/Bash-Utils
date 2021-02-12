@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # School and home software and packages installation script
-# Version : 2.0
+# Version : 1.0
 
 # To debug this script when needed, type the following command :
 # sudo <shell> -x <filename>
@@ -38,15 +38,15 @@ LINUX_REINSTALL_VARS="$(GetParentDirectoryName)/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
 EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
-GetDirectorySubfoldersPath "$LINUX_REINSTALL_INST"
-GetDirectorySubfoldersPath "$LINUX_REINSTALL_LANG"
-GetDirectorySubfoldersPath "$LINUX_REINSTALL_VARS"; Newline
+GetDirectorySubFolderPath "$LINUX_REINSTALL_INST"
+GetDirectorySubFolderPath "$LINUX_REINSTALL_LANG"
+GetDirectorySubFolderPath "$LINUX_REINSTALL_VARS"; Newline
 EchoNewstep "All the needed directories are found !"; Newline
 
 # Sourcing the Linux-reinstall language files.
 # EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
 # SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-Newline #; Newline
+# Newline #; Newline
 
 # Ending the initialization process.
 HeaderGreen "END OF THE $(DechoGreen "${PROJECT_NAME^^}")'S INITIALIZATION";
@@ -74,15 +74,6 @@ ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 
 # -----------------------------------------------
 
-# TODO : Retirer ces lignes obsolètes
-## OPTIONAL ARGUMENTS
-
-ARG_DEBUG=$2            # Debug utilitary  | Argument servant d'utilitaire de déboguage.
-ARG_DEBUG_INDEX='2'     # Debug argument's index.
-
-ARG_DEBUG_VAL="debug"   # Valeur de l'agument de déboguage.
-
-# -----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -103,7 +94,7 @@ function CheckArgs
     
     #***** Code *****
 	# If the script is not run as super-user (root)
-	if [ "$EUID" -ne 0 ]; then
+        lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
 		EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)" >&2
 		EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :" >&2
 
@@ -118,18 +109,18 @@ function CheckArgs
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
             "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
-            "${FUNCNAME[0]}" "$LINENO" >&2
+            "$(basename "$0")" "${FUNCNAME[0]}" "$lineno" >&2
     fi
 
 	# If the mandatory installation tye argument is not passed.
-	if [ -z "$ARG_INSTALL" ]; then
+	lineno=$LINENO; if [ -z "$ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo "    sudo $0 \$username"
         Newline
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
             "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
-            "$LINENO"
+            "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
 
         exit 1
 
@@ -144,7 +135,7 @@ function CheckArgs
                 ;;
             *)
                 Newline; HandleErrors "1" "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
-                "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$LINENO"
+                "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
                 exit 1
                 ;;
@@ -187,9 +178,7 @@ function CheckArgs
 function ScriptInit
 {
 	CheckArgs				# On appelle la fonction de vérification des arguments passés au script,
-	CreateLogFile			# Puis la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant,
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
-	WriteInstallScript		# Puis la fonction de création de scripts d'installation.
 
 	# On écrit dans le fichier de logs que l'on passe à la première étape "visible dans le terminal", à savoir l'étape d'initialisation du script.
 	{

@@ -88,6 +88,10 @@ function Makefile
 	path="$parent/$name"	# Chemin du fichier à traiter.
 
 	#***** Code *****
+	if [ -z "$parent" ] || [ -z "$name" ]; then
+        HandleErrors "1" "AT LEAST AN ARGUMENT IS MISSING" "The two awaited arguments for this function are the $(DechoE "parent directory") and the $(DechoE "name of the file to create")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	fi
+	
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$path" ]; then
         EchoNewstep "Creating the $(DechoN "$name") file in the parent folder $(DechoN "$parent/")."
@@ -114,57 +118,6 @@ function Makefile
 
 		return 0
 	fi
-}
-
-# Creating the log file to [ répertorier chaque sortie de commande (sortie standard (STDOUT) ou sortie d'erreurs (STDERR)).
-function CreateLogFile
-{
-    #***** Modifying status *****
-#     STAT_ERROR="fatal"
-#     STAT_LOG="true"
-#     STAT_LOG_REDIRECT="log"
-#     STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
-#     CheckProjectVarStatus
-    
-    #***** Code *****
-    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
-
-	# On vérifie si le fichier de logs a bien été créé.
-	if [ -f "$PROJECT_LOG_PATH" ]; then
-		EchoSuccess "$MSG_CRLOGFILE_SUCCESS"
-		Newline
-
-		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_BLUE" "RÉCUPÉRATION DES INFORMATIONS SUR LE SYSTÈME DE L'UTILISATEUR" "0" >> "$FILE_LOG_PATH"	# Au moment de la création du fichier de logs, la variable "$FILE_LOG_PATH" correspond au dossier actuel de l'utilisateur.
-
-		# Récupération des informations sur le système d'exploitation de l'utilisateur contenues dans le fichier "/etc/os-release".
-		EchoNewstep "$MSG_CRLOGFILE_GETOSINFOS :"
-		Newline
-		
-		EchoNewstep "Operating system family :"
-		CheckSupportedOS && EchoMsg "$OSTYPE"
-		Newline
-		
-		EchoNewstep "Operating system general informations :"
-		EchoMsg "$(cat "/etc/os-release")"
-		Newline
-		
-		EchoNewstep "Bash version :"
-		EchoMsg "$BASH_VERSION"
-		Newline
-		
-
-		EchoSuccess "$MSG_CRLOGFILE_GOTOSINFOS."
-    else
-        # Étant donné que le fichier de logs n'existe pas dans ce cas, il est impossible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise (cependant, il ne s'agit pas de bugs importants).
-        EchoError "$MSG_CRLOGFILE_FAIL"
-        EchoError "$MSG_CRLOGFILE_ADVICE"
-        Newline
-
-        EchoError "$MSG_LINENO $lineno."
-        Newline
-
-        exit 1
-    fi
 }
 
 # -----------------------------------------------

@@ -50,15 +50,15 @@ PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project (p
 # To remove these folders, please run the "rm -rf $folder" command with sudo if you're not logged as super-user.
 if [ "$EUID" -eq 0 ]; then
     PROJECT_TMP_DIR="$BASH_UTILS_TMP/$PROJECT_NAME - ROOT"
-    PROJECT_LOG_FILE="$PROJECT_NAME - ROOT.log"
+    PROJECT_LOG_NAME="$PROJECT_NAME - ROOT.log"
 else
     PROJECT_TMP_DIR="$BASH_UTILS_TMP/$PROJECT_NAME"
-    PROJECT_LOG_FILE="$PROJECT_NAME - ROOT.log"
+    PROJECT_LOG_NAME="$PROJECT_NAME - ROOT.log"
 fi
 
 # Defining project's log file's path.
 PROJECT_LOG_PARENT="$PROJECT_TMP_DIR/logs"
-PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_FILE"
+PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_NAME"
 
 # -----------------------------------------------
 
@@ -103,11 +103,11 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towards a directory.
     if [ -d "$path" ]; then
-        echo "Found directory : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        echo "Found directory : $(tput setaf 6)$path$(tput sgr0)"
         
     # Else, if the path points towards a file.
     elif [ -f "$path" ]; then
-        echo "Found file : $(tput setaf 6)$path$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        echo "Found file : $(tput setaf 6)$path$(tput sgr0)"
     else
         InitErrMsg "The following path is incorrect : $path"
         exit 1
@@ -121,7 +121,7 @@ function EchoSourcedDependency
     dep=$1
     
     #***** Code *****
-    echo "Sourced file : $(tput setaf 6)$dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    echo "Sourced file : $(tput setaf 6)$dep$(tput sgr0)"
 }
 
 # -----------------------------------------------
@@ -131,9 +131,13 @@ function EchoSourcedDependency
 
 #### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES
 
-# Clearing the sourced directories list file if already exists.
+# Clearing the sourced directories list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$INIT_LIST_FILE_PATH" ]; then
     true > "$INIT_LIST_FILE_PATH"
+else
+    if [ ! -d "$PROJECT_TMP_DIR" ]; then
+        mkdir "$PROJECT_TMP_DIR" || echo "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to create the project's temporary directory."
+    fi
 fi
 
 echo "CHECKING REQUIRED DIRECTORIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
@@ -156,32 +160,38 @@ echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 ## SOURCING DEPENDENCIES
 
-echo "CHECKING DEPENDENCIES" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+{
+    echo "CHECKING DEPENDENCIES"
 
-# Sourcing project's status variables file.
-source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
-    && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"
+    # Sourcing project's status variables file.
+    echo "Sourcing the variables status file :"
+    source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
+        && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; echo
 
-# Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
-# Sourcing the very basic fuctions files.
-for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
-    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
-    EchoSourcedDependency "$f"
-done
+    # Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
+    # Sourcing the very basic fuctions files.
+    echo "Sourcing the very basic functions files :"
+    for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
+        source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
+        EchoSourcedDependency "$f"
+    done; echo
 
-# Sourcing the main functions files.
-for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
-    source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
-    EchoSourcedDependency "$f"
-done
+    # Sourcing the main functions files.
+    echo "Sourcing the main functions files :"
+    for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
+        source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
+        EchoSourcedDependency "$f"
+    done; echo
 
-# Sourcing the variables files.
-for f in "$BASH_UTILS_VARS/"*.var; do
-    source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
-    EchoSourcedDependency "$f"
-done
+    # Sourcing the variables files.
+    echo "Sourcing the variables files :"
+    for f in "$BASH_UTILS_VARS/"*.var; do
+        source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
+        EchoSourcedDependency "$f"
+    done; echo
 
-echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    echo 
+} 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -204,12 +214,32 @@ CheckProjectStatusVars
 ## PROCESSING THE LOG FILE
 
 # CREATING OR OVERWRITTING THE PATHS LIST FILE
-if [ -f "$PROJECT_LOG_PATH" ]; then
-    if [ -s "$PROJECT_LOG_PATH" ]; then
-        true > "$PROJECT_LOG_PATH"
+CheckSTAT_LOG; if [ "$STAT_LOG" = "true" ]; then
+    if [ -f "$PROJECT_LOG_PATH" ]; then
+        if [ -s "$PROJECT_LOG_PATH" ]; then
+            true > "$PROJECT_LOG_PATH"
+        fi
+    else
+        Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
     fi
-else
-    Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
+    
+    # Redirecting files list into the log file.
+    cat "$INIT_LIST_FILE_PATH" >> "$PROJECT_LOG_PATH"
+
+    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+    HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+
+	# Getting operating system family.
+	EchoNewstep "Operating system family : $(tput sgr0)$OSTYPE"
+	Newline
+
+	# Gathering OS informations from the "/etc/os-release" file.
+	EchoNewstep "Operating system general informations :"
+	EchoMsg "$(cat "/etc/os-release")"
+	Newline
+
+	EchoNewstep "Bash version : $(tput sgr0)$BASH_VERSION"
+	Newline
 fi
 
 # -----------------------------------------------

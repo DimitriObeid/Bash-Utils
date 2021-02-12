@@ -130,8 +130,9 @@ function Makedir
 # Getting parent folder's without its full path.
 function GetParentDirectoryName
 {
+    # There's no need to pass any argument to this function.
     parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
-        || { HandleErrors "1" "UNABLE TO GET THE PROJECT'S PARENT DIRECTORY" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; }; \
+        || { HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; }; \
         pwd -P )"
     dirname="$parent"
 
@@ -143,8 +144,9 @@ function GetParentDirectoryName
 # Getting parent folder's with its full path.
 function GetParentDirectoryPath
 {
+    # There's no need to pass any argument to this function.
     parent="$( cd "$(dirname "$0")" >/dev/null 2>&1 \
-        || { HandleErrors "1" "UNABLE TO GET THE PROJECT'S PARENT DIRECTORY" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME}" "$LINENO"; }; \
+        || { HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME}" "$LINENO"; }; \
         pwd -P )"
     dirname="$parent"
 
@@ -158,7 +160,7 @@ function GetDirectoryName
 }
 
 # Checking if the directory's sub-folders paths passed as argument exists.
-function GetDirectorySubFoldersPath
+function GetDirectorySubFolderPath
 {
     #***** Parameters *****
     path=$1
@@ -168,9 +170,9 @@ function GetDirectorySubFoldersPath
         HandleErrors "1" "${FUNCNAME[0]} : NO PATH ARGUMENT PASSED" "" ""
     else
         if [ -d "$path" ]; then
-            EchoSuccess "Got this folder : $(DechoS "$path")"
+            EchoSuccess "Got this subfolder : $(DechoS "$path")"
         else
-            HandleErrors "1" "${FUNCNAME[0]} : THE PATH PROVIDED FOR THE $(DechoE "$path") IS INCORRECT !" "" ""
+            HandleErrors "1" "UNABLE TO GET TH : THE PATH PROVIDED FOR THE $(DechoE "$path") IS INCORRECT !" "Check if the provided path is correct." "$(basename "${BASH_SOURCE[0]}")"
         fi
     fi
 }
