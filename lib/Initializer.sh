@@ -24,26 +24,12 @@ fi
 
 #### FIRST STEP : DEFINING VARIABLES
 
-## BASH-UTILS PATHS
+## BASH-UTILS PATHS VARIABLES
 
-# Bash-Utils root directory path.
-BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
+# Note : the content of this section had been moved in the "~/Bash-utilsrc" file for a better
+# integration in the environment-dependent parts in files (like the filepaths in the".desktop" files).
 
-# Bash-Utils sub-folders paths.
-BASH_UTILS="$BASH_UTILS_ROOT/lib"
-BASH_UTILS_BIN="$BASH_UTILS_ROOT/bin"
-BASH_UTILS_CONF="$BASH_UTILS_ROOT/config"
-BASH_UTILS_TMP="$BASH_UTILS_ROOT/tmp"
-
-# "config" folder's content.
-BASH_UTILS_CONF_PROJECT_STATUS="$BASH_UTILS_CONF/ProjectStatus.conf"
-
-# "lib" folder's content.
-BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
-BASH_UTILS_FUNCTS_BASIS="$BASH_UTILS_FUNCTS/basis"
-BASH_UTILS_LANG="$BASH_UTILS/lang"
-BASH_UTILS_VARS="$BASH_UTILS/variables"
-
+# For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
 # -----------------------------------------------
 
@@ -215,6 +201,10 @@ done; EchoDBG
 
 #### PROCESSING PROJECT'S LOG FILE
 
+## CREATING NEW VARIABLES
+
+PROJECT_PATH="$(GetParentDirectoryPath "$0")/$PROJECT_FILE"
+
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 STAT_LOG="true";            CheckSTAT_LOG
@@ -238,7 +228,7 @@ if [ "$STAT_LOG" = "true" ]; then
             Makedir "$PROJECT_TMP_DIR" "$PROJECT_LOG_PARENT_NAME"
         fi
 
-        Makefile "$PROJECT_LOG_PARENT_NAME" "$PROJECT_LOG_NAME"
+        Makefile "$PROJECT_LOG_PARENT_PATH" "$PROJECT_LOG_NAME"
         echo "$PROJECT_LOG_PARENT_PATH/$PROJECT_LOG_NAME"
         echo "$PROJECT_LOG_PATH"
     fi

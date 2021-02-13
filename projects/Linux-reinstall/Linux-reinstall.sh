@@ -29,9 +29,9 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
-LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$0")/install/categories"
-LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$0")/lang"
-LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$0")/variables"
+LINUX_REINSTALL_INST="$PROJECT_PATH/install/categories"
+LINUX_REINSTALL_LANG="$PROJECT_PATH/lang"
+LINUX_REINSTALL_VARS="$PROJECT_PATH/variables"
 
 {
     # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.

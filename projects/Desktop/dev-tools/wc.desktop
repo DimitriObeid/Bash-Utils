@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name="wc.sh"
+Comment=""
+Exec=
+Icon="$BASH_UTILS_DEVTOOLS/dev-imgs/wc.png"
+Terminal=false
+Type=Application
+Categories=;
