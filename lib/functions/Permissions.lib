@@ -95,9 +95,8 @@ function Chown
                 Newline
 
                 return 0
-            
             else
-                HandleErrors "1" "Unable to change the rights of the $(DechoE "$path/") folder"
+                HandleErrors "1" "Unable to change the rights of the $(DechoE "$path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
                 Newline
 
                 return 1

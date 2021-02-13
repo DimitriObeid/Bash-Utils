@@ -165,7 +165,10 @@ function GetParentDirectoryPath
 # Getting the name of a directory without its path
 function GetDirectoryName
 {
+    #***** Parameters *****
     p_dir=$1
+    
+    #***** Code *****
 }
 
 # Checking if the directory's sub-folders paths passed as argument exists.

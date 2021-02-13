@@ -67,8 +67,9 @@ else
 fi
 
 # Defining project's log file's path.
-PROJECT_LOG_PARENT="$PROJECT_TMP_DIR/logs"
-PROJECT_LOG_PATH="$PROJECT_LOG_PARENT/$PROJECT_LOG_NAME"
+PROJECT_LOG_PARENT_NAME="logs"
+PROJECT_LOG_PARENT_PATH="$PROJECT_TMP_DIR/$PROJECT_LOG_PARENT_NAME"
+PROJECT_LOG_PATH="$PROJECT_LOG_PARENT_PATH/$PROJECT_LOG_NAME"
 
 # -----------------------------------------------
 
@@ -94,7 +95,11 @@ INIT_LIST_FILE_PATH="$PROJECT_TMP_DIR/$INIT_FILE_LIST_NAME"
 # Controlling all the redirections in a single place for a better debugging process.
 function EchoDBG
 {
-    echo "$1" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    if [ -z "$INIT_LIST_FILE_PATH" ] || [ ! -f "$INIT_LIST_FILE_PATH" ]; then
+        echo; echo "Error : the initializer log file's path is invalid."; echo; exit 1
+    else
+        echo "$1" >> "$INIT_LIST_FILE_PATH"
+    fi
 }
 
 # Defining the error message's beginning and end.
@@ -102,10 +107,9 @@ function InitErrMsg
 {
     #***** Parameters *****
     msg=$1
-    lineno=$2
     
     #***** Code *****
-    EchoDBG "$(tput setaf 196)In ${BASH_SOURCE[0]}, line $lineno --> ERROR : $msg$(tput sgr0)"; EchoDBG
+    EchoDBG "$(tput setaf 196)In ${BASH_SOURCE[0]} --> ERROR : $msg$(tput sgr0)"; EchoDBG
     exit 1
 }
 
@@ -114,7 +118,6 @@ function CheckBURequirements
 {
     #***** Parameters *****
     path=$1
-    lineno=$2
     
     #***** Code *****
     # If the path points towards a directory.
@@ -154,6 +157,8 @@ else
     if [ ! -d "$PROJECT_TMP_DIR" ]; then
         mkdir "$PROJECT_TMP_DIR" || echo "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to create the project's temporary directory." 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
     fi
+    
+    touch "$INIT_LIST_FILE_PATH"
 fi
 
 EchoDBG "CHECKING REQUIRED DIRECTORIES"
@@ -174,40 +179,33 @@ EchoDBG
 
 ## SOURCING DEPENDENCIES
 
+# Tip : It's important to source the functions files before the variables ones to avoid error
+# messages while including them at first, as some functions are called into these variables.
+
 EchoDBG "CHECKING DEPENDENCIES"
 
 # Sourcing project's status variables file.
-EchoDBG "Sourcing the variables status file :"
+EchoDBG "Sourcing the variables status file :"; source "$BASH_UTILS_CONF_PROJECT_STATUS" \
+    || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS"
+EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
 
-source "$BASH_UTILS_CONF_PROJECT_STATUS" || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" \
-    && EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
-
-# Sourcing the functions files before the variables ones to avoid error messages while including them at first, as some functions are called into these variables.
 # Sourcing the very basic fuctions files.
-EchoDBG "Sourcing the very basic functions files :"
-
-for f in $(ls -R "$BASH_UTILS_FUNCTS/basis/"*.lib); do
-    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the very basic functions files :"; for f in $(ls -R "$BASH_UTILS_FUNCTS_BASIS/"*.lib); do source "$f" \
+    || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the main functions files.
-EchoDBG "Sourcing the main functions files :"
-
-for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do
-    source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the main functions files :"; for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do source "$f" \
+    || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the variables files.
-EchoDBG "Sourcing the variables files :"
-
-for f in "$BASH_UTILS_VARS/"*.var; do
-    source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the variables files :"; for f in "$BASH_UTILS_VARS/"*.var; do source "$f" \
+    || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
     EchoSourcedDependency "$f"
 done; EchoDBG
-
-EchoDBG
 
 # -----------------------------------------------
 
@@ -219,44 +217,57 @@ EchoDBG
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
-STAT_LOG_REDIRECT="tee"     # TODO : put this value as "log" when the initializer file will be done.
-STAT_ERROR="fatal"
-STAT_TIME_HEADER="0"
-STAT_TIME_TXT="0"
-CheckProjectStatusVars
+STAT_LOG="true";            CheckSTAT_LOG
+STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT
+STAT_ERROR="fatal";         CheckSTAT_ERROR
+STAT_TIME_HEADER="0";       CheckSTAT_TIME_HEADER
+STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT
 
 # -----------------------------------------------
 
 ## PROCESSING THE LOG FILE
 
-# CREATING OR OVERWRITTING THE PATHS LIST FILE
-CheckSTAT_LOG; if [ "$STAT_LOG" = "true" ]; then
+# Creating or overwritting the paths list file.
+if [ "$STAT_LOG" = "true" ]; then
     if [ -f "$PROJECT_LOG_PATH" ]; then
         if [ -s "$PROJECT_LOG_PATH" ]; then
             true > "$PROJECT_LOG_PATH"
         fi
     else
-        # Makefile "$PROJECT_LOG_PARENT" "$PROJECT_LOG_NAME" # > /dev/null
-        touch "$PROJECT_LOG_PATH"
+        if [ ! -d "$PROJECT_LOG_PARENT_PATH" ]; then
+            Makedir "$PROJECT_TMP_DIR" "$PROJECT_LOG_PARENT_NAME"
+        fi
+
+        Makefile "$PROJECT_LOG_PARENT_NAME" "$PROJECT_LOG_NAME"
+        echo "$PROJECT_LOG_PARENT_PATH/$PROJECT_LOG_NAME"
+        echo "$PROJECT_LOG_PATH"
     fi
     
     # Redirecting files list into the log file.
-    cat "$INIT_LIST_FILE_PATH" >> "$PROJECT_LOG_PATH"
+    {
+        HeaderBlue "SOURCED FILES LOG OUTPUT"
+        Newline
+        
+        cat "$INIT_LIST_FILE_PATH"
 
-    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
-    HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+        # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+        HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
-	# Getting operating system family.
-	EchoNewstep "Operating system family : $(tput sgr0)$OSTYPE"
-	Newline
+        # Getting operating system family.
+        EchoNewstep "Operating system family :$(tput sgr0) $OSTYPE"
+        Newline
 
-	# Gathering OS informations from the "/etc/os-release" file.
-	EchoNewstep "Operating system general informations :"
-	EchoMsg "$(cat "/etc/os-release")"
-	Newline
+        # Gathering OS informations from the "/etc/os-release" file.
+        EchoNewstep "Operating system general informations :"
+        EchoMsg "$(cat "/etc/os-release")"
+        Newline
 
-	EchoNewstep "Bash version : $(tput sgr0)$BASH_VERSION"
-	Newline
+        EchoNewstep "Bash version :$(tput sgr0) $BASH_VERSION"
+        Newline
+
+        EchoSuccess "Successfully got the user's system's informations."
+        Newline
+    } >> "$PROJECT_LOG_PATH"
 fi
 
 # -----------------------------------------------
@@ -267,4 +278,4 @@ fi
 
 #### ENDING THE INITIALIZATION PROCESS
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "${PROJECT_NAME^^}") !"
+HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "${PROJECT_NAME^^}") !" >> "$PROJECT_LOG_PATH"

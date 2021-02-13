@@ -72,7 +72,7 @@ function CheckTextColor
 
                     echo "$v_string the$v_colCyan tput setaf$v_colRed command's value is incorrect." >&2
 
-                    echo "The$col_cyan tput setaf$col_red option's value range is $v_colCyan 0 - 255 $v_colReset" >&2
+                    echo "The$v_colCyan tput setaf$v_colRed option's value range is $v_colCyan 0 - 255 $v_colReset" >&2
 
                     echo >&2; ExitSourced
                 fi
@@ -86,7 +86,7 @@ function CheckTextColor
         fi
         
     else
-        echo "$v_string no value passed as$col_cyan tput$v_colRed command's option argument$v_colReset" >&2; echo >&2; ExitSourced
+        echo "$v_string no value passed as$v_colCyan tput$v_colRed command's option argument$v_colReset" >&2; echo >&2; ExitSourced
     fi
 }
 
@@ -125,11 +125,11 @@ function CheckProjectLogStatus
     if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
             echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
         elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
             echo "$p_string"
             echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $PROJECT_LOG_PATH file$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
         fi
     else
         echo "$p_string"
@@ -155,11 +155,22 @@ function HandleErrors
 	p_lineno=$6          # Ligne à laquelle le message d'erreur s'est produite.
 
     #***** Variables *****
+    # Echoing the line breaks according to the "STAT_LOG_REDIRECT" status variable's value (processed a few lines down).
+    v_echo=""
+    
     v_headerString="IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->"
 
 	# ***** Code *****
 	CheckSTAT_ERROR
 	
+	# If the text was redirected to the log file, it will also be redirected to the terminal.
+	CheckSTAT_LOG_REDIRECT; if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+        STAT_LOG_REDIRECT="tee"
+        v_echo="$(echo >&2 | tee -a "$PROJECT_LOG_PATH")"
+    else
+        v_echo="$(Newline)"
+	fi
+
 	if [ "$p_returnCode" -eq 0 ]; then
         return
     else
@@ -167,27 +178,27 @@ function HandleErrors
             HeaderRed "$v_headerString FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
 
             if [ -z "$p_adviceString" ]; then
-                EchoError "No advice to give." >&2
-                Newline >&2
+                EchoError "No advice to give."
+                echo "$v_echo"
             else
-                EchoError "Advice : $p_adviceString" >&2
-                Newline >&2
+                EchoError "Advice : $p_adviceString"
+                echo "$v_echo"
             fi
 
-            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")." >&2
-            Newline >&2
+            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."
+            echo "$v_echo"
 
             exit 1
 
         elif [ -z "$STAT_ERROR" ]; then
-            HeaderRed "$v_headerString FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_headerString FATAL ERROR : $(DechoE "${p_errorString^^}")"
 
             if [ -z "$p_adviceString" ]; then
-                EchoError "No advice to give." >&2
-                Newline >&2
+                EchoError "No advice to give."
+                echo "$v_echo"
             else
-                EchoError "Advice : $p_adviceString" >&2
-                Newline >&2
+                EchoError "Advice : $p_adviceString"
+                echo "$v_echo"
             fi
             
             KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")" \

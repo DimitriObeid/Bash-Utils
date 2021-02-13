@@ -124,6 +124,29 @@ function Makefile
 
 # -----------------------------------------------
 
+## FILE SOURCING
+
+# Sourcing dependencies files.
+function SourceFile
+{
+    #***** Parameters *****
+    path=$1
+
+    #***** Code *****
+    if [ -f "$path" ]; then
+        # shellcheck disable=SC1090
+        if source "$path"; then
+            EchoSuccess "Sourced file : $(DechoS "$path")"
+        else
+            HandleErrors "1" "UNABLE TO FIND THIS PATH" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+        fi
+    else
+        HandleErrors "1" "UNABLE TO FIND THIS PATH" "Verify the path passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))"
+    fi
+}
+
+# -----------------------------------------------
+
 ## TEXT FILES PARSING
 
 # Getting a specific line from a text file.

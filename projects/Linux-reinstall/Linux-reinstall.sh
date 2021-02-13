@@ -33,20 +33,22 @@ LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$0")/install/categories"
 LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$0")/lang"
 LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$0")/variables"
 
-# Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
-GetDirectorySubFolderPath "$LINUX_REINSTALL_INST"
-GetDirectorySubFolderPath "$LINUX_REINSTALL_LANG"
-GetDirectorySubFolderPath "$LINUX_REINSTALL_VARS"; Newline
-EchoNewstep "All the needed directories are found !"; Newline
+{
+    # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
+    EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
+    GetDirectorySubFolderPath "$LINUX_REINSTALL_INST"
+    GetDirectorySubFolderPath "$LINUX_REINSTALL_LANG"
+    GetDirectorySubFolderPath "$LINUX_REINSTALL_VARS"; Newline
+    EchoNewstep "All the needed directories are found !"; Newline
 
-# Sourcing the Linux-reinstall language files.
-# EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
-# SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-# Newline #; Newline
+    # Sourcing the Linux-reinstall language files.
+    # EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
+    # SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
+    # Newline #; Newline
 
-# Ending the initialization process.
-HeaderGreen "END OF THE $(DechoGreen "${PROJECT_NAME^^}")'S INITIALIZATION";
+    # Ending the initialization process.
+    HeaderGreen "END OF THE $(DechoGreen "${PROJECT_NAME^^}")'S INITIALIZATION"
+} >> "$PROJECT_LOG_PATH"
 
 # -----------------------------------------------
 

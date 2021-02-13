@@ -60,7 +60,7 @@ function EchoError
     string=$1
 
     #***** Code *****
-    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_RED")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")"
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_RED")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")" >&2
 
     sleep "$STAT_TIME_TXT"
 }
@@ -105,7 +105,7 @@ function EchoSuccess
     string=$1
 
     #***** Code *****
-    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_GREEN")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")"
+    CheckProjectLogStatus "$(ColorChar "setaf" "$COL_GREEN")$TXT_TAB$TXT_TAB $string$(ColorChar "sgr0")" >&1
 
     sleep "$STAT_TIME_TXT"
 }
@@ -129,7 +129,11 @@ function Newline
     #***** Code *****
     if [ -n "$number" ] && [[ ! "$number" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         HandleErrors "1" "The number of line breaks must be an integer." "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"
+    else
+        # Doing X line breaks according to the number passed as argument.
+        for ((i=0; i<number; i++)); do
+            echo -n "Test $number"
+            CheckProjectLogStatus
+        done
     fi
-    
-    CheckProjectLogStatus
 }
