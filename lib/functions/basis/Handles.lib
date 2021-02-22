@@ -15,7 +15,7 @@
 function CheckRootEUID
 {
     if [ "$EUID" -ne 0 ]; then
-        HandleErrors "1" "Error : you need root user's privileges to perform this action." ""
+        HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
     fi
 }
 

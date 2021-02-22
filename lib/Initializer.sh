@@ -5,8 +5,6 @@
 
 # Version : 2.0
 
-
-
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
@@ -18,18 +16,41 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1
 fi
 
-
-
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### FIRST STEP : DEFINING VARIABLES
 
 ## BASH-UTILS PATHS VARIABLES
 
-# Note : the content of this section had been moved in the "~/Bash-utilsrc" file for a better
+# Note : the content of this section had been copied in the "~/Bash-utilsrc" file for a better
 # integration in the environment-dependent parts in files (like the filepaths in the".desktop" files).
 
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
+
+# Bash-Utils root directory path.
+BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
+
+# Bash-Utils sub-folders paths.
+BASH_UTILS="$BASH_UTILS_ROOT/lib"
+BASH_UTILS_BIN="$BASH_UTILS_ROOT/bin"
+BASH_UTILS_CONF="$BASH_UTILS_ROOT/config"
+BASH_UTILS_TMP="$BASH_UTILS_ROOT/tmp"
+
+# "config" folder's content.
+BASH_UTILS_CONF_PROJECT_STATUS="$BASH_UTILS_CONF/ProjectStatus.conf"
+
+# Bash-utils dev-tools paths.
+BASH_UTILS_DEVTOOLS_ROOT="$BASH_UTILS_ROOT/projects/dev-tools"
+BASH_UTILS_DEVTOOLS_BIN="$BASH_UTILS_DEVTOOLS_ROOT/dev-bin"
+BASH_UTILS_DEVTOOLS_IMG="$BASH_UTILS_DEVTOOLS_ROOT/dev-img"
+BASH_UTILS_DEVTOOLS_SRC="$BASH_UTILS_DEVTOOLS_ROOT/dev-src"
+BASH_UTILS_DEVTOOLS_TRANSL="$BASH_UTILS_DEVTOOLS_ROOT/dev-translations"
+
+# "lib" folder's content.
+BASH_UTILS_FUNCTS="$BASH_UTILS/functions"
+BASH_UTILS_FUNCTS_BASIS="$BASH_UTILS_FUNCTS/basis"
+BASH_UTILS_LANG="$BASH_UTILS/lang"
+BASH_UTILS_VARS="$BASH_UTILS/variables"
 
 # -----------------------------------------------
 
@@ -92,10 +113,11 @@ function EchoDBG
 function InitErrMsg
 {
     #***** Parameters *****
-    msg=$1
+    p_msg=$1
+    p_lineno=$2
     
     #***** Code *****
-    EchoDBG "$(tput setaf 196)In ${BASH_SOURCE[0]} --> ERROR : $msg$(tput sgr0)"; EchoDBG
+    echo; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)"; echo
     exit 1
 }
 
@@ -103,18 +125,19 @@ function InitErrMsg
 function CheckBURequirements
 {
     #***** Parameters *****
-    path=$1
+    p_path=$1
+    p_lineno=$2
     
     #***** Code *****
     # If the path points towards a directory.
-    if [ -d "$path" ]; then
-        EchoDBG "Found directory : $(tput setaf 6)$path$(tput sgr0)"
+    if [ -d "$p_path" ]; then
+        EchoDBG "Found directory : $(tput setaf 6)$p_path$(tput sgr0)"
         
     # Else, if the path points towards a file.
-    elif [ -f "$path" ]; then
-        EchoDBG "Found file : $(tput setaf 6)$path$(tput sgr0)"
+    elif [ -f "$p_path" ]; then
+        EchoDBG "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
     else
-        InitErrMsg "The following path is incorrect : $path" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno"
         exit 1
     fi
 }
@@ -123,10 +146,10 @@ function CheckBURequirements
 function EchoSourcedDependency
 {
     #***** Parameters *****
-    dep=$1
+    p_dep=$1
     
     #***** Code *****
-    EchoDBG "Sourced file : $(tput setaf 6)$dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+    EchoDBG "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
 }
 
 # -----------------------------------------------
@@ -141,7 +164,10 @@ if [ -f "$INIT_LIST_FILE_PATH" ]; then
     true > "$INIT_LIST_FILE_PATH"
 else
     if [ ! -d "$PROJECT_TMP_DIR" ]; then
-        mkdir "$PROJECT_TMP_DIR" || echo "In ${BASH_SOURCE[0]}, line $(( LINENO-1 )) --> Error : unable to create the project's temporary directory." 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        mkdir "$PROJECT_TMP_DIR" || {
+            echo 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
+        }
     fi
     
     touch "$INIT_LIST_FILE_PATH"
@@ -171,25 +197,37 @@ EchoDBG
 EchoDBG "CHECKING DEPENDENCIES"
 
 # Sourcing project's status variables file.
-EchoDBG "Sourcing the variables status file :"; source "$BASH_UTILS_CONF_PROJECT_STATUS" \
-    || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS"
+EchoDBG "Sourcing the variables status file :"
+
+# shellcheck disable=SC1090
+source "$BASH_UTILS_CONF_PROJECT_STATUS" \
+    || InitErrMsg "Unable to source this file : $(tput setaf 6)$BASH_UTILS_CONF_PROJECT_STATUS" "$LINENO"
 EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
 
 # Sourcing the very basic fuctions files.
-EchoDBG "Sourcing the very basic functions files :"; for f in $(ls -R "$BASH_UTILS_FUNCTS_BASIS/"*.lib); do source "$f" \
-    || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the very basic functions files :"; for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
+    [[ -e "$f" ]] || InitErrMsg "Error : this basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+    
+    # shellcheck disable=SC1090
+    source "$f" || InitErrMsg "Error : unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the main functions files.
-EchoDBG "Sourcing the main functions files :"; for f in $(ls -R "$BASH_UTILS_FUNCTS/"*.lib); do source "$f" \
-    || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the main functions files :"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
+    [[ -e "$f" ]] || InitErrMsg "Error : this main functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+
+    # shellcheck disable=SC1090
+    source "$f" || InitErrMsg "Error : unable to source this main functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the variables files.
-EchoDBG "Sourcing the variables files :"; for f in "$BASH_UTILS_VARS/"*.var; do source "$f" \
-    || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f"
+EchoDBG "Sourcing the variables files :"; for f in "$BASH_UTILS_VARS/"*.var; do
+    [[ -e "$f" ]] || InitErrMsg "Error : this variables file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+
+    # shellcheck disable=SC1090
+    source "$f" || InitErrMsg "Error : unable to source this variables file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
@@ -203,14 +241,26 @@ done; EchoDBG
 
 ## CREATING NEW VARIABLES
 
+# shellcheck disable=SC2034
 PROJECT_PATH="$(GetParentDirectoryPath "$0")/$PROJECT_FILE"
+
+# -----------------------------------------------
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
+# shellcheck disable=SC2034
 STAT_LOG="true";            CheckSTAT_LOG
+
+# shellcheck disable=SC2034
 STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT
+
+# shellcheck disable=SC2034
 STAT_ERROR="fatal";         CheckSTAT_ERROR
+
+# shellcheck disable=SC2034
 STAT_TIME_HEADER="0";       CheckSTAT_TIME_HEADER
+
+# shellcheck disable=SC2034
 STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT
 
 # -----------------------------------------------
@@ -234,30 +284,27 @@ if [ "$STAT_LOG" = "true" ]; then
     fi
     
     # Redirecting files list into the log file.
-    {
-        HeaderBlue "SOURCED FILES LOG OUTPUT"
-        Newline
+    HeaderBlue "SOURCED FILES LOG OUTPUT"
         
-        cat "$INIT_LIST_FILE_PATH"
+    cat "$INIT_LIST_FILE_PATH" >> "$PROJECT_LOG_PATH"
 
-        # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
-        HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+    HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
-        # Getting operating system family.
-        EchoNewstep "Operating system family :$(tput sgr0) $OSTYPE"
-        Newline
+    # Getting operating system family.
+    EchoNewstep "Operating system family :$(tput sgr0) $OSTYPE"
+    Newline
 
-        # Gathering OS informations from the "/etc/os-release" file.
-        EchoNewstep "Operating system general informations :"
-        EchoMsg "$(cat "/etc/os-release")"
-        Newline
+    # Gathering OS informations from the "/etc/os-release" file.
+    EchoNewstep "Operating system general informations :"
+    EchoMsg "$(cat "/etc/os-release")"
+    Newline
 
-        EchoNewstep "Bash version :$(tput sgr0) $BASH_VERSION"
-        Newline
+    EchoNewstep "Bash version :$(tput sgr0) $BASH_VERSION"
+    Newline
 
-        EchoSuccess "Successfully got the user's system's informations."
-        Newline
-    } >> "$PROJECT_LOG_PATH"
+    EchoSuccess "Successfully got the user's system's informations."
+    Newline
 fi
 
 # -----------------------------------------------

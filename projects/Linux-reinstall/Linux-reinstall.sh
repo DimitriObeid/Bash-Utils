@@ -19,6 +19,10 @@
 
 ## SOURCING THE INITALIZER FILE
 
+# if [ "$(cat /etc/os-release)" ]; then
+#     echo lllll
+# fi
+
 # shellcheck disable=SC1091
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
     echo; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
@@ -29,16 +33,16 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
-LINUX_REINSTALL_INST="$PROJECT_PATH/install/categories"
-LINUX_REINSTALL_LANG="$PROJECT_PATH/lang"
-LINUX_REINSTALL_VARS="$PROJECT_PATH/variables"
+LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$PROJECT_FILE")/install/categories"
+LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$PROJECT_FILE")/lang"
+LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$PROJECT_FILE")/variables"
 
 {
     # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
     EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
-    GetDirectorySubFolderPath "$LINUX_REINSTALL_INST"
-    GetDirectorySubFolderPath "$LINUX_REINSTALL_LANG"
-    GetDirectorySubFolderPath "$LINUX_REINSTALL_VARS"; Newline
+    GetDirectoryPath "$LINUX_REINSTALL_INST"
+    GetDirectoryPath "$LINUX_REINSTALL_LANG"
+    GetDirectoryPath "$LINUX_REINSTALL_VARS"; Newline
     EchoNewstep "All the needed directories are found !"; Newline
 
     # Sourcing the Linux-reinstall language files.
@@ -94,17 +98,18 @@ function CheckArgs
     #***** Code *****
 	# If the script is not run as super-user (root)
         lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
-		EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)" >&2
-		EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :" >&2
+        {
+            EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
+            EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
 
-		# La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
-		# Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-		echo "sudo $0 \$installation" >&2
-		Newline >&2
+            # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
+            # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
+            echo "sudo $0 \$installation"
+            Newline
 
-		EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande" >&2
-		echo "    $0 \$installation" >&2
-		Newline >&2
+            EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
+            echo "    $0 \$installation"
+        } >&2
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
             "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
@@ -115,7 +120,7 @@ function CheckArgs
 	lineno=$LINENO; if [ -z "$ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo "    sudo $0 \$username"
-        Newline
+        Newline >&2
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
             "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
@@ -176,19 +181,16 @@ function CheckArgs
 # Script's initialization.
 function ScriptInit
 {
-	CheckArgs				# On appelle la fonction de vérification des arguments passés au script,
+    CheckArgs				# On appelle la fonction de vérification des arguments passés au script,
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
 
 	# On écrit dans le fichier de logs que l'on passe à la première étape "visible dans le terminal", à savoir l'étape d'initialisation du script.
-	{
-		HeaderBase "$COL_BLUE" "$TXT_HEADER_LINE_CHAR" "$COL_CYAN" \
-			"VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT" "0"
-	} >> "$FILE_LOG_PATH"
+    HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
 
 	# On demande à l'utilisateur de bien confirmer son nom d'utilisateur, au cas où son compte utilisateur cohabite avec d'autres comptes et qu'il n'a pas passé le bon compte en argument.
 	Newline
 
-	YesNo "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}.$(Newline)Est-ce correct ? (oui/non)" \
+	KbInputYesNo "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}.$(Newline)Est-ce correct ? (oui/non)" \
         "$(return)" "Abandon $(exit 0)"
 }
 

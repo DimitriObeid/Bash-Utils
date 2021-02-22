@@ -102,7 +102,7 @@ function Makefile
         # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
         # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(DechoE "$name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." "Verify the permissions of the targeted directory" "$(basename "$BASH_SOURCE[0]")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
+        HandleErrors "$?" "THE $(DechoE "$name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." "Please check the permissions of the targeted directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
         EchoSuccess "The $(DechoS "$name") file was successfully created in the $(DechoS "$parent") folder."
         Newline
         
