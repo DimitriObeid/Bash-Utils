@@ -21,13 +21,17 @@ function KbInputYesNo
     #***** Parameters *****
     description=$1
     ans_yes=$2
-    ans_no=$3
+    cmd_ans_yes=$3
+    ans_no=$4
+    cmd_and_no=$5
 
     #***** Code *****
     EchoNewstep "$description"
     Newline
     
     read -rp "Enter your answer : " ans_yesno
+    
+    # If the "STAT_LOG_REDIRECT" status variable contains one of its redirection value ('log' or 'tee'), the answer is redirected to the log file with the date.
     if [ -n "$STAT_LOG_REDIRECT" ]; then
         echo "[$TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$PROJECT_LOG_PATH"
     fi; Newline

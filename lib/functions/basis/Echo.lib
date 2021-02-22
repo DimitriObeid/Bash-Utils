@@ -127,13 +127,17 @@ function Newline
     number=$1
 
     #***** Code *****
+    # TODO : faire en sorte de n'accepter QUE les nombres entiers (pas de float).
     if [ -n "$number" ] && [[ ! "$number" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         HandleErrors "1" "The number of line breaks must be an integer." "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"
     else
-        # Doing X line breaks according to the number passed as argument.
-        for ((i=0; i<number; i++)); do
-            echo -n "Test $number"
+        if [ -n "$number" ]; then
+            # Doing X line breaks according to the number passed as argument.
+            for ((i=0; i<number; i++)); do
+                CheckProjectLogStatus
+            done
+        else
             CheckProjectLogStatus
-        done
+        fi
     fi
 }

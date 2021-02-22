@@ -27,9 +27,6 @@ function ColorChar
             
             return
         fi
-    else
-        echo "test"
-        kill "$$"
     fi
 }
 
