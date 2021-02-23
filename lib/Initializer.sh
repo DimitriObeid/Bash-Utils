@@ -206,30 +206,32 @@ EchoSourcedDependency "$BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
 
 # Sourcing the very basic fuctions files.
 EchoDBG "Sourcing the very basic functions files :"; for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
-    [[ -e "$f" ]] || InitErrMsg "Error : this basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+    [[ -e "$f" ]] || InitErrMsg "This basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
     
     # shellcheck disable=SC1090
-    source "$f" || InitErrMsg "Error : unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO"
+    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the main functions files.
-EchoDBG "Sourcing the main functions files :"; for f in "$BASH_UTILS_FUNCTS/"*.lib; do
-    [[ -e "$f" ]] || InitErrMsg "Error : this main functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+EchoDBG "Sourcing the main functions files :"; for f in "$BASH_UTILS_FUNCTS/main/"*.lib; do
+    [[ -e "$f" ]] || InitErrMsg "This main functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
 
     # shellcheck disable=SC1090
-    source "$f" || InitErrMsg "Error : unable to source this main functions file : $(tput setaf 6)$f" "$LINENO"
+    source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
 
 # Sourcing the variables files.
 EchoDBG "Sourcing the variables files :"; for f in "$BASH_UTILS_VARS/"*.var; do
-    [[ -e "$f" ]] || InitErrMsg "Error : this variables file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+    [[ -e "$f" ]] || InitErrMsg "This variables file doesn't exists : $(tput setaf 6)$f" "$LINENO"
 
     # shellcheck disable=SC1090
-    source "$f" || InitErrMsg "Error : unable to source this variables file : $(tput setaf 6)$f" "$LINENO"
+    source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
 done; EchoDBG
+
+Newline 10
 
 # -----------------------------------------------
 
@@ -315,4 +317,4 @@ fi
 
 #### ENDING THE INITIALIZATION PROCESS
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "${PROJECT_NAME^^}") !" >> "$PROJECT_LOG_PATH"
+HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "${PROJECT_NAME^^}") !"

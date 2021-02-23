@@ -22,7 +22,7 @@ function CheckRootEUID
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CHECKING TEXTS
+#### TEXT CHECKING
 
 ## COLOR CHECKINGS
 
@@ -55,9 +55,9 @@ function CheckTextColor
     p_colorCode=$2
     
     #***** Variables *****
-    v_colCyan="$(tput setaf 6)"
-    v_colRed="$(tput setaf 196)"
-    v_string="$(tput setaf 196)IN $v_colCyan$(basename "${BASH_SOURCE[0]}")$v_colRed, FUNCTION $v_colCyan${FUNCNAME[0]}$v_colRed --> Error :"
+    v_colCyan="$(tput setaf "$COL_CYAN")"
+    v_colRed="$(tput setaf "$COL_RED")"
+    v_string="$(tput setaf "$COL_RED")IN $v_colCyan$(basename "${BASH_SOURCE[0]}")$v_colRed, FUNCTION $v_colCyan${FUNCNAME[0]}$v_colRed --> Error :"
     v_colReset="$(tput sgr0)"
 
     #***** Code *****
@@ -90,6 +90,69 @@ function CheckTextColor
     fi
 }
 
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VARIABLES VALUES CHECKING
+
+## NUMBER VALUES
+
+# Checking floating value.
+function IsFloat
+{
+    #***** Parameters *****
+    value=$1
+
+    #***** Code *****
+    if [[ "$value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
+        return 0
+    fi
+}
+
+# Checking floating and integer value.
+function IsFloatInt
+{
+    #***** Parameters *****
+    value=$1
+
+    #***** Code *****
+    if [[ "$value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+        return 0
+    fi
+}
+
+# Checking integer value.
+function IsInt
+{
+    #***** Parameters *****
+    value=$1
+
+    #***** Code *****
+    if [[ "$value" =~ ^[+-]?[0-9]+$ ]]; then
+        return 0
+    fi
+}
+
+# -----------------------------------------------
+
+## STRING VALUES
+
+# Checking string value (no number allowed)
+function IsString
+{
+    #***** Parameters *****
+    value=$1
+
+    #***** Code *****
+    # Checking if the value is a floating number or an integer.
+    if [ "$value" != $(IsFloat "$value") ] && [ "$value" != "$(IsFloatInt "$value")" ] && [ "$value" != "$(isInt "$value")" ]; then
+        return 0
+    fi
+}
+
+# -----------------------------------------------
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -103,7 +166,10 @@ function CheckTextColor
 function CheckProjectLogPath
 {
     if [ -z "$PROJECT_LOG_PATH" ]; then
-        echo "$(tput setaf "$COL_RED") Error : no path provided into the PROJECT_LOG_PATH variable.$(tput sgr0)" >&2
+        echo "$(tput setaf "$COL_RED") Error : no path provided into the $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") variable.$(tput sgr0)" >&2
+        echo >&2; ExitSourced
+    elif [ ! -f "$PROJECT_LOG_PATH" ]; then
+        echo "$(tput setaf "$COL_RED") Error : incorrect path provided into the $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") variable.$(tput sgr0)" >&2
         echo >&2; ExitSourced
     fi
 }
@@ -113,6 +179,7 @@ function CheckProjectLogStatus
 {
     #***** Parameters *****
     p_string=$1
+    p_option=$2     # "echo" command options
 
     #**** Code *****
     CheckSTAT_LOG
@@ -121,27 +188,120 @@ function CheckProjectLogStatus
     CheckSTAT_TIME_HEADER
     CheckSTAT_TIME_LINE
     CheckSTAT_TIME_TXT
+    
+    # If the text is redirected towars the log path, it's better to put every timer status variables values to '0'.
+    if [ "$STAT_LOG_REDIRECT" = "true" ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_HEADER" -gt 0 ] || \
+        [ "$STAT_TIME_LINE" -gt 0 ] || [ "$STAT_TIME_TXT" -gt 0 ]; then
 
-    if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
-        if [ "$STAT_LOG_REDIRECT" = "log" ] || [ "$STAT_LOG_REDIRECT" -eq 1 ]; then
-            echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-        elif [ "$STAT_LOG_REDIRECT" = "tee" ] || [ "$STAT_LOG_REDIRECT" -eq 2 ]; then
-            echo "$p_string"
-            echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            # Backup the old values to restore them when the log processing will be done.
+            OLD_STAT_TIME_HEADER="$STAT_TIME_HEADER"
+            OLD_STAT_TIME_LINE="$STAT_TIME_LINE"
+            OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
+            
+            STAT_TIME_HEADER="0"
+            STAT_TIME_LINE="0"
+            STAT_TIME_TXT="0"
+        fi
+    fi
+
+    if [ "$p_option" = "-e" ]; then
+        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+                echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+                echo -e "$p_string"
+                echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            fi
+        else
+            echo -e "$p_string"
+        fi
+    elif [ "$p_option" = "-n" ]; then
+        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+                echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+                echo -n "$p_string"
+                echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            fi
+        else
+            echo -n "$p_string"
+        fi
+    elif [ "$p_option" = "-ne" ]; then
+        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+                echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+                echo -ne "$p_string"
+                echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            fi
+        else
+            echo -ne "$p_string"
         fi
     else
-        echo "$p_string"
+        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+                echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+                echo "$p_string"
+                echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
+                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
+            fi
+        else
+            echo "$p_string"
+        fi
+    fi
+    
+    # Restore timer status variables old values if they were modified because of the redirection to the log file only.
+    if [ "$STAT_LOG_REDIRECT" = "true" ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_HEADER" -eq 0 ] || \
+            [ "$STAT_TIME_LINE" -eq 0 ] || [ "$STAT_TIME_TXT" -eq 0 ]; then
+        
+            # Backup the old values to restore them when the log processing will be done.
+            STAT_TIME_HEADER="$OLD_STAT_TIME_HEADER"
+            STAT_TIME_LINE="$OLD_STAT_TIME_LINE"
+            STAT_TIME_TXT="$OLD_STAT_TIME_TXT"
+            
+            echo "$STAT_TIME_HEADER"
+            echo "$STAT_TIME_LINE"
+            echo "$STAT_TIME_TXT"
+            
+            # Checking if the correct values were reassignated.
+            CheckSTAT_TIME_HEADER
+            CheckSTAT_TIME_LINE
+            CheckSTAT_TIME_TXT
+        fi
     fi
 }
 
 # -----------------------------------------------
 
-## ERROR HANDLING FUNCTIONS
+## DIRECTORIES PATHS CHECKING
+
+# 
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### ERRORS HANDLING FUNCTIONS
+
+## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function ExitSourced { kill "$$"; }
+
+# -----------------------------------------------
+
+## SCRIPT'S ERRORS HANDLING
 
 # Handling command outputs.
 function HandleErrors

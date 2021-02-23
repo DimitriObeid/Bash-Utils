@@ -185,7 +185,7 @@ function ScriptInit
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
 
 	# On écrit dans le fichier de logs que l'on passe à la première étape "visible dans le terminal", à savoir l'étape d'initialisation du script.
-    HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
+    HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
 
 	# On demande à l'utilisateur de bien confirmer son nom d'utilisateur, au cas où son compte utilisateur cohabite avec d'autres comptes et qu'il n'a pas passé le bon compte en argument.
 	Newline
@@ -198,11 +198,11 @@ function ScriptInit
 function LaunchScript
 {
     # Affichage du header de bienvenue
-    HeaderStep "BIENVENUE DANS L'INSTALLATEUR DE PROGRAMMES POUR ${OSTYPE^^} : VERSION $MAIN_SCRIPT_VERSION"
+    HeaderCyan "BIENVENUE DANS L'INSTALLATEUR DE PROGRAMMES POUR ${OSTYPE^^} : VERSION $MAIN_SCRIPT_VERSION"
     EchoNewstep "Début de l'installation."
 	Newline
 
-	YesNo "Assurez-vous d'avoir lu au moins le mode d'emploi $(DechoN "(Mode d'emploi.odt)") avant de lancer l'installation.$(Newline)Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)." \
+	KbInputYesNo "Assurez-vous d'avoir lu au moins le mode d'emploi $(DechoN "(Mode d'emploi.odt)") avant de lancer l'installation.$(Newline)Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)." \
         "Vous avez confirmé vouloir exécuter ce script.$(Newline)Début de l'exécution. $(return)" \
         "Le script ne sera pas exécuté.$(Newline)Abandon.$(exit 0)"
 }
@@ -213,10 +213,10 @@ function LaunchScript
 # Vérification de la connexion à Internet.
 function CheckInternetConnection
 {
-	HeaderStep "VÉRIFICATION DE LA CONNEXION À INTERNET"
+	HeaderCyan "VÉRIFICATION DE LA CONNEXION À INTERNET"
 
 	# On vérifie si l'ordinateur est connecté à Internet (pour le savoir, on ping le serveur DNS d'OpenDNS avec la commande ping 1.1.1.1).
-	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$FILE_LOG_PATH"
+	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$PROJECT_LOG_PATH"
 
     HandleErrors "$?" "AUCUNE CONNEXION À INTERNET" "Vérifiez que vous êtes bien connecté à Internet, puis relancez le script." "$lineno"
     EchoSuccess "Votre ordinateur est connecté à Internet."
@@ -246,7 +246,7 @@ function DistUpgrade
 
 	# On crée le dossier contenant les commandes de mise à jour.
 	if test ! -d "$update_d_path"; then
-		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$FILE_LOG_PATH"
+		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$PROJECT_LOG_PATH"
 	fi
 
 	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la variable "$PACK_MAIN_PACKAGE_MANAGER".
@@ -266,7 +266,7 @@ function DistUpgrade
 	EchoNewstep "Mise à jour des paquets"
 	Newline
 
-	bash "$pack_upg_f_path" # | tee -a "$FILE_LOG_PATH"
+	bash "$pack_upg_f_path" # | tee -a "$PROJECT_LOG_PATH"
 
 	if test "$?" -eq 0; then
 		packs_updated="1"
@@ -301,7 +301,7 @@ function SetSudo
     Newline
 
 	# On vérifie si la commande "sudo" est installée sur le système de l'utilisateur.
-	command -v sudo 2>&1 | tee -a "$FILE_LOG_PATH"
+	command -v sudo 2>&1 | tee -a "$PROJECT_LOG_PATH"
 
 	if test "$?" -eq 0; then
         Newline
@@ -332,7 +332,7 @@ function SetSudo
 	function ReadSetSudo
 	{
 		read -rp "Entrez votre réponse : " rep_set_sudo
-		echo "$rep_set_sudo" >> "$FILE_LOG_PATH"
+		echo "$rep_set_sudo" >> "$PROJECT_LOG_PATH"
 		Newline
 
 		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
@@ -391,7 +391,7 @@ function SetSudo
 				EchoNewstep "Ajout de l'utilisateur $(DechoN "${ARG_USERNAME}") au groupe sudo."
 				Newline
 
-				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$FILE_LOG_PATH"
+				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$PROJECT_LOG_PATH"
 
 				if test "$?" == "0"; then
                     EchoSuccess "L'utilisateur $(DechoS "${ARG_USERNAME}") a été ajouté au groupe sudo avec succès."
@@ -538,7 +538,7 @@ function Autoremove
 	function ReadAutoremove
 	{
 		read -rp "Entrez votre réponse : " rep_autoremove
-		echo "$rep_autoremove" >> "$FILE_LOG_PATH"
+		echo "$rep_autoremove" >> "$PROJECT_LOG_PATH"
 		Newline
 
 		case ${rep_autoremove,,} in
@@ -590,7 +590,7 @@ function IsInstallationDone
 	Newline
 
 	read -rp "Entrez votre réponse : " rep_erase_tmp
-	echo "$rep_erase_tmp" >> "$FILE_LOG_PATH"
+	echo "$rep_erase_tmp" >> "$PROJECT_LOG_PATH"
     Newline
 
 	case ${rep_erase_tmp,,} in
@@ -598,13 +598,13 @@ function IsInstallationDone
 			EchoNewstep "Déplacement du fichier de logs dans votre dossier personnel."
 			Newline
 
-			mv -v "$FILE_LOG_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$FILE_LOG_NAME" && FILE_LOG_PATH=$"$DIR_HOMEDIR" \
+			mv -v "$PROJECT_LOG_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$FILE_LOG_NAME" && FILE_LOG_PATH=$"$DIR_HOMEDIR" \
 				&& EchoSuccess "Le fichier de logs a bien été deplacé dans votre dossier personnel."
 
 			EchoNewstep "Suppression du dossier temporaire $DIR_TMP_PATH."
 			Newline
 
-			if test rm -rfv "$DIR_TMP_PATH" >> "$FILE_LOG_PATH"; then
+			if test rm -rfv "$DIR_TMP_PATH" >> "$PROJECT_LOG_PATH"; then
 				EchoSuccess "Le dossier temporaire $(DechoS "$DIR_TMP_PATH") a été supprimé avec succès."
 				Newline
 			else
@@ -658,7 +658,7 @@ PackInstall "$main" wget
 EchoNewstep "Vérification de l'installation des commandes $(DechoN "curl"), $(DechoN "snapd") et $(DechoN "wget")."
 Newline
 
-lineno=$LINENO; command -v curl snap wget | tee -a "$FILE_LOG_PATH"
+lineno=$LINENO; command -v curl snap wget | tee -a "$PROJECT_LOG_PATH"
 HandleErrors "$?" "AU MOINS UNE DES COMMANDES D'INSTALLATION MANQUE À L'APPEL" "Essayez de  télécharger manuellement ces paquets : $(DechoE "curl"), $(DechoE "snapd") et $(DechoE "wget")." "$lineno"
 EchoSuccess "Les commandes importantes d'installation ont été installées avec succès."
 Newline
@@ -689,7 +689,7 @@ sleep 1
 EchoNewstep "Création du dossier d'installation des logiciels."
 Newline
 
-Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$PROJECT_LOG_PATH"
 Newline
 
 # Installation de JMerise

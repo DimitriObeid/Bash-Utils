@@ -50,6 +50,6 @@ function KbInputYesNo
             EchoNewstep "The valid answers are $(DechoN "yes") and $(DechoN "no")"
             Newline
             
-            YesNo "$description" "$ans_yes" "$ans_no"
+            KbinputYesNo "$description" "$ans_yes" "$ans_no"
     esac
 }
