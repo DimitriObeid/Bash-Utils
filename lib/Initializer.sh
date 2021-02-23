@@ -231,8 +231,6 @@ EchoDBG "Sourcing the variables files :"; for f in "$BASH_UTILS_VARS/"*.var; do
     EchoSourcedDependency "$f"
 done; EchoDBG
 
-Newline 10
-
 # -----------------------------------------------
 
 
@@ -258,9 +256,6 @@ STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT
 
 # shellcheck disable=SC2034
 STAT_ERROR="fatal";         CheckSTAT_ERROR
-
-# shellcheck disable=SC2034
-STAT_TIME_HEADER="0";       CheckSTAT_TIME_HEADER
 
 # shellcheck disable=SC2034
 STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT

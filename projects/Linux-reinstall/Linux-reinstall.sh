@@ -92,7 +92,7 @@ function CheckArgs
 
     STAT_ERROR="fatal"
     STAT_LOG="true"; STAT_LOG_REDIRECT="log"
-    STAT_TIME_HEADER="0"; STAT_TIME_LINE="0"; STAT_TIME_TXT="0"
+    STAT_TIME_TXT="0"
     CheckProjectStatusVars
     
     #***** Code *****
@@ -113,7 +113,7 @@ function CheckArgs
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
             "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
-            "$(basename "$0")" "${FUNCNAME[0]}" "$lineno" >&2
+            "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno" >&2
     fi
 
 	# If the mandatory installation tye argument is not passed.
@@ -124,7 +124,7 @@ function CheckArgs
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
             "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
-            "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
+            "$ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
 
         exit 1
 
@@ -139,7 +139,8 @@ function CheckArgs
                 ;;
             *)
                 Newline; HandleErrors "1" "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
-                "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+                    "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
+                    "$ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
 
                 exit 1
                 ;;

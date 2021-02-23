@@ -23,7 +23,7 @@ function KbInputYesNo
     ans_yes=$2
     cmd_ans_yes=$3
     ans_no=$4
-    cmd_and_no=$5
+    cmd_ans_no=$5
 
     #***** Code *****
     EchoNewstep "$description"
@@ -38,18 +38,31 @@ function KbInputYesNo
     
     case ${ans_yesno,,} in
         "oui" | "yes")
-            EchoSuccess "$ans_yes"
+            EchoMsg "$(tput setaf "$COL_GREEN")$ans_yes$(tput sgr0)"
             Newline
+            
+            case "$cmd_ans_yes" in
+                "return")
+                    return
+                    ;;
+                "exit")
+                    exit 1
+                    ;;
+                *)
+                    STAT_ERROR="fatal"
+                    HandleErrors "1" "BAD $(tput setaf "$COL_CYAN")cmd_ans_yes$(tput setaf "$COL_RED") ARGUMENT VALUE" "The awaited values are $(tput setaf "$COL_CYAN")return$(tput setaf "$COL_RED") and $(tput setaf "$COL_CYAN")exit$(tput sgr0)" "$cmd_ans_yes" "$(basename "$BASH_SOURCE[0]")" "${FUNCNAME[0]}" "$(( LINENO-9 ))"
+                    ;;
+            esac
             ;;
         "non" | "no")
-            EchoError "$ans_no"
+            EchoMsg "$(tput setaf "$COL_RED")$ans_no$(tput sgr0)"
             Newline
             ;;
         *)
-            EchoError "Enter a valid answer"
-            EchoNewstep "The valid answers are $(DechoN "yes") and $(DechoN "no")"
+            EchoMsg "$(tput setaf "$COL_RED")Enter a valid answer$(tput sgr0)"
+            EchoMsg "The valid answers are $(tput setaf "$COL_CYAN")yes$(tput setaf "$COL_RED") and $(tput setaf "$COL_CYAN")no$(tput sgr0)"
             Newline
             
-            KbinputYesNo "$description" "$ans_yes" "$ans_no"
+            KbinputYesNo "$description" "$ans_yes" "$cmd_ans_yes" "$ans_no" "$cmd_and_no"
     esac
 }

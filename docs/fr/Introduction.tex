@@ -103,11 +103,24 @@ Fort heureusement, un script shell s'occupe de cette partie : \textbf{Initialize
 La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer ce fichier d'initialisation. Il s'occupera de réaliser toutes les étapes ci-dessous :
 
 \subsection{Étapes d'initialisation}
-En premier lieu sont initialisées les variables globales contenant les chemins utiles à la recherche des chemins des dossiers de la librairie (BASH_UTILS_), ainsi que celles enregistrant les chemins du projet.
+En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins utiles à la recherche des chemins des dossiers de la librairie (\textbf{BASH\_UTILS}), ainsi que celles enregistrant les chemins du projet.
 
-En second lieu sont définies les fonctions utile à l'initialisation de Bash Utils.
+En second lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
 
-En troisième lieu, le script vérifie si les chemins contenus dans les variables "BASH_UTILS_"  initialisées dans la première étape existent
+En troisième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \textbf{"BASH\_UTILS\_"} initialisées dans la première étape existent.
+
+En quatrième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \textbf{lib}
+
+En cinquième lieu, le script :
+\begin{itemize}
+    \item Crée une variable nommée \textbf{PROJECT\_PATH}, enregistrant le chemin du fichier de script principal par le biais de la fonction \textbf{GetParentDirectoryPath} du fichier \textbf{functions/main/Directories.lib}. 
+    
+    \item Modifie plusieurs variables de statut pour rendre la partie d'initialisation invisible à l'utilisateur final.
+    
+    \item Copie le contenu du fichier de logs de la partie d'initialisation dans le fichier de logs principal.
+\end{itemize}
+
+
 
 \section{Installation de Bash Utils}
 

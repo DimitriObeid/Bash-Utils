@@ -72,7 +72,7 @@ function OverwriteDir
 	# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU DO !!!
 	# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
     rm -rfv "${path/:?}/"*
-    HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(DechoE "$v_path/") FOLDER." "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(DechoE "$v_path/") FOLDER." "Please check the permissions of the targeted directory" "$path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     EchoSuccess "Deletion of the contents of the folder $(DechoS "$v_path/") performed successfully"
     Newline
 
@@ -107,7 +107,7 @@ function Makedir
 
 		# On crée une variable nommée "lineno". Elle enregistre la valeur de la variable globale "$LINENO", qui enregistre le numéro de la ligne dans laquelle est est appelée dans un script.
         mkdir -pv "$v_path"
-        HandleErrors "$?" "${FUNCNAME[0]} : THE $(DechoE "$p_name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$p_parent/") !" "" ""
+        HandleErrors "$?" "${FUNCNAME[0]} : THE $(DechoE "$p_name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$p_parent/") !" "" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
         EchoSuccess "The $(DechoS "$p_name") folder was successfully created in the $(DechoS "$p_parent/") folder."
         Newline
         

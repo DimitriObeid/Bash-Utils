@@ -12,16 +12,26 @@
 function DrawLine
 {
 	#***** Parameters *****
-	line_color=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	line_char=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 
+	#***** Variables *****
+	v_statTimeTxt="0.0003"
+	
 	#***** Code *****
+	# As the line drawing program is using the same timer than the text displaying pause, the sleeping time must be reduced drastically,
+	# or else, the drawing time will be very long, as this pause time will apply for each line character written.
+	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" != "$v_statTimeTxt" ]; then
+        OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
+        STAT_TIME_TXT="$v_statTimeTxt"
+    fi
+
     # Defining the color of the wished character for the whole line before displaying the first character.
-    # If the value of the "$line_color" parameter (which stores the text's color encoding) is not empty,
+    # If the value of the "$p_lineColor" parameter (which stores the text's color encoding) is not empty,
     # then we write the color's encoding into the terminal, which displays the color, and not its encoding in text.
     
     # The color's encoding can be written via the "tput setaf $value" command. The line is empty before the first
-    # ASCII characters if the first parameter "$line_color" is passed as an empty string, which means that no
+    # ASCII characters if the first parameter "$p_lineColor" is passed as an empty string, which means that no
     # "tput setaf $value" command was executed.
 
     # Since we want to write the characters composing the header line after the color encoding string, we use the options
@@ -29,8 +39,8 @@ function DrawLine
 	# end of the string, to write the next string directly after the line.
     
 	# Since all the columns in the row are used, the following characters will be written in the row, as if a line break has been made.
-	if test "$line_color" != ""; then
-		EchoMsg "$line_color" "-ne"
+	if test "$p_lineColor" != ""; then
+		echo -ne "$p_lineColor"
 	fi
 
     # Displaying the desired character on the whole line. To do this, using a "for" loop, we start reading it from
@@ -43,7 +53,7 @@ function DrawLine
 	# The 'i' variable in the "for i in" loop has been replaced by an underscore '_' to stop Shellcheck from sending a warning
 	# message due to the non-declaration of the variable 'i', although this does not change anything when the script is executed.
 	for _ in $(eval echo "{1..$TXT_COLS}"); do
-		EchoMsg "$line_char" "-n"
+		echo -n "$p_lineChar"
 	done
 
     # Definition (here, reinitialization) of the color of the characters following the last character of the header line
@@ -55,12 +65,16 @@ function DrawLine
 	# Cette réinitialisation de la couleur du texte n'est qu'une mini-sécurité permettant d'éviter d'avoir la couleur de l'invite de
 	# commandes encodée avec la couleur des headers si l'exécution du script est interrompue de force avec la combinaison "CTRL + C"
 	# ou mise en pause avec la combinaison "CTRL + Z", par exemple.
-	if test "$line_color" != ""; then
-        EchoMsg "$COL_RESET" "-ne"
+	if test "$p_lineColor" != ""; then
+        echo -ne "$COL_RESET"
 	fi
 
 	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
 	echo
+	
+	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" = "$v_statTimeTxt" ]; then
+        STAT_TIME_TXT="$OLD_STAT_TIME_TXT"
+    fi
 
 	return
 }
@@ -84,21 +98,19 @@ function HeaderBase
 	#***** Code *****
 	Newline
 	
-	DrawLine "$(ColorChar "setaf" "$p_lineColor")" "$p_lineChar"
-	EchoMsg "$(ColorChar "setaf" "$p_stringColor")##> $p_stringTxt$COL_RESET"
-	DrawLine "$(ColorChar "setaf" "$p_lineColor")" "$p_lineChar"
+	EchoMsg "$(DrawLine "$(tput setaf "$p_lineColor")" "$p_lineChar")"
+	EchoMsg "$(tput setaf "$p_stringColor")##> $p_stringTxt$COL_RESET"
+	EchoMsg "$(DrawLine "$(tput setaf "$p_lineColor")" "$p_lineChar")"
 	Newline
-
-	sleep "$STAT_TIME_HEADER"
 
 	return
 }
 
 # Header display function when changing step.
-function HeaderStep { HeaderBase "$(ColorChar "setaf" "$COL_CYAN")" "-" "$(ColorChar "setaf" "$COL_CYAN")" "$1"; }
+function HeaderStep { HeaderBase "$(tput setaf "$COL_CYAN")" "-" "$(tput setaf "$COL_CYAN")" "$1"; }
 
 # Header display function when switching to a new package category during package installation.
-function HeaderInstall { HeaderBase "$(ColorChar "setaf" "$COL_YELLOW")" "-" "$(ColorChar "setaf" "$COL_GREEN")" "$1"; }
+function HeaderInstall { HeaderBase "$(tput setaf "$COL_YELLOW")" "-" "$(tput setaf "$COL_GREEN")" "$1"; }
 
 # -----------------------------------------------
 

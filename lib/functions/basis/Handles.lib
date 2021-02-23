@@ -15,83 +15,9 @@
 function CheckRootEUID
 {
     if [ "$EUID" -ne 0 ]; then
-        HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
+        HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
     fi
 }
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### TEXT CHECKING
-
-## COLOR CHECKINGS
-
-# Checking line colors
-
-# I'm not sure if i'll keep this function.
-function CheckLineColor
-{
-    #***** Parameters *****
-    p_colorCode=$1
-
-    #***** Code *****
-    if [ "$p_colorCode" != "$(tput sgr0)" ]; then
-        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput$(tput sgr0) command's option is not $(tput setaf "$COL_CYAN")sgr0$(tput sgr0)."; echo
-        exit 1
-    elif [ "$p_colorCode" -lt 0 ] && [ "$p_colorCode" -gt 0 ]; then
-        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput setaf$(tput sgr0) command's value is incorrect."; echo
-        exit 1
-    else
-        echo "$(tput setaf 196)Error :$(tput sgr0) the $(tput setaf "$COL_CYAN")tput$(tput sgr0) command's option is incorrect."; echo
-        exit 1
-    fi
-}
-
-# Checking the " variable's value.
-function CheckTextColor
-{
-    #***** Parameters *****
-    p_option=$1
-    p_colorCode=$2
-    
-    #***** Variables *****
-    v_colCyan="$(tput setaf "$COL_CYAN")"
-    v_colRed="$(tput setaf "$COL_RED")"
-    v_string="$(tput setaf "$COL_RED")IN $v_colCyan$(basename "${BASH_SOURCE[0]}")$v_colRed, FUNCTION $v_colCyan${FUNCNAME[0]}$v_colRed --> Error :"
-    v_colReset="$(tput sgr0)"
-
-    #***** Code *****
-    # Spacing the conditions to make the code cleaner.
-    if [ -n "$p_option" ]; then
-
-        if [ "$p_option" = "setaf" ] ; then
-
-            if [[ "$p_colorCode" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-
-                if [ "$p_colorCode" -lt 0 ] || [ "$p_colorCode" -gt 255 ]; then
-
-                    echo "$v_string the$v_colCyan tput setaf$v_colRed command's value is incorrect." >&2
-
-                    echo "The$v_colCyan tput setaf$v_colRed option's value range is $v_colCyan 0 - 255 $v_colReset" >&2
-
-                    echo >&2; ExitSourced
-                fi
-    
-            else
-                echo "$v_string the$v_colCyan tput setaf$v_colRed option's value is not a number.$v_colReset" >&2; echo >&2; ExitSourced
-            fi
-
-        elif [ "$p_option" != "sgr0" ]; then
-            echo "$v_string the$v_colCyan tput$v_colRed command's option is incorrect.$v_colReset" >&2; echo >&2; ExitSourced
-        fi
-        
-    else
-        echo "$v_string no value passed as$v_colCyan tput$v_colRed command's option argument$v_colReset" >&2; echo >&2; ExitSourced
-    fi
-}
-
-# -----------------------------------------------
-
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -139,15 +65,26 @@ function IsInt
 
 ## STRING VALUES
 
-# Checking string value (no number allowed)
-function IsString
+# Checking if value is an alphabetic string (not any number allowed)
+function IsAlpha
+{
+    #***** Parameters *****
+    value=$1
+    
+    #***** Code *****
+    if [[ "$var" =~ [A-Z] ]]; then
+        return 0
+    fi
+}
+
+# Checking if vialue is an aplhanumeric string.
+function IsAlphaNum
 {
     #***** Parameters *****
     value=$1
 
     #***** Code *****
-    # Checking if the value is a floating number or an integer.
-    if [ "$value" != $(IsFloat "$value") ] && [ "$value" != "$(IsFloatInt "$value")" ] && [ "$value" != "$(isInt "$value")" ]; then
+    if [[ "$value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
     fi
 }
@@ -166,116 +103,100 @@ function IsString
 function CheckProjectLogPath
 {
     if [ -z "$PROJECT_LOG_PATH" ]; then
-        echo "$(tput setaf "$COL_RED") Error : no path provided into the $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") variable.$(tput sgr0)" >&2
-        echo >&2; ExitSourced
+        HandleErrors "1" "NO PATH PROVIDED INTO THE $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") VARIABLE.$(tput sgr0)" "$PROJECT_LOG_PATH" "Please add the path as argument." "$(basename "$BASH_SOURCE[0]")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     elif [ ! -f "$PROJECT_LOG_PATH" ]; then
-        echo "$(tput setaf "$COL_RED") Error : incorrect path provided into the $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") variable.$(tput sgr0)" >&2
-        echo >&2; ExitSourced
+        HandleErrors "1" "BAD PATH PROVIDED INTO THE $(tput setaf "$COL_CYAN")PROJECT_LOG_PATH$(tput setaf "$COL_RED") VARIABLE.$(tput sgr0)" "$PROJECT_LOG_PATH" "Please correct the path passed as argument." "$(basename "$BASH_SOURCE[0]")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     fi
 }
 
-# Checking for project's log file's status, then write
+# Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 function CheckProjectLogStatus
 {
     #***** Parameters *****
     p_string=$1
     p_option=$2     # "echo" command options
 
+    #***** Variables *****
+    v_errorEcho="$(tput setaf "$COL_RED")Unable to write into the $(tput setaf "$COL_CYAN")"$PROJECT_LOG_PATH"$(tput setaf "$COL_RED") file.$(tput sgr0)"
+
     #**** Code *****
+    STAT_LOG="ll"
     CheckSTAT_LOG
     CheckSTAT_LOG_REDIRECT
     CheckProjectLogPath
-    CheckSTAT_TIME_HEADER
-    CheckSTAT_TIME_LINE
     CheckSTAT_TIME_TXT
     
     # If the text is redirected towars the log path, it's better to put every timer status variables values to '0'.
     if [ "$STAT_LOG_REDIRECT" = "true" ]; then
-        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_HEADER" -gt 0 ] || \
-        [ "$STAT_TIME_LINE" -gt 0 ] || [ "$STAT_TIME_TXT" -gt 0 ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_TXT" -gt 0 ]; then
 
             # Backup the old values to restore them when the log processing will be done.
-            OLD_STAT_TIME_HEADER="$STAT_TIME_HEADER"
-            OLD_STAT_TIME_LINE="$STAT_TIME_LINE"
             OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
-            
-            STAT_TIME_HEADER="0"
-            STAT_TIME_LINE="0"
             STAT_TIME_TXT="0"
         fi
     fi
 
-    if [ "$p_option" = "-e" ]; then
-        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
-            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
-                echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
-                echo -e "$p_string"
-                echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            fi
-        else
-            echo -e "$p_string"
-        fi
-    elif [ "$p_option" = "-n" ]; then
-        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
-            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
-                echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
-                echo -n "$p_string"
-                echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            fi
-        else
-            echo -n "$p_string"
-        fi
-    elif [ "$p_option" = "-ne" ]; then
-        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
-            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
-                echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
-                echo -ne "$p_string"
-                echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            fi
-        else
-            echo -ne "$p_string"
+    if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+            case "$p_option" in
+                '-e')
+                    echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                '-n')
+                    echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                '-ne')
+                    echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                *)
+                    echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+            esac
+        elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+            case "$p_option" in
+                '-e')
+                    echo -e "$p_string"
+                    echo -e "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                '-n')
+                    echo -n "$p_string"
+                    echo -n "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                '-ne')
+                    echo -ne "$p_string"
+                    echo -ne "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+                *)
+                    echo "$p_string"
+                    echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                    ;;
+            esac
         fi
     else
-        if [ -f "$PROJECT_LOG_PATH" ] && [ "$PROJECT_STATUS_LOG" = "true" ] && [ -n "$STAT_LOG_REDIRECT" ]; then
-            if [ "$STAT_LOG_REDIRECT" = "log" ]; then
-                echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            elif [ "$STAT_LOG_REDIRECT" = "tee" ]; then
+        case "$p_option" in
+            '-e')
+                echo -e "$p_string"
+                ;;
+            '-n')
+                echo -n "$p_string"
+                ;;
+            '-ne')
+                echo -ne "$p_string"
+                ;;
+            *)
                 echo "$p_string"
-                echo "[$TIME_DATE] $p_string" >> "$PROJECT_LOG_PATH" || \
-                    { echo "$(ColorChar "setaf" "$COL_RED") Unable to write into the $(DechoE "$PROJECT_LOG_PATH") file.$(ColorChar "sgr0")" >&2; echo >&2; ExitSourced; }
-            fi
-        else
-            echo "$p_string"
-        fi
+                ;;
+        esac
     fi
-    
+
     # Restore timer status variables old values if they were modified because of the redirection to the log file only.
     if [ "$STAT_LOG_REDIRECT" = "true" ]; then
-        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_HEADER" -eq 0 ] || \
-            [ "$STAT_TIME_LINE" -eq 0 ] || [ "$STAT_TIME_TXT" -eq 0 ]; then
+        if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_TXT" -eq 0 ]; then
         
             # Backup the old values to restore them when the log processing will be done.
-            STAT_TIME_HEADER="$OLD_STAT_TIME_HEADER"
-            STAT_TIME_LINE="$OLD_STAT_TIME_LINE"
             STAT_TIME_TXT="$OLD_STAT_TIME_TXT"
             
-            echo "$STAT_TIME_HEADER"
-            echo "$STAT_TIME_LINE"
-            echo "$STAT_TIME_TXT"
-            
             # Checking if the correct values were reassignated.
-            CheckSTAT_TIME_HEADER
-            CheckSTAT_TIME_LINE
             CheckSTAT_TIME_TXT
         fi
     fi
@@ -297,7 +218,7 @@ function CheckProjectLogStatus
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function ExitSourced { kill "$$"; }
+function ExitError { kill "$$"; }
 
 # -----------------------------------------------
 
@@ -310,15 +231,16 @@ function HandleErrors
 	p_returnCode=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
 	p_errorString=$2    # Chaîne de caractères du type d'erreur à afficher.
 	p_adviceString=$3   # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
-	p_file=$4            # The name of the file where the error occured.
-	p_function=$5        # The name of the function where the error occured.
-	p_lineno=$6          # Ligne à laquelle le message d'erreur s'est produite.
+    p_badValue=$4       # Incorrect value which caused the error.
+	p_file=$5            # The name of the file where the error occured.
+	p_function=$6        # The name of the function where the error occured.
+	p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
 
     #***** Variables *****
     # Echoing the line breaks according to the "STAT_LOG_REDIRECT" status variable's value (processed a few lines down).
     v_echo=""
     
-    v_headerString="IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->"
+    v_headerString="$(tput setaf "$COL_RED")IN $(tput setaf "$COL_CYAN")$p_file$(tput setaf "$COL_RED"), FUNCTION $(tput setaf "$COL_CYAN")$p_function$(tput setaf "$COL_RED"), LINE $(tput setaf "$COL_CYAN")$p_lineno$(tput setaf "$COL_RED") -->"
 
 	# ***** Code *****
 	CheckSTAT_ERROR
@@ -333,37 +255,35 @@ function HandleErrors
 
 	if [ "$p_returnCode" -eq 0 ]; then
         return
-    else
+    else        
         if [ -n "$STAT_ERROR" ] && [ "$STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_headerString FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_headerString FATAL ERROR : $(tput setaf "$COL_CYAN")${p_errorString^^}$(tput sgr0)" >&2
+        else
+            HeaderRed "$v_headerString FATAL ERROR : $(tput setaf "$COL_CYAN")${p_errorString^^}$(tput sgr0)" >&2
+        fi
 
-            if [ -z "$p_adviceString" ]; then
-                EchoError "No advice to give."
-                echo "$v_echo"
-            else
-                EchoError "Advice : $p_adviceString"
-                echo "$v_echo"
-            fi
+        if [ -z "$p_adviceString" ]; then
+            EchoMsg "$(tput setaf "$COL_RED")No advice to give$(tput sgr0)." >&2
+            echo "$v_echo"
+        else
+            EchoMsg "$(tput setaf "$COL_RED")Advice : $p_adviceString$(tput sgr0)" >&2
+            echo "$v_echo"
+        fi
+            
+        if [ -z "$p_badValue" ]; then
+            EchoMsg "Value that caused this error : Unknown error"
+        else
+            EchoMsg "Value that caused this error : $p_badValue"
+        fi
 
-            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."
+        if [ "$STAT_ERROR" = "fatal" ]; then
+            EchoMsg "$(tput setaf "$COL_RED")Stopping the execution of $(tput setaf "$COL_CYAN")$(basename "$0")$(tput sgr0)." >&2
             echo "$v_echo"
 
             exit 1
-
-        elif [ -z "$STAT_ERROR" ]; then
-            HeaderRed "$v_headerString FATAL ERROR : $(DechoE "${p_errorString^^}")"
-
-            if [ -z "$p_adviceString" ]; then
-                EchoError "No advice to give."
-                echo "$v_echo"
-            else
-                EchoError "Advice : $p_adviceString"
-                echo "$v_echo"
-            fi
-            
-            KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? $(DechoN "(yes/no)")" \
-                "$(echo "Aborting script execution." && exit 1)" \
-                "Resuming script execution." >&2
+        else
+            KbInputYesNo "$(tput setaf "$COL_RED")Do you want to stop the execution of $(tput setaf "$COL_RED")$(basename "$0") ?$(tput sgr0) (yes/no)" \
+                "Resuming script execution." "return" >&1 "Aborting script execution." >&2 "exit"
         fi
     fi
 }
