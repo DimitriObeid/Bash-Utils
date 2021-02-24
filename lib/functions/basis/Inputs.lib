@@ -19,11 +19,11 @@
 function KbInputYesNo
 {
     #***** Parameters *****
-    description=$1
-    ans_yes=$2
-    cmd_ans_yes=$3
-    ans_no=$4
-    cmd_ans_no=$5
+    local description=$1
+    local ans_yes=$2
+    local cmd_ans_yes=$3
+    local ans_no=$4
+    local cmd_ans_no=$5
 
     #***** Code *****
     EchoNewstep "$description"

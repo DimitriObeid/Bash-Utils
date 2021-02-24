@@ -12,11 +12,11 @@
 function DrawLine
 {
 	#***** Parameters *****
-	p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 
 	#***** Variables *****
-	v_statTimeTxt="0.0003"
+	local v_statTimeTxt="0.0003"
 	
 	#***** Code *****
 	# As the line drawing program is using the same timer than the text displaying pause, the sleeping time must be reduced drastically,
@@ -83,10 +83,10 @@ function DrawLine
 function HeaderBase
 {
 	#***** Parameters *****
-	p_lineColor=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	p_lineChar=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	p_stringColor=$3	   # Définition de la couleur de la chaîne de caractères du header.
-	p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
+	local p_lineColor=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	local p_lineChar=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_stringColor=$3	   # Définition de la couleur de la chaîne de caractères du header.
+	local p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
 	
 	# Le problème vient d'ici, c'est parce que la variable "string" d'ici porte le même nom que l'argument de la fonction cible.
 	# TODO : vérifier comment outrepasser ceci sans modifier le nom de la variable quand je serai de nouveau connecté.

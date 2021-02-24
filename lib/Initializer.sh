@@ -146,7 +146,7 @@ function CheckBURequirements
 function EchoSourcedDependency
 {
     #***** Parameters *****
-    p_dep=$1
+    local p_dep=$1
     
     #***** Code *****
     EchoDBG "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$INIT_LIST_FILE_PATH"
@@ -249,7 +249,7 @@ PROJECT_PATH="$(GetParentDirectoryPath "$0")/$PROJECT_FILE"
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
-STAT_LOG="true";            CheckSTAT_LOG
+STAT_LOG="tre";            CheckSTAT_LOG
 
 # shellcheck disable=SC2034
 STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT

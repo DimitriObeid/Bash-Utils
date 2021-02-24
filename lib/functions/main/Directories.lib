@@ -14,13 +14,13 @@
 function ProcessingDir
 {
     #***** Parameters *****
-    p_function=$1
-    p_parent=$2
-    p_name=$3
+    local p_function=$1
+    local p_parent=$2
+    local p_name=$3
     
     #***** Variables *****
-    v_char='"'
-    v_path="$p_parent/$p_name"
+    local v_char='"'
+    local v_path="$p_parent/$p_name"
     
     #***** Code *****
     # On commence par dessiner la première ligne du bloc.
@@ -29,9 +29,7 @@ function ProcessingDir
     EchoNewstep "Processing the $(DechoN "$p_name") folder in the parent folder $(DechoN "$p_parent")."
     Newline
     
-    eval "$p_function"
-    
-    if test "$?" -eq 0; then
+    if "$p_function"; then
         EchoSuccess "End of processing the $(DechoS "$v_path/") folder."
 		DrawLine "$COL_RESET" "$v_char"
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
@@ -58,11 +56,11 @@ function ProcessingDir
 function OverwriteDir
 {
     #***** Parameters *****
-    p_parent=$1
-    p_name=$2
+    local p_parent=$1
+    local p_name=$2
     
     #***** Variables *****
-    v_path="$p_parent/$p_name"
+    local v_path="$p_parent/$p_name"
 
     #***** Code *****
     EchoNewstep "A non-empty folder with exactly the same name ($(DechoN "$p_name")) is already in the target folder $(DechoN "$p_parent/")"
@@ -93,11 +91,11 @@ function OverwriteDir
 function Makedir
 {
 	#***** Parameters *****
-	p_parent=$1		# Emplacement depuis la racine du dossier parent du dossier à traiter.
-	p_name=$2		# Nom du dossier à traiter (dans son dossier parent).
+	local p_parent=$1		# Emplacement depuis la racine du dossier parent du dossier à traiter.
+	local p_name=$2		# Nom du dossier à traiter (dans son dossier parent).
 
 	#***** Variables *****
-	v_path="$parent/$name"	# Chemin du dossier à traiter.
+	local v_path="$parent/$name"	# Chemin du dossier à traiter.
 
 	#***** Code *****
 	# Si le dossier à traiter n'existe pas, alors le script le crée.
@@ -140,7 +138,7 @@ function Makedir
 function GetParentDirectoryName
 {
     #***** Parameters *****
-    p_path=$1
+    local p_path=$1
 
     #***** Code *****
     parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
@@ -158,7 +156,7 @@ function GetParentDirectoryName
 function GetParentDirectoryPath
 {
     #***** Parameters *****
-    p_path=$1
+    local p_path=$1
 
     #***** Code *****
     parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
@@ -175,7 +173,7 @@ function GetParentDirectoryPath
 function GetDirectoryName
 {
     #***** Parameters *****
-    p_path=$1
+    local p_path=$1
     
     #***** Code *****
     if [ -z "$p_path" ]; then
@@ -196,7 +194,7 @@ function GetDirectoryName
 function GetDirectoryPath
 {
     #***** Parameters *****
-    p_path=$1
+    local p_path=$1
 
     #***** Code *****
     if [ -z "$p_path" ]; then

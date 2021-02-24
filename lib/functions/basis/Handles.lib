@@ -29,7 +29,7 @@ function CheckRootEUID
 function IsFloat
 {
     #***** Parameters *****
-    value=$1
+    local value=$1
 
     #***** Code *****
     if [[ "$value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
@@ -41,7 +41,7 @@ function IsFloat
 function IsFloatInt
 {
     #***** Parameters *****
-    value=$1
+    local value=$1
 
     #***** Code *****
     if [[ "$value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
@@ -53,7 +53,7 @@ function IsFloatInt
 function IsInt
 {
     #***** Parameters *****
-    value=$1
+    local value=$1
 
     #***** Code *****
     if [[ "$value" =~ ^[+-]?[0-9]+$ ]]; then
@@ -69,7 +69,7 @@ function IsInt
 function IsAlpha
 {
     #***** Parameters *****
-    value=$1
+    local value=$1
     
     #***** Code *****
     if [[ "$var" =~ [A-Z] ]]; then
@@ -81,7 +81,7 @@ function IsAlpha
 function IsAlphaNum
 {
     #***** Parameters *****
-    value=$1
+    local value=$1
 
     #***** Code *****
     if [[ "$value" =~ [^a-zA-Z0-9\ ] ]]; then
@@ -113,11 +113,11 @@ function CheckProjectLogPath
 function CheckProjectLogStatus
 {
     #***** Parameters *****
-    p_string=$1
-    p_option=$2     # "echo" command options
+    local p_string=$1
+    local p_option=$2     # "echo" command options
 
     #***** Variables *****
-    v_errorEcho="$(tput setaf "$COL_RED")Unable to write into the $(tput setaf "$COL_CYAN")"$PROJECT_LOG_PATH"$(tput setaf "$COL_RED") file.$(tput sgr0)"
+    local v_errorEcho="$(tput setaf "$COL_RED")Unable to write into the $(tput setaf "$COL_CYAN")"$PROJECT_LOG_PATH"$(tput setaf "$COL_RED") file.$(tput sgr0)"
 
     #**** Code *****
     CheckSTAT_LOG
@@ -227,19 +227,19 @@ function ExitError { kill "$$"; }
 function HandleErrors
 {
 	#***** Paramètres *****
-	p_returnCode=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
-	p_errorString=$2    # Chaîne de caractères du type d'erreur à afficher.
-	p_adviceString=$3   # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
-    p_badValue=$4       # Incorrect value which caused the error.
-	p_file=$5            # The name of the file where the error occured.
-	p_function=$6        # The name of the function where the error occured.
-	p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
+	local p_returnCode=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
+	local p_errorString=$2    # Chaîne de caractères du type d'erreur à afficher.
+	local p_adviceString=$3   # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+    local p_badValue=$4       # Incorrect value which caused the error.
+	local p_file=$5            # The name of the file where the error occured.
+	local p_function=$6        # The name of the function where the error occured.
+	local p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
 
     #***** Variables *****
     # Echoing the line breaks according to the "STAT_LOG_REDIRECT" status variable's value (processed a few lines down).
-    v_echo=""
+    local v_echo=""
     
-    v_headerString="$(tput setaf "$COL_RED")IN $(tput setaf "$COL_CYAN")$p_file$(tput setaf "$COL_RED"), FUNCTION $(tput setaf "$COL_CYAN")$p_function$(tput setaf "$COL_RED"), LINE $(tput setaf "$COL_CYAN")$p_lineno$(tput setaf "$COL_RED") -->"
+    local v_headerString="$(tput setaf "$COL_RED")IN $(tput setaf "$COL_CYAN")$p_file$(tput setaf "$COL_RED"), FUNCTION $(tput setaf "$COL_CYAN")$p_function$(tput setaf "$COL_RED"), LINE $(tput setaf "$COL_CYAN")$p_lineno$(tput setaf "$COL_RED") -->"
 
 	# ***** Code *****
 	CheckSTAT_ERROR
@@ -247,9 +247,9 @@ function HandleErrors
 	# If the text was redirected to the log file, it will also be redirected to the terminal.
 	CheckSTAT_LOG_REDIRECT; if [ "$STAT_LOG_REDIRECT" = "log" ]; then
         STAT_LOG_REDIRECT="tee"
-        v_echo="$(echo >&2 | tee -a "$PROJECT_LOG_PATH")"
+        local v_echo="$(echo >&2 | tee -a "$PROJECT_LOG_PATH")"
     else
-        v_echo="$(Newline)"
+        local v_echo="$(Newline)"
 	fi
 
 	if [ "$p_returnCode" -eq 0 ]; then
