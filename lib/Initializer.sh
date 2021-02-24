@@ -103,7 +103,7 @@ INIT_LIST_FILE_PATH="$PROJECT_TMP_DIR/$INIT_FILE_LIST_NAME"
 function EchoDBG
 {
     if [ -z "$INIT_LIST_FILE_PATH" ] || [ ! -f "$INIT_LIST_FILE_PATH" ]; then
-        echo; echo "Error : the initializer log file's path is invalid."; echo; exit 1
+        echo >&2; echo "Error : the initializer log file's path is invalid." >&2; echo >&2; exit 1
     else
         echo "$1" >> "$INIT_LIST_FILE_PATH"
     fi
@@ -113,20 +113,20 @@ function EchoDBG
 function InitErrMsg
 {
     #***** Parameters *****
-    p_msg=$1
-    p_lineno=$2
+    local p_msg=$1
+    local p_lineno=$2
     
     #***** Code *****
-    echo; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)"; echo
-    exit 1
+    echo >&2; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)" >&2; echo >&2
+    kill "$$"
 }
 
 # Finding Bash-utils directories.
 function CheckBURequirements
 {
     #***** Parameters *****
-    p_path=$1
-    p_lineno=$2
+    local p_path=$1
+    local p_lineno=$2
     
     #***** Code *****
     # If the path points towards a directory.

@@ -21,6 +21,9 @@ COL_YELLOW="226"        # Light yellow    --> Couleur d'affichage des messages d
 
 ## MEMORIZER
 
+# This variable is used by the "ProjectStatus.conf" file to check if thfis file has been source to get the color code.
+__COL_IS_INITIALIZED="true"
+
 # Current color
 COL_CURRENT=""
 

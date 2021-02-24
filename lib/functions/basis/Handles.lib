@@ -120,7 +120,6 @@ function CheckProjectLogStatus
     v_errorEcho="$(tput setaf "$COL_RED")Unable to write into the $(tput setaf "$COL_CYAN")"$PROJECT_LOG_PATH"$(tput setaf "$COL_RED") file.$(tput sgr0)"
 
     #**** Code *****
-    STAT_LOG="ll"
     CheckSTAT_LOG
     CheckSTAT_LOG_REDIRECT
     CheckProjectLogPath
