@@ -174,12 +174,12 @@ else
 fi
 
 EchoDBG "CHECKING REQUIRED DIRECTORIES"
-CheckBURequirements "$BASH_UTILS_BIN" "$LINENO"
-CheckBURequirements "$BASH_UTILS_CONF" "$LINENO"
-CheckBURequirements "$BASH_UTILS_TMP" "$LINENO"
-CheckBURequirements "$BASH_UTILS_FUNCTS" "$LINENO"
-CheckBURequirements "$BASH_UTILS_FUNCTS_BASIS" "$LINENO"
-CheckBURequirements "$BASH_UTILS_VARS" "$LINENO"
+CheckBURequirements "$BASH_UTILS_BIN"           "$LINENO"
+CheckBURequirements "$BASH_UTILS_CONF"          "$LINENO"
+CheckBURequirements "$BASH_UTILS_TMP"           "$LINENO"
+CheckBURequirements "$BASH_UTILS_FUNCTS"        "$LINENO"
+CheckBURequirements "$BASH_UTILS_FUNCTS_BASIS"  "$LINENO"
+CheckBURequirements "$BASH_UTILS_VARS"          "$LINENO"
 EchoDBG
 
 # -----------------------------------------------
@@ -249,16 +249,16 @@ PROJECT_PATH="$(GetParentDirectoryPath "$0")/$PROJECT_FILE"
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
-STAT_LOG="tre";            CheckSTAT_LOG
+STAT_LOG="tre";            CheckSTAT_LOG            "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT
+STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-STAT_ERROR="fatal";         CheckSTAT_ERROR
+STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT
+STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

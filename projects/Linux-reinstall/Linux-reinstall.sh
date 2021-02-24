@@ -93,7 +93,7 @@ function CheckArgs
     STAT_ERROR="fatal"
     STAT_LOG="true"; STAT_LOG_REDIRECT="log"
     STAT_TIME_TXT="0"
-    CheckProjectStatusVars
+    CheckProjectStatusVars "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     
     #***** Code *****
 	# If the script is not run as super-user (root)

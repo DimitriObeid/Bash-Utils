@@ -120,18 +120,18 @@ function CheckProjectLogStatus
     local v_errorEcho="$(tput setaf "$COL_RED")Unable to write into the $(tput setaf "$COL_CYAN")"$PROJECT_LOG_PATH"$(tput setaf "$COL_RED") file.$(tput sgr0)"
 
     #**** Code *****
-    CheckSTAT_LOG
-    CheckSTAT_LOG_REDIRECT
-    CheckProjectLogPath
-    CheckSTAT_TIME_TXT
-    
+    CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    CheckProjectLogPath 
+
     # If the text is redirected towars the log path, it's better to put every timer status variables values to '0'.
     if [ "$STAT_LOG_REDIRECT" = "true" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_TXT" -gt 0 ]; then
 
             # Backup the old values to restore them when the log processing will be done.
             OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
-            STAT_TIME_TXT="0"
+            STAT_TIME_TXT="0"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
 
@@ -192,11 +192,8 @@ function CheckProjectLogStatus
     if [ "$STAT_LOG_REDIRECT" = "true" ]; then
         if [ "$STAT_LOG_REDIRECT" = "log" ] && [ "$STAT_TIME_TXT" -eq 0 ]; then
         
-            # Backup the old values to restore them when the log processing will be done.
-            STAT_TIME_TXT="$OLD_STAT_TIME_TXT"
-            
-            # Checking if the correct values were reassignated.
-            CheckSTAT_TIME_TXT
+            # Backup the old values to restore them when the log processing will be done, then check if the correct values were reassignated.
+            STAT_TIME_TXT="$OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
 }
@@ -242,10 +239,10 @@ function HandleErrors
     local v_headerString="$(tput setaf "$COL_RED")IN $(tput setaf "$COL_CYAN")$p_file$(tput setaf "$COL_RED"), FUNCTION $(tput setaf "$COL_CYAN")$p_function$(tput setaf "$COL_RED"), LINE $(tput setaf "$COL_CYAN")$p_lineno$(tput setaf "$COL_RED") -->"
 
 	# ***** Code *****
-	CheckSTAT_ERROR
+	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	
 	# If the text was redirected to the log file, it will also be redirected to the terminal.
-	CheckSTAT_LOG_REDIRECT; if [ "$STAT_LOG_REDIRECT" = "log" ]; then
+	CheckSTAT_LOG_REDIRECT $(basename "${BASH_SOURCE[0]}") "$LINENO"; if [ "$STAT_LOG_REDIRECT" = "log" ]; then
         STAT_LOG_REDIRECT="tee"
         local v_echo="$(echo >&2 | tee -a "$PROJECT_LOG_PATH")"
     else

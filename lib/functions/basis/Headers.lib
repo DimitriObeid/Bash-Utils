@@ -23,7 +23,7 @@ function DrawLine
 	# or else, the drawing time will be very long, as this pause time will apply for each line character written.
 	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" != "$v_statTimeTxt" ]; then
         OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
-        STAT_TIME_TXT="$v_statTimeTxt"
+        STAT_TIME_TXT="$v_statTimeTxt"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     fi
 
     # Defining the color of the wished character for the whole line before displaying the first character.
@@ -73,7 +73,7 @@ function DrawLine
 	echo
 	
 	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" = "$v_statTimeTxt" ]; then
-        STAT_TIME_TXT="$OLD_STAT_TIME_TXT"
+        STAT_TIME_TXT="$OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     fi
 
 	return
@@ -119,11 +119,11 @@ function HeaderInstall { HeaderBase "$(tput setaf "$COL_YELLOW")" "-" "$(tput se
 # Copy-paste this function to avoid losing time while creating unicolor headers :
 # function Header<col> { HeaderBase "$COL_"" "-" "$COL_"" "$1"; }
 
-function HeaderBlue { HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "$1"; }
-function HeaderCyan { HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$1"; }
-function HeaderGreen { HeaderBase "$COL_GREEN" "-" "$COL_GREEN" "$1"; }
-function HeaderRed { HeaderBase "$COL_RED" "-" "$COL_RED" "$1"; }
-function HeaderYellow { HeaderBase "$COL_YELLOW" "-" "$COL_YELLOW" "$1"; }
+function HeaderBlue     { HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "$1"; }
+function HeaderCyan     { HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$1"; }
+function HeaderGreen    { HeaderBase "$COL_GREEN" "-" "$COL_GREEN" "$1"; }
+function HeaderRed      { HeaderBase "$COL_RED" "-" "$COL_RED" "$1"; }
+function HeaderYellow   { HeaderBase "$COL_YELLOW" "-" "$COL_YELLOW" "$1"; }
 
 # -----------------------------------------------
 
@@ -133,34 +133,34 @@ function HeaderYellow { HeaderBase "$COL_YELLOW" "-" "$COL_YELLOW" "$1"; }
 # function Header<col1><col2> { HeaderBase "$COL_" "-" "$COL_" "$1"; }
 
 # Blue lines, differently colored text.
-function HeaderBlueCyan { HeaderBase "$COL_BLUE" "-" "$COL_CYAN" "$1"; }
-function HeaderBlueGreen { HeaderBase "$COL_BLUE" "-" "$COL_GREEN" "$1"; }
-function HeaderBlueRed { HeaderBase "$COL_BLUE" "-" "$COL_RED" "$1"; }
-function HeaderBlueYellow { HeaderBase "$COL_BLUE" "-" "$COL_YELLOW" "$1"; }
+function HeaderBlueCyan     { HeaderBase "$COL_BLUE" "-" "$COL_CYAN" "$1"; }
+function HeaderBlueGreen    { HeaderBase "$COL_BLUE" "-" "$COL_GREEN" "$1"; }
+function HeaderBlueRed      { HeaderBase "$COL_BLUE" "-" "$COL_RED" "$1"; }
+function HeaderBlueYellow   { HeaderBase "$COL_BLUE" "-" "$COL_YELLOW" "$1"; }
 
 # Cyan lines, differently colored text.
-function HeaderCyanBlue { HeaderBase "$COL_CYAN" "-" "$COL_BLUE" "$1"; }
-function HeaderCyanGreen { HeaderBase "$COL_CYAN" "-" "$COL_GREEN" "$1"; }
-function HeaderCyanRed { HeaderBase "$COL_CYAN" "-" "$COL_RED" "$1"; }
-function HeaderCyanYellow { HeaderBase "$COL_CYAN" "-" "$COL_YELLOW" "$1"; }
+function HeaderCyanBlue     { HeaderBase "$COL_CYAN" "-" "$COL_BLUE" "$1"; }
+function HeaderCyanGreen    { HeaderBase "$COL_CYAN" "-" "$COL_GREEN" "$1"; }
+function HeaderCyanRed      { HeaderBase "$COL_CYAN" "-" "$COL_RED" "$1"; }
+function HeaderCyanYellow   { HeaderBase "$COL_CYAN" "-" "$COL_YELLOW" "$1"; }
 
 # Green lines, differently colored text.
-function HeaderGreenBlue { HeaderBase "$COL_GREEN" "-" "$COL_BLUE" "$1"; }
-function HeaderGreenCyan { HeaderBase "$COL_GREEN" "-" "$COL_CYAN" "$1"; }
-function HeaderGreenRed { HeaderBase "$COL_GREEN" "-" "$COL_RED" "$1"; }
-function HeaderGreenYellow { HeaderBase "$COL_GREEN" "-" "$COL_YELLOW" "$1"; }
+function HeaderGreenBlue    { HeaderBase "$COL_GREEN" "-" "$COL_BLUE" "$1"; }
+function HeaderGreenCyan    { HeaderBase "$COL_GREEN" "-" "$COL_CYAN" "$1"; }
+function HeaderGreenRed     { HeaderBase "$COL_GREEN" "-" "$COL_RED" "$1"; }
+function HeaderGreenYellow  { HeaderBase "$COL_GREEN" "-" "$COL_YELLOW" "$1"; }
 
 # Purple lines, differently colored text
-function HeaderPurpleBlue { HeaderBase "$COL_PURPLE" "-" "$COL_BLUE" "$1"; }
+function HeaderPurpleBlue   { HeaderBase "$COL_PURPLE" "-" "$COL_BLUE" "$1"; }
 
 # Red lines, differently colored text.
-function HeaderRedBlue { HeaderBase "$COL_RED" "-" "$COL_BLUE" "$1"; }
-function HeaderRedCyan { HeaderBase "$COL_RED" "-" "$COL_CYAN" "$1"; }
-function HeaderRedGreen { HeaderBase "$COL_RED" "-" "$COL_GREEN" "$1"; }
-function HeaderRedYellow { HeaderBase "$COL_RED" "-" "$COL_YELLOW" "$1"; }
+function HeaderRedBlue      { HeaderBase "$COL_RED" "-" "$COL_BLUE" "$1"; }
+function HeaderRedCyan      { HeaderBase "$COL_RED" "-" "$COL_CYAN" "$1"; }
+function HeaderRedGreen     { HeaderBase "$COL_RED" "-" "$COL_GREEN" "$1"; }
+function HeaderRedYellow    { HeaderBase "$COL_RED" "-" "$COL_YELLOW" "$1"; }
 
 # Yellow lines, differently colored text.
-function HeaderYellowBlue { HeaderBase "$COL_YELLOW" "-" "$COL_BLUE" "$1"; }
-function HeaderYellowCyan { HeaderBase "$COL_YELLOW" "-" "$COL_CYAN" "$1"; }
-function HeaderYellowGreen { HeaderBase "$COL_YELLOW" "-" "$COL_GREEN" "$1"; }
-function HeaderYellowRed { HeaderBase "$COL_YELLOW" "-" "$COL_RED" "$1"; }
+function HeaderYellowBlue   { HeaderBase "$COL_YELLOW" "-" "$COL_BLUE" "$1"; }
+function HeaderYellowCyan   { HeaderBase "$COL_YELLOW" "-" "$COL_CYAN" "$1"; }
+function HeaderYellowGreen  { HeaderBase "$COL_YELLOW" "-" "$COL_GREEN" "$1"; }
+function HeaderYellowRed    { HeaderBase "$COL_YELLOW" "-" "$COL_RED" "$1"; }

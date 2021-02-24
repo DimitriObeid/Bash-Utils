@@ -38,13 +38,13 @@ function DechoS { string=$1; DechoBasis "$string" "$COL_GREEN"; }
 # -----------------------------------------------
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBlue { string=$1; DechoBasis "$string" "$COL_BLUE"; }
-function DechoCyan { string=$1; DechoBasis "$string" "$COL_CYAN"; }
-function DechoGreen { string=$1; DechoBasis "$string" "$COL_GREEN"; }
-function DechoOrange { string=$1; DechoBasis "$string" "$COL_ORANGE"; }
-function DechoPurple { string=$1; DechoBasis "$string" "$COL_PURPLE"; }
-function DechoRed { string=$1; DechoBasis "$string" "$COL_RED"; }
-function DechoYellow { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
+function DechoBlue      { string=$1; DechoBasis "$string" "$COL_BLUE"; }
+function DechoCyan      { string=$1; DechoBasis "$string" "$COL_CYAN"; }
+function DechoGreen     { string=$1; DechoBasis "$string" "$COL_GREEN"; }
+function DechoOrange    { string=$1; DechoBasis "$string" "$COL_ORANGE"; }
+function DechoPurple    { string=$1; DechoBasis "$string" "$COL_PURPLE"; }
+function DechoRed       { string=$1; DechoBasis "$string" "$COL_RED"; }
+function DechoYellow    { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
 
 # -----------------------------------------------
 
