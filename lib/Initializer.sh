@@ -249,7 +249,7 @@ PROJECT_PATH="$(GetParentDirectoryPath "$0")/$PROJECT_FILE"
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
-STAT_LOG="tre";            CheckSTAT_LOG            "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 STAT_LOG_REDIRECT="log";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -282,7 +282,7 @@ if [ "$STAT_LOG" = "true" ]; then
     
     # Redirecting files list into the log file.
     HeaderBlue "SOURCED FILES LOG OUTPUT"
-        
+
     cat "$INIT_LIST_FILE_PATH" >> "$PROJECT_LOG_PATH"
 
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.

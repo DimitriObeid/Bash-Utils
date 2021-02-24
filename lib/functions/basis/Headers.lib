@@ -14,18 +14,11 @@ function DrawLine
 	#***** Parameters *****
 	local p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
 	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-
-	#***** Variables *****
-	local v_statTimeTxt="0.0003"
 	
-	#***** Code *****
-	# As the line drawing program is using the same timer than the text displaying pause, the sleeping time must be reduced drastically,
-	# or else, the drawing time will be very long, as this pause time will apply for each line character written.
-	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" != "$v_statTimeTxt" ]; then
-        OLD_STAT_TIME_TXT="$STAT_TIME_TXT"
-        STAT_TIME_TXT="$v_statTimeTxt"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    fi
+	#***** Variables *****
+    local v_statTimeTxt="0"
 
+	#***** Code *****
     # Defining the color of the wished character for the whole line before displaying the first character.
     # If the value of the "$p_lineColor" parameter (which stores the text's color encoding) is not empty,
     # then we write the color's encoding into the terminal, which displays the color, and not its encoding in text.
@@ -71,10 +64,6 @@ function DrawLine
 
 	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
 	echo
-	
-	if [ "$STAT_LOG_REDIRECT" != "log" ] && [ "$STAT_TIME_TXT" = "$v_statTimeTxt" ]; then
-        STAT_TIME_TXT="$OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    fi
 
 	return
 }
@@ -85,17 +74,17 @@ function HeaderBase
 	#***** Parameters *****
 	local p_lineColor=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
 	local p_lineChar=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	local p_stringColor=$3	   # Définition de la couleur de la chaîne de caractères du header.
+	local p_stringColor=$3	  # Définition de la couleur de la chaîne de caractères du header.
 	local p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
 	
 	# Le problème vient d'ici, c'est parce que la variable "string" d'ici porte le même nom que l'argument de la fonction cible.
 	# TODO : vérifier comment outrepasser ceci sans modifier le nom de la variable quand je serai de nouveau connecté.
 	
-	#***** Variables *****
-	HEADERBASE_COLOR_LINE="$p_lineColor"
-	HEADERBASE_COLOR_TEXT="$p_stringColor"
+	#***** Variables *****	
+# 	HEADERBASE_COLOR_LINE="$p_lineColor"
+# 	HEADERBASE_COLOR_TEXT="$p_stringColor"
 	
-	#***** Code *****
+	#***** Code *****    
 	Newline
 	
 	EchoMsg "$(DrawLine "$(tput setaf "$p_lineColor")" "$p_lineChar")"
@@ -117,7 +106,7 @@ function HeaderInstall { HeaderBase "$(tput setaf "$COL_YELLOW")" "-" "$(tput se
 ## UNICOLOR HEADERS
 
 # Copy-paste this function to avoid losing time while creating unicolor headers :
-# function Header<col> { HeaderBase "$COL_"" "-" "$COL_"" "$1"; }
+# function Header<col> { HeaderBase "$COL_"" "-" "$COL_" "$1"; }
 
 function HeaderBlue     { HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "$1"; }
 function HeaderCyan     { HeaderBase "$COL_CYAN" "-" "$COL_CYAN" "$1"; }

@@ -91,8 +91,8 @@ function CheckArgs
     #***** Status *****            fi
 
     STAT_ERROR="fatal"
-    STAT_LOG="true"; STAT_LOG_REDIRECT="log"
-    STAT_TIME_TXT="0"
+    STAT_LOG="true"; STAT_LOG_REDIRECT="tee"
+    STAT_TIME_TXT=".1"
     CheckProjectStatusVars "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     
     #***** Code *****
