@@ -21,23 +21,25 @@ function ProcessingFile
     
     #***** Code *****
     if [ -z "$function" ]; then
-        HandleErrors "1" "NO FUNCTION NAME PASSED AS ARGUMENT" "The function $(tput setag "$COL_CYAN")${FUNCNAME[0]}$(tput setaf "$COL_RED") needs a function passed as first argument to work properly" "$function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        HandleErrors "1" "NO FUNCTION NAME PASSED AS ARGUMENT" \
+            "The function $(DechoE "${FUNCNAME[0]}") needs a function passed as first argument to work properly" \
+            "$function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
     fi
     
-	sleep "$PROJECT_STATUS_SLEEP_LINE"
-    DrawLine "$COL_RESET" "$char"
+	sleep "$__STAT_TIME_TXT"
+    DrawLine "$__COL_RESET" "$char"
     EchoNewstep "Processing the $(DechoN "$name") file."
     Newline
     
     if "$function"; then
         EchoSuccess "End of processing the $(DechoS "$name") file"
-		DrawLine "$COL_RESET" "$char"
-		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		DrawLine "$__COL_RESET" "$char"
+		sleep "$__STAT_TIME_TXT"
 		Newline
     else
         EchoError "End of processing the $(DechoE "$name") file"
-		DrawLine "$COL_RESET" "$char"
-		sleep "$PROJECT_STATUS_SLEEP_LINE"
+		DrawLine "$__COL_RESET" "$char"
+		sleep "$__STAT_TIME_TXT"
 		Newline
     fi
 }
@@ -54,16 +56,17 @@ function ProcessingFile
 function OverwriteFile
 {
     #***** Parameters *****
-    path=$1
+    p_path=$1
     
     #***** Code *****
-    EchoNewstep "The $(DechoN "$path") file already exists and is not empty."
-	EchoNewstep "Overwriting data from file $(DechoN "$path")"
+    EchoNewstep "The $(DechoN "$p_path/") file already exists and is not empty."
+	EchoNewstep "Overwriting data from file $(DechoN "$p_path/")"
 	Newline
 
-	true > "$path"
-	HandleErrors "$?" "${FUNCNAME[0]} : THE CONTENT OF THE $(DechoE "$path") FILE HAD NOT BEEN OVERWRITTEN" "$LINENO" ""
-	EchoSuccess "The content of the $(DechoS "$path") file has been successfully overwritten"
+	true > "$p_path"
+	HandleErrors "$?" "THE CONTENT OF THE $(DechoE "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+	EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
 	Newline
 
 	return 0
@@ -85,46 +88,46 @@ function OverwriteFile
 function Makefile
 {
 	#***** Paramètres *****
-	parent=$1      # Emplacement depuis la racine du dossier parent du fichier à traiter.
-	name=$2        # Nom du fichier à traiter (dans son dossier parent).
+	p_parent=$1      # Emplacement depuis la racine du dossier parent du fichier à traiter.
+	p_name=$2        # Nom du fichier à traiter (dans son dossier parent).
 
 	#***** Autres variables *****
-	path="$parent/$name"	# Chemin du fichier à traiter.
+	p_path="$p_parent/$p_name"	# Chemin du fichier à traiter.
 
 	#***** Code *****
-	if [ -z "$parent" ] || [ -z "$name" ]; then
+	if [ -z "$p_parent" ] || [ -z "$p_name" ]; then
         HandleErrors "1" "AT LEAST AN ARGUMENT IS MISSING" \
             "The two awaited arguments for this function are the $(DechoE "parent directory") and the $(DechoE "name of the file to create")" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 
-	elif [ ! -d "$parent" ]; then
+	elif [ ! -d "$p_parent" ]; then
         HandleErrors "1" "THE $(DechoE "PARENT") ARGUMENT IS INVALID" "Check the name of the targeted directory in your code" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 	fi
 	
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
-	if [ ! -f "$path" ]; then
-        EchoNewstep "Creating the $(DechoN "$name") file in the parent folder $(DechoN "$parent/")."
+	if [ ! -f "$p_path" ]; then
+        EchoNewstep "Creating the $(DechoN "$p_name") file in the parent folder $(DechoN "$p_parent/")."
 
-		touch "$path"
+		touch "$p_path"
         # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
         # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(DechoE "$name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$parent/")." \
+        HandleErrors "$?" "THE $(DechoE "$p_name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$p_parent/")." \
             "Please check the permissions of the targeted directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
-        EchoSuccess "The $(DechoS "$name") file was successfully created in the $(DechoS "$parent") folder."
+        EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
         
         return 0
 	
 	# Else, if the file to be created already exists AND it is NOT empty.
-	elif [ -f "$path" ] && [ -s "$path" ]; then
-        OverwriteFile "$path"
+	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
+        OverwriteFile "$p_path"
 		return 0
 
 	# Else, if the file to be created already exists AND it is empty.
-	elif [ -f "$path" ] && [ ! -s "$path" ]; then
-		EchoSuccess "The $(DechoS "$path/") file already exists in the $(DechoS "$parent/") folder and is empty."
+	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
+		EchoSuccess "The $(DechoS "$p_path/") file already exists in the $(DechoS "$p_parent/") folder and is empty."
 		Newline
 
 		return 0
@@ -139,18 +142,18 @@ function Makefile
 function SourceFile
 {
     #***** Parameters *****
-    path=$1
+    p_path=$1
 
     #***** Code *****
-    if [ -f "$path" ]; then
+    if [ -f "$p_path" ]; then
         # shellcheck disable=SC1090
-        if source "$path"; then
-            EchoSuccess "Sourced file : $(DechoS "$path")"
+        if source "$p_path"; then
+            EchoSuccess "Sourced file : $(DechoS "$p_path")"
         else
-            HandleErrors "1" "UNABLE TO FIND THIS PATH" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            HandleErrors "1" "UNABLE TO FIND THIS PATH" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        HandleErrors "1" "UNABLE TO FIND THIS PATH" "Verify the path passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))"
+        HandleErrors "1" "UNABLE TO FIND THIS PATH" "Verify the path passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 
@@ -199,8 +202,8 @@ function Compress
     #***** Parameters *****
     cmd=$1      # Compression command.
     opts=$2     # Options of the compression command.
-    path=$3     # Path to the file/folder to archivate.
-    name=$4     # Archive's name (only used into displayed messages).
+    p_path=$3     # Path to the file/folder to archivate.
+    p_name=$4     # Archive's name (only used into displayed messages).
     
     #***** Code *****
     
@@ -220,14 +223,14 @@ function Uncompress
     cmd=$1      # Compression command.
     # TODO : Vérifier si cette procédure est bonne
     opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    path=$3     # Path to the l'archive to uncompress.
-    name=$4     # Archive's name (only used into displayed messages).
+    p_path=$3     # Path to the l'archive to uncompress.
+    p_name=$4     # Archive's name (only used into displayed messages).
 
     #***** Code *****
     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
-    "$cmd $opts $path"
-    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$name") A ÉCHOUÉE"
-    EchoSuccess "La décompression de l'archive $(DechoS "$name") s'est effectuée avec brio."
+    "$cmd $opts $p_path"
+    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$p_name") A ÉCHOUÉE"
+    EchoSuccess "La décompression de l'archive $(DechoS "$p_name") s'est effectuée avec brio."
     Newline
     
     return 0

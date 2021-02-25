@@ -8,6 +8,6 @@
 
 ## GETTING THE DATE
 # Saving the current date in YYYYY-MM-DD hh-mm-ss format (YEAR-MONTH-DAY hour-minute-second)
-TIME_DATE=$(date +"%Y-%m-%d %Hh-%Mm-%Ss")
+__TIME_DATE=$(date +"%Y-%m-%d %Hh-%Mm-%Ss")
 
 # -----------------------------------------------

@@ -6,4 +6,4 @@ if [ -f "$debug" ]; then
 	true > "$debug"
 fi
 
-sudo bash -x Linux-reinstall.sh sio 2>> "$debug"
+sudo bash -x Linux-reinstall.sh sio >> "$debug"

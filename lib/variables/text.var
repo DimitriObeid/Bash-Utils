@@ -4,11 +4,18 @@
 
 ######################################## DEFINING VARIABLES #######################################
 
+#### INCLUDING
+
+# This variable is used by the "ProjectStatus.conf" file to check if thfis file has been source to get the color code.
+__TXT_IS_INITIALIZED="true"
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### COLUMNS
 
 ## RETRIEVAL
 # Get the columns number on the terminal according to its window's lenght
-TXT_COLS=$(tput cols)
+__TXT_COLS=$(tput cols)
 
 # -----------------------------------------------
 
@@ -20,7 +27,7 @@ TXT_COLS=$(tput cols)
 ## HEADER'S LINES CHARACTER
 # Caractère utilisé pour dessiner les lignes des headers. Si vous souhaitez mettre un autre caractère à la place d'un tiret, changez le caractère entre les double guillemets.
 # Ne mettez pas plus d'un caractère si vous ne souhaitez pas voir le texte de chaque header apparaître entre plusieurs lignes (une ligne de chaque caractère).
-TXT_HEADER_LINE_CHAR="-"		# Caractère à afficher en boucle pour créer une ligne des headers de changement d'étapes.
+__TXT_HEADER_LINE_CHAR="-"		# Caractère à afficher en boucle pour créer une ligne des headers de changement d'étapes.
 
 # -----------------------------------------------
 
@@ -31,6 +38,6 @@ TXT_HEADER_LINE_CHAR="-"		# Caractère à afficher en boucle pour créer une lig
 
 ## WRITING CHEVRONS
 # Affichage de chevrons avant une chaîne de caractères (par exemple).
-TXT_TAB=">>>>"
+__TXT_TAB=">>>>"
 
 # -----------------------------------------------

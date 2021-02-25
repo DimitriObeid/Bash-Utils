@@ -33,17 +33,17 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall sub-folders paths
-LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$PROJECT_FILE")/install/categories"
-LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$PROJECT_FILE")/lang"
-LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$PROJECT_FILE")/variables"
+__LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__PROJECT_FILE")/install/categories"
+__LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__PROJECT_FILE")/lang"
+__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__PROJECT_FILE")/variables"
 
 {
     # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-    EchoNewstep "In $PROJECT_FILE, line $LINENO : CHECKING FOR ${PROJECT_NAME^^}'S SUB-FOLDERS"
-    GetDirectoryPath "$LINUX_REINSTALL_INST"
-    GetDirectoryPath "$LINUX_REINSTALL_LANG"
-    GetDirectoryPath "$LINUX_REINSTALL_VARS"; Newline
-    EchoNewstep "All the needed directories are found !"; Newline
+    EchoNewstep "In $__PROJECT_FILE, line $LINENO : CHECKING FOR ${__PROJECT_NAME^^}'S SUB-FOLDERS"
+    GetDirectoryPath "$__LINUX_REINSTALL_INST"
+    GetDirectoryPath "$__LINUX_REINSTALL_LANG"
+    GetDirectoryPath "$__LINUX_REINSTALL_VARS"; Newline
+    EchoNewstep "All the needed directories are found !"
 
     # Sourcing the Linux-reinstall language files.
     # EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
@@ -51,8 +51,8 @@ LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$PROJECT_FILE")/variables"
     # Newline #; Newline
 
     # Ending the initialization process.
-    HeaderGreen "END OF THE $(DechoGreen "${PROJECT_NAME^^}")'S INITIALIZATION"
-} >> "$PROJECT_LOG_PATH"
+    HeaderGreen "END OF THE $(DechoGreen "${__PROJECT_NAME^^}")'S INITIALIZATION"
+} >> "$__PROJECT_LOG_PATH"
 
 # -----------------------------------------------
 
@@ -85,41 +85,40 @@ ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 
 ## DEFINING INITIALIZATION FUNCTIONS
 
-# Détection du passage des arguments au script
+# Détection du passage des arguments au script.
 function CheckArgs
 {
-    #***** Status *****            fi
+    #***** Status *****
 
-    STAT_ERROR="fatal"
-    STAT_LOG="true"; STAT_LOG_REDIRECT="tee"
-    STAT_TIME_TXT=".1"
-    CheckProjectStatusVars "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    __STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    __STAT_LOG="true";          CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    __STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    __STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     
     #***** Code *****
 	# If the script is not run as super-user (root)
-        lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
-        {
-            EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
-            EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
+        local lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
+    
+        EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
+        EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
 
-            # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
-            # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-            echo "sudo $0 \$installation"
-            Newline
+        # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
+        # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
+        echo "    sudo $0 \$installation" >&2
+        Newline >&2
 
-            EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
-            echo "    $0 \$installation"
-        } >&2
+        EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
+        echo "    $0 \$installation" >&2
 
 		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
             "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
-            "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno" >&2
+            "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
     fi
 
 	# If the mandatory installation tye argument is not passed.
-	lineno=$LINENO; if [ -z "$ARG_INSTALL" ]; then
+	local lineno=$LINENO; if [ -z "$ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
-        echo "    sudo $0 \$username"
+        echo "    sudo $0 \$username" >&2
         Newline >&2
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \

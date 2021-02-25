@@ -10,7 +10,7 @@
 
 # "LOGNAME" is an environment variable that stores the name of the current session's name,
 # whether if there was an user switching (with the "su") command or if a script was executed with root privileges or not.
-DIR_HOME="/home/$LOGNAME"     # Getting the current logged user's home directory.
+__DIR_HOME="/home/$LOGNAME"     # Getting the current logged user's home directory.
 
 # -----------------------------------------------
 

@@ -32,13 +32,13 @@ function KbInputYesNo
     read -rp "Enter your answer : " ans_yesno
     
     # If the "STAT_LOG_REDIRECT" status variable contains one of its redirection value ('log' or 'tee'), the answer is redirected to the log file with the date.
-    if [ -n "$STAT_LOG_REDIRECT" ]; then
-        echo "[$TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$PROJECT_LOG_PATH"
+    if [ -n "$__STAT_LOG_REDIRECT" ]; then
+        echo "[$__TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$__PROJECT_LOG_PATH"
     fi; Newline
     
     case ${ans_yesno,,} in
         "oui" | "yes")
-            EchoMsg "$(tput setaf "$COL_GREEN")$ans_yes$(tput sgr0)"
+            EchoMsg "$(tput setaf "$__COL_GREEN")$ans_yes$(tput sgr0)"
             Newline
             
             case "$cmd_ans_yes" in
@@ -49,20 +49,23 @@ function KbInputYesNo
                     exit 1
                     ;;
                 *)
-                    STAT_ERROR="fatal"
-                    HandleErrors "1" "BAD $(tput setaf "$COL_CYAN")cmd_ans_yes$(tput setaf "$COL_RED") ARGUMENT VALUE" "The awaited values are $(tput setaf "$COL_CYAN")return$(tput setaf "$COL_RED") and $(tput setaf "$COL_CYAN")exit$(tput sgr0)" "$cmd_ans_yes" "$(basename "$BASH_SOURCE[0]")" "${FUNCNAME[0]}" "$(( LINENO-9 ))"
+                    # shellcheck disable=2034
+                    __STAT_ERROR="fatal"
+                    HandleErrors "1" "BAD $(DechoE "cmd_ans_yes") ARGUMENT VALUE" \
+                        "The awaited values are $(DechoE "return") and $(DechoE "exit")" \
+                        "$cmd_ans_yes" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))"
                     ;;
             esac
             ;;
         "non" | "no")
-            EchoMsg "$(tput setaf "$COL_RED")$ans_no$(tput sgr0)"
+            EchoError "$ans_no"
             Newline
             ;;
         *)
-            EchoMsg "$(tput setaf "$COL_RED")Enter a valid answer$(tput sgr0)"
-            EchoMsg "The valid answers are $(tput setaf "$COL_CYAN")yes$(tput setaf "$COL_RED") and $(tput setaf "$COL_CYAN")no$(tput sgr0)"
+            EchoError "Please enter a valid answer"
+            EchoError "The valid answers are $(tput setaf "$COL_CYAN")yes$(tput setaf "$COL_RED") and $(tput setaf "$COL_CYAN")no$(tput sgr0)"
             Newline
             
-            KbinputYesNo "$description" "$ans_yes" "$cmd_ans_yes" "$ans_no" "$cmd_and_no"
+            KbInputYesNo "$description" "$ans_yes" "$cmd_ans_yes" "$ans_no" "$cmd_ans_no"
     esac
 }

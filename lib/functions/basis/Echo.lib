@@ -6,49 +6,67 @@
 
 #### TEXT WRITING AND DECORATION
 
+function SwitchColor
+{
+    #***** Parameters *****
+    local p_originalColor=$1
+
+    #***** Variables *****
+    local k='140'             # Key
+    local x="$__COL_CODE"     # Color code number to multiply by 'k'
+    local div='256'           # Number to divide
+    local res
+    
+    #***** Code *****
+    res=$(( x*k ))
+    res=$(( res/div ))
+    
+    echo "$(tput setaf "$res"; __COL_CODE="$res")"
+}
+
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
 function DechoBasis
 {
     #***** Parameters *****
-    local string=$1           # The string to display.
-    local original_color=$2   # The original text's color.
+    local p_string=$1           # The string to display.
+    local p_originalColor=$2    # The original text's color.
     
     #***** Code *****
     
     #***** Variables *****
     # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
-    local new_color="$COL_YELLOW"
+    local v_newColor="$(SwitchColor "$p_originalColor")"
     
     #***** Code *****
-    if [ "$original_color" = "$COL_BLUE" ] || [ "$original_color" = "$COL_CYAN" ]; then
+    if [ "$p_originalColor" = "$__COL_BLUE" ] || [ "$p_originalColor" = "$__COL_CYAN" ]; then
         # TODO : adapting this line of code when the aforementioned function will be ready.
-        echo "$(tput setaf "$new_color")$string$(tput setaf "$original_color")"
+        echo "${v_newColor}$p_string$p_originalColor"
     else
-        echo "$(tput setaf "$COL_CYAN")$string$(tput setaf "$original_color")"
+        echo "${__COL_CYAN}$p_string$p_originalColor"
     fi
 }
 
-function Decho { string=$1; echo "$(ColorChar "setaf" "$COL_CYAN")$string$(ColorChar "sgr0")"; }    # Colouring a part of a simple message written via the "echo" command.
+function Decho { echo "$__COL_CYAN $1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
 
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
-function DechoE { string=$1; DechoBasis "$string" "$COL_RED"; }
-function DechoN { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
-function DechoS { string=$1; DechoBasis "$string" "$COL_GREEN"; }
+function DechoE { DechoBasis "$1" "$__COL_RED"; }
+function DechoN { DechoBasis "$1" "$__COL_YELLOW"; }
+function DechoS { DechoBasis "$1" "$__COL_GREEN"; }
 
 # -----------------------------------------------
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBlue      { string=$1; DechoBasis "$string" "$COL_BLUE"; }
-function DechoCyan      { string=$1; DechoBasis "$string" "$COL_CYAN"; }
-function DechoGreen     { string=$1; DechoBasis "$string" "$COL_GREEN"; }
-function DechoOrange    { string=$1; DechoBasis "$string" "$COL_ORANGE"; }
-function DechoPurple    { string=$1; DechoBasis "$string" "$COL_PURPLE"; }
-function DechoRed       { string=$1; DechoBasis "$string" "$COL_RED"; }
-function DechoYellow    { string=$1; DechoBasis "$string" "$COL_YELLOW"; }
+function DechoBlue      { DechoBasis "$1" "$__COL_BLUE"; }
+function DechoCyan      { DechoBasis "$1" "$__COL_CYAN"; }
+function DechoGreen     { DechoBasis "$1" "$__COL_GREEN"; }
+function DechoOrange    { DechoBasis "$1" "$__COL_ORANGE"; }
+function DechoPurple    { DechoBasis "$1" "$__COL_PURPLE"; }
+function DechoRed       { DechoBasis "$1" "$__COL_RED"; }
+function DechoYellow    { DechoBasis "$1" "$__COL_YELLOW"; }
 
 # -----------------------------------------------
 
-## DISPLAYING A MESSAGE ACCORDING TO THE CONTEXT AND THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE.
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__STAT_TIME_TXT" status variable.
 
 # Error message
 
@@ -59,11 +77,12 @@ function EchoError
     #***** Parameters *****
     local string=$1
     local option=$2
+    local extraArgs=$3
 
     #***** Code *****
-    CheckProjectLogStatus "$(tput setaf "$COL_RED")$TXT_TAB$TXT_TAB $string$(tput sgr0)" "$option" >&2
+    CheckProjectLogStatus "$__COL_RED$__TXT_TAB$__TXT_TAB $string$__COL_RESET" "$option" "$extraArgs" >&2
 
-    sleep "$STAT_TIME_TXT"
+    sleep "$__STAT_TIME_TXT"
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -75,11 +94,12 @@ function EchoMsg
     #***** Parameters *****
     local string=$1
     local option=$2
+    local extraArgs=$3
 
     #***** Code *****
-    CheckProjectLogStatus "$string" "$option"
+    CheckProjectLogStatus "$string" "$option" "$extraArgs"
 
-    sleep "$STAT_TIME_TXT"
+    sleep "$__STAT_TIME_TXT"
 }
 
 # New sub-step message
@@ -91,11 +111,12 @@ function EchoNewstep
     #***** Parameters *****
     local string=$1
     local option=$2
+    local extraArgs=$3
 
     #***** Code *****
-    CheckProjectLogStatus "$(tput setaf "$COL_YELLOW")$TXT_TAB$TXT_TAB $string$(tput sgr0)" "$option"
+    CheckProjectLogStatus "$__COL_YELLOW$__TXT_TAB$__TXT_TAB $string$__COL_RESET" "$option" "$extraArgs"
 
-    sleep "$STAT_TIME_TXT"
+    sleep "$__STAT_TIME_TXT"
 }
 
 # Success message
@@ -107,11 +128,12 @@ function EchoSuccess
     #***** Parameters *****
     local string=$1
     local option=$2
+    local extraArgs=$3
 
     #***** Code *****
-    CheckProjectLogStatus "$(tput setaf "$COL_GREEN")$TXT_TAB$TXT_TAB $string$(tput sgr0)" >&1 "$option"
+    CheckProjectLogStatus "$__COL_GREEN$__TXT_TAB$__TXT_TAB $string$__COL_RESET" >&1 "$option" "$extraArgs"
 
-    sleep "$STAT_TIME_TXT"
+    sleep "$__STAT_TIME_TXT"
 }
 
 
@@ -132,7 +154,9 @@ function Newline
 
     #***** Code *****
     if [ -n "$number" ] && ! IsInt "$number"; then
-        HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "$number" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"
+        HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" \
+            "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "$number" \
+            "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
     else
         if [ -n "$number" ]; then
             # Doing X line breaks according to the number passed as argument.
