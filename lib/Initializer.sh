@@ -168,14 +168,19 @@ function EchoSourcedDependency
 
 #### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES
 
+
 # Clearing the sourced directories list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
-    true > "$__INIT_LIST_FILE_PATH"
+    true > "$__INIT_LIST_FILE_PATH" || { 
+        echo >&2;
+        echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to"
+        echo >&2; exit 1
+    }
 else
     if [ ! -d "$__PROJECT_TMP_DIR" ]; then
         mkdir "$__PROJECT_TMP_DIR" || {
-            echo 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
-            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+            echo >&2
+            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." >&2; echo >&2; exit 1
         }
     fi
     
@@ -258,6 +263,9 @@ __PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
+__STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
 __STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
@@ -292,21 +300,21 @@ if [ "$__STAT_LOG" = "true" ]; then
     # Redirecting files list into the log file.
     HeaderBlue "SOURCED FILES LOG OUTPUT"
 
-    EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")"
+    EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
 
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
     HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
     # Getting operating system family.
-    EchoNewstep "Operating system family :$__COL_RESET $OSTYPE"
+    EchoNewstep "Operating system family : $(DechoN "$OSTYPE")"
     Newline
 
     # Gathering OS informations from the "/etc/os-release" file.
     EchoNewstep "Operating system general informations :"
-    EchoMsg "$(cat "/etc/os-release")"
+    EchoMsg "$(cat "/etc/os-release")" "" "nodate"
     Newline
 
-    EchoNewstep "Bash version :$__COL_RESET $BASH_VERSION"
+    EchoNewstep "Bash version : $(DechoN "$BASH_VERSION")"
     Newline
 
     EchoSuccess "Successfully got the user's system's informations."

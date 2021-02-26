@@ -81,19 +81,19 @@ function HeaderBase
 	#***** Code *****    
 	Newline
 
-	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "line"
+	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
 	EchoMsg "$p_stringColor##> $p_stringTxt$__COL_RESET"
-	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "line"
+	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
 	Newline
 
 	return
 }
 
 # Header display function when changing step.
-function HeaderStep     { HeaderBase "$(tput setaf "$__COL_CYAN")" "-" "$(tput setaf "$__COL_CYAN")" "$1"; }
+function HeaderStep     { HeaderBase "$__COL_CYAN" "-" "$__COL_CYAN" "$1"; }
 
 # Header display function when switching to a new package category during package installation.
-function HeaderInstall  { HeaderBase "$(tput setaf "$__COL_YELLOW")" "-" "$(tput setaf "$__COL_GREEN")" "$1"; }
+function HeaderInstall  { HeaderBase "$__COL_YELLOW" "-" "$__COL_GREEN" "$1"; }
 
 # -----------------------------------------------
 

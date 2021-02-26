@@ -19,10 +19,6 @@
 
 ## SOURCING THE INITALIZER FILE
 
-# if [ "$(cat /etc/os-release)" ]; then
-#     echo lllll
-# fi
-
 # shellcheck disable=SC1091
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
     echo; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
@@ -37,22 +33,20 @@ __LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__PROJECT_FILE")/install/cate
 __LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__PROJECT_FILE")/lang"
 __LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__PROJECT_FILE")/variables"
 
-{
-    # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-    EchoNewstep "In $__PROJECT_FILE, line $LINENO : CHECKING FOR ${__PROJECT_NAME^^}'S SUB-FOLDERS"
-    GetDirectoryPath "$__LINUX_REINSTALL_INST"
-    GetDirectoryPath "$__LINUX_REINSTALL_LANG"
-    GetDirectoryPath "$__LINUX_REINSTALL_VARS"; Newline
-    EchoNewstep "All the needed directories are found !"
+# Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
+EchoNewstep "In $(DechoN "$__PROJECT_FILE"), line $(DechoN "$LINENO") : CHECKING FOR ${__PROJECT_NAME^^}'S SUB-FOLDERS"
+GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"
+GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"
+GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"; Newline
+EchoNewstep "All the needed directories are found !"
 
-    # Sourcing the Linux-reinstall language files.
-    # EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
-    # SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-    # Newline #; Newline
+# Sourcing the Linux-reinstall language files.
+# EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
+# SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
+# Newline #; Newline
 
-    # Ending the initialization process.
-    HeaderGreen "END OF THE $(DechoGreen "${__PROJECT_NAME^^}")'S INITIALIZATION"
-} >> "$__PROJECT_LOG_PATH"
+# Ending the initialization process.
+HeaderGreen "END OF THE $(DechoGreen "${__PROJECT_NAME^^}")'S INITIALIZATION"
 
 # -----------------------------------------------
 
@@ -65,15 +59,16 @@ __LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__PROJECT_FILE")/variables"
 #### DEFINING SCRIPT'S ARGUMENTS
 
 ## ARGUMENT VALUES ARRAY
-ARGV=("$@")
+# shellcheck disable=SC2034
+__ARGV=("$@")
 
 # -----------------------------------------------
 
 ## MANDATORY ARGUMENTS
 
 # Arguments to call after the script's execution command to make it running correctly.
-ARG_INSTALL=$1          # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
-ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
+__ARG_INSTALL=$1          # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
+__ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 
 # -----------------------------------------------
 
@@ -89,57 +84,64 @@ ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 function CheckArgs
 {
     #***** Status *****
+    # shellcheck disable=SC2034
+    __STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "$0")" "$LINENO"
 
-    __STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    __STAT_LOG="true";          CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    __STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    __STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    # shellcheck disable=SC2034
+    __STAT_LOG="true";          CheckSTAT_LOG           "$(basename "$0")" "$LINENO"
+
+    # shellcheck disable=SC2034
+    __STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "$0")" "$LINENO"
+
+    # shellcheck disable=SC2034
+    __STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
     
     #***** Code *****
 	# If the script is not run as super-user (root)
         local lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
-    
-        EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)"
-        EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
+            EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)."
+            EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
 
-        # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
-        # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-        echo "    sudo $0 \$installation" >&2
-        Newline >&2
+            # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
+            # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
+            echo "    sudo $0 \$installation" >&2
+            Newline >&2
 
-        EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande"
-        echo "    $0 \$installation" >&2
+            EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande."
+            echo "    $0 \$installation" >&2
 
-		HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
-            "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur" \
-            "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
+            HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
+                "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur." \
+                "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
     fi
 
 	# If the mandatory installation tye argument is not passed.
-	local lineno=$LINENO; if [ -z "$ARG_INSTALL" ]; then
+	local lineno=$LINENO; if [ -z "$__ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo "    sudo $0 \$username" >&2
         Newline >&2
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
-            "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
-            "$ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
+            "Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
+            "$__ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
 
         exit 1
 
     # Else, if the second argument is passed, the script checks if the value is equal to only one of the awaited values ("custom" or "sio"). They are not case sensitive.
-   	else
-        case ${ARG_INSTALL,,} in
+   	else local lineno=$LINENO
+        case ${__ARG_INSTALL,,} in
             "custom")
-                VER_INSTALL="$ARG_INSTALL"
+                __VER_INSTALL="$__ARG_INSTALL"
                 ;;
             "sio")
-                VER_INSTALL="$ARG_INSTALL"
+                # shellcheck disable=SC2034
+                __VER_INSTALL="$__ARG_INSTALL"
                 ;;
             *)
-                Newline; HandleErrors "1" "LA VALEUR DU DEUXIÈME ARGUMENT NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
-                    "Veuillez passer le type d'installation à effectuer en premier argument. Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
-                    "$ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
+                Newline; HandleErrors "1" \
+                    "LA VALEUR DE L'ARGUMENT $(DechoE "$__ARG_INSTALL_INDEX") NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
+                    "Les valeurs attendues sont : $(DechoE "perso") ou $(DechoE "sio")." \
+                    "$__ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
 
                 exit 1
                 ;;
@@ -149,30 +151,41 @@ function CheckArgs
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
-	if [ "$PROJECT_STATUS_DEBUG" = "true" ]; then
+	if [ "$__STAT_DEBUG" = "true" ]; then
 		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
 		Newline
-		
+
 		# The name of the log file is redefined, THEN we redefine the path,
 		# EVEN if the initial value of the variable "$PROJECT_LOG_PATH" is the same as the new value.
 		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called,
 		# because the "$PROJECT_LOG_NAME" stored in the former "$$PROJECT_LOG_PATH" is the former one (its value was not updated).
-		PROJECT_LOG_NAME="$PROJECT_NAME - DEBUG.log"
-		PROJECT_LOG_PATH="$PROJECT_LOG_NAME/$PROJECT_LOG_NAME"
+		__PROJECT_LOG_NAME_OLD="$__PROJECT_LOG_NAME"
+		echo "$__PROJECT_LOG_NAME_OLD"
+		__PROJECT_LOG_NAME="$__PROJECT_NAME - DEBUG.log"
+    		echo "$__PROJECT_LOG_NAME"
 
-		## APPEL DES FONCTIONS D'INITIALISATION
-		CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
-		GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur.
-		WriteInstallScript		# Puis la fonction de création de scripts d'installation.
+		__PROJECT_LOG_PATH="$__PROJECT_LOG_PARENT_PATH/$__PROJECT_LOG_NAME"
+		
+		# Changing the name of the log file.
+        if [ "$(EchoMsg "$(mv -v "$__PROJECT_LOG_NAME_OLD" "$__PROJECT_LOG_NAME")")" ]; then
+            ## APPEL DES FONCTIONS D'INITIALISATION
+            CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
+            GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur.
+            WriteInstallScript		# Puis la fonction de création de scripts d'installation.
 
-		# APPEL DES FONCTIONS À TESTER
-		EchoNewstep "Test de la fonction d'installation"
+            # APPEL DES FONCTIONS À TESTER
+            EchoNewstep "Test de la fonction d'installation"
 
-		HeaderStep "TEST D'INSTALLATION DE PAQUETS"
-		PackInstall "apt" "nano"
-		PackInstall "apt" "emacs"
+            HeaderStep "TEST D'INSTALLATION DE PAQUETS"
+            PackInstall "apt" "nano"
+            PackInstall "apt" "emacs"
 
-		exit 0
+            exit 0
+        else
+            HandleErrors "1" "UNABLE TO RENAME THE LOG FILE" \
+                "Check what happened by running the script with the $(DechoE "bash -x $0") command" \
+                "$__PROJECT_LOG_NAME_OLD // OR // $__PROJECT_LOG_NAME" "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        fi
 	fi
 }
 
@@ -216,7 +229,7 @@ function CheckInternetConnection
 	HeaderCyan "VÉRIFICATION DE LA CONNEXION À INTERNET"
 
 	# On vérifie si l'ordinateur est connecté à Internet (pour le savoir, on ping le serveur DNS d'OpenDNS avec la commande ping 1.1.1.1).
-	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$PROJECT_LOG_PATH"
+	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$__PROJECT_LOG_PATH"
 
     HandleErrors "$?" "AUCUNE CONNEXION À INTERNET" "Vérifiez que vous êtes bien connecté à Internet, puis relancez le script." "$lineno"
     EchoSuccess "Votre ordinateur est connecté à Internet."
@@ -246,7 +259,7 @@ function DistUpgrade
 
 	# On crée le dossier contenant les commandes de mise à jour.
 	if test ! -d "$update_d_path"; then
-		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$PROJECT_LOG_PATH"
+		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__PROJECT_LOG_PATH"
 	fi
 
 	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la variable "$PACK_MAIN_PACKAGE_MANAGER".
@@ -295,13 +308,13 @@ function SetSudo
 	HeaderStep "DÉTECTION DE SUDO ET AJOUT DE L'UTILISATEUR À LA LISTE DES SUDOERS"
 
 	# On crée une backup du fichier de configuration "sudoers" au cas où l'utilisateur souhaite revenir à son ancienne configuration.
-	local sudoers_old="/etc/sudoers - $TIME_DATE.old"
+	local sudoers_old="/etc/sudoers - $__TIME_DATE.old"
 
-    EchoNewstep "Détection de la commande sudo $COL_RESET."
+    EchoNewstep "Détection de la commande sudo $__COL_RESET."
     Newline
 
 	# On vérifie si la commande "sudo" est installée sur le système de l'utilisateur.
-	command -v sudo 2>&1 | tee -a "$PROJECT_LOG_PATH"
+	command -v sudo 2>&1 | tee -a "$__PROJECT_LOG_PATH"
 
 	if test "$?" -eq 0; then
         Newline
@@ -332,7 +345,7 @@ function SetSudo
 	function ReadSetSudo
 	{
 		read -rp "Entrez votre réponse : " rep_set_sudo
-		echo "$rep_set_sudo" >> "$PROJECT_LOG_PATH"
+		echo "$rep_set_sudo" >> "$__PROJECT_LOG_PATH"
 		Newline
 
 		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
@@ -391,7 +404,7 @@ function SetSudo
 				EchoNewstep "Ajout de l'utilisateur $(DechoN "${ARG_USERNAME}") au groupe sudo."
 				Newline
 
-				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$__PROJECT_LOG_PATH"
 
 				if test "$?" == "0"; then
                     EchoSuccess "L'utilisateur $(DechoS "${ARG_USERNAME}") a été ajouté au groupe sudo avec succès."
@@ -538,7 +551,7 @@ function Autoremove
 	function ReadAutoremove
 	{
 		read -rp "Entrez votre réponse : " rep_autoremove
-		echo "$rep_autoremove" >> "$PROJECT_LOG_PATH"
+		echo "$rep_autoremove" >> "$__PROJECT_LOG_PATH"
 		Newline
 
 		case ${rep_autoremove,,} in
@@ -590,7 +603,7 @@ function IsInstallationDone
 	Newline
 
 	read -rp "Entrez votre réponse : " rep_erase_tmp
-	echo "$rep_erase_tmp" >> "$PROJECT_LOG_PATH"
+	echo "$rep_erase_tmp" >> "$__PROJECT_LOG_PATH"
     Newline
 
 	case ${rep_erase_tmp,,} in
@@ -598,13 +611,13 @@ function IsInstallationDone
 			EchoNewstep "Déplacement du fichier de logs dans votre dossier personnel."
 			Newline
 
-			mv -v "$PROJECT_LOG_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$FILE_LOG_NAME" && FILE_LOG_PATH=$"$DIR_HOMEDIR" \
+			mv -v "$__PROJECT_LOG_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$__PROJECT_LOG_NAME" && __PROJECT_LOG_PATH=$"$DIR_HOMEDIR" \
 				&& EchoSuccess "Le fichier de logs a bien été deplacé dans votre dossier personnel."
 
 			EchoNewstep "Suppression du dossier temporaire $DIR_TMP_PATH."
 			Newline
 
-			if test rm -rfv "$DIR_TMP_PATH" >> "$PROJECT_LOG_PATH"; then
+			if test rm -rfv "$DIR_TMP_PATH" >> "$__PROJECT_LOG_PATH"; then
 				EchoSuccess "Le dossier temporaire $(DechoS "$DIR_TMP_PATH") a été supprimé avec succès."
 				Newline
 			else
@@ -623,7 +636,7 @@ function IsInstallationDone
 
 	echo "$(Decho "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
 	echo "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
-	echo "Il porte le nom de $(Decho "$FILE_LOG_NAME")."
+	echo "Il porte le nom de $(Decho "$__PROJECT_LOG_NAME")."
 	Newline
 
     # On tue le processus de connexion en mode super-utilisateur.
@@ -658,7 +671,7 @@ PackInstall "$main" wget
 EchoNewstep "Vérification de l'installation des commandes $(DechoN "curl"), $(DechoN "snapd") et $(DechoN "wget")."
 Newline
 
-lineno=$LINENO; command -v curl snap wget | tee -a "$PROJECT_LOG_PATH"
+lineno=$LINENO; command -v curl snap wget | tee -a "$__PROJECT_LOG_PATH"
 HandleErrors "$?" "AU MOINS UNE DES COMMANDES D'INSTALLATION MANQUE À L'APPEL" "Essayez de  télécharger manuellement ces paquets : $(DechoE "curl"), $(DechoE "snapd") et $(DechoE "wget")." "$lineno"
 EchoSuccess "Les commandes importantes d'installation ont été installées avec succès."
 Newline
@@ -689,7 +702,7 @@ sleep 1
 EchoNewstep "Création du dossier d'installation des logiciels."
 Newline
 
-Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$__PROJECT_LOG_PATH"
 Newline
 
 # Installation de JMerise

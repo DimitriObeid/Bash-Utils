@@ -12,16 +12,17 @@ function SwitchColor
     local p_originalColor=$1
 
     #***** Variables *****
-    local k='140'             # Key
-    local x="$__COL_CODE"     # Color code number to multiply by 'k'
-    local div='256'           # Number to divide
-    local res
+    local key='140'             # Key
+    local code="$__COL_CODE"    # Color code number to multiply by 'k'
+    local div='256'             # Number to divide
+    local res                   # Result
     
     #***** Code *****
-    res=$(( x*k ))
+    res=$(( code*key ))
     res=$(( res/div ))
     
     echo "$(tput setaf "$res"; __COL_CODE="$res")"
+    echo $res
 }
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
@@ -161,10 +162,10 @@ function Newline
         if [ -n "$number" ]; then
             # Doing X line breaks according to the number passed as argument.
             for ((i=0; i<number; i++)); do
-                CheckProjectLogStatus
+                CheckProjectLogStatus "" "" "nodate"
             done
         else
-            CheckProjectLogStatus
+            CheckProjectLogStatus "" "" "nodate"
         fi
     fi
 }

@@ -143,8 +143,8 @@ function CheckProjectLogStatus
     if [ -f "$__PROJECT_LOG_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
         
-            # If the "line" value is passed as argument.
-            if [ "$p_extraArgs" = "line" ]; then
+            # If the "nodate" value is passed as argument.
+            if [ "$p_extraArgs" = "nodate" ]; then
                 case "$p_option" in
                     '-n')
                         echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -170,8 +170,8 @@ function CheckProjectLogStatus
         
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
         
-            # If the "line" value is passed as argument.
-            if [ "$p_extraArgs" = "line" ]; then
+            # If the "nodate" value is passed as argument.
+            if [ "$p_extraArgs" = "nodate" ]; then
                 case "$p_option" in
                     '-n')
                         echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -245,6 +245,8 @@ function ExitError { kill "$$"; }
 ## SCRIPT'S ERRORS HANDLING
 
 # Handling command outputs.
+# Featured functions and files from the "basis" category :
+#   - 
 function HandleErrors
 {
 	#***** Paramètres *****
@@ -258,7 +260,7 @@ function HandleErrors
 
     #***** Variables *****
     local v_hdrString
-    v_hdrString="$(echo -e "${__COL_RED}IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") --> ")"
+    v_hdrString="$(echo -e "IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->")"
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -271,15 +273,15 @@ function HandleErrors
         fi
 
         if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "${v_hdrString}FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
         else
-            HeaderRed "${v_hdrString}ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_hdrString ERROR : $(DechoE "${p_errorString^^}")" >&2
         fi
 
         if [ -z "$p_adviceString" ]; then
             EchoError "No advice to give."; Newline >&2
         else
-            EchoError "Advice : $(DechoE "$p_adviceString")" >&2; Newline >&2
+            EchoError "$(DechoE "Advice") : $p_adviceString" >&2; Newline >&2
         fi
             
         if [ -z "$p_badValue" ]; then
