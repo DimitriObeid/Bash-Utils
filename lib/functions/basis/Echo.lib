@@ -6,7 +6,10 @@
 
 #### TEXT WRITING AND DECORATION
 
-function SwitchColor
+## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
+
+# Switching color
+function SwitchColorOld
 {
     #***** Parameters *****
     local p_originalColor=$1
@@ -25,8 +28,7 @@ function SwitchColor
     echo $res
 }
 
-## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBasis
+function DechoBasisOld
 {
     #***** Parameters *****
     local p_string=$1           # The string to display.
@@ -36,7 +38,8 @@ function DechoBasis
     
     #***** Variables *****
     # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
-    local v_newColor="$(SwitchColor "$p_originalColor")"
+    local v_newColor
+    v_newColor="$(SwitchColor "$p_originalColor")"
     
     #***** Code *****
     if [ "$p_originalColor" = "$__COL_BLUE" ] || [ "$p_originalColor" = "$__COL_CYAN" ]; then
@@ -47,7 +50,30 @@ function DechoBasis
     fi
 }
 
-function Decho { echo "$__COL_CYAN $1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+# -----------------------------------------------
+
+## WRITING DIFFERENTLY COLORED TEXT BETWEEN TEXT
+
+# Basis procssing.
+function DechoBasis
+{
+    #***** Parameters *****
+    local p_string=$1
+    local p_oldColor=$2
+    
+    #***** Variables *****
+    local v_newColor="$__COL_CODE"
+    echo "$__COL_CODE"
+
+    #***** Code *****
+#     if [ "$p_oldColor" = "$v_newColor" ]; then
+#         SwitchColorOld "$v_newColor"
+#     fi
+
+    echo -e "$(tput setaf "$v_newColor")$p_string$p_oldColor"
+}
+
+function Decho { echo -e "${__COL_CYAN}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
 
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
 function DechoE { DechoBasis "$1" "$__COL_RED"; }
@@ -115,6 +141,7 @@ function EchoNewstep
     local extraArgs=$3
 
     #***** Code *****
+    exit 1
     CheckProjectLogStatus "$__COL_YELLOW$__TXT_TAB$__TXT_TAB $string$__COL_RESET" "$option" "$extraArgs"
 
     sleep "$__STAT_TIME_TXT"

@@ -84,7 +84,7 @@ function Chown
     CheckRootEUID
 
     # If the path passed as argument doesn't exists.
-    if [ -d "$path" ]; then
+    if [ -d "$p_path" ]; then
         EchoNewstep "Changing the ownership rights of the  $(DechoN "$p_path/") folder from $(DechoN "$p_currentOwner") to $(DechoN "$p_newOwner")."
         Newline
         
@@ -92,7 +92,7 @@ function Chown
         case "$p_option" in
             'R')
                 if chown -Rv "$p_newOwner" "$p_path"; then
-                    EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
+                    EchoSuccess "The rights of the $(DechoS "$p_path") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
                     Newline
 
                     return 0
@@ -106,7 +106,7 @@ function Chown
             '')
                 # Changing ownership non-recursively.
                 if chown -v "$p_newOwner" "$p_path"; then
-                    EchoSuccess "The rights of the $(DechoS "$name") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
+                    EchoSuccess "The rights of the $(DechoS "$p_path") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
                     Newline
 
                     return 0

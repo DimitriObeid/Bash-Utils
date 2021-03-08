@@ -14,33 +14,40 @@
 function ProcessingFile
 {
     #***** Parameters *****
-    function=$1
+    p_function=$1
+    p_parent=$2
+    p_name=$3
     
     #***** Variables *****
-    char="'"
+    v_char="'"
     
     #***** Code *****
-    if [ -z "$function" ]; then
+    # Arguments checking.
+    if [ -z "$p_function" ]; then
         HandleErrors "1" "NO FUNCTION NAME PASSED AS ARGUMENT" \
             "The function $(DechoE "${FUNCNAME[0]}") needs a function passed as first argument to work properly" \
-            "$function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    elif [ -z "$p_parent" ] || [ -z "$p_name" ]; then
+        HandleErrors "1" "AT LEAST ONE OF THE TWO $(DechoE "${FUNCNAME[0]}")'S LAST ARGUMENTS IS MISSING" \
+            "The function $(DechoE "${FUNCNAME[0]}") needs a function passed as first argument to work properly" \
+            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     fi
     
 	sleep "$__STAT_TIME_TXT"
-    DrawLine "$__COL_RESET" "$char"
-    EchoNewstep "Processing the $(DechoN "$name") file."
+    EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    EchoNewstep "Processing the $(DechoN "$p_name") file in the $(DechoN "$p_parent") parent directory."
     Newline
     
-    if "$function"; then
-        EchoSuccess "End of processing the $(DechoS "$name") file"
-		DrawLine "$__COL_RESET" "$char"
+    if "$p_function" "$p_parent" "$p_name"; then
+        EchoSuccess "End of processing the $(DechoS "$p_name") file"
+        EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        Newline
 		sleep "$__STAT_TIME_TXT"
-		Newline
     else
-        EchoError "End of processing the $(DechoE "$name") file"
-		DrawLine "$__COL_RESET" "$char"
-		sleep "$__STAT_TIME_TXT"
+        EchoError "End of processing the $(DechoE "$p_name") file"
+		EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
 		Newline
+		sleep "$__STAT_TIME_TXT"
     fi
 }
 
@@ -87,34 +94,35 @@ function OverwriteFile
 #   - HandleErrors      -> Handles.lib
 function Makefile
 {
-	#***** Paramètres *****
-	p_parent=$1      # Emplacement depuis la racine du dossier parent du fichier à traiter.
-	p_name=$2        # Nom du fichier à traiter (dans son dossier parent).
+	#***** Parameters *****
+	p_parent=$1      # Emplacement of the currently processed file's parent folder from the root directory.
+	p_name=$2        # Name of the file to process (into its parent directory).
 
-	#***** Autres variables *****
-	p_path="$p_parent/$p_name"	# Chemin du fichier à traiter.
+	#***** Variables *****
+	v_path="$p_parent/$p_name"	# Path of the file to process.
 
 	#***** Code *****
+	# Checking first if the awaited arguments are given
 	if [ -z "$p_parent" ] || [ -z "$p_name" ]; then
         HandleErrors "1" "AT LEAST AN ARGUMENT IS MISSING" \
             "The two awaited arguments for this function are the $(DechoE "parent directory") and the $(DechoE "name of the file to create")" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+            "$p_parent // OR // $p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
 	elif [ ! -d "$p_parent" ]; then
         HandleErrors "1" "THE $(DechoE "PARENT") ARGUMENT IS INVALID" "Check the name of the targeted directory in your code" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 	fi
 	
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
-	if [ ! -f "$p_path" ]; then
+	if [ ! -f "$v_path" ]; then
         EchoNewstep "Creating the $(DechoN "$p_name") file in the parent folder $(DechoN "$p_parent/")."
 
-		touch "$p_path"
+		touch "$v_path"
         # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
         # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(DechoE "$p_name") FILE CANNOT BE CREATED IN THE PARENT FOLDER $(DechoE "$p_parent/")." \
-            "Please check the permissions of the targeted directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
+        HandleErrors "$?" "THE $(DechoE "$p_name") FILE CANNOT BE CREATED IN THE $(DechoE "$p_parent/") PARENT FOLDER." \
+            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
         EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
         
@@ -122,8 +130,11 @@ function Makefile
 	
 	# Else, if the file to be created already exists AND it is NOT empty.
 	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
-        OverwriteFile "$p_path"
-		return 0
+        if OverwriteFile "$p_path"; then
+            return 0
+        else
+            return 1
+        fi
 
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then

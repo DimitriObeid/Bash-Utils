@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+# Color encoding
+function EncodingColor
+{
+    #***** Parameters *****
+    p_code=$1
+
+    #***** Variables *****
+    if [ "$p_code" = "sgr0" ]; then
+        tput sgr0
+        __COL_CODE=""
+    elif [[ "$p_code" =~ ^[+-]?[0-9]+$ ]]; then
+        tput setaf "$p_code"
+        __COL_CODE="$p_code"
+    else
+        echo >&2; echo "In $(basename "${BASH_SOURCE[0]}") file, function ${FUNCNAME[0]}, line $LINENO --> Error : unable to set a color !" >&2
+        echo >&2; exit 1
+    fi
+}

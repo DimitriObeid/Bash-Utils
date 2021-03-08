@@ -118,7 +118,9 @@ function CheckProjectLogStatus
     #***** Parameters *****
     local p_string=$1
     local p_option=$2       # "echo" command options
-    local p_extraArgs=$3    # More processing arguments (like the processing of a whole line-long string).
+    shift && shift
+    
+    local p_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
     local v_errorEcho
@@ -142,17 +144,34 @@ function CheckProjectLogStatus
 
     if [ -f "$__PROJECT_LOG_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
-        
-            # If the "nodate" value is passed as argument.
-            if [ "$p_extraArgs" = "nodate" ]; then
-                case "$p_option" in
-                    '-n')
-                        echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                    '')
-                        echo -e "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                esac
+
+            # Checking the extra arguments array.
+            if [ -n "${p_extraArgs[*]}" ]; then
+
+                for val in "${p_extraArgs[@]}"; do
+                    # If the "nodate" value is passed as argument.
+                    if [[ "$val" = "nodate" ]]; then
+                        case "$p_option" in
+                            '-n')
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                            '')
+                                echo -e "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                        esac
+                    else
+                        case "$p_option" in
+                            '-n')
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                ;;
+                            '')
+                                echo -e "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                ;;
+                        esac
+                    fi
+                done
                 
             # Else, if no argument is passed in "$p_extraArgs" parameter.
             else
@@ -169,18 +188,34 @@ function CheckProjectLogStatus
         sleep "$__STAT_TIME_TXT"
         
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
-        
-            # If the "nodate" value is passed as argument.
-            if [ "$p_extraArgs" = "nodate" ]; then
-                case "$p_option" in
-                    '-n')
-                        echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                    '')
-                        echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                esac
-            
+                    
+            # Checking the extra arguments array.
+            if [ -n "${p_extraArgs[*]}" ]; then
+
+                for val in "${p_extraArgs[@]}"; do
+                    # If the "nodate" value is passed as argument.
+                    if [ "$val" = "nodate" ]; then
+                        case "$p_option" in
+                            '-n')
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                            '')
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                        esac
+                    else
+                        case "$p_option" in
+                            '-n')
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                ;;
+                            '')
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                ;;
+                        esac
+                    fi
+                done
             # Else, if no argument is passed in "$p_extraArgs" parameter.
             else
                 case "$p_option" in
