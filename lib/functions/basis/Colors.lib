@@ -4,6 +4,8 @@
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### ENCODING
+
 # Color encoding
 function EncodingColor
 {
@@ -22,3 +24,50 @@ function EncodingColor
         echo >&2; exit 1
     fi
 }
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### READ AND WRITE
+
+## READING FUNCTIONS
+
+# Reading from a named pipe.
+function ReadFromFIFOColor
+{
+    ReadFromFIFO "$__PROJECT_FIFO_COLORS" "__PROJECT_FIFO_COLORS" "EOF"
+}
+
+function ReadFromFIFO
+{
+    #***** Parameters *****
+    p_fifoPath=$1
+    p_fifoVar=$2
+    p_end=$3
+
+    #***** Code *****
+    if [ -z "$p_fifoPath" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoPath' parameter has no value" >&2; echo >&2; exit 1
+    elif [ ! -f "$p_fifoPath" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoPath' variable's value is incorrect" >&2; echo >&2; exit 1
+    elif [ -z "$p_fifoVar" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoVar' variable's value is incorrect" >&2; echo >&2; exit 1
+    else
+        while true; do
+            if read -r line < "$p_fifoPath"; then
+                if [[ "$line" == "$p_end" ]]; then
+                    break
+                fi
+            fi
+        done
+    fi
+}
+
+# -----------------------------------------------
+
+## WRITING FUNCTIONS
+
+# Write in a named pipe.

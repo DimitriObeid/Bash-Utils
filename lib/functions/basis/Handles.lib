@@ -103,12 +103,18 @@ function IsAlphaNum
 # Required functions and files :
 function CheckProjectLogPath
 {
-    if [ -z "$__PROJECT_LOG_PATH" ]; then
-        HandleErrors "1" "NO PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" \
-            "Please add the path as argument." "$PROJECT_LOG_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-    elif [ ! -f "$__PROJECT_LOG_PATH" ]; then
-        HandleErrors "1" "BAD PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" \
-            "Please correct the path passed as argument." "$PROJECT_LOG_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+    if [ -z "$__PROJECT_LOG_FILE_PATH" ]; then
+        echo -ne "${__COL_RED}IN $(DechoE "$(basename "${BASH_SOURCE[0]}")"), function $(DechoE "${FUNCNAME[0]}"), line $(DechoE "$(( LINENO-2 ))") --> " >&2
+        echo "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo "Please add the path as argument.$__COL_RESET" >&2; echo >&2
+        
+        exit 1
+    elif [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
+        echo -ne "${__COL_RED}IN $(DechoE "$(basename "${BASH_SOURCE[0]}")"), function $(DechoE "${FUNCNAME[0]}"), line $(DechoE "$(( LINENO-2 ))") --> " >&2
+        echo "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo "Please correct the path passed as argument.$__COL_RESET" >&2; echo >&2
+        
+        exit 1
     fi
 }
 
@@ -118,13 +124,13 @@ function CheckProjectLogStatus
     #***** Parameters *****
     local p_string=$1
     local p_option=$2       # "echo" command options
-    shift && shift
-    
+    shift 2
+
     local p_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
     local v_errorEcho
-    v_errorEcho="Unable to write into the $(DechoE "$__PROJECT_LOG_PATH") file."
+    v_errorEcho="Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file."
 
     # If the text is redirected towars the log path, it's better to put every timer status variables values to '0'.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
@@ -140,9 +146,9 @@ function CheckProjectLogStatus
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    CheckProjectLogPath 
+    CheckProjectLogPath
 
-    if [ -f "$__PROJECT_LOG_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
+    if [ -f "$__PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
             # Checking the extra arguments array.
@@ -153,21 +159,21 @@ function CheckProjectLogStatus
                     if [[ "$val" = "nodate" ]]; then
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                             '')
-                                echo -e "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
                     else
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
                                 ;;
                             '')
-                                echo -e "$p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
                                 ;;
                         esac
                     fi
@@ -177,10 +183,10 @@ function CheckProjectLogStatus
             else
                 case "$p_option" in
                     '-n')
-                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                     '')
-                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                 esac
             fi
@@ -197,21 +203,21 @@ function CheckProjectLogStatus
                     if [ "$val" = "nodate" ]; then
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                             '')
-                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
                     else
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
                                 ;;
                             '')
-                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$PROJECT_LOG_PATH"
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
                                 ;;
                         esac
                     fi
@@ -221,11 +227,11 @@ function CheckProjectLogStatus
                 case "$p_option" in
                     '-n')
                         echo -ne "$p_string"
-                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                     '')
                         echo -e "$p_string"
-                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                 esac
             fi

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### INITIALIZATION
+
+## INITIALIZING THE ARGUMENTS ARRAY
+
+function InitARG
+{
+    # shellcheck disable=SC2034
+    __PROJECT_ARGV=("$@")
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### OPERATING SYSTEM SPECIFIC ARGUMENTS
+
+## INSTALLATION CATEGORY
+
+function DeclareARG_INSTALL_CAT
+{
+    #***** Parameters *****
+    p_install=$1
+
+    #***** Code *****
+    # shellcheck disable=SC2034
+    __PROJECT_ARG_INSTALL_CAT="$p_install"
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### USER'S ARGUMENTS
+
+## USER'S NAME
+
+function DeclareARG_USERNAME
+{
+    #***** Parameters *****
+    p_username=$1
+
+    #***** Code *****
+    # shellcheck disable=SC2034    
+    __PROJECT_ARG_USERNAME="$p_username"
+}

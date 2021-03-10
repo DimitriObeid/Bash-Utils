@@ -33,7 +33,7 @@ function KbInputYesNo
     
     # If the "STAT_LOG_REDIRECT" status variable contains one of its redirection value ('log' or 'tee'), the answer is redirected to the log file with the date.
     if [ -n "$__STAT_LOG_REDIRECT" ]; then
-        echo "[$__TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$__PROJECT_LOG_PATH"
+        echo "[$__TIME_DATE] Answer : $(Decho "$ans_yesno")" >> "$__PROJECT_LOG_FILE_PATH"
     fi; Newline
     
     case ${ans_yesno,,} in

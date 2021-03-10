@@ -63,7 +63,7 @@ __BASH_UTILS_VARS="$__BASH_UTILS/variables"
 
 # -----------------------------------------------
 
-## PROJECT'S PATHS
+## PROJECT'S PATH VARIABLES
 
 # Script file's informations
 __PROJECT_FILE=$(basename "$0")                           # Project file's name.
@@ -76,20 +76,20 @@ __PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.')         # Name of the project 
 # To remove these folders, please run the "rm -rf $folder" command with sudo if you're not logged as super-user.
 if [ "$EUID" -eq 0 ]; then
     __PROJECT_TMP_DIR="$__BASH_UTILS_TMP/$__PROJECT_NAME - ROOT"
-    __PROJECT_LOG_NAME="$__PROJECT_NAME - ROOT.log"
+
 else
     __PROJECT_TMP_DIR="$__BASH_UTILS_TMP/$__PROJECT_NAME"
-    __PROJECT_LOG_NAME="$__PROJECT_NAME.log"
 fi
 
 # Defining project's log file's path.
-__PROJECT_LOG_PARENT_NAME="logs"
-__PROJECT_LOG_PARENT_PATH="$__PROJECT_TMP_DIR/$__PROJECT_LOG_PARENT_NAME"
-__PROJECT_LOG_PATH="$__PROJECT_LOG_PARENT_PATH/$__PROJECT_LOG_NAME"
+__PROJECT_LOG_DIR_NAME="logs"
+__PROJECT_LOG_DIR_PATH="$__PROJECT_TMP_DIR/$__PROJECT_LOG_DIR_NAME"
+__PROJECT_LOG_FILE_NAME="$__PROJECT_NAME.log"
+__PROJECT_LOG_FILE_PATH="$__PROJECT_LOG_DIR_PATH/$__PROJECT_LOG_FILE_NAME"
 
 # -----------------------------------------------
 
-## OTHER PATHS VARIABLES
+## INITIALIZATION PATHS VARIABLES
 
 # Bash-utils paths list variables (to check if every directories and files were successfully sourced). 
 __INIT_FILE_LIST_NAME="Sourced.list"
@@ -97,8 +97,14 @@ __INIT_LIST_FILE_PATH="$__PROJECT_TMP_DIR/$__INIT_FILE_LIST_NAME"
 
 # -----------------------------------------------
 
-## OTHER VARIABLES
+## PROJECT'S NAMED PIPES
 
+# Defining project's FIFOs directory.
+__PROJECT_FIFO_DIR_NAME="FIFO"
+__PROJECT_FIFO_DIR_PATH="$__PROJECT_TMP_DIR/$__PROJECT_FIFO_DIR_NAME"
+
+# Defining project's FIFOs
+__PROJECT_FIFO_COLORS="$__PROJECT_FIFO_DIR_PATH/Colors"
 
 # -----------------------------------------------
 
@@ -108,13 +114,34 @@ __INIT_LIST_FILE_PATH="$__PROJECT_TMP_DIR/$__INIT_FILE_LIST_NAME"
 
 #### SECOND STEP : DEFINING INITIALIZATION FUNCTIONS
 
-# Controlling all the redirections in a single place for a better debugging process.
-function EchoDBG
+## FUNCTIONS THAT BELONG TO THE INITIALIZER FILE
+
+# This function is called at multiple times in the next function.
+function __EchoInit
 {
+    echo "$1" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+}
+
+# Controlling all the redirections in a single place for a better debugging process.
+function EchoInit
+{
+    #***** Parameters *****
+    local p_str=$1
+    local p_colorCode=$2
+
+    #***** Code *****
     if [ -z "$__INIT_LIST_FILE_PATH" ] || [ ! -f "$__INIT_LIST_FILE_PATH" ]; then
         echo >&2; echo "Error : the initializer log file's path is invalid." >&2; echo >&2; exit 1
     else
-        echo "$1" >> "$__INIT_LIST_FILE_PATH"
+        if [ -z "$p_colorCode" ]; then
+            __EchoInit "$p_str"
+        else
+            if [[ "$p_colorCode" =~ [0-9] ]]; then
+                __EchoInit "$(tput setaf "$p_colorCode")$p_str$(tput sgr0)"
+            else
+                echo >&2; echo "The ${FUNCNAME[0]} color code must be an integer !" >&2; echo >&2; exit 1
+            fi
+        fi
     fi
 }
 
@@ -124,10 +151,16 @@ function InitErrMsg
     #***** Parameters *****
     local p_msg=$1
     local p_lineno=$2
+    local p_exit=$3
     
     #***** Code *****
     echo >&2; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)" >&2; echo >&2
-    kill "$$"
+    
+    if [ "$p_exit" -eq 0 ]; then
+        return
+    elif [ "$p_exit" -eq 1 ]; then
+        exit 1
+    fi
 }
 
 # Finding Bash-utils directories.
@@ -138,27 +171,117 @@ function CheckBURequirements
     local p_lineno=$2
     
     #***** Code *****
-    # If the path points towards a directory.
+    # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
-        EchoDBG "Found directory : $(tput setaf 6)$p_path$(tput sgr0)"
+        EchoInit "Found directory : $(tput setaf 6)$p_path$(tput sgr0)"
         
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
-        EchoDBG "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
+        EchoInit "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
     else
         InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno"
         exit 1
     fi
 }
 
-# Making the code cleaner in the 4th part (sourcing dependecies).
+# Making the code cleaner in the 4th step (sourcing dependencies).
 function EchoSourcedDependency
 {
     #***** Parameters *****
     local p_dep=$1
     
     #***** Code *****
-    EchoDBG "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+    EchoInit "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+}
+
+# -----------------------------------------------
+
+## FUNCTIONS THAT CAN BE USED ELSEWHERE THAN THE INITIALIZER FILE
+
+# These functions could be considered like functions belonging to the function files included later.
+# These functions are essential for the initialization part before the sourcing of the '.lib' files,
+# or cannot be sorted according to their category for now.
+
+# This function is called once in the next function.
+function __CreateFIFO
+{
+    #***** Parameters *****
+    local arr=("$@")
+    
+    #***** Variables *****
+    local i=0
+
+    #***** Code *****
+    for val in "${arr[@]}"; do
+        i=$(( i+1 ))
+        
+        EchoInit ">>>>>>>> $(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
+    done
+}
+
+# Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
+function CreateFIFO
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    if [ ! -d "$__PROJECT_FIFO_DIR_PATH" ]; then
+        EchoInit "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
+    fi
+    
+    EchoInit "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
+    
+    if [ ! -p "$p_path" ]; then
+        if mkfifo "$p_path"; then
+            EchoInit "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
+            EchoInit
+        else
+            InitErrMsg "Unable to create this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))" "0"
+            EchoInit "The possible sources of errors are :" "196"
+            __CreateFIFO \
+                "$(tput setaf 196)Project's FIFOs path --> $(tput setaf 6)$__PROJECT_FIFO_DIR_PATH$(tput setaf 196)" \
+                "$(tput setaf 196)Writing rights"
+            echo >&2; echo "$(tput setaf 196)Aborting initialization$(tput sgr0)" >&2; echo >&2; exit 1
+        fi
+    else
+        EchoInit "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
+    fi
+}
+
+# Reading from a named pipe.
+function ReadFromFIFO
+{
+    #***** Parameters *****
+    p_fifoPath=$1
+    p_fifoVar=$2
+    p_end=$3
+
+    #***** Code *****
+    if [ -z "$p_fifoPath" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoPath' parameter has no value" >&2; echo >&2; exit 1
+    elif [ ! -f "$p_fifoPath" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoPath' variable's value is incorrect" >&2; echo >&2; exit 1
+    elif [ -z "$p_fifoVar" ]; then
+        echo >&2; echo "ERROR : THE 'p_fifoVar' variable's value is incorrect" >&2; echo >&2; exit 1
+    else
+        EchoInit "Read the $p_fifoPath FIFO to find the $p_fifoVar value."
+        
+        
+        while true; do
+            if read -r line < "$p_fifoPath"; then
+                if [[ "$line" == "$p_end" ]]; then
+                    break
+                fi
+            fi
+        done
+    fi
+}
+
+# Writing into a named pipe
+function WriteIntoFIFO
+{
+
 }
 
 # -----------------------------------------------
@@ -168,8 +291,9 @@ function EchoSourcedDependency
 
 #### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES
 
+## PROCESSING THE BASH_UTILS INITIALIZATION LOG FILE AND THE PROJECT'S TEMPORARY FOLDER
 
-# Clearing the sourced directories list file if already exists, or create the project's temporary directory if not exists.
+# Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || { 
         echo >&2;
@@ -187,14 +311,18 @@ else
     touch "$__INIT_LIST_FILE_PATH"
 fi
 
-EchoDBG "CHECKING REQUIRED DIRECTORIES"
+# -----------------------------------------------
+
+## CHECKING FOR THE REQUIRED FOLDERS
+
+EchoInit "CHECKING REQUIRED DIRECTORIES"
 CheckBURequirements "$__BASH_UTILS_BIN"           "$LINENO"
 CheckBURequirements "$__BASH_UTILS_CONF"          "$LINENO"
 CheckBURequirements "$__BASH_UTILS_TMP"           "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS"        "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS_BASIS"  "$LINENO"
 CheckBURequirements "$__BASH_UTILS_VARS"          "$LINENO"
-EchoDBG
+EchoInit
 
 # -----------------------------------------------
 
@@ -208,42 +336,51 @@ EchoDBG
 # Tip : It's important to source the functions files before the variables ones to avoid error
 # messages while including them at first, as some functions are called into these variables.
 
-EchoDBG "CHECKING DEPENDENCIES"
+EchoInit "CHECKING DEPENDENCIES"
 
 # Sourcing project's status variables file.
-EchoDBG "Sourcing the variables status file :"
+EchoInit "Sourcing the variables status file :"
 
 # shellcheck disable=SC1090
 source "$__BASH_UTILS_CONF_PROJECT_STATUS" \
     || InitErrMsg "Unable to source this file : $(tput setaf 6)$__BASH_UTILS_CONF_PROJECT_STATUS" "$LINENO"
-EchoSourcedDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoDBG
+EchoSourcedDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoInit
 
 # Sourcing the very basic fuctions files.
-EchoDBG "Sourcing the very basic functions files :"; for f in "$__BASH_UTILS_FUNCTS_BASIS/"*.lib; do
+EchoInit "Sourcing the very basic functions files :"; for f in "$__BASH_UTILS_FUNCTS_BASIS/"*.lib; do
     [[ -e "$f" ]] || InitErrMsg "This basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
     
     # shellcheck disable=SC1090
     source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
-done; EchoDBG
+done; EchoInit
 
 # Sourcing the main functions files.
-EchoDBG "Sourcing the main functions files :"; for f in "$__BASH_UTILS_FUNCTS/main/"*.lib; do
+EchoInit "Sourcing the main functions files :"; for f in "$__BASH_UTILS_FUNCTS/main/"*.lib; do
     [[ -e "$f" ]] || InitErrMsg "This main functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
 
     # shellcheck disable=SC1090
     source "$f" || InitErrMsg "Unable to source this main functions file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
-done; EchoDBG
+done; EchoInit
 
 # Sourcing the variables files.
-EchoDBG "Sourcing the variables files :"; for f in "$__BASH_UTILS_VARS/"*.var; do
+EchoInit "Sourcing the variables files :"; for f in "$__BASH_UTILS_VARS/"*.var; do
     [[ -e "$f" ]] || InitErrMsg "This variables file doesn't exists : $(tput setaf 6)$f" "$LINENO"
 
     # shellcheck disable=SC1090
     source "$f" || InitErrMsg "Unable to source this variables file : $(tput setaf 6)$f" "$LINENO"
     EchoSourcedDependency "$f"
-done; EchoDBG
+done; EchoInit
+
+# -----------------------------------------------
+
+## CREATING THE FIFOs
+
+EchoInit "PROCESSING THE $(Decho "$__PROJECT_NAME") FIFOs"
+
+# Color processing.
+CreateFIFO "$__PROJECT_FIFO_COLORS"
 
 # -----------------------------------------------
 
@@ -251,7 +388,7 @@ done; EchoDBG
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### PROCESSING PROJECT'S LOG FILE
+#### FIFTH STEP : PROCESSING PROJECT'S LOG FILE
 
 ## CREATING NEW VARIABLES
 
@@ -283,18 +420,18 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 # Creating or overwritting the paths list file.
 if [ "$__STAT_LOG" = "true" ]; then
-    if [ -f "$__PROJECT_LOG_PATH" ]; then
-        if [ -s "$__PROJECT_LOG_PATH" ]; then
-            true > "$__PROJECT_LOG_PATH"
+    if [ -f "$__PROJECT_LOG_FILE_PATH" ]; then
+        if [ -s "$__PROJECT_LOG_FILE_PATH" ]; then
+            true > "$__PROJECT_LOG_FILE_PATH"
         fi
     else
-        if [ ! -d "$__PROJECT_LOG_PARENT_PATH" ]; then
-            Makedir "$__PROJECT_TMP_DIR" "$__PROJECT_LOG_PARENT_NAME"
+        if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
+            Makedir "$__PROJECT_TMP_DIR" "$__PROJECT_LOG_DIR_NAME"
         fi
 
-        Makefile "$__PROJECT_LOG_PARENT_PATH" "$__PROJECT_LOG_NAME"
-        echo "$__PROJECT_LOG_PARENT_PATH/$__PROJECT_LOG_NAME"
-        echo "$__PROJECT_LOG_PATH"
+        Makefile "$__PROJECT_LOG_DIR_PATH" "$__PROJECT_LOG_FILE_NAME"
+        echo "$__PROJECT_LOG_DIR_PATH/$__PROJECT_LOG_FILE_NAME"
+        echo "$__PROJECT_LOG_FILE_PATH"
     fi
     
     # Redirecting files list into the log file.

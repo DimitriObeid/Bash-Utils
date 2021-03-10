@@ -184,7 +184,7 @@ function Newline
     if [ -n "$number" ] && ! IsInt "$number"; then
         HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" \
             "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "$number" \
-            "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
     else
         if [ -n "$number" ]; then
             # Doing X line breaks according to the number passed as argument.
