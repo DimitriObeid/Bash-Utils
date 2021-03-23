@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### NAMED PIPES CREATION
+
+## FIFO CREATION
+
+# This function is called once in the next function.
+function __CreateFIFO
+{
+    #***** Parameters *****
+    local arr=("$@")
+    
+    #***** Variables *****
+    local i=0
+
+    #***** Code *****
+    for val in "${arr[@]}"; do
+        i=$(( i+1 ))
+        
+        EchoContext "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)" 'E'
+    done
+}
+
+# Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
+function CreateFIFO
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    if [ ! -d "$__PROJECT_FIFO_DIR_PATH" ]; then
+        EchoContext "Creating the $(DechoN "$__PROJECT_FIFO_DIR_PATH")" 'N'; Newline
+        EchoMsg "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
+    fi
+    
+    EchoContext "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO." 'N'
+    Newline
+    
+    if [ ! -p "$p_path" ]; then
+        if mkfifo "$p_path"; then
+            EchoContext "The  $(DechoS "$p_path")  FIFO already exists" 'S'
+        else
+            EchoContext "Error : Unable to create this FIFO --> $(DechoE "$p_path")" \
+                "$(__CreateFIFO \
+                    "Project's FIFOs path --> $(DechoE "$__PROJECT_FIFO_DIR_PATH")" \
+                    "$(DechoE "Writing rights")")" \
+                "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+
+            EchoSuccess "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
+            Newline
+        fi
+    else
+        EchoSuccess "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
+    fi
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### NAMED PIPES READING
+
+## FIFO READING
+
+# Reading from a named pipe.
+function ReadFromFIFO
+{
+    #***** Parameters *****
+    p_fifoPath=$1
+    p_fifoVarName=$2
+    p_fifoCurrentVarValue=$3
+    p_newVar=$4
+
+    #***** Variables *****
+    v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
+
+    #***** Code *****
+    CheckArgs_ReadWriteFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue" "$p_newVar"
+    
+    EchoContext "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value." 'N'
+    Newline
+        
+    while true; do
+        if read -r line < "$p_fifoPath"; then
+            if [[ "$line" == "$p_newVar" ]]; then
+                # Gathering the wanted value
+                echo "$p_newVar"
+                break
+            fi
+        fi
+    done
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Writing into a named pipe
+function WriteIntoFIFO
+{
+    #***** Parameters *****
+    p_fifoPath=$1
+    p_fifoVarName=$2
+    p_newVar=$3
+    p_existingPath=$4
+
+    #***** Variables *****
+    v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
+
+    #***** Code *****
+    CheckArgs_ReadWriteFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue" "$p_newVar"
+
+    if [ ! -p "$p_fifoPath" ]; then
+        if [ "$p_existingPath" = "nopath" ]; then
+            return
+        else
+            # Line break with the "CheckProjectLogPath" function without any argument.
+            CheckProjectLogPath
+            
+            # As this function is called by the functions called in the "HandleErrors" function, calling this last function will cause an infinite loop
+            # Redefining a part of its behavior was necessary to prevent this situation.
+            DrawLine "$(tput setaf 196)" "-"
+            CheckProjectLogPath "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
+            CheckProjectLogPath "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
+            CheckProjectLogPath
+
+            CheckProjectLogPath ""
+        fi
+    fi
+    # If the file size is equal to 0 (empty file)
+    if [ ! -s "$p_fifoPath" ]; then
+        cat << EOF > "$p_fifoPath"
+        $v_varLine
+EOF
+    fi
+}

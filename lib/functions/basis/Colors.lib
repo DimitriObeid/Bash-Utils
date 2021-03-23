@@ -10,18 +10,30 @@
 function EncodingColor
 {
     #***** Parameters *****
-    p_code=$1
+    p_colorCode=$1; shift
 
     #***** Variables *****
-    if [ "$p_code" = "sgr0" ]; then
-        tput sgr0
-        __COL_CODE=""
-    elif [[ "$p_code" =~ ^[+-]?[0-9]+$ ]]; then
-        tput setaf "$p_code"
-        __COL_CODE="$p_code"
+    v_currentColor="$__COL_CODE" 
+
+    #***** Variables *****
+    # Checking if the color's FIFO path exists. If not, then the function stops and no text is colored.
+    if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
+        return
     else
-        echo >&2; echo "In $(basename "${BASH_SOURCE[0]}") file, function ${FUNCNAME[0]}, line $LINENO --> Error : unable to set a color !" >&2
-        echo >&2; exit 1
+        if [ "$p_colorCode" = "sgr0" ]; then
+            WriteIntoFIFOColor
+            tput sgr0;  __COL_CODE=""
+            echo "$__COL_CODE"
+
+        elif IsInt "$p_colorCode"; then
+            tput setaf "$p_colorCode"; __COL_CODE="$p_colorCode"
+
+        else
+            # It's impossible to call the "HandleErrors" function here, as the current function is called by this function.
+            # Instead, we just call the "echo" command.
+            echo >&2; echo "In   $(basename "${BASH_SOURCE[0]}")   file, function   ${FUNCNAME[0]}, line   $LINENO   --> Error : unable to set a color !" >&2
+            echo >&2; exit 1
+        fi
     fi
 }
 
@@ -38,32 +50,11 @@ function EncodingColor
 # Reading from a named pipe.
 function ReadFromFIFOColor
 {
-    ReadFromFIFO "$__PROJECT_FIFO_COLORS" "__PROJECT_FIFO_COLORS" "EOF"
-}
-
-function ReadFromFIFO
-{
     #***** Parameters *****
-    p_fifoPath=$1
-    p_fifoVar=$2
-    p_end=$3
+    p_colorCode=$1
 
     #***** Code *****
-    if [ -z "$p_fifoPath" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoPath' parameter has no value" >&2; echo >&2; exit 1
-    elif [ ! -f "$p_fifoPath" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoPath' variable's value is incorrect" >&2; echo >&2; exit 1
-    elif [ -z "$p_fifoVar" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoVar' variable's value is incorrect" >&2; echo >&2; exit 1
-    else
-        while true; do
-            if read -r line < "$p_fifoPath"; then
-                if [[ "$line" == "$p_end" ]]; then
-                    break
-                fi
-            fi
-        done
-    fi
+    ReadFromFIFO "$__PROJECT_FIFO_COLORS" "__PROJECT_FIFO_COLORS" "$p_colorCode"
 }
 
 # -----------------------------------------------
@@ -71,3 +62,7 @@ function ReadFromFIFO
 ## WRITING FUNCTIONS
 
 # Write in a named pipe.
+function WriteIntoFIFOColor
+{
+    WriteIntoFIFO "" "" "" ""
+}

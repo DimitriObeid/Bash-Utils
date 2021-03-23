@@ -8,10 +8,10 @@
 
 ## EFFECTIVE USER IDENTIFIANTS CHECKING
 
-# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID)
+# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
 # Required functions and files :
-#   - HandleErrors      -> Bash-Utils/src/functions/Headers.lib
+#   - HandleErrors      -> Bash-Utils/lib/functions/basis/Handles.lib
 function CheckRootEUID
 {
     if [ "$EUID" -ne 0 ]; then
@@ -19,6 +19,178 @@ function CheckRootEUID
             "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
     fi
 }
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### ARGUMENT VALUES CHECKING
+
+## "Directories.lib" FILE'S FUNCTION
+
+# "ProcessingDir" function.
+function CheckArgs_ProcessingDir
+{
+    #***** Parameters *****
+    return
+
+    #***** Code *****
+}
+
+# "OverwriteDir" function.
+function CheckArgs_OverwriteDir
+{
+    #***** Parameters ****
+    local p_path=$1
+
+    #***** Code *****
+    if [ -z "$p_path" ]; then
+        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
+    elif [ ! -d "$p_path" ]; then
+        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# "Makedir" function.
+function CheckArgs_Makedir
+{
+    #***** Parameters *****
+    local p_parent=$1
+    local p_name=$2
+
+    #***** Code *****
+    if [ -z  "$p_parent" ]; then
+        HandleErrors "1" "" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    elif [ ! -d "$p_parent" ]; then
+        HandleErrors "1" "" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    elif [ -z "$p_name" ]; then
+        HandleErrors "1" "" "" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# -----------------------------------------------
+
+## "Files.lib" FILE's FUNCTION
+
+# "ProcessingFile" function.
+function CheckArgs_ProcessingFile
+{
+    #***** Parameters *****
+    local p_function=$1
+
+    #***** Code *****
+    if [ -z "$p_function" ]; then
+        HandleErrors "1" "THE $(DechoE "p_function") PARAMETER'S VALUE IS INCORRECT" "Please pass a valid file processing function as first argument" \
+            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# "OverwriteFile" function.
+function CheckArgs_OverwriteFile
+{
+    #***** Parameters ****
+    local p_path=$1
+
+    #***** Code *****
+    if [ -z "$p_path" ]; then
+        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
+    elif [ ! -d "$p_path" ]; then
+        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# "Makefile" function's arguments.
+function CheckArgs_Makefile
+{
+    #***** Parameters *****
+    local p_parent=$1
+    local p_name=$2
+
+    #***** Code *****
+    if [ -z "$p_parent" ]; then
+        HandleErrors "1" "THE $(DechoE "p_parent") PARAMETER HAS NO VALUE" "Please pass the path of the new directory's parent folder as first argument" \
+            "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
+    elif [ ! -d "$p_parent" ]; then
+        HandleErrors "1" "THE $(DechoE "p_parent") PARAMETER'S VALUE IS INCORRECT" "Please pass a valid parent directory path as first argument" \
+            "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
+    elif [ -z "$p_name" ]; then
+        HandleErrors "1" "THE $(DechoE "p_name") PARAMETER HAS NO VALUE" "Please pass the name of the folder to create as second argument" \
+            "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# -----------------------------------------------
+
+## "Pipelining.lib" FILE
+
+# Displaying text according to the color variable's FIFO existence and the message to display.
+# There's no need to check for the string variable's value existence, as an empty value gives a line break.
+function CheckArgs_EchoContext
+{
+    #***** Parameters *****
+    local p_stat=$1; shift
+
+    #***** Variables *****
+    local v_statArr; v_statArr=('E' 'N' 'S' 'W')
+
+    #***** Code *****
+    if [ -z "$p_stat" ]; then
+        HandleErrors "1" "THE $(DechoE "p_stat") PARAMETER HAS NO VALUE" "Please pass a valid value : 'E', 'N', 'S' OR 'W'" \
+            "$p_stat" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    else
+        for val in "${v_statArr[@]}"; do
+            if [ "$p_stat" = "$val" ]; then
+                local v_succ="$val"
+                break
+            fi
+            
+            # Checking if the "v_succ" variable is not empty as the loop ends.
+            if [ -z "$v_succ" ]; then
+                HandleErrors "1" "THE $(DechoE "v_succ") VARIABLE CONTAINS NO VALUE" \
+                "Please pass one of the following valid value when calling the $(DechoE "EchoFIFO") function : 'E', 'N', 'S' OR 'W'" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            fi
+        done
+    fi
+}
+
+# "ReadFromFIFO and WriteIntoFIFO" functions.
+function CheckArgs_ReadWriteFIFO
+{
+    #***** Parameters ****
+    p_fifoPath=$1
+    p_fifoVarName=$2
+    p_newVar=$3
+
+    #***** Code *****
+    if [ -z "$p_fifoPath" ]; then
+        Newline >&2; CheckProjectLogPath "THE 'p_fifoPath' PARAMETER HAS NO VALUE" >&2;         Newline >&2; ExitError
+
+    elif [ ! -f "$p_fifoPath" ]; then
+        Newline >&2; CheckProjectLogPath "THE 'p_fifoPath' PARAMETER'S VALUE IS INCORRECT" >&2; Newline >&2; ExitError
+        
+    elif [ -z "$p_fifoVarName" ]; then
+        Newline >&2; CheckProjectLogPath "THE 'p_fifoVarName' PARAMETER HAS NO VALUE" >&2;      Newline >&2; ExitError
+
+    elif [ -z "$p_newVar" ]; then
+        Newline >&2; CheckProjectLogPath "THE 'p_newVar' PARAMETER HAS NO VALUE" >&2;           Newline >&2; ExitError
+
+    fi
+}
+
+# -----------------------------------------------
+
+
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -35,6 +207,8 @@ function IsFloat
     #***** Code *****
     if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
+    else
+        return 1
     fi
 }
 
@@ -47,6 +221,8 @@ function IsFloatInt
     #***** Code *****
     if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
+    else
+        return 1
     fi
 }
 
@@ -59,6 +235,8 @@ function IsInt
     #***** Code *****
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
+    else
+        return 1
     fi
 }
 
@@ -75,6 +253,8 @@ function IsAlpha
     #***** Code *****
     if [[ "$p_value" =~ [A-Z] ]]; then
         return 0
+    else
+        return 1
     fi
 }
 
@@ -87,6 +267,8 @@ function IsAlphaNum
     #***** Code *****
     if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
+    else
+        return 1
     fi
 }
 
@@ -107,14 +289,14 @@ function CheckProjectLogPath
         echo -ne "${__COL_RED}IN $(DechoE "$(basename "${BASH_SOURCE[0]}")"), function $(DechoE "${FUNCNAME[0]}"), line $(DechoE "$(( LINENO-2 ))") --> " >&2
         echo "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" >&2
         echo "Please add the path as argument.$__COL_RESET" >&2; echo >&2
-        
-        exit 1
+        ExitError
+
     elif [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__COL_RED}IN $(DechoE "$(basename "${BASH_SOURCE[0]}")"), function $(DechoE "${FUNCNAME[0]}"), line $(DechoE "$(( LINENO-2 ))") --> " >&2
         echo "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" >&2
         echo "Please correct the path passed as argument.$__COL_RESET" >&2; echo >&2
-        
-        exit 1
+        ExitError
+
     fi
 }
 
@@ -132,7 +314,7 @@ function CheckProjectLogStatus
     local v_errorEcho
     v_errorEcho="Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file."
 
-    # If the text is redirected towars the log path, it's better to put every timer status variables values to '0'.
+    # If the text is redirected towards the log path, it's better to put every timer status variables values to '0'.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
         if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -gt 0 ]; then
 
@@ -155,25 +337,28 @@ function CheckProjectLogStatus
             if [ -n "${p_extraArgs[*]}" ]; then
 
                 for val in "${p_extraArgs[@]}"; do
+
                     # If the "nodate" value is passed as argument.
                     if [[ "$val" = "nodate" ]]; then
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                             '')
-                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
+
+                    # Else, if an unsupported option is passed (note for myself : the extra args checking "for" loop is still running (for the "log" option)).
                     else
                         case "$p_option" in
                             '-n')
-                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
+                                echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                             '')
-                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
+                                echo -e "[$__TIME_DATE]$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
                     fi
@@ -199,6 +384,7 @@ function CheckProjectLogStatus
             if [ -n "${p_extraArgs[*]}" ]; then
 
                 for val in "${p_extraArgs[@]}"; do
+
                     # If the "nodate" value is passed as argument.
                     if [ "$val" = "nodate" ]; then
                         case "$p_option" in
@@ -209,15 +395,17 @@ function CheckProjectLogStatus
                                 echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
+
+                    # Else, if an unsupported option is passed (note for myself : the extra args checking "for" loop is still running (for the "tee" option)).
                     else
                         case "$p_option" in
                             '-n')
                                 echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                             '')
                                 echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH"
+                                echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW, $__COL_CYAN${FUNCNAME[0]}$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
                     fi
@@ -279,7 +467,7 @@ function CheckProjectLogStatus
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function ExitError { kill "$$"; }
+function ExitError { exit 1 || kill "$$"; }
 
 # -----------------------------------------------
 
@@ -326,15 +514,14 @@ function HandleErrors
         fi
             
         if [ -z "$p_badValue" ]; then
-            EchoError "Value that caused this error : $(DechoOrange "Unknown error")"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoOrange "Unknown error")"; Newline >&2
         else
-            EchoError "Value that caused this error : $(DechoE "$p_badValue")"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoE "$p_badValue")"; Newline >&2
         fi
 
         if [ "$__STAT_ERROR" = "fatal" ]; then
             EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."; Newline >&2
-
-            exit 1
+            ExitError
         else
             KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? (yes/no)" \
                 "Resuming script execution." "return" >&1 "Aborting script execution." >&2 "exit"

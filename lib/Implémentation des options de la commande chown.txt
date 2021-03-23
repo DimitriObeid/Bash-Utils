@@ -1,3 +1,0 @@
-Faire passer en quatrième argument l'option '-R'.
-
-Si l'option '-R' est passée en argument, 

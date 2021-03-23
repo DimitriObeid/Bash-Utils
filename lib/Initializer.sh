@@ -114,7 +114,7 @@ __PROJECT_FIFO_COLORS="$__PROJECT_FIFO_DIR_PATH/Colors"
 
 #### SECOND STEP : DEFINING INITIALIZATION FUNCTIONS
 
-## FUNCTIONS THAT BELONG TO THE INITIALIZER FILE
+## TEXT PROCESSING FUNCTIONS
 
 # This function is called at multiple times in the next function.
 function __EchoInit
@@ -154,7 +154,13 @@ function InitErrMsg
     local p_exit=$3
     
     #***** Code *****
-    echo >&2; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)" >&2; echo >&2
+    if [ -z "$p_msg" ] || [ -z "$p_lineno" ] || [ -z "$p_exit" ]; then
+        InitErrMsg "No message, no line number or no exit value passed as argument !" "$(( LINENO-1 ))" "1"
+    elif [ "$p_exit" -lt 0 ] || [ "$p_exit" -gt 1 ]; then
+        InitErrMsg "Bad value passed as exit status !" "$(( LINENO-1 ))" "1"
+    else
+        echo >&2; echo "$(tput setaf 196)In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> ERROR : $p_msg$(tput sgr0)" >&2; echo >&2
+    fi
     
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -162,6 +168,20 @@ function InitErrMsg
         exit 1
     fi
 }
+
+# Making the code cleaner in the 4th step (sourcing dependencies).
+function EchoSourcedDependency
+{
+    #***** Parameters *****
+    local p_dep=$1
+    
+    #***** Code *****
+    EchoInit "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+}
+
+# -----------------------------------------------
+
+## CHECKINGS FUNCTIONS
 
 # Finding Bash-utils directories.
 function CheckBURequirements
@@ -179,109 +199,9 @@ function CheckBURequirements
     elif [ -f "$p_path" ]; then
         EchoInit "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
     else
-        InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno"
+        InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno" "1"
         exit 1
     fi
-}
-
-# Making the code cleaner in the 4th step (sourcing dependencies).
-function EchoSourcedDependency
-{
-    #***** Parameters *****
-    local p_dep=$1
-    
-    #***** Code *****
-    EchoInit "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
-}
-
-# -----------------------------------------------
-
-## FUNCTIONS THAT CAN BE USED ELSEWHERE THAN THE INITIALIZER FILE
-
-# These functions could be considered like functions belonging to the function files included later.
-# These functions are essential for the initialization part before the sourcing of the '.lib' files,
-# or cannot be sorted according to their category for now.
-
-# This function is called once in the next function.
-function __CreateFIFO
-{
-    #***** Parameters *****
-    local arr=("$@")
-    
-    #***** Variables *****
-    local i=0
-
-    #***** Code *****
-    for val in "${arr[@]}"; do
-        i=$(( i+1 ))
-        
-        EchoInit ">>>>>>>> $(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
-    done
-}
-
-# Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
-function CreateFIFO
-{
-    #***** Parameters *****
-    local p_path=$1
-
-    #***** Code *****
-    if [ ! -d "$__PROJECT_FIFO_DIR_PATH" ]; then
-        EchoInit "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
-    fi
-    
-    EchoInit "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
-    
-    if [ ! -p "$p_path" ]; then
-        if mkfifo "$p_path"; then
-            EchoInit "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
-            EchoInit
-        else
-            InitErrMsg "Unable to create this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))" "0"
-            EchoInit "The possible sources of errors are :" "196"
-            __CreateFIFO \
-                "$(tput setaf 196)Project's FIFOs path --> $(tput setaf 6)$__PROJECT_FIFO_DIR_PATH$(tput setaf 196)" \
-                "$(tput setaf 196)Writing rights"
-            echo >&2; echo "$(tput setaf 196)Aborting initialization$(tput sgr0)" >&2; echo >&2; exit 1
-        fi
-    else
-        EchoInit "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
-    fi
-}
-
-# Reading from a named pipe.
-function ReadFromFIFO
-{
-    #***** Parameters *****
-    p_fifoPath=$1
-    p_fifoVar=$2
-    p_end=$3
-
-    #***** Code *****
-    if [ -z "$p_fifoPath" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoPath' parameter has no value" >&2; echo >&2; exit 1
-    elif [ ! -f "$p_fifoPath" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoPath' variable's value is incorrect" >&2; echo >&2; exit 1
-    elif [ -z "$p_fifoVar" ]; then
-        echo >&2; echo "ERROR : THE 'p_fifoVar' variable's value is incorrect" >&2; echo >&2; exit 1
-    else
-        EchoInit "Read the $p_fifoPath FIFO to find the $p_fifoVar value."
-        
-        
-        while true; do
-            if read -r line < "$p_fifoPath"; then
-                if [[ "$line" == "$p_end" ]]; then
-                    break
-                fi
-            fi
-        done
-    fi
-}
-
-# Writing into a named pipe
-function WriteIntoFIFO
-{
-
 }
 
 # -----------------------------------------------
@@ -302,10 +222,11 @@ if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     }
 else
     if [ ! -d "$__PROJECT_TMP_DIR" ]; then
-        mkdir "$__PROJECT_TMP_DIR" || {
+        EchoInit "CREATING THE PROJECT'S TEMPORARY DIRECTORY"
+        EchoInit "$(mkdir -pv "$__PROJECT_TMP_DIR")" || {
             echo >&2
             echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." >&2; echo >&2; exit 1
-        }
+        }; EchoInit
     fi
     
     touch "$__INIT_LIST_FILE_PATH"
@@ -315,14 +236,14 @@ fi
 
 ## CHECKING FOR THE REQUIRED FOLDERS
 
-EchoInit "CHECKING REQUIRED DIRECTORIES"
+EchoInit "CHECKING FOR THE  \"$__PROJECT_NAME\"  REQUIRED DIRECTORIES"
 CheckBURequirements "$__BASH_UTILS_BIN"           "$LINENO"
 CheckBURequirements "$__BASH_UTILS_CONF"          "$LINENO"
 CheckBURequirements "$__BASH_UTILS_TMP"           "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS"        "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS_BASIS"  "$LINENO"
 CheckBURequirements "$__BASH_UTILS_VARS"          "$LINENO"
-EchoInit
+EchoInit; EchoInit
 
 # -----------------------------------------------
 
@@ -336,9 +257,9 @@ EchoInit
 # Tip : It's important to source the functions files before the variables ones to avoid error
 # messages while including them at first, as some functions are called into these variables.
 
-EchoInit "CHECKING DEPENDENCIES"
+EchoInit "CHECKING FOR THE  \"$__PROJECT_NAME\"  DEPENDENCIES"
 
-# Sourcing project's status variables file.
+# Sourcing the project's status variables file.
 EchoInit "Sourcing the variables status file :"
 
 # shellcheck disable=SC1090
@@ -346,12 +267,13 @@ source "$__BASH_UTILS_CONF_PROJECT_STATUS" \
     || InitErrMsg "Unable to source this file : $(tput setaf 6)$__BASH_UTILS_CONF_PROJECT_STATUS" "$LINENO"
 EchoSourcedDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoInit
 
+
 # Sourcing the very basic fuctions files.
 EchoInit "Sourcing the very basic functions files :"; for f in "$__BASH_UTILS_FUNCTS_BASIS/"*.lib; do
-    [[ -e "$f" ]] || InitErrMsg "This basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO"
+    [[ -e "$f" ]] || InitErrMsg "This basic functions file doesn't exists : $(tput setaf 6)$f" "$LINENO" '1'
     
     # shellcheck disable=SC1090
-    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO"
+    source "$f" || InitErrMsg "Unable to source this basic functions file : $(tput setaf 6)$f" "$LINENO" '1'
     EchoSourcedDependency "$f"
 done; EchoInit
 
@@ -373,11 +295,13 @@ EchoInit "Sourcing the variables files :"; for f in "$__BASH_UTILS_VARS/"*.var; 
     EchoSourcedDependency "$f"
 done; EchoInit
 
+EchoInit
+
 # -----------------------------------------------
 
 ## CREATING THE FIFOs
 
-EchoInit "PROCESSING THE $(Decho "$__PROJECT_NAME") FIFOs"
+EchoInit "PROCESSING THE  \"$__PROJECT_NAME\"  FIFOs"
 
 # Color processing.
 CreateFIFO "$__PROJECT_FIFO_COLORS"

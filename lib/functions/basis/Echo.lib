@@ -66,11 +66,14 @@ function DechoBasis
     echo "$__COL_CODE"
 
     #***** Code *****
+    if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
 #     if [ "$p_oldColor" = "$v_newColor" ]; then
 #         SwitchColorOld "$v_newColor"
 #     fi
-
-    echo -e "$(tput setaf "$v_newColor")$p_string$p_oldColor"
+        echo -e "$p_string"
+    else
+        echo -e "$(tput setaf "$v_newColor")$p_string$p_oldColor"
+    fi
 }
 
 function Decho { echo -e "${__COL_CYAN}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
@@ -95,6 +98,50 @@ function DechoYellow    { DechoBasis "$1" "$__COL_YELLOW"; }
 
 ## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__STAT_TIME_TXT" status variable.
 
+# # Display a text according to different parameters than log file's existence.
+# function AdvancedEchoCheck
+# {
+#     #***** Parameters *****
+#     local p_string=$1
+#     local p_var=$2
+#     local p_stat=$3; shift 3
+# 
+#     #***** Variables *****
+#     local arr; arr=("$@")
+# 
+#     #***** Code *****
+# 
+# }
+
+# Display text according to a global variable's value (the "$__PROJECT_FIFO_COLORS" global variable's value, for example).
+function EchoContext
+{
+    #***** Parameters *****
+    local p_string=$1
+    local p_var=$2
+    local p_stat=$3; shift 3
+
+    #***** Variables *****
+    local arr; arr=('E' 'N' 'S' 'W')
+
+    #***** Code *****
+    CheckArgs_EchoContext "$p_var" "$p_stat" "${arr[@]}"
+    
+    if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
+        CheckProjectLogPath "$p_string"
+    else
+        if [ "$p_stat" = 'E' ]; then
+            EchoError "$p_stat"
+        elif [ "$p_stat" = 'N' ]; then
+            EchoNewstep "$p_string"
+        elif [ "$p_stat" = 'S' ]; then
+            EchoSuccess "$p_string"
+        elif [ "$p_stat" = 'W' ]; then
+            EchoWarning "$p_string"
+        fi
+    fi
+}
+
 # Error message
 
 # Featured functions and files from the "functions" folder :
@@ -102,12 +149,14 @@ function DechoYellow    { DechoBasis "$1" "$__COL_YELLOW"; }
 function EchoError
 {
     #***** Parameters *****
-    local string=$1
-    local option=$2
-    local extraArgs=$3
+    local p_string=$1
+    local p_option=$2; shift 2
+    local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$__COL_RED$__TXT_TAB$__TXT_TAB $string$__COL_RESET" "$option" "$extraArgs" >&2
+    # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
+    # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
+    CheckProjectLogStatus "$__COL_RED$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -119,12 +168,12 @@ function EchoError
 function EchoMsg
 {
     #***** Parameters *****
-    local string=$1
-    local option=$2
-    local extraArgs=$3
+    local p_string=$1
+    local p_option=$2; shift 2
+    local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$string" "$option" "$extraArgs"
+    CheckProjectLogStatus "$p_string" "$p_option" "${p_arrExtraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -136,13 +185,13 @@ function EchoMsg
 function EchoNewstep
 {
     #***** Parameters *****
-    local string=$1
-    local option=$2
-    local extraArgs=$3
+    local p_string=$1
+    local p_option=$2; shift 2
+    local p_arrExtraArgs=("$@")
 
     #***** Code *****
     exit 1
-    CheckProjectLogStatus "$__COL_YELLOW$__TXT_TAB$__TXT_TAB $string$__COL_RESET" "$option" "$extraArgs"
+    CheckProjectLogStatus "$__COL_ORANGE$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -154,15 +203,35 @@ function EchoNewstep
 function EchoSuccess
 {
     #***** Parameters *****
-    local string=$1
-    local option=$2
-    local extraArgs=$3
+    local p_string=$1
+    local p_option=$2; shift 2
+    local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$__COL_GREEN$__TXT_TAB$__TXT_TAB $string$__COL_RESET" >&1 "$option" "$extraArgs"
+    CheckProjectLogStatus "$__COL_GREEN$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" >&1
 
     sleep "$__STAT_TIME_TXT"
 }
+
+# Warning message
+
+# Featured functions and files from the "functions" folder :
+#   - CheckProjectLogStatus     -> Checkings.lib
+function EchoWarning
+{
+    #***** Parameters *****
+    local p_string=$1
+    local p_option=$2; shift 2
+    local p_arrExtraArgs=("$@")
+
+    #***** Code *****
+    CheckProjectLogStatus "$__COL_YELLOW$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
+
+    sleep "$__STAT_TIME_TXT"
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
