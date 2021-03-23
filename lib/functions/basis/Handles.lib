@@ -164,26 +164,45 @@ function CheckArgs_EchoContext
     fi
 }
 
-# "ReadFromFIFO and WriteIntoFIFO" functions.
-function CheckArgs_ReadWriteFIFO
+# "ReadFromFIFO" function.
+function CheckArgs_ReadFromFIFO
 {
-    #***** Parameters ****
-    p_fifoPath=$1
-    p_fifoVarName=$2
-    p_newVar=$3
+    #***** Parameters *****
+    local p_fifoPath=$1               # FIFO's path.
+    local p_fifoVarName=$2            # Stored variable's name.
+#     local p_fifoCurrentVarValue=$3    # Stored variable's value to get.
 
     #***** Code *****
     if [ -z "$p_fifoPath" ]; then
-        Newline >&2; CheckProjectLogPath "THE 'p_fifoPath' PARAMETER HAS NO VALUE" >&2;         Newline >&2; ExitError
+        Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_fifoPath' PARAMETER HAS NO VALUE" >&2;         Newline >&2; ExitError
 
     elif [ ! -f "$p_fifoPath" ]; then
-        Newline >&2; CheckProjectLogPath "THE 'p_fifoPath' PARAMETER'S VALUE IS INCORRECT" >&2; Newline >&2; ExitError
+        Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_fifoPath' PARAMETER'S VALUE IS INCORRECT" >&2; Newline >&2; ExitError
+
+    fi
+}
+
+# "WriteIntoFIFO" function.
+function CheckArgs_WriteIntoFIFO
+{
+    #***** Parameters ****
+    local p_fifoPath=$1         # FIFO's path to write into.
+    local p_fifoVarName=$2      # Stored variable's name
+#     local p_newVar=$3         # Stored variable's new value.
+#     local p_existingPath=$4   # Handling missing FIFO, to define specific instructions.
+
+    #***** Code *****
+    if [ -z "$p_fifoPath" ]; then
+        Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_fifoPath' PARAMETER HAS NO VALUE" >&2;         Newline >&2; ExitError
+
+    elif [ ! -f "$p_fifoPath" ]; then
+        Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_fifoPath' PARAMETER'S VALUE IS INCORRECT" >&2; Newline >&2; ExitError
         
     elif [ -z "$p_fifoVarName" ]; then
-        Newline >&2; CheckProjectLogPath "THE 'p_fifoVarName' PARAMETER HAS NO VALUE" >&2;      Newline >&2; ExitError
+        Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_fifoVarName' PARAMETER HAS NO VALUE" >&2;      Newline >&2; ExitError
 
-    elif [ -z "$p_newVar" ]; then
-        Newline >&2; CheckProjectLogPath "THE 'p_newVar' PARAMETER HAS NO VALUE" >&2;           Newline >&2; ExitError
+#     elif [ -z "$p_newVar" ]; then
+#         Newline >&2; CheckProjectLogPath "${FUNCNAME[0]} : THE 'p_newVar' PARAMETER HAS NO VALUE" >&2;           Newline >&2; ExitError
 
     fi
 }

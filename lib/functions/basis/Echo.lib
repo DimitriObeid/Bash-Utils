@@ -113,35 +113,6 @@ function DechoYellow    { DechoBasis "$1" "$__COL_YELLOW"; }
 # 
 # }
 
-# Display text according to a global variable's value (the "$__PROJECT_FIFO_COLORS" global variable's value, for example).
-function EchoContext
-{
-    #***** Parameters *****
-    local p_string=$1
-    local p_var=$2
-    local p_stat=$3; shift 3
-
-    #***** Variables *****
-    local arr; arr=('E' 'N' 'S' 'W')
-
-    #***** Code *****
-    CheckArgs_EchoContext "$p_var" "$p_stat" "${arr[@]}"
-    
-    if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
-        CheckProjectLogPath "$p_string"
-    else
-        if [ "$p_stat" = 'E' ]; then
-            EchoError "$p_stat"
-        elif [ "$p_stat" = 'N' ]; then
-            EchoNewstep "$p_string"
-        elif [ "$p_stat" = 'S' ]; then
-            EchoSuccess "$p_string"
-        elif [ "$p_stat" = 'W' ]; then
-            EchoWarning "$p_string"
-        fi
-    fi
-}
-
 # Error message
 
 # Featured functions and files from the "functions" folder :
