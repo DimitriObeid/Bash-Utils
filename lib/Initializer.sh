@@ -10,11 +10,22 @@
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo "WARNING !"; echo
-    echo "This script is not meant to be executed directly !"
+    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
     echo "Use this script only by sourcing it in your project script."; echo
 
     exit 1
 fi
+
+# Defining a function to print debug status messages and whitespaces, to be shown only when the shell script is executed with the "bash -x" command.
+function PrintDBGVoid
+{ echo "$(tput setaf 0)////////////////////////////////////////////////////////////////////////////$(tput sgr0)"; }
+
+function PrintDBGMsg
+{
+    PrintDBGVoid || return
+    echo "$(tput setaf 166)$1$(tput sgr0)";
+    PrintDBGVoid || return
+}
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -27,11 +38,13 @@ fi
 
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
+PrintDBGMsg "Initializing \"BASH_UTILS\" variables"
+
 # Bash-Utils root directory path.
 __BASH_UTILS_ROOT="/usr/local/lib/Bash-utils"
 
 # Bash-Utils sub-folders paths.
-__BASH_UTILS="$__BASH_UTILS_ROOT/lib"
+__BASH_UTILS="$__BASH_UTILS_ROOT/lib/"
 __BASH_UTILS_BIN="$__BASH_UTILS_ROOT/bin"
 __BASH_UTILS_CONF="$__BASH_UTILS_ROOT/config"
 __BASH_UTILS_TMP="$__BASH_UTILS_ROOT/tmp"
@@ -61,9 +74,14 @@ __BASH_UTILS_FUNCTS_BASIS="$__BASH_UTILS_FUNCTS/basis"
 __BASH_UTILS_LANG="$__BASH_UTILS/lang"
 __BASH_UTILS_VARS="$__BASH_UTILS/variables"
 
+PrintDBGVoid
+
 # -----------------------------------------------
 
 ## PROJECT'S PATH VARIABLES
+
+PrintDBGVoid
+PrintDBGMsg "Initializing "
 
 # Script file's informations
 __PROJECT_FILE=$(basename "$0")                           # Project file's name.
@@ -86,6 +104,9 @@ __PROJECT_LOG_DIR_NAME="logs"
 __PROJECT_LOG_DIR_PATH="$__PROJECT_TMP_DIR/$__PROJECT_LOG_DIR_NAME"
 __PROJECT_LOG_FILE_NAME="$__PROJECT_NAME.log"
 __PROJECT_LOG_FILE_PATH="$__PROJECT_LOG_DIR_PATH/$__PROJECT_LOG_FILE_NAME"
+
+PrintDBGVoid
+exit 0
 
 # -----------------------------------------------
 
@@ -299,6 +320,29 @@ EchoInit
 
 # -----------------------------------------------
 
+## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
+
+# shellcheck disable=SC2034
+__STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_EXIT_CODE="1";         CheckSTAT_EXIT_CODE     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+
+# -----------------------------------------------
+
 ## CREATING THE FIFOs
 
 EchoInit "PROCESSING THE  \"$__PROJECT_NAME\"  FIFOs"
@@ -318,25 +362,6 @@ CreateFIFO "$__PROJECT_FIFO_COLORS"
 
 # shellcheck disable=SC2034
 __PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
-
-# -----------------------------------------------
-
-## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
-
-# shellcheck disable=SC2034
-__STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
-__STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
-__STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
-__STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

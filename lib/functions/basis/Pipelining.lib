@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo "WARNING !"; echo
+    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -84,7 +93,7 @@ function ReadFromFIFO
     #***** Code *****
     CheckArgs_ReadFromFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue"
     
-    EchoContext "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value." 'N'
+    EchoNewstep "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value."
     Newline
         
     while true; do
@@ -94,7 +103,8 @@ function ReadFromFIFO
                 echo "$p_newVar"
                 break
             else
-                EchoContext "" 'E'
+                HandleErrors "1" "THE $(DechoE "$v_varLine") STRING WAS NOT FOUND IN THE $(DechoE "$p_fifoPath") FIFO" \
+                    "" "$v_varLine" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
             fi
         fi
     done

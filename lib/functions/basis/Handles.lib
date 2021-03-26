@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo "WARNING !"; echo
+    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -131,6 +140,18 @@ function CheckArgs_Makefile
 
 # -----------------------------------------------
 
+## "Handles.lib" FILE
+
+# Checking if an argument i provided in the "Is..." functions (check the "VARIABLES VALUES CHECKING" section for more informations).
+function CheckArgs_IsCorrectValue
+{
+    if [ "$#" -eq 0 ]; then
+        HandleErrors "1" "" "" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
+}
+
+# -----------------------------------------------
+
 ## "Pipelining.lib" FILE
 
 # Displaying text according to the color variable's FIFO existence and the message to display.
@@ -224,6 +245,8 @@ function IsFloat
     local p_value=$1
 
     #***** Code *****
+    CheckArgs_IsCorrectValue "$p_value"
+
     if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
     else
@@ -238,6 +261,8 @@ function IsFloatInt
     local p_value=$1
 
     #***** Code *****
+    CheckArgs_IsCorrectValue "$p_value"
+
     if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
     else
@@ -252,6 +277,8 @@ function IsInt
     local p_value=$1
 
     #***** Code *****
+    CheckArgs_IsCorrectValue "$p_value"
+
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
     else
@@ -270,6 +297,8 @@ function IsAlpha
     local p_value=$1
     
     #***** Code *****
+    CheckArgs_IsCorrectValue "$p_value"
+
     if [[ "$p_value" =~ [A-Z] ]]; then
         return 0
     else
@@ -284,6 +313,8 @@ function IsAlphaNum
     local p_value=$1
 
     #***** Code *****
+    CheckArgs_IsCorrectValue "$p_value"
+
     if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
     else
@@ -486,7 +517,11 @@ function CheckProjectLogStatus
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function ExitError { exit 1 || kill "$$"; }
+function ExitError
+{
+    # In case the "exit" command didn't worked, the program has to be killed.
+    CheckSTAT_EXIT_CODE "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; exit "$__STAT_EXIT_CODE" || kill "$$"
+}
 
 # -----------------------------------------------
 
@@ -533,14 +568,14 @@ function HandleErrors
         fi
             
         if [ -z "$p_badValue" ]; then
-            EchoError "Value(s) that caused this error : $(DechoOrange "Unknown error")"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoOrange 'No value //OR\\ an unknown error')"; Newline >&2
         else
             EchoError "Value(s) that caused this error : $(DechoE "$p_badValue")"; Newline >&2
         fi
 
         if [ "$__STAT_ERROR" = "fatal" ]; then
             EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."; Newline >&2
-            ExitError
+            ExitError "$__STAT_EXIT_CODE"
         else
             KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? (yes/no)" \
                 "Resuming script execution." "return" >&1 "Aborting script execution." >&2 "exit"

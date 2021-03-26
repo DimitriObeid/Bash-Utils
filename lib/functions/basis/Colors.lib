@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo "WARNING !"; echo
+    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -12,29 +21,33 @@ function EncodingColor
     #***** Parameters *****
     p_colorCode=$1; shift
 
-    #***** Variables *****
-    v_currentColor="$__COL_CODE" 
-
-    #***** Variables *****
+    #***** Code *****
     # Checking if the color's FIFO path exists. If not, then the function stops and no text is colored.
     if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
         return
     else
         if [ "$p_colorCode" = "sgr0" ]; then
-            WriteIntoFIFOColor
-            tput sgr0;  __COL_CODE=""
-            echo "$__COL_CODE"
+            WriteIntoFIFOColor ""; tput sgr0
 
         elif IsInt "$p_colorCode"; then
-            tput setaf "$p_colorCode"; __COL_CODE="$p_colorCode"
+            WriteIntoFIFOColor "$p_colorCode"; tput setaf "$p_colorCode";
 
         else
-            # It's impossible to call the "HandleErrors" function here, as the current function is called by this function.
-            # Instead, we just call the "echo" command.
-            echo >&2; echo "In   $(basename "${BASH_SOURCE[0]}")   file, function   ${FUNCNAME[0]}, line   $LINENO   --> Error : unable to set a color !" >&2
-            echo >&2; exit 1
+            # It's impossible to call the "HandleErrors" function here,
+            # as its called functions call the current function ("EncodingColor").
+
+            # Instead, we just call the "CheckProjectLogPath" function.
+            CheckProjectLogPath >&2
+            CheckProjectLogPath "IN   $(basename "${BASH_SOURCE[0]}")   FILE, FUNCTION   ${FUNCNAME[0]}, LINE   $LINENO   --> " '-n' >&2
+            CheckProjectLogPath "ERROR : UNABLE TO SET A COLOR !" >&2
+            CheckProjectLogPath >&2; exit 1
         fi
     fi
+
+    # Reading the color FIFO.
+
+    # shellcheck disable=SC2034
+    __COL_CODE="$(ReadFromFIFOColor "$p_colorCode")"
 }
 
 # -----------------------------------------------

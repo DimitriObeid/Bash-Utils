@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo "WARNING !"; echo
+    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -7,48 +16,48 @@
 #### TEXT WRITING AND DECORATION
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-
-# Switching color
-function SwitchColorOld
-{
-    #***** Parameters *****
-    local p_originalColor=$1
-
-    #***** Variables *****
-    local key='140'             # Key
-    local code="$__COL_CODE"    # Color code number to multiply by 'k'
-    local div='256'             # Number to divide
-    local res                   # Result
-    
-    #***** Code *****
-    res=$(( code*key ))
-    res=$(( res/div ))
-    
-    echo "$(tput setaf "$res"; __COL_CODE="$res")"
-    echo $res
-}
-
-function DechoBasisOld
-{
-    #***** Parameters *****
-    local p_string=$1           # The string to display.
-    local p_originalColor=$2    # The original text's color.
-    
-    #***** Code *****
-    
-    #***** Variables *****
-    # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
-    local v_newColor
-    v_newColor="$(SwitchColor "$p_originalColor")"
-    
-    #***** Code *****
-    if [ "$p_originalColor" = "$__COL_BLUE" ] || [ "$p_originalColor" = "$__COL_CYAN" ]; then
-        # TODO : adapting this line of code when the aforementioned function will be ready.
-        echo "${v_newColor}$p_string$p_originalColor"
-    else
-        echo "${__COL_CYAN}$p_string$p_originalColor"
-    fi
-}
+# 
+# # Switching color
+# function SwitchColorOld
+# {
+#     #***** Parameters *****
+#     local p_originalColor=$1
+# 
+#     #***** Variables *****
+#     local key='140'             # Key
+#     local code="$__COL_CODE"    # Color code number to multiply by 'k'
+#     local div='256'             # Number to divide
+#     local res                   # Result
+#     
+#     #***** Code *****
+#     res=$(( code*key ))
+#     res=$(( res/div ))
+#     
+#     echo "$(tput setaf "$res"; __COL_CODE="$res")"
+#     echo $res
+# }
+# 
+# function DechoBasisOld
+# {
+#     #***** Parameters *****
+#     local p_string=$1           # The string to display.
+#     local p_originalColor=$2    # The original text's color.
+#     
+#     #***** Code *****
+#     
+#     #***** Variables *****
+#     # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
+#     local v_newColor
+#     v_newColor="$(SwitchColor "$p_originalColor")"
+#     
+#     #***** Code *****
+#     if [ "$p_originalColor" = "$__COL_BLUE" ] || [ "$p_originalColor" = "$__COL_CYAN" ]; then
+#         # TODO : adapting this line of code when the aforementioned function will be ready.
+#         echo "${v_newColor}$p_string$p_originalColor"
+#     else
+#         echo "${__COL_CYAN}$p_string$p_originalColor"
+#     fi
+# }
 
 # -----------------------------------------------
 
@@ -59,10 +68,10 @@ function DechoBasis
 {
     #***** Parameters *****
     local p_string=$1
-    local p_oldColor=$2
+    local p_newColor=$2
     
     #***** Variables *****
-    local v_newColor="$__COL_CODE"
+    local v_oldColor="$(ReadFromFIFOColor "$__COL_CODE")"
     echo "$__COL_CODE"
 
     #***** Code *****
@@ -72,7 +81,8 @@ function DechoBasis
 #     fi
         echo -e "$p_string"
     else
-        echo -e "$(tput setaf "$v_newColor")$p_string$p_oldColor"
+        echo -ne "$(tput setaf "166")$p_string$p_oldColor"
+        __COL_CODE="$(WriteIntoFIFOColor "$v_oldColor")"
     fi
 }
 
