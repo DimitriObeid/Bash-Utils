@@ -98,8 +98,36 @@ function EchoStep
 	echo "$__COL_PURPLE$I.$J : $__COL_ORANGE$p_str$(tput sgr0)"
 }
 
-function CheckSupport
+function CheckSupportAndInstallDeps
 {
-    EchoNewSubStep "Operating system : $OSTYPE"
+    EchoNewSubStep "Operating system : $OSTYPE"; echo
     
+    # If the operating system is Linux-based.
+    if [ "$OSTYPE" == "linux-gnu" ]; then
+        
+        # Install dependencies for Debian-based Linux distributions.
+        if command -v "apt"; then
+        
+        elif command -v "dnf"; then
+        
+        elif command -v "pacman"; then
+        
+        else
+            EchoWarning "Your package manager is not yet supported by the installer (and thus, by some parts of the library) !";
+            EchoWarning "You can continue the installation, but it's not guaranteed that you already have the needed programs"; ExitInstall
+
+        fi
+        
+    # Else, if the operating system is Mac-based.
+    elif [ "$OSTYPE" == "darwin" ]; then
+        return
+    
+    else
+        echo >&2
+
+        EchoWarning "Your operating system is not yet supported by the installer (and thus, by some parts of the library) !";
+        EchoWarning "You can continue the installation, but it's not guaranteed that you already have the needed programs"; ExitInstall
+        
+        echo >&2; exit 1
+    fi
 }
