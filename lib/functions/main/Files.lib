@@ -1,0 +1,267 @@
+#!/usr/bin/env bash
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### TEXT FILES PROCESSING FUNCTIONS
+
+# This function only repeats some parts of the following function.
+function __ProcessingFile
+{
+    #***** Parameters *****
+    p_output=$1
+    p_name=$2
+    p_char=$3
+
+    #***** Code *****
+    if [ "$p_output" = 'E' ]; then
+        EchoError "End of processing the $(DechoE "$p_name") file"
+        EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        Newline
+            
+        sleep "$__STAT_TIME_TXT"
+
+    elif [ "$p_output" = 'S' ]; then
+        EchoSuccess "End of processing the $(DechoS "$p_name") file"
+        EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
+        Newline
+        
+        sleep "$__STAT_TIME_TXT"
+    else
+        EchoWarning ""
+    fi
+
+}
+
+# Separate processing steps displays from the rest of the main script between two horizontal lines.
+
+# Featured functions and files from the "functions" folder :
+#   - DrawLine      -> Headers.lib
+#   - HandleErrors  -> Headers.lib
+function ProcessingFile
+{
+    #***** Parameters *****
+    local p_function=$1; shift
+    local p_name=$2
+    local arr; arr=$("$@")
+    
+    #***** Variables *****
+    local v_char="'"
+    
+    #***** Code *****
+    # Arguments checking.
+    CheckArgs_ProcessingFile "$p_function"
+    
+	sleep "$__STAT_TIME_TXT"
+    EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    EchoNewstep "Processing the $(DechoN "$p_name") file in the $(DechoN "$p_parent") parent directory."
+    Newline
+    
+    case "$p_function" in
+        'Makefile')
+            if Makefile "$arr"; then
+                __ProcessingFile 'S' "$p_name" "$p_char"
+            else
+                __ProcessingFile 'E' "$p_name" "$p_char"
+            fi
+            ;;
+        'OverwriteFile')
+            if OverwriteFile "$arr"; then
+                __ProcessingFile 'S' "$p_name" "$p_char"
+            else
+                __ProcessingFile 'E' "$p_name" "$p_char"
+            fi
+            ;;
+    esac
+}
+
+## OVERWRITING CONTENT
+
+# Overwrite a file
+
+# Featured functions and files from the "functions" folder :
+#	- EchoError			-> Echo.lib
+#	- EchoNewstep		-> Echo.lib
+#	- EchoSuccess		-> Echo.lib
+#	- Newline			-> Echo.lib
+function OverwriteFile
+{
+    #***** Parameters *****
+    local p_path=$1
+    
+    #***** Code *****
+    CheckArgs_OverwriteFile
+    
+    EchoNewstep "The $(DechoN "$p_path/") file already exists and is not empty."
+	EchoNewstep "Overwriting data from file $(DechoN "$p_path/")"
+	Newline
+
+	true > "$p_path"
+	HandleErrors "$?" "THE CONTENT OF THE $(DechoE "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+	EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
+	Newline
+
+	return 0
+}
+
+# -----------------------------------------------
+
+## FILE CREATION
+
+# File creation function.
+# LORS DE SON APPEL, LA SORTIE DE CETTE FONCTION DOIT ÊTRE REDIRIGÉE SOIT VERS LE TERMINAL ET LE FICHIER DE LOGS, SOIT VERS LE FICHIER DE LOGS UNIQUEMENT.
+
+# Featured functions and files from the "functions" folder :
+#   - DrawLine          -> Headers.lib
+#   - EchoError         -> Echo.lib
+#   - EchoNewstep       -> Echo.lib
+#   - EchoSuccess       -> Echo.lib
+#   - HandleErrors      -> Handles.lib
+function Makefile
+{
+	#***** Parameters *****
+	local p_parent=$1      # Emplacement of the currently processed file's parent folder from the root directory.
+	local p_name=$2        # Name of the file to process (into its parent directory).
+
+	#***** Variables *****
+	local v_path="$p_parent/$p_name"	# Path of the file to process.
+
+	#***** Code *****
+	# Checking first if the awaited arguments are given
+    CheckArgs_Makefile "$p_parent" "$p_name"
+	
+	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
+	if [ ! -f "$v_path" ]; then
+        EchoNewstep "Creating the $(DechoN "$p_name") file in the parent folder $(DechoN "$p_parent/")."
+
+		touch "$v_path"
+        # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
+        # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
+        # file in a folder where the user is not allowed to create a file without superuser privileges.
+        HandleErrors "$?" "THE $(DechoE "$p_name") FILE CANNOT BE CREATED IN THE $(DechoE "$p_parent/") PARENT FOLDER." \
+            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
+        EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
+        Newline
+        
+        return 0
+	
+	# Else, if the file to be created already exists AND it is NOT empty.
+	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
+        if OverwriteFile "$p_path"; then
+            return 0
+        else
+            return 1
+        fi
+
+	# Else, if the file to be created already exists AND it is empty.
+	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
+		EchoSuccess "The $(DechoS "$p_path/") file already exists in the $(DechoS "$p_parent/") folder and is empty."
+		Newline
+
+		return 0
+	fi
+}
+
+# -----------------------------------------------
+
+## FILE SOURCING
+
+# Sourcing dependencies files.
+function SourceFile
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    if [ -f "$p_path" ]; then
+        # shellcheck disable=SC1090
+        if source "$p_path"; then
+            EchoSuccess "Sourced file : $(DechoS "$p_path")"
+        else
+            HandleErrors "1" "UNABLE TO FIND THIS PATH" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+        fi
+    else
+        HandleErrors "1" "UNABLE TO FIND THIS PATH" "Verify the path passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+    fi
+}
+
+# -----------------------------------------------
+
+## TEXT FILES PARSING
+
+# Getting a specific line from a text file.
+function GetLineFromTextFile
+{
+    #***** Parameters *****
+    local source=$1           # File to parse
+    local wanted_line=$2      # Line to get in the file
+    
+    #***** Variables *****
+    local i=0     # Line incrementer
+    
+    #***** Code *****
+    cat "$source" | while read -r line; do
+        # Incrementing the line incrementer variable's value...
+        i=$(( i+1 ))
+        
+        # ... until it reaches the wanted line.
+        if [ "$i" -eq "$wanted_line" ]; then
+            # Creating a variable and storing the wanted line's text.
+            FILE_GETTXTLINE="$line"
+        fi
+    done
+}
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### ARCHIVES PROCESSING FUNCTIONS
+
+## (UN)COMPRESSION FUNCTIONS
+
+# 
+
+# Featured functions and files from the "functions" folder :
+#   - 
+function Compress
+{
+    #***** Parameters *****
+    local cmd=$1      # Compression command.
+    local opts=$2     # Options of the compression command.
+    local p_path=$3     # Path to the file/folder to archivate.
+    local p_name=$4     # Archive's name (only used into displayed messages).
+    
+    #***** Code *****
+    
+    
+    return 0
+}
+
+# Uncompressing archives according to the used compression method.
+
+# Featured functions and files from the "functions" folder :
+#   - HandleErrors      -> Handles.lib
+#   - EchoSuccess       -> Echo.lib
+#   - Newline           -> Echo.lib
+function Uncompress
+{
+    #***** Paramètres *****
+    local p_cmd=$1      # Compression command.
+    # TODO : Vérifier si cette procédure est bonne
+    local p_opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_path=$3     # Path to the l'archive to uncompress.
+    local p_name=$4     # Archive's name (only used into displayed messages).
+
+    #***** Code *****
+    # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
+    "$cmd $opts $p_path"
+    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$p_name") A ÉCHOUÉE"
+    EchoSuccess "La décompression de l'archive $(DechoS "$p_name") s'est effectuée avec brio."
+    Newline
+    
+    return 0
+}

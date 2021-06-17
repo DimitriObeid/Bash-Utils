@@ -1,0 +1,239 @@
+#!/usr/bin/env bash
+
+## WARNING !!
+# The currently supported operating systems are Linux based OS.
+
+# The currently supported packages managers are APT (Debian based),
+# DNF (RHEL and Fedora based) and Pacman (Arch Linux and Manjaro based).
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### PACKAGE MANAGERS
+
+## GETTING INFORMATIONS ABOUT PACKAGE MANAGERS
+
+# Getting the user's operating system main package manager.
+function GetMainPackageManager
+{
+	HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
+
+	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
+	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
+
+	# For more informations about the redirections in UNIX Shell, please visit this link -> https://www.tldp.org/LDP/abs/html/io-redirection.html
+
+	# Checking first the operating system type, to avoid running the script in a not (yet) suported UNIX/Linux operating system.
+	if [[ "$OSTYPE" = "linux-gnu"* ]]; then
+        command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt"
+        command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
+        command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
+    else
+        EchoError "Your operating system is not (yet) supported !"; Newline
+        exit 1
+    fi
+
+	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
+	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
+        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
+		HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(DechoE "APT"), $(DechoE "DNF") et $(DechoE "Pacman")." "$LINENO"
+	else
+		EchoSuccess "Gestionnaire de paquets principal trouvé : $(DechoS "$PACK_MAIN_PACKAGE_MANAGER")"
+	fi
+}
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### INSTALLATIONS FROM PACKAGE MANAGERS
+
+
+#### NEW FUNCTIONS :
+
+function APTInstall
+{
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
+}
+
+function DNFInstall
+{
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
+}
+
+function PacmanInstall
+{
+    #***** Parameters *****
+    package="$1"
+    
+    #***** Code *****
+    
+}
+
+function PackHDCheck
+{
+    return
+}
+
+function PackDBCheck
+{
+    return
+}
+
+function PackInstall
+{
+    #***** Parameters *****
+    manager=$1  # Package manager
+    package=$2  # Package's name
+    
+    #***** Code *****
+    CheckRootEUID
+
+    if [ "$OSTYPE" = "linux-gnu" ]; then
+        if [ "$manager" = "apt" ]; then APTInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" = "dnf" ]; then DNFInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" = "pacman" ]; then PacmanInstall
+        fi
+    fi
+}
+
+
+
+
+
+
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### INSTALLING FROM WEB
+
+# Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
+function SoftwareInstall
+{
+	#***** Parameters *****
+	local weblink=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
+	local archive=$2		# Nom de l'archive contenant les fichiers du logiciel.
+	local name=$3			# Nom du logiciel.
+	local comment=$4		# Affichage d'un commentaire descriptif du logiciel lorsque l'utilisateur passe le curseur de sa souris pas dessus le fichier ".desktop".
+	local exec=$5			# Adresse du fichier exécutable du logiciel.
+	local icon=$6			# Emplacement du fichier image de l'icône du logiciel.
+	local type=$7			# Détermine si le fichier ".desktop" pointe vers une application, un lien ou un dossier.
+	local category=$8		# Catégorie(s) du logiciel (jeu, développement, bureautique, etc...).
+
+	#***** Variables *****
+	# Dossiers
+ 	local inst_path="$DIR_SOFTWARE_PATH/$name"	   # Dossier d'installation du logiciel.
+	local shortcut_dir="$DIR_HOMEDIR/Bureau/Linux-reinstall.links"	   # Dossier de stockage des raccourcis vers les fichiers exécutables des logiciels téléchargés.
+
+	# Fichiers
+	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
+
+	#***** Code *****
+	CheckRootEUID
+	
+	EchoNewstep "Téléchargement du logiciel $(DechoN "$name")."
+
+	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.
+	if test ! -d "$inst_path"; then
+        Makedir "$DIR_SOFTWARE_NAME" "$name" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+    fi
+
+	if test wget -v "$software_dl_link" -O "$inst_path" >> "$FILE_LOG_PATH"; then
+		EchoSuccess "L'archive du logiciel $(DechoS "$name") a été téléchargé avec succès."
+		Newline
+
+	else
+		EchoError "Échec du téléchargement de l'archive du logiciel $(DechoE "$name")."
+		Newline
+
+		return
+	fi
+
+	# On décompresse l'archive téléchargée selon le format de compression tout en redirigeant toutes les sorties vers le terminal et le fichier de logs.
+	EchoNewstepTee "Décompression de l'archive $(DechoN "$archive")."
+	{
+		case "$archive" in
+			"*.zip")
+				UncompressArchive "unzip" "" "$inst_path/$archive" "$archive"
+				;;
+			"*.7z")
+				UncompressArchive "7z" "e" "$inst_path/$archive" "$archive"
+				;;
+			"*.rar")
+				UncompressArchive "unrar" "e" "$inst_path/$archive" "$archive"
+				;;
+			"*.tar.gz")
+				UncompressArchive "tar" "-zxvf" "$inst_path/$archive" "$archive"
+				;;
+			"*.tar.bz2")
+				UncompressArchive "tar" "-jxvf" "$inst_path/$archive" "$archive"
+				;;
+			*)
+				EchoError "Le format de fichier de l'archive $(DechoE "$archive") n'est pas supporté."
+				Newline
+
+				return
+				;;
+		esac
+	} 2>&1 | tee -a "$FILE_LOG_PATH"
+
+	# On vérifie que le dossier contenant les fichiers desktop (servant de raccourci) existe, pour ne pas encombrer le bureau de l'utilisateur.
+	# S'il n'existe pas, alors le script le crée
+	if test ! -d "$shortcut_dir"; then
+		EchoNewstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau)."
+		Newline
+
+		Makedir "$DIR_HOMEDIR/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+
+		EchoSuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier."
+	fi
+
+	EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(DechoN "$name")."
+	ln -s "$exec" "$name"
+
+	if test "$?" == "0"; then
+		EchoSuccess "Le lien symbolique a été créé avec succès."
+		Newline
+	else
+        EchoError "Impossible de créer un lien symbolique pointant vers $(DechoE "$exec")."
+        Newline
+	fi
+
+	EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(DechoN "$name")."
+	Newline
+
+	cat <<-EOF > "$shortcut_dir/$name.desktop"
+	[Desktop Entry]
+	Name="$name"
+	Comment="$comment"
+	Exec="$inst_path/$exec"
+	Icon="$icon"
+	Type="$type"
+	Categories="$category";
+	EOF
+
+	EchoSuccess "Le fichier $(DechoS "$name.desktop") a été créé avec succès dans le dossier $(DechoS "$shortcut_dir")."
+	Newline
+
+	EchoNewstep "Suppression de l'archive $(DechoN "$archive")."
+	Newline
+
+	# On vérifie que l'archive a bien été supprimée.
+	if test rm -f "$inst_path/$archive"; then
+        EchoSuccess "L'archive $(DechoS "$archive") a été correctement supprimée."
+		Newline
+    else
+		EchoError "La suppression de l'archive $(DechoE "$archive") a échouée."
+		Newline
+	fi
+}

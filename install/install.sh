@@ -43,6 +43,26 @@ fi
 
 # -----------------------------------------------
 
+## WRITING PATH
+
+EchoStep "Please type the directory where you want to install the library."
+EchoStep "The default path is \"/usr/local/lib\"."
+Newline
+
+read -r "Enter the path :" $path
+
+if [ -z "$path" ]; then
+    echo '__BASH_UTILS_ROOT="/usr/local/lib/"' >> "$HOME/.bash_profile"
+    source "$HOME/.bash_profile"
+elif [ -d "$path" ]; then
+    echo "__BASH_UTILS_ROOT=\"$path\""
+    source "$HOME/.bash_profile"
+else
+    
+fi
+
+# -----------------------------------------------
+
 ## CHECKING FOR LIBRARY INSTALLATION AND RUNNING PROGRAMS
 
 EchoStep "DOWNLOADING THE LIBRARY DEPENDENCIES" "" "J"

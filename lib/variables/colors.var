@@ -19,15 +19,27 @@ __COL_CODE_YELLOW='226'
 # -----------------------------------------------
 
 ## ENCODING WITH THE "tput" COMMAND.
-# Encodage des couleurs (codes de la commande "tput setaf") pour mieux lire les étapes de l'exécution du script.
-__COL_BLUE="$(EncodingColor "$__COL_CODE_BLUE")"       # Deep blue       --> Couleur des headers à n'écrire que dans le fichier de logs.
-__COL_CYAN="$(EncodingColor "$__COL_CODE_CYAN")"       # Cyan blue	      --> Couleur des headers.
-__COL_GREEN="$(EncodingColor "$__COL_CODE_GREEN")"     # Light green     --> Couleur d'affichage des messages de succès la sous-étape.
-__COL_ORANGE="$(EncodingColor "$__COL_CODE_ORANGE")"   # Orange
-__COL_PURPLE="$(EncodingColor "$__COL_CODE_PURPLE")"   # Purple
-__COL_RED="$(EncodingColor "$__COL_CODE_RED")"	       # Light red       --> Couleur d'affichage des messages d'erreur de la sous-étape.
-__COL_RESET="$(EncodingColor "sgr0")"                  # Restauration de la couleur originelle d'affichage de texte selon la configuration du profil du terminal.
-__COL_YELLOW="$(EncodingColor "$__COL_CODE_YELLOW")"   # Light yellow    --> Couleur d'affichage des messages de passage à la prochaine sous-étapes.
+# # Encodage des couleurs (codes de la commande "tput setaf") pour mieux lire les étapes de l'exécution du script.
+# __COL_BLUE="$(EncodingColor "$__COL_CODE_BLUE")"       # Deep blue       --> Couleur des headers à n'écrire que dans le fichier de logs.
+# __COL_CYAN="$(EncodingColor "$__COL_CODE_CYAN")"       # Cyan blue	      --> Couleur des headers.
+# __COL_GREEN="$(EncodingColor "$__COL_CODE_GREEN")"     # Light green     --> Couleur d'affichage des messages de succès la sous-étape.
+# __COL_ORANGE="$(EncodingColor "$__COL_CODE_ORANGE")"   # Orange
+# __COL_PURPLE="$(EncodingColor "$__COL_CODE_PURPLE")"   # Purple
+# __COL_RED="$(EncodingColor "$__COL_CODE_RED")"	       # Light red       --> Couleur d'affichage des messages d'erreur de la sous-étape.
+# __COL_RESET="$(EncodingColor "sgr0")"                  # Restauration de la couleur originelle d'affichage de texte selon la configuration du profil du terminal.
+# __COL_YELLOW="$(EncodingColor "$__COL_CODE_YELLOW")"   # Light yellow    --> Couleur d'affichage des messages de passage à la prochaine sous-étapes.
+
+
+
+__COL_BLUE="$(tput setaf "$__COL_CODE_BLUE")"       # Deep blue       --> Couleur des headers à n'écrire que dans le fichier de logs.
+__COL_CYAN="$(tput setaf "$__COL_CODE_CYAN")"       # Cyan blue	      --> Couleur des headers.
+__COL_GREEN="$(tput setaf "$__COL_CODE_GREEN")"     # Light green     --> Couleur d'affichage des messages de succès la sous-étape.
+__COL_ORANGE="$(tput setaf "$__COL_CODE_ORANGE")"   # Orange
+__COL_PURPLE="$(tput setaf "$__COL_CODE_PURPLE")"   # Purple
+__COL_RED="$(tput setaf "$__COL_CODE_RED")"	        # Light red       --> Couleur d'affichage des messages d'erreur de la sous-étape.
+__COL_RESET="$(tput sgr0)"                          # Restauration de la couleur originelle d'affichage de texte selon la configuration du profil du terminal.
+__COL_YELLOW="$(tput setaf "$__COL_CODE_YELLOW")"   # Light yellow    --> Couleur d'affichage des messages de passage à la prochaine sous-étapes.
+
 
 # -----------------------------------------------
 
