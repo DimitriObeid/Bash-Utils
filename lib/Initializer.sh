@@ -263,7 +263,7 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 __STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG_REDIRECT="";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

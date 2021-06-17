@@ -84,23 +84,23 @@ fi
 #     fi
 # }
 
-function Decho { echo -e "${__2}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+function Decho { echo -e "${__COL_CYAN}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
 
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
-function DechoE { Decho "$1" "$__COL_RED"; }
-function DechoN { Decho "$1" "$__COL_YELLOW"; }
-function DechoS { Decho "$1" "$__COL_GREEN"; }
+function DechoE { echo -e "${__COL_CYAN}$1$__COL_RED"; }
+function DechoN { echo -e "${__COL_CYAN}$1$__COL_YELLOW"; }
+function DechoS { echo -e "${__COL_CYAN}$1$__COL_GREEN"; }
 
 # -----------------------------------------------
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBlue      { Decho "$1" "$__COL_BLUE"; }
-function DechoCyan      { Decho "$1" "$__COL_CYAN"; }
-function DechoGreen     { Decho "$1" "$__COL_GREEN"; }
-function DechoOrange    { Decho "$1" "$__COL_ORANGE"; }
-function DechoPurple    { Decho "$1" "$__COL_PURPLE"; }
-function DechoRed       { Decho "$1" "$__COL_RED"; }
-function DechoYellow    { Decho "$1" "$__COL_YELLOW"; }
+function DechoBlue      { echo -e "${__COL_CYAN}$1$__COL_BLUE"; }
+function DechoCyan      { echo -e "${__COL_CYAN}$1$__COL_CYAN"; }
+function DechoGreen     { echo -e "${__COL_CYAN}$1$__COL_GREEN"; }
+function DechoOrange    { echo -e "${__COL_CYAN}$1$__COL_ORANGE"; }
+function DechoPurple    { echo -e "${__COL_CYAN}$1$__COL_PURPLE"; }
+function DechoRed       { echo -e "${__COL_CYAN}$1$__COL_RED"; }
+function DechoYellow    { echo -e "${__COL_CYAN}$1$__COL_YELLOW"; }
 
 # -----------------------------------------------
 

@@ -341,7 +341,6 @@ function CheckProjectLogPath
         echo "Please add the path as argument.$__COL_RESET" >&2; echo >&2
         ExitError
 
-    echo "$__PROJECT_LOG_FILE_PATH"
     elif [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__COL_RED}IN $(DechoE "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoE "${FUNCNAME[0]}"), LINE $(DechoE "$(( LINENO-1 ))") --> " >&2
         echo "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoE "PROJECT_LOG_PATH") VARIABLE" >&2
@@ -363,7 +362,7 @@ function CheckProjectLogStatus
 
     #***** Variables *****
     local v_errorEcho
-    v_errorEcho="Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file."
+    v_errorEcho="$(tput setaf 196)Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file.$(tput sgr0)"
 
     # If the text is redirected towards the log path, it's better to put every timer status variables values to '0'.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
@@ -383,6 +382,8 @@ function CheckProjectLogStatus
 
     # If a log file exists AND if "$__STAT_LOG" value is "false" AND if "$__STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
+
+        # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
             # Checking the extra arguments array.
@@ -430,7 +431,8 @@ function CheckProjectLogStatus
             fi
         
         sleep "$__STAT_TIME_TXT"
-        
+
+        # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
             # Checking the extra arguments array.
@@ -464,6 +466,7 @@ function CheckProjectLogStatus
                         esac
                     fi
                 done
+
             # Else, if no argument is passed in "$p_extraArgs" parameter.
             else
                 case "$p_option" in
@@ -479,7 +482,6 @@ function CheckProjectLogStatus
             fi
             
             sleep "$__STAT_TIME_TXT"
-            
         fi
 
     # Else, if no log file exists OR if "$__STAT_LOG" value is "false" OR if "$__STAT_LOG_REDIRECT" has no redirection value. 
