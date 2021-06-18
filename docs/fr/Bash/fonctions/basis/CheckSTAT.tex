@@ -1,0 +1,172 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}     % Encodage du texte
+\usepackage[french]{babel}      % Langue
+\usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{fancyhdr}
+
+\fontfamily{}
+
+\title{Fonctions du fichier de librairie CheckSTAT.lib}
+\author{Dimitri OBEID}
+\date{2021}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Fonctions du fichier de librairie CheckSTAT.lib)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Fonctions du fichier de librairie CheckSTAT.lib)
+  /Keywords ()
+}
+
+\begin{document}
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Présentation}
+\section{Fonctions}
+\subsection{ConfEcho}
+\begin{itemize}
+    \item \textbf{Description de la fonction :} Cette fonction
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \$p\_badVal :
+    \$p\_varVal :
+    
+    \item \textbf{Variables :} v\_array :
+    i :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_DEBUG}
+\begin{itemize}
+    \item \textbf{Description de la variable :} Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
+    
+    Valeurs acceptées :
+    \begin{itemize}
+        \item \textbf{true} : Si une condition vérifie que la valeur de cette variable de statut est égale à cette valeur, alors les fonctionnalités à tester sont testées au début du script principal, avant d'interrompre l'exécution une fois les tests passés.
+        \item \textbf{false} : Le script ignore les éventuels tests de fonctionnalités. 
+    \end{itemize}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_DEBUG" soit bien égale à "true" ou "false".
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_ERROR}
+\begin{itemize}
+    \item \textbf{Description de la variable :} Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".
+    
+    Valeurs acceptées :
+    \begin{itemize}
+        \item \textbf{\textit{vide}} : Sans valeur enregistrée, le script demande à l'utilisateur s'il souhaite que son exécution continue ou non (via la fonction HandleErrors()).
+        \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.
+    \end{itemize}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_EXIT\_CODE}
+\begin{itemize}
+    \item \textbf{Description de la variable :}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_EXIT\_CODE" soit un nombre entier.
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_LOG}
+\begin{itemize}
+    \item \textbf{Description de la variable :}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG" corresponde aux chaînes de caractères "true" ou "false".
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_LOG\_REDIRECT}
+\begin{itemize}
+    \item \textbf{Description de la variable :}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG\_REDIRECT" soit vide ou corresponde aux chaînes de caractères "log" ou "tee".
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_TIME\_TXT}
+\begin{itemize}
+    \item \textbf{Description de la variable :} Cette variable sert à mettre en pause l'exécution du script pendant un temps bref (vue d'un message, etc...).
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_TIME\_TXT" soit un nombre entier ou décimal.
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} v\_array :
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckSTAT\_USER\_OS}
+\begin{itemize}
+    \item \textbf{Description de la variable :}
+
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_USER\_OS" soit
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :}
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\subsection{CheckProjectStatusVars}
+\begin{itemize}
+    \item \textbf{Description de la fonction :} Cette fonction
+
+    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
+    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+
+    \item \textbf{Variables :} Aucune.
+
+    \item \textbf{Code :}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,129 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}     % Encodage du texte
+\usepackage[french]{babel}      % Langue
+\usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{fancyhdr}
+
+\fontfamily{}
+
+\title{Introduction à Bash Utils}
+\author{Dimitri OBEID}
+\date{2021}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Introduction à Bash Utils)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Introduction à Bash Utils)
+  /Keywords ()
+}
+
+% TODO : Justifier chaque paragraphe du document.
+\begin{document}
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction à Bash Utils}
+\subsection{Présentation}
+Bash Utils est une librairie, c'est à dire un ensemble de fonctions utilitaires, regroupées et mises à disposition afin de pouvoir être utilisées sans avoir à les réécrire.
+
+Comme son nom le suggère, il s'agit d'une librairie orientée vers le langage Bash, un langage de script permettant une interaction simple avec le shell (interpréteur de commandes) du système d'exploitation, ainsi qu'avec ses différents programmes.
+
+Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix s'explique par la très vaste documentation disponible, ainsi que pour sa
+
+\subsection{Architecture}
+Bash Utils est un ensemble de fichiers shell à sourcer dans un script, servant de fichiers source, de fichiers de configuration, d'outils de développement ou encore de scripts déjà prêts à l'exécution.
+
+Liste des dossiers :
+\subsubsection{bin}
+Ce dossier contient les fichiers exécutables nécessaires au bon fonctionnement de la librairie.
+
+\subsubsection{config}
+Ce dossier contient les fichiers de configuration de la librairie, tel que celui traitant les variables de statut.
+
+\subsubsection{docs}
+Ce dossier contient toute la documentation utile aux développeurs.
+
+\subsubsection{install}
+Ce dossier contient les fichiers et dossiers nécessaires à l'installation automatique de la librairie.
+
+\subsubsection{lib}
+Ce dossier est le plus important de tous, car il contient tous les fichiers source de la librairie (fonctions et variables), ainsi que le fichier d'initialisation à sourcer dans un script principal.
+
+Il contient trois sous-dossiers :
+\begin{itemize}
+    \item \textbf{functions} : ce sous-dossier contient tous les fichiers de fonctions dans différents sous-dossiers.
+    \item \textbf{lang} : ce sous-dossier contient tous les fichiers nécessaires à la traduction des scripts (fonctionnalité future).
+    \item \textbf{variables} : ce sous-dossier contient tous les fichiers enregistrant des variables.
+\end{itemize}
+
+Description des sous-dossiers du dossier \textbf{functions}
+\setcounter{secnumdepth}{4}
+\paragraph{Fonctions}
+Chaque fichier contient des fonctions qui sont propres au nom du fichier. Par exemple, le fichier "Files.lib" ne contient que des fonctions de traitement de fichiers.
+
+Les trois sous-dossiers du dossier \textbf{functions} ont été créés pour différencier les différentes catégories de fichiers de fonctions (dans le dossier \textbf{functions}) :
+\begin{itemize}
+    \item \textbf{basis} : les fonctions les plus basiques (affichage de texte coloré, vérifications, gestion de couleurs, saisies de l'utilisateur).
+    
+    \item \textbf{main} : les fonctions standard (traitement de fichiers, de dossiers, de permissions, gestion du temps, etc...)
+
+    Ces fonctions dépendent des fonctions contenues dans les fichiers du dossier "basis".
+
+    \item \textbf{os\_specific} : les fonctions spécifiques aux systèmes UNIX supportés (installations, configurations, etc...)
+\end{itemize}
+
+\paragraph{lang}
+Le fichier \textbf{lang.csv} contient les différentes traductions de la librairie dans un fichier au format CSV.
+
+\paragraph{variables}
+
+\subsubsection{projects}
+Ce dossier contient non seulement des scripts facilitant l'utilisation du shell Bash sur un système UNIX, mais aussi des scripts facilitant le développement de la librairie Bash Utils.
+
+\subsubsection{tmp}
+Ce dossier sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs.
+
+
+\section{Fonctionnement}
+Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
+
+Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug.
+
+Fort heureusement, un script shell s'occupe de cette partie : \textbf{Initializer.sh}, dans le dossier \textbf{lib}.
+
+La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer ce fichier d'initialisation. Il s'occupera de réaliser toutes les étapes ci-dessous :
+
+\subsection{Étapes d'initialisation}
+En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins utiles à la recherche des chemins des dossiers de la librairie (\textbf{BASH\_UTILS}), ainsi que celles enregistrant les chemins du projet.
+
+En second lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
+
+En troisième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \textbf{"BASH\_UTILS\_"} initialisées dans la première étape existent.
+
+En quatrième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \textbf{lib}
+
+En cinquième lieu, le script :
+\begin{itemize}
+    \item Crée une variable nommée \textbf{PROJECT\_PATH}, enregistrant le chemin du fichier de script principal par le biais de la fonction \textbf{GetParentDirectoryPath} du fichier \textbf{functions/main/Directories.lib}. 
+    
+    \item Modifie plusieurs variables de statut pour rendre la partie d'initialisation invisible à l'utilisateur final.
+    
+    \item Copie le contenu du fichier de logs de la partie d'initialisation dans le fichier de logs principal.
+\end{itemize}
+
+
+
+\section{Installation de Bash Utils}
+
+\section{Documentations des fonctions et des variables de Bash-Utils}
+
+\end{document}

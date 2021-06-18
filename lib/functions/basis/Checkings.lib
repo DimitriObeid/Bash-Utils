@@ -364,7 +364,7 @@ function CheckProjectLogStatus
     local v_errorEcho
     v_errorEcho="$(tput setaf 196)Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file.$(tput sgr0)"
 
-    # If the text is redirected towards the log path, it's better to put every timer status variables values to '0'.
+    # If the text is redirected towards the log path only, it's better to put every timer status variables values to '0'.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
         if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -gt 0 ]; then
 
@@ -386,8 +386,8 @@ function CheckProjectLogStatus
         # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
-            # Checking the extra arguments array.
-            if [ -n "${p_extraArgs[*]}" ]; then
+            # Checking if the extra arguments array contains at least a value, by checking its elements number.
+            if [ "${#p_extraArgs[@]}" -gt 0 ]; then
 
                 for val in "${p_extraArgs[@]}"; do
 
@@ -435,8 +435,8 @@ function CheckProjectLogStatus
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            # Checking the extra arguments array.
-            if [ -n "${p_extraArgs[*]}" ]; then
+            # Checking if the extra arguments array contains at least a value, by checking its elements number.
+            if [ "${#p_extraArgs[@]}" -gt 0 ]; then
 
                 for val in "${p_extraArgs[@]}"; do
 

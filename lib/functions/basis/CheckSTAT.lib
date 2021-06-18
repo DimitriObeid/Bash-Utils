@@ -25,14 +25,14 @@ function ConfEcho
     local p_lineno=$2;
     local p_badVal=$3;
     local p_varVal=$4
-    
+
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4
 
 
     #***** Variables *****
-    local arr=("$@")
+    local v_array=("$@")
     local i=0
 
     #***** Code *****
@@ -48,14 +48,14 @@ function ConfEcho
     echo >&2; echo "$__COL_RED$__TXT_TAB$__TXT_TAB The allowed values are :$__COL_RESET" >&2
 
     # Displaying the list of every allowed arguments.
-    for val in "${arr[@]}"; do
+    for val in "${v_array[@]}"; do
         i=$(( i+1 ))
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__COL_RED}$i/${#arr[@]}  --> ${__COL_ORANGE}An empty argument$__COL_RESET" >&2
+            echo -e "${__COL_RED}$i/${#v_array[@]}  --> ${__COL_ORANGE}An empty argument$__COL_RESET" >&2
         else
-            echo -e "${__COL_RED}$i/${#arr[@]}  --> $__COL_CYAN$val$__COL_RESET" >&2
+            echo -e "${__COL_RED}$i/${#v_array[@]}  --> $__COL_CYAN$val$__COL_RESET" >&2
         fi
     done
 
@@ -74,11 +74,11 @@ function CheckSTAT_DEBUG
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("true" "false")
+    local v_array=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_DEBUG" != "true" ] && [ "$__STAT_DEBUG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${v_array[@]}"
     fi
 }
 
@@ -90,11 +90,11 @@ function CheckSTAT_ERROR
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("" "fatal")
+    local v_array=("" "fatal")
 
     #***** Code *****
     if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" != "fatal" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${v_array[@]}"
     fi
 }
 
@@ -106,11 +106,11 @@ function CheckSTAT_EXIT_CODE
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("")
+    local v_array=("")
 
     #***** Code *****
     if ! IsInt "$__STAT_EXIT_CODE"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${v_array[@]}"
     fi
 }
 
@@ -122,11 +122,11 @@ function CheckSTAT_LOG
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("true" "false")
+    local v_array=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_LOG" != "true" ] && [ "$__STAT_LOG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${v_array[@]}"
     fi
 }
 
@@ -138,11 +138,11 @@ function CheckSTAT_LOG_REDIRECT
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("" "true" "false")
+    local v_array=("" "true" "false")
 
     #***** Code *****
     if [ -n "$__STAT_LOG_REDIRECT" ] && [ "$__STAT_LOG_REDIRECT" != 'log' ] && [ "$__STAT_LOG_REDIRECT" != 'tee' ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${v_array[@]}"
     fi
 }
 
@@ -154,12 +154,12 @@ function CheckSTAT_TIME_TXT
     local p_lineno=$2
 
     #***** Variables *****
-    local array=("${__COL_ORANGE}An integer or a floating number")
+    local v_array=("${__COL_ORANGE}An integer or a floating number")
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.
     if ! IsFloatInt "$__STAT_TIME_TXT"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${array[@]}" >&2
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${v_array[@]}" >&2
     fi
 }
 
@@ -167,6 +167,11 @@ function CheckSTAT_TIME_TXT
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS
 {
+    #***** Parameters *****
+    local p_file=$1
+    local p_lineno=$2
+
+    #***** Code *****
     return
 }
 

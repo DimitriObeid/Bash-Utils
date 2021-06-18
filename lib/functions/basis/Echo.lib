@@ -133,9 +133,11 @@ function EchoError
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
-    # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
+                                # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
+                                # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
+    DbgMsg "0" "2"
     CheckProjectLogStatus "$__COL_RED$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" >&2
+    DbgMsg "1"
 
     sleep "$__STAT_TIME_TXT"
 }
