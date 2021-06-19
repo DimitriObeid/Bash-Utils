@@ -28,21 +28,22 @@ fi
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
 # Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_ROOT" variable.
-# Do not source the "~/.bashrc" file, as it's
+# Do not source the "~/.bashrc" file, as it is executed for interactive non-login shells, unlike "~/.bash_profile".
 
-source "$HOME/.bash_profile" || {
-    echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$HOME/.bash_profile\" FILE !" >&2
-    
-    if [ "$EUID" -eq 0 ]; then
-        echo "Make sure that this file exists in your \"$HOME\" directory (since you executed this script with super-administrator privileges), and that the \"\$__BASH_UTILS_ROOT\" variable is equal to an existing path." >&2
-    else
-        echo "Make sure that this file exists in your \"$HOME\" directory, and that the \"$\__BASH_UTILS_ROOT\" variable is equal to an existing path." >&2
-    fi
-    
-    echo >&2; echo "Aborting operation." >&2
-
-    exit 1
-}
+# TODO : Write these instructions into a LaTeX document.
+# source "$HOME/.bash_profile" || {
+#     echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$HOME/.bash_profile\" FILE !" >&2
+# 
+#     if [ "$EUID" -eq 0 ]; then
+#         echo "Make sure that this file exists in your \"$HOME\" directory (since you executed this script with super-administrator privileges), and that the \"\$__BASH_UTILS_ROOT\" variable is equal to an existing path." >&2
+#     else
+#         echo "Make sure that this file exists in your \"$HOME\" directory, and that the \"$\__BASH_UTILS_ROOT\" variable is equal to an existing path." >&2
+#     fi
+#     
+#     echo >&2; echo "Aborting operation." >&2
+# 
+#     exit 1
+# }
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 source "$__BASH_UTILS_ROOT/config/Init.conf" || {  echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_ROOT/config/Init.conf\" FILE"; }
@@ -317,7 +318,7 @@ if [ "$__STAT_LOG" = "true" ]; then
     fi
     
     # Redirecting files list into the log file.
-    HeaderBlue "SOURCED FILES LOG OUTPUT"
+    HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
     EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
 
@@ -337,7 +338,6 @@ if [ "$__STAT_LOG" = "true" ]; then
     Newline
 
     EchoSuccess "Successfully got the user's system's informations."
-    Newline
 fi
 
 # -----------------------------------------------

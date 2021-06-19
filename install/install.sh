@@ -53,6 +53,8 @@ read -r "Enter the path :" $path
 
 if [ -z "$path" ]; then
     echo '__BASH_UTILS_ROOT="/usr/local/lib/"' >> "$HOME/.bash_profile"
+    echo '__BASH_UTILS="$__BASH_UTILS_ROOT/lib"' >> "$HOME/.bash_profile"
+
     source "$HOME/.bash_profile"
 elif [ -d "$path" ]; then
     echo "__BASH_UTILS_ROOT=\"$path\""

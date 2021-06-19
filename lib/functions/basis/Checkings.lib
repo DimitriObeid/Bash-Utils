@@ -398,7 +398,6 @@ function CheckProjectLogStatus
 
     #***** Variables *****
     local v_acceptedExtraArgs=('nodate')        # Allowed extra arguments list for the "$p_extraArgs" array of arguments.
-    local i=0               # Array incrementer.
     local v_errorEcho
     v_errorEcho="$(tput setaf 196)Unable to write into the $(DechoE "$__PROJECT_LOG_FILE_PATH") file.$(tput sgr0)"
 
@@ -424,7 +423,7 @@ function CheckProjectLogStatus
         # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
-            # Checking if the extra arguments array contains at least a value, by checking its elements number.
+            # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
             if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
 
                 for val in "${p_extraArgs[@]}"; do
@@ -474,7 +473,7 @@ function CheckProjectLogStatus
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            # Checking if the extra arguments array contains at least a value, by checking its elements number.
+            # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
             if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
 
                 for val in "${p_extraArgs[@]}"; do
@@ -511,11 +510,11 @@ function CheckProjectLogStatus
                 case "$p_option" in
                     '-n')
                         echo -ne "$p_string"
-                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -ne "[$__TIME_DATE_DISPLAY] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                     '')
                         echo -e "$p_string"
-                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                        echo -e "[$__TIME_DATE_DISPLAY] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
                 esac
             fi

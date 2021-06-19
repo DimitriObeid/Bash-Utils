@@ -39,6 +39,21 @@ Comme son nom le suggère, il s'agit d'une librairie orientée vers le langage B
 
 Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix s'explique par la très vaste documentation disponible, ainsi que pour sa
 
+\subsection{Utilisation}
+Pour utiliser cette librairie, il vous suffira de sourcer deux fichiers :
+\begin{itemize}
+    \item \textbf{\$HOME/.bash\_profile} : Ce fichier à sourcer en tout premier lieu doit contenir les variables suivantes :
+    \begin{itemize}
+        \item \textbf{\$\_\_BASH\_UTILS\_ROOT} : Contient le chemin vers le dossier racine de la librairie, appelé \textbf{Bash-utils}.
+        \item \textbf{\$\_\_BASH\_UTILS} : Contient le chemin vers le fichier d'initialisation.
+    \end{itemize}
+
+    \item \textbf{Initializer.sh} : Ce fichier est l'initialiseur de la librairie Bash-utils. Ils doit être sourcé en deuxième lieu.
+    
+    \item Pour en savoir plus sur les instructions concernant le fichier \textbf{.bash\_profile}, veuillez consulter la section <> du fichier "Installation.pdf".
+\end{itemize}
+
+
 \subsection{Architecture}
 Bash Utils est un ensemble de fichiers shell à sourcer dans un script, servant de fichiers source, de fichiers de configuration, d'outils de développement ou encore de scripts déjà prêts à l'exécution.
 

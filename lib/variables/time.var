@@ -11,3 +11,7 @@
 __TIME_DATE=$(date +"%Y-%m-%d %Hh-%Mm-%Ss")
 
 # -----------------------------------------------
+
+## PRINTING THE DATE
+# Displaying the current date YYYYY-MM-DD hh-mm-ss format (YEAR-MONTH-DAY hour-minute-second) with a colored text (for a better view in the log file).
+__TIME_DATE_DISPLAY=$(printf "$(tput setaf 111)$__TIME_DATE$(tput sgr0)")

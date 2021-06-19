@@ -19,9 +19,15 @@
 
 ## SOURCING THE INITALIZER FILE
 
+# shellcheck disable=SC1090
 # shellcheck disable=SC1091
-if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
-    echo; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
+if ! source "$HOME/.bash_profile"; then
+    echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the ~/.bash_profile file." >&2; echo >&2; exit 1
+fi
+
+# shellcheck disable=SC1091
+if ! source "$__BASH_UTILS/Initializer.sh"; then
+    echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1
 fi
 
 # -----------------------------------------------
@@ -115,7 +121,16 @@ function CheckArgs
                 "EUID != 0" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
     fi
 
-	# If the mandatory installation tye argument is not passed.
+    # If the mandatory username argument is not passed.
+    local lineno=$LINENO; if [ -z "$__ARG_USERNAME" ]; then
+        EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
+        echo "    sudo $0 \$username" >&2
+        Newline >&2
+        
+        exit 1
+    fi
+    
+	# If the mandatory installation type argument is not passed.
 	local lineno=$LINENO; if [ -z "$__ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo "    sudo $0 \$username" >&2
