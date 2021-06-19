@@ -28,16 +28,16 @@ fi
 
 ## DEFINING RESOURCE FILES AND FOLDERS
 
-# Linux-reinstall sub-folders paths
+# Linux-reinstall's sub-folders paths
 __LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__PROJECT_FILE")/install/categories"
 __LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__PROJECT_FILE")/lang"
 __LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__PROJECT_FILE")/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-EchoNewstep "In $(DechoN "$__PROJECT_FILE"), line $(DechoN "$LINENO") : CHECKING FOR ${__PROJECT_NAME^^}'S SUB-FOLDERS"
-GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"
-GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"
-GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && EchoSuccess "Got this directory : $(DechoS "$__LINUX_REINSTALL_INST")"; Newline
+EchoNewstep "IN $(DechoN "$__PROJECT_FILE"), LINE $(DechoN "$LINENO") : CHECKING FOR ${__PROJECT_NAME^^}'S SUB-FOLDERS"
+GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"
+GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"
+GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"; Newline
 EchoNewstep "All the needed directories are found !"
 
 # Sourcing the Linux-reinstall language files.

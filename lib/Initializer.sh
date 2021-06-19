@@ -82,7 +82,7 @@ function DbgMsg
 
 # -----------------------------------------------
 
-## FUNCTIONS THAT BELONG TO THE INITIALIZER FILE
+## PRINTING TEXT FUNCTIONS THAT BELONG TO THE INITIALIZATION PROCESS.
 
 # This function is called at multiple times in the next function.
 function __EchoInit
@@ -131,6 +131,10 @@ function InitErrMsg
     fi
 }
 
+# -----------------------------------------------
+
+## CHECKINGS FUNCTIONS THAT BELONG TO THE INITIALIZATION PROCESS.
+
 # Finding Bash-utils directories.
 function CheckBURequirements
 {
@@ -148,6 +152,17 @@ function CheckBURequirements
         EchoInit "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
     else
         InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno" "1"
+    fi
+}
+
+# Checking if the initialization process is done or not
+function CheckIsLibraryInitializing
+{
+    #***** Code *****
+    if [ "$__BASH_UTILS_IS_INITIALIZING" = "true" ]; then
+        return 0
+    else
+        return 1
     fi
 }
 
@@ -197,7 +212,8 @@ fi
 
 ## CHECKING FOR THE REQUIRED FOLDERS
 
-EchoInit "CHECKING REQUIRED DIRECTORIES"
+# Checking for the required Bash-utils folders.
+EchoInit "CHECKING FOR BASH-UTILS REQUIRED DIRECTORIES"
 CheckBURequirements "$__BASH_UTILS_BIN"             "$LINENO"
 CheckBURequirements "$__BASH_UTILS_CONF"            "$LINENO"
 CheckBURequirements "$__BASH_UTILS_TMP"             "$LINENO"
@@ -206,6 +222,15 @@ CheckBURequirements "$__BASH_UTILS_FUNCTS_BASIS"    "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS_MAIN"     "$LINENO"
 CheckBURequirements "$__BASH_UTILS_VARS"            "$LINENO"
 EchoInit
+
+# Checking for the development tools required folders.
+if [ -n "$__BASH_UTILS_DEVTOOLS_PROJECT" ] && [ "$__BASH_UTILS_DEVTOOLS_PROJECT" = "true" ]; then
+    EchoInit "CHECKING FOR DEVTOOLS REQUIRED DIRECTORIES"
+    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_BIN"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_IMG"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_SRC"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_TRANSL" "$LINENO"
+fi
 
 # -----------------------------------------------
 
@@ -263,7 +288,7 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 __STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -324,3 +349,5 @@ fi
 #### ENDING THE INITIALIZATION PROCESS
 
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "${__PROJECT_NAME^^}") !"
+
+# 

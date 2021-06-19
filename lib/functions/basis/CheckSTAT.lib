@@ -29,10 +29,9 @@ function ConfEcho
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4
-
+    local p_array=("$@")
 
     #***** Variables *****
-    local v_array=("$@")
     local i=0
 
     #***** Code *****
@@ -48,14 +47,14 @@ function ConfEcho
     echo >&2; echo "$__COL_RED$__TXT_TAB$__TXT_TAB The allowed values are :$__COL_RESET" >&2
 
     # Displaying the list of every allowed arguments.
-    for val in "${v_array[@]}"; do
+    for val in "${p_array[@]}"; do
         i=$(( i+1 ))
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__COL_RED}$i/${#v_array[@]}  --> ${__COL_ORANGE}An empty argument$__COL_RESET" >&2
+            echo -e "${__COL_RED}$i/${#p_array[@]}  --> ${__COL_ORANGE}An empty argument$__COL_RESET" >&2
         else
-            echo -e "${__COL_RED}$i/${#v_array[@]}  --> $__COL_CYAN$val$__COL_RESET" >&2
+            echo -e "${__COL_RED}$i/${#p_array[@]}  --> $__COL_CYAN$val$__COL_RESET" >&2
         fi
     done
 

@@ -32,7 +32,7 @@ function __CreateFIFO
 
         # 166 --> Orange
         # 196 --> Red
-        EchoError "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
+        EchoInit "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
     done
 }
 
@@ -44,28 +44,24 @@ function CreateFIFO
 
     #***** Code *****
     if [ ! -d "$__PROJECT_FIFO_DIR_PATH" ]; then
-        EchoMsg "Creating the $(DechoN "$__PROJECT_FIFO_DIR_PATH")"; Newline
-        EchoMsg "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
+        EchoInit "Creating the $(DechoN "$__PROJECT_FIFO_DIR_PATH")"; EchoInit
+        EchoInit "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
     fi
-    
-    EchoMsg "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
-    Newline
+
+    EchoInit "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
+    EchoInit
     
     if [ ! -p "$p_path" ]; then
         if mkfifo "$p_path"; then
-            EchoSuccess "The $(DechoS "$p_path") FIFO already exists"
+            EchoInit "Created FIFO : $(tput setaf 6)$p_path$(tput sgr0)"
         else
-            HandleErrors "1" "UNABLE TO CREATE THIS FIFO --> $(DechoE "$p_path")" \
-                "$(__CreateFIFO \
-                    "Project's FIFOs path --> $(DechoE "$__PROJECT_FIFO_DIR_PATH")" \
-                    "$(DechoE "Writing rights")")" \
-                "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
-
-            EchoSuccess "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
-            Newline
+            InitErrMsg "$(echo "UNABLE TO CREATE THIS FIFO --> $(tput setaf 196)$p_path$(tput sgr0) ! PLEASE CHECK AT THE FOLLOWING ADVICES TO RESOLVE THIS ERROR !" \
+            "$(__CreateFIFO \
+                "Project's FIFOs path --> $(tput setaf 196)$__PROJECT_FIFO_DIR_PATH$(tput sgr0)" \
+                "$(tput setaf 196)Writing rights$(tput sgr0)")")"
         fi
     else
-        EchoSuccess "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
+        EchoInit "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
     fi
 }
 
@@ -91,23 +87,30 @@ function ReadFromFIFO
     v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
 
     #***** Code *****
-    CheckArgs_ReadFromFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue"
-    
-    EchoNewstep "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value."
-    Newline
+    if [ -f "$__PROJECT_LOG_FILE_PATH" ] && [ "$__BASH_UTILS_IS_INITIALIZING" = "true" ]; then
+        # TODO : Test
+        echo lol
+    else
+        CheckArgs_ReadFromFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue"
         
-    while true; do
-        if read -r line < "$p_fifoPath"; then
-            if [[ "$line" == "$v_varLine" ]]; then
-                # Gathering the wanted value
-                echo "$p_newVar"
-                break
-            else
-                HandleErrors "1" "THE $(DechoE "$v_varLine") STRING WAS NOT FOUND IN THE $(DechoE "$p_fifoPath") FIFO" \
-                    "" "$v_varLine" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+        CheckProjectLogStatus "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value."
+        CheckProjectLogStatus
+            
+        while true; do
+            if read -r line < "$p_fifoPath"; then
+                if [[ "$line" == "$v_varLine" ]]; then
+                    # Gathering the wanted value
+                    echo "$p_newVar"
+                    break
+                else
+                    CheckProjectLogStatus "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
+                    CheckProjectLogStatus "THE $(tput setaf 196)$v_varLine$(tput sgr0) STRING WAS NOT FOUND IN THE $(tput setaf 196)$p_fifoPath$(tput sgr0) FIFO"
+                    
+                    ExitError
+                fi
             fi
-        fi
-    done
+        done
+    fi
 }
 
 # -----------------------------------------------
@@ -135,17 +138,17 @@ function WriteIntoFIFO
         if [ "$p_existingPath" = "nopath" ]; then
             return
         else
-            # Line break with the "CheckProjectLogPath" function without any argument.
-            CheckProjectLogPath
+            # Line break with the "CheckProjectLogStatus" function without any argument.
+            CheckProjectLogStatus
             
             # As this function is called by the functions called in the "HandleErrors" function, calling this last function will cause an infinite loop
             # Redefining a part of its behavior was necessary to prevent this situation.
             DrawLine "$(tput setaf 196)" "-"
-            CheckProjectLogPath "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
-            CheckProjectLogPath "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
-            CheckProjectLogPath
+            CheckProjectLogStatus "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
+            CheckProjectLogStatus "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
+            CheckProjectLogStatus
 
-            CheckProjectLogPath ""
+            CheckProjectLogStatus ""
         fi
     fi
     # If the file size is equal to 0 (empty file)
