@@ -386,6 +386,11 @@ function CheckProjectLogPath
     fi
 }
 
+function CheckProjectLogStatusPrintWarningArrayValue
+{
+    echo -e "${__COL_YELLOW}Warning : incorrect argument given as extra argument array in $__COL_CYAN${BASH_SOURCE[0]}$__COL_YELLOW,  function ${__COL_CYAN}CheckProjectLogStatus$__COL_YELLOW --> $val$__COL_RESET" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+}
+
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 function CheckProjectLogStatus
 {
