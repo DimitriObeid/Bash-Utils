@@ -9,3 +9,7 @@ fi
 if ! source "$__BASH_UTILS/Initializer.sh"; then
     echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1
 fi
+
+
+# /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
+
