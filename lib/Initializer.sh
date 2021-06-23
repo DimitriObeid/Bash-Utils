@@ -39,9 +39,9 @@ fi
 #     else
 #         echo "Make sure that this file exists in your \"$HOME\" directory, and that the \"$\__BASH_UTILS_ROOT\" variable is equal to an existing path." >&2
 #     fi
-#     
+#
 #     echo >&2; echo "Aborting operation." >&2
-# 
+#
 #     exit 1
 # }
 
@@ -65,13 +65,13 @@ function DbgMsg
 
     #***** Code *****
     printf "
-    
+
     -------------------------------------------------
     DEBUG
     -------------------------------------------------
-    
+
     "
-    
+
     if [ "$p_code" -eq 0 ]; then
         sleep "$p_sleep"
 
@@ -121,10 +121,10 @@ function InitErrMsg
     local p_msg=$1
     local p_lineno=$2
     local p_exit=$3
-    
+
     #***** Code *****
     echo >&2; echo "$(tput setaf 196)BASH-UTILS ERROR : In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> $p_msg$(tput sgr0)" >&2; echo >&2
-    
+
     if [ "$p_exit" -eq 0 ]; then
         return
     elif [ "$p_exit" -eq 1 ]; then
@@ -142,12 +142,12 @@ function CheckBURequirements
     #***** Parameters *****
     local p_path=$1
     local p_lineno=$2
-    
+
     #***** Code *****
     # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
         EchoInit "Found directory : $(tput setaf 6)$p_path$(tput sgr0)"
-        
+
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
         EchoInit "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
@@ -175,7 +175,7 @@ function SourceDependency
 
     #***** Code *****
     [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : $(tput setaf 6)$p_dep" "$LINENO" "1"
-    
+
     # shellcheck disable=SC1090
     source "$p_dep" || InitErrMsg "Unable to source this dependency file : $(tput setaf 6)$p_dep" "$LINENO" "1"
 
@@ -193,7 +193,7 @@ function SourceDependency
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
-    true > "$__INIT_LIST_FILE_PATH" || { 
+    true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
         echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to clear the initializer's log file."
         echo >&2; exit 1
@@ -205,7 +205,7 @@ else
             echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." >&2; echo >&2; exit 1
         }
     fi
-    
+
     touch "$__INIT_LIST_FILE_PATH"
 fi
 
@@ -257,11 +257,11 @@ EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FI
 EchoInit "Sourcing the variables files :"; for f in "${__BASH_UTILS_VARIABLES_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
 # -----------------------------------------------
-# 
+#
 # ## CREATING THE FIFOs
-# 
+#
 # EchoInit "PROCESSING THE $(Decho "$__PROJECT_NAME") FIFOs"
-# 
+#
 # # Color processing.
 # CreateFIFO "$__PROJECT_FIFO_COLORS"
 

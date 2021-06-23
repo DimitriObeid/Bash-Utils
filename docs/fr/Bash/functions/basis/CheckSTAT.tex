@@ -3,26 +3,34 @@
 \usepackage[utf8]{inputenc}     % Encodage du texte
 \usepackage[french]{babel}      % Langue
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}
-\usepackage{color}
-\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}					%
+\usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte
+\usepackage{verbatim}						% Mise en page de paragraphes
+\usepackage{fancyhdr}						%
+\usepackage[document]{ragged2e}				% Justification du texte
 
 \fontfamily{}
 
-\title{Fonctions du fichier de librairie CheckSTAT.lib}
+\pagecolor{black}
+\title{\color{red}Introduction à Bash Utils}\color{white}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
 
 \pdfinfo{
-  /Title    (Fonctions du fichier de librairie CheckSTAT.lib)
+  /Title    (Introduction à Bash Utils)
   /Author   (Dimitri OBEID)
   /Creator  (Dimitri OBEID)
   /Producer (Dimitri OBEID)
-  /Subject  (Fonctions du fichier de librairie CheckSTAT.lib)
+  /Subject  (Introduction à Bash Utils)
   /Keywords ()
 }
 
+% Définition de couleurs
+\definecolor{mauve}{RGB}{128, 0, 128}
+
+
+% TODO : Justifier chaque paragraphe du document.
 \begin{document}
 \maketitle
 \newpage
@@ -30,24 +38,40 @@
 \tableofcontents
 \newpage
 
-\section{Présentation}
-\section{Fonctions}
-\subsection{ConfEcho}
-\begin{itemize}
-    \item \textbf{Description de la fonction :} Cette fonction
+\color{red}
+\section{Présentation}\color{white}
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
-    \$p\_badVal :
-    \$p\_varVal :
+
+\color{red}
+\section{Fonctions}\color{white}
+
+\color{green}
+\subsection{ConfEcho}\color{white}
+\begin{flushleft}
+	\textbf{Description de la fonction :}\\
+   	Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.\\[1\baselineskip]
+   	Ce message est structuré de la manière suivante :\\
+   	\begin{itemize}
+   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,
+   		\item la valeur défectueuse enregistrée,
+   		\item la liste des valeurs autorisées.\\[1\baselineskip]
+   	\end{itemize}
+
+   	\textbf{Paramètres :}\\
+   	\color{orange}\textbf{\$p\_file\color{white} :} \color{white} fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")").\\
+   	\color{orange}\textbf{\$p\_lineno\color{white} :} \color{white} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}").\\
+   	\color{orange}\textbf{\$p\_badVal\color{white} :} \color{white}\\
+   	\color{orange}\textbf{\$p\_varVal\color{white} :} \color{white}\\[1\baselineskip]
     
-    \item \textbf{Variables :} v\_array :
-    i :
+   	\textbf{Variables :}\\
+   	\color{orange}\textbf{\$v\_array\color{white} :} \color{white} \\
+   	\color{orange}\textbf{\$i\color{white} :} \color{white}\\[1\baselineskip]
 
-    \item \textbf{Code :}
-\end{itemize}
+    \textbf{Code :}\\
+\end{flushleft}
 
-\subsection{CheckSTAT\_DEBUG}
+\color{green}
+\subsection{CheckSTAT\_DEBUG}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :} Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
     
@@ -59,15 +83,17 @@
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_DEBUG" soit bien égale à "true" ou "false".
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_ERROR}
+\color{green}
+\subsection{CheckSTAT\_ERROR}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :} Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".
     
@@ -79,90 +105,103 @@
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+    \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_EXIT\_CODE}
+\color{green}
+\subsection{CheckSTAT\_EXIT\_CODE}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_EXIT\_CODE" soit un nombre entier.
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_LOG}
+\color{green}
+\subsection{CheckSTAT\_LOG}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG" corresponde aux chaînes de caractères "true" ou "false".
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_LOG\_REDIRECT}
+\color{green}
+\subsection{CheckSTAT\_LOG\_REDIRECT}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG\_REDIRECT" soit vide ou corresponde aux chaînes de caractères "log" ou "tee".
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_TIME\_TXT}
+\color{green}
+\subsection{CheckSTAT\_TIME\_TXT}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :} Cette variable sert à mettre en pause l'exécution du script pendant un temps bref (vue d'un message, etc...).
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_TIME\_TXT" soit un nombre entier ou décimal.
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckSTAT\_USER\_OS}
+\color{green}
+\subsection{CheckSTAT\_USER\_OS}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
     \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_USER\_OS" soit
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :}
 
     \item \textbf{Code :}
 \end{itemize}
 
-\subsection{CheckProjectStatusVars}
+\color{green}
+\subsection{CheckProjectStatusVars}\color{white}
 \begin{itemize}
     \item \textbf{Description de la fonction :} Cette fonction
 
-    \item \textbf{Paramètres :} \$p\_file : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(basename "\$BASH\_SOURCE[0]")")
-    \$p\_lineno : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\$LINENO")
+    \item \textbf{Paramètres :}
+        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} Aucune.
 
