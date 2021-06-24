@@ -37,6 +37,20 @@ function CheckRootEUID
 
 #### ARGUMENT VALUES CHECKING
 
+## UTILITES FUNCTIONS
+
+# Cut the text of the function's name before and with the underscore.
+function CutCheck
+{
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	sed 's/^[^_]*_//' <<< "$p_string"
+}
+
+# -----------------------------------------------
+
 ## "Directories.lib" FILE'S FUNCTION
 
 # "ProcessingDir" function.
@@ -57,12 +71,12 @@ function CheckArgs_OverwriteDir
     #***** Code *****
     # If the target folder path is missing (no path is given).
     if [ -z "$p_path" ]; then
-        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoE "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
     # Else, if the given folder path is incorrect.
     elif [ ! -d "$p_path" ]; then
-        HandleErrors "1" "THE $(DechoE "p_path") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoE "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     fi
 }
@@ -77,15 +91,15 @@ function CheckArgs_Makedir
     #***** Code *****
     # If the parent folder's path is missing (no path is given).
     if [ -z  "$p_parent" ]; then
-        HandleErrors "1" "" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoE "$(ToLowercase '$p_parent')") PARAMETER HAS NO VALUE" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
     # Else, if the parent folder's path is incorrect.
     elif [ ! -d "$p_parent" ]; then
-        HandleErrors "1" "" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoE "$(ToLowercase '$p_parent')") PARAMETER'S VALUE IS INCORRECT" "" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
     # Else, if the folder's name is missing (no name is given).
     elif [ -z "$p_name" ]; then
-        HandleErrors "1" "" "" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoE "$(ToLowercase '$p_name')") PARAMETER HAS NO VALUE" "" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
     fi
 }
 
@@ -612,9 +626,9 @@ function HandleErrors
         fi
 
         if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "$(ToLowercase "$p_errorString")") !" >&2
+            HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
         else
-            HeaderRed "$v_hdrString ERROR : $(DechoE "$(ToLowercase "$p_errorString")") !" >&2
+            HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
         fi
 
         if [ -z "$p_adviceString" ]; then
