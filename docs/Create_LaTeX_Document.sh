@@ -38,7 +38,9 @@ EchoNewstep "Please type the wanted language's code in the following parenthesis
 read -rp "In which language do you want to write your LaTeX document ?" __read_lang
 EchoRead "$__read_lang"
 
-lineno_if_valid_lang="$LINENO"; if [[ "$__read_lang" =~ "$__supported_languages[*]" ]]; then
+if ! [[ "$__read_lang" =~ "$__supported_languages[*]" ]]; then
+	HandleErrors "1" "The \$__read_lang variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+else
 
 	#***** Conditions variables definition.
 	__path1="$__lang/Bash/"
@@ -60,16 +62,16 @@ lineno_if_valid_lang="$LINENO"; if [[ "$__read_lang" =~ "$__supported_languages[
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			__folder_path="$__read_lang/$__path1"
+			Makedir "$__read_lang" "$__path1" && __folder_path="$__read_lang/$__path1"
 			;;
 		2)
-			__folder_path="$__read_lang/$__path2"
+			Makedir "$__read_lang" "$__path2" && __folder_path="$__read_lang/$__path2"
 			;;
 		3)
-			__folder_path="$__read_lang/$__path3"
+			Makedir "$__read_lang" "$__path3" && __folder_path="$__read_lang/$__path3"
 			;;
 		4)
-			__folder_path="$__read_lang/$__path4"
+			Makedir "$__read_lang" "$__path4" && __folder_path="$__read_lang/$__path4"
 			;;
 		*)
 			HandleErrors "1" "The \$__read_folder_code entered value is invalid" "Please type an integer value ranging from 1 to 4" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
@@ -82,11 +84,10 @@ lineno_if_valid_lang="$LINENO"; if [[ "$__read_lang" =~ "$__supported_languages[
 	if [ -z "$__read_doc_name" ]; then
 		HandleErrors "1" "The \$__read_doc_name variable is empty" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
+	
+	__full_path="$__folder_path/$__read_doc_name"
 
-
-
-	Makedir "" ""
-
-else
-	HandleErrors "1" "The \$__read_lang variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_if_valid_lang"
+	Makefile "$__folder_path" "$__read_doc_name" && EchoSuccess "Your LaTeX file ($(DechoS "$__full_path")) was successfully created."
+	
+	exit 0
 fi
