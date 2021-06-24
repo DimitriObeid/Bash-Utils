@@ -4,8 +4,11 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
-source "$HOME/.bash_profile" || { echo >&2; echo "Unable to source the \"$HOME/.bash_profile\" file" >&2; echo >&2; exit 1 }
-source "$__BASH_UTILS/Initializer.sh" || { echo >&2; echo "Unable to source the \"$__BASH_UTILS/Initializer.sh\" file" >&2; echo >&2; exit 1 }
+# shellcheck disable=SC1090
+source "$HOME/.bash_profile" || { echo >&2; echo "Unable to source the \"$HOME/.bash_profile\" file" >&2; echo >&2; exit 1; }
+
+# shellcheck disable=SC1090
+source "$__BASH_UTILS/Initializer.sh" || { echo >&2; echo "Unable to source the \"$__BASH_UTILS/Initializer.sh\" file" >&2; echo >&2; exit 1; }
 
 
 
@@ -21,14 +24,15 @@ source "$__BASH_UTILS/Initializer.sh" || { echo >&2; echo "Unable to source the 
 ## VARIABLES DEFINITION
 
 # Supported languages array.
-__supported_languages=('en', 'fr')
+__supported_languages=('en' 'fr')
 
 
 # -----------------------------------------------
 
 ## STATUS VARIABLES MODIFICATION
 
-$__STAT_ERROR="fatal";CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# shellcheck disable=SC2034
+__STAT_ERROR="fatal";CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
@@ -38,12 +42,12 @@ EchoNewstep "Please type the wanted language's code in the following parenthesis
 read -rp "In which language do you want to write your LaTeX document ?" __read_lang
 EchoRead "$__read_lang"
 
-if ! [[ "$__read_lang" =~ "$__supported_languages[*]" ]]; then
+if ! [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	HandleErrors "1" "The \$__read_lang variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
-	__path1="$__lang/Bash/"
+	__path1="$__read_lang/Bash/"
 	__path2="$__read_lang/Bash/functions/basis"
 	__path3="$__read_lang/Bash/functions/main"
 	__path4="$__read_lang/Bash/variable"
