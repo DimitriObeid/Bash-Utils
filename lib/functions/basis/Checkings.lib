@@ -612,9 +612,9 @@ function HandleErrors
         fi
 
         if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "$(ToLowercase "p_errorString")")" >&2
+            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "$(ToLowercase "$p_errorString")") !" >&2
         else
-            HeaderRed "$v_hdrString ERROR : $(DechoE "$(ToLowercase "p_errorString")")" >&2
+            HeaderRed "$v_hdrString ERROR : $(DechoE "$(ToLowercase "$p_errorString")") !" >&2
         fi
 
         if [ -z "$p_adviceString" ]; then

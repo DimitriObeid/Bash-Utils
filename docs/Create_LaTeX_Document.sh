@@ -38,11 +38,14 @@ __STAT_ERROR="fatal";CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 ## CODE
 
-EchoNewstep "Please type the wanted language's code in the following parenthesis --> English (en), French (fr)"
-read -rp "In which language do you want to write your LaTeX document ?" __read_lang
+EchoNewstep "In which language do you want to write your LaTeX document ?"
+EchoNewstep "Currently supported languages --> English (en), French (fr)"
+Newline
+
+read -rp "Please type the wanted language's code in the above parenthesis : " __read_lang
 EchoRead "$__read_lang"
 
-if ! [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
+if [[ ! "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	HandleErrors "1" "The $(ToLowercase "\$__read_lang") variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
@@ -60,7 +63,7 @@ else
 	EchoMsg "4 - Variables documentation		Targeted folder --> $__path4"
 	Newline
 
-	read -rp "Please type the number corresponding to the wanted document category." __read_folder_code
+	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
 	EchoRead "$__read_folder_code"
 	
 	#***** Verifying if the entered code is valid.
