@@ -43,7 +43,7 @@ read -rp "In which language do you want to write your LaTeX document ?" __read_l
 EchoRead "$__read_lang"
 
 if ! [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
-	HandleErrors "1" "The \$__read_lang variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	HandleErrors "1" "The $(ToLowercase "\$__read_lang") variable's value is incorrect" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
@@ -78,7 +78,7 @@ else
 			Makedir "$__read_lang" "$__path4" && __folder_path="$__read_lang/$__path4"
 			;;
 		*)
-			HandleErrors "1" "The \$__read_folder_code entered value is invalid" "Please type an integer value ranging from 1 to 4" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
+			HandleErrors "1" "The $(ToLowercase "\$__read_folder_code") entered value is invalid" "Please type an integer value ranging from 1 to 4" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
 	
@@ -86,7 +86,7 @@ else
 	EchoRead "$__read_doc_name"
 	
 	if [ -z "$__read_doc_name" ]; then
-		HandleErrors "1" "The \$__read_doc_name variable is empty" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+		HandleErrors "1" "The $(ToLowercase "\$__read_doc_name") variable is empty" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
 	
 	__full_path="$__folder_path/$__read_doc_name"

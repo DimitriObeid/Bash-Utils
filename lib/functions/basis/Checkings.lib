@@ -594,7 +594,12 @@ function HandleErrors
 
     #***** Variables *****
     local v_hdrString
-    v_hdrString="$(echo -e "IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->")"
+	
+	if [ -n "$p_function" ]; then
+		v_hdrString="$(echo -e "IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->")"
+	else
+		v_hdrString="$(echo -e "IN $(DechoE "$p_file"), LINE $(DechoE "$p_lineno") -->")"
+	fi
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -607,9 +612,9 @@ function HandleErrors
         fi
 
         if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_hdrString FATAL ERROR : $(DechoE "$(ToLowercase "p_errorString")")" >&2
         else
-            HeaderRed "$v_hdrString ERROR : $(DechoE "${p_errorString^^}")" >&2
+            HeaderRed "$v_hdrString ERROR : $(DechoE "$(ToLowercase "p_errorString")")" >&2
         fi
 
         if [ -z "$p_adviceString" ]; then

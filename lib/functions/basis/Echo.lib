@@ -226,6 +226,30 @@ function EchoWarning
 
 # -----------------------------------------------
 
+## TEXT FORMATING
+
+# Print a lowercased text.
+function ToLowercase
+{
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	echo "$p_string" | tr '[:upper:]' '[:lower:]'
+}
+
+# Print an uppercased text.
+function ToUppercase
+{
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	echo "$p_string" | tr '[:lower:]' '[:upper:]'
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
