@@ -21,6 +21,7 @@ tmp/
 **/*.aux
 **/*.dvi
 **/*.log
+**/*.out
 **/*.synctex.gz
 **/*.toc
 
