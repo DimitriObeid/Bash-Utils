@@ -93,16 +93,20 @@ function OverwriteFile
     
     #***** Code *****
     CheckArgs_OverwriteFile
-    
-    EchoNewstep "The $(DechoN "$p_path/") file already exists and is not empty."
-	EchoNewstep "Overwriting data from file $(DechoN "$p_path/")"
-	Newline
 
-	true > "$p_path"
-	HandleErrors "$?" "THE CONTENT OF THE $(DechoE "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-	EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
-	Newline
+    if [ "$p_authorization" = "true" ]; then
+		EchoNewstep "The $(DechoN "$p_path/") file already exists and is not empty."
+		EchoNewstep "Overwriting data from file $(DechoN "$p_path/")"
+		Newline
+
+		true > "$p_path"
+		HandleErrors "$?" "THE CONTENT OF THE $(DechoE "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+		EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
+		Newline
+	else
+		return
+	fi
 
 	return 0
 }
