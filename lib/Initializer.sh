@@ -22,6 +22,7 @@ fi
 
 ## BASH-UTILS PATHS VARIABLES
 
+# TODO : Clean this commentary section.
 # Note : the content of this section had been moved in the "Bash-utils/config/Init.conf" file for a better
 # integration in the environment-dependent parts in files (like the filepaths in the".desktop" files).
 
@@ -46,7 +47,7 @@ fi
 # }
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
-source "$__BASH_UTILS_ROOT/config/Init.conf" || {  echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_ROOT/config/Init.conf\" FILE"; }
+source "$__BASH_UTILS_ROOT/config/Init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_ROOT/config/Init.conf\" FILE" >&2; echo >&2; exit 1; }
 
 
 
@@ -187,9 +188,9 @@ function SourceDependency
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES
+#### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES AND FILES
 
-## PROCESSING THE BASH_UTILS INITIALIZATION LOG FILE AND THE PROJECT'S TEMPORARY FOLDER
+## PROCESSING THE BASH_UTILS INITIALIZATION LOG FILE AND THE PROJECT'S TEMPORARY FOLDER AND FILES
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
@@ -199,10 +200,10 @@ if [ -f "$__INIT_LIST_FILE_PATH" ]; then
         echo >&2; exit 1
     }
 else
-    if [ ! -d "$__PROJECT_TMP_DIR" ]; then
-        mkdir -p "$__PROJECT_TMP_DIR" || {
+    if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
+        mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory." >&2; echo >&2; exit 1
+            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory and/or the project's logs directory." >&2; echo >&2; exit 1
         }
     fi
 
@@ -267,7 +268,18 @@ EchoInit "Sourcing the variables files :"; for f in "${__BASH_UTILS_VARIABLES_FI
 
 # -----------------------------------------------
 
+## PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS
 
+EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
+
+# Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
+if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
+	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the $__PROJECT_TR_FILE_PATH file" "1"; }
+	
+	EchoInit "Created file : $(tput setaf 6)$__PROJECT_TR_FILE_PATH$(tput sgr0)"
+else
+	EchoInit "Found file : $(tput setaf 6)$__PROJECT_TR_FILE_PATH$(tput sgr0)"
+fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 

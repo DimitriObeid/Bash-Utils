@@ -202,6 +202,7 @@ function GetLineFromTextFile
     local i=0     # Line incrementer
     
     #***** Code *****
+	# shellcheck disable=SC2002
     cat "$source" | while read -r line; do
         # Incrementing the line incrementer variable's value...
         i=$(( i+1 ))

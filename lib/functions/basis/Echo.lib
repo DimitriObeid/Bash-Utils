@@ -226,7 +226,17 @@ function EchoWarning
 
 # -----------------------------------------------
 
-## TEXT FORMATING
+## TEXT FORMATTING
+
+# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()").
+function KeepFormating
+{
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	echo "$p_string"
+}
 
 # Print a lowercased text.
 function ToLowercase
