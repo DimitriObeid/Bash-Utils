@@ -32,7 +32,7 @@ __supported_languages=('en' 'fr')
 ## STATUS VARIABLES MODIFICATION
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal";CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
@@ -50,17 +50,19 @@ if [[ ! "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 else
 
 	#***** Conditions variables definition.
-	__path1="$__read_lang/Bash/"
-	__path2="$__read_lang/Bash/functions/basis"
-	__path3="$__read_lang/Bash/functions/main"
-	__path4="$__read_lang/Bash/variable"
+	__path_Bash="$__read_lang/Bash/"
+	__path_config="$__read_lang/config"
+	__path_basis_functions="$__read_lang/Bash/functions/basis"
+	__path_main_functions="$__read_lang/Bash/functions/main"
+	__path_variables="$__read_lang/Bash/variable"
 
 	#***** Asking for the new document's path.
 	EchoNewstep "What kind of document do you want to write ?"
-	EchoMsg "1 - Master documentation			Targeted folder --> $__path1"
-	EchoMsg "2 - Basic functions documentation	Targeted folder --> $__path2"
-	EchoMsg "3 - Main functions documentation	Targeted folder --> $__path3"
-	EchoMsg "4 - Variables documentation		Targeted folder --> $__path4"
+	EchoMsg "1 - Master documentation			Targeted folder --> $__path_Bash"
+	EchoMsg "2 - Configuration documentation	Targeted folder --> $__path_config"
+	EchoMsg "3 - Basic functions documentation	Targeted folder --> $__path_basis_functions"
+	EchoMsg "4 - Main functions documentation	Targeted folder --> $__path_main_functions"
+	EchoMsg "5 - Variables documentation		Targeted folder --> $__path_variables"
 	Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
@@ -69,16 +71,19 @@ else
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			Makedir "$__read_lang" "$__path1" && __folder_path="$__read_lang/$__path1"
+			Makedir "$__read_lang" "$__path_Bash" && __folder_path="$__path_Bash"
 			;;
 		2)
-			Makedir "$__read_lang" "$__path2" && __folder_path="$__read_lang/$__path2"
+			Makedir "$__read_lang" "$__path_config" && __folder_path="$__path_config"
 			;;
 		3)
-			Makedir "$__read_lang" "$__path3" && __folder_path="$__read_lang/$__path3"
+			Makedir "$__read_lang" "$__path_basis_functions" && __folder_path="$__path_basis_functions"
 			;;
 		4)
-			Makedir "$__read_lang" "$__path4" && __folder_path="$__read_lang/$__path4"
+			Makedir "$__read_lang" "$__path_main_functions" && __folder_path="$__path_main_functions"
+			;;
+		5)
+			Makedir "$__read_lang" "$__path_variables" && __folder_path="$__path_variables"
 			;;
 		*)
 			HandleErrors "1" "THE $(ToLowercase "$(DechoE "\$__read_doc_name")")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 4" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
