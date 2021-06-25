@@ -72,10 +72,12 @@ function TriggerRootDirWarning
 		'/tmp' '/usr' '/var')
 
 	#***** Code *****
-	if [ "$p_path" = "/" ]; then
-		EchoMsg "$__COL_RED WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!$__COL_RESET"
-		EchoMsg "$__COL_RED $__COL_RESET"
-	fi
+	for val in "${v_root_directories[@]}"
+		if [ "$p_path" = "$val[@]" ]; then
+			EchoMsg "$__COL_RED WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!$__COL_RESET"
+			EchoMsg "$__COL_RED You are about to operate at the root directory or one of its present sub-folders !$__COL_RESET"
+		fi
+	done
 }
 
 # -----------------------------------------------
