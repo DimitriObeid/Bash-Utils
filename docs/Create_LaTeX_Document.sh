@@ -44,8 +44,9 @@ Newline
 
 read -rp "Please type the wanted language's code in the above parenthesis : " __read_lang
 EchoRead "$__read_lang"
+Newline
 
-if [[ ! "$__read_lang" =~ ${__supported_languages[*]} ]]; then
+if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')") VARIABLE'S VALUE IS INCORRECT" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
@@ -58,39 +59,41 @@ else
 
 	#***** Asking for the new document's path.
 	EchoNewstep "What kind of document do you want to write ?"
-	EchoMsg "1 - Master documentation			Targeted folder --> $__path_Bash"
-	EchoMsg "2 - Configuration documentation	Targeted folder --> $__path_config"
-	EchoMsg "3 - Basic functions documentation	Targeted folder --> $__path_basis_functions"
-	EchoMsg "4 - Main functions documentation	Targeted folder --> $__path_main_functions"
-	EchoMsg "5 - Variables documentation		Targeted folder --> $__path_variables"
+	EchoMsg "1 - Master documentation			$(DechoGreen "Targeted folder") --> $(Decho "$__path_Bash")"
+	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_config")"
+	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_basis_functions")"
+	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_main_functions")"
+	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_variables")"
 	Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
 	EchoRead "$__read_folder_code"
+	Newline
 	
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			Makedir "$__read_lang" "$__path_Bash" && __folder_path="$__path_Bash"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_Bash" && __folder_path="$__BASH_UTILS_DOCS/$__path_Bash"
 			;;
 		2)
-			Makedir "$__read_lang" "$__path_config" && __folder_path="$__path_config"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_config" && __folder_path="$__BASH_UTILS_DOCS/$__path_config"
 			;;
 		3)
-			Makedir "$__read_lang" "$__path_basis_functions" && __folder_path="$__path_basis_functions"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_basis_functions" && __folder_path="$__BASH_UTILS_DOCS/$__path_basis_functions"
 			;;
 		4)
-			Makedir "$__read_lang" "$__path_main_functions" && __folder_path="$__path_main_functions"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__read_lang" "$__path_variables" && __folder_path="$__path_variables"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_variables" && __folder_path="$__BASH_UTILS_DOCS/$__path_variables"
 			;;
 		*)
-			HandleErrors "1" "THE $(ToLowercase "$(DechoE "\$__read_doc_name")")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 4" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
+			HandleErrors "1" "THE $(ToLowercase "$(DechoE "\$__read_doc_name")")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
 	
-	read -rp "How do you want to name your document ?" __read_doc_name
+	EchoNewstep "How do you want to name your document ?"
+	read -rp "Enter the file's name : " __read_doc_name
 	EchoRead "$__read_doc_name"
 	
 	if [ -z "$__read_doc_name" ]; then

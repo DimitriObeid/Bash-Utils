@@ -89,6 +89,7 @@ function OverwriteFile
 {
     #***** Parameters *****
     local p_path=$1
+	local p_authorization=$2
     
     #***** Code *****
     CheckArgs_OverwriteFile
