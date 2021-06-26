@@ -17,7 +17,7 @@ fi
 
 ## FIFO CREATION
 
-# This function is called once in the next function.
+# This function is called once in the next function, to print all advices given in the called "InitErrMsg()" function.
 function __CreateFIFO
 {
     #***** Parameters *****

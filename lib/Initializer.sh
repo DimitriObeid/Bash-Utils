@@ -86,7 +86,7 @@ function DbgMsg
 
 ## PRINTING TEXT FUNCTIONS THAT BELONG TO THE INITIALIZATION PROCESS.
 
-# This function is called at multiple times in the next function.
+# This function is called at multiple times in the next function, to avoid changing redirection operators more than once.
 function __EchoInit
 {
     echo "$1" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
@@ -101,7 +101,7 @@ function EchoInit
 
     #***** Code *****
     if [ -z "$__INIT_LIST_FILE_PATH" ] || [ ! -f "$__INIT_LIST_FILE_PATH" ]; then
-        echo >&2; echo "Error : the initializer log file's path is invalid." >&2; echo >&2; exit 1
+        InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
             __EchoInit "$p_str"
@@ -109,7 +109,7 @@ function EchoInit
             if [[ "$p_colorCode" =~ [0-9] ]]; then
                 __EchoInit "$(tput setaf "$p_colorCode")$p_str$(tput sgr0)"
             else
-                echo >&2; echo "The ${FUNCNAME[0]} color code must be an integer !" >&2; echo >&2; exit 1
+                InitErrMsg "The ${FUNCNAME[0]} color code must be an integer !" "$(( LINENO-1 ))" "1"
             fi
         fi
     fi
@@ -130,12 +130,26 @@ function InitErrMsg
         return
     elif [ "$p_exit" -eq 1 ]; then
         exit 1
+	else
+		exit 1
     fi
 }
 
 # -----------------------------------------------
 
 ## CHECKINGS FUNCTIONS THAT BELONG TO THE INITIALIZATION PROCESS.
+
+# Checking the currently used Bash language's version.
+function CheckBashMinimalVersion
+{
+	if [ "${BASH_VERSION:-0}" -lt 6 ]; then
+		InitErrMsg "This Bash library requires at least the Bash version 4.0.0 " "$(( LINENO-1 ))" "0"
+		EchoInit "Your Bash version is : $(EchoInit "$BASH_VERSION" "6")" >&2
+		echo >&2
+		
+		exit 1
+	fi
+}
 
 # Finding Bash-utils directories.
 function CheckBURequirements
@@ -191,6 +205,9 @@ function SourceDependency
 #### THIRD STEP : CHECKING FOR ESSENTIAL DIRECTORIES AND FILES
 
 ## PROCESSING THE BASH_UTILS INITIALIZATION LOG FILE AND THE PROJECT'S TEMPORARY FOLDER AND FILES
+
+# Checking the currently used Bash language's version.
+CheckBashMinimalVersion
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then

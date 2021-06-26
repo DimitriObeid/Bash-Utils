@@ -47,7 +47,7 @@ EchoRead "$__read_lang"
 Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
-	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')") VARIABLE'S VALUE IS INCORRECT" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
@@ -88,7 +88,7 @@ else
 			Makedir "$__BASH_UTILS_DOCS" "$__path_variables" && __folder_path="$__BASH_UTILS_DOCS/$__path_variables"
 			;;
 		*)
-			HandleErrors "1" "THE $(ToLowercase "$(DechoE "\$__read_doc_name")")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
+			HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
 	
@@ -97,7 +97,7 @@ else
 	EchoRead "$__read_doc_name"
 	
 	if [ -z "$__read_doc_name" ]; then
-		HandleErrors "1" "THE $(ToLowercase "$(DechoE "\$__read_doc_name")") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+		HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
 	
 	__full_path="$__folder_path/$__read_doc_name"
