@@ -89,7 +89,7 @@ function ReadFromFIFO
     #***** Code *****
     if [ -f "$__PROJECT_LOG_FILE_PATH" ] && [ "$__BASH_UTILS_IS_INITIALIZING" = "true" ]; then
         # TODO : Test
-        echo lol
+        echo "Fonctionnalités à implémenter ici."
     else
         CheckArgs_ReadFromFIFO "$p_fifoPath" "$p_fifoVarName" "$p_fifoCurrentVarValue"
         

@@ -145,6 +145,22 @@ function CheckSTAT_LOG_REDIRECT
     fi
 }
 
+# Checking the "$__STAT_OPERATE_ROOT" variable's value.
+function CheckSTAT_OPERATE_ROOT
+{
+	#***** Parameters *****
+	local p_file=$1
+	local p_lineno=$2
+
+	#***** Variables *****
+	local v_array=("authorized" "forbidden" "restricted")
+
+	#***** Code *****
+	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] || [ "$__STAT_OPERATE_ROOT" != "forbidden" ] || [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
+		ConfEcho "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${v_array[@]}"
+	fi
+}
+
 # Checking the "$__STAT_TIME_TXT" variable's value.
 function CheckSTAT_TIME_TXT
 {

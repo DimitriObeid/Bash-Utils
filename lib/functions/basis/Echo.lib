@@ -15,53 +15,9 @@ fi
 
 #### TEXT WRITING AND DECORATION
 
-## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-# 
-# # Switching color
-# function SwitchColorOld
-# {
-#     #***** Parameters *****
-#     local p_originalColor=$1
-# 
-#     #***** Variables *****
-#     local key='140'             # Key
-#     local code="$__COL_CODE"    # Color code number to multiply by 'k'
-#     local div='256'             # Number to divide
-#     local res                   # Result
-#     
-#     #***** Code *****
-#     res=$(( code*key ))
-#     res=$(( res/div ))
-#     
-#     echo "$(tput setaf "$res"; __COL_CODE="$res")"
-#     echo $res
-# }
-# 
-# function DechoBasisOld
-# {
-#     #***** Parameters *****
-#     local p_string=$1           # The string to display.
-#     local p_originalColor=$2    # The original text's color.
-#     
-#     #***** Variables *****
-#     # TODO : trying to detect the original color and adapt the decoration color to make it as readable as possible.
-#     local v_newColor
-#     v_newColor="$(SwitchColor "$p_originalColor")"
-#     
-#     #***** Code *****
-#     if [ "$p_originalColor" = "$__COL_BLUE" ] || [ "$p_originalColor" = "$__COL_CYAN" ]; then
-#         # TODO : adapting this line of code when the aforementioned function will be ready.
-#         echo "${v_newColor}$p_string$p_originalColor"
-#     else
-#         echo "${__COL_CYAN}$p_string$p_originalColor"
-#     fi
-# }
-
-# -----------------------------------------------
-
 ## WRITING DIFFERENTLY COLORED TEXT BETWEEN TEXT
 
-# # Basis procssing.
+# # Basis procssing. --> FUTURE FUNCTIONNALITY
 # function DechoBasis
 # {
 #     #***** Parameters *****
@@ -106,25 +62,10 @@ function DechoYellow    { echo -e "${__COL_CYAN}$1$__COL_YELLOW"; }
 
 ## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__STAT_TIME_TXT" status variable.
 
-# # Display a text according to different parameters than log file's existence.
-# function AdvancedEchoCheck
-# {
-#     #***** Parameters *****
-#     local p_string=$1
-#     local p_var=$2
-#     local p_stat=$3; shift 3
-# 
-#     #***** Variables *****
-#     local arr; arr=("$@")
-# 
-#     #***** Code *****
-# 
-# }
-
 # Error message
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
 function EchoError
 {
     #***** Parameters *****
@@ -143,7 +84,7 @@ function EchoError
 # Normal message (without any extra color), with redirection checking.
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
 function EchoMsg
 {
     #***** Parameters *****
@@ -160,7 +101,7 @@ function EchoMsg
 # New sub-step message
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
 function EchoNewstep
 {
     #***** Parameters *****
@@ -177,7 +118,7 @@ function EchoNewstep
 # Read input values
 
 # Featured functions and files from the "functions" folder :
-#	- CheckProjectLogStatus		-> Checkings.lib
+#	- CheckProjectLogStatus		--> Checkings.lib
 
 function EchoRead
 {
@@ -193,7 +134,7 @@ function EchoRead
 # Success message
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
 function EchoSuccess
 {
     #***** Parameters *****
@@ -210,7 +151,7 @@ function EchoSuccess
 # Warning message
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
 function EchoWarning
 {
     #***** Parameters *****
@@ -271,7 +212,8 @@ function ToUppercase
 # Redirecting the output of the "echo" command
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     -> Checkings.lib
+#   - CheckProjectLogStatus     --> Checkings.lib
+#	- HandleErrors				--> Checkings.lib
 function Newline
 {
     #***** Parameters *****

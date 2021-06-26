@@ -59,6 +59,7 @@ function TriggerRootDirWarning
 {
 	#***** Parameters *****
 	p_path=$1
+	p_authorization=$2
 
 	#***** Variables *****
 	v_root_directories=$(
@@ -74,8 +75,13 @@ function TriggerRootDirWarning
 	#***** Code *****
 	for val in "${v_root_directories[@]}"
 		if [ "$p_path" = "$val[@]" ]; then
-			EchoMsg "$__COL_RED WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!$__COL_RESET"
-			EchoMsg "$__COL_RED You are about to operate at the root directory or one of its present sub-folders !$__COL_RESET"
+			if [ "$p_authorization" = "forbidden" ]; then
+			
+			elif [ "$p_authorization" = "restricted" ]; then
+				EchoMsg "$__COL_RED WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!$__COL_RESET"
+				EchoMsg "$__COL_RED You are about to operate at the root directory or one of its present sub-folders !$__COL_RESET"
+				Newline
+			fi
 		fi
 	done
 }
@@ -133,6 +139,18 @@ function CheckArgs_EchoContext
             fi
         done
     fi
+}
+
+# "CreateFIFO" function.
+function CheckArgs_CreateFIFO
+{
+	#***** Parameters *****
+	p_path=$1				# FIFO to create's path.
+
+	#***** Code *****
+	local lineno="$LINENO"; if [ ! -z "$p_path" ]; then
+		"" 
+	fi
 }
 
 # "ReadFromFIFO" function.
@@ -628,18 +646,22 @@ function CheckProjectLogStatus
 
     # Else, if no log file exists OR if "$__STAT_LOG" value is "false" OR if "$__STAT_LOG_REDIRECT" has no redirection value. 
     else
-        case "$p_option" in
-            '-n')
-                echo -ne "$p_string"
-                ;;
-            '')
-                echo -e "$p_string"
-                ;;
-        esac
-        
-        sleep "$__STAT_TIME_TXT"
-        
-    fi
+		# Writing into the 
+		if CheckIsLibraryInitializing && [ -f "$__INIT_LIST_FILE_PATH" ]; then
+			EchoInit "$p_string"
+		else
+			case "$p_option" in
+				'-n')
+					echo -ne "$p_string"
+					;;
+				'')
+					echo -e "$p_string"
+					;;
+			esac
+			
+			sleep "$__STAT_TIME_TXT"
+		fi
+	fi
 
     # Restore timer status variables old values if they were modified because of the redirection to the log file only.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
