@@ -60,7 +60,7 @@ function ProcessingFile
     
     case "$p_function" in
         'Makefile')
-            if Makefile "$arr"; then
+            if Makefile "${arr[@]}"; then
                 __ProcessingFile 'S' "$p_name" "$p_char"
             else
                 __ProcessingFile 'E' "$p_name" "$p_char"
