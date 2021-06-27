@@ -47,8 +47,12 @@ fi
 # }
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
+# shellcheck disable=SC1090
 source "$__BASH_UTILS_ROOT/config/Init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_ROOT/config/Init.conf\" FILE" >&2; echo >&2; exit 1; }
 
+# Grouping colors by categories, to modify easily each color code outside a FIFO input.
+# shellcheck disable=SC1090
+source "$__BASH_UTILS_CONF/Colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_CONF/Colors.conf\" FILE" >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -104,10 +108,10 @@ function EchoInit
         InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
-            __EchoInit "$p_str"
+            __EchoInit "$p_str${__COLOR_CODE_RESET}"
         else
             if [[ "$p_colorCode" =~ [0-9] ]]; then
-                __EchoInit "$(tput setaf "$p_colorCode")$p_str$(tput sgr0)"
+                __EchoInit "$(tput setaf "$p_colorCode")$p_str${__COLOR_CODE_RESET}"
             else
                 InitErrMsg "The ${FUNCNAME[0]} color code must be an integer !" "$(( LINENO-1 ))" "1"
             fi
@@ -124,7 +128,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo "$(tput setaf 196)BASH-UTILS ERROR : In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput setaf 196), line $(tput setaf 6)$p_lineno$(tput setaf 196) --> $p_msg$(tput sgr0)" >&2; echo >&2
+    echo >&2; echo "{$__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> $p_msg${__COLOR_CODE_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -142,11 +146,17 @@ function InitErrMsg
 # Checking the currently used Bash language's version.
 function CheckBashMinimalVersion
 {
-	if [ "${BASH_VERSION:-0}" -lt 6 ]; then
-		InitErrMsg "This Bash library requires at least the Bash version 4.0.0 " "$(( LINENO-1 ))" "0"
-		EchoInit "Your Bash version is : $(EchoInit "$BASH_VERSION" "6")" >&2
+	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+		echo -ne "${__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-1 ))${__COLOR_CODE_ERROR} --> ${__COLOR_CODE_RESET}" >&2
+		echo "${__COLOR_CODE_ERROR}This Bash library requires at least the Bash version ${__COLOR_CODE_RESET}4.0.0${__COLOR_CODE_RESET}" >&2
 		echo >&2
-		
+
+		echo "${__COLOR_CODE_ERROR}Your Bash version is : ${__COLOR_CODE_HIGHLIGHT}$BASH_VERSION${__COLOR_CODE_RESET}" >&2
+		echo >&2
+
+		echo "${__COLOR_CODE_ERROR}Please install at least the ${__COLOR_CODE_HIGHLIGHT}4.0.0${__COLOR_CODE_ERROR} Bash version to use this library${__COLOR_CODE_RESET}"
+		echo >&2
+
 		exit 1
 	fi
 }
@@ -161,13 +171,13 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
-        EchoInit "Found directory : $(tput setaf 6)$p_path$(tput sgr0)"
+        EchoInit "Found directory : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
 
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
-        EchoInit "Found file : $(tput setaf 6)$p_path$(tput sgr0)"
+        EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
     else
-        InitErrMsg "The following path is incorrect : $(tput setaf 6)$p_path$(tput sgr0)" "$p_lineno" "1"
+        InitErrMsg "The following path is incorrect : ${__COLOR_CODE_HIGHLIGHT}$p_path" "$p_lineno" "1"
     fi
 }
 
@@ -189,12 +199,12 @@ function SourceDependency
     local p_dep=$1
 
     #***** Code *****
-    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : $(tput setaf 6)$p_dep" "$LINENO" "1"
+    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : ${__COLOR_CODE_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
     # shellcheck disable=SC1090
-    source "$p_dep" || InitErrMsg "Unable to source this dependency file : $(tput setaf 6)$p_dep" "$LINENO" "1"
+    source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__COLOR_CODE_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
-    EchoInit "Sourced file : $(tput setaf 6)$p_dep$(tput sgr0)"
+    EchoInit "Sourced file : ${__COLOR_CODE_HIGHLIGHT}$p_dep${__COLOR_CODE_RESET}"
 }
 
 # -----------------------------------------------
@@ -213,19 +223,21 @@ CheckBashMinimalVersion
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
-        echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to clear the initializer's log file."
+        echo "{__COLOR_CODE_ERROR}In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to clear the initializer's log file.${__COLOR_CODE_RESET}"
         echo >&2; exit 1
     }
 else
     if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
         mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "In $(tput setaf 6)$(basename "${BASH_SOURCE[0]}")$(tput sgr0), line $(( LINENO-2 )) --> Error : unable to create the project's temporary directory and/or the project's logs directory." >&2; echo >&2; exit 1
+            echo "${__COLOR_CODE_ERROR}In {__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__COLOR_CODE_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
     touch "$__INIT_LIST_FILE_PATH"
 fi
+
+exit 0
 
 # -----------------------------------------------
 
@@ -291,11 +303,11 @@ EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 
 # Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
 if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
-	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the $__PROJECT_TR_FILE_PATH file" "1"; }
+	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
 	
-	EchoInit "Created file : $(tput setaf 6)$__PROJECT_TR_FILE_PATH$(tput sgr0)"
+	EchoInit "Created file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__COLOR_CODE_RESET}"
 else
-	EchoInit "Found file : $(tput setaf 6)$__PROJECT_TR_FILE_PATH$(tput sgr0)"
+	EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__COLOR_CODE_RESET}"
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

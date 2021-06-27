@@ -32,7 +32,7 @@ function __CreateFIFO
 
         # 166 --> Orange
         # 196 --> Red
-        EchoInit "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
+        EchoInit "$(tput setaf 166)$i${__COLOR_CODE_ERROR}/$(tput setaf 166)${#arr[@]}${__COLOR_CODE_RESET} : $val${__COLOR_CODE_RESET}"
     done
 }
 
@@ -48,20 +48,20 @@ function CreateFIFO
         EchoInit "$(mkdir -pv "$__PROJECT_FIFO_DIR_PATH")"
     fi
 
-    EchoInit "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
+    EchoInit "Creating the ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET} FIFO."
     EchoInit
     
     if [ ! -p "$p_path" ]; then
         if mkfifo "$p_path"; then
-            EchoInit "Created FIFO : $(tput setaf 6)$p_path$(tput sgr0)"
+            EchoInit "Created FIFO : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
         else
-            InitErrMsg "$(echo "UNABLE TO CREATE THIS FIFO --> $(tput setaf 196)$p_path$(tput sgr0) ! PLEASE CHECK AT THE FOLLOWING ADVICES TO RESOLVE THIS ERROR !" \
+            InitErrMsg "$(echo "UNABLE TO CREATE THIS FIFO --> ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_ERROR} ! PLEASE CHECK AT THE FOLLOWING ADVICES TO RESOLVE THIS ERROR !" \
             "$(__CreateFIFO \
-                "Project's FIFOs path --> $(tput setaf 196)$__PROJECT_FIFO_DIR_PATH$(tput sgr0)" \
-                "$(tput setaf 196)Writing rights$(tput sgr0)")")"
+                "Project's FIFOs path --> ${__COLOR_CODE_ERROR}$__PROJECT_FIFO_DIR_PATH${__COLOR_CODE_RESET}" \
+                "${__COLOR_CODE_ERROR}Writing rights${__COLOR_CODE_RESET}")")"
         fi
     else
-        EchoInit "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-3 ))"
+        EchoInit "Existing FIFO --> ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}" "$(( LINENO-3 ))"
     fi
 }
 
@@ -103,8 +103,8 @@ function ReadFromFIFO
                     echo "$p_newVar"
                     break
                 else
-                    CheckProjectLogStatus "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
-                    CheckProjectLogStatus "THE $(tput setaf 196)$v_varLine$(tput sgr0) STRING WAS NOT FOUND IN THE $(tput setaf 196)$p_fifoPath$(tput sgr0) FIFO"
+                    CheckProjectLogStatus "${__COLOR_CODE_ERROR}IN ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, FUNCTION ${__COLOR_CODE_HIGHLIGHT}${FUNCNAME[0]}${__COLOR_CODE_ERROR}, LINE ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-1 ))${__COLOR_CODE_ERROR} --> ERROR :" "-ne"
+                    CheckProjectLogStatus "${__COLOR_CODE_ERROR}THE ${__COLOR_CODE_HIGHLIGHT}$v_varLine${__COLOR_CODE_ERROR} STRING WAS NOT FOUND IN THE ${__COLOR_CODE_HIGHLIGHT}$p_fifoPath${__COLOR_CODE_ERROR} FIFO${__COLOR_CODE_RESET}"
                     
                     ExitError
                 fi
@@ -138,14 +138,16 @@ function WriteIntoFIFO
         if [ "$p_existingPath" = "nopath" ]; then
             return
         else
+			lineno="$(( LINENO-1 ))"
+
             # Line break with the "CheckProjectLogStatus" function without any argument.
             CheckProjectLogStatus
             
             # As this function is called by the functions called in the "HandleErrors" function, calling this last function will cause an infinite loop
             # Redefining a part of its behavior was necessary to prevent this situation.
-            DrawLine "$(tput setaf 196)" "-"
-            CheckProjectLogStatus "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
-            CheckProjectLogStatus "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
+            DrawLine "${__COLOR_CODE_ERROR}" "-"
+            CheckProjectLogStatus "IN ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, FUNCTION ${__COLOR_CODE_HIGHLIGHT}${FUNCNAME[0]}${__COLOR_CODE_ERROR}, LINE ${__COLOR_CODE_HIGHLIGHT}$lineno${__COLOR_CODE_ERROR} --> ERROR :" "-ne"
+            CheckProjectLogStatus "NO VALUE PASSED IN THE  ${__COLOR_CODE_HIGHLIGHT}p_existingPath${__COLOR_CODE_ERROR}  PARAMETER !${__COLOR_CODE_RESET}" "-e"
             CheckProjectLogStatus
 
             CheckProjectLogStatus ""
