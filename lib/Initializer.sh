@@ -216,7 +216,7 @@ function SourceDependency
 
 ## PROCESSING THE BASH_UTILS INITIALIZATION LOG FILE AND THE PROJECT'S TEMPORARY FOLDER AND FILES
 
-# Checking the currently used Bash language's version.
+# Calling the function that checks the currently used Bash language's version.
 CheckBashMinimalVersion
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
@@ -236,8 +236,6 @@ else
 
     touch "$__INIT_LIST_FILE_PATH"
 fi
-
-exit 0
 
 # -----------------------------------------------
 
