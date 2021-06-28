@@ -35,16 +35,16 @@ function ConfEcho
     local i=0
 
     #***** Code *****
-    echo >&2; echo -n "$__COL_RED$__TXT_TAB$__TXT_TAB In$__COL_CYAN $p_file$__COL_RED, line$__COL_CYAN $p_lineno$__COL_RED --> " >&2
-    echo "Error : the$__COL_CYAN $p_varVal$__COL_RED variable's value is incorrect$__COL_RESET" >&2
+    echo >&2; echo -n "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB In ${__COLOR_CODE_HIGHLIGHT}$p_file${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> " >&2
+    echo "Error : the ${__COLOR_CODE_HIGHLIGHT}$p_varVal${__COLOR_CODE_ERROR} variable's value is incorrect.${__COLOR_CODE_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
-        echo >&2; echo "$__COL_RED$__TXT_TAB$__TXT_TAB Bad value :$__COL_YELLOW An empty string$__COL_RESET" >&2
+        echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB Bad value :$__COL_YELLOW An empty string.${__COLOR_CODE_RESET}" >&2
     else
-        echo >&2; echo "$__COL_RED$__TXT_TAB$__TXT_TAB Bad value :$__COL_CYAN $p_badVal$__COL_RESET" >&2
+        echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB Bad value : ${__COLOR_CODE_HIGHLIGHT}$p_badVal.${__COLOR_CODE_RESET}" >&2
     fi
 
-    echo >&2; echo "$__COL_RED$__TXT_TAB$__TXT_TAB The allowed values are :$__COL_RESET" >&2
+    echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB The allowed values are :${__COLOR_CODE_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
     for val in "${p_array[@]}"; do
@@ -52,9 +52,9 @@ function ConfEcho
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__COL_RED}$i/${#p_array[@]}  --> ${__COL_ORANGE}An empty argument$__COL_RESET" >&2
+            echo -e "${__COLOR_CODE_ERROR}$i/${#p_array[@]}  --> ${__COL_ORANGE}An empty argument.${__COLOR_CODE_RESET}" >&2
         else
-            echo -e "${__COL_RED}$i/${#p_array[@]}  --> $__COL_CYAN$val$__COL_RESET" >&2
+            echo -e "${__COLOR_CODE_ERROR}$i/${#p_array[@]}  --> ${__COLOR_CODE_HIGHLIGHT}$val${__COLOR_CODE_RESET}" >&2
         fi
     done
 
@@ -110,6 +110,22 @@ function CheckSTAT_EXIT_CODE
     #***** Code *****
     if ! IsInt "$__STAT_EXIT_CODE"; then
         ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${v_array[@]}"
+    fi
+}
+
+# Checking the "$__STAT_FIFO_REDIRECTION" variable's value.
+function Check__STAT_FIFO_REDIRECTION
+{
+    #***** Parameters *****
+    local p_file=$1
+    local p_lineno=$2
+
+    #***** Variables *****
+    local v_array=("true" "false")
+
+    #***** Code *****
+    if [ "$__STAT_FIFO_REDIRECTION" != "true" ] && [ "$__STAT_FIFO_REDIRECTION" != "false" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_FIFO_REDIRECTION" "__STAT_FIFO_REDIRECTION" "${v_array[@]}"
     fi
 }
 
@@ -203,8 +219,10 @@ function CheckProjectStatusVars
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
-    CheckSTAT_EXIT          "$p_file" "$p_lineno"
+    CheckSTAT_EXIT_CODE     "$p_file" "$p_lineno"
+	CheckSTAT_OPERATE_ROOT	"$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
+	CheckSTAT_OPERATE_ROOT	"$p_file" "$p_lineno"
     CheckSTAT_TIME_TXT      "$p_file" "$p_lineno"
 }
 

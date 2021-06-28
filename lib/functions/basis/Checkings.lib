@@ -59,7 +59,6 @@ function TriggerRootDirWarning
 {
 	#***** Parameters *****
 	p_path=$1
-	p_authorization=$2
 
 	#***** Variables *****
 	v_root_directories=$(
@@ -74,13 +73,36 @@ function TriggerRootDirWarning
 
 	#***** Code *****
 	for val in "${v_root_directories[@]}"
+		
+		# Checking if the given path points towards the root directory or one of its subfolders
+		# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 		if [ "$p_path" = "$val[@]" ]; then
-			if [ "$p_authorization" = "forbidden" ]; then
-			
-			elif [ "$p_authorization" = "restricted" ]; then
+			if [ "$__STAT_OPERATE_ROOT" = "forbidden" ]; then
+				EchoMsg "${__COLOR_CODE_ERROR}WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!${__COLOR_CODE_RESET}"
+				EchoMsg "${__COLOR_CODE_ERROR}The script was trying to operate at the root directory (or one of its sub directories) without authorization${__COLOR_CODE_RESET}"
+				EchoMsg "${__COLOR_CODE_ERROR}Given path : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
+				Newline
+
+				ExitError
+			elif [ "$__STAT_OPERATE_ROOT" = "restricted" ]; then
 				EchoMsg "$__COL_RED WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!$__COL_RESET"
 				EchoMsg "$__COL_RED You are about to operate at the root directory or one of its present sub-folders !$__COL_RESET"
+				EchoMsg "${__COLOR_CODE_ERROR}Given path : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
 				Newline
+				
+				EchoMsg "Do you want to continue the script's execution ? (yes / no)"
+				read -rp "Enter your answer : " __read_TriggerRootDirWarning
+				EchoRead "$__read_TriggerRootDirWarning"
+				Newline
+				
+				case "$__read_TriggerRootDirWarning" in
+					"yes")
+						;;
+					"no")
+						;;
+					*)
+						;;
+				esac
 			fi
 		fi
 	done
