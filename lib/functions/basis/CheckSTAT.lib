@@ -114,7 +114,7 @@ function CheckSTAT_EXIT_CODE
 }
 
 # Checking the "$__STAT_FIFO_REDIRECTION" variable's value.
-function Check__STAT_FIFO_REDIRECTION
+function CheckSTAT_FIFO_REDIRECTION
 {
     #***** Parameters *****
     local p_file=$1
