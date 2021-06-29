@@ -48,11 +48,11 @@ fi
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_ROOT/config/Init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_ROOT/config/Init.conf' FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF_INIT/init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/init.conf' FILE" >&2; echo >&2; exit 1; }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF/Colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/Colors.conf' FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF_INIT/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/colors.conf' FILE" >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -128,7 +128,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo "{$__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
+    echo >&2; echo "{$__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -147,8 +147,8 @@ function InitErrMsg
 function CheckBashMinimalVersion
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-		echo -ne "${__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-1 ))${__COLOR_CODE_ERROR} --> ${__BU_COLOR_RESET}" >&2
-		echo "${__BU_COLOR_CODE_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
+		echo -ne "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-1 ))${__BU_COLOR_ERROR} --> ${__BU_COLOR_RESET}" >&2
+		echo "${__BU_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
 		echo >&2
 
 		echo "${__COLOR_CODE_ERROR}Your Bash version is : ${__COLOR_CODE_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
@@ -285,15 +285,6 @@ EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FI
 EchoInit "Sourcing the variables files :"; for f in "${__BASH_UTILS_VARIABLES_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
 # -----------------------------------------------
-#
-# ## CREATING THE FIFOs
-#
-# EchoInit "PROCESSING THE $(Decho "$__PROJECT_NAME") FIFOs"
-#
-# # Color processing.
-# CreateFIFO "$__PROJECT_FIFO_COLORS"
-
-# -----------------------------------------------
 
 ## PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS
 
@@ -388,5 +379,3 @@ fi
 #### ENDING THE INITIALIZATION PROCESS
 
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__PROJECT_NAME") !"
-
-# 
