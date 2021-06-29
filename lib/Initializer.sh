@@ -151,10 +151,10 @@ function CheckBashMinimalVersion
 		echo "${__BU_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__COLOR_CODE_ERROR}Your Bash version is : ${__COLOR_CODE_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
+		echo "${__BU_COLOR_ERROR}Your Bash version is : ${__BU_COLOR_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__COLOR_CODE_ERROR}Please install at least the ${__COLOR_CODE_HIGHLIGHT}4.0.0${__COLOR_CODE_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
+		echo "${__BU_COLOR_ERROR}Please install at least the ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
 		echo >&2
 
 		exit 1
@@ -171,13 +171,13 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
-        EchoInit "Found directory : ${__COLOR_CODE_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
+        EchoInit "Found directory : ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
 
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
-        EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
+        EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
     else
-        InitErrMsg "The following path is incorrect : ${__COLOR_CODE_HIGHLIGHT}$p_path" "$p_lineno" "1"
+        InitErrMsg "The following path is incorrect : ${__BU_COLOR_HIGHLIGHT}$p_path" "$p_lineno" "1"
     fi
 }
 
@@ -199,12 +199,12 @@ function SourceDependency
     local p_dep=$1
 
     #***** Code *****
-    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : ${__COLOR_CODE_HIGHLIGHT}$p_dep" "$LINENO" "1"
+    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : ${__BU_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
     # shellcheck disable=SC1090
-    source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__COLOR_CODE_HIGHLIGHT}$p_dep" "$LINENO" "1"
+    source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__BU_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
-    EchoInit "Sourced file : ${__COLOR_CODE_HIGHLIGHT}$p_dep${__BU_COLOR_RESET}"
+    EchoInit "Sourced file : ${__BU_COLOR_HIGHLIGHT}$p_dep${__BU_COLOR_RESET}"
 }
 
 # -----------------------------------------------
@@ -223,14 +223,14 @@ CheckBashMinimalVersion
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
-        echo "{__COLOR_CODE_ERROR}In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
+        echo "{__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
         echo >&2; exit 1
     }
 else
     if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
         mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "${__COLOR_CODE_ERROR}In {__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
+            echo "${__BU_COLOR_ERROR}In {__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
@@ -292,11 +292,11 @@ EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 
 # Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
 if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
-	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
+	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
 	
-	EchoInit "Created file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 else
-	EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Found file : ${__BU_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -17,52 +17,48 @@ fi
 
 ## WRITING DIFFERENTLY COLORED TEXT BETWEEN TEXT
 
-# # Basis procssing. --> FUTURE FUNCTIONNALITY
-# function DechoBasis
-# {
-#     #***** Parameters *****
-#     local p_string=$1
-#     local p_newColor=$2
-#     
-#     #***** Variables *****
-#     local v_oldColor="$(ReadFromFIFOColor "$__COL_CODE")"
-#     echo "$__COL_CODE"
-# 
-#     #***** Code *****
-#     if [ ! -p "$__PROJECT_FIFO_COLORS" ]; then
-# #     if [ "$p_oldColor" = "$v_newColor" ]; then
-# #         SwitchColorOld "$v_newColor"
-# #     fi
-#         echo -e "$p_string"
-#     else
-#         echo -ne "$(tput setaf "166")$p_string$p_oldColor"
-#         __COL_CODE="$(tput setaf "$v_oldColor")"
-#     fi
-# }
+# Text inside decoration procssing.
 
-function Decho { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+# Usage :
+#	Decho "<Text to write>" "${__BU_COLOR_<TO_DISPLAY>}"
+ 
+# Featured functions and files from the "functions" folder : none
+function Decho
+{
+    #***** Parameters *****
+    local p_string=$1
+    local p_newColor=$2
 
-## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
-function DechoE { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RED"; }
-function DechoN { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_YELLOW"; }
-function DechoS { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_GREEN"; }
+    #***** Variables *****
+    local v_oldColor="$(cat "$__BASH_UTILS_FILE_COLOR_CODE_PATH")"
 
-# -----------------------------------------------
+    #***** Code *****
+    if [ "$p_newColor" = "$v_oldColor" ]; then
+        p_newColor="$(( p_newColor+2 ))"
+		tput setaf "$p_newColor"
+    fi
 
-## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBlue      { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_BLUE"; }
-function DechoCyan      { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_CYAN"; }
-function DechoGreen     { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_GREEN"; }
-function DechoOrange    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_ORANGE"; }
-function DechoPurple    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_PURPLE"; }
-function DechoRed       { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RED"; }
-function DechoYellow    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_YELLOW"; }
+	echo -e "${p_newColor}$p_string${v_oldColor}" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+}
+
+# Easy "Decho()" function call.
+function DechoHighlight { Decho "$1" "${__BU_COLOR_HIGHLIGHT}"; }
+function DechoBlue 		{ Decho "$1" "${__BU_COLOR_BLUE}"; }
+function DechoCyan 		{ Decho "$1" "${__BU_COLOR_CYAN}"; }
+function DechoGreen 	{ Decho "$1" "${__BU_COLOR_GREEN}"; }
+function DechoOrange 	{ Decho "$1" "${__BU_COLOR_ORANGE}"; }
+function DechoPurple 	{ Decho "$1" "${__BU_COLOR_PURPLE}"; }
+function DechoRed		{ Decho "$1" "${__BU_COLOR_RED}"; }
+function DechoYellow 	{ Decho "$1" "${__BU_COLOR_YELLOW}"; }
 
 # -----------------------------------------------
 
 ## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__STAT_TIME_TXT" status variable.
 
 # Error message
+
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
@@ -76,12 +72,15 @@ function EchoError
     #***** Code *****
     # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
     # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
-    CheckProjectLogStatus "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB $p_string${__COLOR_CODE_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
+    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
 }
 
 # Normal message (without any extra color), with redirection checking.
+
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
@@ -100,6 +99,9 @@ function EchoMsg
 
 # New sub-step message
 
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoNewstep
@@ -110,16 +112,18 @@ function EchoNewstep
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$__COL_ORANGE$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}"
+    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 }
 
 # Read input values
 
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+
 # Featured functions and files from the "functions" folder :
 #	- CheckProjectLogStatus		--> Checkings.lib
-
 function EchoRead
 {
 	#***** Parameters *****
@@ -133,6 +137,9 @@ function EchoRead
 
 # Success message
 
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoSuccess
@@ -143,12 +150,15 @@ function EchoSuccess
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$__COL_GREEN$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" >&1
+    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&1
 
     sleep "$__STAT_TIME_TXT"
 }
 
 # Warning message
+
+# Usage :
+#	EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
@@ -160,7 +170,7 @@ function EchoWarning
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$__COL_YELLOW$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
+    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -169,7 +179,7 @@ function EchoWarning
 
 ## TEXT FORMATTING
 
-# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()").
+# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
 function KeepFormating
 {
 	#***** Parameters *****
@@ -180,6 +190,9 @@ function KeepFormating
 }
 
 # Print a lowercased text.
+
+# Usage :
+#	ToLowercase "<Text to write>"
 function ToLowercase
 {
 	#***** Parameters *****
@@ -190,6 +203,9 @@ function ToLowercase
 }
 
 # Print an uppercased text.
+
+# Usage :
+#	ToUppercase "<Text to write>"
 function ToUppercase
 {
 	#***** Parameters *****
