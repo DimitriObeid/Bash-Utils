@@ -13,14 +13,31 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### 
 
 ##
 
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+####
+
+## 
+
 function Case_read_TriggerRootDirWarning
 {
-	#***** Parameters *****
-	
-
-	#***** Code *****
+	case "$__read_TriggerRootDirWarning" in
+		"yes")
+			;;
+		"no")
+			;;
+		*)
+			
+			Case_read_TriggerRootDirWarning
+			;;
+	esac
 }

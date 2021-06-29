@@ -40,23 +40,23 @@ fi
 #     fi
 # }
 
-function Decho { echo -e "${__COL_CYAN}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
+function Decho { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RESET"; }    # Colouring a part of a simple message written via the "echo" command.
 
 ## Pun between "deco(ration)" and "echo", followed by the first letter of the message type name (error (E), moving to a new sub-step (N) or success (S)).
-function DechoE { echo -e "${__COL_CYAN}$1$__COL_RED"; }
-function DechoN { echo -e "${__COL_CYAN}$1$__COL_YELLOW"; }
-function DechoS { echo -e "${__COL_CYAN}$1$__COL_GREEN"; }
+function DechoE { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RED"; }
+function DechoN { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_YELLOW"; }
+function DechoS { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_GREEN"; }
 
 # -----------------------------------------------
 
 ## COLOR A PART OF A TEXT WITH ANOTHER COLOR (STEPS).
-function DechoBlue      { echo -e "${__COL_CYAN}$1$__COL_BLUE"; }
-function DechoCyan      { echo -e "${__COL_CYAN}$1$__COL_CYAN"; }
-function DechoGreen     { echo -e "${__COL_CYAN}$1$__COL_GREEN"; }
-function DechoOrange    { echo -e "${__COL_CYAN}$1$__COL_ORANGE"; }
-function DechoPurple    { echo -e "${__COL_CYAN}$1$__COL_PURPLE"; }
-function DechoRed       { echo -e "${__COL_CYAN}$1$__COL_RED"; }
-function DechoYellow    { echo -e "${__COL_CYAN}$1$__COL_YELLOW"; }
+function DechoBlue      { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_BLUE"; }
+function DechoCyan      { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_CYAN"; }
+function DechoGreen     { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_GREEN"; }
+function DechoOrange    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_ORANGE"; }
+function DechoPurple    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_PURPLE"; }
+function DechoRed       { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_RED"; }
+function DechoYellow    { echo -e "${__COLOR_CODE_HIGHLIGHT}$1$__COL_YELLOW"; }
 
 # -----------------------------------------------
 
@@ -74,9 +74,9 @@ function EchoError
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-                                # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
-                                # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
-    CheckProjectLogStatus "$__COL_RED$__TXT_TAB$__TXT_TAB $p_string$__COL_RESET" "$p_option" "${p_arrExtraArgs[@]}" >&2
+    # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
+    # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
+    CheckProjectLogStatus "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB $p_string${__COLOR_CODE_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
 }

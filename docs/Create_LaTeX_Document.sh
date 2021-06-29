@@ -5,10 +5,10 @@
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 # shellcheck disable=SC1090
-source "$HOME/.bash_profile" || { echo >&2; echo "Unable to source the \"$HOME/.bash_profile\" file" >&2; echo >&2; exit 1; }
+source "$HOME/.bash_profile" || { echo >&2; echo "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_INITIALIZER" || { echo >&2; echo "Unable to source the \"$__BASH_UTILS/Initializer.sh\" file" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_INITIALIZER" || { echo >&2; echo "Unable to source the '$__BASH_UTILS/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 
@@ -16,16 +16,16 @@ source "$__BASH_UTILS_INITIALIZER" || { echo >&2; echo "Unable to source the \"$
 
 ######################################################### CODE ########################################################
 
-## FUNCTIONS DEFINITION
+## ARGUMENTS DEFINITION
 
+# Please define any needed arguments here.
 
-# ----------------------------------------------
+# -----------------------------------------------
 
 ## VARIABLES DEFINITION
 
 # Supported languages array.
 __supported_languages=('en' 'fr')
-
 
 # -----------------------------------------------
 
@@ -35,6 +35,12 @@ __supported_languages=('en' 'fr')
 __STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
+
+## FUNCTIONS DEFINITION
+
+# Please define any needed functions here.
+
+# ----------------------------------------------
 
 ## CODE
 

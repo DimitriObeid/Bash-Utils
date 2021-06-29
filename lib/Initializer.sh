@@ -48,11 +48,11 @@ fi
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_ROOT/config/Init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_ROOT/config/Init.conf\" FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_ROOT/config/Init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_ROOT/config/Init.conf' FILE" >&2; echo >&2; exit 1; }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF/Colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE \"$__BASH_UTILS_CONF/Colors.conf\" FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF/Colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/Colors.conf' FILE" >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -108,10 +108,10 @@ function EchoInit
         InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
-            __EchoInit "$p_str${__COLOR_CODE_RESET}"
+            __EchoInit "$p_str${__BU_COLOR_RESET}"
         else
             if [[ "$p_colorCode" =~ [0-9] ]]; then
-                __EchoInit "$(tput setaf "$p_colorCode")$p_str${__COLOR_CODE_RESET}"
+                __EchoInit "$(tput setaf "$p_colorCode")$p_str${__BU_COLOR_RESET}"
             else
                 InitErrMsg "The ${FUNCNAME[0]} color code must be an integer !" "$(( LINENO-1 ))" "1"
             fi
@@ -128,7 +128,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo "{$__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> $p_msg${__COLOR_CODE_RESET}" >&2; echo >&2
+    echo >&2; echo "{$__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -147,14 +147,14 @@ function InitErrMsg
 function CheckBashMinimalVersion
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-		echo -ne "${__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-1 ))${__COLOR_CODE_ERROR} --> ${__COLOR_CODE_RESET}" >&2
-		echo "${__COLOR_CODE_ERROR}This Bash library requires at least the Bash version ${__COLOR_CODE_RESET}4.0.0${__COLOR_CODE_RESET}" >&2
+		echo -ne "${__COLOR_CODE_ERROR}BASH-UTILS ERROR : In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-1 ))${__COLOR_CODE_ERROR} --> ${__BU_COLOR_RESET}" >&2
+		echo "${__BU_COLOR_CODE_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__COLOR_CODE_ERROR}Your Bash version is : ${__COLOR_CODE_HIGHLIGHT}$BASH_VERSION${__COLOR_CODE_RESET}" >&2
+		echo "${__COLOR_CODE_ERROR}Your Bash version is : ${__COLOR_CODE_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__COLOR_CODE_ERROR}Please install at least the ${__COLOR_CODE_HIGHLIGHT}4.0.0${__COLOR_CODE_ERROR} Bash version to use this library${__COLOR_CODE_RESET}"
+		echo "${__COLOR_CODE_ERROR}Please install at least the ${__COLOR_CODE_HIGHLIGHT}4.0.0${__COLOR_CODE_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
 		echo >&2
 
 		exit 1
@@ -171,11 +171,11 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
-        EchoInit "Found directory : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
+        EchoInit "Found directory : ${__COLOR_CODE_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
 
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
-        EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$p_path${__COLOR_CODE_RESET}"
+        EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
     else
         InitErrMsg "The following path is incorrect : ${__COLOR_CODE_HIGHLIGHT}$p_path" "$p_lineno" "1"
     fi
@@ -204,7 +204,7 @@ function SourceDependency
     # shellcheck disable=SC1090
     source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__COLOR_CODE_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
-    EchoInit "Sourced file : ${__COLOR_CODE_HIGHLIGHT}$p_dep${__COLOR_CODE_RESET}"
+    EchoInit "Sourced file : ${__COLOR_CODE_HIGHLIGHT}$p_dep${__BU_COLOR_RESET}"
 }
 
 # -----------------------------------------------
@@ -223,14 +223,14 @@ CheckBashMinimalVersion
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
-        echo "{__COLOR_CODE_ERROR}In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to clear the initializer's log file.${__COLOR_CODE_RESET}"
+        echo "{__COLOR_CODE_ERROR}In ${__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
         echo >&2; exit 1
     }
 else
     if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
         mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "${__COLOR_CODE_ERROR}In {__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__COLOR_CODE_RESET}" >&2; echo >&2; exit 1
+            echo "${__COLOR_CODE_ERROR}In {__COLOR_CODE_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$(( LINENO-2 ))${__COLOR_CODE_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
@@ -303,9 +303,9 @@ EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
 	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
 	
-	EchoInit "Created file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__COLOR_CODE_RESET}"
+	EchoInit "Created file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 else
-	EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__COLOR_CODE_RESET}"
+	EchoInit "Found file : ${__COLOR_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

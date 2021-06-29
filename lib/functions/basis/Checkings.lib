@@ -94,15 +94,9 @@ function TriggerRootDirWarning
 				read -rp "Enter your answer : " __read_TriggerRootDirWarning
 				EchoRead "$__read_TriggerRootDirWarning"
 				Newline
-				
-				case "$__read_TriggerRootDirWarning" in
-					"yes")
-						;;
-					"no")
-						;;
-					*)
-						;;
-				esac
+
+				# Calling the function that processes the given answer.
+				Case_read_TriggerRootDirWarning
 			fi
 		fi
 	done
