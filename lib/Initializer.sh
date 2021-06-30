@@ -48,11 +48,11 @@ fi
 
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF_INIT/init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/init.conf' FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF_INIT/init.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/init.conf' FILE : '$__BASH_UTILS_CONF_INIT/init'" >&2; echo >&2; exit 1; }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF_INIT/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/colors.conf' FILE" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF_INIT/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/colors.conf' FILE : " >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -128,7 +128,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo "{$__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
+    echo >&2; echo "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -223,14 +223,14 @@ CheckBashMinimalVersion
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
-        echo "{__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
+        echo "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
         echo >&2; exit 1
     }
 else
     if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
         mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "${__BU_COLOR_ERROR}In {__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
+            echo "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
@@ -249,7 +249,6 @@ CheckBURequirements "$__BASH_UTILS_TMP"             "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS"          "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS_BASIS"    "$LINENO"
 CheckBURequirements "$__BASH_UTILS_FUNCTS_MAIN"     "$LINENO"
-CheckBURequirements "$__BASH_UTILS_VARS"            "$LINENO"
 EchoInit
 
 # Checking for the development tools required folders.
@@ -296,7 +295,7 @@ if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
 	
 	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 else
-	EchoInit "Found file : ${__BU_CODE_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

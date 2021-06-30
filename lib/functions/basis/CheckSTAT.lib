@@ -113,22 +113,6 @@ function CheckSTAT_EXIT_CODE
     fi
 }
 
-# Checking the "$__STAT_FIFO_REDIRECTION" variable's value.
-function CheckSTAT_FIFO_REDIRECTION
-{
-    #***** Parameters *****
-    local p_file=$1
-    local p_lineno=$2
-
-    #***** Variables *****
-    local v_array=("true" "false")
-
-    #***** Code *****
-    if [ "$__STAT_FIFO_REDIRECTION" != "true" ] && [ "$__STAT_FIFO_REDIRECTION" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_FIFO_REDIRECTION" "__STAT_FIFO_REDIRECTION" "${v_array[@]}"
-    fi
-}
-
 # Checking the "$__STAT_LOG" variable's value.
 function CheckSTAT_LOG
 {
@@ -172,7 +156,7 @@ function CheckSTAT_OPERATE_ROOT
 	local v_array=("authorized" "forbidden" "restricted")
 
 	#***** Code *****
-	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] || [ "$__STAT_OPERATE_ROOT" != "forbidden" ] || [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
+	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] && [ "$__STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
 		ConfEcho "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${v_array[@]}"
 	fi
 }

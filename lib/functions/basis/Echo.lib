@@ -30,7 +30,8 @@ function Decho
     local p_newColor=$2
 
     #***** Variables *****
-    local v_oldColor="$(cat "$__BASH_UTILS_FILE_COLOR_CODE_PATH")"
+    local v_oldColor
+		v_oldColor="$(cat "$__BASH_UTILS_FILE_COLOR_CODE_PATH")"
 
     #***** Code *****
     if [ "$p_newColor" = "$v_oldColor" ]; then
@@ -38,7 +39,7 @@ function Decho
 		tput setaf "$p_newColor"
     fi
 
-	echo -e "${p_newColor}$p_string${v_oldColor}" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+	echo -e "${p_newColor}$p_string$(tput setaf "$v_oldColor")" && CheckInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
 }
 
 # Easy "Decho()" function call.

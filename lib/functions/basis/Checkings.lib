@@ -61,15 +61,15 @@ function TriggerRootDirWarning
 	p_path=$1
 
 	#***** Variables *****
-	v_root_directories=$(
-		'/' '/bin' '/boot'
-		'/dev' '/etc' '/home'
-		'/lib' '/lib32' '/lib64'
-		'/libx32' '/lost+found'
-		'/media' '/mnt' '/opt'
-		'/proc' '/root' '/run' '/sbin'
-		'/snap' '/srv' '/sys'
-		'/tmp' '/usr' '/var')
+#	v_root_directories=$( \
+		'/' '/bin' '/boot' \
+		'/dev' '/etc' '/home' \
+		'/lib' '/lib32' '/lib64' \
+		'/libx32' '/lost+found' \
+		'/media' '/mnt' '/opt' \
+		'/proc' '/root' '/run' '/sbin' \
+		'/snap' '/srv' '/sys' \
+		'/tmp' '/usr' '/var' \)
 
 	#***** Code *****
 	# Checking if the given path points towards the root directory or one of its subfolders
@@ -94,7 +94,7 @@ function TriggerRootDirWarning
 			Newline
 
 			# Calling the function that processes the given answer.
-			Case_read_TriggerRootDirWarning
+			CaseRead_TriggerRootDirWarning
 		fi
 	fi
 }
@@ -431,12 +431,10 @@ function CheckProjectLogStatus
             # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
             if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
 
-                for value_1 in "${p_extraArgs[@]}"; do
-
-					for value_2 in "${v_acceptedExtraArgs[@]}"
+                for val in "${p_extraArgs[@]}"; do
 
                     # If the "nodate" value is passed as argument.
-                    if [ "$value_1" = "nodate" ] && [ "$value_2" = "nodate" ]; then
+                    if [ "$val" = "nodate" ]; then
                         case "$p_option" in
                             '-n')
                                 echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -445,7 +443,6 @@ function CheckProjectLogStatus
                                 echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 ;;
                         esac
-
 
                     # Else, if an unsupported option is passed (note for myself : the extra args checking
                     # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "log" option)).
@@ -480,43 +477,36 @@ function CheckProjectLogStatus
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            # Checking if the extra arguments array contains at least an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
+            # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
             if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
 
-				for value_acc in "${v_acceptedExtraArgs[@]}"; do
+                for val in "${p_extraArgs[@]}"; do
 
-					# 
-					if [ "$value_acc" = "nodate" ]; then
+                    # If the "nodate" value is passed as argument.
+                    if [ "$val" = "nodate" ]; then
+                        case "$p_option" in
+                            '-n')
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                            '')
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                ;;
+                        esac
 
-						detected_accepted_values=("nodate")
-
-						for "${value_arg[*]}" in "${p_extraArgs[@]}"; do
-				
-					# If the "nodate" value is passed as argument.
-						if [[ "$value_arg" =~ ${detected_accepted_values[*]} ]]; then
-							case "$p_option" in
-								'-n')
-									echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									;;
-								'')
-									echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									;;
-							esac						
-						# Else, if an unsupported option is passed (note for myself : the extra args checking
-						# "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "tee" option)).
-						else
-							case "$p_option" in
-								'-n')
-									echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									;;
-								'')
-									echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-									;;
-							esac
-						fi
-					done
+					# Else, if an unsupported option is passed (note for myself : the extra args checking
+					# "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "tee" option)).
+					else
+						case "$p_option" in
+							'-n')
+								echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+								echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+								;;
+							'')
+								echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+								echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+								;;
+						esac
+					fi
 				done
 
             # Else, if no argument is passed in "$p_extraArgs" parameter array.
@@ -625,7 +615,7 @@ function HandleErrors
         fi
 
         if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^"} >&2
+            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
         else
             HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
         fi
@@ -633,21 +623,21 @@ function HandleErrors
         if [ -z "$p_adviceString" ]; then
             EchoError "No advice to give."; Newline >&2
         else
-            EchoError "$(DechoE "Advice") : $p_adviceString" >&2; Newline >&2
+            EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
         fi
             
         if [ -z "$p_badValue" ]; then
-            EchoError "Value(s) that caused this error : $(DechoOrange 'No value //OR\\ an unknown error')"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoOrange 'No value') OR $(DechoOrange 'an unknown error')"; Newline >&2
         else
-            EchoError "Value(s) that caused this error : $(DechoE "$p_badValue")"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
         fi
 
         if [ "$__STAT_ERROR" = "fatal" ]; then
-            EchoError "Stopping the execution of $(DechoE "$(basename "$0")")."; Newline >&2
+            EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
             ExitError "$__STAT_EXIT_CODE"
         else
-            KbInputYesNo "Do you want to stop the execution of $(DechoE "$(basename "$0")") ? (yes/no)" \
-                "Resuming script execution." "return" >&1 "Aborting script execution." >&2 "exit"
+			# Calling the function that processes the given answer.
+			CaseRead_HandleErrors
         fi
     fi
 }
