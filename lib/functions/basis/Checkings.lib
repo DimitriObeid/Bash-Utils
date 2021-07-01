@@ -131,9 +131,20 @@ function CheckArgs_IsCorrectValue
 function CheckArgs_ProcessingDir
 {
     #***** Parameters *****
+    local p_function=$1
+    local p_parent=$2
+    local p_name=$3
 
     #***** Code *****
-    return
+    if [ -z "$p_function" ]; then
+        HandleErrors "1" "NO FUNCTION NAME PASSED AS ARGUMENT" \
+            "THE FUNCTION $(DechoHighlight "$(CutCheck "${FUNCNAME[0]}")") NEEDS A FUNCTION PASSED AS FIRST ARGUMENT TO WORK PROPERLY" \
+            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    elif [ -z "$p_parent" ] || [ -z "$p_name" ]; then
+        HandleErrors "1" "AT LEAST ONE OF THE TWO $(DechoHighlight "$(CutCheck "${FUNCNAME[0]}")")'S LAST ARGUMENTS IS MISSING" \
+            "The function $(DechoHighlight "$(CutCheck "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
+            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
 }
 
 # "OverwriteDir" function.
@@ -411,7 +422,7 @@ function CheckProjectLogStatus
         if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -gt 0 ]; then
 
             # Backup the old values to restore them when the log processing will be done.
-            local __OLD_STAT_TIME_TXT="$__STAT_TIME_TXT"
+            local __BU_OLD_STAT_TIME_TXT="$__STAT_TIME_TXT"
             __STAT_TIME_TXT="0"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
@@ -550,7 +561,7 @@ function CheckProjectLogStatus
         if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -eq 0 ]; then
         
             # Backup the old values to restore them when the log processing will be done, then check if the correct values were reassignated.
-            __STAT_TIME_TXT="$__OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            __STAT_TIME_TXT="$__BU_OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
 }
@@ -599,9 +610,9 @@ function HandleErrors
     local v_hdrString
 	
 	if [ -n "$p_function" ]; then
-		v_hdrString="$(echo -e "IN $(DechoE "$p_file"), FUNCTION $(DechoE "$p_function"), LINE $(DechoE "$p_lineno") -->")"
+		v_hdrString="$(echo -e "IN $(DechoHighlight "$p_file"), FUNCTION $(DechoHighlight "$p_function"), LINE $(DechoHighlight "$p_lineno") -->")"
 	else
-		v_hdrString="$(echo -e "IN $(DechoE "$p_file"), LINE $(DechoE "$p_lineno") -->")"
+		v_hdrString="$(echo -e "IN $(DechoHighlight "$p_file"), LINE $(DechoHighlight "$p_lineno") -->")"
 	fi
 
 	# ***** Code *****

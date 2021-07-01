@@ -181,6 +181,22 @@ function CheckBURequirements
     fi
 }
 
+# Check project related file presence, or create this file.
+function CheckProjectRelatedFile
+{
+	#***** Parameters *****
+	p_path=$1
+
+	#***** Code *****
+	if [ -f "$p_path" ]; then
+        if [ -s "$p_path" ]; then
+            true > "$p_path"
+        fi
+    else
+		EchoInit "$(touch "$p_path")"
+    fi
+}
+
 # Checking if the initialization process is done or not
 function CheckIsLibraryInitializing
 {
@@ -280,9 +296,6 @@ EchoInit "Sourcing the variables status file :"; SourceDependency "$__BASH_UTILS
 # Sourcing the fuctions files.
 EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
-# Sourcing the variables files.
-EchoInit "Sourcing the variables files :"; for f in "${__BASH_UTILS_VARIABLES_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
-
 # -----------------------------------------------
 
 ## PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS
@@ -314,6 +327,7 @@ __PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
 # shellcheck disable=SC2034
 __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
+# The function "CheckSTAT_LOG()" creates the log file and its path.
 # shellcheck disable=SC2034
 __STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
@@ -330,23 +344,18 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 ## PROCESSING THE LOG FILE
 
-# Creating or overwritting the paths list file.
-if [ "$__STAT_LOG" = "true" ]; then
-    if [ -f "$__PROJECT_LOG_FILE_PATH" ]; then
-        if [ -s "$__PROJECT_LOG_FILE_PATH" ]; then
-            true > "$__PROJECT_LOG_FILE_PATH"
-        fi
-    else
-        if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
-            EchoInit "$(mkdir -p "$__PROJECT_LOG_DIR_PATH")"
-        fi
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
+# but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
+if [ ! -d "$__PROJECT_TMP_PATH" ]; then
+	EchoInit "$(mkdir -p "$__PROJECT_TMP_PATH")"
+fi
 
-        EchoInit "$(touch "$__PROJECT_LOG_FILE_PATH")"
-        echo "$__PROJECT_LOG_DIR_PATH/$__PROJECT_LOG_FILE_NAME"
-        echo "$__PROJECT_LOG_FILE_PATH"
-    fi
-    
-    # Redirecting files list into the log file.
+CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
+CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+
+# TODO : create a function to execute this code if this variable status is modified somewhere in the library code.
+if [ "$__STAT_LOG" = "true" ]; then
+	# Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
     EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"

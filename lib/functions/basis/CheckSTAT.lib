@@ -126,7 +126,37 @@ function CheckSTAT_LOG
     #***** Code *****
     if [ "$__STAT_LOG" != "true" ] && [ "$__STAT_LOG" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${v_array[@]}"
-    fi
+    elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
+		if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
+			echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder.${BU_COLOR_RESET}"
+			mkdir -pv "$__PROJECT_LOG_DIR_PATH" || { HandleErrors "1" "THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))" }
+		fi
+		echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_FILE_PATH${__BU_COLOR_NEWSTEP} file.${BU_COLOR_RESET}"
+		touch "$__PROJECT_LOG_FILE_PATH" { HandleErrors "1" "THE PROJECT'S LOG FILE CREATION FAILED" "" "$__PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))" }
+
+		# Redirecting the initializer's log file content into the log file.
+		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
+
+		EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
+
+		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+		HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+
+		# Getting operating system family.
+		EchoNewstep "Operating system family : $(DechoN "$OSTYPE")"
+		Newline
+
+		# Gathering OS informations from the "/etc/os-release" file.
+		EchoNewstep "Operating system general informations :"
+		EchoMsg "$(cat "/etc/os-release")" "" "nodate"
+		Newline
+
+		EchoNewstep "Bash version : $(DechoN "$BASH_VERSION")"
+		Newline
+
+		EchoSuccess "Successfully got the user's system's informations."
+
+	fi
 }
 
 # Checking the "$__STAT_LOG_REDIRECT" variable's value.

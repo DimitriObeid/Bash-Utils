@@ -17,7 +17,7 @@ fi
 
 ## WRITING DIFFERENTLY COLORED TEXT BETWEEN TEXT
 
-# Text inside decoration procssing.
+# Text's inside decoration procssing.
 
 # Usage :
 #	Decho "<Text to write>" "${__BU_COLOR_<TO_DISPLAY>}"
@@ -31,26 +31,32 @@ function Decho
 
     #***** Variables *****
     local v_oldColor
-		v_oldColor="$(cat "$__BASH_UTILS_FILE_COLOR_CODE_PATH")"
+		v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
 
     #***** Code *****
-    if [ "$p_newColor" = "$v_oldColor" ]; then
-        p_newColor="$(( p_newColor+2 ))"
-		tput setaf "$p_newColor"
-    fi
+	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+		EchoWarning "Warning ! The ${__BU_COLOR_HIGHLIGHT}$__BASH_UTILS_FILE_COLOR_CODE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !"
+		
+		return 1
+	else
+		if [ "$p_newColor" = "$v_oldColor" ]; then
+			p_newColor="$(( p_newColor+2 ))"
+			tput setaf "$p_newColor"
+		fi
 
-	echo -e "${p_newColor}$p_string$(tput setaf "$v_oldColor")" && CheckInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+		echo -e "${p_newColor}$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+	fi
 }
 
 # Easy "Decho()" function call.
-function DechoHighlight { Decho "$1" "${__BU_COLOR_HIGHLIGHT}"; }
-function DechoBlue 		{ Decho "$1" "${__BU_COLOR_BLUE}"; }
-function DechoCyan 		{ Decho "$1" "${__BU_COLOR_CYAN}"; }
-function DechoGreen 	{ Decho "$1" "${__BU_COLOR_GREEN}"; }
-function DechoOrange 	{ Decho "$1" "${__BU_COLOR_ORANGE}"; }
-function DechoPurple 	{ Decho "$1" "${__BU_COLOR_PURPLE}"; }
-function DechoRed		{ Decho "$1" "${__BU_COLOR_RED}"; }
-function DechoYellow 	{ Decho "$1" "${__BU_COLOR_YELLOW}"; }
+function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"; }
+function DechoBlue 		{ Decho "$1" "$__BU_COLOR_BLUE"; }
+function DechoCyan 		{ Decho "$1" "$__BU_COLOR_CYAN"; }
+function DechoGreen 	{ Decho "$1" "$__BU_COLOR_GREEN"; }
+function DechoOrange 	{ Decho "$1" "$__BU_COLOR_ORANGE"; }
+function DechoPurple 	{ Decho "$1" "$__BU_COLOR_PURPLE"; }
+function DechoRed		{ Decho "$1" "$__BU_COLOR_RED"; }
+function DechoYellow 	{ Decho "$1" "$__BU_COLOR_YELLOW"; }
 
 # -----------------------------------------------
 
@@ -71,8 +77,6 @@ function EchoError
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    # There's no need to check if the "$__PROJECT_FIFO_COLORS" global variable contains a path as value,
-    # as this failsafe is done in the function triggered by the call of the "$__COL_RED" variable (it's the same for the other "$__COL_*" variables).
     CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
