@@ -296,20 +296,15 @@ EchoInit "Sourcing the variables status file :"; SourceDependency "$__BASH_UTILS
 # Sourcing the fuctions files.
 EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
+# Sourcing the remaining configuration files.
+EchoInit "Sourcing the remaining configuration files :"
+SourceDependency "$__BASH_UTILS_CONF/text.conf"
+SourceDependency "$__BASH_UTILS_CONF/time.conf"
+EchoInit
+
 # -----------------------------------------------
 
-## PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS
 
-EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
-
-# Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
-if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
-	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
-	
-	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
-else
-	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
-fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -342,7 +337,7 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 # -----------------------------------------------
 
-## PROCESSING THE LOG FILE
+## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
@@ -353,29 +348,19 @@ fi
 CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
 CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
 
-# TODO : create a function to execute this code if this variable status is modified somewhere in the library code.
-if [ "$__STAT_LOG" = "true" ]; then
-	# Redirecting the initializer's log file content into the log file.
-    HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
+# -----------------------------------------------
 
-    EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
+## PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS
 
-    # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
-    HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 
-    # Getting operating system family.
-    EchoNewstep "Operating system family : $(DechoN "$OSTYPE")"
-    Newline
-
-    # Gathering OS informations from the "/etc/os-release" file.
-    EchoNewstep "Operating system general informations :"
-    EchoMsg "$(cat "/etc/os-release")" "" "nodate"
-    Newline
-
-    EchoNewstep "Bash version : $(DechoN "$BASH_VERSION")"
-    Newline
-
-    EchoSuccess "Successfully got the user's system's informations."
+# Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
+if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
+	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
+	
+	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+else
+	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 fi
 
 # -----------------------------------------------

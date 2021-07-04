@@ -129,10 +129,11 @@ function CheckSTAT_LOG
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
 		if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
 			echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder.${BU_COLOR_RESET}"
-			mkdir -pv "$__PROJECT_LOG_DIR_PATH" || { HandleErrors "1" "THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))" }
+			mkdir -pv "$__PROJECT_LOG_DIR_PATH" || { HandleErrors "1" "THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; }
 		fi
+
 		echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_FILE_PATH${__BU_COLOR_NEWSTEP} file.${BU_COLOR_RESET}"
-		touch "$__PROJECT_LOG_FILE_PATH" { HandleErrors "1" "THE PROJECT'S LOG FILE CREATION FAILED" "" "$__PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))" }
+		touch "$__PROJECT_LOG_FILE_PATH" || { HandleErrors "1" "THE PROJECT'S LOG FILE CREATION FAILED" "" "$__PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; }
 
 		# Redirecting the initializer's log file content into the log file.
 		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
