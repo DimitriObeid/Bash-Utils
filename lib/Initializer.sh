@@ -366,4 +366,7 @@ fi
 
 #### ENDING THE INITIALIZATION PROCESS
 
+# Ending the initialization process by setting its status variable's value to "false".
+__BASH_UTILS_IS_INITIALIZING="false"
+
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__PROJECT_NAME") !"
