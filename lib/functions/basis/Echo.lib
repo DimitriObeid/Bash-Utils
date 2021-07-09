@@ -30,22 +30,23 @@ function Decho
     local p_newColor=$2
 
     #***** Variables *****
-    local v_oldColor
-		v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
-
-    #***** Code *****
-	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-		EchoWarning "Warning ! The ${__BU_COLOR_HIGHLIGHT}$__BASH_UTILS_FILE_COLOR_CODE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !"
+    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        echo "${__BU_COLOR_RESET}" >&2
+		echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__BASH_UTILS_FILE_COLOR_CODE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2
 		
 		return 1
-	else
-		if [ "$p_newColor" = "$v_oldColor" ]; then
-			p_newColor="$(( p_newColor+2 ))"
-			tput setaf "$p_newColor"
-		fi
+    else
+        local v_oldColor
+            v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
+    fi
 
-		echo -e "${p_newColor}$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+    #***** Code *****
+    if [ "$p_newColor" = "$v_oldColor" ]; then
+		p_newColor="$(( p_newColor+2 ))"
+		tput setaf "$p_newColor"
 	fi
+
+	echo -e "$(tput setaf "$p_newColor")$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
 }
 
 # Easy "Decho()" function call.
