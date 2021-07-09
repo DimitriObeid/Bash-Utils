@@ -32,9 +32,9 @@ fi
 # Do not source the "~/.bashrc" file, as it is executed for interactive non-login shells, unlike "~/.bash_profile".
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF_INIT/init.conf" ||
+source "$__BASH_UTILS_CONF/init.conf" ||
 {
-    echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/init.conf' FILE : '$__BASH_UTILS_CONF_INIT/init'" >&2
+    echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/init.conf' FILE : '$__BASH_UTILS_CONF/init'" >&2
     
     if [ -z "${__BASH_UTILS_ROOT:+x}" ]; then
         echo >&2; echo 
@@ -47,7 +47,7 @@ source "$__BASH_UTILS_CONF_INIT/init.conf" ||
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF_INIT/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF_INIT/colors.conf' FILE : " >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
