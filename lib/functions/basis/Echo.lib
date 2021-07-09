@@ -31,8 +31,8 @@ function Decho
 
     #***** Variables *****
     if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo "${__BU_COLOR_RESET}" >&2
-		echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__BASH_UTILS_FILE_COLOR_CODE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2
+        echo "$__BU_COLOR_RESET" >&2
+		echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2
 		
 		return 1
     else
@@ -42,6 +42,8 @@ function Decho
 
     #***** Code *****
     if [ "$p_newColor" = "$v_oldColor" ]; then
+        
+        # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer). Se renseigner sur la commande "tput setaf".
 		p_newColor="$(( p_newColor+2 ))"
 		tput setaf "$p_newColor"
 	fi
@@ -50,14 +52,17 @@ function Decho
 }
 
 # Easy "Decho()" function call.
-function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"; }
-function DechoBlue 		{ Decho "$1" "$__BU_COLOR_BLUE"; }
-function DechoCyan 		{ Decho "$1" "$__BU_COLOR_CYAN"; }
-function DechoGreen 	{ Decho "$1" "$__BU_COLOR_GREEN"; }
-function DechoOrange 	{ Decho "$1" "$__BU_COLOR_ORANGE"; }
-function DechoPurple 	{ Decho "$1" "$__BU_COLOR_PURPLE"; }
-function DechoRed		{ Decho "$1" "$__BU_COLOR_RED"; }
-function DechoYellow 	{ Decho "$1" "$__BU_COLOR_YELLOW"; }
+function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT";   }
+function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE";        }
+function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN";        }
+function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY";        }
+function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN";       }
+function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE";      }
+function DechoPink      { Decho "$1" "$__BU_COLOR_PINK";        }
+function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE";      }
+function DechoRed       { Decho "$1" "$__BU_COLOR_RED";         }
+function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE";   }
+function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW";      }
 
 # -----------------------------------------------
 
@@ -78,7 +83,7 @@ function EchoError
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
+    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -118,7 +123,7 @@ function EchoNewstep
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}"
+    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -156,7 +161,7 @@ function EchoSuccess
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&1
+    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&1
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -176,7 +181,7 @@ function EchoWarning
     local p_arrExtraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_TAB$__BU_TXT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
+    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
 
     sleep "$__STAT_TIME_TXT"
 }
