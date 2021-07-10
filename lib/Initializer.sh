@@ -40,6 +40,16 @@ function CheckBashMinimalVersion
 	fi
 }
 
+# Print an error message.
+function PrintErrorMsg
+{
+    #***** Parameters *****
+    local p_msg=$1
+
+    #***** Code *****
+    echo >&2; echo "${__BU_COLOR_ERROR}IN ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_ERROR} --> BASH UTILS ERROR : $p_msg${__BU_COLOR_RESET}"
+}
+
 # Check project related file presence, or create this file.
 function CheckProjectRelatedFile
 {
@@ -53,10 +63,11 @@ function CheckProjectRelatedFile
         fi
     else
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
-            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR : UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !${__BU_COLOR_RESET}" >&2; echo >&2; kill "$$"; }
+            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !" >&2; echo >&2; exit 1; }
         fi
-		
-		EchoMsg "$(touch "$p_path")"
+
+		EchoMsg "$(touch "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"; echo >&2; exit 1 }
+		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") file."
     fi
 }
 
@@ -114,29 +125,19 @@ CheckBashMinimalVersion
 # Defining an associative array to store each sourced configuration file's path.
 a_config_files_path=()
 
-# Project's and initialization process global variables.
-# shellcheck disable=SC1090
-f_init="$__BASH_UTILS_CONF/init.conf"
+# Storing the configuration files path variables values into an array to source, print and add easier into the "a_config_files_path" associative array.
+# Those files are, respectly, the :
+#   - Project's and initialization process global variables
+#   - Text color
+#   - Project's status variables
+#   - Text decoration, formatting and printing variables
+#   - Time variables
 
-# Text color.
-# shellcheck disable=SC1090
-f_colors="$__BASH_UTILS_CONF/colors.conf"
-
-# Project's status variables.
-# shellcheck disable=SC1090
-f_status="$__BASH_UTILS_CONF/projectStatus.conf"
-
-# Text decoration, formatting and printing variables.
-# shellcheck disable=SC1090
-f_text="$__BASH_UTILS_CONF/text.conf"
-
-# Time variables.
-# shellcheck disable=SC1090
-f_time="$__BASH_UTILS_CONF/time.conf"
-
-
-# Storing those variables values into an array to source, print and add easier into the "a_config_files_path" associative array.
-a_list_config_files_path=("$f_init" "$f_colors" "$f_status" "$f_text" "$f_time")
+a_list_config_files_path=("$__BASH_UTILS_CONF_FILE_INIT" \
+    "$__BASH_UTILS_CONF_FILE_COLORS" \
+    "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" \
+    "$__BASH_UTILS_CONF_FILE_TEXT" \
+    "$__BASH_UTILS_CONF_FILE_TIME")
 
 # shellcheck disable=SC1090
 for f in "${a_list_config_files_path[@]}"; do
@@ -219,8 +220,5 @@ CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### ENDING THE INITIALIZATION PROCESS
-
-# Ending the initialization process by setting its status variable's value to "false".
-__BASH_UTILS_IS_INITIALIZING="false"
 
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__PROJECT_NAME") !"
