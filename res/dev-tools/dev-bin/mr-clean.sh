@@ -6,7 +6,7 @@
 
 source "~/.bash_profile" || { echo >&2; echo "BASH-UTILS ERROR : Unable to source the '$HOME/.bash_profile' file." >&2; echo >&2; exit 1; }
 
-source "$__BASH_UTILS_INITIALIZER" || { echo >&2; echo "BASH-UTILS ERROR : Unable to source the Bash-utils initializer file." >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_LIB_FILE_INITIALIZER" || { echo >&2; echo "BASH-UTILS ERROR : Unable to source the Bash-utils initializer file." >&2; echo >&2; exit 1; }
 
 
 

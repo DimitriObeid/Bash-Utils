@@ -66,7 +66,7 @@ function CheckProjectRelatedFile
             mkdir -pv "$(GetParentDirectoryPath "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !" >&2; echo >&2; exit 1; }
         fi
 
-		EchoMsg "$(touch "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"; echo >&2; exit 1 }
+		EchoMsg "$(touch "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"; echo >&2; exit 1; }
 		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") file."
     fi
 }
