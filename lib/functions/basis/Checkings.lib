@@ -119,6 +119,22 @@ function CheckArgs_IsCorrectValue
 
 # -----------------------------------------------
 
+## "basis/Echo.lib" FILE
+
+# Checking if the color code file exists.
+function CheckDecho
+{
+    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        echo "$__BU_COLOR_RESET" >&2; echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2
+
+		CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+		
+		touch "$__PROJECT_COLOR_CODE_FILE_PATH" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_ERROR} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2; ExitError; }
+    fi
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -539,21 +555,16 @@ function CheckProjectLogStatus
 
     # Else, if no log file exists OR if "$__STAT_LOG" value is "false" OR if "$__STAT_LOG_REDIRECT" has no redirection value. 
     else
-		# Writing into the 
-		if CheckIsLibraryInitializing && [ -f "$__INIT_LIST_FILE_PATH" ]; then
-			EchoInit "$p_string"
-		else
-			case "$p_option" in
-				'-n')
-					echo -ne "$p_string"
-					;;
-				'')
-					echo -e "$p_string"
-					;;
-			esac
-			
-			sleep "$__STAT_TIME_TXT"
-		fi
+        case "$p_option" in
+			'-n')
+				echo -ne "$p_string"
+				;;
+			'')
+				echo -e "$p_string"
+				;;
+		esac
+
+        sleep "$__STAT_TIME_TXT"
 	fi
 
     # Restore timer status variables old values if they were modified because of the redirection to the log file only.

@@ -30,15 +30,8 @@ function Decho
     local p_newColor=$2
 
     #***** Variables *****
-    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo "$__BU_COLOR_RESET" >&2
-		echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2
-		
-		return 1
-    else
-        local v_oldColor
-            v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
-    fi
+    local v_oldColor
+        v_oldColor="$(CheckDecho && cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
 
     #***** Code *****
     if [ "$p_newColor" = "$v_oldColor" ]; then

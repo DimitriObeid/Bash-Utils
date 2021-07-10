@@ -52,7 +52,11 @@ function CheckProjectRelatedFile
             true > "$p_path"
         fi
     else
-		EchoInit "$(touch "$p_path")"
+        if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
+            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR : UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !${__BU_COLOR_RESET}" >&2; echo >&2; kill "$$"; }
+        fi
+		
+		EchoMsg "$(touch "$p_path")"
     fi
 }
 
@@ -136,7 +140,7 @@ a_list_config_files_path=("$f_init" "$f_colors" "$f_status" "$f_text" "$f_time")
 
 # shellcheck disable=SC1090
 for f in "${a_list_config_files_path[@]}"; do
-    source "$f" || SourcingFailure "$f"; a_config_files_path+=("$f\n")
+    source "$f" || SourcingFailure "$f"; a_config_files_path+=("$f")
 done
 
 
@@ -175,7 +179,7 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__STAT_LOG" variable's value is equal to "true".
 # shellcheck disable=SC2034
-__STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG="false";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -192,9 +196,18 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-if [ ! -d "$__PROJECT_TMP_PATH" ]; then
-	EchoMsg "$(mkdir -p "$__PROJECT_TMP_PATH")"
-fi
+function MkTmpDir
+{
+    if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
+        EchoMsg "$(mkdir -pv "$__PROJECT_TM_DIR_PATH" || HandleErrors "1" "THE $(DechoHighlight "$__PROJECT_TMP_DIR_PATH") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))")"
+    fi
+}
+
+MkTmpDir
+
+# -----------------------------------------------
+
+## PROCESSING REMAINING DIRECTORIES AND FILES
 
 CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
 CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
