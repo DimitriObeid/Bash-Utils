@@ -138,6 +138,9 @@ function CheckSTAT_LOG
 		# Redirecting the initializer's log file content into the log file.
 		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
+		EchoNewstep "Sourced configuration files :"; for val in "${a_config_files_path[@]}"; do EchoMsg "$val"; done; Newline
+		EchoNewstep "Sourced library files : "; for val in "${a_lib_files_path[@]}"; do EchoMsg "$val"; done; Newline
+		
 		EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
 
 		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.

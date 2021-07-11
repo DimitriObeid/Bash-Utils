@@ -184,13 +184,13 @@ function EchoWarning
 ## TEXT FORMATTING
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
-function KeepFormating
+function KeepFormatting
 {
 	#***** Parameters *****
 	p_string=$1
 
 	#***** Code *****
-	echo "$p_string"
+	echo "$p_string" | tr '[upper]' '[upper]'
 }
 
 # Print a lowercased text.
@@ -240,18 +240,18 @@ function Newline
     local number=$1
 
     #***** Code *****
-    if [ -n "$number" ] && ! IsInt "$number"; then
-        HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" \
-            "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "$number" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
-    else
-        if [ -n "$number" ]; then
+    if [ -n "$number" ]; then
+        if ! IsInt "$number"; then
+            HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" \
+                "Check at the mentionned file in the 4th $(DechoE "HandleErrors") function's argument" "$number" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        else
             # Doing X line breaks according to the number passed as argument.
             for ((i=0; i<number; i++)); do
                 CheckProjectLogStatus "" "" "nodate"
             done
-        else
-            CheckProjectLogStatus "" "" "nodate"
         fi
+    else
+        CheckProjectLogStatus "" "" "nodate"
     fi
 }
