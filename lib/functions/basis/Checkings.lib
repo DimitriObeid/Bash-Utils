@@ -119,22 +119,6 @@ function CheckArgs_IsCorrectValue
 
 # -----------------------------------------------
 
-## "basis/Echo.lib" FILE
-
-# Checking if the color code file exists.
-function CheckDecho
-{
-    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo "$__BU_COLOR_RESET" >&2; echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2
-
-		CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
-		
-		touch "$__PROJECT_COLOR_CODE_FILE_PATH" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_ERROR} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2; ExitError; }
-    fi
-}
-
-# -----------------------------------------------
-
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -299,6 +283,32 @@ function CheckArgs_Makefile
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### BASIS FUNCTIONS VALUES HANDLING
+
+## "basis/Echo.lib" FILE
+
+# Checking if the color code file exists.
+function HandleVal_Decho
+{
+    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        echo "$__BU_COLOR_RESET" >&2; echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2
+
+		CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+		
+		touch "$__PROJECT_COLOR_CODE_FILE_PATH" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_ERROR} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2; ExitError; }
+    fi
+}
+
+# -----------------------------------------------
+
+
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### VARIABLES VALUES CHECKING
 
 ## NUMBER VALUES
@@ -395,7 +405,19 @@ function IsAlphaNum
 
 ## FILE PATHS CHECKING
 
-# Checking for existent path.
+# Checking for an existent directory path (for the "HandleErrors()" function mainly).
+function CheckDirPathExists
+{
+    #***** Parameters *****
+    p_path=$1               # Path of the (in)existent directory.
+
+    #***** Code *****
+    if [ ! -f "$p_path" ]; then
+        DechoBoldItalicHighlight "<missing directory path>"
+    fi
+}
+
+# Checking for an existent file path (for the "HandleErrors()" function mainly).
 function CheckFilePathExists
 {
     #***** Parameters *****
@@ -403,7 +425,7 @@ function CheckFilePathExists
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoBoldItalicHighlight ""
+        DechoBoldItalicHighlight "<missing file path>"
     fi
 }
 
