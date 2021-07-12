@@ -133,9 +133,12 @@ a_config_files_path=()
 #   - Text decoration, formatting and printing variables
 #   - Time variables
 
+# The "init.conf" file MUST be sourced first, then the "ProjectStatus.conf" file MUST be sourced in the second.
+# Unless otherwise stated, the other configuration files may be sourced in any order.
+
 a_list_config_files_path=("$__BASH_UTILS_CONF_FILE_INIT" \
-    "$__BASH_UTILS_CONF_FILE_COLORS" \
     "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" \
+    "$__BASH_UTILS_CONF_FILE_COLORS" \
     "$__BASH_UTILS_CONF_FILE_TEXT" \
     "$__BASH_UTILS_CONF_FILE_TIME")
 

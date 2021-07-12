@@ -438,7 +438,7 @@ function CheckProjectLogStatus
     local p_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
-    local v_acceptedExtraArgs=('nodate')        # Allowed extra arguments list for the "$p_extraArgs" array of arguments.
+    local a_acceptedExtraArgs=('nodate')        # Allowed extra arguments list for the "$p_extraArgs" array of arguments.
     local v_errorEcho
 		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the $(Decho "$__PROJECT_LOG_FILE_PATH" "${__BU_COLOR_HIGHLIGHT}") file.${__BU_COLOR_RESET}"
 	
@@ -467,8 +467,8 @@ function CheckProjectLogStatus
         # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
-            # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
-            if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
+            # Checking if the extra arguments array contains an allowed value, by checking the "$a_acceptedExtraArgs" array's values.
+            if [[ "${p_extraArgs[*]}" =~ ${a_acceptedExtraArgs[*]} ]]; then
 
                 for val in "${p_extraArgs[@]}"; do
 
@@ -516,8 +516,8 @@ function CheckProjectLogStatus
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            # Checking if the extra arguments array contains an allowed value, by checking the "$v_acceptedExtraArgs" array's values.
-            if [[ "${p_extraArgs[*]}" =~ ${v_acceptedExtraArgs[*]} ]]; then
+            # Checking if the extra arguments array contains an allowed value, by checking the "$a_acceptedExtraArgs" array's values.
+            if [[ "${p_extraArgs[*]}" =~ ${a_acceptedExtraArgs[*]} ]]; then
 
                 for val in "${p_extraArgs[@]}"; do
 

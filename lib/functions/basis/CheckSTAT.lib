@@ -97,22 +97,6 @@ function CheckSTAT_ERROR
     fi
 }
 
-# Checking the "$__STAT_ERROR_TXT_FMT" status variable's value.
-function CheckSTAT_ERROR_TXT_FMT
-{
-    #***** Parameters *****
-    p_file=$1
-    p_lineno=$2
-
-    #***** Variables *****
-    local a_array=("true" "false")
-
-    #***** Code *****
-    if [ "$__STAT_ERROR_TXT_FMT" != "true" ] && [ "$__STAT_ERROR_TXT_FMT" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR_TXT_FMT" '__STAT_ERROR_TXT_FMT' "${a_array[@]}"
-    fi
-}
-
 # Checking the "$__STAT_EXIT_CODE" status variable's value.
 function CheckSTAT_EXIT_CODE
 {
@@ -228,6 +212,21 @@ function CheckSTAT_TIME_TXT
     fi
 }
 
+# Checking the "$__STAT_TXT_FMT" status variable's value.
+function CheckSTAT_TXT_FMT
+{
+    #***** Parameters *****
+    p_file=$1
+    p_lineno=$2
+
+    #***** Variables *****
+    local a_array=("true" "false")
+
+    #***** Code *****
+    if [ "$__STAT_TXT_FMT" != "true" ] && [ "$__STAT_TXT_FMT" != "false" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_TXT_FMT" '__STAT_TXT_FMT' "${a_array[@]}"
+    fi
+}
 # Checking the "$__STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS
@@ -245,7 +244,7 @@ function CheckSTAT_USER_OS
 function CheckProjectStatusVars
 {
     #***** Parameters *****
-    local p_file=$1
+    local p_file=$1error
     local p_lineno=$2
 
     #***** Code *****
@@ -253,7 +252,7 @@ function CheckProjectStatusVars
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
-    CheckSTAT_ERROR_TXT_FMT "$p_file" "$p_lineno"
+    CheckSTAT_TXT_FMT       "$p_file" "$p_lineno"
     CheckSTAT_EXIT_CODE     "$p_file" "$p_lineno"
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
