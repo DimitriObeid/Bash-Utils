@@ -65,7 +65,7 @@ function ConfEcho
 
 ## CHECKINGS
 
-# Checking the "$STAT_DEBUG" variable's value.
+# Checking the "$__STAT_DEBUG" status variable's value.
 function CheckSTAT_DEBUG
 {
     #***** Parameters *****
@@ -73,15 +73,15 @@ function CheckSTAT_DEBUG
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("true" "false")
+    local a_array=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_DEBUG" != "true" ] && [ "$__STAT_DEBUG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${v_array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${a_array[@]}"
     fi
 }
 
-# Checking the "$STAT_ERROR" variable's value.
+# Checking the "$__STAT_ERROR" status variable's value.
 function CheckSTAT_ERROR
 {
     #***** Parameters *****
@@ -89,15 +89,31 @@ function CheckSTAT_ERROR
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("" "fatal")
+    local a_array=("" "fatal")
 
     #***** Code *****
     if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" != "fatal" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${v_array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${a_array[@]}"
     fi
 }
 
-# Checking the "$__STAT_EXIT_CODE" variable's value.
+# Checking the "$__STAT_ERROR_TXT_FMT" status variable's value.
+function CheckSTAT_ERROR_TXT_FMT
+{
+    #***** Parameters *****
+    p_file=$1
+    p_lineno=$2
+
+    #***** Variables *****
+    local a_array=("true" "false")
+
+    #***** Code *****
+    if [ "$__STAT_ERROR_TXT_FMT" != "true" ] && [ "$__STAT_ERROR_TXT_FMT" != "false" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR_TXT_FMT" '__STAT_ERROR_TXT_FMT' "${a_array[@]}"
+    fi
+}
+
+# Checking the "$__STAT_EXIT_CODE" status variable's value.
 function CheckSTAT_EXIT_CODE
 {
     #***** Parameters *****
@@ -105,15 +121,15 @@ function CheckSTAT_EXIT_CODE
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("")
+    local a_array=("")
 
     #***** Code *****
     if ! IsInt "$__STAT_EXIT_CODE"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${v_array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${a_array[@]}"
     fi
 }
 
-# Checking the "$__STAT_LOG" variable's value.
+# Checking the "$__STAT_LOG" status variable's value.
 function CheckSTAT_LOG
 {
     #***** Parameters *****
@@ -121,11 +137,11 @@ function CheckSTAT_LOG
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("true" "false")
+    local a_array=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_LOG" != "true" ] && [ "$__STAT_LOG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${v_array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${a_array[@]}"
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
 		if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
 			echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder.${BU_COLOR_RESET}"
@@ -163,7 +179,7 @@ function CheckSTAT_LOG
 	fi
 }
 
-# Checking the "$__STAT_LOG_REDIRECT" variable's value.
+# Checking the "$__STAT_LOG_REDIRECT" status variable's value.
 function CheckSTAT_LOG_REDIRECT
 {
     #***** Parameters *****
@@ -171,15 +187,15 @@ function CheckSTAT_LOG_REDIRECT
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("" "true" "false")
+    local a_array=("" "true" "false")
 
     #***** Code *****
     if [ -n "$__STAT_LOG_REDIRECT" ] && [ "$__STAT_LOG_REDIRECT" != 'log' ] && [ "$__STAT_LOG_REDIRECT" != 'tee' ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${v_array[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${a_array[@]}"
     fi
 }
 
-# Checking the "$__STAT_OPERATE_ROOT" variable's value.
+# Checking the "$__STAT_OPERATE_ROOT" status variable's value.
 function CheckSTAT_OPERATE_ROOT
 {
 	#***** Parameters *****
@@ -187,15 +203,15 @@ function CheckSTAT_OPERATE_ROOT
 	local p_lineno=$2
 
 	#***** Variables *****
-	local v_array=("authorized" "forbidden" "restricted")
+	local a_array=("authorized" "forbidden" "restricted")
 
 	#***** Code *****
 	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] && [ "$__STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
-		ConfEcho "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${v_array[@]}"
+		ConfEcho "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${a_array[@]}"
 	fi
 }
 
-# Checking the "$__STAT_TIME_TXT" variable's value.
+# Checking the "$__STAT_TIME_TXT" status variable's value.
 function CheckSTAT_TIME_TXT
 {
     #***** Parameters *****
@@ -203,16 +219,16 @@ function CheckSTAT_TIME_TXT
     local p_lineno=$2
 
     #***** Variables *****
-    local v_array=("${__COL_ORANGE}An integer or a floating number")
+    local a_array=("${__COL_ORANGE}An integer or a floating number")
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.
     if ! IsFloatInt "$__STAT_TIME_TXT"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${v_array[@]}" >&2
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${a_array[@]}" >&2
     fi
 }
 
-# Checking the "$__STAT_USER_OS" variable's value.
+# Checking the "$__STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS
 {
@@ -237,10 +253,11 @@ function CheckProjectStatusVars
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
+    CheckSTAT_ERROR_TXT_FMT "$p_file" "$p_lineno"
     CheckSTAT_EXIT_CODE     "$p_file" "$p_lineno"
-	CheckSTAT_OPERATE_ROOT	"$p_file" "$p_lineno"
+	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
-	CheckSTAT_OPERATE_ROOT	"$p_file" "$p_lineno"
+	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_TIME_TXT      "$p_file" "$p_lineno"
 }
 

@@ -13,14 +13,14 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### TEXT WRITING AND DECORATION
+#### TEXT WRITING AND DECORATION (FORMATTING)
 
-## WRITING DIFFERENTLY COLORED TEXT BETWEEN TEXT
+## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT
 
-# Text's inside decoration procssing.
+# Text's inside decoration/formatting procssing.
 
 # Usage :
-#	Decho "<Text to write>" "${__BU_COLOR_<TO_DISPLAY>}"
+#	Decho "${__BU_COLOR_<TO_DISPLAY>}" "$1" '<format code>'
 
 # Featured functions and files from the "functions" folder : none
 function Decho
