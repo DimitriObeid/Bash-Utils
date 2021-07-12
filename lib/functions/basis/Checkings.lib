@@ -61,7 +61,7 @@ function TriggerRootDirWarning
 	p_path=$1
 
 	#***** Variables *****
-#	v_root_directories=$( \
+#	v_root_directories=$( \/snap
 		'/' '/bin' '/boot' \
 		'/dev' '/etc' '/home' \
 		'/lib' '/lib32' '/lib64' \
@@ -394,6 +394,18 @@ function IsAlphaNum
 #### PATHS CHECKING
 
 ## FILE PATHS CHECKING
+
+# Checking for existent path.
+function CheckFilePathExists
+{
+    #***** Parameters *****
+    p_path=$1               # Path of the (in)existent file.
+
+    #***** Code *****
+    if [ ! -f "$p_path" ]; then
+        DechoBoldItalicHighlight ""
+    fi
+}
 
 # Checking for "$PROJECT_LOG_PATH"
 

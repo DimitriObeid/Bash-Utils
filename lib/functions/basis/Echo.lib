@@ -21,13 +21,14 @@ fi
 
 # Usage :
 #	Decho "<Text to write>" "${__BU_COLOR_<TO_DISPLAY>}"
- 
+
 # Featured functions and files from the "functions" folder : none
 function Decho
 {
     #***** Parameters *****
     local p_string=$1
     local p_newColor=$2
+    local p_formatting=$3
 
     #***** Variables *****
     local v_oldColor
@@ -41,21 +42,157 @@ function Decho
 		tput setaf "$p_newColor"
 	fi
 
-	echo -e "$(tput setaf "$p_newColor")$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+	case "${p_formatting^^}" in
+        'B')
+            # Formatting : bold.
+            ;;
+        'BC')
+            # Formatting : bold + color.
+            echo -e ""
+            ;;
+        'BCI')
+            # Formatting : bold + color + italic.
+            echo -e ""
+            ;;
+        'BCIU')
+            # Formatting : bold + color + italic + underline
+            echo -e ""
+            ;;
+        'C')
+            # Formatting : color.
+            echo -e "$(tput setaf "$p_newColor")$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+            ;;
+
+        'CI')
+            # Formatting : color + italic.
+            echo -e ""
+            ;;
+        'CIU')
+            # Formatting : color + italic + underline.
+            echo -e ""
+            ;;
+        'CU')
+            # Formatting : color + underline.
+            echo -e ""
+            ;;
+        'I')
+            # Formatting : italic.
+            echo -e ""
+            ;;
+        'IU')
+            # Formatting : italic + underline.
+            ;;
+        'U')
+            # Formatting : underline.
+            ;;
+        *)
+            ;;
+    esac
 }
 
-# Easy "Decho()" function call.
-function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT";   }
-function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE";        }
-function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN";        }
-function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY";        }
-function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN";       }
-function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE";      }
-function DechoPink      { Decho "$1" "$__BU_COLOR_PINK";        }
-function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE";      }
-function DechoRed       { Decho "$1" "$__BU_COLOR_RED";         }
-function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE";   }
-function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW";      }
+# Bold formatting.
+function DechoBold                  { echo -e "${__BU_TXT_BOLD}$1${__BU_TXT_RESET}"; }
+function DechoBoldItalic            { echo -e "${__BU_TXT_BOLD}${__BU_TXT_ITALIC}$1${__BU_TXT_RESET}"; }
+function DechoBoldItalicUnderline   { echo -e "${__BU_TXT_BOLD}${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+function DechoBoldUnderline         { echo -e "${__BU_TXT_BOLD}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+
+# Italic formatting.
+function DechoItalic                { echo -e "${__BU_TXT_ITALIC}$1${__BU_TXT_RESET}"; }
+function DechoItalicUnderline       { echo -e "${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+
+# Underline formatting.
+function DechoUnderline             { echo -e "${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+
+# Easy "Decho()" function calls.
+function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C'; }
+function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE"         'C'; }
+function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C'; }
+function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY"         'C'; }
+function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN"        'C'; }
+function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C'; }
+function DechoPink      { Decho "$1" "$__BU_COLOR_PINK"         'C'; }
+function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C'; }
+function DechoRed       { Decho "$1" "$__BU_COLOR_RED"          'C'; }
+function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C'; }
+function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C'; }
+
+# Easy "DechoBold()" function calls with colors.
+function DechoBoldHighlight     { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BC'; }
+function DechoBoldBlue          { Decho "$1" "$__BU_COLOR_BLUE"         'BC'; }
+function DechoBoldCyan          { Decho "$1" "$__BU_COLOR_CYAN"         'BC'; }
+function DechoBoldGray          { Decho "$1" "$__BU_COLOR_GRAY"         'BC'; }
+function DechoBoldGreen         { Decho "$1" "$__BU_COLOR_GREEN"        'BC'; }
+function DechoBoldOrange        { Decho "$1" "$__BU_COLOR_ORANGE"       'BC'; }
+function DechoBoldPink          { Decho "$1" "$__BU_COLOR_PINK"         'BC'; }
+function DechoBoldPurple        { Decho "$1" "$__BU_COLOR_PURPLE"       'BC'; }
+function DechoBoldRed           { Decho "$1" "$__BU_COLOR_RED"          'BC'; }
+function DechoBoldTurquoise     { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BC'; }
+function DechoBoldYellow        { Decho "$1" "$__BU_COLOR_YELLOW"       'BC'; }
+
+# Easy "DechoBoldItalic()" function calls with colors.
+function DechoBoldItalicHighlight   { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BCI'; }
+function DechoBoldItalicBlue        { Decho "$1" "$__BU_COLOR_BLUE"         'BCI'; }
+function DechoBoldItalicCyan        { Decho "$1" "$__BU_COLOR_CYAN"         'BCI'; }
+function DechoBoldItalicGray        { Decho "$1" "$__BU_COLOR_GRAY"         'BCI'; }
+function DechoBoldItalicGreen       { Decho "$1" "$__BU_COLOR_GREEN"        'BCI'; }
+function DechoBoldItalicOrange      { Decho "$1" "$__BU_COLOR_ORANGE"       'BCI'; }
+function DechoBoldItalicPink        { Decho "$1" "$__BU_COLOR_PINK"         'BCI'; }
+function DechoBoldItalicPurple      { Decho "$1" "$__BU_COLOR_PURPLE"       'BCI'; }
+function DechoBoldItalicRed         { Decho "$1" "$__BU_COLOR_RED"          'BCI'; }
+function DechoBoldItalicTurquoise   { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BCI'; }
+function DechoBoldItalicYellow      { Decho "$1" "$__BU_COLOR_YELLOW"       'BCI'; }
+
+# Easy "DechoBoldItalicUnderline()" function calls with color.
+function DechoBoldItalicUnderlineHighlight   { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BCIU'; }
+function DechoBoldItalicUnderlineBlue        { Decho "$1" "$__BU_COLOR_BLUE"         'BCIU'; }
+function DechoBoldItalicUnderlineCyan        { Decho "$1" "$__BU_COLOR_CYAN"         'BCIU'; }
+function DechoBoldItalicUnderlineGray        { Decho "$1" "$__BU_COLOR_GRAY"         'BCIU'; }
+function DechoBoldItalicUnderlineGreen       { Decho "$1" "$__BU_COLOR_GREEN"        'BCIU'; }
+function DechoBoldItalicUnderlineOrange      { Decho "$1" "$__BU_COLOR_ORANGE"       'BCIU'; }
+function DechoBoldItalicUnderlinePink        { Decho "$1" "$__BU_COLOR_PINK"         'BCIU'; }
+function DechoBoldItalicUnderlinePurple      { Decho "$1" "$__BU_COLOR_PURPLE"       'BCIU'; }
+function DechoBoldItalicUnderlineRed         { Decho "$1" "$__BU_COLOR_RED"          'BCIU'; }
+function DechoBoldItalicUnderlineTurquoise   { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BCIU'; }
+function DechoBoldItalicUnderlineYellow      { Decho "$1" "$__BU_COLOR_YELLOW"       'BCIU'; }
+
+# Easy "DechoItalic()" function calls with colors.
+function DechoItalicHighlight     { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CI'; }
+function DechoItalicBlue          { Decho "$1" "$__BU_COLOR_BLUE"         'CI'; }
+function DechoItalicCyan          { Decho "$1" "$__BU_COLOR_CYAN"         'CI'; }
+function DechoItalicGray          { Decho "$1" "$__BU_COLOR_GRAY"         'CI'; }
+function DechoItalicGreen         { Decho "$1" "$__BU_COLOR_GREEN"        'CI'; }
+function DechoItalicOrange        { Decho "$1" "$__BU_COLOR_ORANGE"       'CI'; }
+function DechoItalicPink          { Decho "$1" "$__BU_COLOR_PINK"         'CI'; }
+function DechoItalicPurple        { Decho "$1" "$__BU_COLOR_PURPLE"       'CI'; }
+function DechoItalicRed           { Decho "$1" "$__BU_COLOR_RED"          'CI'; }
+function DechoItalicTurquoise     { Decho "$1" "$__BU_COLOR_TURQUOISE"    'CI'; }
+function DechoItalicYellow        { Decho "$1" "$__BU_COLOR_YELLOW"       'CI'; }
+
+# Easy "DechoItalicUnderline()" function calls with colors.
+function DechoItalicUnderlineHighlight     { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CIU'; }
+function DechoItalicUnderlineBlue          { Decho "$1" "$__BU_COLOR_BLUE"         'CIU'; }
+function DechoItalicUnderlineCyan          { Decho "$1" "$__BU_COLOR_CYAN"         'CIU'; }
+function DechoItalicUnderlineGray          { Decho "$1" "$__BU_COLOR_GRAY"         'CIU'; }
+function DechoItalicUnderlineGreen         { Decho "$1" "$__BU_COLOR_GREEN"        'CIU'; }
+function DechoItalicUnderlineOrange        { Decho "$1" "$__BU_COLOR_ORANGE"       'CIU'; }
+function DechoItalicUnderlinePink          { Decho "$1" "$__BU_COLOR_PINK"         'CIU'; }
+function DechoItalicUnderlinePurple        { Decho "$1" "$__BU_COLOR_PURPLE"       'CIU'; }
+function DechoItalicUnderlineRed           { Decho "$1" "$__BU_COLOR_RED"          'CIU'; }
+function DechoItalicUnderlineTurquoise     { Decho "$1" "$__BU_COLOR_TURQUOISE"    'CIU'; }
+function DechoItalicUnderlineYellow        { Decho "$1" "$__BU_COLOR_YELLOW"       'CIU'; }
+
+# Easy "DechoUnderline()" function calls with colors.
+function DechoUnderlineHighlight     { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CU'; }
+function DechoUnderlineBlue          { Decho "$1" "$__BU_COLOR_BLUE"         'CU'; }
+function DechoUnderlineCyan          { Decho "$1" "$__BU_COLOR_CYAN"         'CU'; }
+function DechoUnderlineGray          { Decho "$1" "$__BU_COLOR_GRAY"         'CU'; }
+function DechoUnderlineGreen         { Decho "$1" "$__BU_COLOR_GREEN"        'CU'; }
+function DechoUnderlineOrange        { Decho "$1" "$__BU_COLOR_ORANGE"       'CU'; }
+function DechoUnderlinePink          { Decho "$1" "$__BU_COLOR_PINK"         'CU'; }
+function DechoUnderlinePurple        { Decho "$1" "$__BU_COLOR_PURPLE"       'CU'; }
+function DechoUnderlineRed           { Decho "$1" "$__BU_COLOR_RED"          'CU'; }
+function DechoUnderlineTurquoise     { Decho "$1" "$__BU_COLOR_TURQUOISE"    'CU'; }
+function DechoUnderlineYellow        { Decho "$1" "$__BU_COLOR_YELLOW"       'CU'; }
 
 # -----------------------------------------------
 
