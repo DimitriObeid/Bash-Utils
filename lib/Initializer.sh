@@ -183,7 +183,7 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__STAT_LOG" variable's value is equal to "true".
 # shellcheck disable=SC2034
-__STAT_LOG="false";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG="false";           CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -203,7 +203,13 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 function MkTmpDir
 {
     if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
-        EchoMsg "$(mkdir -pv "$__PROJECT_TM_DIR_PATH" || HandleErrors "1" "THE $(DechoHighlight "$__PROJECT_TMP_DIR_PATH") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))")"
+        # shellcheck disable=SC2034
+        __STAT_TXT_FMT="false"
+
+        EchoMsg "$(mkdir -pv "$__PROJECT_TMP_DIR_PATH" || HandleErrors "1" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJEC_TMP_DIR_PATH")") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))")"
+
+        # shellcheck disable=SC2034
+        __STAT_TXT_FMT="true"
     fi
 }
 

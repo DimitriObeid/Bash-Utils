@@ -303,10 +303,6 @@ function HandleVal_Decho
 
 
 
-# -----------------------------------------------
-
-
-
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### VARIABLES VALUES CHECKING
@@ -413,7 +409,7 @@ function CheckDirPathExists
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoBoldItalicHighlight "<missing directory path>"
+        DechoBoldItalic "<missing directory path>"
     fi
 }
 
@@ -425,7 +421,7 @@ function CheckFilePathExists
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoBoldItalicHighlight "<missing file path>"
+        DechoBoldItalic "<missing file path>"
     fi
 }
 
