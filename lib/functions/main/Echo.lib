@@ -17,6 +17,9 @@ fi
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT
 
+# Quick multi commands execution for the below "Decho()" function.
+function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH" }
+
 # Text's inside decoration/formatting procssing.
 
 # Usage :
@@ -33,11 +36,14 @@ function Decho
     #***** Variables *****
     local v_oldColor
         v_oldColor="$(CheckDecho && cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
+        
+    local v_commands
+        v_commands="$()"
 
     #***** Code *****
-    if [ "$p_newColor" = "$v_oldColor" ]; then
+    if [ -n "$p_newColor" ] && [ "$p_newColor" = "$v_oldColor" ]; then
         
-        # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer). Se renseigner sur la commande "tput setaf".
+        # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
 		p_newColor="$(( p_newColor+2 ))"
 		tput setaf "$p_newColor"
 	fi
@@ -45,63 +51,69 @@ function Decho
 	case "${p_formatting^^}" in
         'B')
             # Formatting : bold.
+            echo -e "${__BU_TXT_BOLD}$p_string${__BU_TXT_RESET}"
             ;;
         'BC')
             # Formatting : bold + color.
-            echo -e ""
+            echo -e "${__BU_TXT_BOLD}$(tput setaf "$p_newColor")$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'BCI')
             # Formatting : bold + color + italic.
-            echo -e ""
+            echo -e "${__BU_TXT_BOLD}${p_newColor}${__BU_TXT_ITALIC}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'BCIU')
             # Formatting : bold + color + italic + underline
-            echo -e ""
+            echo -e "${__BU_TXT_BOLD}${p_newColor}${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'C')
             # Formatting : color.
-            echo -e "$(tput setaf "$p_newColor")$p_string$(tput setaf "$v_oldColor")" && IsInt "$v_oldColor" && echo "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"
+            echo -e "$(tput setaf "$p_newColor")$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
 
         'CI')
             # Formatting : color + italic.
-            echo -e ""
+            echo -e "$(tput setaf "$p_newColor")${__BU_TXT_ITALIC}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'CIU')
             # Formatting : color + italic + underline.
-            echo -e ""
+            echo -e "$(tput setaf "$p_newColor")${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'CU')
             # Formatting : color + underline.
-            echo -e ""
+            echo -e "$(tput setaf "$p_newColor")${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'I')
             # Formatting : italic.
-            echo -e ""
+            echo -e "${__BU_TXT_ITALIC}$p_string${__BU_TXT_RESET}"
             ;;
         'IU')
             # Formatting : italic + underline.
+            echo -e "${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}"
             ;;
         'U')
             # Formatting : underline.
+            echo -e "${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}"
             ;;
         *)
+            HandleErrors "1" "THE $(DechoHighlight "case condition") TEXT FORMATTING VALUE IS INCORRECT" \
+                "Please specify a valid text formatting. The list and the descriptions are available into the aforementionned condition." \
+                "$p_formatting" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
             ;;
     esac
 }
 
 # Bold formatting.
-function DechoBold                  { echo -e "${__BU_TXT_BOLD}$1${__BU_TXT_RESET}"; }
-function DechoBoldItalic            { echo -e "${__BU_TXT_BOLD}${__BU_TXT_ITALIC}$1${__BU_TXT_RESET}"; }
-function DechoBoldItalicUnderline   { echo -e "${__BU_TXT_BOLD}${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
-function DechoBoldUnderline         { echo -e "${__BU_TXT_BOLD}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+function DechoBold                  { Decho "$1" "" 'B';    }
+function DechoBoldItalic            { Decho "$1" "" 'BI';   }
+function DechoBoldItalicUnderline   { Decho "$1" "" 'BIU';  }
+function DechoBoldUnderline         { Decho "$1" "" 'BU';   }
 
 # Italic formatting.
-function DechoItalic                { echo -e "${__BU_TXT_ITALIC}$1${__BU_TXT_RESET}"; }
-function DechoItalicUnderline       { echo -e "${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+function DechoItalic                { Decho "$1" "" 'I';    }
+function DechoItalicUnderline       { Decho "$1" "" 'IU';   }
 
 # Underline formatting.
-function DechoUnderline             { echo -e "${__BU_TXT_UNDERLINE}$1${__BU_TXT_RESET}"; }
+function DechoUnderline             { Decho "$1" "" 'U';    }
 
 # Easy "Decho()" function calls.
 function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C'; }

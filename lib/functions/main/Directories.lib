@@ -68,7 +68,7 @@ function OverwriteDir
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$p_path"
 
-    EchoNewstep "A non-empty folder with exactly the same name ($(DechoN "$p_name")) is already in the target folder $(DechoN "$p_parent/")"
+    EchoNewstep "A non-empty folder with exactly the same name ($(Dechoh "$p_name")) is already in the target folder $(DechoN "$p_parent/")"
 	EchoNewstep "Deleting the contents of the $(DechoN "$v_path/") folder"
 	Newline
 
