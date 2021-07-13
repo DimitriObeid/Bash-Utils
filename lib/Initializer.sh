@@ -47,7 +47,9 @@ function PrintErrorMsg
     local p_msg=$1
 
     #***** Code *****
-    echo >&2; echo "${__BU_COLOR_ERROR}IN ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_ERROR} --> BASH UTILS ERROR : $p_msg${__BU_COLOR_RESET}"
+    echo >&2; echo "${__BU_COLOR_ERROR}IN ${__BU_COLOR_HIGHLIGHT}, FILE ${BASH_SOURCE[0]}${__BU_COLOR_ERROR} --> BASH UTILS ERROR : $p_msg${__BU_COLOR_RESET}"; echo >&2;
+    
+    exit 1;
 }
 
 # Check project related file presence, or create this file.
@@ -63,10 +65,10 @@ function CheckProjectRelatedFile
         fi
     else
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
-            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !" >&2; echo >&2; exit 1; }
+            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !"
         fi
 
-		EchoMsg "$(touch "$p_path")" || { echo >&2; PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"; echo >&2; exit 1; }
+		EchoMsg "$(touch "$p_path")" || PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"
 		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") file."
     fi
 }
@@ -123,7 +125,7 @@ CheckBashMinimalVersion
 ## SOURCING CONFIGURATION FILES FIRST
 
 # Defining an associative array to store each sourced configuration file's path.
-a_config_files_path=()
+A_CONFIG_FILES_PATH=()
 
 # Storing the configuration files path variables values into an array to source, print and add easier into the "a_config_files_path" associative array.
 # Those files are, respectly, the :
@@ -143,8 +145,8 @@ a_list_config_files_path=("$__BASH_UTILS_CONF_FILE_INIT" \
     "$__BASH_UTILS_CONF_FILE_TIME")
 
 # shellcheck disable=SC1090
-for f in "${a_list_config_files_path[@]}"; do
-    source "$f" || SourcingFailure "$f"; a_config_files_path+=("$f")
+for f in "${A_LIST_CONFIG_FILES_PATH[@]}"; do
+    source "$f" || SourcingFailure "$f"; A_CONFIG_FILES_PATH+=("$f")
 done
 
 
@@ -153,12 +155,12 @@ done
 ## SOURCING LIBRARY FILES
 
 # Defining an associative array to store each sourced library file's path.
-a_lib_files_path=()
+A_LIB_FILES_PATH=()
 
 # Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" variable.
 # shellcheck disable=SC1090
 for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || SourcingFailure "$f"; a_lib_files_path+=("$f")
+    source "$f" || SourcingFailure "$f"; A_LIB_FILES_PATH+=("$f")
 done
 
 # -----------------------------------------------
