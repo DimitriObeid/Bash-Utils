@@ -60,29 +60,35 @@ function OverwriteDir
     #***** Parameters *****
     local p_path=$1
 	local p_authorization=$2
-    
-    #***** Variables *****
-    local v_path="$p_parent/$p_name"
 
     #***** Code *****
-	CheckArgs_OverwriteDir "$p_path" "$p_authorization"
+    # Checking first if the awaited arguments are given
+    CheckArgs_OverwriteDir "$p_path" "$p_authorization"
+	
+    # Checking second if the script is operating at the root directory.
+    TriggerRootDirWarning "$p_path"
 
     EchoNewstep "A non-empty folder with exactly the same name ($(DechoN "$p_name")) is already in the target folder $(DechoN "$p_parent/")"
 	EchoNewstep "Deleting the contents of the $(DechoN "$v_path/") folder"
 	Newline
 
 	if [ "$p_authorization" = "true" ]; then
-		# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
-		# WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
-		# VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM WILL OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
+        # TODO : Si la variable n'est pas initialisée.
+        if [ -n "${p_path+x}" ]; then
+            # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
+            # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
+            # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM WILL OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
-		# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-		rm -rfv "${v_path/:?}/"*
-		HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(DechoHighlight "$v_path/") FOLDER." \
-			"Please check the permissions of the targeted directory" "$v_path" "$v_path" \
-			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-		EchoSuccess "Deletion of the contents of the folder $(DechoS "$v_path/") performed successfully"
-		Newline
+            # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
+            rm -rfv "${v_path/:?}/"*
+            HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(DechoHighlight "$v_path/") FOLDER." \
+                "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            EchoSuccess "Deletion of the contents of the folder $(DechoS "$v_path/") performed successfully"
+            Newline
+        else
+            __STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            HandleErrors
 	fi
 
     return 0
@@ -111,6 +117,9 @@ function Makedir
 	#***** Code *****
 	# Checking first if the awaited arguments are given
     CheckArgs_Makedir "$p_parent" "$p_name"
+    
+    # Checking second if the script is operating at the root directory.
+    TriggerRootDirWarning "$v_path"
 	
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
