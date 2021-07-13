@@ -59,11 +59,11 @@ function Decho
             ;;
         'BCI')
             # Formatting : bold + color + italic.
-            echo -e "${__BU_TXT_BOLD}${p_newColor}${__BU_TXT_ITALIC}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
+            echo -e "${__BU_TXT_BOLD}$(tput setaf "$p_newColor")${__BU_TXT_ITALIC}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'BCIU')
             # Formatting : bold + color + italic + underline
-            echo -e "${__BU_TXT_BOLD}${p_newColor}${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
+            echo -e "${__BU_TXT_BOLD}$(tput setaf "$p_newColor")${__BU_TXT_ITALIC}${__BU_TXT_UNDERLINE}$p_string${__BU_TXT_RESET}" && __Decho "$v_oldColor"
             ;;
         'C')
             # Formatting : color.
