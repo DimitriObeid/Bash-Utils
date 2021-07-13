@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+source "$HOME/.bash_profile"
+
+__BASH_UTILS_FULL_FILE_PATH="$__BASH_UTILS_ROOT/Bash-utils.sh"
+
+if [ ! -f "$__BASH_UTILS_FULL_FILE_PATH" ]; then
+	touch "$__BASH_UTILS_FULL_FILE_PATH"
+fi
+
+if [ -s "$__BASH_UTILS_FULL_FILE_PATH" ]; then
+	true > "$__BASH_UTILS_FULL_FILE_PATH"
+fi
+
+cat "$__BASH_UTILS_CONF_FILE_INIT" >> "$__BASH_UTILS_FULL_FILE_PATH"
+cat "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" >> "$__BASH_UTILS_FULL_FILE_PATH"
+cat "$__BASH_UTILS_CONF_FILE_COLORS" >> "$__BASH_UTILS_FULL_FILE_PATH"
+cat "$__BASH_UTILS_CONF_FILE_TEXT" >> "$__BASH_UTILS_FULL_FILE_PATH"
+cat "$__BASH_UTILS_CONF_FILE_TIME" >> "$__BASH_UTILS_FULL_FILE_PATH"
+
+for i in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
+	cat "$i" >> "$__BASH_UTILS_FULL_FILE_PATH"
+done
