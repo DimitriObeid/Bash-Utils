@@ -35,16 +35,16 @@ function ConfEcho
     local i=0
 
     #***** Code *****
-    echo >&2; echo -n "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB In ${__COLOR_CODE_HIGHLIGHT}$p_file${__COLOR_CODE_ERROR}, line ${__COLOR_CODE_HIGHLIGHT}$p_lineno${__COLOR_CODE_ERROR} --> " >&2
-    echo "Error : the ${__COLOR_CODE_HIGHLIGHT}$p_varVal${__COLOR_CODE_ERROR} variable's value is incorrect.${__COLOR_CODE_RESET}" >&2
+    echo >&2; echo -n "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB In ${__BU_COLOR_HIGHLIGHT}$p_file${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> " >&2
+    echo "Error : the ${__BU_COLOR_HIGHLIGHT}$p_varVal${__BU_COLOR_ERROR} variable's value is incorrect.${__BU_COLOR_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
-        echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB Bad value :$__COL_YELLOW An empty string.${__COLOR_CODE_RESET}" >&2
+        echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value :${__BU_COLOR_YELLOW} An empty string.${__BU_COLOR_RESET}" >&2
     else
-        echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB Bad value : ${__COLOR_CODE_HIGHLIGHT}$p_badVal.${__COLOR_CODE_RESET}" >&2
+        echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value : ${__BU_COLOR_HIGHLIGHT}$p_badVal.${__BU_COLOR_RESET}" >&2
     fi
 
-    echo >&2; echo "${__COLOR_CODE_ERROR}$__TXT_TAB$__TXT_TAB The allowed values are :${__COLOR_CODE_RESET}" >&2
+    echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB The allowed values are :${__BU_COLOR_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
     for val in "${p_array[@]}"; do
@@ -52,9 +52,9 @@ function ConfEcho
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__COLOR_CODE_ERROR}$i/${#p_array[@]}  --> ${__COL_ORANGE}An empty argument.${__COLOR_CODE_RESET}" >&2
+            echo -e "${__BU_COLOR_ERROR}$i/${#p_array[@]}  --> ${__BU_COLOR_ORANGE}An empty argument.${__BU_COLOR_RESET}" >&2
         else
-            echo -e "${__COLOR_CODE_ERROR}$i/${#p_array[@]}  --> ${__COLOR_CODE_HIGHLIGHT}$val${__COLOR_CODE_RESET}" >&2
+            echo -e "${__BU_COLOR_ERROR}$i/${#p_array[@]}  --> ${__BU_COLOR_HIGHLIGHT}$val${__BU_COLOR_RESET}" >&2
         fi
     done
 
@@ -203,7 +203,7 @@ function CheckSTAT_TIME_TXT
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("${__COL_ORANGE}An integer or a floating number")
+    local a_array=("${__BU_COLOR_ORANGE}An integer or a floating number")
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.

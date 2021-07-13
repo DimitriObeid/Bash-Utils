@@ -87,8 +87,10 @@ function OverwriteDir
             EchoSuccess "Deletion of the contents of the folder $(DechoS "$v_path/") performed successfully"
             Newline
         else
+            # shellcheck disable=SC2034
             __STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             HandleErrors
+        fi
 	fi
 
     return 0
