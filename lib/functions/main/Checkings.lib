@@ -446,6 +446,8 @@ function CheckProjectLogPath
 }
 
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
+
+# Accepted arguments : "nodate", '<an empty string>'
 function CheckProjectLogStatus
 {
     #***** Parameters *****
@@ -456,12 +458,11 @@ function CheckProjectLogStatus
     local p_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
-    local a_acceptedExtraArgs=('nodate')        # Allowed extra arguments list for the "$p_extraArgs" array of arguments.
     local v_errorEcho
-		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the $(Decho "$__PROJECT_LOG_FILE_PATH" "${__BU_COLOR_HIGHLIGHT}") file.${__BU_COLOR_RESET}"
+		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the $(DechoHighlight "$__PROJECT_LOG_FILE_PATH") file.${__BU_COLOR_RESET}"
 	
 	local v_warning_array_value
-		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING},  function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"
+		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in $(DechoHighlight "${BASH_SOURCE[0]}"), function $(DechoHighlight "${FUNCNAME[0]}") --> $val${__BU_COLOR_RESET}"
 
     # If the text is redirected towards the log path only, it's better to put every timer status variables values to '0'.
     if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
@@ -485,92 +486,67 @@ function CheckProjectLogStatus
         # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
-            # Checking if the extra arguments array contains an allowed value, by checking the "$a_acceptedExtraArgs" array's values.
-            if [[ "${p_extraArgs[*]}" =~ ${a_acceptedExtraArgs[*]} ]]; then
+            for val in "${p_extraArgs[@]}"; do
 
-                for val in "${p_extraArgs[@]}"; do
+                # If the "nodate" value is passed as argument.
+                if [ "$val" = "nodate" ]; then
+                    case "$p_option" in
+                        '-n')
+                            echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                        '')
+                            echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                    esac
 
-                    # If the "nodate" value is passed as argument.
-                    if [ "$val" = "nodate" ]; then
-                        case "$p_option" in
-                            '-n')
-                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                            '')
-                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                        esac
+                # Else, if no argument is passed in "$p_extraArgs" parameter array.
+                elif [ "$val" = '' ]; then
+                    case "$p_option" in
+                        '-n')
+                            echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                        '')
+                            echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                    esac
+                # Else, if an unsupported option is passed (note for myself : the extra args checking
+                # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "log" option)).
+                else
+                    case "$p_option" in
+                        '-n')
+                            echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                        '')
+                            echo -e "[$__TIME_DATE]$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                    esac
+                fi
 
-                    # Else, if an unsupported option is passed (note for myself : the extra args checking
-                    # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "log" option)).
-                    else
-                        case "$p_option" in
-                            '-n')
-                                echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                            '')
-                                echo -e "[$__TIME_DATE]$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                        esac
-                    fi
-                done
+            done
 
-            # Else, if no argument is passed in "$p_extraArgs" parameter array.
-            else
-                case "$p_option" in
-                    '-n')
-                        echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                    '')
-                        echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                        ;;
-                esac
-            fi
-
-        sleep "$__STAT_TIME_TXT"
+            sleep "$__STAT_TIME_TXT"
 
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            # Checking if the extra arguments array contains an allowed value, by checking the "$a_acceptedExtraArgs" array's values.
-            if [[ "${p_extraArgs[*]}" =~ ${a_acceptedExtraArgs[*]} ]]; then
+            for val in "${p_extraArgs[@]}"; do
 
-                for val in "${p_extraArgs[@]}"; do
+                # If the "nodate" value is passed as argument.
+                if [ "$val" = "nodate" ]; then
+                    case "$p_option" in
+                        '-n')
+                            echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                        '')
+                            echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                    esac
 
-                    # If the "nodate" value is passed as argument.
-                    if [ "$val" = "nodate" ]; then
-                        case "$p_option" in
-                            '-n')
-                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                            '')
-                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                ;;
-                        esac
-
-					# Else, if an unsupported option is passed (note for myself : the extra args checking
-					# "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "tee" option)).
-					else
-						case "$p_option" in
-							'-n')
-								echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-								echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-								;;
-							'')
-								echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-								echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-								;;
-						esac
-					fi
-					
-					break
-				done
-
-            # Else, if no argument is passed in "$p_extraArgs" parameter array.
-            else
-                case "$p_option" in
+                # Else, if no argument is passed in "$p_extraArgs" parameter array.
+                elif [ "$val" = '' ]; then
+                    case "$p_option" in
                     '-n')
                         echo -ne "$p_string"
                         echo -ne "[$__TIME_DATE_DISPLAY] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -579,8 +555,23 @@ function CheckProjectLogStatus
                         echo -e "$p_string"
                         echo -e "[$__TIME_DATE_DISPLAY] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         ;;
-                esac
-            fi
+                    esac
+
+                # Else, if an unsupported option is passed (note for myself : the extra args checking
+                # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "tee" option)).
+                else
+                    case "$p_option" in
+                        '-n')
+                            echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                        '')
+                            echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            ;;
+                    esac
+                fi
+            done
             
             sleep "$__STAT_TIME_TXT"
         fi
