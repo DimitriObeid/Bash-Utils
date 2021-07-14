@@ -564,6 +564,8 @@ function CheckProjectLogStatus
 								;;
 						esac
 					fi
+					
+					break
 				done
 
             # Else, if no argument is passed in "$p_extraArgs" parameter array.
