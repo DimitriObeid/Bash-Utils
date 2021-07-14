@@ -22,7 +22,10 @@ function CheckDecho
 {
 	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         __STAT_TXT_FMT="false"; EchoMsg "Creating the $__PROJECT_COLOR_CODE_FILE_PATH color code file." && touch "$__PROJECT_COLOR_CODE_FILE_PATH"
-        HandleErrors "$?" "THE COLOR CODE FILE DOESN'T EXISTS AND CANNOT BE CREATED !" "Please check the rights <...>" "$__PROJECT_COLOR_CODE_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "Decho" "$(( LINENO-1 ))"
+
+        HandleErrors "$?" "THE COLOR CODE FILE DOESN'T EXISTS AND CANNOT BE CREATED !" "Please check the rights <...>" \
+            "$__PROJECT_COLOR_CODE_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "Decho" "$(( LINENO-1 ))"
+
         __STAT_TXT_FMT="true"
 	fi
 }
@@ -51,7 +54,7 @@ function Decho
     if [ -n "$p_newColor" ] && [ "$p_newColor" = "$v_oldColor" ]; then
         
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
-		p_newColor="$(( p_newColor+2 ))"
+		p_newColor="$(( p_newColor+38 ))"
 		tput setaf "$p_newColor"
 	fi
 

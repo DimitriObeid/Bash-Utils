@@ -209,7 +209,7 @@ function MkTmpDir
         __STAT_TXT_FMT="false"
 
         DbgMsg "0" "2"
-        EchoMsg "$(mkdir -pv "$__PROJECT_TMP_DIR_PATH")" || HandleErrors "1" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJEC_TMP_DIR_PATH")") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
+        EchoMsg "$(mkdir -pv "$__PROJECT_TMP_DIR_PATH")" || HandleErrors "1" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
         DbgMsg "1" "3"
         # shellcheck disable=SC2034
         __STAT_TXT_FMT="true"

@@ -16,7 +16,7 @@ function __ProcessingFile
 
     #***** Code *****
     if [ "$p_output" = 'E' ]; then
-        EchoError "End of processing the $(DechoE "$p_name") file"
+        EchoError "End of processing the $(DechoHighlight "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
         Newline
             
@@ -55,7 +55,7 @@ function ProcessingFile
     
 	sleep "$__STAT_TIME_TXT"
     EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-    EchoNewstep "Processing the $(DechoN "$p_name") file in the $(DechoN "$p_parent") parent directory."
+    EchoNewstep "Processing the $(DechoHighlight "$p_name") file in the $(DechoHighlight "$p_parent") parent directory."
     Newline
     
     case "$p_function" in
@@ -99,12 +99,12 @@ function OverwriteFile
     TriggerRootDirWarning "$p_path"
 
     if [ "$p_authorization" = "true" ]; then
-		EchoNewstep "The $(DechoN "$p_path/") file already exists and is not empty."
-		EchoNewstep "Overwriting data from file $(DechoN "$p_path/")"
+		EchoNewstep "The $(DechoHighlight "$p_path/") file already exists and is not empty."
+		EchoNewstep "Overwriting data from file $(DechoHighlight "$p_path/")"
 		Newline
 
 		true > "$p_path"
-		HandleErrors "$?" "THE CONTENT OF THE $(DechoE "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		HandleErrors "$?" "THE CONTENT OF THE $(DechoHighlight "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 		EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
 		Newline
@@ -146,13 +146,13 @@ function Makefile
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
-        EchoNewstep "Creating the $(DechoN "$p_name") file in the parent folder $(DechoN "$p_parent/")."
+        EchoNewstep "Creating the $(DechoHighlight "$p_name") file in the parent folder $(DechoHighlight "$p_parent/")."
 
 		touch "$v_path"
         # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
         # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(DechoE "$p_name") FILE CANNOT BE CREATED IN THE $(DechoE "$p_parent/") PARENT FOLDER." \
+        HandleErrors "$?" "THE $(DechoHighlight "$p_name") FILE CANNOT BE CREATED IN THE $(DechoHighlight "$p_parent/") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
         EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
@@ -272,7 +272,7 @@ function Uncompress
     #***** Code *****
     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
     "$cmd $opts $p_path"
-    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoE "$p_name") A ÉCHOUÉE"
+    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
     EchoSuccess "La décompression de l'archive $(DechoS "$p_name") s'est effectuée avec brio."
     Newline
     
