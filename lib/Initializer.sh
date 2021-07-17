@@ -138,7 +138,7 @@ A_CONFIG_FILES_PATH=()
 # The "init.conf" file MUST be sourced first, then the "ProjectStatus.conf" file MUST be sourced in the second.
 # Unless otherwise stated, the other configuration files may be sourced in any order.
 
-a_list_config_files_path=("$__BASH_UTILS_CONF_FILE_INIT" \
+A_LIST_CONFIG_FILES_PATH=("$__BASH_UTILS_CONF_FILE_INIT" \
     "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" \
     "$__BASH_UTILS_CONF_FILE_COLORS" \
     "$__BASH_UTILS_CONF_FILE_TEXT" \
@@ -209,7 +209,13 @@ function MkTmpDir
         __STAT_TXT_FMT="false"
 
         DbgMsg "0" "2"
-        EchoMsg "$(mkdir -pv "$__PROJECT_TMP_DIR_PATH")" || HandleErrors "1" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
+        
+        mkdir -p "$__PROJECT_TMP_DIR_PATH"
+        
+        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+            "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" \
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
+
         DbgMsg "1" "3"
         # shellcheck disable=SC2034
         __STAT_TXT_FMT="true"

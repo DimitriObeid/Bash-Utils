@@ -27,6 +27,9 @@ function CheckDecho
             "$__PROJECT_COLOR_CODE_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "Decho" "$(( LINENO-1 ))"
 
         __STAT_TXT_FMT="true"
+    
+    elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
 	fi
 }
 
