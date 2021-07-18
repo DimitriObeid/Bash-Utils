@@ -17,7 +17,7 @@
 #	- EchoSuccess		-> Echo.lib
 #	- Newline			-> Echo.lib
 #	- HandleErrors		-> Headers.lib
-function ChownRec
+function ChownRec()
 {
     #***** Paramètres *****
     local p_currentOwner=$1    # This parameter is used in the messages.
@@ -71,7 +71,7 @@ function ChownRec
 #   - EchoSuccess   -> Echo.lib
 #   - DrawLine      -> Headers.lib
 #   - HandleErrors  -> Headers.lib
-function Chown
+function Chown()
 {
     #***** Parameters *****
     p_currentOwner=$1    # This parameter is used in the translated messages, stored into their own variables.

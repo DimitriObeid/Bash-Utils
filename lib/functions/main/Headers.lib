@@ -18,7 +18,7 @@ fi
 ## DÉFINITION DES FONCTIONS DE CRÉATION DE HEADERS
 
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
-function DrawLine
+function DrawLine()
 {
 	#***** Parameters *****
 	local p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
@@ -72,7 +72,7 @@ function DrawLine
 }
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
-function HeaderBase
+function HeaderBase()
 {
 	#***** Parameters *****
 	local p_lineColor=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.

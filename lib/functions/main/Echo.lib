@@ -18,7 +18,7 @@ fi
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT
 
 #
-function CheckDecho
+function CheckDecho()
 {
 	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         __STAT_TXT_FMT="false"; EchoMsg "Creating the $__PROJECT_COLOR_CODE_FILE_PATH color code file." && touch "$__PROJECT_COLOR_CODE_FILE_PATH"
@@ -42,7 +42,7 @@ function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_ol
 #	Decho "${__BU_COLOR_<TO_DISPLAY>}" "$1" '<format code>'
 
 # Featured functions and files from the "functions" folder : none
-function Decho
+function Decho()
 {
     #***** Parameters *****
     local p_string=$1
@@ -243,7 +243,7 @@ function Decho_FMT_CU_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'CU'; }
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
-function EchoError
+function EchoError()
 {
     #***** Parameters *****
     local p_string=$1
@@ -263,7 +263,7 @@ function EchoError
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
-function EchoMsg
+function EchoMsg()
 {
     #***** Parameters *****
     local p_string=$1
@@ -283,7 +283,7 @@ function EchoMsg
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
-function EchoNewstep
+function EchoNewstep()
 {
     #***** Parameters *****
     local p_string=$1
@@ -303,7 +303,7 @@ function EchoNewstep
 
 # Featured functions and files from the "functions" folder :
 #	- CheckProjectLogStatus		--> Checkings.lib
-function EchoRead
+function EchoRead()
 {
 	#***** Parameters *****
 	local p_string=$1
@@ -321,7 +321,7 @@ function EchoRead
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
-function EchoSuccess
+function EchoSuccess()
 {
     #***** Parameters *****
     local p_string=$1
@@ -341,7 +341,7 @@ function EchoSuccess
 
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
-function EchoWarning
+function EchoWarning()
 {
     #***** Parameters *****
     local p_string=$1
@@ -359,7 +359,7 @@ function EchoWarning
 ## TEXT FORMATTING
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
-# function KeepFormatting
+# function KeepFormatting()
 # {
 # 	#***** Parameters *****
 # 	p_string=$1
@@ -372,7 +372,7 @@ function EchoWarning
 
 # Usage :
 #	ToLowercase "<Text to write>"
-function ToLowercase
+function ToLowercase()
 {
 	#***** Parameters *****
 	p_string=$1
@@ -385,7 +385,7 @@ function ToLowercase
 
 # Usage :
 #	ToUppercase "<Text to write>"
-function ToUppercase
+function ToUppercase()
 {
 	#***** Parameters *****
 	p_string=$1
@@ -409,7 +409,7 @@ function ToUppercase
 # Featured functions and files from the "functions" folder :
 #   - CheckProjectLogStatus     --> Checkings.lib
 #	- HandleErrors				--> Checkings.lib
-function Newline
+function Newline()
 {
     #***** Parameters *****
     local number=$1

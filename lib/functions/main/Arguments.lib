@@ -17,7 +17,7 @@ fi
 
 ## INITIALIZING THE ARGUMENTS ARRAY
 
-function InitARG
+function InitARG()
 {
     # shellcheck disable=SC2034
     __PROJECT_ARGV=("$@")
@@ -33,7 +33,7 @@ function InitARG
 
 ## INSTALLATION CATEGORY
 
-function DeclareARG_INSTALL_CAT
+function DeclareARG_INSTALL_CAT()
 {
     #***** Parameters *****
     p_install=$1
@@ -53,7 +53,7 @@ function DeclareARG_INSTALL_CAT
 
 ## USER'S NAME
 
-function DeclareARG_USERNAME
+function DeclareARG_USERNAME()
 {
     #***** Parameters *****
     p_username=$1

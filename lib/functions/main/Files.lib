@@ -7,7 +7,7 @@
 #### TEXT FILES PROCESSING FUNCTIONS
 
 # This function only repeats some parts of the following function.
-function __ProcessingFile
+function __ProcessingFile()
 {
     #***** Parameters *****
     p_output=$1
@@ -39,7 +39,7 @@ function __ProcessingFile
 # Featured functions and files from the "functions" folder :
 #   - DrawLine      -> Headers.lib
 #   - HandleErrors  -> Headers.lib
-function ProcessingFile
+function ProcessingFile()
 {
     #***** Parameters *****
     local p_function=$1; shift
@@ -85,7 +85,7 @@ function ProcessingFile
 #	- EchoNewstep		-> Echo.lib
 #	- EchoSuccess		-> Echo.lib
 #	- Newline			-> Echo.lib
-function OverwriteFile
+function OverwriteFile()
 {
     #***** Parameters *****
     local p_path=$1
@@ -128,7 +128,7 @@ function OverwriteFile
 #   - EchoNewstep       -> Echo.lib
 #   - EchoSuccess       -> Echo.lib
 #   - HandleErrors      -> Handles.lib
-function Makefile
+function Makefile()
 {
 	#***** Parameters *****
 	local p_parent=$1      # Emplacement of the currently processed file's parent folder from the root directory.
@@ -181,7 +181,7 @@ function Makefile
 ## FILE SOURCING
 
 # Sourcing dependencies files.
-function SourceFile
+function SourceFile()
 {
     #***** Parameters *****
     local p_path=$1
@@ -204,7 +204,7 @@ function SourceFile
 ## TEXT FILES PARSING
 
 # Getting a specific line from a text file.
-function GetLineFromTextFile
+function GetLineFromTextFile()
 {
     #***** Parameters *****
     local source=$1           # File to parse
@@ -240,7 +240,7 @@ function GetLineFromTextFile
 
 # Featured functions and files from the "functions" folder :
 #   - 
-function Compress
+function Compress()
 {
     #***** Parameters *****
     local cmd=$1      # Compression command.
@@ -260,7 +260,7 @@ function Compress
 #   - HandleErrors      -> Handles.lib
 #   - EchoSuccess       -> Echo.lib
 #   - Newline           -> Echo.lib
-function Uncompress
+function Uncompress()
 {
     #***** Paramètres *****
     local p_cmd=$1      # Compression command.

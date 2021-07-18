@@ -18,7 +18,7 @@ fi
 ## HANDLINGS
 
 # Easy writing text function.
-function ConfEcho
+function ConfEcho()
 {
     #***** Parameters *****
     local p_file=$1;
@@ -66,7 +66,7 @@ function ConfEcho
 ## CHECKINGS
 
 # Checking the "$__STAT_DEBUG" status variable's value.
-function CheckSTAT_DEBUG
+function CheckSTAT_DEBUG()
 {
     #***** Parameters *****
     local p_file=$1
@@ -82,7 +82,7 @@ function CheckSTAT_DEBUG
 }
 
 # Checking the "$__STAT_ERROR" status variable's value.
-function CheckSTAT_ERROR
+function CheckSTAT_ERROR()
 {
     #***** Parameters *****
     local p_file=$1
@@ -98,7 +98,7 @@ function CheckSTAT_ERROR
 }
 
 # Checking the "$__STAT_EXIT_CODE" status variable's value.
-function CheckSTAT_EXIT_CODE
+function CheckSTAT_EXIT_CODE()
 {
     #***** Parameters *****
     local p_file=$1
@@ -114,7 +114,7 @@ function CheckSTAT_EXIT_CODE
 }
 
 # Checking the "$__STAT_LOG" status variable's value.
-function CheckSTAT_LOG
+function CheckSTAT_LOG()
 {
     #***** Parameters *****
     local p_file=$1
@@ -165,7 +165,7 @@ function CheckSTAT_LOG
 }
 
 # Checking the "$__STAT_LOG_REDIRECT" status variable's value.
-function CheckSTAT_LOG_REDIRECT
+function CheckSTAT_LOG_REDIRECT()
 {
     #***** Parameters *****
     local p_file=$1
@@ -181,7 +181,7 @@ function CheckSTAT_LOG_REDIRECT
 }
 
 # Checking the "$__STAT_OPERATE_ROOT" status variable's value.
-function CheckSTAT_OPERATE_ROOT
+function CheckSTAT_OPERATE_ROOT()
 {
 	#***** Parameters *****
 	local p_file=$1
@@ -197,7 +197,7 @@ function CheckSTAT_OPERATE_ROOT
 }
 
 # Checking the "$__STAT_TIME_TXT" status variable's value.
-function CheckSTAT_TIME_TXT
+function CheckSTAT_TIME_TXT()
 {
     #***** Parameters *****
     local p_file=$1
@@ -214,7 +214,7 @@ function CheckSTAT_TIME_TXT
 }
 
 # Checking the "$__STAT_TXT_FMT" status variable's value.
-function CheckSTAT_TXT_FMT
+function CheckSTAT_TXT_FMT()
 {
     #***** Parameters *****
     p_file=$1
@@ -230,7 +230,7 @@ function CheckSTAT_TXT_FMT
 }
 # Checking the "$__STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
-function CheckSTAT_USER_OS
+function CheckSTAT_USER_OS()
 {
     #***** Parameters *****
     local p_file=$1
@@ -242,7 +242,7 @@ function CheckSTAT_USER_OS
 
 
 # Checking all the project's status variables values if multiple values had been modified.
-function CheckProjectStatusVars
+function CheckProjectStatusVars()
 {
     #***** Parameters *****
     local p_file=$1error

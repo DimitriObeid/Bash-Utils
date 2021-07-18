@@ -21,7 +21,7 @@ fi
 
 # Required functions and files :
 #   - HandleErrors      -> Bash-Utils/lib/functions/basis/Handles.lib
-function CheckRootEUID
+function CheckRootEUID()
 {
     if [ "$EUID" -ne 0 ]; then
         HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
@@ -40,7 +40,7 @@ function CheckRootEUID
 ## TEXT FORMATING FUNCTIONS
 
 # Cut the text of the function's name before and with the underscore.
-function CutCheck
+function CutCheck()
 {
 	#***** Parameters *****
 	p_string=$1
@@ -55,7 +55,7 @@ function CutCheck
 ## PATH CHECKING FUNCTIONS
 
 # Check if the script is about to work at the root directory ('/').
-function TriggerRootDirWarning
+function TriggerRootDirWarning()
 {
 	#***** Parameters *****
 	p_path=$1
@@ -110,7 +110,7 @@ function TriggerRootDirWarning
 ## "basis/Checkings.lib" FILE
 
 # Checking if an argument is provided in the "Is..." functions (check the below "VARIABLES VALUES CHECKING" section for more informations).
-function CheckArgs_IsCorrectValue
+function CheckArgs_IsCorrectValue()
 {
     if [ "$#" -eq 0 ]; then
         HandleErrors "1" "" "" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
@@ -128,7 +128,7 @@ function CheckArgs_IsCorrectValue
 ## "main/Directories.lib" FILE'S FUNCTION
 
 # "ProcessingDir" function.
-function CheckArgs_ProcessingDir
+function CheckArgs_ProcessingDir()
 {
     #***** Parameters *****
     local p_function=$1
@@ -148,7 +148,7 @@ function CheckArgs_ProcessingDir
 }
 
 # "OverwriteDir" function.
-function CheckArgs_OverwriteDir
+function CheckArgs_OverwriteDir()
 {
     #***** Parameters ****
     local p_path=$1         # Path of the directory to overwrite.
@@ -171,7 +171,7 @@ function CheckArgs_OverwriteDir
 }
 
 # "Makedir" function.
-function CheckArgs_Makedir
+function CheckArgs_Makedir()
 {
     #***** Parameters *****
     local p_parent=$1       # Parent folder's path.
@@ -203,7 +203,7 @@ function CheckArgs_Makedir
 ## "main/Files.lib" FILE's FUNCTION
 
 # "ProcessingFile" function.
-function CheckArgs_ProcessingFile
+function CheckArgs_ProcessingFile()
 {
     #***** Parameters *****
     local p_function=$1     # 
@@ -218,7 +218,7 @@ function CheckArgs_ProcessingFile
 }
 
 # "OverwriteFile" function.
-function CheckArgs_OverwriteFile
+function CheckArgs_OverwriteFile()
 {
     #***** Parameters ****
     local p_path=$1         	# Path of the file to overwrite.
@@ -247,7 +247,7 @@ function CheckArgs_OverwriteFile
 }
 
 # "Makefile" function's arguments.
-function CheckArgs_Makefile
+function CheckArgs_Makefile()
 {
     #***** Parameters *****
     local p_parent=$1       # File to create's Parent folder path. 
@@ -288,7 +288,7 @@ function CheckArgs_Makefile
 ## "basis/Echo.lib" FILE
 
 # Checking if the color code file exists.
-function HandleVal_Decho
+function HandleVal_Decho()
 {
     if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         echo "$__BU_COLOR_RESET" >&2; echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2
@@ -310,7 +310,7 @@ function HandleVal_Decho
 ## NUMBER VALUES
 
 # Checking floating value.
-function IsFloat
+function IsFloat()
 {
     #***** Parameters *****
     local p_value=$1
@@ -326,7 +326,7 @@ function IsFloat
 }
 
 # Checking floating and integer value.
-function IsFloatInt
+function IsFloatInt()
 {
     #***** Parameters *****
     local p_value=$1
@@ -342,7 +342,7 @@ function IsFloatInt
 }
 
 # Checking integer value.
-function IsInt
+function IsInt()
 {
     #***** Parameters *****
     local p_value=$1
@@ -362,7 +362,7 @@ function IsInt
 ## STRING VALUES
 
 # Checking if value is an alphabetic string (not any number allowed)
-function IsAlpha
+function IsAlpha()
 {
     #***** Parameters *****
     local p_value=$1
@@ -378,7 +378,7 @@ function IsAlpha
 }
 
 # Checking if vialue is an aplhanumeric string.
-function IsAlphaNum
+function IsAlphaNum()
 {
     #***** Parameters *****
     local p_value=$1
@@ -402,33 +402,33 @@ function IsAlphaNum
 ## FILE PATHS CHECKING
 
 # Checking for an existent directory path (for the "HandleErrors()" function mainly).
-function CheckDirPathExists
+function CheckDirPathExists()
 {
     #***** Parameters *****
     p_path=$1               # Path of the (in)existent directory.
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoBoldItalic "<missing directory path>"
+        Decho_FMT_BI "<missing directory path>"
     fi
 }
 
 # Checking for an existent file path (for the "HandleErrors()" function mainly).
-function CheckFilePathExists
+function CheckFilePathExists()
 {
     #***** Parameters *****
     p_path=$1               # Path of the (in)existent file.
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoBoldItalic "<missing file path>"
+        Decho_FMT_BI "<missing file path>"
     fi
 }
 
 # Checking for "$PROJECT_LOG_PATH"
 
 # Required functions and files :
-function CheckProjectLogPath
+function CheckProjectLogPath()
 {
     if [ -z "$__PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
@@ -448,7 +448,7 @@ function CheckProjectLogPath
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 
 # Accepted arguments : "nodate", '<an empty string>'
-function CheckProjectLogStatus
+function CheckProjectLogStatus()
 {
     #***** Parameters *****
     local p_string=$1       # String to display.
@@ -616,7 +616,7 @@ function CheckProjectLogStatus
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function ExitError
+function ExitError()
 {
     # In case the "exit" command didn't worked, the program has to be killed.
     CheckSTAT_EXIT_CODE "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; exit "$__STAT_EXIT_CODE" || kill "$$"
@@ -629,7 +629,7 @@ function ExitError
 # Handling command outputs.
 # Featured functions and files from the "basis" category :
 #   - 
-function HandleErrors
+function HandleErrors()
 {
 	#***** Paramètres *****
 	local p_returnCode=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.

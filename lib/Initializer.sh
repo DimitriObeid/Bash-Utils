@@ -23,7 +23,7 @@ fi
 ## DEFINING FUNCTIONS
 
 # Checking the currently used Bash language's version.
-function CheckBashMinimalVersion
+function CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
 		printf "BASH-UTILS ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2
@@ -41,7 +41,7 @@ function CheckBashMinimalVersion
 }
 
 # Print an error message.
-function PrintErrorMsg
+function PrintErrorMsg()
 {
     #***** Parameters *****
     local p_msg=$1
@@ -53,7 +53,7 @@ function PrintErrorMsg
 }
 
 # Check project related file presence, or create this file.
-function CheckProjectRelatedFile
+function CheckProjectRelatedFile()
 {
 	#***** Parameters *****
 	p_path=$1
@@ -74,7 +74,7 @@ function CheckProjectRelatedFile
 }
 
 # Use this function to have a better view about a bug location during a "bash -x" debug.
-function DbgMsg
+function DbgMsg()
 {
     #***** Parameters *****
     p_code=$1               # Exit code.
@@ -99,7 +99,7 @@ function DbgMsg
 }
 
 # Printing an error message if a file cannot be sourced.
-function SourcingFailure
+function SourcingFailure()
 {
     #***** Parameters *****
     p_path=$1               # Path of the file that cannot be sourced.
@@ -202,7 +202,7 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-function MkTmpDir
+function MkTmpDir()
 {
     if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
         # shellcheck disable=SC2034

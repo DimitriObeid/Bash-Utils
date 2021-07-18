@@ -11,7 +11,7 @@
 # Featured functions and files from the "functions" folder :
 #   - DrawLine      -> Headers.lib
 #   - HandleErrors  -> Headers.lib
-function ProcessingDir
+function ProcessingDir()
 {
     #***** Parameters *****
     local p_function=$1
@@ -55,7 +55,7 @@ function ProcessingDir
 #	- EchoNewstep		-> Echo.lib
 #	- EchoSuccess		-> Echo.lib
 #	- Newline			-> Echo.lib
-function OverwriteDir
+function OverwriteDir()
 {
     #***** Parameters *****
     local p_path=$1
@@ -107,7 +107,7 @@ function OverwriteDir
 #   - Echo.sh       -> EchoSuccessTimer
 #   - Headers.sh    -> DrawLine   
 #   - Headers.sh    -> HandleErrors
-function Makedir
+function Makedir()
 {
 	#***** Parameters *****
 	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
@@ -159,7 +159,7 @@ function Makedir
 ## PATH PROCESSING
 
 # Getting parent folder's name only (without its full path from the root directory), then printing it.
-function GetParentDirectoryName
+function GetParentDirectoryName()
 {
     #***** Parameters *****
     local p_path=$1
@@ -179,7 +179,7 @@ function GetParentDirectoryName
 }
 
 # Getting parent folder's path from the root directory, then printing it
-function GetParentDirectoryPath
+function GetParentDirectoryPath()
 {
     #***** Parameters *****
     local p_path=$1
@@ -198,7 +198,7 @@ function GetParentDirectoryPath
 }
 
 # Getting the name of a target directory without its path.
-function GetDirectoryName
+function GetDirectoryName()
 {
     #***** Parameters *****
     local p_path=$1
@@ -221,7 +221,7 @@ function GetDirectoryName
 }
 
 # Checking if the directory's sub-folders paths passed as argument exists, then print its path.
-function GetDirectoryPath
+function GetDirectoryPath()
 {
     #***** Parameters *****
     local p_path=$1

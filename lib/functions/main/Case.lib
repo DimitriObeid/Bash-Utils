@@ -30,7 +30,7 @@ __CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or (
 ## "Checkings.lib" FILE
 
 # "TriggerRootDirWarning" function.
-function CaseRead_TriggerRootDirWarning
+function CaseRead_TriggerRootDirWarning()
 {
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
@@ -46,7 +46,7 @@ function CaseRead_TriggerRootDirWarning
 }
 
 # "HandleErrors" function.
-function CaseRead_HandleErrors
+function CaseRead_HandleErrors()
 {
 	# shellcheck disable=SC2154
 	case "${__read_HandleErrors,,}" in
