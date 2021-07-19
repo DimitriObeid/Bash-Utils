@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+    #!/usr/bin/env bash
 
 # Script initializer file, initializing all you need for your scripts.
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
@@ -104,8 +104,6 @@ function MkTmpDir()
     if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
         # shellcheck disable=SC2034
         __STAT_TXT_FMT="false"
-
-        DbgMsg "0" "2"
         
         mkdir -p "$__PROJECT_TMP_DIR_PATH"
         
@@ -113,7 +111,6 @@ function MkTmpDir()
             "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
 
-        DbgMsg "1" "3"
         # shellcheck disable=SC2034
         __STAT_TXT_FMT="true"
     fi

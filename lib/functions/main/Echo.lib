@@ -20,9 +20,14 @@ fi
 #
 function CheckDecho()
 {
+    DbgMsg "0" "2"
+
 	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo >&2; echo "THE COLOR CODE FILE DOESN'T EXISTS !" >&2; echo >&2; ExitError "1"
-    
+        echo >&2; echo "THE COLOR CODE FILE DOESN'T EXISTS !" >&2;
+        echo >&2; echo "Please verify if this file was created during the initialization process." >&2; echo >&2; kill "$$"
+
+        DbgMsg "1" "2"
+
     elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
 	fi
