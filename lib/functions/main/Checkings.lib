@@ -211,6 +211,7 @@ function CheckArgs_GetParentDirectoryName
 		# shellcheck disable=SC2016
 		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" \
             "Please pass the path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+    fi
 }
 
 # "GetParentDirectoryPath" function.
@@ -226,6 +227,7 @@ function CheckArgs_GetParentDirectoryPath
 		# shellcheck disable=SC2016
 		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+    fi
 }
 
 # -----------------------------------------------
