@@ -128,7 +128,12 @@ function CheckSTAT_LOG()
         ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${a_array[@]}"
 
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
-		if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
+        
+        if [ "$__STAT_TXT_FMT" = "true" ]; then
+            local v_stat_txt_fmt='1'
+        fi
+
+        __STAT_TXT_FMT="false"; if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
 			echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder.${BU_COLOR_RESET}"
 			mkdir -pv "$__PROJECT_LOG_DIR_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 		fi

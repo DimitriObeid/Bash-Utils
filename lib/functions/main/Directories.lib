@@ -165,6 +165,8 @@ function GetParentDirectoryName()
     local p_path=$1
 
     #***** Code *****
+    CheckArgs_GetParentDirectoryName "$p_path"
+
     parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
         || { 
             HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Check if the provided path is correct." "$p_path" \
@@ -185,6 +187,8 @@ function GetParentDirectoryPath()
     local p_path=$1
 
     #***** Code *****
+    CheckArgs_GetParentDirectoryPath "$p_path"
+
     parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
         || {
             HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Check if the provided path is correct." "$p_path" \

@@ -40,18 +40,6 @@ function CheckBashMinimalVersion()
 	fi
 }
 
-# Print an error message.
-function PrintErrorMsg()
-{
-    #***** Parameters *****
-    local p_msg=$1
-
-    #***** Code *****
-    echo >&2; echo "${__BU_COLOR_ERROR}IN ${__BU_COLOR_HIGHLIGHT}, FILE ${BASH_SOURCE[0]}${__BU_COLOR_ERROR} --> BASH UTILS ERROR : $p_msg${__BU_COLOR_RESET}"; echo >&2;
-    
-    exit 1;
-}
-
 # Check project related file presence, or create this file.
 function CheckProjectRelatedFile()
 {
@@ -65,11 +53,22 @@ function CheckProjectRelatedFile()
         fi
     else
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
-            mkdir -pv "$(GetParentDirectoryPath "$p_path")" || PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$(GetParentDirectoryPath "$p_path")${__BU_COLOR_ERROR} FOLDER !"
+            EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
+
+            mkdir -pv "$(GetParentDirectoryPath "$p_path")"
+            
+            HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+        
+            EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
         fi
 
-		EchoMsg "$(touch "$p_path")" || PrintErrorMsg "UNABLE TO CREATE THE ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_ERROR} FILE !"
-		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") file."
+		EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
+
+		touch "$p_path"
+		
+		HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+		
+		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
     fi
 }
 
@@ -95,6 +94,28 @@ function DbgMsg()
         return
     else
         exit 1
+    fi
+}
+
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
+# but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
+function MkTmpDir()
+{
+    if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
+        # shellcheck disable=SC2034
+        __STAT_TXT_FMT="false"
+
+        DbgMsg "0" "2"
+        
+        mkdir -p "$__PROJECT_TMP_DIR_PATH"
+        
+        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+            "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" \
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
+
+        DbgMsg "1" "3"
+        # shellcheck disable=SC2034
+        __STAT_TXT_FMT="true"
     fi
 }
 
@@ -178,6 +199,12 @@ __PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
 
 # -----------------------------------------------
 
+## PROCESSING SOME DIRECTORIES AND FILES
+
+CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+
+# -----------------------------------------------
+
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
@@ -200,27 +227,7 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
-# but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-function MkTmpDir()
-{
-    if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
-        # shellcheck disable=SC2034
-        __STAT_TXT_FMT="false"
 
-        DbgMsg "0" "2"
-        
-        mkdir -p "$__PROJECT_TMP_DIR_PATH"
-        
-        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
-            "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
-
-        DbgMsg "1" "3"
-        # shellcheck disable=SC2034
-        __STAT_TXT_FMT="true"
-    fi
-}
 
 MkTmpDir
 
@@ -229,7 +236,6 @@ MkTmpDir
 ## PROCESSING REMAINING DIRECTORIES AND FILES
 
 CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
-CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
 
 # -----------------------------------------------
 

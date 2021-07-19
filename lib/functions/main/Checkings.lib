@@ -158,15 +158,15 @@ function CheckArgs_OverwriteDir()
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" \
+            "Please pass the path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
     # Else, if the given folder path is incorrect.
     local lineno="$LINENO"; elif [ ! -d "$p_path" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" \
+            "Please pass the correct path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -198,6 +198,36 @@ function CheckArgs_Makedir()
     fi
 }
 
+# "GetParentDirectoryName" function.
+function CheckArgs_GetParentDirectoryName
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    # If the target folder path is missing (no path is given).
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+        
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" \
+            "Please pass the path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+}
+
+# "GetParentDirectoryPath" function.
+function CheckArgs_GetParentDirectoryPath
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    # If the target folder path is missing (no path is given).
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+        
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+}
+
 # -----------------------------------------------
 
 ## "main/Files.lib" FILE's FUNCTION
@@ -212,8 +242,8 @@ function CheckArgs_ProcessingFile()
     local lineno="$LINENO"; if [ -z "$p_function" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_function')") PARAMETER'S VALUE IS INCORRECT" "Please pass a valid file processing function as first argument" \
-            "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_function')") PARAMETER'S VALUE IS INCORRECT" \
+            "Please pass a valid file processing function as first argument" "$p_function" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -229,20 +259,21 @@ function CheckArgs_OverwriteFile()
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" \
+            "Please pass the path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
     # Else, if the given file path is incorrect.
     local lineno="$LINENO"; elif [ ! -d "$p_path" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" "Please pass the correct path of the directory to overwrite as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" \
+            "Please pass the correct path of the directory to overwrite as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 			
 	local lineno="$LINENO"; elif [ -z "$p_authorization" ]; then
 
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_authorization')") PARAMETER HAS NO VALUE" "Please enter a valid value for the overwrite authorization" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" 
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_authorization')") PARAMETER HAS NO VALUE" \
+            "Please enter a valid value for the overwrite authorization" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" 
     fi
 }
 
@@ -258,22 +289,22 @@ function CheckArgs_Makefile()
     local lineno="$LINENO"; if [ -z "$p_parent" ]; then
         
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_parent')") PARAMETER HAS NO VALUE" "Please pass the path of the new directory's parent folder as first argument" \
-            "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_parent')") PARAMETER HAS NO VALUE" \
+            "Please pass the path of the new directory's parent folder as first argument" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
     # Else, if the parent folder's path is incorrect.
     local lineno="$LINENO"; elif [ ! -d "$p_parent" ]; then
     
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_parent')") PARAMETER'S VALUE IS INCORRECT" "Please pass a valid parent directory path as first argument" \
-				"$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+		HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_parent')") PARAMETER'S VALUE IS INCORRECT" \
+            "Please pass a valid parent directory path as first argument" "$p_parent" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
     # Else, if the file's name is missing (no name is given).
     local lineno="$LINENO"; elif [ -z "$p_name" ]; then
 
 		# shellcheck disable=SC2016
-        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_name')") PARAMETER HAS NO VALUE" "Please pass the name of the folder to create as second argument" \
-            "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+        HandleErrors "1" "THE $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_name')") PARAMETER HAS NO VALUE" \
+            "Please pass the name of the folder to create as second argument" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
