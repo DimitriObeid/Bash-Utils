@@ -21,12 +21,7 @@ fi
 function CheckDecho()
 {
 	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        __STAT_TXT_FMT="false"; EchoMsg "Creating the $__PROJECT_COLOR_CODE_FILE_PATH color code file." && touch "$__PROJECT_COLOR_CODE_FILE_PATH"
-
-        HandleErrors "$?" "THE COLOR CODE FILE DOESN'T EXISTS AND CANNOT BE CREATED !" "Please check the rights <...>" \
-            "$__PROJECT_COLOR_CODE_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "Decho" "$(( LINENO-1 ))"
-
-        __STAT_TXT_FMT="true"
+        echo >&2; echo "THE COLOR CODE FILE DOESN'T EXISTS !" >&2; echo >&2; ExitError "1"
     
     elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
