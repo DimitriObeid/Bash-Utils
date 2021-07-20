@@ -208,7 +208,11 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__STAT_LOG" variable's value is equal to "true".
 # shellcheck disable=SC2034
-__STAT_LOG="false";           CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG="false";           CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
+if [ "$__INIT_IS_INITALIZING" = "true" ]; then
+    __INIT_IS_INITALIZING="false"
+fi
 
 # shellcheck disable=SC2034
 __STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
