@@ -155,8 +155,8 @@ function CheckSTAT_LOG()
 		# Redirecting the initializer's log file content into the log file.
 		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-		EchoNewstep "Sourced configuration files :"; for val in "${A_CONFIG_FILES_PATH[@]}"; do EchoMsg "$val"; done; Newline
-		EchoNewstep "Sourced library files : "; for val in "${A_LIB_FILES_PATH[@]}"; do EchoMsg "$val"; done; Newline
+		EchoNewstep "Sourced configuration files :"; for val in "${__INIT_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+		EchoNewstep "Sourced library files : "; for val in "${__INIT_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 		
 		if [ -n "$__INIT_STR_ARRAY" ]; then
             EchoNewstep "Initialization log output :"; Newline

@@ -117,7 +117,7 @@ function MkTmpDir()
 }
 
 # Printing an error message if a file cannot be sourced.
-function SourcingFailure()
+function InitializerSourcingFailure()
 {
     #***** Parameters *****
     p_path=$1               # Path of the file that cannot be sourced.
@@ -142,42 +142,20 @@ CheckBashMinimalVersion
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Defining an associative array to store each sourced library file's path.
-A_LIB_FILES_PATH=()
-
 # Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" variable.
+
 # shellcheck disable=SC1090
 for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || SourcingFailure "$f"; A_LIB_FILES_PATH+=("$f")
+    source "$f" || InitializerSourcingFailure "$f"; __INIT_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
-# Defining an associative array to store each sourced configuration file's path.
-A_CONFIG_FILES_PATH=()
-
-# Storing the configuration files path variables values into an array to source, print and add easier into the "a_config_files_path" associative array.
-# Those files are, respectly, the :
-#   - Project's and initialization process global variables
-#   - Text color
-#   - Project's status variables
-#   - Text decoration, formatting and printing variables
-#   - Time variables
-
-# The "init.conf" file MUST be sourced first, then the "ProjectStatus.conf" file MUST be sourced in the second.
-# Unless otherwise stated, the other configuration files may be sourced in any order.
-
-A_LIST_CONFIG_FILES_PATH=("$__BASH_UTILS_CONF_FILE_INIT" \
-    "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" \
-    "$__BASH_UTILS_CONF_FILE_COLORS" \
-    "$__BASH_UTILS_CONF_FILE_TEXT" \
-    "$__BASH_UTILS_CONF_FILE_TIME")
-
 # shellcheck disable=SC1090
-for f in "${A_LIST_CONFIG_FILES_PATH[@]}"; do
-    source "$f" || SourcingFailure "$f"; A_CONFIG_FILES_PATH+=("$f")
+for f in "${__INIT_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
+    source "$f" || InitializerSourcingFailure "$f"; __INIT_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------

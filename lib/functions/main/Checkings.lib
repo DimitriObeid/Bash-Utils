@@ -670,6 +670,20 @@ function CheckProjectLogStatus()
 
 ## FORMATTING CHECKINGS
 
+# Checking if the project's color code file exists or not.
+function CheckDecho()
+{
+    #***** Code *****
+    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        return 1
+
+    elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
+    else
+        return 0
+	fi
+}
+
 # Checking if the "$__STAT_TXT_FMT" status variable's value is "true".
 function CheckFmt()
 {
