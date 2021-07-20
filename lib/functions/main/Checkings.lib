@@ -288,28 +288,6 @@ function CheckArgs_Makefile()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### BASIS FUNCTIONS VALUES HANDLING
-
-## "basis/Echo.lib" FILE
-
-# Checking if the color code file exists.
-function HandleVal_Decho()
-{
-    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo "$__BU_COLOR_RESET" >&2; echo "${__BU_COLOR_WARNING}Warning ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2
-
-		CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
-		
-		touch "$__PROJECT_COLOR_CODE_FILE_PATH" || { echo >&2; echo "${__BU_COLOR_ERROR}BASH UTILS ERROR ! The ${__BU_COLOR_HIGHLIGHT}$__PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_ERROR} temporary file doesn't exists !${__BU_COLOR_RESET}" >&2; echo >&2; ExitError; }
-    fi
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
 #### VARIABLES VALUES CHECKING
 
 ## NUMBER VALUES

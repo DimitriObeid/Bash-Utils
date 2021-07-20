@@ -55,20 +55,20 @@ function CheckProjectRelatedFile()
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
             EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
 
-            mkdir -pv "$(GetParentDirectoryPath "$p_path")"
-            
+            mkdir -p "$(GetParentDirectoryPath "$p_path")"
+
             HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-        
+
             EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
         fi
 
-		EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
+        EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
 
-		touch "$p_path"
-		
-		HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-		
-		EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
+        touch "$p_path"
+
+        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            
+        EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
     fi
 }
 

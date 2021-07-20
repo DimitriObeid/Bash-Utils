@@ -20,11 +20,9 @@ fi
 #
 function CheckDecho()
 {
-	if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo >&2; echo "${__BU_COLOR_ERROR}THE COLOR CODE FILE DOESN'T EXISTS !${__BU_COLOR_RESET}" >&2;
-        echo >&2; echo "${__BU_COLOR_ERROR}Please verify if this file was created during the initialization process.${__BU_COLOR_RESET}" >&2; echo >&2
-        
-        kill -s SIGKILL "$$"
+    #***** Code *****
+    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        return 1
 
     elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
         echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
@@ -36,10 +34,9 @@ function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_ol
 
 # Text's inside decoration/formatting procssing.
 
-# Usage :
-#	Decho "${__BU_COLOR_<TO_DISPLAY>}" "$1" '<format code>'
-
-# Featured functions and files from the "functions" folder : none
+# Featured functions and files from the "functions" folder :
+#   - CheckDecho                        --> This file.
+#       - 
 function Decho()
 {
     #***** Parameters *****
@@ -49,9 +46,17 @@ function Decho()
 
     #***** Variables *****
     local v_oldColor
-        v_oldColor="$(CheckDecho && cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
 
     #***** Code *****
+    CheckDecho
+
+    if [ "$?" -ne 0 ]; then
+        echo "$p_string"
+    else
+        local v_oldColor
+            v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
+    fi
+
     if [ -n "$p_newColor" ] && [ "$p_newColor" = "$v_oldColor" ]; then
         
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
