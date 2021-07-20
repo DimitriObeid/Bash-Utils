@@ -147,7 +147,13 @@ function CheckSTAT_LOG()
 		EchoNewstep "Sourced configuration files :"; for val in "${A_CONFIG_FILES_PATH[@]}"; do EchoMsg "$val"; done; Newline
 		EchoNewstep "Sourced library files : "; for val in "${A_LIB_FILES_PATH[@]}"; do EchoMsg "$val"; done; Newline
 		
-		EchoMsg "$(cat "$__INIT_LIST_FILE_PATH")" "" "nodate"
+		if [ -n "$__INIT_STR_ARRAY" ]; then
+            EchoNewstep "Initialization log output :"; Newline
+
+            for val in "${__INIT_STR_ARRAY[@]}"; do
+                CheckProjectLogStatus "$val"
+            done
+		fi
 
 		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
 		HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"

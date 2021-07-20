@@ -1,4 +1,4 @@
-    #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Script initializer file, initializing all you need for your scripts.
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
@@ -140,7 +140,20 @@ CheckBashMinimalVersion
 
 #### SECOND STEP : SOURCING FILES
 
-## SOURCING CONFIGURATION FILES FIRST
+## SOURCING LIBRARY FILES FIRST
+
+# Defining an associative array to store each sourced library file's path.
+A_LIB_FILES_PATH=()
+
+# Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" variable.
+# shellcheck disable=SC1090
+for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
+    source "$f" || SourcingFailure "$f"; A_LIB_FILES_PATH+=("$f")
+done
+
+# -----------------------------------------------
+
+## SOURCING CONFIGURATION FILES
 
 # Defining an associative array to store each sourced configuration file's path.
 A_CONFIG_FILES_PATH=()
@@ -165,20 +178,6 @@ A_LIST_CONFIG_FILES_PATH=("$__BASH_UTILS_CONF_FILE_INIT" \
 # shellcheck disable=SC1090
 for f in "${A_LIST_CONFIG_FILES_PATH[@]}"; do
     source "$f" || SourcingFailure "$f"; A_CONFIG_FILES_PATH+=("$f")
-done
-
-
-# -----------------------------------------------
-
-## SOURCING LIBRARY FILES
-
-# Defining an associative array to store each sourced library file's path.
-A_LIB_FILES_PATH=()
-
-# Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" variable.
-# shellcheck disable=SC1090
-for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || SourcingFailure "$f"; A_LIB_FILES_PATH+=("$f")
 done
 
 # -----------------------------------------------

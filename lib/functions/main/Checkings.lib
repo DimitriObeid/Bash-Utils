@@ -13,41 +13,16 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### CHECKING FOR IDENTIFIANTS
-
-## EFFECTIVE USER IDENTIFIANTS CHECKING
-
-# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
-
-# Required functions and files :
-#   - HandleErrors      -> Bash-Utils/lib/functions/basis/Handles.lib
-function CheckRootEUID()
-{
-    if [ "$EUID" -ne 0 ]; then
-        HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
-            "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-    fi
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
 #### ARGUMENT VALUES CHECKING : UTILITES FUNCTIONS
 
-## TEXT FORMATING FUNCTIONS
+## ARGUMENT PRESENCE CHECKING
 
-# Cut the text of the function's name before and with the underscore.
-function CutCheck()
+# Checking if an argument is provided (like in the "Is..." functions (check the below "VARIABLES VALUES CHECKING" section for more informations)).
+function CheckArgs_IsArgcNot0()
 {
-	#***** Parameters *****
-	p_string=$1
-
-	#***** Code *****
-	#shellcheck disable=SC2001
-	sed 's/^[^_]*_//' <<< "$p_string"
+    if [ "$#" -eq 0 ]; then
+        HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+    fi
 }
 
 # -----------------------------------------------
@@ -101,20 +76,17 @@ function TriggerRootDirWarning()
 
 # -----------------------------------------------
 
+## TEXT FORMATING FUNCTIONS
 
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### BASIS FUNCTIONS ARGUMENT VALUES CHECKING
-
-## "basis/Checkings.lib" FILE
-
-# Checking if an argument is provided in the "Is..." functions (check the below "VARIABLES VALUES CHECKING" section for more informations).
-function CheckArgs_IsCorrectValue()
+# Cut the text of the function's name before and with the underscore.
+function CutCheck()
 {
-    if [ "$#" -eq 0 ]; then
-        HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-    fi
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	#shellcheck disable=SC2001
+	sed 's/^[^_]*_//' <<< "$p_string"
 }
 
 # -----------------------------------------------
@@ -349,7 +321,7 @@ function IsFloat()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsCorrectValue "$p_value"
+    CheckArgs_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
@@ -365,7 +337,7 @@ function IsFloatInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsCorrectValue "$p_value"
+    CheckArgs_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
@@ -381,7 +353,7 @@ function IsInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsCorrectValue "$p_value"
+    CheckArgs_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
@@ -401,7 +373,7 @@ function IsAlpha()
     local p_value=$1
     
     #***** Code *****
-    CheckArgs_IsCorrectValue "$p_value"
+    CheckArgs_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ [A-Z] ]]; then
         return 0
@@ -417,7 +389,7 @@ function IsAlphaNum()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsCorrectValue "$p_value"
+    CheckArgs_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
@@ -428,9 +400,51 @@ function IsAlphaNum()
 
 # -----------------------------------------------
 
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### DIFFERENT CHECKINGS
+
+## CHECKING FOR IDENTIFIANTS
+
+# Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
+
+# Required functions and files :
+#   - HandleErrors      --> From this file.
+function CheckRootEUID()
+{
+    if [ "$EUID" -ne 0 ]; then
+        HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
+            "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+    fi
+}
+
+# -----------------------------------------------
+
+## INITIALIZATION CHECKINGS
+
+# Checking if the library is into its initialization process.
+function CheckInitialization()
+{
+    if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
+    return
+}
+
+
+# -----------------------------------------------
+
+
+
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PATHS CHECKING
+
+## DIRECTORIES PATHS CHECKING
+
+# 
+
+# -----------------------------------------------
 
 ## FILE PATHS CHECKING
 
@@ -635,11 +649,26 @@ function CheckProjectLogStatus()
 
 # -----------------------------------------------
 
-## DIRECTORIES PATHS CHECKING
 
-# 
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### TEXT CHECKINGS
+
+## FORMATTING CHECKINGS
+
+# Checking if the "$__STAT_TXT_FMT" status variable's value is "true".
+function CheckFmt()
+{
+    if [ "$__STAT_TXT_FMT" = "true" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
 
 # -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -719,3 +748,6 @@ function HandleErrors()
         fi
     fi
 }
+
+# -----------------------------------------------
+
