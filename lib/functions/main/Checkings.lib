@@ -428,7 +428,10 @@ function CheckRootEUID()
 function CheckInitialization()
 {
     if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
-    return
+        return 0
+    else
+        return 1
+    fi
 }
 
 
@@ -539,10 +542,18 @@ function CheckProjectLogStatus()
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
                         '-n')
-                            echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$p_string")
+                            else
+                                echo -ne "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
+                            fi
                             ;;
                         '')
-                            echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$p_string")
+                            else
+                                echo -e "$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
+                            fi
                             ;;
                     esac
 
@@ -550,10 +561,18 @@ function CheckProjectLogStatus()
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
                         '-n')
-                            echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
+                            else
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                         '')
-                            echo -e "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
+                            else
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                     esac
                 # Else, if an unsupported option is passed (note for myself : the extra args checking
@@ -561,12 +580,20 @@ function CheckProjectLogStatus()
                 else
                     case "$p_option" in
                         '-n')
-                            echo -ne "[$__TIME_DATE] $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$p_string")
+                            else
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                         '')
-                            echo -e "[$__TIME_DATE]$p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if CheckInitialization; then
+                                __INIT_STR_ARRAY+=("$__TIME_DATE_DISPLAY $p_string")
+                            else
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                     esac
                 fi
@@ -584,10 +611,18 @@ function CheckProjectLogStatus()
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
                         '-n')
-                            echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
+                                __INIT_STR_ARRAY+=("$p_string")
+                            else
+                                echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                         '')
-                            echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
+                                __INIT_STR_ARRAY+=("$p_string")
+                            else
+                                echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            fi
                             ;;
                     esac
 

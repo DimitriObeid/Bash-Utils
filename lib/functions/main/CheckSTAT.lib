@@ -131,10 +131,15 @@ function CheckSTAT_LOG()
         
         if [ "$__STAT_TXT_FMT" = "true" ]; then
             local v_stat_txt_fmt='1'
+        
+            __STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
+        
+        if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
 
-        __STAT_TXT_FMT="false"; if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
-			echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder.${BU_COLOR_RESET}"
+            # Even if the initialization process is still ongoing, it's possible to call an "Echo<...>()" function,
+            # as the text display in this condition is managed by the "CheckProjectLogStatus()" function.
+			EchoNewstep "Creating the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder."
 
 			mkdir -pv "$__PROJECT_LOG_DIR_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 		fi
@@ -143,7 +148,7 @@ function CheckSTAT_LOG()
 
 		touch "$__PROJECT_LOG_FILE_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 
-		if [ "$__INIT_IS_INITALIZING" = "true" ]; then
+		if CheckInitialization; then
             __INIT_IS_INITALIZING="false"
         fi
 		

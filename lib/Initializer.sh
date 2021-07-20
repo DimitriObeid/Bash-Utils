@@ -197,7 +197,7 @@ __PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+__STAT_TXT_FMT="false"; CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -210,24 +210,25 @@ __STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE
 # shellcheck disable=SC2034
 __STAT_LOG="false";           CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-if [ "$__INIT_IS_INITALIZING" = "true" ]; then
+if CheckInitialization; then
     __INIT_IS_INITALIZING="false"
 fi
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG_REDIRECT="tee";      CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_ERROR="fatal";           CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_TIME_TXT="0";            CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+__STAT_TXT_FMT="true";          CheckSTAT_TXT_FMT       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
-
-
 
 MkTmpDir
 
