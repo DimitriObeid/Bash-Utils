@@ -95,11 +95,20 @@ function HeaderBase()
 	return
 }
 
-# Header display function when changing step.
-function HeaderStep     { HeaderBase "$__BU_COLOR_CYAN"     "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_CYAN"   "$1"; }
+# Header to display in case of an error.
+function HeaderError    { HeaderBase "$__BU_COLOR_ERROR"    "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_ERROR"      "$1"; }
 
-# Header display function when switching to a new package category during package installation.
-function HeaderInstall  { HeaderBase "$__BU_COLOR_YELLOW"   "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_GREEN"  "$1"; }
+# Header to display when switching to a new package category during package installation.
+function HeaderInstall  { HeaderBase "$__BU_COLOR_YELLOW"   "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_GREEN"      "$1"; }
+
+# Header to display when changing step.
+function HeaderStep     { HeaderBase "$__BU_COLOR_CYAN"     "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_CYAN"       "$1"; }
+
+# Header to display in case of a successfully done step.
+function HeaderSuccess  { HeaderBase "$__BU_COLOR_SUCCESS"  "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_SUCCESS"    "$1"; }
+
+# Header to display in case of a minor error.
+function HeaderWarning  { HeaderBase "$__BU_COLOR_WARNING"  "$__BU_TXT_PRINT_HEADER_LINE_CHAR"  "$__BU_COLOR_WARNING"   "$1"; }
 
 # -----------------------------------------------
 

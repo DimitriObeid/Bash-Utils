@@ -5,7 +5,7 @@ source "$HOME/.bash_profile"
 __BASH_UTILS_FULL_FILE_PATH="$__BASH_UTILS_ROOT/Bash-utils.sh"
 
 function CatBU { cat "$1" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; }
-function EchoBU { echo "$1" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; }
+function EchoBU { echo "# $1" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; }
 
 if [ ! -f "$__BASH_UTILS_FULL_FILE_PATH" ]; then
 	touch "$__BASH_UTILS_FULL_FILE_PATH"

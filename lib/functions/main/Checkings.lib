@@ -497,7 +497,7 @@ function CheckProjectLogStatus()
         if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -gt 0 ]; then
 
             # Backup the old values to restore them when the log processing will be done.
-            local __BU_OLD_STAT_TIME_TXT="$__STAT_TIME_TXT"
+            local v_old_stat_time_txt="$__STAT_TIME_TXT"
             __STAT_TIME_TXT="0"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
@@ -562,7 +562,7 @@ function CheckProjectLogStatus()
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
@@ -570,7 +570,7 @@ function CheckProjectLogStatus()
                                 __INIT_STR_ARRAY+=("$__TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                     esac
@@ -579,6 +579,13 @@ function CheckProjectLogStatus()
             done
 
             sleep "$__STAT_TIME_TXT"
+
+            # Restore timer status variables old values if they were modified because of the redirection to the log file only.
+            if [ "$__STAT_TIME_TXT" -eq 0 ]; then
+            
+                # Backup the old values to restore them when the log processing will be done, then check if the correct values were reassignated.
+                __STAT_TIME_TXT="$v_old_stat_time_txt"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            fi
 
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
@@ -623,11 +630,11 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n')
                             echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             ;;
                         '')
                             echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                            echo -e "$v_warning_array_value" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             ;;
                     esac
                 fi
@@ -649,15 +656,6 @@ function CheckProjectLogStatus()
 
         sleep "$__STAT_TIME_TXT"
 	fi
-
-    # Restore timer status variables old values if they were modified because of the redirection to the log file only.
-    if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
-        if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -eq 0 ]; then
-        
-            # Backup the old values to restore them when the log processing will be done, then check if the correct values were reassignated.
-            __STAT_TIME_TXT="$__BU_OLD_STAT_TIME_TXT"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-        fi
-    fi
 }
 
 # -----------------------------------------------
@@ -761,7 +759,7 @@ function HandleErrors()
         fi
             
         if [ -z "$p_badValue" ]; then
-            EchoError "Value(s) that caused this error : $(DechoOrange 'No value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+            EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
         else
             EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
         fi
