@@ -42,7 +42,7 @@ function Decho()
         echo " ' $p_string ' "
     else
         local v_oldColor
-            v_oldColor="$(cat "$__PROJECT_COLOR_CODE_FILE_PATH")"
+            v_oldColor="$__PROJECT_COLOR_CODE"
     fi
 
     if [ -n "$p_newColor" ] && [ "$p_newColor" = "$v_oldColor" ]; then

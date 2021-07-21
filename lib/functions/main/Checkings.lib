@@ -672,11 +672,11 @@ function CheckProjectLogStatus()
 function CheckDecho()
 {
     #***** Code *****
-    if [ ! -f "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
+    if [ -z "${__PROJECT_COLOR_CODE+x}" ] || [ "$__STAT_TXT_FMT" = "false" ]; then
         return 1
 
-    elif [ -f "$__PROJECT_COLOR_CODE_FILE_PATH" ] && [ ! -s "$__PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        echo "$__BU_COLOR_RESET" > "$__PROJECT_COLOR_CODE_FILE_PATH"
+    elif [ -n "${__PROJECT_COLOR_CODE+x}" ] && [ "$__PROJECT_COLOR_CODE" = '' ]; then
+        __PROJECT_COLOR_CODE="$__BU_COLOR_RESET"
     else
         return 0
 	fi

@@ -129,12 +129,6 @@ function CheckSTAT_LOG()
 
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__PROJECT_LOG_FILE_PATH" ]; then
         
-        if [ "$__STAT_TXT_FMT" = "true" ]; then
-            local v_stat_txt_fmt='1'
-        
-            __STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-        fi
-        
         if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
 
             # Even if the initialization process is still ongoing, it's possible to call an "Echo<...>()" function,
@@ -149,6 +143,7 @@ function CheckSTAT_LOG()
 		touch "$__PROJECT_LOG_FILE_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 
 		if CheckInitialization; then
+            # shellcheck disable=SC2034
             __INIT_IS_INITALIZING="false"
         fi
 		
