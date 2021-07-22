@@ -24,7 +24,7 @@ function ProcessingDir()
     
     #***** Code *****
     # Arguments checking.
-	CheckArgs_ProcessingDir "$p_function" "$p_parent" "$p_name"
+	CheckArgsMain_ProcessingDir "$p_function" "$p_parent" "$p_name"
     
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
@@ -63,7 +63,7 @@ function OverwriteDir()
 
     #***** Code *****
     # Checking first if the awaited arguments are given
-    CheckArgs_OverwriteDir "$p_path" "$p_authorization"
+    CheckArgsMain_OverwriteDir "$p_path" "$p_authorization"
 	
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$p_path"
@@ -118,7 +118,7 @@ function Makedir()
 
 	#***** Code *****
 	# Checking first if the awaited arguments are given
-    CheckArgs_Makedir "$p_parent" "$p_name"
+    CheckArgsMain_Makedir "$p_parent" "$p_name"
     
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$v_path"
@@ -158,6 +158,43 @@ function Makedir()
 
 ## PATH PROCESSING
 
+# Getting the name of a target directory without its path.
+function GetDirectoryName()
+{
+    #***** Parameters *****
+    local p_path=$1
+    
+    #***** Code *****
+    CheckArgsMain_GetDirectoryName "$p_path"
+    
+    if [ -d "$p_path" ]; then
+        shopt -s extglob            # enable +(...) glob syntax
+        result=${p_path%%+(/)}      # trim however many trailing slashes exist
+        result=${result##*/}        # remove everything before the last / that still remains
+        echo "$dirname"
+    else
+        HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
+    fi
+}
+
+# Checking if the directory's sub-folders paths passed as argument exists, then print its path.
+function GetDirectoryPath()
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    CheckArgsMain_GetDirectoryPath "$p_path"
+
+    if [ -d "$p_path" ]; then
+        echo "$p_path"
+    else
+        HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+    fi
+}
+
 # Getting parent folder's name only (without its full path from the root directory), then printing it.
 function GetParentDirectoryName()
 {
@@ -165,11 +202,11 @@ function GetParentDirectoryName()
     local p_path=$1
 
     #***** Code *****
-    CheckArgs_GetParentDirectoryName "$p_path"
+    CheckArgsMain_GetParentDirectoryName "$p_path"
 
-    parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
+    parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
         || { 
-            HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Check if the provided path is correct." "$p_path" \
+            HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Please check if the provided path is correct." "$p_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
         }; pwd -P )"
     dirname="$parent"
@@ -187,59 +224,17 @@ function GetParentDirectoryPath()
     local p_path=$1
 
     #***** Code *****
-    CheckArgs_GetParentDirectoryPath "$p_path"
+    CheckArgsMain_GetParentDirectoryPath "$p_path"
 
-    parent="$( cd "$(dirname "$p_path")" >/dev/null 2>&1 \
+    parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
         || {
-            HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Check if the provided path is correct." "$p_path" \
+            HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
         }; pwd -P )"
     dirname="$parent"
 
     shopt -s extglob           # enable +(...) glob syntax
     result=${dirname%%+(/)}    # trim however many trailing slashes exist
-    echo "$result"
-}
-
-# Getting the name of a target directory without its path.
-function GetDirectoryName()
-{
-    #***** Parameters *****
-    local p_path=$1
-    
-    #***** Code *****
-    if [ -z "$p_path" ]; then
-        HandleErrors "1" "NO PATH ARGUMENT PASSED" "The $(DechoHighlight "${FUNCNAME[0]}") function takes a path as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-    else
-        if [ -d "$p_path" ]; then
-            shopt -s extglob            # enable +(...) glob syntax
-            result=${p_path%%+(/)}      # trim however many trailing slashes exist
-            result=${result##*/}        # remove everything before the last / that still remains
-            echo "$dirname"
-        else
-            HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
-                "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
-        fi
-    fi
-}
-
-# Checking if the directory's sub-folders paths passed as argument exists, then print its path.
-function GetDirectoryPath()
-{
-    #***** Parameters *****
-    local p_path=$1
-
-    #***** Code *****
-    if [ -z "$p_path" ]; then
-        HandleErrors "1" "NO PATH ARGUMENT PASSED" "The $(DechoHighlight "${FUNCNAME[0]}") function takes a path as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-    else
-        if [ -d "$p_path" ]; then
-            echo "$p_path"
-        else
-            HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
-                "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
-        fi
-    fi
+    echo "# Getting the name of a target directory without its path.
+$result"
 }

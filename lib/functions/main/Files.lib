@@ -192,10 +192,10 @@ function SourceFile()
         if source "$p_path"; then
             EchoSuccess "Sourced file : $(DechoS "$p_path")"
         else
-            HandleErrors "1" "UNABLE TO FIND THIS PATH" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(DechoHighlight "$p_path")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        HandleErrors "1" "UNABLE TO FIND THIS PATH" "Verify the path passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+        HandleErrors "1" "UNABLE TO FIND THIS FILE : $(DechoHighlight "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 
@@ -207,22 +207,22 @@ function SourceFile()
 function GetLineFromTextFile()
 {
     #***** Parameters *****
-    local source=$1           # File to parse
-    local wanted_line=$2      # Line to get in the file
+    local p_source=$1           # File to parse
+    local p_wanted_line=$2      # Line to get in the file
     
     #***** Variables *****
-    local i=0     # Line incrementer
+    local i=0                   # Line incrementer
     
     #***** Code *****
 	# shellcheck disable=SC2002
-    cat "$source" | while read -r line; do
+    cat "$p_source" | while read -r line; do
         # Incrementing the line incrementer variable's value...
         i=$(( i+1 ))
         
         # ... until it reaches the wanted line.
-        if [ "$i" -eq "$wanted_line" ]; then
+        if [ "$i" -eq "$p_wanted_line" ]; then
             # Creating a variable and storing the wanted line's text.
-            FILE_GETTXTLINE="$line"
+            __BU_TXT_GOT_LINE="$line"
         fi
     done
 }
@@ -273,7 +273,7 @@ function Uncompress()
     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
     "$cmd $opts $p_path"
     HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
-    EchoSuccess "La décompression de l'archive $(DechoS "$p_name") s'est effectuée avec brio."
+    EchoSuccess "La décompression de l'archive $(DechoHighlight "$p_name") s'est effectuée avec brio."
     Newline
     
     return 0

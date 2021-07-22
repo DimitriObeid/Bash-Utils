@@ -33,7 +33,7 @@ function ChownRec()
         HandleError "1" "" "" ""
     fi
 
-    EchoNewstep "Recursive change of the ownership rights of the new folder $(DechoN "$p_path/") from $(DechoN "$p_currentOwner") to $(DechoN "$p_newOwner")"
+    EchoNewstep "Recursive change of the ownership rights of the new folder $(DechoHighlight "$p_path/") from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")"
 	Newline
 
     # On change les droits du fichier créé par le script.
@@ -43,12 +43,12 @@ function ChownRec()
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$p_newOwner" "$p_path"; then
-		EchoSuccess "The rights of the $(DechoS "$p_path/") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
+		EchoSuccess "The rights of the $(DechoHighlight "$p_path/") folder have been successfully changed from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")"
 		Newline
 
 		return 0
 	else
-        EchoError "Unable to change the rights of the $(DechoE "$p_path/") folder"
+        EchoError "Unable to change the rights of the $(DechoHighlight "$p_path/") folder"
 		Newline
 
 		return 1
@@ -85,19 +85,19 @@ function Chown()
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
-        EchoNewstep "Changing the ownership rights of the  $(DechoN "$p_path/") folder from $(DechoN "$p_currentOwner") to $(DechoN "$p_newOwner")."
+        EchoNewstep "Changing the ownership rights of the  $(DechoHighlight "$p_path/") folder from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")."
         Newline
         
         # Changing ownership recursively.
         case "$p_option" in
             'R')
                 if chown -Rv "$p_newOwner" "$p_path"; then
-                    EchoSuccess "The rights of the $(DechoS "$p_path") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
+                    EchoSuccess "The rights of the $(DechoHighlight "$p_path") folder have been successfully changed from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")"
                     Newline
 
                     return 0
                 else
-                    HandleErrors "1" "Unable to change the rights of the $(DechoE "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))"
+                    HandleErrors "1" "Unable to change the rights of the $(DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))"
                     Newline
 
                     return 1
@@ -106,14 +106,14 @@ function Chown()
             '')
                 # Changing ownership non-recursively.
                 if chown -v "$p_newOwner" "$p_path"; then
-                    EchoSuccess "The rights of the $(DechoS "$p_path") folder have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")"
+                    EchoSuccess "The rights of the $(DechoHighlight "$p_path") folder have been successfully changed from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")"
                     Newline
 
                     return 0
 
                 else
-                    HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(DechoE "$p_path/") FOLDER" \
-                        "Please run the script with the command $(DechoE "bash -x $PROJECT_NAME") to check what happened" \
+                    HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(DechoHighlight "$p_path/") FOLDER" \
+                        "Please run the script with the command $(DechoHighlight "bash -x $PROJECT_NAME") to check what happened" \
                         "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))"
                     Newline
 
@@ -121,7 +121,7 @@ function Chown()
                 fi
                 ;;
             *)
-                HandleError "1" "THE $(DechoE "${FUNCNAME[0]}")'S FUNCTION $(DechoE "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
+                HandleError "1" "THE $(DechoHighlight "${FUNCNAME[0]}")'S FUNCTION $(DechoHighlight "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
                 ;;
         esac
@@ -130,23 +130,23 @@ function Chown()
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$p_path" ]; then
-            EchoNewstep "Changing the ownership rights of the  $(DechoN "$p_path/") file from $(DechoN "$p_currentOwner") to $(DechoN "$p_newOwner")."
+            EchoNewstep "Changing the ownership rights of the  $(DechoHighlight "$p_path/") file from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")."
             Newline
 
             # Changing ownership
             if chown -v "$p_newOwner" "$p_path"; then
-                EchoSuccess "The rights of the $(DechoS "$p_path") file have been successfully changed from $(DechoS "$p_currentOwner") to $(DechoS "$p_newOwner")."
+                EchoSuccess "The rights of the $(DechoHighlight "$p_path") file have been successfully changed from $(DechoHighlight "$p_currentOwner") to $(DechoHighlight "$p_newOwner")."
                 Newline
 
                 return 0
             else
-                HandleErrors "$?" "Unable to change the rights of the $(DechoE "$p_path") file !"
+                HandleErrors "$?" "Unable to change the rights of the $(DechoHighlight "$p_path") file !"
                 Newline
 
                 return 1
             fi
         else
-            HandleErrors "1" "THE $(DechoE "$p_path") FILE DOESN'T EXISTS" && return 1
+            HandleErrors "1" "THE $(DechoHighlight "$p_path") FILE DOESN'T EXISTS" && return 1
         fi
     fi
 }
