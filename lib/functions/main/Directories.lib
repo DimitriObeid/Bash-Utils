@@ -169,9 +169,12 @@ function GetDirectoryName()
     
     if [ -d "$p_path" ]; then
         shopt -s extglob            # enable +(...) glob syntax
+
         result=${p_path%%+(/)}      # trim however many trailing slashes exist
         result=${result##*/}        # remove everything before the last / that still remains
+
         echo "$dirname"
+
     else
         HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
@@ -209,11 +212,13 @@ function GetParentDirectoryName()
             HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Please check if the provided path is correct." "$p_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
         }; pwd -P )"
+
     dirname="$parent"
     
     shopt -s extglob           # enable +(...) glob syntax
     result=${dirname%%+(/)}    # trim however many trailing slashes exist
     result=${result##*/}       # remove everything before the last / that still remains
+
     echo "$dirname"
 }
 
@@ -235,6 +240,6 @@ function GetParentDirectoryPath()
 
     shopt -s extglob           # enable +(...) glob syntax
     result=${dirname%%+(/)}    # trim however many trailing slashes exist
-    echo "# Getting the name of a target directory without its path.
-$result"
+
+    echo "$result"
 }

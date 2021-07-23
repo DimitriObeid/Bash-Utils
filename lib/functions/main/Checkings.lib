@@ -24,7 +24,7 @@ function IsFloat()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
@@ -40,7 +40,7 @@ function IsFloatInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
@@ -56,7 +56,7 @@ function IsInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
@@ -76,7 +76,7 @@ function IsAlpha()
     local p_value=$1
     
     #***** Code *****
-    CheckArgs_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ [A-Z] ]]; then
         return 0
@@ -92,7 +92,7 @@ function IsAlphaNum()
     local p_value=$1
 
     #***** Code *****
-    CheckArgs_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsArgcNot0 "$p_value"
 
     if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
@@ -216,16 +216,6 @@ function CheckProjectLogStatus()
 	
 	local v_warning_array_value
 		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in $(DechoHighlight "${BASH_SOURCE[0]}"), function $(DechoHighlight "${FUNCNAME[0]}") --> $val${__BU_COLOR_RESET}"
-
-    # If the text is redirected towards the log path only, it's better to put every timer status variables values to '0'.
-    if [ "$__STAT_LOG_REDIRECT" = "true" ]; then
-        if [ "$__STAT_LOG_REDIRECT" = "log" ] && [ "$__STAT_TIME_TXT" -gt 0 ]; then
-
-            # Backup the old values to restore them when the log processing will be done.
-            local v_old_stat_time_txt="$__STAT_TIME_TXT"
-            __STAT_TIME_TXT="0"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-        fi
-    fi
     
     #**** Code *****
     CheckProjectLogPath
@@ -302,15 +292,6 @@ function CheckProjectLogStatus()
                 fi
 
             done
-
-            sleep "$__STAT_TIME_TXT"
-
-            # Restore timer status variables old values if they were modified because of the redirection to the log file only.
-            if [ "$__STAT_TIME_TXT" -eq 0 ]; then
-            
-                # Backup the old values to restore them when the log processing will be done, then check if the correct values were reassignated.
-                __STAT_TIME_TXT="$v_old_stat_time_txt"; CheckSTAT_TIME_TXT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            fi
 
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
