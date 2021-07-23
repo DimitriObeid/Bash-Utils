@@ -35,17 +35,6 @@ function TriggerRootDirWarning()
 	#***** Parameters *****
 	p_path=$1
 
-	#***** Variables *****
-#	v_root_directories=$( \/snap
-		'/' '/bin' '/boot' \
-		'/dev' '/etc' '/home' \
-		'/lib' '/lib32' '/lib64' \
-		'/libx32' '/lost+found' \
-		'/media' '/mnt' '/opt' \
-		'/proc' '/root' '/run' '/sbin' \
-		'/snap' '/srv' '/sys' \
-		'/tmp' '/usr' '/var' \)
-
 	#***** Code *****
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
@@ -58,7 +47,7 @@ function TriggerRootDirWarning()
 
 			ExitError
 		elif [ "$__STAT_OPERATE_ROOT" = "restricted" ]; then
-			EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT !!!!!!"
+			EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
 			EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			EchoWarning "Given path : $(DechoHighlight "$p_path")"
 			Newline
@@ -91,9 +80,9 @@ function CutCheck()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### "main/Directories.lib" FILE'S FUNCTION
+#### "Directories.lib" FILE'S FUNCTION
 
-## "main/Directories.lib" FILE'S FUNCTIONS - DIRECTORIES PROCESSING CATEGORY
+## "Directories.lib" FILE'S FUNCTIONS - DIRECTORIES PROCESSING CATEGORY
 
 # "ProcessingDir" function.
 function CheckArgsMain_ProcessingDir()
@@ -169,7 +158,7 @@ function CheckArgsMain_Makedir()
 
 # -----------------------------------------------
 
-## "main/Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING CATEGORY
+## "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING CATEGORY
 
 # "GetDirectoryName" function.
 function CheckArgsMain_GetDirectoryName()
@@ -178,10 +167,10 @@ function CheckArgsMain_GetDirectoryName()
     local p_path=$1         # Path of the directory to process.
 
     #***** Code *****
-    if [ -z "$p_path" ]; then
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
 
         # shellcheck disable=SC2016
-        HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "The $(DechoHighlight "${FUNCNAME[0]}") function takes a path as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+        HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "The $(DechoHighlight "${FUNCNAME[0]}") function takes a path as argument" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -192,11 +181,11 @@ function CheckArgsMain_GetDirectoryPath()
     local p_path=$1         # Path of the directory to process.
 
     #***** Code *****
-    if [ -z "$p_path" ]; then
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
 
         # shellcheck disable=SC2016
         HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "The $(ToLowercase "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight) function takes a path as argument" \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -238,7 +227,59 @@ function CheckArgsMain_GetParentDirectoryPath()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### "main/Files.lib" FILE'S FUNCTIONS
+#### "Lang.lib" FILE'S FUNCTIONS
+
+## PARSING FUNCTIONS CATEGORY
+
+#
+function CheckArgsMain_ParseCSVLang()
+{
+    #***** Parameters *****
+    local p_path=$1               # Path of the translations CSV file to parse.
+    local p_lang=$2               # Language to fetch.
+    local p_success_msg=$3        # Success message to display in the targeted language.
+    local p_error_msg=$4          # Error message to display in the targeted language.
+
+    #***** Code *****
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+
+        # shellcheck disable=SC2016
+		HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ ! -f "$p_path" ]; then
+
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_path')") PARAMETER'S VALUE IS INCORRECT" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ -z "$p_lang" ]; then
+
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_lang')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ -z "$p_success_msg" ]; then
+
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_success_msg')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ -z "$p_error_msg" ]; then
+
+		# shellcheck disable=SC2016
+		HandleErrors "1" "THE $(KeepFormating "$(CutCheck "${FUNCNAME[0]}")'s") $(DechoHighlight "$(ToLowercase '$p_error_msg')") PARAMETER HAS NO VALUE" "Please pass the path of the directory to overwrite as argument" \
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+    fi
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### "Files.lib" FILE'S FUNCTIONS
 
 ## TEXT FILE PROCESSING CATEGORY
 
