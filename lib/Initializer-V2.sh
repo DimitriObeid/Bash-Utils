@@ -238,8 +238,8 @@ if [ -f "$__INIT_LIST_FILE_PATH" ]; then
         echo >&2; exit 1
     }
 else
-    if [ ! -d "$__PROJECT_LOG_DIR_PATH" ]; then
-        mkdir -p "$__PROJECT_LOG_DIR_PATH" || {
+    if [ ! -d "$__BU_PROJECT_LOG_DIR_PATH" ]; then
+        mkdir -p "$__BU_PROJECT_LOG_DIR_PATH" || {
             echo >&2
             echo "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
         }
@@ -308,7 +308,7 @@ EchoInit
 ## CREATING NEW VARIABLES
 
 # shellcheck disable=SC2034
-__PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
+__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE"
 
 # -----------------------------------------------
 
@@ -336,12 +336,12 @@ __STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE
 
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-if [ ! -d "$__PROJECT_TMP_PATH" ]; then
-	EchoInit "$(mkdir -p "$__PROJECT_TMP_PATH")"
+if [ ! -d "$__BU_PROJECT_TMP_PATH" ]; then
+	EchoInit "$(mkdir -p "$__BU_PROJECT_TMP_PATH")"
 fi
 
-CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
-CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PATH"
+CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -350,12 +350,12 @@ CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
 EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 
 # Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
-if [ ! -f "$__PROJECT_TR_FILE_PATH" ]; then
-	touch "$__PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH file" "1"; }
+if [ ! -f "$__BU_PROJECT_TR_FILE_PATH" ]; then
+	touch "$__BU_PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH file" "1"; }
 	
-	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 else
-	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
 fi
 
 # -----------------------------------------------
@@ -369,4 +369,4 @@ fi
 # Ending the initialization process by setting its status variable's value to "false".
 __BASH_UTILS_IS_INITIALIZING="false"
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__PROJECT_NAME") !"
+HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"

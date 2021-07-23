@@ -42,7 +42,7 @@ function Decho()
         echo " ' $p_string ' "
     else
         local v_oldColor
-            v_oldColor="$__PROJECT_COLOR_CODE"
+            v_oldColor="$__BU_PROJECT_COLOR_CODE"
     fi
 
     if [ -n "$p_newColor" ] && [ "$p_newColor" = "$v_oldColor" ]; then
@@ -297,11 +297,11 @@ function EchoNewstep()
 function EchoRead()
 {
 	#***** Parameters *****
-	local p_string=$1
+	local p_string=$1      # User's keyboard input.
 	
 	#***** Code *****
-	if [ -f "$__PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
-		echo "$p_string" >> "$__PROJECT_LOG_FILE_PATH"
+	if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
+		echo "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH"
 	fi
 }
 

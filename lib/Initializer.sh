@@ -99,14 +99,14 @@ function DbgMsg()
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function MkTmpDir()
 {
-    if [ ! -d "$__PROJECT_TMP_DIR_PATH" ]; then
+    if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
         # shellcheck disable=SC2034
         __STAT_TXT_FMT="false"
         
-        mkdir -p "$__PROJECT_TMP_DIR_PATH"
+        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH"
         
-        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
-            "Please check at the mentionned line in the mentionned file." "$__PROJECT_TMP_DIR_PATH" \
+        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+            "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
 
         # shellcheck disable=SC2034
@@ -167,13 +167,13 @@ done
 ## CREATING NEW VARIABLES
 
 # shellcheck disable=SC2034
-__PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__PROJECT_FILE"
+__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE"
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-__STAT_TXT_FMT="false"; CheckProjectRelatedFile "$__PROJECT_COLOR_CODE_FILE_PATH"
+__STAT_TXT_FMT="false"; CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -212,7 +212,7 @@ MkTmpDir
 
 ## PROCESSING REMAINING DIRECTORIES AND FILES
 
-CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
+CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -222,4 +222,4 @@ CheckProjectRelatedFile "$__PROJECT_LOG_FILE_PATH"
 
 #### ENDING THE INITIALIZATION PROCESS
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__PROJECT_NAME") !"
+HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
