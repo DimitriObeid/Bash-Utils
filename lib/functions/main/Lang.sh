@@ -18,7 +18,7 @@ fi
 ## PARSING FUNCTIONS
 
 # Parsing a translations CSV file.
-function ParseCSVLang
+function ParseCSVLang()
 {
     #***** Parameters *****
     p_path=$1               # Path of the translations CSV file to parse.
