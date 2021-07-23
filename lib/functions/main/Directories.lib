@@ -129,7 +129,7 @@ function Makedir()
 		Newline
 
         mkdir -pv "$v_path"
-        HandleErrors "$?" "${FUNCNAME[0]} : THE $(DechoHighlight "$p_name") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoHighlight "$p_parent/") !" \
+        HandleErrors "$?" "${FUNCNAME[0]} : THE $(DechoHighlight "$p_name/") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(DechoHighlight "$p_parent/") !" \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
         EchoSuccess "The $(DechoHighlight "$p_name") folder was successfully created in the $(DechoHighlight "$p_parent/") folder."
         Newline
@@ -147,7 +147,7 @@ function Makedir()
 
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
 	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then
-		EchoSuccess "The $(DechoHighlight "$p_name") folder already exists in the $(DechoHighlight "$p_parent/") folder and is empty."
+		EchoSuccess "The $(DechoHighlight "$p_name/") folder already exists in the $(DechoHighlight "$p_parent/") folder and is empty."
 		Newline
 
 		return 0
