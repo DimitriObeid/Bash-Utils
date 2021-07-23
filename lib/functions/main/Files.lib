@@ -104,7 +104,7 @@ function OverwriteFile()
 		Newline
 
 		true > "$p_path"
-		HandleErrors "$?" "THE CONTENT OF THE $(DechoHighlight "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		HandleErrors "$?" "THE CONTENT OF THE $(KeepFormatting "$(DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 		EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
 		Newline
@@ -152,7 +152,7 @@ function Makefile()
         # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
         # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(DechoHighlight "$p_name") FILE CANNOT BE CREATED IN THE $(DechoHighlight "$p_parent/") PARENT FOLDER." \
+        HandleErrors "$?" "THE $(KeepFormatting "$(DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(DechoHighlight "$p_parent/")") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
         EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
@@ -192,10 +192,10 @@ function SourceFile()
         if source "$p_path"; then
             EchoSuccess "Sourced file : $(DechoS "$p_path")"
         else
-            HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(DechoHighlight "$p_path")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(KeepFormatting "$(DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        HandleErrors "1" "UNABLE TO FIND THIS FILE : $(DechoHighlight "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+        HandleErrors "1" "UNABLE TO FIND THIS FILE : $(KeepFormatting "$(DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 

@@ -81,7 +81,7 @@ function OverwriteDir()
 
             # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
             rm -rfv "${v_path/:?}/"*
-            HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(DechoHighlight "$v_path/") FOLDER." \
+            HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(KeepFormatting "$(DechoHighlight "$v_path/")") FOLDER." \
                 "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
             EchoSuccess "Deletion of the contents of the folder $(DechoHighlight "$v_path/") performed successfully"

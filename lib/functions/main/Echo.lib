@@ -350,14 +350,15 @@ function EchoWarning()
 ## TEXT FORMATTING
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
-# function KeepFormatting()
-# {
-# 	#***** Parameters *****
-# 	p_string=$1
-# 
-# 	#***** Code *****
-# 	echo "$p_string" | tr '[upper]' '[upper]'
-# }
+function KeepFormatting()
+{
+	#***** Parameters *****
+	p_string=$1
+
+	#***** Code *****
+	# echo "$p_string" | tr '[upper]' '[upper]'
+	return
+}
 
 # Print a lowercased text.
 
