@@ -274,7 +274,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n')
                             if CheckInitialization; then
-                                __INIT_STR_ARRAY+=("$p_string")
+                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -282,7 +282,7 @@ function CheckProjectLogStatus()
                             ;;
                         '')
                             if CheckInitialization; then
-                                __INIT_STR_ARRAY+=("$__TIME_DATE_DISPLAY $p_string")
+                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -302,14 +302,14 @@ function CheckProjectLogStatus()
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
                         '-n')
-                            if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
+                            if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
-                            if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
+                            if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -e "$p_string" 2>&1 | tee -a "$__PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
