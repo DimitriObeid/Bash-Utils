@@ -156,7 +156,7 @@ function CheckDirPathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        Decho_FMT_BI "<missing directory path>"
+        Decho_FMT_BoldI "<missing directory path>"
     fi
 }
 
@@ -172,7 +172,7 @@ function CheckFilePathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        Decho_FMT_BI "<missing file path>"
+        Decho_FMT_BoldI "<missing file path>"
     fi
 }
 
@@ -441,7 +441,7 @@ function CheckFmt()
 {
     if [ "$__STAT_TXT_FMT" = "true" ]; then
         # Formatting text with the tput command or directly with the backslash escapes.
-        tput $1 || echo -e "$2"
+        tput $1 || echo -e "\e[$2m"
         
         return 0
     else
