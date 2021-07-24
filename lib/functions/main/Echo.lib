@@ -134,7 +134,7 @@ function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C'; }
 function DechoWhite     { Decho "$1" "$__BU_COLOR_WHITE"        'C'; }
 function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C'; }
 
-# Easy "DechoBold()" function calls with colors.
+# Easy "Decho_FMT_B()" function calls with colors.
 function Decho_FMT_BC_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BC'; }
 function Decho_FMT_BC_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'BC'; }
 function Decho_FMT_BC_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'BC'; }
@@ -149,7 +149,7 @@ function Decho_FMT_BC_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BC'; }
 function Decho_FMT_BC_White     { Decho "$1" "$__BU_COLOR_WHITE"        'BC'; }
 function Decho_FMT_BC_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'BC'; }
 
-# Easy "DechoBoldItalic()" function calls with colors.
+# Easy "Decho_FMT_BI()" function calls with colors.
 function Decho_FMT_BCI_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BCI'; }
 function Decho_FMT_BCI_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'BCI'; }
 function Decho_FMT_BCI_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'BCI'; }
@@ -164,7 +164,7 @@ function Decho_FMT_BCI_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BCI'; 
 function Decho_FMT_BCI_White     { Decho "$1" "$__BU_COLOR_WHITE"        'BCI'; }
 function Decho_FMT_BCI_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'BCI'; }
 
-# Easy "DechoBoldItalicUnderline()" function calls with color.
+# Easy "Decho_FMT_BIU()" function calls with color.
 function Decho_FMT_BCIU_Highlight   { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'BCIU'; }
 function Decho_FMT_BCIU_Black       { Decho "$1" "$__BU_COLOR_BLACK"        'BCIU'; }
 function Decho_FMT_BCIU_Blue        { Decho "$1" "$__BU_COLOR_BLUE"         'BCIU'; }
@@ -178,7 +178,7 @@ function Decho_FMT_BCIU_Red         { Decho "$1" "$__BU_COLOR_RED"          'BCI
 function Decho_FMT_BCIU_Turquoise   { Decho "$1" "$__BU_COLOR_TURQUOISE"    'BCIU'; }
 function Decho_FMT_BCIU_Yellow      { Decho "$1" "$__BU_COLOR_YELLOW"       'BCIU'; }
 
-# Easy "DechoItalic()" function calls with colors.
+# Easy "Decho_FMT_I()" function calls with colors.
 function Decho_FMT_CI_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CI'; }
 function Decho_FMT_CI_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'CI'; }
 function Decho_FMT_CI_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'CI'; }
@@ -193,7 +193,7 @@ function Decho_FMT_CI_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'CI'; }
 function Decho_FMT_CI_White     { Decho "$1" "$__BU_COLOR_WHITE"        'CI'; }
 function Decho_FMT_CI_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'CI'; }
 
-# Easy "DechoItalicUnderline()" function calls with colors.
+# Easy "Decho_FMT_IU()" function calls with colors.
 function Decho_FMT_CIU_Highlight    { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CIU'; }
 function Decho_FMT_CIU_Black        { Decho "$1" "$__BU_COLOR_BLACK"        'CIU'; }
 function Decho_FMT_CIU_Blue         { Decho "$1" "$__BU_COLOR_BLUE"         'CIU'; }
@@ -208,7 +208,7 @@ function Decho_FMT_CIU_Turquoise    { Decho "$1" "$__BU_COLOR_TURQUOISE"    'CIU
 function Decho_FMT_CIU_White        { Decho "$1" "$__BU_COLOR_WHITE"        'CIU'; }
 function Decho_FMT_CIU_Yellow       { Decho "$1" "$__BU_COLOR_YELLOW"       'CIU'; }
 
-# Easy "DechoUnderline()" function calls with colors.
+# Easy "Decho_FMT_U()" function calls with colors.
 function Decho_FMT_CU_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'CU'; }
 function Decho_FMT_CU_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'CU'; }
 function Decho_FMT_CU_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'CU'; }
