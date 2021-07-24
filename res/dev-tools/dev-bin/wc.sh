@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1091
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
-	echo; echo "Unable to source the initializer file"; echo; exit 1
+	echo; echo -e "Unable to source the initializer file"; echo; exit 1
 fi
 
 # Sourcing the tool's source files.

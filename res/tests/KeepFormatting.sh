@@ -6,7 +6,7 @@ function KeepFormattingl
     p_string=$1
 
     #***** Code *****
-    echo "$p_string" | tr '[lower]' '[lower]'
+    echo -e "$p_string" | tr '[lower]' '[lower]'
 }
 
 function KeepFormattingU
@@ -15,11 +15,11 @@ function KeepFormattingU
 	p_string=$1
 
 	#***** Code *****
-	echo "$p_string" | tr '[upper]' '[upper]'
+	echo -e "$p_string" | tr '[upper]' '[upper]'
 }
 
 string1="Test de la fonction $(KeepFormattingl "KeepFormattingl") en LOW"
-echo "${string1,,}"
+echo -e "${string1,,}"
 
 string2="Test de la fonction $(KeepFormattingU "KeepFormattingU") EN up"
-echo "${string2^^}"
+echo -e "${string2^^}"

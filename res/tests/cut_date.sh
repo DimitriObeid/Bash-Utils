@@ -4,5 +4,5 @@ A_TEST=("[ 23-07-2021 - 12h42-16 ] test1" "[ 23-07-2021 - 12h42-16 ] test2" "[ 2
 
 for val in "${A_TEST[@]}"; do
 	v_cutstr="${val##*] }"
-	echo "$v_cutstr"
+	echo -e "$v_cutstr"
 done

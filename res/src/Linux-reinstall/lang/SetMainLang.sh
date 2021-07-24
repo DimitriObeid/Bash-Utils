@@ -16,7 +16,7 @@ function SetMainLang
         if source "$f"; then
             EchoInit "$success_msg : $f"
         else
-            echo "$f : $error_msg" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo
+            echo -e "$f : $error_msg" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"; echo
             exit 1
         fi
     done; EchoInit
@@ -35,8 +35,8 @@ case "$LANG" in
     *)
         # Else, if the detected language is not yet supported, the default language will be English.
         # As it's an important information, the "echo" command's output has to be redirected to the terminal too, no matter if
-        echo "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
-        echo "The $(basename "$0" | cut -f 1 -d '.') library language will be set in English" 2>&1 | tee -a ""
+        echo -e "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" 2>&1 | tee -a "$INITIALIZER_LOG_PATH"
+        echo -e "The $(basename "$0" | cut -f 1 -d '.') library language will be set in English" 2>&1 | tee -a ""
         
         SetLibLang "$BASH_UTILS_LANG/en" "*.en" "Unable to source this translation file" "Sourced translation file" "$LINENO"
         ;;

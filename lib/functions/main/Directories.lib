@@ -154,6 +154,19 @@ function Makedir()
     fi
 }
 
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
+# but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
+function MkTmpDir()
+{
+    local lineno="$LINENO"; if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
+        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH"
+
+        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+            "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+    fi
+}
+
 # -----------------------------------------------
 
 ## PATH PROCESSING
@@ -173,7 +186,7 @@ function GetDirectoryName()
         result=${p_path%%+(/)}      # trim however many trailing slashes exist
         result=${result##*/}        # remove everything before the last / that still remains
 
-        echo "$dirname"
+        echo -e "$dirname"
 
     else
         HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
@@ -191,7 +204,7 @@ function GetDirectoryPath()
     CheckArgsMain_GetDirectoryPath "$p_path"
 
     if [ -d "$p_path" ]; then
-        echo "$p_path"
+        echo -e "$p_path"
     else
         HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
@@ -219,7 +232,7 @@ function GetParentDirectoryName()
     result=${dirname%%+(/)}    # trim however many trailing slashes exist
     result=${result##*/}       # remove everything before the last / that still remains
 
-    echo "$dirname"
+    echo -e "$dirname"
 }
 
 # Getting parent folder's path from the root directory, then printing it
@@ -241,5 +254,5 @@ function GetParentDirectoryPath()
     shopt -s extglob           # enable +(...) glob syntax
     result=${dirname%%+(/)}    # trim however many trailing slashes exist
 
-    echo "$result"
+    echo -e "$result"
 }

@@ -6,12 +6,12 @@ function SetLibLang
     case "$LANG" in
         en_*)
             # English
-            ParseCSVLibLang "$LANG" "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "$LANG" "In $(Decho -e "${BASH_SOURCE[0]}"), line $(Decho -e "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
         fr_*)
             # French
-            ParseCSVLibLang "$LANG" "Dans le fichier $(Decho "${BASH_SOURCE[0]}"), à la ligne $(Decho "$lineno") --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
+            ParseCSVLibLang "$LANG" "Dans le fichier $(Decho -e "${BASH_SOURCE[0]}"), à la ligne $(Decho -e "$lineno") --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
                 "Fichier de traduction trouvé : $LIBLANG_TRANSLATION_FILE"
             ;;
         *)
@@ -20,7 +20,7 @@ function SetLibLang
             EchoInit "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
             EchoInit "The $PROJECT_NAME library language will be set in English" "1"
 
-            ParseCSVLibLang "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "In $(Decho -e "${BASH_SOURCE[0]}"), line $(Decho -e "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
     esac

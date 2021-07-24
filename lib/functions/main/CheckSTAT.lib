@@ -2,9 +2,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !"; echo
-    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
-    echo "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !"; echo
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo -e "Use this script only by sourcing it in your project script."; echo
 
     exit 1
 fi
@@ -36,15 +36,15 @@ function ConfEcho()
 
     #***** Code *****
     echo >&2; echo -n "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB In ${__BU_COLOR_HIGHLIGHT}$p_file${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> " >&2
-    echo "Error : the ${__BU_COLOR_HIGHLIGHT}$p_varVal${__BU_COLOR_ERROR} variable's value is incorrect.${__BU_COLOR_RESET}" >&2
+    echo -e "Error : the ${__BU_COLOR_HIGHLIGHT}$p_varVal${__BU_COLOR_ERROR} variable's value is incorrect.${__BU_COLOR_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
-        echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value :${__BU_COLOR_YELLOW} An empty string.${__BU_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value :${__BU_COLOR_YELLOW} An empty string.${__BU_COLOR_RESET}" >&2
     else
-        echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value : ${__BU_COLOR_HIGHLIGHT}$p_badVal.${__BU_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value : ${__BU_COLOR_HIGHLIGHT}$p_badVal.${__BU_COLOR_RESET}" >&2
     fi
 
-    echo >&2; echo "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB The allowed values are :${__BU_COLOR_RESET}" >&2
+    echo >&2; echo -e "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB The allowed values are :${__BU_COLOR_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
     for val in "${p_array[@]}"; do
@@ -77,7 +77,7 @@ function CheckSTAT_DEBUG()
 
     #***** Code *****
     if [ "$__STAT_DEBUG" != "true" ] && [ "$__STAT_DEBUG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${a_array[@]}"
     fi
 }
 
@@ -93,7 +93,7 @@ function CheckSTAT_ERROR()
 
     #***** Code *****
     if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" != "fatal" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${a_array[@]}"
     fi
 }
 
@@ -109,7 +109,7 @@ function CheckSTAT_EXIT_CODE()
 
     #***** Code *****
     if ! IsInt "$__STAT_EXIT_CODE"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${a_array[@]}"
     fi
 }
 
@@ -125,7 +125,7 @@ function CheckSTAT_LOG()
 
     #***** Code *****
     if [ "$__STAT_LOG" != "true" ] && [ "$__STAT_LOG" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${a_array[@]}"
 
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         
@@ -135,12 +135,12 @@ function CheckSTAT_LOG()
             # as the text display in this condition is managed by the "CheckProjectLogStatus()" function.
 			EchoNewstep "Creating the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder."
 
-			mkdir -pv "$__BU_PROJECT_LOG_DIR_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__BU_PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
+			mkdir -pv "$__BU_PROJECT_LOG_DIR_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__BU_PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 		fi
 
-		echo "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_NEWSTEP} file.${BU_COLOR_RESET}"
+		echo -e "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_NEWSTEP} file.${BU_COLOR_RESET}"
 
-		touch "$__BU_PROJECT_LOG_FILE_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__BU_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
+		touch "$__BU_PROJECT_LOG_FILE_PATH" || { __STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__BU_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 
 		if CheckInitialization; then
             # shellcheck disable=SC2034
@@ -193,7 +193,7 @@ function CheckSTAT_LOG_REDIRECT()
 
     #***** Code *****
     if [ -n "$__STAT_LOG_REDIRECT" ] && [ "$__STAT_LOG_REDIRECT" != 'log' ] && [ "$__STAT_LOG_REDIRECT" != 'tee' ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${a_array[@]}"
     fi
 }
 
@@ -209,7 +209,7 @@ function CheckSTAT_OPERATE_ROOT()
 
 	#***** Code *****
 	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] && [ "$__STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
-		ConfEcho "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${a_array[@]}"
+		Confecho -e "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${a_array[@]}"
 	fi
 }
 
@@ -226,7 +226,7 @@ function CheckSTAT_TIME_TXT()
     #***** Code *****
     # If the status variable's value is not a float or an integer.
     if ! IsFloatInt "$__STAT_TIME_TXT"; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${a_array[@]}" >&2
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${a_array[@]}" >&2
     fi
 }
 
@@ -242,7 +242,7 @@ function CheckSTAT_TXT_FMT()
 
     #***** Code *****
     if [ "$__STAT_TXT_FMT" != "true" ] && [ "$__STAT_TXT_FMT" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__STAT_TXT_FMT" '__STAT_TXT_FMT' "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_TXT_FMT" '__STAT_TXT_FMT' "${a_array[@]}"
     fi
 }
 # Checking the "$__STAT_USER_OS" status variable's value.

@@ -2,9 +2,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !"; echo
-    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
-    echo "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !"; echo
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo -e "Use this script only by sourcing it in your project script."; echo
 
     exit 1
 fi
@@ -148,12 +148,6 @@ function CheckInitialization()
 
 ## DIRECTORIES PATHS CHECKING
 
-# 
-
-# -----------------------------------------------
-
-## FILE PATHS CHECKING
-
 # Checking for an existent directory path (for the "HandleErrors()" function mainly).
 function CheckDirPathExists()
 {
@@ -165,6 +159,10 @@ function CheckDirPathExists()
         Decho_FMT_BI "<missing directory path>"
     fi
 }
+
+# -----------------------------------------------
+
+## FILE PATHS CHECKING
 
 # Checking for an existent file path (for the "HandleErrors()" function mainly).
 function CheckFilePathExists()
@@ -185,14 +183,14 @@ function CheckProjectLogPath()
 {
     if [ -z "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
-        echo "Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -e "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo -e "Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
     elif [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
-        echo "Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -e "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo -e "Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
     fi
@@ -238,14 +236,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
+                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
                             fi
                             ;;
                         '')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
+                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
                             fi
                             ;;
                     esac
@@ -257,14 +255,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                     esac
@@ -275,19 +273,19 @@ function CheckProjectLogStatus()
                         '-n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                     esac
@@ -307,14 +305,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                     esac
@@ -327,7 +325,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -ne "$p_string"
-                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         fi
                         ;;
                     '')
@@ -335,7 +333,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -e "$p_string"
-                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         fi
                         ;;
                     esac
@@ -347,19 +345,19 @@ function CheckProjectLogStatus()
                         '-n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                         '')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
                     esac
@@ -382,6 +380,36 @@ function CheckProjectLogStatus()
 
         sleep "$__STAT_TIME_TXT"
 	fi
+}
+
+# Check project related file presence, or create this file.
+function CheckProjectRelatedFile()
+{
+	#***** Parameters *****
+	p_path=$1
+
+	#***** Code *****
+	if [ -f "$p_path" ]; then
+        if [ -s "$p_path" ]; then
+            true > "$p_path"
+        fi
+    else
+        if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
+            EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
+
+            mkdir -p "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+
+            EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
+        fi
+
+        EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
+
+        touch "$p_path"
+
+        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            
+        EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
+    fi
 }
 
 # -----------------------------------------------
@@ -412,6 +440,9 @@ function CheckDecho()
 function CheckFmt()
 {
     if [ "$__STAT_TXT_FMT" = "true" ]; then
+        # Formatting text with the tput command or directly with the backslash escapes.
+        tput $1 || echo -e "$2"
+        
         return 0
     else
         return 1

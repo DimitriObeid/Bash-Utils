@@ -5,10 +5,10 @@
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 # shellcheck disable=SC1090
-source "$HOME/.bash_profile" || { echo >&2; echo "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
+source "$HOME/.bash_profile" || { echo >&2; echo -e "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_LIB_FILE_INITIALIZER" || { echo >&2; echo "Unable to source the '$__BASH_UTILS/Initializer.sh' file" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 
@@ -65,11 +65,11 @@ else
 
 	#***** Asking for the new document's path.
 	EchoNewstep "What kind of document do you want to write ?"
-	EchoMsg "1 - Master documentation			$(DechoGreen "Targeted folder") --> $(Decho "$__path_Bash")"
-	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_config")"
-	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_basis_functions")"
-	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_main_functions")"
-	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_variables")"
+	EchoMsg "1 - Master documentation			$(DechoGreen "Targeted folder") --> $(Decho -e "$__path_Bash")"
+	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho -e "$__path_config")"
+	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho -e "$__path_basis_functions")"
+	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho -e "$__path_main_functions")"
+	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho -e "$__path_variables")"
 	Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code

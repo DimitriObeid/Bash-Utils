@@ -2,12 +2,12 @@
 
 function funcname1
 {
-	echo "$1"
+	echo -e "$1"
 }
 
 function funcname0
 {
-	echo "${FUNCNAME[0]}"
+	echo -e "${FUNCNAME[0]}"
 	funcname1 "${FUNCNAME[1]}"
 }
 

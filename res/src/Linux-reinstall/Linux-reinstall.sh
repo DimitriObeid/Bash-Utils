@@ -22,12 +22,12 @@
 # shellcheck disable=SC1090
 # shellcheck disable=SC1091
 if ! source "$HOME/.bash_profile"; then
-    echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the ~/.bash_profile file." >&2; echo >&2; exit 1
+    echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the ~/.bash_profile file." >&2; echo >&2; exit 1
 fi
 
 # shellcheck disable=SC1091
 if ! source "$__BASH_UTILS_LIB_FILE_INITIALIZER"; then
-    echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1
+    echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1
 fi
 
 # -----------------------------------------------
@@ -35,9 +35,9 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall's sub-folders paths
-__LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__BU_PROJECT_FILE")/install/categories"
-__LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__BU_PROJECT_FILE")/lang"
-__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_PROJECT_FILE")/variables"
+__LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__BU_PROJECT_NAME")/install/categories"
+__LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__BU_PROJECT_NAME")/lang"
+__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_PROJECT_NAME")/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
 EchoNewstep "IN $(DechoN "$__BU_PROJECT_FILE"), LINE $(DechoN "$LINENO") : CHECKING FOR ${__BU_PROJECT_NAME^^}'S SUB-FOLDERS"
@@ -110,11 +110,11 @@ function CheckArgs
 
             # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
             # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
-            echo "    sudo $0 \$installation" >&2
+            echo -e "    sudo $0 \$installation" >&2
             Newline >&2
 
             EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande."
-            echo "    $0 \$installation" >&2
+            echo -e "    $0 \$installation" >&2
 
             HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
                 "Relancez le script avec les droits de super-utilisateur (avec la commande $(DechoE "sudo")) ou en vous connectant en super-utilisateur." \
@@ -124,7 +124,7 @@ function CheckArgs
     # If the mandatory username argument is not passed.
     local lineno=$LINENO; if [ -z "$__ARG_USERNAME" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
-        echo "    sudo $0 \$username" >&2
+        echo -e "    sudo $0 \$username" >&2
         Newline >&2
         
         exit 1
@@ -133,7 +133,7 @@ function CheckArgs
 	# If the mandatory installation type argument is not passed.
 	local lineno=$LINENO; if [ -z "$__ARG_INSTALL" ]; then
         EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
-        echo "    sudo $0 \$username" >&2
+        echo -e "    sudo $0 \$username" >&2
         Newline >&2
         
         HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
@@ -167,7 +167,7 @@ function CheckArgs
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
 	if [ "$__STAT_DEBUG" = "true" ]; then
-		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
+		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho -e "true")"
 		Newline
 
 		# The name of the log file is redefined, THEN we redefine the path,
@@ -175,9 +175,9 @@ function CheckArgs
 		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called,
 		# because the "$PROJECT_LOG_NAME" stored in the former "$$PROJECT_LOG_PATH" is the former one (its value was not updated).
 		__BU_PROJECT_LOG_FILE_NAME_OLD="$__BU_PROJECT_LOG_FILE_NAME"
-		echo "$__BU_PROJECT_LOG_FILE_NAME_OLD"
+		echo -e "$__BU_PROJECT_LOG_FILE_NAME_OLD"
 		__BU_PROJECT_LOG_FILE_NAME="$__BU_PROJECT_NAME - DEBUG.log"
-    		echo "$__BU_PROJECT_LOG_FILE_NAME"
+    		echo -e "$__BU_PROJECT_LOG_FILE_NAME"
 
 		__BU_PROJECT_LOG_FILE_PATH="$__BU_PROJECT_LOG_DIR_PATH/$__BU_PROJECT_LOG_FILE_NAME"
 		
@@ -346,21 +346,21 @@ function SetSudo
 
 	EchoNewstep "Le script va tenter de télécharger un fichier $(DechoN "sudoers") déjà configuré"
 	EchoNewstep "depuis le dossier des fichiers ressources de mon dépôt Git :"
-	echo ">>>> https://github.com/DimitriObeid/Linux-reinstall/tree/Beta/Ressources"
+	echo -e ">>>> https://github.com/DimitriObeid/Linux-reinstall/tree/Beta/Ressources"
 	Newline
 
 	EchoNewstep "Souhaitez vous le télécharger PUIS l'installer maintenant dans le dossier $(DechoN "/etc/") ? (oui/non)"
 	Newline
 
-	echo ">>>> REMARQUE : Si vous disposez déjà des droits de super-utilisateur, ce n'est pas la peine de le faire !"
-	echo ">>>> Si vous avez déjà un fichier sudoers modifié, une sauvegarde du fichier actuel sera effectuée dans le même dossier,"
-	echo "	tout en arborant sa date de sauvegarde dans son nom (par exemple :$COL_CYAN sudoers - $TIME_DATE.old $COL_RESET)."
+	echo -e ">>>> REMARQUE : Si vous disposez déjà des droits de super-utilisateur, ce n'est pas la peine de le faire !"
+	echo -e ">>>> Si vous avez déjà un fichier sudoers modifié, une sauvegarde du fichier actuel sera effectuée dans le même dossier,"
+	echo -e "	tout en arborant sa date de sauvegarde dans son nom (par exemple :$COL_CYAN sudoers - $TIME_DATE.old $COL_RESET)."
 	Newline
 
 	function ReadSetSudo
 	{
 		read -rp "Entrez votre réponse : " rep_set_sudo
-		echo "$rep_set_sudo" >> "$__BU_PROJECT_LOG_FILE_PATH"
+		echo -e "$rep_set_sudo" >> "$__BU_PROJECT_LOG_FILE_PATH"
 		Newline
 
 		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
@@ -511,7 +511,7 @@ EOF
     # Mise à jour du fichier de configuration "~/.bashrc" et vérification de l'application de la modification de la variable d'environnement
     # shellcheck disable=SC1090
     source "$DIR_HOME/.bashrc"
-    echo "$PATH" | grep "$envpath"
+    echo -e "$PATH" | grep "$envpath"
     
     HandleErrors "$?" "LA VARIABLE D'ENVIRONNEMENT $(DechoE "\$PATH") N'A PAS ÉTÉ MODIFÉE" \
         "Échec de l'installation de Laravel." "$lineno"
@@ -566,7 +566,7 @@ function Autoremove
 	function ReadAutoremove
 	{
 		read -rp "Entrez votre réponse : " rep_autoremove
-		echo "$rep_autoremove" >> "$__BU_PROJECT_LOG_FILE_PATH"
+		echo -e "$rep_autoremove" >> "$__BU_PROJECT_LOG_FILE_PATH"
 		Newline
 
 		case ${rep_autoremove,,} in
@@ -618,7 +618,7 @@ function IsInstallationDone
 	Newline
 
 	read -rp "Entrez votre réponse : " rep_erase_tmp
-	echo "$rep_erase_tmp" >> "$__BU_PROJECT_LOG_FILE_PATH"
+	echo -e "$rep_erase_tmp" >> "$__BU_PROJECT_LOG_FILE_PATH"
     Newline
 
 	case ${rep_erase_tmp,,} in
@@ -649,9 +649,9 @@ function IsInstallationDone
     EchoSuccess "Installation terminée. Votre distribution Linux est prête à l'emploi."
 	Newline
 
-	echo "$(Decho "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
-	echo "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
-	echo "Il porte le nom de $(Decho "$__BU_PROJECT_LOG_FILE_NAME")."
+	echo -e "$(Decho -e "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
+	echo -e "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
+	echo -e "Il porte le nom de $(Decho -e "$__BU_PROJECT_LOG_FILE_NAME")."
 	Newline
 
     # On tue le processus de connexion en mode super-utilisateur.

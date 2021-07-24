@@ -9,9 +9,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !" >&2; echo >&2
-    echo "This script is not meant to be executed directly !" >&2
-    echo "Use this script only by sourcing it in your project script." >&2; echo >&2
+    echo -e "WARNING !" >&2; echo >&2
+    echo -e "This script is not meant to be executed directly !" >&2
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
 
     exit 1
 fi
@@ -27,47 +27,17 @@ function CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
 		printf "BASH-UTILS ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2
-		echo "This Bash library requires at least the Bash version 4.0.0" >&2
+		echo -e "This Bash library requires at least the Bash version 4.0.0" >&2
 		echo >&2
 
-		echo "Your Bash version is : $BASH_VERSION" >&2
+		echo -e "Your Bash version is : $BASH_VERSION" >&2
 		echo >&2
 
-		echo "Please install at least the Bash version 4.0.0 to use this library"
+		echo -e "Please install at least the Bash version 4.0.0 to use this library"
 		echo >&2
 
 		exit 1
 	fi
-}
-
-# Check project related file presence, or create this file.
-function CheckProjectRelatedFile()
-{
-	#***** Parameters *****
-	p_path=$1
-
-	#***** Code *****
-	if [ -f "$p_path" ]; then
-        if [ -s "$p_path" ]; then
-            true > "$p_path"
-        fi
-    else
-        if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
-            EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
-
-            mkdir -p "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-
-            EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
-        fi
-
-        EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
-
-        touch "$p_path"
-
-        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-            
-        EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
-    fi
 }
 
 # Use this function to have a better view about a bug location during a "bash -x" debug.
@@ -95,25 +65,6 @@ function DbgMsg()
     fi
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
-# but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-function MkTmpDir()
-{
-    if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
-        # shellcheck disable=SC2034
-        __STAT_TXT_FMT="false"
-        
-        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH"
-        
-        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
-            "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO ))"
-
-        # shellcheck disable=SC2034
-        __STAT_TXT_FMT="true"
-    fi
-}
-
 # Printing an error message if a file cannot be sourced.
 function InitializerSourcingFailure()
 {
@@ -121,7 +72,7 @@ function InitializerSourcingFailure()
     p_path=$1               # Path of the file that cannot be sourced.
 
     #***** Code *****
-    echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THIS FILE --> $p_path" >&2; echo >&2; exit 1
+    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THIS FILE --> $p_path" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -166,9 +117,6 @@ done
 
 ## CREATING NEW VARIABLES
 
-# shellcheck disable=SC2034
-__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE"
-
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
@@ -206,7 +154,13 @@ __STAT_TXT_FMT="true";          CheckSTAT_TXT_FMT       "$(basename "${BASH_SOUR
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
+# shellcheck disable=SC2034
+__STAT_TXT_FMT="false"
+
 MkTmpDir
+
+# shellcheck disable=SC2034
+__STAT_TXT_FMT="true"
 
 # -----------------------------------------------
 

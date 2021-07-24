@@ -11,7 +11,7 @@ function GetWCLinesNumber
 
     #***** Code *****
     lines_number_proj=$(wc -c "$PROJECT_PATH")
-    echo "Number of lines in $(Decho "$PROJECT_PATH") : $lines_proj"; echo ll
+    echo -e "Number of lines in $(Decho -e "$PROJECT_PATH") : $lines_proj"; echo ll
     lines_number=$(( lines_number+lines_number_proj ))
 
     for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
@@ -19,11 +19,11 @@ function GetWCLinesNumber
 
         lines_number_basis_tmp="$(wc -c "$f")"
 
-		echo "Number of lines in $(Decho "$f") : $lines_number_basis_tmp"
+		echo -e "Number of lines in $(Decho -e "$f") : $lines_number_basis_tmp"
 		lines_number_basis=$(( lines_number_basis+lines_number_basis_tmp )); echo
 	done
 
-	echo "Total number of lines in the basis functions files : $lines_basis"; echo
+	echo -e "Total number of lines in the basis functions files : $lines_basis"; echo
 	lines_number=$(( lines_number+lines_number_basis ))
 
     for f in "$BASH_UTILS_FUNCTS/"*.lib; do
@@ -31,11 +31,11 @@ function GetWCLinesNumber
 
         lines_number_functs_tmp="$(wc -c "$f")"
 
-        echo "Number of lines in $(Decho "$f") : $lines_number_basis_tmp"
+        echo -e "Number of lines in $(Decho -e "$f") : $lines_number_basis_tmp"
         lines_number_functs=$(( lines_number_functs+lines_number_functs_tmp )); echo
     done
 
-	echo "Total number of lines in the main functions files : $lines_functs"; echo
+	echo -e "Total number of lines in the main functions files : $lines_functs"; echo
     lines_number=$(( lines_number+lines_number_functs ))
 
     for f in "$BASH_UTILS_VARS/"*.lib; do
@@ -43,12 +43,12 @@ function GetWCLinesNumber
 
         line_number_vars_tmp="$(wc -c "$f")"
 
-        echo "Number of lines in $(Decho "$f") $lines_vars_tmp"        
+        echo -e "Number of lines in $(Decho -e "$f") $lines_vars_tmp"        
         lines_vars=$(( lines+line_number_vars_tmp )); echo
     done
     
-    echo "Total number of lines in the variables files : $lines_vars"; echo
+    echo -e "Total number of lines in the variables files : $lines_vars"; echo
     lines=$(( lines+lines_vars )); echo
     
-    echo "Total number of lines in the project and the library : $lines"; echo
+    echo -e "Total number of lines in the project and the library : $lines"; echo
 }

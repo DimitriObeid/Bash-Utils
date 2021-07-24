@@ -4,9 +4,9 @@ LIBLANG_TRANSLATION_FILE="$BASH_UTILS_LANG/lang.csv"
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !"; echo
-    echo "This script is not meant to be executed directly."
-    echo "Use this script only by sourcing it the initializer script."; echo
+    echo -e "WARNING !"; echo
+    echo -e "This script is not meant to be executed directly."
+    echo -e "Use this script only by sourcing it the initializer script."; echo
 
     exit 1
 fi
@@ -25,7 +25,7 @@ function ParseCSVLibLang
     # Since the library files are sourced before the language's definition, it's possible to
     # call some functions which does not display messages accroding to the user's language.
     EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"; EchoInit
-    EchoInit "In $(Decho ${BASH_SOURCE[0]}), line $(Decho "$LINENO") : DEFINING BASH-UTILS LIBRARY LANGUAGE"
+    EchoInit "In $(Decho ${BASH_SOURCE[0]}), line $(Decho -e "$LINENO") : DEFINING BASH-UTILS LIBRARY LANGUAGE"
     EchoInit "Setting language"
     EchoInit
     
@@ -52,7 +52,7 @@ function ParseCSVLibLang
 
         exit 1
     elif test "$?" -eq 2; then
-        EchoInit "CSV parsing error : the $(Decho "lang.csv") file was not found" "1";
+        EchoInit "CSV parsing error : the $(Decho -e "lang.csv") file was not found" "1";
         EchoInit "" "1"
         
         EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
@@ -60,7 +60,7 @@ function ParseCSVLibLang
         exit 1
     elif test "$?" -eq 3; then
     # Renvoyer l'index de la colonne et celui de la ligne de la cellule où l'erreur s'est produite via un fichier dans lequel ces informations ont été renvoyées.
-        EchoInit "CSV parsing error : the value stored in the $(Decho "X"), $(Decho "Y") cell is invalid" "1";
+        EchoInit "CSV parsing error : the value stored in the $(Decho -e "X"), $(Decho -e "Y") cell is invalid" "1";
         EchoInit "" "1"
         
         EchoInit "$(DrawLine "$COL_GREEN" '"')" "2"
@@ -84,7 +84,7 @@ function ParseCSVLibLang
     fi
 
 #         ANCIEN CODE
-#         echo "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE" "1"
+#         echo -e "STILL PARSING THE CSV FILE, WAIT UNTIL IT'S DONE" "1"
 #         exit 1
 
 #     # Parser le fichier CSV contenant les traductions
@@ -95,8 +95,8 @@ function ParseCSVLibLang
 #             col_index=$(( col_index+1 ))
 # 
 #             if [ "$col_value" = "VARIABLE" ] && [ "$col_index" -eq 1 ]; then
-#                 echo "$col_value"
-#                 echo "$col_index"
+#                 echo -e "$col_value"
+#                 echo -e "$col_index"
 #             else
 #                 EchoInit "In ${BASH_SOURCE[0]}, line $LINENO --> Error : Unable to get the VARIABLE value in the $LIBLANG_TRANSLATION_FILE's FIRST line." "1"
 #                 EchoInit "Did you modified the CSV file or the script ?" "1"
@@ -109,8 +109,8 @@ function ParseCSVLibLang
         # Then, getting the language's row.
         # ÇA NE MARCHE PAS
         # for row_val in "${row_values[$row_index]}"; do
-        #       echo "$row_val"
-        #       echo "$row_index"
+        #       echo -e "$row_val"
+        #       echo -e "$row_index"
         # done
         
         # Then, reading the VARIABLE column and assign for each variable of the VARIABLE column the value of the $LANG column from the same row.
@@ -125,10 +125,10 @@ function ParseCSVLibLang
        #         if [ "$col_index" -eq 1 ]; then
        #             for row_index in "${!row_values[@]}"; do
        #                 language_val=${row_values[$row_index]}
-       #                 echo "$language_val"
+       #                 echo -e "$language_val"
        #                 
        #                 if [ "$language_val" = "$LANG" ]; then
-       #                     echo "Row $row_index, LANGUE : $LANG"
+       #                     echo -e "Row $row_index, LANGUE : $LANG"
        #                 fi
        #             done
        #         fi
@@ -146,7 +146,7 @@ function ParseCSVLibLang
    #     if source "$f"; then
    #         EchoInit "$success_msg : $f"
    #     else
-   #         echo "$f : $error_msg"; echo
+   #         echo -e "$f : $error_msg"; echo
 #
  #           exit 1
   #      fi
@@ -159,12 +159,12 @@ function SetLibLang
     case "$LANG" in
         en_*)
             # English
-            ParseCSVLibLang "$LANG" "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "$LANG" "In $(Decho -e "${BASH_SOURCE[0]}"), line $(Decho -e "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
         fr_*)
             # French
-            ParseCSVLibLang "$LANG" "Dans le fichier $(Decho "${BASH_SOURCE[0]}"), à la ligne $(Decho "$lineno") --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
+            ParseCSVLibLang "$LANG" "Dans le fichier $(Decho -e "${BASH_SOURCE[0]}"), à la ligne $(Decho -e "$lineno") --> Erreur : impossible de trouver le fichier $LIBLANG_TRANSLATION_FILE" \
                 "Fichier de traduction trouvé : $LIBLANG_TRANSLATION_FILE"
             ;;
         *)
@@ -173,7 +173,7 @@ function SetLibLang
             EchoInit "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
             EchoInit "The $PROJECT_NAME library language will be set in English" "1"
 
-            ParseCSVLibLang "In $(Decho "${BASH_SOURCE[0]}"), line $(Decho "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
+            ParseCSVLibLang "In $(Decho -e "${BASH_SOURCE[0]}"), line $(Decho -e "$lineno") --> Error : cannot find the $LIBLANG_TRANSLATION_FILE file, abort" \
                 "Translation file found : $LIBLANG_TRANSLATION_FILE"
             ;;
     esac

@@ -4,7 +4,7 @@
 # You will just have to fill the empty fields.
 
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
-    echo; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
+    echo; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file."; echo; exit 1
 fi
 
 p_path=$1		# Path of the file to create, including its name.

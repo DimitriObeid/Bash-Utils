@@ -31,7 +31,6 @@ function __ProcessingFile()
     else
         EchoWarning ""
     fi
-
 }
 
 # Separate processing steps displays from the rest of the main script between two horizontal lines.

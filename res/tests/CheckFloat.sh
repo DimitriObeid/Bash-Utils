@@ -4,15 +4,15 @@ function Check
 {
 	# Supports '+' and '-' signs
 	if [[ ! "$1" =~ ^[+-]?([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-    	echo "Test 1 : NaN"; exit 1
+    	echo -e "Test 1 : NaN"; exit 1
 	else
-		echo "Test 1 : Number"
+		echo -e "Test 1 : Number"
 	fi
 
 	if [[ ! "$1" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-		echo "Test 2 : NaN"
+		echo -e "Test 2 : NaN"
 	else
-		echo "Test 2 : Number"
+		echo -e "Test 2 : Number"
 	fi
 	echo
 }

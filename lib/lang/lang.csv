@@ -1,7 +1,7 @@
 VARIABLE,COMMENTS,MESSAGE, en, fr
-MSG_INITEND_END_OF_LIB_INIT,Bash-utils/src/Initializer.sh,None,"END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho ""${PROJECT_NAME^^}"")'S PROJECT RESOURCES NOW","FIN DE L’INITIALISATION DE LA LIBRAIRIE, TRAITEMENT DU PROJET $(Decho ""${PROJECT_NAME^^}"")"
-MSG_INITEND_SOURCE_PROJECT_CONF_FAIL,Bash-utils/src/Initializer.sh,None,"In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $(Decho ""$PROJECT_NAME"")'s file variables status configuration file.","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO => Erreur : impossible de sourcer le fichier de configuration des variables de statut du projet $(Decho ""$PROJECT_NAME"")."
-MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS,Bash-utils/src/Initializer.sh,None,"Successfully sourced the $(Decho ""$PROJECT_NAME"")'s file variables status configuration file.","Le fichier de configuration des variables de statut du projet $(Decho ""$PROJECT_NAME"") a été sourcé avec succès."
+MSG_INITEND_END_OF_LIB_INIT,Bash-utils/src/Initializer.sh,None,"END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho -e ""${PROJECT_NAME^^}"")'S PROJECT RESOURCES NOW","FIN DE L’INITIALISATION DE LA LIBRAIRIE, TRAITEMENT DU PROJET $(Decho -e ""${PROJECT_NAME^^}"")"
+MSG_INITEND_SOURCE_PROJECT_CONF_FAIL,Bash-utils/src/Initializer.sh,None,"In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $(Decho -e ""$PROJECT_NAME"")'s file variables status configuration file.","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO => Erreur : impossible de sourcer le fichier de configuration des variables de statut du projet $(Decho -e ""$PROJECT_NAME"")."
+MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS,Bash-utils/src/Initializer.sh,None,"Successfully sourced the $(Decho -e ""$PROJECT_NAME"")'s file variables status configuration file.","Le fichier de configuration des variables de statut du projet $(Decho -e ""$PROJECT_NAME"") a été sourcé avec succès."
 /,/,,/,/
 MSG_DIR_PROCESSING_BEGIN,"Directories.lib ==> ""ProcessingDir"" function",Newstep,"Processing the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent"").","Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
 MSG_DIR_PROCESSING_END_FAIL,"Directories.lib ==> ""ProcessingDir"" function",Error,"End of processing the $(DechoE ""$path/"") folder.","Fin du traitement du dossier $(DechoE ""$path/"")."
@@ -45,7 +45,7 @@ MSG_HANDLES_ROOTEUID_FAIL,"Handles.lib ==> ""CheckRootEUID"" function",Error,Err
 /,/,,/,/
 MSG_HANDLES_LOG_PATH_FAIL,"Handles.lib ==> ""CheckProjectLogPath"" function",Error,Error : no path provided into the PROJECT_LOG_PATH variable.,Erreur : Aucun chemin fourni dans la variable PROJECT_LOG_PATH.
 /,/,,/,/
-MSG_HANDLES_LOG_STATUS_FAIL_LOCATION,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,"In ${BASH_UTILS[0]}, line $(Decho ""$LINENO"") ==>","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO ==>"
+MSG_HANDLES_LOG_STATUS_FAIL_LOCATION,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,"In ${BASH_UTILS[0]}, line $(Decho -e ""$LINENO"") ==>","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO ==>"
 MSG_HANDLES_LOG_STATUS,"Handles.lib ==> ""CheckProjectLogStatus"" function",,,
 MSG_HANDLES_LOG_STATUS_INVALID,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,Error : no valid write output mode defined in the PROJECT_STATUS_LOG variable.,Erreur : aucun mode d’écriture défini dans la variable PROJECT_STATUS_LOG.
 /,/,,/,/

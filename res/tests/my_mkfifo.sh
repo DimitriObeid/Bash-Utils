@@ -2,7 +2,7 @@
 
 __BU_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FIFO"
 
-function Decho { echo "$(tput setaf 6)$1$(tput sgr0)"; }
+function Decho { echo -e "$(tput setaf 6)$1$(tput sgr0)"; }
 
 # This function is called once in the next function.
 function __CreateFIFO
@@ -17,7 +17,7 @@ function __CreateFIFO
     for val in "${arr[@]}"; do
         i=$(( i+1 ))
 
-        echo "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
+        echo -e "$(tput setaf 166)$i$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : $val$(tput sgr0)"
     done
 }
 
@@ -29,22 +29,22 @@ function CreateFIFO
 
     #***** Code *****
     if [ ! -d "$__BU_PROJECT_FIFO_DIR_PATH" ]; then
-        echo "Creating the $(Decho "$__BU_PROJECT_FIFO_DIR_PATH")"; echo
+        echo -e "Creating the $(Decho -e "$__BU_PROJECT_FIFO_DIR_PATH")"; echo
         mkdir -pv "$__BU_PROJECT_FIFO_DIR_PATH"
     fi
     
-    echo "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
+    echo -e "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
     echo
     
     if [ ! -p "$p_path" ]; then
         if mkfifo "$p_path"; then
-            echo "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
+            echo -e "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
             echo
         else
-            echo "Error : Unable to create this FIFO --> $(Decho "$p_path")"
+            echo -e "Error : Unable to create this FIFO --> $(Decho -e "$p_path")"
         fi
     else
-        echo "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-1 ))"
+        echo -e "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-1 ))"
     fi
 }
 
@@ -70,17 +70,17 @@ function ReadFromFIFO
     v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
 
     #***** Code *****
-    echo "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value." 
+    echo -e "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value." 
     echo
         
     while true; do
         if read -r line < "$p_fifoPath"; then
             if [[ "$line" == "$v_varLine" ]]; then
                 # Gathering the wanted value
-                echo "$p_newVar"
+                echo -e "$p_newVar"
                 break
             else
-                echo "${FUNCNAME[0]} --> Error : the $(Decho "$v_varLine") string was not found in the $(Decho "$p_fifoPath") FIFO" >&2
+                echo -e "${FUNCNAME[0]} --> Error : the $(Decho -e "$v_varLine") string was not found in the $(Decho -e "$p_fifoPath") FIFO" >&2
                 kill "$$"
             fi
         fi
@@ -114,11 +114,11 @@ function WriteIntoFIFO
             
             # As this function is called by the functions called in the "HandleErrors" function, calling this last function will cause an infinite loop
             # Redefining a part of its behavior was necessary to prevent this situation.
-            echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
-            echo "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
+            echo -e "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
+            echo -e "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"
             echo
 
-            echo ""
+            echo -e ""
         fi
     fi
     # If the file size is equal to 0 (empty file)
@@ -131,10 +131,10 @@ EOF
 }
 
 CreateFIFO "$__BU_PROJECT_FIFO_DIR_PATH/test1"
-echo "//////////////////////////////////////////////////////////////////////////////////////////////////"
+echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"
 
 WriteIntoFIFO "$__BU_PROJECT_FIFO_DIR_PATH/test1" "COLOR" "6" ""
-echo "//////////////////////////////////////////////////////////////////////////////////////////////////"
+echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"
 
 ReadFromFIFO "$__BU_PROJECT_FIFO_DIR_PATH/test1" "COLOR" ""
-echo "//////////////////////////////////////////////////////////////////////////////////////////////////"
+echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"

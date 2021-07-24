@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1091
 if ! source "install_functions.sh"; then
-    echo >&2; echo "Unable to source the  \"install_functions.sh\"  file." >&2; echo >&2; exit 1
+    echo >&2; echo -e "Unable to source the  \"install_functions.sh\"  file." >&2; echo >&2; exit 1
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -23,7 +23,7 @@ elif ! id -u "$__ARG_USERNAME"; then
     exit 1
 fi
 
-echo "INSTALLING THE  \"Bash-utils\"  LIBRARY !" "I" ""
+echo -e "INSTALLING THE  \"Bash-utils\"  LIBRARY !" "I" ""
 echo
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -57,7 +57,7 @@ if [ -z "$path" ]; then
 
     source "$HOME/.bash_profile"
 elif [ -d "$path" ]; then
-    echo "__BASH_UTILS_ROOT=\"$path\""
+    echo -e "__BASH_UTILS_ROOT=\"$path\""
     source "$HOME/.bash_profile"
 else
     

@@ -9,9 +9,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !"; echo
-    echo "This script is not meant to be executed directly !"
-    echo "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !"; echo
+    echo -e "This script is not meant to be executed directly !"
+    echo -e "Use this script only by sourcing it in your project script."; echo
 
     exit 1
 fi
@@ -34,7 +34,7 @@ fi
 # shellcheck disable=SC1090
 source "$__BASH_UTILS_CONF/init.conf" ||
 {
-    echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/init.conf' FILE : '$__BASH_UTILS_CONF/init'" >&2
+    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/init.conf' FILE : '$__BASH_UTILS_CONF/init'" >&2
     
     if [ -z "${__BASH_UTILS_ROOT:+x}" ]; then
         echo >&2; echo 
@@ -47,7 +47,7 @@ source "$__BASH_UTILS_CONF/init.conf" ||
 # As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF/colors.conf" || { echo >&2; echo "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -88,7 +88,7 @@ function DbgMsg
 # This function is called at multiple times in the next function, to avoid changing redirection operators more than once.
 function __EchoInit
 {
-    echo "$1" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+    echo -e "$1" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
 }
 
 # Controlling all the redirections in a single place for a better debugging process.
@@ -123,7 +123,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
+    echo >&2; echo -e "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -143,13 +143,13 @@ function CheckBashMinimalVersion
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
 		echo -ne "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-1 ))${__BU_COLOR_ERROR} --> ${__BU_COLOR_RESET}" >&2
-		echo "${__BU_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
+		echo -e "${__BU_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__BU_COLOR_ERROR}Your Bash version is : ${__BU_COLOR_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
+		echo -e "${__BU_COLOR_ERROR}Your Bash version is : ${__BU_COLOR_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
 		echo >&2
 
-		echo "${__BU_COLOR_ERROR}Please install at least the ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
+		echo -e "${__BU_COLOR_ERROR}Please install at least the ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
 		echo >&2
 
 		exit 1
@@ -234,14 +234,14 @@ CheckBashMinimalVersion
 if [ -f "$__INIT_LIST_FILE_PATH" ]; then
     true > "$__INIT_LIST_FILE_PATH" || {
         echo >&2;
-        echo "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
+        echo -e "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
         echo >&2; exit 1
     }
 else
     if [ ! -d "$__BU_PROJECT_LOG_DIR_PATH" ]; then
         mkdir -p "$__BU_PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
+            echo -e "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
@@ -308,7 +308,7 @@ EchoInit
 ## CREATING NEW VARIABLES
 
 # shellcheck disable=SC2034
-__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE"
+__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE_PATH"
 
 # -----------------------------------------------
 

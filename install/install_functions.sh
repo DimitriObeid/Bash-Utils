@@ -2,9 +2,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo "WARNING !"; echo
-    echo "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
-    echo "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !"; echo
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo -e "Use this script only by sourcing it in your project script."; echo
 
     exit 1
 fi
@@ -34,7 +34,7 @@ J=0
 # Basic printing.
 function ExitInstall
 {
-    echo "Do you want to exit installation ? (yes/no)" >&2
+    echo -e "Do you want to exit installation ? (yes/no)" >&2
     
     read -r "Enter an answer : " read_exit
     
@@ -46,15 +46,15 @@ function ExitInstall
             return
             ;;
         *)
-            echo; echo "Please enter a correct answer : yes OR no"; echo
+            echo; echo -e "Please enter a correct answer : yes OR no"; echo
             ExitInstall
             ;;
     esac
 }
-function EchoError      { echo "${__COL_RED}ERROR : $1$(tput sgr0)" >&2; ExitError >&2; }
-function EchoNewSubStep { echo "${__COL_ORANGE}$1$(tput sgr0)"; }
-function EchoSuccess    { echo "${__COL_GREEN}SUCCESS : $1$(tput sgr0)" >&1; }
-function EchoWarning    { echo "${__COL_YELLOW}WARNING : $1$(tput sgr0)"; }
+function EchoError      { echo -e "${__COL_RED}ERROR : $1$(tput sgr0)" >&2; ExitError >&2; }
+function EchoNewSubStep { echo -e "${__COL_ORANGE}$1$(tput sgr0)"; }
+function EchoSuccess    { echo -e "${__COL_GREEN}SUCCESS : $1$(tput sgr0)" >&1; }
+function EchoWarning    { echo -e "${__COL_YELLOW}WARNING : $1$(tput sgr0)"; }
 
 # Line breaking
 function Newline
@@ -95,7 +95,7 @@ function EchoStep
 		EchoWarning "No values passed as second and third argument of the ${FUNCNAME[0]} function"
 	fi
 
-	echo "$__COL_PURPLE$I.$J : $__COL_ORANGE$p_str$(tput sgr0)"
+	echo -e "$__COL_PURPLE$I.$J : $__COL_ORANGE$p_str$(tput sgr0)"
 }
 
 function CheckSupportAndInstallDeps
