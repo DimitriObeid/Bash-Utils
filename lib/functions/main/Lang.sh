@@ -31,5 +31,8 @@ function ParseCSVLang()
 
     HeaderCyan "PARSING THE $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
 
-    EchoNewstep "Finding the "
+    EchoNewstep "Finding the variables list"
+    Newline
+
+    for i in 
 }
