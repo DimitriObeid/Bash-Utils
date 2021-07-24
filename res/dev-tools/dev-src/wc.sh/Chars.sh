@@ -11,7 +11,7 @@ function GetWCCharsNumber
 
     #***** Code *****
     chars_proj=$(wc -c "$PROJECT_PATH")
-    echo -e "Number of characters in $(Decho -e "$PROJECT_PATH") : $chars_proj"; echo ll
+    echo -e "Number of characters in $(Decho "$PROJECT_PATH") : $chars_proj"; echo ll
     chars=$(( chars+chars_proj ))
 
     for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
@@ -19,7 +19,7 @@ function GetWCCharsNumber
 
         chars_basis_tmp="$(wc -c "$f")"
 
-		echo -e "Number of characters in $(Decho -e "$f") : $chars_basis_tmp"
+		echo -e "Number of characters in $(Decho "$f") : $chars_basis_tmp"
 		chars_basis=$(( chars_basis+chars_basis_tmp )); echo
 	done
 
@@ -31,7 +31,7 @@ function GetWCCharsNumber
 
         chars_functs_tmp="$(wc -c "$f")"
 
-        echo -e "Number of characters in $(Decho -e "$f") : $chars_basis_tmp"
+        echo -e "Number of characters in $(Decho "$f") : $chars_basis_tmp"
         chars_functs=$(( chars_functs+chars_functs_tmp )); echo
     done
 
@@ -43,7 +43,7 @@ function GetWCCharsNumber
 
         chars_vars_tmp="$(wc -c "$f")"
 
-        echo -e "Number of characters in $(Decho -e "$f") $chars_vars_tmp"        
+        echo -e "Number of characters in $(Decho "$f") $chars_vars_tmp"        
         chars_vars=$(( chars_vars+chars_vars_tmp )); echo
     done
     

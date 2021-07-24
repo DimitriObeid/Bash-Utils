@@ -11,7 +11,7 @@ function GetWCBytes
 
     #***** Code *****
     bytes_proj=$(wc -c "$PROJECT_PATH")
-    echo -e "Size in bytes of $(Decho -e "$PROJECT_PATH") : $bytes_proj"; echo ll
+    echo -e "Size in bytes of $(Decho "$PROJECT_PATH") : $bytes_proj"; echo ll
     bytes=$(( bytes+bytes_proj ))
 
     for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
@@ -19,7 +19,7 @@ function GetWCBytes
 
         bytes_basis_tmp="$(wc -c "$f")"
 
-		echo -e "Size in bytes of $(Decho -e "$f") : $bytes_basis_tmp"
+		echo -e "Size in bytes of $(Decho "$f") : $bytes_basis_tmp"
 		bytes_basis=$(( bytes_basis+bytes_basis_tmp )); echo
 	done
 
@@ -31,7 +31,7 @@ function GetWCBytes
 
         bytes_functs_tmp="$(wc -c "$f")"
 
-        echo -e "Size in bytes of $(Decho -e "$f") : $bytes_basis_tmp"
+        echo -e "Size in bytes of $(Decho "$f") : $bytes_basis_tmp"
         bytes_functs=$(( bytes_functs+bytes_functs_tmp )); echo
     done
 
@@ -43,7 +43,7 @@ function GetWCBytes
 
         bytes_vars_tmp="$(wc -c "$f")"
 
-        echo -e "Size in bytes of $(Decho -e "$f") $bytes_vars_tmp"        
+        echo -e "Size in bytes of $(Decho "$f") $bytes_vars_tmp"        
         bytes_vars=$(( bytes_vars+bytes_vars_tmp )); echo
     done
     

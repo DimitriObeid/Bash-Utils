@@ -167,7 +167,7 @@ function CheckArgs
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
 	if [ "$__STAT_DEBUG" = "true" ]; then
-		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho -e "true")"
+		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
 		Newline
 
 		# The name of the log file is redefined, THEN we redefine the path,
@@ -649,9 +649,9 @@ function IsInstallationDone
     EchoSuccess "Installation terminée. Votre distribution Linux est prête à l'emploi."
 	Newline
 
-	echo -e "$(Decho -e "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
+	echo -e "$(Decho "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
 	echo -e "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
-	echo -e "Il porte le nom de $(Decho -e "$__BU_PROJECT_LOG_FILE_NAME")."
+	echo -e "Il porte le nom de $(Decho "$__BU_PROJECT_LOG_FILE_NAME")."
 	Newline
 
     # On tue le processus de connexion en mode super-utilisateur.

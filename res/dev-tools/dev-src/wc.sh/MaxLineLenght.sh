@@ -11,7 +11,7 @@ function GetWCMaxLineLenght
 
     #***** Code *****
     max_line_proj=$(wc -c "$PROJECT_PATH")
-    echo -e "Number of max_line of $(Decho -e "$PROJECT_PATH") : $max_line_proj"; echo ll
+    echo -e "Number of max_line of $(Decho "$PROJECT_PATH") : $max_line_proj"; echo ll
     max_line=$(( max_line+max_line_proj ))
 
     for f in "$BASH_UTILS_FUNCTS_BASIS/"*.lib; do
@@ -19,7 +19,7 @@ function GetWCMaxLineLenght
 
         max_line_basis_tmp="$(wc -c "$f")"
 
-		echo -e "Number of max_line of $(Decho -e "$f") : $max_line_basis_tmp"
+		echo -e "Number of max_line of $(Decho "$f") : $max_line_basis_tmp"
 		max_line_basis=$(( max_line_basis+max_line_basis_tmp )); echo
 	done
 
@@ -31,7 +31,7 @@ function GetWCMaxLineLenght
 
         max_line_functs_tmp="$(wc -c "$f")"
 
-        echo -e "Number of max_line of $(Decho -e "$f") : $max_line_basis_tmp"
+        echo -e "Number of max_line of $(Decho "$f") : $max_line_basis_tmp"
         max_line_functs=$(( max_line_functs+max_line_functs_tmp )); echo
     done
 
@@ -43,7 +43,7 @@ function GetWCMaxLineLenght
 
         max_line_vars_tmp="$(wc -c "$f")"
 
-        echo -e "Number of max_line of $(Decho -e "$f") $max_line_vars_tmp"        
+        echo -e "Number of max_line of $(Decho "$f") $max_line_vars_tmp"        
         max_line_vars=$(( max_line_vars+max_line_vars_tmp )); echo
     done
     

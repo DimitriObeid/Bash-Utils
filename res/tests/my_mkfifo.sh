@@ -29,7 +29,7 @@ function CreateFIFO
 
     #***** Code *****
     if [ ! -d "$__BU_PROJECT_FIFO_DIR_PATH" ]; then
-        echo -e "Creating the $(Decho -e "$__BU_PROJECT_FIFO_DIR_PATH")"; echo
+        echo -e "Creating the $(Decho "$__BU_PROJECT_FIFO_DIR_PATH")"; echo
         mkdir -pv "$__BU_PROJECT_FIFO_DIR_PATH"
     fi
     
@@ -41,7 +41,7 @@ function CreateFIFO
             echo -e "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
             echo
         else
-            echo -e "Error : Unable to create this FIFO --> $(Decho -e "$p_path")"
+            echo -e "Error : Unable to create this FIFO --> $(Decho "$p_path")"
         fi
     else
         echo -e "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-1 ))"
@@ -80,7 +80,7 @@ function ReadFromFIFO
                 echo -e "$p_newVar"
                 break
             else
-                echo -e "${FUNCNAME[0]} --> Error : the $(Decho -e "$v_varLine") string was not found in the $(Decho -e "$p_fifoPath") FIFO" >&2
+                echo -e "${FUNCNAME[0]} --> Error : the $(Decho "$v_varLine") string was not found in the $(Decho "$p_fifoPath") FIFO" >&2
                 kill "$$"
             fi
         fi
