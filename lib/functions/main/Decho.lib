@@ -78,14 +78,29 @@ function Decho()
                 echo -ne "${__BU_TXT_FMT_UNDERLINE}"
                 ;;
             *)
-                echo "Invalid value"; exit 1
+                echo -e "Invalid value"; exit 1
                 ;; 
         esac
     done
 
-    echo "$p_string$p_newcolor$__BU_TXT_RESET"
+    echo -e "$p_string$p_newcolor$__BU_TXT_RESET"
 
 }
+
+# Easy "Decho()" function calls with colors.
+function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C'; }
+function DechoBlack     { Decho "$1" "$__BU_COLOR_BLACK"        'C'; }
+function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE"         'C'; }
+function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C'; }
+function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY"         'C'; }
+function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN"        'C'; }
+function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C'; }
+function DechoPink      { Decho "$1" "$__BU_COLOR_PINK"         'C'; }
+function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C'; }
+function DechoRed       { Decho "$1" "$__BU_COLOR_RED"          'C'; }
+function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C'; }
+function DechoWhite     { Decho "$1" "$__BU_COLOR_WHITE"        'C'; }
+function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C'; }
 
 # Blink formatting.
 function Decho_FMT_Blink            { Decho "$1" "" 'Blink'; }
@@ -156,21 +171,6 @@ function Decho_FMT_IU    { Decho "$1" "" 'I' 'U';   }
 
 # Underline formatting.
 function Decho_FMT_U     { Decho "$1" "" 'U';    }
-
-# Easy "Decho()" function calls with colors.
-function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C'; }
-function DechoBlack     { Decho "$1" "$__BU_COLOR_BLACK"        'C'; }
-function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE"         'C'; }
-function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C'; }
-function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY"         'C'; }
-function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN"        'C'; }
-function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C'; }
-function DechoPink      { Decho "$1" "$__BU_COLOR_PINK"         'C'; }
-function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C'; }
-function DechoRed       { Decho "$1" "$__BU_COLOR_RED"          'C'; }
-function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C'; }
-function DechoWhite     { Decho "$1" "$__BU_COLOR_WHITE"        'C'; }
-function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C'; }
 
 # Easy "Decho_FMT_Blink()" function calls with colors.
 function Decho_FMT_Blink_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'Blink' 'C'; }
