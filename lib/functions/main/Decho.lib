@@ -32,7 +32,8 @@ function Decho()
     local p_newColor=$2
     shift 2
 
-    local pa_fmtArgs=$("$@")
+    local pa_fmtArgs
+        pa_fmtArgs=$("$@")
 
     #***** Variables *****
     local v_oldColor

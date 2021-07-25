@@ -250,7 +250,7 @@ function CheckArgsMain_GetParentDirectoryPath()
 
 ## PARSING FUNCTIONS CATEGORY
 
-#
+# Parsing a CSV file containing translations.
 function CheckArgsMain_ParseCSVLang()
 {
     #***** Parameters *****

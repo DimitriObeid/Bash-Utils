@@ -165,7 +165,7 @@ function CheckSTAT_LOG()
 		HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
 		# Getting operating system family.
-		EchoNewstep "Operating system family : $(DechoN "$OSTYPE")"
+		EchoNewstep "Operating system family : $(DechoHighlight "$OSTYPE")"
 		Newline
 
 		# Gathering OS informations from the "/etc/os-release" file.
@@ -173,7 +173,12 @@ function CheckSTAT_LOG()
 		EchoMsg "$(cat "/etc/os-release")" "" "nodate"
 		Newline
 
-		EchoNewstep "Bash version : $(DechoN "$BASH_VERSION")"
+		EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
+		Newline
+
+		local v_terminfo_v="$($(ps -p $(ps -p $$ -o ppid=) o args=) -v)"
+
+		EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")"
 		Newline
 
 		EchoSuccess "Successfully got the user's system's informations."
