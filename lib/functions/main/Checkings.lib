@@ -2,9 +2,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo -e "WARNING !"; echo
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
-    echo -e "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !" >&2; echo >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
 
     exit 1
 fi
@@ -397,7 +397,7 @@ function CheckProjectRelatedFile()
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
             EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
 
-            mkdir -p "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            Makedir "$(GetParentDirectoryPath "$p_path" '2')" "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 
             EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
         fi

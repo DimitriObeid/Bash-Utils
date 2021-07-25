@@ -2,9 +2,9 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo -e "WARNING !"; echo
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
-    echo -e "Use this script only by sourcing it in your project script."; echo
+    echo -e "WARNING !" >&2; echo >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
 
     exit 1
 fi
