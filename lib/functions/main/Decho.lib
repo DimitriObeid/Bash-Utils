@@ -57,7 +57,7 @@ function Decho()
 		tput setaf "$p_newColor"
 	fi
 
-    #***** Code *****    
+    # Setting every formattings.
     for val in "${pa_fmtArgs[@]^^}"; do
         case "$val" in
             'Blink')
@@ -79,13 +79,57 @@ function Decho()
                 echo -ne "${__BU_TXT_FMT_UNDERLINE}"
                 ;;
             *)
+                # WARNING ! Do not reset the "$__STAT_TXT_FMT" variable's value to "true", or else the program will be stuck in an infinite loop.
+
+                # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
+                # if the "$__STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+
+                local lineno="$LINENO"; __STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$lineno"
+                
+                HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
+                    "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
                 echo -e "Invalid value"; exit 1
                 ;; 
         esac
     done
 
-    echo -e "$p_string$p_newColor$__BU_TXT_RESET"
+    echo -e "$p_string$p_newColor$__BU_COLOR_RESET"
 
+    # Resetting every formattings.
+    for val in "${pa_fmtArgs[@]^^}"; do
+        case "$val" in
+            'Blink')
+                echo -ne "${__BU_TXT_FMT_BLINK_RESET}"
+                ;;  
+            'Bold')
+                echo -ne "${__BU_TXT_FMT_BOLD_RESET}"
+                ;; 
+            'D')
+                echo -ne "${__BU_TXT_FMT_DIM_RESET}"
+                ;;
+            'I')
+                echo -ne "${__BU_TXT_FMT_ITALIC_RESET}"
+                ;;
+            'S')
+                echo -ne "${__BU_TXT_FMT_STRIKETHROUGH_RESET}"
+                ;;
+            'U')
+                echo -ne "${__BU_TXT_FMT_UNDERLINE_RESET}"
+                ;;
+            *)
+                # WARNING ! Do not reset the "$__STAT_TXT_FMT" variable's value  to "true", or else the program will be stuck in an infinite loop.
+
+                # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
+                # if the "$__STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+
+                local lineno="$LINENO"; __STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$lineno"
+                
+                HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
+                    "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+                echo -e "Invalid value"; exit 1
+                ;; 
+        esac
+    done
 }
 
 # Easy "Decho()" function calls with colors.

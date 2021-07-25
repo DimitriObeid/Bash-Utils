@@ -17,7 +17,7 @@ fi
 
 ## VARIABLES
 
-__CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
+__BU_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
 
 # -----------------------------------------------
 
@@ -32,6 +32,11 @@ __CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or (
 # "TriggerRootDirWarning" function.
 function CaseRead_TriggerRootDirWarning()
 {
+    EchoWarning "Do you want to continue the script's execution ? (yes / no)"
+	read -rp "Enter your answer : " __read_TriggerRootDirWarning
+	EchoRead "$__read_TriggerRootDirWarning"
+	Newline
+
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
 		"yes")
@@ -39,15 +44,20 @@ function CaseRead_TriggerRootDirWarning()
 		"no")
 			;;
 		*)
-			EchoError "$__CASE_INVALID_ANSWER"
+			EchoError "$__BU_CASE_INVALID_ANSWER"
 			CaseRead_TriggerRootDirWarning
 			;;
 	esac
 }
 
-# "HandleErrors" function.
+# "HandleErrors" function, with the "$__STAT_CPLS" variable set to "false".
 function CaseRead_HandleErrors()
 {
+	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
+	read -rp "Enter your answer : " __read_TriggerRootDirWarning
+	EchoRead "$__read_TriggerRootDirWarning"
+    Newline
+
 	# shellcheck disable=SC2154
 	case "${__read_HandleErrors,,}" in
 		"yes")
@@ -57,8 +67,31 @@ function CaseRead_HandleErrors()
 			EchoError "Aborting the $(DechoHighlight "$__BU_PROJECT_NAME")'s execution."
 			;;
 		*)
-			EchoError "$__CASE_INVALID_ANSWER"
+			EchoError "$__BU_CASE_INVALID_ANSWER"
 			CaseRead_HandleErrors
+			;;
+	esac
+}
+
+# "HandleErrors" function, with the "$__STAT_CPLS" variable set to "true".
+function CaseRead_HandleErrorsCPLS()
+{
+	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
+	read -rp "Enter your answer : " __read_TriggerRootDirWarning
+	EchoRead "$__read_TriggerRootDirWarning"
+    Newline
+
+	# shellcheck disable=SC2154
+	case "${__read_HandleErrorsCPLS,,}" in
+		"yes")
+			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Resuming the execution of the $(DechoHighlight "$__BU_PROJECT_NAME") script." >&2s)")
+			;;
+		"no")
+			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Aborting the $(DechoHighlight "$__BU_PROJECT_NAME")'s execution." >&2)")
+			;;
+		*)
+			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_CASE_INVALID_ANSWER" >&2)")
+			CaseRead_HandleErrorsCPLS
 			;;
 	esac
 }

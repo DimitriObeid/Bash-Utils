@@ -51,11 +51,6 @@ function TriggerRootDirWarning()
 			EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			EchoWarning "Given path : $(DechoHighlight "$p_path")"
 			Newline
-				
-			EchoWarning "Do you want to continue the script's execution ? (yes / no)"
-			read -rp "Enter your answer : " __read_TriggerRootDirWarning
-			EchoRead "$__read_TriggerRootDirWarning"
-			Newline
 
 			# Calling the function that processes the given answer.
 			CaseRead_TriggerRootDirWarning

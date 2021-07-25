@@ -209,11 +209,19 @@ function CheckProjectLogStatus()
     local pa_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
+	# WARNING : DO NOT call any "Echo<...>()" function from the "main/Echo.lib" file, as they all call the "CheckProjectLogStatus()" function.
+
+	# Also, DO NOT call any "Decho<...>()" function, as they call the "HandleErrors()" function in case of a bad value passed as array of argument,
+	# which also calls this same ""CheckProjectLogStatus() function.
+
+    # If you need to call a function here, please verify if it doesn't calls the "CheckProjectLogStatus()" function,
+    # nor any function called by the function you want to add.
+
     local v_errorEcho
-		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file.${__BU_COLOR_RESET}"
-	
+		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}"
+
 	local v_warning_array_value
-		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in $(DechoHighlight "${BASH_SOURCE[0]}"), function $(DechoHighlight "${FUNCNAME[0]}") --> $val${__BU_COLOR_RESET}"
+		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"
     
     #**** Code *****
     CheckProjectLogPath
@@ -440,8 +448,8 @@ function CheckDecho()
 function CheckFmt()
 {
     #***** Parameters *****
-    #   $1  -> tput command 
-    #   $2  -> ANSI
+    #   $1  -> tput command's text formatting option.
+    #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
     #***** Code *****
     if [ "$__STAT_TXT_FMT" = "true" ]; then
@@ -450,6 +458,8 @@ function CheckFmt()
             tput "$1" || echo -ne "\e[$2m"
 
             return 0
+
+        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence
         else
             echo -ne "\e[$2m"
 
@@ -488,21 +498,22 @@ function ExitError()
 function HandleErrors()
 {
 	#***** Paramètres *****
-	local p_returnCode=$1     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
-	local p_errorString=$2    # Chaîne de caractères du type d'erreur à afficher.
-	local p_adviceString=$3   # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
-    local p_badValue=$4       # Incorrect value which caused the error.
-	local p_file=$5           # The name of the file where the error occured.
-	local p_function=$6       # The name of the function where the error occured.
-	local p_lineno=$7         # Ligne à laquelle le message d'erreur s'est produite.
+	local p_returnCode=$1      # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
+	local p_errorString=$2     # Chaîne de caractères du type d'erreur à afficher.
+	local p_adviceString=$3    # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+    local p_badValue=$4        # Incorrect value which caused the error.
+	local p_file=$5            # The name of the file where the error occured.
+	local p_function=$6        # The name of the function where the error occured.
+	local p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
+	local p_cpls=$8            
 
     #***** Variables *****
     local v_hdrString
 	
 	if [ -n "$p_function" ]; then
-		v_hdrString="$(echo -e "IN $(DechoHighlight "$p_file"), FUNCTION $(DechoHighlight "$p_function"), LINE $(DechoHighlight "$p_lineno") -->")"
+		v_hdrString="$(echo -ne "IN $(DechoHighlight "$p_file"), FUNCTION $(DechoHighlight "$p_function"), LINE $(DechoHighlight "$p_lineno") -->")"
 	else
-		v_hdrString="$(echo -e "IN $(DechoHighlight "$p_file"), LINE $(DechoHighlight "$p_lineno") -->")"
+		v_hdrString="$(echo -ne "IN $(DechoHighlight "$p_file"), LINE $(DechoHighlight "$p_lineno") -->")"
 	fi
 
 	# ***** Code *****
@@ -511,34 +522,88 @@ function HandleErrors()
 	if [ "$p_returnCode" -eq 0 ]; then
         return
     else
-        if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
-            __STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-        fi
+        # If the function needs to be called in the "CheckProjectLogStatus()" function,
+        # this status variable's value MUST be set at "true", or else the script will loop forever.
 
-        if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
-        else
-            HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
-        fi
+        # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
-        if [ -z "$p_adviceString" ]; then
-            EchoError "No advice to give."; Newline >&2
-        else
-            EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
-        fi
-            
-        if [ -z "$p_badValue" ]; then
-            EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
-        else
-            EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
-        fi
+        if [ "$__STAT_CPLS" = "true" ]; then
+            __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")")
+            __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}AN ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
 
-        if [ "$__STAT_ERROR" = "fatal" ]; then
-            EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
-            ExitError "$__STAT_EXIT_CODE"
+            if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_ERROR}$v_hdrString FATAL ERROR : ${p_errorString^^}${__BU_COLOR_RESET}" >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
+            else
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_ERROR}$v_hdrString ERROR : ${p_errorString^^}${__BU_COLOR_RESET}" >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
+            fi
+
+            if [ -z "$p_adviceString" ]; then
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "No advice to give." >&2; echo >&2)")
+            else
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Advice : $p_adviceString" >&2; echo >&2)")
+            fi
+                
+            if [ -z "$p_badValue" ]; then
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+="$(echo -e "${__BU_COLOR_ERROR}Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')$__BU_COLOR_RESET" >&2; echo -e >&2)"
+            else
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Value(s) that caused this error : $(DechoHighlight "$p_badValue")" >&2; echo -e >&2)"
+            fi
+
+            if [ "$__STAT_ERROR" = "fatal" ]; then
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Stopping the execution of $(DechoHighlight "$(basename "$0")")." >&2; echo -e >&2)"
+
+                # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
+                for val in "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY"; do
+                    CheckProjectLogPath "$val"
+                done
+
+                exit 1; kill "$$"
+            else
+
+                # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
+                for val in "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY"; do
+                    CheckProjectLogPath "$val"
+                done
+
+                # Calling the function that processes the given answer.
+                CaseRead_HandleErrorsCPLS
+
+                # Resetting the "$__STAT_CPLS" status variable.
+                __STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         else
-			# Calling the function that processes the given answer.
-			CaseRead_HandleErrors
+            if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
+                __STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            fi
+
+            if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
+                HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
+            else
+                HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
+            fi
+
+            if [ -z "$p_adviceString" ]; then
+                EchoError "No advice to give."; Newline >&2
+            else
+                EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
+            fi
+                
+            if [ -z "$p_badValue" ]; then
+                EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+            else
+                EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
+            fi
+
+            if [ "$__STAT_ERROR" = "fatal" ]; then
+                EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
+                ExitError "$__STAT_EXIT_CODE"
+            else
+                # Calling the function that processes the given answer.
+                CaseRead_HandleErrors
+            fi
         fi
     fi
 }

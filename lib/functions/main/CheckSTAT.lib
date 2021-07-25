@@ -65,6 +65,22 @@ function ConfEcho()
 
 ## CHECKINGS
 
+# Check the "$__STAT_CPLS" status variable's value.
+function CheckSTAT_CPLS()
+{
+    #***** Parameters *****
+    local p_file=$1
+    local p_lineno=$2
+
+    #***** Variables *****
+    local pa_correctValues=("true" "false")
+
+    #***** Code *****
+    if [ "$__STAT_CPLS" != "true" ] && [ "$__STAT_CPLS" != "false" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__STAT_CPLS" "__STAT_CPLS" "${pa_correctValues[@]}"
+    fi
+}
+
 # Checking the "$__STAT_DEBUG" status variable's value.
 function CheckSTAT_DEBUG()
 {
