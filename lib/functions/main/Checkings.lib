@@ -439,11 +439,23 @@ function CheckDecho()
 # Checking if the "$__STAT_TXT_FMT" status variable's value is "true".
 function CheckFmt()
 {
+    #***** Parameters *****
+    #   $1  -> tput command 
+    #   $2  -> ANSI
+
+    #***** Code *****
     if [ "$__STAT_TXT_FMT" = "true" ]; then
-        # Formatting text with the tput command or directly with the backslash escapes.
-        tput "$1" || echo -e "\e[$2m"
-        
-        return 0
+        if [ -n "$1" ]; then
+            # Formatting text with the tput command or directly with the backslash escapes.
+            tput "$1" || echo -ne "\e[$2m"
+
+            return 0
+        else
+            echo -ne "\e[$2m"
+
+            return 0
+        fi
+
     else
         return 1
     fi

@@ -121,22 +121,21 @@ function Decho_FMT_BlinkBoldIU      { Decho "$1" "" 'Blink' 'Bold' 'I' 'U'; }
 function Decho_FMT_BlinkBoldS       { Decho "$1" "" 'Blink' 'Bold' 'S'; }
 function Decho_FMT_BlinkBoldSU      { Decho "$1" "" 'Blink' 'Bold' 'S' 'U'; }
 function Decho_FMT_BlinkBoldU       { Decho "$1" "" 'Blink' 'Bold' 'U'; }
-
-function Decho_FMT_BlinkD       { Decho "$1" "" 'Blink' 'D'; }
-function Decho_FMT_BlinkDI      { Decho "$1" "" 'Blink' 'D' 'I'; }
-function Decho_FMT_BlinkDIS     { Decho "$1" "" 'Blink' 'D' 'I' 'S'; }
-function Decho_FMT_BlinkDISU    { Decho "$1" "" 'Blink' 'D' 'I' 'S' 'U'; }
-function Decho_FMT_BlinkDIU     { Decho "$1" "" 'Blink' 'D' 'I' 'U'; }
-function Decho_FMT_BlinkDS      { Decho "$1" "" 'Blink' 'D' 'S'; }
-function Decho_FMT_BlinkDSU     { Decho "$1" "" 'Blink' 'D' 'S' 'U'; }
-function Decho_FMT_BlinkDU      { Decho "$1" "" 'Blink' 'D' 'U'; }
-function Decho_FMT_BlinkI       { Decho "$1" "" 'Blink' 'I'; }
-function Decho_FMT_BlinkIS      { Decho "$1" "" 'Blink' 'I' 'S'; }
-function Decho_FMT_BlinkISU     { Decho "$1" "" 'Blink' 'I' 'S' 'U'; }
-function Decho_FMT_BlinkIU      { Decho "$1" "" 'Blink' 'I' 'U'; }
-function Decho_FMT_BlinkS       { Decho "$1" "" 'Blink' 'S'; }
-function Decho_FMT_BlinkSU      { Decho "$1" "" 'Blink' 'S' 'U'; }
-function Decho_FMT_BlinkU       { Decho "$1" "" 'Blink' 'U'; }
+function Decho_FMT_BlinkD           { Decho "$1" "" 'Blink' 'D'; }
+function Decho_FMT_BlinkDI          { Decho "$1" "" 'Blink' 'D' 'I'; }
+function Decho_FMT_BlinkDIS         { Decho "$1" "" 'Blink' 'D' 'I' 'S'; }
+function Decho_FMT_BlinkDISU        { Decho "$1" "" 'Blink' 'D' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkDIU         { Decho "$1" "" 'Blink' 'D' 'I' 'U'; }
+function Decho_FMT_BlinkDS          { Decho "$1" "" 'Blink' 'D' 'S'; }
+function Decho_FMT_BlinkDSU         { Decho "$1" "" 'Blink' 'D' 'S' 'U'; }
+function Decho_FMT_BlinkDU          { Decho "$1" "" 'Blink' 'D' 'U'; }
+function Decho_FMT_BlinkI           { Decho "$1" "" 'Blink' 'I'; }
+function Decho_FMT_BlinkIS          { Decho "$1" "" 'Blink' 'I' 'S'; }
+function Decho_FMT_BlinkISU         { Decho "$1" "" 'Blink' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkIU          { Decho "$1" "" 'Blink' 'I' 'U'; }
+function Decho_FMT_BlinkS           { Decho "$1" "" 'Blink' 'S'; }
+function Decho_FMT_BlinkSU          { Decho "$1" "" 'Blink' 'S' 'U'; }
+function Decho_FMT_BlinkU           { Decho "$1" "" 'Blink' 'U'; }
 
 # Bold formatting.
 function Decho_FMT_Bold     { Decho "$1" "" 'Bold'; }
@@ -167,8 +166,14 @@ function Decho_FMT_DSU  { Decho "$1" "" 'D' 'S' 'U'; }
 function Decho_FMT_DU   { Decho "$1" "" 'D' 'U'; }
 
 # Italic formatting.
-function Decho_FMT_I     { Decho "$1" "" 'I';    }
-function Decho_FMT_IU    { Decho "$1" "" 'I' 'U';   }
+function Decho_FMT_I    { Decho "$1" "" 'I';    }
+function Decho_FMT_IS   { Decho "$1" "" 'I' 'S'; }
+function Decho_FMT_ISU  { Decho "$1" "" 'I' 'S' 'U'; }
+function Decho_FMT_IU   { Decho "$1" "" 'I' 'U';   }
+
+# Strikethrough formatting.
+function Decho_FMT_S    { Decho "$1" "" 'S'; }
+function Decho_FMT_SU   { Decho "$1" "" 'S' 'U'; }
 
 # Underline formatting.
 function Decho_FMT_U     { Decho "$1" "" 'U';    }
