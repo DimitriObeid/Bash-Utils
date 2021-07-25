@@ -216,15 +216,16 @@ function GetParentDirectoryName()
 {
     #***** Parameters *****
     local p_path=$1
+    local p_iterations=$2
 
     #***** Code *****
-    CheckArgsMain_GetParentDirectoryName "$p_path"
+    CheckArgsMain_GetParentDirectoryName "$p_path" "$p_iterations"
 
-    parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+    parent="$( for I in "$p_iterations"; do cd "$(dirname "$p_path")" > /dev/null 2>&1 \
         || { 
             HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S PATH" "Please check if the provided path is correct." "$p_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-        }; pwd -P )"
+        }; done; pwd -P )"
 
     dirname="$parent"
     
