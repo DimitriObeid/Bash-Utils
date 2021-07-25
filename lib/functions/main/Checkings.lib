@@ -206,7 +206,7 @@ function CheckProjectLogStatus()
     local p_option=$2       # "echo" command options.
     shift 2
 
-    local p_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
+    local pa_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
     #***** Variables *****
     local v_errorEcho
@@ -227,7 +227,7 @@ function CheckProjectLogStatus()
         # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
 
-            for val in "${p_extraArgs[@]}"; do
+            for val in "${pa_extraArgs[@]}"; do
 
                 # If the "nodate" value is passed as argument.
                 if [ "$val" = "nodate" ]; then
@@ -248,7 +248,7 @@ function CheckProjectLogStatus()
                             ;;
                     esac
 
-                # Else, if no argument is passed in "$p_extraArgs" parameter array.
+                # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
                         '-n')
@@ -267,7 +267,7 @@ function CheckProjectLogStatus()
                             ;;
                     esac
                 # Else, if an unsupported option is passed (note for myself : the extra args checking
-                # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "log" option)).
+                # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "log" option)).
                 else
                     case "$p_option" in
                         '-n')
@@ -296,7 +296,7 @@ function CheckProjectLogStatus()
         # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
 
-            for val in "${p_extraArgs[@]}"; do
+            for val in "${pa_extraArgs[@]}"; do
 
                 # If the "nodate" value is passed as argument.
                 if [ "$val" = "nodate" ]; then
@@ -317,7 +317,7 @@ function CheckProjectLogStatus()
                             ;;
                     esac
 
-                # Else, if no argument is passed in "$p_extraArgs" parameter array.
+                # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
                     '-n')
@@ -339,7 +339,7 @@ function CheckProjectLogStatus()
                     esac
 
                 # Else, if an unsupported option is passed (note for myself : the extra args checking
-                # "for" loop (for val in "${p_extraArgs[@]}"; do) is still running (for the "tee" option)).
+                # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "tee" option)).
                 else
                     case "$p_option" in
                         '-n')

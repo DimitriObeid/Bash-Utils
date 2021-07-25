@@ -213,11 +213,14 @@ function CheckArgsMain_GetParentDirectoryName()
 {
     #***** Parameters *****
     local p_path=$1         # Path of the directory to process.
+    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #***** Code *****
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+    local lineno="$LINENO"; elif ! IsInt "$p_iterations"; then
+        __CheckArgsMain_PrintBadOption '' "" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -226,11 +229,14 @@ function CheckArgsMain_GetParentDirectoryPath()
 {
     #***** Parameters *****
     local p_path=$1         # Path of the directory to process.
+    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #***** Code *****
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+    local lineno="$LINENO"; elif ! IsInt "$p_iterations"; then
+        __CheckArgsMain_PrintBadOption '' "" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 

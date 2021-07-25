@@ -34,5 +34,5 @@ function ParseCSVLang()
     EchoNewstep "Finding the variables list"
     Newline
 
-    for i in 
+#     for i in 
 }

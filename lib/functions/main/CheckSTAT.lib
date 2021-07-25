@@ -29,7 +29,7 @@ function ConfEcho()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4
-    local p_array=("$@")
+    local pa_correctValues=("$@")
 
     #***** Variables *****
     local i=0
@@ -47,14 +47,14 @@ function ConfEcho()
     echo >&2; echo -e "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB The allowed values are :${__BU_COLOR_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
-    for val in "${p_array[@]}"; do
+    for val in "${pa_correctValues[@]}"; do
         i=$(( i+1 ))
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__BU_COLOR_ERROR}$i/${#p_array[@]}  --> ${__BU_COLOR_ORANGE}An empty argument.${__BU_COLOR_RESET}" >&2
+            echo -e "${__BU_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_COLOR_ORANGE}An empty argument.${__BU_COLOR_RESET}" >&2
         else
-            echo -e "${__BU_COLOR_ERROR}$i/${#p_array[@]}  --> ${__BU_COLOR_HIGHLIGHT}$val${__BU_COLOR_RESET}" >&2
+            echo -e "${__BU_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_COLOR_HIGHLIGHT}$val${__BU_COLOR_RESET}" >&2
         fi
     done
 
@@ -73,11 +73,11 @@ function CheckSTAT_DEBUG()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("true" "false")
+    local pa_correctValues=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_DEBUG" != "true" ] && [ "$__STAT_DEBUG" != "false" ]; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_DEBUG" "__STAT_DEBUG" "${pa_correctValues[@]}"
     fi
 }
 
@@ -89,11 +89,11 @@ function CheckSTAT_ERROR()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("" "fatal")
+    local pa_correctValues=("" "fatal")
 
     #***** Code *****
     if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" != "fatal" ]; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_ERROR" "__STAT_ERROR" "${pa_correctValues[@]}"
     fi
 }
 
@@ -105,11 +105,11 @@ function CheckSTAT_EXIT_CODE()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("")
+    local pa_correctValues=("")
 
     #***** Code *****
     if ! IsInt "$__STAT_EXIT_CODE"; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_EXIT" "__STAT_EXIT" "${pa_correctValues[@]}"
     fi
 }
 
@@ -121,11 +121,11 @@ function CheckSTAT_LOG()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("true" "false")
+    local pa_correctValues=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_LOG" != "true" ] && [ "$__STAT_LOG" != "false" ]; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG" "__STAT_LOG" "${pa_correctValues[@]}"
 
     elif [ "$__STAT_LOG" = "true" ] && [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         
@@ -189,11 +189,11 @@ function CheckSTAT_LOG_REDIRECT()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("" "true" "false")
+    local pa_correctValues=("" "true" "false")
 
     #***** Code *****
     if [ -n "$__STAT_LOG_REDIRECT" ] && [ "$__STAT_LOG_REDIRECT" != 'log' ] && [ "$__STAT_LOG_REDIRECT" != 'tee' ]; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_LOG_REDIRECT" "__STAT_LOG_REDIRECT" "${pa_correctValues[@]}"
     fi
 }
 
@@ -205,11 +205,11 @@ function CheckSTAT_OPERATE_ROOT()
 	local p_lineno=$2
 
 	#***** Variables *****
-	local a_array=("authorized" "forbidden" "restricted")
+	local pa_correctValues=("authorized" "forbidden" "restricted")
 
 	#***** Code *****
 	if [ "$__STAT_OPERATE_ROOT" != "authorized" ] && [ "$__STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__STAT_OPERATE_ROOT" != "restricted" ]; then
-		Confecho -e "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${a_array[@]}"
+		Confecho -e "$p_file" "$p_lineno" "$__STAT_OPERATE_ROOT" "__STAT_OPERATE_ROOT" "${pa_correctValues[@]}"
 	fi
 }
 
@@ -221,12 +221,12 @@ function CheckSTAT_TIME_TXT()
     local p_lineno=$2
 
     #***** Variables *****
-    local a_array=("${__BU_COLOR_ORANGE}An integer or a floating number")
+    local pa_correctValues=("${__BU_COLOR_ORANGE}An integer or a floating number")
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.
     if ! IsFloatInt "$__STAT_TIME_TXT"; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${a_array[@]}" >&2
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_TIME_TXT" "__STAT_TIME_TXT" "${pa_correctValues[@]}" >&2
     fi
 }
 
@@ -238,11 +238,11 @@ function CheckSTAT_TXT_FMT()
     p_lineno=$2
 
     #***** Variables *****
-    local a_array=("true" "false")
+    local pa_correctValues=("true" "false")
 
     #***** Code *****
     if [ "$__STAT_TXT_FMT" != "true" ] && [ "$__STAT_TXT_FMT" != "false" ]; then
-        Confecho -e "$p_file" "$p_lineno" "$__STAT_TXT_FMT" '__STAT_TXT_FMT' "${a_array[@]}"
+        Confecho -e "$p_file" "$p_lineno" "$__STAT_TXT_FMT" '__STAT_TXT_FMT' "${pa_correctValues[@]}"
     fi
 }
 # Checking the "$__STAT_USER_OS" status variable's value.

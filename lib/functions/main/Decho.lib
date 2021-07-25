@@ -32,7 +32,7 @@ function Decho()
     local p_newColor=$2
     shift 2
 
-    local pa_formatting=$("$@")
+    local pa_fmtArgs=$("$@")
 
     #***** Variables *****
     local v_oldColor
@@ -57,7 +57,7 @@ function Decho()
 	fi
 
     #***** Code *****    
-    for val in "${pa_formatting[@]^^}"; do
+    for val in "${pa_fmtArgs[@]^^}"; do
         case "$val" in
             'Blink')
                 echo -ne "${__BU_TXT_FMT_BLINK}"
@@ -83,7 +83,7 @@ function Decho()
         esac
     done
 
-    echo -e "$p_string$p_newcolor$__BU_TXT_RESET"
+    echo -e "$p_string$p_newColor$__BU_TXT_RESET"
 
 }
 
@@ -109,7 +109,7 @@ function Decho_FMT_BlinkBoldD       { Decho "$1" "" 'Blink' 'Bold' 'D'; }
 function Decho_FMT_BlinkBoldDI      { Decho "$1" "" 'Blink' 'Bold' 'D' 'I'; }
 function Decho_FMT_BlinkBoldDIS     { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'S'; }
 function Decho_FMT_BlinkBoldDISU    { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'S' 'U'; }
-function Decho_FMT_BlinkBoldDIU     { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'U' }
+function Decho_FMT_BlinkBoldDIU     { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'U'; }
 function Decho_FMT_BlinkBoldDS      { Decho "$1" "" 'Blink' 'Bold' 'D' 'S'; }
 function Decho_FMT_BlinkBoldDSU     { Decho "$1" "" 'Blink' 'Bold' 'D' 'S' 'U'; }
 function Decho_FMT_BlinkBoldDU      { Decho "$1" "" 'Blink' 'Bold' 'D' 'U'; }
@@ -125,7 +125,7 @@ function Decho_FMT_BlinkD       { Decho "$1" "" 'Blink' 'D'; }
 function Decho_FMT_BlinkDI      { Decho "$1" "" 'Blink' 'D' 'I'; }
 function Decho_FMT_BlinkDIS     { Decho "$1" "" 'Blink' 'D' 'I' 'S'; }
 function Decho_FMT_BlinkDISU    { Decho "$1" "" 'Blink' 'D' 'I' 'S' 'U'; }
-function Decho_FMT_BlinkDIU     { Decho "$1" "" 'Blink' 'D' 'I' 'U' }
+function Decho_FMT_BlinkDIU     { Decho "$1" "" 'Blink' 'D' 'I' 'U'; }
 function Decho_FMT_BlinkDS      { Decho "$1" "" 'Blink' 'D' 'S'; }
 function Decho_FMT_BlinkDSU     { Decho "$1" "" 'Blink' 'D' 'S' 'U'; }
 function Decho_FMT_BlinkDU      { Decho "$1" "" 'Blink' 'D' 'U'; }

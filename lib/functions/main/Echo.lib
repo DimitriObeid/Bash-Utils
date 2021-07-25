@@ -73,11 +73,11 @@ function EchoError()
     #***** Parameters *****
     local p_string=$1
     local p_option=$2; shift 2
-    local p_arrExtraArgs=("$@")
+    local pa_extraArgs=("$@")
 
     #***** Code *****
 	__EchoOutput "$p_string" 'begin' 'E'
-    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&2
+    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" >&2
 
     sleep "$__STAT_TIME_TXT"
 	__EchoOutput "$p_string" 'end' 'E'
@@ -95,10 +95,10 @@ function EchoMsg()
     #***** Parameters *****
     local p_string=$1
     local p_option=$2; shift 2
-    local p_arrExtraArgs=("$@")
+    local pa_extraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$p_string" "$p_option" "${p_arrExtraArgs[@]}"
+    CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 }
@@ -115,11 +115,11 @@ function EchoNewstep()
     #***** Parameters *****
     local p_string=$1
     local p_option=$2; shift 2
-    local p_arrExtraArgs=("$@")
+    local pa_extraArgs=("$@")
 
     #***** Code *****
 	__EchoOutput "$p_string" 'begin' 'N'
-    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}"
+    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
     sleep "$__STAT_TIME_TXT"
 	__EchoOutput "$p_string" 'end' 'N'
@@ -155,11 +155,11 @@ function EchoSuccess()
     #***** Parameters *****
     local p_string=$1
     local p_option=$2; shift 2
-    local p_arrExtraArgs=("$@")
+    local pa_extraArgs=("$@")
 
     #***** Code *****
 	__EchoOutput "$p_string" 'begin' 'S'
-    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" >&1
+    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" >&1
 
     sleep "$__STAT_TIME_TXT"
 	__EchoOutput "$p_string" 'end' 'S'
@@ -177,11 +177,11 @@ function EchoWarning()
     #***** Parameters *****
     local p_string=$1
     local p_option=$2; shift 2
-    local p_arrExtraArgs=("$@")
+    local pa_extraArgs=("$@")
 
     #***** Code *****
 	__EchoOutput "$p_string" 'begin' 'W'
-    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${p_arrExtraArgs[@]}" 1>&2
+    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" 1>&2
 
     sleep "$__STAT_TIME_TXT"
 	__EchoOutput "$p_string" 'end' 'W'
