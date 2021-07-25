@@ -35,13 +35,13 @@ function __EchoOutput()
 	fi
 	
 	if [ "$p_context" = "begin" ]; then
-		if [ "${p_type,,}" = "E" ]; then
+		if [ "${p_type^^}" = "E" ]; then
 			EchoMsg "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'N' ]; then
+		elif [ "${p_type^^}" = 'N' ]; then
 			EchoMsg "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'S' ]; then
+		elif [ "${p_type^^}" = 'S' ]; then
 			EchoMsg "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'W' ]; then
+		elif [ "${p_type^^}" = 'W' ]; then
 			EchoMsg "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
 		fi
 		
@@ -49,13 +49,13 @@ function __EchoOutput()
 	fi
 
 	if [ "$p_context" = "end" ]; then
-		if [ "${p_type,,}" = "E" ]; then
+		if [ "${p_type^^}" = "E" ]; then
 			EchoMsg "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'N' ]; then
+		elif [ "${p_type^^}" = 'N' ]; then
 			EchoMsg "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'S' ]; then
+		elif [ "${p_type^^}" = 'S' ]; then
 			EchoMsg "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type,,}" = 'W' ]; then
+		elif [ "${p_type^^}" = 'W' ]; then
 			EchoMsg "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
 		fi
 	fi
