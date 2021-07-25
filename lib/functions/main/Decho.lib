@@ -1,0 +1,279 @@
+#!/usr/bin/env bash
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo -e "WARNING !"; echo
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !"
+    echo -e "Use this script only by sourcing it in your project script."; echo
+
+    exit 1
+fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### TEXT WRITING AND DECORATION (FORMATTING)
+
+## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT
+
+# Quick multi commands execution for the below "Decho()" function.
+function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_oldColor" && echo -e "$v_oldColor" > "$__BASH_UTILS_FILE_COLOR_CODE_PATH"; }
+
+# Text's inside decoration/formatting procssing.
+
+# Featured functions and files from the "functions" folder :
+#   - CheckDecho                        --> This file.
+#       - 
+function Decho()
+{
+    #***** Parameters *****
+    local p_string=$1
+    local p_newColor=$2
+    shift 2
+
+    local pa_formatting=$("$@")
+
+    #***** Variables *****
+    local v_oldColor
+
+    #***** Code *****
+    CheckDecho
+
+    if [ "$?" -ne 0 ]; then
+        echo -e " ' $p_string ' "
+        
+        return 1
+    else
+        local v_oldColor
+            v_oldColor="$__BU_PROJECT_COLOR_CODE"
+    fi
+
+    if [ "$p_newColor" = "$v_oldColor" ]; then
+
+        # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
+		p_newColor="$(( p_newColor+38 ))"
+		tput setaf "$p_newColor"
+	fi
+
+    #***** Code *****    
+    for val in "${pa_formatting[@]^^}"; do
+        case "$val" in
+            'Blink')
+                echo -ne "${__BU_TXT_FMT_BLINK}"
+                ;;  
+            'Bold')
+                echo -ne "${__BU_TXT_FMT_BOLD}"
+                ;; 
+            'D')
+                echo -ne "${__BU_TXT_FMT_DIM}"
+                ;;
+            'I')
+                echo -ne "${__BU_TXT_FMT_ITALIC}"
+                ;;
+            'S')
+                echo -ne "${__BU_TXT_FMT_STRIKETHROUGH}"
+                ;;
+            'U')
+                echo -ne "${__BU_TXT_FMT_UNDERLINE}"
+                ;;
+            *)
+                echo "Invalid value"; exit 1
+                ;; 
+        esac
+    done
+
+    echo "$p_string$p_newcolor$__BU_TXT_RESET"
+
+}
+
+# Blink formatting.
+function Decho_FMT_Blink            { Decho "$1" "" 'Blink'; }
+function Decho_FMT_BlinkBold        { Decho "$1" "" 'Blink' 'Bold'; }
+function Decho_FMT_BlinkBoldD       { Decho "$1" "" 'Blink' 'Bold' 'D'; }
+function Decho_FMT_BlinkBoldDI      { Decho "$1" "" 'Blink' 'Bold' 'D' 'I'; }
+function Decho_FMT_BlinkBoldDIS     { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'S'; }
+function Decho_FMT_BlinkBoldDISU    { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkBoldDIU     { Decho "$1" "" 'Blink' 'Bold' 'D' 'I' 'U' }
+function Decho_FMT_BlinkBoldDS      { Decho "$1" "" 'Blink' 'Bold' 'D' 'S'; }
+function Decho_FMT_BlinkBoldDSU     { Decho "$1" "" 'Blink' 'Bold' 'D' 'S' 'U'; }
+function Decho_FMT_BlinkBoldDU      { Decho "$1" "" 'Blink' 'Bold' 'D' 'U'; }
+function Decho_FMT_BlinkBoldI       { Decho "$1" "" 'Blink' 'Bold' 'I'; }
+function Decho_FMT_BlinkBoldIS      { Decho "$1" "" 'Blink' 'Bold' 'I' 'S'; }
+function Decho_FMT_BlinkBoldISU     { Decho "$1" "" 'Blink' 'Bold' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkBoldIU      { Decho "$1" "" 'Blink' 'Bold' 'I' 'U'; }
+function Decho_FMT_BlinkBoldS       { Decho "$1" "" 'Blink' 'Bold' 'S'; }
+function Decho_FMT_BlinkBoldSU      { Decho "$1" "" 'Blink' 'Bold' 'S' 'U'; }
+function Decho_FMT_BlinkBoldU       { Decho "$1" "" 'Blink' 'Bold' 'U'; }
+
+function Decho_FMT_BlinkD       { Decho "$1" "" 'Blink' 'D'; }
+function Decho_FMT_BlinkDI      { Decho "$1" "" 'Blink' 'D' 'I'; }
+function Decho_FMT_BlinkDIS     { Decho "$1" "" 'Blink' 'D' 'I' 'S'; }
+function Decho_FMT_BlinkDISU    { Decho "$1" "" 'Blink' 'D' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkDIU     { Decho "$1" "" 'Blink' 'D' 'I' 'U' }
+function Decho_FMT_BlinkDS      { Decho "$1" "" 'Blink' 'D' 'S'; }
+function Decho_FMT_BlinkDSU     { Decho "$1" "" 'Blink' 'D' 'S' 'U'; }
+function Decho_FMT_BlinkDU      { Decho "$1" "" 'Blink' 'D' 'U'; }
+function Decho_FMT_BlinkI       { Decho "$1" "" 'Blink' 'I'; }
+function Decho_FMT_BlinkIS      { Decho "$1" "" 'Blink' 'I' 'S'; }
+function Decho_FMT_BlinkISU     { Decho "$1" "" 'Blink' 'I' 'S' 'U'; }
+function Decho_FMT_BlinkIU      { Decho "$1" "" 'Blink' 'I' 'U'; }
+function Decho_FMT_BlinkS       { Decho "$1" "" 'Blink' 'S'; }
+function Decho_FMT_BlinkSU      { Decho "$1" "" 'Blink' 'S' 'U'; }
+function Decho_FMT_BlinkU       { Decho "$1" "" 'Blink' 'U'; }
+
+# Bold formatting.
+function Decho_FMT_Bold     { Decho "$1" "" 'Bold'; }
+function Decho_FMT_BoldD    { Decho "$1" "" 'Bold' 'D'; }
+function Decho_FMT_BoldDI   { Decho "$1" "" 'Bold' 'D' 'I'; }
+function Decho_FMT_BoldDIS  { Decho "$1" "" 'Bold' 'D' 'I' 'S'; }
+function Decho_FMT_BoldDISU { Decho "$1" "" 'Bold' 'D' 'I' 'S' 'U'; }
+function Decho_FMT_BoldDIU  { Decho "$1" "" 'Bold' 'D' 'I' 'U'; }
+function Decho_FMT_BoldDS   { Decho "$1" "" 'Bold' 'D' 'S'; }
+function Decho_FMT_BoldDSU  { Decho "$1" "" 'Bold' 'D' 'S' 'U'; }
+function Decho_FMT_BoldDU   { Decho "$1" "" 'Bold' 'D' 'U'; }
+function Decho_FMT_BoldI    { Decho "$1" "" 'Bold' 'I'; }
+function Decho_FMT_BoldIS   { Decho "$1" "" 'Bold' 'I' 'S'; }
+function Decho_FMT_BoldISU  { Decho "$1" "" 'Bold' 'I' 'S' 'U'; }
+function Decho_FMT_BoldIU   { Decho "$1" "" 'Bold' 'I' 'U'; }
+function Decho_FMT_BoldS    { Decho "$1" "" 'Bold' 'S'; }
+function Decho_FMT_BoldSU   { Decho "$1" "" 'Bold' 'S' 'U'; }
+function Decho_FMT_BoldU    { Decho "$1" "" 'Bold' 'U'; }
+
+# Dim formatting
+function Decho_FMT_D    { Decho "$1" "" 'D'; }
+function Decho_FMT_DI   { Decho "$1" "" 'D' 'I'; }
+function Decho_FMT_DIS  { Decho "$1" "" 'D' 'I' 'S'; }
+function Decho_FMT_DISU { Decho "$1" "" 'D' 'I' 'S' 'U'; }
+function Decho_FMT_DIU  { Decho "$1" "" 'D' 'I' 'U'; }
+function Decho_FMT_DS   { Decho "$1" "" 'D' 'S'; }
+function Decho_FMT_DSU  { Decho "$1" "" 'D' 'S' 'U'; }
+function Decho_FMT_DU   { Decho "$1" "" 'D' 'U'; }
+
+# Italic formatting.
+function Decho_FMT_I     { Decho "$1" "" 'I';    }
+function Decho_FMT_IU    { Decho "$1" "" 'I' 'U';   }
+
+# Underline formatting.
+function Decho_FMT_U     { Decho "$1" "" 'U';    }
+
+# Easy "Decho()" function calls with colors.
+function DechoHighlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C'; }
+function DechoBlack     { Decho "$1" "$__BU_COLOR_BLACK"        'C'; }
+function DechoBlue      { Decho "$1" "$__BU_COLOR_BLUE"         'C'; }
+function DechoCyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C'; }
+function DechoGray      { Decho "$1" "$__BU_COLOR_GRAY"         'C'; }
+function DechoGreen     { Decho "$1" "$__BU_COLOR_GREEN"        'C'; }
+function DechoOrange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C'; }
+function DechoPink      { Decho "$1" "$__BU_COLOR_PINK"         'C'; }
+function DechoPurple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C'; }
+function DechoRed       { Decho "$1" "$__BU_COLOR_RED"          'C'; }
+function DechoTurquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C'; }
+function DechoWhite     { Decho "$1" "$__BU_COLOR_WHITE"        'C'; }
+function DechoYellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C'; }
+
+# Easy "Decho_FMT_Blink()" function calls with colors.
+function Decho_FMT_Blink_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'Blink' 'C'; }
+function Decho_FMT_Blink_C_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'Blink' 'C'; }
+function Decho_FMT_Blink_C_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'Blink' 'C'; }
+function Decho_FMT_Blink_C_Cyan      { Decho "$1" "$__BU_COLOR_CYAN"         'Blink' 'C'; }
+function Decho_FMT_Blink_C_Gray      { Decho "$1" "$__BU_COLOR_GRAY"         'Blink' 'C'; }
+function Decho_FMT_Blink_C_Green     { Decho "$1" "$__BU_COLOR_GREEN"        'Blink' 'C'; }
+function Decho_FMT_Blink_C_Orange    { Decho "$1" "$__BU_COLOR_ORANGE"       'Blink' 'C'; }
+function Decho_FMT_Blink_C_Pink      { Decho "$1" "$__BU_COLOR_PINK"         'Blink' 'C'; }
+function Decho_FMT_Blink_C_Purple    { Decho "$1" "$__BU_COLOR_PURPLE"       'Blink' 'C'; }
+function Decho_FMT_Blink_C_Red       { Decho "$1" "$__BU_COLOR_RED"          'Blink' 'C'; }
+function Decho_FMT_Blink_C_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'Blink' 'C'; }
+function Decho_FMT_Blink_C_White     { Decho "$1" "$__BU_COLOR_WHITE"        'Blink' 'C'; }
+function Decho_FMT_Blink_C_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'Blink' 'C'; }
+
+# Easy "Decho_FMT_Bold()" function calls with colors.
+function Decho_FMT_Bold_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'Bold' 'C'; }
+function Decho_FMT_Bold_C_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'Bold' 'C'; }
+function Decho_FMT_Bold_C_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'Bold' 'C'; }
+function Decho_FMT_Bold_C_Cyan      { Decho "$1" "$__BU_COLOR_CYAN"         'Bold' 'C'; }
+function Decho_FMT_Bold_C_Gray      { Decho "$1" "$__BU_COLOR_GRAY"         'Bold' 'C'; }
+function Decho_FMT_Bold_C_Green     { Decho "$1" "$__BU_COLOR_GREEN"        'Bold' 'C'; }
+function Decho_FMT_Bold_C_Orange    { Decho "$1" "$__BU_COLOR_ORANGE"       'Bold' 'C'; }
+function Decho_FMT_Bold_C_Pink      { Decho "$1" "$__BU_COLOR_PINK"         'Bold' 'C'; }
+function Decho_FMT_Bold_C_Purple    { Decho "$1" "$__BU_COLOR_PURPLE"       'Bold' 'C'; }
+function Decho_FMT_Bold_C_Red       { Decho "$1" "$__BU_COLOR_RED"          'Bold' 'C'; }
+function Decho_FMT_Bold_C_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'Bold' 'C'; }
+function Decho_FMT_Bold_C_White     { Decho "$1" "$__BU_COLOR_WHITE"        'Bold' 'C'; }
+function Decho_FMT_Bold_C_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'Bold' 'C'; }
+
+# Easy "Decho_FMT_BoldI()" function calls with colors.
+function Decho_FMT_BoldI_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Cyan      { Decho "$1" "$__BU_COLOR_CYAN"         'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Gray      { Decho "$1" "$__BU_COLOR_GRAY"         'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Green     { Decho "$1" "$__BU_COLOR_GREEN"        'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Orange    { Decho "$1" "$__BU_COLOR_ORANGE"       'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Pink      { Decho "$1" "$__BU_COLOR_PINK"         'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Purple    { Decho "$1" "$__BU_COLOR_PURPLE"       'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Red       { Decho "$1" "$__BU_COLOR_RED"          'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_White     { Decho "$1" "$__BU_COLOR_WHITE"        'Bold' 'C' 'I'; }
+function Decho_FMT_BoldI_C_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'Bold' 'C' 'I'; }
+
+# Easy "Decho_FMT_BoldIU()" function calls with color.
+function Decho_FMT_BoldIU_C_Highlight   { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Black       { Decho "$1" "$__BU_COLOR_BLACK"        'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Blue        { Decho "$1" "$__BU_COLOR_BLUE"         'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Cyan        { Decho "$1" "$__BU_COLOR_CYAN"         'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Gray        { Decho "$1" "$__BU_COLOR_GRAY"         'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Green       { Decho "$1" "$__BU_COLOR_GREEN"        'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Orange      { Decho "$1" "$__BU_COLOR_ORANGE"       'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Pink        { Decho "$1" "$__BU_COLOR_PINK"         'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Purple      { Decho "$1" "$__BU_COLOR_PURPLE"       'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Red         { Decho "$1" "$__BU_COLOR_RED"          'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Turquoise   { Decho "$1" "$__BU_COLOR_TURQUOISE"    'Bold' 'C' 'I' 'U'; }
+function Decho_FMT_BoldIU_C_Yellow      { Decho "$1" "$__BU_COLOR_YELLOW"       'Bold' 'C' 'I' 'U'; }
+
+# Easy "Decho_FMT_I()" function calls with colors.
+function Decho_FMT_I_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C' 'I'; }
+function Decho_FMT_I_C_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'C' 'I'; }
+function Decho_FMT_I_C_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'C' 'I'; }
+function Decho_FMT_I_C_Cyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C' 'I'; }
+function Decho_FMT_I_C_Gray      { Decho "$1" "$__BU_COLOR_GRAY"         'C' 'I'; }
+function Decho_FMT_I_C_Green     { Decho "$1" "$__BU_COLOR_GREEN"        'C' 'I'; }
+function Decho_FMT_I_C_Orange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C' 'I'; }
+function Decho_FMT_I_C_Pink      { Decho "$1" "$__BU_COLOR_PINK"         'C' 'I'; }
+function Decho_FMT_I_C_Purple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C' 'I'; }
+function Decho_FMT_I_C_Red       { Decho "$1" "$__BU_COLOR_RED"          'C' 'I'; }
+function Decho_FMT_I_C_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C' 'I'; }
+function Decho_FMT_I_C_White     { Decho "$1" "$__BU_COLOR_WHITE"        'C' 'I'; }
+function Decho_FMT_I_C_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C' 'I'; }
+
+# Easy "Decho_FMT_IU()" function calls with colors.
+function Decho_FMT_IU_C_Highlight    { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Black        { Decho "$1" "$__BU_COLOR_BLACK"        'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Blue         { Decho "$1" "$__BU_COLOR_BLUE"         'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Cyan         { Decho "$1" "$__BU_COLOR_CYAN"         'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Gray         { Decho "$1" "$__BU_COLOR_GRAY"         'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Green        { Decho "$1" "$__BU_COLOR_GREEN"        'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Orange       { Decho "$1" "$__BU_COLOR_ORANGE"       'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Pink         { Decho "$1" "$__BU_COLOR_PINK"         'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Purple       { Decho "$1" "$__BU_COLOR_PURPLE"       'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Red          { Decho "$1" "$__BU_COLOR_RED"          'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Turquoise    { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C' 'I' 'U'; }
+function Decho_FMT_IU_C_White        { Decho "$1" "$__BU_COLOR_WHITE"        'C' 'I' 'U'; }
+function Decho_FMT_IU_C_Yellow       { Decho "$1" "$__BU_COLOR_YELLOW"       'C' 'I' 'U'; }
+
+# Easy "Decho_FMT_U()" function calls with colors.
+function Decho_FMT_U_C_Highlight { Decho "$1" "$__BU_COLOR_HIGHLIGHT"    'C' 'U'; }
+function Decho_FMT_U_C_Black     { Decho "$1" "$__BU_COLOR_BLACK"        'C' 'U'; }
+function Decho_FMT_U_C_Blue      { Decho "$1" "$__BU_COLOR_BLUE"         'C' 'U'; }
+function Decho_FMT_U_C_Cyan      { Decho "$1" "$__BU_COLOR_CYAN"         'C' 'U'; }
+function Decho_FMT_U_C_Gray      { Decho "$1" "$__BU_COLOR_GRAY"         'C' 'U'; }
+function Decho_FMT_U_C_Green     { Decho "$1" "$__BU_COLOR_GREEN"        'C' 'U'; }
+function Decho_FMT_U_C_Orange    { Decho "$1" "$__BU_COLOR_ORANGE"       'C' 'U'; }
+function Decho_FMT_U_C_Pink      { Decho "$1" "$__BU_COLOR_PINK"         'C' 'U'; }
+function Decho_FMT_U_C_Purple    { Decho "$1" "$__BU_COLOR_PURPLE"       'C' 'U'; }
+function Decho_FMT_U_C_Red       { Decho "$1" "$__BU_COLOR_RED"          'C' 'U'; }
+function Decho_FMT_U_C_Turquoise { Decho "$1" "$__BU_COLOR_TURQUOISE"    'C' 'U'; }
+function Decho_FMT_U_C_White     { Decho "$1" "$__BU_COLOR_WHITE"        'C' 'U'; }
+function Decho_FMT_U_C_Yellow    { Decho "$1" "$__BU_COLOR_YELLOW"       'C' 'U'; }
+
+# -----------------------------------------------

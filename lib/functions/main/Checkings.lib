@@ -441,7 +441,7 @@ function CheckFmt()
 {
     if [ "$__STAT_TXT_FMT" = "true" ]; then
         # Formatting text with the tput command or directly with the backslash escapes.
-        tput $1 || echo -e "\e[$2m"
+        tput "$1" || echo -e "\e[$2m"
         
         return 0
     else
