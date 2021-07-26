@@ -69,6 +69,27 @@ function __EchoOutput()
 	fi
 }
 
+# Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+function __EchoCPLS()
+{
+    #***** Parameters *****
+    p_string=$1
+    p_option=$2
+
+    shift 2; pa_extraArgs=("$@")
+
+    #***** Code *****
+    if [ "$__STAT_LOG" = "true" ] && [ "$__STAT_LOG_REDIRECT" = "log" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+        if [ "${pa_extraArgs[@]}" = "nodate" ]; then
+        
+        else
+        
+        fi
+    else
+        
+    fi
+}
+
 # Error message
 
 # Usage :
@@ -106,7 +127,11 @@ function EchoMsg()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}"
+    if [ "$__STAT_CPLS" = "false" ]; then
+        CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}"
+    else
+        __EchoCPLS "$p_string" "" "${pa_extraArgs}"
+    fi
 
     sleep "$__STAT_TIME_TXT"
 }

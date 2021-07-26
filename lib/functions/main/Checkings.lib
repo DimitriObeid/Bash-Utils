@@ -215,13 +215,13 @@ function CheckProjectLogStatus()
 	# which also calls this same ""CheckProjectLogStatus() function.
 
     # If you need to call a function here, please verify if it doesn't calls the "CheckProjectLogStatus()" function,
-    # nor any function called by the function you want to add.
+    # nor any function called by the function you want to add, or else set the "$__STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
 
     local v_errorEcho
-		v_errorEcho="${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}"
+		v_errorEcho="$(__STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}"; return 1)"
 
 	local v_warning_array_value
-		v_warning_array_value="${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"
+		v_warning_array_value="$(echo -e "${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"; return 1)"
     
     #**** Code *****
     CheckProjectLogPath
