@@ -247,9 +247,9 @@ function GetParentDirectoryName()
         p_path="$parent"
     done
 
-    shopt -s extglob            # enable +(...) glob syntax
-    result=${p_path%%+(/)}      # trim however many trailing slashes exist
-    result=${result##*/}        # remove everything before the last / that still remains
+    shopt -s extglob            # enable +(...) glob syntax.
+    result=${p_path%%+(/)}      # trim however many trailing slashes exist.
+    result=${result##*/}        # remove everything before the last / that still remains.
 
     echo -e "$result"
 }
@@ -277,8 +277,8 @@ function GetParentDirectoryPath()
         p_path="$parent"
     done
 
-    shopt -s extglob            # enable +(...) glob syntax
-    result=${p_path%%+(/)}      # trim however many trailing slashes exist
+    shopt -s extglob            # enable +(...) glob syntax.
+    result=${p_path%%+(/)}      # trim however many trailing slashes exist.
 
     echo -e "$result"
 }

@@ -21,7 +21,7 @@ fi
 function CutDateFromString()
 {
     #***** Parameters *****
-    p_string=$1
+    local p_string=$1
 
     #***** Code *****
     p_string="${p_string##*] }"
@@ -33,10 +33,25 @@ function CutDateFromString()
 function CutDashFromOption()
 {
     #***** Parameters *****
-    p_string=$1
+    local p_string=$1
 
     #***** Code *****
     p_string="${p_string##*-}"
     
     echo -e "$p_string"
+}
+
+# Cut the last field of a path.
+function CutLastFieldFromPath()
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    CheckArgsMain_CutLastFieldFromPath "$p_path"
+
+    shopt -s extglob            # enable +(...) glob syntax.
+    p_path=${p_path%%+(/)}      # trim however many trailing slashes exist.
+
+    echo -e "$p_path"
 }

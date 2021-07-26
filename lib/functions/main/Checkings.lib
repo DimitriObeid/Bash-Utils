@@ -402,6 +402,9 @@ function CheckProjectRelatedFile()
 	#***** Parameters *****
 	p_path=$1
 
+	#***** Variables *****
+	v_name=$(CutLastFieldFromPath "$p_path")
+
 	#***** Code *****
 	if [ -f "$p_path" ]; then
         if [ -s "$p_path" ]; then
@@ -418,13 +421,13 @@ function CheckProjectRelatedFile()
             EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
         fi
 
-        EchoNewstep "Creating the $(DechoHighlight "$p_path") project's file."
+        EchoNewstep "Creating the $(DechoHighlight "$v_name") project's file."
 
-        touch "$p_path"
+        Makefile "$(GetParentDirectoryName "$p_path")" "$v_name"
 
-        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$p_path") PROJECT'S FILE !" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$v_name") PROJECT'S FILE !" "" "$v_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
             
-        EchoSuccess "Successfully created the $(DechoHighlight "$p_path") project's file."
+        EchoSuccess "Successfully created the $(DechoHighlight "$v_name") project's file."
     fi
 }
 

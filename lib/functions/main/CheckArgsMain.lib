@@ -340,3 +340,23 @@ function CheckArgsMain_Makefile()
 }
 
 # -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### "main/Text.lib" FILE'S FUNCTIONS
+
+##
+
+# "CutLastFieldFromPath()"
+function CheckArgsMain_CutLastFieldFromPath()
+{
+    #***** Parameters *****
+    local p_path=1
+
+    #***** Code *****
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+        __CheckArgsMain_PrintBadOption "z" "Please pass the string composing the path of the file or the directory to get." 'p_path' "$p_path" "$FUNCNAME[0]" "$lineno"
+    fi
+}
