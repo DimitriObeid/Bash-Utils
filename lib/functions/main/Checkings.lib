@@ -564,9 +564,7 @@ function HandleErrors()
 
                             echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
-                        elif [ "$__STAT_                            CutDateFromString "$val"
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || {  }
-LOG_REDIRECT" = "" ]; then
+                        elif [ "$__STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
                         fi
                     else
