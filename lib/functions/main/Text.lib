@@ -50,8 +50,7 @@ function CutLastFieldFromPath()
     #***** Code *****
     CheckArgsMain_CutLastFieldFromPath "$p_path"
 
-    shopt -s extglob            # enable +(...) glob syntax.
-    p_path=${p_path%%+(/)}      # trim however many trailing slashes exist.
+    p_path=${p_path##*/)}
 
     echo -e "$p_path"
 }

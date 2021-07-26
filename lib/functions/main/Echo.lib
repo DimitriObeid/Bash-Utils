@@ -28,7 +28,7 @@ function __EchoOutput()
 	#***** Code *****
 	if [ ! -f "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" ]; then
         if [ ! -d "$(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH")" ]; then
-            mkdir -pv "$(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH")" || \
+            mkdir -pv "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" || \
             {
                 echo >&2; echo "${__BU_COLOR_ERROR}UNABLE TO CREATE THE $(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") DIRECTORY, PARENT OF THE $(DechoHighlight "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") FILE !${__BU_COLOR_RESET}" >&2;
                 echo >&2; exit 1
