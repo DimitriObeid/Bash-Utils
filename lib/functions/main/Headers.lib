@@ -102,6 +102,9 @@ function HeaderError    { HeaderBase "$__BU_COLOR_ERROR"    "$__BU_TXT_PRINT_HEA
 function HeaderInstall  { HeaderBase "$__BU_COLOR_YELLOW"   "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_GREEN"      "$1"; }
 
 # Header to display when changing step.
+function HeaderNewstep  { HeaderBase "$__BU_COLOR_NEWSTEP"  "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_NEWSTEP"    "$1"; }
+
+# Header to display when changing step.
 function HeaderStep     { HeaderBase "$__BU_COLOR_CYAN"     "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_CYAN"       "$1"; }
 
 # Header to display in case of a successfully done step.
