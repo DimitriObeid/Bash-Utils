@@ -118,16 +118,16 @@ done
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
 # shellcheck disable=SC2034
-__STAT_DEBUG="true";        CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_DEBUG="true";        CheckSTAT_DEBUG     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_CPLS="false";        CheckSTAT_CPLS      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal";           CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_ERROR="fatal";       CheckSTAT_ERROR     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_TIME_TXT="0";            CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_TIME_TXT="0";        CheckSTAT_TIME_TXT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -138,7 +138,7 @@ if CheckInitialization; then
 fi
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";      CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 MkTmpDir
 

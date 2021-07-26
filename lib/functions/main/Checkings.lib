@@ -176,20 +176,20 @@ function CheckFilePathExists()
     fi
 }
 
-# Checking for "$PROJECT_LOG_PATH"
+# Checking for "$__BU_PROJECT_LOG_FILE_PATH"
 
 # Required functions and files :
 function CheckProjectLogPath()
 {
     if [ -z "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo -e "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo -e "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE" >&2
         echo -e "Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
     elif [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo -e "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "PROJECT_LOG_PATH") VARIABLE" >&2
+        echo -e "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE" >&2
         echo -e "Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
