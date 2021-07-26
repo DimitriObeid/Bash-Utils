@@ -28,3 +28,15 @@ function CutDateFromString()
     
     echo -e "$p_string"
 }
+
+# Cut the dash written before a command option call.
+function CutDashFromOption()
+{
+    #***** Parameters *****
+    p_string=$1
+
+    #***** Code *****
+    p_string="${p_string##*-}"
+    
+    echo -e "$p_string"
+}

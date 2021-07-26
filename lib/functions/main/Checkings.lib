@@ -218,7 +218,7 @@ function CheckProjectLogStatus()
     # nor any function called by the function you want to add, or else set the "$__STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
 
     local v_errorEcho
-		v_errorEcho="$(__STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}"; return 1)"
+		v_errorEcho="$(echo -e "${__BU_COLOR_ERROR}Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; return 1)"
 
 	local v_warning_array_value
 		v_warning_array_value="$(echo -e "${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"; return 1)"
@@ -228,6 +228,9 @@ function CheckProjectLogStatus()
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+    # Setting the "$__STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    __STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     # If a log file exists AND if "$__STAT_LOG" value is "false" AND if "$__STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
@@ -259,14 +262,14 @@ function CheckProjectLogStatus()
                 # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
-                        '-n')
+                        '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
-                        '')
+                        '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
@@ -278,7 +281,7 @@ function CheckProjectLogStatus()
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "log" option)).
                 else
                     case "$p_option" in
-                        '-n')
+                        '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -287,7 +290,7 @@ function CheckProjectLogStatus()
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
-                        '')
+                        '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -388,6 +391,9 @@ function CheckProjectLogStatus()
 
         sleep "$__STAT_TIME_TXT"
 	fi
+
+	# Resetting the "$__STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+	__STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 }
 
 # Check project related file presence, or create this file.

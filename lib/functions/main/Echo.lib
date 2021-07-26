@@ -79,14 +79,58 @@ function __EchoCPLS()
     shift 2; pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_LOG" = "true" ] && [ "$__STAT_LOG_REDIRECT" = "log" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-        if [ "${pa_extraArgs[@]}" = "nodate" ]; then
-        
+    if [ "$__STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+        if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
+            for val in "${pa_extraArgs[@]}"; do
+                case "$p_option" in
+                    '-n' | 'n')
+                        if [ "$val" = "nodate" ]; then
+                            echo -ne "$p_string" > "$__BU_PROJECT_LOG_FILE_PATH"
+                        else
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
+                        fi
+                        ;;
+                    '' | *)
+                        if [ "$val" = "nodate" ]; then
+                            echo -ne "$p_string" > "$__BU_PROJECT_LOG_FILE_PATH"
+                        else
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
+                        fi
+                        ;;
+                esac
+            done
+
+        elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
+            for val in "${pa_extraArgs[@]}"; do
+                case "$p_option" in
+                    '-n' | 'n')
+                        if [ "$val" = "nodate" ]; then
+                            echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH"
+                        else
+                            echo -ne "$p_string"
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
+                        fi
+                        ;;
+                    '' | *)
+                        if [ "$val" = "nodate" ]; then
+                            echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH"
+                        else
+                            echo -e "$p_string"
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
+                        fi
+                        ;;
+                esac
+            done
         else
-        
+            case "$p_option" in
+                '-n' | 'n')
+                    echo -ne "$p_string";;
+                '' | *)
+                    echo -e "$p_string";;
+            esac
         fi
     else
-        
+        echo -e "$p_string"
     fi
 }
 
@@ -105,11 +149,19 @@ function EchoError()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-	__EchoOutput "$p_string" 'begin' 'E'
-    CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" >&2
+    if [ "$__STAT_CPLS" = "false" ]; then
+        __EchoOutput "$p_string" 'begin' 'E'
+        CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'E'
+    else
+        __EchoOutput "$p_string" 'begin' 'E'
+        __EchoCPLS "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'E'
+    fi
 
     sleep "$__STAT_TIME_TXT"
-	__EchoOutput "$p_string" 'end' 'E'
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -130,7 +182,7 @@ function EchoMsg()
     if [ "$__STAT_CPLS" = "false" ]; then
         CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}"
     else
-        __EchoCPLS "$p_string" "" "${pa_extraArgs}"
+        __EchoCPLS "$p_string" "" "${pa_extraArgs[@]}"
     fi
 
     sleep "$__STAT_TIME_TXT"
@@ -151,11 +203,19 @@ function EchoNewstep()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-	__EchoOutput "$p_string" 'begin' 'N'
-    CheckProjectLogStatus "${__BU_COLOR_ORANGE}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+    if [ "$__STAT_CPLS" = "false" ]; then
+        __EchoOutput "$p_string" 'begin' 'N'
+        CheckProjectLogStatus "${__BU_COLOR_NEWSTEP}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'N'
+    else
+        __EchoOutput "$p_string" 'begin' 'N'
+        __EchoCPLS "${__BU_COLOR_NEWSTEP}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'N'
+    fi
 
     sleep "$__STAT_TIME_TXT"
-	__EchoOutput "$p_string" 'end' 'N'
 }
 
 # Read input values
@@ -191,11 +251,19 @@ function EchoSuccess()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-	__EchoOutput "$p_string" 'begin' 'S'
-    CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" >&1
+    if [ "$__STAT_CPLS" = "false" ]; then
+        __EchoOutput "$p_string" 'begin' 'S'
+        CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'S'
+    else
+        __EchoOutput "$p_string" 'begin' 'S'
+        __EchoCPLS "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'S'
+    fi
 
     sleep "$__STAT_TIME_TXT"
-	__EchoOutput "$p_string" 'end' 'S'
 }
 
 # Warning message
@@ -213,11 +281,19 @@ function EchoWarning()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-	__EchoOutput "$p_string" 'begin' 'W'
-    CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" 1>&2
+    if [ "$__STAT_CPLS" = "false" ]; then
+        __EchoOutput "$p_string" 'begin' 'W'
+        CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'W'
+    else
+        __EchoOutput "$p_string" 'begin' 'W'
+        __EchoCPLS "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+
+        __EchoOutput "$p_string" 'end' 'W'
+    fi
 
     sleep "$__STAT_TIME_TXT"
-	__EchoOutput "$p_string" 'end' 'W'
 }
 
 # -----------------------------------------------
