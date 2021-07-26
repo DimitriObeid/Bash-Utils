@@ -115,7 +115,9 @@ done
 
 #### THIRD STEP : PROCESSING PROJECT'S RESOURCES
 
-## CREATING NEW VARIABLES
+## CREATING THE PROJECT'S TEMPORARY FOLDER
+
+# MkTmpDir
 
 # -----------------------------------------------
 
@@ -156,8 +158,6 @@ __STAT_TXT_FMT="true";          CheckSTAT_TXT_FMT       "$(basename "${BASH_SOUR
 
 # shellcheck disable=SC2034
 __STAT_TXT_FMT="false"
-
-MkTmpDir
 
 # shellcheck disable=SC2034
 __STAT_TXT_FMT="true"

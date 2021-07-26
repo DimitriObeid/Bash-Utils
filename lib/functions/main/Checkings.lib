@@ -156,7 +156,7 @@ function CheckDirPathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        Decho_FMT_BoldI "<missing directory path>"
+        DechoHighlight "<missing directory path>"   # Since this function is to be called into a string, it's better to use a formatting function.
     fi
 }
 
@@ -172,7 +172,7 @@ function CheckFilePathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        Decho_FMT_BoldI "<missing file path>"
+        DechoHighlight "<missing file path>"        # Since this function is to be called into a string, it's better to use a formatting function.
     fi
 }
 
@@ -405,7 +405,9 @@ function CheckProjectRelatedFile()
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
             EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
 
-            Makedir "$(GetParentDirectoryPath "$p_path" '2')" "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            Makedir "$(GetParentDirectoryPath "$p_path" '2')" "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" \
+                "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path" '2')") AND / OR THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" \
+                "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 
             EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
         fi

@@ -88,19 +88,20 @@ function OverwriteDir()
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
             # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
-            # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM WILL OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
+            # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
             # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
             rm -rfv "${v_path/:?}/"*
             HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(KeepFormatting "$(DechoHighlight "$v_path/")") FOLDER." \
                 "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
             EchoSuccess "Deletion of the contents of the folder $(DechoHighlight "$v_path/") performed successfully"
             Newline
         else
             # shellcheck disable=SC2034
             __STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            HandleErrors
+            HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
         fi
 	fi
 
@@ -172,7 +173,7 @@ function MkTmpDir()
     local lineno="$LINENO"; if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_PROJECT_TMP_DIR_PATH"
 
-        HandleErrors "$?" "THE $(CheckFilePathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+        HandleErrors "$?" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
             "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
     fi
