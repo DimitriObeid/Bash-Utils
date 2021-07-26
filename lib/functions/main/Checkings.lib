@@ -406,7 +406,7 @@ function CheckProjectRelatedFile()
             EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
 
             Makedir "$(GetParentDirectoryPath "$p_path" '2')" "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" \
-                "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path" '2')") AND / OR THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") FOLDER !" \
+                "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path" '2')") AND / OR THE $(DechoHighlight "$(GetParentDirectoryName "$p_path")") FOLDER !" \
                 "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 
             EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."

@@ -115,33 +115,13 @@ done
 
 #### THIRD STEP : PROCESSING PROJECT'S RESOURCES
 
-## CREATING THE PROJECT'S TEMPORARY FOLDER
-
-# MkTmpDir
-
-# -----------------------------------------------
-
-## PROCESSING SOME DIRECTORIES AND FILES
-
-__STAT_TXT_FMT="false"; CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
-
-# -----------------------------------------------
-
-## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
+## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
 # shellcheck disable=SC2034
-__STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__STAT_LOG" variable's value is equal to "true".
-# shellcheck disable=SC2034
-__STAT_LOG="false";           CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
-
-if CheckInitialization; then
-    __INIT_IS_INITALIZING="false"
-fi
+__STAT_DEBUG="true";        CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";      CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_CPLS="false";        CheckSTAT_CPLS      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
 __STAT_ERROR="fatal";           CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -150,22 +130,34 @@ __STAT_ERROR="fatal";           CheckSTAT_ERROR         "$(basename "${BASH_SOUR
 __STAT_TIME_TXT="0";            CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_TXT_FMT="true";          CheckSTAT_TXT_FMT       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+if CheckInitialization; then
+    # shellcheck disable=SC2034
+    __INIT_IS_INITALIZING="false"
+fi
+
+# shellcheck disable=SC2034
+__STAT_LOG_REDIRECT="tee";      CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+MkTmpDir
 
 # -----------------------------------------------
 
-## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
+## MODIFYING OTHER STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
+
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__STAT_LOG" variable's value is equal to "true".
+# shellcheck disable=SC2034
+__STAT_LOG="false";     CheckSTAT_LOG       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 # shellcheck disable=SC2034
-__STAT_TXT_FMT="false"
-
-# shellcheck disable=SC2034
-__STAT_TXT_FMT="true"
+__STAT_TXT_FMT="true";  CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
-## PROCESSING REMAINING DIRECTORIES AND FILES
+## PROCESSING SOME DIRECTORIES AND FILES
 
+CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
 CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PATH"
 
 # -----------------------------------------------
