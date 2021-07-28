@@ -87,12 +87,12 @@ function Decho()
                 echo -ne "${__BU_TXT_FMT_UNDERLINE}"
                 ;;
             *)
-                # WARNING ! Do not reset the "$__STAT_TXT_FMT" variable's value to "true", or else the program will be stuck in an infinite loop.
+                # WARNING ! Do not reset the "$__BU_STAT_TXT_FMT" variable's value to "true", or else the program will be stuck in an infinite loop.
 
                 # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                # if the "$__STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+                # if the "$__BU_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
-                local lineno="$LINENO"; __STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$lineno"
+                local lineno="$LINENO"; __BU_STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$lineno"
                 
                 HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
                     "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
@@ -125,13 +125,13 @@ function Decho()
                 echo -ne "${__BU_TXT_FMT_UNDERLINE_RESET}"
                 ;;
             *)
-                # WARNING ! Do not reset the "$__STAT_TXT_FMT" variable's value  to "true", or else the program will be stuck in an infinite loop.
+                # WARNING ! Do not reset the "$__BU_STAT_TXT_FMT" variable's value  to "true", or else the program will be stuck in an infinite loop.
 
                 # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                # if the "$__STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+                # if the "$__BU_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
                 # shellcheck disable=SC2034
-                __STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                __BU_STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
                 
                 HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
                     "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"

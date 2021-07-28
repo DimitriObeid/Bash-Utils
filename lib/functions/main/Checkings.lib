@@ -223,7 +223,7 @@ function CheckProjectLogStatus()
 	# which also calls this same ""CheckProjectLogStatus() function.
 
     # If you need to call a function here, please verify if it doesn't calls the "CheckProjectLogStatus()" function,
-    # nor any function called by the function you want to add, or else set the "$__STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
+    # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
 
     local v_errorEcho
 		v_errorEcho="$(echo -e "${__BU_COLOR_ERROR}Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; return 1)"
@@ -232,22 +232,22 @@ function CheckProjectLogStatus()
 		v_warning_array_value="$(echo -e "${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"; return 1)"
     
     #**** Code *****
-    if [ "$__STAT_LOG" = "true" ]; then
+    if [ "$__BU_STAT_LOG" = "true" ]; then
         CheckProjectLogPath
     fi
 
-    # Setting the "$__STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
-    __STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    # Setting the "$__BU_STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    __BU_STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    # If a log file exists AND if "$__STAT_LOG" value is "false" AND if "$__STAT_LOG_REDIRECT" has a redirection value.
-    if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
+    # If a log file exists AND if "$__BU_STAT_LOG" value is "false" AND if "$__BU_STAT_LOG_REDIRECT" has a redirection value.
+    if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ] && [ -n "$__BU_STAT_LOG_REDIRECT" ]; then
 
-        # If messages must be redirected in the log file only ("$__STAT_LOG_REDIRECT" value is equal to "log")
-        if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
+        # If messages must be redirected in the log file only ("$__BU_STAT_LOG_REDIRECT" value is equal to "log")
+        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -315,8 +315,8 @@ function CheckProjectLogStatus()
 
             done
 
-        # Else, if messages must be redirected in the log file AND to the terminal ("$__STAT_LOG_REDIRECT" value is equal to "tee")
-        elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
+        # Else, if messages must be redirected in the log file AND to the terminal ("$__BU_STAT_LOG_REDIRECT" value is equal to "tee")
+        elif [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -386,7 +386,7 @@ function CheckProjectLogStatus()
                 fi
             done
             
-            sleep "$__STAT_TIME_TXT"
+            sleep "$__BU_STAT_TIME_TXT"
         else
             case "$p_option" in
                 '-n' | 'n')
@@ -397,11 +397,11 @@ function CheckProjectLogStatus()
                     ;;
             esac
 
-        sleep "$__STAT_TIME_TXT"
+        sleep "$__BU_STAT_TIME_TXT"
 
         fi
 
-    # Else, if no log file exists OR if "$__STAT_LOG" value is "false" OR if "$__STAT_LOG_REDIRECT" has no redirection value. 
+    # Else, if no log file exists OR if "$__BU_STAT_LOG" value is "false" OR if "$__BU_STAT_LOG_REDIRECT" has no redirection value. 
     else
         case "$p_option" in
 			'-n' | 'n')
@@ -412,11 +412,11 @@ function CheckProjectLogStatus()
 				;;
 		esac
 
-        sleep "$__STAT_TIME_TXT"
+        sleep "$__BU_STAT_TIME_TXT"
 	fi
 
-	# Resetting the "$__STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-	__STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	# Resetting the "$__BU_STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+	__BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 }
 
 # Check project related file presence, or create this file.
@@ -457,7 +457,7 @@ function CheckProjectRelatedFile()
 function CheckDecho()
 {
     #***** Code *****
-    if [ -z "${__BU_PROJECT_COLOR_CODE+x}" ] || [ "$__STAT_TXT_FMT" = "false" ]; then
+    if [ -z "${__BU_PROJECT_COLOR_CODE+x}" ] || [ "$__BU_STAT_TXT_FMT" = "false" ]; then
         return 1
 
     elif [ -n "${__BU_PROJECT_COLOR_CODE+x}" ] && [ "$__BU_PROJECT_COLOR_CODE" = '' ]; then
@@ -467,7 +467,7 @@ function CheckDecho()
 	fi
 }
 
-# Checking if the "$__STAT_TXT_FMT" status variable's value is "true".
+# Checking if the "$__BU_STAT_TXT_FMT" status variable's value is "true".
 function CheckFmt()
 {
     #***** Parameters *****
@@ -475,7 +475,7 @@ function CheckFmt()
     #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
     #***** Code *****
-    if [ "$__STAT_TXT_FMT" = "true" ]; then
+    if [ "$__BU_STAT_TXT_FMT" = "true" ]; then
         if [ -n "$1" ]; then
             # Formatting text with the tput command or directly with the backslash escapes.
             tput "$1" || echo -ne "\e[$2m"
@@ -508,7 +508,7 @@ function CheckFmt()
 function ExitError()
 {
     # In case the "exit" command didn't worked, the program has to be killed.
-    CheckSTAT_EXIT_CODE "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; exit "$__STAT_EXIT_CODE"; kill "$$"
+    CheckSTAT_EXIT_CODE "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; exit "$__BU_STAT_EXIT_CODE"; kill "$$"
 }
 
 # -----------------------------------------------
@@ -549,11 +549,11 @@ function HandleErrors()
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
-        if [ "$__STAT_CPLS" = "true" ]; then
+        if [ "$__BU_STAT_CPLS" = "true" ]; then
             __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")")
             __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}AN ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
 
-            if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
+            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}$v_hdrString FATAL ERROR : ${p_errorString^^}${__BU_COLOR_RESET}" >&2)")
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
@@ -575,19 +575,19 @@ function HandleErrors()
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Value(s) that caused this error : $(DechoHighlight "$p_badValue")$__BU_COLOR_RESET" >&2; echo -e >&2)")
             fi
 
-            if [ "$__STAT_ERROR" = "fatal" ]; then
+            if [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 # As the only time 
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_ERROR}Stopping the execution of $(DechoHighlight "$(basename "$0")")$__BU_COLOR_RESET." >&2; echo -e >&2)")
 
                 # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
                 for val in "${__BU_TXT_STORE_ERROR_MESSAGES_ARRAY[@]}"; do
-                    if [ "$__STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-                        if [ "$__STAT_LOG_REDIRECT" = "log" ] || [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
+                    if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+                        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
                             echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
-                        elif [ "$__STAT_LOG_REDIRECT" = "" ]; then
+                        elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
                         fi
                     else
@@ -600,13 +600,13 @@ function HandleErrors()
 
                 # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
                 for val in "${__BU_TXT_STORE_ERROR_MESSAGES_ARRAY[@]}"; do
-                    if [ "$__STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-                        if [ "$__STAT_LOG_REDIRECT" = "log" ] || [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
+                    if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+                        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
                             echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
-                        elif [ "$__STAT_LOG_REDIRECT" = "" ]; then
+                        elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
                         fi
                     else
@@ -617,17 +617,17 @@ function HandleErrors()
                 # Calling the function that processes the given answer.
                 CaseRead_HandleErrorsCPLS
 
-                # Resetting the "$__STAT_CPLS" status variable.
-                __STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                # Resetting the "$__BU_STAT_CPLS" status variable.
+                __BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 
         # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
         else
-            if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
-                __STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
+                __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 
-            if [ -n "$__STAT_ERROR" ] && [ "$__STAT_ERROR" = "fatal" ]; then
+            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
             else
                 HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
@@ -645,9 +645,9 @@ function HandleErrors()
                 EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
             fi
 
-            if [ "$__STAT_ERROR" = "fatal" ]; then
+            if [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
-                ExitError "$__STAT_EXIT_CODE"
+                ExitError "$__BU_STAT_EXIT_CODE"
             else
                 # Calling the function that processes the given answer.
                 CaseRead_HandleErrors

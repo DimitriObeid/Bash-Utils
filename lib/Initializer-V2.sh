@@ -315,26 +315,26 @@ __BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE_PATH"
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
-__STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # The function "CheckSTAT_LOG()" creates the log file and its path.
 # shellcheck disable=SC2034
-__STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 if [ ! -d "$__BU_PROJECT_TMP_PATH" ]; then
 	EchoInit "$(mkdir -p "$__BU_PROJECT_TMP_PATH")"

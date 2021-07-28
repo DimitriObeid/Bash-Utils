@@ -108,7 +108,7 @@ function OverwriteDir()
             Newline
         else
             # shellcheck disable=SC2034
-            __STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            __BU_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
         fi
 	fi
@@ -175,7 +175,7 @@ function Makedir()
     fi
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __STAT_LOG variable's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function MkTmpDir()
 {
@@ -245,6 +245,9 @@ function GetParentDirectoryName()
     if [ -z "$p_iterations" ]; then
         p_iterations='1'
     fi
+
+    # Storing the
+    local v_path_str=""
 
     for ((i=0; i<p_iterations; i++)); do
         parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \

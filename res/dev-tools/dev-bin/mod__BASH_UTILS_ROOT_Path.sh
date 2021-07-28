@@ -31,7 +31,7 @@ source "$__BASH_UTILS/Initializer.sh" || { echo >&2; echo -e "Unable to source t
 ## STATUS VARIABLES EDITION
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

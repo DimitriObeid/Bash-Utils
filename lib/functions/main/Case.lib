@@ -58,7 +58,7 @@ function CaseRead_TriggerRootDirWarning()
 	esac
 }
 
-# "HandleErrors" function, with the "$__STAT_CPLS" variable set to "false".
+# "HandleErrors" function, with the "$__BU_STAT_CPLS" variable set to "false".
 function CaseRead_HandleErrors()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
@@ -85,7 +85,7 @@ function CaseRead_HandleErrors()
 	esac
 }
 
-# "HandleErrors" function, with the "$__STAT_CPLS" variable set to "true".
+# "HandleErrors" function, with the "$__BU_STAT_CPLS" variable set to "true".
 function CaseRead_HandleErrorsCPLS()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"

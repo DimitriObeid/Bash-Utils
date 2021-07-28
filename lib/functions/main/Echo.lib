@@ -23,7 +23,7 @@ fi
 
 ####
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__STAT_TIME_TXT" status variable.
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status variable.
 
 # "Echo<...>()" functions debug output for a better view during a "bash - x" debug process.
 function __EchoOutput()
@@ -89,8 +89,8 @@ function __EchoCPLS()
     shift 2; pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-        if [ "$__STAT_LOG_REDIRECT" = "log" ]; then
+    if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
             for val in "${pa_extraArgs[@]}"; do
                 case "$p_option" in
                     '-n' | 'n')
@@ -110,7 +110,7 @@ function __EchoCPLS()
                 esac
             done
 
-        elif [ "$__STAT_LOG_REDIRECT" = "tee" ]; then
+        elif [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
             for val in "${pa_extraArgs[@]}"; do
                 case "$p_option" in
                     '-n' | 'n')
@@ -132,7 +132,7 @@ function __EchoCPLS()
                 esac
             done
 
-            sleep "$__STAT_TIME_TXT"
+            sleep "$__BU_STAT_TIME_TXT"
 
         else
             case "$p_option" in
@@ -142,13 +142,13 @@ function __EchoCPLS()
                     echo -e "$p_string";;
             esac
 
-            sleep "$__STAT_TIME_TXT"
+            sleep "$__BU_STAT_TIME_TXT"
 
         fi
     else
         echo -e "$p_string"
         
-        sleep "$__STAT_TIME_TXT"
+        sleep "$__BU_STAT_TIME_TXT"
 
     fi
 }
@@ -168,7 +168,7 @@ function EchoError()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_CPLS" = "false" ]; then
+    if [ "$__BU_STAT_CPLS" = "false" ]; then
         __EchoOutput "$p_string" 'begin' 'E'
         CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
@@ -180,7 +180,7 @@ function EchoError()
         __EchoOutput "$p_string" 'end' 'E'
     fi
 
-    sleep "$__STAT_TIME_TXT"
+    sleep "$__BU_STAT_TIME_TXT"
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -198,13 +198,13 @@ function EchoMsg()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_CPLS" = "false" ]; then
+    if [ "$__BU_STAT_CPLS" = "false" ]; then
         CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}"
     else
         __EchoCPLS "$p_string" "" "${pa_extraArgs[@]}"
     fi
 
-    sleep "$__STAT_TIME_TXT"
+    sleep "$__BU_STAT_TIME_TXT"
 }
 
 # New sub-step message
@@ -222,7 +222,7 @@ function EchoNewstep()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_CPLS" = "false" ]; then
+    if [ "$__BU_STAT_CPLS" = "false" ]; then
         __EchoOutput "$p_string" 'begin' 'N'
         CheckProjectLogStatus "${__BU_COLOR_NEWSTEP}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
@@ -234,7 +234,7 @@ function EchoNewstep()
         __EchoOutput "$p_string" 'end' 'N'
     fi
 
-    sleep "$__STAT_TIME_TXT"
+    sleep "$__BU_STAT_TIME_TXT"
 }
 
 # Read input values
@@ -250,7 +250,7 @@ function EchoRead()
 	local p_string=$1      # User's keyboard input.
 	
 	#***** Code *****
-	if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
+	if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ] && [ -n "$__BU_STAT_LOG_REDIRECT" ]; then
 		echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH"
 	fi
 }
@@ -270,7 +270,7 @@ function EchoSuccess()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_CPLS" = "false" ]; then
+    if [ "$__BU_STAT_CPLS" = "false" ]; then
         __EchoOutput "$p_string" 'begin' 'S'
         CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
@@ -282,7 +282,7 @@ function EchoSuccess()
         __EchoOutput "$p_string" 'end' 'S'
     fi
 
-    sleep "$__STAT_TIME_TXT"
+    sleep "$__BU_STAT_TIME_TXT"
 }
 
 # Warning message
@@ -300,7 +300,7 @@ function EchoWarning()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if [ "$__STAT_CPLS" = "false" ]; then
+    if [ "$__BU_STAT_CPLS" = "false" ]; then
         __EchoOutput "$p_string" 'begin' 'W'
         CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
@@ -312,7 +312,7 @@ function EchoWarning()
         __EchoOutput "$p_string" 'end' 'W'
     fi
 
-    sleep "$__STAT_TIME_TXT"
+    sleep "$__BU_STAT_TIME_TXT"
 }
 
 # -----------------------------------------------

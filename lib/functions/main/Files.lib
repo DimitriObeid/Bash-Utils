@@ -37,14 +37,14 @@ function __ProcessingFile()
         EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
         Newline
             
-        sleep "$__STAT_TIME_TXT"
+        sleep "$__BU_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
         EchoSuccess "End of processing the $(DechoS "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
         Newline
         
-        sleep "$__STAT_TIME_TXT"
+        sleep "$__BU_STAT_TIME_TXT"
     else
         EchoWarning ""
     fi
@@ -69,7 +69,7 @@ function ProcessingFile()
     # Arguments checking.
     CheckArgs_ProcessingFile "$p_function"
     
-	sleep "$__STAT_TIME_TXT"
+	sleep "$__BU_STAT_TIME_TXT"
     EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
     EchoNewstep "Processing the $(DechoHighlight "$p_name") file in the $(DechoHighlight "$p_parent") parent directory."
     Newline

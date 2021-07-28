@@ -32,7 +32,7 @@ __supported_languages=('en' 'fr')
 ## STATUS VARIABLES MODIFICATION
 
 # shellcheck disable=SC2034
-__STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

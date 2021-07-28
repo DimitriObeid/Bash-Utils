@@ -91,16 +91,16 @@ function CheckArgs
 {
     #***** Status *****
     # shellcheck disable=SC2034
-    __STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "$0")" "$LINENO"
+    __BU_STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __STAT_LOG="true";          CheckSTAT_LOG           "$(basename "$0")" "$LINENO"
+    __BU_STAT_LOG="true";          CheckSTAT_LOG           "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "$0")" "$LINENO"
+    __BU_STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
+    __BU_STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
     
     #***** Code *****
 	# If the script is not run as super-user (root)
@@ -166,7 +166,7 @@ function CheckArgs
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
-	if [ "$__STAT_DEBUG" = "true" ]; then
+	if [ "$__BU_STAT_DEBUG" = "true" ]; then
 		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
 		Newline
 

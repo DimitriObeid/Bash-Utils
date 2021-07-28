@@ -47,14 +47,14 @@ function TriggerRootDirWarning()
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 	if [ "$p_path" = "/" ] || [ "$(GetParentDirectoryPath "$p_path")" = '/' ]; then
-		if [ "$__STAT_OPERATE_ROOT" = "forbidden" ]; then
+		if [ "$__BU_STAT_OPERATE_ROOT" = "forbidden" ]; then
 			EchoError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
 			EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
 			EchoError "Given path : $(DechoHighlight "$p_path")"
 			Newline
 
 			ExitError
-		elif [ "$__STAT_OPERATE_ROOT" = "restricted" ]; then
+		elif [ "$__BU_STAT_OPERATE_ROOT" = "restricted" ]; then
 			EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
 			EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			EchoWarning "Given path : $(DechoHighlight "$p_path")"
