@@ -250,13 +250,13 @@ function GetParentDirectoryName()
     local v_path_str=""
 
     for ((i=0; i<p_iterations; i++)); do
-        parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+        local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
             || {
                 HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
             }; pwd -P )"
 
-        p_path="$parent"
+        p_path="$v_parent"
     done
 
     shopt -s extglob            # enable +(...) glob syntax.
@@ -282,7 +282,7 @@ function GetParentDirectoryPath()
 
     if [ -d "$p_path" ]; then
         for ((i=0; i<p_iterations; i++)); do
-            local v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+            local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
@@ -296,22 +296,27 @@ function GetParentDirectoryPath()
 
         echo -e "$result"
     else
-        mkdir -p "$p_path" || HandleErrors "THE $(KeepFormatting "$(DechoHighlight "$p_path/")") FOLDER CANNOT BE CREATED !" \
-            "Please check the permissions of the targeted directory" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-
         local v_path_str=""
+        local v_current_path="$p_path"
 
         for ((i=0; i<p_iterations; i++)); do
-            local v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+            local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
                 }; pwd -P )"
             
-            local v_path_cut="${v_parent##*/}"
-            v_path_str+="$v_path_cut/"
+            local v_path_cut; v_path_cut="${v_parent##*/}"
+            local v_path_str+="$v_path_cut/"
+
+            # Removing the unnecessary folders.
+            # WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
+            # DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
+            rmdir "$v_current_path"; HandleErrors "$?" "UNABLE TO ERASE THE $(DechoHighlight "$v_current_path") NEWLY CREATED FOLDER !"
+            
+            local v_current_path="$v_parent"
         done
 
-        local v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
+        local v_print_path; v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
     fi
 }

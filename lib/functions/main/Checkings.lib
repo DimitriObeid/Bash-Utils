@@ -32,7 +32,7 @@ function IsFloat()
     local p_value=$1
 
     #***** Code *****
-    CheckArgsMain_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsBadArgc0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
@@ -48,7 +48,7 @@ function IsFloatInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgsMain_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsBadArgc0 "$p_value"
 
     if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
@@ -64,7 +64,7 @@ function IsInt()
     local p_value=$1
 
     #***** Code *****
-    CheckArgsMain_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsBadArgc0 "$p_value"
 
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
@@ -84,7 +84,7 @@ function IsAlpha()
     local p_value=$1
     
     #***** Code *****
-    CheckArgsMain_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsBadArgc0 "$p_value"
 
     if [[ "$p_value" =~ [A-Z] ]]; then
         return 0
@@ -100,7 +100,7 @@ function IsAlphaNum()
     local p_value=$1
 
     #***** Code *****
-    CheckArgsMain_IsArgcNot0 "$p_value"
+    CheckArgsMain_IsBadArgc0 "$p_value"
 
     if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
@@ -430,9 +430,9 @@ function CheckProjectRelatedFile()
     local v_path="$p_parent/$p_name"
 
 	#***** Code *****
-	if [ -f "$p_path" ]; then
-        if [ -s "$p_path" ]; then
-            true > "$p_path"
+	if [ -f "$v_path" ]; then
+        if [ -s "$v_path" ]; then
+            true > "$v_path"
         fi
     else
         if [ ! -d "$(GetParentDirectoryPath "$p_parent")" ]; then

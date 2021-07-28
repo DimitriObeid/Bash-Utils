@@ -26,7 +26,7 @@ fi
 ## ARGUMENT PRESENCE CHECKING
 
 # Checking if an argument is provided (like in the "Is..." functions (check the below "VARIABLES VALUES CHECKING" section for more informations)).
-function CheckArgsMain_IsArgcNot0()
+function CheckArgsMain_IsBadArgc0()
 {
     if [ "$#" -eq 0 ]; then
         HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
@@ -84,20 +84,43 @@ function __CheckArgsMain_PrintBadOption()
     local p_funcname=$5 # Name of the function where the test failed.
     local p_lineno=$6   # Line where the test failed.
 
+    #***** Variables *****
+    v_string="THE $(KeepFormatting "$(CutCheck "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
+
     #***** Code *****
     if [ "$p_option" = 'z' ]; then
         # shellcheck disable=SC2116
-		HandleErrors "1" "THE $(KeepFormatting "$(CutCheck "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
+		HandleErrors "1" "$v_string HAS NO VALUE" \
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+
+    elif [ "$p_option" = '!alpha' ]; then
+        # shellcheck disable=SC2116
+        HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHABETIC STRING" \
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+
+    elif [ "$p_option" = '!alphanum' ]; then
+        # shellcheck disable=SC2116
+        HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!d' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "THE $(KeepFormatting "$(CutCheck "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS INCORRECT" \
+        HandleErrors "1" "$v_string'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
-
+    
     elif [ "$p_option" = '!f' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "THE $(KeepFormatting "$(CutCheck "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS INCORRECT" \
+        HandleErrors "1" "$v_string'S VALUE IS NOT A VALID FILE PATH" \
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+
+    elif [ "$p_option" = '!float' ]; then
+        # shellcheck disable=SC2116
+        HandleErrors "1" "$v_string'S VALUE IS NOT A FLOAT" \
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+
+    elif [ "$p_option" = '!int' ]; then
+        # shellcheck disable=SC2116
+        HandleErrors "1" "$v_string'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
     fi
 }
@@ -239,7 +262,7 @@ function CheckArgsMain_GetParentDirectoryPath()
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
     local lineno="$LINENO"; elif ! IsInt "$p_iterations"; then
-        __CheckArgsMain_PrintBadOption '' "" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
+        __CheckArgsMain_PrintBadOption '!int' "Please pass an integer as second argument" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -365,6 +388,6 @@ function CheckArgsMain_CutLastFieldFromPath()
 
     #***** Code *****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption "z" "Please pass the string composing the path of the file or the directory to get." 'p_path' "$p_path" "$FUNCNAME[0]" "$lineno"
+        __CheckArgsMain_PrintBadOption "z" "Please pass the string composing the path of the file or the directory to get." 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
     fi
 }
