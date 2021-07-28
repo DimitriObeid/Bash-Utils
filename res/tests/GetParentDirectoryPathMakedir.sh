@@ -32,6 +32,11 @@ function GetParentDirectoryPathMkdir()
 		echo "PATH : $v_parent"
 		v_path_cut="${v_parent##*/}"
         v_path_str+="$v_path_cut/"
+
+		# WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
+		# DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
+		rmdir "$v_current_path" || { echo "Unable to remove the $v_current_path folder"; exit 1; }
+
 		v_current_path="$v_parent"
     done
 
@@ -40,4 +45,4 @@ function GetParentDirectoryPathMkdir()
 	echo "$v_print_path"
 }
 
-GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "2"
+GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "5"
