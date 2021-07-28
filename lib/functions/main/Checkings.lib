@@ -424,10 +424,12 @@ function CheckProjectLogStatus()
 function CheckProjectRelatedFile()
 {
 	#***** Parameters *****
-	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
-	local p_name=$2    # Name of the file to process (into its parent directory).
+	local p_dirname_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
+	local p_dirname=$2         # Name of the folder to process (into its parent directory).
+	local p_filename=$3        # Name of the file to process (into its parent directory).
 
 	#***** Variables *****
+	local v_file_parent="$p_dirname_parent/$p_dirname"
     local v_path="$p_parent/$p_name"
 
 	#***** Code *****
@@ -438,11 +440,11 @@ function CheckProjectRelatedFile()
     elif [ -d "$v_path" ]; then
         return 0
     else
-        if [ ! -d "$(GetParentDirectoryPath "$p_parent")" ]; then
-            Makedir "$(GetParentDirectoryPath "$p_parent")" "$p_parent"
+        if [ ! -d "$p_dirname_parent" ]; then
+            Makedir "$p_dirname_parent" "$p_dirname"
         fi
 
-        Makfile "$p_parent" "$p_name"
+        Makefile "$v_file_parent" "$p_name"
     fi
 }
 
