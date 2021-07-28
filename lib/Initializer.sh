@@ -162,8 +162,8 @@ __STAT_TXT_FMT="true";  CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
-CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PATH"
+CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME"
+CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME"
 
 # -----------------------------------------------
 

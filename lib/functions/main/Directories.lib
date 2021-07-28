@@ -243,7 +243,7 @@ function GetParentDirectoryName()
     CheckArgsMain_GetParentDirectoryName "$p_path" "$p_iterations"
 
     if [ -z "$p_iterations" ]; then
-        p_iterations='0'
+        p_iterations='1'
     fi
 
     for ((i=0; i<p_iterations; i++)); do
@@ -274,7 +274,7 @@ function GetParentDirectoryPath()
     CheckArgsMain_GetParentDirectoryPath "$p_path" "$p_iterations"
 
     if [ -z "$p_iterations" ]; then
-        p_iterations='0'
+        p_iterations='1'
     fi
 
     if [ -d "$p_path" ]; then

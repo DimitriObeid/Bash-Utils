@@ -435,7 +435,7 @@ function CheckProjectRelatedFile()
             true > "$p_path"
         fi
     else
-        if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
+        if [ ! -d "$(GetParentDirectoryPath "$p_parent")" ]; then
             Makedir "$(GetParentDirectoryPath "$p_parent")" "$p_parent"
         fi
 

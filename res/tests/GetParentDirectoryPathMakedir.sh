@@ -1,22 +1,37 @@
 #!/usr/bin/env bash
 
+# Reverse a string.
+function ReverseStringWordsOrder()
+{
+    #***** Parameters *****
+    p_str=$1
+    p_delim=$2
+
+    #***** Code *****
+    echo "$p_str" | tr "$p_delim" '\n' | tac | tr '\n' "$p_delim"
+
+}
+
 function GetParentDirectoryPathMkdir()
 {
-    mkdir -p "$p_path" || HandleErrors "THE $(KeepFormatting "$(DechoHighlight "$p_path/")") FOLDER CANNOT BE CREATED !" \
-        "Please check the permissions of the targeted directory" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	local p_path=$1
+	local p_iterations=$2
+
+    mkdir -p "$p_path" || { echo "THE $p_path FOLDER CANNOT BE CREATED !"; exit 1; }
 
     local v_path_str=""
 
     for ((i=0; i<p_iterations; i++)); do
         local v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
-            || {
-                HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-            }; pwd -P )"
+            || { echo "UNABLE TO CHANGE DIRECTORY"; exit 1; };
+			pwd -P )"
 
-        local v_path_cut="${v_parent##*/}"
-        v_path_str+="$v_path_cut/"
+		p_path="${p_path##*/}"
+        v_path_str+="$v_parent/"
     done
 
     local v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
+	echo "$v_print_path"
 }
+
+GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "3"
