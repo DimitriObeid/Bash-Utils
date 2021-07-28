@@ -587,7 +587,7 @@ function HandleErrors()
                         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
+                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]} : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
                         elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
@@ -606,7 +606,7 @@ function HandleErrors()
                         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
+                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]} : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
                         elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
