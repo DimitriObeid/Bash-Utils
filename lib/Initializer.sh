@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-# Script initializer file, initializing all you need for your scripts.
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
+# ----------------------
+## SCRIPT'S INFORMATIONS
 
+# Name : Text.lib
+# Description : Script initializer file, initializing all you need for your scripts.
+# Author(s) : Dimitri Obeid
 # Version : 3.0
+
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 

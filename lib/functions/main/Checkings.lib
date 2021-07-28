@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# ----------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Checkings.lib
+# Description   : 
+# Author(s)     : Dimitri Obeid
+# Version       : 
+
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
@@ -228,12 +236,12 @@ function CheckProjectLogStatus()
         CheckProjectLogPath
     fi
 
+    # Setting the "$__STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    __STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-    # Setting the "$__STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
-    __STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     # If a log file exists AND if "$__STAT_LOG" value is "false" AND if "$__STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__STAT_LOG" = "true" ] && [ -n "$__STAT_LOG_REDIRECT" ]; then
@@ -246,14 +254,14 @@ function CheckProjectLogStatus()
                 # If the "nodate" value is passed as argument.
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
-                        '-n')
+                        '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }                            
                             fi
                             ;;
-                        '')
+                        '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
@@ -315,14 +323,14 @@ function CheckProjectLogStatus()
                 # If the "nodate" value is passed as argument.
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
-                        '-n')
+                        '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
-                        '')
+                        '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
@@ -334,7 +342,7 @@ function CheckProjectLogStatus()
                 # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
-                    '-n')
+                    '-n' | 'n')
                         if CheckInitialization; then
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
@@ -342,7 +350,7 @@ function CheckProjectLogStatus()
                             echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                         fi
                         ;;
-                    '')
+                    '' | *)
                         if CheckInitialization; then
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
@@ -356,7 +364,7 @@ function CheckProjectLogStatus()
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "tee" option)).
                 else
                     case "$p_option" in
-                        '-n')
+                        '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -365,7 +373,7 @@ function CheckProjectLogStatus()
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
                             fi
                             ;;
-                        '')
+                        '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_errorEcho" >&2; echo >&2; ExitSourced; }
@@ -379,15 +387,27 @@ function CheckProjectLogStatus()
             done
             
             sleep "$__STAT_TIME_TXT"
+        else
+            case "$p_option" in
+                '-n' | 'n')
+                    echo -ne "$p_string"
+                    ;;
+                '' | *)
+                    echo -e "$p_string"
+                    ;;
+            esac
+
+        sleep "$__STAT_TIME_TXT"
+
         fi
 
     # Else, if no log file exists OR if "$__STAT_LOG" value is "false" OR if "$__STAT_LOG_REDIRECT" has no redirection value. 
     else
         case "$p_option" in
-			'-n')
+			'-n' | 'n')
 				echo -ne "$p_string"
 				;;
-			'')
+			'' | *)
 				echo -e "$p_string"
 				;;
 		esac
@@ -403,10 +423,11 @@ function CheckProjectLogStatus()
 function CheckProjectRelatedFile()
 {
 	#***** Parameters *****
-	p_path=$1
+	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
+	local p_name=$2    # Name of the file to process (into its parent directory).
 
 	#***** Variables *****
-	v_name=$(CutLastFieldFromPath "$p_path")
+    local v_path="$p_parent/$p_name"
 
 	#***** Code *****
 	if [ -f "$p_path" ]; then
@@ -415,22 +436,10 @@ function CheckProjectRelatedFile()
         fi
     else
         if [ ! -d "$(GetParentDirectoryPath "$p_path")" ]; then
-            EchoNewstep "Creating the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") temporary folder."
-
-            Makedir "$(GetParentDirectoryPath "$p_path" '2')" "$(GetParentDirectoryPath "$p_path")" || HandleErrors "$?" \
-                "UNABLE TO CREATE THE $(DechoHighlight "$(GetParentDirectoryPath "$p_path" '2')") AND / OR THE $(DechoHighlight "$(GetParentDirectoryName "$p_path")") FOLDER !" \
-                "" "$(GetParentDirectoryPath "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-
-            EchoSuccess "Successfully created the $(DechoHighlight "$(GetParentDirectoryPath "$p_path")") parent folder."
+            Makedir "$(GetParentDirectoryPath "$p_parent")" "$p_parent"
         fi
 
-        EchoNewstep "Creating the $(DechoHighlight "$v_name") project's file."
-
-        Makefile "$(GetParentDirectoryName "$p_path")" "$v_name"
-
-        HandleErrors "$?" "UNABLE TO CREATE THE $(DechoHighlight "$v_name") PROJECT'S FILE !" "" "$v_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-            
-        EchoSuccess "Successfully created the $(DechoHighlight "$v_name") project's file."
+        Makfile "$p_parent" "$p_name"
     fi
 }
 

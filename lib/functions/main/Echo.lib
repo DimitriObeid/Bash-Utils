@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# ----------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Echo.lib
+# Description   : (Colored) text display functions.
+# Author(s)     : Dimitri Obeid
+# Version       : 
+
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
@@ -28,6 +36,7 @@ function __EchoOutput()
 	#***** Code *****
 	if [ ! -f "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" ]; then
         if [ ! -d "$(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH")" ]; then
+            # Don't call the "Makedir()" function, or else the script will loop forever, since this function calls the "Echo<...>()" functions, who call this function.
             mkdir -pv "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" || \
             {
                 echo >&2; echo "${__BU_COLOR_ERROR}UNABLE TO CREATE THE $(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") DIRECTORY, PARENT OF THE $(DechoHighlight "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") FILE !${__BU_COLOR_RESET}" >&2;
@@ -35,6 +44,7 @@ function __EchoOutput()
             }
         fi
 
+        # Don't call the "Makefile()" function, or else the script will loop forever, since this function calls the "Echo<...>()" functions, who call this function.
 		touch "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" || { \
             echo >&2
             echo -e "${__BU_COLOR_ERROR}Unable to create the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH${__BU_COLOR_ERROR} file${__BU_COLOR_RESET}" >&2
@@ -121,6 +131,9 @@ function __EchoCPLS()
                         ;;
                 esac
             done
+
+            sleep "$__STAT_TIME_TXT"
+
         else
             case "$p_option" in
                 '-n' | 'n')
@@ -128,9 +141,15 @@ function __EchoCPLS()
                 '' | *)
                     echo -e "$p_string";;
             esac
+
+            sleep "$__STAT_TIME_TXT"
+
         fi
     else
         echo -e "$p_string"
+        
+        sleep "$__STAT_TIME_TXT"
+
     fi
 }
 

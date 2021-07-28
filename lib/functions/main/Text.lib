@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# ----------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Text.lib
+# Description   : Functions specially made for text processing (cutting fields / characters, ).
+# Author(s)     : Dimitri Obeid
+# Version       : 
+
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
@@ -29,7 +37,7 @@ function CutDateFromString()
     echo -e "$p_string"
 }
 
-# Cut the dash written before a command option call.
+# Cut the dash written before a command option call (to be improved).
 function CutDashFromOption()
 {
     #***** Parameters *****
@@ -53,4 +61,16 @@ function CutLastFieldFromPath()
     p_path=${p_path##*/)}
 
     echo -e "$p_path"
+}
+
+# Reverse a string.
+function ReverseStringWordsOrder()
+{
+    #***** Parameters *****
+    p_str=$1
+    p_delim=$2
+
+    #***** Code *****
+    echo "$p_str" | tr "$p_delim" '\n' | tac | tr '\n' "$p_delim"
+
 }
