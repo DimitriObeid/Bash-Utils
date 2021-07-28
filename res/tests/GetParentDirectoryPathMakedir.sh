@@ -21,17 +21,23 @@ function GetParentDirectoryPathMkdir()
 
     local v_path_str=""
 
-    for ((i=0; i<p_iterations; i++)); do
-        local v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
-            || { echo "UNABLE TO CHANGE DIRECTORY"; exit 1; };
-			pwd -P )"
+	local v_current_path="$p_path"
 
-		p_path="${p_path##*/}"
-        v_path_str+="$v_parent/"
+    for ((i=0; i<p_iterations; i++)); do
+        local v_parent
+			v_parent="$( cd "$(dirname "$v_current_path")" > /dev/null 2>&1 \
+            	|| { echo "UNABLE TO CHANGE DIRECTORY"; exit 1; };
+				pwd -P; )"
+
+		echo "PATH : $v_parent"
+		v_path_cut="${v_parent##*/}"
+        v_path_str+="$v_path_cut/"
+		v_current_path="$v_parent"
     done
 
-    local v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
+    local v_print_path
+		v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
 	echo "$v_print_path"
 }
 
-GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "3"
+GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "2"
