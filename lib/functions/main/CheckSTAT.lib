@@ -291,7 +291,7 @@ function CheckSTAT_USER_OS()
 function CheckProjectStatusVars()
 {
     #***** Parameters *****
-    local p_file=$1error
+    local p_file=$1
     local p_lineno=$2
 
     #***** Code *****
