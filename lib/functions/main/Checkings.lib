@@ -66,6 +66,22 @@ function IsInt()
     #***** Code *****
     CheckArgsMain_IsBadArgc0 "$p_value"
 
+    if [[ "$p_value" =~ [0-9] ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Checking integer value.
+function IsInt2()
+{
+    #***** Parameters *****
+    local p_value=$1
+
+    #***** Code *****
+    CheckArgsMain_IsBadArgc0 "$p_value"
+
     if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
     else
@@ -245,7 +261,7 @@ function CheckProjectLogStatus()
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     # If a log file exists AND if "$__BU_STAT_LOG" value is "false" AND if "$__BU_STAT_LOG_REDIRECT" has a redirection value.
-    if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ] && [ -n "$__BU_STAT_LOG_REDIRECT" ]; then
+    if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ]; then
 
         # If messages must be redirected in the log file only ("$__BU_STAT_LOG_REDIRECT" value is equal to "log")
         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
@@ -259,14 +275,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }                            
+                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }                            
+                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
                             fi
                             ;;
                     esac
@@ -278,14 +294,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -296,19 +312,19 @@ function CheckProjectLogStatus()
                         '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitSourced; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -328,14 +344,14 @@ function CheckProjectLogStatus()
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -348,7 +364,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -ne "$p_string"
-                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                         fi
                         ;;
                     '' | *)
@@ -356,7 +372,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -e "$p_string"
-                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                         fi
                         ;;
                     esac
@@ -368,19 +384,19 @@ function CheckProjectLogStatus()
                         '-n' | 'n')
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckInitialization; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitSourced; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -512,8 +528,11 @@ function CheckFmt()
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function ExitError()
 {
-    # In case the "exit" command didn't worked, the program has to be killed.
-    CheckSTAT_EXIT_CODE "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; exit "$__BU_STAT_EXIT_CODE"; kill "$$"
+    if [[ "$1" =~ [0-9] ]]; then
+        exit "$1"; kill "$$"
+    else
+        echo "${__BU_COLOR_WARNING}Warning : unexpected exit code passed as argument for the ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} function.${__BU_COLOR_RESET}"
+    fi
 }
 
 # -----------------------------------------------
@@ -556,7 +575,11 @@ function HandleErrors()
 
         if [ "$__BU_STAT_CPLS" = "true" ]; then
             __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")")
-            __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}AN ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
+            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}A FATAL ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
+            else
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}AN ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
+            fi
 
             if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
@@ -581,7 +604,6 @@ function HandleErrors()
             fi
 
             if [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                # As the only time 
                 __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_ERROR}Stopping the execution of $(DechoHighlight "$(basename "$0")")$__BU_COLOR_RESET." >&2; echo -e >&2)")
 
                 # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
@@ -609,7 +631,7 @@ function HandleErrors()
                         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
+                            echo -e "$val" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
 
                         elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
@@ -629,7 +651,7 @@ function HandleErrors()
         # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
         else
             if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
-                __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                local v_log_old="true"; __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 
             if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
@@ -652,10 +674,14 @@ function HandleErrors()
 
             if [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
-                ExitError "$__BU_STAT_EXIT_CODE"
+                ExitError "1"
             else
                 # Calling the function that processes the given answer.
                 CaseRead_HandleErrors
+            fi
+            
+            if [ "$v_log_old" = "true" ]; then
+                __BU_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
         fi
     fi

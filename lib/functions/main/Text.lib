@@ -63,6 +63,12 @@ function CutLastFieldFromPath()
     echo -e "$p_path"
 }
 
+# Cut any part of a string after a delimiter.
+function CutStringAfterDelim()
+{
+
+}
+
 # Reverse a string.
 function ReverseStringWordsOrder()
 {

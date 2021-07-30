@@ -121,22 +121,6 @@ function CheckSTAT_ERROR()
     fi
 }
 
-# Checking the "$__BU_STAT_EXIT_CODE" status variable's value.
-function CheckSTAT_EXIT_CODE()
-{
-    #***** Parameters *****
-    local p_file=$1
-    local p_lineno=$2
-
-    #***** Variables *****
-    local pa_correctValues=("")
-
-    #***** Code *****
-    if ! IsInt "$__BU_STAT_EXIT_CODE"; then
-        Confecho -e "$p_file" "$p_lineno" "$__BU_STAT_EXIT" "__BU_STAT_EXIT" "${pa_correctValues[@]}"
-    fi
-}
-
 # Checking the "$__BU_STAT_LOG" status variable's value.
 function CheckSTAT_LOG()
 {
@@ -316,7 +300,6 @@ function CheckProjectStatusVars()
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
     CheckSTAT_TXT_FMT       "$p_file" "$p_lineno"
-    CheckSTAT_EXIT_CODE     "$p_file" "$p_lineno"
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
