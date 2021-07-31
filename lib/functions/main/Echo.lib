@@ -136,9 +136,9 @@ function __EchoCPLS()
                         ;;
                     '' | *)
                         if [ "$val" = "nodate" ]; then
-                            echo -ne "$p_string" > "$__BU_PROJECT_LOG_FILE_PATH"
+                            echo -e "$p_string" > "$__BU_PROJECT_LOG_FILE_PATH"
                         else
-                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e >&2; echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo -e >&2; return 1; }
                         fi
                         ;;
                 esac
