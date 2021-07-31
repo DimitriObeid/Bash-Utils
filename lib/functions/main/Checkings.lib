@@ -148,6 +148,8 @@ function CheckRootEUID()
     if [ "$EUID" -ne 0 ]; then
         HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
             "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+
+        return 1
     fi
 }
 
@@ -165,6 +167,15 @@ function CheckInitialization()
     fi
 }
 
+# -----------------------------------------------
+
+## TEXT DISPLAYING CHECKINGS
+
+# Check if the "$__STAT_CPLS" and / or "$__BU_STAT_ECHO" status variables values are set to "true".
+function CheckEcho()
+{
+    if [ "$STAT_" ]
+}
 
 # -----------------------------------------------
 
@@ -438,6 +449,8 @@ function CheckProjectLogStatus()
 
 	# Resetting the "$__BU_STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 	__BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+	return 0
 }
 
 # Check project related file presence, or create this file.
@@ -535,7 +548,9 @@ function ExitError()
     if [[ "$1" =~ [0-9] ]]; then
         exit "$1"; kill "$$"
     else
-        echo "${__BU_COLOR_WARNING}Warning : unexpected exit code passed as argument for the ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} function.${__BU_COLOR_RESET}"
+        echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()$__BU_COLOR_WARNING --> Warning : unexpected exit code passed as argument.${__BU_COLOR_RESET}"
+
+        return 1
     fi
 }
 
@@ -559,12 +574,22 @@ function HandleErrors()
 
     #***** Variables *****
     local v_hdrString
+    local va_hdrString
+
+	if [ -n "$p_file" ]; then
+        va_hdrString+=("$(DechoHighlight "$p_file"), ")
+	fi
 	
 	if [ -n "$p_function" ]; then
-		v_hdrString="$(echo -ne "IN $(DechoHighlight "$p_file"), FUNCTION $(DechoHighlight "$p_function"), LINE $(DechoHighlight "$p_lineno") -->")"
-	else
-		v_hdrString="$(echo -ne "IN $(DechoHighlight "$p_file"), LINE $(DechoHighlight "$p_lineno") -->")"
+        va_hdrString+=("FUNCTION $(DechoHighlight "$p_function"), ")
 	fi
+	
+	if [ -n "$p_lineno" ]; then
+        va_hdrString+=("LINE $(DechoHighlight "$p_lineno" )")
+	fi
+
+	# TODO : print every values of the va_hdrString array.
+	v_hdrString="$(echo -ne "IN ${va_hdrString[0]}${va_hdrString[1]}${va_hdrString[2]}-->")"
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

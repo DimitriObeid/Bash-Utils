@@ -122,6 +122,9 @@ function HeaderBase()
     fi
 }
 
+# Header to display without color.
+function Header         { HeaderBase "$__BU_COLOR_RESET"    "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_RESET"      "$1"; } 
+
 # Header to display in case of an error.
 function HeaderError    { HeaderBase "$__BU_COLOR_ERROR"    "$__BU_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_COLOR_ERROR"      "$1"; }
 

@@ -90,6 +90,8 @@ function __EchoOutput()
                 __EchoCPLS "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'N' ]; then
                 __EchoCPLS "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'msg' ]; then
+                __EchoCPLS "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'S' ]; then
                 __EchoCPLS "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'W' ]; then

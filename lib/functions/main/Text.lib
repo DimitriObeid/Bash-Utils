@@ -36,9 +36,7 @@ function CutDateFromString()
     local p_string=$1
 
     #***** Code *****
-    p_string="${p_string##*] }"
-    
-    echo -e "$p_string"
+    p_string="${p_string##*] }"; echo -e "$p_string"
 }
 
 # Cut the dash written before a command option call (to be improved).
@@ -48,9 +46,7 @@ function CutDashFromOption()
     local p_string=$1
 
     #***** Code *****
-    p_string="${p_string##*-}"
-    
-    echo -e "$p_string"
+    p_string="${p_string##*-}"; echo -e "$p_string"
 }
 
 # Cut every part of a string before and with the delimiter.
@@ -63,7 +59,7 @@ function CutFromCharacter()
 
     #***** Code *****
     if ! IsInt "$p_iterations"; then
-        EchoWarning "$(DechoHighligh "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."; return 1
+        EchoWarning "$(DechoHighligh "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."
     fi
 
     if [ "$p_iterations" -eq 0 ]; then
@@ -74,6 +70,7 @@ function CutFromCharacter()
         #shellcheck disable=SC2001
         p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")"
         p_target="$p_target"
+
         echo "$p_target"
     done
 
