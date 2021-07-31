@@ -169,16 +169,6 @@ function CheckInitialization()
 
 # -----------------------------------------------
 
-## TEXT DISPLAYING CHECKINGS
-
-# Check if the "$__STAT_CPLS" and / or "$__BU_STAT_ECHO" status variables values are set to "true".
-function CheckEcho()
-{
-    if [ "$STAT_" ]
-}
-
-# -----------------------------------------------
-
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -503,6 +493,14 @@ function CheckDecho()
     else
         return 0
 	fi
+}
+
+# Check if the "$__STAT_CPLS" and / or "$__BU_STAT_ECHO" status variables values are set to "true".
+function CheckEcho()
+{
+    if [ "$__BU_STAT_CPLS" = "true" ] || [ "$__BU_STAT_ECHO" = "true" ]; then
+    
+    fi
 }
 
 # Checking if the "$__BU_STAT_TXT_FMT" status variable's value is "true".
