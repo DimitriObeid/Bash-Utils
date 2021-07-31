@@ -281,7 +281,12 @@ function CheckSTAT_USER_OS()
     #***** Parameters *****
     local p_file=$1
     local p_lineno=$2
+    shift 2
 
+    local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
+
+    #***** Variables *****
+    
     #***** Code *****
     return
 }
@@ -295,13 +300,15 @@ function CheckProjectStatusVars()
     local p_lineno=$2
 
     #***** Code *****
-    # Processing first the "STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
+    # Processing first the "__STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
+    CheckSTAT_CPLS          "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
-    CheckSTAT_TXT_FMT       "$p_file" "$p_lineno"
-	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno"
     CheckSTAT_TIME_TXT      "$p_file" "$p_lineno"
+    CheckSTAT_TRANSLATED    "$p_file" "$p_lineno"
+    CheckSTAT_TXT_FMT       "$p_file" "$p_lineno"
+    CheckSTAT_USER_OS       "$p_file" "$p_lineno"
 }

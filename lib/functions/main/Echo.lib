@@ -51,32 +51,62 @@ function __EchoOutput()
             echo >&2; exit 1
         }
 	fi
-	
-	if [ "$p_context" = "begin" ]; then
-		if [ "${p_type^^}" = "E" ]; then
-			EchoMsg "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'N' ]; then
-			EchoMsg "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'S' ]; then
-			EchoMsg "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'W' ]; then
-			EchoMsg "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		fi
-		
-		return 0
-	fi
 
-	if [ "$p_context" = "end" ]; then
-		if [ "${p_type^^}" = "E" ]; then
-			EchoMsg "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'N' ]; then
-			EchoMsg "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'S' ]; then
-			EchoMsg "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		elif [ "${p_type^^}" = 'W' ]; then
-			EchoMsg "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
-		fi
-	fi
+	if [ "$__BU_STAT_CPLS" = "false" ]; then
+        if [ "$p_context" = "begin" ]; then
+            if [ "${p_type^^}" = "E" ]; then
+                EchoMsg "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'N' ]; then
+                EchoMsg "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'S' ]; then
+                EchoMsg "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'W' ]; then
+                EchoMsg "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            fi
+            
+            return 0
+        fi
+
+        if [ "$p_context" = "end" ]; then
+            if [ "${p_type^^}" = "E" ]; then
+                EchoMsg "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'N' ]; then
+                EchoMsg "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'S' ]; then
+                EchoMsg "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'W' ]; then
+                EchoMsg "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            fi
+        fi
+
+    # Else, if the "$__BU_STAT_CPLS" status variable's value is set to "true"
+    else
+        if [ "$p_context" = "begin" ]; then
+            if [ "${p_type^^}" = "E" ]; then
+                __EchoCPLS "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'N' ]; then
+                __EchoCPLS "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'S' ]; then
+                __EchoCPLS "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'W' ]; then
+                __EchoCPLS "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            fi
+            
+            return 0
+        fi
+
+        if [ "$p_context" = "end" ]; then
+            if [ "${p_type^^}" = "E" ]; then
+                __EchoCPLS "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'N' ]; then
+                __EchoCPLS "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'S' ]; then
+                __EchoCPLS "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            elif [ "${p_type^^}" = 'W' ]; then
+                __EchoCPLS "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+            fi
+        fi
+    fi
 }
 
 # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
@@ -88,7 +118,11 @@ function __EchoCPLS()
 
     shift 2; pa_extraArgs=("$@")
 
-    #***** Code *****
+    #***** Code *****$
+    CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
     if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
             for val in "${pa_extraArgs[@]}"; do

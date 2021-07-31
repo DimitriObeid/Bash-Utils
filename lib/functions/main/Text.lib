@@ -49,34 +49,67 @@ function CutDashFromOption()
     echo -e "$p_string"
 }
 
-# Cut the last field of a path.
-function CutLastFieldFromPath()
+# Cut every part of a string before and with the delimiter.
+function CutFromCharacter()
 {
     #***** Parameters *****
-    local p_path=$1
+    p_target=$1         # string to process
+    #   $2  --> delimiter
+    p_iterations=$3     # iterations
 
     #***** Code *****
-    CheckArgsMain_CutLastFieldFromPath "$p_path"
+    if ! IsInt "$p_iterations"; then
+        EchoWarning "$(DechoHighligh "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."; return 1
+    fi
 
-    p_path=${p_path##*/)}
+    if [ "$p_iterations" -eq 0 ]; then
+        p_iterations='1'
+    fi
 
-    echo -e "$p_path"
+    for ((i=0; i<p_iterations; i++)); do
+        #shellcheck disable=SC2001
+        p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")"
+        p_target="$p_target"
+        echo "$p_target"
+    done
+
+    return 0
+}
+
+# Cut the last field of a string.
+function CutLastFieldFromDelimiter()
+{
+    #***** Parameters *****
+    #   $1  --> string to process
+    #   $2  --> delimiter
+
+    #***** Code *****
+    "$1"="${1##*$2)}"; echo -ne "$1" && return 0
 }
 
 # Cut any part of a string after a delimiter.
 function CutStringAfterDelim()
 {
+    #***** Parameters *****
+    #   $1  --> string to process
+    #   $2  --> delimiter
+    #   $3  --> iterations
 
+    #***** Code *****
+    return
 }
 
-# Reverse a string.
+# Reverse words of a string according to a delimiter.
+
+# Examples with the '|' and '/' delimiter:
+# animal | big | car | donut    --> donut | car | big | animal
+# /home/user/Documents          --> Documents/user/home
 function ReverseStringWordsOrder()
 {
     #***** Parameters *****
-    p_str=$1
-    p_delim=$2
+    #   $1  --> string to process
+    #   $2  --> delimiter
 
     #***** Code *****
-    echo "$p_str" | tr "$p_delim" '\n' | tac | tr '\n' "$p_delim"
-
+    echo -ne "$1" | tr "$2" '\n' | tac | tr '\n' "$2" && return 0
 }

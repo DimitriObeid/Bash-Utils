@@ -85,60 +85,45 @@ function __CheckArgsMain_PrintBadOption()
     local p_lineno=$6   # Line where the test failed.
 
     #***** Variables *****
-    v_string="THE $(KeepFormatting "$(CutCheck "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
+    v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
 
     #***** Code *****
     if [ "$p_option" = 'z' ]; then
         # shellcheck disable=SC2116
 		HandleErrors "1" "$v_string HAS NO VALUE" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!alpha' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHABETIC STRING" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!alphanum' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHANUMERIC STRING" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!d' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A VALID DIRECTORY PATH" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
     
     elif [ "$p_option" = '!f' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A VALID FILE PATH" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!float' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A FLOAT" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
     elif [ "$p_option" = '!int' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN INTEGER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutCheck "$p_funcname")" "$p_lineno"
+            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
     fi
 }
-
-# -----------------------------------------------
-
-## TEXT FORMATING FUNCTIONS
-
-# Cut the text of the function's name before and with the underscore.
-function CutCheck()
-{
-	#shellcheck disable=SC2001
-	sed 's/^[^_]*_//' <<< "$1"
-}
-
-# -----------------------------------------------
-
-
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -156,7 +141,7 @@ function CheckArgsMain_ProcessingDir()
 
     #***** Code *****
     local lineno="$LINENO"; if [ -z "$p_function" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "The function $(CutCheck "$(DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
+        __CheckArgsMain_PrintBadOption 'z' "The function $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
             'p_function' "$p_function" "${FUNCNAME[0]}" "$lineno"
 
     local lineno="$LINENO"; elif [ -z "$p_parent" ]; then
@@ -218,7 +203,7 @@ function CheckArgsMain_GetDirectoryName()
 
     #***** Code *****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "The $(CutCheck "$(DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "${FUNCNAME[0]}" "$lineno"
+        __CheckArgsMain_PrintBadOption 'z' "The $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -230,7 +215,7 @@ function CheckArgsMain_GetDirectoryPath()
 
     #***** Code *****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "The $(CutCheck "$(DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+        __CheckArgsMain_PrintBadOption 'z' "The $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
     fi
 }
 
@@ -375,19 +360,3 @@ function CheckArgsMain_Makefile()
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### "main/Text.lib" FILE'S FUNCTIONS
-
-##
-
-# "CutLastFieldFromPath()"
-function CheckArgsMain_CutLastFieldFromPath()
-{
-    #***** Parameters *****
-    local p_path=1
-
-    #***** Code *****
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption "z" "Please pass the string composing the path of the file or the directory to get." 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
-    fi
-}

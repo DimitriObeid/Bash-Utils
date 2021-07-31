@@ -80,6 +80,10 @@ function DrawLine()
 }
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
+
+# Since this function can be called in the "__EchoOutput()" function,
+# even if the "$__BU_STAT_CPLS" status variable's value is set to "true",
+# it's better to create a failsafe, to avoid experiencing an infinite loop.
 function HeaderBase()
 {
 	#***** Parameters *****
@@ -92,15 +96,26 @@ function HeaderBase()
 # 	HEADERBASE_COLOR_LINE="$p_lineColor"
 # 	HEADERBASE_COLOR_TEXT="$p_stringColor"
 
-	#***** Code *****    
-	Newline
+	#***** Code *****
+	if [ "$__BU_STAT_CPLS" = "false" ]; then
+        Newline
 
-	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
-	EchoMsg "$p_stringColor##> $p_stringTxt${__BU_COLOR_RESET}"
-	EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
-	Newline
+        EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        EchoMsg "$p_stringColor##> $p_stringTxt${__BU_COLOR_RESET}"
+        EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        Newline
 
-	return
+        return 0
+    else
+        echo -e
+
+        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        echo -e "$p_stringColor##> $p_stringTxt${__BU_COLOR_RESET}"
+        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        echo -e
+
+        return 0
+    fi
 }
 
 # Header to display in case of an error.

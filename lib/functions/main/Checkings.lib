@@ -109,7 +109,7 @@ function IsAlpha()
     fi
 }
 
-# Checking if vialue is an aplhanumeric string.
+# Checking if value is an aplhanumeric string.
 function IsAlphaNum()
 {
     #***** Parameters *****
