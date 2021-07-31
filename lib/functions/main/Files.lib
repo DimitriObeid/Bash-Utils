@@ -263,10 +263,10 @@ function GetLineFromTextFile()
 function Compress()
 {
     #***** Parameters *****
-    local cmd=$1      # Compression command.
-    local opts=$2     # Options of the compression command.
-    local p_path=$3     # Path to the file/folder to archivate.
-    local p_name=$4     # Archive's name (only used into displayed messages).
+#     local cmd=$1      # Compression command.
+#     local opts=$2     # Options of the compression command.
+#     local p_path=$3     # Path to the file/folder to archivate.
+#     local p_name=$4     # Archive's name (only used into displayed messages).
     
     #***** Code *****
     
@@ -282,19 +282,19 @@ function Compress()
 #   - Newline           -> Echo.lib
 function Uncompress()
 {
-    #***** Paramètres *****
-    local p_cmd=$1      # Compression command.
-    # TODO : Vérifier si cette procédure est bonne
-    local p_opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_path=$3     # Path to the l'archive to uncompress.
-    local p_name=$4     # Archive's name (only used into displayed messages).
-
-    #***** Code *****
-    # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
-    "$cmd $opts $p_path"
-    HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
-    EchoSuccess "La décompression de l'archive $(DechoHighlight "$p_name") s'est effectuée avec brio."
-    Newline
+#     #***** Paramètres *****
+#     local p_cmd=$1      # Compression command.
+#     # TODO : Vérifier si cette procédure est bonne
+#     local p_opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+#     local p_path=$3     # Path to the l'archive to uncompress.
+#     local p_name=$4     # Archive's name (only used into displayed messages).
+# 
+#     #***** Code *****
+#     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
+#     "$cmd $opts $p_path"
+#     HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
+#     EchoSuccess "La décompression de l'archive $(DechoHighlight "$p_name") s'est effectuée avec brio."
+#     Newline
     
     return 0
 }

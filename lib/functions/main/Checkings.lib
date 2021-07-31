@@ -453,7 +453,7 @@ function CheckProjectRelatedFile()
 
 	#***** Variables *****
 	local v_file_parent="$p_dirname_parent/$p_dirname"
-    local v_path="$p_parent/$p_name"
+    local v_path="$v_file_parent/$p_filename"
 
 	#***** Code *****
 	if [ -f "$v_path" ]; then
@@ -467,7 +467,7 @@ function CheckProjectRelatedFile()
             Makedir "$p_dirname_parent" "$p_dirname"
         fi
 
-        Makefile "$v_file_parent" "$p_name"
+        Makefile "$v_file_parent" "$p_filename"
     fi
 }
 
@@ -499,7 +499,9 @@ function CheckDecho()
 function CheckEcho()
 {
     if [ "$__BU_STAT_CPLS" = "true" ] || [ "$__BU_STAT_ECHO" = "true" ]; then
-    
+        return 0
+    else
+        return 1
     fi
 }
 

@@ -321,6 +321,6 @@ function GetParentDirectoryPath()
             local v_current_path="$v_parent"
         done
 
-        local v_print_path; v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
+        ReverseStringWordsOrder "$v_path_str" '/'
     fi
 }
