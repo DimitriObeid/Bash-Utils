@@ -137,7 +137,7 @@ __BU_STAT_TIME_TXT="0";        CheckSTAT_TIME_TXT  "$(basename "${BASH_SOURCE[0]
 # shellcheck disable=SC2034
 __BU_STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-if CheckInitialization; then
+if CheckIsInitializing; then
     # shellcheck disable=SC2034
     __INIT_IS_INITALIZING="false"
 fi

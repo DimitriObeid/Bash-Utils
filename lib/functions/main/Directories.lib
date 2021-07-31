@@ -112,7 +112,7 @@ function OverwriteDir()
             Newline
         else
             # shellcheck disable=SC2034
-            __BU_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            ChangeSTAT_ERROR "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
         fi
 	fi

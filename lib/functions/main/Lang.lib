@@ -27,6 +27,39 @@ fi
 
 #### TRANSLATIONS PROCESSING FUNCTIONS
 
+## CHECKING FUNCTIONS
+
+# Parsing a CSV file containing translations.
+function CheckNotTranslated_ParseCSVLang()
+{
+    #***** Parameters *****
+    local p_path=$1               # Path of the translations CSV file to parse.
+    local p_lang=$2               # Language to fetch.
+    local p_success_msg=$3        # Success message to display in the targeted language.
+    local p_error_msg=$4          # Error message to display in the targeted language.
+
+    #***** Code *****
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ ! -f "$p_path" ]; then
+        __CheckArgsMain_PrintBadOption '!f' "Please pass the valid path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ -z "$p_lang" ]; then
+        __CheckArgsMain_PrintBadOption 'z' "Please pass the <...> of the language to fetch as argument" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno"
+
+    ## TODO : Add a fail-safe if the targeted language is not found.
+
+    local lineno="$LINENO"; elif [ -z "$p_success_msg" ]; then
+        __CheckArgsMain_PrintBadOption 'z' "Please pass the success message of your language as third argument" 'p_success_msg' "$p_success_msg" "${FUNCNAME[0]}" "$lineno"
+
+    local lineno="$LINENO"; elif [ -z "$p_error_msg" ]; then
+        __CheckArgsMain_PrintBadOption 'z' "Please pass the error message of your language as forth argument" 'p_error_msg' "$p_error_msg" "${FUNCNAME[0]}" "$lineno"
+    fi
+}
+
+# -----------------------------------------------
+
 ## PARSING FUNCTIONS
 
 # Parsing a translations CSV file.
@@ -39,12 +72,21 @@ function ParseCSVLang()
     p_error_msg=$4          # Error message to display in the targeted language.
 
     #***** Code *****
-    CheckArgsMain_ParseCSVLang "$p_path" "$p_lang" "$p_success_msg" "$p_error_msg"
+    # If the library is already translated and a project's translation file needs to be called,
+    # then it's not recommended to call a function that prints translated text, even if it only happens because of an error.
+    if [ "$__STAT_TRANSLATED" = "false" ]; then
+        CheckNotTranslated_ParseCSVLang "$p_path" "$p_lang" "$p_success_msg" "$p_error_msg"
 
-    HeaderCyan "PARSING THE $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
+    # Else, if the library is already translated and a project's translation file needs to be called,
+    # Then it's OK to call a function that prints translated text.
+    else
+        CheckArgsMain_ParseCSVLang "$p_path" "$p_lang" "$p_success_msg" "$p_error_msg"
 
-    EchoNewstep "Finding the variables list"
-    Newline
+        HeaderCyan "PARSING THE $(DechoHighlight "$__BU_PROJECT_NAME")'S $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
 
-#     for i in 
+        EchoNewstep "Finding the variables list"
+        Newline
+
+        # for i in 
+    fi
 }

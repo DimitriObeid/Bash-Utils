@@ -32,13 +32,7 @@ fi
 # Checking floating value.
 function IsFloat()
 {
-    #***** Parameters *****
-    local p_value=$1
-
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
+    if [[ "$1" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0
     else
         return 1
@@ -48,13 +42,7 @@ function IsFloat()
 # Checking floating and integer value.
 function IsFloatInt()
 {
-    #***** Parameters *****
-    local p_value=$1
-
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+    if [[ "$1" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
         return 0
     else
         return 1
@@ -64,13 +52,7 @@ function IsFloatInt()
 # Checking integer value.
 function IsInt()
 {
-    #***** Parameters *****
-    local p_value=$1
-
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ [0-9] ]]; then
+    if [[ "$1" =~ [0-9] ]]; then
         return 0
     else
         return 1
@@ -80,13 +62,7 @@ function IsInt()
 # Checking integer value.
 function IsInt2()
 {
-    #***** Parameters *****
-    local p_value=$1
-
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ ^[+-]?[0-9]+$ ]]; then
+    if [[ "$1" =~ ^[+-]?[0-9]+$ ]]; then
         return 0
     else
         return 1
@@ -100,13 +76,7 @@ function IsInt2()
 # Checking if value is an alphabetic string (not any number allowed)
 function IsAlpha()
 {
-    #***** Parameters *****
-    local p_value=$1
-    
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ [A-Z] ]]; then
+    if [[ "$1" =~ [A-Z] ]]; then
         return 0
     else
         return 1
@@ -116,13 +86,7 @@ function IsAlpha()
 # Checking if value is an aplhanumeric string.
 function IsAlphaNum()
 {
-    #***** Parameters *****
-    local p_value=$1
-
-    #***** Code *****
-    CheckArgsMain_IsBadArgc0 "$p_value"
-
-    if [[ "$p_value" =~ [^a-zA-Z0-9\ ] ]]; then
+    if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0
     else
         return 1
@@ -158,7 +122,7 @@ function CheckRootEUID()
 ## INITIALIZATION CHECKINGS
 
 # Checking if the library is into its initialization process.
-function CheckInitialization()
+function CheckIsInitializing()
 {
     if [ "$__INIT_IS_INITIALIZING" = "true" ]; then
         return 0
@@ -185,7 +149,7 @@ function CheckDirPathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoHighlight "<missing directory path>"   # Since this function is to be called into a string, it's better to use a formatting function.
+        DechoHighlight "<missing directory path>"   # Since this function should be called into a string, it's better to use a formatting function.
     fi
 }
 
@@ -201,7 +165,7 @@ function CheckFilePathExists()
 
     #***** Code *****
     if [ ! -f "$p_path" ]; then
-        DechoHighlight "<missing file path>"        # Since this function is to be called into a string, it's better to use a formatting function.
+        DechoHighlight "<missing file path>"        # Since this function should be called into a string, it's better to use a formatting function.
     fi
 }
 
@@ -259,7 +223,7 @@ function CheckProjectLogStatus()
     fi
 
     # Setting the "$__BU_STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
-    __BU_STAT_CPLS="true"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -277,14 +241,14 @@ function CheckProjectLogStatus()
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
@@ -296,14 +260,14 @@ function CheckProjectLogStatus()
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                             else
                                 echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
@@ -315,7 +279,7 @@ function CheckProjectLogStatus()
                 else
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             else
@@ -324,7 +288,7 @@ function CheckProjectLogStatus()
                             fi
                             ;;
                         '' | *)
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                             else
@@ -346,14 +310,14 @@ function CheckProjectLogStatus()
                 if [ "$val" = "nodate" ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
                                 echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
@@ -365,7 +329,7 @@ function CheckProjectLogStatus()
                 elif [ "$val" = '' ]; then
                     case "$p_option" in
                     '-n' | 'n')
-                        if CheckInitialization; then
+                        if CheckIsInitializing; then
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -ne "$p_string"
@@ -373,7 +337,7 @@ function CheckProjectLogStatus()
                         fi
                         ;;
                     '' | *)
-                        if CheckInitialization; then
+                        if CheckIsInitializing; then
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -e "$p_string"
@@ -387,7 +351,7 @@ function CheckProjectLogStatus()
                 else
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             else
@@ -396,7 +360,7 @@ function CheckProjectLogStatus()
                             fi
                             ;;
                         '' | *)
-                            if CheckInitialization; then
+                            if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                             else
@@ -438,7 +402,7 @@ function CheckProjectLogStatus()
 	fi
 
 	# Resetting the "$__BU_STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-	__BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	return 0
 }
@@ -464,10 +428,10 @@ function CheckProjectRelatedFile()
         return 0
     else
         if [ ! -d "$p_dirname_parent" ]; then
-            Makedir "$p_dirname_parent" "$p_dirname"
+            mkdir "$v_file_parent"
         fi
 
-        Makefile "$v_file_parent" "$p_filename"
+        touch "$v_path"
     fi
 }
 

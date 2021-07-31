@@ -96,11 +96,13 @@ function Decho()
                 # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
                 # if the "$__BU_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
-                local lineno="$LINENO"; __BU_STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$lineno"
-                
+                ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
                 HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
-                    "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+                    "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
                 echo -e "Invalid value"; exit 1
+
+                ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
                 ;; 
         esac
     done
@@ -135,12 +137,14 @@ function Decho()
                 # if the "$__BU_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
                 # shellcheck disable=SC2034
-                __BU_STAT_TXT_FMT="false"; CheckSTAT_TXT_FMT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
                 
                 HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
                     "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
                 echo -e "Invalid value"; exit 1
-                ;; 
+                
+                ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ;;
         esac
     done
 }

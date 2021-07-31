@@ -39,7 +39,7 @@ function __EchoOutput()
 
 	#***** Code *****
 	if [ ! -f "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" ]; then
-        if [ ! -d "$(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH")" ]; then
+        if [ ! -d "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" ]; then
             # Don't call the "Makedir()" function, or else the script will loop forever, since this function calls the "Echo<...>()" functions, who call this function.
             mkdir -pv "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" || \
             {
