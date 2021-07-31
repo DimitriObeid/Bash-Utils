@@ -25,9 +25,9 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### PRINTING FORMATTED STRINGS
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status variable.
+## DEBUGGING AND HANDLING TEXT DISPLAY ERRORS
 
 # "Echo<...>()" functions debug output for a better view during a "bash - x" debug process.
 function __EchoOutput()
@@ -190,6 +190,10 @@ function __EchoCPLS()
 
     fi
 }
+
+# --------------------------------------------
+
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status variable.
 
 # Error message
 
@@ -417,9 +421,7 @@ function Newline()
     #***** Code *****
     if [ -n "$number" ]; then
         if ! IsInt "$number"; then
-            HandleErrors "1" "THE NUMBER OF LINE BREAKS MUST BE AN INTEGER" \
-                "Check at the mentionned file in the 4th $(DechoHighlight "HandleErrors") function's argument" "$number" \
-                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer"
         else
             # Doing X line breaks according to the number passed as argument.
             for ((i=0; i<number; i++)); do

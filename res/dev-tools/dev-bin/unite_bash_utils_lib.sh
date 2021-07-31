@@ -4,6 +4,7 @@ source "$HOME/.bash_profile"
 
 __BASH_UTILS_FULL_FILE_PATH="$__BASH_UTILS_ROOT/Bash-utils.sh"
 
+function Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; done; }
 function CatBU { cat "$1" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; }
 function EchoBU { echo -e "# $1" | tee -a "$__BASH_UTILS_FULL_FILE_PATH"; }
 
@@ -15,12 +16,15 @@ if [ -s "$__BASH_UTILS_FULL_FILE_PATH" ]; then
 	true > "$__BASH_UTILS_FULL_FILE_PATH"
 fi
 
-EchoBU "$__BASH_UTILS_CONF_FILE_INIT"           && CatBU "$__BASH_UTILS_CONF_FILE_INIT"
-EchoBU "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" && CatBU "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS"
-EchoBU "$__BASH_UTILS_CONF_FILE_COLORS"         && CatBU "$__BASH_UTILS_CONF_FILE_COLORS"
-EchoBU "$__BASH_UTILS_CONF_FILE_TEXT"           && CatBU "$__BASH_UTILS_CONF_FILE_TEXT"
-EchoBU "$__BASH_UTILS_CONF_FILE_TIME"           && CatBU "$__BASH_UTILS_CONF_FILE_TIME"
+__CONFIG_ARRAY=($"__BASH_UTILS_CONF_FILE_INIT" "$__BASH_UTILS_CONF_FILE_PROJECT_STATUS" \
+	"$__BASH_UTILS_CONF_FILE_COLORS" "__BASH_UTILS_CONF_FILE_TEXT" "$__BASH_UTILS_CONF_FILE_TIME")
 
+# Processing the configuration files.
+for i in "${__CONFIG_ARRAY[@]}"; do
+	Newline '2' && EchoBU "${i^^}" && Newline '1' && CatBU "$i"
+done
+
+# Processing the function files.
 for i in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
-	EchoBU && EchoBU "${i^^}" && EchoBU && CatBU "$i"
+	Newline '2' && EchoBU "${i^^}" && Newline '1' && CatBU "$i"
 done
