@@ -211,11 +211,11 @@ function CheckProjectLogStatus()
     # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
 
     local v_redirectionError
-		v_redirectionError="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; \
+		v_redirectionError="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; \
             echo -e "${__BU_COLOR_ERROR}Redirection option :${__BU_COLOR_RESET}")"
 
 	local v_warning_array_value
-		v_warning_array_value="$(echo -e "${__BU_COLOR_WARNING}Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}")"
+		v_warning_array_value="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}")"
     
     #**** Code *****
     if [ "$__BU_STAT_LOG" = "true" ]; then
@@ -223,7 +223,7 @@ function CheckProjectLogStatus()
     fi
 
     # Setting the "$__BU_STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
-    ChangeSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_CPLS "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -411,13 +411,11 @@ function CheckProjectLogStatus()
 function CheckProjectRelatedFile()
 {
 	#***** Parameters *****
-	local p_dirname_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
-	local p_dirname=$2         # Name of the folder to process (into its parent directory).
-	local p_filename=$3        # Name of the file to process (into its parent directory).
+	local p_dirname=$1         # Name of the folder to process (into its parent directory).
+	local p_filename=$2        # Name of the file to process (into its parent directory).
 
 	#***** Variables *****
-	local v_file_parent="$p_dirname_parent/$p_dirname"
-    local v_path="$v_file_parent/$p_filename"
+    local v_path="$p_dirname/$p_filename"
 
 	#***** Code *****
 	if [ -f "$v_path" ]; then
@@ -427,8 +425,8 @@ function CheckProjectRelatedFile()
     elif [ -d "$v_path" ]; then
         return 0
     else
-        if [ ! -d "$p_dirname_parent" ]; then
-            mkdir "$v_file_parent"
+        if [ ! -d "$p_dirname" ]; then
+            mkdir "$p_dirname"
         fi
 
         touch "$v_path"
@@ -454,6 +452,8 @@ function CheckDecho()
 
     elif [ -n "${__BU_PROJECT_COLOR_CODE+x}" ] && [ "$__BU_PROJECT_COLOR_CODE" = '' ]; then
         __BU_PROJECT_COLOR_CODE="$__BU_COLOR_RESET"
+
+        return 0
     else
         return 0
 	fi
@@ -681,4 +681,3 @@ function HandleErrors()
 }
 
 # -----------------------------------------------
-

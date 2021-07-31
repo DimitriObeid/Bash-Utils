@@ -123,19 +123,19 @@ done
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
 # shellcheck disable=SC2034
-__BU_STAT_DEBUG="true";        CheckSTAT_DEBUG     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_DEBUG        "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_CPLS="false";        CheckSTAT_CPLS      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_CPLS         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_ERROR="fatal";       CheckSTAT_ERROR     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ERROR        "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_TIME_TXT="0";        CheckSTAT_TIME_TXT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TIME_TXT     "0"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_TXT_FMT="false";     CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TXT_FMT      "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 if CheckIsInitializing; then
     # shellcheck disable=SC2034
@@ -143,7 +143,7 @@ if CheckIsInitializing; then
 fi
 
 # shellcheck disable=SC2034
-__BU_STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_LOG_REDIRECT "tee"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 MkTmpDir
 
@@ -153,17 +153,17 @@ MkTmpDir
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" variable's value is equal to "true".
 # shellcheck disable=SC2034
-__BU_STAT_LOG="false";     CheckSTAT_LOG       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+ChangeSTAT_LOG       "false"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 # shellcheck disable=SC2034
-__BU_STAT_TXT_FMT="true";  CheckSTAT_TXT_FMT   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-CheckProjectRelatedFile "$(GetParentDirectoryPath "$__BU_PROJECT_COLOR_CODE_FILE_PARENT")" "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME"
-CheckProjectRelatedFile "$(GetParentDirectoryPath "$__BU_PROJECT_LOG_FILE_PARENT")" "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME"
+CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME"
+CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME"
 
 # -----------------------------------------------
 
