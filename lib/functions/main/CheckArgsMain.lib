@@ -8,6 +8,10 @@
 # Author(s)     : Dimitri Obeid
 # Version : 
 
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
