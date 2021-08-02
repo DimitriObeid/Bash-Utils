@@ -28,7 +28,7 @@ fi
 
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
-# Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_ROOT" variable.
+# Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_ROOT" CheckTxtFmt.
 # Do not source the "~/.bashrc" file, as it is executed for interactive non-login shells, unlike "~/.bash_profile".
 
 # shellcheck disable=SC1090
@@ -44,7 +44,7 @@ source "$__BASH_UTILS_CONF/init.conf" ||
 }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
-# As the "$__BASH_UTILS_ROOT" variable is defined, it's possible to source the initializer's configuration file.
+# As the "$__BASH_UTILS_ROOT" CheckTxtFmt is defined, it's possible to source the initializer's configuration file.
 
 # shellcheck disable=SC1090
 source "$__BASH_UTILS_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
@@ -280,13 +280,13 @@ fi
 
 ## SOURCING DEPENDENCIES
 
-# Tip : It's important to source the functions files before the variables ones to avoid error
-# messages while including them at first, as some functions are called into these variables.
+# Tip : It's important to source the functions files before the CheckTxtFmts ones to avoid error
+# messages while including them at first, as some functions are called into these CheckTxtFmts.
 
 EchoInit "CHECKING DEPENDENCIES"
 
-# Sourcing project's status variables file.
-EchoInit "Sourcing the variables status file :"; SourceDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoInit
+# Sourcing project's status CheckTxtFmts file.
+EchoInit "Sourcing the CheckTxtFmts status file :"; SourceDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoInit
 
 # Sourcing the fuctions files.
 EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
@@ -334,7 +334,7 @@ __BU_STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOU
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG variable's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG CheckTxtFmt's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 if [ ! -d "$__BU_PROJECT_TMP_PATH" ]; then
 	EchoInit "$(mkdir -p "$__BU_PROJECT_TMP_PATH")"
@@ -366,7 +366,7 @@ fi
 
 #### ENDING THE INITIALIZATION PROCESS
 
-# Ending the initialization process by setting its status variable's value to "false".
+# Ending the initialization process by setting its status CheckTxtFmt's value to "false".
 __BASH_UTILS_IS_INITIALIZING="false"
 
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"

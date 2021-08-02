@@ -2,6 +2,6 @@
 
 mkfifo fifo
 
-cat /dev/null < fifo | fifo > source ../../lib/variables/text.var
+cat /dev/null < fifo | fifo > source ../../lib/CheckTxtFmts/text.var
 
 rm fifo

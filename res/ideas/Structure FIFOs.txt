@@ -1,2 +1,2 @@
-VARIABLE="$VALEUR"		#	Name of the variable and its value to get
+VARIABLE="$VALEUR"		#	Name of the CheckTxtFmt and its value to get
 EOF						#	

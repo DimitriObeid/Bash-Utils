@@ -19,7 +19,7 @@ function GetMainPackageManager
 {
 	HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
 
-	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
+	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment CheckTxtFmt's supported paths) by executing it.
 	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
 
 	# For more informations about the redirections in UNIX Shell, please visit this link -> https://www.tldp.org/LDP/abs/html/io-redirection.html
@@ -34,7 +34,7 @@ function GetMainPackageManager
         exit 1
     fi
 
-	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
+	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la CheckTxtFmt $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
 	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
         # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "HandleErrors" sans que le moindre bug ne se produise.
 		HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(DechoE "APT"), $(DechoE "DNF") et $(DechoE "Pacman")." "$LINENO"

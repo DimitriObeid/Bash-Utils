@@ -24,7 +24,7 @@ source "$__BASH_UTILS/Initializer.sh" || { echo >&2; echo -e "Unable to source t
 
 ## VARIABLES DEFINITION
 
-# Please define any needed variable here.
+# Please define any needed CheckTxtFmt here.
 
 # -----------------------------------------------
 

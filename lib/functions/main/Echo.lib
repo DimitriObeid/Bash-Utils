@@ -193,7 +193,7 @@ function __EchoCPLS()
 
 # --------------------------------------------
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status variable.
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status CheckTxtFmt.
 
 # Error message
 

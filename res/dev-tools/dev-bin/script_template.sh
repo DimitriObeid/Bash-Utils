@@ -24,13 +24,13 @@ source "$__BASH_UTILS_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable to so
 
 ## VARIABLES DEFINITION
 
-# Please define any needed variable here.
+# Please define any needed CheckTxtFmt here.
 
 # -----------------------------------------------
 
 ## STATUS VARIABLES EDITION
 
-# Please edit any needed status variable here.
+# Please edit any needed status CheckTxtFmt here.
 
 # -----------------------------------------------
 

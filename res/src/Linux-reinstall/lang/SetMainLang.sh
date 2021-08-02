@@ -11,7 +11,7 @@ function SetMainLang
     local lineno=$5
     
     #***** Code *****
-    # Don't double quote what follows the path variable, or else, the loop will only run once.
+    # Don't double quote what follows the path CheckTxtFmt, or else, the loop will only run once.
     EchoInit "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
         if source "$f"; then
             EchoInit "$success_msg : $f"
@@ -22,7 +22,7 @@ function SetMainLang
     done; EchoInit
 }
 
-# Detecting user's language with the "$LANG" environment variable.
+# Detecting user's language with the "$LANG" environment CheckTxtFmt.
 case "$LANG" in
     en_*)
         # English

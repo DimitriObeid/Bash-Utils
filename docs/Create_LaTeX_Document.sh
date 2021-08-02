@@ -56,12 +56,12 @@ if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
-	#***** Conditions variables definition.
+	#***** Conditions CheckTxtFmts definition.
 	__path_Bash="$__read_lang/Bash/"
 	__path_config="$__read_lang/config"
 	__path_basis_functions="$__read_lang/Bash/functions/basis"
 	__path_main_functions="$__read_lang/Bash/functions/main"
-	__path_variables="$__read_lang/Bash/variable"
+	__path_CheckTxtFmts="$__read_lang/Bash/CheckTxtFmt"
 
 	#***** Asking for the new document's path.
 	EchoNewstep "What kind of document do you want to write ?"
@@ -69,7 +69,7 @@ else
 	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_config")"
 	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_basis_functions")"
 	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_main_functions")"
-	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_variables")"
+	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_CheckTxtFmts")"
 	Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
@@ -91,7 +91,7 @@ else
 			Makedir "$__BASH_UTILS_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__BASH_UTILS_DOCS" "$__path_variables" && __folder_path="$__BASH_UTILS_DOCS/$__path_variables"
+			Makedir "$__BASH_UTILS_DOCS" "$__path_CheckTxtFmts" && __folder_path="$__BASH_UTILS_DOCS/$__path_CheckTxtFmts"
 			;;
 		*)
 			HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"

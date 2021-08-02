@@ -86,7 +86,7 @@ function OverwriteDir()
 
     #***** Code *****
     # Checking first if the awaited arguments are given
-    CheckArgsMain_OverwriteDir "$p_path" "$p_authorization"
+    if ! CheckArgsMain_OverwriteDir "$p_path" "$p_authorization"; then return 1; fi
 	
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$p_path"
@@ -96,7 +96,7 @@ function OverwriteDir()
 	Newline
 
 	if [ "$p_authorization" = "true" ]; then
-        # TODO : Si la variable n'est pas initialisée.
+        # TODO : Si la CheckTxtFmt n'est pas initialisée.
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
             # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
@@ -110,10 +110,12 @@ function OverwriteDir()
 
             EchoSuccess "Deletion of the contents of the folder $(DechoHighlight "$v_path/") performed successfully"
             Newline
+
+			return 0
         else
-            # shellcheck disable=SC2034
-            ChangeSTAT_ERROR "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+            HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+
+			return 1
         fi
 	fi
 
@@ -142,10 +144,10 @@ function Makedir()
 
 	#***** Code *****
 	# Checking first if the awaited arguments are given
-    CheckArgsMain_Makedir "$p_parent" "$p_name"
+    if ! CheckArgsMain_Makedir "$p_parent" "$p_name"; then return 1; fi
     
     # Checking second if the script is operating at the root directory.
-    TriggerRootDirWarning "$v_path"
+    if ! TriggerRootDirWarning "$v_path"; then return 1; fi
 	
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
@@ -179,17 +181,28 @@ function Makedir()
     fi
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG variable's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG CheckTxtFmt's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function MkTmpDir()
 {
     local lineno="$LINENO"; if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
-        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH"
-
-        HandleErrors "$?" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH" ||
+		{
+			ChangeSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			
+			HandleErrors "1" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
             "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
-    fi
+
+			ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+			return 1
+		}
+    
+		return 0
+	fi
+
+	return 0
 }
 
 # -----------------------------------------------
@@ -213,9 +226,12 @@ function GetDirectoryName()
 
         echo -e "$result"
 
+		return 0
     else
         HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
+		
+		return 1
     fi
 }
 
@@ -230,9 +246,13 @@ function GetDirectoryPath()
 
     if [ -d "$p_path" ]; then
         echo -e "$p_path"
+
+		return 0
     else
         HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+
+		return 1
     fi
 }
 
@@ -250,14 +270,11 @@ function GetParentDirectoryName()
         p_iterations='1'
     fi
 
-    # Storing the
-    local v_path_str=""
-
     for ((i=0; i<p_iterations; i++)); do
         local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
             || {
                 HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
             }; pwd -P )"
 
         p_path="$v_parent"
@@ -289,7 +306,7 @@ function GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
                 }; pwd -P )"
 
             p_path="$v_parent"
@@ -307,7 +324,7 @@ function GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
                 }; pwd -P )"
             
             local v_path_cut; v_path_cut="${v_parent##*/}"

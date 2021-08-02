@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Detecting user's language with the "$LANG" environment variable.
+# Detecting user's language with the "$LANG" environment CheckTxtFmt.
 function SetLibLang
 {
     case "$LANG" in

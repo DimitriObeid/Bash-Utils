@@ -175,15 +175,15 @@ function CheckFilePathExists()
 function CheckProjectLogPath()
 {
     if [ -z "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-        echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo -e "FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE" >&2
-        echo -e "Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
+        echo -e "${__BU_COLOR_ERROR}FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
+        echo -e "${__BU_COLOR_ERROR}Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
     elif [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-        echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> " >&2
-        echo -e "FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE" >&2
-        echo -e "Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
+        echo -e "${__BU_COLOR_ERROR}FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
+        echo -e "${__BU_COLOR_ERROR}Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
         ExitError
 
     fi
@@ -208,7 +208,7 @@ function CheckProjectLogStatus()
 	# which also calls this same ""CheckProjectLogStatus() function.
 
     # If you need to call a function here, please verify if it doesn't calls the "CheckProjectLogStatus()" function,
-    # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status variable value to "true" BEFORE calling the wanted function.
+    # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status CheckTxtFmt value to "true" BEFORE calling the wanted function.
 
     local v_redirectionError
 		v_redirectionError="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; \
@@ -222,7 +222,7 @@ function CheckProjectLogStatus()
         CheckProjectLogPath
     fi
 
-    # Setting the "$__BU_STAT_CPLS" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    # Setting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
     ChangeSTAT_CPLS "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -401,7 +401,7 @@ function CheckProjectLogStatus()
         sleep "$__BU_STAT_TIME_TXT"
 	fi
 
-	# Resetting the "$__BU_STAT_CPLS" status variable's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+	# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 	ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	return 0
@@ -420,16 +420,21 @@ function CheckProjectRelatedFile()
 	#***** Code *****
 	if [ -f "$v_path" ]; then
         if [ -s "$v_path" ]; then
-            true > "$v_path"
+            true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
         fi
+
+		return 0
+
     elif [ -d "$v_path" ]; then
         return 0
     else
         if [ ! -d "$p_dirname" ]; then
-            mkdir "$p_dirname"
+            mkdir "$p_dirname" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_dirname")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
         fi
 
-        touch "$v_path"
+        touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
+
+		return 0
     fi
 }
 
@@ -459,7 +464,7 @@ function CheckDecho()
 	fi
 }
 
-# Check if the "$__STAT_CPLS" and / or "$__BU_STAT_ECHO" status variables values are set to "true".
+# Check if the "$__STAT_CPLS" and / or "$__BU_STAT_ECHO" status values are set to "true".
 function CheckEcho()
 {
     if [ "$__BU_STAT_CPLS" = "true" ] || [ "$__BU_STAT_ECHO" = "true" ]; then
@@ -469,22 +474,26 @@ function CheckEcho()
     fi
 }
 
-# Checking if the "$__BU_STAT_TXT_FMT" status variable's value is "true".
-function CheckFmt()
+# Checking if the "$__BU_STAT_TXT_FMT" status value is set to "true".
+function CheckTextFormat()
 {
     #***** Parameters *****
-    #   $1  -> tput command's text formatting option.
+    #   $1  -> "tput" command's text formatting option.
     #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
     #***** Code *****
     if [ "$__BU_STAT_TXT_FMT" = "true" ]; then
         if [ -n "$1" ]; then
-            # Formatting text with the tput command or directly with the backslash escapes.
-            tput "$1" || echo -ne "\e[$2m"
+			if command -v "tput" &> /dev/null; then
+				# Formatting text with the tput command or directly with the backslash escapes.
+				tput "$1" || echo -ne "\e[$2m"
 
-            return 0
+				return 0
+			else
+				echo -ne "\e[$2m"; return 0
+			fi
 
-        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence
+        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence.
         else
             echo -ne "\e[$2m"
 
@@ -562,7 +571,7 @@ function HandleErrors()
         return
     else
         # If the function needs to be called in the "CheckProjectLogStatus()" function,
-        # this status variable's value MUST be set at "true", or else the script will loop forever.
+        # this status CheckTxtFmt's value MUST be set at "true", or else the script will loop forever.
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
@@ -637,7 +646,7 @@ function HandleErrors()
                 # Calling the function that processes the given answer.
                 CaseRead_HandleErrorsCPLS
 
-                # Resetting the "$__BU_STAT_CPLS" status variable.
+                # Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt.
                 __BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 

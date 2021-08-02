@@ -48,7 +48,7 @@ function ConfEcho()
 
     #***** Code *****
     echo >&2; echo -n "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB In ${__BU_COLOR_HIGHLIGHT}$p_file${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> " >&2
-    echo -e "Error : the ${__BU_COLOR_HIGHLIGHT}$p_varVal${__BU_COLOR_ERROR} variable's value is incorrect.${__BU_COLOR_RESET}" >&2
+    echo -e "Error : the ${__BU_COLOR_HIGHLIGHT}$p_varVal${__BU_COLOR_ERROR} CheckTxtFmt's value is incorrect.${__BU_COLOR_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
         echo >&2; echo -e "${__BU_COLOR_ERROR}$__BU_TXT_TAB$__BU_TXT_TAB Bad value :${__BU_COLOR_YELLOW} An empty string.${__BU_COLOR_RESET}" >&2
@@ -77,7 +77,7 @@ function ConfEcho()
 
 ## CHECKINGS
 
-# Check the "$__BU_STAT_CPLS" status variable's value.
+# Check the "$__BU_STAT_CPLS" status CheckTxtFmt's value.
 function CheckSTAT_CPLS()
 {
     #***** Parameters *****
@@ -93,7 +93,7 @@ function CheckSTAT_CPLS()
     fi
 }
 
-# Checking the "$__BU_STAT_DEBUG" status variable's value.
+# Checking the "$__BU_STAT_DEBUG" status CheckTxtFmt's value.
 function CheckSTAT_DEBUG()
 {
     #***** Parameters *****
@@ -109,7 +109,7 @@ function CheckSTAT_DEBUG()
     fi
 }
 
-# Checking the "$__BU_STAT_ECHO" status variable's value.
+# Checking the "$__BU_STAT_ECHO" status CheckTxtFmt's value.
 function CheckSTAT_ECHO()
 {
     #***** Parameters *****
@@ -125,7 +125,7 @@ function CheckSTAT_ECHO()
     fi
 }
 
-# Checking the "$__BU_STAT_ERROR" status variable's value.
+# Checking the "$__BU_STAT_ERROR" status CheckTxtFmt's value.
 function CheckSTAT_ERROR()
 {
     #***** Parameters *****
@@ -141,7 +141,7 @@ function CheckSTAT_ERROR()
     fi
 }
 
-# Checking the "$__BU_STAT_LOG" status variable's value.
+# Checking the "$__BU_STAT_LOG" status CheckTxtFmt's value.
 function CheckSTAT_LOG()
 {
     #***** Parameters *****
@@ -161,12 +161,12 @@ function CheckSTAT_LOG()
 
             # Even if the initialization process is still ongoing, it's possible to call an "Echo<...>()" function,
             # as the text display in this condition is managed by the "CheckProjectLogStatus()" function.
-			EchoNewstep "Creating the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_DIR_PATH${__BU_COLOR_NEWSTEP} folder."
+			EchoNewstep "Creating the $(DechoHighlight "$__BU_PROJECT_LOG_DIR_PATH")folder."
 
-			mkdir -pv "$__BU_PROJECT_LOG_DIR_PATH" || { __BU_STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED" "" "$__BU_PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
+			mkdir -pv "$__BU_PROJECT_LOG_DIR_PATH" || { __BU_STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED${}" "" "$__BU_PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 		fi
 
-		echo -e "${__BU_COLOR_NEWSTEP}Creating the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_NEWSTEP} file.${BU_COLOR_RESET}"
+		EchoNewstep "Creating the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
 
 		touch "$__BU_PROJECT_LOG_FILE_PATH" || { __BU_STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__BU_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
 
@@ -189,7 +189,7 @@ function CheckSTAT_LOG()
             done
 		fi
 
-		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Linux distribution.
+		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
 		HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
 		# Getting operating system family.
@@ -204,7 +204,7 @@ function CheckSTAT_LOG()
 		EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
 		Newline
 
-		local v_terminfo_v="$($(ps -p $(ps -p $$ -o ppid=) o args=) -v)"
+		local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
 		EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")"
 		Newline
@@ -214,7 +214,7 @@ function CheckSTAT_LOG()
 	fi
 }
 
-# Checking the "$__BU_STAT_LOG_REDIRECT" status variable's value.
+# Checking the "$__BU_STAT_LOG_REDIRECT" status CheckTxtFmt's value.
 function CheckSTAT_LOG_REDIRECT()
 {
     #***** Parameters *****
@@ -230,7 +230,7 @@ function CheckSTAT_LOG_REDIRECT()
     fi
 }
 
-# Checking the "$__BU_STAT_OPERATE_ROOT" status variable's value.
+# Checking the "$__BU_STAT_OPERATE_ROOT" status CheckTxtFmt's value.
 function CheckSTAT_OPERATE_ROOT()
 {
 	#***** Parameters *****
@@ -246,7 +246,7 @@ function CheckSTAT_OPERATE_ROOT()
 	fi
 }
 
-# Checking the "$__BU_STAT_TIME_TXT" status variable's value.
+# Checking the "$__BU_STAT_TIME_TXT" status CheckTxtFmt's value.
 function CheckSTAT_TIME_TXT()
 {
     #***** Parameters *****
@@ -257,7 +257,7 @@ function CheckSTAT_TIME_TXT()
     local pa_correctValues=("${__BU_COLOR_ORANGE}An integer or a floating number")
 
     #***** Code *****
-    # If the status variable's value is not a float or an integer.
+    # If the status CheckTxtFmt's value is not a float or an integer.
     if ! IsFloatInt "$__BU_STAT_TIME_TXT"; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_TIME_TXT" "__BU_STAT_TIME_TXT" "${pa_correctValues[@]}" >&2
     fi
@@ -278,7 +278,7 @@ function CheckSTAT_TRANSLATED()
     fi
 }
 
-# Checking the "$__BU_STAT_TXT_FMT" status variable's value.
+# Checking the "$__BU_STAT_TXT_FMT" status CheckTxtFmt's value.
 function CheckSTAT_TXT_FMT()
 {
     #***** Parameters *****
@@ -294,7 +294,7 @@ function CheckSTAT_TXT_FMT()
     fi
 }
 
-# Checking the "$__BU_STAT_USER_OS" status variable's value.
+# Checking the "$__BU_STAT_USER_OS" status CheckTxtFmt's value.
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS()
 {
@@ -303,7 +303,7 @@ function CheckSTAT_USER_OS()
     local p_lineno=$2
     shift 2
 
-    local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
+    # local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
 
     #***** Variables *****
     
@@ -312,7 +312,7 @@ function CheckSTAT_USER_OS()
 }
 
 
-# Checking all the project's status variables values if multiple values had been modified.
+# Checking all the project's status CheckTxtFmts values if multiple values had been modified.
 function CheckProjectStatusVars()
 {
     #***** Parameters *****
@@ -320,7 +320,7 @@ function CheckProjectStatusVars()
     local p_lineno=$2
 
     #***** Code *****
-    # Processing first the "__BU_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
+    # Processing first the "__BU_STAT_LOG_REDIRECT" CheckTxtFmt, to make sure the following error messages will be correctly displayed if another error happened.
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
     CheckSTAT_CPLS          "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
@@ -342,32 +342,32 @@ function CheckProjectStatusVars()
 #   $2  --> file where the change was made.
 #   $3  --> line where the change was made.
 
-# Changing the "$__BU_STAT_CPLS" status variable's value.
+# Changing the "$__BU_STAT_CPLS" status CheckTxtFmt's value.
 function ChangeSTAT_CPLS()  { __BU_STAT_CPLS="$1";      CheckSTAT_CPLS  "$2" "$3"; }
 
-# Changing the "$__BU_STAT_DEBUG" status variable's value.
+# Changing the "$__BU_STAT_DEBUG" status CheckTxtFmt's value.
 function ChangeSTAT_DEBUG() { __BU_STAT_DEBUG="$1";     CheckSTAT_DEBUG "$2" "$3"; }
 
-# Changing the "$__BU_STAT_ECHO" status variable's value.
+# Changing the "$__BU_STAT_ECHO" status CheckTxtFmt's value.
 function ChangeSTAT_ECHO    { __BU_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
 
-# Changing the "$__BU_STAT_ERROR" status variable's value.
+# Changing the "$__BU_STAT_ERROR" status CheckTxtFmt's value.
 function ChangeSTAT_ERROR   { __BU_STAT_ERROR="$1";     CheckSTAT_ERROR "$2" "$3"; }
 
-# Changing the "$__BU_STAT_LOG" status variable's value.
+# Changing the "$__BU_STAT_LOG" status CheckTxtFmt's value.
 function ChangeSTAT_LOG     { __BU_STAT_LOG="$1";       CheckSTAT_LOG   "$2" "$3"; }
 
-# Changing the "$__BU_STAT_LOG_REDIRECT" status variable's value.
+# Changing the "$__BU_STAT_LOG_REDIRECT" status CheckTxtFmt's value.
 function ChangeSTAT_LOG_REDIRECT    { __BU_STAT_LOG_REDIRECT="$1";  CheckSTAT_LOG_REDIRECT  "$2" "$3"; }
 
-# Changing the "$__BU_STAT_OPERATE_ROOT" status variable's value.
+# Changing the "$__BU_STAT_OPERATE_ROOT" status CheckTxtFmt's value.
 function ChangeSTAT_OPERATE_ROOT    { __BU_STAT_OPERATE_ROOT="$1";  CheckSTAT_OPERATE_ROOT  "$2" "$3"; }
 
-# Changing the "$__BU_STAT_TIME_TXT" status variable's value.
+# Changing the "$__BU_STAT_TIME_TXT" status CheckTxtFmt's value.
 function ChangeSTAT_TIME_TXT        { __BU_STAT_TIME_TXT="$1";      CheckSTAT_TIME_TXT      "$2" "$3"; }
 
-# Changing the "$__BU_STAT_TRANSLATED" status variable's value.
+# Changing the "$__BU_STAT_TRANSLATED" status CheckTxtFmt's value.
 function ChangeSTAT_TRANSLATED      { __BU_STAT_TRANSLATED="$1";    CheckSTAT_TRANSLATED    "$2" "$3"; }
 
-# Changing the "$__BU_STAT_TXT_FMT" status variable's value.
+# Changing the "$__BU_STAT_TXT_FMT" status CheckTxtFmt's value.
 function ChangeSTAT_TXT_FMT { __BU_STAT_TXT_FMT="$1"; CheckSTAT_TXT_FMT "$2" "$3"; }

@@ -6,8 +6,8 @@ MAIN_SCRIPT_LOG=""
 
 ROOTPATH="/home/dimob/Projets/Linux-reinstall"
 
-source "$ROOTPATH/lib/variables/colors.var" && echo true 2>&1 | tee -a "$FILE_LOG_PATH"
-source "$ROOTPATH/lib/variables/text.var"
+source "$ROOTPATH/lib/CheckTxtFmts/colors.var" && echo true 2>&1 | tee -a "$FILE_LOG_PATH"
+source "$ROOTPATH/lib/CheckTxtFmts/text.var"
 
 source "$ROOTPATH/lib/functions/Echo.lib"
 

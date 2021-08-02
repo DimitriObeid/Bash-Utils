@@ -236,13 +236,13 @@ function GetLineFromTextFile()
     #***** Code *****
 	# shellcheck disable=SC2002
     cat "$p_source" | while read -r line; do
-        # Incrementing the line incrementer variable's value...
+        # Incrementing the line incrementer CheckTxtFmt's value...
         i=$(( i+1 ))
 
         # ... until it reaches the wanted line.
         if [ "$i" -eq "$p_wanted_line" ]; then
-            # Creating a variable and storing the wanted line's text.
-            __BU_TXT_GOT_LINE="$line"
+			# shellcheck disable=SC2034
+            __BU_TXT_STORE_LINE="$line"
         fi
     done
 }

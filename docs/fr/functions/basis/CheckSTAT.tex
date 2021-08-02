@@ -52,17 +52,17 @@
 \subsection{ConfEcho}\color{white}
 \begin{flushleft}
 	\textbf{Description de la fonction :}\\
-   	Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.\\[1\baselineskip]
+   	Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une CheckTxtFmt de statut.\\[1\baselineskip]
    	Ce message est structuré de la manière suivante :\\
    	\begin{itemize}
-   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,
+   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la CheckTxtFmt de statut,
    		\item la valeur défectueuse enregistrée,
    		\item la liste des valeurs autorisées.\\[1\baselineskip]
    	\end{itemize}
 
    	\textbf{Paramètres :}\\
    	\color{orange}\textbf{\$p\_file\color{white} :} \color{white} fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")").\\
-   	\color{orange}\textbf{\$p\_lineno\color{white} :} \color{white} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}").\\
+   	\color{orange}\textbf{\$p\_lineno\color{white} :} \color{white} le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}").\\
    	\color{orange}\textbf{\$p\_badVal\color{white} :} \color{white}\\
    	\color{orange}\textbf{\$p\_varVal\color{white} :} \color{white}\\[1\baselineskip]
     
@@ -76,19 +76,19 @@
 \color{green}
 \subsection{CheckSTAT\_DEBUG}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :} Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
+    \item \textbf{Description de la CheckTxtFmt :} Cette CheckTxtFmt de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
     
     Valeurs acceptées :
     \begin{itemize}
-        \item \textbf{true} : Si une condition vérifie que la valeur de cette variable de statut est égale à cette valeur, alors les fonctionnalités à tester sont testées au début du script principal, avant d'interrompre l'exécution une fois les tests passés.
+        \item \textbf{true} : Si une condition vérifie que la valeur de cette CheckTxtFmt de statut est égale à cette valeur, alors les fonctionnalités à tester sont testées au début du script principal, avant d'interrompre l'exécution une fois les tests passés.
         \item \textbf{false} : Le script ignore les éventuels tests de fonctionnalités. 
     \end{itemize}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_DEBUG" soit bien égale à "true" ou "false".
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_DEBUG" soit bien égale à "true" ou "false".
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -98,7 +98,7 @@
 \color{green}
 \subsection{CheckSTAT\_ERROR}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :} Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".
+    \item \textbf{Description de la CheckTxtFmt :} Cette CheckTxtFmt de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette CheckTxtFmt est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".
     
     Valeurs acceptées :
     \begin{itemize}
@@ -106,11 +106,11 @@
         \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.
     \end{itemize}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".
 
     \item \textbf{Paramètres :}
     \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -120,13 +120,13 @@
 \color{green}
 \subsection{CheckSTAT\_EXIT\_CODE}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :}
+    \item \textbf{Description de la CheckTxtFmt :}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_EXIT\_CODE" soit un nombre entier.
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_EXIT\_CODE" soit un nombre entier.
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -136,13 +136,13 @@
 \color{green}
 \subsection{CheckSTAT\_LOG}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :}
+    \item \textbf{Description de la CheckTxtFmt :}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG" corresponde aux chaînes de caractères "true" ou "false".
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_LOG" corresponde aux chaînes de caractères "true" ou "false".
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -152,13 +152,13 @@
 \color{green}
 \subsection{CheckSTAT\_LOG\_REDIRECT}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :}
+    \item \textbf{Description de la CheckTxtFmt :}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_LOG\_REDIRECT" soit vide ou corresponde aux chaînes de caractères "log" ou "tee".
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_LOG\_REDIRECT" soit vide ou corresponde aux chaînes de caractères "log" ou "tee".
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -168,13 +168,13 @@
 \color{green}
 \subsection{CheckSTAT\_TIME\_TXT}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :} Cette variable sert à mettre en pause l'exécution du script pendant un temps bref (vue d'un message, etc...).
+    \item \textbf{Description de la CheckTxtFmt :} Cette CheckTxtFmt sert à mettre en pause l'exécution du script pendant un temps bref (vue d'un message, etc...).
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_TIME\_TXT" soit un nombre entier ou décimal.
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_TIME\_TXT" soit un nombre entier ou décimal.
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} v\_array :
 
@@ -184,13 +184,13 @@
 \color{green}
 \subsection{CheckSTAT\_USER\_OS}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :}
+    \item \textbf{Description de la CheckTxtFmt :}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_USER\_OS" soit
+    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la CheckTxtFmt de statut "\$\_\_STAT\_USER\_OS" soit
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :}
 
@@ -204,7 +204,7 @@
 
     \item \textbf{Paramètres :}
         \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
+    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la CheckTxtFmt d'environnement "\color{orange}\$LINENO\color{white}")
 
     \item \textbf{Variables :} Aucune.
 

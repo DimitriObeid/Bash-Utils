@@ -1,4 +1,4 @@
-Les noms de toutes les variables globales créées dans les fichiers du répertoire "config" commencent par "__BU_"
+Les noms de toutes les CheckTxtFmts globales créées dans les fichiers du répertoire "config" commencent par "__BU_"
 Les noms de toutes celles définies dans le fichier "~/.bash_profile" commencent par "__BASH_UTILS_" ou "__INIT_"
 
 Suivant ce début :

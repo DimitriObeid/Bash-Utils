@@ -29,7 +29,7 @@ fi
 
 ## CHECKING FUNCTIONS
 
-# Parsing a CSV file containing translations.
+# Parsing a CSV file containing translations, when the library is not translated yet.
 function CheckNotTranslated_ParseCSVLang()
 {
     #***** Parameters *****
@@ -84,7 +84,7 @@ function ParseCSVLang()
 
         HeaderCyan "PARSING THE $(DechoHighlight "$__BU_PROJECT_NAME")'S $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
 
-        EchoNewstep "Finding the variables list"
+        EchoNewstep "Finding the CheckTxtFmts list"
         Newline
 
         # for i in 

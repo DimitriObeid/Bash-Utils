@@ -95,7 +95,7 @@ function ChownRec()
 function Chown()
 {
     #***** Parameters *****
-    p_currentOwner=$1    # This parameter is used in the translated messages, stored into their own variables.
+    p_currentOwner=$1    # This parameter is used in the translated messages, stored into their own CheckTxtFmts.
     p_newOwner=$2
     p_path=$3
     p_option=$4   # Recursive swapping or not.

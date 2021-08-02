@@ -47,7 +47,7 @@ function GetWCMaxLineLenght
         max_line_vars=$(( max_line_vars+max_line_vars_tmp )); echo
     done
     
-    echo -e "Total max_line number from the variables files : $max_line_vars"; echo
+    echo -e "Total max_line number from the CheckTxtFmts files : $max_line_vars"; echo
     max_line=$(( max_line+max_line_vars )); echo
     
     echo -e "Total max_line number from the project and the library : $max_line"; echo

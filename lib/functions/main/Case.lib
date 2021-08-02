@@ -52,8 +52,10 @@ function CaseRead_TriggerRootDirWarning()
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
 		"yes")
+			return 0
 			;;
 		"no")
+			return 1
 			;;
 		*)
 			EchoError "$__BU_CASE_INVALID_ANSWER"
@@ -62,7 +64,7 @@ function CaseRead_TriggerRootDirWarning()
 	esac
 }
 
-# "HandleErrors" function, with the "$__BU_STAT_CPLS" variable set to "false".
+# "HandleErrors" function, with the "$__BU_STAT_CPLS" CheckTxtFmt set to "false".
 function CaseRead_HandleErrors()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
@@ -89,7 +91,7 @@ function CaseRead_HandleErrors()
 	esac
 }
 
-# "HandleErrors" function, with the "$__BU_STAT_CPLS" variable set to "true".
+# "HandleErrors" function, with the "$__BU_STAT_CPLS" CheckTxtFmt set to "true".
 function CaseRead_HandleErrorsCPLS()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"

@@ -96,7 +96,7 @@ CheckBashMinimalVersion
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" variable.
+# Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" CheckTxtFmt.
 
 # shellcheck disable=SC1090
 for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
@@ -151,7 +151,7 @@ MkTmpDir
 
 ## MODIFYING OTHER STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" variable's value is equal to "true".
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
 # shellcheck disable=SC2034
 ChangeSTAT_LOG       "false"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
