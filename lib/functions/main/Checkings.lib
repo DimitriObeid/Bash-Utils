@@ -444,16 +444,16 @@ function CheckProjectRelatedFile()
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
-				true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+				true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
 			fi
 
 			return 0
 		else
 			if [ ! -d "$p_parent" ]; then
-				mkdir -p "$p_parent" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_dirname")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+				mkdir -p "$p_parent" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_parent")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
 			fi
 
-			touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
 
 			return 0
 		fi
@@ -462,7 +462,7 @@ function CheckProjectRelatedFile()
 		if [ -d "$v_path" ]; then
 			return 0
 		else
-			mkdir -p "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			mkdir -p "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
 
 			return 0
 		fi

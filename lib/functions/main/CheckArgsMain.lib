@@ -101,7 +101,7 @@ function __CheckArgsMain_PrintBadOption()
 		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
-    local v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
+    local v_string; v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
 
     #***** Code *****
 
@@ -204,7 +204,7 @@ function CheckArgsMain_CheckProjectRelatedFile()
 
 		return 1
 
-	local lineno="$LINENO"; elif [ "$p_type" != 'd' ] || [ "$p_type" != 'f' ]; then
+	local lineno="$LINENO"; elif [ "$p_type" != 'd' ] && [ "$p_type" != 'f' ]; then
 		__CheckArgsMain_PrintBadOption 'z' "You need to precise if what you want to create is a directory or a file." 'p_type' "$p_type" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
