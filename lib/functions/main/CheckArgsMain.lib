@@ -177,7 +177,41 @@ function __CheckArgsMain_PrintBadOption()
 
 ## "Checkings.lib" FILE'S FUNCTIONS - FILES PATHS CHECKING CATEGORY
 
-# 
+# "CheckProjectRelatedFile" function.
+function CheckArgsMain_CheckProjectRelatedFile()
+{
+	#***** Parameters *****
+	local p_parent=$1
+	local p_child=$2
+	local p_type=$3
+
+	#***** Code *****
+	local lineno="$LINENO"; if [ -z "$p_parent" ]; then
+		__CheckArgsMain_PrintBadOption 'z' "The function $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
+			'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
+
+		return 1
+	
+	local lineno="$LINENO"; elif [ -z "$p_child" ]; then
+		__CheckArgsMain_PrintBadOption 'z' "The function $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") needs a function passed as second argument to work properly" \
+			'p_child' "$p_child" "${FUNCNAME[0]}" "$lineno"
+
+		return 1
+
+	local lineno="$LINENO"; elif [ -z "$p_type" ]; then
+		__CheckArgsMain_PrintBadOption 'z' "The function $(CutFromCharacter "$(DechoHighlight "${FUNCNAME[0]}")") needs a function passed as third argument to work properly" \
+			'p_type' "$p_type" "${FUNCNAME[0]}" "$lineno"
+
+		return 1
+
+	local lineno="$LINENO"; elif [ "$p_type" != 'd' ] || [ "$p_type" != 'f' ]; then
+		__CheckArgsMain_PrintBadOption 'z' "You need to precise if what you want to create is a directory or a file." 'p_type' "$p_type" "${FUNCNAME[0]}" "$lineno"
+
+		return 1
+	fi
+
+	return 0
+}
 
 # -----------------------------------------------
 

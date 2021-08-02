@@ -439,11 +439,7 @@ function CheckProjectRelatedFile()
     local v_path="$p_parent/$p_child"
 
 	#***** Code *****
-	CheckSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-	if [  ] || [  ]; then
-	
-	fi
-	CheckSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	if ! CheckArgsMain_CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type"; then return 1; fi
 
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
