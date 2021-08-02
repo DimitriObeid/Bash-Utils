@@ -55,23 +55,7 @@ function __EchoOutput()
 
 	#***** Code *****
 	if [ "$__BU_STAT_DEBUG" = "true" ]; then
-        if [ ! -f "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" ]; then
-            if [ ! -d "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" ]; then
-                # Don't call the "Makedir()" function, or else the script will loop forever, since this function calls the "Echo<...>()" functions, who call this function.
-                mkdir -pv "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" || \
-                {
-                    echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}UNABLE TO CREATE THE $(GetParentDirectoryPath "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") DIRECTORY, PARENT OF THE $(DechoHighlight "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH") FILE !${__BU_COLOR_RESET}" >&2;
-                    echo >&2; exit 1
-                }
-            fi
-
-            # Don't call the "Makefile()" function, or else the script will loop forever, since this function calls the "Echo<...>()" functions, who call this function.
-            touch "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH" || { \
-                echo >&2
-                echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to create the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH${__BU_COLOR_ERROR} file${__BU_COLOR_RESET}" >&2
-                echo >&2; exit 1
-            }
-        fi
+		CheckProjectRelatedFile "__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_PROJECT_ECHO_OUTPUT_FILE_NAME" "f"
 
         if [ "$p_context" = "begin" ]; then
             __EchoVoid

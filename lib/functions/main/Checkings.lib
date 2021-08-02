@@ -211,11 +211,10 @@ function CheckProjectLogStatus()
     # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status CheckTxtFmt value to "true" BEFORE calling the wanted function.
 
     local v_redirectionError
-		v_redirectionError="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; \
-            echo -e "${__BU_COLOR_ERROR}Redirection option :${__BU_COLOR_RESET}")"
+		v_redirectionError="${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}\n${__BU_COLOR_ERROR}Redirection option :${__BU_COLOR_RESET}"
 
 	local v_warning_array_value
-		v_warning_array_value="$(echo -e "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}")"
+		v_warning_array_value="${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"
     
     #**** Code *****
     if [ "$__BU_STAT_LOG" = "true" ]; then
@@ -232,7 +231,7 @@ function CheckProjectLogStatus()
     # If a log file exists AND if "$__BU_STAT_LOG" value is "false" AND if "$__BU_STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ]; then
 
-        # If messages must be redirected in the log file only ("$__BU_STAT_LOG_REDIRECT" value is equal to "log")
+        # If messages must be redirected in the log file only ("$__BU_STAT_LOG_REDIRECT" value is equal to "log").
         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
 
             for val in "${pa_extraArgs[@]}"; do
@@ -282,19 +281,23 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                            else
+								CheckProjectLogStatus
+							else
                                 echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                            fi
+								CheckProjectLogStatus
+							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                            else
+								CheckProjectLogStatus
+							else
                                 echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                            fi
+								CheckProjectLogStatus
+							fi
                             ;;
                     esac
                 fi
@@ -359,19 +362,23 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                            else
+								CheckProjectLogStatus
+							else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                            fi
+								CheckProjectLogStatus
+							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                            else
+								CheckProjectLogStatus
+							else
                                 echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
                                 CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                            fi
+								CheckProjectLogStatus
+							fi
                             ;;
                     esac
                 fi
@@ -483,11 +490,12 @@ function CheckProjectRelatedFile()
 function CheckDecho()
 {
     #***** Code *****
-    if [ -z "${__BU_PROJECT_COLOR_CODE+x}" ] || [ "$__BU_STAT_TXT_FMT" = "false" ]; then
+    if [ "$__BU_STAT_TXT_FMT" = "false" ]; then
         return 1
-
-    elif [ -n "${__BU_PROJECT_COLOR_CODE+x}" ] && [ "$__BU_PROJECT_COLOR_CODE" = '' ]; then
-        __BU_PROJECT_COLOR_CODE="$__BU_COLOR_RESET"
+	fi
+	
+    if [ -f "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
+        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : Unable to write any color code into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} file.${$__BU_COLOR_RESET}"; return 1; }
 
         return 0
     else

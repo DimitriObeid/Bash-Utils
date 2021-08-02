@@ -153,7 +153,7 @@ MkTmpDir
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
 # shellcheck disable=SC2034
-ChangeSTAT_LOG       "false"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+ChangeSTAT_LOG       "true"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 # shellcheck disable=SC2034
 ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
