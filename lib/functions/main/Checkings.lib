@@ -155,7 +155,7 @@ function CheckDirPathExists()
 
 # -----------------------------------------------
 
-## FILE PATHS CHECKING
+## FILES PATHS CHECKING
 
 # Checking for an existent file path (for the "HandleErrors()" function mainly).
 function CheckFilePathExists()
@@ -301,6 +301,11 @@ function CheckProjectLogStatus()
 
             done
 
+			# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+			ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		
+			return 0
+
         # Else, if messages must be redirected in the log file AND to the terminal ("$__BU_STAT_LOG_REDIRECT" value is equal to "tee")
         elif [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
 
@@ -373,6 +378,11 @@ function CheckProjectLogStatus()
             done
             
             sleep "$__BU_STAT_TIME_TXT"
+			
+			# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+			ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		
+			return 0
         else
             case "$p_option" in
                 '-n' | 'n')
@@ -384,6 +394,11 @@ function CheckProjectLogStatus()
             esac
 
         sleep "$__BU_STAT_TIME_TXT"
+
+		# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		
+		return 0
 
         fi
 
@@ -399,6 +414,11 @@ function CheckProjectLogStatus()
 		esac
 
         sleep "$__BU_STAT_TIME_TXT"
+		
+		# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
+		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		
+		return 0
 	fi
 
 	# Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
@@ -411,30 +431,45 @@ function CheckProjectLogStatus()
 function CheckProjectRelatedFile()
 {
 	#***** Parameters *****
-	local p_dirname=$1         # Name of the folder to process (into its parent directory).
-	local p_filename=$2        # Name of the file to process (into its parent directory).
+	local p_parent=$1   # Name of the folder to process (into its parent directory).
+	local p_child=$2  	# Name of the file or folder to process (into its parent directory).
+	local p_type=$3		# Type of data to create (d = directory, f = file).
 
 	#***** Variables *****
-    local v_path="$p_dirname/$p_filename"
+    local v_path="$p_parent/$p_child"
 
 	#***** Code *****
-	if [ -f "$v_path" ]; then
-        if [ -s "$v_path" ]; then
-            true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
-        fi
+	CheckSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	if [  ] || [  ]; then
+	
+	fi
+	CheckSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-		return 0
+	if [ "$p_type" = 'f' ]; then
+		if [ -f "$v_path" ]; then
+			if [ -s "$v_path" ]; then
+				true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			fi
 
-    elif [ -d "$v_path" ]; then
-        return 0
-    else
-        if [ ! -d "$p_dirname" ]; then
-            mkdir "$p_dirname" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_dirname")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
-        fi
+			return 0
+		else
+			if [ ! -d "$p_parent" ]; then
+				mkdir -p "$p_parent" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_dirname")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			fi
 
-        touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; }
+			touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
 
-		return 0
+			return 0
+		fi
+
+    elif [ "$p_type" = 'd' ]; then
+		if [ -d "$v_path" ]; then
+			return 0
+		else
+			mkdir -p "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${$__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+
+			return 0
+		fi
     fi
 }
 

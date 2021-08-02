@@ -83,9 +83,6 @@ function TriggerRootDirWarning()
 ## QUICK MESSAGE PRINTING
 
 # Print a message without the need to write the whole "HandleErrors()" function's second argument, and according to the test option which failed :
-#   - z     : no value
-#   - !d    : bad directory path argument
-#   - !f    : bad file path argument
 function __CheckArgsMain_PrintBadOption()
 {
     #***** Parameters *****
@@ -97,9 +94,18 @@ function __CheckArgsMain_PrintBadOption()
     local p_lineno=$6   # Line where the test failed.
 
     #***** Variables *****
-    v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
+	# Changing the "$__BU_STAT_CPLS" status variable's value to "true" in case this function is called during a 
+	if [ "$__BU_STAT_CPLS" = "false" ]; then
+		local v_STAT_CPLS_was_false="true"
+		
+		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	fi
+
+    local v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
 
     #***** Code *****
+
+	# If no value is passed as argument.
     if [ "$p_option" = 'z' ]; then
         # shellcheck disable=SC2116
 		HandleErrors "1" "$v_string HAS NO VALUE" \
@@ -107,11 +113,13 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
 
+	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "$p_option" = '!alpha' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
+	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "$p_option" = '!alphanum' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHANUMERIC STRING" \
@@ -119,6 +127,7 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
 
+	# Else, if the value passed as argument is not a valid directory path.
     elif [ "$p_option" = '!d' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A VALID DIRECTORY PATH" \
@@ -126,6 +135,7 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
 
+	# Else, if the value passed as argument is not a valid file path.
     elif [ "$p_option" = '!f' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A VALID FILE PATH" \
@@ -133,6 +143,7 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
 
+	# Else, if the value passed as argument is not a floating number.
     elif [ "$p_option" = '!float' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT A FLOAT" \
@@ -140,6 +151,7 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
 
+	# Else, if the value passed as argument is not an integer.
     elif [ "$p_option" = '!int' ]; then
         # shellcheck disable=SC2116
         HandleErrors "1" "$v_string'S VALUE IS NOT AN INTEGER" \
@@ -147,7 +159,29 @@ function __CheckArgsMain_PrintBadOption()
 
 		return 1
     fi
+
+	if [ "$v_STAT_CPLS_was_false" = "true" ]; then
+		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	fi
+
+	return 0
 }
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### "Checkings.lib" FILE'S FUNCTIONS
+
+## "Checkings.lib" FILE'S FUNCTIONS - FILES PATHS CHECKING CATEGORY
+
+# 
+
+# -----------------------------------------------
+
+
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -180,6 +214,8 @@ function CheckArgsMain_ProcessingDir()
 
 		return 1
 	fi
+
+	return 0
 }
 
 # "OverwriteDir" function.
@@ -201,6 +237,8 @@ function CheckArgsMain_OverwriteDir()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "Makedir" function.
@@ -229,6 +267,8 @@ function CheckArgsMain_Makedir()
 
 		return 1
     fi
+
+	return 0
 }
 
 # -----------------------------------------------
@@ -247,6 +287,8 @@ function CheckArgsMain_GetDirectoryName()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "GetDirectoryPath" function.
@@ -261,6 +303,8 @@ function CheckArgsMain_GetDirectoryPath()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "GetParentDirectoryName" function.
@@ -282,6 +326,8 @@ function CheckArgsMain_GetParentDirectoryName()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "GetParentDirectoryPath" function.
@@ -303,6 +349,8 @@ function CheckArgsMain_GetParentDirectoryPath()
 
 		return 1
     fi
+
+	return 0
 }
 
 # -----------------------------------------------
@@ -352,6 +400,8 @@ function CheckArgsMain_ParseCSVLang()
 
 		return 1
     fi
+
+	return 0
 }
 
 # -----------------------------------------------
@@ -376,6 +426,8 @@ function CheckArgsMain_ProcessingFile()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "OverwriteFile" function.
@@ -403,6 +455,8 @@ function CheckArgsMain_OverwriteFile()
 
 		return 1
     fi
+
+	return 0
 }
 
 # "Makefile" function's arguments.
@@ -431,6 +485,8 @@ function CheckArgsMain_Makefile()
 
 		return 1
     fi
+
+	return 0
 }
 
 # -----------------------------------------------
