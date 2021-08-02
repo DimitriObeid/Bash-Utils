@@ -59,7 +59,7 @@ function Decho()
         return 1
     else
         local v_oldColor
-            v_oldColor="(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")"
+            v_oldColor="$(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")"
     fi
 
     if [ "$p_newColor" = "$v_oldColor" ]; then
