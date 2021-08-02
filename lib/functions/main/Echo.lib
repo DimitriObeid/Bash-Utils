@@ -55,7 +55,7 @@ function __EchoOutput()
 
 	#***** Code *****
 	if [ "$__BU_STAT_DEBUG" = "true" ]; then
-		CheckProjectRelatedFile "__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_PROJECT_ECHO_OUTPUT_FILE_NAME" "f"
+		CheckProjectRelatedFile "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_PROJECT_ECHO_OUTPUT_FILE_NAME" "f"
 
         if [ "$p_context" = "begin" ]; then
             __EchoVoid
