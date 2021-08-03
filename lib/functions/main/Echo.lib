@@ -104,7 +104,7 @@ function __EchoCPLS()
 
     #***** Code *****
     for val in "${pa_extraArgs[@]}"; do
-        if "$val" = 'nodate'; then 
+        if [ "$val" = 'nodate' ]; then 
             case "$p_option" in
                 '-n' | 'n')
                     if CheckIsInitializing; then

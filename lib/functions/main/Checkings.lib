@@ -191,7 +191,7 @@ function CheckProjectLogPath()
 
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 
-# Accepted arguments : "nodate", '<an empty string>'
+# Accepted arguments : 'nodate', '<an empty string>'
 function CheckProjectLogStatus()
 {
     #***** Parameters *****
@@ -236,8 +236,8 @@ function CheckProjectLogStatus()
 
             for val in "${pa_extraArgs[@]}"; do
 
-                # If the "nodate" value is passed as argument.
-                if [ "$val" = "nodate" ]; then
+                # If the 'nodate' value is passed as argument.
+                if [ "$val" = 'nodate' ]; then
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
@@ -310,8 +310,8 @@ function CheckProjectLogStatus()
 
             for val in "${pa_extraArgs[@]}"; do
 
-                # If the "nodate" value is passed as argument.
-                if [ "$val" = "nodate" ]; then
+                # If the 'nodate' value is passed as argument.
+                if [ "$val" = 'nodate' ]; then
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
