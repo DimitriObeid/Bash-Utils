@@ -178,6 +178,10 @@ function CheckSTAT_LOG()
             # shellcheck disable=SC2034
             __INIT_IS_INITALIZING="false"
         fi
+        
+        if [ "$__STAT_CPLS" = "true" ]; then
+            ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        fi
 		
 		# Redirecting the initializer's log file content into the log file.
 		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"

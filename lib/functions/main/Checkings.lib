@@ -211,10 +211,10 @@ function CheckProjectLogStatus()
     # nor any function called by the function you want to add, or else set the "$__BU_STAT_CPLS" status CheckTxtFmt value to "true" BEFORE calling the wanted function.
 
     local v_redirectionError
-		v_redirectionError="${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}\n${__BU_COLOR_ERROR}Redirection option :${__BU_COLOR_RESET}"
+		v_redirectionError="$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to write into the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file.${__BU_COLOR_RESET}\n${__BU_COLOR_ERROR}Redirection option :"
 
 	local v_warning_array_value
-		v_warning_array_value="${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : incorrect argument given as extra argument array in ${__BU_COLOR_HIGHLIGHT}${BASH_SOURCE[0]}${__BU_COLOR_WARNING}, function ${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} --> $val${__BU_COLOR_RESET}"
+		v_warning_array_value="$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(DechoHighlight "${BASH_SOURCE[0]}"), function $(DechoHighlight "${FUNCNAME[0]}") --> $val"
     
     #**** Code *****
     if [ "$__BU_STAT_LOG" = "true" ]; then
@@ -241,16 +241,16 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                __INIT_STR_ARRAY+=("$p_string")
+                                InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                             else
-                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
+                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
-                                __INIT_STR_ARRAY+=("$p_string")
+                                InitializerAddInitStrArrayVal "$p_string"
                             else
-                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }                            
+                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }                            
                             fi
                             ;;
                     esac
@@ -260,16 +260,16 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
+                                InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
-                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
+                                InitializerAddInitStrArrayVal "$p_string"
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -279,23 +279,21 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-								CheckProjectLogStatus
+                                InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
+                                EchoWarning "$v_warning_array_value" "$p_option" ''
 							else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-								CheckProjectLogStatus
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError log" >&2; echo >&2; ExitError "1"; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							fi
                             ;;
@@ -321,14 +319,14 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$p_string")
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -341,7 +339,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -ne "$p_string"
-                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                         fi
                         ;;
                     '' | *)
@@ -349,7 +347,7 @@ function CheckProjectLogStatus()
                             __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
                         else
                             echo -e "$p_string"
-                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
                         fi
                         ;;
                     esac
@@ -361,22 +359,22 @@ function CheckProjectLogStatus()
                         '-n' | 'n')
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 __INIT_STR_ARRAY+=("$__BU_TIME_DATE_DISPLAY $p_string")
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
-                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; echo -e "$v_redirectionError tee" >&2; echo >&2; ExitError "1"; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                CheckProjectLogStatus "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 								CheckProjectLogStatus
 							fi
                             ;;
@@ -459,16 +457,16 @@ function CheckProjectRelatedFile()
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
-				true > "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+				true > "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 			fi
 
 			return 0
 		else
 			if [ ! -d "$p_parent" ]; then
-				mkdir -p "$p_parent" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_parent")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+				mkdir -p "$p_parent" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_parent")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 			fi
 
-			touch "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			touch "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 
 			return 0
 		fi
@@ -477,7 +475,7 @@ function CheckProjectRelatedFile()
 		if [ -d "$v_path" ]; then
 			return 0
 		else
-			mkdir -p "$v_path" || { echo >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; echo >&2; ExitError "1"; }
+			mkdir -p "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
 
 			return 0
 		fi
@@ -641,9 +639,9 @@ function HandleErrors()
             fi
 
             if [ -z "$p_adviceString" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}No advice to give.${__BU_COLOR_RESET}" >&2; echo >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}No advice to give.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2)")
             else
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Advice : ${__BU_COLOR_HIGHLIGHT}$p_adviceString${__BU_COLOR_RESET}" >&2; echo >&2)")
+                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Advice : ${__BU_COLOR_HIGHLIGHT}$p_adviceString${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2)")
             fi
 
             if [ -z "$p_badValue" ]; then
@@ -661,7 +659,7 @@ function HandleErrors()
                         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
+                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; exit 1; kill "$$"; }
 
                         elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"
@@ -680,7 +678,7 @@ function HandleErrors()
                         if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
                             CutDateFromString "$val"
 
-                            echo -e "$val" >> "$__BU_PROJECT_LOG_FILE_PATH" || { echo >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1; kill "$$"; }
+                            echo -e "$val" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; exit 1; kill "$$"; }
 
                         elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
                             CutDateFromString "$val"

@@ -27,13 +27,21 @@ fi
 
 ## DEFINING FUNCTIONS
 
-# Add value in the "$__INIT_STR_ARRAY" array that stores the initialization log output.
+# Add value in the "$__INIT_STR_ARRAY" array that stores the initialization log output, according to the "$__BU_STAT_PRINT_INIT_LOG" status variables's value :
+#   "true"  --> store the text into the "$__INIT_STR_ARRAY" array AND display text to the terminal.
+#   "false" --> store the text into the "$__INIT_STR_ARRAY" array WITHOUT displaying any text. 
 function InitializerAddInitStrArrayVal()
 {
     #***** Parameters *****
-    p_string=$1
+    p_string=$1             # String to store in the "$__INIT_STR_ARRAY" array.
+    p_option=$2             # "echo" command's options. 
 
     #***** Code *****
+    if [ "$__BU_STAT_PRINT_INIT_LOG" = "true" ]; then
+        __INIT_STR_ARRAY+=("$p_string"); echo "$p_string"
+    else
+        __INIT_STR_ARRAY+=("$p_string")
+    fi
 }
 
 # Checking the currently used Bash language's version.
@@ -135,9 +143,6 @@ done
 ChangeSTAT_DEBUG        "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-ChangeSTAT_CPLS         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
 ChangeSTAT_ERROR        "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
@@ -173,6 +178,12 @@ ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 if ! CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
 if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
+
+
+# Setting this status variable's value to "false" once the initialization part is over.
+
+# shellcheck disable=SC2034
+ChangeSTAT_CPLS         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
