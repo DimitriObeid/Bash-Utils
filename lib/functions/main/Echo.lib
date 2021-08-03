@@ -103,6 +103,10 @@ function __EchoCPLS()
     shift 2; pa_extraArgs=("$@")
 
     #***** Code *****$
+    if [ "$__BU_STAT_LOG" = "true" ]; then
+        CheckProjectLogPath
+    fi
+
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

@@ -27,8 +27,17 @@ fi
 
 ## DEFINING FUNCTIONS
 
+# Add value in the "$__INIT_STR_ARRAY" array that stores the initialization log output.
+function InitializerAddInitStrArrayVal()
+{
+    #***** Parameters *****
+    p_string=$1
+
+    #***** Code *****
+}
+
 # Checking the currently used Bash language's version.
-function CheckBashMinimalVersion()
+function InitializerCheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
 		printf "BASH-UTILS ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2
@@ -84,7 +93,7 @@ function InitializerSourcingFailure()
 
 ## USING FUNCTIONS
 
-CheckBashMinimalVersion
+InitializerCheckBashMinimalVersion
 
 # -----------------------------------------------
 

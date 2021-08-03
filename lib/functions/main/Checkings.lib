@@ -393,10 +393,18 @@ function CheckProjectLogStatus()
         else
             case "$p_option" in
                 '-n' | 'n')
-                    echo -ne "$p_string"
+                    if CheckIsInitializing; then
+                        __INIT_STR_ARRAY+=("$p_string")
+                    else
+                        echo -ne "$p_string"
+                    fi
                     ;;
                 '' | *)
-                    echo -e "$p_string"
+                    if CheckIsInitializing; then
+                        __INIT_STR_ARRAY+=("$p_string")
+                    else
+                        echo -e "$p_string"
+                    fi
                     ;;
             esac
 
