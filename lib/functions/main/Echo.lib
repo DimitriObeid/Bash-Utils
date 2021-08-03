@@ -110,13 +110,16 @@ function __EchoCPLS()
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                     else
-                        echo -ne "$p_string";;
+                        echo -ne "$p_string"
                     fi
+                    ;;
                 '' | *)
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" ""
                     else
-                        echo -e "$p_string";;
+                        echo -e "$p_string"
+                    fi
+                    ;;
             esac
         else
             case "$p_option" in
@@ -124,14 +127,16 @@ function __EchoCPLS()
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                     else
-                        echo -ne "$__BU_TIME_DATE_DISPLAY $p_string";;
+                        echo -ne "$__BU_TIME_DATE_DISPLAY $p_string"
                     fi
+                    ;;
                 '' | *)
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" ""
                     else
-                        echo -e "$__BU_TIME_DATE_DISPLAY $p_string";;
+                        echo -e "$__BU_TIME_DATE_DISPLAY $p_string"
                     fi
+                    ;;
             esac
         fi
 

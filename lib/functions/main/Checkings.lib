@@ -243,14 +243,14 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "$p_option")"
                             else
-                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }                            
+                                echo -ne "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string"
                             else
-                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }                            
+                                echo -e "$p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }                            
                             fi
                             ;;
                     esac
@@ -262,14 +262,14 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
                             else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string"
                             else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -282,17 +282,17 @@ function CheckProjectLogStatus()
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
                                 EchoWarning "$v_warning_array_value" "$p_option" ''
 							else
-                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string"
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							else
-                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError log" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							fi
                             ;;
                     esac
@@ -317,14 +317,14 @@ function CheckProjectLogStatus()
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "$p_option")"
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string"
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                             fi
                             ;;
                     esac
@@ -337,7 +337,7 @@ function CheckProjectLogStatus()
                             InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
                         else
                             echo -ne "$p_string"
-                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                            echo -ne "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                         fi
                         ;;
                     '' | *)
@@ -345,7 +345,7 @@ function CheckProjectLogStatus()
                             InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string"
                         else
                             echo -e "$p_string"
-                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                            echo -e "$__BU_TIME_DATE_DISPLAY $p_string" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
                         fi
                         ;;
                     esac
@@ -357,19 +357,19 @@ function CheckProjectLogStatus()
                         '-n' | 'n')
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_TIME_DATE_DISPLAY $p_string"
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
-                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
+                                EchoWarning "$v_warning_array_value" '-n' '' 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg '' "$p_option" '' >&2; EchoError "$v_redirectionError tee" "$p_option" ''; EchoMsg '' "$p_option" '' >&2; ExitError "1"; }
 							fi
                             ;;
                     esac
@@ -459,16 +459,16 @@ function CheckProjectRelatedFile()
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
-				true > "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to overwrite this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+				true > "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
 			fi
 
 			return 0
 		else
 			if [ ! -d "$p_parent" ]; then
-				mkdir -p "$p_parent" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file's parent folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$p_parent")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+				mkdir -p "$p_parent" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file's parent folder --> $(DechoHighlight "$(CheckDirPathExists "$p_parent")")"; EchoMsg >&2; ExitError "1"; }
 			fi
 
-			touch "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's file --> ${__BU_COLOR_HIGHLIGHT}$(CheckFilePathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+			touch "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
 
 			return 0
 		fi
@@ -477,7 +477,7 @@ function CheckProjectRelatedFile()
 		if [ -d "$v_path" ]; then
 			return 0
 		else
-			mkdir -p "$v_path" || { EchoMsg "$p_option" '' >&2; echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_ERROR} --> Error : unable to create this ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_NAME${__BU_COLOR_ERROR} project's folder --> ${__BU_COLOR_HIGHLIGHT}$(CheckDirPathExists "$v_path")${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; ExitError "1"; }
+			mkdir -p "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's folder --> $(DechoHighlight "$(CheckDirPathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
 
 			return 0
 		fi
@@ -503,7 +503,7 @@ function CheckDecho()
 	fi
 	
     if [ -f "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
-        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING} --> Warning : Unable to write any color code into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} file.${__BU_COLOR_RESET}"; return 1; }
+        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { EchoMsg >&2; EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : Unable to write any color code into the $(DechoHighlight "$__BU_PROJECT_COLOR_CODE_FILE_PATH") file."; EchoMsg >&2; return 1; }
 
         return 0
     else
@@ -568,15 +568,24 @@ function ExitError()
     if [[ "$1" =~ [0-9] ]]; then
         exit "$1"; kill "$$"
     else
-        echo "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()$__BU_COLOR_WARNING --> Warning : unexpected exit code passed as argument.${__BU_COLOR_RESET}"
+        EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument."
 
-        return 1
+        kill "$$"
     fi
 }
 
 # -----------------------------------------------
 
 ## SCRIPT'S ERRORS HANDLING
+
+# "HandleErrors()" function --> Handling file name presence.
+function HandleErrors_File()        { if [ -z "$1" ]; then DechoHighlight "<no file>"; else DechoHighlight "$1"; fi }
+
+# "HandleErrors()" function --> Handling function name presence.
+function HandleErrors_Function()    { if [ -z "$1" ]; then DechoHighlight "<no function>"; else DechoHighlight "$1"; fi }
+
+# "HandleErrors()" function --> Handling line number presence.
+function HandleErrors_Line()        { if [ -z "$1" ]; then DechoHighlight "<no line>"; else DechoHighlight "$1"; fi }
 
 # Handling command outputs.
 # Featured functions and files from the "basis" category :
@@ -594,28 +603,14 @@ function HandleErrors()
 
     #***** Variables *****
     local v_hdrString
-    local va_hdrString
 
-	if [ -n "$p_file" ]; then
-        va_hdrString+=("$(DechoHighlight "$p_file"), ")
-	fi
-	
-	if [ -n "$p_function" ]; then
-        va_hdrString+=("FUNCTION $(DechoHighlight "$p_function"), ")
-	fi
-	
-	if [ -n "$p_lineno" ]; then
-        va_hdrString+=("LINE $(DechoHighlight "$p_lineno" )")
-	fi
-
-	# TODO : print every values of the va_hdrString array.
-	v_hdrString="$(echo -ne "IN ${va_hdrString[0]}${va_hdrString[1]}${va_hdrString[2]}-->")"
+	local v_hdrString; v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	if [ "$p_returnCode" -eq 0 ]; then
-        return
+        return 0
     else
         # If the function needs to be called in the "CheckProjectLogStatus()" function,
         # this status CheckTxtFmt's value MUST be set at "true", or else the script will loop forever.
@@ -623,117 +618,52 @@ function HandleErrors()
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
         if [ "$__BU_STAT_CPLS" = "true" ]; then
-            __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")")
+            EchoMsg "$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")"
             if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}A FATAL ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
+                EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR A !"
             else
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_HIGHLIGHT}AN ERROR OCCURED DURING A TEST IN THE  'CheckProjectLogStatus'  FUNCTION !${__BU_COLOR_RESET}" >&2)")
-            fi
-
-            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}$v_hdrString FATAL ERROR : ${p_errorString^^}${__BU_COLOR_RESET}" >&2)")
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
-            else
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}$v_hdrString ERROR : ${p_errorString^^}${__BU_COLOR_RESET}" >&2)")
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR" >&2)")
-            fi
-
-            if [ -z "$p_adviceString" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}No advice to give.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2)")
-            else
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Advice : ${__BU_COLOR_HIGHLIGHT}$p_adviceString${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2)")
-            fi
-
-            if [ -z "$p_badValue" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')$__BU_COLOR_RESET" >&2; echo -e >&2)")
-            else
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_TIME_DATE_DISPLAY ${__BU_COLOR_ERROR}Value(s) that caused this error : $(DechoHighlight "$p_badValue")$__BU_COLOR_RESET" >&2; echo -e >&2)")
-            fi
-
-            if [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                __BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "${__BU_COLOR_ERROR}Stopping the execution of $(DechoHighlight "$(basename "$0")")$__BU_COLOR_RESET." >&2; echo -e >&2)")
-
-                # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
-                for val in "${__BU_TXT_STORE_ERROR_MESSAGES_ARRAY[@]}"; do
-                    if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-                        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
-                            CutDateFromString "$val"
-
-                            echo -e "$val" > "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; exit 1; kill "$$"; }
-
-                        elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
-                            CutDateFromString "$val"
-                        fi
-                    else
-                        CutDateFromString "$val"
-                    fi
-                done
-
-                exit 1; kill "$$"
-            else
-
-                # Displaying the content of the "$__BU_TXT_STORE_ERROR_MESSAGES_ARRAY" array.
-                for val in "${__BU_TXT_STORE_ERROR_MESSAGES_ARRAY[@]}"; do
-                    if [ "$__BU_STAT_LOG" = "true" ] && [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-                        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ] || [ "$__BU_STAT_LOG_REDIRECT" = "tee" ]; then
-                            CutDateFromString "$val"
-
-                            echo -e "$val" >> "$__BU_PROJECT_LOG_FILE_PATH" || { EchoMsg "$p_option" '' >&2; "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}() : ${__BU_COLOR_ERROR}Unable to write into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_LOG_FILE_PATH${__BU_COLOR_ERROR} file.${__BU_COLOR_RESET}" >&2; EchoMsg "$p_option" '' >&2; exit 1; kill "$$"; }
-
-                        elif [ "$__BU_STAT_LOG_REDIRECT" = "" ]; then
-                            CutDateFromString "$val"
-                        fi
-                    else
-                        CutDateFromString "$val"
-                    fi
-                done
-
-                # Calling the function that processes the given answer.
-                CaseRead_HandleErrorsCPLS
-
-                # Resetting the "$__BU_STAT_CPLS" status CheckTxtFmt.
-                __BU_STAT_CPLS="false"; CheckSTAT_CPLS "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR A !"
             fi
 
         # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
+        fi
+        
+        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
+            local v_log_old="true"; __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        fi
+
+        if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
+            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
         else
-            if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
-                local v_log_old="true"; __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            fi
+            HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
+        fi
 
-            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
-            else
-                HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
-            fi
+        if [ -z "$p_adviceString" ]; then
+            EchoError "No advice to give."; Newline >&2
+        else
+            EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
+        fi
 
-            if [ -z "$p_adviceString" ]; then
-                EchoError "No advice to give."; Newline >&2
-            else
-                EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
-            fi
-                
-            if [ -z "$p_badValue" ]; then
-                EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
-            else
-                EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
-            fi
+        if [ -z "$p_badValue" ]; then
+            EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+        else
+            EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
+        fi
 
-            if [ "$__BU_STAT_ERROR" = "fatal" ]; then
-                EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
-                ExitError "1"
-            else
-                # Calling the function that processes the given answer.
-                CaseRead_HandleErrors
-            fi
-            
-            if [ "$v_log_old" = "true" ]; then
-                __BU_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            fi
+        if [ "$__BU_STAT_ERROR" = "fatal" ]; then
+            EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
+            ExitError "1"
+        else
+            # Calling the function that processes the given answer.
+            CaseRead_HandleErrors
+        fi
+
+        if [ "$v_log_old" = "true" ]; then
+            __BU_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
+
+    return 1
 }
 
 # -----------------------------------------------
