@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+
+# ----------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Errors.lib
+# Description   : Errors handling functions.
+# Author(s)     : Dimitri Obeid
+# Version       : 
+
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo -e "WARNING !" >&2; echo >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
+
+    exit 1
+fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### ERRORS HANDLING FUNCTIONS
+
+## CLASSIC ERRORS HANDLING
+
+# Saving time when displaying a newline, an error message and an exit or a return value.
+function HandleSmallErrors()
+{
+
+    return 0
+}
+
+# -----------------------------------------------
+
+## EXIT HANDLING
+
+# Handling exit command from sourced files, as it's impossible to properly exit the script from these.
+function ExitError()
+{
+    if [[ "$1" =~ [0-9] ]]; then
+        exit "$1"; kill "$$"
+    else
+        EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument."
+
+        kill "$$"
+    fi
+}
+
+# -----------------------------------------------
+
+## SCRIPT'S ERRORS HANDLING
+
+# "HandleErrors()" function --> Handling file name presence.
+function HandleErrors_File()        { if [ -z "$1" ]; then DechoHighlight "<no file>"; else DechoHighlight "$1"; fi }
+
+# "HandleErrors()" function --> Handling function name presence.
+function HandleErrors_Function()    { if [ -z "$1" ]; then DechoHighlight "<no function>"; else DechoHighlight "$1"; fi }
+
+# "HandleErrors()" function --> Handling line number presence.
+function HandleErrors_Line()        { if [ -z "$1" ]; then DechoHighlight "<no line>"; else DechoHighlight "$1"; fi }
+
+# Handling command outputs.
+# Featured functions and files from the "basis" category :
+#   - 
+function HandleErrors()
+{
+	#***** Paramètres *****
+	local p_returnCode=$1      # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
+	local p_errorString=$2     # Chaîne de caractères du type d'erreur à afficher.
+	local p_adviceString=$3    # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+    local p_badValue=$4        # Incorrect value which caused the error.
+	local p_file=$5            # The name of the file where the error occured.
+	local p_function=$6        # The name of the function where the error occured.
+	local p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
+
+    #***** Variables *****
+	local v_hdrString;
+        v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
+
+	# ***** Code *****
+	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+	if [ "$p_returnCode" -eq 0 ]; then
+        return 0
+    else
+        # If the function needs to be called in the "CheckProjectLogStatus()" function,
+        # this status CheckTxtFmt's value MUST be set at "true", or else the script will loop forever.
+
+        # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
+
+        if [ "$__BU_STAT_CPLS" = "true" ]; then
+            EchoMsg "$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")"
+            if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
+                EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+            else
+                EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+            fi
+
+        # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
+        fi
+        
+        if [ "$__BU_STAT_LOG_REDIRECT" = "log" ]; then
+            local v_log_old="true"; __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        fi
+
+        if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
+            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
+        else
+            HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
+        fi
+
+        if [ -z "$p_adviceString" ]; then
+            EchoError "No advice to give."; Newline >&2
+        else
+            EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
+        fi
+
+        if [ -z "$p_badValue" ]; then
+            EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+        else
+            EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
+        fi
+
+        if [ "$__BU_STAT_ERROR" = "fatal" ]; then
+            EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
+            ExitError "1"
+        else
+            # Calling the function that processes the given answer.
+            CaseRead_HandleErrors
+        fi
+
+        if [ "$__BU_STAT_CPLS" = "true" ]; then
+            if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
+                EchoWarning "" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || {  }
+            fi
+        fi
+
+        if [ "$v_log_old" = "true" ]; then
+            __BU_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        fi
+    fi
+
+    return 1
+}
+
+# -----------------------------------------------

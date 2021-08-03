@@ -121,6 +121,23 @@ function __EchoCPLS()
                     fi
                     ;;
             esac
+        elif [ -z "$val" ]; then
+            case "$p_option" in
+                '-n' | 'n')
+                    if CheckIsInitializing; then
+                        InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
+                    else
+                        echo -ne "$__BU_TIME_DATE_DISPLAY $p_string"
+                    fi
+                    ;;
+                '' | *)
+                    if CheckIsInitializing; then
+                        InitializerAddInitStrArrayVal "$p_string" ""
+                    else
+                        echo -e "$__BU_TIME_DATE_DISPLAY $p_string"
+                    fi
+                    ;;
+            esac
         else
             case "$p_option" in
                 '-n' | 'n')

@@ -90,30 +90,3 @@ function CaseRead_HandleErrors()
 			;;
 	esac
 }
-
-# "HandleErrors" function, with the "$__BU_STAT_CPLS" CheckTxtFmt set to "true".
-function CaseRead_HandleErrorsCPLS()
-{
-	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
-	read -rp "Enter your answer : " __read_TriggerRootDirWarning
-	EchoRead "$__read_TriggerRootDirWarning"
-    Newline
-
-	# shellcheck disable=SC2154
-	case "${__read_HandleErrorsCPLS,,}" in
-		"yes")
-			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Resuming the execution of the $(DechoHighlight "$__BU_PROJECT_NAME") script." >&2s)")
-
-			return 0
-			;;
-		"no")
-			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "Aborting the $(DechoHighlight "$__BU_PROJECT_NAME")'s execution." >&2)")
-
-			exit 1; kill "$$"
-			;;
-		*)
-			__BU_TXT_STORE_ERROR_MESSAGES_ARRAY+=("$(echo -e "$__BU_CASE_INVALID_ANSWER" >&2)")
-			CaseRead_HandleErrorsCPLS
-			;;
-	esac
-}
