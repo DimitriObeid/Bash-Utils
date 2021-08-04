@@ -30,7 +30,7 @@ fi
 ## 
 
 # Cut the date displayed before a string.
-function CutDateFromString()
+function CutLogDateFromString()
 {
     #***** Parameters *****
     local p_string=$1

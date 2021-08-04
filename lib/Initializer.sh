@@ -38,7 +38,7 @@ function InitializerAddInitStrArrayVal()
 
     #***** Code *****
     if [ "$__BU_STAT_PRINT_INIT_LOG" = "true" ]; then
-        __INIT_STR_ARRAY+=("$p_string"); echo "${p_string##*] }"    # Cut the date from a string, before displaying it on the terminal.
+        __INIT_STR_ARRAY+=("$p_string"); printf "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
     else
         __INIT_STR_ARRAY+=("$p_string")
     fi

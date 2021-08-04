@@ -34,8 +34,61 @@ fi
 # Saving time when displaying a newline, an error message and an exit or a return value.
 function HandleSmallErrors()
 {
+    #***** Parameters *****
+    local p_type=$1         # Type of message to display ('E' = EchoError; 'W' = EchoWarning)
+    local p_string=$2       # String to display.
+    local p_return=$3       # Exit or return status.
+    local p_cpls=$4         # Enable the safe text printing mode.
 
-    return 0
+    #***** Variables *****
+    v_advise="Please don't forget to pass a type of message to display as first argument ('E' = EchoError; 'W' = EchoWarning)"
+
+    if [ "${p_cpls^^}" = 'CPLS' ]; then
+        if [ "$__BU_STAT_CPLS" = 'false' ]; then
+            local v_bu_stat_cpls_old="$__BU_STAT_CPLS"; ChangeSTAT_CPLS 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        fi
+    fi
+
+    #***** Code *****
+    Newline >&2;
+
+    if [ "$p_type" = 'E' ]; then EchoError "$p_string" '' ''
+    elif [ "$p_type" = 'W' ]; then EchoWarning "$p_string" '' ''
+
+    # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
+    else
+        if [ "$(( RANDOM%2 ))" = "0" ]; then
+            EchoError "$p_string    | ${__BU_COLOR_RESET}$v_advise" '' ''
+        else
+            EchoWarning "$p_string  | ${__BU_COLOR_RESET}$v_advise" '' ''
+        fi
+    fi
+    
+    Newline >&2
+
+    # As the "EchoWarning()" function will be called in case of a missing return or exit code (normally passed as second argument),
+    # it's better to reset the value of the "$__BU_STAT_CPLS" status variable condition per condition.
+    if [ "${p_return^^}" = 'R' ]; then
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then
+            __BU_STAT_CPLS='false'
+        fi
+    
+        return 1
+
+    elif [ "${p_return^^}" = 'E' ]; then
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then
+            __BU_STAT_CPLS='false'
+        fi
+
+        ExitError '1'
+
+    else 
+        EchoWarning "$("${FUNCNAME[0]}") Warning : bad exit or return code given as second argument !"; ExitError '1'
+        
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then
+            __BU_STAT_CPLS='false'
+        fi
+    fi
 }
 
 # -----------------------------------------------
@@ -72,14 +125,14 @@ function HandleErrors_Line()        { if [ -z "$1" ]; then DechoHighlight "<no l
 #   - 
 function HandleErrors()
 {
-	#***** Paramètres *****
+	#***** Parameters *****
 	local p_returnCode=$1      # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
-	local p_errorString=$2     # Chaîne de caractères du type d'erreur à afficher.
-	local p_adviceString=$3    # Chaîne de caractères affichants un conseil pour orienter l'utilisateur vers la meilleure solution en cas de problème.
+	local p_errorString=$2     # String of the type of error to display.
+	local p_adviceString=$3    # String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
     local p_badValue=$4        # Incorrect value which caused the error.
 	local p_file=$5            # The name of the file where the error occured.
 	local p_function=$6        # The name of the function where the error occured.
-	local p_lineno=$7          # Ligne à laquelle le message d'erreur s'est produite.
+	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #***** Variables *****
 	local v_hdrString;
@@ -111,7 +164,7 @@ function HandleErrors()
             local v_log_old="true"; __BU_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
 
-        if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
+        if [ "$__BU_STAT_ERROR" = "fatal" ]; then
             HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
         else
             HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
@@ -139,7 +192,10 @@ function HandleErrors()
 
         if [ "$__BU_STAT_CPLS" = "true" ]; then
             if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-                EchoWarning "" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" || {  }
+                EchoWarning "" 2>&1 | tee -a "$__BU_PROJECT_LOG_FILE_PATH" ||
+                {
+                    HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                }
             fi
         fi
 

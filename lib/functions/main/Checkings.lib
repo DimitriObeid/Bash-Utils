@@ -503,7 +503,7 @@ function CheckDecho()
 	fi
 	
     if [ -f "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
-        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { EchoMsg >&2; EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : Unable to write any color code into the $(DechoHighlight "$__BU_PROJECT_COLOR_CODE_FILE_PATH") file."; EchoMsg >&2; return 1; }
+        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { HandleSmallErrors "$(EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : Unable to write any color code into the $(DechoHighlight "$__BU_PROJECT_COLOR_CODE_FILE_PATH") file.")"; 'R' ''; return 1; }
 
         return 0
     else
