@@ -37,7 +37,7 @@ function HandleSmallErrors()
     #***** Parameters *****
     local p_type=$1         # Type of message to display ('E' = EchoError; 'W' = EchoWarning)
     local p_string=$2       # String to display.
-    local p_return=$3       # Exit or return status.
+    local p_return=$3       # Exit or return status ('E' = exit; 'R' = return).
     local p_cpls=$4         # Enable the safe text printing mode.
 
     #***** Variables *****

@@ -178,12 +178,15 @@ function CheckProjectLogPath()
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+
         ExitError
 
     elif [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
-        echo -e "${__BU_COLOR_ERROR}Please correct the path passed as argument.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -e "${__BU_COLOR_ERROR}Please correct the path passed as argument, or check if the file was created before.${__BU_COLOR_RESET}" >&2; echo >&2
+        echo -e "${__BU_COLOR_ERROR}Incorrect value : $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH")" >&2; echo >&2
+
         ExitError
 
     fi
@@ -459,16 +462,16 @@ function CheckProjectRelatedFile()
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
-				true > "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
+				true > "$v_path" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")" 'E'; return 1; }
 			fi
 
 			return 0
 		else
 			if [ ! -d "$p_parent" ]; then
-				mkdir -p "$p_parent" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file's parent folder --> $(DechoHighlight "$(CheckDirPathExists "$p_parent")")"; EchoMsg >&2; ExitError "1"; }
+				mkdir -p "$p_parent" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file's parent folder --> $(DechoHighlight "$(CheckDirPathExists "$p_parent")")" 'E'; return 1; }
 			fi
 
-			touch "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
+			touch "$v_path" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's file --> $(DechoHighlight "$(CheckFilePathExists "$v_path")")" 'E'; return 1; }
 
 			return 0
 		fi
@@ -477,7 +480,7 @@ function CheckProjectRelatedFile()
 		if [ -d "$v_path" ]; then
 			return 0
 		else
-			mkdir -p "$v_path" || { EchoMsg >&2; EchoError "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's folder --> $(DechoHighlight "$(CheckDirPathExists "$v_path")")"; EchoMsg >&2; ExitError "1"; }
+			mkdir -p "$v_path" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to create this $(DechoHighlight "$__BU_PROJECT_NAME") project's folder --> $(DechoHighlight "$(CheckDirPathExists "$v_path")")" 'E'; return 1; }
 
 			return 0
 		fi

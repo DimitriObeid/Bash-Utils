@@ -160,19 +160,10 @@ function CheckSTAT_LOG()
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_LOG" "__BU_STAT_LOG" "${pa_correctValues[@]}"
 
     elif [ "$__BU_STAT_LOG" = "true" ] && [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-        
-        if [ ! -d "$__BU_PROJECT_LOG_DIR_PATH" ]; then
-
-            # Even if the initialization process is still ongoing, it's possible to call an "Echo<...>()" function,
-            # as the text display in this condition is managed by the "CheckProjectLogStatus()" function.
-			EchoNewstep "Creating the $(DechoHighlight "$__BU_PROJECT_LOG_DIR_PATH")folder."
-
-			mkdir -pv "$__BU_PROJECT_LOG_DIR_PATH" || { __BU_STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S TEMPORARY LOGS FOLDER CREATION FAILED${}" "" "$__BU_PROJECT_LOG_DIR_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
-		fi
 
 		EchoNewstep "Creating the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
 
-		touch "$__BU_PROJECT_LOG_FILE_PATH" || { __BU_STAT_TXT_FMT="false"; echo >&2; echo -e "${__BU_COLOR_ERROR}THE PROJECT'S LOG FILE CREATION FAILED" "" "$__BU_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; echo >&2; exit 1; }
+		CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'
 
 		if CheckIsInitializing; then
             # shellcheck disable=SC2034

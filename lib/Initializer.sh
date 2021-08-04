@@ -156,6 +156,10 @@ if CheckIsInitializing; then
     __INIT_IS_INITALIZING="false"
 fi
 
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
+# shellcheck disable=SC2034
+ChangeSTAT_LOG       "true"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
 # shellcheck disable=SC2034
 ChangeSTAT_LOG_REDIRECT "tee"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
@@ -164,10 +168,6 @@ MkTmpDir
 # -----------------------------------------------
 
 ## MODIFYING OTHER STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
-# shellcheck disable=SC2034
-ChangeSTAT_LOG       "true"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 # shellcheck disable=SC2034
 ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -179,6 +179,7 @@ ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 if ! CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
 if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
 
+exit 0
 
 # Setting this status variable's value to "false" once the initialization part is over.
 

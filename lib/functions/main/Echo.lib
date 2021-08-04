@@ -175,7 +175,9 @@ function EchoError()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2; shift 2
+    local p_option=$2;
+shift 2
+
     local pa_extraArgs=("$@")
 
     #***** Code *****
@@ -207,7 +209,9 @@ function EchoMsg()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2; shift 2
+    local p_option=$2;
+    shift 2
+
     local pa_extraArgs=("$@")
 
     #***** Code *****
@@ -239,7 +243,9 @@ function EchoNewstep()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2; shift 2
+    local p_option=$2;
+    shift 2
+
     local pa_extraArgs=("$@")
 
     #***** Code *****
@@ -289,7 +295,9 @@ function EchoSuccess()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2; shift 2
+    local p_option=$2;
+    shift 2
+
     local pa_extraArgs=("$@")
 
     #***** Code *****
@@ -321,7 +329,9 @@ function EchoWarning()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2; shift 2
+    local p_option=$2;
+    shift 2
+
     local pa_extraArgs=("$@")
 
     #***** Code *****
@@ -408,7 +418,7 @@ function Newline()
     if [ -n "$number" ]; then
         if ! IsInt "$number"; then
             EchoMsg "" "" "nodate"
-            HandleSmallErrors "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
+            HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
             EchoMsg "" "" "nodate"
         else
             # Doing X line breaks according to the number passed as argument.
