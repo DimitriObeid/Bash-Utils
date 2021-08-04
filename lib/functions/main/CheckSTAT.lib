@@ -161,9 +161,9 @@ function CheckSTAT_LOG()
 
     elif [ "$__BU_STAT_LOG" = "true" ] && [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
 
-		EchoNewstep "Creating the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
+		if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
 
-		CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'
+		EchoSuccess "Successfully created the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
 
 		if CheckIsInitializing; then
             # shellcheck disable=SC2034
