@@ -164,6 +164,8 @@ function CheckSTAT_LOG()
 		if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
 
 		EchoSuccess "Successfully created the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
+		
+		ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 		if CheckIsInitializing; then
             # shellcheck disable=SC2034
