@@ -45,10 +45,10 @@ function CutFromCharacter()
 
     #***** Code *****
     if ! IsInt "$p_iterations"; then
-        EchoWarning "$(DechoHighlight "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."
+        EchoWarning "$(DechoHighlight "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
     fi
 
-    if [ "$p_iterations" -eq 0 ]; then
+    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
         p_iterations='1'
     fi
 

@@ -346,20 +346,10 @@ function CheckArgsMain_GetParentDirectoryName()
 {
     #***** Parameters *****
     local p_path=$1         # Path of the directory to process.
-    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #***** Code *****
     # If the target folder path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    local lineno="$LINENO"; elif ! IsInt "$p_iterations"; then
-        __CheckArgsMain_PrintBadOption '' "" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-    fi
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"; return 1; fi
 
 	return 0
 }
@@ -369,20 +359,10 @@ function CheckArgsMain_GetParentDirectoryPath()
 {
     #***** Parameters *****
     local p_path=$1         # Path of the directory to process.
-    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #***** Code *****
     # If the target folder path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    local lineno="$LINENO"; elif ! IsInt "$p_iterations"; then
-        __CheckArgsMain_PrintBadOption '!int' "Please pass an integer as second argument" 'p_iterations' "$p_iterations" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-    fi
+    local lineno="$LINENO"; if [ -z "$p_path" ]; then __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"; return 1; fi
 
 	return 0
 }

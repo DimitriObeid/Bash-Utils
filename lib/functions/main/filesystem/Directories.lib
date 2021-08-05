@@ -266,7 +266,11 @@ function GetParentDirectoryName()
     #***** Code *****
     CheckArgsMain_GetParentDirectoryName "$p_path" "$p_iterations"
 
-    if [ -z "$p_iterations" ]; then
+    if ! IsInt "$p_iterations"; then
+        EchoWarning "$(DechoHighlight "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
+    fi
+
+    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
         p_iterations='1'
     fi
 
@@ -297,7 +301,7 @@ function GetParentDirectoryPath()
     #***** Code *****
     CheckArgsMain_GetParentDirectoryPath "$p_path" "$p_iterations"
 
-    if [ -z "$p_iterations" ]; then
+    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
         p_iterations='1'
     fi
 
