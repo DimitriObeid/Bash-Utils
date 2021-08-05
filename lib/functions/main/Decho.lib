@@ -54,7 +54,7 @@ function Decho()
     CheckDecho
 
     if test "$?" -ne 0; then
-        echo -ne " << $p_string >> "
+        echo -ne "<< $p_string >>"
         
         return 1
     else

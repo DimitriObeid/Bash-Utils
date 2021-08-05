@@ -30,32 +30,18 @@ fi
 ## 
 
 # Cut the date displayed before a string.
-function CutLogDateFromString()
-{
-    #***** Parameters *****
-    local p_string=$1
-
-    #***** Code *****
-    p_string="${p_string##*] }"; echo -e "$p_string"
-}
+function CutLogDateFromString()     { CutLastFieldFromDelimiter "$1" '] ';  return 0; }
 
 # Cut the dash written before a command option call (to be improved).
-function CutDashFromOption()
-{
-    #***** Parameters *****
-    local p_string=$1
-
-    #***** Code *****
-    p_string="${p_string##*-}"; echo -e "$p_string"
-}
+function CutDashFromOption()        { CutLastFieldFromDelimiter "$1" '-';   return 0; }
 
 # Cut every part of a string before and with the delimiter.
 function CutFromCharacter()
 {
     #***** Parameters *****
-    p_target=$1         # string to process
-    #   $2  --> delimiter
-    p_iterations=$3     # iterations
+    p_target=$1         # String to process.
+    # $2                # Delimiter.
+    p_iterations=$3     # Iterations.
 
     #***** Code *****
     if ! IsInt "$p_iterations"; then
@@ -70,11 +56,9 @@ function CutFromCharacter()
         #shellcheck disable=SC2001
         p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")"
         p_target="$p_target"
-
-        echo "$p_target"
     done
 
-    return 0
+    echo -ne "$p_target"; return 0
 }
 
 # Cut the last field of a string.
