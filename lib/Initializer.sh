@@ -38,7 +38,7 @@ function InitializerAddInitStrArrayVal()
 
     #***** Code *****
     if [ "$__BU_STAT_PRINT_INIT_LOG" = "true" ]; then
-        __INIT_STR_ARRAY+=("$p_string"); printf "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+        __INIT_STR_ARRAY+=("$p_string"); printf "%s" "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
     else
         __INIT_STR_ARRAY+=("$p_string")
     fi
@@ -139,41 +139,14 @@ done
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
-# shellcheck disable=SC2034
 ChangeSTAT_DEBUG        "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
 ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
 ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# shellcheck disable=SC2034
 ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-if CheckIsInitializing; then
-    # shellcheck disable=SC2034
-    __INIT_IS_INITALIZING="false"
-fi
-
-# shellcheck disable=SC2034
 ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-# shellcheck disable=SC2034
-ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
-# shellcheck disable=SC2034
-ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
-
 MkTmpDir
-
-# -----------------------------------------------
-
-## MODIFYING OTHER STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
-
-# shellcheck disable=SC2034
-ChangeSTAT_TXT_FMT   "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TXT_FMT      "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
@@ -185,7 +158,7 @@ if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_
 # Setting this status variable's value to "false" once the initialization part is over.
 
 # shellcheck disable=SC2034
-ChangeSTAT_ECHO         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
 
 # -----------------------------------------------
 
@@ -195,4 +168,17 @@ ChangeSTAT_ECHO         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 #### ENDING THE INITIALIZATION PROCESS
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
+ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
+# shellcheck disable=SC2034
+ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
+
+if CheckIsInitializing; then
+    # shellcheck disable=SC2034
+    __INIT_IS_INITALIZING="false"
+fi

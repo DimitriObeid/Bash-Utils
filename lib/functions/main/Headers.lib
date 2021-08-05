@@ -60,7 +60,7 @@ function DrawLine()
 
 	# The 'i' CheckTxtFmt in the "for i in" loop has been replaced by an underscore '_' to stop Shellcheck from sending a warning
 	# message due to the non-declaration of the CheckTxtFmt 'i', although this does not change anything when the script is executed.
-	for _ in $(eval echo -e "{1..$__TXT_COLS}"); do
+	for _ in $(eval echo -e "{1..$__BU_TXT_COLS}"); do
 		echo -n "$p_lineChar"
 	done
 
