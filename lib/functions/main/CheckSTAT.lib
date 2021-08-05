@@ -47,7 +47,7 @@ function ConfEcho()
     local i=0
 
     #***** Code *****
-    __BU_STAT_CPLS="true"; __BU_STAT_ECHO=""; __BU_STAT_LOG="false"; __BU_STAT_LOG_REDIRECT="";
+    __BU_STAT_ECHO="true"; __BU_STAT_LOG="false"; __BU_STAT_LOG_REDIRECT="";
 
     HeaderError "AN ERROR OCCURED DURING A STATUS VARIABLES CHECKING !!!"
 
@@ -81,22 +81,6 @@ function ConfEcho()
 
 ## CHECKINGS
 
-# Check the "$__BU_STAT_CPLS" status variable's value.
-function CheckSTAT_CPLS()
-{
-    #***** Parameters *****
-    local p_file=$1
-    local p_lineno=$2
-
-    #***** Variables *****
-    local pa_correctValues=("true" "false")
-
-    #***** Code *****
-    if [ "$__BU_STAT_CPLS" != "true" ] && [ "$__BU_STAT_CPLS" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_STAT_CPLS" "__BU_STAT_CPLS" "${pa_correctValues[@]}"
-    fi
-}
-
 # Checking the "$__BU_STAT_DEBUG" status variable's value.
 function CheckSTAT_DEBUG()
 {
@@ -113,7 +97,23 @@ function CheckSTAT_DEBUG()
     fi
 }
 
-# Checking the "$__BU_STAT_ECHO" status variable's value.
+# Check the "$__BU_STAT_DECHO" status variable's value.
+function CheckSTAT_DECHO()
+{
+    #***** Parameters *****
+    local p_file=$1
+    local p_lineno=$2
+
+    #***** Variables *****
+    local pa_correctValues=("authorize" "forbid" "restrict")
+
+    #***** Code *****
+    if [ "$__BU_STAT_DECHO" != "authorize" ] && [ "$__BU_STAT_DECHO" != "forbid" ] && [ "$__BU_STAT_DECHO" != "restrict" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__BU_STAT_DECHO" "__BU_STAT_DECHO" "${pa_correctValues[@]}"
+    fi
+}
+
+# Check the "$__BU_STAT_ECHO" status variable's value.
 function CheckSTAT_ECHO()
 {
     #***** Parameters *****
@@ -125,7 +125,7 @@ function CheckSTAT_ECHO()
 
     #***** Code *****
     if [ "$__BU_STAT_ECHO" != "true" ] && [ "$__BU_STAT_ECHO" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_STAT_ECHO" "__BU_STAT_ECHO" "${pa_correctValues[@]}"
+        ConfEcho "$p_file" "$p_lineno" "$__BU_STAT_ECHO" "__BU_STAT_ECHO" "${pa_correctValues[@]}"
     fi
 }
 
@@ -172,8 +172,8 @@ function CheckSTAT_LOG()
             __INIT_IS_INITALIZING="false"
         fi
 
-        if [ "$__STAT_CPLS" = "true" ]; then
-            ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        if [ "$__STAT_ECHO" = "true" ]; then
+            ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
 		
 		# Redirecting the initializer's log file content into the log file.
@@ -340,7 +340,7 @@ function CheckProjectStatusVars()
     #***** Code *****
     # Processing first the "__BU_STAT_LOG_REDIRECT" CheckTxtFmt, to make sure the following error messages will be correctly displayed if another error happened.
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
-    CheckSTAT_CPLS          "$p_file" "$p_lineno"
+    CheckSTAT_ECHO          "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"
     CheckSTAT_LOG           "$p_file" "$p_lineno"
@@ -360,14 +360,11 @@ function CheckProjectStatusVars()
 #   $2  --> file where the change was made.
 #   $3  --> line where the change was made.
 
-# Changing the "$__BU_STAT_CPLS" status variable's value.
-function ChangeSTAT_CPLS()  { __BU_STAT_CPLS="$1";      CheckSTAT_CPLS  "$2" "$3"; }
+# Changing the "$__BU_STAT_ECHO" status variable's value.
+function ChangeSTAT_ECHO()  { __BU_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
 
 # Changing the "$__BU_STAT_DEBUG" status variable's value.
 function ChangeSTAT_DEBUG() { __BU_STAT_DEBUG="$1";     CheckSTAT_DEBUG "$2" "$3"; }
-
-# Changing the "$__BU_STAT_ECHO" status variable's value.
-function ChangeSTAT_ECHO    { __BU_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
 
 # Changing the "$__BU_STAT_ERROR" status variable's value.
 function ChangeSTAT_ERROR   { __BU_STAT_ERROR="$1";     CheckSTAT_ERROR "$2" "$3"; }

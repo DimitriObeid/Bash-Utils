@@ -94,11 +94,11 @@ function __CheckArgsMain_PrintBadOption()
     local p_lineno=$6   # Line where the test failed.
 
     #***** Variables *****
-	# Changing the "$__BU_STAT_CPLS" status variable's value to "true" in case this function is called during a 
-	if [ "$__BU_STAT_CPLS" = "false" ]; then
-		local v_STAT_CPLS_was_false="true"
+	# Changing the "$__BU_STAT_ECHO" status variable's value to "true" in case this function is called during a 
+	if [ "$__BU_STAT_ECHO" = "false" ]; then
+		local v_STAT_ECHO_was_false="true"
 		
-		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
     local v_string; v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
@@ -160,8 +160,8 @@ function __CheckArgsMain_PrintBadOption()
 		return 1
     fi
 
-	if [ "$v_STAT_CPLS_was_false" = "true" ]; then
-		ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	if [ "$v_STAT_ECHO_was_false" = "true" ]; then
+		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
 	return 0

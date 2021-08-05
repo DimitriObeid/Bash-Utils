@@ -94,7 +94,7 @@ function InitializerSourcingFailure()
     p_path=$1               # Path of the file that cannot be sourced.
 
     #***** Code *****
-    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THIS FILE --> $p_path" >&2; echo >&2; exit 1
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS FILE --> $p_path" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -140,16 +140,16 @@ done
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
 # shellcheck disable=SC2034
-ChangeSTAT_DEBUG        "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_DEBUG        "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-ChangeSTAT_ERROR        "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-ChangeSTAT_TIME_TXT     "0"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-ChangeSTAT_TXT_FMT      "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 if CheckIsInitializing; then
     # shellcheck disable=SC2034
@@ -157,11 +157,14 @@ if CheckIsInitializing; then
 fi
 
 # shellcheck disable=SC2034
-ChangeSTAT_LOG_REDIRECT "tee"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# shellcheck disable=SC2034
+ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
 # shellcheck disable=SC2034
-ChangeSTAT_LOG       "true"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 MkTmpDir
 
@@ -182,7 +185,7 @@ if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_
 # Setting this status variable's value to "false" once the initialization part is over.
 
 # shellcheck disable=SC2034
-ChangeSTAT_CPLS         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ECHO         "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

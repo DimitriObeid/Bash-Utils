@@ -371,7 +371,7 @@ function KeepFormatting()
 	elif [ "${p_old_formatting^^}" = 'U' ]; then
         echo -ne "$(ToUppercase "")"
 	else
-        DechoHighlight "<<| No reformatting precised in the ${FUNCNAME[0]}() function |>>"
+        echo -ne "<<|| No reformatting precised in the ${FUNCNAME[0]}() function ||>>"
 	fi
 
 	return 0

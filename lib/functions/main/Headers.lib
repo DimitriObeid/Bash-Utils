@@ -86,7 +86,7 @@ function DrawLine()
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
 
 # Since this function can be called in the "__EchoOutput()" function,
-# even if the "$__BU_STAT_CPLS" status CheckTxtFmt's value is set to "true",
+# even if the "$__BU_STAT_ECHO" status CheckTxtFmt's value is set to "true",
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 function HeaderBase()
 {
@@ -101,7 +101,7 @@ function HeaderBase()
 # 	HEADERBASE_COLOR_TEXT="$p_stringColor"
 
 	#***** Code *****
-	if [ "$__BU_STAT_CPLS" = "false" ]; then
+	if [ "$__BU_STAT_ECHO" = "false" ]; then
         Newline
 
         EchoMsg "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
@@ -110,7 +110,7 @@ function HeaderBase()
         Newline
 
         return 0
-    elif [ "$__BU_STAT_CPLS" = "true" ] || [ "$__BU_STAT_TRANSLATED" = "false" ]; then
+    elif [ "$__BU_STAT_ECHO" = "true" ] || [ "$__BU_STAT_TRANSLATED" = "false" ]; then
         echo -e
 
         echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"

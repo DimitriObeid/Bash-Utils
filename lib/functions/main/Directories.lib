@@ -188,13 +188,13 @@ function MkTmpDir()
     local lineno="$LINENO"; if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_PROJECT_TMP_DIR_PATH" ||
 		{
-			ChangeSTAT_CPLS "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			
 			HandleErrors "1" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
             "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
-			ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 			return 1
 		}
