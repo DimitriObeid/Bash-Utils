@@ -360,11 +360,14 @@ function CheckProjectStatusVars()
 #   $2  --> file where the change was made.
 #   $3  --> line where the change was made.
 
-# Changing the "$__BU_STAT_ECHO" status variable's value.
-function ChangeSTAT_ECHO()  { __BU_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
-
 # Changing the "$__BU_STAT_DEBUG" status variable's value.
 function ChangeSTAT_DEBUG() { __BU_STAT_DEBUG="$1";     CheckSTAT_DEBUG "$2" "$3"; }
+
+# Changing the "$__BU_STAT_DECHO" status variable's value.
+function ChangeSTAT_DECHO()  { __BU_STAT_DECHO="$1";    CheckSTAT_DECHO "$2" "$3"; }
+
+# Changing the "$__BU_STAT_ECHO" status variable's value.
+function ChangeSTAT_ECHO()  { __BU_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
 
 # Changing the "$__BU_STAT_ERROR" status variable's value.
 function ChangeSTAT_ERROR   { __BU_STAT_ERROR="$1";     CheckSTAT_ERROR "$2" "$3"; }

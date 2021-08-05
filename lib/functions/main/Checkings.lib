@@ -305,6 +305,9 @@ function CheckProjectLogStatus()
 
             done
 
+            #
+            ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
 			# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
@@ -383,6 +386,9 @@ function CheckProjectLogStatus()
             
             sleep "$__BU_STAT_TIME_TXT"
 			
+			#
+			ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
 			# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
@@ -406,6 +412,9 @@ function CheckProjectLogStatus()
             esac
 
         sleep "$__BU_STAT_TIME_TXT"
+
+        #
+        ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 		# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -434,7 +443,10 @@ function CheckProjectLogStatus()
         esac
 
         sleep "$__BU_STAT_TIME_TXT"
-		
+
+        #
+        ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
 		# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
 		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
