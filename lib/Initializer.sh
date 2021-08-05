@@ -38,7 +38,14 @@ function InitializerAddInitStrArrayVal()
 
     #***** Code *****
     if [ "$__BU_STAT_PRINT_INIT_LOG" = "true" ]; then
-        __INIT_STR_ARRAY+=("$p_string"); printf "%s" "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+        case "$p_option" in
+            '-n' | 'n')
+                __INIT_STR_ARRAY+=("$p_string"); echo -ne "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                ;;
+            '' | *)
+                __INIT_STR_ARRAY+=("$p_string"); echo -e "${p_string##*] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                ;;
+            esac
     else
         __INIT_STR_ARRAY+=("$p_string")
     fi
