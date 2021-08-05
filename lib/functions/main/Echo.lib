@@ -360,11 +360,21 @@ function EchoWarning()
 function KeepFormatting()
 {
 	#***** Parameters *****
-	p_string=$1
+	p_string=$1            # String to display.
+	p_old_formatting=$2    # Former tectxt formatting.
 
 	#***** Code *****
-	# echo -e "$p_string" | tr '[upper]' '[upper]'
-	return
+	echo -ne &>/dev/null; echo -ne "$p_string"
+
+	if [ "${p_old_formatting,,}" = 'l' ]; then
+        echo -ne "$(ToLowercase "")"
+	elif [ "${p_old_formatting^^}" = 'U' ]; then
+        echo -ne "$(ToUppercase "")"
+	else
+        DechoHighlight "<<| No reformatting precised in the ${FUNCNAME[0]}() function |>>"
+	fi
+
+	return 0
 }
 
 # Print a lowercased text.
@@ -377,7 +387,7 @@ function ToLowercase()
 	p_string=$1
 
 	#***** Code *****
-	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'
+	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'; return 0
 }
 
 # Print an uppercased text.
@@ -390,7 +400,7 @@ function ToUppercase()
 	p_string=$1
 
 	#***** Code *****
-	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'
+	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'; return 0
 }
 
 # -----------------------------------------------

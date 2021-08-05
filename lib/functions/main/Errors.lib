@@ -32,6 +32,8 @@ fi
 ## CLASSIC ERRORS HANDLING
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
+
+# WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER, SINCE THIS FUNCTION IS CALLED IN THE "CheckDecho()" FUNCTION !!!
 function HandleSmallErrors()
 {
     #***** Parameters *****
@@ -69,25 +71,19 @@ function HandleSmallErrors()
     # As the "EchoWarning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_STAT_CPLS" status variable condition per condition.
     if [ "${p_return^^}" = 'R' ]; then
-        if [ "$v_bu_stat_cpls_old" = "true" ]; then
-            __BU_STAT_CPLS='false'
-        fi
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then __BU_STAT_CPLS='false'; fi
     
         return 1
 
     elif [ "${p_return^^}" = 'E' ]; then
-        if [ "$v_bu_stat_cpls_old" = "true" ]; then
-            __BU_STAT_CPLS='false'
-        fi
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then __BU_STAT_CPLS='false'; fi
 
         ExitError '1'
 
     else 
-        EchoWarning "$("${FUNCNAME[0]}") Warning : bad exit or return code given as second argument !"; ExitError '1'
+        EchoWarning "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_COLOR_WARNING} Warning : bad exit or return code given as second argument !"; ExitError '1'
         
-        if [ "$v_bu_stat_cpls_old" = "true" ]; then
-            __BU_STAT_CPLS='false'
-        fi
+        if [ "$v_bu_stat_cpls_old" = "true" ]; then __BU_STAT_CPLS='false'; fi
     fi
 }
 

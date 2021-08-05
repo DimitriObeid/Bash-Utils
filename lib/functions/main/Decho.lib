@@ -54,7 +54,7 @@ function Decho()
     CheckDecho
 
     if test "$?" -ne 0; then
-        echo -e " ' $p_string ' "
+        echo -ne " ' $p_string ' "
         
         return 1
     else
@@ -70,14 +70,14 @@ function Decho()
 	fi
 
     # Setting every formattings.
-    for val in "${pa_fmtArgs[@]^^}"; do
-        case "$val" in
-            'Blink')
+    for val in "${pa_fmtArgs[@]}"; do
+        case "${val^^}" in
+            'BLINK')
                 echo -ne "${__BU_TXT_FMT_BLINK}"
-                ;;  
-            'Bold')
+                ;;
+            'BOLD')
                 echo -ne "${__BU_TXT_FMT_BOLD}"
-                ;; 
+                ;;
             'D')
                 echo -ne "${__BU_TXT_FMT_DIM}"
                 ;;
@@ -112,14 +112,14 @@ function Decho()
     echo -e "$p_string$p_newColor$__BU_COLOR_RESET"
 
     # Resetting every formattings.
-    for val in "${pa_fmtArgs[@]^^}"; do
-        case "$val" in
-            'Blink')
+    for val in "${pa_fmtArgs[@]}"; do
+        case "${val^^}" in
+            'BLINK')
                 echo -ne "${__BU_TXT_FMT_BLINK_RESET}"
-                ;;  
-            'Bold')
+                ;;
+            'BOLD')
                 echo -ne "${__BU_TXT_FMT_BOLD_RESET}"
-                ;; 
+                ;;
             'D')
                 echo -ne "${__BU_TXT_FMT_DIM_RESET}"
                 ;;
@@ -146,8 +146,6 @@ function Decho()
                 echo -e "Invalid value"; exit 1
                 
                 ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-                return 1
                 ;;
         esac
     done

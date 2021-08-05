@@ -498,15 +498,22 @@ function CheckProjectRelatedFile()
 ## FORMATTING CHECKINGS
 
 # Checking if the project's color code file exists or not.
+
+# WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER !!!
 function CheckDecho()
 {
     #***** Code *****
-    if [ "$__BU_STAT_TXT_FMT" = "false" ]; then
+    if [ "$__BU_STAT_TXT_FMT" = "false" ] || [ ! -f "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ]; then
         return 1
 	fi
 	
     if [ -f "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
-        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" || { HandleSmallErrors "$(EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : Unable to write any color code into the $(DechoHighlight "$__BU_PROJECT_COLOR_CODE_FILE_PATH") file.")"; 'R' ''; return 1; }
+        echo "$__BU_COLOR_RESET" > "$__BU_PROJECT_COLOR_CODE_FILE_PATH" ||
+        {
+            HandleSmallErrors "$(EchoWarning "${__BU_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_COLOR_WARNING}--> Warning : Unable to write any color code into the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_COLOR_CODE_FILE_PATH${__BU_COLOR_WARNING} file."; 'R' ''
+
+            return 1;
+        }
 
         return 0
     else

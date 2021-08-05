@@ -164,14 +164,14 @@ function CheckSTAT_LOG()
 		if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
 
 		EchoSuccess "Successfully created the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
-		
+
 		ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 		if CheckIsInitializing; then
             # shellcheck disable=SC2034
             __INIT_IS_INITALIZING="false"
         fi
-        
+
         if [ "$__STAT_CPLS" = "true" ]; then
             ChangeSTAT_CPLS "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
@@ -181,7 +181,7 @@ function CheckSTAT_LOG()
 
 		EchoNewstep "Sourced configuration files :"; for val in "${__INIT_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 		EchoNewstep "Sourced library files : "; for val in "${__INIT_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-		
+
 		if (( ${#__INIT_STR_ARRAY[@]} > 0 )); then
             EchoNewstep "Initialization log output :"; Newline
 
