@@ -95,6 +95,8 @@ function CheckSTAT_DEBUG()
     if [ "$__BU_STAT_DEBUG" != "true" ] && [ "$__BU_STAT_DEBUG" != "false" ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_DEBUG" "__BU_STAT_DEBUG" "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Check the "$__BU_STAT_DECHO" status variable's value.
@@ -111,6 +113,8 @@ function CheckSTAT_DECHO()
     if [ "$__BU_STAT_DECHO" != "authorize" ] && [ "$__BU_STAT_DECHO" != "forbid" ] && [ "$__BU_STAT_DECHO" != "restrict" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_STAT_DECHO" "__BU_STAT_DECHO" "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Check the "$__BU_STAT_ECHO" status variable's value.
@@ -127,6 +131,8 @@ function CheckSTAT_ECHO()
     if [ "$__BU_STAT_ECHO" != "true" ] && [ "$__BU_STAT_ECHO" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_STAT_ECHO" "__BU_STAT_ECHO" "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_ERROR" status variable's value.
@@ -143,6 +149,8 @@ function CheckSTAT_ERROR()
     if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" != "fatal" ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_ERROR" "__BU_STAT_ERROR" "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_LOG" status variable's value.
@@ -160,59 +168,10 @@ function CheckSTAT_LOG()
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_LOG" "__BU_STAT_LOG" "${pa_correctValues[@]}"
 
     elif [ "$__BU_STAT_LOG" = "true" ] && [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
-
-		if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
-
-		EchoSuccess "Successfully created the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
-
-		ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-		if CheckIsInitializing; then
-            # shellcheck disable=SC2034
-            __INIT_IS_INITALIZING="false"
-        fi
-
-        if [ "$__STAT_ECHO" = "true" ]; then
-            ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-        fi
-		
-		# Redirecting the initializer's log file content into the log file.
-		HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
-
-		EchoNewstep "Sourced configuration files :"; for val in "${__INIT_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-		EchoNewstep "Sourced library files : "; for val in "${__INIT_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-
-		if (( ${#__INIT_STR_ARRAY[@]} > 0 )); then
-            EchoNewstep "Initialization log output :"; Newline
-
-            for val in "${__INIT_STR_ARRAY[@]}"; do
-                CheckProjectLogStatus "$val"
-            done
-		fi
-
-		# Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
-		HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
-
-		# Getting operating system family.
-		EchoNewstep "Operating system family : $(DechoHighlight "$OSTYPE")"
-		Newline
-
-		# Gathering OS informations from the "/etc/os-release" file.
-		EchoNewstep "Operating system general informations :"
-		EchoMsg "$(cat "/etc/os-release")" "" "nodate"
-		Newline
-
-		EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
-		Newline
-
-		local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
-
-		EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")"
-		Newline
-
-		EchoSuccess "Successfully got the user's system's informations."
-
+        CreateProjectLogFile
 	fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_LOG_REDIRECT" status variable's value.
@@ -229,6 +188,8 @@ function CheckSTAT_LOG_REDIRECT()
     if [ -n "$__BU_STAT_LOG_REDIRECT" ] && [ "$__BU_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_STAT_LOG_REDIRECT" != 'tee' ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_LOG_REDIRECT" "__BU_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_OPERATE_ROOT" status variable's value.
@@ -245,6 +206,8 @@ function CheckSTAT_OPERATE_ROOT()
 	if [ "$__BU_STAT_OPERATE_ROOT" != "authorized" ] && [ "$__BU_STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__BU_STAT_OPERATE_ROOT" != "restricted" ]; then
 		Confecho "$p_file" "$p_lineno" "$__BU_STAT_OPERATE_ROOT" "__BU_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"
 	fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_PRINT_INIT_LOG" status variable's value.
@@ -261,6 +224,8 @@ function CheckSTAT_PRINT_INIT_LOG()
     if [ "$__BU_STAT_PRINT_INIT_LOG" != "true" ] && [ "$__BU_STAT_PRINT_INIT_LOG" != "false" ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_PRINT_INIT_LOG" '__BU_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_TIME_TXT" status variable's value.
@@ -278,6 +243,8 @@ function CheckSTAT_TIME_TXT()
     if ! IsFloatInt "$__BU_STAT_TIME_TXT"; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_TIME_TXT" "__BU_STAT_TIME_TXT" "${pa_correctValues[@]}" >&2
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_TRANSLATED" status variable's value.
@@ -294,6 +261,8 @@ function CheckSTAT_TRANSLATED()
     if [ "$__BU_STAT_TRANSLATED" != "true" ] && [ "$__BU_STAT_TRANSLATED" != "false" ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_TRANSLATED" '__BU_STAT_TRANSLATED' "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_TXT_FMT" status variable's value.
@@ -310,6 +279,8 @@ function CheckSTAT_TXT_FMT()
     if [ "$__BU_STAT_TXT_FMT" != "true" ] && [ "$__BU_STAT_TXT_FMT" != "false" ]; then
         Confecho "$p_file" "$p_lineno" "$__BU_STAT_TXT_FMT" '__BU_STAT_TXT_FMT' "${pa_correctValues[@]}"
     fi
+
+    return 0
 }
 
 # Checking the "$__BU_STAT_USER_OS" status variable's value.
@@ -340,6 +311,7 @@ function CheckProjectStatusVars()
     #***** Code *****
     # Processing first the "__BU_STAT_LOG_REDIRECT" CheckTxtFmt, to make sure the following error messages will be correctly displayed if another error happened.
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
+    CheckSTAT_DECHO         "$p_file" "$p_lineno"
     CheckSTAT_ECHO          "$p_file" "$p_lineno"
     CheckSTAT_DEBUG         "$p_file" "$p_lineno"
     CheckSTAT_ERROR         "$p_file" "$p_lineno"

@@ -145,14 +145,13 @@ ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 MkTmpDir
-ChangeSTAT_TXT_FMT      "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
 if ! CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
-if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
+# if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
 
 # Setting this status variable's value to "false" once the initialization part is over.
 
@@ -167,13 +166,13 @@ if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_
 
 #### ENDING THE INITIALIZATION PROCESS
 
+ChangeSTAT_TXT_FMT      "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
-# shellcheck disable=SC2034
-ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
+ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
 
