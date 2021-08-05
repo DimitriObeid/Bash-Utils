@@ -108,6 +108,8 @@ function InitializerSourcingFailure()
 
 ## USING FUNCTIONS
 
+# Checking the currently used Bash language's version.
+# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
 InitializerCheckBashMinimalVersion
 
 # -----------------------------------------------
