@@ -17,7 +17,7 @@ function DisplaySpinner()
 
     echo ">>>> $p_string"
 
-    while [ -d "/proc/$p_pid" ]; do
+    while true; do
         printf "\b${sp:i++%${#sp}:1}"
     done
 }
