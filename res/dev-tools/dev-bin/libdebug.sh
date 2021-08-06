@@ -1,11 +1,42 @@
 #!/usr/bin/env bash
 
-debug="tmp/debug.log"
+debug_tmp_f="tmp/debug.tmp"
+debug_log="tmp/final_debug_file.dbg"
 
-if [ -f "$debug" ]; then
-	true > "$debug"
+if [ -f "$debug_tmp_f" ]; then
+	true > "$debug_f"
 else
-	touch "$debug"
+	if [ ! -d "tmp" ]; then
+		mkdir -p "tmp"
+	fi
+
+	touch "$debug_tmp_f"
 fi
 
-bash -x LibTest.sh 2>&1 | tee -a "$debug"
+bash -x LibTest.sh 2>&1 | tee -a "$debug_tmp_f"
+
+function EchoDbg()
+{
+	echo -e "$1" >> "$debug_log"
+}
+
+if [ -s "$debug_tmp_f" ]; then
+	if [ ! -f "$debug_log" ]; then
+		touch "$debug_log"
+	else
+		true > "$debug_log"
+	fi
+
+	i=0
+
+	cat "$debug_tmp_f" | while read -r line; do
+		if line='++++ for _ in $(eval echo -e "{1..$__BU_TXT_COLS}")\n++++ echo -n -'; then
+			for i in ${#line}; do
+				line="$(echo -e "$line\b")"
+				EchoDbg "$line"
+			done; EchoDbg "\b"
+		fi
+
+		echo "$line" >> "$debug_log"
+	done
+fi

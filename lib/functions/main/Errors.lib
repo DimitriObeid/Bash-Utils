@@ -146,7 +146,7 @@ function HandleErrors()
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
         if [ "$__BU_STAT_ECHO" = "true" ]; then
-            EchoMsg "$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")"
+            EchoMsg "$(DrawLine "$__BU_TXT_PRINT_HEADER_LINE" "$__BU_COLOR_ERROR")" '' 'nodate'
             if [ -n "$__BU_STAT_ERROR" ] && [ "$__BU_STAT_ERROR" = "fatal" ]; then
                 EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
             else
