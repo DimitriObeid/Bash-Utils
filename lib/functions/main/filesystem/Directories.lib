@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -181,17 +181,17 @@ function Makedir()
     fi
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG CheckTxtFmt's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MOD_MAIN_STAT_LOG CheckTxtFmt's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function MkTmpDir()
 {
-    local lineno="$LINENO"; if [ ! -d "$__BU_PROJECT_TMP_DIR_PATH" ]; then
-        mkdir -p "$__BU_PROJECT_TMP_DIR_PATH" ||
+    local lineno="$LINENO"; if [ ! -d "$__BU_MOD_MAIN_PROJECT_TMP_DIR_PATH" ]; then
+        mkdir -p "$__BU_MOD_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
 			ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			
-			HandleErrors "1" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
-            "Please check at the mentionned line in the mentionned file." "$__BU_PROJECT_TMP_DIR_PATH" \
+			HandleErrors "1" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_MOD_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+            "Please check at the mentionned line in the mentionned file." "$__BU_MOD_MAIN_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
 			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

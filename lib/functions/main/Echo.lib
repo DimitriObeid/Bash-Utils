@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -42,7 +42,7 @@ function __EchoVoid()
     
     
     
-    " > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+    " > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
 }
 
 # "Echo<...>()" functions debug output for a better view during a "bash - x" debug process.
@@ -54,37 +54,37 @@ function __EchoOutput()
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
 	#***** Code *****
-	if [ "$__BU_STAT_DEBUG" = "true" ]; then
-		CheckProjectRelatedFile "$__BU_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_PROJECT_ECHO_OUTPUT_FILE_NAME" "f"
+	if [ "$__BU_MOD_MAIN_STAT_DEBUG" = "true" ]; then
+		CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f"
 
         if [ "$p_context" = "begin" ]; then
             __EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'm' ]; then
-                echo -e "$(Header "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(Header "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             fi
 
             return 0
 
         elif [ "$p_context" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'm' ]; then
-                echo -e "$(Header "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(Header "END DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_PROJECT_ECHO_OUTPUT_FILE_PATH"
+                echo -e "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MOD_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
             fi
 
             __EchoVoid; return 0
@@ -126,14 +126,14 @@ function __EchoCPLS()
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                     else
-                        echo -ne "$__BU_TIME_DATE_DISPLAY $p_string"
+                        echo -ne "$__BU_MOD_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" ""
                     else
-                        echo -e "$__BU_TIME_DATE_DISPLAY $p_string"
+                        echo -e "$__BU_MOD_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
             esac
@@ -143,26 +143,26 @@ function __EchoCPLS()
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")"
                     else
-                        echo -ne "$__BU_TIME_DATE_DISPLAY $p_string"
+                        echo -ne "$__BU_MOD_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if CheckIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" ""
                     else
-                        echo -e "$__BU_TIME_DATE_DISPLAY $p_string"
+                        echo -e "$__BU_MOD_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
             esac
         fi
 
-        sleep "$__BU_STAT_TIME_TXT"
+        sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
     done
 }
 
 # --------------------------------------------
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_STAT_TIME_TXT" status CheckTxtFmt.
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MOD_MAIN_STAT_TIME_TXT" status CheckTxtFmt.
 
 # Error message
 
@@ -183,19 +183,19 @@ shift 2
     #***** Code *****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'E'
-        CheckProjectLogStatus "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        CheckProjectLogStatus "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'E'
 
     # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
     else
         __EchoOutput "$p_string" 'begin' 'E'
-        __EchoCPLS "${__BU_COLOR_ERROR}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        __EchoCPLS "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'E'
     fi
 
-    sleep "$__BU_STAT_TIME_TXT"
+    sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -229,7 +229,7 @@ function EchoMsg()
         __EchoOutput "$p_string" 'end' 'm'
     fi
 
-    sleep "$__BU_STAT_TIME_TXT"
+    sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 }
 
 # New sub-step message
@@ -251,19 +251,19 @@ function EchoNewstep()
     #***** Code *****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'N'
-        CheckProjectLogStatus "${__BU_COLOR_NEWSTEP}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        CheckProjectLogStatus "${__BU_MOD_MAIN_COLOR_NEWSTEP}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'N'
 
     # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
     else
         __EchoOutput "$p_string" 'begin' 'N'
-        __EchoCPLS "${__BU_COLOR_NEWSTEP}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        __EchoCPLS "${__BU_MOD_MAIN_COLOR_NEWSTEP}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'N'
     fi
 
-    sleep "$__BU_STAT_TIME_TXT"
+    sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 }
 
 # Read input values
@@ -279,8 +279,8 @@ function EchoRead()
 	local p_string=$1      # User's keyboard input.
 	
 	#***** Code *****
-	if [ -f "$__BU_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_STAT_LOG" = "true" ] && [ -n "$__BU_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(DechoHighlight "$p_string")" >> "$__BU_PROJECT_LOG_FILE_PATH"
+	if [ -f "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MOD_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" ]; then
+		echo -e "Keyboard input value : $(DechoHighlight "$p_string")" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
 	fi
 }
 
@@ -303,19 +303,19 @@ function EchoSuccess()
     #***** Code *****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'S'
-        CheckProjectLogStatus "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        CheckProjectLogStatus "${__BU_MOD_MAIN_COLOR_SUCCESS}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'S'
 
     # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
     else
         __EchoOutput "$p_string" 'begin' 'S'
-        __EchoCPLS "${__BU_COLOR_SUCCESS}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        __EchoCPLS "${__BU_MOD_MAIN_COLOR_SUCCESS}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'S'
     fi
 
-    sleep "$__BU_STAT_TIME_TXT"
+    sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 }
 
 # Warning message
@@ -337,19 +337,19 @@ function EchoWarning()
     #***** Code *****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'W'
-        CheckProjectLogStatus "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        CheckProjectLogStatus "${__BU_MOD_MAIN_COLOR_WARNING}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'W'
 
     # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
     else
         __EchoOutput "$p_string" 'begin' 'W'
-        __EchoCPLS "${__BU_COLOR_WARNING}$__BU_TXT_PRINT_TAB$__BU_TXT_PRINT_TAB $p_string${__BU_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
+        __EchoCPLS "${__BU_MOD_MAIN_COLOR_WARNING}$__BU_MOD_MAIN_TXT_PRINT_TAB$__BU_MOD_MAIN_TXT_PRINT_TAB $p_string${__BU_MOD_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}"
 
         __EchoOutput "$p_string" 'end' 'W'
     fi
 
-    sleep "$__BU_STAT_TIME_TXT"
+    sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 }
 
 # -----------------------------------------------

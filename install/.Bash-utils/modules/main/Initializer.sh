@@ -3,10 +3,10 @@
 # ----------------------
 ## SCRIPT'S INFORMATIONS
 
-# Name : Text.lib
-# Description : Script initializer file, initializing all you need for your scripts.
+# Name : Initializer.sh
+# Description : Module initializer file, initializing all the module's functions and variables you need for your scripts.
 # Author(s) : Dimitri Obeid
-# Version : 3.0
+# Version : 1.0
 
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
 
@@ -27,46 +27,28 @@ fi
 
 ## DEFINING FUNCTIONS
 
-# Add value in the "$__INIT_STR_ARRAY" array that stores the initialization log output, according to the "$__BU_STAT_PRINT_INIT_LOG" status variables's value :
-#   "true"  --> store the text into the "$__INIT_STR_ARRAY" array AND display text to the terminal.
-#   "false" --> store the text into the "$__INIT_STR_ARRAY" array WITHOUT displaying any text. 
+# Add value in the "$__INIT_MOD_MAIN_STR_ARRAY" array that stores the initialization log output, according to the "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
+#   "true"  --> store the text into the "$__INIT_MOD_MAIN_STR_ARRAY" array AND display text to the terminal.
+#   "false" --> store the text into the "$__INIT_MOD_MAIN_STR_ARRAY" array WITHOUT displaying any text. 
 function InitializerAddInitStrArrayVal()
 {
     #***** Parameters *****
-    p_string=$1             # String to store in the "$__INIT_STR_ARRAY" array.
+    p_string=$1             # String to store in the "$__INIT_MOD_MAIN_STR_ARRAY" array.
     p_option=$2             # "echo" command's options. 
 
     #***** Code *****
-    if [ "$__BU_STAT_PRINT_INIT_LOG" = "true" ]; then
+    if [ "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in
             '-n' | 'n')
-                __INIT_STR_ARRAY+=("$p_string"); echo -ne "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __INIT_MOD_MAIN_STR_ARRAY+=("$p_string"); echo -ne "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
             '' | *)
-                __INIT_STR_ARRAY+=("$p_string"); echo -e "${p_string##*] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __INIT_MOD_MAIN_STR_ARRAY+=("$p_string"); echo -e "${p_string##*] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
             esac
     else
-        __INIT_STR_ARRAY+=("$p_string")
+        __INIT_MOD_MAIN_STR_ARRAY+=("$p_string")
     fi
-}
-
-# Checking the currently used Bash language's version.
-function InitializerCheckBashMinimalVersion()
-{
-	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-		printf "BASH-UTILS ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2
-		echo -e "This Bash library requires at least the Bash version 4.0.0" >&2
-		echo >&2
-
-		echo -e "Your Bash version is : $BASH_VERSION" >&2
-		echo >&2
-
-		echo -e "Please install at least the Bash version 4.0.0 to use this library"
-		echo >&2
-
-		exit 1
-	fi
 }
 
 # Use this function to have a better view about a bug location during a "bash -x" debug.
@@ -94,24 +76,6 @@ function DbgMsg()
     fi
 }
 
-# Printing an error message if a file cannot be sourced.
-function InitializerSourcingFailure()
-{
-    #***** Parameters *****
-    p_path=$1               # Path of the file that cannot be sourced.
-
-    #***** Code *****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS FILE --> $p_path" >&2; echo >&2; exit 1
-}
-
-# -----------------------------------------------
-
-## USING FUNCTIONS
-
-# Checking the currently used Bash language's version.
-# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
-InitializerCheckBashMinimalVersion
-
 # -----------------------------------------------
 
 
@@ -122,11 +86,11 @@ InitializerCheckBashMinimalVersion
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Sourcing each file listed into the "$__BASH_UTILS_FUNCTIONS_FILES_PATH" CheckTxtFmt.
+# Sourcing each file listed into the "$__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" CheckTxtFmt.
 
 # shellcheck disable=SC1090
-for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || InitializerSourcingFailure "$f"; __INIT_LIB_FILES_PATH_ARRAY+=("$f")
+for f in "${__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH[@]}"; do
+    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------
@@ -134,8 +98,8 @@ done
 ## SOURCING CONFIGURATION FILES
 
 # shellcheck disable=SC1090
-for f in "${__INIT_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-    source "$f" || InitializerSourcingFailure "$f"; __INIT_LIB_FILES_PATH_ARRAY+=("$f")
+for f in "${__INIT_MOD_MAIN_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
+    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------
@@ -159,8 +123,8 @@ MkTmpDir
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-if ! CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
-# if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
+if ! CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MOD_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
+# if ! CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
 
 # Setting this status variable's value to "false" once the initialization part is over.
 
@@ -180,12 +144,12 @@ ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_STAT_LOG" CheckTxtFmt's value is equal to "true".
+# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MOD_MAIN_STAT_LOG" CheckTxtFmt's value is equal to "true".
 ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
+HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MOD_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MOD_MAIN_PROJECT_NAME") !"
 
 if CheckIsInitializing; then
     # shellcheck disable=SC2034
-    __INIT_IS_INITALIZING="false"
+    __INIT_MOD_MAIN_IS_INITALIZING="false"
 fi

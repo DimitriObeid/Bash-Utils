@@ -30,7 +30,7 @@ if [ -s "$debug_tmp_f" ]; then
 	i=0
 
 	cat "$debug_tmp_f" | while read -r line; do
-		if line='++++ for _ in $(eval echo -e "{1..$__BU_TXT_COLS}")\n++++ echo -n -'; then
+		if line='++++ for _ in $(eval echo -e "{1..$__BU_MOD_MAIN_TXT_COLS}")\n++++ echo -n -'; then
 			for i in ${#line}; do
 				line="$(echo -e "$line\b")"
 				EchoDbg "$line"

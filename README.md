@@ -19,6 +19,10 @@ Bash-utils is a group of utilities for Bash programming : configurations, docume
 		- _Supported Linux distributions :_
 			- Ubuntu
 
+### INSTALLATION
+
+lease follow the instructions in the **README INSTALL.md** file in the **install** folder.
+
 ---
 
 ## FRANÇAIS
@@ -39,3 +43,7 @@ Bash-utils est un regroupement d'utilitaires pour la programmation en Bash : con
 	- **_Fonctionnalités spécifiques :_**
 		- _Distributions Linux supportées :_
 			- Ubuntu
+
+### INSTALLATION
+
+Veuillez suivre les instructions contenues dans le fichier **README INSTALL.md** du dossier **install**.

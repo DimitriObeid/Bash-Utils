@@ -28,15 +28,15 @@ fi
 
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
-# Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_ROOT" CheckTxtFmt.
+# Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_MOD_MAIN_ROOT" CheckTxtFmt.
 # Do not source the "~/.bashrc" file, as it is executed for interactive non-login shells, unlike "~/.bash_profile".
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF/init.conf" ||
+source "$__BASH_UTILS_MOD_MAIN_CONF/init.conf" ||
 {
-    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/init.conf' FILE : '$__BASH_UTILS_CONF/init'" >&2
+    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_MOD_MAIN_CONF/init.conf' FILE : '$__BASH_UTILS_MOD_MAIN_CONF/init'" >&2
     
-    if [ -z "${__BASH_UTILS_ROOT:+x}" ]; then
+    if [ -z "${__BASH_UTILS_MOD_MAIN_ROOT:+x}" ]; then
         echo >&2; echo 
     fi
     
@@ -44,10 +44,10 @@ source "$__BASH_UTILS_CONF/init.conf" ||
 }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
-# As the "$__BASH_UTILS_ROOT" CheckTxtFmt is defined, it's possible to source the initializer's configuration file.
+# As the "$__BASH_UTILS_MOD_MAIN_ROOT" CheckTxtFmt is defined, it's possible to source the initializer's configuration file.
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_MOD_MAIN_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_MOD_MAIN_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -88,7 +88,7 @@ function DbgMsg
 # This function is called at multiple times in the next function, to avoid changing redirection operators more than once.
 function __EchoInit
 {
-    echo -e "$1" 2>&1 | tee -a "$__INIT_LIST_FILE_PATH"
+    echo -e "$1" 2>&1 | tee -a "$__INIT_MOD_MAIN_LIST_FILE_PATH"
 }
 
 # Controlling all the redirections in a single place for a better debugging process.
@@ -99,14 +99,14 @@ function EchoInit
     local p_colorCode=$2
 
     #***** Code *****
-    if [ -z "$__INIT_LIST_FILE_PATH" ] || [ ! -f "$__INIT_LIST_FILE_PATH" ]; then
+    if [ -z "$__INIT_MOD_MAIN_LIST_FILE_PATH" ] || [ ! -f "$__INIT_MOD_MAIN_LIST_FILE_PATH" ]; then
         InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
-            __EchoInit "$p_str${__BU_COLOR_RESET}"
+            __EchoInit "$p_str${__BU_MOD_MAIN_COLOR_RESET}"
         else
             if [[ "$p_colorCode" =~ [0-9] ]]; then
-                __EchoInit "$(tput setaf "$p_colorCode")$p_str${__BU_COLOR_RESET}"
+                __EchoInit "$(tput setaf "$p_colorCode")$p_str${__BU_MOD_MAIN_COLOR_RESET}"
             else
                 InitErrMsg "The ${FUNCNAME[0]} color code must be an integer !" "$(( LINENO-1 ))" "1"
             fi
@@ -123,7 +123,7 @@ function InitErrMsg
     local p_exit=$3
 
     #***** Code *****
-    echo >&2; echo -e "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$p_lineno${__BU_COLOR_ERROR} --> $p_msg${__BU_COLOR_RESET}" >&2; echo >&2
+    echo >&2; echo -e "${__BU_MOD_MAIN_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MOD_MAIN_COLOR_ERROR} --> $p_msg${__BU_MOD_MAIN_COLOR_RESET}" >&2; echo >&2
 
     if [ "$p_exit" -eq 0 ]; then
         return
@@ -142,14 +142,14 @@ function InitErrMsg
 function CheckBashMinimalVersion
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-		echo -ne "${__BU_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-1 ))${__BU_COLOR_ERROR} --> ${__BU_COLOR_RESET}" >&2
-		echo -e "${__BU_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_RESET}" >&2
+		echo -ne "${__BU_MOD_MAIN_COLOR_ERROR}BASH-UTILS ERROR : In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(( LINENO-1 ))${__BU_MOD_MAIN_COLOR_ERROR} --> ${__BU_MOD_MAIN_COLOR_RESET}" >&2
+		echo -e "${__BU_MOD_MAIN_COLOR_ERROR}This Bash library requires at least the Bash version ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}4.0.0${__BU_MOD_MAIN_COLOR_RESET}" >&2
 		echo >&2
 
-		echo -e "${__BU_COLOR_ERROR}Your Bash version is : ${__BU_COLOR_HIGHLIGHT}$BASH_VERSION${__BU_COLOR_RESET}" >&2
+		echo -e "${__BU_MOD_MAIN_COLOR_ERROR}Your Bash version is : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$BASH_VERSION${__BU_MOD_MAIN_COLOR_RESET}" >&2
 		echo >&2
 
-		echo -e "${__BU_COLOR_ERROR}Please install at least the ${__BU_COLOR_HIGHLIGHT}4.0.0${__BU_COLOR_ERROR} Bash version to use this library${__BU_COLOR_RESET}"
+		echo -e "${__BU_MOD_MAIN_COLOR_ERROR}Please install at least the ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}4.0.0${__BU_MOD_MAIN_COLOR_ERROR} Bash version to use this library${__BU_MOD_MAIN_COLOR_RESET}"
 		echo >&2
 
 		exit 1
@@ -166,13 +166,13 @@ function CheckBURequirements
     #***** Code *****
     # If the path points towardœs a directory.
     if [ -d "$p_path" ]; then
-        EchoInit "Found directory : ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
+        EchoInit "Found directory : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_path${__BU_MOD_MAIN_COLOR_RESET}"
 
     # Else, if the path points towards a file.
     elif [ -f "$p_path" ]; then
-        EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$p_path${__BU_COLOR_RESET}"
+        EchoInit "Found file : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_path${__BU_MOD_MAIN_COLOR_RESET}"
     else
-        InitErrMsg "The following path is incorrect : ${__BU_COLOR_HIGHLIGHT}$p_path" "$p_lineno" "1"
+        InitErrMsg "The following path is incorrect : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_path" "$p_lineno" "1"
     fi
 }
 
@@ -196,7 +196,7 @@ function CheckProjectRelatedFile
 function CheckIsLibraryInitializing
 {
     #***** Code *****
-    if [ "$__BASH_UTILS_IS_INITIALIZING" = "true" ]; then
+    if [ "$__BASH_UTILS_MOD_MAIN_IS_INITIALIZING" = "true" ]; then
         return 0
     else
         return 1
@@ -210,12 +210,12 @@ function SourceDependency
     local p_dep=$1
 
     #***** Code *****
-    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : ${__BU_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
+    [[ -e "$p_dep" ]] || InitErrMsg "This dependency file doesn't exists : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
     # shellcheck disable=SC1090
-    source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__BU_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
+    source "$p_dep" || InitErrMsg "Unable to source this dependency file : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_dep" "$LINENO" "1"
 
-    EchoInit "Sourced file : ${__BU_COLOR_HIGHLIGHT}$p_dep${__BU_COLOR_RESET}"
+    EchoInit "Sourced file : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_dep${__BU_MOD_MAIN_COLOR_RESET}"
 }
 
 # -----------------------------------------------
@@ -231,21 +231,21 @@ function SourceDependency
 CheckBashMinimalVersion
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
-if [ -f "$__INIT_LIST_FILE_PATH" ]; then
-    true > "$__INIT_LIST_FILE_PATH" || {
+if [ -f "$__INIT_MOD_MAIN_LIST_FILE_PATH" ]; then
+    true > "$__INIT_MOD_MAIN_LIST_FILE_PATH" || {
         echo >&2;
-        echo -e "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_COLOR_RESET}"
+        echo -e "${__BU_MOD_MAIN_COLOR_ERROR}In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_MOD_MAIN_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_MOD_MAIN_COLOR_RESET}"
         echo >&2; exit 1
     }
 else
-    if [ ! -d "$__BU_PROJECT_LOG_DIR_PATH" ]; then
-        mkdir -p "$__BU_PROJECT_LOG_DIR_PATH" || {
+    if [ ! -d "$__BU_MOD_MAIN_PROJECT_LOG_DIR_PATH" ]; then
+        mkdir -p "$__BU_MOD_MAIN_PROJECT_LOG_DIR_PATH" || {
             echo >&2
-            echo -e "${__BU_COLOR_ERROR}In ${__BU_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_COLOR_ERROR}, line ${__BU_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_COLOR_RESET}" >&2; echo >&2; exit 1
+            echo -e "${__BU_MOD_MAIN_COLOR_ERROR}In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_MOD_MAIN_COLOR_ERROR} --> Error : unable to create the project's temporary directory and/or the project's logs directory.${__BU_MOD_MAIN_COLOR_RESET}" >&2; echo >&2; exit 1
         }
     fi
 
-    touch "$__INIT_LIST_FILE_PATH"
+    touch "$__INIT_MOD_MAIN_LIST_FILE_PATH"
 fi
 
 # -----------------------------------------------
@@ -254,21 +254,21 @@ fi
 
 # Checking for the required Bash-utils folders.
 EchoInit "CHECKING FOR BASH-UTILS REQUIRED DIRECTORIES"
-CheckBURequirements "$__BASH_UTILS_BIN"             "$LINENO"
-CheckBURequirements "$__BASH_UTILS_CONF"            "$LINENO"
-CheckBURequirements "$__BASH_UTILS_TMP"             "$LINENO"
-CheckBURequirements "$__BASH_UTILS_FUNCTS"          "$LINENO"
-CheckBURequirements "$__BASH_UTILS_FUNCTS_BASIS"    "$LINENO"
-CheckBURequirements "$__BASH_UTILS_FUNCTS_MAIN"     "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_BIN"             "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_CONF"            "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_TMP"             "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_FUNCTS"          "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_FUNCTS_BASIS"    "$LINENO"
+CheckBURequirements "$__BASH_UTILS_MOD_MAIN_FUNCTS_MAIN"     "$LINENO"
 EchoInit
 
 # Checking for the development tools required folders.
-if [ -n "$__BASH_UTILS_DEVTOOLS_PROJECT" ] && [ "$__BASH_UTILS_DEVTOOLS_PROJECT" = "true" ]; then
+if [ -n "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_PROJECT" ] && [ "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_PROJECT" = "true" ]; then
     EchoInit "CHECKING FOR DEVTOOLS REQUIRED DIRECTORIES"
-    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_BIN"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_IMG"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_SRC"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_DEVTOOLS_TRANSL" "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_BIN"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_IMG"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_SRC"    "$LINENO"
+    CheckBURequirements "$__BASH_UTILS_MOD_MAIN_DEVTOOLS_TRANSL" "$LINENO"
 fi
 
 # -----------------------------------------------
@@ -286,15 +286,15 @@ fi
 EchoInit "CHECKING DEPENDENCIES"
 
 # Sourcing project's status CheckTxtFmts file.
-EchoInit "Sourcing the CheckTxtFmts status file :"; SourceDependency "$__BASH_UTILS_CONF_PROJECT_STATUS"; EchoInit
+EchoInit "Sourcing the CheckTxtFmts status file :"; SourceDependency "$__BASH_UTILS_MOD_MAIN_CONF_PROJECT_STATUS"; EchoInit
 
 # Sourcing the fuctions files.
-EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
+EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
 # Sourcing the remaining configuration files.
 EchoInit "Sourcing the remaining configuration files :"
-SourceDependency "$__BASH_UTILS_CONF/text.conf"
-SourceDependency "$__BASH_UTILS_CONF/time.conf"
+SourceDependency "$__BASH_UTILS_MOD_MAIN_CONF/text.conf"
+SourceDependency "$__BASH_UTILS_MOD_MAIN_CONF/time.conf"
 EchoInit
 
 # -----------------------------------------------
@@ -308,40 +308,40 @@ EchoInit
 ## CREATING NEW VARIABLES
 
 # shellcheck disable=SC2034
-__BU_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_PROJECT_FILE_PATH"
+__BU_MOD_MAIN_PROJECT_PATH="$(GetParentDirectoryPath "$0")/$__BU_MOD_MAIN_PROJECT_FILE_PATH"
 
 # -----------------------------------------------
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS.
 
 # shellcheck disable=SC2034
-__BU_STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_DEBUG="true";          CheckSTAT_DEBUG         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # The function "CheckSTAT_LOG()" creates the log file and its path.
 # shellcheck disable=SC2034
-__BU_STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_LOG="true";            CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_LOG_REDIRECT="tee";    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_ERROR="fatal";         CheckSTAT_ERROR         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # shellcheck disable=SC2034
-__BU_STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_TIME_TXT="0";          CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## PROCESSING THE PROJECT'S TEMPORARY DIRECTORY
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_STAT_LOG CheckTxtFmt's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MOD_MAIN_STAT_LOG CheckTxtFmt's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
-if [ ! -d "$__BU_PROJECT_TMP_PATH" ]; then
-	EchoInit "$(mkdir -p "$__BU_PROJECT_TMP_PATH")"
+if [ ! -d "$__BU_MOD_MAIN_PROJECT_TMP_PATH" ]; then
+	EchoInit "$(mkdir -p "$__BU_MOD_MAIN_PROJECT_TMP_PATH")"
 fi
 
-CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PATH"
-CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
+CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_COLOR_CODE_FILE_PATH"
 
 # -----------------------------------------------
 
@@ -350,12 +350,12 @@ CheckProjectRelatedFile "$__BU_PROJECT_COLOR_CODE_FILE_PATH"
 EchoInit "PROCESSING THE REMAINING PROJECT'S FILES AND FOLDERS"
 
 # Creating the "tr" command output's file (for example : for printing non-formatted text between formatted text).
-if [ ! -f "$__BU_PROJECT_TR_FILE_PATH" ]; then
-	touch "$__BU_PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH file" "1"; }
+if [ ! -f "$__BU_MOD_MAIN_PROJECT_TR_FILE_PATH" ]; then
+	touch "$__BU_MOD_MAIN_PROJECT_TR_FILE_PATH" || { InitErrMsg "Unable to create the ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$__BU_MOD_MAIN_PROJECT_TR_FILE_PATH file" "1"; }
 	
-	EchoInit "Created file : ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Created file : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$__BU_MOD_MAIN_PROJECT_TR_FILE_PATH${__BU_MOD_MAIN_COLOR_RESET}"
 else
-	EchoInit "Found file : ${__BU_COLOR_HIGHLIGHT}$__BU_PROJECT_TR_FILE_PATH${__BU_COLOR_RESET}"
+	EchoInit "Found file : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$__BU_MOD_MAIN_PROJECT_TR_FILE_PATH${__BU_MOD_MAIN_COLOR_RESET}"
 fi
 
 # -----------------------------------------------
@@ -367,6 +367,6 @@ fi
 #### ENDING THE INITIALIZATION PROCESS
 
 # Ending the initialization process by setting its status CheckTxtFmt's value to "false".
-__BASH_UTILS_IS_INITIALIZING="false"
+__BASH_UTILS_MOD_MAIN_IS_INITIALIZING="false"
 
-HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_PROJECT_NAME") !"
+HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_MOD_MAIN_PROJECT_NAME") !"

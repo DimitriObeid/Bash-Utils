@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -41,14 +41,14 @@ function __ProcessingFile()
         EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
         Newline
             
-        sleep "$__BU_STAT_TIME_TXT"
+        sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
         EchoSuccess "End of processing the $(DechoS "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
         Newline
         
-        sleep "$__BU_STAT_TIME_TXT"
+        sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
     else
         EchoWarning ""
     fi
@@ -73,7 +73,7 @@ function ProcessingFile()
     # Arguments checking.
     CheckArgs_ProcessingFile "$p_function"
     
-	sleep "$__BU_STAT_TIME_TXT"
+	sleep "$__BU_MOD_MAIN_STAT_TIME_TXT"
     EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
     EchoNewstep "Processing the $(DechoHighlight "$p_name") file in the $(DechoHighlight "$p_parent") parent directory."
     Newline
@@ -203,28 +203,28 @@ function CreateProjectLogFile()
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
     #***** Code *****
-    if ! CheckProjectRelatedFile "$__BU_PROJECT_LOG_FILE_PARENT" "$__BU_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
+    if ! CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
 
-    EchoSuccess "Successfully created the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file."
+    EchoSuccess "Successfully created the $(DechoHighlight "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH") file."
 
     ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    if [ "$__BU_STAT_ECHO" = "true" ]; then
+    if [ "$__BU_MOD_MAIN_STAT_ECHO" = "true" ]; then
         ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     fi
 
     # Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-    EchoNewstep "Sourced configuration files :"; for val in "${__INIT_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-    EchoNewstep "Sourced library files : "; for val in "${__INIT_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced configuration files :"; for val in "${__INIT_MOD_MAIN_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced library files : "; for val in "${__INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 
     EchoNewstep "Initialization log output :"; Newline
 
-    if (( ${#__INIT_STR_ARRAY[@]} < 1 )); then
+    if (( ${#__INIT_MOD_MAIN_STR_ARRAY[@]} < 1 )); then
         EchoMsg "No log output."
     else
-        for val in "${__INIT_STR_ARRAY[@]}"; do
+        for val in "${__INIT_MOD_MAIN_STR_ARRAY[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
         done
     fi
@@ -296,7 +296,7 @@ function GetLineFromTextFile()
         # ... until it reaches the wanted line.
         if [ "$i" -eq "$p_wanted_line" ]; then
 			# shellcheck disable=SC2034
-            __BU_TXT_STORE_LINE="$line"
+            __BU_MOD_MAIN_TXT_STORE_LINE="$line"
         fi
     done
 }
