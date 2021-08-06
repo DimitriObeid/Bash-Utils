@@ -1,0 +1,56 @@
+/usr/bin/env bash
+
+# ----------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Terminal.lib
+# Description   : Functions specially made for terminal interaction.
+# Author(s)     : Dimitri Obeid
+# Version       : 
+
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo -e "WARNING !" >&2; echo >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
+
+    exit 1
+fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### 
+
+##
+
+#
+function DisplayCountdown()
+{
+
+}
+
+# Display a spinner while a task is ongoing.
+function DisplaySpinner()
+{
+    #***** Parameters *****
+    p_string=$1
+    p_countdown=$2
+    p_pid=$3
+
+    #***** Variables *****
+    i=1
+    sp="/-\|"
+
+    #***** Code *****
+    echo -n ' '
+
+    while [ -d "/proc/$PID" ]; do
+        printf "\b${sp:i++%${#sp}:1}"
+    done
+}
