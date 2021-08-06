@@ -25,12 +25,18 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### 
+#### TERMINAL INTERACTION FUNCTIONS
 
-##
+## DISPLAYING TEXT AND MORE WHILE A TASK IS ONGOING
 
-#
+# Display a countdown while a task is ongoing.
 function DisplayCountdown()
+{
+
+}
+
+# Display a progress bar while a task is ongoing.
+function  DisplayProgressBar()
 {
 
 }
@@ -50,7 +56,11 @@ function DisplaySpinner()
     #***** Code *****
     echo -n ' '
 
-    while [ -d "/proc/$PID" ]; do
+    EchoMsg "$__BU_TXT_TAB $p_string"
+
+    while [ -d "/proc/$p_pid" ]; do
         printf "\b${sp:i++%${#sp}:1}"
     done
+
+    return 0
 }

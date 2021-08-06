@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Display a spinner while a task is ongoing.
 function DisplaySpinner()
 {
     #***** Parameters *****
@@ -14,9 +15,10 @@ function DisplaySpinner()
     #***** Code *****
     echo -n ' '
 
-   # while [ -d "/proc/$PID" ]; do
-    while [[ "$j" < "$p_countdown" ]]; do
-	printf "\b${sp:i++%${#sp}:1}"
+    echo ">>>> $p_string"
+
+    while [ -d "/proc/$p_pid" ]; do
+        printf "\b${sp:i++%${#sp}:1}"
     done
 }
 
