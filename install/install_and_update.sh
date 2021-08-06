@@ -2,8 +2,8 @@
 
 ## NOTE : This script takes in account my defined paths and the fact that I also develop with WSL. Please feel free to modify what you need to modify.
 
-if [ "$EUID" -eq 0 ]; then
-	printf "THIS COPY SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
+if [ "$EUID" -ne 0 ]; then
+	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
 
 username="$1"
@@ -29,7 +29,7 @@ __INSTALL_MODULE_DIRECTORY=".Bash-utils"
 
 ## FULL PATHS
 
-__INSTALL_MODULE_DIRECTORY_FULL_PATH="$__INSTALL_DIRECTORY_PATH/$__INSTALL_MODULE_DIRECTORY"
+__INSTALL_MODULE_DIRECTORY_FULL_PATH="$__INSTALL_DIRECTORY_SOURCE_PATH/$__INSTALL_MODULE_DIRECTORY"
 
 __INSTALL_DIRECTORY_DESTINATION_PATH="$user/$__INSTALL_MODULE_DIRECTORY"
 
@@ -68,7 +68,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 			cp -rv "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH"; exit 1; }
 		fi
 
-		printf "\n\nTHE INSTALLATION OF THE MODULES MANAGER IS DONE !\n\n"
+		printf "\n\nTHE INSTALLATION OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n\n"
 	fi
 done
 
