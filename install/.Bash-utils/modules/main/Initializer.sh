@@ -27,27 +27,27 @@ fi
 
 ## DEFINING FUNCTIONS
 
-# Add value in the "$__INIT_MOD_MAIN_STR_ARRAY" array that stores the initialization log output, according to the "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
-#   "true"  --> store the text into the "$__INIT_MOD_MAIN_STR_ARRAY" array AND display text to the terminal.
-#   "false" --> store the text into the "$__INIT_MOD_MAIN_STR_ARRAY" array WITHOUT displaying any text. 
+# Add value in the "$__BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY" array that stores the initialization log output, according to the "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
+#   "true"  --> store the text into the "$__BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY" array AND display text to the terminal.
+#   "false" --> store the text into the "$__BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY" array WITHOUT displaying any text. 
 function InitializerAddInitStrArrayVal()
 {
     #***** Parameters *****
-    p_string=$1             # String to store in the "$__INIT_MOD_MAIN_STR_ARRAY" array.
+    p_string=$1             # String to store in the "$__BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY" array.
     p_option=$2             # "echo" command's options. 
 
     #***** Code *****
     if [ "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in
             '-n' | 'n')
-                __INIT_MOD_MAIN_STR_ARRAY+=("$p_string"); echo -ne "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY+=("$p_string"); echo -ne "${p_string##*] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
             '' | *)
-                __INIT_MOD_MAIN_STR_ARRAY+=("$p_string"); echo -e "${p_string##*] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY+=("$p_string"); echo -e "${p_string##*] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
             esac
     else
-        __INIT_MOD_MAIN_STR_ARRAY+=("$p_string")
+        __BASH_UTILS_MOD_MAIN_INIT_STR_ARRAY+=("$p_string")
     fi
 }
 
@@ -78,8 +78,6 @@ function DbgMsg()
 
 # -----------------------------------------------
 
-
-
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### SECOND STEP : SOURCING FILES
@@ -90,7 +88,7 @@ function DbgMsg()
 
 # shellcheck disable=SC1090
 for f in "${__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY+=("$f")
+    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BASH_UTILS_MOD_MAIN_INIT_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------
@@ -98,8 +96,8 @@ done
 ## SOURCING CONFIGURATION FILES
 
 # shellcheck disable=SC1090
-for f in "${__INIT_MOD_MAIN_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY+=("$f")
+for f in "${__BASH_UTILS_MOD_MAIN_INIT_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
+    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BASH_UTILS_MOD_MAIN_INIT_LIB_FILES_PATH_ARRAY+=("$f")
 done
 
 # -----------------------------------------------
@@ -139,7 +137,7 @@ if ! CheckProjectRelatedFile "$__BU_MOD_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$_
 
 #### ENDING THE INITIALIZATION PROCESS
 
-ChangeSTAT_TXT_FMT      "true"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -151,5 +149,5 @@ HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING TH
 
 if CheckIsInitializing; then
     # shellcheck disable=SC2034
-    __INIT_MOD_MAIN_IS_INITALIZING="false"
+    __BASH_UTILS_MOD_MAIN_INIT_IS_INITALIZING="false"
 fi

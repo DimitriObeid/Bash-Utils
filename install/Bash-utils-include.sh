@@ -15,7 +15,7 @@
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
-    echo -e "This script is not meant to be executed directly !" >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
 
     exit 1
@@ -24,6 +24,17 @@ fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### MODULES INITIALIZATION
+
+## CHECKING THE ARGUMENTS ARRAY LENGTH
+
+# List of all the modules to include passed as arguments.
+p_module_list=("$@")
+
+if [ -z "${p_module_list[*]}" ]; then
+    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE %s MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
+fi
+
+# -----------------------------------------------
 
 ## DEFINING INITIALIZATION FUNCTIONS
 
@@ -45,9 +56,25 @@ function ModuleInitializer_CheckBashMinimalVersion()
 	fi
 }
 
+# Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
+function ModuleInitializer_FindPath
+{
+    # $1 = Parent directory.
+    # $2 = Targeted directory or file.
+    local path
+        path="$(find "$1" -maxdepth 1 -iname "$2")" && echo "$path"
+}
+
 function ModuleInitializer_GetModuleName()
 {
-    v_module="$(cd $(dirname "$1"); pwd -P)"; echo -ne "${v_module##*/}"
+    v_module="$(cd "$(dirname "$1")" ||
+    {
+        printf "\nUnable to get the module's name from the parent directory name\n\n"
+
+        exit 1
+    }; pwd -P)"
+
+    echo -ne "${v_module##*/}"; return 0
 }
 
 # Printing an error message if a file cannot be sourced.
@@ -63,6 +90,15 @@ function ModuleInitializer_SourcingFailure()
 
 # -----------------------------------------------
 
+## DEFINING GLOBAL VARIABLES
+
+__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME/" ".Bash-utils")"
+__BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
+__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
+__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+
+# -----------------------------------------------
+
 ## INITIALIZATION CODE
 
 # Checking the currently used Bash language's version.
@@ -70,21 +106,23 @@ function ModuleInitializer_SourcingFailure()
 ModuleInitializer_CheckBashMinimalVersion
 
 
-# List of all the modules to include passed as arguments.
-p_module_list=("$@")
-
-# Checking if any wanted module exists.
+# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
-	if ! "$(ls -d "$HOME/.Bash-utils/config/$module/")"; then
-		printf
-	fi
-
-    if  ! "$(ls -d "$HOME/.Bash-utils/module/$module")"; then
-        printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!" "$module"; exit 1
+    if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/"; then
+		printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
+		
+		exit 1
+    else
+        # shellcheck disable=SC1090
+        source "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module"
     fi
-done
 
-for module in "${p_module_list[@]}"; do
-	source "$HOME/.Bash-utils/config/$module/module.conf"
-	source "$HOME/.Bash-utils/module/$module/Initializer.sh"
+    if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$module"; then
+        printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$module"
+
+        exit 1
+    else
+        # shellcheck disable=SC1090
+        source "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$module"
+    fi
 done

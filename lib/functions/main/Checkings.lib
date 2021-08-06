@@ -124,7 +124,7 @@ function CheckRootEUID()
 # Checking if the library is into its initialization process.
 function CheckIsInitializing()
 {
-    if [ "$__INIT_MOD_MAIN_IS_INITIALIZING" = "true" ]; then
+    if [ "$__BASH_UTILS_MOD_MAIN_INIT__IS_INITIALIZING" = "true" ]; then
         return 0
     else
         return 1

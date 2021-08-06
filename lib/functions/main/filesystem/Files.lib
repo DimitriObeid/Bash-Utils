@@ -216,15 +216,15 @@ function CreateProjectLogFile()
     # Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-    EchoNewstep "Sourced configuration files :"; for val in "${__INIT_MOD_MAIN_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-    EchoNewstep "Sourced library files : "; for val in "${__INIT_MOD_MAIN_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced configuration files :"; for val in "${__BASH_UTILS_MOD_MAIN_INIT__CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced library files : "; for val in "${__BASH_UTILS_MOD_MAIN_INIT__LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 
     EchoNewstep "Initialization log output :"; Newline
 
-    if (( ${#__INIT_MOD_MAIN_STR_ARRAY[@]} < 1 )); then
+    if (( ${#__BASH_UTILS_MOD_MAIN_INIT__STR_ARRAY[@]} < 1 )); then
         EchoMsg "No log output."
     else
-        for val in "${__INIT_MOD_MAIN_STR_ARRAY[@]}"; do
+        for val in "${__BASH_UTILS_MOD_MAIN_INIT__STR_ARRAY[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
         done
     fi

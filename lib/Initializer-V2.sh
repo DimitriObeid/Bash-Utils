@@ -88,7 +88,7 @@ function DbgMsg
 # This function is called at multiple times in the next function, to avoid changing redirection operators more than once.
 function __EchoInit
 {
-    echo -e "$1" 2>&1 | tee -a "$__INIT_MOD_MAIN_LIST_FILE_PATH"
+    echo -e "$1" 2>&1 | tee -a "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH"
 }
 
 # Controlling all the redirections in a single place for a better debugging process.
@@ -99,7 +99,7 @@ function EchoInit
     local p_colorCode=$2
 
     #***** Code *****
-    if [ -z "$__INIT_MOD_MAIN_LIST_FILE_PATH" ] || [ ! -f "$__INIT_MOD_MAIN_LIST_FILE_PATH" ]; then
+    if [ -z "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH" ] || [ ! -f "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH" ]; then
         InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
@@ -231,8 +231,8 @@ function SourceDependency
 CheckBashMinimalVersion
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
-if [ -f "$__INIT_MOD_MAIN_LIST_FILE_PATH" ]; then
-    true > "$__INIT_MOD_MAIN_LIST_FILE_PATH" || {
+if [ -f "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH" ]; then
+    true > "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH" || {
         echo >&2;
         echo -e "${__BU_MOD_MAIN_COLOR_ERROR}In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_MOD_MAIN_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_MOD_MAIN_COLOR_RESET}"
         echo >&2; exit 1
@@ -245,7 +245,7 @@ else
         }
     fi
 
-    touch "$__INIT_MOD_MAIN_LIST_FILE_PATH"
+    touch "$__BASH_UTILS_MOD_MAIN_INIT__LIST_FILE_PATH"
 fi
 
 # -----------------------------------------------
