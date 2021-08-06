@@ -174,21 +174,28 @@ function CheckFilePathExists()
 # Required functions and files :
 function CheckProjectLogPath()
 {
+    # Since the "$__BU_STAT_DECHO" and the "$__BU_STAT_ECHO" status variables values are set to their safe mode in the "CheckProjectLogStatus()" function
+    # (the only one where the "CheckProjectLogPath()" function can be called), it's safe to call the "HandleErrors()" and the "DechoHighlight" functions without risking an infinite loop.
     if [ -z "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), function $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}FATAL ERROR : NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}Please add the path as argument.${__BU_COLOR_RESET}" >&2; echo >&2
 
-        ExitError
+        # In case the "ExitError()" function doesn't stops the script's execution because the final user modified its behavior, it's safer to add a return value.
+        ExitError; return 1
 
+    # Remember : since the "$__BU_STAT_DECHO" and the "$__BU_STAT_ECHO" status variables values are set to their safe mode in the "CheckProjectLogStatus()" function
+    # (the only one where the "CheckProjectLogPath()" function can be called), it's safe to call the "HandleErrors()" and the "DechoHighlight" functions without risking an infinite loop.
     elif [ ! -f "$__BU_PROJECT_LOG_FILE_PATH" ]; then
         echo -ne "${__BU_COLOR_ERROR}IN $(DechoHighlight "$(basename "${BASH_SOURCE[0]}")"), FUNCTION $(DechoHighlight "${FUNCNAME[0]}"), LINE $(DechoHighlight "$(( LINENO-1 ))") --> ${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}FATAL ERROR : BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_PROJECT_LOG_FILE_PATH") VARIABLE${__BU_COLOR_RESET}" >&2
         echo -e "${__BU_COLOR_ERROR}Please correct the path passed as argument, or check if the file was created before.${__BU_COLOR_RESET}" >&2; echo >&2
         echo -e "${__BU_COLOR_ERROR}Incorrect value : $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH")" >&2; echo >&2
 
-        ExitError
-
+        # In case the "ExitError()" function doesn't stops the script's execution because the final user modified its behavior, it's safer to add a return value.
+        ExitError; return 1
+    else
+        return 0
     fi
 }
 
@@ -215,6 +222,9 @@ function CheckProjectLogStatus()
 
     local v_bu_stat_decho_old="$__BU_STAT_DECHO"; ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
+    # Setting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    local v_bu_stat_echo_old="$__BU_STAT_ECHO"; ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
     local v_redirectionError
 		v_redirectionError="$(DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to write into the $(DechoHighlight "$__BU_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> "
 
@@ -222,12 +232,19 @@ function CheckProjectLogStatus()
 		v_warning_array_value="$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(DechoHighlight "${BASH_SOURCE[0]}"), function $(DechoHighlight "${FUNCNAME[0]}()").\nValue --> $(DechoHighlight "$val")\nLine -->"
     
     #**** Code *****
+    # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
     if [ "$__BU_STAT_LOG" = "true" ]; then
-        CheckProjectLogPath
-    fi
+        CheckProjectLogPath || \
+        {
+            # Resetting the "$__BU_STAT_DECHO" status variable's value to its former value, since the "CheckProjectLogStatus()" function's execution is stopped.
+            ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    # Setting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
-    ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			# Resetting the "$__BU_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is stopped.
+			ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+            return 1
+        }
+    fi
 
     CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -305,11 +322,11 @@ function CheckProjectLogStatus()
 
             done
 
-            #
+            # Resetting the "$__BU_STAT_DECHO" status variable's value to its former value, since the "CheckProjectLogStatus()" function's execution is over.
             ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-			# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			# Resetting the "$__BU_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+			ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
 			return 0
 
@@ -386,11 +403,11 @@ function CheckProjectLogStatus()
             
             sleep "$__BU_STAT_TIME_TXT"
 			
-			#
-			ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			# Resetting the "$__BU_STAT_DECHO" status variable's value to its former value, since the "CheckProjectLogStatus()" function's execution is over.
+			ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-			# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			# Resetting the "$__BU_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+			ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
 			return 0
         else
@@ -413,11 +430,11 @@ function CheckProjectLogStatus()
 
         sleep "$__BU_STAT_TIME_TXT"
 
-        #
-        ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        # Resetting the "$__BU_STAT_DECHO" status variable's value to its former value, since the "CheckProjectLogStatus()" function's execution is over.
+        ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-		# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		# Resetting the "$__BU_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+		ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
 		return 0
 
@@ -444,17 +461,20 @@ function CheckProjectLogStatus()
 
         sleep "$__BU_STAT_TIME_TXT"
 
-        #
+        # Resetting the "$__BU_STAT_DECHO" status variable's value to its former value, since the "CheckProjectLogStatus()" function's execution is over.
         ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-		# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+		# Resetting the "$__BU_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+		ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 		
 		return 0
 	fi
 
-	# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to false, since the "CheckProjectLogStatus()" function's execution is over.
-	ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	#
+	ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+	# Resetting the "$__BU_STAT_ECHO" status CheckTxtFmt's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+	ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	return 0
 }
