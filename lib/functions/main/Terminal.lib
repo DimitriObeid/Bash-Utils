@@ -1,4 +1,4 @@
-/usr/bin/env bash
+#!/usr/bin/env bash
 
 # ----------------------
 # SCRIPT'S INFORMATIONS
@@ -32,13 +32,13 @@ fi
 # Display a countdown while a task is ongoing.
 function DisplayCountdown()
 {
-
+    return 0
 }
 
 # Display a progress bar while a task is ongoing.
 function  DisplayProgressBar()
 {
-
+    return 0
 }
 
 # Display a spinner while a task is ongoing.
