@@ -2,13 +2,12 @@
 
 ## NOTE : This script takes in account my defined paths and the fact that I also develop with WSL. Please feel free to modify what you need to modify.
 
+## TODO 
+##	: Ask to the user if he wants to keep the defualt paths.
+
 if [ "$EUID" -ne 0 ]; then
 	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
-
-username="$1"
-username="$(tr '[:lower:]' '[:lower:]' <<< "${username:0:1}")${username:1}"
-system="$2"
 
 # Feel free to add any user's home directory path into this user list.
 __TARGET_HOME_DIRECTORIES=("/root" "/home/dimob")
@@ -18,9 +17,11 @@ __TARGET_HOME_DIRECTORIES=("/root" "/home/dimob")
 
 ## DIRECTORIES AND FILES NAMES
 
+__BU_root_path_file="Bash-utils-root-val.path"
+
 __module_init_file="Bash-utils-include.sh"
 
-__INSTALL_DIRECTORY_SOURCE_PATH="$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"
+__INSTALL_DIRECTORY_SOURCE="$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"
 
 __INSTALL_MODULE_DIRECTORY=".Bash-utils"
 
@@ -29,7 +30,7 @@ __INSTALL_MODULE_DIRECTORY=".Bash-utils"
 
 ## FULL PATHS
 
-__INSTALL_MODULE_DIRECTORY_FULL_PATH="$__INSTALL_DIRECTORY_SOURCE_PATH/$__INSTALL_MODULE_DIRECTORY"
+__INSTALL_MODULE_DIRECTORY_FULL_PATH="$__INSTALL_DIRECTORY_SOURCE/$__INSTALL_MODULE_DIRECTORY"
 
 __INSTALL_DIRECTORY_DESTINATION_PATH="$user/$__INSTALL_MODULE_DIRECTORY"
 
@@ -39,9 +40,9 @@ __module_init_file_home_dir="$user/$__module_init_file"
 
 ## CODE
 
-if [ "${system,,}" = "win" ]; then
-	username="$(tr '[:lower:]' '[:upper:]' <<< "${username:0:1}")${username:1}"
-fi
+printf "Copying the Bash Utils root directory path into the %s file\n" "$__BU_root_path_file"
+printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__BU_root_path_file" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__BU_root_path_file"; exit 1; }
+printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__BU_root_path_file"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 	if [ ! -d "$user" ]; then
@@ -68,8 +69,15 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 			cp -rv "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH"; exit 1; }
 		fi
 
-		printf "\n\nTHE INSTALLATION OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n\n"
+		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n\n"
 	fi
 done
 
+printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS !\n"
+
+for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
+	printf "\"%s\" " "${user##*/}"
+done
+
+printf "\n\n"
 exit 0
