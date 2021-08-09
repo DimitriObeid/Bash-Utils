@@ -9,9 +9,8 @@ if [ "$EUID" -ne 0 ]; then
 	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
 
-# Feel free to add any user's home directory path into this user list.
-__TARGET_HOME_DIRECTORIES=("/root" "/home/dimob")
-
+# Feel free to add any user's home directory path into the "users.list" file.
+mapfile -t __TARGET_HOME_DIRECTORIES < "users.list"
 
 # ------------------------------------------------
 

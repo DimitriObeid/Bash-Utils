@@ -2,11 +2,17 @@
 
 ## ENGLISH
 
-Copy the whole content of this folder **EXACTLY** in your home directory, and in the **/root** directory. You don't need to copy this readme file.
+### Automatic install
+
+Just execute the **install_and_update.sh** script to install the modules manager, or the **update_path.sh** script if you moved the Bash Utils library root folder somewhere else in your hard drive.
+
+### Manual install
+
+Copy the **.Bash-utils** folder and the **Bash-utils-include.sh** script file in your home directory (/home/<your_username>), and in the **/root** directory. You don't need to copy this readme file, and shouldn't copy the other files.
 
 **PLEASE NOTICE** that the ".Bash-utils" folder is a hidden folder so as not to clutter up your personnal folder, so make it visible by your file explorer (usually with the **Ctrl+H** keyboard shortcut), or include it with the files to copy if you're using the _cp -r_ command.
 
-**DON'T FORGET** to check the path stored into the **_Bash-utils-root-val.path_** file, this is the definition of the path of the library's root folder.
+**DON'T FORGET** to check the path stored into the **_Bash-utils-root-val.path_** file, even if the installation and the update script files automatically change it, this is the definition of the path of the library's root folder.
 
 ---
 
