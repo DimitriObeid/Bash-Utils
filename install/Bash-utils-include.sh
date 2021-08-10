@@ -110,7 +110,7 @@ ModuleInitializer_CheckBashMinimalVersion
 for module in "${p_module_list[@]}"; do
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/"; then
 		printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
-		
+
 		exit 1
     else
         # shellcheck disable=SC1090
