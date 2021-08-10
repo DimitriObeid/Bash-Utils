@@ -26,7 +26,7 @@ if ! source "$HOME/.bash_profile"; then
 fi
 
 # shellcheck disable=SC1091
-if ! source "$__BASH_UTILS_MOD_MAIN_LIB_FILE_INITIALIZER"; then
+if ! source "$__BASH_UTILS_MAIN_LIB_FILE_INITIALIZER"; then
     echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1
 fi
 
@@ -35,12 +35,12 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall's sub-folders paths
-__LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__BU_MOD_MAIN_PROJECT_NAME")/install/categories"
-__LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__BU_MOD_MAIN_PROJECT_NAME")/lang"
-__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_MOD_MAIN_PROJECT_NAME")/CheckTxtFmts"
+__LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/install/categories"
+__LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/lang"
+__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/CheckTxtFmts"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-EchoNewstep "IN $(DechoN "$__BU_MOD_MAIN_PROJECT_FILE"), LINE $(DechoN "$LINENO") : CHECKING FOR ${__BU_MOD_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
+EchoNewstep "IN $(DechoN "$__BU_MAIN_PROJECT_FILE"), LINE $(DechoN "$LINENO") : CHECKING FOR ${__BU_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
 GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"
 GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"
 GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && EchoSuccess "Got this $PROJECT_NAME's directory : $(DechoS "$__LINUX_REINSTALL_INST")"; Newline
@@ -52,7 +52,7 @@ EchoNewstep "All the needed directories are found !"
 # Newline #; Newline
 
 # Ending the initialization process.
-HeaderGreen "END OF THE $(DechoGreen "${__BU_MOD_MAIN_PROJECT_NAME^^}")'S INITIALIZATION"
+HeaderGreen "END OF THE $(DechoGreen "${__BU_MAIN_PROJECT_NAME^^}")'S INITIALIZATION"
 
 # -----------------------------------------------
 
@@ -91,16 +91,16 @@ function CheckArgs
 {
     #***** Status *****
     # shellcheck disable=SC2034
-    __BU_MOD_MAIN_STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "$0")" "$LINENO"
+    __BU_MAIN_STAT_ERROR="fatal";       CheckSTAT_ERROR         "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __BU_MOD_MAIN_STAT_LOG="true";          CheckSTAT_LOG           "$(basename "$0")" "$LINENO"
+    __BU_MAIN_STAT_LOG="true";          CheckSTAT_LOG           "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __BU_MOD_MAIN_STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "$0")" "$LINENO"
+    __BU_MAIN_STAT_LOG_REDIRECT="tee";  CheckSTAT_LOG_REDIRECT  "$(basename "$0")" "$LINENO"
 
     # shellcheck disable=SC2034
-    __BU_MOD_MAIN_STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
+    __BU_MAIN_STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
     
     #***** Code *****
 	# If the script is not run as super-user (root)
@@ -166,7 +166,7 @@ function CheckArgs
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument. 
-	if [ "$__BU_MOD_MAIN_STAT_DEBUG" = "true" ]; then
+	if [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 		EchoMsg "PROJECT_STATUS_DEBUG status : $(Decho "true")"
 		Newline
 
@@ -174,15 +174,15 @@ function CheckArgs
 		# EVEN if the initial value of the CheckTxtFmt "$PROJECT_LOG_PATH" is the same as the new value.
 		# In this case, if the value of the CheckTxtFmt "$PROJECT_LOG_PATH" is not redefined, its former value is called,
 		# because the "$PROJECT_LOG_NAME" stored in the former "$$PROJECT_LOG_PATH" is the former one (its value was not updated).
-		__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME_OLD="$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME"
-		echo -e "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME_OLD"
-		__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME="$__BU_MOD_MAIN_PROJECT_NAME - DEBUG.log"
-    		echo -e "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME"
+		__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD="$__BU_MAIN_PROJECT_LOG_FILE_NAME"
+		echo -e "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD"
+		__BU_MAIN_PROJECT_LOG_FILE_NAME="$__BU_MAIN_PROJECT_NAME - DEBUG.log"
+    		echo -e "$__BU_MAIN_PROJECT_LOG_FILE_NAME"
 
-		__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MOD_MAIN_PROJECT_LOG_DIR_PATH/$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME"
+		__BU_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MAIN_PROJECT_LOG_DIR_PATH/$__BU_MAIN_PROJECT_LOG_FILE_NAME"
 		
 		# Changing the name of the log file.
-        if [ "$(EchoMsg "$(mv -v "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME_OLD" "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME")")" ]; then
+        if [ "$(EchoMsg "$(mv -v "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD" "$__BU_MAIN_PROJECT_LOG_FILE_NAME")")" ]; then
             ## APPEL DES FONCTIONS D'INITIALISATION
             CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
             GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur.
@@ -199,7 +199,7 @@ function CheckArgs
         else
             HandleErrors "1" "UNABLE TO RENAME THE LOG FILE" \
                 "Check what happened by running the script with the $(DechoE "bash -x $0") command" \
-                "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME_OLD // OR // $__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME" "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+                "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD // OR // $__BU_MAIN_PROJECT_LOG_FILE_NAME" "$(basename "$0")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
         fi
 	fi
 }
@@ -244,7 +244,7 @@ function CheckInternetConnection
 	HeaderCyan "VÉRIFICATION DE LA CONNEXION À INTERNET"
 
 	# On vérifie si l'ordinateur est connecté à Internet (pour le savoir, on ping le serveur DNS d'OpenDNS avec la commande ping 1.1.1.1).
-	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
     HandleErrors "$?" "AUCUNE CONNEXION À INTERNET" "Vérifiez que vous êtes bien connecté à Internet, puis relancez le script." "$lineno"
     EchoSuccess "Votre ordinateur est connecté à Internet."
@@ -274,7 +274,7 @@ function DistUpgrade
 
 	# On crée le dossier contenant les commandes de mise à jour.
 	if test ! -d "$update_d_path"; then
-		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 	fi
 
 	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la CheckTxtFmt "$PACK_MAIN_PACKAGE_MANAGER".
@@ -329,7 +329,7 @@ function SetSudo
     Newline
 
 	# On vérifie si la commande "sudo" est installée sur le système de l'utilisateur.
-	command -v sudo 2>&1 | tee -a "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+	command -v sudo 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
 	if test "$?" -eq 0; then
         Newline
@@ -360,7 +360,7 @@ function SetSudo
 	function ReadSetSudo
 	{
 		read -rp "Entrez votre réponse : " rep_set_sudo
-		echo -e "$rep_set_sudo" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+		echo -e "$rep_set_sudo" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 		Newline
 
 		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
@@ -419,7 +419,7 @@ function SetSudo
 				EchoNewstep "Ajout de l'utilisateur $(DechoN "${ARG_USERNAME}") au groupe sudo."
 				Newline
 
-				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
 				if test "$?" == "0"; then
                     EchoSuccess "L'utilisateur $(DechoS "${ARG_USERNAME}") a été ajouté au groupe sudo avec succès."
@@ -566,7 +566,7 @@ function Autoremove
 	function ReadAutoremove
 	{
 		read -rp "Entrez votre réponse : " rep_autoremove
-		echo -e "$rep_autoremove" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+		echo -e "$rep_autoremove" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 		Newline
 
 		case ${rep_autoremove,,} in
@@ -618,7 +618,7 @@ function IsInstallationDone
 	Newline
 
 	read -rp "Entrez votre réponse : " rep_erase_tmp
-	echo -e "$rep_erase_tmp" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+	echo -e "$rep_erase_tmp" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
     Newline
 
 	case ${rep_erase_tmp,,} in
@@ -626,13 +626,13 @@ function IsInstallationDone
 			EchoNewstep "Déplacement du fichier de logs dans votre dossier personnel."
 			Newline
 
-			mv -v "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME" && __BU_MOD_MAIN_PROJECT_LOG_FILE_PATH=$"$DIR_HOMEDIR" \
+			mv -v "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$__BU_MAIN_PROJECT_LOG_FILE_NAME" && __BU_MAIN_PROJECT_LOG_FILE_PATH=$"$DIR_HOMEDIR" \
 				&& EchoSuccess "Le fichier de logs a bien été deplacé dans votre dossier personnel."
 
 			EchoNewstep "Suppression du dossier temporaire $DIR_TMP_PATH."
 			Newline
 
-			if test rm -rfv "$DIR_TMP_PATH" >> "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"; then
+			if test rm -rfv "$DIR_TMP_PATH" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"; then
 				EchoSuccess "Le dossier temporaire $(DechoS "$DIR_TMP_PATH") a été supprimé avec succès."
 				Newline
 			else
@@ -651,7 +651,7 @@ function IsInstallationDone
 
 	echo -e "$(Decho "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
 	echo -e "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
-	echo -e "Il porte le nom de $(Decho "$__BU_MOD_MAIN_PROJECT_LOG_FILE_NAME")."
+	echo -e "Il porte le nom de $(Decho "$__BU_MAIN_PROJECT_LOG_FILE_NAME")."
 	Newline
 
     # On tue le processus de connexion en mode super-utilisateur.
@@ -686,7 +686,7 @@ PackInstall "$main" wget
 EchoNewstep "Vérification de l'installation des commandes $(DechoN "curl"), $(DechoN "snapd") et $(DechoN "wget")."
 Newline
 
-lineno=$LINENO; command -v curl snap wget | tee -a "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+lineno=$LINENO; command -v curl snap wget | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 HandleErrors "$?" "AU MOINS UNE DES COMMANDES D'INSTALLATION MANQUE À L'APPEL" "Essayez de  télécharger manuellement ces paquets : $(DechoE "curl"), $(DechoE "snapd") et $(DechoE "wget")." "$lineno"
 EchoSuccess "Les commandes importantes d'installation ont été installées avec succès."
 Newline
@@ -717,7 +717,7 @@ sleep 1
 EchoNewstep "Création du dossier d'installation des logiciels."
 Newline
 
-Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH"
+Makedir "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 Newline
 
 # Installation de JMerise

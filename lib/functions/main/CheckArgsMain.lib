@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -53,14 +53,14 @@ function TriggerRootDirWarning()
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 	if [ "$p_path" = "/" ] || [ "$(GetParentDirectoryPath "$p_path")" = '/' ]; then
-		if [ "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" = "forbidden" ]; then
+		if [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "forbidden" ]; then
 			EchoError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
 			EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
 			EchoError "Given path : $(DechoHighlight "$p_path")"
 			Newline
 
 			ExitError
-		elif [ "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
+		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
 			EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
 			EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			EchoWarning "Given path : $(DechoHighlight "$p_path")"
@@ -94,8 +94,8 @@ function __CheckArgsMain_PrintBadOption()
     local p_lineno=$6   # Line where the test failed.
 
     #***** Variables *****
-	# Changing the "$__BU_MOD_MAIN_STAT_ECHO" status variable's value to "true" in case this function is called during a 
-	if [ "$__BU_MOD_MAIN_STAT_ECHO" = "false" ]; then
+	# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value to "true" in case this function is called during a 
+	if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
 		local v_STAT_ECHO_was_false="true"
 		
 		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

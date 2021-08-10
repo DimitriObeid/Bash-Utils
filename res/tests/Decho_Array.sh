@@ -5,8 +5,8 @@ source "$HOME/.bash_profile"
 __ROOT_DIR="$HOME/Projets/Bash-utils"
 
 source "$__ROOT_DIR/lib/functions/main/Checkings.lib" || { echo "Fail Checkings.lib"; exit 1; }
-source "$__BASH_UTILS_MOD_MAIN_CONF_FILE_TEXT" # || { echo "Fail text.conf"; exit 1; }
-source "$__BASH_UTILS_MOD_MAIN_CONF_FILE_COLORS" || { echo "Fail colors.conf"; exit 1; }
+source "$__BASH_UTILS_MAIN_CONF_FILE_TEXT" # || { echo "Fail text.conf"; exit 1; }
+source "$__BASH_UTILS_MAIN_CONF_FILE_COLORS" || { echo "Fail colors.conf"; exit 1; }
 
 function D_Array()
 {
@@ -24,7 +24,7 @@ function D_Array()
 				echo -ne ""
 				;;
 			'Bold')
-				echo -ne "${__BU_MOD_MAIN_TXT_FMT_BOLD}"
+				echo -ne "${__BU_MAIN_TXT_FMT_BOLD}"
 				;;
 			'D')
 				;;
@@ -40,7 +40,7 @@ function D_Array()
 		esac
 	done
 
-	echo "$p_string$p_newcolor$__BU_MOD_MAIN_TXT_RESET"
+	echo "$p_string$p_newcolor$__BU_MAIN_TXT_RESET"
 }
 
 D_Array 'Test' '166' 'Blink' 'Bold' 'C'
