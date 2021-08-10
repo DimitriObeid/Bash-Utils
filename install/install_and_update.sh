@@ -54,9 +54,15 @@ __BU_root_path_file_path="$__BU_root_path_file_parent/$__BU_root_path_file_name"
 
 # ------------------------------------------------
 
+## OTHER VARIABLES
+
+__SLEEP="1"
+
+# ------------------------------------------------
+
 ## CODE
 
-printf "Copying the Bash Utils root directory path into the %s file\n" "$__BU_root_path_file" 0"0"
+printf "Copying the Bash Utils root directory path into the %s file\n" "$__BU_root_path_file"
 printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__BU_root_path_file" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__BU_root_path_file"; exit 1; }
 printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__BU_root_path_file"
 
@@ -67,6 +73,8 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 		printf "ERROR --> %s IS NOT AN EXISTING USER !\n\n" "$user"; exit 1
 	else
 		printf "PROCESSED USER : %s\n\n" "${user##*/}"
+
+		sleep "$__SLEEP"
 
 		printf "Copying the modules initialization file into the %s directory\n" "$user"
 
@@ -95,9 +103,11 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 			cp -rv "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH"; exit 1; }
 		fi
 
-		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n"
+		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
 
 		PrintLine
+
+		sleep "$__SLEEP"
 	fi
 done
 
