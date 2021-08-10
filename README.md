@@ -25,7 +25,7 @@ lease follow the instructions in the **README INSTALL.md** file in the **install
 
 ---
 
-## FRANÇAIS
+## FRANÇAIS | FRENCH
 
 **Note :** Si vous vous basez sur la branche beta, veuillez noter que cette dernière est régulièrement mise à jour, ce qui implique que vos scripts peuvent ne plus fonctionner après une mise à jour.
 
