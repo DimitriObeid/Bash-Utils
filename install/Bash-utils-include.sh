@@ -77,15 +77,28 @@ function ModuleInitializer_GetModuleName()
     echo -ne "${v_module##*/}"; return 0
 }
 
+__ModuleInitializer_SourcingFailure_CheckPath()
+{
+    #***** Parameters *****
+    local p_path=$1
+
+    #***** Code *****
+    if [ -z "$p_path" ]; then
+        printf "<No file path>"
+    elif [ ! -f "$p_path" ]; then
+        printf "$p_path (bad file path : not found)"
+    fi
+}
+
 # Printing an error message if a file cannot be sourced.
 function ModuleInitializer_SourcingFailure()
 {
     #***** Parameters *****
-    p_path=$1               # Path of the file that cannot be sourced.
-    p_module=$2             # Name of the module.
+    local p_path=$1         # Path of the file that cannot be sourced.
+    local p_module=$2       # Name of the module.
 
     #***** Code *****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' FILE --> $p_path" >&2; echo >&2; exit 1
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
