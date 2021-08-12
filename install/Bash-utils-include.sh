@@ -77,7 +77,7 @@ function ModuleInitializer_GetModuleName()
     echo -ne "${v_module##*/}"; return 0
 }
 
-__ModuleInitializer_SourcingFailure_CheckPath()
+function __ModuleInitializer_SourcingFailure_CheckPath()
 {
     #***** Parameters *****
     local p_path=$1
