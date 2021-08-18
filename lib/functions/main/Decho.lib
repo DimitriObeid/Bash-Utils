@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -30,7 +30,7 @@ fi
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 
 # Quick multi commands execution for the below "Decho()" function.
-function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_oldColor" && echo -e "$v_oldColor" > "$__BASH_UTILS_MOD_MAIN_FILE_COLOR_CODE_PATH"; }
+function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_oldColor" && echo -e "$v_oldColor" > "$__BASH_UTILS_MAIN_FILE_COLOR_CODE_PATH"; }
 
 # Text's inside decoration/formatting procssing.
 
@@ -59,7 +59,7 @@ function Decho()
         return 1
     else
         local v_oldColor
-            v_oldColor="$(cat "$__BU_MOD_MAIN_PROJECT_COLOR_CODE_FILE_PATH")"
+            v_oldColor="$(cat "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH")"
     fi
 
     if [ "$p_newColor" = "$v_oldColor" ]; then
@@ -69,35 +69,35 @@ function Decho()
 		tput setaf "$p_newColor"
 	fi
 
-	if [ "$__BU_MOD_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
+	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
         return 0
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
                 'BLINK')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_BLINK}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_BLINK}"
                     ;;
                 'BOLD')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_BOLD}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_BOLD}"
                     ;;
                 'D')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_DIM}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_DIM}"
                     ;;
                 'I')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_ITALIC}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_ITALIC}"
                     ;;
                 'S')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_STRIKETHROUGH}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH}"
                     ;;
                 'U')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_UNDERLINE}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}"
                     ;;
                 *)
-                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MOD_MAIN_STAT_TXT_FMT" CheckTxtFmt's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" CheckTxtFmt's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MOD_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
 
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
@@ -112,34 +112,34 @@ function Decho()
             esac
         done
 
-        echo -e "$p_string$p_newColor$__BU_MOD_MAIN_COLOR_RESET"
+        echo -e "$p_string$p_newColor$__BU_MAIN_COLOR_RESET"
 
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
                 'BLINK')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_BLINK_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_BLINK_RESET}"
                     ;;
                 'BOLD')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_BOLD_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_BOLD_RESET}"
                     ;;
                 'D')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_DIM_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_DIM_RESET}"
                     ;;
                 'I')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_ITALIC_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_ITALIC_RESET}"
                     ;;
                 'S')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_STRIKETHROUGH_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH_RESET}"
                     ;;
                 'U')
-                    echo -ne "${__BU_MOD_MAIN_TXT_FMT_UNDERLINE_RESET}"
+                    echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}"
                     ;;
                 *)
-                    # WARNING ! Do not reset the "$__BU_MOD_MAIN_STAT_TXT_FMT" CheckTxtFmt's value  to "true", or else the program will be stuck in an infinite loop.
+                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_TXT_FMT" CheckTxtFmt's value  to "true", or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MOD_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
 
                     # shellcheck disable=SC2034
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -167,19 +167,19 @@ function Decho()
 # echo -e "Lorem ipsum $(DechoOrange "$(Decho_FMT_BlinkBoldDISU "dolor")") sit amet..."
 
 # Easy "Decho()" function calls with colors.
-function DechoHighlight { Decho "$1" "$__BU_MOD_MAIN_COLOR_HIGHLIGHT"    ; }
-function DechoBlack     { Decho "$1" "$__BU_MOD_MAIN_COLOR_BLACK"        ; }
-function DechoBlue      { Decho "$1" "$__BU_MOD_MAIN_COLOR_BLUE"         ; }
-function DechoCyan      { Decho "$1" "$__BU_MOD_MAIN_COLOR_CYAN"         ; }
-function DechoGray      { Decho "$1" "$__BU_MOD_MAIN_COLOR_GRAY"         ; }
-function DechoGreen     { Decho "$1" "$__BU_MOD_MAIN_COLOR_GREEN"        ; }
-function DechoOrange    { Decho "$1" "$__BU_MOD_MAIN_COLOR_ORANGE"       ; }
-function DechoPink      { Decho "$1" "$__BU_MOD_MAIN_COLOR_PINK"         ; }
-function DechoPurple    { Decho "$1" "$__BU_MOD_MAIN_COLOR_PURPLE"       ; }
-function DechoRed       { Decho "$1" "$__BU_MOD_MAIN_COLOR_RED"          ; }
-function DechoTurquoise { Decho "$1" "$__BU_MOD_MAIN_COLOR_TURQUOISE"    ; }
-function DechoWhite     { Decho "$1" "$__BU_MOD_MAIN_COLOR_WHITE"        ; }
-function DechoYellow    { Decho "$1" "$__BU_MOD_MAIN_COLOR_YELLOW"       ; }
+function DechoHighlight { Decho "$1" "$__BU_MAIN_COLOR_HIGHLIGHT"    ; }
+function DechoBlack     { Decho "$1" "$__BU_MAIN_COLOR_BLACK"        ; }
+function DechoBlue      { Decho "$1" "$__BU_MAIN_COLOR_BLUE"         ; }
+function DechoCyan      { Decho "$1" "$__BU_MAIN_COLOR_CYAN"         ; }
+function DechoGray      { Decho "$1" "$__BU_MAIN_COLOR_GRAY"         ; }
+function DechoGreen     { Decho "$1" "$__BU_MAIN_COLOR_GREEN"        ; }
+function DechoOrange    { Decho "$1" "$__BU_MAIN_COLOR_ORANGE"       ; }
+function DechoPink      { Decho "$1" "$__BU_MAIN_COLOR_PINK"         ; }
+function DechoPurple    { Decho "$1" "$__BU_MAIN_COLOR_PURPLE"       ; }
+function DechoRed       { Decho "$1" "$__BU_MAIN_COLOR_RED"          ; }
+function DechoTurquoise { Decho "$1" "$__BU_MAIN_COLOR_TURQUOISE"    ; }
+function DechoWhite     { Decho "$1" "$__BU_MAIN_COLOR_WHITE"        ; }
+function DechoYellow    { Decho "$1" "$__BU_MAIN_COLOR_YELLOW"       ; }
 
 # Blink formatting.
 function Decho_FMT_Blink            { Decho "$1" "" 'Blink'; }

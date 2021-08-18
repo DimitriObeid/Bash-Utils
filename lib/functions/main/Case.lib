@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -29,7 +29,7 @@ fi
 
 ## VARIABLES
 
-__BU_MOD_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
+__BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
 
 # -----------------------------------------------
 
@@ -58,13 +58,13 @@ function CaseRead_TriggerRootDirWarning()
 			return 1
 			;;
 		*)
-			EchoError "$__BU_MOD_MAIN_CASE_INVALID_ANSWER"
+			EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
 			CaseRead_TriggerRootDirWarning
 			;;
 	esac
 }
 
-# "HandleErrors" function, with the "$__BU_MOD_MAIN_STAT_ECHO" CheckTxtFmt set to "false".
+# "HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" CheckTxtFmt set to "false".
 function CaseRead_HandleErrors()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
@@ -75,17 +75,17 @@ function CaseRead_HandleErrors()
 	# shellcheck disable=SC2154
 	case "${__read_HandleErrors,,}" in
 		"yes")
-			EchoNewstep "Resuming the execution of the $(DechoHighlight "$__BU_MOD_MAIN_PROJECT_NAME") script."
+			EchoNewstep "Resuming the execution of the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") script."
 			
 			return 0
 			;;
 		"no")
-			EchoError "Aborting the $(DechoHighlight "$__BU_MOD_MAIN_PROJECT_NAME")'s execution."
+			EchoError "Aborting the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution."
 			
 			ExitError '1'
 			;;
 		*)
-			EchoError "$__BU_MOD_MAIN_CASE_INVALID_ANSWER"
+			EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
 			CaseRead_HandleErrors
 			;;
 	esac

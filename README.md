@@ -21,7 +21,7 @@ Bash-utils is a group of utilities for Bash programming : configurations, docume
 
 ### INSTALLATION
 
-lease follow the instructions in the **README INSTALL.md** file in the **install** folder.
+Please follow the instructions in the **README INSTALL.md** file in the **install** folder.
 
 ---
 

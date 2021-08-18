@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -82,7 +82,7 @@ function ParseCSVLang()
     else
         CheckArgsMain_ParseCSVLang "$p_path" "$p_lang" "$p_success_msg" "$p_error_msg"
 
-        HeaderCyan "PARSING THE $(DechoHighlight "$__BU_MOD_MAIN_PROJECT_NAME")'S $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
+        HeaderCyan "PARSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
 
         EchoNewstep "Finding the CheckTxtFmts list"
         Newline
