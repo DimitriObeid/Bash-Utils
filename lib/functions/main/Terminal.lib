@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -56,7 +56,7 @@ function DisplaySpinner()
     #***** Code *****
     echo -n ' '
 
-    EchoMsg "$__BU_MAIN_TXT_TAB $p_string"
+    EchoMsg "$__BU_MOD_MAIN_TXT_TAB $p_string"
 
     while [ -d "/proc/$p_pid" ]; do
         printf "\b${sp:i++%${#sp}:1}"

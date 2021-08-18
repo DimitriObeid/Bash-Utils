@@ -31,7 +31,7 @@ source "$__BASH_UTILS_MOD_MAIN/Initializer.sh" || { echo >&2; echo -e "Unable to
 ## STATUS VARIABLES EDITION
 
 # shellcheck disable=SC2034
-__BU_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 

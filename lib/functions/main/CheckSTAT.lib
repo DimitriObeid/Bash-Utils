@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MOD_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -47,20 +47,20 @@ function ConfEcho()
     local i=0
 
     #***** Code *****
-    __BU_MAIN_STAT_ECHO="true"; __BU_MAIN_STAT_LOG="false"; __BU_MAIN_STAT_LOG_REDIRECT="";
+    __BU_MOD_MAIN_STAT_ECHO="true"; __BU_MOD_MAIN_STAT_LOG="false"; __BU_MOD_MAIN_STAT_LOG_REDIRECT="";
 
     HeaderError "AN ERROR OCCURED DURING A STATUS VARIABLES CHECKING !!!"
 
-    echo >&2; echo -n "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
-    echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+    echo >&2; echo -n "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_TAB$__BU_MOD_MAIN_TXT_TAB In ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MOD_MAIN_COLOR_ERROR}, line ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MOD_MAIN_COLOR_ERROR} --> " >&2
+    echo -e "Error : the ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MOD_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MOD_MAIN_COLOR_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_TAB$__BU_MOD_MAIN_TXT_TAB Bad value :${__BU_MOD_MAIN_COLOR_YELLOW} An empty string.${__BU_MOD_MAIN_COLOR_RESET}" >&2
     else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_TAB$__BU_MOD_MAIN_TXT_TAB Bad value : ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MOD_MAIN_COLOR_RESET}" >&2
     fi
 
-    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+    echo >&2; echo -e "${__BU_MOD_MAIN_COLOR_ERROR}$__BU_MOD_MAIN_TXT_TAB$__BU_MOD_MAIN_TXT_TAB The allowed values are :${__BU_MOD_MAIN_COLOR_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
@@ -68,9 +68,9 @@ function ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+            echo -e "${__BU_MOD_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MOD_MAIN_COLOR_ORANGE}An empty argument.${__BU_MOD_MAIN_COLOR_RESET}" >&2
         else
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
+            echo -e "${__BU_MOD_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MOD_MAIN_COLOR_HIGHLIGHT}$val${__BU_MOD_MAIN_COLOR_RESET}" >&2
         fi
     done
 
@@ -81,7 +81,7 @@ function ConfEcho()
 
 ## CHECKINGS
 
-# Checking the "$__BU_MAIN_STAT_DEBUG" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_DEBUG" status variable's value.
 function CheckSTAT_DEBUG()
 {
     #***** Parameters *****
@@ -92,14 +92,14 @@ function CheckSTAT_DEBUG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_DEBUG" != "true" ] && [ "$__BU_MAIN_STAT_DEBUG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_DEBUG" != "true" ] && [ "$__BU_MOD_MAIN_STAT_DEBUG" != "false" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_DEBUG" "__BU_MOD_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
+# Check the "$__BU_MOD_MAIN_STAT_DECHO" status variable's value.
 function CheckSTAT_DECHO()
 {
     #***** Parameters *****
@@ -110,14 +110,14 @@ function CheckSTAT_DECHO()
     local pa_correctValues=("authorize" "forbid" "restrict")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_DECHO" != "authorize" ] && [ "$__BU_MAIN_STAT_DECHO" != "forbid" ] && [ "$__BU_MAIN_STAT_DECHO" != "restrict" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_DECHO" != "authorize" ] && [ "$__BU_MOD_MAIN_STAT_DECHO" != "forbid" ] && [ "$__BU_MOD_MAIN_STAT_DECHO" != "restrict" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_DECHO" "__BU_MOD_MAIN_STAT_DECHO" "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Check the "$__BU_MAIN_STAT_ECHO" status variable's value.
+# Check the "$__BU_MOD_MAIN_STAT_ECHO" status variable's value.
 function CheckSTAT_ECHO()
 {
     #***** Parameters *****
@@ -128,14 +128,14 @@ function CheckSTAT_ECHO()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_ECHO" != "true" ] && [ "$__BU_MAIN_STAT_ECHO" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_ECHO" != "true" ] && [ "$__BU_MOD_MAIN_STAT_ECHO" != "false" ]; then
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_ECHO" "__BU_MOD_MAIN_STAT_ECHO" "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_ERROR" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_ERROR" status variable's value.
 function CheckSTAT_ERROR()
 {
     #***** Parameters *****
@@ -146,14 +146,14 @@ function CheckSTAT_ERROR()
     local pa_correctValues=("" "fatal")
 
     #***** Code *****
-    if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" != "fatal" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"
+    if [ -n "$__BU_MOD_MAIN_STAT_ERROR" ] && [ "$__BU_MOD_MAIN_STAT_ERROR" != "fatal" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_ERROR" "__BU_MOD_MAIN_STAT_ERROR" "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_LOG" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_LOG" status variable's value.
 function CheckSTAT_LOG()
 {
     #***** Parameters *****
@@ -164,17 +164,17 @@ function CheckSTAT_LOG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_LOG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_LOG" != "true" ] && [ "$__BU_MOD_MAIN_STAT_LOG" != "false" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_LOG" "__BU_MOD_MAIN_STAT_LOG" "${pa_correctValues[@]}"
 
-    elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+    elif [ "$__BU_MOD_MAIN_STAT_LOG" = "true" ] && [ ! -f "$__BU_MOD_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         CreateProjectLogFile
 	fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" status variable's value.
 function CheckSTAT_LOG_REDIRECT()
 {
     #***** Parameters *****
@@ -185,14 +185,14 @@ function CheckSTAT_LOG_REDIRECT()
     local pa_correctValues=("" "true" "false")
 
     #***** Code *****
-    if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'tee' ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"
+    if [ -n "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" ] && [ "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" != 'tee' ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" "__BU_MOD_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" status variable's value.
 function CheckSTAT_OPERATE_ROOT()
 {
 	#***** Parameters *****
@@ -203,14 +203,14 @@ function CheckSTAT_OPERATE_ROOT()
 	local pa_correctValues=("authorized" "forbidden" "restricted")
 
 	#***** Code *****
-	if [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "authorized" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "restricted" ]; then
-		Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"
+	if [ "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" != "authorized" ] && [ "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" != "restricted" ]; then
+		Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" "__BU_MOD_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"
 	fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
 function CheckSTAT_PRINT_INIT_LOG()
 {
     #***** Parameters *****
@@ -221,14 +221,14 @@ function CheckSTAT_PRINT_INIT_LOG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" != "true" ] && [ "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" != "false" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_PRINT_INIT_LOG" '__BU_MOD_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_TIME_TXT" status variable's value.
 function CheckSTAT_TIME_TXT()
 {
     #***** Parameters *****
@@ -236,18 +236,18 @@ function CheckSTAT_TIME_TXT()
     local p_lineno=$2
 
     #***** Variables *****
-    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
+    local pa_correctValues=("${__BU_MOD_MAIN_COLOR_ORANGE}An integer or a floating number")
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.
-    if ! IsFloatInt "$__BU_MAIN_STAT_TIME_TXT"; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}" >&2
+    if ! IsFloatInt "$__BU_MOD_MAIN_STAT_TIME_TXT"; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_TIME_TXT" "__BU_MOD_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}" >&2
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_TRANSLATED" status variable's value.
 function CheckSTAT_TRANSLATED()
 {
     #***** Parameters *****
@@ -258,14 +258,14 @@ function CheckSTAT_TRANSLATED()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" != "true" ] && [ "$__BU_MAIN_STAT_TRANSLATED" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_TRANSLATED" != "true" ] && [ "$__BU_MOD_MAIN_STAT_TRANSLATED" != "false" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_TRANSLATED" '__BU_MOD_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_TXT_FMT" status variable's value.
 function CheckSTAT_TXT_FMT()
 {
     #***** Parameters *****
@@ -276,14 +276,14 @@ function CheckSTAT_TXT_FMT()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TXT_FMT" != "true" ] && [ "$__BU_MAIN_STAT_TXT_FMT" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"
+    if [ "$__BU_MOD_MAIN_STAT_TXT_FMT" != "true" ] && [ "$__BU_MOD_MAIN_STAT_TXT_FMT" != "false" ]; then
+        Confecho "$p_file" "$p_lineno" "$__BU_MOD_MAIN_STAT_TXT_FMT" '__BU_MOD_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"
     fi
 
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_USER_OS" status variable's value.
+# Checking the "$__BU_MOD_MAIN_STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS()
 {
@@ -309,7 +309,7 @@ function CheckProjectStatusVars()
     local p_lineno=$2
 
     #***** Code *****
-    # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" CheckTxtFmt, to make sure the following error messages will be correctly displayed if another error happened.
+    # Processing first the "__BU_MOD_MAIN_STAT_LOG_REDIRECT" CheckTxtFmt, to make sure the following error messages will be correctly displayed if another error happened.
     CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno"
     CheckSTAT_DECHO         "$p_file" "$p_lineno"
     CheckSTAT_ECHO          "$p_file" "$p_lineno"
@@ -332,32 +332,32 @@ function CheckProjectStatusVars()
 #   $2  --> file where the change was made.
 #   $3  --> line where the change was made.
 
-# Changing the "$__BU_MAIN_STAT_DEBUG" status variable's value.
-function ChangeSTAT_DEBUG() { __BU_MAIN_STAT_DEBUG="$1";     CheckSTAT_DEBUG "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_DEBUG" status variable's value.
+function ChangeSTAT_DEBUG() { __BU_MOD_MAIN_STAT_DEBUG="$1";     CheckSTAT_DEBUG "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function ChangeSTAT_DECHO()  { __BU_MAIN_STAT_DECHO="$1";    CheckSTAT_DECHO "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_DECHO" status variable's value.
+function ChangeSTAT_DECHO()  { __BU_MOD_MAIN_STAT_DECHO="$1";    CheckSTAT_DECHO "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value.
-function ChangeSTAT_ECHO()  { __BU_MAIN_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_ECHO" status variable's value.
+function ChangeSTAT_ECHO()  { __BU_MOD_MAIN_STAT_ECHO="$1";      CheckSTAT_ECHO  "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function ChangeSTAT_ERROR   { __BU_MAIN_STAT_ERROR="$1";     CheckSTAT_ERROR "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_ERROR" status variable's value.
+function ChangeSTAT_ERROR   { __BU_MOD_MAIN_STAT_ERROR="$1";     CheckSTAT_ERROR "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function ChangeSTAT_LOG     { __BU_MAIN_STAT_LOG="$1";       CheckSTAT_LOG   "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_LOG" status variable's value.
+function ChangeSTAT_LOG     { __BU_MOD_MAIN_STAT_LOG="$1";       CheckSTAT_LOG   "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function ChangeSTAT_LOG_REDIRECT    { __BU_MAIN_STAT_LOG_REDIRECT="$1";  CheckSTAT_LOG_REDIRECT  "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_LOG_REDIRECT" status variable's value.
+function ChangeSTAT_LOG_REDIRECT    { __BU_MOD_MAIN_STAT_LOG_REDIRECT="$1";  CheckSTAT_LOG_REDIRECT  "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function ChangeSTAT_OPERATE_ROOT    { __BU_MAIN_STAT_OPERATE_ROOT="$1";  CheckSTAT_OPERATE_ROOT  "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_OPERATE_ROOT" status variable's value.
+function ChangeSTAT_OPERATE_ROOT    { __BU_MOD_MAIN_STAT_OPERATE_ROOT="$1";  CheckSTAT_OPERATE_ROOT  "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function ChangeSTAT_TIME_TXT        { __BU_MAIN_STAT_TIME_TXT="$1";      CheckSTAT_TIME_TXT      "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_TIME_TXT" status variable's value.
+function ChangeSTAT_TIME_TXT        { __BU_MOD_MAIN_STAT_TIME_TXT="$1";      CheckSTAT_TIME_TXT      "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function ChangeSTAT_TRANSLATED      { __BU_MAIN_STAT_TRANSLATED="$1";    CheckSTAT_TRANSLATED    "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_TRANSLATED" status variable's value.
+function ChangeSTAT_TRANSLATED      { __BU_MOD_MAIN_STAT_TRANSLATED="$1";    CheckSTAT_TRANSLATED    "$2" "$3"; }
 
-# Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function ChangeSTAT_TXT_FMT { __BU_MAIN_STAT_TXT_FMT="$1"; CheckSTAT_TXT_FMT "$2" "$3"; }
+# Changing the "$__BU_MOD_MAIN_STAT_TXT_FMT" status variable's value.
+function ChangeSTAT_TXT_FMT { __BU_MOD_MAIN_STAT_TXT_FMT="$1"; CheckSTAT_TXT_FMT "$2" "$3"; }

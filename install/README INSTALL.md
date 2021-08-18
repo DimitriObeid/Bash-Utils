@@ -20,7 +20,7 @@ Copy the **.Bash-utils** folder and the **Bash-utils-include.sh** script file in
 
 ### Installation automatique
 
-Exécutez le script **install_and_update.sh** pour installer le gestionnaire de modules, ou bien exécutez le script **update_path.sh** si vous avez déplacé le dossier racine de la librairie autre part sur votre disque dur.
+Exécutez le script **install_and_update.sh** pour installer le gestionnaire de modules, ou bien exécutez le script **update_path.sh** si vous avez déplacé le dossier racine de la librairie autre part sur votre disue dur.
 
 ### Installation manuelle
 

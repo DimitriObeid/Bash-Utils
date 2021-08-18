@@ -8,7 +8,7 @@
 source "$HOME/.bash_profile" || { echo >&2; echo -e "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_MAIN_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
+source "$__BASH_UTILS_MOD_MAIN_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 
@@ -32,7 +32,7 @@ __supported_languages=('en' 'fr')
 ## STATUS VARIABLES MODIFICATION
 
 # shellcheck disable=SC2034
-__BU_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+__BU_MOD_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
@@ -79,19 +79,19 @@ else
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_Bash"
+			Makedir "$__BASH_UTILS_MOD_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BASH_UTILS_MOD_MAIN_DOCS/$__path_Bash"
 			;;
 		2)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_config" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_config"
+			Makedir "$__BASH_UTILS_MOD_MAIN_DOCS" "$__path_config" && __folder_path="$__BASH_UTILS_MOD_MAIN_DOCS/$__path_config"
 			;;
 		3)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_basis_functions"
+			Makedir "$__BASH_UTILS_MOD_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BASH_UTILS_MOD_MAIN_DOCS/$__path_basis_functions"
 			;;
 		4)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_main_functions"
+			Makedir "$__BASH_UTILS_MOD_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_MOD_MAIN_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_CheckTxtFmts" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_CheckTxtFmts"
+			Makedir "$__BASH_UTILS_MOD_MAIN_DOCS" "$__path_CheckTxtFmts" && __folder_path="$__BASH_UTILS_MOD_MAIN_DOCS/$__path_CheckTxtFmts"
 			;;
 		*)
 			HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-__BU_MAIN_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FIFO"
+__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FIFO"
 
 function Decho { echo -e "$(tput setaf 6)$1$(tput sgr0)"; }
 
@@ -28,9 +28,9 @@ function CreateFIFO
     local p_path=$1
 
     #***** Code *****
-    if [ ! -d "$__BU_MAIN_PROJECT_FIFO_DIR_PATH" ]; then
-        echo -e "Creating the $(Decho "$__BU_MAIN_PROJECT_FIFO_DIR_PATH")"; echo
-        mkdir -pv "$__BU_MAIN_PROJECT_FIFO_DIR_PATH"
+    if [ ! -d "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH" ]; then
+        echo -e "Creating the $(Decho "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH")"; echo
+        mkdir -pv "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH"
     fi
     
     echo -e "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
@@ -130,11 +130,11 @@ EOF
     fi
 }
 
-CreateFIFO "$__BU_MAIN_PROJECT_FIFO_DIR_PATH/test1"
+CreateFIFO "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH/test1"
 echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"
 
-WriteIntoFIFO "$__BU_MAIN_PROJECT_FIFO_DIR_PATH/test1" "COLOR" "6" ""
+WriteIntoFIFO "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH/test1" "COLOR" "6" ""
 echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"
 
-ReadFromFIFO "$__BU_MAIN_PROJECT_FIFO_DIR_PATH/test1" "COLOR" ""
+ReadFromFIFO "$__BU_MOD_MAIN_PROJECT_FIFO_DIR_PATH/test1" "COLOR" ""
 echo -e "//////////////////////////////////////////////////////////////////////////////////////////////////"
