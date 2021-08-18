@@ -51,31 +51,6 @@ function InitializerAddInitStrArrayVal()
     fi
 }
 
-# Use this function to have a better view about a bug location during a "bash -x" debug.
-function DbgMsg()
-{
-    #***** Parameters *****
-    p_code=$1               # Exit code.
-    p_sleep=$2              # Pause time in seconds.
-
-    #***** Code *****
-    printf "
-
-    -------------------------------------------------
-    DEBUG
-    -------------------------------------------------
-
-    "
-
-    if [ "$p_code" -eq 0 ]; then
-        sleep "$p_sleep"
-
-        return
-    else
-        exit 1
-    fi
-}
-
 # -----------------------------------------------
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -131,23 +106,6 @@ if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_
 
 # -----------------------------------------------
 
+## ENDING THE MODULE INITIALIZATION PROCESS
 
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### ENDING THE INITIALIZATION PROCESS
-
-ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" CheckTxtFmt's value is equal to "true".
-ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_NAME") !"
-
-if CheckIsInitializing; then
-    # shellcheck disable=SC2034
-    __BU_MAIN_INIT_IS_INITALIZING="false"
-fi
+HeaderGreen "END OF THE $(DechoHighlight) MODULE INITIALIZATION !"
