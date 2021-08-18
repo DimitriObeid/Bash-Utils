@@ -2,15 +2,15 @@
 
 ## NOTE : This script takes in account my defined paths and the fact that I also develop with WSL. Please feel free to modify what you need to modify.
 
-## TODO 
-##	: Ask to the user if he wants to keep the defualt paths.
+## TODO
+##	: Ask to the user if he wants to keep the default paths.
 
 if [ "$EUID" -ne 0 ]; then
 	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
 
 # Feel free to add any user's home directory path into the "users.list" file.
-mapfile -t __TARGET_HOME_DIRECTORIES < "users.list"
+mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"; exit 1; }
 
 ## FUNCTIONS
 
