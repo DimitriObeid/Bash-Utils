@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 
 ## NOTE : This script takes in account my defined paths and the fact that I also develop with WSL. Please feel free to modify what you need to modify.
 
@@ -35,8 +35,6 @@ __module_init_file="Bash-utils-include.sh"
 __INSTALL_DIRECTORY_SOURCE="$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"
 
 __INSTALL_MODULE_DIRECTORY=".Bash-utils"
-
-__BU_root_path_file_name="Bash-utils-root-val.path"
 
 # ------------------------------------------------
 

@@ -84,10 +84,10 @@ function ModuleInitializer_CheckBashMinimalVersion()
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
 function ModuleInitializer_FindPath
 {
-    # $1 = Parent directory.
+	# $1 = Parent directory.
     # $2 = Targeted directory or file.
     local path
-        path="$(find "$1" -maxdepth 1 -iname "$2")" && echo "$path"
+        path="$(find "$1" -maxdepth 1 -iname "$2")" && printf "%s" "$path"; return 0
 }
 
 function ModuleInitializer_GetModuleName()
@@ -99,7 +99,7 @@ function ModuleInitializer_GetModuleName()
         exit 1
     }; pwd -P)"
 
-    echo -ne "${v_module##*/}"; return 0
+    printf "%s" "${v_module##*/}"; return 0
 }
 
 function __ModuleInitializer_SourcingFailure_CheckPath()
