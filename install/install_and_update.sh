@@ -13,19 +13,10 @@ fi
 # Feel free to add any user's home directory path into the "users.list" file.
 mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"; exit 1; }
 
-# ------------------------------------------------
 
-## FUNCTIONS
+# Installation type argument.
+__ARG=$1
 
-# Printing a line according to the terminal's columns number.
-function PrintLine()
-{
-    __cols="$(tput cols)"
-
-	for _ in $(eval echo -e "{1..$__cols}"); do
-            printf '-'
-    done; printf "\n"
-}
 
 # ------------------------------------------------
 
@@ -56,6 +47,101 @@ __F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh"
 # Path of the modules inititialization file in the installation directory.
 __F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_FILE_NAME"
 
+
+
+# ------------------------------------------------
+
+## FUNCTIONS
+
+# Copying the modules inititializer file into the user's home directory.
+function CopyModulesInitializer()
+{
+	#***** Parameters *****
+	user=$1
+
+	#***** Code *****
+    if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
+        printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
+        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
+        
+		printf "\n"
+	else
+        printf "Overwriting the %s file in the %s directory" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
+        true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+            
+        printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
+        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
+    fi
+}
+
+# Copying the modules manager directory into the user's home directory.
+function CopyModulesManagerDirectory()
+{
+	#***** Parameters *****
+	user=$1
+
+	#***** Code *****
+    if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
+
+        printf "Erasing the existing %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+
+		# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
+        # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
+        # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
+
+        # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
+        rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !\n\n" "$__D_MODULE_MANAGER_NEW_PATH"; exit 1; }
+        printf "\n"
+
+        printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
+
+    else
+        printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+        cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
+
+	fi
+}
+
+# Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
+function ChangeOwnership()
+{
+	#***** Parameters *****
+	user=$1
+
+	#***** Code *****
+	if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
+		printf "Changing the ownership of the %s file, from root to %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"
+		chown -v "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "$user"; exit 1; }
+
+		return 0
+	fi
+	
+    printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
+    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
+
+	printf "\n"
+	printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
+
+	printf "\n"; PrintLine; printf "\n"; sleep 0.5
+
+	printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
+    chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+
+	printf "\n"
+	printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
+}
+
+# Printing a line according to the terminal's columns number.
+function PrintLine()
+{
+    __cols="$(tput cols)"
+
+	for _ in $(eval echo -e "{1..$__cols}"); do
+            printf '-'
+    done; printf "\n"
+}
+
 # ------------------------------------------------
 
 ## CODE
@@ -67,7 +153,7 @@ printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s f
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 	if [ ! -d "$user" ]; then
-        ""
+        printf "ERROR --> %s IS NOT AN EXISTING USER !\n\n" "$user"; exit 1
 	else
         # ------------------------------------------------
 
@@ -89,64 +175,24 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-		PrintLine
-        printf "PROCESSED USER : %s\n" "${user##*/}"
-		PrintLine; printf "\n"
+		PrintLine; printf "PROCESSED USER : %s\n" "${user##*/}"; PrintLine; printf "\n"; sleep 1
 
-		sleep 1
+		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
-        if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
+			CopyModulesManagerDirectory "$user"; sleep 0.5
 
-            printf "Erasing the existing %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+			CopyModulesInitializer "$user"; sleep 0.5
+			
+			printf "\n"; PrintLine; printf "\n"; sleep 0.5
 
-			# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
-            # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
-            # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
+			ChangeOwnership "$user"; sleep 0.5
 
-            # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-            rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !\n\n" "$__D_MODULE_MANAGER_NEW_PATH"; exit 1; }
-            printf "\n"
+		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 
-            printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-			cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
-
-        else
-            printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-            cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
-
-		fi
-
-		sleep 0.5
-
-        if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
-            printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
-            cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
-        
-			printf "\n"
+			ChangeOwnership "$user"; sleep 0.5
 		else
-            printf "Overwriting the %s file in the %s directory" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
-            true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
-            
-            printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
-            cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
-        fi
-
-        printf "\n"; PrintLine; printf "\n"; sleep 0.5
-
-        printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
-        chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
-
-		printf "\n"
-		printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
-
-		printf "\n"; PrintLine; printf "\n"; sleep 0.5
-
-		printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
-        chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
-
-		printf "\n"
-		printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
-
+			printf "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are 'install' or 'i' for the installation of the modules manager,\nor 'update' or 'u' for the update of the Bash Utils root directory's path.\n\n"; exit 1
+		fi
 
 		printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
 
