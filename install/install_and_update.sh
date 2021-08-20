@@ -7,7 +7,7 @@
 ##      : Change each user's newly installed files and folders rights, so that the users can interact easily with these.
 
 if [ "$EUID" -ne 0 ]; then
-        printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
+    printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
 
 # Feel free to add any user's home directory path into the "users.list" file.
@@ -129,6 +129,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
             printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
             cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
         fi
+
+        printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+        chown -Rv "$user" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
+
+        printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
+        chown -v "$user" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
 
 		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
 
