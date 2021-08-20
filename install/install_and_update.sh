@@ -112,13 +112,13 @@ function ChangeOwnership()
 	#***** Code *****
 	if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 		printf "Changing the ownership of the %s file, from root to %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"
-		chown -v "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "$user"; exit 1; }
+		chown -v "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "\nUNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"; exit 1; }
 
 		return 0
 	fi
 	
     printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
-    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
+    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "\nUNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"; exit 1; }
 
 	printf "\n"
 	printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
@@ -126,7 +126,7 @@ function ChangeOwnership()
 	printf "\n"; PrintLine; printf "\n"; sleep 0.5
 
 	printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
-    chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+    chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "\nUNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"; exit 1; }
 
 	printf "\n"
 	printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
@@ -167,7 +167,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
         ## NEW FILES VARIABLES DECLARATIONS
 
         # Path of the file which stores the Bash Utils library's root directory's path, in the user's home directory.
-        __F_LIBRARY_PATH_NEW_PARENT_PATH="$user/$__F_LIBRARY_PATH_FILE_NAME"
+        __F_LIBRARY_PATH_NEW_PARENT_PATH="$__D_MODULE_MANAGER_NEW_PATH/$__F_LIBRARY_PATH_FILE_NAME"
 
         __F_MODULE_INITIALIZER_NEW_PATH="$user/$__F_MODULE_INITIALIZER_FILE_NAME"
 
