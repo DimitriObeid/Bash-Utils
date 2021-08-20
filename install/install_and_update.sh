@@ -22,9 +22,9 @@ function PrintLine()
 {
     __cols="$(tput cols)"
 
-    for _ in $(eval echo -e "{1..$__cols}"); do
+	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
-    done; printf "\n\n"
+    done; printf "\n"
 }
 
 # ------------------------------------------------
@@ -58,19 +58,11 @@ __F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_F
 
 # ------------------------------------------------
 
-## OTHER VARIABLES
-                
-__SLEEP='1'
-
-# ------------------------------------------------
-
 ## CODE
 
 printf "Copying the Bash Utils root directory path into the %s file\n" "$__F_LIBRARY_PATH_FILE_NAME"
 printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME"; exit 1; }
 printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__F_LIBRARY_PATH_FILE_NAME"
-
-PrintLine
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
@@ -97,7 +89,11 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-        printf "PROCESSED USER : %s\n\n" "${user##*/}"; sleep "$__SLEEP"
+		PrintLine
+        printf "PROCESSED USER : %s\n" "${user##*/}"
+		PrintLine; printf "\n"
+
+		sleep 1
 
         if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
 
@@ -117,12 +113,17 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
         else
             printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
             cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
-        fi
+
+		fi
+
+		sleep 0.5
 
         if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
             printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
             cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
-        else
+        
+			printf "\n"
+		else
             printf "Overwriting the %s file in the %s directory" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
             true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
             
@@ -130,17 +131,29 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
             cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; exit 1; }
         fi
 
-        printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-        chown -Rv "$user" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
+        printf "\n"; PrintLine; printf "\n"; sleep 0.5
 
-        printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
-        chown -v "$user" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+        printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
+        chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"; exit 1; }
 
-		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
+		printf "\n"
+		printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
 
-        PrintLine; sleep "$__SLEEP"
+		printf "\n"; PrintLine; printf "\n"; sleep 0.5
+
+		printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
+        chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+
+		printf "\n"
+		printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
+
+
+		printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
+
     fi
 done
+
+PrintLine; printf "\n"
 
 printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :\n"
 
