@@ -1,16 +1,19 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 ## NOTE : This script takes in account my defined paths and the fact that I also develop with WSL. Please feel free to modify what you need to modify.
 
 ## TODO
-##	: Ask to the user if he wants to keep the default paths.
+##      : Ask to the user if he wants to keep the default paths.
+##      : Change each user's newly installed files and folders rights, so that the users can interact easily with these.
 
 if [ "$EUID" -ne 0 ]; then
-	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
+        printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
 fi
 
 # Feel free to add any user's home directory path into the "users.list" file.
 mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"; exit 1; }
+
+# ------------------------------------------------
 
 ## FUNCTIONS
 
@@ -26,94 +29,96 @@ function PrintLine()
 
 # ------------------------------------------------
 
-## DIRECTORIES AND FILES NAMES
+## DIRECTORIES VARIABLES DECLARATIONS
 
-__BU_root_path_file="Bash-utils-root-val.path"
+# /foo/bar/Bash-utils/install directory
+__D_INSTALL_DIR_PATH="$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"
 
-__module_init_file="Bash-utils-include.sh"
+# Name of the module manager directory.
+__D_MODULE_MANAGER_DIR_NAME=".Bash-utils"
 
-__INSTALL_DIRECTORY_SOURCE="$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"
-
-__INSTALL_MODULE_DIRECTORY=".Bash-utils"
+# Path of the module manager directory in the installation directory.
+__D_MODULE_MANAGER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__D_MODULE_MANAGER_DIR_NAME"
 
 # ------------------------------------------------
 
-## FULL PATHS
+## DIRECTORIES VARIABLES DECLARATIONS
 
-__INSTALL_MODULE_DIRECTORY_FULL_PATH="$__INSTALL_DIRECTORY_SOURCE/$__INSTALL_MODULE_DIRECTORY"
+# Name of the file which stores the Bash Utils library's root directory's path.
+__F_LIBRARY_PATH_FILE_NAME="Bash-utils-root-val.path"
 
-__INSTALL_DIRECTORY_DESTINATION_PATH="$user/$__INSTALL_MODULE_DIRECTORY"
+# Path of the aforementionned file in the installation directory.
+__F_LIBRARY_PATH_OLD_PARENT_PATH="$__D_MODULE_MANAGER_OLD_PATH/$__F_LIBRARY_PATH_FILE_NAME"
 
-__module_init_file_home_dir="$user/$__module_init_file"
+# Name of the modules inititialization file.
+__F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh"
 
-__BU_root_path_file_parent="$user/$__INSTALL_MODULE_DIRECTORY"
-
-__BU_root_path_file_path="$__BU_root_path_file_parent/$__BU_root_path_file_name"
+# Path of the modules inititialization file in the installation directory.
+__F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_FILE_NAME"
 
 # ------------------------------------------------
 
 ## OTHER VARIABLES
-
-__SLEEP="1"
+                
+__SLEEP='1'
 
 # ------------------------------------------------
 
 ## CODE
 
-printf "Copying the Bash Utils root directory path into the %s file\n" "$__BU_root_path_file"
-printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__BU_root_path_file" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__BU_root_path_file"; exit 1; }
-printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__BU_root_path_file"
+printf "Copying the Bash Utils root directory path into the %s file\n" "$__F_LIBRARY_PATH_FILE_NAME"
+printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME"; exit 1; }
+printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__F_LIBRARY_PATH_FILE_NAME"
 
 PrintLine
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
+
 	if [ ! -d "$user" ]; then
-		printf "ERROR --> %s IS NOT AN EXISTING USER !\n\n" "$user"; exit 1
+        ""
 	else
-		printf "PROCESSED USER : %s\n\n" "${user##*/}"
+        # ------------------------------------------------
 
-		sleep "$__SLEEP"
+        ## NEW DIRECTORIES VARIABLES DECLARATIONS
 
-		printf "Copying the modules initialization file into the %s directory\n" "$user"
+        # Path of the module manager directory in the user's directory.
+        __D_MODULE_MANAGER_NEW_PATH="$user/$__D_MODULE_MANAGER_DIR_NAME"
 
-		if [ -f "$__module_init_file_home_dir" ]; then
-			cat "$__module_init_file" 2>&1 "$__module_init_file_home_dir" || { printf "UNABLE TO OVERWRITE THE %s FILE WITH THE %s FILE'S CONTENT !\n\n" "$__module_init_file_home_dir" "$__module_init_file"; exit 1; }
-		else
-			cp -v "$__module_init_file" "$user" || { printf "UNABLE TO COPY THE %s FILE INTO THE %s DIRECTORY !\n\n" "$__module_init_file" "$user"; exit 1; }
-		fi
+        # ------------------------------------------------
 
-		printf "\nCopying the content of the %s into the %s directory\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user"
-		if [ -d "$__INSTALL_DIRECTORY_DESTINATION_PATH" ]; then
+        ## NEW FILES VARIABLES DECLARATIONS
+
+        # Path of the file which stores the Bash Utils library's root directory's path, in the user's home directory.
+        __F_LIBRARY_PATH_NEW_PARENT_PATH="$user/$__F_LIBRARY_PATH_FILE_NAME"
+
+        __F_MODULE_INITIALIZER_NEW_PATH="$user/$__F_MODULE_INITIALIZER_FILE_NAME"
+
+        # ------------------------------------------------
+
+        ## CODE
+
+        printf "PROCESSED USER : %s\n\n" "${user##*/}"; sleep "$__SLEEP"
+
+        if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
+
+            printf "Erasing the existing %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+
 			# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
-            		# WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
-            		# VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
+            # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
+            # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
-            		# Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-            		rm -rfv "${$__INSTALL_DIRECTORY_DESTINATION_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !\n\n" "$__INSTALL_DIRECTORY_DESTINATION_PATH"; exit 1; }
-			cp -rv "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH"; exit 1; }
+            # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
+            rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !\n\n" "$__D_MODULE_MANAGER_NEW_PATH"; exit 1; }
+            printf "\n"
 
-			if [ -f "$__BU_root_path_file_path" ]; then
-				cat "$__BU_root_path_file_name" 2>&1 "$__BU_root_path_file_path" || { printf "UNABLE TO OVERWRITE THE %s FILE WITH THE %s FILE'S CONTENT !\n\n" "$__BU_root_path_file_path" "$__BU_root_path_file_name"; exit 1; }
-			else
-				cp -v "$__BU_root_path_file_name" "$__BU_root_path_file_path" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__BU_root_path_file_name" "$__BU_root_path_file_parent"; exit 1; }
-			fi
-		else
-			cp -rv "$__INSTALL_MODULE_DIRECTORY_FULL_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__INSTALL_MODULE_DIRECTORY_FULL_PATH"; exit 1; }
-		fi
+            printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+			cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
 
-		printf "\n\nTHE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}"
+        else
+            printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+            cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; exit 1; }
+        fi
 
-		PrintLine
-
-		sleep "$__SLEEP"
-	fi
+        printf "\n"; PrintLine
+    fi
 done
-
-printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS !\n"
-
-for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
-	printf "\"%s\" " "${user##*/}"
-done
-
-printf "\n\n"
-exit 0
