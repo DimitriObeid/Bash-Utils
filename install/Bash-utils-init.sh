@@ -87,7 +87,7 @@ function ModuleInitializer_FindPath
 	# $1 = Parent directory.
     # $2 = Targeted directory or file.
     local path
-        path="$(find "$1" -maxdepth 1 -iname "$2")" && printf "%s" "$path"; return 0
+        path="$(find "$1" -maxdepth 1 -iname "$2")" && printf "%s" "$1/$2"; return 0
 }
 
 function ModuleInitializer_GetModuleName()
@@ -111,7 +111,7 @@ function __ModuleInitializer_SourcingFailure_CheckPath()
     if [ -z "$p_path" ]; then
         printf "<No file path>"
     elif [ ! -f "$p_path" ]; then
-        printf "$p_path (bad file path : not found)"
+        printf "%s (bad file path : not found)" "$p_path"
     fi
 }
 
@@ -130,10 +130,12 @@ function ModuleInitializer_SourcingFailure()
 
 ## DEFINING GLOBAL VARIABLES
 
-__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME/" ".Bash-utils")"
+__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME" ".Bash-utils")"
 __BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
 __BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
 __BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+
+__BU_MAIN_ROOT_DIR_PATH="$(cat "$__BU_MODULE_UTILS_ROOT/Bash-utils-root-val.path")"
 
 # -----------------------------------------------
 
