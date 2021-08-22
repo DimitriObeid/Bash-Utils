@@ -5,10 +5,7 @@
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 # shellcheck disable=SC1090
-source "$HOME/.bash_profile" || { echo >&2; echo -e "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
-
-# shellcheck disable=SC1090
-source "$__BASH_UTILS_MAIN_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
+source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 
@@ -53,7 +50,8 @@ EchoRead "$__read_lang"
 Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
-	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	# shellcheck disable=SC2016
+	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions CheckTxtFmts definition.
@@ -75,7 +73,7 @@ else
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
 	EchoRead "$__read_folder_code"
 	Newline
-	
+
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
@@ -94,21 +92,22 @@ else
 			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_CheckTxtFmts" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_CheckTxtFmts"
 			;;
 		*)
+			# shellcheck disable=SC2016
 			HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
-	
+
 	EchoNewstep "How do you want to name your document ?"
-	read -rp "Enter the file's name : " __read_doc_name
+	read -rp "Enter the file's name (no ''.tek'' extension, this script will complete it) : " __read_doc_name
 	EchoRead "$__read_doc_name"
-	
+
 	if [ -z "$__read_doc_name" ]; then
+		# shellcheck disable=SC2016
 		HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
-	
 	__full_path="$__folder_path/$__read_doc_name"
 
-	Makefile "$__folder_path" "$__read_doc_name" && EchoSuccess "Your LaTeX file ($(DechoS "$__full_path")) was successfully created."
-	
+	Makefile "$__folder_path" "$__read_doc_name.tex" && EchoSuccess "Your LaTeX file ($(DechoS "$__full_path")) was successfully created."
+
 	exit 0
 fi
