@@ -31,6 +31,14 @@ fi
 
 __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
 
+__BU_MAIN_CASE_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)"
+
+__BU_MAIN_CASE_ANSWER_PROMPT="Enter your answer : "
+
+__BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") script."
+
+__BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution."
+
 # -----------------------------------------------
 
 
@@ -44,17 +52,21 @@ __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'ye
 # "TriggerRootDirWarning" function.
 function CaseRead_TriggerRootDirWarning()
 {
-    EchoWarning "Do you want to continue the script's execution ? (yes / no)"
-	read -rp "Enter your answer : " __read_TriggerRootDirWarning
+    EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	EchoRead "$__read_TriggerRootDirWarning"
 	Newline
 
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
 		"yes")
+            EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
+
 			return 0
 			;;
 		"no")
+            EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
+
 			return 1
 			;;
 		*)
@@ -67,21 +79,21 @@ function CaseRead_TriggerRootDirWarning()
 # "HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function CaseRead_HandleErrors()
 {
-	EchoWarning "Do you want to continue the script's execution ? (yes / no)"
-	read -rp "Enter your answer : " __read_TriggerRootDirWarning
+	EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	EchoRead "$__read_TriggerRootDirWarning"
     Newline
 
 	# shellcheck disable=SC2154
 	case "${__read_HandleErrors,,}" in
 		"yes")
-			EchoNewstep "Resuming the execution of the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") script."
-			
+			EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
+
 			return 0
 			;;
 		"no")
-			EchoError "Aborting the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution."
-			
+			EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
+
 			ExitError '1'
 			;;
 		*)

@@ -179,7 +179,7 @@ function CheckProjectLogPath()
     if [ -z "$__BU_MAIN_PROJECT_LO_FILE_PATH" ]; then
         HandleErrors "1" "NO PATH PROVIDED INTO THE $(DechoHighlight "__BU_MAIN_PROJECT_LOG_FILE_PATH") VARIABLE" \
             "Please check if the project's log file exists / was successfully created and if the $(DechoHighlight "__BU_MAIN_PROJECT_LOG_FILE_PATH") global variable is set or called" \
-            "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "$BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
         # In case the "ExitError()" function doesn't stops the script's execution because the final user modified its behavior, it's safer to add a return value.
         ExitError; return 1
@@ -189,7 +189,7 @@ function CheckProjectLogPath()
     elif [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         HandleErrors "1" "BAD PATH PROVIDED INTO THE $(DechoHighlight "__BU_MAIN_PROJECT_LOG_FILE_PATH") VARIABLE" \
             "Please correct the path passed as argument, or redefine the variable if its value was modified somewhere" \
-            "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "$BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
         # In case the "ExitError()" function doesn't stops the script's execution because the final user modified its behavior, it's safer to add a return value.
         ExitError; return 1

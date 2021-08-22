@@ -101,14 +101,12 @@ function __CheckArgsMain_PrintBadOption()
 		ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
-    local v_string; v_string="THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER"
-
     #***** Code *****
 
 	# If no value is passed as argument.
     if [ "$p_option" = 'z' ]; then
         # shellcheck disable=SC2116
-		HandleErrors "1" "$v_string HAS NO VALUE" \
+		HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
@@ -116,13 +114,13 @@ function __CheckArgsMain_PrintBadOption()
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "$p_option" = '!alpha' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHABETIC STRING" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "$p_option" = '!alphanum' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT AN ALPHANUMERIC STRING" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
@@ -130,7 +128,7 @@ function __CheckArgsMain_PrintBadOption()
 	# Else, if the value passed as argument is not a valid directory path.
     elif [ "$p_option" = '!d' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT A VALID DIRECTORY PATH" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
@@ -138,7 +136,7 @@ function __CheckArgsMain_PrintBadOption()
 	# Else, if the value passed as argument is not a valid file path.
     elif [ "$p_option" = '!f' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT A VALID FILE PATH" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
@@ -146,7 +144,7 @@ function __CheckArgsMain_PrintBadOption()
 	# Else, if the value passed as argument is not a floating number.
     elif [ "$p_option" = '!float' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT A FLOAT" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
@@ -154,7 +152,7 @@ function __CheckArgsMain_PrintBadOption()
 	# Else, if the value passed as argument is not an integer.
     elif [ "$p_option" = '!int' ]; then
         # shellcheck disable=SC2116
-        HandleErrors "1" "$v_string'S VALUE IS NOT AN INTEGER" \
+        HandleErrors "1" "THE $(KeepFormatting "$(CutFromCharacter "$p_funcname")'s") $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$(CutFromCharacter "$p_funcname")" "$p_lineno"
 
 		return 1
