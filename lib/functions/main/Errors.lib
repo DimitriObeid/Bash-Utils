@@ -141,7 +141,7 @@ function HandleErrors()
         return 0
     else
         # If the function needs to be called in the "CheckProjectLogStatus()" function,
-        # this status CheckTxtFmt's value MUST be set at "true", or else the script will loop forever.
+        # this status variable's value MUST be set at "true", or else the script will loop forever.
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 

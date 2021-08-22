@@ -47,7 +47,7 @@ function GetWCCharsNumber
         chars_vars=$(( chars_vars+chars_vars_tmp )); echo
     done
     
-    echo -e "Total number of characters in of the CheckTxtFmts files : $chars_vars"; echo
+    echo -e "Total number of characters in of the variables files : $chars_vars"; echo
     chars=$(( chars+chars_vars )); echo
     
     echo -e "Total number of characters in the project and the library : $chars"; echo

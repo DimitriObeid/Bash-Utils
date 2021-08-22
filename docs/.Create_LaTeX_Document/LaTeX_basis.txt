@@ -1,0 +1,29 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[sfdefault]{roboto}
+\usepackage[T1]{fontenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage[document]{ragged2e}	
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}
+\usepackage{hyperref}
+
+\fontfamily{}
+
+\pagecolor{black}
+\title{\color{red}%TITLE%}
+\author{%AUTHOR%}
+\date{%DATE%}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (%TITLE%)
+  /Author   (%AUTHOR%)
+  /Creator  (%AUTHOR%)
+  /Producer (%AUTHOR%)
+  /Subject  (%TITLE%)
+  /Keywords ()
+}

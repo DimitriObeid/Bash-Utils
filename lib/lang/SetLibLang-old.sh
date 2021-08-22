@@ -29,7 +29,7 @@ function ParseCSVLibLang
     EchoInit "Setting language"
     EchoInit
     
-    # Cut the ICU language code, which is at the left of the underscore, then storing it into a CheckTxtFmt.
+    # Cut the ICU language code, which is at the left of the underscore, then storing it into a variable.
     LANG=$("$LANG" | cut -f 1 -d '_')
     EchoInit "Language : $LANG"
     
@@ -113,7 +113,7 @@ function ParseCSVLibLang
         #       echo -e "$row_index"
         # done
         
-        # Then, reading the VARIABLE column and assign for each CheckTxtFmt of the VARIABLE column the value of the $LANG column from the same row.
+        # Then, reading the VARIABLE column and assign for each variable of the VARIABLE column the value of the $LANG column from the same row.
         
         
         
@@ -141,7 +141,7 @@ function ParseCSVLibLang
 #     fi
 
   
-  # Don't double quote what follows the path CheckTxtFmt, or else, the loop will only run once.
+  # Don't double quote what follows the path variable, or else, the loop will only run once.
  #   EchoInit "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
    #     if source "$f"; then
    #         EchoInit "$success_msg : $f"
@@ -153,7 +153,7 @@ function ParseCSVLibLang
    # done; EchoInit
 }
 
-# Detecting user's language with the "$LANG" environment CheckTxtFmt.
+# Detecting user's language with the "$LANG" environment variable.
 function SetLibLang
 {
     case "$LANG" in

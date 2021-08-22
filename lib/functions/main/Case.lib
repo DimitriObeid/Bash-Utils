@@ -64,7 +64,7 @@ function CaseRead_TriggerRootDirWarning()
 	esac
 }
 
-# "HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" CheckTxtFmt set to "false".
+# "HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function CaseRead_HandleErrors()
 {
 	EchoWarning "Do you want to continue the script's execution ? (yes / no)"

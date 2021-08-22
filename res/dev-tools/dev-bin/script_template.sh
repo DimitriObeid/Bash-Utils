@@ -24,13 +24,13 @@ source "$__BASH_UTILS_MAIN_LIB_FILE_INITIALIZER" || { echo >&2; echo -e "Unable 
 
 ## VARIABLES DEFINITION
 
-# Please define any needed CheckTxtFmt here.
+# Please define any needed variable here.
 
 # -----------------------------------------------
 
 ## STATUS VARIABLES EDITION
 
-# Please edit any needed status CheckTxtFmt here.
+# Please edit any needed status variable here.
 
 # -----------------------------------------------
 

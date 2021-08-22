@@ -217,11 +217,11 @@ function CheckProjectLogStatus()
 	# which also calls this same ""CheckProjectLogStatus() function.
 
     # If you need to call a function here, please verify if it doesn't calls the "CheckProjectLogStatus()" function,
-    # nor any function called by the function you want to add, or else set the "$__BU_MAIN_STAT_ECHO" status CheckTxtFmt value to "true" BEFORE calling the wanted function.
+    # nor any function called by the function you want to add, or else set the "$__BU_MAIN_STAT_ECHO" status variable value to "true" BEFORE calling the wanted function.
 
     local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    # Setting the "$__BU_MAIN_STAT_ECHO" status CheckTxtFmt's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
+    # Setting the "$__BU_MAIN_STAT_ECHO" status variable's value to "true", in case an error occurs during a function call, where the "CheckProjectLogStatus()" function or any other function that calls it might be called.
     local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
     local v_redirectionError
@@ -472,7 +472,7 @@ function CheckProjectLogStatus()
 	#
 	ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-	# Resetting the "$__BU_MAIN_STAT_ECHO" status CheckTxtFmt's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
+	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "CheckProjectLogStatus()" function's execution is over.
 	ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	return 0

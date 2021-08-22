@@ -22,13 +22,13 @@ __ARG_EXTENSION=$1
 
 ## VARIABLES DEFINITION
 
-# Please define any needed CheckTxtFmt here.
+# Please define any needed variable here.
 
 # -----------------------------------------------
 
 ## STATUS VARIABLES EDITION
 
-# Please edit any needed status CheckTxtFmt here.
+# Please edit any needed status variable here.
 
 # ----------------------------------------------
 

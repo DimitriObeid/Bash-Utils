@@ -84,7 +84,7 @@ function ParseCSVLang()
 
         HeaderCyan "PARSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S $(DechoHighlight "$p_path") TRANSLATIONS CSV FILE"
 
-        EchoNewstep "Finding the CheckTxtFmts list"
+        EchoNewstep "Finding the variables list"
         Newline
 
         # for i in 

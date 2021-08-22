@@ -37,7 +37,7 @@ fi
 # Linux-reinstall's sub-folders paths
 __LINUX_REINSTALL_INST="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/install/categories"
 __LINUX_REINSTALL_LANG="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/lang"
-__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/CheckTxtFmts"
+__LINUX_REINSTALL_VARS="$(GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
 EchoNewstep "IN $(DechoN "$__BU_MAIN_PROJECT_FILE"), LINE $(DechoN "$LINENO") : CHECKING FOR ${__BU_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
@@ -108,7 +108,7 @@ function CheckArgs
             EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)."
             EchoError "Exécutez ce script en plaçant la commande $(DechoE "sudo") devant votre commande :"
 
-            # La CheckTxtFmt "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
+            # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
             # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
             echo -e "    sudo $0 \$installation" >&2
             Newline >&2
@@ -171,8 +171,8 @@ function CheckArgs
 		Newline
 
 		# The name of the log file is redefined, THEN we redefine the path,
-		# EVEN if the initial value of the CheckTxtFmt "$PROJECT_LOG_PATH" is the same as the new value.
-		# In this case, if the value of the CheckTxtFmt "$PROJECT_LOG_PATH" is not redefined, its former value is called,
+		# EVEN if the initial value of the variable "$PROJECT_LOG_PATH" is the same as the new value.
+		# In this case, if the value of the variable "$PROJECT_LOG_PATH" is not redefined, its former value is called,
 		# because the "$PROJECT_LOG_NAME" stored in the former "$$PROJECT_LOG_PATH" is the former one (its value was not updated).
 		__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD="$__BU_MAIN_PROJECT_LOG_FILE_NAME"
 		echo -e "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD"
@@ -277,7 +277,7 @@ function DistUpgrade
 		Makedir "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 	fi
 
-	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la CheckTxtFmt "$PACK_MAIN_PACKAGE_MANAGER".
+	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la variable "$PACK_MAIN_PACKAGE_MANAGER".
 	case "$PACK_MAIN_PACKAGE_MANAGER" in
 		"apt")
 			echo apt-get -y upgrade > "$pack_upg_f_path"
@@ -485,7 +485,7 @@ function LaravelInstall
     # PackInstall "$main" php-zip               # Le paquet étant déja installé avec Apache 2, il reste là comme rappel, au cas où vous souhaitez récupérer la fonction "LaravelInstall" pour l'implémenter dans un script personnel
     PackInstall "$main" unzip
 
-    # Modification de la valeur de la CheckTxtFmt "cgi.fix_pathinfo" (booléen) en la mettant à 0
+    # Modification de la valeur de la variable "cgi.fix_pathinfo" (booléen) en la mettant à 0
     local lineno=$LINENO; sed -ie 's/cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' "$php_ini_path"
     HandleErrors "$?" "IMPOSSIBLE DE TROUVER LE FICHIER $(DechoE "$php_ini_path")" \
         "Vérifiez que le dossier $(DechE "/etc/php/7.4") existe." ""
@@ -503,19 +503,19 @@ function LaravelInstall
     # Installation de Laravel
     composer global require laravel/installer
     
-    # Ajout du dossier ~/.config/composer/vendor/bin dans la CheckTxtFmt d'environnement "$PATH"
+    # Ajout du dossier ~/.config/composer/vendor/bin dans la variable d'environnement "$PATH"
     local lineno=$LINENO; cat <<-EOF >> "$DIR_HOMEDIR/.bashrc"
     export PATH="$envpath$PATH"
 EOF
 
-    # Mise à jour du fichier de configuration "~/.bashrc" et vérification de l'application de la modification de la CheckTxtFmt d'environnement
+    # Mise à jour du fichier de configuration "~/.bashrc" et vérification de l'application de la modification de la variable d'environnement
     # shellcheck disable=SC1090
     source "$DIR_HOME/.bashrc"
     echo -e "$PATH" | grep "$envpath"
     
     HandleErrors "$?" "LA VARIABLE D'ENVIRONNEMENT $(DechoE "\$PATH") N'A PAS ÉTÉ MODIFÉE" \
         "Échec de l'installation de Laravel." "$lineno"
-    EchoSuccess "La CheckTxtFmt d'environnement $(DechoS "\$PATH") a été modifiée avec succès."
+    EchoSuccess "La variable d'environnement $(DechoS "\$PATH") a été modifiée avec succès."
     Newline
     
     EchoSuccess "Le framework Laravel a été installé avec succès sur votre système"
@@ -675,7 +675,7 @@ DistUpgrade				# Mise à jour des paquets actuels.
 
 
 ## INSTALLATIONS PRIORITAIRES ET CONFIGURATIONS DE PRÉ-INSTALLATION
-# On déclare une CheckTxtFmt "main" et on lui assigne en valeur le nom du gestionnaire de paquet principal stocké dans la CheckTxtFmt. "$PACK_MAIN_PACKAGE_MANAGER" pour éviter de retaper le nom de cette CheckTxtFmt.
+# On déclare une variable "main" et on lui assigne en valeur le nom du gestionnaire de paquet principal stocké dans la variable. "$PACK_MAIN_PACKAGE_MANAGER" pour éviter de retaper le nom de cette variable.
 main="$PACK_MAIN_PACKAGE_MANAGER"
 
 HeaderStep "INSTALLATION DES COMMANDES IMPORTANTES POUR LES TÉLÉCHARGEMENTS"

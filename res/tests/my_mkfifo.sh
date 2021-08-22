@@ -21,7 +21,7 @@ function __CreateFIFO
     done
 }
 
-# Creating a named pipe to get a CheckTxtFmt's value instead of declaring it in a sub-shell, and thus, losing its modified value.
+# Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
 function CreateFIFO
 {
     #***** Parameters *****
@@ -63,8 +63,8 @@ function ReadFromFIFO
 {
     #***** Parameters *****
     p_fifoPath=$1               # FIFO's path.
-    p_fifoVarName=$2            # Stored CheckTxtFmt's name.
-    p_fifoCurrentVarValue=$3    # Stored CheckTxtFmt's value to get.
+    p_fifoVarName=$2            # Stored variable's name.
+    p_fifoCurrentVarValue=$3    # Stored variable's value to get.
 
     #***** Variables *****
     v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
@@ -98,8 +98,8 @@ function WriteIntoFIFO
 {
     #***** Parameters *****
     p_fifoPath=$1		# FIFO's path to write into.
-    p_fifoVarName=$2    # Stored CheckTxtFmt's name
-    p_newVar=$3         # Stored CheckTxtFmt's new value.
+    p_fifoVarName=$2    # Stored variable's name
+    p_newVar=$3         # Stored variable's new value.
     p_existingPath=$4   # Handling missing FIFO, to define specific instructions.
 
     #***** Variables *****

@@ -96,7 +96,7 @@ function OverwriteDir()
 	Newline
 
 	if [ "$p_authorization" = "true" ]; then
-        # TODO : Si la CheckTxtFmt n'est pas initialisée.
+        # TODO : Si la variable n'est pas initialisée.
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
             # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
@@ -181,7 +181,7 @@ function Makedir()
     fi
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MAIN_STAT_LOG CheckTxtFmt's value is "true",
+# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MAIN_STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function MkTmpDir()
 {

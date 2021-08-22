@@ -24,7 +24,7 @@ source "$__BASH_UTILS_MOD_MAIN/Initializer.sh" || { echo >&2; echo -e "Unable to
 
 ## VARIABLES DEFINITION
 
-# Please define any needed CheckTxtFmt here.
+# Please define any needed variable here.
 
 # -----------------------------------------------
 

@@ -59,10 +59,10 @@ function InitializerAddInitStrArrayVal()
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Sourcing each file listed into the "$__BU_MAIN_FUNCTIONS_FILES_PATH" CheckTxtFmt.
+# Sourcing each file listed into the "$__BU_MAIN_MODINIT_FUNCTIONS_FILES_PATH" variable.
 
 # shellcheck disable=SC1090
-for f in "${__BU_MAIN_FUNCTIONS_FILES_PATH[@]}"; do
+for f in "${__BU_MAIN_MODINIT_FUNCTIONS_FILES_PATH[@]}"; do
     source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_INIT_LIB_FILES_PATH_ARRAY+=("$f")
 done
 

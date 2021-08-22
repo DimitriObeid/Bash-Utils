@@ -47,7 +47,7 @@ function GetWCLinesNumber
         lines_vars=$(( lines+line_number_vars_tmp )); echo
     done
     
-    echo -e "Total number of lines in the CheckTxtFmts files : $lines_vars"; echo
+    echo -e "Total number of lines in the variables files : $lines_vars"; echo
     lines=$(( lines+lines_vars )); echo
     
     echo -e "Total number of lines in the project and the library : $lines"; echo

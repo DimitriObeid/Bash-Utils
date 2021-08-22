@@ -56,10 +56,10 @@ Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le
 \subsection{Utilisation}\color{white}
 Pour utiliser cette librairie, il vous suffira de sourcer deux fichiers :
 \begin{itemize}
-    \item \color{orange}\textbf{\$HOME\color{lime}/.bash\_profile\color{white} :} \color{white} Ce fichier à sourcer en tout premier lieu doit contenir les CheckTxtFmts suivantes :
+    \item \color{orange}\textbf{\$HOME\color{lime}/.bash\_profile\color{white} :} \color{white} Ce fichier à sourcer en tout premier lieu doit contenir les variables suivantes :
     \begin{itemize}
         \item \color{orange}\textbf{\$\_\_BASH\_UTILS\_ROOT\color{white} :} \color{white} Contient le chemin vers le dossier racine de la librairie, appelé \color{lime}\textbf{Bash-utils}\color{white}.
-        \item \color{orange}\textbf{\$\_\_BASH\_UTILS\color{white} :} \color{white} Contient le chemin vers le dossier du fichier d'initialisation, de préférence en appelant la CheckTxtFmt précédente.\linebreak
+        \item \color{orange}\textbf{\$\_\_BASH\_UTILS\color{white} :} \color{white} Contient le chemin vers le dossier du fichier d'initialisation, de préférence en appelant la variable précédente.\linebreak
     \end{itemize}
 
     \item \color{lime}\textbf{Initializer.sh\color{white} :} \color{white} Ce fichier est l'initialiseur de la librairie Bash Utils. Il doit être sourcé en deuxième lieu.
@@ -91,13 +91,13 @@ Ce dossier contient les fichiers et dossiers nécessaires à l'installation auto
 
 \color{blue}
 \subsubsection{lib}\color{white}
-Ce dossier est le plus important de tous, car il contient tous les fichiers source de la librairie (fonctions et CheckTxtFmts), ainsi que le fichier d'initialisation à sourcer dans un script principal.
+Ce dossier est le plus important de tous, car il contient tous les fichiers source de la librairie (fonctions et variables), ainsi que le fichier d'initialisation à sourcer dans un script principal.
 
 Il contient trois sous-dossiers :
 \begin{itemize}
     \item \color{lime}\textbf{functions\color{white} :} \color{white} ce sous-dossier contient tous les fichiers de fonctions dans différents sous-dossiers.
     \item \color{lime}\textbf{lang\color{white} :} \color{white} ce sous-dossier contient tous les fichiers nécessaires à la traduction des scripts (fonctionnalité future).
-    \item \color{lime}\textbf{CheckTxtFmts\color{white} :} \color{white} ce sous-dossier contient tous les fichiers enregistrant des CheckTxtFmts.
+    \item \color{lime}\textbf{variables\color{white} :} \color{white} ce sous-dossier contient tous les fichiers enregistrant des variables.
 \end{itemize}
 
 Description des sous-dossiers du dossier \textbf{functions}
@@ -121,8 +121,8 @@ Rappel : fonctionnalité future, certaines idées peuvent encore changer.\\[1\ba
 
 Le fichier \color{lime}\textbf{lang.csv} \color{white} contient les différentes traductions de la librairie dans un fichier au format CSV. Il sera parsé (analysé) par le script d'initialisation.
 
-\paragraph{CheckTxtFmts}\mbox{}\\
-Chaque fichier définit des CheckTxtFmts propres aux catégories décrites dans le nom de chaque fichier. Par exemple, les CheckTxtFmts définies dans le fichier \color{lime}\textbf{colors.var}\color{white} sont des CheckTxtFmts définissant le code de la couleur d'un texte à afficher.
+\paragraph{variables}\mbox{}\\
+Chaque fichier définit des variables propres aux catégories décrites dans le nom de chaque fichier. Par exemple, les variables définies dans le fichier \color{lime}\textbf{colors.var}\color{white} sont des variables définissant le code de la couleur d'un texte à afficher.
 
 \color{blue}
 \subsubsection{projects}\color{white}
@@ -137,7 +137,7 @@ Il n'est créé que pendant l'exécution d'un projet, pendant la partie d'initia
 
 \color{red}
 \section{Fonctionnement}\color{white}
-Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des CheckTxtFmts, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
+Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
 
 Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug.
 
@@ -147,28 +147,28 @@ Les deux seules procédures que vous devez réaliser dans votre script pour util
 
 \color{green}
 \subsection{Étapes d'initialisation}\color{white}
-En premier lieu, le script d'initialisation initialise les CheckTxtFmts globales contenant les chemins des multiples dossiers et fichiers de la librairie Bash Utils, ainsi que celles enregistrant les chemins du projet.
+En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers et fichiers de la librairie Bash Utils, ainsi que celles enregistrant les chemins du projet.
 
-Ces CheckTxtFmts sont définies dans le fichier \color{lime}\textbf{config/Init.conf}\color{white}.
+Ces variables sont définies dans le fichier \color{lime}\textbf{config/Init.conf}\color{white}.
 
 En second lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
 
-En troisième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les CheckTxtFmts \color{orange}\textbf{\$\_\_BASH\_UTILS\_*}\color{white} initialisées dans la première étape existent.
+En troisième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \color{orange}\textbf{\$\_\_BASH\_UTILS\_*}\color{white} initialisées dans la première étape existent.
 
-En quatrième lieu, le script source tous les fichiers de fonctions et de CheckTxtFmts des sous-dossiers du dossier \color{lime}\textbf{lib}\color{white}.
+En quatrième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \color{lime}\textbf{lib}\color{white}.
 
 En cinquième lieu, le script :
 \begin{itemize}
-    \item Crée une CheckTxtFmt nommée \color{orange}\textbf{\$\_\_PROJECT\_PATH}\color{white}, enregistrant le chemin du fichier de script principal par le biais de la fonction \color{mauve}\textbf{GetParentDirectoryPath} \color{white} du fichier \color{lime}\textbf{functions/main/Directories.lib}\color{white}.
+    \item Crée une variable nommée \color{orange}\textbf{\$\_\_PROJECT\_PATH}\color{white}, enregistrant le chemin du fichier de script principal par le biais de la fonction \color{mauve}\textbf{GetParentDirectoryPath} \color{white} du fichier \color{lime}\textbf{functions/main/Directories.lib}\color{white}.
     
-    \item Modifie plusieurs CheckTxtFmts de statut pour rendre la partie d'initialisation invisible à l'utilisateur final.
+    \item Modifie plusieurs variables de statut pour rendre la partie d'initialisation invisible à l'utilisateur final.
     
     \item Copie le contenu du fichier de logs de la partie d'initialisation dans le fichier de logs principal.
 \end{itemize}
 
 
 \color{red}
-\section{Documentations des fonctions et des CheckTxtFmts de Bash Utils}\color{white}
+\section{Documentations des fonctions et des variables de Bash Utils}\color{white}
 
 \color{green}
 \subsection{Fonctions}\color{white}
@@ -176,7 +176,7 @@ Tous les fichiers de documentation en français concernant la description des fo
 
 \color{green}
 \subsection{Variables}\color{white}
-Tous les fichiers de documentation en français concernant la description des CheckTxtFmts se situent dans le dossier \color{lime}\textbf{docs/fr/Bash/CheckTxtFmts}\color{white}.
+Tous les fichiers de documentation en français concernant la description des variables se situent dans le dossier \color{lime}\textbf{docs/fr/Bash/variables}\color{white}.
 
 \color{red}
 \section{Installation de Bash Utils}\color{white}

@@ -1,7 +1,7 @@
 VARIABLE,COMMENTS,MESSAGE, en, fr
 MSG_INITEND_END_OF_LIB_INIT,Bash-utils/src/Initializer.sh,None,"END OF THE LIBRARY INITIALIZATION PROCESS, PROCESSING $(Decho ""${PROJECT_NAME^^}"")'S PROJECT RESOURCES NOW","FIN DE L’INITIALISATION DE LA LIBRAIRIE, TRAITEMENT DU PROJET $(Decho ""${PROJECT_NAME^^}"")"
-MSG_INITEND_SOURCE_PROJECT_CONF_FAIL,Bash-utils/src/Initializer.sh,None,"In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $(Decho ""$PROJECT_NAME"")'s file CheckTxtFmts status configuration file.","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO => Erreur : impossible de sourcer le fichier de configuration des CheckTxtFmts de statut du projet $(Decho ""$PROJECT_NAME"")."
-MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS,Bash-utils/src/Initializer.sh,None,"Successfully sourced the $(Decho ""$PROJECT_NAME"")'s file CheckTxtFmts status configuration file.","Le fichier de configuration des CheckTxtFmts de statut du projet $(Decho ""$PROJECT_NAME"") a été sourcé avec succès."
+MSG_INITEND_SOURCE_PROJECT_CONF_FAIL,Bash-utils/src/Initializer.sh,None,"In ${BASH_SOURCE[0]}, line $LINENO --> Error : unable to source the $(Decho ""$PROJECT_NAME"")'s file variables status configuration file.","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO => Erreur : impossible de sourcer le fichier de configuration des variables de statut du projet $(Decho ""$PROJECT_NAME"")."
+MSG_INITEND_SOURCE_PROJECT_CONF_SUCCESS,Bash-utils/src/Initializer.sh,None,"Successfully sourced the $(Decho ""$PROJECT_NAME"")'s file variables status configuration file.","Le fichier de configuration des variables de statut du projet $(Decho ""$PROJECT_NAME"") a été sourcé avec succès."
 /,/,,/,/
 MSG_DIR_PROCESSING_BEGIN,"Directories.lib ==> ""ProcessingDir"" function",Newstep,"Processing the $(DechoN ""$name"") folder in the parent folder $(DechoN ""$parent"").","Traitement du dossier $(DechoN ""$name"") dans le dossier parent $(DechoN ""$parent/"")."
 MSG_DIR_PROCESSING_END_FAIL,"Directories.lib ==> ""ProcessingDir"" function",Error,"End of processing the $(DechoE ""$path/"") folder.","Fin du traitement du dossier $(DechoE ""$path/"")."
@@ -35,19 +35,19 @@ MSG_FILE_COMPRESS_PROCESSING,"Files.lib ==> ""Compress"" function",Newstep,"Unco
 MSG_FILE_COMPRESS_FAIL,"Files.lib ==> ""Compress"" function",Error,"Unable to uncompress the $(DechoE ""$name"") archive.","La décompression de l'archive $(DechoE ""$name"") a échouée."
 MSG_FILE_COMPRESS_SUCCESS,"Files.lib ==> ""Compress"" function",Success,"Successfully uncompressed the $(DechoS ""$name"") archive.","L'archive $(DechoS ""$name"") a été décompressée avec succès."
 /,/,/,/,/
-MSG_VARSTAT_DEBUG_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the CheckTxtFmt STAT_DEBUG is incorrect.,Erreur : la valeur de la CheckTxtFmt STAT_DEBUG est incorrecte.
-MSG_VARSTAT_LOG_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the CheckTxtFmt STAT_LOG is incorrect.,Erreur : la valeur de la CheckTxtFmt STAT_LOG est incorrecte.
-MSG_VARSTAT_LOGREDIRECT_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the CheckTxtFmt STAT_LOG_REDIRECT is incorrect.,Erreur : la valeur de la CheckTxtFmt STAT_LOG_REDIRECT est incorrecte.
-MSG_VARSTAT_ERROR_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the CheckTxtFmt STAT_ERROR is incorrect.,Erreur : la valeur de la CheckTxtFmt STAT_ERROR est incorrecte.
-MSG_VARSTAT_TIMETXT_NAN,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the CheckTxtFmt STAT_TIME_TXT is not a number.,Erreur : la valeur de la CheckTxtFmt STAT_TXT n’est pas un nombre.
+MSG_VARSTAT_DEBUG_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the variable STAT_DEBUG is incorrect.,Erreur : la valeur de la variable STAT_DEBUG est incorrecte.
+MSG_VARSTAT_LOG_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the variable STAT_LOG is incorrect.,Erreur : la valeur de la variable STAT_LOG est incorrecte.
+MSG_VARSTAT_LOGREDIRECT_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the variable STAT_LOG_REDIRECT is incorrect.,Erreur : la valeur de la variable STAT_LOG_REDIRECT est incorrecte.
+MSG_VARSTAT_ERROR_FAIL,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the variable STAT_ERROR is incorrect.,Erreur : la valeur de la variable STAT_ERROR est incorrecte.
+MSG_VARSTAT_TIMETXT_NAN,"ProjectStatus.conf ==> ""CheckProjectStatusVars"" function",Error,Error : the value of the variable STAT_TIME_TXT is not a number.,Erreur : la valeur de la variable STAT_TXT n’est pas un nombre.
 /,/,,/,/
 MSG_HANDLES_ROOTEUID_FAIL,"Handles.lib ==> ""CheckRootEUID"" function",Error,Error : you need root user's privileges to perform this action.,Erreur : vous avez besoin des privilèges du super-utilisateur pour effectuer cette action.
 /,/,,/,/
-MSG_HANDLES_LOG_PATH_FAIL,"Handles.lib ==> ""CheckProjectLogPath"" function",Error,Error : no path provided into the PROJECT_LOG_PATH CheckTxtFmt.,Erreur : Aucun chemin fourni dans la CheckTxtFmt PROJECT_LOG_PATH.
+MSG_HANDLES_LOG_PATH_FAIL,"Handles.lib ==> ""CheckProjectLogPath"" function",Error,Error : no path provided into the PROJECT_LOG_PATH variable.,Erreur : Aucun chemin fourni dans la variable PROJECT_LOG_PATH.
 /,/,,/,/
 MSG_HANDLES_LOG_STATUS_FAIL_LOCATION,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,"In ${BASH_UTILS[0]}, line $(Decho ""$LINENO"") ==>","Dans le fichier ${BASH_SOURCE[0]}, à la ligne $LINENO ==>"
 MSG_HANDLES_LOG_STATUS,"Handles.lib ==> ""CheckProjectLogStatus"" function",,,
-MSG_HANDLES_LOG_STATUS_INVALID,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,Error : no valid write output mode defined in the PROJECT_STATUS_LOG CheckTxtFmt.,Erreur : aucun mode d’écriture défini dans la CheckTxtFmt PROJECT_STATUS_LOG.
+MSG_HANDLES_LOG_STATUS_INVALID,"Handles.lib ==> ""CheckProjectLogStatus"" function",Error,Error : no valid write output mode defined in the PROJECT_STATUS_LOG variable.,Erreur : aucun mode d’écriture défini dans la variable PROJECT_STATUS_LOG.
 /,/,,/,/
 MSG_HANDLES_ERR_FATAL_ERROR,"Headers.lib ==> ""HandleErrors"" function",Error,FATAL ERROR,ERREUR FATALE
 MSG_HANDLES_ERR_FATAL_TYPE,"Headers.lib ==> ""HandleErrors"" function",Error,A fatal error occured !,Une erreur fatale s'est produite !

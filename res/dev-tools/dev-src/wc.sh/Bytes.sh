@@ -47,7 +47,7 @@ function GetWCBytes
         bytes_vars=$(( bytes_vars+bytes_vars_tmp )); echo
     done
     
-    echo -e "Total size in bytes of the CheckTxtFmts files : $bytes_vars"; echo
+    echo -e "Total size in bytes of the variables files : $bytes_vars"; echo
     bytes=$(( bytes+bytes_vars )); echo
     
     echo -e "Total size in bytes of the project and the library : $bytes"; echo

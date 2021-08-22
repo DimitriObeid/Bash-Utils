@@ -290,7 +290,7 @@ function GetLineFromTextFile()
     #***** Code *****
 	# shellcheck disable=SC2002
     cat "$p_source" | while read -r line; do
-        # Incrementing the line incrementer CheckTxtFmt's value...
+        # Incrementing the line incrementer variable's value...
         i=$(( i+1 ))
 
         # ... until it reaches the wanted line.

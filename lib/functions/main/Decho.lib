@@ -94,10 +94,10 @@ function Decho()
                     echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}"
                     ;;
                 *)
-                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" CheckTxtFmt's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
@@ -136,10 +136,10 @@ function Decho()
                     echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}"
                     ;;
                 *)
-                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_TXT_FMT" CheckTxtFmt's value  to "true", or else the program will be stuck in an infinite loop.
+                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_TXT_FMT" variable's value  to "true", or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_TXT_FMT" status CheckTxtFmt's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
 
                     # shellcheck disable=SC2034
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

@@ -21,6 +21,9 @@ source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to sourc
 
 ## VARIABLES DEFINITION
 
+# Script's resources directory.
+__RES_DIR="$__BU_MAIN_MODINIT_DOCS_DIR_PATH/.$__BU_MAIN_PROJECT_NAME"
+
 # Supported languages array.
 __supported_languages=('en' 'fr')
 
@@ -54,12 +57,12 @@ if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
-	#***** Conditions CheckTxtFmts definition.
+	#***** Conditions variables definition.
 	__path_Bash="$__read_lang/Bash/"
 	__path_config="$__read_lang/config"
 	__path_basis_functions="$__read_lang/Bash/functions/basis"
 	__path_main_functions="$__read_lang/Bash/functions/main"
-	__path_CheckTxtFmts="$__read_lang/Bash/CheckTxtFmt"
+	__path_variables="$__read_lang/Bash/variable"
 
 	#***** Asking for the new document's path.
 	EchoNewstep "What kind of document do you want to write ?"
@@ -67,7 +70,7 @@ else
 	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_config")"
 	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_basis_functions")"
 	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_main_functions")"
-	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_CheckTxtFmts")"
+	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_variables")"
 	Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
@@ -89,7 +92,7 @@ else
 			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_CheckTxtFmts" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_CheckTxtFmts"
+			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_variables" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_variables"
 			;;
 		*)
 			# shellcheck disable=SC2016
@@ -108,6 +111,8 @@ else
 	__full_path="$__folder_path/$__read_doc_name"
 
 	Makefile "$__folder_path" "$__read_doc_name.tex" && EchoSuccess "Your LaTeX file ($(DechoS "$__full_path")) was successfully created."
+
+	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
 
 	exit 0
 fi
