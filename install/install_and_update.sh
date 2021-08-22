@@ -205,7 +205,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 			CopyModulesManagerDirectory "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
 
 			CopyModulesInitializer "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
-			
+
 			NewlineF; PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; NewlineF; sleep 0.5
 
 			ChangeOwnership "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
@@ -246,6 +246,14 @@ printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTE
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 	printf "\"%s\" " "${user##*/}" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
 done
+
+printf "\n\n"
+
+if [ "$__ARG" = 'install' ] || [ "$__ARG" = 'i' ]; then
+	printf "Please check the %s log file to verify if the installation was successful" "$__F_INSTALL_LOG_FILE_PATH"
+elif [ "$__ARG" = 'update' ] || [ "$__ARG" = 'u' ]; then
+	printf "Please check the %s log file to verify if the update was successful" "$__F_INSTALL_LOG_FILE_PATH"
+fi
 
 printf "\n\n"
 
