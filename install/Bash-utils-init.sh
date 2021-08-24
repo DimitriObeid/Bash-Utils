@@ -162,7 +162,9 @@ for module in "${p_module_list[@]}"; do
     else
         # shellcheck disable=SC1090
         source "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$module"
-    fi
+    
+		HeaderGreen "END OF THE $(DechoHighlight "$module") MODULE INITIALIZATION !"
+	fi
 done
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -171,15 +173,15 @@ done
 
 ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
 ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_NAME") !"
+HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_PATH") !"
 
 if CheckIsInitializing; then
     # shellcheck disable=SC2034
-    __BU_MAIN_INIT_IS_INITALIZING="false"
+    __BU_MAIN_MODULE_IS_INITALIZING="false"
 fi

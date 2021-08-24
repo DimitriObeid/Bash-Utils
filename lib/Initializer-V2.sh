@@ -28,15 +28,15 @@ fi
 
 # For more convenience, this configuration file has to be sourced via the ".bashrc" file in the /home directory.
 
-# Sourcing the "~/.bash_profile" file to call the "$__BASH_UTILS_MAIN_ROOT" variable.
+# Sourcing the "~/.bash_profile" file to call the "$__BU_MAIN_ROOT" variable.
 # Do not source the "~/.bashrc" file, as it is executed for interactive non-login shells, unlike "~/.bash_profile".
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_MAIN_CONF/init.conf" ||
+source "$__BU_MAIN_CONF/init.conf" ||
 {
-    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_MAIN_CONF/init.conf' FILE : '$__BASH_UTILS_MAIN_CONF/init'" >&2
+    echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BU_MAIN_CONF/init.conf' FILE : '$__BU_MAIN_CONF/init'" >&2
     
-    if [ -z "${__BASH_UTILS_MAIN_ROOT:+x}" ]; then
+    if [ -z "${__BU_MAIN_ROOT:+x}" ]; then
         echo >&2; echo 
     fi
     
@@ -44,10 +44,10 @@ source "$__BASH_UTILS_MAIN_CONF/init.conf" ||
 }
 
 # Grouping colors by categories, to modify easily each color code outside a FIFO input.
-# As the "$__BASH_UTILS_MAIN_ROOT" variable is defined, it's possible to source the initializer's configuration file.
+# As the "$__BU_MAIN_ROOT" variable is defined, it's possible to source the initializer's configuration file.
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_MAIN_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BASH_UTILS_MAIN_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
+source "$__BU_MAIN_CONF/colors.conf" || { echo >&2; echo -e "BASH-UTILS ERROR : UNABLE TO SOURCE THE '$__BU_MAIN_CONF/colors.conf' FILE : " >&2; echo >&2; exit 1; }
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -88,7 +88,7 @@ function DbgMsg
 # This function is called at multiple times in the next function, to avoid changing redirection operators more than once.
 function __EchoInit
 {
-    echo -e "$1" 2>&1 | tee -a "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH"
+    echo -e "$1" 2>&1 | tee -a "$__BU_MAIN_MODULE_LIST_FILE_PATH"
 }
 
 # Controlling all the redirections in a single place for a better debugging process.
@@ -99,7 +99,7 @@ function EchoInit
     local p_colorCode=$2
 
     #***** Code *****
-    if [ -z "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH" ] || [ ! -f "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH" ]; then
+    if [ -z "$__BU_MAIN_MODULE_LIST_FILE_PATH" ] || [ ! -f "$__BU_MAIN_MODULE_LIST_FILE_PATH" ]; then
         InitErrMsg "The initializer log file's path is invalid." "$(( LINENO-1 ))" "1"
     else
         if [ -z "$p_colorCode" ]; then
@@ -196,7 +196,7 @@ function CheckProjectRelatedFile
 function CheckIsLibraryInitializing
 {
     #***** Code *****
-    if [ "$__BASH_UTILS_MAIN_IS_INITIALIZING" = "true" ]; then
+    if [ "$__BU_MAIN_MODULE_IS_INITALIZING" = "true" ]; then
         return 0
     else
         return 1
@@ -231,8 +231,8 @@ function SourceDependency
 CheckBashMinimalVersion
 
 # Clearing the sourced dependencies list file if already exists, or create the project's temporary directory if not exists.
-if [ -f "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH" ]; then
-    true > "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH" || {
+if [ -f "$__BU_MAIN_MODULE_LIST_FILE_PATH" ]; then
+    true > "$__BU_MAIN_MODULE_LIST_FILE_PATH" || {
         echo >&2;
         echo -e "${__BU_MAIN_COLOR_ERROR}In ${__BU_MAIN_COLOR_HIGHLIGHT}$(basename "${BASH_SOURCE[0]}")${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$(( LINENO-2 ))${__BU_MAIN_COLOR_ERROR} --> Error : unable to clear the initializer's log file.${__BU_MAIN_COLOR_RESET}"
         echo >&2; exit 1
@@ -245,7 +245,7 @@ else
         }
     fi
 
-    touch "$__BASH_UTILS_MAIN_INIT__LIST_FILE_PATH"
+    touch "$__BU_MAIN_MODULE_LIST_FILE_PATH"
 fi
 
 # -----------------------------------------------
@@ -254,21 +254,21 @@ fi
 
 # Checking for the required Bash-utils folders.
 EchoInit "CHECKING FOR BASH-UTILS REQUIRED DIRECTORIES"
-CheckBURequirements "$__BASH_UTILS_MAIN_BIN"             "$LINENO"
-CheckBURequirements "$__BASH_UTILS_MAIN_CONF"            "$LINENO"
-CheckBURequirements "$__BASH_UTILS_MAIN_TMP"             "$LINENO"
-CheckBURequirements "$__BASH_UTILS_MAIN_FUNCTS"          "$LINENO"
-CheckBURequirements "$__BASH_UTILS_MAIN_FUNCTS_BASIS"    "$LINENO"
-CheckBURequirements "$__BASH_UTILS_MAIN_FUNCTS_MAIN"     "$LINENO"
+CheckBURequirements "$__BU_MAIN_BIN"             "$LINENO"
+CheckBURequirements "$__BU_MAIN_CONF"            "$LINENO"
+CheckBURequirements "$__BU_MAIN_TMP"             "$LINENO"
+CheckBURequirements "$__BU_MAIN_FUNCTS"          "$LINENO"
+CheckBURequirements "$__BU_MAIN_FUNCTS_BASIS"    "$LINENO"
+CheckBURequirements "$__BU_MAIN_FUNCTS_MAIN"     "$LINENO"
 EchoInit
 
 # Checking for the development tools required folders.
-if [ -n "$__BASH_UTILS_MAIN_DEVTOOLS_PROJECT" ] && [ "$__BASH_UTILS_MAIN_DEVTOOLS_PROJECT" = "true" ]; then
+if [ -n "$__BU_MAIN_DEVTOOLS_PROJECT" ] && [ "$__BU_MAIN_DEVTOOLS_PROJECT" = "true" ]; then
     EchoInit "CHECKING FOR DEVTOOLS REQUIRED DIRECTORIES"
-    CheckBURequirements "$__BASH_UTILS_MAIN_DEVTOOLS_BIN"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_MAIN_DEVTOOLS_IMG"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_MAIN_DEVTOOLS_SRC"    "$LINENO"
-    CheckBURequirements "$__BASH_UTILS_MAIN_DEVTOOLS_TRANSL" "$LINENO"
+    CheckBURequirements "$__BU_MAIN_DEVTOOLS_BIN"    "$LINENO"
+    CheckBURequirements "$__BU_MAIN_DEVTOOLS_IMG"    "$LINENO"
+    CheckBURequirements "$__BU_MAIN_DEVTOOLS_SRC"    "$LINENO"
+    CheckBURequirements "$__BU_MAIN_DEVTOOLS_TRANSL" "$LINENO"
 fi
 
 # -----------------------------------------------
@@ -286,15 +286,15 @@ fi
 EchoInit "CHECKING DEPENDENCIES"
 
 # Sourcing project's status variables file.
-EchoInit "Sourcing the variables status file :"; SourceDependency "$__BASH_UTILS_MAIN_CONF_PROJECT_STATUS"; EchoInit
+EchoInit "Sourcing the variables status file :"; SourceDependency "$__BU_MAIN_CONF_PROJECT_STATUS"; EchoInit
 
 # Sourcing the fuctions files.
-EchoInit "Sourcing the functions files :"; for f in "${__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
+EchoInit "Sourcing the functions files :"; for f in "${__BU_MAIN_FUNCTIONS_FILES_PATH[@]}"; do SourceDependency "$f"; done; EchoInit
 
 # Sourcing the remaining configuration files.
 EchoInit "Sourcing the remaining configuration files :"
-SourceDependency "$__BASH_UTILS_MAIN_CONF/text.conf"
-SourceDependency "$__BASH_UTILS_MAIN_CONF/time.conf"
+SourceDependency "$__BU_MAIN_CONF/text.conf"
+SourceDependency "$__BU_MAIN_CONF/time.conf"
 EchoInit
 
 # -----------------------------------------------
@@ -367,6 +367,6 @@ fi
 #### ENDING THE INITIALIZATION PROCESS
 
 # Ending the initialization process by setting its status variable's value to "false".
-__BASH_UTILS_MAIN_IS_INITIALIZING="false"
+__BU_MAIN_MODULE_IS_INITALIZING="false"
 
 HeaderGreen "END OF LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_NAME") !"

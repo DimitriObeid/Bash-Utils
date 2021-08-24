@@ -2,18 +2,18 @@
 
 __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"
 
-__BASH_UTILS_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh"
+__BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh"
 
-# function Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BASH_UTILS_MAIN_FULL_FILE_PATH"; done; }
-function CatBU { cat "$1" | tee -a "$__BASH_UTILS_MAIN_FULL_FILE_PATH"; }
-function EchoBU { echo -e "# $1" | tee -a "$__BASH_UTILS_MAIN_FULL_FILE_PATH"; }
+# function Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
+function CatBU { cat "$1" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; }
+function EchoBU { echo -e "# $1" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; }
 
-if [ ! -f "$__BASH_UTILS_MAIN_FULL_FILE_PATH" ]; then
-	touch "$__BASH_UTILS_MAIN_FULL_FILE_PATH"
+if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
+	touch "$__BU_MAIN_FULL_FILE_PATH"
 fi
 
-if [ -s "$__BASH_UTILS_MAIN_FULL_FILE_PATH" ]; then
-	true > "$__BASH_UTILS_MAIN_FULL_FILE_PATH"
+if [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then
+	true > "$__BU_MAIN_FULL_FILE_PATH"
 fi
 
 

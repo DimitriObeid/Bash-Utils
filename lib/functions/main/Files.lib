@@ -8,7 +8,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "__BASH_UTILS_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -203,28 +203,25 @@ function CreateProjectLogFile()
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
     #***** Code *****
-    if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then ExitError '1'; fi
+    if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then EchoError "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; ExitError '1'; fi
 
     EchoSuccess "Successfully created the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
 
     ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
-        ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    fi
+	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+    if [ "$__BU_MAIN_STAT_ECHO" = 'true' ]; then	ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
     # Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-    EchoNewstep "Sourced configuration files :"; for val in "${__BASH_UTILS_MAIN_INIT__CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-    EchoNewstep "Sourced library files : "; for val in "${__BASH_UTILS_MAIN_INIT__LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 
-    EchoNewstep "Initialization log output :"; Newline
+	if (( "${#__BU_MAIN_MODULE_STR_ARRAY[@]}" >= 1 )); then
+		EchoNewstep "Initialization log output :"; Newline
 
-    if (( ${#__BASH_UTILS_MAIN_INIT__STR_ARRAY[@]} < 1 )); then
-        EchoMsg "No log output."
-    else
-        for val in "${__BASH_UTILS_MAIN_INIT__STR_ARRAY[@]}"; do
+        for val in "${__BU_MAIN_MODULE_STR_ARRAY[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
         done
     fi
@@ -244,7 +241,8 @@ function CreateProjectLogFile()
     EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
     Newline
 
-    EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")"
+	# shellcheck disable=SC2016
+    EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")" || EchoWarning "$(DechoHighlight '$v_terminfo_v') : bad command call."
     Newline
 
     EchoSuccess "Successfully got the user's system's informations."

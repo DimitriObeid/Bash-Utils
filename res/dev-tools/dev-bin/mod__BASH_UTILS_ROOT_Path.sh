@@ -8,7 +8,7 @@
 source "$HOME/.bash_profile" || { echo >&2; echo -e "Unable to source the '$HOME/.bash_profile' file" >&2; echo >&2; exit 1; }
 
 # shellcheck disable=SC1090
-source "$__BASH_UTILS_MOD_MAIN/Initializer.sh" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
+source "$__BU_MOD_MAIN/Initializer.sh" || { echo >&2; echo -e "Unable to source the '$__BU_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 

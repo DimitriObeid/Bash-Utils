@@ -5,7 +5,7 @@
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 # shellcheck disable=SC1090
-source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to source the '$__BASH_UTILS_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
+source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to source the '$__BU_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
 
 
 
@@ -22,7 +22,7 @@ source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to sourc
 ## VARIABLES DEFINITION
 
 # Script's resources directory.
-__RES_DIR="$__BU_MAIN_MODINIT_DOCS_DIR_PATH/.$__BU_MAIN_PROJECT_NAME"
+__RES_DIR="$__BU_MAIN_MODULE_DOCS_DIR_PATH/.$__BU_MAIN_PROJECT_NAME"
 
 # Supported languages array.
 __supported_languages=('en' 'fr')
@@ -80,19 +80,19 @@ else
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_Bash"
+			Makedir "$__BU_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BU_MAIN_DOCS/$__path_Bash"
 			;;
 		2)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_config" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_config"
+			Makedir "$__BU_MAIN_DOCS" "$__path_config" && __folder_path="$__BU_MAIN_DOCS/$__path_config"
 			;;
 		3)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_basis_functions"
+			Makedir "$__BU_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_basis_functions"
 			;;
 		4)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_main_functions"
+			Makedir "$__BU_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__BASH_UTILS_MAIN_DOCS" "$__path_variables" && __folder_path="$__BASH_UTILS_MAIN_DOCS/$__path_variables"
+			Makedir "$__BU_MAIN_DOCS" "$__path_variables" && __folder_path="$__BU_MAIN_DOCS/$__path_variables"
 			;;
 		*)
 			# shellcheck disable=SC2016

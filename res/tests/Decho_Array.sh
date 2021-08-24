@@ -5,8 +5,8 @@ source "$HOME/.bash_profile"
 __ROOT_DIR="$HOME/Projets/Bash-utils"
 
 source "$__ROOT_DIR/lib/functions/main/Checkings.lib" || { echo "Fail Checkings.lib"; exit 1; }
-source "$__BASH_UTILS_MAIN_CONF_FILE_TEXT" # || { echo "Fail text.conf"; exit 1; }
-source "$__BASH_UTILS_MAIN_CONF_FILE_COLORS" || { echo "Fail colors.conf"; exit 1; }
+source "$__BU_MAIN_CONF_FILE_TEXT" # || { echo "Fail text.conf"; exit 1; }
+source "$__BU_MAIN_CONF_FILE_COLORS" || { echo "Fail colors.conf"; exit 1; }
 
 function D_Array()
 {
