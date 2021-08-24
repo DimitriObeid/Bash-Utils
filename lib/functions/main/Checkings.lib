@@ -124,7 +124,7 @@ function CheckRootEUID()
 # Checking if the library is into its initialization process.
 function CheckIsInitializing()
 {
-    if [ "$__BU_MAIN_MODULE_IS_INITALIZING" = "true" ]; then
+    if [ "$__BU_MAIN_STAT_INITIALIZING" = "true" ]; then
         return 0
     else
         return 1

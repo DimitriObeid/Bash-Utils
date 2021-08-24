@@ -218,10 +218,10 @@ function CreateProjectLogFile()
     EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
     EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
 
-	if (( "${#__BU_MAIN_MODULE_STR_ARRAY[@]}" >= 1 )); then
+	if (( "${#__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}" >= 1 )); then
 		EchoNewstep "Initialization log output :"; Newline
 
-        for val in "${__BU_MAIN_MODULE_STR_ARRAY[@]}"; do
+        for val in "${__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
         done
     fi
