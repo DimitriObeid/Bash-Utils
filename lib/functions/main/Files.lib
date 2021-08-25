@@ -168,13 +168,16 @@ function Makefile()
 	if [ ! -f "$v_path" ]; then
         EchoNewstep "Creating the $(DechoHighlight "$p_name") file in the parent folder $(DechoHighlight "$p_parent/")."
 
-		touch "$v_path"
-        # Testing if the file has been created by checking the return code of the "touch" command via the "HandleErrors" function.
-        # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a
-        # file in a folder where the user is not allowed to create a file without superuser privileges.
-        HandleErrors "$?" "THE $(KeepFormatting "$(DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(DechoHighlight "$p_parent/")") PARENT FOLDER." \
+		touch "$v_path"; CheckFilePathWasCreated "$v_path"
+
+		# Testing if the file has been created by checking the return code of the "CheckFilePathWasCreated" function via the "HandleErrors" function.
+        # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
+		# where the user is not allowed to create a file without superuser privileges.
+
+		HandleErrors "$?" "THE $(KeepFormatting "$(DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(DechoHighlight "$p_parent/")") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
-        EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
+
+		EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
         
         return 0
