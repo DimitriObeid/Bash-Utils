@@ -13,11 +13,15 @@ To do so, please execute this script as described :
 
 ### Manual install
 
-Copy the **.Bash-utils** folder and the **Bash-utils-include.sh** script file in your home directory (/home/<your_username>), and in the **/root** directory. You don't need to copy the other files.
+Copy the **.Bash-utils** folder and the **_Bash-utils-init.sh_** script file and paste them in your home directory (/home/<your_username>), in any other device's users home directories, and in the **/root** directory. You don't need to copy the other files.
 
-**PLEASE NOTICE** that the ".Bash-utils" folder is a hidden folder so as not to clutter up your personnal folder, so make it visible by your file explorer (usually with the **Ctrl+H** keyboard shortcut), or include it with the files to copy if you're using the _cp -r_ command.
+**PLEASE NOTICE** that the **.Bash-utils** folder is a hidden folder so as not to clutter up your personnal folder, so make it visible by your file explorer (usually with the **Ctrl+H** keyboard shortcut), or include it with the files to copy if you're using the _cp -r_ command.
 
-**DON'T FORGET** to check the path stored into the **_Bash-utils-root-val.path_** file, **EVEN** if the installation and the update script files automatically change it, This is the definition of the path of the library's root folder.
+If the **_Bash-utils-root-val.path_** file is already provided (in this **.Bash-utils** hidden folder), **DON'T FORGET** to check the path stored inside, **EVEN** if the installation and the update script files automatically change it. This is the definition of the path of the library's root folder.
+
+If the aforementionned file doesn't exists, just create it in the **.Bash-utils** folder (**BEFORE** copying it in a user's folder, for more convenience), and write inside the path of the Bash Utils library's root folder.
+
+Normally, this file is automatically created and filled during the automatic installation.
 
 ---
 
@@ -34,8 +38,12 @@ Pour cela, exécuter ce script d'une des manières suivantes :
 
 ### Installation manuelle
 
-Copiez tout le dossier **.Bash-utils** dans votre dossier personnel (/home/<votre_nom_d'utilisateur>), ainsi que dans le dossier **/root**. Vous n'avez pas besoin de copier les autres fichiers.
+Copiez le dossier **.Bash-utils** et le fichier **_Bash-utils-init.sh_** et collez-les dans votre dossier personnel (/home/<votre_nom_d'utilisateur>), dans celui des autres utilisateurs de la machine, ainsi que dans le dossier **/root**. Vous n'avez pas besoin de copier les autres fichiers.
 
 **REMARQUE** : Le dossier ".Bash-utils" est un dossier caché pour ne pas trop encombrer votre dossier personnel. Rendez-le visible par votre explorateur de fichiers (en général avec le raccourci clavier **Ctrl+H**), ou incluez-le avec les fichiers à copier si vous utilisez la commande _cp -r_.
 
-**N'OUBLIEZ PAS** de vérifier le contenu du fichier **_Bash-utils-root-val.path_**, **MÊME** si les scripts d'installation et/ou de mise à jour le modifie automatiquement. C'est ici que le chemin du dossier racine de la libraire est défini.
+Si le fichier **_Bash-utils-root-val.path_** est déjà fourni (dans le dossier caché **.Bash-utils**), **N'OUBLIEZ PAS** de vérifier le chemin enregistré à l'intérieur , **MÊME** si les scripts d'installation et/ou de mise à jour le modifie automatiquement. C'est ici que le chemin du dossier racine de la libraire est défini.
+
+Si le fichier mentionné ci-dessus n'existe pas, crééz-le dans le dossier **.Bash-utils** (**AVANT** de le copier dans un dossier d'utilisateur, pour plus de confort), puis écrivez-y le chemin du dossier racine de la librairie Bash Utils.
+
+Normalement, ce fichier est créé et rempli automatiquement lors de l'installation automatique.
