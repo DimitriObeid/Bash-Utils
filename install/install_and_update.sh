@@ -42,6 +42,16 @@ __F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh"
 # Path of the modules inititialization file in the installation directory.
 __F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_FILE_NAME"
 
+# Name of the users home directories paths list file.
+if [ "$OSTYPE" = 'linux-android' ]; then
+    __F_USERS_LIST_FILE_NAME="termux-users.list"
+else
+    __F_USERS_LIST_FILE_NAME="users.list"
+fi
+
+# Path of the users home directories paths list file.
+__F_USERS_LIST_FILE_PATH="$__D_INSTALL_DIR_PATH/$__F_USERS_LIST_FILE_NAME"
+
 # ------------------------------------------------
 
 ## FUNCTIONS
@@ -141,7 +151,7 @@ function Log()
 	fi
 
     printf '\n' >> "$__F_INSTALL_LOG_FILE_PATH"
-	
+
 	printf "USER'S OPERATING SYSTEM DATA\n\n" >> "$__F_INSTALL_LOG_FILE_PATH"
 	printf "Operating system family : %s\n" "$OSTYPE" >> "$__F_INSTALL_LOG_FILE_PATH"
 
@@ -166,8 +176,8 @@ function PrintLine()
     done; printf "\n"
 }
 
-# Printing back the "/root" path in the "users.list" file.
-function PrintRoot() { if [ "$__UNROOT" = 'true' ]; then printf '/root' >> 'users.list'; fi; }
+# Printing back the "/root" path in the users list.
+function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; }
 
 # ------------------------------------------------
 
@@ -194,7 +204,7 @@ if [ "$EUID" -ne 0 ]; then
 
     if [ "${__ans,,}" != 'yes' ]; then
         printf "\n\nAborting installation\n\n" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-        
+
         printf "Please check the %s log file\n\n" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
 
         exit 1
@@ -206,32 +216,32 @@ fi
 
 if [ "$__UNROOT" = 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
-    printf "Copying and sorting the content of the 'users.list' file to the 'users.list.tmp\n' file" >> "$__F_INSTALL_LOG_FILE_PATH"
+    printf "Copying and sorting the content of the '%s' file to the '%s.tmp\n' file" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
 
     # shellcheck disable=SC2002
-    cat "users.list" | sort > "users.list.tmp"  || { printf "UNABLE TO CREATE THE 'users.list' FILE\n\n"; $ exit 1; }
+    cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { printf "UNABLE TO CREATE THE '%s.tmp' FILE\n\n" "$__F_USERS_LIST_FILE_PATH"; $ exit 1; }
     printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
-    printf "Copying back the content of the 'users.list.tmp' file to the 'users.list' file" >> "$__F_INSTALL_LOG_FILE_PATH"
-    cat "users.list.tmp" > "users.list"         || { printf "UNABLE TO COPY THE CONTENT OF THE 'users.list.tmp' TO THE 'users.list' FILE\n\n"; exit 1; }
+    printf "Copying back the content of the '$__F_USERS_LIST_FILE_PATH.tmp' file to the '%s' file" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
+    cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { printf "UNABLE TO COPY THE CONTENT OF THE '%s.tmp' TO THE '%s' FILE\n\n" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
     printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
-    printf "Removing the 'users.list.tmp' file" >> "$__F_INSTALL_LOG_FILE_PATH"
-    rm "users.list.tmp"                         || { printf "UNABLE TO REMOVE THE 'users.list.tmp' FILE\n\n"; exit 1; }
+    printf "Removing the '$__F_USERS_LIST_FILE_PATH.tmp' file" >> "$__F_INSTALL_LOG_FILE_PATH"
+    rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { printf "UNABLE TO REMOVE THE '%s.tmp' FILE\n\n" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
     printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
-    # Finding the "/root" path at the end of the "users.list" file.
-    LAST=$(tail -n 1 users.list)
+    # Finding the "/root" path at the end of the users list file.
+    LAST=$(tail -n 1 "$__F_USERS_LIST_FILE_PATH")
 
     # Truncating this aforementionned file.
     let TRUNCATE_SIZE="${#LAST} + 1"
 
     # Deleting the "/root" path
-    truncate -s -"$TRUNCATE_SIZE" users.list
+    truncate -s -"$TRUNCATE_SIZE" "$__F_USERS_LIST_FILE_PATH"
 fi
 
-# Feel free to add any user's home directory path into the "users.list" file.
-mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
+# Feel free to add any user's home directory path into the users list.
+mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
 
 
 # Installation type argument.
@@ -321,7 +331,7 @@ done
 
 printf "\n\n"
 
-# Printing back the "/root" path into the "users.list" file if the installation was done without the super-user's privileges.
+# Printing back the "/root" path into the users list file if the installation was done without the super-user's privileges.
 PrintRoot
 
 if [ "$__ARG" = 'install' ] || [ "$__ARG" = 'i' ]; then
