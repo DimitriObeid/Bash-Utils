@@ -232,6 +232,10 @@ function CreateProjectLogFile()
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
     HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
+	# Getting operating system name.
+	EchoNewstep "Operating system name : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"
+	Newline
+
     # Getting operating system family.
     EchoNewstep "Operating system family : $(DechoHighlight "$OSTYPE")"
     Newline
@@ -241,13 +245,16 @@ function CreateProjectLogFile()
     if [ -f "/etc/os-release" ]; then EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
     Newline
 
+	# Getting operating system extra informations (Windows Subsystem for Linux, etc...).
 	EchoNewstep "Operating system extra informations :"
-	if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then EchoMsg "Distro running on Windows Subsystem for Linux : "; fi
+	if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then EchoMsg "Distro running on Windows Subsystem for Linux : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"; fi
 	Newline
 
+	# Getting Bash language's version.
     EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
     Newline
 
+	# Getting terminal emulator's name and version.
 	# shellcheck disable=SC2016
     EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")" || EchoWarning "$(DechoHighlight '$v_terminfo_v') : bad command call."
     Newline
