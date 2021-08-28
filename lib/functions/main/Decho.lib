@@ -70,7 +70,7 @@ function Decho()
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
-        return 0
+        echo -e "$p_string$p_newColor$__BU_MAIN_COLOR_RESET"; return 0
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do

@@ -179,9 +179,9 @@ function Makefile()
 
 		EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
         Newline
-        
+
         return 0
-	
+
 	# Else, if the file to be created already exists AND it is NOT empty.
 	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
         if OverwriteFile "$p_path"; then
