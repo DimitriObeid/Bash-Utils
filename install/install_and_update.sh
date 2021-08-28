@@ -6,18 +6,6 @@
 ##      : Ask to the user if he wants to keep the default paths.
 ##      : Change each user's newly installed files and folders rights, so that the users can interact easily with these.
 
-if [ "$EUID" -ne 0 ]; then
-    printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n"; exit 1
-fi
-
-# Feel free to add any user's home directory path into the "users.list" file.
-mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")"; exit 1; }
-
-
-# Installation type argument.
-__ARG=$1
-
-
 # ------------------------------------------------
 
 ## DIRECTORIES VARIABLES DECLARATIONS
@@ -53,8 +41,6 @@ __F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh"
 
 # Path of the modules inititialization file in the installation directory.
 __F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_FILE_NAME"
-
-
 
 # ------------------------------------------------
 
@@ -144,6 +130,21 @@ function CopyModulesManagerDirectory()
 	fi
 }
 
+# Log file processing.
+function Log()
+{
+    if [ -f "$__F_INSTALL_LOG_FILE_PATH" ] && [ -s "$__F_INSTALL_LOG_FILE_PATH" ]; then
+        true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "UNABLE TO ERASE THE EXISTING CONTENT OF THE %s LOG FILE\n\nPlease erase the content of this file by yourself\n\n" "$__F_INSTALL_LOG_FILE_PATH" ; exit 1; }
+	fi
+
+	PrintLine
+	
+	printf "USER'S OPERATING SYSTEM DATA\n\n" >> "$__F_INSTALL_LOG_FILE_PATH"
+	printf "Operating system family : %s\n" "$OSTYPE" >> "$__F_INSTALL_LOG_FILE_PATH"
+
+	if [ -f "/etc/os-release" ]; then printf "Operating system general informations : %s" "$(cat "/etc/os-release")" >> "$__F_INSTALL_LOG_FILE_PATH"; fi
+}
+
 # New line function for the functions called into the following "for" loop.
 function Newline() { printf "\n"; }
 
@@ -162,12 +163,29 @@ function PrintLine()
 
 # ------------------------------------------------
 
-## CODE
+# INITIALIZATION
 
-if [ -f "$__F_INSTALL_LOG_FILE_PATH" ] && [ -s "$__F_INSTALL_LOG_FILE_PATH" ]; then
-    true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "UNABLE TO ERASE THE EXISTING CONTENT OF THE %s LOG FILE\n\nPlease erase the content of this file by yourself\n\n" "$__F_INSTALL_LOG_FILE_PATH" ; exit 1; }
+Log
+
+# Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
+if ! su; then
+	printf "No " 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+else
+	if [ "$EUID" -ne 0 ]; then
+    	printf "THIS INSTALL / UPDATE SCRIPT MUST BE EXECUTED WITH SUPER-USER PRIVILEGES !\n\n" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; exit 1
+	fi
 fi
 
+# Feel free to add any user's home directory path into the "users.list" file.
+mapfile -t __TARGET_HOME_DIRECTORIES < "users.list" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
+
+
+# Installation type argument.
+__ARG=$1
+
+# ------------------------------------------------
+
+## CODE
 printf "Copying the Bash Utils root directory path into the %s file\n" "$__F_LIBRARY_PATH_FILE_NAME" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
 printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
 printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")"; cd ..; pwd -P)" >> "$__F_INSTALL_LOG_FILE_PATH"
