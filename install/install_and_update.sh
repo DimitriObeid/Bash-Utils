@@ -169,7 +169,11 @@ function NewlineF() { Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; }
 # Printing a line according to the terminal's columns number.
 function PrintLine()
 {
-    __cols="$(tput cols || stty size | cut -d " " -f2)"
+    if command -v tput &> /dev/null; then
+        __cols="$(tput cols || stty size | cut -d " " -f2)"
+    else
+        __cols="$(stty size | cut -d " " -f2)"
+    fi
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
@@ -226,7 +230,7 @@ if [ "$__UNROOT" = 'true' ]; then
     cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { printf "UNABLE TO COPY THE CONTENT OF THE '%s.tmp' TO THE '%s' FILE\n\n" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
     printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
-    printf "Removing the '$__F_USERS_LIST_FILE_PATH.tmp' file" >> "$__F_INSTALL_LOG_FILE_PATH"
+    printf "Removing the '%s.tmp' file" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
     rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { printf "UNABLE TO REMOVE THE '%s.tmp' FILE\n\n" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
     printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
