@@ -169,7 +169,7 @@ function NewlineF() { Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; }
 # Printing a line according to the terminal's columns number.
 function PrintLine()
 {
-    __cols="$(tput cols)"
+    __cols="$(tput cols || stty size | cut -d " " -f2)"
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
