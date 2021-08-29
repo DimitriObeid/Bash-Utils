@@ -56,6 +56,27 @@ __F_USERS_LIST_FILE_PATH="$__D_INSTALL_DIR_PATH/$__F_USERS_LIST_FILE_NAME"
 
 ## FUNCTIONS
 
+# Asking to user before engaging an action.
+function AskUser()
+{
+    #***** Parameters *****
+    p_main_question=$1
+    p_more_informations=$2
+
+    #***** Code *****
+    printf "%s" "$p_main_question"
+
+    if [ -n "$p_more_informations" ]; then
+        printf "%s" "$p_more_informations"
+    fi
+
+    printf "\n\n"
+
+    read -rp "Enter your answer : " __ANS_ASK
+
+    return 0
+}
+
 # Behavior if the "cd" command failed.
 function CDfail() { printf "UNABLE TO CHANGE DIRECTORY\n\n"; PrintRoot; exit 1; }
 
@@ -180,7 +201,7 @@ function PrintLine()
     done; printf "\n"
 }
 
-# Printing back the "/root" path in the users list.
+# Printing back the "/root" path in the normal users list file.
 function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; }
 
 # ------------------------------------------------
@@ -217,7 +238,7 @@ if [ "$EUID" -ne 0 ]; then
     __UNROOT="true"
 fi
 
-
+# If the installation is made without super-user's privileges.
 if [ "$__UNROOT" = 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
     printf "Copying and sorting the content of the '%s' file to the '%s.tmp\n' file" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
