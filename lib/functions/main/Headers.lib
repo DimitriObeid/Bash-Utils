@@ -25,9 +25,9 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### FUNCTIONS WITHOUT REDIRECTIONS TOWARDS A LOG FILE
+#### FUNCTIONS DEFINITION
 
-## DÉFINITION DES FONCTIONS DE CRÉATION DE HEADERS
+## HEADERS BASIS CREATION FUNCTIONS
 
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function DrawLine()
@@ -91,8 +91,8 @@ function DrawLine()
 function HeaderBase()
 {
 	#***** Parameters *****
-	local p_lineColor=$1      # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	local p_lineChar=$2       # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineColor=$1      # Premier paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "DrawLine".
+	local p_lineChar=$2       # Deuxième paramètre servant à définir le caractère souhaité lors de l'appel de la fonction "DrawLine".
 	local p_stringColor=$3	  # Définition de la couleur de la chaîne de caractères du header.
 	local p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
 
@@ -122,206 +122,206 @@ function HeaderBase()
     fi
 }
 
-# Header to display without color.
-function Header         { HeaderBase "$__BU_MAIN_COLOR_RESET"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RESET"      "$1"; return 0; } 
-
-# Header to display in case of an error.
-function HeaderError    { HeaderBase "$__BU_MAIN_COLOR_ERROR"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ERROR"      "$1"; return 0; }
-
-# Header to display when switching to a new package category during package installation.
-function HeaderInstall  { HeaderBase "$__BU_MAIN_COLOR_YELLOW"   "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-
-# Header to display when changing step.
-function HeaderNewstep  { HeaderBase "$__BU_MAIN_COLOR_NEWSTEP"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_NEWSTEP"    "$1"; return 0; }
-
-# Header to display when changing step.
-function HeaderStep     { HeaderBase "$__BU_MAIN_COLOR_CYAN"     "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1"; return 0; }
-
-# Header to display in case of a successfully done step.
-function HeaderSuccess  { HeaderBase "$__BU_MAIN_COLOR_SUCCESS"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_SUCCESS"    "$1"; return 0; }
-
-# Header to display in case of a minor error.
-function HeaderWarning  { HeaderBase "$__BU_MAIN_COLOR_WARNING"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR"  "$__BU_MAIN_COLOR_WARNING"   "$1"; return 0; }
-
 # -----------------------------------------------
 
 ## UNICOLOR HEADERS
 
-# Copy-paste this function to avoid losing time while creating unicolor headers :
-# function Header<col> { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_<COLOR>" "$1"; return 0; }
+# Header to display without color.
+function Header         { HeaderBase "$__BU_MAIN_COLOR_RESET"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RESET"      "$1" || return 1; return 0; } 
 
-function HeaderBlack        { HeaderBase "$__BU_MAIN_COLOR_BLACK"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      "$1"; return 0; }
-function HeaderBlue         { HeaderBase "$__BU_MAIN_COLOR_BLUE"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       "$1"; return 0; }
-function HeaderCyan         { HeaderBase "$__BU_MAIN_COLOR_CYAN"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1"; return 0; }
-function HeaderGray         { HeaderBase "$__BU_MAIN_COLOR_GRAY"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       "$1"; return 0; }
-function HeaderGreen        { HeaderBase "$__BU_MAIN_COLOR_GREEN"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-function HeaderOrange       { HeaderBase "$__BU_MAIN_COLOR_ORANGE"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     "$1"; return 0; }
-function HeaderPink         { HeaderBase "$__BU_MAIN_COLOR_PINK"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       "$1"; return 0; }
-function HeaderPurple       { HeaderBase "$__BU_MAIN_COLOR_PURPLE"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     "$1"; return 0; }
-function HeaderRed          { HeaderBase "$__BU_MAIN_COLOR_RED"          "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        "$1"; return 0; }
-function HeaderTurquoise    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  "$1"; return 0; }
-function HeaderWhite        { HeaderBase "$__BU_MAIN_COLOR_WHITE"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      "$1"; return 0; }
-function HeaderYellow       { HeaderBase "$__BU_MAIN_COLOR_YELLOW"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     "$1"; return 0; }
+# Header to display in case of an error.
+function HeaderError    { HeaderBase "$__BU_MAIN_COLOR_ERROR"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ERROR"      "$1" || return 1; return 0; }
+
+# Header to display when switching to a new package category during package installation.
+function HeaderInstall  { HeaderBase "$__BU_MAIN_COLOR_YELLOW"   "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1" || return 1; return 0; }
+
+# Header to display when changing step.
+function HeaderNewstep  { HeaderBase "$__BU_MAIN_COLOR_NEWSTEP"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_NEWSTEP"    "$1" || return 1; return 0; }
+
+# Header to display when changing step.
+function HeaderStep     { HeaderBase "$__BU_MAIN_COLOR_CYAN"     "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1" || return 1; return 0; }
+
+# Header to display in case of a successfully done step.
+function HeaderSuccess  { HeaderBase "$__BU_MAIN_COLOR_SUCCESS"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_SUCCESS"    "$1" || return 1; return 0; }
+
+# Header to display in case of a minor error.
+function HeaderWarning  { HeaderBase "$__BU_MAIN_COLOR_WARNING"  "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR"  "$__BU_MAIN_COLOR_WARNING"   "$1" || return 1; return 0; }
+
+# Copy-paste this function to avoid losing time while creating unicolor headers :
+# function Header<col> { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_<COLOR>" "$1" || return 1; return 0; }
+
+function HeaderBlack        { HeaderBase "$__BU_MAIN_COLOR_BLACK"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
+function HeaderBlue         { HeaderBase "$__BU_MAIN_COLOR_BLUE"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       	"$1" || return 1; return 0; }
+function HeaderCyan         { HeaderBase "$__BU_MAIN_COLOR_CYAN"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       	"$1" || return 1; return 0; }
+function HeaderGray         { HeaderBase "$__BU_MAIN_COLOR_GRAY"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       	"$1" || return 1; return 0; }
+function HeaderGreen        { HeaderBase "$__BU_MAIN_COLOR_GREEN"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      	"$1" || return 1; return 0; }
+function HeaderOrange       { HeaderBase "$__BU_MAIN_COLOR_ORANGE"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function HeaderPink         { HeaderBase "$__BU_MAIN_COLOR_PINK"         "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
+function HeaderPurple       { HeaderBase "$__BU_MAIN_COLOR_PURPLE"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function HeaderRed          { HeaderBase "$__BU_MAIN_COLOR_RED"          "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function HeaderTurquoise    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE"    "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderWhite        { HeaderBase "$__BU_MAIN_COLOR_WHITE"        "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
+function HeaderYellow       { HeaderBase "$__BU_MAIN_COLOR_YELLOW"       "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
 # -----------------------------------------------
 
 ## BICOLOR HEADERS
 
 # Copy-paste this function to avoid losing time while creating multicolor headers :
-# function Header<col1><col2>   { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_<COLOR>" "$1"; return 0; }
+# function Header<col1><col2>   { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_<COLOR>" "$1" || return 1; return 0; }
 
 # Black line, differently colored text.
-function HeaderBlue             { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      "$1"; return 0; }
-function HeaderBlackCyan        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      "$1"; return 0; }
-function HeaderBlackGray        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      "$1"; return 0; }
-function HeaderBlackGreen       { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     "$1"; return 0; }
-function HeaderBlackOrange      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    "$1"; return 0; }
-function HeaderBlackPink        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      "$1"; return 0; }
-function HeaderBlackPurple      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    "$1"; return 0; }
-function HeaderBlackRed         { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       "$1"; return 0; }
-function HeaderBlackTurquoise   { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" "$1"; return 0; }
-function HeaderBlackWhite       { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"     "$1"; return 0; }
-function HeaderBlackYellow      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    "$1"; return 0; }
+function HeaderBlue             { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
+function HeaderBlackCyan        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      	"$1" || return 1; return 0; }
+function HeaderBlackGray        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      	"$1" || return 1; return 0; }
+function HeaderBlackGreen       { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     	"$1" || return 1; return 0; }
+function HeaderBlackOrange      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    	"$1" || return 1; return 0; }
+function HeaderBlackPink        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
+function HeaderBlackPurple      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    	"$1" || return 1; return 0; }
+function HeaderBlackRed         { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function HeaderBlackTurquoise   { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function HeaderBlackWhite       { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"     	"$1" || return 1; return 0; }
+function HeaderBlackYellow      { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
 # Blue lines, differently colored text.
-function HeaderBlueBlack        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      "$1"; return 0; }
-function HeaderBlueCyan         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1"; return 0; }
-function HeaderBlueGray         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       "$1"; return 0; }
-function HeaderBlueGreen        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-function HeaderBlueOrange       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     "$1"; return 0; }
-function HeaderBluePink         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       "$1"; return 0; }
-function HeaderBluePurple       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     "$1"; return 0; }
-function HeaderBlueRed          { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        "$1"; return 0; }
-function HeaderBlueTurquoise    { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  "$1"; return 0; }
-function HeaderBlueWhite        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      "$1"; return 0; }
-function HeaderBlueYellow       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     "$1"; return 0; }
+function HeaderBlueBlack        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
+function HeaderBlueCyan         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       	"$1" || return 1; return 0; }
+function HeaderBlueGray         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       	"$1" || return 1; return 0; }
+function HeaderBlueGreen        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      	"$1" || return 1; return 0; }
+function HeaderBlueOrange       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function HeaderBluePink         { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
+function HeaderBluePurple       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function HeaderBlueRed          { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function HeaderBlueTurquoise    { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderBlueWhite        { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
+function HeaderBlueYellow       { HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
 # Cyan lines, differently colored text.
-function HeaderCyanBlack        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      "$1"; return 0; }
-function HeaderCyanBlue         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       "$1"; return 0; }
-function HeaderCyanGray         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       "$1"; return 0; }
-function HeaderCyanGreen        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-function HeaderCyanOrange       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     "$1"; return 0; }
-function HeaderCyanPink         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       "$1"; return 0; }
-function HeaderCyanPurple       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     "$1"; return 0; }
-function HeaderCyanRed          { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        "$1"; return 0; }
-function HeaderCyanTurquoise    { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  "$1"; return 0; }
-function HeaderCyanWhite        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      "$1"; return 0; }
-function HeaderCyanYellow       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     "$1"; return 0; }
+function HeaderCyanBlack        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
+function HeaderCyanBlue         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       	"$1" || return 1; return 0; }
+function HeaderCyanGray         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       	"$1" || return 1; return 0; }
+function HeaderCyanGreen        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      	"$1" || return 1; return 0; }
+function HeaderCyanOrange       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function HeaderCyanPink         { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
+function HeaderCyanPurple       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function HeaderCyanRed          { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function HeaderCyanTurquoise    { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderCyanWhite        { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
+function HeaderCyanYellow       { HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
 # Gray lines, differently colored text.
-function HeaderGrayBlack        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      "$1"; return 0; }
-function HeaderGrayBlue         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       "$1"; return 0; }
-function HeaderGrayCyan         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1"; return 0; }
-function HeaderGrayGreen        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-function HeaderGrayOrange       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     "$1"; return 0; }
-function HeaderGrayPink         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       "$1"; return 0; }
-function HeaderGrayPurple       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     "$1"; return 0; }
-function HeaderGrayRed          { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        "$1"; return 0; }
-function HeaderGrayTurquoise    { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  "$1"; return 0; }
-function HeaderGrayWhite        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      "$1"; return 0; }
-function HeaderGrayYellow       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     "$1"; return 0; }
+function HeaderGrayBlack        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
+function HeaderGrayBlue         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       	"$1" || return 1; return 0; }
+function HeaderGrayCyan         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       	"$1" || return 1; return 0; }
+function HeaderGrayGreen        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      	"$1" || return 1; return 0; }
+function HeaderGrayOrange       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function HeaderGrayPink         { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
+function HeaderGrayPurple       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function HeaderGrayRed          { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function HeaderGrayTurquoise    { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderGrayWhite        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
+function HeaderGrayYellow       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
 # Green lines, differently colored text.
-function HeaderGreenBlack       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     "$1"; return 0; }
-function HeaderGreenBlue        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      "$1"; return 0; }
-function HeaderGreenCyan        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN" 	    "$1"; return 0; }
-function HeaderGreenGray        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY" 	    "$1"; return 0; }
-function HeaderGreenOrange      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"	"$1"; return 0; }
-function HeaderGreenPink        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      "$1"; return 0; }
-function HeaderGreenPurple      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"	"$1"; return 0; }
-function HeaderGreenRed         { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       "$1"; return 0; }
-function HeaderGreenTurquoise   { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" "$1"; return 0; }
-function HeaderGreenWhite       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"     "$1"; return 0; }
-function HeaderGreenYellow      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW" 	"$1"; return 0; }
+function HeaderGreenBlack       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     	"$1" || return 1; return 0; }
+function HeaderGreenBlue        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
+function HeaderGreenCyan        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN" 	    "$1" || return 1; return 0; }
+function HeaderGreenGray        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY" 	    "$1" || return 1; return 0; }
+function HeaderGreenOrange      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"		"$1" || return 1; return 0; }
+function HeaderGreenPink        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
+function HeaderGreenPurple      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"		"$1" || return 1; return 0; }
+function HeaderGreenRed         { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function HeaderGreenTurquoise   { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function HeaderGreenWhite       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"     	"$1" || return 1; return 0; }
+function HeaderGreenYellow      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW" 	"$1" || return 1; return 0; }
 
 # Orange lines, differently colored text.
-function HeaderOrangeBlack      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        "$1"; return 0; }
-function HeaderOrangeBlue       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         "$1"; return 0; }
-function HeaderOrangeCyan       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         "$1"; return 0; }
-function HeaderOrangeGray       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         "$1"; return 0; }
-function HeaderOrangeGreen      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        "$1"; return 0; }
-function HeaderOrangePink       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         "$1"; return 0; }
-function HeaderOrangePurple     { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"       "$1"; return 0; }
-function HeaderOrangeRed        { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          "$1"; return 0; }
-function HeaderOrangeTurquoise  { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"    "$1"; return 0; }
-function HeaderOrangeWhite      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        "$1"; return 0; }
-function HeaderOrangeYellow     { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"       "$1"; return 0; }
+function HeaderOrangeBlack      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        	"$1" || return 1; return 0; }
+function HeaderOrangeBlue       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         	"$1" || return 1; return 0; }
+function HeaderOrangeCyan       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         	"$1" || return 1; return 0; }
+function HeaderOrangeGray       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         	"$1" || return 1; return 0; }
+function HeaderOrangeGreen      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        	"$1" || return 1; return 0; }
+function HeaderOrangePink       { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         	"$1" || return 1; return 0; }
+function HeaderOrangePurple     { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"       	"$1" || return 1; return 0; }
+function HeaderOrangeRed        { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          	"$1" || return 1; return 0; }
+function HeaderOrangeTurquoise  { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderOrangeWhite      { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        	"$1" || return 1; return 0; }
+function HeaderOrangeYellow     { HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"       	"$1" || return 1; return 0; }
 
 # Pink lines, differently colored text.
-function HeaderPinkBlack        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      "$1"; return 0; }
-function HeaderPinkBlue         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       "$1"; return 0; }
-function HeaderPinkCyan         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       "$1"; return 0; }
-function HeaderPinkGray         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       "$1"; return 0; }
-function HeaderPinkGreen        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      "$1"; return 0; }
-function HeaderPinkOrange       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     "$1"; return 0; }
-function HeaderPinkPurple       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     "$1"; return 0; }
-function HeaderPinkRed          { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        "$1"; return 0; }
-function HeaderPinkTurquoise    { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  "$1"; return 0; }
-function HeaderPinkWhite        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      "$1"; return 0; }
-function HeaderPinkYellow       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     "$1"; return 0; }
+function HeaderPinkBlack        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
+function HeaderPinkBlue         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"       	"$1" || return 1; return 0; }
+function HeaderPinkCyan         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"       	"$1" || return 1; return 0; }
+function HeaderPinkGray         { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"       	"$1" || return 1; return 0; }
+function HeaderPinkGreen        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"      	"$1" || return 1; return 0; }
+function HeaderPinkOrange       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function HeaderPinkPurple       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function HeaderPinkRed          { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function HeaderPinkTurquoise    { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function HeaderPinkWhite        { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
+function HeaderPinkYellow       { HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
 # Purple lines, differently colored text.
-function HeaderPurpleBlack      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        "$1"; return 0; }
-function HeaderPurpleBlue       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         "$1"; return 0; }
-function HeaderPurpleCyan       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         "$1"; return 0; }
-function HeaderPurpleGray       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         "$1"; return 0; }
-function HeaderPurpleGreen      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        "$1"; return 0; }
-function HeaderPurpleOrange     { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"       "$1"; return 0; }
-function HeaderPurplePink       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         "$1"; return 0; }
-function HeaderPurpleRed        { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          "$1"; return 0; }
-function HeaderPurpleTurquoise  { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"    "$1"; return 0; }
-function HeaderPurpleWhite      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        "$1"; return 0; }
-function HeaderPurpleYellow     { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"       "$1"; return 0; }
+function HeaderPurpleBlack      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        	"$1" || return 1; return 0; }
+function HeaderPurpleBlue       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         	"$1" || return 1; return 0; }
+function HeaderPurpleCyan       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         	"$1" || return 1; return 0; }
+function HeaderPurpleGray       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         	"$1" || return 1; return 0; }
+function HeaderPurpleGreen      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        	"$1" || return 1; return 0; }
+function HeaderPurpleOrange     { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"       	"$1" || return 1; return 0; }
+function HeaderPurplePink       { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         	"$1" || return 1; return 0; }
+function HeaderPurpleRed        { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          	"$1" || return 1; return 0; }
+function HeaderPurpleTurquoise  { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"    	"$1" || return 1; return 0; }
+function HeaderPurpleWhite      { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        	"$1" || return 1; return 0; }
+function HeaderPurpleYellow     { HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"       	"$1" || return 1; return 0; }
 
 # Red lines, differently colored text.
-function HeaderRedBlack     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"       "$1"; return 0; }
-function HeaderRedBlue      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"        "$1"; return 0; }
-function HeaderRedCyan      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"        "$1"; return 0; }
-function HeaderRedGray      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"        "$1"; return 0; }
-function HeaderRedGreen     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"       "$1"; return 0; }
-function HeaderRedOrange    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"      "$1"; return 0; }
-function HeaderRedPink      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"        "$1"; return 0; }
-function HeaderRedPurple    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"      "$1"; return 0; }
-function HeaderRedTurquoise { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"   "$1"; return 0; }
-function HeaderRedWhite     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"       "$1"; return 0; }
-function HeaderRedYellow    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"      "$1"; return 0; }
+function HeaderRedBlack     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"       	"$1" || return 1; return 0; }
+function HeaderRedBlue      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"        	"$1" || return 1; return 0; }
+function HeaderRedCyan      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"        	"$1" || return 1; return 0; }
+function HeaderRedGray      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"        	"$1" || return 1; return 0; }
+function HeaderRedGreen     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"       	"$1" || return 1; return 0; }
+function HeaderRedOrange    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"      	"$1" || return 1; return 0; }
+function HeaderRedPink      { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"        	"$1" || return 1; return 0; }
+function HeaderRedPurple    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"      	"$1" || return 1; return 0; }
+function HeaderRedTurquoise { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"   	"$1" || return 1; return 0; }
+function HeaderRedWhite     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"       	"$1" || return 1; return 0; }
+function HeaderRedYellow    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"      	"$1" || return 1; return 0; }
 
 # Turquoise lines, differently colored text.
-function HeaderTurquoiseBlack   { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     "$1"; return 0; }
-function HeaderTurquoiseBlue    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      "$1"; return 0; }
-function HeaderTurquoiseCyan    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      "$1"; return 0; }
-function HeaderTurquoiseGray    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      "$1"; return 0; }
-function HeaderTurquoiseGreen   { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     "$1"; return 0; }
-function HeaderTurquoiseOrange  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    "$1"; return 0; }
-function HeaderTurquoisePink    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      "$1"; return 0; }
-function HeaderTurquoisePurple  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    "$1"; return 0; }
-function HeaderTurquoiseRed     { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" "$1"; return 0; }
-function HeaderTurquoiseWhite   { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE" "$1"; return 0; }
-function HeaderTurquoiseYellow  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    "$1"; return 0; }
+function HeaderTurquoiseBlack   { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     	"$1" || return 1; return 0; }
+function HeaderTurquoiseBlue    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
+function HeaderTurquoiseCyan    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      	"$1" || return 1; return 0; }
+function HeaderTurquoiseGray    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      	"$1" || return 1; return 0; }
+function HeaderTurquoiseGreen   { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     	"$1" || return 1; return 0; }
+function HeaderTurquoiseOrange  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    	"$1" || return 1; return 0; }
+function HeaderTurquoisePink    { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
+function HeaderTurquoisePurple  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    	"$1" || return 1; return 0; }
+function HeaderTurquoiseRed     { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function HeaderTurquoiseWhite   { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE" 			"$1" || return 1; return 0; }
+function HeaderTurquoiseYellow  { HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
 # White lines, differently colored text.
-function HeaderWhiteBlack       { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     "$1"; return 0; }
-function HeaderWhiteBlue        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      "$1"; return 0; }
-function HeaderWhiteCyan        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      "$1"; return 0; }
-function HeaderWhiteGray        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      "$1"; return 0; }
-function HeaderWhiteGreen       { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     "$1"; return 0; }
-function HeaderWhiteOrange      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    "$1"; return 0; }
-function HeaderWhitePink        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      "$1"; return 0; }
-function HeaderWhitePurple      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    "$1"; return 0; }
-function HeaderWhiteRed         { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       "$1"; return 0; }
-function HeaderWhiteTurquoise   { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" "$1"; return 0; }
-function HeaderWhiteYellow      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    "$1"; return 0; }
+function HeaderWhiteBlack       { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"     	"$1" || return 1; return 0; }
+function HeaderWhiteBlue        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
+function HeaderWhiteCyan        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"      	"$1" || return 1; return 0; }
+function HeaderWhiteGray        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"      	"$1" || return 1; return 0; }
+function HeaderWhiteGreen       { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"     	"$1" || return 1; return 0; }
+function HeaderWhiteOrange      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"    	"$1" || return 1; return 0; }
+function HeaderWhitePink        { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
+function HeaderWhitePurple      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"    	"$1" || return 1; return 0; }
+function HeaderWhiteRed         { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function HeaderWhiteTurquoise   { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function HeaderWhiteYellow      { HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
 # Yellow lines, differently colored text.
-function HeaderYellowBlack      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        "$1"; return 0; }
-function HeaderYellowBlue       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         "$1"; return 0; }
-function HeaderYellowCyan       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         "$1"; return 0; }
-function HeaderYellowGray       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         "$1"; return 0; }
-function HeaderYellowGreen      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        "$1"; return 0; }
-function HeaderYellowOrange     { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"       "$1"; return 0; }
-function HeaderYellowPink       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         "$1"; return 0; }
-function HeaderYellowPurple     { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"       "$1"; return 0; }
-function HeaderYellowRed        { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          "$1"; return 0; }
-function HeaderYellowWhite      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        "$1"; return 0; }
-function HeaderYellowTurquoise  { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"    "$1"; return 0; }
+function HeaderYellowBlack      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLACK"        	"$1" || return 1; return 0; }
+function HeaderYellowBlue       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_BLUE"         	"$1" || return 1; return 0; }
+function HeaderYellowCyan       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_CYAN"         	"$1" || return 1; return 0; }
+function HeaderYellowGray       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GRAY"         	"$1" || return 1; return 0; }
+function HeaderYellowGreen      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_GREEN"        	"$1" || return 1; return 0; }
+function HeaderYellowOrange     { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_ORANGE"       	"$1" || return 1; return 0; }
+function HeaderYellowPink       { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PINK"         	"$1" || return 1; return 0; }
+function HeaderYellowPurple     { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_PURPLE"       	"$1" || return 1; return 0; }
+function HeaderYellowRed        { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_RED"          	"$1" || return 1; return 0; }
+function HeaderYellowWhite      { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_WHITE"        	"$1" || return 1; return 0; }
+function HeaderYellowTurquoise  { HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_PRINT_HEADER_LINE_CHAR" "$__BU_MAIN_COLOR_TURQUOISE"    	"$1" || return 1; return 0; }
