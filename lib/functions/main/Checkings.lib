@@ -39,10 +39,20 @@ function IsFloat()
     fi
 }
 
-# Checking floating and integer value.
-function IsFloatInt()
+# Checking negative only floating value.
+function IsNegativeFloat()
 {
-    if [[ "$1" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+    if IsFloat && (( 1 < 0 )); then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Checking positive only floating value.
+function IsPositiveFloat()
+{
+    if IsFloat && (( 1 >= 0 )); then
         return 0
     else
         return 1
@@ -52,21 +62,31 @@ function IsFloatInt()
 # Checking integer value.
 function IsInt()
 {
-    if [[ "$1" =~ [0-9] ]]; then
+    if [[ "$1" =~ ^[\-0-9]+$ ]]; then
         return 0
     else
         return 1
     fi
 }
 
-# Checking integer value.
-function IsInt2()
+# Checking negative only integer value.
+function IsNegativeInt()
 {
-    if [[ "$1" =~ ^[+-]?[0-9]+$ ]]; then
-        return 0
-    else
-        return 1
-    fi
+	if IsInt && (( 1 < 0 )); then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# Checking positive only integer value.
+function IsPositiveInt()
+{
+	if IsInt && (( 1 >= 0 )); then
+		return 0
+	else
+		return 1
+	fi
 }
 
 # -----------------------------------------------
@@ -76,14 +96,14 @@ function IsInt2()
 # Checking if value is an alphabetic string (not any number allowed)
 function IsAlpha()
 {
-    if [[ "$1" =~ [A-Z] ]]; then
+    if [[ "$1" =~  [^a-zA-Z\ ] ]]; then
         return 0
     else
         return 1
     fi
 }
 
-# Checking if value is an aplhanumeric string.
+# Checking if value is an alphanumeric string.
 function IsAlphaNum()
 {
     if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
@@ -92,6 +112,27 @@ function IsAlphaNum()
         return 1
     fi
 }
+
+# Checking if the value is a character.
+function IsChar()
+{
+	if [[ "$1" = [a-zA-Z] ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# Checking if the value is an alphabetic character (not any number allowed).
+function IsAlphaChar()
+{
+	if [[ "$1" = [a-zA-Z0-9] ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
 
 # -----------------------------------------------
 
