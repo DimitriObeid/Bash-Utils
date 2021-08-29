@@ -80,6 +80,17 @@ function AskUser()
 # Behavior if the "cd" command failed.
 function CDfail() { printf "UNABLE TO CHANGE DIRECTORY\n\n"; PrintRoot; exit 1; }
 
+# Changing individually the ownership rights.
+function ChangeFileOwnership()
+{
+	#***** Parameters *****
+	p_user=$1
+	p_file=$2
+
+	#***** Code *****
+	if chown -v "${p_user##*/}" "$p_file"; then return 0; else printf "\nUNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"; PrintRoot; exit 1; fi
+}
+
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
 function ChangeOwnership()
 {
@@ -89,7 +100,7 @@ function ChangeOwnership()
 	#***** Code *****
 	if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 		printf "Changing the ownership of the %s file, from root to %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"
-		chown -v "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "\nUNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"; PrintRoot; exit 1; }
+		ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"
 
 		Newline
 
@@ -97,7 +108,7 @@ function ChangeOwnership()
 	fi
 
     printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
-    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || { printf "\nUNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"; PrintRoot; exit 1; }
+    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || 
 
 	Newline
 	printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
@@ -105,10 +116,12 @@ function ChangeOwnership()
 	Newline; PrintLine; Newline; sleep 0.5
 
 	printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
-    chown -v "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "\nUNABLE TO CHANGE THE OWNERSHIP OF THE %s FILE TO %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"; PrintRoot; exit 1; }
+    ChangeFileOwnership "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH"
 
 	Newline
 	printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
+
+	return 0
 }
 
 # Copying the modules inititializer file into the user's home directory.
@@ -168,7 +181,19 @@ function CopyModulesManagerDirectory()
 function Log()
 {
     if [ -f "$__F_INSTALL_LOG_FILE_PATH" ] && [ -s "$__F_INSTALL_LOG_FILE_PATH" ]; then
-        true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "UNABLE TO ERASE THE EXISTING CONTENT OF THE %s LOG FILE\n\nPlease erase the content of this file by yourself\n\n" "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
+        true > "$__F_INSTALL_LOG_FILE_PATH" ||
+        {
+            local error_msg="\nUNABLE TO ERASE THE EXISTING CONTENT OF THE $__F_INSTALL_LOG_FILE_PATH LOG FILE\n\nPlease erase the content of this file by yourself.\n\nIf the script cannot erase it because of rights / ownership problems (since this script should normally be executed with root privileges), please use the sudo before the erasing command.\n\n"
+        
+            if [ "$EUID" -ne 0 ]; then
+                AskUser "You must have the root user's privileges to change the " ""
+                ChangeFileOwnership "$LOGNAME" "$__F_INSTALL_LOG_FILE_PATH"
+
+                true > "$__F_INSTALL_LOG_FILE_PATH" || printf "%s" "$error_msg"; exit 1
+            else
+                printf "%s" "$error_msg"; exit 1
+            fi
+        }
 	fi
 
     printf '\n' >> "$__F_INSTALL_LOG_FILE_PATH"
@@ -208,6 +233,11 @@ function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-andr
 
 # INITIALIZATION
 
+# Installation type argument.
+__ARG=$1
+__NOLOG=$2
+
+if [ -z "$__NOLOG" ] || [ "$__NOLOG" != 'nolog' ]; then
 Log
 
 # Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
@@ -267,10 +297,6 @@ fi
 
 # Feel free to add any user's home directory path into the users list.
 mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
-
-
-# Installation type argument.
-__ARG=$1
 
 # ------------------------------------------------
 
@@ -363,6 +389,11 @@ if [ "$__ARG" = 'install' ] || [ "$__ARG" = 'i' ]; then
 	printf "Please check the %s log file to verify if the installation was successful" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
 elif [ "$__ARG" = 'update' ] || [ "$__ARG" = 'u' ]; then
 	printf "Please check the %s log file to verify if the update was successful" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+fi
+
+if [ "$EUID" -eq 0 ]; then
+    # TODO : Get the current home directory.
+    ChangeFileOwnership ""
 fi
 
 printf "\n\n"
