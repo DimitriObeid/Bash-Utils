@@ -49,18 +49,18 @@ function ConfEcho()
     #***** Code *****
     __BU_MAIN_STAT_ECHO="true"; __BU_MAIN_STAT_LOG="false"; __BU_MAIN_STAT_LOG_REDIRECT="";
 
-    HeaderError "AN ERROR OCCURED DURING A STATUS VARIABLES CHECKING !!!"
+    HeaderError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"
 
-    echo >&2; echo -n "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
+    echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
     echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
 
     if [ -z "$p_badVal" ]; then
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
     else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
     fi
 
-    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_TAB$__BU_MAIN_TXT_TAB The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
@@ -93,7 +93,7 @@ function CheckSTAT_DEBUG()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_DEBUG" != "true" ] && [ "$__BU_MAIN_STAT_DEBUG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -147,7 +147,7 @@ function CheckSTAT_ERROR()
 
     #***** Code *****
     if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" != "fatal" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -165,7 +165,7 @@ function CheckSTAT_INITIALIZING()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_INITIALIZING" != "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1
 	fi
 
     return 0
@@ -183,7 +183,7 @@ function CheckSTAT_LOG()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_LOG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1
 
     elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         CreateProjectLogFile || return 1
@@ -204,7 +204,7 @@ function CheckSTAT_LOG_REDIRECT()
 
     #***** Code *****
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'tee' ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -222,7 +222,7 @@ function CheckSTAT_OPERATE_ROOT()
 
 	#***** Code *****
 	if [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "authorized" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "restricted" ]; then
-		Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1
+		ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1
 	fi
 
     return 0
@@ -240,7 +240,7 @@ function CheckSTAT_PRINT_INIT_LOG()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -258,8 +258,8 @@ function CheckSTAT_TIME_TXT()
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.
-    if ! IsFloatInt "$__BU_MAIN_STAT_TIME_TXT"; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1
+    if ! IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -277,7 +277,7 @@ function CheckSTAT_TRANSLATED()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_TRANSLATED" != "true" ] && [ "$__BU_MAIN_STAT_TRANSLATED" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -295,7 +295,7 @@ function CheckSTAT_TXT_FMT()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_TXT_FMT" != "true" ] && [ "$__BU_MAIN_STAT_TXT_FMT" != "false" ]; then
-        Confecho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"; return 1
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
