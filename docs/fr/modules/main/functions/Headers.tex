@@ -59,13 +59,20 @@ Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec 
 * Chaque code couleur est défini dans le fichier \color{lime}\textbf{Colors.conf}\color{white}.\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
-La fonction \color{mauve}\textbf{DrawLine }\color{white} vérifie d'abord qu'une valeur soit passée en premier argument (paramètre \color{orange}\textbf{p\_lineColor}\color{white}). Si c'est le cas, la commande \color{gray}\textbf{echo }\color{white} est appelée avec ses options \color{gray}\textbf{-ne }\color{white} pour afficher.\\[1\baselineskip]
+La fonction \color{mauve}\textbf{DrawLine }\color{white} vérifie d'abord qu'une valeur soit passée en premier argument (paramètre \color{orange}\textbf{p\_lineColor}\color{white}). Si c'est le cas, la commande \color{gray}\textbf{echo }\color{white} est appelée avec ses options \color{gray}\textbf{-ne }\color{white} pour encoder la couleur de la ligne de caractère à dessiner.\\[1\baselineskip]
+
+Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \color{gray}\textbf{eval echo}\color{white}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère défini par la variable \color{orange}\textbf{\$\_\_BU\_MAIN\_TXT\_COLS }\color{white} dans le fichier de\linebreak
+configurations \color{lime}\textbf{Text.conf}\color{white}.\\[1\baselineskip]
+
+Enfin, une fois la boucle exécutée, la fonction réencode la couleur d'affichage selon la couleur par\linebreak
+défaut du terminal, si le paramètre \color{orange}\textbf{\$p\_lineColor }\color{white} contient une valeur.\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
 Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal.\\[2\baselineskip]
 
 
 \par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+
 \textbf{Fonction : }\color{mauve}\textbf{HeaderBase}\color{white}\\[1\baselineskip]
 \textbf{Description :}\linebreak
 Cette fonction affiche un header complet.\\[1\baselineskip]
@@ -77,16 +84,20 @@ Cette fonction affiche un header complet.\\[1\baselineskip]
 \color{orange}\textbf{p\_stringTxt }\color{white} --> Ce paramètre attend une chaîne de caractères.\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
-Tout d'abord, la fonction \color{mauve}\textbf{HeaderBase }\color{white} vérifie l'état de la variable de statut \color{orange}\textbf{\_\_BU\_MAIN\_STAT\_ECHO }\color{white}, vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en rappelant certaines fonctions\color{white}.\\[1\baselineskip]
+Tout d'abord, la fonction \color{mauve}\textbf{HeaderBase }\color{white} vérifie l'état de la variable de statut \color{orange}\textbf{\$\_\_BU\_MAIN\_STAT\_ECHO}\color{white}, vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
+rappelant certaines fonctions\color{white}.\\[1\baselineskip]
 
 En adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \color{mauve}\textbf{DrawLine }\color{white} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]
 
-Une fois ceci fait, un saut de ligne est effectué, et un message est affiché, avec la couleur choisie encodée en premier (troisième paramètre) et le texte passé en quatrième argument.\\[1\baselineskip]
+Une fois ceci fait, un saut de ligne est effectué, et un message est affiché, avec la couleur choisie\linebreak
+encodée en premier (troisième paramètre) et le texte passé en quatrième argument.\\[1\baselineskip]
 
-La commande de ré-initialisation de décoration du terminal (définie dans le fichier) est ensuite appelée (elle est définie dans les fichiers \color{lime}\textbf{Colors.conf }\color{white} et \color{lime}\textbf{Text.conf}\color{white}) pour réinitialiser la couleur d'affichage de texte selon la configuration du terminal.\\[1\baselineskip]
+La commande de ré-initialisation de décoration du terminal (définie dans les fichiers \color{lime}\textbf{Colors.conf }\color{white} et \color{lime}\textbf{Text.conf}\color{white}) est ensuite appelée pour réinitialiser la couleur d'affichage de texte selon la configuration du terminal.\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
-Appelez cette fonction pour afficher un texte en majuscules entre deux lignes, et pour davantage personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions des sections \color{green}\textbf{Headers unicolores }\color{white} et \color{green}\textbf{Headers multicolores}\color{white}.\\[1\baselineskip]
+Appelez cette fonction pour afficher un texte en majuscules entre deux lignes, et pour davantage\linebreak
+personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sections suivantes :
+\color{green}\textbf{Headers unicolores }\color{white} et \color{green}\textbf{Headers multicolores}\color{white}.\\[1\baselineskip]
 
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
@@ -94,21 +105,30 @@ Appelez cette fonction pour afficher un texte en majuscules entre deux lignes, e
 \color{green}
 \subsection{Headers unicolores}\color{white}
 \textbf{Description :}\linebreak
-Chacune des fonctions de cette catégorie appellent la fonction \color{mauve}\textbf{HeaderBase }\color{white}, en lui passant en premier et troisième arguments une même couleur (définie dans le fichier \color{lime}\textbf{Colors.conf}\color{white}), un caractère défini par la variable \color{orange}\textbf{\$\_\_BU\_MAIN\_TXT\_PRINT\_HEADER\_LINE\_CHAR }\color{white} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
+Chacune de ces fonctions appelle la fonction \color{mauve}\textbf{HeaderBase}\color{white}, en lui passant ses trois premiers\linebreak
+arguments prédéfinis.\\[1\baselineskip]
 
-\textbf{Paramètres :}\linebreak
-\color{orange}\textbf{\$1 }\color{white} --> Ce paramètre attend la chaîne de caractère à afficher.
+\textbf{Paramètre :}\linebreak
+\color{orange}\textbf{\$1 }\color{white} --> Ce paramètre attend la chaîne de caractère à afficher.\\[1\baselineskip]
+
+
+\textbf{Fonctionnement :}\linebreak
+Chacune des fonctions de cette catégorie appelle la fonction \color{mauve}\textbf{HeaderBase}\color{white}, en lui passant en premier et troisième arguments un même code couleur \color{orange}\textbf{\$\_\_BU\_MAIN\_COLOR...}\color{white}, (défini dans le fichier \color{lime}\textbf{Colors.conf}\color{white}), un caractère défini par la variable \color{orange}\textbf{\$\_\_BU\_MAIN\_TXT\_PRINT\_HEADER\_LINE\_CHAR }\color{white} en deuxième\linebreak
+argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
+
+\textbf{Utilisation :}\linebreak
+Appelez une de ces fonctions pour afficher un header unicolore sans avoir à passer ses trois premiers arguments.\\[1\baselineskip]
+
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
 \subsection{Headers bicolores}\color{white}
-Pour faciliter davantage la tâche des développeurs, des fonctions de création de headers bicolores existent.
+Pour davantage faciliter la tâche des développeurs, des fonctions de création de headers bicolores existent.\\[1\baselineskip]
 
-Elles fonctionnent chacune de la même manière que les précédentes, à deux exceptions prêtes :\linebreak
-	- le nom : chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\linebreak
-	- le nom (bis) : Il n'y a pas de fonctions portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\linebreak
-	- 
+Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :\linebreak
+	- \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\\[1\baselineskip]
+	- \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\linebreak
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -122,6 +142,11 @@ Pour vous donner une idée, prenez la formule mathématique suivante :
 
 Où nbcol = nombre de codes couleurs disponibles\linebreak
 
-Au moment où j'ai écrit cette partie de la documentation, il existait 12 codes couleurs disponibles. En effectuant le calcul précédent, nous obtenons \textbf{12 * 11 * 12 = 1 584 combinaisons possibles}, sans parler de l'ajout d'éventuels nouveaux codes couleurs.\\[1\baselineskip]
+Au moment où j'ai écrit cette partie de la documentation (dimanche 29 août 2021), il existait 12 codes couleurs disponibles.\\[1\baselineskip]
+
+En effectuant le calcul précédent, nous obtenons \textbf{12 * 11 * 12 = 1 584 combinaisons possibles}, sans\linebreak
+parler de l'ajout d'éventuels nouveaux codes couleurs.\\[1\baselineskip]
+
+Il faudra donc se contenter d'appeler la fonction \color{mauve}\textbf{HeaderBase}\color{white}, suivie de ses 4 arguments.
 
 \end{document}

@@ -167,7 +167,7 @@ function HeaderYellow       { HeaderBase "$__BU_MAIN_COLOR_YELLOW"       "$__BU_
 
 ## BICOLOR HEADERS
 
-# Copy-paste this function to avoid losing time while creating multicolor headers :
+# Copy-paste this function to avoid losing time while creating bicolor headers :
 # function Header<col1><col2>   { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_<COLOR>" "$1" || return 1; return 0; }
 
 # Black line, differently colored text.

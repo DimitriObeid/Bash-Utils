@@ -116,7 +116,7 @@ function IsAlphaNum()
 # Checking if the value is a character.
 function IsChar()
 {
-	if [[ "$1" = [a-zA-Z] ]]; then
+	if [[ "$1" = [a-zA-Z0-9] ]]; then
 		return 0
 	else
 		return 1
@@ -126,7 +126,7 @@ function IsChar()
 # Checking if the value is an alphabetic character (not any number allowed).
 function IsAlphaChar()
 {
-	if [[ "$1" = [a-zA-Z0-9] ]]; then
+	if [[ "$1" = [a-zA-Z] ]]; then
 		return 0
 	else
 		return 1
