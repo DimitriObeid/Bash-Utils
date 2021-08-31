@@ -5,6 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}					%
 \usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
+\usepackage{multirow}                       % Création de tableaux.
 \usepackage{verbatim}						% Mise en page de paragraphes.
 \usepackage{fancyhdr}						%
 \usepackage[document]{ragged2e}								% Justification du texte.
@@ -39,7 +40,82 @@
 
 \color{red}
 \section{Présentation}\color{white}
+
+\color{green}
+\subsection{Présentation}\color{white}
 Ce fichier source inclut des fonctions servant à la création de headers, séparant ce qu'un développeur de scripts Bash peut imaginer comme étant deux grandes étapes différentes d'un script.\\[1\baselineskip]
+
+\color{green}
+\subsection{Définitions des éléments mentionnés}\color{white}
+
+\color{blue}
+\subsubsection{Chemins de fichiers}\color{white}
+\textbf{Nom du fichier :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH/lib/functions/main\color{white}}\\[1\baselineskip]
+
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Colors.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MODULE\_UTILS\_ROOT/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MODULE\_UTILS\_ROOT/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Text.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MODULE\_UTILS\_ROOT/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Fonctions}\color{white}
+\textbf{Fonction :} \textbf{\color{mauve}IsChar\color{white}}\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}} \\[1\baselineskip]
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Variables}\color{white}
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Chacune des variables globales commençant par ce nom contient le nom de la couleur encodée lors de l'appel d'une de ces variables.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Colors.conf\color{white}}\\[1\baselineskip]
+
+
+
+\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette variable globale met le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
+
+
+
+\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Text.conf\color{white}}\\[1\baselineskip]
+
 
 
 \color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
@@ -61,7 +137,9 @@ Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec 
 * Chaque code couleur est défini dans le fichier \textbf{\color{lime}Colors.conf\color{white}}.\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
-La fonction \textbf{\color{mauve}DrawLine\color{white}} vérifie d'abord qu'une valeur soit passée en premier argument (paramètre \textbf{\color{orange}p\_lineColor\color{white}}). Si c'est le cas, la commande \textbf{\color{gray}echo\color{white}} est appelée avec ses options \textbf{\color{gray}-ne\color{white}} pour encoder la couleur de la ligne de caractère à dessiner.\\[1\baselineskip]
+La fonction \textbf{\color{mauve}DrawLine\color{white}} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}\$p\_lineChar\color{white}} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar\color{white}}, définie dans le fichier \textbf{\color{lime}Checkings.lib\color{white}}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.\\[1\baselineskip]
+
+Cette fonction vérifie ensuite qu'une valeur soit passée en premier argument (paramètre \textbf{\color{orange}p\_lineColor\color{white}}). Si c'est le cas, la commande \textbf{\color{gray}echo\color{white}} est appelée avec ses options \textbf{\color{gray}-ne\color{white}} pour encoder la couleur de la ligne de caractère à dessiner.\\[1\baselineskip]
 
 Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \textbf{\color{gray}eval echo\color{white}}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar\color{white}}) dans le fichier de\linebreak
 configurations \textbf{\color{lime}Text.conf\color{white}}.\\[1\baselineskip]
@@ -97,8 +175,7 @@ encodée en premier (troisième paramètre) et le texte passé en quatrième arg
 La commande de ré-initialisation de décoration du terminal (définie dans les fichiers \textbf{\color{lime}Colors.conf\color{white}} et \textbf{\color{lime}Text.conf\color{white}}) est ensuite appelée pour réinitialiser la couleur d'affichage de texte selon la configuration du terminal.\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
-Appelez cette fonction pour afficher un texte en majuscules entre deux lignes, et pour davantage\linebreak
-personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sections suivantes :
+Appelez cette fonction pour afficher un texte entre deux lignes, et pour davantage personnaliser cet\linebreak affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sections suivantes :
 \textbf{\color{green}Headers unicolores\color{white}} et \textbf{\color{green}Headers multicolores\color{white}}.\\[1\baselineskip]
 
 
@@ -115,8 +192,7 @@ arguments prédéfinis.\\[1\baselineskip]
 
 
 \textbf{Fonctionnement :}\linebreak
-Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, (défini dans le fichier \textbf{\color{lime}Colors.conf\color{white}}), un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}} en deuxième\linebreak
-argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
+Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}} en deuxième argument, puis la chaîne de caractères à\linebreak afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
 Appelez une de ces fonctions pour afficher un header unicolore sans avoir à passer ses trois premiers arguments.\\[1\baselineskip]
@@ -130,7 +206,7 @@ Pour davantage faciliter la tâche des développeurs, des fonctions de création
 
 Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :\linebreak
 	- \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\\[1\baselineskip]
-	- \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\linebreak
+	- \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\\[5\baselineskip]
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 

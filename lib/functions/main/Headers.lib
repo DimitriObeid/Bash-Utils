@@ -37,6 +37,11 @@ function DrawLine()
 	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	
 	#***** Code *****
+	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
+	if ! IsChar "$p_lineChar"; then
+        p_lineChar="${p_lineChar:0:1}"
+	fi
+	
     # Defining the color of the wished character for the whole line before displaying the first character.
     # If the value of the "$p_lineColor" parameter (which stores the text's color encoding) is not empty,
     # then we write the color's encoding into the terminal, which displays the color, and not its encoding in text.
