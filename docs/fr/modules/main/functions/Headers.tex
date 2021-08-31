@@ -15,7 +15,7 @@
 \fontfamily{}
 
 \pagecolor{black}
-\title{Fonctions du fichier de librairie Headers.lib}
+\title{\color{red}Fonctions du fichier de librairie \color{lime}Headers.lib}\color{white}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
@@ -39,6 +39,8 @@
 
 \color{red}
 \section{Présentation}\color{white}
+Ce fichier source inclut des fonctions servant à la création de headers, séparant ce qu'un développeur de scripts Bash peut imaginer comme étant deux grandes étapes différentes d'un script.\\[1\baselineskip]
+
 
 \color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -61,7 +63,7 @@ Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec 
 \textbf{Fonctionnement :}\linebreak
 La fonction \textbf{\color{mauve}DrawLine\color{white}} vérifie d'abord qu'une valeur soit passée en premier argument (paramètre \textbf{\color{orange}p\_lineColor\color{white}}). Si c'est le cas, la commande \textbf{\color{gray}echo\color{white}} est appelée avec ses options \textbf{\color{gray}-ne\color{white}} pour encoder la couleur de la ligne de caractère à dessiner.\\[1\baselineskip]
 
-Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \textbf{\color{gray}eval echo\color{white}}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_COLS\color{white}} dans le fichier de\linebreak
+Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \textbf{\color{gray}eval echo\color{white}}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar\color{white}}) dans le fichier de\linebreak
 configurations \textbf{\color{lime}Text.conf\color{white}}.\\[1\baselineskip]
 
 Enfin, une fois la boucle exécutée, la fonction réencode la couleur d'affichage selon la couleur par\linebreak
@@ -113,7 +115,7 @@ arguments prédéfinis.\\[1\baselineskip]
 
 
 \textbf{Fonctionnement :}\linebreak
-Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, (défini dans le fichier \textbf{\color{lime}Colors.conf\color{white}}), un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_PRINT\_HEADER\_LINE\_CHAR\color{white}} en deuxième\linebreak
+Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, (défini dans le fichier \textbf{\color{lime}Colors.conf\color{white}}), un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}} en deuxième\linebreak
 argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
