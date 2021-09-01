@@ -191,7 +191,7 @@ function Log()
         true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "\nUNABLE TO ERASE THE EXISTING CONTENT OF THE '%s' LOG FILE\n\nPlease erase the content of this file by yourself, or execute this script with 'nolog' as extra argument.\n\n" "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
 	fi
 
-    printf '\n' >> "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog '\n' 'log'
 
 	PrintLog "USER'S OPERATING SYSTEM DATA\n\n" 'log'
 	PrintLog "Operating system family : %s\n" "$OSTYPE" 'log'
@@ -226,12 +226,12 @@ function PrintLog()
 {
     if [ "$__NOLOG" = 'nolog' ]; then
         if [ -n "$2" ] && [ "$2" = 'log' ]; then
-            printf "%s" "$1" >> "$__F_INSTALL_LOG_FILE_PATH"
+            echo -ne "$1" >> "$__F_INSTALL_LOG_FILE_PATH"
         else
-            printf "%s" "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+            echo -ne "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
         fi
     else
-        printf "%s" "$1"
+        echo -ne "$1"
     fi
 }
 
@@ -344,13 +344,13 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
-			PrintLog "$(CopyModulesManagerDirectory "$user")"; sleep 0.5
+			PrintLog "$(CopyModulesManagerDirectory "$user")\n"; sleep 0.5
 
-			PrintLog "$(CopyModulesInitializer "$user")"; sleep 0.5
+			PrintLog "$(CopyModulesInitializer "$user")\n"; sleep 0.5
 
-			NewlineF; PrintLog "$(PrintLine)"; NewlineF; sleep 0.5
+			NewlineF; PrintLog "$(PrintLine)\n"; NewlineF; sleep 0.5
 
-			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")\n"; sleep 0.5
 
 		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 
@@ -359,17 +359,17 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				true > "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO OVERWRITE THE $__F_LIBRARY_PATH_FILE_NAME FILE IN THE $__D_MODULE_MANAGER_NEW_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
 
 				PrintLog "\nCopying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
 
 				NewlineF
 			else
 				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
 
 				NewlineF
 			fi
 
-			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")\n"; sleep 0.5
 		else
 			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are 'install' or 'i' for the installation of the modules manager,\nor 'update' or 'u' for the update of the Bash Utils root directory's path.\n\n"; PrintRoot; exit 1
 		fi
@@ -380,12 +380,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
     fi
 done
 
-PrintLog "$(PrintLine)"; NewlineF
+PrintLog "$(PrintLine)\n"; NewlineF
 
 PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :\n"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
-	PrintLog "\"%s\" " "${user##*/}"
+	PrintLog "${user##*/}"
 done
 
 printf "\n\n"
