@@ -77,7 +77,7 @@ function AskUser()
         printf "%s" "$p_more_informations"
     fi
 
-    printf "\n\n"
+    printf ""
 
     read -rp "Enter your answer : " __ANS_ASK
 
@@ -85,9 +85,23 @@ function AskUser()
 }
 
 # Behavior if the "cd" command failed.
-function CDfail() { printf "UNABLE TO CHANGE DIRECTORY\n\n"; PrintRoot; exit 1; }
+function CDfail() { printf "UNABLE TO CHANGE DIRECTORY"; PrintRoot; exit 1; }
 
-# Changing individually the ownership rights.
+# Changing recursively a directory's ownership rights.
+function ChangeDirOwnership()
+{
+	#***** Parameters *****
+	p_user=$1
+	p_dir=$2
+
+	#***** Code *****
+	PrintLog "Changing recursively the ownership of the $__F_LIBRARY_PATH_NEW_PARENT_PATH directory, from root to ${user##*/}"
+	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The $__F_MODULE_INITIALIZER_NEW_PATH file ownership was successfully changed"; return 0
+    else PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE '$p_dir' DIRECTORY TO '${user##*/}'"; PrintRoot; exit 1; fi
+
+}
+
+# Changing individually the files ownership rights.
 function ChangeFileOwnership()
 {
 	#***** Parameters *****
@@ -95,7 +109,8 @@ function ChangeFileOwnership()
 	p_file=$2
 
 	#***** Code *****
-	if chown -v "${p_user##*/}" "$p_file"; then return 0; else printf "\nUNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE %s DIRECTORY TO %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"; PrintRoot; exit 1; fi
+	PrintLog "Changing the ownership of the $__F_LIBRARY_PATH_NEW_PARENT_PATH file, from root to ${user##*/}"
+	if chown -v "${p_user##*/}" "$p_file"; then return 0; else printf "UNABLE TO CHANGE THE OWNERSHIP OF THE '$p_file' FILE TO '${user##*/}'"; PrintRoot; exit 1; fi
 }
 
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
@@ -105,30 +120,27 @@ function ChangeOwnership()
 	user=$1
 
 	#***** Code *****
-	if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
-		printf "Changing the ownership of the %s file, from root to %s\n\n" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" "${user##*/}"
-		ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"
+	if [ "$user" != '/root' ]; then
+        if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; Newline; return 0; fi
 
-		Newline
+        PrintLog "Changing recursively the ownership of the newly installed '$__D_MODULE_MANAGER_NEW_PATH' folder, from 'root' to '${user##*/}'"
+        chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || 
 
-		return 0
-	fi
+        Newline
+        PrintLog "The '$__D_MODULE_MANAGER_NEW_PATH' folder ownership was successfully changed"
 
-    printf "Changing recursively the ownership of the newly installed %s folder, from root to %s\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "${user##*/}"
-    chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || 
+        Newline; PrintLine; Newline; sleep 0.5
 
-	Newline
-	printf "The %s folder ownership was successfully changed\n\n" "$__D_MODULE_MANAGER_NEW_PATH"
+        PrintLog "Changing the ownership of the newly $__F_MODULE_INITIALIZER_NEW_PATH file, from root to ${user##*/}"
+        ChangeFileOwnership "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH"
 
-	Newline; PrintLine; Newline; sleep 0.5
+        Newline
+        PrintLog "The $__F_MODULE_INITIALIZER_NEW_PATH file ownership was successfully changed"
 
-	printf "Changing the ownership of the newly %s file, from root to %s\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "${user##*/}"
-    ChangeFileOwnership "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH"
-
-	Newline
-	printf "The %s file ownership was successfully changed\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH"
-
-	return 0
+        return 0
+    else
+        return 0
+    fi
 }
 
 # Copying the modules inititializer file into the user's home directory.
@@ -140,16 +152,16 @@ function CopyModulesInitializer()
 	#***** Code *****
     if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
         printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
-        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
+        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
 
 	Newline
 
 	else
         printf "Overwriting the %s file in the %s directory" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
-        true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+        true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
 
         printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
-        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
+        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
     fi
 }
 
@@ -162,23 +174,23 @@ function CopyModulesManagerDirectory()
 	#***** Code *****
     if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
 
-        printf "Erasing the existing %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+        printf "Erasing the existing %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
 
 		# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
         # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
         # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
         # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-        rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !\n\n" "$__D_MODULE_MANAGER_NEW_PATH"; PrintRoot; exit 1; }
+        rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !" "$__D_MODULE_MANAGER_NEW_PATH"; PrintRoot; exit 1; }
         Newline
 
-        printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
+        printf "Copying the %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
 
 		Newline
     else
-        printf "Copying the %s modules manager directory into the %s directory\n\n" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-        cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !\n\n" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
+        printf "Copying the %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+        cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
 
 		Newline
 	fi
@@ -188,21 +200,21 @@ function CopyModulesManagerDirectory()
 function Log()
 {
     if [ -f "$__F_INSTALL_LOG_FILE_PATH" ] && [ -s "$__F_INSTALL_LOG_FILE_PATH" ]; then
-        true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "\nUNABLE TO ERASE THE EXISTING CONTENT OF THE '%s' LOG FILE\n\nPlease erase the content of this file by yourself, or execute this script with 'nolog' as extra argument.\n\n" "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
+        true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "UNABLE TO ERASE THE EXISTING CONTENT OF THE '%s' LOG FILEPlease erase the content of this file by yourself, or execute this script with 'nolog' as extra argument." "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
 	fi
 
-    PrintLog '\n' 'log'
+    PrintLog '' 'log'
 
-	PrintLog "USER'S OPERATING SYSTEM DATA\n\n" 'log'
-	PrintLog "Operating system family : %s\n" "$OSTYPE" 'log'
+	PrintLog "USER'S OPERATING SYSTEM DATA" 'log'
+	PrintLog "Operating system family : %s" "$OSTYPE" 'log'
 
 	if [ -f "/etc/os-release" ]; then PrintLog "Operating system general informations : %s" "$(cat "/etc/os-release")" 'log'; fi
 
-	PrintLog '\n\n' 'log'; PrintLog "$(PrintLine)" 'log'; PrintLog '\n' 'log'
+	PrintLog '' 'log'; PrintLog "$(PrintLine)" 'log'; PrintLog '' 'log'
 }
 
 # New line function for the functions called into the following "for" loop.
-function Newline() { printf "\n"; }
+function Newline() { printf ""; }
 
 # New line function called into the the followig "for" loop.
 function NewlineF() { PrintLog "$(Newline)"; }
@@ -218,7 +230,7 @@ function PrintLine()
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
-    done; printf "\n"
+    done; printf ""
 }
 
 # Checking if the 
@@ -252,13 +264,13 @@ fi
 
 # Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
 if [ "$EUID" -ne 0 ]; then
-    PrintLog "Are you sure you want to install this library without super-user privileges ?\n\n"; sleep .3
+    PrintLog "Are you sure you want to install this library without super-user privileges ?"; sleep .3
 
-    PrintLog "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges.\n\n"; sleep .3
+    PrintLog "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges."; sleep .3
 
-    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device.\n\n"
+    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device."
 
-    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation.\n\n"
+    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."
 
 
     read -rp "Type your answer : " __ans
@@ -267,9 +279,9 @@ if [ "$EUID" -ne 0 ]; then
 
 
     if [ "${__ans,,}" != 'yes' ]; then
-        PrintLog "\n\nAborting installation\n\n"
+        PrintLog "Aborting installation"
 
-        PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file\n\n"
+        PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file"
 
         exit 1
     fi
@@ -280,19 +292,19 @@ fi
 # If the installation is made without super-user's privileges.
 if [ "$__UNROOT" = 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
-    PrintLog "Copying and sorting the content of the '$__F_USERS_LIST_FILE_PATH' file to the '$__F_USERS_LIST_FILE_PATH.tmp\n' file" 'log'
+    PrintLog "Copying and sorting the content of the '$__F_USERS_LIST_FILE_PATH' file to the '$__F_USERS_LIST_FILE_PATH.tmp' file" 'log'
 
     # shellcheck disable=SC2002
-    cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE\n\n"; $ exit 1; }
-    PrintLog 'Done\n\n' 'log'
+    cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE"; $ exit 1; }
+    PrintLog 'Done' 'log'
 
     PrintLog "Copying back the content of the '$__F_USERS_LIST_FILE_PATH.tmp' file to the '$__F_USERS_LIST_FILE_PATH' file" 'log'
-    cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { PrintLog "UNABLE TO COPY THE CONTENT OF THE '$__F_USERS_LIST_FILE_PATH.tmp' TO THE '$__F_USERS_LIST_FILE_PATH' FILE\n\n"; exit 1; }
-    PrintLog 'Done\n\n' 'log'
+    cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { PrintLog "UNABLE TO COPY THE CONTENT OF THE '$__F_USERS_LIST_FILE_PATH.tmp' TO THE '$__F_USERS_LIST_FILE_PATH' FILE"; exit 1; }
+    PrintLog 'Done' 'log'
 
     PrintLog "Removing the '$__F_USERS_LIST_FILE_PATH.tmp' file" 'log'
-    rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { PrintLog "UNABLE TO REMOVE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE\n\n"; exit 1; }
-    PrintLog 'Done\n\n' 'log'
+    rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { PrintLog "UNABLE TO REMOVE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE"; exit 1; }
+    PrintLog 'Done' 'log'
 
     # Finding the "/root" path at the end of the users list file.
     LAST=$(tail -n 1 "$__F_USERS_LIST_FILE_PATH")
@@ -305,20 +317,20 @@ if [ "$__UNROOT" = 'true' ]; then
 fi
 
 # Feel free to add any user's home directory path into the users list.
-mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { PrintLog "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> $(pwd -P "$(basename "${BASH_SOURCE[0]}")")\n\n" 'log'; PrintRoot; exit 1; }
+mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { PrintLog "UNABLE TO GET THE USERS LIST FILEPlease navigate to this directory, and execute this script right there --> $(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 'log'; PrintRoot; exit 1; }
 
 # ------------------------------------------------
 
 ## CODE
-PrintLog "Copying the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file\n"
+PrintLog "Copying the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file"
 PrintLog "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { PrintLog "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME"; PrintRoot; exit 1; }
 PrintLog "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" 'log'
-PrintLog "\n\nSuccessfully copied the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file\n\n"
+PrintLog "Successfully copied the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 	if [ ! -d "$user" ]; then
-        PrintLog "ERROR --> $user IS NOT AN EXISTING USER !\n\n"; PrintRoot; exit 1
+        PrintLog "ERROR --> $user IS NOT AN EXISTING USER !"; PrintRoot; exit 1
 	else
         # ------------------------------------------------
 
@@ -340,55 +352,55 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-		PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}\n"; PrintLog "$(PrintLine)"; NewlineF; sleep 1
+		PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; NewlineF; sleep 1
 
 		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
-			PrintLog "$(CopyModulesManagerDirectory "$user")\n"; sleep 0.5
+			PrintLog "$(CopyModulesManagerDirectory "$user")"; sleep 0.5
 
-			PrintLog "$(CopyModulesInitializer "$user")\n"; sleep 0.5
+			PrintLog "$(CopyModulesInitializer "$user")"; sleep 0.5
 
-			NewlineF; PrintLog "$(PrintLine)\n"; NewlineF; sleep 0.5
+			NewlineF; PrintLog "$(PrintLine)"; NewlineF; sleep 0.5
 
-			PrintLog "$(ChangeOwnership "$user")\n"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
 
 		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 
 			if [ -f "$__F_LIBRARY_PATH_NEW_PARENT_PATH" ]; then
-				PrintLog "Overwriting the $__F_LIBRARY_PATH_FILE_NAME file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
-				true > "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO OVERWRITE THE $__F_LIBRARY_PATH_FILE_NAME FILE IN THE $__D_MODULE_MANAGER_NEW_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
+				PrintLog "Overwriting the $__F_LIBRARY_PATH_FILE_NAME file in the $__D_MODULE_MANAGER_NEW_PATH directory"
+				true > "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO OVERWRITE THE $__F_LIBRARY_PATH_FILE_NAME FILE IN THE $__D_MODULE_MANAGER_NEW_PATH DIRECTORY"; PrintRoot; exit 1; }
 
-				PrintLog "\nCopying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
+				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory"
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
 				NewlineF
 			else
-				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
+				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory"
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
 				NewlineF
 			fi
 
-			PrintLog "$(ChangeOwnership "$user")\n"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
 		else
-			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are 'install' or 'i' for the installation of the modules manager,\nor 'update' or 'u' for the update of the Bash Utils root directory's path.\n\n"; PrintRoot; exit 1
+			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENTThe accepted values are 'install' or 'i' for the installation of the modules manager,or 'update' or 'u' for the update of the Bash Utils root directory's path."; PrintRoot; exit 1
 		fi
 
 		PrintLog "$(PrintLine)"; NewlineF
 
-		PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n"
+		PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !"
     fi
 done
 
-PrintLog "$(PrintLine)\n"; NewlineF
+PrintLog "$(PrintLine)"; NewlineF
 
-PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :\n"
+PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 	PrintLog "${user##*/}"
 done
 
-printf "\n\n"
+printf ""
 
 # Printing back the "/root" path into the users list file if the installation was done without the super-user's privileges.
 PrintRoot
@@ -404,6 +416,6 @@ fi
 #     ChangeFileOwnership ""
 # fi
 
-printf "\n\n"
+printf ""
 
 exit 0
