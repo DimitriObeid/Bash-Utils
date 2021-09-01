@@ -151,17 +151,17 @@ function CopyModulesInitializer()
 
 	#***** Code *****
     if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
-        printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
+        PrintLog "Copying the '$__F_MODULE_INITIALIZER_OLD_PATH' file in the '$user' directory"
         cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
 
 	Newline
 
 	else
-        printf "Overwriting the %s file in the %s directory" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"
-        true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
+        PrintLog "Overwriting the '$__F_MODULE_INITIALIZER_NEW_PATH' file in the '$user' directory"
+        true > "$__F_MODULE_INITIALIZER_NEW_PATH" || { PrintLog "UNABLE TO OVERWRITE THE %s FILE IN THE '$user' DIRECTORY" "$__F_MODULE_INITIALIZER_NEW_PATH" "$user"; exit 1; }
 
-        printf "Copying the %s file in the %s directory" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"
-        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_MODULE_INITIALIZER_OLD_PATH" "$user"; PrintRoot; exit 1; }
+        PrintLog "Copying the '$__F_MODULE_INITIALIZER_OLD_PATH' file in the '$user' directory"
+        cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { PrintLog "UNABLE TO COPY THE '$__F_MODULE_INITIALIZER_OLD_PATH' FILE IN THE '$user' DIRECTORY"; PrintRoot; exit 1; }
     fi
 }
 
@@ -174,23 +174,23 @@ function CopyModulesManagerDirectory()
 	#***** Code *****
     if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
 
-        printf "Erasing the existing %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
+        PrintLog "Erasing the existing '$__D_MODULE_MANAGER_NEW_PATH' modules manager directory into the '$user' directory"
 
 		# WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
         # WARNING ! IF YOU MODIFY THE NAME OF THE VARIABLES, PLEASE CHECK THE NAME OF EVERY
         # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
         # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-        rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { printf "UNABLE TO OVERWRITE THE HIDDEN %s MODULES MANAGER'S DIRECTORY !" "$__D_MODULE_MANAGER_NEW_PATH"; PrintRoot; exit 1; }
+        rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { PrintLog "UNABLE TO OVERWRITE THE HIDDEN '$__D_MODULE_MANAGER_NEW_PATH' MODULES MANAGER'S DIRECTORY !"; PrintRoot; exit 1; }
         Newline
 
-        printf "Copying the %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
+        PrintLog "Copying the '$__D_MODULE_MANAGER_NEW_PATH' modules manager directory into the '$user' directory"
+		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { PrintLog "UNABLE TO COPY THE '$__D_MODULE_MANAGER_OLD_PATH' DIRECTORY INTO THE '$user' DIRECTORY !"; PrintRoot; exit 1; }
 
 		Newline
     else
-        printf "Copying the %s modules manager directory into the %s directory" "$__D_MODULE_MANAGER_NEW_PATH" "$user"
-        cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE $user DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
+        PrintLog "Copying the '$__D_MODULE_MANAGER_NEW_PATH' modules manager directory into the '$user' directory"
+        cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE '$user' DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
 
 		Newline
 	fi
