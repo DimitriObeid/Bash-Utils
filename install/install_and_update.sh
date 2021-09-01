@@ -23,9 +23,16 @@ __D_MODULE_MANAGER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__D_MODULE_MANAGER_DIR_NAME"
 
 ## DIRECTORIES VARIABLES DECLARATIONS
 
-# Name of the installation log file.
+# Getting the script's name to define the name of the installation log file.
 __F_INSTALL_LOG_FILE_NAME="${BASH_SOURCE[0]##*./}"
-__F_INSTALL_LOG_FILE_NAME="${__F_INSTALL_LOG_FILE_NAME%%.sh}.log"
+
+# Setting the name of the log file according to the user's privileges.
+if [ "$EUID" -eq 0 ]; then
+    __F_INSTALL_LOG_FILE_NAME="${__F_INSTALL_LOG_FILE_NAME%%.sh} - ROOT.log"
+else
+    __F_INSTALL_LOG_FILE_NAME="${__F_INSTALL_LOG_FILE_NAME%%.sh}.log"
+fi
+
 
 # Path of the installation log file.
 __F_INSTALL_LOG_FILE_PATH="$__D_INSTALL_DIR_PATH/$__F_INSTALL_LOG_FILE_NAME"
@@ -181,36 +188,24 @@ function CopyModulesManagerDirectory()
 function Log()
 {
     if [ -f "$__F_INSTALL_LOG_FILE_PATH" ] && [ -s "$__F_INSTALL_LOG_FILE_PATH" ]; then
-        true > "$__F_INSTALL_LOG_FILE_PATH" ||
-        {
-            local error_msg="\nUNABLE TO ERASE THE EXISTING CONTENT OF THE $__F_INSTALL_LOG_FILE_PATH LOG FILE\n\nPlease erase the content of this file by yourself.\n\nIf the script cannot erase it because of rights / ownership problems (since this script should normally be executed with root privileges), please use the sudo before the erasing command.\n\n"
-        
-            if [ "$EUID" -ne 0 ]; then
-                AskUser "You must have the root user's privileges to change the " ""
-                ChangeFileOwnership "$LOGNAME" "$__F_INSTALL_LOG_FILE_PATH"
-
-                true > "$__F_INSTALL_LOG_FILE_PATH" || printf "%s" "$error_msg"; exit 1
-            else
-                printf "%s" "$error_msg"; exit 1
-            fi
-        }
+        true > "$__F_INSTALL_LOG_FILE_PATH" || { printf "\nUNABLE TO ERASE THE EXISTING CONTENT OF THE '%s' LOG FILE\n\nPlease erase the content of this file by yourself, or execute this script with 'nolog' as extra argument.\n\n" "$__F_INSTALL_LOG_FILE_PATH"; exit 1; }
 	fi
 
     printf '\n' >> "$__F_INSTALL_LOG_FILE_PATH"
 
-	printf "USER'S OPERATING SYSTEM DATA\n\n" >> "$__F_INSTALL_LOG_FILE_PATH"
-	printf "Operating system family : %s\n" "$OSTYPE" >> "$__F_INSTALL_LOG_FILE_PATH"
+	PrintLog "USER'S OPERATING SYSTEM DATA\n\n" 'log'
+	PrintLog "Operating system family : %s\n" "$OSTYPE" 'log'
 
-	if [ -f "/etc/os-release" ]; then printf "Operating system general informations : %s" "$(cat "/etc/os-release")" >> "$__F_INSTALL_LOG_FILE_PATH"; fi
+	if [ -f "/etc/os-release" ]; then PrintLog "Operating system general informations : %s" "$(cat "/etc/os-release")" 'log'; fi
 
-	printf '\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"; PrintLine >> "$__F_INSTALL_LOG_FILE_PATH"; printf '\n' >> "$__F_INSTALL_LOG_FILE_PATH"
+	PrintLog '\n\n' 'log'; PrintLog "$(PrintLine)" 'log'; PrintLog '\n' 'log'
 }
 
 # New line function for the functions called into the following "for" loop.
 function Newline() { printf "\n"; }
 
 # New line function called into the the followig "for" loop.
-function NewlineF() { Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; }
+function NewlineF() { PrintLog "$(Newline)"; }
 
 # Printing a line according to the terminal's columns number.
 function PrintLine()
@@ -226,6 +221,20 @@ function PrintLine()
     done; printf "\n"
 }
 
+# Checking if the 
+function PrintLog()
+{
+    if [ "$__NOLOG" = 'nolog' ]; then
+        if [ -n "$2" ] && [ "$2" = 'log' ]; then
+            printf "%s" "$1" >> "$__F_INSTALL_LOG_FILE_PATH"
+        else
+            printf "%s" "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+        fi
+    else
+        printf "%s" "$1"
+    fi
+}
+
 # Printing back the "/root" path in the normal users list file.
 function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; }
 
@@ -238,29 +247,29 @@ __ARG=$1
 __NOLOG=$2
 
 if [ -z "$__NOLOG" ] || [ "$__NOLOG" != 'nolog' ]; then
-Log
+    Log
+fi
 
 # Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
 if [ "$EUID" -ne 0 ]; then
-    {
-        printf "Are you sure you want to install this library without super-user privileges ?\n\n"; sleep .3
+    PrintLog "Are you sure you want to install this library without super-user privileges ?\n\n"; sleep .3
 
-        printf "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges.\n\n"; sleep .3
+    PrintLog "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges.\n\n"; sleep .3
 
-        printf "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device.\n\n"
+    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device.\n\n"
 
-        printf "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation.\n\n"
-    } 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation.\n\n"
+
 
     read -rp "Type your answer : " __ans
-    printf "Type your answer" >> "$__F_INSTALL_LOG_FILE_PATH"
-    printf "Answer : %s\n\n" "$__ans" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog "Type your answer" 'log'
+    PrintLog "Answer : $__ans"
 
 
     if [ "${__ans,,}" != 'yes' ]; then
-        printf "\n\nAborting installation\n\n" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+        PrintLog "\n\nAborting installation\n\n"
 
-        printf "Please check the %s log file\n\n" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+        PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file\n\n"
 
         exit 1
     fi
@@ -271,19 +280,19 @@ fi
 # If the installation is made without super-user's privileges.
 if [ "$__UNROOT" = 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
-    printf "Copying and sorting the content of the '%s' file to the '%s.tmp\n' file" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog "Copying and sorting the content of the '$__F_USERS_LIST_FILE_PATH' file to the '$__F_USERS_LIST_FILE_PATH.tmp\n' file" 'log'
 
     # shellcheck disable=SC2002
-    cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { printf "UNABLE TO CREATE THE '%s.tmp' FILE\n\n" "$__F_USERS_LIST_FILE_PATH"; $ exit 1; }
-    printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
+    cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE\n\n"; $ exit 1; }
+    PrintLog 'Done\n\n' 'log'
 
-    printf "Copying back the content of the '$__F_USERS_LIST_FILE_PATH.tmp' file to the '%s' file" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
-    cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { printf "UNABLE TO COPY THE CONTENT OF THE '%s.tmp' TO THE '%s' FILE\n\n" "$__F_USERS_LIST_FILE_PATH" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
-    printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog "Copying back the content of the '$__F_USERS_LIST_FILE_PATH.tmp' file to the '$__F_USERS_LIST_FILE_PATH' file" 'log'
+    cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { PrintLog "UNABLE TO COPY THE CONTENT OF THE '$__F_USERS_LIST_FILE_PATH.tmp' TO THE '$__F_USERS_LIST_FILE_PATH' FILE\n\n"; exit 1; }
+    PrintLog 'Done\n\n' 'log'
 
-    printf "Removing the '%s.tmp' file" "$__F_USERS_LIST_FILE_PATH" >> "$__F_INSTALL_LOG_FILE_PATH"
-    rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { printf "UNABLE TO REMOVE THE '%s.tmp' FILE\n\n" "$__F_USERS_LIST_FILE_PATH"; exit 1; }
-    printf 'Done\n\n' >> "$__F_INSTALL_LOG_FILE_PATH"
+    PrintLog "Removing the '$__F_USERS_LIST_FILE_PATH.tmp' file" 'log'
+    rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { PrintLog "UNABLE TO REMOVE THE '$__F_USERS_LIST_FILE_PATH.tmp' FILE\n\n"; exit 1; }
+    PrintLog 'Done\n\n' 'log'
 
     # Finding the "/root" path at the end of the users list file.
     LAST=$(tail -n 1 "$__F_USERS_LIST_FILE_PATH")
@@ -296,20 +305,20 @@ if [ "$__UNROOT" = 'true' ]; then
 fi
 
 # Feel free to add any user's home directory path into the users list.
-mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { printf "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> %s\n\n" "$(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
+mapfile -t __TARGET_HOME_DIRECTORIES < "$__F_USERS_LIST_FILE_PATH" || { PrintLog "\nUNABLE TO GET THE USERS LIST FILE\n\nPlease navigate to this directory, and execute this script right there --> $(pwd -P "$(basename "${BASH_SOURCE[0]}")")\n\n" 'log'; PrintRoot; exit 1; }
 
 # ------------------------------------------------
 
 ## CODE
-printf "Copying the Bash Utils root directory path into the %s file\n" "$__F_LIBRARY_PATH_FILE_NAME" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { printf "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
-printf "%s" "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" >> "$__F_INSTALL_LOG_FILE_PATH"
-printf "\n\nSuccessfully copied the Bash Utils root directory path into the %s file\n\n" "$__F_LIBRARY_PATH_FILE_NAME" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+PrintLog "Copying the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file\n"
+PrintLog "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" 2>&1 | tee "$__F_LIBRARY_PATH_OLD_PARENT_PATH" || { PrintLog "UNABLE TO WRITE THE BASH UTILS ROOT DIRECTORY PATH INTO THE %s FILE" "$__F_LIBRARY_PATH_FILE_NAME"; PrintRoot; exit 1; }
+PrintLog "$(cd "$(dirname "$(basename "${BASH_SOURCE[0]}")")" || CDfail; cd .. || CDfail; pwd -P)" 'log'
+PrintLog "\n\nSuccessfully copied the Bash Utils root directory path into the $__F_LIBRARY_PATH_FILE_NAME file\n\n"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 	if [ ! -d "$user" ]; then
-        printf "ERROR --> %s IS NOT AN EXISTING USER !\n\n" "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1
+        PrintLog "ERROR --> $user IS NOT AN EXISTING USER !\n\n"; PrintRoot; exit 1
 	else
         # ------------------------------------------------
 
@@ -331,53 +340,52 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-		PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; printf "PROCESSED USER : %s\n" "${user##*/}" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; NewlineF; sleep 1
+		PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}\n"; PrintLog "$(PrintLine)"; NewlineF; sleep 1
 
 		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
-			CopyModulesManagerDirectory "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
+			PrintLog "$(CopyModulesManagerDirectory "$user")"; sleep 0.5
 
-			CopyModulesInitializer "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
+			PrintLog "$(CopyModulesInitializer "$user")"; sleep 0.5
 
-			NewlineF; PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; NewlineF; sleep 0.5
+			NewlineF; PrintLog "$(PrintLine)"; NewlineF; sleep 0.5
 
-			ChangeOwnership "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
 
 		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 
 			if [ -f "$__F_LIBRARY_PATH_NEW_PARENT_PATH" ]; then
-				printf "Overwriting the %s file in the %s directory\n\n" "$__F_LIBRARY_PATH_FILE_NAME" "$__D_MODULE_MANAGER_NEW_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-				true > "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "UNABLE TO OVERWRITE THE %s FILE IN THE %s DIRECTORY\n\n" "$__F_LIBRARY_PATH_FILE_NAME" "$__D_MODULE_MANAGER_NEW_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
+				PrintLog "Overwriting the $__F_LIBRARY_PATH_FILE_NAME file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
+				true > "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO OVERWRITE THE $__F_LIBRARY_PATH_FILE_NAME FILE IN THE $__D_MODULE_MANAGER_NEW_PATH DIRECTORY\n\n"; PrintRoot; exit 1; }
 
-				printf "\nCopying the %s file in the %s directory\n\n" "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__D_MODULE_MANAGER_NEW_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
+				PrintLog "\nCopying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
 				NewlineF
 			else
-				printf "Copying the %s file in the %s directory\n\n" "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__D_MODULE_MANAGER_NEW_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { printf "UNABLE TO COPY THE %s FILE IN THE %s DIRECTORY" "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1; }
+				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory\n\n"
+				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
 				NewlineF
 			fi
 
-			ChangeOwnership "$user" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; sleep 0.5
+			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
 		else
-			printf "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are 'install' or 'i' for the installation of the modules manager,\nor 'update' or 'u' for the update of the Bash Utils root directory's path.\n\n" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; PrintRoot; exit 1
+			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are 'install' or 'i' for the installation of the modules manager,\nor 'update' or 'u' for the update of the Bash Utils root directory's path.\n\n"; PrintRoot; exit 1
 		fi
 
-		PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; NewlineF
+		PrintLog "$(PrintLine)"; NewlineF
 
-		printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE %s USER !\n\n" "${user##*/}" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
-
+		PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE ${user##*/} USER !\n\n"
     fi
 done
 
-PrintLine 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; NewlineF
+PrintLog "$(PrintLine)"; NewlineF
 
-printf "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :\n" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :\n"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
-	printf "\"%s\" " "${user##*/}" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+	PrintLog "\"%s\" " "${user##*/}"
 done
 
 printf "\n\n"
@@ -386,15 +394,15 @@ printf "\n\n"
 PrintRoot
 
 if [ "$__ARG" = 'install' ] || [ "$__ARG" = 'i' ]; then
-	printf "Please check the %s log file to verify if the installation was successful" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+	PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file to verify if the installation was successful"
 elif [ "$__ARG" = 'update' ] || [ "$__ARG" = 'u' ]; then
-	printf "Please check the %s log file to verify if the update was successful" "$__F_INSTALL_LOG_FILE_PATH" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+	PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file to verify if the update was successful"
 fi
 
-if [ "$EUID" -eq 0 ]; then
-    # TODO : Get the current home directory.
-    ChangeFileOwnership ""
-fi
+# if [ "$EUID" -eq 0 ]; then
+#     # TODO : Get the current home directory.
+#     ChangeFileOwnership ""
+# fi
 
 printf "\n\n"
 
