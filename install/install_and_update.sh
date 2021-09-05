@@ -110,7 +110,7 @@ function ChangeFileOwnership()
 
 	#***** Code *****
 	PrintLog "Changing the ownership of the $__F_LIBRARY_PATH_NEW_PARENT_PATH file, from root to ${user##*/}"
-	if chown -v "${p_user##*/}" "$p_file"; then return 0; else printf "UNABLE TO CHANGE THE OWNERSHIP OF THE '$p_file' FILE TO '${user##*/}'"; PrintRoot; exit 1; fi
+	if chown -v "${p_user##*/}" "$p_file"; then return 0; else PrintLog "UNABLE TO CHANGE THE OWNERSHIP OF THE '$p_file' FILE TO '${user##*/}'"; PrintRoot; exit 1; fi
 }
 
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
@@ -124,7 +124,7 @@ function ChangeOwnership()
         if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; Newline; return 0; fi
 
         PrintLog "Changing recursively the ownership of the newly installed '$__D_MODULE_MANAGER_NEW_PATH' folder, from 'root' to '${user##*/}'"
-        chown -Rv "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH" || 
+        ChangeDirOwnership "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH"
 
         Newline
         PrintLog "The '$__D_MODULE_MANAGER_NEW_PATH' folder ownership was successfully changed"
@@ -214,10 +214,23 @@ function Log()
 }
 
 # New line function for the functions called into the following "for" loop.
-function Newline() { printf ""; }
+function Newline()
+{
+    #***** Parameters *****
+    local p_line_breaks=$1
+
+#     #***** Code *****
+    if [[ "$p_line_breaks" =~ ^[\-0-9]+$ ]]; then
+        for (( i=0; i<p_line_breaks; i++ )); do
+            echo;
+        done
+    else
+        echo
+    fi
+}
 
 # New line function called into the the followig "for" loop.
-function NewlineF() { PrintLog "$(Newline)"; }
+function NewlineF() { local p_line_breaks=$1; if [[ "$p_line_breaks" =~ ^[\-0-9]+$ ]]; then PrintLog "$(Newline "$p_line_breaks")"; else PrintLog "$(Newline)"; fi; return 0; }
 
 # Printing a line according to the terminal's columns number.
 function PrintLine()
@@ -230,7 +243,7 @@ function PrintLine()
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
-    done; printf ""
+    done; PrintLog "$(Newline)"; return 0
 }
 
 # Checking if the 
@@ -238,17 +251,17 @@ function PrintLog()
 {
     if [ "$__NOLOG" = 'nolog' ]; then
         if [ -n "$2" ] && [ "$2" = 'log' ]; then
-            echo -ne "$1" >> "$__F_INSTALL_LOG_FILE_PATH"
+            echo -ne "$1" >> "$__F_INSTALL_LOG_FILE_PATH"; Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0
         else
-            echo -ne "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"
+            echo -ne "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0
         fi
     else
-        echo -ne "$1"
+        echo -ne "$1"; Newline; return 0
     fi
 }
 
 # Printing back the "/root" path in the normal users list file.
-function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; }
+function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; return 0; }
 
 # ------------------------------------------------
 
@@ -264,13 +277,13 @@ fi
 
 # Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
 if [ "$EUID" -ne 0 ]; then
-    PrintLog "Are you sure you want to install this library without super-user privileges ?"; sleep .3
+    PrintLog "Are you sure you want to install this library without super-user privileges ?"; sleep .3; NewlineF
 
-    PrintLog "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges."; sleep .3
+    PrintLog "If it was a mistake, please relaunch this script with the 'sudo' command, or else you will not be able to use any function that require these privileges."; sleep .3; NewlineF
 
-    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device."
+    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device."; NewlineF
 
-    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."
+    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."; NewlineF
 
 
     read -rp "Type your answer : " __ans
@@ -279,9 +292,9 @@ if [ "$EUID" -ne 0 ]; then
 
 
     if [ "${__ans,,}" != 'yes' ]; then
-        PrintLog "Aborting installation"
+        PrintLog "Aborting installation"; NewlineF
 
-        PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file"
+        PrintLog "Please check the $__F_INSTALL_LOG_FILE_PATH log file"; NewlineF
 
         exit 1
     fi
@@ -373,12 +386,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
-				NewlineF
+				Newline
 			else
 				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the $__D_MODULE_MANAGER_NEW_PATH directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE $__F_LIBRARY_PATH_OLD_PARENT_PATH FILE IN THE $__F_LIBRARY_PATH_NEW_PARENT_PATH DIRECTORY"; PrintRoot; exit 1; }
 
-				NewlineF
+				Newline
 			fi
 
 			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
