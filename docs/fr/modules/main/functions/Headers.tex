@@ -5,7 +5,6 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}					%
 \usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
-\usepackage{multirow}                       % Création de tableaux.
 \usepackage{verbatim}						% Mise en page de paragraphes.
 \usepackage{fancyhdr}						%
 \usepackage[document]{ragged2e}								% Justification du texte.
@@ -51,7 +50,9 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 \color{blue}
 \subsubsection{Chemins de fichiers}\color{white}
 \textbf{Nom du fichier :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
-\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH/lib/functions/main\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{lime}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH/lib/functions/main\color{white}*}\\[1\baselineskip]
+
+\textbf{*} : Voir la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH/lib/functions/main\color{white}} dans la sous-sous-catégorie\linebreak \textbf{\color{blue}Variables\color{white}}.\\[1\baselineskip]
 
 
 
@@ -82,7 +83,7 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 \subsubsection{Fonctions}\color{white}
 \textbf{Fonction :} \textbf{\color{mauve}IsChar\color{white}}\\[1\baselineskip]
 
-\textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}} \\[1\baselineskip]
+\textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
 
 
 
@@ -102,7 +103,12 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Cette variable globale met le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.\\[1\baselineskip]
+\textbf{Description :} Cette variable globale met le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.
+
+
+(( vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
+rappelant certaines fonctions ))
+\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
 
@@ -164,10 +170,7 @@ Cette fonction affiche un header complet.\\[1\baselineskip]
 \textbf{\color{orange}p\_stringTxt\color{white}} --> Ce paramètre attend une chaîne de caractères.\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
-Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase\color{white}} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}, vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
-rappelant certaines fonctions.\\[1\baselineskip]
-
-En adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}DrawLine\color{white}} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]
+Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase\color{white}} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}DrawLine\color{white}} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]
 
 Une fois ceci fait, un saut de ligne est effectué, et un message est affiché, avec la couleur choisie\linebreak
 encodée en premier (troisième paramètre) et le texte passé en quatrième argument.\\[1\baselineskip]
