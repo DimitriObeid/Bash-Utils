@@ -206,9 +206,9 @@ function Log()
     PrintLog '' 'log'
 
 	PrintLog "USER'S OPERATING SYSTEM DATA" 'log'
-	PrintLog "Operating system family : %s" "$OSTYPE" 'log'
+	PrintLog "Operating system family : $OSTYPE" 'log'
 
-	if [ -f "/etc/os-release" ]; then PrintLog "Operating system general informations : %s" "$(cat "/etc/os-release")" 'log'; fi
+	if [ -f "/etc/os-release" ]; then PrintLog "Operating system general informations : $(cat "/etc/os-release")" 'log'; fi
 
 	PrintLog '' 'log'; PrintLog "$(PrintLine)" 'log'; PrintLog '' 'log'
 }
@@ -235,6 +235,8 @@ function NewlineF() { local p_line_breaks=$1; if [[ "$p_line_breaks" =~ ^[\-0-9]
 # Printing a line according to the terminal's columns number.
 function PrintLine()
 {
+    PrintLog "$(Newline)"
+
     if command -v tput &> /dev/null; then
         __cols="$(tput cols || stty size | cut -d " " -f2)"
     else
@@ -283,7 +285,7 @@ if [ "$EUID" -ne 0 ]; then
 
     PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges / can't install the 'su' or 'sudo' command, or if you're using an unrooted Android device."; NewlineF
 
-    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."; NewlineF
+    PrintLog "Do you want to continue the installation ? Answer 'yes' (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."
 
 
     read -rp "Type your answer : " __ans
