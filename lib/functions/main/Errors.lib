@@ -33,7 +33,8 @@ fi
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
-# WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER, SINCE THIS FUNCTION IS CALLED IN THE "CheckDecho()" FUNCTION !!!
+# WARNING ! DO NOT CALL ANY FUNCTION THAT CALL THIS FUNCTION DIRECTLY OR INDIRECTLY HERE,
+# OR THE SCRIPT WILL LOOP FOREVER IN CASE OF AN ERROR DURING THIS FUNCTION CALL !!!
 function HandleSmallErrors()
 {
     #***** Parameters *****

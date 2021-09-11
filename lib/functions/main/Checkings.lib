@@ -618,7 +618,9 @@ function CheckDecho()
     if [ -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
         echo "$__BU_MAIN_COLOR_RESET" > "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" || \
         {
-            HandleSmallErrors "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH${__BU_MAIN_COLOR_WARNING} file." 'R' ''
+			# It's better to call the "EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
+			# It's also better to not call the "HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
+            EchoMsg "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH${__BU_MAIN_COLOR_WARNING} file." 'R' ''
 
             return 1
         }
