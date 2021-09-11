@@ -94,12 +94,12 @@ function ModuleInitializer_GetModuleName()
 {
     v_module="$(cd "$(dirname "$1")" ||
     {
-        printf "\nUnable to get the module's name from the parent directory name\n\n"
+        echo "Unable to get the module's name from the parent directory name"
 
         exit 1
     }; pwd -P)"
 
-    printf "%s" "${v_module##*/}"; return 0
+    echo "${v_module##*/}"; return 0
 }
 
 function __ModuleInitializer_SourcingFailure_CheckPath()
@@ -152,7 +152,7 @@ for module in "${p_module_list[@]}"; do
 		exit 1
     else
         # shellcheck disable=SC1090
-        source "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module")"
     fi
 
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$module"; then
@@ -161,7 +161,7 @@ for module in "${p_module_list[@]}"; do
         exit 1
     else
         # shellcheck disable=SC1090
-        source "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$module"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$module")"
     
 		HeaderGreen "END OF THE $(DechoHighlight "$module") MODULE INITIALIZATION !"
 	fi
