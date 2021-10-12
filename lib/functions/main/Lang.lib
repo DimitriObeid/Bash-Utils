@@ -74,7 +74,7 @@ function ParseCSVLang()
     #***** Code *****
     # If the library is already translated and a project's translation file needs to be called,
     # then it's not recommended to call a function that prints translated text, even if it only happens because of an error.
-    if [ "$__STAT_TRANSLATED" = "false" ]; then
+    if [ "$__BU_MAIN_STAT_TRANSLATED" = "false" ]; then
         CheckNotTranslated_ParseCSVLang "$p_path" "$p_lang" "$p_success_msg" "$p_error_msg"
 
     # Else, if the library is already translated and a project's translation file needs to be called,

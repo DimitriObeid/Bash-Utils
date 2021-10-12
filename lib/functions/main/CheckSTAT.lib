@@ -51,7 +51,7 @@ function ConfEcho()
 
     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-        else 
+        else DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
 
         echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
         echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
@@ -76,9 +76,13 @@ function ConfEcho()
             fi
         done
     else
-        HeaderError "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
+        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+        else
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
+        fi
 
-        echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
+        echo -ne "" >&2
         echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
 
         if [ -z "$p_badVal" ]; then

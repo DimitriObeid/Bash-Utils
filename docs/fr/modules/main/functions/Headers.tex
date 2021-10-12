@@ -81,9 +81,11 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{blue}Terminal
-\subsubsection{Fonctions}\color{white}
+\color{blue}
+\subsubsection{Fonctions externes appelées}\color{white}
 \textbf{Fonction :} \textbf{\color{mauve}IsChar\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette fonction verifie que la valeur enregistrée dans une variable soit un simple caractère alphanumérique.\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
 
@@ -92,16 +94,16 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{Variables}\color{white}
+\subsubsection{Variables globales et/ou d'environnement appelées}\color{white}
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Chacune des variables globales commençant par ce nom contient le nom de la couleur encodée lors de l'appel d'une de ces variables.\\[1\baselineskip]
+\textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{lime}Colors.conf\color{white}}\\[1\baselineskip]
 
 
 
-\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{white}}\\[1\baselineskip]
 
@@ -111,11 +113,20 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 
 
 
-\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette variable globale enregistre le chemin du dossier racine des modules la librairie Bash Utils, celui qui contient tous les fichiers de configuration et d'initialisation de chaque module.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}module.conf\color{white}}\\[1\baselineskip]
+
+
+
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Cette variable globale met le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.
+\textbf{Description :} Cette variable globale sert à mettre le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.
 
 
 (( vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
@@ -126,7 +137,7 @@ rappelant certaines fonctions ))
 
 
 
-\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}}\\[1\baselineskip]
 
@@ -229,17 +240,16 @@ Elles fonctionnent chacune de la même manière que les fonctions de la catégor
 \subsection{Headers tricolores}\color{white}
 Étant donné la charge de travail nécessaire pour créer ces headers, il serait beaucoup trop fastidieux de créer tous ces headers prédéfinis.\\[1\baselineskip]
 
-Pour vous donner une idée, prenez la formule mathématique suivante :
+Pour vous donner une idée de la quantité de travail, prenez la formule mathématique suivante :
 
 \[nbcol * (nbcol - 1) * nbcol\]
 
-Où nbcol = nombre de codes couleurs disponibles\linebreak
+Où nbcol = nombre de codes couleurs disponibles.\linebreak
 
 Au moment où j'ai écrit cette partie de la documentation (dimanche 29 août 2021), il existait 12 codes couleurs disponibles.\\[1\baselineskip]
 
-En effectuant le calcul précédent, nous obtenons \textbf{12 * 11 * 12 = 1 584 combinaisons possibles}, sans\linebreak
-parler de l'ajout d'éventuels nouveaux codes couleurs.\\[1\baselineskip]
+En effectuant le calcul précédent, nous obtenons donc \textbf{12 * 11 * 12 = 1 584 combinaisons possibles}, sans parler de l'ajout d'éventuels nouveaux codes couleurs.\\[1\baselineskip]
 
-Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}HeaderBase\color{white}}, suivie de ses 4 arguments.
+Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}HeaderBase\color{white}}, suivie de ses 4 arguments, dont leur\linebreak valeur sera différente des autres.
 
 \end{document}
