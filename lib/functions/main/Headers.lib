@@ -37,6 +37,8 @@ function DrawLine()
 	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	
 	#***** Code *****
+	debug
+
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! IsChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}"

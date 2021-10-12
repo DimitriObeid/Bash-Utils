@@ -90,3 +90,25 @@ function ParseCSVLang()
         # for i in 
     fi
 }
+
+
+# Parsing the created translation file.
+function _tr()
+{
+    #***** Parameters *****
+    p_translated=$1; shift
+
+    p_variables_array=("$@")
+
+    #***** Code *****
+    if [ ! -f "$__BU_MAIN_PROJECT_TR_FILE_NAME" ]; then
+        echo -e "UNABLE TO FIND THE CREATED TRANSLATIONS FILE"; exit 1
+    else
+        # ALGORITHME :
+        # Lire le fichier jusqu'à trouver le nom de la variable passée en argument.
+        #   Si la variable n'est pas trouvée, alors retourner 1
+        #   Sinon, lire chaque argument passé.
+    
+        return 0
+    fi
+}

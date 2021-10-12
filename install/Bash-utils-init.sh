@@ -92,12 +92,7 @@ function ModuleInitializer_FindPath
 
 function ModuleInitializer_GetModuleName()
 {
-    v_module="$(cd "$(dirname "$1")" ||
-    {
-        echo "Unable to get the module's name from the parent directory name"
-
-        exit 1
-    }; pwd -P)"
+    v_module="$(cd "$(dirname "$1")" || { echo -e "Unable to get the module's name from the parent directory name"; exit 1; }; pwd -P)"
 
     echo "${v_module##*/}"; return 0
 }
@@ -110,7 +105,7 @@ function __ModuleInitializer_SourcingFailure_CheckPath()
     #***** Code *****
     if [ -z "$p_path" ]; then
         printf "<No file path>"
-    elif [ ! -f "$p_path" ]; then
+    elif [ -n "$p_path" ] && [ ! -f "$p_path" ]; then
         printf "%s (bad file path : not found)" "$p_path"
     fi
 }
@@ -143,7 +138,6 @@ __BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
 ModuleInitializer_CheckBashMinimalVersion
 
-
 # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/"; then
@@ -152,8 +146,10 @@ for module in "${p_module_list[@]}"; do
 		exit 1
     else
         # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module")"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" "$module"
     fi
+    
+    ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "modue.conf")" "$module"
 
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$module"; then
         printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$module"
@@ -161,7 +157,7 @@ for module in "${p_module_list[@]}"; do
         exit 1
     else
         # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$module")"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$module" "Initializer.sh")" "$module"
     
 		HeaderGreen "END OF THE $(DechoHighlight "$module") MODULE INITIALIZATION !"
 	fi

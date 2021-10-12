@@ -49,30 +49,58 @@ function ConfEcho()
     #***** Code *****
     __BU_MAIN_STAT_ECHO="true"; __BU_MAIN_STAT_LOG="false"; __BU_MAIN_STAT_LOG_REDIRECT="";
 
-    HeaderError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"
+    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+        else 
 
-    echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
-    echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+        echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
+        echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
 
-    if [ -z "$p_badVal" ]; then
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
-    else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
-    fi
-
-    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
-
-    # Displaying the list of every allowed arguments.
-    for val in "${pa_correctValues[@]}"; do
-        i=$(( i+1 ))
-
-        # If an empty argument is allowed.
-        if [ -z "$val" ]; then
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+        if [ -z "$p_badVal" ]; then
+            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
         else
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
+            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
         fi
-    done
+
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+
+        # Displaying the list of every allowed arguments.
+        for val in "${pa_correctValues[@]}"; do
+            i=$(( i+1 ))
+
+            # If an empty argument is allowed.
+            if [ -z "$val" ]; then
+                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+            else
+                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
+            fi
+        done
+    else
+        HeaderError "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
+
+        echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
+        echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+
+        if [ -z "$p_badVal" ]; then
+            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
+        else
+            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
+        fi
+
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+
+        # Displaying the list of every allowed arguments.
+        for val in "${pa_correctValues[@]}"; do
+            i=$(( i+1 ))
+
+            # If an empty argument is allowed.
+            if [ -z "$val" ]; then
+                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+            else
+                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
+            fi
+        done
+    fi
 
     echo >&2; ExitError 1
 }

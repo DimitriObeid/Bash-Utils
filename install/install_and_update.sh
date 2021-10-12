@@ -97,7 +97,7 @@ function ChangeDirOwnership()
 	#***** Code *****
 	PrintLog "Changing recursively the ownership of the $__F_LIBRARY_PATH_NEW_PARENT_PATH directory, from root to ${user##*/}"
 	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The $__F_MODULE_INITIALIZER_NEW_PATH file ownership was successfully changed"; return 0
-    else PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE '$p_dir' DIRECTORY TO '${user##*/}'"; PrintRoot; exit 1; fi
+    else Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE '$p_dir' DIRECTORY TO '${user##*/}'"; PrintRoot; exit 1; fi
 
 }
 
@@ -235,8 +235,6 @@ function NewlineF() { local p_line_breaks=$1; if [[ "$p_line_breaks" =~ ^[\-0-9]
 # Printing a line according to the terminal's columns number.
 function PrintLine()
 {
-    PrintLog "$(Newline)"
-
     if command -v tput &> /dev/null; then
         __cols="$(tput cols || stty size | cut -d " " -f2)"
     else
@@ -367,7 +365,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-		PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; NewlineF; sleep 1
+		NewlineF; PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; NewlineF; sleep 1
 
 		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
