@@ -51,7 +51,7 @@ Bash Utils est une librairie, c'est à dire un ensemble de fonctions utilitaires
 
 Comme son nom le suggère, il s'agit d'une librairie orientée vers le langage Bash, un langage de script permettant une interaction simple avec le shell (interpréteur de commandes) du système\linebreak d'exploitation, ainsi qu'avec ses différents programmes.\\[1\baselineskip]
 
-Bash Utils est divisé en deux parties : la libraire, et les modules, expliqués plus en détails dans le\linebreak fichier \textbf{\color{lime}modules/Fonctionnement.pdf\color{white}}.\\[1\baselineskip]
+Bash Utils est divisé en deux parties : la librairie, et les modules, expliqués plus en détails dans le\linebreak fichier \textbf{\color{lime}modules/Fonctionnement.pdf\color{white}}.\\[1\baselineskip]
 
 Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix\linebreak s'explique non seulement par sa vaste présence, mais aussi par sa très vaste documentation\linebreak disponible et ses fonctionnalités (notamment les tableaux).\\[1\baselineskip]
 
@@ -145,49 +145,41 @@ Chaque fichier définit des variables propres aux catégories décrites dans le 
 \subsubsection{res}\color{white}
 Ce dossier contient plusieurs sous-dossiers :
 \begin{itemize}
-    \item \textbf{\color{lime}dev-tools\color{white} :} les fonctions les plus basiques (affichage de texte coloré, vérifications, gestion\linebreak de couleurs, saisies de l'utilisateur).\\[1\baselineskip]
+    \item \textbf{\color{lime}dev-tools\color{white} :} Ce dossier contient des scripts aidant au développement de la librairie, avec leurs dépendances (fichiers binaires, fichiers raccourcis \textbf{desktop}, icônes et fichiers sources dans le cas où un fichier serait trop long).\\[1\baselineskip]
 
-    \item \textbf{\color{lime}ideas\color{white} :} .\\[1\baselineskip]
+    \item \textbf{\color{lime}ideas\color{white} :} Ce dossier contient des fichiers où j'écris mes idées de fonctionnalités à implémenter dans la librairie.\\[1\baselineskip]
 
-    \item \textbf{\color{lime}src\color{white} :} .\\[1\baselineskip]
+    \item \textbf{\color{lime}src\color{white} :} Ce dossier contient des scripts préparés facilitant l'utilisation d'un système UNIX, en utilisant les fonctionnalités implémentées par la librairie.\\[1\baselineskip]
 
-    \item \textbf{\color{lime}tests\color{white} :} .\\[1\baselineskip]
+    \item \textbf{\color{lime}tests\color{white} :} Ce dossier contient de nombreux scripts servant ou ayant servi de fichiers de tests pour de nombreuses fonctionnalités, implémentées ou en cours d'implémentation.\\[1\baselineskip]
 \end{itemize}
 
-Description des sous-dossiers du dossier \textbf{res} :
-\setcounter{secnumdepth}{4}
-\paragraph{Fonctions}\mbox{}\\
-
-
-
-
-Ce dossier contient non seulement des scripts facilitant l'utilisation du shell Bash sur un système UNIX, mais aussi des scripts facilitant le développement de la librairie Bash Utils.\\[1\baselineskip]
 
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{tmp}\color{white}
-Ce dossier sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs.\\[1\baselineskip]
+Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs, de traduction, etc...\\[1\baselineskip]
 
-Il n'est créé que pendant l'exécution d'un projet, pendant la partie d'initialisation. Il n'est pas effacé par la suite.\\[1\baselineskip]
 
 
 \color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{red}
 \section{Fonctionnement}\color{white}
-Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
+Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.\\[1\baselineskip]
 
-Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug.
+Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug, et encore plus de répéter toutes ces étapes pour chaque module à ajouter, voire à supprimer au cas où.\\[1\baselineskip]
 
-Fort heureusement, un script shell s'occupe de cette partie : \color{lime}\textbf{Initializer.sh}\color{white}, dans le dossier \color{lime}\textbf{lib}\color{white}.
+Fort heureusement, un script shell s'occupe de cette partie : \color{lime}\textbf{Bash-utils-init.sh}\color{white}, dans le dossier\linebreak personnel.\\[1\baselineskip]
 
-Les deux seules procédures que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer le fichier \color{orange}\textbf{\$HOME\color{lime}/.bash\_profile}\color{white}, puis ce fichier d'initialisation. Il s'occupera de réaliser toutes les étapes ci-dessous :
+La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer le fichier cité ci-dessus. Il s'occupera de réaliser toutes les étapes ci-dessous, décrite plus en détils dans le fichier \textbf{\color{lime}modules/Fonctionnement.pdf\color{white}} :
+
 
 \color{green}
 \subsection{Étapes d'initialisation}\color{white}
-En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers et fichiers de la librairie Bash Utils, ainsi que celles enregistrant les chemins du projet.
+En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers du gestionnaire de modules.\\[1\baselineskip]
 
 Ces variables sont définies dans le fichier \color{lime}\textbf{config/Init.conf}\color{white}.
 
