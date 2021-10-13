@@ -160,7 +160,7 @@ Ce dossier contient plusieurs sous-dossiers :
 
 \color{blue}
 \subsubsection{tmp}\color{white}
-Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs, de traduction, etc...\\[1\baselineskip]
+Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du\linebreak module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des\linebreak fichiers de logs, de traduction, etc...\\[1\baselineskip]
 
 
 
@@ -174,22 +174,42 @@ Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de 
 
 Fort heureusement, un script shell s'occupe de cette partie : \color{lime}\textbf{Bash-utils-init.sh}\color{white}, dans le dossier\linebreak personnel.\\[1\baselineskip]
 
-La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer le fichier cité ci-dessus. Il s'occupera de réaliser toutes les étapes ci-dessous, décrite plus en détils dans le fichier \textbf{\color{lime}modules/Fonctionnement.pdf\color{white}} :
+La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités\linebreak proposées par Bash Utils est de sourcer le fichier cité ci-dessus. Il s'occupera de réaliser\linebreak toutes les étapes ci-dessous. Les fichiers mentionnés sont décrits plus en détils dans\linebreak le fichier \textbf{\color{lime}Bash-utils/docs/fr/modules/Fonctionnement.pdf\color{white}}.
 
 
 \color{green}
 \subsection{Étapes d'initialisation}\color{white}
-En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers du gestionnaire de modules.\\[1\baselineskip]
 
-Ces variables sont définies dans le fichier \color{lime}\textbf{config/Init.conf}\color{white}.
 
-En second lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
 
-En troisième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \color{orange}\textbf{\$\_\_BASH\_UTILS\_*}\color{white} initialisées dans la première étape existent.
 
-En quatrième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \color{lime}\textbf{lib}\color{white}.
+\color{blue}
+\subsubsection{Version de Bash}\color{white}
+En premier lieu, le script vérifie que la version de Bash utilisée soit la version 4.0.0 ou une version supérieure.\\[1\baselineskip]
 
-En cinquième lieu, le script :
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Variables de modules}\color{white}
+En second lieu, le script d'initialisation initialise les variables globales contenant les chemins des\linebreak multiples dossiers du gestionnaire de modules.\\[1\baselineskip]
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{}\color{white}
+En troisième lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
+
+
+
+En quatrième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \color{orange}\textbf{\$\_\_BASH\_UTILS\_*}\color{white} initialisées dans la première étape existent.
+
+En cinquième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \color{lime}\textbf{lib}\color{white}.
+
+En sixième lieu, le script :
 \begin{itemize}
     \item Crée une variable nommée \color{orange}\textbf{\$\_\_PROJECT\_PATH}\color{white}, enregistrant le chemin du fichier de script principal par le biais de la fonction \color{mauve}\textbf{GetParentDirectoryPath} \color{white} du fichier \color{lime}\textbf{functions/main/Directories.lib}\color{white}.
     
