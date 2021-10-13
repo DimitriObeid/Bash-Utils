@@ -180,43 +180,39 @@ La seule procédure que vous devez réaliser dans votre script pour utiliser les
 \color{green}
 \subsection{Étapes d'initialisation}\color{white}
 
+\color{blue}
+\subsubsection{Variables de modules}\color{white}
+En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des\linebreak multiples dossiers du gestionnaire de modules.\\[1\baselineskip]
 
 
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{Version de Bash}\color{white}
-En premier lieu, le script vérifie que la version de Bash utilisée soit la version 4.0.0 ou une version supérieure.\\[1\baselineskip]
+En second lieu, le script vérifie que la version de Bash utilisée soit la version 4.0.0 ou une version supérieure.\\[1\baselineskip]
 
 
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{Variables de modules}\color{white}
-En second lieu, le script d'initialisation initialise les variables globales contenant les chemins des\linebreak multiples dossiers du gestionnaire de modules.\\[1\baselineskip]
+\subsubsection{Boucle d'initialisation}\color{white}
+En troisième lieu, il exécute une boucle pour initialiser chaque module passé en argument lors de\linebreak l'exécution de ce script d'initialisation.\\[1\baselineskip]
+
+D'abord, il vérifie que le module existe dans le dossier \textbf{\color{lime}\~/.Bash-utils\color{white}}, puis il source le fichier\linebreak d'initialisation de variables associé, situé dans le dossier \textbf{\color{lime}\~/.Bash-utils/config/modules/\$nom\_du\_module\color{white}} et nommé \textbf{\color{lime}module.conf\color{white}}, qui doit initialiser d'autres fichiers de configurations à placer de préférence dans ce même dossier.\\[1\baselineskip]
+
+Ensuite, le script en fait de même pour le fichier d'initialisation des fonctions de librairie associé, situé dans le dossier \textbf{\color{lime}\~/.Bash-utils/modules/\$nom\_du\_module\color{white}}, et nommé \textbf{\color{lime}\~/Initializer.sh\color{white}}, avant de reboucler tant que tous les modules n'ont pas été initialisés.\\[1\baselineskip]
 
 
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{}\color{white}
-En troisième lieu, il définit les fonctions utiles à l'initialisation de Bash Utils.
+\subsubsection{Variables de statut}\color{white}
+En quatrième et dernier lieu, le script modifie des variables de statut, dont la valeur initialement\linebreak assignée dans le fichier \textbf{\color{lime}\~/.Bash-utils/config/modules/main/Status.conf\color{white}} servait à initialiser la librairie.\\[1\baselineskip]
 
 
-
-En quatrième lieu, le script crée le dossier temporaire du projet s'il n'existe pas déjà, puis dans ce dossier, il crée un fichier où seront redirigées les informations concernant le déroulé de la quatrième étape, avant de vérifier si les chemins contenus dans les variables \color{orange}\textbf{\$\_\_BASH\_UTILS\_*}\color{white} initialisées dans la première étape existent.
-
-En cinquième lieu, le script source tous les fichiers de fonctions et de variables des sous-dossiers du dossier \color{lime}\textbf{lib}\color{white}.
-
-En sixième lieu, le script :
-\begin{itemize}
-    \item Crée une variable nommée \color{orange}\textbf{\$\_\_PROJECT\_PATH}\color{white}, enregistrant le chemin du fichier de script principal par le biais de la fonction \color{mauve}\textbf{GetParentDirectoryPath} \color{white} du fichier \color{lime}\textbf{functions/main/Directories.lib}\color{white}.
-    
-    \item Modifie plusieurs variables de statut pour rendre la partie d'initialisation invisible à l'utilisateur final.
-    
-    \item Copie le contenu du fichier de logs de la partie d'initialisation dans le fichier de logs principal.\\[1\baselineskip]
-\end{itemize}
 
 \color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -244,10 +240,18 @@ Par ailleurs, \\[1\baselineskip]
 
 \color{green}
 \subsection{Configurations}\color{white}
-Pour utiliser les fonctionnalités de la librairie depuis n'importe quel chemin sans avoir à réécrire le chemin du fichier d'initialisation dans une myriade de fichiers éparpillés sur le disque dur, il est fortement recommandé de créer un fichier (s'il n'existe pas encore) nommé \color{lime}\textbf{.bash\_profile}\color{white} dans votre dossier personnel, ainsi que dans le dossier personnel du super-utilisateur (dans le dossier \color{lime}\textbf{/root}\color{white}) pour tout script lancé avec les privilèges du super-utilisateur.
+Pour utiliser les fonctionnalités de la librairie depuis n'importe quel chemin sans avoir à réécrire le\linebreak chemin du fichier d'initialisation dans une myriade de fichiers éparpillés sur le disque dur, il est fortement recommandé d'installer le gestionnaire de modules de la façon décrite dans le fichier \textbf{\color{lime}README INSTALL.md\color{white}}.\\[1\baselineskip]
+
+
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
 \subsection{Installation}\color{white}
+
+
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
 \subsection{Mise à jour}\color{white}
