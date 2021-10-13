@@ -44,6 +44,95 @@
 \color{red}
 \section{Présentation}\color{white}
 
+\color{green}
+\subsection{Présentation}\color{white}
+Ce fichier source inclut des fonctions servant à la gestion des valeurs des variables globales de statut : gestions d'erreurs et changement de valeur assité.\\[1\baselineskip]
+
+
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{Définitions des éléments mentionnés}\color{white}
+
+\color{blue}
+\subsubsection{Chemins de fichiers}\color{white}
+\textbf{Nom du fichier :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main\color{white}}\\[1\baselineskip]
+
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Colors.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+
+\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Nom du fichier :} \textbf{\color{lime}Text.conf\color{white}}\\[1\baselineskip]
+\textbf{Dossier parent :} \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main\color{white}}\\[1\baselineskip]
+
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Fonctions externes appelées}\color{white}
+\textbf{Fonction :} \textbf{\color{mauve}IsChar\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette fonction verifie que la valeur enregistrée dans une variable soit un simple caractère alphanumérique.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Variables globales et/ou d'environnement appelées}\color{white}
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Colors.conf\color{white}}\\[1\baselineskip]
+
+
+
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette variable globale sert à mettre le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.
+
+
+(( vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
+rappelant certaines fonctions ))
+\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
+
+
+
+\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}}\\[1\baselineskip]
+
+\textbf{Description :} Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.\\[1\baselineskip]
+
+\textbf{Fichier de définition :} \textbf{\color{lime}Text.conf\color{white}}\\[1\baselineskip]
+
+
+
+\color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{red}
 \section{Fonctions}\color{white}
