@@ -88,9 +88,9 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 \color{blue}
 \subsubsection{Fonctions externes appelées}\color{white}
-\textbf{Fonction :} \textbf{\color{mauve}IsChar\color{white}}\\[1\baselineskip]
+\textbf{Fonction :} \textbf{\color{mauve}DrawLine\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Cette fonction verifie que la valeur enregistrée dans une variable soit un simple caractère alphanumérique.\\[1\baselineskip]
+\textbf{Description :} .\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{lime}Checkings.lib\color{white}}\\[1\baselineskip]
 
@@ -99,7 +99,7 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{Variables globales et/ou d'environnement appelées}\color{white}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}\\[1\baselineskip]
 
 \textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.\\[1\baselineskip]
@@ -109,16 +109,12 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 
 \color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Cette variable globale sert à mettre le script dans un état dit ``stable'', dans le cas où un rappel de la même fonction dans l'état précédent peut causer une boucle infinie.
+\textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH\color{white}}\\[1\baselineskip]
 
+\textbf{Description :} Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{gray}true\color{white}}.\\[1\baselineskip]
 
-(( vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies en\linebreak
-rappelant certaines fonctions ))
-\\[1\baselineskip]
-
-\textbf{Fichier de définition :} \textbf{\color{lime}Status.conf\color{white}}\\[1\baselineskip]
+\textbf{Fichier de définition :} \\[1\baselineskip]
 
 
 
@@ -126,9 +122,9 @@ rappelant certaines fonctions ))
 
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}}\\[1\baselineskip]
 
-\textbf{Description :} Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.\\[1\baselineskip]
+\textbf{Description :} Cette variable .\\[1\baselineskip]
 
-\textbf{Fichier de définition :} \textbf{\color{lime}Text.conf\color{white}}\\[1\baselineskip]
+\textbf{Fichier de définition :} \\[1\baselineskip]
 
 
 

@@ -114,11 +114,32 @@ function __ModuleInitializer_SourcingFailure_CheckPath()
 function ModuleInitializer_SourcingFailure()
 {
     #***** Parameters *****
-    local p_path=$1         # Path of the file that cannot be sourced.
+    local p_path=$1 ; echo "$p_path"        # Path of the file that cannot be sourced.
     local p_module=$2       # Name of the module.
 
     #***** Code *****
     echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+}
+
+# Checking the spelling of a module name.
+function ModuleInitializer_SpellCheck()
+{
+    #***** Code *****
+    if command -v "aspell"; then
+        for file in "$@"; do
+            let count="$(aspell -a < "$file" | grep -E "^\&" | awk '{print $2}' | sort -u | wc -l | awk '{print $1}')"
+
+            if [ $count -eq 0 ]; then echo -e "\nNo spelling errors on $file\n"; fi
+
+            if [ $count -gt 0 ]; then
+                echo -e "\n$count spelling error(s) on $file\n"
+
+                echo ======================================================
+
+                aspell -a < "$file"  | grep -E "^\&" | awk '{print $2}' | sort -u
+            fi
+        done
+    fi
 }
 
 # -----------------------------------------------
@@ -141,7 +162,9 @@ ModuleInitializer_CheckBashMinimalVersion
 # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/"; then
-		printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
+		printf '\n'; printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
+
+        ModuleInitializer_SpellCheck "${p_module_list[@]}"
 
 		exit 1
     else
@@ -149,7 +172,7 @@ for module in "${p_module_list[@]}"; do
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" || ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" "$module"
     fi
     
-    ModuleInitializer_SourcingFailure "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "modue.conf")" "$module"
+    ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/modue.conf" "$module"
 
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$module"; then
         printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$module"

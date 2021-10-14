@@ -47,8 +47,6 @@ function ConfEcho()
     local i=0
 
     #***** Code *****
-    __BU_MAIN_STAT_ECHO="true"; __BU_MAIN_STAT_LOG="false"; __BU_MAIN_STAT_LOG_REDIRECT="";
-
     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi

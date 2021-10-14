@@ -91,7 +91,7 @@ Ce fichier source inclut des fonctions servant à la création de headers, sépa
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{Variables globales et/ou d'environnement appelées}\color{white}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
 \textbf{Variable :} \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}\\[1\baselineskip]
 
 \textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.\\[1\baselineskip]
@@ -157,7 +157,7 @@ défaut du terminal, si le paramètre \textbf{\color{orange}\$p\_lineColor\color
 Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal.\\[2\baselineskip]
 
 
-\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+\color{mauve}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
 \textbf{Fonction : \color{mauve}HeaderBase\color{white}}\\[1\baselineskip]
 \textbf{Description :}\linebreak
@@ -170,7 +170,7 @@ Cette fonction affiche un header complet.\\[1\baselineskip]
 \textbf{\color{orange}p\_stringTxt\color{white}} --> Ce paramètre attend une chaîne de caractères.\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
-Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase\color{white}} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}DrawLine\color{white}} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]
+Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase\color{white}} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction\linebreak \textbf{\color{mauve}DrawLine\color{white}} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]
 
 Une fois ceci fait, un saut de ligne est effectué, et un message est affiché, avec la couleur choisie\linebreak
 encodée en premier (troisième paramètre) et le texte passé en quatrième argument.\\[1\baselineskip]
@@ -195,7 +195,7 @@ arguments prédéfinis.\\[1\baselineskip]
 
 
 \textbf{Fonctionnement :}\linebreak
-Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}} en deuxième argument, puis la chaîne de caractères à\linebreak afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
+Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant en premier\linebreak et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...\color{white}}, un caractère défini par la\linebreak variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE\color{white}} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
 Appelez une de ces fonctions pour afficher un header unicolore sans avoir à passer ses trois premiers arguments.\\[1\baselineskip]
@@ -207,9 +207,13 @@ Appelez une de ces fonctions pour afficher un header unicolore sans avoir à pas
 \subsection{Headers bicolores}\color{white}
 Pour davantage faciliter la tâche des développeurs, des fonctions de création de headers bicolores existent.\\[1\baselineskip]
 
-Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :\linebreak
-	- \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\\[1\baselineskip]
-	- \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\\[5\baselineskip]
+Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :
+\begin{itemize}
+ \item \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\\[1\baselineskip]
+ \item \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.\\[1\baselineskip]
+\end{itemize}
+
+
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -227,6 +231,6 @@ Au moment où j'ai écrit cette partie de la documentation (dimanche 29 août 20
 
 En effectuant le calcul précédent, nous obtenons donc \textbf{12 * 11 * 12 = 1 584 combinaisons possibles}, sans parler de l'ajout d'éventuels nouveaux codes couleurs.\\[1\baselineskip]
 
-Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}HeaderBase\color{white}}, suivie de ses 4 arguments, dont leur\linebreak valeur sera différente des autres.
+Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}HeaderBase\color{white}}, suivie de ses 4 arguments, dont chaque\linebreak valeur sera différente des autres.
 
 \end{document}
