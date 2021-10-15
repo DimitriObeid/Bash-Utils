@@ -48,7 +48,7 @@ function ConfEcho()
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
 
         echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
@@ -80,16 +80,16 @@ function ConfEcho()
             DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
         fi
 
-        echo -ne "" >&2
-        echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+        echo -ne "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED" >&2
+        echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED_TYPE" >&2
 
         if [ -z "$p_badVal" ]; then
-            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
+            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE_EMPTY" >&2
         else
-            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
+            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE" >&2
         fi
 
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+        echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VALS_LIST_MSG" >&2
 
         # Displaying the list of every allowed arguments.
         for val in "${pa_correctValues[@]}"; do
@@ -97,7 +97,7 @@ function ConfEcho()
 
             # If an empty argument is allowed.
             if [ -z "$val" ]; then
-                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+                echo -e "" >&2
             else
                 echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
             fi
@@ -284,7 +284,11 @@ function CheckSTAT_TIME_TXT()
     local p_lineno=$2
 
     #***** Variables *****
-    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
+    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+        local pa_correctValues="${__BU_MAIN_COLOR_ORANGE}An integer or a floating number"
+    else
+        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT")
+    fi
 
     #***** Code *****
     # If the status variable's value is not a float or an integer.

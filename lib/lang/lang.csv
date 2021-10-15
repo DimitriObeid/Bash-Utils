@@ -1,23 +1,25 @@
 VARIABLE,COMMENTS,MESSAGE, en, fr
-__BU_MAIN_MSG_CASE_INVALID_ANSWER,Any invalid answer given as user’s keyboard input.,Error,Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !,Veuillez entrer une réponse valide ($(DechoHighlight 'oui') ou ($(DechoHighlight 'non')) !
-__BU_MAIN_MSG_CASE_ASK_CONTINUE_EXEC,Asking to the user if (s)he wants to continue the script’s execution.,Newstep,Do you want to continue the script's execution ? (yes / no),Souhaitez-vous continuer l’exécution du script ?(oui / non)
-__BU_MAIN_MSG_CASE_ANSWER_PROMPT,Asking a keyboard input to the user.,Newstep,Enter your answer : ,Entrez votre réponse : 
-__BU_MAIN_MSG_CASE_RESUME_EXEC,Displaying the message of resumption of the script’s execution.,Newstep,"Resuming the execution of the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"") script.","Reprise de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
-__BU_MAIN_MSG_CASE_CANCEL_EXEC,Displaying the cancellation message of the script execution. ,Error,"Aborting the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")'s execution.","Annulation de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
-/,/,/,/,/
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_NO_VAL,No value is passed as a mandatory function’s argument.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER HAS NO VALUE","LE PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’A PAS DE VALEUR"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHA,The value passed as mandatory function’s argument is not an alphabetic string.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHABÉTIQUE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHANUM,The value passed as mandatory function’s argument is not an alphanumeric string.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHANUMÉRIQUE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHA,The value passed as mandatory function’s argument is not an alphabetic character.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHABÉTIQUE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHA_NUM,The value passed as mandatory function’s argument is not an alphanumeric character.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHANUMÉRIQUE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_DIR,The value passed as mandatory function’s argument is not a directory path.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE DOSSIER VALIDE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FILE,The value passed as mandatory function’s argument is not a file path.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID FILE PATH","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE FICHER VALIDE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT,The value passed as mandatory function’s argument is not a decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A FLOAT","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_NEG,The value passed as mandatory function’s argument is not a negative decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE NÉGATIF"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_POS,The value passed as mandatory function’s argument is not a positive decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE POSITIF"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT,The value passed as mandatory function’s argument is not an integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN INTEGER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_NEG,The value passed as mandatory function’s argument is not a negative integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER NÉGATIF"
-__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_POS,The value passed as mandatory function’s argument is not a positive integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER POSITIF"
+__BU_MAIN_MSG_CASE_nofunction_INVALID_ANSWER,Any invalid answer given as user’s keyboard input.,Error,Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !,Veuillez entrer une réponse valide ($(DechoHighlight 'oui') ou ($(DechoHighlight 'non')) !
+,,,,Souhaitez-vous continuer l’exécution du script ?(oui / non)
+,,,,Entrez votre réponse : 
+__BU_MAIN_MSG_CASE_nofunction_ASK_CONTINUE_EXEC,Asking to the user if (s)he wants to continue the script’s execution.,Newstep,Do you want to continue the script's execution ? (yes / no),"Reprise de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
+__BU_MAIN_MSG_CASE_nofunction_ANSWER_PROMPT,Asking a keyboard input to the user.,Newstep,Enter your answer : ,"Annulation de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
+__BU_MAIN_MSG_CASE_nofunction_RESUME_EXEC,Displaying the message of resumption of the script’s execution.,Newstep,"Resuming the execution of the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"") script.",/
+__BU_MAIN_MSG_CASE_CANCEL_EXEC,Displaying the cancellation message of the script execution. ,Error,"Aborting the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")'s execution.","LE PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’A PAS DE VALEUR"
+/,/,/,/,"LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHABÉTIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_NO_VAL,No value is passed as a mandatory function’s argument.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER HAS NO VALUE","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHANUMÉRIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHA,The value passed as mandatory function’s argument is not an alphabetic string.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHABÉTIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHANUM,The value passed as mandatory function’s argument is not an alphanumeric string.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHANUMÉRIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHA,The value passed as mandatory function’s argument is not an alphabetic character.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE DOSSIER VALIDE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHA_NUM,The value passed as mandatory function’s argument is not an alphanumeric character.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE FICHER VALIDE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_DIR,The value passed as mandatory function’s argument is not a directory path.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FILE,The value passed as mandatory function’s argument is not a file path.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID FILE PATH","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE NÉGATIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT,The value passed as mandatory function’s argument is not a decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A FLOAT","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE POSITIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_NEG,The value passed as mandatory function’s argument is not a negative decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_POS,The value passed as mandatory function’s argument is not a positive decimal number.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER NÉGATIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT,The value passed as mandatory function’s argument is not an integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN INTEGER","LA VALEUR DU PARAMÈTRE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER POSITIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_NEG,The value passed as mandatory function’s argument is not a negative integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER",
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_POS,The value passed as mandatory function’s argument is not a positive integer.,Error,"THE $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER",
 /,,,,
 BU_MAIN_MSG_CHECKINGS_,,,,
 ,,,,
@@ -26,8 +28,31 @@ BU_MAIN_MSG_CHECKINGS_,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR,Printing the error that occured during a status variable value checking.,Error,,
-,,,"${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} →",
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR,Telling that an error occured during a status variable value checking.,Error,AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!,
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED,Printing the location of this error.,Error,"${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} →",
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED_TYPE,Printing the error that occured during a status variable value checking.,Error,Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE_EMPTY,The bad status variable value is an empty string.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE,The bad status variable value is an unexpected string.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VALS_LIST_MSG,Printing the message that preceds the list of accepted values.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_LIST_EMPTY,Printing the acceptance of an empty value.,Msg,${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT,Printing the acceptance of a floating number or an integer.,Msg,${__BU_MAIN_COLOR_ORANGE}An integer or a floating number,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_DECHO,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_ECHO,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -37,23 +62,7 @@ BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR,Printing the error that occured duri
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_DECHO,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-/,,,,
-BU_MAIN_MSG_DIRS,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-/,,,,
-BU_MAIN_MSG_ECHO,,,,
-,,,,
+__BU_MAIN_MSG_ERRORS,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -62,7 +71,7 @@ BU_MAIN_MSG_ECHO,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_ERRORS,,,,
+__BU_MAIN_MSG_FILES,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -71,7 +80,7 @@ BU_MAIN_MSG_ERRORS,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_FILES,,,,
+__BU_MAIN_MSG_HEADERS,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -80,16 +89,7 @@ BU_MAIN_MSG_FILES,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_HEADERS,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-/,,,,
-BU_MAIN_MSG_LANG,,,,
+__BU_MAIN_MSG_LANG,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -97,7 +97,7 @@ BU_MAIN_MSG_LANG,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_PERM,,,,
+__BU_MAIN_MSG_PERM,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -116,7 +116,7 @@ BU_MAIN_MSG_PERM,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_TEXT,,,,
+__BU_MAIN_MSG_TEXT,,,,
 ,,,,
 ,,,,
 ,,,,
@@ -125,4 +125,4 @@ BU_MAIN_MSG_TEXT,,,,
 ,,,,
 ,,,,
 /,,,,
-BU_MAIN_MSG_TIME,,,,
+__BU_MAIN_MSG_TIME,,,,
