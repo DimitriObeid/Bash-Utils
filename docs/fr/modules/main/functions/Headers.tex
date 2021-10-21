@@ -136,7 +136,12 @@ rappelant certaines fonctions ))
 \textbf{Description :}\linebreak
 Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec un caractère choisi et passé en second argument.\linebreak
 
-\textbf{Paramètres :}\linebreak
+\textbf{Paramètres :}\\[1\baselineskip]
+\begin{tabular}{|l|l|}
+\hline & \\
+\hline & \\
+end{tabular}
+
 \textbf{\color{orange}p\_lineColor\color{white}} --> Ce paramètre attend un code couleur *.\linebreak
 \textbf{\color{orange}p\_lineChar\color{white}} --> Ce paramètre attend un seul caractère, qui sera affiché sur chaque colonne.\linebreak
 
@@ -150,7 +155,7 @@ Cette fonction vérifie ensuite qu'une valeur soit passée en premier argument (
 Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \textbf{\color{gray}eval echo\color{white}}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar\color{white}}) dans le fichier de\linebreak
 configurations \textbf{\color{lime}Text.conf\color{white}}.\\[1\baselineskip]
 
-Enfin, une fois la boucle exécutée, la fonction réencode la couleur d'affichage selon la couleur par\linebreak
+Enfin, une fois la boucle exécutée, la fonction ré-encode la couleur d'affichage selon la couleur par\linebreak
 défaut du terminal, si le paramètre \textbf{\color{orange}\$p\_lineColor\color{white}} contient une valeur.\\[1\baselineskip]
 
 \textbf{Utilisation :}\linebreak
@@ -163,11 +168,18 @@ Appelez cette fonction pour dessiner une ligne devant remplir la totalité des c
 \textbf{Description :}\linebreak
 Cette fonction affiche un header complet.\\[1\baselineskip]
 
-\textbf{Paramètres :}\linebreak
-\textbf{\color{orange}p\_lineColor\color{white}} --> Ce paramètre attend un code couleur.\linebreak
-\textbf{\color{orange}p\_lineChar\color{white}} --> Ce paramètre attend un seul caractère.\linebreak
-\textbf{\color{orange}p\_stringColor\color{white}} --> Ce paramètre attend un code couleur.\linebreak
-\textbf{\color{orange}p\_stringTxt\color{white}} --> Ce paramètre attend une chaîne de caractères.\\[1\baselineskip]
+\textbf{Paramètres :}\\[1\baselineskip]
+\begin{tabular}{|l|l|}
+\hline 
+\textbf{\color{orange}p\_lineColor\color{white}} & Ce paramètre attend un code couleur \\ 
+\hline 
+\textbf{\color{orange}p\_lineChar\color{white}} & Ce paramètre attend un seul caractère \\ 
+\hline 
+\textbf{\color{orange}p\_stringColor\color{white}} & Ce paramètre attend un code couleur \\ 
+\hline 
+\textbf{\color{orange}p\_stringTxt\color{white}} & Ce paramètre attend une chaîne de caractères\\ 
+\hline 
+\end{tabular}\\[1\baselineskip]
 
 \textbf{Fonctionnement :}\linebreak
 Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase\color{white}} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO\color{white}}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction\linebreak \textbf{\color{mauve}DrawLine\color{white}} en y passant en arguments ses deux premiers paramètres.\\[1\baselineskip]

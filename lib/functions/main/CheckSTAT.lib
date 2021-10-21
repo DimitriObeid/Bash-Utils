@@ -75,9 +75,9 @@ function ConfEcho()
         done
     else
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
         fi
 
         echo -ne "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED" >&2
