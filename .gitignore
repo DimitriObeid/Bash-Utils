@@ -25,6 +25,7 @@ tmp/
 **/*.dvi
 **/*.out
 **/*.synctex.gz
+**/*.synctex\(busy\)
 **/*.toc
 
 # Log files
