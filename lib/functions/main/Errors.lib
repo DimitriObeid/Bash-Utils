@@ -149,9 +149,11 @@ function HandleErrors()
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
             EchoMsg "$(DrawLine "$__BU_MAIN_TXT_PRINT_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR")" '' 'nodate'
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-                EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                else EchoError ""; fi
             else
-                EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                else EchoError ""; fi
             fi
 
         # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
@@ -162,25 +164,28 @@ function HandleErrors()
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
+             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
+             else HeaderRed "$v_hdrString $__ : ${p_errorString^^}" >&2; fi
         else
-            HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
+            else HeaderRed "$v_hdrString $__ : ${p_errorString^^}" >&2; fi
         fi
 
         if [ -z "$p_adviceString" ]; then
-            EchoError "No advice to give."; Newline >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "No advice to give."; Newline >&2; else EchoError ""; fi
         else
-            EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2; else EchoError ""; fi
         fi
 
         if [ -z "$p_badValue" ]; then
-            EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then; EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+            else EchoError ""; fi
         else
-            EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2; else EchoError ""; fi
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2; else EchoError ""; fi
             ExitError "1"
         else
             # Calling the function that processes the given answer.
@@ -191,7 +196,11 @@ function HandleErrors()
             if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
                 EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
                 {
-                    HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+                        HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                    else
+                        HandleSmallErrors "$__" 'R' 'CPLS'
+                    fi
                 }
             fi
         fi
