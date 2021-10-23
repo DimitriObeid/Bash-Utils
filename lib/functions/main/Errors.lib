@@ -109,13 +109,13 @@ function ExitError()
 ## SCRIPT'S ERRORS HANDLING
 
 # "HandleErrors()" function --> Handling file name presence.
-function HandleErrors_File()        { if [ -z "$1" ]; then DechoHighlight "<no file>"; else DechoHighlight "$1"; fi }
+function HandleErrors_File()        { if [ -z "$1" ]; then if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then DechoHighlight "<no specified file>"; else DechoHighlight "$__BU_MAIN_MSG_ERRORS_HandleErrors_File_NO_FILE"; fi; else DechoHighlight "$1"; fi; }
 
 # "HandleErrors()" function --> Handling function name presence.
-function HandleErrors_Function()    { if [ -z "$1" ]; then DechoHighlight "<no function>"; else DechoHighlight "$1"; fi }
+function HandleErrors_Function()    { if [ -z "$1" ]; then if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then DechoHighlight "<no specified function>"; else DechoHighlight "$__BU_MAIN_MSG_ERRORS_HandleErrors_Function_NO_FUNCTION"; fi; else DechoHighlight "$1"; fi; }
 
 # "HandleErrors()" function --> Handling line number presence.
-function HandleErrors_Line()        { if [ -z "$1" ]; then DechoHighlight "<no line>"; else DechoHighlight "$1"; fi }
+function HandleErrors_Line()        { if [ -z "$1" ]; then if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then DechoHighlight "<no specified line>"; else DechoHighlight "$__BU_MAIN_MSG_ERRORS_HandleErrors_Line_NO_LINE"; fi; else DechoHighlight "$1"; fi; }
 
 # Handling command outputs.
 # Featured functions and files from the "basis" category :
@@ -132,8 +132,13 @@ function HandleErrors()
 	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #***** Variables *****
-	local v_hdrString;
-        v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
+    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+        local v_hdrString;
+            v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
+    else
+        local v_hdrString;
+            v_hdrString="$(echo -ne "$__BU_MAIN_MSG_ERRORS_HandleErrors_HDR_STRING")"
+    fi
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -165,27 +170,27 @@ function HandleErrors()
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
              if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : ${p_errorString^^}" >&2
-             else HeaderRed "$v_hdrString $__ : ${p_errorString^^}" >&2; fi
+             else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : ${p_errorString^^}" >&2; fi
         else
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : ${p_errorString^^}" >&2
-            else HeaderRed "$v_hdrString $__ : ${p_errorString^^}" >&2; fi
+            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : ${p_errorString^^}" >&2; fi
         fi
 
         if [ -z "$p_adviceString" ]; then
-            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "No advice to give."; Newline >&2; else EchoError ""; fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "No advice to give."; Newline >&2; else EchoError "$__BU_MAIN_MSG_ERRORS_HandleErrors_"; fi
         else
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "$(DechoHighlight "Advice") : $p_adviceString" >&2; Newline >&2; else EchoError ""; fi
         fi
 
         if [ -z "$p_badValue" ]; then
-            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then; EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
-            else EchoError ""; fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Value(s) that caused this error : $(DechoOrange 'no value') OR $(DechoOrange 'an unknown error')"; Newline >&2
+            else EchoError "$__BU_MAIN_MSG_ERRORS_HandleErrors_"; fi
         else
-            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2; else EchoError ""; fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Value(s) that caused this error : $(DechoHighlight "$p_badValue")"; Newline >&2; else EchoError "$__BU_MAIN_MSG_ERRORS_HandleErrors_"; fi
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2; else EchoError ""; fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "Stopping the execution of $(DechoHighlight "$(basename "$0")")."; Newline >&2; else EchoError "$__BU_MAIN_MSG_ERRORS_HandleErrors_"; fi
             ExitError "1"
         else
             # Calling the function that processes the given answer.
@@ -199,7 +204,7 @@ function HandleErrors()
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
                         HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
                     else
-                        HandleSmallErrors "$__" 'R' 'CPLS'
+                        HandleSmallErrors "$__BU_MAIN_MSG_ERRORS_HandleErrors_" 'R' 'CPLS'
                     fi
                 }
             fi
