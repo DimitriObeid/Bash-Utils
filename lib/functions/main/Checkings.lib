@@ -42,7 +42,7 @@ function IsFloat()
 # Checking negative only floating value.
 function IsNegativeFloat()
 {
-    if IsFloat && (( 1 < 0 )); then
+    if IsFloat "$1" && (( 1 < 0 )); then
         return 0
     else
         return 1
@@ -52,7 +52,7 @@ function IsNegativeFloat()
 # Checking positive only floating value.
 function IsPositiveFloat()
 {
-    if IsFloat && (( 1 >= 0 )); then
+    if IsFloat "$1" && (( 1 >= 0 )); then
         return 0
     else
         return 1
@@ -72,7 +72,7 @@ function IsInt()
 # Checking negative only integer value.
 function IsNegativeInt()
 {
-	if IsInt && (( 1 < 0 )); then
+	if IsInt "$1" && (( 1 < 0 )); then
 		return 0
 	else
 		return 1
@@ -82,7 +82,7 @@ function IsNegativeInt()
 # Checking positive only integer value.
 function IsPositiveInt()
 {
-	if IsInt && (( 1 >= 0 )); then
+	if IsInt "$1" && (( 1 >= 0 )); then
 		return 0
 	else
 		return 1
