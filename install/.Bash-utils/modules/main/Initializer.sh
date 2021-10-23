@@ -91,6 +91,10 @@ ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 MkTmpDir
 
+# Future functionnality : translating the library.
+# SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
+# ParseCSVLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "" "" ""
+
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
