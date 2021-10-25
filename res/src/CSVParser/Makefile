@@ -1,34 +1,32 @@
 ## MAKEFILE FOR COMPILING THE BASH PARSER
 
-# SOURCE FILES
-SRC	=	main.cpp
+SRC	=	main.cpp		# SOURCE FILES
 
-# CREATING OBJECT FILES
-OBJ	=	$(SRC: .cpp= .o)
+OBJ	=	$(SRC:.cpp=.o)		# CREATING OBJECT FILES
 
-# EXECUTABLE FILE'S NAME
-EXE	=	CSVParser.exec
+EXE	=	CSVParser-Linux		# EXECUTABLE FILE'S NAME
 
-# COMPILATION OPTIONS
-CXXFLAGS	=	-Werror -Wextra -Wall -ICSV.h
+CXXFLAGS	= -g -Werror -Wextra -Wall	# COMPILATION OPTIONS
 
 
-## COMMANDS
+## COMMANDS ALIASES
+GXX = g++
 
-RM	=	rm -f
+RM = rm -f
 
 
-##
+## MAKEFILE RULES (TO PASS AS ARGUMENT WHEN YOU CALL THE MAKE COMMAND, EXCEPT FOR THE "all:" RULE)
+all: $(OBJ)
+	$(GXX) -o $(EXE) $(CXXFLAGS) $(SRC)
 
-$(NAME): $(OBJ)
-	g++ -o $(NAME) $(OBJ)
+clean:
+	$(RM) $(OBJ)
 
-all: $(NAME)
+debug:
+	$(GXX) -o $(EXE) $(CXXFLAGS) $(SRC)
 
-clean:	$(RM) $(OBJ)
-
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	$(RM) $(EXE) $(OBJ)
 
 re: fclean all
 
