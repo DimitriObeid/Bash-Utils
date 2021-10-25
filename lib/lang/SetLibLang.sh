@@ -27,9 +27,14 @@ function SetLibLang
             ;;
         *)
             # Else, if the detected language is not (yet) supported, the default language will be set as English.
-            # As it's an important information, the "echo" command's output has to be redirected to the terminal too, no matter if
-            EchoInit "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
-            EchoInit "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
+            
+            # As it's an important information, the "echo" command's output has to be redirected to the
+            # terminal too, no matter if it was configured to be redirected only to the log project's file.
+
+            ChangeSTAT_LOG
+
+            EchoMsg "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
+            EchoMsg "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
                 "$LANG" "$(ChangeSTAT_ERROR 'fatal'; HandleErrors '1' "ERROR : CANNOT FIND THE $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv FILE" "Please make sure that the file path passed as ${FUNCNAME[0]} function's first argument is valid" \

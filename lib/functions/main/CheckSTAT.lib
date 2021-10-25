@@ -230,7 +230,7 @@ function CheckSTAT_LOG_REDIRECT()
     local p_lineno=$2
 
     #***** Variables *****
-    local pa_correctValues=("" "true" "false")
+    local pa_correctValues=("" "log" "tee")
 
     #***** Code *****
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'tee' ]; then
