@@ -71,6 +71,10 @@ function ParseCSVLibLang()
     p_success_msg=$3        # Success message to display in the targeted language.
     p_error_msg=$4          # Error message to display in the targeted language.
 
+    #***** Variables *****
+    v_num_row=0             # Row incrementer.
+    v_num_col=0             # Column incrementer.
+
     #***** Code *****
     # If the library is already translated and a project's translation file needs to be called,
     # then it's not recommended to call a function that prints translated text, even if it only happens because of an error.
@@ -87,11 +91,20 @@ function ParseCSVLibLang()
         EchoNewstep "Finding the variables list"
         Newline
 
-        # for i in 
-        
-        
-        #
-
+#         for col_index in "${!col_values[@]}"; do
+#             col_index_2=${col_values[$col_index]}
+#             
+#             if [ "$col_index" -eq 1 ]; then
+#                 for row_index in "${!row_values[@]}"; do
+#                     language_val=${row_values[$row_index]}
+#                     echo "$language_val"
+#                        
+#                     if [ "$language_val" = "$LANG" ]; then
+#                         echo "Row $row_index, LANGUE : $LANG"
+#                        fi
+#                 done
+#             fi
+#         done
     fi
 }
 
