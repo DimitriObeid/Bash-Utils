@@ -2,9 +2,10 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc < 1 || argc > 2) {
-		std::cout << "ERROR : At least or only 1 argument is expected :" << std::endl;
+	if (argc != 3) {
+		std::cout << "ERROR : At least or only 2 arguments are expected :" << std::endl;
 		std::cout << "\t - The CSV file's path" << std::endl;
+		std::cout << "\t - The language's code" << std::endl;
 		exit(84);
 	}
 
