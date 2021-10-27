@@ -91,6 +91,9 @@ function ParseCSVLibLang()
         EchoNewstep "Finding the variables list"
         Newline
 
+        while read line ; do
+        
+        done < "$p_path"
 #         for col_index in "${!col_values[@]}"; do
 #             col_index_2=${col_values[$col_index]}
 #             
