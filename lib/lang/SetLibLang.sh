@@ -19,7 +19,7 @@ function SetLibLang
             # French | Français
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$LANG" \
 
-                "$(ChangeSTAT_ERROR 'fatal'; HandleErrors '1' "ERREUR : IMPOSSIBLE DE TROUVER LE FICHIER $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv")" \
+                "$(ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; HandleErrors '1' "ERREUR : IMPOSSIBLE DE TROUVER LE FICHIER $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv")" \
                 "Assurez-vous que le chemin du fichier passé en premier argument de la fonction $(DechoHighlight "${FUNCNAME[0]}") soit valide" "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO")" \
 
@@ -37,7 +37,7 @@ function SetLibLang
             EchoMsg "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
-                "$LANG" "$(ChangeSTAT_ERROR 'fatal'; HandleErrors '1' "ERROR : CANNOT FIND THE $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv FILE" "Please make sure that the file path passed as ${FUNCNAME[0]} function's first argument is valid" \
+                "$LANG" "$(ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; HandleErrors '1' "ERROR : CANNOT FIND THE $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv FILE" "Please make sure that the file path passed as ${FUNCNAME[0]} function's first argument is valid" \
                 "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO")"
                 "Translation file found : $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv"
             ;;

@@ -176,8 +176,7 @@ function EchoError()
 {
     #***** Parameters *****
     local p_string=$1
-    local p_option=$2;
-shift 2
+    local p_option=$2; shift 2
 
     local pa_extraArgs=("$@")
 

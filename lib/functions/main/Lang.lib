@@ -91,9 +91,27 @@ function ParseCSVLibLang()
         EchoNewstep "Finding the variables list"
         Newline
 
-        while read line ; do
-        
+        # First, getting the header informations.
+        while read line; do
+            if [ "$line" = "VARIABLE" ]; then
+                echo "VAR"; exit 0
+            else
+                ChangeSTAT_ERROR "fatal" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+                HandleErrors '1' "UNABLE TO FIND THE \"VARIABLE\" OF THE $(DechoHighlight "$p_path") FILE'S FIRST COLUMN'S ROW" \
+                    "Check if the \"VARIABLE\" row is located in the $(DechoHighlight "$p_path") file's first column's row, preferably in the first row."
+            fi
         done < "$p_path"
+
+
+        # Then, getting the CSV file's values.
+#         while read line; do
+            # if "$line" = '/'; then
+            #   $((v_num_col++))
+            # else
+            # fi
+#         done
+
 #         for col_index in "${!col_values[@]}"; do
 #             col_index_2=${col_values[$col_index]}
 #             

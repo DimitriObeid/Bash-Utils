@@ -37,8 +37,6 @@ function DrawLine()
 	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	
 	#***** Code *****
-	debug
-
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! IsChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}"
@@ -120,9 +118,9 @@ function HeaderBase()
     elif [ "$__BU_MAIN_STAT_ECHO" = "true" ] || [ "$__BU_MAIN_STAT_TRANSLATED" = "false" ]; then
         echo -e
 
-        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")"
         echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
-        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        echo -e "$(DrawLine "$p_lineColor" "$p_lineChar")"
         echo -e
 
         return 0
