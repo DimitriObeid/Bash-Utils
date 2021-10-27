@@ -93,7 +93,7 @@ MkTmpDir
 
 # Future functionnality : translating the library.
 SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
-SetLibLang
+GetLibLang
 
 # -----------------------------------------------
 

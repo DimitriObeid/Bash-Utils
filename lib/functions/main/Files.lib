@@ -276,7 +276,7 @@ function SourceFile()
     if [ -f "$p_path" ]; then
         # shellcheck disable=SC1090
         if source "$p_path"; then
-            EchoSuccess "Sourced file : $(DechoS "$p_path")"
+            EchoSuccess "Sourced file : $(DechoHighlight "$p_path")"
         else
             HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(KeepFormatting "$(DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
