@@ -42,7 +42,10 @@ function SetLibLang
 
             # As it's an important information, the "echo" command's output has to be redirected to the
             # terminal too, no matter if it was configured to be redirected only to the log project's file.
+
+            # Backup the "$__BU_MAIN_STAT_LOG_REIDRECT" status variable's value.
             if [ "$__BU_MAIN_STAT_LOG_REIDRECT" = 'log' ]; then
+                local __BU_MAIN_STAT_LOG_REIDRECT_OLD='log'
                 ChangeSTAT_LOG_REDIRECT "tee" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 
@@ -53,6 +56,11 @@ function SetLibLang
                 "$LANG" "$(ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; HandleErrors '1' "ERROR : CANNOT FIND THE $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv FILE" "Please make sure that the file path passed as ${FUNCNAME[0]} function's first argument is valid" \
                 "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO")"
                 "Translation file found : $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv"
+
+            # Setting the backupped value to the "$__BU_MAIN_STAT_LOG_REIDRECT" function.
+            if [ -n "$__BU_MAIN_STAT_LOG_REIDRECT_OLD" ] && [ "$__BU_MAIN_STAT_LOG_REIDRECT_OLD" = 'log' ]; then
+                __BU_MAIN_STAT_LOG_REIDRECT="$__BU_MAIN_STAT_LOG_REIDRECT_OLD"
+            fi
             ;;
     esac
 }
