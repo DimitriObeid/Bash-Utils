@@ -111,7 +111,7 @@ function Decho()
 
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-                    HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
+                    HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
                         "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
                     echo -e "Invalid value"; exit 1
 

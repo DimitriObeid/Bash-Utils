@@ -34,26 +34,29 @@ EchoBU "$HOME/Bash-utils-init.sh"; Newline '1'; CatBU "$i"
 
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
-	Newline '2'; EchoBU "${i^^}"; Newline '1'; CatBU "$i"
+	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
 done
 
 # Processing the modules files.
 for i in "$HOME/.Bash-utils/modules/main/"*; do
-	Newline '2'; EchoBU "${i^^}"; Newline '1'; CatBU "$i"
+	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
 done
 
 # Processing the function files.
 for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-	Newline '2'; EchoBU "${i^^}"; Newline '1'; CatBU "$i"
+	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
 done
+
+# Processing the remaining files.
+Newline '2'; :'EchoBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"; Newline "1"'; CatBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"
 
 
 PrintLine
 
 printf "Library statistics :\n\n"
 
-printf "Size in bytes			: %s\n" "$(wc -c "$__BU_MAIN_FULL_FILE_PATH")"
-printf "Number of characters 	: %s\n" "$(wc -m "$__BU_MAIN_FULL_FILE_PATH")"
-printf "Number of lines			: %s\n" "$(wc -l "$__BU_MAIN_FULL_FILE_PATH")"
-printf "Maximum display width 	: %s\n" "$(wc -L "$__BU_MAIN_FULL_FILE_PATH")"
-printf "Number of words 		: %s\n" "$(wc -w "$__BU_MAIN_FULL_FILE_PATH")"
+printf "Size in bytes		    : %s\t\t\n" "$(wc -c "$__BU_MAIN_FULL_FILE_PATH")"
+printf "Number of characters 	: %s\t\t\n" "$(wc -m "$__BU_MAIN_FULL_FILE_PATH")"
+printf "Number of lines		    : %s\t\t\n" "$(wc -l "$__BU_MAIN_FULL_FILE_PATH")"
+printf "Maximum display width 	: %s\t\t\n" "$(wc -L "$__BU_MAIN_FULL_FILE_PATH")"
+printf "Number of words 	    : %s\t\t\n" "$(wc -w "$__BU_MAIN_FULL_FILE_PATH")"
