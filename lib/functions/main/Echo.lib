@@ -4,11 +4,21 @@
 # SCRIPT'S INFORMATIONS
 
 # Name          : Echo.lib
+# Module        : Main
 # Description   : (Colored) text display functions.
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+# DON'T PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCEDURE !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -357,6 +367,7 @@ function EchoWarning()
 ## TEXT FORMATTING
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
+# This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 function KeepFormatting()
 {
 	#***** Parameters *****
@@ -364,15 +375,15 @@ function KeepFormatting()
 	p_old_formatting=$2    # Former tectxt formatting.
 
 	#***** Code *****
-	echo -ne &>/dev/null; echo -ne "$p_string"
-
-	if [ "${p_old_formatting,,}" = 'l' ]; then
-        echo -ne "$(ToLowercase "")"
-	elif [ "${p_old_formatting^^}" = 'U' ]; then
-        echo -ne "$(ToUppercase "")"
-	else
-        echo -ne "<<|| No reformatting precised in the ${FUNCNAME[0]}() function ||>>"
-	fi
+# 	echo -ne &>/dev/null; echo -ne "$p_string"
+# 
+# 	if [ "${p_old_formatting,,}" = 'l' ]; then
+#         echo -ne "$(ToLowercase "$p_string")"
+# 	elif [ "${p_old_formatting^^}" = 'U' ]; then
+#         echo -ne "$(ToUppercase "$p_string")"
+# 	else
+#         echo -ne "<<|| No reformatting precised in the $(ToLowercase "${FUNCNAME[0]}()") function ||>>"
+# 	fi
 
 	return 0
 }

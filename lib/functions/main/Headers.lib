@@ -4,11 +4,21 @@
 # SCRIPT'S INFORMATIONS
 
 # Name          : Headers.lib
+# Module        : Main
 # Description   : 
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+# DON'T PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCEDURE !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 

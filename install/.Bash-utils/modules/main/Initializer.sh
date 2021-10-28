@@ -29,12 +29,12 @@ fi
 
 # Add value in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array that stores the initialization log output, according to the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
 #   "true"  --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array AND display text to the terminal.
-#   "false" --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array WITHOUT displaying any text. 
+#   "false" --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array WITHOUT displaying any text.
 function InitializerAddInitStrArrayVal()
 {
     #***** Parameters *****
     p_string=$1             # String to store in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array.
-    p_option=$2             # "echo" command's options. 
+    p_option=$2             # "echo" command's options.
 
     #***** Code *****
     if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
@@ -91,21 +91,16 @@ ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 MkTmpDir
 
-# Future functionnality : translating the library.
-SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
-GetLibLang
-
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
 if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
-# if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
+if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
 
-# Setting this status variable's value to "false" once the initialization part is over.
-
-# shellcheck disable=SC2034
-
+# Future functionnality : translating the library.
+SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
+# GetLibLang
 
 # -----------------------------------------------
 

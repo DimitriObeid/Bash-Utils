@@ -4,11 +4,21 @@
 # SCRIPT'S INFORMATIONS
 
 # Name          : Text.lib
+# Module        : Main
 # Description   : Functions specially made for text processing (cutting fields / characters, ).
 # Author(s)     : Dimitri Obeid
 # Version       : 
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+# DON'T PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCEDURE !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -44,8 +54,8 @@ function CutFromCharacter()
     p_iterations=$3     # Iterations.
 
     #***** Code *****
-    if ! IsInt "$p_iterations"; then
-        EchoWarning "$(DechoHighlight "${FUCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
+    if [ -n "$p_iterations" ] && ! IsInt "$p_iterations"; then
+        EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
     fi
 
     if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
