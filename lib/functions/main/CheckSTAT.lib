@@ -295,7 +295,7 @@ function CheckSTAT_TIME_TXT()
 
     #***** Variables *****
     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-        local pa_correctValues="${__BU_MAIN_COLOR_ORANGE}An integer or a floating number"
+        local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
     else
         local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT")
     fi
