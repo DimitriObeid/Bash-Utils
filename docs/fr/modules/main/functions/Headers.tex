@@ -8,9 +8,8 @@
 \usepackage{verbatim}						% Mise en page de paragraphes.
 \usepackage{fancyhdr}						%
 \usepackage[document]{ragged2e}								% Justification du texte.
-\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.					%
-\usepackage{hyperref}
-
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
+\usepackage{hyperref}                                       % Table des matières cliquable.
 
 \fontfamily{}
 
@@ -30,6 +29,7 @@
   /Keywords ()
 }
 
+% Definition de couleurs
 \definecolor{mauve}{RGB}{128, 0, 128}
 
 \begin{document}
@@ -199,7 +199,7 @@ Appelez cette fonction pour afficher un texte entre deux lignes, et pour davanta
 \color{green}
 \subsection{Headers unicolores}\color{white}
 \textbf{Description :}\linebreak
-Chacune de ces fonctions appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant ses trois premiers\linebreak
+Chacune de ces fonctions appelle la fonction \textbf{\color{mauve}HeaderBase\color{white}}, en lui passant ses trois premiers\linebreak     
 arguments prédéfinis.\\[1\baselineskip]
 
 \textbf{Paramètre :}\linebreak
