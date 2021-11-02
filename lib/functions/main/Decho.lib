@@ -85,6 +85,9 @@ function Decho()
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
+                "$(IsInt "${#val}")")
+                    return
+                    ;;
                 'BLINK')
                     echo -ne "${__BU_MAIN_TXT_FMT_BLINK}"
                     ;;
@@ -111,9 +114,8 @@ function Decho()
 
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-                    HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
-                        "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
-                    echo -e "Invalid value"; exit 1
+                    HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
+                        "Check if the value is supported in the first value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
 
                     ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
@@ -127,6 +129,9 @@ function Decho()
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
+                "$(IsInt "${#val}")")
+                    return
+                    ;;
                 'BLINK')
                     echo -ne "${__BU_MAIN_TXT_FMT_BLINK_RESET}"
                     ;;
@@ -154,10 +159,9 @@ function Decho()
                     # shellcheck disable=SC2034
                     ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
                     
-                    HandleErrors "1" "AT LEAST ONE OF THE $(KeepFormatting "$(DechoHighlight "${FUNCNAME[@]}")")'S ARRAY ARGUMENT VALUE IS INCORRECT" "" \
-                        "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
-                    echo -e "Invalid value"; exit 1
-                    
+                    HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
+                    "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
+
                     ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
                     ;;
             esac
