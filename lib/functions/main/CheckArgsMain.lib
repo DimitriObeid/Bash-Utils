@@ -118,7 +118,7 @@ function __CheckArgsMain_PrintBadOption()
 	if [ -n "$p_filename" ]; then
         local v_filename="$p_filename"
 	else
-        local v_filename="$(basename "${BASH_SOURCE[0]}")"
+        local v_filename; v_filename="$(basename "${BASH_SOURCE[0]}")"
 	fi
 
     #***** Code *****
@@ -292,13 +292,15 @@ function CheckArgsMain_ProcessingDir()
             'p_function' "$p_function" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
-    local lineno="$LINENO"; elif [ -z "$p_parent" ]; then
+    local lineno="$LINENO"; if [ -z "$p_parent" ]; then
         __CheckArgsMain_PrintBadOption 'z' "Please pass a valid parent directory path as second argument" 'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
-    local lineno="$LINENO"; elif [ -z "$p_name" ]; then
+    local lineno="$LINENO"; if [ -z "$p_name" ]; then
         __CheckArgsMain_PrintBadOption 'z' "Please pass the name of the folder to process as third argument" 'p_name' "$p_name" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
@@ -319,9 +321,10 @@ function CheckArgsMain_OverwriteDir()
         __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the given folder path is incorrect.
-    local lineno="$LINENO"; elif [ ! -d "$p_path" ]; then
+    local lineno="$LINENO"; if [ ! -d "$p_path" ]; then
         __CheckArgsMain_PrintBadOption '!d' "Please pass the correct path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
@@ -343,15 +346,17 @@ function CheckArgsMain_Makedir()
         __CheckArgsMain_PrintBadOption 'z' "" 'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the parent folder's path is incorrect.
-    local lineno="$LINENO"; elif [ ! -d "$p_parent" ]; then
+    local lineno="$LINENO"; if [ ! -d "$p_parent" ]; then
         __CheckArgsMain_PrintBadOption '!d' "" 'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the folder's name is missing (no name is given).
-    local lineno="$LINENO"; elif [ -z "$p_name" ]; then
+    local lineno="$LINENO"; if [ -z "$p_name" ]; then
 		__CheckArgsMain_PrintBadOption 'z' "" 'p_name' "$p_name" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
@@ -430,48 +435,7 @@ function CheckArgsMain_GetParentDirectoryPath()
 
 #### "Lang.lib" FILE'S FUNCTIONS
 
-## PARSING FUNCTIONS CATEGORY
-
-# Parsing a CSV file containing translations.
-function CheckArgsMain_ParseCSVLang()
-{
-    #***** Parameters *****
-    local p_path=$1               # Path of the translations CSV file to parse.
-    local p_lang=$2               # Language to fetch.
-    local p_success_msg=$3        # Success message to display in the targeted language.
-    local p_error_msg=$4          # Error message to display in the targeted language.
-
-    #***** Code *****
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    local lineno="$LINENO"; elif [ ! -f "$p_path" ]; then
-        __CheckArgsMain_PrintBadOption '!f' "Please pass the valid path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    local lineno="$LINENO"; elif [ -z "$p_lang" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the <...> of the language to fetch as argument" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    ## TODO : Add a fail-safe if the targeted language is not found.
-
-    local lineno="$LINENO"; elif [ -z "$p_success_msg" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the success message of your language as third argument" 'p_success_msg' "$p_success_msg" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-
-    local lineno="$LINENO"; elif [ -z "$p_error_msg" ]; then
-        __CheckArgsMain_PrintBadOption 'z' "Please pass the error message of your language as forth argument" 'p_error_msg' "$p_error_msg" "${FUNCNAME[0]}" "$lineno"
-
-		return 1
-    fi
-
-	return 0
-}
+## PLEASE CHECK THE "CheckNotTranslated_ParseCSVLang()" FUNCTION IN THE AFOREMENTIONED LIBRARY FILE.
 
 # -----------------------------------------------
 
@@ -512,14 +476,16 @@ function CheckArgsMain_OverwriteFile()
         __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the given file path is incorrect.
-    local lineno="$LINENO"; elif [ ! -d "$p_path" ]; then
+    local lineno="$LINENO"; if [ ! -d "$p_path" ]; then
         __CheckArgsMain_PrintBadOption '!d' "Please pass the correct path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
-			
-	local lineno="$LINENO"; elif [ -z "$p_authorization" ]; then
+    fi
+
+	local lineno="$LINENO"; if [ -z "$p_authorization" ]; then
 		__CheckArgsMain_PrintBadOption 'z' "Please enter a valid value for the overwrite authorization as second argument" 'p_authorization' "$p_authorization" "${FUNCNAME[0]}" "$lineno" 
 
 		return 1
@@ -541,15 +507,17 @@ function CheckArgsMain_Makefile()
         __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the new directory's parent folder as first argument" 'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the parent folder's path is incorrect.
-    local lineno="$LINENO"; elif [ ! -d "$p_parent" ]; then
+    local lineno="$LINENO"; if [ ! -d "$p_parent" ]; then
         __CheckArgsMain_PrintBadOption '!d' "Please pass a valid parent directory path as first argument" 'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
+    fi
 
     # Else, if the file's name is missing (no name is given).
-    local lineno="$LINENO"; elif [ -z "$p_name" ]; then
+    local lineno="$LINENO"; if [ -z "$p_name" ]; then
         __CheckArgsMain_PrintBadOption 'z' "Please pass the name of the folder to create as second argument" 'p_name' "$p_name" "${FUNCNAME[0]}" "$lineno"
 
 		return 1

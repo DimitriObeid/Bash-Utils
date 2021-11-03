@@ -84,35 +84,39 @@ function CheckNotTranslated_ParseCSVLang()
     #***** Code *****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-            __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" "$(basename ${BASH_SOURCE[0]})" || return 1
+            __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
             CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_" 'p_path' "$_path" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
+    fi
 
-    local lineno="$LINENO"; elif [ ! -f "$p_path" ]; then
+    local lineno="$LINENO"; if [ ! -f "$p_path" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-            __CheckArgsMain_PrintBadOption '!f' "Please pass the valid path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" "$(basename ${BASH_SOURCE[0]})" || return 1
+            __CheckArgsMain_PrintBadOption '!f' "Please pass the valid path of the directory to overwrite as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
             CheckNotTranslated_ParseCSVLang_PrintBadOption '!f' "$__BU_MAIN_MSG_LANG_" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
+    fi
 
-    local lineno="$LINENO"; elif [ -z "$p_lang" ]; then
+    local lineno="$LINENO"; if [ -z "$p_lang" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-            __CheckArgsMain_PrintBadOption 'z' "Please pass the ISO 639-1 language's code to fetch as second argument" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" "$(basename ${BASH_SOURCE[0]})" || return 1
+            __CheckArgsMain_PrintBadOption 'z' "Please pass the ISO 639-1 language's code to fetch as second argument" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
             CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
+    fi
 
-    local lineno="$LINENO"; elif [ -z "$p_success_msg" ]; then
+    local lineno="$LINENO"; if [ -z "$p_success_msg" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-            __CheckArgsMain_PrintBadOption 'z' "Please pass the success message of your language as third argument" 'p_success_msg' "$p_success_msg" "${FUNCNAME[0]}" "$lineno" "$(basename ${BASH_SOURCE[0]})" || return 1
+            __CheckArgsMain_PrintBadOption 'z' "Please pass the success message of your language as third argument" 'p_success_msg' "$p_success_msg" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
             CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_" 'p_success_msg' "$p_success_msg" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
+    fi
 
-    local lineno="$LINENO"; elif [ -z "$p_error_msg" ]; then
+    local lineno="$LINENO"; if [ -z "$p_error_msg" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-            __CheckArgsMain_PrintBadOption 'z' "Please pass the error message of your language as forth argument" 'p_error_msg' "$p_error_msg" "${FUNCNAME[0]}" "$lineno" "$(basename ${BASH_SOURCE[0]})" || return 1
+            __CheckArgsMain_PrintBadOption 'z' "Please pass the error message of your language as forth argument" 'p_error_msg' "$p_error_msg" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
             CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_" 'p_error_msg' "$p_error_msg" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
