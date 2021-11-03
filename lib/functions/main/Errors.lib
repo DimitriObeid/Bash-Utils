@@ -13,7 +13,7 @@
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
-# DON'T PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCEDURE !!!
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # shellcheck disable=SC2154
 
@@ -167,11 +167,21 @@ function HandleErrors()
             EchoMsg "$(DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_PRINT_HEADER_LINE")" '' 'nodate'
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                else EchoError ""; fi
+                if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    else EchoError ""; fi
+                else
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
+                    else EchoError ""; fi
+                fi
             else
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                else EchoError ""; fi
+                if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    else EchoError ""; fi
+                else
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
+                    else EchoError ""; fi
+                fi
             fi
 
         # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.

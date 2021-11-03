@@ -22,7 +22,7 @@ function SetLibLang
         fr_*)
             # French | Français (fr_*)
 
-            # Définition du numéro de colonne approprié pour la traduction du fichier CSV.
+            # Définition du numéro de colonne approprié pour la traduction du fichier CSV (depuis le fichier ".Bash-utils/config/module/main/LangCSVCode.conf").
             __BU_MAIN_LANG_CSV_CODE="$__BU_MAIN_LANG_CSV_CODE_FR"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$LANG" \
@@ -51,6 +51,9 @@ function SetLibLang
 
             EchoMsg "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
             EchoMsg "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
+
+            # Changing the "$LANG" environment variable's value for the mandatory arguments call.
+            LANG="en_US.UTF-8"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
                 "$LANG" "$(ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; HandleErrors '1' "ERROR : CANNOT FIND THE $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv FILE" "Please make sure that the file path passed as ${FUNCNAME[0]} function's first argument is valid" \

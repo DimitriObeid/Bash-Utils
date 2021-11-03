@@ -100,7 +100,9 @@ if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PR
 
 # Future functionnality : translating the library.
 SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
-# GetLibLang
+GetLibLang
+
+echo "!!!!!!!!!!!!!!!!!!!!"
 
 # -----------------------------------------------
 
