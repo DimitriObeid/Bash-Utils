@@ -102,8 +102,6 @@ if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PR
 SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
 GetLibLang
 
-echo "!!!!!!!!!!!!!!!!!!!!"
-
 # -----------------------------------------------
 
 ## END OF THE MODULE INITIALIZATION PROCESS
