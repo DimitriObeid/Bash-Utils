@@ -26,7 +26,6 @@ function SetLibLang
             __BU_MAIN_LANG_CSV_CODE="$__BU_MAIN_LANG_CSV_CODE_FR"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$LANG" \
-
                 "$(ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; HandleErrors '1' "ERREUR : IMPOSSIBLE DE TROUVER LE FICHIER $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv")" \
                 "Assurez-vous que le chemin du fichier passé en premier argument de la fonction $(DechoHighlight "${FUNCNAME[0]}") soit valide" "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO")" \
