@@ -104,6 +104,7 @@ function __CheckArgsMain_PrintBadOption()
     local p_lineno=$6   # Line where the test failed.
 
     #***** Optional parameters *****
+    local p_filename="$7"
 
     #***** Variables *****
 	# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value to "true" in case this function is called during a .
@@ -113,81 +114,88 @@ function __CheckArgsMain_PrintBadOption()
 		ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
+	# Since this function can be called from the "Lang.lib" file, and eventually in other library files, it's better to include a support for an appropriated file name.
+	if [ -n "$p_filename" ]; then
+        local v_filename="$p_filename"
+	else
+        local v_filename="$(basename "${BASH_SOURCE[0]}")"
+	fi
+
     #***** Code *****
 	# If no value is passed as argument.
     if [ "$p_option" = 'z' ]; then
 		HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "$p_option" = '!alpha' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "$p_option" = '!alphanum' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "$p_option" = '!char' ]; then
         HandleErrors '1' "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
     # Else, if the value passed as argument is not an alphanumeric character.
     elif [ "$p_option" = '!charnum' ]; then
         HandleErrors '1' "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not a valid directory path.
     elif [ "$p_option" = '!d' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a valid file path.
     elif [ "$p_option" = '!f' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a floating number.
     elif [ "$p_option" = '!float' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "$p_option" = '!floatneg' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a positive floating number.
     elif [ "$p_option" = '!floatpos' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not an integer.
     elif [ "$p_option" = '!int' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
@@ -195,13 +203,13 @@ function __CheckArgsMain_PrintBadOption()
     elif [ "$p_option" = '!intneg' ]; then
 
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 		return 1
 
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "$p_option" = '!intpos' ]; then
         HandleErrors "1" "THE $p_funcname FUNCTION'S $(DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-            "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" ""$p_funcname"" "$p_lineno"
+            "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
