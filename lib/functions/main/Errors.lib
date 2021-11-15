@@ -156,6 +156,8 @@ function HandleErrors()
 	if [ "$p_returnCode" -eq 0 ]; then
         return 0
     else
+        # -------- PART 1 : MANAGING THE CALL OF THIS "HandleErrors()" FUNCTION IF THIS "HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "HandleErrors()" FUNCTION
+
         # If the function needs to be called in the "CheckProjectLogStatus()" function,
         # this status variable's value MUST be set at "true", or else the script will loop forever.
 
@@ -183,21 +185,36 @@ function HandleErrors()
                     else EchoError ""; fi
                 fi
             fi
-
-        # Else, if the function doesn't need to be called in the "CheckProjectLogStatus()" function.
         fi
-        
+
+
+        # -------- PART 2 : PRINTING THE HEADER
+
+        # Redirecting the log messages to the terminal, to show them to the user. 
         if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
             local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
-             else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
+            if CheckIsInitializing; then
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString FATAL ERROR : $p_errorString")" >&2
+                else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
+            else
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
+                else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
+            fi
         else
-            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
-            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
+            if CheckIsInitializing; then
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString ERROR : $p_errorString")" >&2
+                else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
+            else
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
+                else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
+            fi
         fi
+
+
+        # -------- PART 3 : GIVING AN ADVICE ABOUT THE ORIGIN OF THE ERROR TO THE USER/DEVELOPPER
 
         if [ -z "$p_adviceString" ]; then
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "No advice to give."; Newline >&2; else EchoError "$__BU_MAIN_MSG_ERRORS_HandleErrors_"; fi

@@ -118,14 +118,14 @@ function __EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$p_string"
                     fi
                     ;;
                 '' | *)
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$p_string"
                     fi
@@ -135,14 +135,14 @@ function __EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
@@ -152,14 +152,14 @@ function __EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "-n")" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" "" || return 1
+                        InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
@@ -169,6 +169,8 @@ function __EchoCPLS()
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
     done
+
+    return 0
 }
 
 # --------------------------------------------
@@ -205,7 +207,7 @@ function EchoError()
         __EchoOutput "$p_string" 'end' 'E' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -239,7 +241,7 @@ function EchoMsg()
         __EchoOutput "$p_string" 'end' 'm' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
 # New sub-step message
@@ -273,7 +275,7 @@ function EchoNewstep()
         __EchoOutput "$p_string" 'end' 'N' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
 # Read input values
@@ -291,7 +293,7 @@ function EchoRead()
 	#***** Code *****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
 		echo -e "Keyboard input value : $(DechoHighlight "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { HandleSmallErrors '' "" '' ""; return 1; }
-	fi
+	fi; return 0
 }
 
 # Success message
@@ -325,7 +327,7 @@ function EchoSuccess()
         __EchoOutput "$p_string" 'end' 'S' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
 # Warning message
@@ -359,7 +361,7 @@ function EchoWarning()
         __EchoOutput "$p_string" 'end' 'W' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
 # -----------------------------------------------

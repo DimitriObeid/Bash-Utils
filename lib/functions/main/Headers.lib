@@ -125,6 +125,7 @@ function HeaderBase()
         Newline
 
         return 0
+
     elif [ "$__BU_MAIN_STAT_ECHO" = "true" ] || [ "$__BU_MAIN_STAT_TRANSLATED" = "false" ]; then
         echo -e
 

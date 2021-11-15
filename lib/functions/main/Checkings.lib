@@ -356,14 +356,14 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "$p_option")" 'nodate'
+                                InitializerAddInitStrArrayVal "$p_string" 'n'
                             else
                                 echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$p_string" 'nodate'
+                                InitializerAddInitStrArrayVal "$p_string"
                             else
                                 echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }                            
                             fi
@@ -375,7 +375,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                             else
                                 echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
                             fi
@@ -394,7 +394,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline
 							else
                                 echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
@@ -433,7 +433,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$p_string" "$(CutDashFromOption "$p_option")"
+                                InitializerAddInitStrArrayVal "$p_string" 'n'
                             else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
                             fi
@@ -452,7 +452,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                     '-n' | 'n')
                         if CheckIsInitializing; then
-                            InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                            InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                         else
                             echo -ne "$p_string"
                             echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
@@ -474,7 +474,7 @@ function CheckProjectLogStatus()
                     case "$p_option" in
                         '-n' | 'n')
                             if CheckIsInitializing; then
-                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
 							else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
@@ -507,7 +507,7 @@ function CheckProjectLogStatus()
             case "$p_option" in
                 '-n' | 'n')
                     if CheckIsInitializing; then
-                        InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                        InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                     else
                         echo -ne "$p_string"
                     fi
@@ -538,7 +538,7 @@ function CheckProjectLogStatus()
         case "$p_option" in
             '-n' | 'n')
                 if CheckIsInitializing; then
-                    InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" "$(CutDashFromOption "$p_option")"
+                    InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                 else
                     echo -ne "$p_string"
                 fi
