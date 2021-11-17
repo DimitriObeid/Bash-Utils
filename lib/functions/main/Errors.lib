@@ -213,6 +213,8 @@ function HandleErrors()
             fi
         fi
 
+        Newline >&2
+
 
         # -------- PART 3 : GIVING AN ADVICE ABOUT THE ORIGIN OF THE ERROR TO THE USER/DEVELOPPER
 

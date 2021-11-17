@@ -395,6 +395,8 @@ function CheckProjectLogStatus()
                         '-n' | 'n')
                             if CheckIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
+
+                                # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline
 							else
                                 echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }

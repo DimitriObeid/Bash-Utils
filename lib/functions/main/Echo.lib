@@ -65,7 +65,9 @@ function __EchoOutput()
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
 	#***** Code *****
-	if [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
+	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0
+
+	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 		CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "$p_context" = "begin" ]; then
@@ -193,7 +195,7 @@ function EchoError()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if ! CheckEcho; then
+    if ! CheckEcho || ! CheckIsInitializing; then
         __EchoOutput "$p_string" 'begin' 'E' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 

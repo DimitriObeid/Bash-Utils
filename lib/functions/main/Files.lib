@@ -223,7 +223,7 @@ function CreateProjectLogFile()
     ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
-    if [ "$__BU_MAIN_STAT_ECHO" = 'true' ]; then	ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+    if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
     # Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
