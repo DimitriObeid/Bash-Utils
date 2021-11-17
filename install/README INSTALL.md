@@ -42,7 +42,7 @@ Copiez le dossier **.Bash-utils** et le fichier **_Bash-utils-init.sh_** et coll
 
 **REMARQUE** : Le dossier ".Bash-utils" est un dossier caché pour ne pas trop encombrer votre dossier personnel. Rendez-le visible par votre explorateur de fichiers (en général avec le raccourci clavier **Ctrl+H**), ou incluez-le avec les fichiers à copier si vous utilisez la commande _cp -r_.
 
-Si le fichier **_Bash-utils-root-val.path_** est déjà fourni (dans le dossier caché **.Bash-utils**), **N'OUBLIEZ PAS** de vérifier le chemin enregistré à l'intérieur , **MÊME** si les scripts d'installation et/ou de mise à jour le modifie automatiquement. C'est ici que le chemin du dossier racine de la libraire est défini.
+Si le fichier **_Bash-utils-root-val.path_** est déjà fourni (dans le dossier caché **.Bash-utils**), **N'OUBLIEZ PAS** de vérifier le chemin enregistré à l'intérieur, **MÊME** si le script d'installation et de mise à jour le modifie automatiquement. C'est ici que le chemin du dossier racine de la libraire est défini.
 
 Si le fichier mentionné ci-dessus n'existe pas, crééz-le dans le dossier **.Bash-utils** (**AVANT** de le copier dans un dossier d'utilisateur, pour plus de confort), puis écrivez-y le chemin du dossier racine de la librairie Bash Utils.
 
