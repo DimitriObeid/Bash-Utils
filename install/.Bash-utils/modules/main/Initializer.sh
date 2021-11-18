@@ -36,8 +36,6 @@ function InitializerAddInitStrArrayVal()
     p_string=$1             # String to store in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array.
     p_option=$2             # "echo" command's options.
 
-    echo "STRING : $p_string"
-
     #***** Code *****
     if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in

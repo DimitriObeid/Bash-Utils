@@ -142,12 +142,16 @@ function HandleErrors()
 	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #***** Variables *****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-        local v_hdrString;
-            v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
-    else
+    if CheckStatIsInitializing && CheckStatIsLoggingDebug; then
+        local v_stat_print_init_log_old='true'; ChangeSTAT_PRINT_INIT_LOG 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    fi
+
+    if CheckStatIsTranslated; then
         local v_hdrString;
             v_hdrString="$(echo -ne "$__BU_MAIN_MSG_ERRORS_HandleErrors_HDR_STRING")"
+    else
+        local v_hdrString;
+            v_hdrString="$(echo -ne "IN $(HandleErrors_File "$p_file") FILE, FUNCTION $(HandleErrors_Function "$p_function"), LINE $(HandleErrors_Line "$p_lineno") -->")"
     fi
 
 	# ***** Code *****
@@ -255,6 +259,10 @@ function HandleErrors()
         if [ "$v_log_old" = "true" ]; then
             __BU_MAIN_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
+    fi
+
+    if [ "$v_stat_is_initializing_old" = 'true' ]; then
+        __BU_MAIN_STAT_PRINT_INIT_LOG="$v_stat_print_init_log_old"
     fi
 
     return 1
