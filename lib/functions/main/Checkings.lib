@@ -172,15 +172,7 @@ function CheckRootEUID()
 
 ## INITIALIZATION CHECKINGS
 
-# Checking if the library is into its initialization process.
-function CheckIsInitializing()
-{
-    if [ "$__BU_MAIN_STAT_INITIALIZING" = "true" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
+
 
 # -----------------------------------------------
 
@@ -355,14 +347,14 @@ function CheckProjectLogStatus()
                 if [ "${val,,}" = 'nodate' ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string" 'n'
                             else
                                 echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }                            
                             fi
                             ;;
                         '' | *)
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string"
                             else
                                 echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }                            
@@ -374,14 +366,14 @@ function CheckProjectLogStatus()
                 elif [ -z "$val" ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                             else
                                 echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                             else
                                 echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
@@ -393,7 +385,7 @@ function CheckProjectLogStatus()
                 else
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
 
                                 # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
@@ -404,7 +396,7 @@ function CheckProjectLogStatus()
 							fi; Newline
                             ;;
                         '' | *)
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "log")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
 							else
@@ -434,14 +426,14 @@ function CheckProjectLogStatus()
                 if [ "${val,,}" = 'nodate' ]; then
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$p_string" 'n'
                             else
                                 echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
                             fi
                             ;;
                         '' | *)
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                             else
                                 echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
@@ -453,7 +445,7 @@ function CheckProjectLogStatus()
                 elif [ -z "$val" ]; then
                     case "$p_option" in
                     '-n' | 'n')
-                        if CheckIsInitializing; then
+                        if CheckStatIsInitializing; then
                             InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                         else
                             echo -ne "$p_string"
@@ -461,7 +453,7 @@ function CheckProjectLogStatus()
                         fi
                         ;;
                     '' | *)
-                        if CheckIsInitializing; then
+                        if CheckStatIsInitializing; then
                             InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                         else
                             echo -e "$p_string"
@@ -475,7 +467,7 @@ function CheckProjectLogStatus()
                 else
                     case "$p_option" in
                         '-n' | 'n')
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
 							else
@@ -484,7 +476,7 @@ function CheckProjectLogStatus()
 							fi; Newline
                             ;;
                         '' | *)
-                            if CheckIsInitializing; then
+                            if CheckStatIsInitializing; then
                                 InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                                 EchoWarning "$v_warning_array_value $(DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
 							else
@@ -508,14 +500,14 @@ function CheckProjectLogStatus()
         else
             case "$p_option" in
                 '-n' | 'n')
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                     else
                         echo -ne "$p_string"
                     fi
                     ;;
                 '' | *)
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     else
                         echo -e "$p_string"
@@ -539,14 +531,14 @@ function CheckProjectLogStatus()
     else
         case "$p_option" in
             '-n' | 'n')
-                if CheckIsInitializing; then
+                if CheckStatIsInitializing; then
                     InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
                 else
                     echo -ne "$p_string"
                 fi
                 ;;
             '' | *)
-                if CheckIsInitializing; then
+                if CheckStatIsInitializing; then
                     InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                 else
                     echo -e "$p_string"
@@ -634,7 +626,13 @@ function CheckProjectRelatedFile()
 function CheckDecho()
 {
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
+    # Creating the "colors.tmp" file in case it doesn't exists.
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" || \
+        { HandleSmallErrors 'E' "$(if CheckSTAT_TRANSLATED; then echo "$__BU_MAIN_MSG_CHECKINGS_CheckDecho_"; else echo "Unable to create the $(Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file"; fi)" 'E' 'CPLS'; return 1; }
+    fi
+
+    # If the , then the "Decho()" function will not decorate the targeted text, but put it between 
+    if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
         return 1
 	fi
 	

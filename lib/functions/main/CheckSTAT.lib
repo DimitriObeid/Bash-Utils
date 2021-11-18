@@ -421,6 +421,9 @@ function ChangeSTAT_LOG_REDIRECT    { __BU_MAIN_STAT_LOG_REDIRECT="$1";     Chec
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
 function ChangeSTAT_OPERATE_ROOT    { __BU_MAIN_STAT_OPERATE_ROOT="$1";     CheckSTAT_OPERATE_ROOT      "$2" "$3" || return 1; return 0; }
 
+# Changing the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
+function ChangeSTAT_PRINT_INIT_LOG  { __BU_MAIN_STAT_PRINT_INIT_LOG="$1";   CheckSTAT_PRINT_INIT_LOG    "$2" "$3" || return 1; return 0; }
+
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
 function ChangeSTAT_TIME_TXT        { __BU_MAIN_STAT_TIME_TXT="$1";         CheckSTAT_TIME_TXT          "$2" "$3" || return 1; return 0; }
 
@@ -429,3 +432,28 @@ function ChangeSTAT_TRANSLATED      { __BU_MAIN_STAT_TRANSLATED="$1";       Chec
 
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
 function ChangeSTAT_TXT_FMT         { __BU_MAIN_STAT_TXT_FMT="$1";          CheckSTAT_TXT_FMT           "$2" "$3" || return 1; return 0; }
+
+# -----------------------------------------------
+
+# CHECKING BOOLEAN VALUES
+
+# CHecking if the debug mode is active.
+function CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
+
+# Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop. 
+function CheckStatAllowEcho()       { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
+
+# Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
+function CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "true" ]; then return 0; else return 1; fi; }
+
+# Checking if the log redirection mode is active.
+function CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LOG"            = 'true' ]; then return 0; else return 1; fi; }
+
+# Checking if the initialization logs can be printed on the terminal.
+function CheckStatIsLoggingDebug()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
+
+# Checking if the main module is translated.
+function CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }
+
+# Checking if the text formatting is allowed.
+function CheckStatAllowFormatting() { if [ "$__BU_MAIN_STAT_TXT_FMT"        = 'true' ]; then return 0; else return 1; fi; }

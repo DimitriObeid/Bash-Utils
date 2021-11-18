@@ -54,7 +54,7 @@ function HandleSmallErrors()
     local p_cpls=$4         # Enable the safe text printing mode.
 
     #***** Variables *****
-    v_advise="Please don't forget to pass a type of message to display as first argument ('E' = EchoError; 'W' = EchoWarning)"
+    local v_advise="Please don't forget to pass a type of message to display as first argument ('E' = EchoError; 'W' = EchoWarning)"
 
     if [ "${p_cpls^^}" = 'CPLS' ]; then
         if [ "$__BU_MAIN_STAT_ECHO" = 'false' ]; then
@@ -196,7 +196,7 @@ function HandleErrors()
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            if CheckIsInitializing; then
+            if CheckStatIsInitializing; then
                 if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString FATAL ERROR : $p_errorString")" >&2
                 else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
             else
@@ -204,7 +204,7 @@ function HandleErrors()
                 else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
             fi
         else
-            if CheckIsInitializing; then
+            if CheckStatIsInitializing; then
                 if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString ERROR : $p_errorString")" >&2
                 else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
             else

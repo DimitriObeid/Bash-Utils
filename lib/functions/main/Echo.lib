@@ -42,7 +42,7 @@ fi
 # Print void lines before and after calling a header.
 function __EchoVoid()
 {
-    printf "
+printf "
     
     
     
@@ -52,7 +52,7 @@ function __EchoVoid()
     
     
     
-    " > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
+" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
 }
 
 # "Echo<...>()" functions debug output for a better view during a debug process.
@@ -119,14 +119,14 @@ function __EchoCPLS()
         if [ "$val" = 'nodate' ]; then 
             case "$p_option" in
                 '-n' | 'n')
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$p_string"
                     fi
                     ;;
                 '' | *)
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$p_string"
@@ -136,14 +136,14 @@ function __EchoCPLS()
         elif [ -z "$val" ]; then
             case "$p_option" in
                 '-n' | 'n')
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
@@ -153,14 +153,14 @@ function __EchoCPLS()
         else
             case "$p_option" in
                 '-n' | 'n')
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
-                    if CheckIsInitializing; then
+                    if CheckStatIsInitializing; then
                         InitializerAddInitStrArrayVal "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
@@ -195,7 +195,7 @@ function EchoError()
     local pa_extraArgs=("$@")
 
     #***** Code *****
-    if ! CheckEcho || ! CheckIsInitializing; then
+    if ! CheckEcho || ! CheckStatIsInitializing; then
         __EchoOutput "$p_string" 'begin' 'E' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 

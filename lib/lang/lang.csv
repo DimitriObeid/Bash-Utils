@@ -93,11 +93,11 @@ __BU_MAIN_MSG_HEADERS_,,,,
 ,,,,
 /,,,,
 __BU_MAIN_MSG_LANG_,,,,
-__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_PATH,"No specified translation file path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the path of the translations CVS file to parse as first argument,
-__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_BAD_PATH,"invalid path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the valid path of the translations CVS file to parse as first argument,
-__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_LANG,No ISO 639-1 language’s code passed as language’s argument,,Please pass the ISO 639-1 language's code to fetch as second argument,
-__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_SUCC_MSG,,,Please pass the success message of your language as third argument,
-__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ERR_MSG,,,Please pass the error message of your language as fourth argument,
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_PATH,"No specified translation file path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the path of the translations CVS file to parse as first argument,Veuillez passer en premier argument le chemin du fichier de traduction au format CSV à lire
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_BAD_PATH,"invalid path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the valid path of the translations CVS file to parse as first argument,Veuillez passer en premier argument ln chemin valide vers le fichier de traduction au format CSV à lire
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ISO_639_1_LANG,No ISO 639-1 language’s code passed as language’s argument,,Please pass the ISO 639-1 language's code to fetch as second argument,Veuillez passer en second argument le code ISO 639-1 de la langue à utiliser
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_SUCC_MSG,No success message passed as target language’s succes message argument,,Please pass the success message of your language as third argument,Veuillez passer en troisième argument le message de succès écrit dans la langue de votre choix
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ERR_MSG,No error message passed as target language’s error message argument,,Please pass the error message of your language as fourth argument,Veuillez passer en quatrième argument le message d’erreur écrit dans la langue de votre choix
 ,,,,
 /,,,,
 __BU_MAIN_MSG_PERM_,,,,

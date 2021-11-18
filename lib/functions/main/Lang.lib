@@ -102,7 +102,7 @@ function CheckNotTranslated_ParseCSVLang()
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
             __CheckArgsMain_PrintBadOption 'z' "Please pass the ISO 639-1 language's code to fetch as second argument" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
         else
-            CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_LANG" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" || return 1
+            CheckNotTranslated_ParseCSVLang_PrintBadOption 'z' "$__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ISO_639_1_LANG" 'p_lang' "$p_lang" "${FUNCNAME[0]}" "$lineno" || return 1
         fi
     fi
 
