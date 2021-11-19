@@ -146,10 +146,21 @@ function ModuleInitializer_SpellCheck()
 
 ## DEFINING GLOBAL VARIABLES
 
-__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME" ".Bash-utils")"
-__BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
-__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
-__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+if [ -d "$HOME/.Bash-utils" ]; then
+	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME" ".Bash-utils")"
+	__BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
+	__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
+	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+else
+	echo "ERROR !"; echo
+
+	echo "The Bash Utils configurations root folder << .Bash-utils >> doesn't exists in your home directory."; echo
+	echo "Please copy this folder in your home directory. You can install it by executing the installation file, or you can find it in the Bash-utils/install directory."; echo
+
+	echo "Aborting the library's initialization."; echo
+
+	exit 1
+fi
 
 # -----------------------------------------------
 
