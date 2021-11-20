@@ -46,13 +46,13 @@ function DbgMsg()
     p_sleep=$2              # Pause time in seconds.
 
     #***** Code *****
-    printf "
+printf "
 
-    -------------------------------------------------
-    DEBUG
-    -------------------------------------------------
+-------------------------------------------------
+                      DEBUG
+-------------------------------------------------
 
-    "
+"
 
     if [ "$p_code" -eq 0 ]; then
         sleep "$p_sleep"
@@ -81,8 +81,17 @@ function ModuleInitializer_CheckBashMinimalVersion()
 	fi
 }
 
+# Create a file directly in the computer's memory to redirect .
+function ModuleInitializer_CreateFileInMemory()
+{
+    #***** Parameters *****
+    p_filename=$1
+
+    #***** Code *****
+}
+
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
-function ModuleInitializer_FindPath
+function ModuleInitializer_FindPath()
 {
 	# $1 = Parent directory.
     # $2 = Targeted directory or file.
@@ -97,16 +106,28 @@ function ModuleInitializer_GetModuleName()
     echo "${v_module##*/}"; return 0
 }
 
-function __ModuleInitializer_SourcingFailure_CheckPath()
+# Check if the given path exists
+function __ModuleInitializer_CheckPath()
 {
     #***** Parameters *****
-    local p_path=$1
+    local p_path=$1         # Path of the target file or directory.
+    local p_target=$2       # Specify if the target is a directory or a file.
 
     #***** Code *****
     if [ -z "$p_path" ]; then
         printf "<No file path>"
-    elif [ -n "$p_path" ] && [ ! -f "$p_path" ]; then
-        printf "%s (bad file path : not found)" "$p_path"
+
+    else
+        if [ -z "$p_target" ]; then
+            echo ">>>>> BASH-UTILS ERROR >>>>> IN << ${FUNCNAME[0]} >>, LINE << $LINENO >> >>>>> NO SPECIFICATION ABOUT THE TARGET !!!"; echo
+
+            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the << ${FUNCNAME[0]} >> function."; echo; exit 1
+        elif [ -n "$p_path" ] && [ "$p_target" = "[D-d]" ] && [ ! -d "$p_path" ]; then
+            printf "%s (bad directory : not found)" "$p_path"
+
+        elif [ -n "$p_path" ] && [ "$p_target" = "[F-f]" ] && [ ! -f "$p_path" ]; then
+            printf "%s (bad file path : not found)" "$p_path"
+        fi
     fi
 }
 
@@ -114,40 +135,63 @@ function __ModuleInitializer_SourcingFailure_CheckPath()
 function ModuleInitializer_SourcingFailure()
 {
     #***** Parameters *****
-    local p_path=$1 ; echo "$p_path"        # Path of the file that cannot be sourced.
+    local p_path=$1         # Path of the file that cannot be sourced.
     local p_module=$2       # Name of the module.
 
     #***** Code *****
     echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
 }
 
-# Checking the spelling of a module name.
-function ModuleInitializer_SpellCheck()
+# Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
+function ModuleInitializer_ListInstalledModules()
 {
+    #***** Variables *****
+    local v_module_conf="$__BU_MODULE_UTILS_ROOT_HOME/BU_modules_config_dir.out"
+    local v_module_init="$__BU_MODULE_UTILS_ROOT_HOME/BU_modules_init_dir.out"
+
     #***** Code *****
-    if command -v "aspell"; then
-        for file in "$@"; do
-            let count="$(aspell -a < "$file" | grep -E "^\&" | awk '{print $2}' | sort -u | wc -l | awk '{print $1}')"
+    if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
 
-            if [ $count -eq 0 ]; then echo -e "\nNo spelling errors on $file\n"; fi
+                                                                        # In case the "ls" command points towards a bad path because of a bad variable's value.
+        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES" > "$v_module_conf"    || echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path"; exit 1
+        ls -l "$__BU_MODULE_UTILS_MODULES_DIR" > "$v_module_init"       || echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path"; exit 1
 
-            if [ $count -gt 0 ]; then
-                echo -e "\n$count spelling error(s) on $file\n"
+        if diff "$v_module_conf" "$v_module_init"; then
+            echo; echo "INSTALLED MODULES LIST :"; echo
 
-                echo ======================================================
+            cat "$v_module_conf"; echo
+        else
+            echo; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE << $__BU_MODULE_UTILS_CONFIG_MODULES >> OR IN THE << $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS"; echo
+            
+            echo "MODULES CONFIGURATION FOLDER LIST :"; echo
 
-                aspell -a < "$file"  | grep -E "^\&" | awk '{print $2}' | sort -u
-            fi
-        done
+            cat "$v_module_conf"; echo
+
+            echo "MODULES INITIALIZATION FOLDER LIST :"; echo
+
+            cat "$v_module_init"; echo
+        fi
+    else
+        if [ ! -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ] && [ ! -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
+            echo "WARNING ! THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !"
+        elif [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ]; then
+            echo "WARNING ! THE MODULES CONFIGURATION FOLDER IS MISSING !"
+        elif [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
+            echo "WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !"
+        fi
     fi
+
+    exit 1
 }
 
 # -----------------------------------------------
 
 ## DEFINING GLOBAL VARIABLES
 
-if [ -d "$HOME/.Bash-utils" ]; then
-	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$HOME" ".Bash-utils")"
+__BU_MODULE_UTILS_ROOT_HOME="$HOME"
+
+if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then    
+	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
 	__BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
 	__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
@@ -173,18 +217,18 @@ ModuleInitializer_CheckBashMinimalVersion
 # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/"; then
-		printf '\n'; printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
+		printf '\n'; printf "WARNING ! THE ''%s'' module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$module"
 
         ModuleInitializer_SpellCheck "${p_module_list[@]}"
 
 		exit 1
     else
         # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$module" "module.conf")" > /dev/null || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$module/module.conf" "$module"
     fi
 
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$module"; then
-        printf "WARNING ! THE ''%s'' module is not installed or doesn't exists !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$module"
+        printf "WARNING ! THE ''%s'' module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$module"
 
         exit 1
     else

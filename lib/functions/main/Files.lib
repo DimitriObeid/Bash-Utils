@@ -209,6 +209,17 @@ function Makefile()
 	fi
 }
 
+# Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive (safer for SSD drives and no permissions are needed).
+function CreateFileInMemory()
+{
+    #***** Parameters *****
+    p_filename=$1
+
+    #***** Code *****
+    
+    return 0
+}
+
 # Creating the project's log file.
 function CreateProjectLogFile()
 {

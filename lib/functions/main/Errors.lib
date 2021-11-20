@@ -65,8 +65,8 @@ function HandleSmallErrors()
     #***** Code *****
     Newline >&2;
 
-    if [ "$p_type" = 'E' ]; then EchoError "$p_string" '' ''
-    elif [ "$p_type" = 'W' ]; then EchoWarning "$p_string" '' ''
+    if      [ "$p_type" = 'E' ];    then EchoError      "$p_string" '' ''
+    elif    [ "$p_type" = 'W' ];    then EchoWarning    "$p_string" '' ''
 
     # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
     else
