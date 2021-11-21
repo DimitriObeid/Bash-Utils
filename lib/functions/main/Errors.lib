@@ -162,7 +162,7 @@ function HandleErrors()
     else
         # -------- PART 1 : MANAGING THE CALL OF THIS "HandleErrors()" FUNCTION IF THIS "HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "HandleErrors()" FUNCTION
 
-        # If the function needs to be called in the "CheckProjectLogStatus()" function,
+        # If the function needs to be called in the "CheckProjectLogStatus()" function, then
         # this status variable's value MUST be set at "true", or else the script will loop forever.
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
@@ -175,18 +175,18 @@ function HandleErrors()
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                    else EchoError ""; fi
+                    else EchoError "$__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED_SAFEMODE"; fi
                 else
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "A FATAL ERROR OCCURED DURING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
-                    else EchoError ""; fi
+                    else EchoError "$__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED"; fi
                 fi
             else
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING A TEST IN THE $(DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                    else EchoError ""; fi
+                    else EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED_SAFEMODE"; fi
                 else
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
-                    else EchoError ""; fi
+                    else EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED; fi
                 fi
             fi
         fi
@@ -243,17 +243,17 @@ function HandleErrors()
             CaseRead_HandleErrors
         fi
 
-        if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
-            if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-                EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
-                {
-                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-                        HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
-                    else
-                        HandleSmallErrors "$__BU_MAIN_MSG_ERRORS_HandleErrors_" 'R' 'CPLS'
-                    fi
-                }
-            fi
+        # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "CheckProjectLogStatus()" FUNCTION).
+
+        if [ "$__BU_MAIN_STAT_ECHO" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+            EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
+            {
+                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+                    HandleSmallErrors "Unable to write in the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                else
+                    HandleSmallErrors "$__BU_MAIN_MSG_ERRORS_HandleErrors_" 'R' 'CPLS'
+                fi
+            }
         fi
 
         if [ "$v_log_old" = "true" ]; then
