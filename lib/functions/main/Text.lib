@@ -94,6 +94,29 @@ function CutStringAfterDelim()
     return
 }
 
+# Getting the size of a string.
+function GetStringSize()
+{
+    #***** Parameters *****
+    p_string=$1
+
+    #***** Variables *****
+    v_size="${#p_string}"
+
+    #***** Code *****
+    echo "$v_size"; return 0
+}
+
+# Getting the number of words in a string.
+function GetStringWordsNumber()
+{
+    #***** Parameters *****
+    p_string=$1
+
+    #***** Code *****
+    echo "$p_string" | wc -w; return 0
+}
+
 # Reverse words of a string according to a delimiter.
 
 # Examples with the '|' and '/' delimiter:
