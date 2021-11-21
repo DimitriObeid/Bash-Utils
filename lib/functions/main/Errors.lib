@@ -186,7 +186,7 @@ function HandleErrors()
                     else EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED_SAFEMODE"; fi
                 else
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then EchoError "AN ERROR OCCURED DURING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
-                    else EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED; fi
+                    else EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED"; fi
                 fi
             fi
         fi
