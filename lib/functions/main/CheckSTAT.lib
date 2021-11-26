@@ -390,7 +390,7 @@ function CheckProjectStatusVars()
 
 # -----------------------------------------------
 
-## CHANGING VALUES 
+## CHANGING VALUES MORE EASILY
 
 # Parameters :
 #   $1  --> new value.
@@ -435,9 +435,9 @@ function ChangeSTAT_TXT_FMT         { __BU_MAIN_STAT_TXT_FMT="$1";          Chec
 
 # -----------------------------------------------
 
-# CHECKING BOOLEAN VALUES
+## EASIER CHECKING BOOLEAN VALUES
 
-# CHecking if the debug mode is active.
+# Checking if the debug mode is active.
 function CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop. 
@@ -450,7 +450,7 @@ function CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "t
 function CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LOG"            = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the initialization logs can be printed on the terminal.
-function CheckStatIsLoggingDebug()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
+function CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the main module is translated.
 function CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }

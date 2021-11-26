@@ -142,7 +142,7 @@ function HandleErrors()
 	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #***** Variables *****
-    if CheckStatIsInitializing && CheckStatIsLoggingDebug; then
+    if CheckStatIsInitializing && CheckStatIsPrintingInit; then
         local v_stat_print_init_log_old='true'; ChangeSTAT_PRINT_INIT_LOG 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     fi
 
