@@ -200,21 +200,11 @@ function HandleErrors()
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            if CheckStatIsInitializing; then
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString FATAL ERROR : $p_errorString")" >&2
-                else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
-            else
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
-                else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
-            fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
+            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
         else
-            if CheckStatIsInitializing; then
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString ERROR : $p_errorString")" >&2
-                else InitializerAddInitStrArrayVal "$(HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString")" >&2; fi
-            else
-                if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
-                else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
-            fi
+            if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
+            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
         fi
 
         Newline >&2
