@@ -42,8 +42,8 @@ function InitializerAddInitStrArrayVal()
         # 
         if [[ "$p_string" = "[ $__BU_MAIN_TIME_DATE_DISPLAY ] *" ]]; then
             # Creating a variable to store temporarly the log date's string to remove.
-            local v_tmp="${p_string%}"
             local v_log_date="[ $__BU_MAIN_TIME_DATE_DISPLAY ] "
+            local v_tmp="${p_string%$v_log_date}"
 
             case "$p_option" in
                 '-n' | 'n')

@@ -142,8 +142,8 @@ function HandleErrors()
 	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #***** Variables *****
-    if CheckStatIsInitializing && CheckStatIsPrintingInit; then
-        local v_stat_print_init_log_old='true'; ChangeSTAT_PRINT_INIT_LOG 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    if CheckStatIsInitializing && ! CheckStatIsPrintingInit; then
+        local v_stat_print_init_log_old='false'; ChangeSTAT_PRINT_INIT_LOG 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
     fi
 
     if CheckStatIsTranslated; then
@@ -251,8 +251,8 @@ function HandleErrors()
         fi
     fi
 
-    if [ "$v_stat_is_initializing_old" = 'true' ]; then
-        __BU_MAIN_STAT_PRINT_INIT_LOG="$v_stat_print_init_log_old"
+    if CheckStatIsInitializing && [ "$v_stat_print_init_log_old" = 'false' ]; then
+        __BU_MAIN_STAT_PRINT_INIT_LOG="$v_stat_print_init_log_old"; v_stat_print_init_log_old=''    # Reassigning the "$v_stat_print_init_log_old" variable to an empty value.
     fi
 
     return 1
