@@ -434,7 +434,7 @@ function CheckProjectLogStatus()
                             ;;
                         '' | *)
                             if CheckStatIsInitializing; then
-                                InitializerAddInitStrArrayVal "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                                InitializerAddInitStrArrayVal "$p_string"
                             else
                                 echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { Newline >&2; EchoError "$v_redirectionError $(DechoHighlight "tee")\nLine --> $(DechoHighlight "$LINENO")" "$p_option" 'nodate'; Newline >&2; ExitError "1"; }
                             fi
