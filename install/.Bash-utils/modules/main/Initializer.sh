@@ -47,10 +47,10 @@ function InitializerAddInitStrArrayVal()
 
             case "$p_option" in
                 '-n' | 'n')
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string##* ] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne    "${v_tmp}"    # Cutting the log entry's date from a string, before displaying it on the terminal.
                     ;;
                 '' | *)
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string##* ] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e     "${v_tmp}"     # Cutting the log entry's date from a string, before displaying it on the terminal.
                     ;;
             esac
         fi
@@ -93,6 +93,8 @@ done
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
+ChangeSTAT_DECHO        "forbid"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ECHO         "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
