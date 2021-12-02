@@ -37,23 +37,15 @@ function InitializerAddInitStrArrayVal()
     p_option=$2             # "echo" command's options.
 
     #***** Code *****
-    # Checking if the program is allowed to print the initialization logs on the terminal.
-    if CheckStatIsPrintingInit; then
-        # 
-        if [[ "$p_string" = "[ $__BU_MAIN_TIME_DATE_DISPLAY ] *" ]]; then
-            # Creating a variable to store temporarly the log date's string to remove.
-            local v_log_date="[ $__BU_MAIN_TIME_DATE_DISPLAY ] "
-            local v_tmp="${p_string%$v_log_date}"
-
-            case "$p_option" in
-                '-n' | 'n')
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne    "${v_tmp}"    # Cutting the log entry's date from a string, before displaying it on the terminal.
-                    ;;
-                '' | *)
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e     "${v_tmp}"     # Cutting the log entry's date from a string, before displaying it on the terminal.
-                    ;;
-            esac
-        fi
+    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "false" ]; then
+        case "$p_option" in
+            '-n' | 'n')
+                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string##* ] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                ;;
+            '' | *)
+                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string##* ] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                ;;
+        esac
     else
         __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string")
     fi
@@ -93,8 +85,6 @@ done
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
-ChangeSTAT_DECHO        "forbid"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_ECHO         "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
