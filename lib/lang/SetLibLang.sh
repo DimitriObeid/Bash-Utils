@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Detecting user's language with the "$LANG" environment variable.
-function SetLibLang
+function SetLibLang()
 {
     case "$LANG" in
         en_*)
@@ -65,7 +65,7 @@ function SetLibLang
 function GetLibLang()
 {
     # In case an user would like to use another language instead of the current used language in the system,
-    # he can create a file named "lang.conf" in the "Bash-Utils/config" folder and write its language's
+    # he/she can create a file named "lang.conf" in the "Bash-Utils/config" modules files' folder and write his/her language's ISO 639-1 code.
     if [ -f "$__BU_MAIN_MODULE_CONF_LANG_ISO_CODE_PATH" ] && [ -s "$__BU_MAIN_MODULE_CONF_LANG_ISO_CODE_PATH" ]; then
         LANG="$(cat "$__BU_MAIN_MODULE_CONF_LANG_ISO_CODE_PATH")"
         SetLibLang
