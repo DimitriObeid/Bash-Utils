@@ -37,7 +37,7 @@ function InitializerAddInitStrArrayVal()
     p_option=$2             # "echo" command's options.
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "false" ]; then
+    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in
             '-n' | 'n')
                 __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string##* ] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.

@@ -207,8 +207,6 @@ function HandleErrors()
             else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
         fi
 
-        Newline >&2
-
 
         # -------- PART 3 : GIVING AN ADVICE ABOUT THE ORIGIN OF THE ERROR TO THE USER/DEVELOPPER
 
