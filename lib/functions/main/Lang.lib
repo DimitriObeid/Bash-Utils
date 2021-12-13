@@ -136,7 +136,8 @@ function ParseCSVLibLang()
     p_path=$1               # Path of the translations CSV file to parse.
     p_lang=$2               # Language to fetch.
     p_success_msg=$3        # Success message to display in the targeted language.
-    p_error_msg=$4          # Error message to display in the targeted language.
+    p_error_msg=$4          # Error message to display as the "HandleErrors()" function's header string argument, in the targeted language.
+    p_advice_msg=$5			# Advice message to display in the "HandleErrors()" function's advice string argument, in the targeted language. 
 
     #***** Variables *****
     v_num_row=0             # Row incrementer.
