@@ -45,6 +45,8 @@
 \color{red}
 \section{Liste des tutoriels}\color{white}
 
+\textbf{Note :} Pour des raisons de lisibilité, veuillez créer les nouvelles fonctions et variables dans l'ordre\linebreak alphabétique de chacune de leurs liste.
+
 \color{green}
 \subsection{Ajouter une nouvelle langue à la librairie}\color{white}
 
@@ -72,6 +74,29 @@
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
+Ouvrez le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}, puis dans la liste des variables globales,\linebreak créez une variable globale nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE\_}, suivie immédiatement du code\linebreak ISO 639-1 de la langue que vous souhaitez ajouter.\\[1\baselineskip]
+
+Ensuite, ouvrez le fichier de librairie \textbf{\color{lime}SetLibLang.sh}, puis rendez-vous dans la fonction \textbf{\color{mauve}SetLibLang}. Une fois dedans, ajoutez une nouvelle condition dans la structure de contrôle \textbf{case}, en écrivant le code ISO 639-1 de la langue cible, suivi d'un tiret du 8 '\_', utilisé par le système pour relier ce code avec le code du pays ISO 3166, avant d'ajouter une étoile '*' pour ne pas à se soucier de la gestion des différences de langue par pays.\\[1\baselineskip]
+
+Une fois la condition créée, définissez la en créant une variable nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE}, en lui assignant la variable que vous venez de défninir dans le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}.\\[1\baselineskip]
+
+Appelez ensuite la fonction \textbf{\color{mauve}ParseCSVLibLang}, en lui passant en argument : 
+\begin{itemize}
+    \item Le chemin du fichier de traduction de la librairie (vous pouvez passer en argument la valeur \textbf{\color{orange}\$\_\_BU\_MAIN\_MODULE\_LIB\_LANG\_DIR\_PATH\color{lime}/lang.csv})
+    \item La variable globale \textbf{\color{orange}\$\_\_BU\_MAIN\_LANG}, qui enregistre la langue choisie, définie plus bas dans le fichier, dans la fonction \textbf{\color{mauve}GetLibLang}.
+    \item Le message de succès de recherche du chemin du fichier CSV, dans la langue que vous\linebreak souhaitez définir.
+    \item Le message d'erreur du header de la fonction \textbf{\color{mauve}HandleErrors}
+    \item Le message de conseil de la fonction \textbf{\color{mauve}HandleErrors}\\[1\baselineskip]
+\end{itemize}
+
+Pour plus de praticité, vous pouvez créer un fichier nommé \textbf{\color{lime}LangISOCode.conf} dans le dossier\linebreak \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}, et écrire le code ISO 639-1 de votre langue,\linebreak suivie du code ISO 3166 d'un des pays où la langue à ajouter est parlée.\\[1\baselineskip]
+
+Pour encore plus de praticité, si votre pays et la langue que vous souhaitez ajouter sont définis\linebreak dans les paramètres de votre système d'exploitation, vous pouvez taper la commande suivante,\linebreak en remplaçant la variable \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT} par le chemin de la racine du dossier de\linebreak configurations de Bash Utils (normalement localisé dans votre dossier personnel) :
+\begin{itemize}
+    \item \textbf{\color{gray}echo \color{orange}\$LANG \color{white} > "\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main/LangISOCode.conf\color{white}"}
+\end{itemize}
+
+
 
 
 % -----------------------------------------------
@@ -128,8 +153,8 @@
 \color{blue}
 \subsubsection{Fichiers de librairie à éditer}\color{white}
 \begin{itemize}
-    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Decho.lib}
-    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Headers.lib}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Decho.lib}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Headers.lib}
 \end{itemize}
 
 
@@ -139,9 +164,7 @@
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
-\textbf{Note :} Pour des raisons de lisibilité, veuillez créer les nouvelles fonctions et variables dans l'ordre\linebreak alphabétique de chacune de leurs liste.\\[1\baselineskip]
-
-Dans le fichier \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
+Dans le fichier de configuration \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
 \begin{itemize}
     \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}\\[1\baselineskip]
 \end{itemize}
@@ -150,12 +173,12 @@ Dans le fichier \textbf{\color{lime}colors.conf}, repérez la section \textbf{CO
 Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer sur le lien ci-dessous :\linebreak
 \url{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}\\[1\baselineskip]
 
-Une fois le code couleur ajouté, dans le même fichier, repérez la sous-section \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}, puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
+Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}, puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
 
 Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[2\baselineskip]
 
 
-Maintenant, rendez vous dans le fichier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Decho.lib}, repérez la sous-catégorie suivante : 
+Maintenant, rendez vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Decho.lib}, repérez la sous-catégorie suivante : 
 \begin{itemize}
     \item \textbf{WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST}\\[1\baselineskip]
 \end{itemize}
@@ -163,7 +186,7 @@ Maintenant, rendez vous dans le fichier \textbf{\color{orange}\$\_\_BU\_MAIN\_RO
 Puis repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
 
 
-Ensuite, rendez-vous dans le fichier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
+Ensuite, rendez-vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
 \begin{itemize}
     \item \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}\linebreak
 \end{itemize}
