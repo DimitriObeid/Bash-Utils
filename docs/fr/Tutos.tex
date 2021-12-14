@@ -201,7 +201,7 @@ Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\col
 
 Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
 
-Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage bicolore.\\[1\baselineskip]
+Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage bicolore pour vous aider.\\[1\baselineskip]
 
 
 % -----------------------------------------------
@@ -210,6 +210,8 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 
 \color{green}
 \subsection{Ajouter un nouveau module}\color{white}
+
+\textbf{Note :} Le fonctionnement des modules est détaillé dans la section \textbf{\color{red}Introduction} du fichier\linebreak \textbf{\color{lime}Bash-utils/docs/fr/modules}.
 
 \color{blue}
 \subsubsection{Fichiers à exécuter}\color{white}
@@ -226,12 +228,14 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 \subsubsection{Consignes}\color{white}
 De manière automatique :
 \begin{itemize}
-    \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh} (vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier racine de la librairie (pour ceux qui\linebreak utilisent WSL, ce lien ne marche pas sur les explorateurs de fichiers sur Windows)), puis\linebreak exécutez juste ce script en lui passant en argument le nom du module à créer.\\[1\baselineskip]
+    \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh} (vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier racine de la librairie (pour ceux qui\linebreak utilisent WSL, ce lien ne marche pas sur les explorateurs de fichiers sur Windows)), puis\linebreak exécutez juste ce script en lui passant en argument les noms des modules à créer.\\[1\baselineskip]
 \end{itemize}
 
 De manière manuelle :
 \begin{itemize}
-    \item  
+    \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{lime}.Bash-utils}, puis rendez vous dans le dossier \textbf{\color{lime}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}module.conf}.\\[1\baselineskip]
+
+    \item Revenez de nouveau dans le dossier racine \textbf{\color{lime}.Bash-utils}, puis rendez vous dans le dossier\linebreak \textbf{\color{lime}modules}. Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}Initializer.sh}.
 \end{itemize}
 
 % -----------------------------------------------
