@@ -49,11 +49,22 @@
 \subsection{Ajouter une nouvelle langue à la librairie}\color{white}
 
 \color{blue}
-\subsubsection{Fichiers à éditer}\color{white}
+\subsubsection{Fichiers de configuration à éditer}\color{white}
 \begin{itemize}
-    \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}}
+    \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main/LangCSVCode.conf}
+    \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main/LangISOCode.conf}
 \end{itemize}
 
+
+% -----------------------------------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Fichiers de librairie à éditer}\color{white}
+\begin{itemize}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/lang/SetLibLang.sh}
+\end{itemize}
 
 % -----------------------------------------------
 
@@ -71,7 +82,18 @@
 \subsection{Ajouter une nouvelle langue à la documentation}\color{white}
 
 \color{blue}
-\subsubsection{Fichiers à éditer}\color{white}
+\subsubsection{Fichiers de configuration à éditer}\color{white}
+\begin{itemize}
+    \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}}
+\end{itemize}
+
+
+% -----------------------------------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Fichiers de librairie à éditer}\color{white}
 \begin{itemize}
     \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}}
 \end{itemize}
@@ -164,12 +186,12 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
-\subsection{\$\_TITRE}\color{white}
+\subsection{Ajouter un nouveau module}\color{white}
 
 \color{blue}
-\subsubsection{Fichiers à éditer}\color{white}
+\subsubsection{Fichiers à exécuter}\color{white}
 \begin{itemize}
-    \item \textbf{\color{lime}}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/res/dev-tools/dev-bin/mkmodules.sh}
 \end{itemize}
 
 
@@ -179,7 +201,15 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
+De manière automatique :
+\begin{itemize}
+    \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh} (vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier racine de la librairie (pour ceux qui\linebreak utilisent WSL, ce lien ne marche pas sur les explorateurs de fichiers sur Windows)), puis\linebreak exécutez juste ce script en lui passant en argument le nom du module à créer.\\[1\baselineskip]
+\end{itemize}
 
+De manière manuelle :
+\begin{itemize}
+    \item  
+\end{itemize}
 
 % -----------------------------------------------
 
