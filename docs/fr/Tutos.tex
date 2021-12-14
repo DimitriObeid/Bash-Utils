@@ -106,6 +106,7 @@
 \color{blue}
 \subsubsection{Fichiers de librairie à éditer}\color{white}
 \begin{itemize}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Decho.lib}
     \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Headers.lib}
 \end{itemize}
 
@@ -116,10 +117,46 @@
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
-Dans le fichier \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis ajoutez une variable,\linebreak de préférence nommée \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}, suivie de son code de la table des couleurs de la commande \textbf{\color{gray}tput setaf}.\\[1\baselineskip]
+\textbf{Note :} Pour des raisons de lisibilité, veuillez créer les nouvelles fonctions et variables dans l'ordre\linebreak alphabétique de chacune de leurs liste.\\[1\baselineskip]
+
+Dans le fichier \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
+\begin{itemize}
+    \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}\\[1\baselineskip]
+\end{itemize}
+ suivie de son code de la table des couleurs de la commande \textbf{\color{gray}tput setaf}.\\[1\baselineskip]
 
 Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer sur le lien ci-dessous :\linebreak
-\url{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}
+\url{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}\\[1\baselineskip]
+
+Une fois le code couleur ajouté, dans le même fichier, repérez la sous-section \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}, puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
+
+Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[2\baselineskip]
+
+
+Maintenant, rendez vous dans le fichier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Decho.lib}, repérez la sous-catégorie suivante : 
+\begin{itemize}
+    \item \textbf{WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST}\\[1\baselineskip]
+\end{itemize}
+
+Puis repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
+
+
+Ensuite, rendez-vous dans le fichier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/function/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
+\begin{itemize}
+    \item \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}\linebreak
+\end{itemize}
+
+Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}, et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}HeaderBase}, en les\linebreak remplaçant par le nom de la variable globale de noms de couleurs souhaitée.\\[1\baselineskip]
+
+Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis rennomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}HeaderBase}.\\[1\baselineskip]
+
+Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,\linebreak toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires avant chaque liste).\\[1\baselineskip]
+
+Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la\linebreak nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
+
+Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
+
+Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage bicolore.\\[1\baselineskip]
 
 
 % -----------------------------------------------
