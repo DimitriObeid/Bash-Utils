@@ -174,15 +174,20 @@ Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer
 
 Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}, puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
 
-Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[2\baselineskip]
+Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[1\baselineskip]
 
 
-Maintenant, rendez vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Decho.lib}, repérez la sous-catégorie suivante : 
+Maintenant, rendez vous dans le fichier de librairie
+\begin{itemize}
+    \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Decho.lib}\\[1\baselineskip]
+\end{itemize}
+
+Puis repérez la sous-catégorie suivante :
 \begin{itemize}
     \item \textbf{WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST}\\[1\baselineskip]
 \end{itemize}
 
-Puis repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
+Repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis\linebreak ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
 
 
 Ensuite, rendez-vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
