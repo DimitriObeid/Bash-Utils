@@ -26,21 +26,19 @@ function check_mandatory_file_exists()
 
 # ----------
 
-## VARIABLES
-
-# Bash Utils library root path from this script's path.
-__D_BU_LIB_ROOT_PATH="../../.."
-
-__D_BU_INST_MODULE_CONF_PATH="$__D_BU_LIB_ROOT_PATH/install/.Bash-utils/config/modules/$1"
-
-__D_BU_INST_MODULE_INIT_PATH="$__D_BU_LIB_ROOT_PATH/install/.Bash-utils/modules/$1"
-
-__D_BU_LIB_MODULE_FUNCTS_PATH="$__D_BU_LIB_ROOT_PATH/lib/functions/$1"
-
-# ---------
+## CODE
 
 # Checking if the script is executed in its directory.
 for module_name in "${__ARG_LIST[@]}"; do
+    # Bash Utils library root path from this script's path.
+    __D_BU_LIB_ROOT_PATH="../../.."
+
+    __D_BU_INST_MODULE_CONF_PATH="$__D_BU_LIB_ROOT_PATH/install/.Bash-utils/config/modules/$module_name"
+
+    __D_BU_INST_MODULE_INIT_PATH="$__D_BU_LIB_ROOT_PATH/install/.Bash-utils/modules/$module_name"
+
+    __D_BU_LIB_MODULE_FUNCTS_PATH="$__D_BU_LIB_ROOT_PATH/lib/functions/$module_name"
+
     if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
         echo "You must run this script from its directory"
         echo "Aborting module creation"
@@ -55,6 +53,9 @@ for module_name in "${__ARG_LIST[@]}"; do
 	    # Checking if the mandatory files exist
 	    check_mandatory_file_exists "$__D_BU_INST_MODULE_CONF_PATH/module.conf"
 	    check_mandatory_file_exists "$__D_BU_INST_MODULE_INIT_PATH/Initializer.sh"
+
+        echo "The $module_name module already exists"; echo
+
     fi
 
     # Checking if the module's configuration path exists, or else creating its directory.
@@ -81,4 +82,7 @@ for module_name in "${__ARG_LIST[@]}"; do
     else
 	    mkdir -pv "$__D_BU_LIB_MODULE_FUNCTS_PATH" || { echo "Unable to create the $__D_BU_LIB_MODULE_FUNCTS_PATH directory"; exit 1; }
     fi
+
+    echo
+
 done
