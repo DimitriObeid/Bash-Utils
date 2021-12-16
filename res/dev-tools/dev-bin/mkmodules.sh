@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-__ARG_LIST="$(@)"
+__ARG_LIST=( "$@" )
 
 # Check if the module's name was passed as argument when this script was executed.
-if [ "${#__ARG_LIST[@]}" -lt 1 ]; then
+
+if (( ${#__ARG_LIST[@]} == 0 )); then
 	echo "This script takes at least one mandatory argument : the new module's name"; exit 1
 fi
 
@@ -38,7 +39,7 @@ __D_BU_LIB_MODULE_FUNCTS_PATH="$__D_BU_LIB_ROOT_PATH/lib/functions/$1"
 
 # ---------
 
-# Checking if the script is run from its directory.
+# Checking if the script is executed in its directory.
 for module_name in "${__ARG_LIST[@]}"; do
     if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
         echo "You must run this script from its directory"
@@ -49,26 +50,34 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     # Checking if the whole module exists.
     if [ -d "$__D_BU_INST_MODULE_CONF_PATH" ] && [ -d "$__D_BU_INST_MODULE_INIT_PATH" ] && [ -d "$__D_BU_LIB_MODULE_FUNCTS_PATH" ]; then
-	    echo "The $1 module already exists"; exit 0
+	    echo "The $module_name module's directories already exist"; exit 0
+
+	    # Checking if the mandatory files exist
+	    check_mandatory_file_exists "$__D_BU_INST_MODULE_CONF_PATH/module.conf"
+	    check_mandatory_file_exists "$__D_BU_INST_MODULE_INIT_PATH/Initializer.sh"
     fi
 
     # Checking if the module's configuration path exists, or else creating its directory.
     if [ -d "$__D_BU_INST_MODULE_CONF_PATH" ]; then
-	    echo "This module already exists in the $__D_BU_INST_MODULE_CONF_PATH directory"
+	    echo "The $module_name module's configurations directory already exists : $__D_BU_INST_MODULE_CONF_PATH"
+	   	check_mandatory_file_exists "$__D_BU_INST_MODULE_CONF_PATH/module.conf"
     else
 	    mkdir -pv "$__D_BU_INST_MODULE_CONF_PATH" || { echo "Unable to create the $__D_BU_INST_MODULE_CONF_PATH directory"; exit 1; }
+	  	check_mandatory_file_exists "$__D_BU_INST_MODULE_CONF_PATH/module.conf"
     fi
 
     # Checking if the module's initializer path exists, or else creating its directory.
     if [ -d "$__D_BU_INST_MODULE_INIT_PATH" ]; then
-	    echo "This module already exists in the $__D_BU_INST_MODULE_INIT_PATH directory"
+	    echo "The $module_name module's initializer directory already exists : $__D_BU_INST_MODULE_INIT_PATH"
+	    check_mandatory_file_exists "$__D_BU_INST_MODULE_INIT_PATH/Initializer.sh"
     else
 	    mkdir -pv "$__D_BU_INST_MODULE_INIT_PATH" || { echo "Unable to create the $__D_BU_INST_MODULE_INIT_PATH directory"; exit 1; }
+	    check_mandatory_file_exists "$__D_BU_INST_MODULE_INIT_PATH/Initializer.sh"
     fi
 
     # Checking if the module's library path exists, or else creating its directory.
     if [ -d "$__D_BU_LIB_MODULE_FUNCTS_PATH" ]; then
-	    echo "This module already exists in the $__D_BU_LIB_MODULE_FUNCTS_PATH directory"
+	    echo "The $module_name module's library directory already exists : $__D_BU_LIB_MODULE_FUNCTS_PATH"
     else
 	    mkdir -pv "$__D_BU_LIB_MODULE_FUNCTS_PATH" || { echo "Unable to create the $__D_BU_LIB_MODULE_FUNCTS_PATH directory"; exit 1; }
     fi
