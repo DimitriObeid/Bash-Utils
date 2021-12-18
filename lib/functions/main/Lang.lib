@@ -226,9 +226,10 @@ function _tr()
         exit 1
     else
         # ALGORITHME :
-        # Lire le fichier jusqu'à trouver le nom de la variable passée en argument.
+        # Lire le fichier jusqu'à trouver le nom de la variable contenant la chaîne de caractère souhaitée, passé en premier argument.
         #   Si la variable n'est pas trouvée, alors retourner 1
-        #   Sinon, lire chaque argument passé. 
+        #   Sinon, lire chaque argument passé.
+        #       Si une chaîne de caractères est entourée du symbole %% dans la chaîne de caractères principale, alors remplacer cette chaîne par la valeur de son paramètre positionnel.
         while read -r line; do
 
             # If the wanted translations file path is not found in the computer's hard drive.
@@ -261,13 +262,13 @@ function _tr()
 
                         # Else, if the main module is initialized AND the same module is translated.
                         else
-                            HandleErrors '1' "$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND" ""$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND_ADVICE" \
+                            HandleErrors '1' "$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND" "$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND_ADVICE" \
                                 "$var" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
                         fi
 
                     # Else, if the wanted value is found in its array.
                     else
-                        
+                        echo ""
                     fi
                 done
             fi

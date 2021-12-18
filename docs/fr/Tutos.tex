@@ -195,17 +195,25 @@ Ensuite, rendez-vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU
     \item \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}\linebreak
 \end{itemize}
 
-Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}, et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}HeaderBase}, en les\linebreak remplaçant par le nom de la variable globale de noms de couleurs souhaitée.\\[1\baselineskip]
+Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>},\linebreak
+et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}HeaderBase}, en les\linebreak
+remplaçant par le nom de la variable globale de noms de couleurs souhaitée.\\[1\baselineskip]
 
 Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis rennomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}HeaderBase}.\\[1\baselineskip]
 
-Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,\linebreak toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires avant chaque liste).\\[1\baselineskip]
+Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,\linebreak
+toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires\linebreak
+avant chaque liste).\\[1\baselineskip]
 
-Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la\linebreak nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
+Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la\linebreak
+nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
 
-Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
+Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée\linebreak
+à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de\linebreak
+couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
 
-Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage bicolore pour vous aider.\\[1\baselineskip]
+Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage\linebreak
+bicolore pour vous aider.\\[1\baselineskip]
 
 
 % -----------------------------------------------
@@ -232,16 +240,24 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 \subsubsection{Consignes}\color{white}
 De manière automatique :
 \begin{itemize}
-    \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh}, puis exécutez juste ce script en lui passant en argument les noms des modules à créer.\\[1\baselineskip]
+    \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh}, puis exécutez juste\linebreak
+    ce script en lui passant en argument les noms des modules à créer.\\[1\baselineskip]
 
-    \item \textbf{Astuce :} Vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier\linebreak racine de la librairie. \textbf{Attention}, pour ceux qui utilisent WSL, ce lien ne marche pas dans le\linebreak moindre explorateur de fichiers sur Windows, mais uniquement en ligne de commande\linebreak avec votre distribution Linux.\\[1\baselineskip]
+    \item \textbf{Astuce :} Vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier\linebreak
+    racine de la librairie. \textbf{Attention}, pour ceux qui utilisent WSL, ce lien ne marche pas dans le\linebreak
+    moindre explorateur de fichiers sur Windows, mais uniquement en ligne de commande\linebreak
+    avec votre distribution Linux.\\[1\baselineskip]
 \end{itemize}
 
 De manière manuelle :
 \begin{itemize}
-    \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{lime}.Bash-utils}, puis rendez vous dans le dossier \textbf{\color{lime}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}module.conf}.\\[1\baselineskip]
+    \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{lime}.Bash-utils}, puis rendez vous dans\linebreak
+    le dossier \textbf{\color{lime}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans\linebreak
+    chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}module.conf}.\\[1\baselineskip]
 
-    \item Revenez de nouveau dans le dossier racine \textbf{\color{lime}.Bash-utils}, puis rendez vous dans le dossier\linebreak \textbf{\color{lime}modules}. Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}Initializer.sh}.
+    \item Revenez de nouveau dans le dossier racine \textbf{\color{lime}.Bash-utils}, puis allez dans le dossier \textbf{\color{lime}modules}.\linebreak
+    Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un\linebreak
+    fichier nommé \textbf{\color{lime}Initializer.sh}.
 \end{itemize}
 
 % -----------------------------------------------
