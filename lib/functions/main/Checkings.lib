@@ -383,7 +383,7 @@ function CheckProjectLogStatus()
                             fi
                             ;;
                     esac
-                # Else, if an unsupported option is passed (note for myself : the extra args checking.
+                # Else, if an unsupported option is passed (note for myself : the extra args checking
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "log" option)).
                 else
                     case "$p_option" in
@@ -465,7 +465,7 @@ function CheckProjectLogStatus()
                         ;;
                     esac
 
-                # Else, if an unsupported option is passed (note for myself : the extra args checking.
+                # Else, if an unsupported option is passed (note for myself : the extra args checking
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "tee" option)).
                 else
                     case "$p_option" in

@@ -215,13 +215,27 @@ function _tr()
     p_variables_array=("$@")
 
     #***** Code *****
-    if [ ! -f "$__BU_MAIN_PROJECT_TR_FILE_NAME" ]; then
-        echo -e "UNABLE TO FIND THE CREATED TRANSLATIONS FILE"; exit 1
+    if [ ! -f "$__BU_MAIN_PROJECT_TR_FILE_PATH" ]; then
+        # If the main module is initialized AND a module is being translated.
+        if CheckStatIsInitializing; then
+            EchoError "UNABLE TO FIND THE MAIN MODULE'S CREATED TRANSLATIONS FILE"
+        else
+            EchoError "$__BU_MAIN_MSG__tr_TRANSLATION_FILE_NOT_FOUND" 
+        fi
+
+        exit 1
     else
         # ALGORITHME :
         # Lire le fichier jusqu'à trouver le nom de la variable passée en argument.
         #   Si la variable n'est pas trouvée, alors retourner 1
-        #   Sinon, lire chaque argument passé.
+        #   Sinon, lire chaque argument passé. 
+        while read -r line; do
+            if ! grep -q "$p_translated" "$__BU_MAIN_PROJECT_TR_FILE_PATH"; then
+                EchoError "ERROR : "
+            else
+                
+            fi
+        done < "$__BU_MAIN_PROJECT_TR_FILE_PATH"
     
         return 0
     fi
