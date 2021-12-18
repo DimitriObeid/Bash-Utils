@@ -42,7 +42,8 @@ fi
 
 ## CHECKING FUNCTIONS
 
-# Rewriting the "CheckArgsMain.lib" file's "__CheckArgsMain_PrintBadOption()" function for the initialization process, since
+# Rewriting the "CheckArgsMain.lib" file's "__CheckArgsMain_PrintBadOption()" function for the initialization process, because managing the
+# "$__BU_MAIN_STAT_TRANSLATED" translation status variable's values in the aforementionned function is more work than necessary for this process.
 function CheckNotTranslated_ParseCSVLang_PrintBadOption()
 {
     #***** Parameters *****
@@ -75,7 +76,7 @@ function CheckNotTranslated_ParseCSVLang_PrintBadOption()
     return 0
 }
 
-# Parsing a CSV file containing translations, when the library is not translated yet.
+# Parsing a CSV file containing translations, when the main module's library is not yet translated, and for the other modules initialization process.
 function CheckNotTranslated_ParseCSVLang()
 {
     #***** Parameters *****
@@ -85,6 +86,8 @@ function CheckNotTranslated_ParseCSVLang()
     local p_error_msg=$4          # Error message to display in the targeted language.
 
     #***** Code *****
+    # These function's lines check if the library's main module is not initialized to print hard-coded messages,
+    # and if this module is initialized, to print the same messages in the user's language, if another module is initialized. 
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
         if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
             __CheckArgsMain_PrintBadOption 'z' "Please pass the path of the translations CVS file to parse as first argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno" "$(basename "${BASH_SOURCE[0]}")" || return 1
