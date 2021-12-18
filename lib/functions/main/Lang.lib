@@ -217,7 +217,7 @@ function _tr()
     #***** Code *****
     if [ ! -f "$__BU_MAIN_PROJECT_TR_FILE_PATH" ]; then
         # If the main module is initialized AND a module is being translated.
-        if CheckStatIsInitializing; then
+        if CheckStatIsInitializing || ! CheckStatIsTranslated; then
             EchoError "UNABLE TO FIND THE MAIN MODULE'S CREATED TRANSLATIONS FILE"
         else
             EchoError "$__BU_MAIN_MSG__tr_TRANSLATION_FILE_NOT_FOUND" 
@@ -230,10 +230,46 @@ function _tr()
         #   Si la variable n'est pas trouvée, alors retourner 1
         #   Sinon, lire chaque argument passé. 
         while read -r line; do
+
+            # If the wanted translations file path is not found in the computer's hard drive.
             if ! grep -q "$p_translated" "$__BU_MAIN_PROJECT_TR_FILE_PATH"; then
-                EchoError "ERROR : "
+
+                # If the library's main module is initializing OR if the same module is not yet translated.
+                if CheckStatIsInitializing || ! CheckStatIsTranslated; then
+                    HandleErrors '1' "THE $(DechoHighlight "$p_translated") sentence was not found in the $(DechoHighlight "$__BU_MAIN_PROJECT_TR_FILE_PATH") file" \
+                        "Please verify the spelling of the variable's name, " "$p_translated" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+
+                # Else, if the main module is initialized AND the same module is translated.
+                else
+                    HandleErrors '1' "$__BU_MAIN_MSG__tr_SENTENCE_NOT_FOUND" "$__BU_MAIN_MSG__tr_SENTENCE_NOT_FOUND_ADVICE" "$p_translated" \
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))" 
+                fi
+
+                exit 1
+
+            # Else, if the wanted translations file path is found.
             else
-                
+                for var in "${p_variables_array[@]}"; do
+
+                    # If the wanted value is not found in its array
+                    if ! grep -q "$var" "$__BU_MAIN_PROJECT_TR_FILE_PATH"; then
+
+                        # If the library's main module is initializing OR if the same module is not yet translated.
+                        if CheckStatIsInitalizing || ! CheckStatIsTranslated; then
+                            HandleErrors '1' "THE $(DechoHighlight "$var") variable was not found in the variables array" "Verify if you corectly wrote the value or the variable's name you passed" \
+                                "$var" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
+
+                        # Else, if the main module is initialized AND the same module is translated.
+                        else
+                            HandleErrors '1' "$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND" ""$__BU_MAIN_MSG__tr_VARIABLE_INDEX_NOT_FOUND_ADVICE" \
+                                "$var" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
+                        fi
+
+                    # Else, if the wanted value is found in its array.
+                    else
+                        
+                    fi
+                done
             fi
         done < "$__BU_MAIN_PROJECT_TR_FILE_PATH"
     
