@@ -135,28 +135,39 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 \section{Fonctions}\color{white}
 
 \color{green}
-\subsection{ConfEcho}\color{white}
+\subsection{Sous-section ``CHECKING VALUES''}
+
+\color{blue}
+\subsubsection{ConfEcho}\color{white}
 \begin{flushleft}
 	\textbf{Description de la fonction :}\\
    	Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.\\[1\baselineskip]
-   	Ce message est structuré de la manière suivante :\\
+
+   	Ce message est structuré de la manière suivante :
    	\begin{itemize}
-   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,
-   		\item la valeur défectueuse enregistrée,
+   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,\\[1\baselineskip]
+   		\item la valeur défectueuse enregistrée,\\[1\baselineskip]
    		\item la liste des valeurs autorisées.\\[1\baselineskip]
    	\end{itemize}
 
-   	\textbf{Paramètres :}\\
-   	\color{orange}\textbf{\$p\_file\color{white} :} \color{white} fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")").\\
-   	\color{orange}\textbf{\$p\_lineno\color{white} :} \color{white} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}").\\
-   	\color{orange}\textbf{\$p\_badVal\color{white} :} \color{white}\\
-   	\color{orange}\textbf{\$p\_varVal\color{white} :} \color{white}\\[1\baselineskip]
-    
-   	\textbf{Variables :}\\
-   	\color{orange}\textbf{\$v\_array\color{white} :} \color{white} \\
-   	\color{orange}\textbf{\$i\color{white} :} \color{white}\\[1\baselineskip]
+   	\textbf{Paramètres :}
+   	\begin{itemize}
+        \item \color{orange}\textbf{\$p\_file\color{white} :} \color{white} fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}.\\[1\baselineskip]
 
-    \textbf{Code :}\\
+        \item \color{orange}\textbf{\$p\_lineno\color{white} :} \color{white} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}).\\[1\baselineskip]
+
+        \item \color{orange}\textbf{\$p\_badVal\color{white} :} \color{white}\\[1\baselineskip]
+
+        \item \color{orange}\textbf{\$p\_varVal\color{white} :} \color{white}\\[1\baselineskip]
+   	\end{itemize}
+    
+   	\textbf{Variables :}
+   	\begin{itemize}
+        \item \color{orange}\textbf{\$v\_array\color{white} :} \color{white}\\[1\baselineskip]
+        \item \color{orange}\textbf{\$i\color{white} :} \color{white}\\[1\baselineskip]
+   	\end{itemize}
+
+    \textbf{Code :}
 \end{flushleft}
 
 
@@ -164,59 +175,76 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
-\subsection{CheckSTAT\_DEBUG}\color{white}
+\subsection{Sous-section "CHECKINGS"}
+
+\color{blue}
+\subsubsection{CheckSTAT\_DEBUG}\color{white}
 \begin{itemize}
-    \item \textbf{Description de la variable :} Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
+    \item \textbf{Description de la variable :} Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.\\[1\baselineskip]
     
-    Valeurs acceptées :
+    \textbf{Valeurs acceptées :}
     \begin{itemize}
         \item \textbf{true} : Si une condition vérifie que la valeur de cette variable de statut est égale à cette valeur, alors les fonctionnalités à tester sont testées au début du script principal, avant d'interrompre l'exécution une fois les tests passés.
-        \item \textbf{false} : Le script ignore les éventuels tests de fonctionnalités. 
+        \item \textbf{false} : Le script ignore les éventuels tests de fonctionnalités.\\[1\baselineskip]
     \end{itemize}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_DEBUG" soit bien égale à "true" ou "false".
+    \item \textbf{Description de la fonction :}\\
+        Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_STAT\_DEBUG} soit bien égale à "true" ou "false".\\[1\baselineskip]
 
     \item \textbf{Paramètres :}
-        \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
-
-    \item \textbf{Variables :} v\_array :
-
-    \item \textbf{Code :}
-\end{itemize}
-
-
-
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{green}
-\subsection{CheckSTAT\_ERROR}\color{white}
-\begin{itemize}
-    \item \textbf{Description de la variable :} Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".
-    
-    Valeurs acceptées :
     \begin{itemize}
-        \item \textbf{\textit{vide}} : Sans valeur enregistrée, le script demande à l'utilisateur s'il souhaite que son exécution continue ou non (via la fonction HandleErrors()).
-        \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.
+        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\[1\baselineskip]
+        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO})\\[1\baselineskip]
     \end{itemize}
 
-    \item \textbf{Description de la fonction :} Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".
+    \item \textbf{Variables :}
+    \begin{itemize}
+        \item \textbf{\color{orange}\$v\_array\color{white} :} \\[1\baselineskip]
+    \end{itemize}
 
-    \item \textbf{Paramètres :}
-    \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande "\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")
-    \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement "\color{orange}\$LINENO\color{white}")
-
-    \item \textbf{Variables :} v\_array :
 
     \item \textbf{Code :}
 \end{itemize}
 
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckSTAT\_EXIT\_CODE}\color{white}
+\color{blue}
+\subsubsection{CheckSTAT\_ERROR}\color{white}
+\begin{itemize}
+    \item \textbf{Description de la variable :} Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction "HandleErrors()" du fichier de librairie "Checkings.lib".\\[1\baselineskip]
+
+    \textbf{Valeurs acceptées :}
+    \begin{itemize}
+        \item \textbf{\textit{vide}} : Sans valeur enregistrée, le script demande à l'utilisateur s'il souhaite que son exécution continue ou non (via la fonction HandleErrors()).\\[1\baselineskip]
+        \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.\\[1\baselineskip]
+    \end{itemize}
+
+    \item \textbf{Description de la fonction :}\\
+        Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_STAT\_ERROR" soit vide ou corresponde à la chaîne de caractères "fatal".\\[1\baselineskip]
+
+    \item \textbf{Paramètres :}
+    \begin{itemize}
+        \item \textbf{\color{orange}\$p\_file\color{white}:} fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\[1\baselineskip]
+
+        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO})\\[1\baselineskip]
+    \end{itemize}
+
+    \item \textbf{Variables :}
+    \begin{itemize}
+        \item \textbf{\color{orange}\$v\_array\color{white} :}\\[1\baselineskip]
+    \end{itemize}
+
+    \item \textbf{Code :}
+\end{itemize}
+
+
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{CheckSTAT\_EXIT\_CODE}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
@@ -233,10 +261,10 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckSTAT\_LOG}\color{white}
+\color{blue}
+\subsubsection{CheckSTAT\_LOG}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
@@ -253,10 +281,10 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckSTAT\_LOG\_REDIRECT}\color{white}
+\color{blue}
+\subsubsection{CheckSTAT\_LOG\_REDIRECT}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
@@ -273,10 +301,10 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckSTAT\_TIME\_TXT}\color{white}
+\color{blue}
+\subsubsection{CheckSTAT\_TIME\_TXT}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :} Cette variable sert à mettre en pause l'exécution du script pendant un temps bref (vue d'un message, etc...).
 
@@ -292,10 +320,10 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 \end{itemize}
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckSTAT\_USER\_OS}\color{white}
+\color{blue}
+\subsubsection{CheckSTAT\_USER\_OS}\color{white}
 \begin{itemize}
     \item \textbf{Description de la variable :}
 
@@ -312,10 +340,10 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
 
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
-\color{green}
-\subsection{CheckProjectStatusVars}\color{white}
+\color{blue}
+\subsubsection{CheckProjectStatusVars}\color{white}
 \begin{itemize}
     \item \textbf{Description de la fonction :} Cette fonction
 
@@ -327,5 +355,12 @@ Ce fichier source inclut des fonctions servant à la gestion des valeurs des var
 
     \item \textbf{Code :}
 \end{itemize}
+
+
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{white}
 
 \end{document}
