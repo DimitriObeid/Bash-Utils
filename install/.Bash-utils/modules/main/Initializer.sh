@@ -95,9 +95,9 @@ MkTmpDir
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then touch "/mazz/maa" || \
-        { HandleSmallErrors 'E' "$(if CheckSTAT_TRANSLATED; then echo "$__BU_MAIN_MSG_CHECKINGS_CheckDecho_"; else echo "Unable to create the $(Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_>
-    fi
+if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then touch "/mazz/maa" || \
+    { HandleSmallErrors 'E' "$(if CheckSTAT_TRANSLATED; then echo "$__BU_MAIN_MSG_CHECKINGS_CheckDecho_"; else echo "Unable to create the $(Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file"; fi)" 'E' 'CPLS'; return 1; }
+fi
 
 
 if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
