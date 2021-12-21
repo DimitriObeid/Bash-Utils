@@ -135,7 +135,7 @@ function CheckSTAT_DEBUG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_DEBUG" != "true" ] && [ "$__BU_MAIN_STAT_DEBUG" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MAIN_STAT_DEBUG,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1
     fi
 
@@ -153,7 +153,7 @@ function CheckSTAT_DECHO()
     local pa_correctValues=("authorize" "forbid" "restrict")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_DECHO" != "authorize" ] && [ "$__BU_MAIN_STAT_DECHO" != "forbid" ] && [ "$__BU_MAIN_STAT_DECHO" != "restrict" ]; then
+    if [ "${__BU_MAIN_STAT_DECHO,,}" != "authorize" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "forbid" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "restrict" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${pa_correctValues[@]}"; return 1
     fi
 

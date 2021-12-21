@@ -174,7 +174,12 @@ Suivie de son code ANSI de la table des couleurs XTERM.\\[1\baselineskip]
 Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer \href{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}{\textbf{ici}}, ou exécuter le script\\
 \textbf{\color{lime}256-color-table.sh}, localisé dans le dossier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/res/dev-tools/dev-bin}.\\[1\baselineskip]
 
-Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}, puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
+Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section :\\
+\begin{itemize}
+    \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}\\[1\baselineskip]
+\end{itemize}
+
+Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
 
 Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[1\baselineskip]
 
@@ -189,7 +194,7 @@ Puis repérez la sous-catégorie suivante :
     \item \textbf{WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST}\\[1\baselineskip]
 \end{itemize}
 
-Repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis\linebreak ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
+Repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
 
 
 Ensuite, rendez vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Echo.lib}, puis dans la sous-catégorie suivante :\\
@@ -219,9 +224,7 @@ avant chaque liste).\\[1\baselineskip]
 
 Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
 
-Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée\linebreak
-à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de\linebreak
-couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
+Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de couleur dédiée au nom de l'autre couleur à afficher.\\[1\baselineskip]
 
 Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage\linebreak
 bicolore pour vous aider.\\[1\baselineskip]
@@ -249,26 +252,21 @@ bicolore pour vous aider.\\[1\baselineskip]
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
-De manière automatique :
+\textbf{De manière automatique :}
 \begin{itemize}
     \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{lime}mkmodules.sh}, puis exécutez juste\linebreak
     ce script en lui passant en argument les noms des modules à créer.\\[1\baselineskip]
 
-    \item \textbf{Astuce :} Vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier\linebreak
-    racine de la librairie. \textbf{Attention}, pour ceux qui utilisent WSL, ce lien ne marche pas dans le\linebreak
-    moindre explorateur de fichiers sur Windows, mais uniquement en ligne de commande\linebreak
-    avec votre distribution Linux.\\[1\baselineskip]
+    \item \textbf{Astuce :} Vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{lime}bin} dans le dossier racine de la librairie. \textbf{Attention}, pour ceux qui utilisent WSL, ce lien ne marche pas dans le moindre explorateur de fichiers sur Windows, mais uniquement en ligne de commande avec votre distribution Linux.\\[1\baselineskip]
 \end{itemize}
 
-De manière manuelle :
+\textbf{De manière manuelle :}
 \begin{itemize}
-    \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{lime}.Bash-utils}, puis rendez vous dans\linebreak
-    le dossier \textbf{\color{lime}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans\linebreak
-    chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}module.conf}.\\[1\baselineskip]
+    \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{lime}.Bash-utils}, puis rendez vous dans
+    le dossier \textbf{\color{lime}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}module.conf}.\\[1\baselineskip]
 
     \item Revenez de nouveau dans le dossier racine \textbf{\color{lime}.Bash-utils}, puis allez dans le dossier \textbf{\color{lime}modules}.\linebreak
-    Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un\linebreak
-    fichier nommé \textbf{\color{lime}Initializer.sh}.
+    Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}Initializer.sh}.
 \end{itemize}
 
 % -----------------------------------------------
@@ -276,12 +274,22 @@ De manière manuelle :
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
-\subsection{\$\_TITRE}\color{white}
+\subsection{Ajouter une variable de statut}\color{white}
 
 \color{blue}
-\subsubsection{Fichiers à éditer}\color{white}
+\subsubsection{Fichiers de configuration à éditer}\color{white}
 \begin{itemize}
-    \item \textbf{\color{lime}}
+    \item \textbf{\color{orange}\$\_\_BU\_MODULES\_UTILS\_ROOT\color{lime}/config/modules/main/Status.conf}
+\end{itemize}
+
+% -----------------------------------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Fichiers de librairie à éditer}\color{white}
+\begin{itemize}
+    \item \textbf{Tout fichier où vous avez créé une nouvelle fonction ou modifié une fonction existante, où vous souhaitez appeler cette variable}
 \end{itemize}
 
 % -----------------------------------------------
