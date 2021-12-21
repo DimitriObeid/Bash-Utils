@@ -60,7 +60,7 @@ function ConfEcho()
     local i=0
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+    if [ "$__BU_MAIN_STAT_TRANSLATED" != 'true' ]; then
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
 
@@ -171,7 +171,7 @@ function CheckSTAT_ECHO()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_ECHO" != "true" ] && [ "$__BU_MAIN_STAT_ECHO" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_ECHO,,}" != "true" ] && [ "${__BU_MAIN_STAT_ECHO,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${pa_correctValues[@]}"; return 1
     fi
 
@@ -189,7 +189,7 @@ function CheckSTAT_ERROR()
     local pa_correctValues=("" "fatal")
 
     #***** Code *****
-    if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" != "fatal" ]; then
+    if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1
     fi
 
@@ -207,7 +207,7 @@ function CheckSTAT_INITIALIZING()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_INITIALIZING" != "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "true" ] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1
 	fi
 
@@ -225,7 +225,7 @@ function CheckSTAT_LOG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_LOG" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1
 
     elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
@@ -246,7 +246,7 @@ function CheckSTAT_LOG_REDIRECT()
     local pa_correctValues=("" "log" "tee")
 
     #***** Code *****
-    if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'log' ] && [ "$__BU_MAIN_STAT_LOG_REDIRECT" != 'tee' ]; then
+    if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1
     fi
 
@@ -264,7 +264,7 @@ function CheckSTAT_OPERATE_ROOT()
 	local pa_correctValues=("authorized" "forbidden" "restricted")
 
 	#***** Code *****
-	if [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "authorized" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "forbidden" ] && [ "$__BU_MAIN_STAT_OPERATE_ROOT" != "restricted" ]; then
+	if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "authorized" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "forbidden" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "restricted" ]; then
 		ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1
 	fi
 
@@ -282,7 +282,7 @@ function CheckSTAT_PRINT_INIT_LOG()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "true" ] && [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1
     fi
 
@@ -297,7 +297,7 @@ function CheckSTAT_TIME_TXT()
     local p_lineno=$2
 
     #***** Variables *****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
+    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
         local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
     else
         local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT")
@@ -323,7 +323,7 @@ function CheckSTAT_TRANSLATED()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" != "true" ] && [ "$__BU_MAIN_STAT_TRANSLATED" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "true" ] && [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
     fi
 
@@ -341,7 +341,7 @@ function CheckSTAT_TXT_FMT()
     local pa_correctValues=("true" "false")
 
     #***** Code *****
-    if [ "$__BU_MAIN_STAT_TXT_FMT" != "true" ] && [ "$__BU_MAIN_STAT_TXT_FMT" != "false" ]; then
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"; return 1
     fi
 
@@ -395,7 +395,7 @@ function CheckProjectStatusVars()
 
 ## CHANGING VALUES MORE EASILY
 
-# Parameters :
+# Positionnal parameters :
 #   $1  --> new value.
 #   $2  --> file where the change was made.
 #   $3  --> line where the change was made.
