@@ -34,6 +34,9 @@ if [ -z "${p_module_list[*]}" ]; then
     printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE %s MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
 fi
 
+# TODO : Ajouter un séparateur d'arguments, et prendre en charge des arguments supplémentaires, comme la modification de la valeur d'une variable globale de statut
+# sans avoir à la modifier manuellement avant chaque exécution d'un script.
+
 # -----------------------------------------------
 
 ## DEFINING INITIALIZATION FUNCTIONS
