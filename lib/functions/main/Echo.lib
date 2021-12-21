@@ -73,12 +73,12 @@ function __EchoOutput()
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 		CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { HandleSmallErrors 'E' "$(DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
-        if [ "$p_context" = "begin" ]; then
+        if [ "${p_context,,}" = "begin" ]; then
             __EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
                 echo -e "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
-            elif [ "${p_type^^}" = 'm' ]; then
+            elif [ "${p_type,,}" = 'm' ]; then
                 echo -e "$(Header "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 		|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
                 echo -e "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
@@ -90,10 +90,10 @@ function __EchoOutput()
 
             return 0
 
-        elif [ "$p_context" = "end" ]; then
+        elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
                 echo -e "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 		|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
-            elif [ "${p_type^^}" = 'm' ]; then
+            elif [ "${p_type,,}" = 'm' ]; then
                 echo -e "$(Header "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 			|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
                 echo -e "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
@@ -378,9 +378,146 @@ function EchoWarning()
 # Black colored message.
 function EchoBlack()
 {
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_BLACK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
+# Blue colored message.
+function EchoBlue()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_BLUE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Cyan colored message.
+function EchoCyan()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_CYAN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Gray colored message.
+function EchoGray()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_GRAY}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Green colored message.
+function EchoGreen()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_GREEN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Orange colored message.
+function EchoOrange()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_ORANGE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Pink colored message.
+function EchoPink()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_PINK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Purple colored message.
+function EchoPurple()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_PURPLE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Red colored message.
+function EchoRed()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_RED}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Turquoise colored message.
+function EchoTurquoise()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_TURQUOISE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# White colored message.
+function EchoWhite()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_WHITE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Yellow colored message.
+function EchoYellow()
+{
+    #***** Parameters *****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #***** Code *****
+    EchoMsg "${__BU_MAIN_COLOR_YELLOW}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
 
 # -----------------------------------------------
 

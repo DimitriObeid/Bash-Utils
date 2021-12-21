@@ -192,23 +192,32 @@ Puis repérez la sous-catégorie suivante :
 Repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis\linebreak ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en la renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\[2\baselineskip]
 
 
-Ensuite, rendez-vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
+Ensuite, rendez vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Echo.lib}, puis dans la sous-catégorie suivante :\\
+\begin{itemize}
+    \item \textbf{DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "\$\_\_BU\_MAIN\_STAT\_TIME\_TXT" status variable}\\[1\baselineskip]
+\end{itemize}
+
+ Vous y trouvrerez des fonctions nommées \textbf{\color{mauve}Echo<\$\_nom\_couleur\_en\_anglais>}.\\[1\baselineskip]
+ 
+ Copiez-collez simplement l'une de ces fonctions, et remplacez y le nom de la couleur par celui de la nouvelle couleur.\\[2\baselineskip]
+
+
+Enfin, rendez-vous dans le fichier de librairie \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main/Headers.lib}, puis dans la sous-section \textbf{UNICOLOR HEADERS}. Repérez la liste de fonctions nommées :
 \begin{itemize}
     \item \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}\linebreak
 \end{itemize}
 
-Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>},\linebreak
-et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}HeaderBase}, en les\linebreak
+Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>},
+et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}HeaderBase}, en les
 remplaçant par le nom de la variable globale de noms de couleurs souhaitée.\\[1\baselineskip]
 
 Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis rennomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}HeaderBase}.\\[1\baselineskip]
 
-Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,\linebreak
-toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires\linebreak
+Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,
+toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires
 avant chaque liste).\\[1\baselineskip]
 
-Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la\linebreak
-nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
+Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.\\[1\baselineskip]
 
 Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée\linebreak
 à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de\linebreak
