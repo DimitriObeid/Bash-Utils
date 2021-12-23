@@ -59,7 +59,7 @@
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -70,41 +70,70 @@
     \item \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/lang/SetLibLang.sh}
 \end{itemize}
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
 
-Ouvrez le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}, puis dans la liste des variables globales,\linebreak créez une variable globale nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE\_}, suivie immédiatement du code\linebreak ISO 639-1 de la langue que vous souhaitez ajouter.\\[1\baselineskip]
+\begin{justify}
+    Ouvrez le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}, puis dans la liste des variables globales, créez une variable globale nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE\_}, suivie immédiatement du code ISO 639-1 de la langue que vous souhaitez ajouter.
+\end{justify}
 
-Ensuite, ouvrez le fichier de librairie \textbf{\color{lime}SetLibLang.sh}, puis rendez-vous dans la fonction \textbf{\color{mauve}SetLibLang}. Une fois dedans, ajoutez une nouvelle condition dans la structure de contrôle \textbf{case}, en écrivant le code ISO 639-1 de la langue cible, suivi d'un tiret du 8 '\_', utilisé par le système pour relier ce code avec le code du pays ISO 3166, avant d'ajouter une étoile '*' pour ne pas à se soucier de la gestion des différences de langue par pays.\\[1\baselineskip]
+\begin{justify}
+    Ensuite, ouvrez le fichier de librairie \textbf{\color{lime}SetLibLang.sh}, puis rendez-vous dans la fonction \textbf{\color{mauve}SetLibLang}.
+\end{justify}
 
-Une fois la condition créée, définissez la en créant une variable nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE}, en lui assignant la variable que vous venez de défninir dans le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}.\\[1\baselineskip]
+\begin{justify}
+    Une fois dedans, ajoutez une nouvelle condition dans la structure de contrôle \textbf{case}, en écrivant le code ISO 639-1 de la langue cible, suivi d'un tiret du 8 '\_', utilisé par le système pour relier ce code avec le code ISO 3166 du pays, avant d'ajouter une étoile '*' pour ne pas à se soucier de la gestion des différences de langue par pays.
+\end{justify}
 
-Appelez ensuite la fonction \textbf{\color{mauve}ParseCSVLibLang}, en lui passant en argument : 
-\begin{itemize}
-    \item Le chemin du fichier de traduction de la librairie (vous pouvez passer en argument la valeur \textbf{\color{orange}\$\_\_BU\_MAIN\_MODULE\_LIB\_LANG\_DIR\_PATH\color{lime}/lang.csv})\\[1\baselineskip]
+\begin{justify}
+    Une fois la condition créée, définissez la en créant une variable nommée \textbf{\color{orange}\_\_BU\_MAIN\_LANG\_CSV\_CODE}, en lui assignant la variable que vous venez de défninir dans le fichier de configuration \textbf{\color{lime}LangCSVCode.conf}.
+\end{justify}
 
-    \item La variable globale \textbf{\color{orange}\$\_\_BU\_MAIN\_LANG}, qui enregistre la langue choisie, définie plus bas dans le fichier, dans la fonction \textbf{\color{mauve}GetLibLang}.\\[1\baselineskip]
+\begin{justify}
+    Appelez ensuite la fonction \textbf{\color{mauve}ParseCSVLibLang}, en lui passant en argument :
 
-    \item Le message de succès de recherche du chemin du fichier CSV, dans la langue que vous\linebreak souhaitez définir.\\[1\baselineskip]
+    \begin{itemize}
+        \item Le chemin du fichier de traduction de la librairie (vous pouvez copier cette valeur, puis la coller en la passant en argument) :
+        \begin{itemize}
+            \item \textbf{\color{orange}\$\_\_BU\_MAIN\_MODULE\_LIB\_LANG\_DIR\_PATH\color{lime}/lang.csv}\\
+        \end{itemize}
 
-    \item Le message d'erreur du header de la fonction \textbf{\color{mauve}HandleErrors}\\[1\baselineskip]
+        \item La variable globale \textbf{\color{orange}\$\_\_BU\_MAIN\_LANG}, qui enregistre la langue choisie, définie plus bas dans le fichier, dans la fonction \textbf{\color{mauve}GetLibLang}.\\
 
-    \item Le message de conseil de la fonction \textbf{\color{mauve}HandleErrors}\\[1\baselineskip]
-\end{itemize}
+        \item Le message de succès de recherche du chemin du fichier CSV, dans la langue que vous\ souhaitez définir.\\
 
-Pour plus de praticité, vous pouvez créer un fichier nommé \textbf{\color{lime}LangISOCode.conf} dans le dossier\linebreak \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}, et écrire le code ISO 639-1 de votre langue,\linebreak suivie du code ISO 3166 d'un des pays où la langue à ajouter est parlée.\\[1\baselineskip]
+        \item Le message d'erreur du header de la fonction \textbf{\color{mauve}HandleErrors}\\
 
-Pour encore plus de praticité, si la langue que vous souhaitez ajouter est définie dans les paramètres de votre système d'exploitation, vous pouvez taper la commande suivante, en remplaçant la variable \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT} par le chemin de la racine du dossier de configurations de Bash Utils (normalement localisé dans votre dossier personnel) :
-\begin{itemize}
-    \item \textbf{\color{gray}echo \color{orange}\$LANG \color{white} > "\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main/LangISOCode.conf\color{white}"}
-\end{itemize}
+        \item Le message de conseil de la fonction \textbf{\color{mauve}HandleErrors}
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    Pour plus de praticité, vous pouvez créer un fichier nommé \textbf{\color{lime}LangISOCode.conf} dans ce dossier :
+    
+    \begin{itemize}
+        \item \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    puis écrire le code ISO 639-1 de votre langue, suivie du code ISO 3166 d'un des pays où la langue à ajouter est parlée.
+\end{justify}
+
+\begin{justify}
+    Pour encore plus de praticité, si la langue que vous souhaitez ajouter est définie dans les paramètres de votre système d'exploitation, vous pouvez taper la commande suivante en remplaçant la variable \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT} par le chemin de la racine du dossier de configurations de Bash Utils (normalement localisé dans votre dossier personnel) :
+
+    \begin{itemize}
+        \item \textbf{\color{gray}echo \color{orange}\$LANG \color{white} > "\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main/LangISOCode.conf\color{white}"}
+    \end{itemize}
+\end{justify}
 
 
-
+% -----------------------
 
 % -----------------------------------------------
 
@@ -121,7 +150,7 @@ Pour encore plus de praticité, si la langue que vous souhaitez ajouter est déf
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -133,13 +162,15 @@ Pour encore plus de praticité, si la langue que vous souhaitez ajouter est déf
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
 
+
+% -----------------------
 
 % -----------------------------------------------
 
@@ -156,7 +187,7 @@ Pour encore plus de praticité, si la langue que vous souhaitez ajouter est déf
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -169,31 +200,44 @@ Pour encore plus de praticité, si la langue que vous souhaitez ajouter est déf
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
 
-Dans le fichier de configuration \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
-\begin{itemize}
-    \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}\\[1\baselineskip]
-\end{itemize}
+\begin{justify}
+    Dans le fichier de configuration \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
 
-Suivie de son code ANSI de la table des couleurs XTERM.\\[1\baselineskip]
+    \begin{itemize}
+        \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}\\
+    \end{itemize}
+\end{justify}
 
-Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer \href{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}{\textbf{ici}}, ou exécuter le script\\
-\textbf{\color{lime}256-color-table.sh}, localisé dans le dossier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/res/dev-tools/dev-bin}.\\[1\baselineskip]
+\begin{justify}
+    Suivie de son code ANSI de la table des couleurs XTERM.
+\end{justify}
 
-Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section :\\
-\begin{itemize}
-    \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}\\[1\baselineskip]
-\end{itemize}
+\begin{justify}
+    Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer \href{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}{\textbf{ici}}, ou exécuter le script \textbf{\color{lime}256-color-table.sh}, localisé dans le dossier \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/res/dev-tools/dev-bin}.
+\end{justify}
 
-Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.\\[1\baselineskip]
+\begin{justify}
+    Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section :\\
 
-Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.\\[1\baselineskip]
+    \begin{itemize}
+        \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "CheckTextColor" FUNCTIONS}
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.
+\end{justify}
+
+\begin{justify}
+    Regardez la manière dont la fonction \textbf{\color{mauve}CheckTextColor} est appelée, pour vous aider.
+\end{justify}
 
 
 Maintenant, rendez vous dans le fichier de librairie
@@ -242,6 +286,8 @@ Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres li
 bicolore pour vous aider.\\[1\baselineskip]
 
 
+% -----------------------
+
 % -----------------------------------------------
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
@@ -259,7 +305,7 @@ bicolore pour vous aider.\\[1\baselineskip]
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -283,6 +329,9 @@ bicolore pour vous aider.\\[1\baselineskip]
     Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{lime}Initializer.sh}.\\[1\baselineskip]
 \end{itemize}
 
+
+% -----------------------
+
 % -----------------------------------------------
 
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
@@ -297,7 +346,8 @@ bicolore pour vous aider.\\[1\baselineskip]
     \item \textbf{\color{orange}\$\_\_BU\_MODULES\_UTILS\_ROOT\color{lime}/config/modules/main/Status.conf}\\[1\baselineskip]
 \end{itemize}
 
-% -----------------------------------------------
+
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -310,7 +360,8 @@ bicolore pour vous aider.\\[1\baselineskip]
     \item \textbf{Tout fichier où vous avez créé une nouvelle fonction ou modifié une fonction existante, où vous souhaitez appeler cette variable}\\[1\baselineskip]
 \end{itemize}
 
-% -----------------------------------------------
+
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -360,28 +411,8 @@ Il est recommandé de vérifier si la valeur enregistrée dans votre variable so
 
 Maintenant, vous pouvez utiliser cette nouvelle variable et ces nouvelles fonctions là où vous le souhaitez dans le module principal, voire dans un autre module, puis dans vos propres scripts.\\[1\baselineskip]
 
-% -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{green}
-\subsection{\$\_TITRE}\color{white}
-
-\color{blue}
-\subsubsection{Fichiers à éditer}\color{white}
-
-\begin{itemize}
-    \item \textbf{\color{lime}\color{white}}
-\end{itemize}
-
-
-% -----------------------------------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{Consignes}\color{white}
-
+% -----------------------
 
 % -----------------------------------------------
 
@@ -398,13 +429,40 @@ Maintenant, vous pouvez utiliser cette nouvelle variable et ces nouvelles foncti
 \end{itemize}
 
 
-% -----------------------------------------------
+% -----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{Consignes}\color{white}
 
+
+% -----------------------
+
+% -----------------------------------------------
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{\$\_TITRE}\color{white}
+
+\color{blue}
+\subsubsection{Fichiers à éditer}\color{white}
+
+\begin{itemize}
+    \item \textbf{\color{lime}\color{white}}
+\end{itemize}
+
+
+% -----------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Consignes}\color{white}
+
+
+% -----------------------
 
 % -----------------------------------------------
 
