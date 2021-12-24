@@ -39,7 +39,7 @@
 \section{Introduction}\color{white}
 
 \begin{justify}
-    \textbf{Note 1 :} La procédure d'initialisation des modules et de la librairie est décrite en détails dans la sous-section \textbf{\color{red}Fonctionnement \color{white} / \color{green}Étapes d'initialisation\color{white}} du fichier \textbf{\color{lime}Bash-utils/docs/fr/Introduction.pdf\color{white}}.
+    \textbf{Note 1 :} La procédure d'initialisation des modules et de la librairie est décrite en détails dans la sous-section \textbf{\color{red}Fonctionnement \color{white} / \color{green}Étapes d'initialisation} du fichier \textbf{\color{lime}Bash-utils/docs/fr/Introduction.pdf}.
 \end{justify}
  
  \begin{justify}
@@ -62,7 +62,7 @@
 \end{justify}
 
 \begin{justify}
-    En outre, il est obligatoire de l'installer dans le dossier personnel du super-utilisateur (le dossier \textbf{\color{lime}/root\color{white}}), pour pouvoir exécuter un script utilisant la librairie Bash Utils avec les privilèges du super-utilisateur, ainsi que pour utiliser certaines fonctionnalités ne pouvant être exécutées qu'avec des privilèges du super-utilisateur.
+    En outre, il est obligatoire de l'installer dans le dossier personnel du super-utilisateur (le dossier \textbf{\color{lime}/root}), pour pouvoir exécuter un script utilisant la librairie Bash Utils avec les privilèges du super-utilisateur, ainsi que pour utiliser certaines fonctionnalités ne pouvant être exécutées qu'avec des privilèges du super-utilisateur.
 \end{justify}
 
 
@@ -76,19 +76,19 @@
 \subsection{Dossiers}\color{white}
 
 \begin{justify}
-    Ce gestionnaire est composé d'un dossier (caché pour ne pas trop encombrer le dossier personnel, où il doit être installé) : \textbf{\color{lime}.Bash-utils\color{white}}
+    Ce gestionnaire est composé d'un dossier (caché pour ne pas trop encombrer le dossier personnel, où il doit être installé) : \textbf{\color{lime}.Bash-utils}
 \end{justify}
 
 \begin{justify}
-    Ce dossier est composé de deux sous-dossiers, comprenant également des sous dossiers : \textbf{\color{lime}config\color{white}} et \textbf{\color{lime}modules\color{white}}.
+    Ce dossier est composé de deux sous-dossiers, comprenant également des sous dossiers : \textbf{\color{lime}config} et \textbf{\color{lime}modules}.
 \end{justify}
 
 \begin{justify}
-    Le dossier \textbf{\color{lime}config\color{white}} est constitué du dossier \textbf{\color{lime}modules\color{white}}, qui contient en sous-dossiers des dossiers de modules contenant les fichiers de configuration propres à chaque module.
+    Le dossier \textbf{\color{lime}config} est constitué du dossier \textbf{\color{lime}modules}, qui contient en sous-dossiers des dossiers de modules contenant les fichiers de configuration propres à chaque module.
 \end{justify}
 
 \begin{justify}
-    Le dossier \textbf{\color{lime}modules\color{white}} (sous-dossier de \textbf{\color{lime}.Bash-utils\color{white}}) contient en sous-dossier des dossiers de modules contenant les fichiers d'initialisation propres à chaque module.
+    Le dossier \textbf{\color{lime}modules} (sous-dossier de \textbf{\color{lime}.Bash-utils}) contient en sous-dossier des dossiers de modules contenant les fichiers d'initialisation propres à chaque module.
 \end{justify}
 
 
@@ -131,24 +131,24 @@
 \subsection{Fichiers}\color{white}
 
 \begin{justify}
-    Ce gestionnaire est composé d'un fichier à placer dans le dossier personnel de tous les utilisateurs de la librairie :  \textbf{\color{lime}Bash-utils-init.sh\color{white}}.
+    Ce gestionnaire est composé d'un fichier à placer dans le dossier personnel de tous les utilisateurs de la librairie :  \textbf{\color{lime}Bash-utils-init.sh}.
 \end{justify}
 
 \begin{justify}
     Parmi les fichiers propres à chaque module, deux d'entre eux doivent obligatoirement être présents :
 
     \begin{itemize}
-        \item \textbf{\color{lime}module.conf\color{white} :} Ce fichier, à placer dans le dossier \textbf{\color{lime}.Bash-utils/config/modules/\$nom\_du\_module\color{white}}, contient chaque variable utile au fichier \textbf{\color{lime}Initializer.sh\color{white}}, présenté ci-dessous.\\
+        \item \textbf{\color{lime}module.conf\color{white} :} Ce fichier, à placer dans le dossier \textbf{\color{lime}.Bash-utils/config/modules/\$nom\_du\_module}, contient chaque variable utile au fichier \textbf{\color{lime}Initializer.sh}, présenté ci-dessous.\\
 
-        \item \textbf{\color{lime}Initializer.sh\color{white} :} Ce fichier initialise le module et sert de fichier d'inclusion de chaque fichier source dans le dossier de librairie \textbf{\color{lime}Bash-utils/lib/\$nom\_du\_module\color{white}}, ainsi qu'aux autres fichiers de configuration à placer, de préférence, dans ce même dossier.
+        \item \textbf{\color{lime}Initializer.sh\color{white} :} Ce fichier initialise le module et sert de fichier d'inclusion de chaque fichier source dans le dossier de librairie \textbf{\color{lime}Bash-utils/lib/\$nom\_du\_module}, ainsi qu'aux autres fichiers de configuration à placer, de préférence, dans ce même dossier.
     \end{itemize}
 \end{justify}
 
 \begin{justify}
-    Outre les fichiers de configuration et les fichiers source de chaque module, plusieurs fichiers sont présents directement dans le dossier \textbf{\color{lime}.Bash-utils\color{white}} :
+    Outre les fichiers de configuration et les fichiers source de chaque module, plusieurs fichiers sont présents directement dans le dossier \textbf{\color{lime}.Bash-utils} :
 
     \begin{itemize}
-        \item \textbf{\color{lime}Bash-utils-root-val.path\color{white} :} Ce fichier contient le chemin du dossier racine de la librairie Bash Utils. Il est lu par le fichier \textbf{\color{lime}module.conf\color{white}}, du module \color{lime}\textbf{main\color{white}}.
+        \item \textbf{\color{lime}Bash-utils-root-val.path\color{white} :} Ce fichier contient le chemin du dossier racine de la librairie Bash Utils. Il est lu par le fichier \textbf{\color{lime}module.conf}, du module \color{lime}\textbf{main}.
     \end{itemize}
 \end{justify}
 
@@ -183,7 +183,7 @@
 \subsubsection{Liste des fonctions}\color{white}
 
 \begin{justify}
-    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{lime}Bash-utils/docs/fr/modules/main/functions\color{white}}
+    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{lime}Bash-utils/docs/fr/modules/main/functions}
 \end{justify}
 
 % -----------------------
@@ -194,7 +194,7 @@
 \subsubsection{Liste des configurations}\color{white}
 
 \begin{justify}
-    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{lime}Bash-utils/docs/fr/modules/main/config\color{white}}
+    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{lime}Bash-utils/docs/fr/modules/main/config}
 \end{justify}
 
 \end{document}
