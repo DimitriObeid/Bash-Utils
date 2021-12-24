@@ -814,17 +814,38 @@
 \subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{white}
 
 \begin{justify}
-    \textbf{Note :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.\\[1\baselineskip]
+    \textbf{Note 1 :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.
 \end{justify}
-
-\color{blue}
-\subsubsection{ChangeSTAT\_DEBUG}\color{white}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction
+    \textbf{Note 2 :} Chaque fonction définie dans cette sous-section attend les trois mêmes paramètres positionnels, dont les informations sont données en commentaire sous le nom de la sous-section.
+
+    \begin{itemize}
+        \item \textbf{\$1 :} Ce paramètre contient la nouvelle valeur à assigner à la variable globale de statut traitée par la fonction.\\
+
+        \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.\\
+
+        \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
+    \end{itemize}
 \end{justify}
-    
+
+
+% -----------------------
+
+% -----------------------------------------------
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{Sous-section "EASIER CHECKING BOOLEAN VALUES"}\color{white}
+
+\begin{justify}
+    Ces fonctions servent à vérifier si la valeur d'une des variables globales de statut contienne la valeur \textbf{vrai} ou la valeur \textbf{faux} (variables booléenes uniquement).
+\end{justify}
+
+\begin{justify}
+    Chacune d'entre elles vérifie si la variable traitée contient la valeur \textbf{vrai}, et retourne la valeur 0 (fonction executée comme souhaitée), ou 1 le cas échéant.
+\end{justify}
 
 
 
