@@ -206,7 +206,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
 else
-	echo "ERROR !"; echo
+	echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
 
 	echo "The Bash Utils configurations root folder << .Bash-utils >> doesn't exists in your home directory."; echo
 	echo "Please copy this folder in your home directory. You can install it by executing the installation file, or you can find it in the Bash-utils/install directory."; echo
@@ -245,7 +245,7 @@ for module in "${p_module_list[@]}"; do
         # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
       # if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
        #    if ! "$(ModuleInitializer_FindPath "$__BU_UTILS_CONFIG_MODULES/${module##* }/" "ChangeStat.conf")"; then
-        #       echo "ERROR !"; echo
+        #       echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
 
         #       echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !"; echo
         #       echo "Please create this file, and write the necessary conditions that changes the status global variables values"; echo
@@ -259,7 +259,7 @@ for module in "${p_module_list[@]}"; do
       # fi
 
         # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" > /dev/null || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
     fi
 
     # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
