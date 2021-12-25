@@ -96,9 +96,10 @@ function HandleSmallErrors()
 
     else 
         EchoWarning "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_WARNING} --> Warning : bad exit or return code given as second argument !"; ExitError '1'
-
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
     fi
+
+    if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
+
 }
 
 # -----------------------------------------------

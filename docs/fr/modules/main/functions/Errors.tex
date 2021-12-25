@@ -19,7 +19,6 @@
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
-\justifying
 
 \pdfinfo{
   /Title    (Fonctions du fichier de librairie Errors.lib)
@@ -119,6 +118,63 @@
 \section{Fonctions}\color{white}
 
 \color{green}
-\subsection{}\color{white}
+\subsection{Sous-section CLASSIC ERRORS HANDLING}\color{white}
+
+\color{blue}
+\subsubsection{HandleSmallErrors}\color{white}
+
+\begin{justify}
+    \textbf{Description :}\\
+    Cette fonction affiche un simple message d'avertissement ou d'erreur, selon le contexte choisi, contrairement à la fonction \textbf{\color{mauve}HandleErrors}, qui fait un rapport complet de l'erreur, et qui est à priviliégier pour de plus grosses erreurs.
+\end{justify}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{itemize}
+        \item \textbf{\color{orange}p\_type} Ce paramètre attend soit le caractère \textbf{W} (warning), soit le paramètre \textbf{E} (error) \\
+
+        \item \textbf{\color{orange}p\_string} Ce paramètre attend la chaîne de caractère à afficher \\
+
+        \item \textbf{\color{orange}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{orange}p\_type} \\
+
+        \item \textbf{\color{orange}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS} (), pour changer la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    \textbf{Fonctionnement :}\\
+    Cette fonction vérifie en premier lieu si la valeur \textbf{CPLS} est passée en quatrième argument, pour sauvegarder la valeur actuelle de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, et la mettre à \textbf{true}.
+\end{justify}
+
+\begin{justify}
+    Passer une valeur à ce paramètre est nécessaire dans les situations où l'appel des fonctions \textbf{\color{mauve}Echo<...>()} peut provoquer une boucle infinie.
+\end{justify}
+
+\begin{justify}    
+    Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{mauve}EchoWarning}, et E = error, donc appel de la fonction \textbf{\color{mauve}EchoError}).
+\end{justify}
+
+\begin{justify}
+    Si la valeur du premier argument n'est ni renseignée, ni attendue, alors une de ces fonctions est aléatoirement appelée pour afficher cette chaîne de caractères.
+\end{justify}
+
+\begin{justify}
+    Une fois la chaîne de caractère affichée, la fonction vérifie quelle valeur a été passée en troisième argument (\textbf{\color{orange}p\_return}), pour simplement continuer l'exécution de votre script ou pour directement arrêter son exécution.
+\end{justify}
+
+\begin{justify}
+    En cas d'absence de valeur ou de présence d'une valeur inattendue, un message d'avertissement s'affiche sur le terminal, avant que l'exécution du script ne soit définitivement interrompue.
+\end{justify}
+
+\begin{justify}
+    Enfin, si la valeur \textbf{CPLS} a été passée en quatrième argument, l'ancienne valeur est automatiquement réassignée à la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Utilisation :}
+\end{justify}
+
+
 
 \end{document}
