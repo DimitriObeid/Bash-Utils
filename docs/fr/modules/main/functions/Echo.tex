@@ -1,18 +1,24 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{inputenc}     % Encodage du texte
-\usepackage[french]{babel}      % Langue
+\usepackage[utf8]{inputenc}     % Encodage du texte.
+\usepackage[french]{babel}      % Langue du document.
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}
-\usepackage{color}
-\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}					%
+\usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
+\usepackage{verbatim}						% Mise en page de paragraphes.
+\usepackage{fancyhdr}						%
+\usepackage[document]{ragged2e}								% Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.					%
+\usepackage{hyperref}
 
 \fontfamily{}
 
-\title{Fonctions du fichier de librairie Echo.lib}
+\pagecolor{black}
+\title{\color{red}Fonctions du fichier de librairie \color{lime}Echo.lib}\color{white}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
+\justifying
 
 \pdfinfo{
   /Title    (Fonctions du fichier de librairie Echo.lib)
