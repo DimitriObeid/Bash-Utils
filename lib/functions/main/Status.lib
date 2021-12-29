@@ -444,7 +444,7 @@ function ChangeSTAT_TXT_FMT         { __BU_MAIN_STAT_TXT_FMT="$1";          Chec
 function CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop. 
-function CheckStatAllowEcho()       { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
+function CheckStatIsBackupEchoing() { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
 function CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "true" ]; then return 0; else return 1; fi; }

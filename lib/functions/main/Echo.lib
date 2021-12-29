@@ -67,6 +67,12 @@ function __EchoOutput()
 	local p_context=$2		# Begin or end of the debug process.
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
+    #***** Variables *****
+    if ! CheckStatIsBackupEchoing; then
+        # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
+        local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
+    fi
+
 	#***** Code *****
 	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0
 
@@ -88,6 +94,11 @@ function __EchoOutput()
                 echo -e "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
+            # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
+            if [ "$v_BU_MAIN_STAT_ECHO_val" = 'false' ]; then
+                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"
+            fi
+
             return 0
 
         elif [ "${p_context,,}" = "end" ]; then
@@ -101,6 +112,11 @@ function __EchoOutput()
                 echo -e "$(HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
                 echo -e "$(HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+            fi
+
+            # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
+            if [ "$v_BU_MAIN_STAT_ECHO_val" = 'false' ]; then
+                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"
             fi
 
             __EchoVoid; return 0

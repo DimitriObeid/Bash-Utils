@@ -132,13 +132,15 @@
     \textbf{Paramètres :}
 
     \begin{itemize}
-        \item \textbf{\color{orange}p\_type} Ce paramètre attend soit le caractère \textbf{W} (warning), soit le paramètre \textbf{E} (error) \\
+        \item \textbf{\color{orange}p\_type} Ce paramètre attend soit le caractère \textbf{W} (warning), soit le paramètre \textbf{E} (error)\\
 
-        \item \textbf{\color{orange}p\_string} Ce paramètre attend la chaîne de caractère à afficher \\
+        \item \textbf{\color{orange}p\_string} Ce paramètre attend la chaîne de caractère à afficher\\
 
-        \item \textbf{\color{orange}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{orange}p\_type} \\
+        \item \textbf{\color{orange}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{orange}p\_type}\\
 
-        \item \textbf{\color{orange}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS} (), pour changer la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
+        \item \textbf{\color{orange}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\
+        
+        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{mauve}CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{mauve}Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
     \end{itemize}
 \end{justify}
 
