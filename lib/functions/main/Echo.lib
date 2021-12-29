@@ -180,7 +180,7 @@ function __EchoCPLS()
 
 # --------------------------------------------
 
-## DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" status variable.
+## DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
 # Error message
 
@@ -371,7 +371,7 @@ function EchoWarning()
 
 # -----------------------------------------------
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" status variable.
+## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
 # Note : These function call the "EchoMsg()" function in order to avoid rewriting tons of lines that would do the same thing.
 
