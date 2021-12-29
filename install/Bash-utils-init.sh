@@ -258,7 +258,9 @@ for module in "${p_module_list[@]}"; do
     v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
     # Checking if the "main" module is passed as first argument.
-    # if [ "" ]; then
+    if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
+		echo 'MAIN'
+	fi
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name"; then
