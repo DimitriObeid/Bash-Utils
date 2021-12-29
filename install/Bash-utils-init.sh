@@ -84,32 +84,8 @@ function ModuleInitializer_CheckBashMinimalVersion()
 	fi
 }
 
-# Create a file directly in the computer's memory to redirect .
-function ModuleInitializer_CreateFileInMemory()
-{
-    #***** Parameters *****
-    p_filename=$1
-
-    #***** Code *****
-}
-
-# Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
-function ModuleInitializer_FindPath()
-{
-	# $1 = Parent directory.
-    # $2 = Targeted directory or file.
-    local path
-        path="$(find "$1" -maxdepth 1 -iname "$2")" || return 1; printf "%s" "$path"; return 0
-}
-
-function ModuleInitializer_GetModuleName()
-{
-    v_module="$(cd "$(dirname "$1")" || { echo -e "Unable to get the module's name from the parent directory name"; exit 1; }; pwd -P)"
-
-    echo "${v_module##*/}"; return 0
-}
-
 # Check if the given path exists
+# TODO : Check where I called this function or tried to do so.
 function __ModuleInitializer_CheckPath()
 {
     #***** Parameters *****
@@ -134,15 +110,30 @@ function __ModuleInitializer_CheckPath()
     fi
 }
 
-# Printing an error message if a file cannot be sourced.
-function ModuleInitializer_SourcingFailure()
+# Create a file directly in the computer's memory to redirect .
+function ModuleInitializer_CreateFileInMemory()
 {
     #***** Parameters *****
-    local p_path=$1         # Path of the file that cannot be sourced.
-    local p_module=$2       # Name of the module.
+    p_filename=$1
 
     #***** Code *****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+}
+
+# Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
+function ModuleInitializer_FindPath()
+{
+	# $1 = Parent directory.
+    # $2 = Targeted directory or file.
+    local path
+        path="$(find "$1" -maxdepth 1 -iname "$2")" || return 1; printf "%s" "$path"; return 0
+}
+
+# Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
+function ModuleInitializer_GetModuleName()
+{
+    v_module="$(cd "$(dirname "$1")" || { echo -e "Unable to get the module's name from the parent directory name"; exit 1; }; pwd -P)"
+
+    echo "${v_module##*/}"; return 0
 }
 
 # Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
@@ -194,6 +185,42 @@ function ModuleInitializer_ListInstalledModules()
     exit 1
 }
 
+# Checking and processing the global status variables value's arguments given after the module's name.
+function ModuleInitializer_ProcessStat()
+{
+    #***** Parameters *****
+    local p_module=$1       # The module's name from the "for module in "${p_module_list[@]}"; do" loop.
+    local p_module_name=$2  # The "$v_module_name" variable defined at each loop's iteration.
+
+    #***** Code *****
+    # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
+    if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
+        if ! "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")"; then
+            echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
+
+            echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !"; echo
+            echo "Please create this file, and write the necessary conditions that changes the status global variables values"; echo
+
+            echo "Aborting the module's initialization"; echo
+
+            exit 1
+        else
+            echo; echo "Processing the $v_module_name module's global status variables' configuration script"; echo
+        fi
+    fi
+}
+
+# Printing an error message if a file cannot be sourced.
+function ModuleInitializer_SourcingFailure()
+{
+    #***** Parameters *****
+    local p_path=$1         # Path of the file that cannot be sourced.
+    local p_module=$2       # Name of the module.
+
+    #***** Code *****
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+}
+
 # -----------------------------------------------
 
 ## DEFINING GLOBAL VARIABLES
@@ -237,26 +264,12 @@ for module in "${p_module_list[@]}"; do
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name"; then
 		printf '\n'; printf "WARNING ! THE ''%s'' module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$v_module_name"
 
+        # Listing all the installed modules in the user's hard drive.
 		ModuleInitializer_ListInstalledModules
-        # ModuleInitializer_SpellCheck "${p_module_list[@]}"
 
 		exit 1
     else
-        # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
-        if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
-            if ! "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")"; then
-                echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
-
-                echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !"; echo
-                echo "Please create this file, and write the necessary conditions that changes the status global variables values"; echo
-
-                echo "Aborting the module's initialization"; echo
-
-                exit 1
-            else
-                echo; echo "Processing the $v_module_name module's global status variables' configuration script"; echo
-            fi
-        fi
+        ModuleInitializer_ProcessStat "$module" "$v_module_name"
 
         # shellcheck disable=SC1090
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
@@ -291,6 +304,9 @@ for module in "${p_module_list[@]}"; do
 		HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 	fi
 done
+
+# Testing a Decho_FMT function
+# Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
