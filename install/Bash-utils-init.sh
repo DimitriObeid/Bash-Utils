@@ -243,20 +243,20 @@ for module in "${p_module_list[@]}"; do
 		exit 1
     else
         # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
-      # if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
-       #    if ! "$(ModuleInitializer_FindPath "$__BU_UTILS_CONFIG_MODULES/${module##* }/" "ChangeStat.conf")"; then
-        #       echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
+        if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
+            if ! "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")"; then
+                echo; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !"; echo
 
-        #       echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !"; echo
-        #       echo "Please create this file, and write the necessary conditions that changes the status global variables values"; echo
+                echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !"; echo
+                echo "Please create this file, and write the necessary conditions that changes the status global variables values"; echo
 
-        #       echo "Aborting the module's initialization"; echo
+                echo "Aborting the module's initialization"; echo
 
-        #       exit 1
-        #   else
-        #       echo; echo "Processing the $v_module_name module's global status variables' configuration script"; echo
-        #   fi
-      # fi
+                exit 1
+            else
+                echo; echo "Processing the $v_module_name module's global status variables' configuration script"; echo
+            fi
+        fi
 
         # shellcheck disable=SC1090
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
@@ -271,6 +271,23 @@ for module in "${p_module_list[@]}"; do
         # shellcheck disable=SC1090
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
 
+        # Changing the global status variable's values after the main module's successful initialization.
+        if [ "$v_module_name" = 'main' ]; then
+            # TODO : After adding the status configuration arguments, 
+            if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")" ]; then
+                echo "STAT"
+            else
+                ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+                # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
+                ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            fi
+        fi
+
 		HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 	fi
 done
@@ -278,15 +295,6 @@ done
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### ENDING THE WHOLE INITIALIZATION PROCESS
-
-ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_PATH") !"
 
