@@ -83,15 +83,15 @@ function __EchoOutput()
             __EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(Header "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 		|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -103,9 +103,9 @@ function __EchoOutput()
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(HeaderError "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 		|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(Header "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 			|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
                 echo -e "$(HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
