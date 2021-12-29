@@ -68,8 +68,8 @@ function __EchoOutput()
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
     #***** Variables *****
+    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
     if ! CheckStatIsBackupEchoing; then
-        # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
     fi
 
