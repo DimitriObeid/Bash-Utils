@@ -106,28 +106,42 @@ function IsPositiveInt()
 
 ## STRING VALUES
 
-# Checking if value is an alphabetic string (not any number allowed)
-function IsAlpha()
+# Checking if the value is an alphabetic character (not any number allowed).
+function IsAlphaChar()
 {
-    if [[ "$1" =~  [^a-zA-Z\ ] ]]; then
+	if [[ "$1" = [a-zA-Z] ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# Checking if the value is an alphabetic string (not any number allowed)
+function IsAlphaString()
+{
+    if [[ "$1" = [^a-zA-Z\ ] ]]; then
         return 0
     else
         return 1
     fi
 }
 
-# Checking if value is an alphanumeric string.
-function IsAlphaNum()
+# Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
+function IsAlphaStringOnly()
 {
-    if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
-        return 0
-    else
-        return 1
-    fi
+	if [ "${#1}" -lt 2 ]; then
+    	echo "Not a string"
+	else
+		if [[ "$1" = [^a-zA-Z\ ] ]]; then
+			return 0
+		else
+    		return 1
+		fi
+	fi
 }
 
 # Checking if the value is a character.
-function IsChar()
+function IsAlphaNumChar()
 {
 	if [[ "$1" = [a-zA-Z0-9] ]]; then
 		return 0
@@ -136,13 +150,27 @@ function IsChar()
 	fi
 }
 
-# Checking if the value is an alphabetic character (not any number allowed).
-function IsAlphaChar()
+# Checking if the value is an alphanumeric string.
+function IsAlphaNumString()
 {
-	if [[ "$1" = [a-zA-Z] ]]; then
-		return 0
+    if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Checking if the value is an alphabetic string only (not less than two characters).
+function IsAlphaNumStringOnly()
+{
+	if [ "${#1}" -lt 2 ]; then
+    	echo "Not a string"
 	else
-		return 1
+		if [[ "$1" = [^a-zA-Z0-9\ ] ]]; then
+			return 0
+		else
+    		return 1
+		fi
 	fi
 }
 

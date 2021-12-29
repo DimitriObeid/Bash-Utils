@@ -9,4 +9,4 @@ function char__()
 	fi
 }
 
-char__ 'at'
+char__ "$1"
