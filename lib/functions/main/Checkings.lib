@@ -658,8 +658,10 @@ function CheckDecho()
 {
     #***** Code *****
     # Creating the "colors.tmp" file in case it doesn't exists.
-    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then touch "/mazz/maa" || \
-        { HandleSmallErrors 'E' "$(if CheckSTAT_TRANSLATED; then echo "$__BU_MAIN_MSG_CHECKINGS_CheckDecho_"; else echo "Unable to create the $(Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file"; fi)" 'E' 'CPLS'; return 1; }
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then
+        if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+            HandleSmallErrors 'E' "Unable to create the $(Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file" 'E' 'CPLS'
+        fi
     fi
 
     # If the , then the "Decho()" function will not decorate the targeted text, but put it between 
