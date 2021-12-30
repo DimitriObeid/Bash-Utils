@@ -23,21 +23,7 @@ fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### MODULES INITIALIZATION
-
-## CHECKING THE ARGUMENTS ARRAY LENGTH
-
-# List of all the modules to include passed as arguments.
-p_module_list=("$@")
-
-if [ -z "${p_module_list[*]}" ]; then
-    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE %s MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
-fi
-
-# TODO : Ajouter un séparateur d'arguments, et prendre en charge des arguments supplémentaires, comme la modification de la valeur d'une variable globale de statut
-# sans avoir à la modifier manuellement avant chaque exécution d'un script.
-
-# -----------------------------------------------
+#### INITIALIZER RESOURCES
 
 ## DEFINING INITIALIZATION FUNCTIONS
 
@@ -64,6 +50,21 @@ printf "
     else
         exit 1
     fi
+}
+
+# Rewriting the library's languages messages.
+function __bu_print_library_default_language()
+{
+    echo >&2; echo "The rest of the library will use english as default language" >&2
+    echo >&2: echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2
+
+    echo >&2
+}
+
+
+function __bu_export_textdomain()
+{
+    
 }
 
 # Checking the currently used Bash language's version.
@@ -230,6 +231,26 @@ function ModuleInitializer_SourcingFailure()
 
 # -----------------------------------------------
 
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### BEGIN INITIALIZATION
+
+## CHECKING THE ARGUMENTS ARRAY LENGTH
+
+# List of all the modules to include passed as arguments.
+p_module_list=("$@")
+
+if [ -z "${p_module_list[*]}" ]; then
+    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE %s MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
+fi
+
+# TODO : Ajouter un séparateur d'arguments, et prendre en charge des arguments supplémentaires, comme la modification de la valeur d'une variable globale de statut
+# sans avoir à la modifier manuellement avant chaque exécution d'un script.
+
+# -----------------------------------------------
+
 ## DEFINING GLOBAL VARIABLES
 
 __BU_MODULE_UTILS_ROOT_HOME="$HOME"
@@ -248,6 +269,39 @@ else
 	echo "Aborting the library's initialization." >&2; echo >&2
 
 	exit 1
+fi
+
+# -----------------------------------------------
+
+## SOURCING THE "gettext.sh" FILE FOR TRANSLATING THE MODULE'S INITIALIZER, THEN THE MODULES
+
+# Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
+__bu_module_gettext_sh_file_path="$(command -v "gettext.sh")"
+
+# Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
+if [ -f "$__bu_module_gettext_sh_file_path" ]; then
+    source "$__bu_module_gettext_sh_file_path" ||
+    {
+        echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << gettext.sh >> FILE FOR THE << .po >> files translation" >&2
+        __bu_print_library_default_language
+    }
+
+    __BU_MODULE_
+
+# Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
+else
+    if [ -f ".Bash-utils/config/initializer/gettext.sh" ]; then
+        source ".Bash-utils/config/initializer/gettext.sh" ||
+        {
+            echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << .Bash-utils/config/initializer/gettext.sh >> FILE FOR THE << .po >> files translation" >&2
+            __print_bu_library_default_language
+        }
+
+    # Else, if the "gettext.sh" file is missing
+    else
+        echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << .Bash-utils/config/initializer/gettext.sh >> FILE" >&2
+        __bu_print_library_default_language
+    fi
 fi
 
 # -----------------------------------------------
