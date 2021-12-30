@@ -64,7 +64,7 @@ function __bu_print_library_default_language()
 
 function __bu_export_textdomain()
 {
-    
+    return 0
 }
 
 # Checking the currently used Bash language's version.
