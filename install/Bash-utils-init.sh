@@ -23,9 +23,9 @@ fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### INITIALIZER RESOURCES
+#### INITIALIZER RESOURCES - FUNCTIONS
 
-## DEFINING INITIALIZATION FUNCTIONS
+## USEFUL FUNCTIONS
 
 # Use this function to have a better view about a bug location during a "bash -x" debug.
 function DbgMsg()
@@ -52,9 +52,35 @@ printf "
     fi
 }
 
+# -----------------------------------------------
+
+## TRANSLATION FUNCTIONS
+
 # Rewriting the library's languages messages.
 function __bu_print_library_default_language()
 {
+    #***** Parameters *****
+    p_missing=$1            # Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
+    p_filepath=$2           # File which retrieval or sourcing failed.
+
+    #***** Code *****
+    if [ -z "$p_missing" ]; then
+        echo >&2; echo "Error : No specification about the kind of file that was not found"
+    fi
+
+    if [ "${p_missing^^}" = 'PATH' ]; then
+        echo >&2; echo "WARNING --> UNABLE TO SOURCE THE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER << $p_filepath >> POUR LA TRADUCTION DES FICHIER << .po >>" >&2; echo >&2
+
+    elif [ "${p_missing,,}" = "config-missing" ]; then
+        echo >&2; echo "WARNING --> UNABLE TO GET THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2
+
+    elif [ "${p_missing,,}" = 'config-source' ]; then
+        echo >&2; echo "WARNING --> UNABLE TO SOURCE THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2  
+    fi
+
     echo >&2; echo "The rest of the library will use english as default language" >&2
     echo >&2: echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2
 
@@ -66,6 +92,41 @@ function __bu_export_textdomain()
 {
     return 0
 }
+
+# Getting and sourcing the "gettext.sh" file.
+function ModuleInitializer_Get_gettext_sh_File()
+{
+    #***** Variables *****
+    local v_path_file_path  # Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
+        v_path_file_path="$(command -v "gettext.sh")"
+
+    local v_spare_file_path # Defining a variable to store the spare gettext.sh file if its path have to move in the future.
+        v_spare_file_path=".Bash-utils/config/initializer/gettext.sh"
+
+    #***** Code *****
+    # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
+    if [ -f "$v_path_file_path" ]; then
+        # shellcheck disable=SC1090
+        source "$v_path_file_path" || __bu_print_library_default_language 'PATH' "$v_path_file_path"
+
+        __BU_MODULE_
+
+    # Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
+    else
+        if [ -f "$v_spare_file_path" ]; then
+            # shellcheck disable=SC1090
+            source "$v_spare_file_path" || __bu_print_library_default_language 'config-source' "$v_spare_file_path"
+
+        # Else, if the spare "gettext.sh" file is also missing.
+        else
+            __bu_print_library_default_language 'config-missing'
+        fi
+    fi
+}
+
+# -----------------------------------------------
+
+## 
 
 # Checking the currently used Bash language's version.
 function ModuleInitializer_CheckBashMinimalVersion()
@@ -203,7 +264,7 @@ function ModuleInitializer_ProcessStat()
     #***** Code *****
     # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
     if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
-        if ! "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")"; then
+        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf"; then
             echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
             echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !" >&2; echo >&2
@@ -236,6 +297,14 @@ function ModuleInitializer_SourcingFailure()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### BEGIN INITIALIZATION
+
+## CHECKING THE BASH VERSION
+
+# Checking the currently used Bash language's version.
+# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
+ModuleInitializer_CheckBashMinimalVersion
+
+# -----------------------------------------------
 
 ## CHECKING THE ARGUMENTS ARRAY LENGTH
 
@@ -273,44 +342,10 @@ fi
 
 # -----------------------------------------------
 
-## SOURCING THE "gettext.sh" FILE FOR TRANSLATING THE MODULE'S INITIALIZER, THEN THE MODULES
-
-# Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
-__bu_module_gettext_sh_file_path="$(command -v "gettext.sh")"
-
-# Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
-if [ -f "$__bu_module_gettext_sh_file_path" ]; then
-    source "$__bu_module_gettext_sh_file_path" ||
-    {
-        echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << gettext.sh >> FILE FOR THE << .po >> files translation" >&2
-        __bu_print_library_default_language
-    }
-
-    __BU_MODULE_
-
-# Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
-else
-    if [ -f ".Bash-utils/config/initializer/gettext.sh" ]; then
-        source ".Bash-utils/config/initializer/gettext.sh" ||
-        {
-            echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << .Bash-utils/config/initializer/gettext.sh >> FILE FOR THE << .po >> files translation" >&2
-            __print_bu_library_default_language
-        }
-
-    # Else, if the "gettext.sh" file is missing
-    else
-        echo >&2; echo "WARNING >>>>> UNABLE TO GET THE << .Bash-utils/config/initializer/gettext.sh >> FILE" >&2
-        __bu_print_library_default_language
-    fi
-fi
-
-# -----------------------------------------------
-
 ## INITIALIZATION CODE
 
-# Checking the currently used Bash language's version.
-# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
-ModuleInitializer_CheckBashMinimalVersion
+# Getting and sourcing the "gettext.sh" file.
+ModuleInitializer_Get_gettext_sh_File
 
 # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
@@ -320,7 +355,14 @@ for module in "${p_module_list[@]}"; do
 
     # Checking if the "main" module is passed as first argument.
     if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
-		echo 'MAIN'
+		true
+    else
+        echo >&2; echo "WARNING --> THE ''main'' MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
+        echo >&2; "Please do so by modifying the ''main'' module's argument position in your script" >&2
+
+        echo >&2; echo "Aborting the library's initialization" >&2
+
+        exit 1
 	fi
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
