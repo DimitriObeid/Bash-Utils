@@ -57,7 +57,7 @@ printf "
 ## TRANSLATION FUNCTIONS
 
 # Rewriting the library's languages messages.
-function __bu_print_library_default_language()
+function Moduleinitializer_PrintModInitDefaultLanguage()
 {
     #***** Parameters *****
     p_missing=$1            # Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
@@ -65,24 +65,30 @@ function __bu_print_library_default_language()
 
     #***** Code *****
     if [ -z "$p_missing" ]; then
-        echo >&2; echo "Error : No specification about the kind of file that was not found"
+        echo >&2;
+        echo "en | Error : No specification about the kind of file that was not found" >&2
+        echo "fr | Erreur : " >&2; echo >&2
     fi
 
     if [ "${p_missing^^}" = 'PATH' ]; then
-        echo >&2; echo "WARNING --> UNABLE TO SOURCE THE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
-        echo "ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER << $p_filepath >> POUR LA TRADUCTION DES FICHIER << .po >>" >&2; echo >&2
+        echo >&2;
+        echo "EN | WARNING --> UNABLE TO SOURCE THE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER << $p_filepath >> POUR LA TRADUCTION DES FICHIER << .po >>" >&2; echo >&2
 
     elif [ "${p_missing,,}" = "config-missing" ]; then
-        echo >&2; echo "WARNING --> UNABLE TO GET THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
-        echo "ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2
+        echo >&2;
+        echo "EN | WARNING --> UNABLE TO GET THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2
 
     elif [ "${p_missing,,}" = 'config-source' ]; then
-        echo >&2; echo "WARNING --> UNABLE TO SOURCE THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
-        echo "ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2  
+        echo >&2;
+        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE << $p_filepath >> FILE FOR THE << .po >> FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS << $p_filepath >> POUR LA TRADUCTION DES FICHIERS << .po >>" >&2; echo >&2  
     fi
 
-    echo >&2; echo "The rest of the library will use english as default language" >&2
-    echo >&2: echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2
+    echo >&2;
+    echo "en | The rest of the library will use english as default language" >&2
+    echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2
 
     echo >&2
 }
@@ -107,7 +113,7 @@ function ModuleInitializer_Get_gettext_sh_File()
     # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
     if [ -f "$v_path_file_path" ]; then
         # shellcheck disable=SC1090
-        source "$v_path_file_path" || __bu_print_library_default_language 'PATH' "$v_path_file_path"
+        source "$v_path_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'PATH' "$v_path_file_path"
 
         __BU_MODULE_
 
@@ -115,11 +121,11 @@ function ModuleInitializer_Get_gettext_sh_File()
     else
         if [ -f "$v_spare_file_path" ]; then
             # shellcheck disable=SC1090
-            source "$v_spare_file_path" || __bu_print_library_default_language 'config-source' "$v_spare_file_path"
+            source "$v_spare_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'config-source' "$v_spare_file_path"
 
         # Else, if the spare "gettext.sh" file is also missing.
         else
-            __bu_print_library_default_language 'config-missing'
+            Moduleinitializer_PrintModInitDefaultLanguage 'config-missing'
         fi
     fi
 }
