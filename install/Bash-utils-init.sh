@@ -359,7 +359,7 @@ for module in "${p_module_list[@]}"; do
     # Defining variables for each iteration.
     v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
-    # Checking if the "main" module is passed as first argument.
+    # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
     if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
 		true
     else
@@ -394,23 +394,6 @@ for module in "${p_module_list[@]}"; do
     else
         # shellcheck disable=SC1090
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
-
-        # Changing the global status variable's values after the main module's successful initialization.
-        if [ "$v_module_name" = 'main' ]; then
-            # TODO : After adding the status configuration arguments, 
-            if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")" ]; then
-                echo "STAT"
-            else
-                ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-                ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-                # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-                ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-                ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-                ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-                ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-            fi
-        fi
 
 		HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 	fi

@@ -40,10 +40,10 @@ function InitializerAddInitStrArrayVal()
     if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in
             '-n' | 'n')
-                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string##* ] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string#* ] }"    # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
             '' | *)
-                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string##* ] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
+                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string#* ] }"     # Cutting the log entry's date from a string, before displaying it on the terminal.
                 ;;
         esac
     else
@@ -61,10 +61,17 @@ function InitializerAddInitStrArrayVal()
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
 
+InitializerAddInitStrArrayVal ""
+
 # shellcheck disable=SC1090
 for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
     source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
+
+	InitializerAddInitStrArrayVal "Successfully sourced this library file : $f"
 done
+
+# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
+InitializerAddInitStrArrayVal ""
 
 # -----------------------------------------------
 
@@ -73,7 +80,12 @@ done
 # shellcheck disable=SC1090
 for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
     source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
+
+	InitializerAddInitStrArrayVal "Successfully sourced this configuration file : $f"
 done
+
+# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
+InitializerAddInitStrArrayVal ""
 
 # -----------------------------------------------
 
@@ -95,13 +107,48 @@ MkTmpDir
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then return 1; fi
-if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then return 1; fi
+if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+	HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
+else
+	EchoSuccess ""
+fi
 
-# Future functionnality : translating the library.
-SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
-GetLibLang
+# Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
+if CheckStatIsLogging; then
+	if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+		HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
+
+		return 1
+	fi
+fi
 
 # -----------------------------------------------
 
-## END OF THE MODULE INITIALIZATION PROCESS
+## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
+
+# TODO : After adding the status configuration arguments, 
+if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")" ]; then
+    echo "STAT"
+else
+    ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+    # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
+    ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+fi
+
+# -----------------------------------------------
+
+## END OF THE "MAIN" MODULE INITIALIZATION PROCESS
+
+
+# ---------
+
+## JUNK
+
+# Future functionnality : translating the library.
+# SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
+# GetLibLang
