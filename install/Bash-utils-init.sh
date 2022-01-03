@@ -190,11 +190,8 @@ function ModuleInitializer_CreateFileInMemory()
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
 function ModuleInitializer_FindPath()
 {
-	# $1 = Parent directory.
-    # $2 = Targeted directory or file.
-    # $3 = Type (directory 'd' OR file 'f')
-#   local path
-#       path="$(find "$1" -maxdepth 1 ! -readable -prune -o -iname "$2" -print)" || return 1; printf "%s" "$path"; return 0
+	#	$1	--> Parent directory.
+    #	$2	--> Targeted directory or file.
     find "$1" -maxdepth 1 -iname "$2"  -print 2>&1 | grep -v "Permission denied" || return 1; return 0
 }
 
