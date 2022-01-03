@@ -192,8 +192,10 @@ function ModuleInitializer_FindPath()
 {
 	# $1 = Parent directory.
     # $2 = Targeted directory or file.
-    local path
-        path="$(find "$1" -maxdepth 1 -iname "$2")" || return 1; printf "%s" "$path"; return 0
+    # $3 = Type (directory 'd' OR file 'f')
+#   local path
+#       path="$(find "$1" -maxdepth 1 ! -readable -prune -o -iname "$2" -print)" || return 1; printf "%s" "$path"; return 0
+    find "$1" -maxdepth 1 -iname "$2"  -print 2>&1 | grep -v "Permission denied" || return 1; return 0
 }
 
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
@@ -309,6 +311,9 @@ function ModuleInitializer_SourcingFailure()
 # Checking the currently used Bash language's version.
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
 ModuleInitializer_CheckBashMinimalVersion
+
+# find "/usr/local/lib/" -maxdepth 1 ! -prune -o -iname "Bash-utils"  -print 2>&1 | grep -v "Permission non accordée"
+
 
 # -----------------------------------------------
 
