@@ -43,12 +43,12 @@ fi
 # This function only repeats some parts of the following function.
 function __ProcessingFile()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_output=$1
     p_name=$2
     p_char=$3
 
-    #***** Code *****
+    #**** Code ****
     if [ "$p_output" = 'E' ]; then
         EchoError "End of processing the $(DechoHighlight "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
@@ -74,15 +74,15 @@ function __ProcessingFile()
 #   - HandleErrors  -> Headers.lib
 function ProcessingFile()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_function=$1; shift
     local p_name=$2
     local arr; arr=$("$@")
     
-    #***** Variables *****
+    #**** Variables ****
     local v_char="'"
     
-    #***** Code *****
+    #**** Code ****
     # Arguments checking.
     CheckArgs_ProcessingFile "$p_function"
     
@@ -120,11 +120,11 @@ function ProcessingFile()
 #	- Newline			-> Echo.lib
 function OverwriteFile()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1
 	local p_authorization=$2
     
-    #***** Code *****
+    #**** Code ****
     # Checking first if the awaited arguments are given
     CheckArgs_OverwriteFile
 
@@ -163,14 +163,14 @@ function OverwriteFile()
 #   - HandleErrors      -> Handles.lib
 function Makefile()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_parent=$1      # Emplacement of the currently processed file's parent folder from the root directory.
 	local p_name=$2        # Name of the file to process (into its parent directory).
 
-	#***** Variables *****
+	#**** Variables ****
 	local v_path="$p_parent/$p_name"	# Path of the file to process.
 
-	#***** Code *****
+	#**** Code ****
 	# Checking first if the awaited arguments are given
     CheckArgs_Makefile "$p_parent" "$p_name"
 
@@ -215,10 +215,10 @@ function Makefile()
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive (safer for SSD drives and no permissions are needed).
 function CreateFileInMemory()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_filename=$1
 
-    #***** Code *****
+    #**** Code ****
     
     return 0
 }
@@ -226,10 +226,10 @@ function CreateFileInMemory()
 # Creating the project's log file.
 function CreateProjectLogFile()
 {
-    #***** Variables *****
+    #**** Variables ****
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then EchoError "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; ExitError '1'; fi
 
     EchoSuccess "Successfully created the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
@@ -293,10 +293,10 @@ function CreateProjectLogFile()
 # Sourcing dependencies files.
 function SourceFile()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1
 
-    #***** Code *****
+    #**** Code ****
     if [ -f "$p_path" ]; then
         # shellcheck disable=SC1090
         if source "$p_path"; then
@@ -316,14 +316,14 @@ function SourceFile()
 # Getting a specific line from a text file.
 function GetLineFromTextFile()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_source=$1           # File to parse
     local p_wanted_line=$2      # Line to get in the file
     
-    #***** Variables *****
+    #**** Variables ****
     local i=0                   # Line incrementer
     
-    #***** Code *****
+    #**** Code ****
 	# shellcheck disable=SC2002
     cat "$p_source" | while read -r line; do
         # Incrementing the line incrementer variable's value...
@@ -352,13 +352,13 @@ function GetLineFromTextFile()
 #   - 
 function Compress()
 {
-    #***** Parameters *****
+    #**** Parameters ****
 #     local cmd=$1      # Compression command.
 #     local opts=$2     # Options of the compression command.
 #     local p_path=$3     # Path to the file/folder to archivate.
 #     local p_name=$4     # Archive's name (only used into displayed messages).
     
-    #***** Code *****
+    #**** Code ****
     
     
     return 0
@@ -379,7 +379,7 @@ function Uncompress()
 #     local p_path=$3     # Path to the l'archive to uncompress.
 #     local p_name=$4     # Archive's name (only used into displayed messages).
 # 
-#     #***** Code *****
+#     #**** Code ****
 #     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
 #     "$cmd $opts $p_path"
 #     HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"

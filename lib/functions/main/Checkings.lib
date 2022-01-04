@@ -218,10 +218,10 @@ function CheckRootEUID()
 # Checking for an existent directory path (for the "HandleErrors()" function mainly).
 function CheckDirPathExists()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_path=$1               # Path of the (in)existent directory.
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -f "$p_path" ]; then
         DechoHighlight "<missing directory path>"   # Since this function should be called into a string, it's better to use a formatting function.
     fi
@@ -230,10 +230,10 @@ function CheckDirPathExists()
 # Checking if a directory was successfully created.
 function CheckDirPathWasCreated()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_path=$1
 
-	#***** Code *****
+	#**** Code ****
 	if [ -d "$p_path" ]; then
 		return 0
 	else
@@ -248,10 +248,10 @@ function CheckDirPathWasCreated()
 # Checking for an existent file path (for the "HandleErrors()" function mainly).
 function CheckFilePathExists()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_path=$1               # Path of the (in)existent file.
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -f "$p_path" ]; then
         DechoHighlight "<missing file path>"        # Since this function should be called into a string, it's better to use a formatting function.
     fi
@@ -260,10 +260,10 @@ function CheckFilePathExists()
 # Checking if a file was successfully created.
 function CheckFilePathWasCreated()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_path=$1
 
-	#***** Code *****
+	#**** Code ****
 	if [ -f "$p_path" ]; then
 		return 0
 	else
@@ -310,14 +310,14 @@ function CheckProjectLogPath()
 # Accepted arguments : 'nodate', '<an empty string>'
 function CheckProjectLogStatus()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1       # String to display.
     local p_option=$2       # "echo" command options.
     shift 2
 
     local pa_extraArgs=("$@")    # More processing arguments (like the processing of a whole line-long string).
 
-    #***** Variables *****
+    #**** Variables ****
 	# WARNING : DO NOT call any "Echo<...>()" function from the "main/Echo.lib" file, as they all call the "CheckProjectLogStatus()" function.
 
 	# Also, DO NOT call any "Decho<...>()" function, as they call the "HandleErrors()" function in case of a bad value passed as array of argument,
@@ -600,15 +600,15 @@ function CheckProjectLogStatus()
 # Check project related file presence, or create this file.
 function CheckProjectRelatedFile()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_parent=$1   # Name of the folder to process (into its parent directory).
 	local p_child=$2  	# Name of the file or folder to process (into its parent directory).
 	local p_type=$3		# Type of data to create (d = directory, f = file).
 
-	#***** Variables *****
+	#**** Variables ****
     local v_path="$p_parent/$p_child"
 
-	#***** Code *****
+	#**** Code ****
 	if ! CheckArgsMain_CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type"; then return 1; fi
 
 	if [ "$p_type" = 'f' ]; then
@@ -656,7 +656,7 @@ function CheckProjectRelatedFile()
 # WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER !!!
 function CheckDecho()
 {
-    #***** Code *****
+    #**** Code ****
     # Creating the "colors.tmp" file in case it doesn't exists.
     if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then
         if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
@@ -698,11 +698,11 @@ function CheckEcho()
 # Checking if the "$__BU_MAIN_STAT_TXT_FMT" status value is set to "true".
 function CheckTextFormat()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     #   $1  -> "tput" command's text formatting option.
     #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
-    #***** Code *****
+    #**** Code ****
     if [ "$__BU_MAIN_STAT_TXT_FMT" = "true" ]; then
         if [ -n "$1" ]; then
 			if command -v "tput" &> /dev/null; then
