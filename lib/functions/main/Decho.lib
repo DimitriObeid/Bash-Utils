@@ -67,7 +67,7 @@ function Decho()
     CheckDecho
 
     if test "$?" -ne 0; then
-        echo -ne "<< $p_string >>"
+        echo -ne "« $p_string >>"
         
         return 1
     else
@@ -110,7 +110,7 @@ function Decho()
                     echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}"
                     ;;
                 *)
-                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET «< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" «<, or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
                     # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
