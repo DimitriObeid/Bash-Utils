@@ -384,14 +384,14 @@ ModuleInitializer_Get_gettext_sh_File
 for module in "${p_module_list[@]}"; do
 
 	## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
-	
-	# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-	if [[ "${p_module_list[i]}" = "* --*" ]]; then
-		__BU_MODULE_UTILS_MODULE_ARGS="$module"
-	fi
 
     # Defining variables for each iteration.
     v_module_name="$(echo "$module" | cut -d' ' -f1)"
+	
+	# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
+	if [[ "${p_module_list[i]}" = "$v_module_name --*" ]]; then
+		__BU_MODULE_UTILS_MODULE_ARGS="$module"
+	fi
 
 	# -----------------------------------------------
 	

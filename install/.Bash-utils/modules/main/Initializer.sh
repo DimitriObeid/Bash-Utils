@@ -130,7 +130,134 @@ fi
 
 #### STEP FOUR : PROCESSING MODULE'S PARAMETERS
 
+if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
+	# Defining a variable that transforms the module's argument string into an array of words.
+	__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY=("${__BU_MODULE_UTILS_MODULE_ARGS}")
+
+	for value in "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY"; do
+
+		# --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
+		# Extracting the "--stat" option's values.
+		if [ "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]" = "--stat=*" ]; then
+			__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT="$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]"
+
+			# TODO : get the --stat option's values between its single quotes.
+
+			# Creating a new array of words for the supported "--stat" option's values.
+			# The __BU_MAIN_STAT_INITIALIZING value change is NOT supported, this status global variable's value MUST stay untouched.
+			for stat_value in "${__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT[@]}"; do
+
+				stat_value_warning="$(echo "${__BU_MAIN_COLOR_WARNING}Warning : the « ${stat_value#*=} » value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")"
+
+				# -------- __BU_MAIN_STAT_DEBUG global status variable
+
+				if [ "$stat_value" = 'debug=false' ] || [ "$stat_value" = 'debug=true' ]; then
+					__BU_MAIN_STAT_DEBUG="${stat_value#*=}"
+				else
+					echo "$stat_value_warning false, true"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_DECHO global status variable
+
+				if   [ "$stat_value" = 'decho=authorize' ] || [ "$stat_value" = 'decho=restrict' ]; then
+					 # Warning : don't set the « __BU_MAIN_STAT_DECHO » global status variable's value to "authorize" or "restrict" during the script's initialization, in order to avoid bugs.
+					 # Instead, a variable is set, and the "__BU_MAIN_STAT_DECHO" value will be set to this value after the initialization.
+					 __BU_MAIN_STAT_DECHO_TMP="${stat_value#*=}"
+
+				elif [ "$stat_value" = 'decho=forbid' ]; then
+					__BU_MAIN_STAT_DECHO='forbid'
+				else
+					echo "$stat_value_warning authorize, restrict, forbid"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_ECHO global status variable
+
+				if   [ "$stat_value" = 'echo=false' ]; then
+					 # Warning : don't set the « __BU_MAIN_STAT_ECHO » global status variable's value to "false" during the script's initialization, in order to avoid bugs and infinite loops.
+					 # Instead, a variable is set, and the "__BU_MAIN_STAT_ECHO" value will be set to this value after the initialization.
+					__BU_MAIN_STAT_ECHO_TMP="false"
+
+				elif [ "$stat_value" = 'echo=true' ]; then
+					__BU_MAIN_STAT_ECHO='true'
+				else
+					echo "$stat_value_warning true, false"
+				fi
+				
+				
+				# -------- __BU_MAIN_STAT_ERROR global status variable
+
+				if   [ "$stat_value" = 'error=fatal' ]; then
+					__BU_MAIN_STAT_ERROR='fatal'
+
+				elif [ "$stat_value" = 'error=void' ]; then
+					__BU_MAIN_STAT_ERROR=''
+				else
+					echo "$stat_value_warning fatal, \e[3man empty string\e[0m"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_LOG global status variable
+
+				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+					__BU_MAIN_STAT_LOG="${stat_value#*=}"
+				else
+					echo "$stat_value_warning true, false"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_LOG_REDIRECT global status variable
+
+				if [ "$stat_value" = '' ]; then
+					__BU_MAIN_STAT_LOG_REDIRECT=''
+
+				elif [ "$stat_value" = 'log' ] || [ "$stat_value" = 'tee' ]; then
+					__BU_MAIN_STAT_LOG_REDIRECT="${stat_value#*=}"
+				else
+					echo "$stat_value_warning log, tee, \e[3man empty string\e[0m"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_OPERATE_ROOT global status variable
+
+				if [ "$stat_value" = 'authorized' ] || [ "$stat_value" = 'forbidden' ] || [ "$stat_value" = 'restricted' ]; then
+					__BU_MAIN_STAT_OPERATE_ROOT="${stat_value#*=}"
+				else
+					echo "$stat_value_warning authorized, forbidden, restricted"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_PRINT_INIT_LOG global status variable
+
+				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+					__BU_MAIN_STAT_PRINT_INIT_LOG="${stat_value#*=}"
+				else
+					echo "$stat_value_warning true, false"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_TIME_TXT global status variable
+
+				if IsFloat "$stat_value"; then
+					__BU_MAIN_STAT_TIME_TXT="$stat_value"
+				else
+					echo "$stat_value_warning \e[3ma floating number\e[0m"
+				fi
+
+
+				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
+
+				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+					__BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
+				else
+					echo "$stat_value_warning true, false"
+				fi
+			done
+		fi
+	done
+fi
 
 
 # -----------------------------------------------
