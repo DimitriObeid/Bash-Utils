@@ -32,11 +32,11 @@ fi
 #   "false" --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array WITHOUT displaying any text.
 function InitializerAddInitStrArrayVal()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1             # String to store in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array.
     p_option=$2             # "echo" command's options.
 
-    #***** Code *****
+    #**** Code ****
     if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
         case "$p_option" in
             '-n' | 'n')

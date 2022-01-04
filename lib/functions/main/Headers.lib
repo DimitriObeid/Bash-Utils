@@ -45,11 +45,11 @@ fi
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function DrawLine()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
 	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	
-	#***** Code *****
+	#**** Code ****
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! IsAlphaNumChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}"
@@ -108,17 +108,17 @@ function DrawLine()
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 function HeaderBase()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_lineColor=$1      # Premier paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "DrawLine".
 	local p_lineChar=$2       # Deuxième paramètre servant à définir le caractère souhaité lors de l'appel de la fonction "DrawLine".
 	local p_stringColor=$3	  # Définition de la couleur de la chaîne de caractères du header.
 	local p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
 
-	#***** Variables *****	
+	#**** Variables ****	
 # 	HEADERBASE_COLOR_LINE="$p_lineColor"
 # 	HEADERBASE_COLOR_TEXT="$p_stringColor"
 
-	#***** Code *****
+	#**** Code ****
 	if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
         Newline
 

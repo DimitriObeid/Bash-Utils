@@ -62,18 +62,18 @@ printf "
 # It's better to also execute the project's script with the "bash - x $project_name" command, instead of the "./$project_name" way.
 function __EchoOutput()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_string=$1		# String to display.
 	local p_context=$2		# Begin or end of the debug process.
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
-    #***** Variables *****
+    #**** Variables ****
     # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
     if ! CheckStatIsBackupEchoing; then
         local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
     fi
 
-	#***** Code *****
+	#**** Code ****
 	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0
 
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
@@ -127,13 +127,13 @@ function __EchoOutput()
 # Failsafe if any "Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
 function __EchoCPLS()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1
     p_option=$2
 
     shift 2; pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     for val in "${pa_extraArgs[@]}"; do
         if [ "$val" = 'nodate' ]; then 
             case "$p_option" in
@@ -207,13 +207,13 @@ function __EchoCPLS()
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoError()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1
     local p_option=$2; shift 2
 
     local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'E' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
@@ -240,14 +240,14 @@ function EchoError()
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoMsg()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1
     local p_option=$2;
     shift 2
 
     local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'm' || return 1
         CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1
@@ -274,14 +274,14 @@ function EchoMsg()
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoNewstep()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1
     local p_option=$2;
     shift 2
 
     local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'N' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
@@ -308,10 +308,10 @@ function EchoNewstep()
 #	- CheckProjectLogStatus		--> Checkings.lib
 function EchoRead()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_string=$1      # User's keyboard input.
 	
-	#***** Code *****
+	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
 		echo -e "Keyboard input value : $(DechoHighlight "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { HandleSmallErrors '' "" '' ""; return 1; }
 	fi; return 0
@@ -326,14 +326,14 @@ function EchoRead()
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoSuccess()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1
     local p_option=$2;
     shift 2
 
     local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'S' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
@@ -360,14 +360,14 @@ function EchoSuccess()
 #   - CheckProjectLogStatus     --> Checkings.lib
 function EchoWarning()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_string=$1
     local p_option=$2;
     shift 2
 
     local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     if ! CheckEcho; then
         __EchoOutput "$p_string" 'begin' 'W' || return 1
         CheckProjectLogStatus "${__BU_MAIN_COLOR_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
@@ -394,10 +394,10 @@ function EchoWarning()
 # Black colored message.
 function EchoBlack()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_BLACK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -406,10 +406,10 @@ function EchoBlack()
 # Blue colored message.
 function EchoBlue()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_BLUE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -418,10 +418,10 @@ function EchoBlue()
 # Cyan colored message.
 function EchoCyan()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_CYAN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -430,10 +430,10 @@ function EchoCyan()
 # Gray colored message.
 function EchoGray()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_GRAY}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -442,10 +442,10 @@ function EchoGray()
 # Green colored message.
 function EchoGreen()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_GREEN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -454,10 +454,10 @@ function EchoGreen()
 # Orange colored message.
 function EchoOrange()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_ORANGE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -466,10 +466,10 @@ function EchoOrange()
 # Pink colored message.
 function EchoPink()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_PINK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -478,10 +478,10 @@ function EchoPink()
 # Purple colored message.
 function EchoPurple()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_PURPLE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -490,10 +490,10 @@ function EchoPurple()
 # Red colored message.
 function EchoRed()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_RED}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -502,10 +502,10 @@ function EchoRed()
 # Turquoise colored message.
 function EchoTurquoise()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_TURQUOISE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -514,10 +514,10 @@ function EchoTurquoise()
 # White colored message.
 function EchoWhite()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_WHITE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -526,10 +526,10 @@ function EchoWhite()
 # Yellow colored message.
 function EchoYellow()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
 
-    #***** Code *****
+    #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_YELLOW}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -543,11 +543,11 @@ function EchoYellow()
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 function KeepFormatting()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_string=$1            # String to display.
 	p_old_formatting=$2    # Former tectxt formatting.
 
-	#***** Code *****
+	#**** Code ****
 # 	echo -ne &>/dev/null; echo -ne "$p_string"
 # 
 # 	if [ "${p_old_formatting,,}" = 'l' ]; then
@@ -567,10 +567,10 @@ function KeepFormatting()
 #	ToLowercase "<Text to write>"
 function ToLowercase()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_string=$1
 
-	#***** Code *****
+	#**** Code ****
 	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'; return 0
 }
 
@@ -580,10 +580,10 @@ function ToLowercase()
 #	ToUppercase "<Text to write>"
 function ToUppercase()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_string=$1
 
-	#***** Code *****
+	#**** Code ****
 	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'; return 0
 }
 
@@ -604,10 +604,10 @@ function ToUppercase()
 #	- HandleErrors				--> Checkings.lib
 function Newline()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local number=$1
 
-    #***** Code *****
+    #**** Code ****
 
     if [ -n "$number" ]; then
         if ! IsInt "$number"; then

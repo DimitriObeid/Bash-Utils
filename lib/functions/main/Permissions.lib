@@ -58,7 +58,7 @@ function ChownRec()
     local p_newOwner=$2
     local p_path=$3
 
-    #***** Code *****
+    #**** Code ****
     # The "chown" command has to be used with super-user privileges,
     CheckRootEUID
 
@@ -107,13 +107,13 @@ function ChownRec()
 #   - HandleErrors  -> Headers.lib
 function Chown()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_currentOwner=$1    # This parameter is used in the translated messages, stored into their own variables.
     p_newOwner=$2
     p_path=$3
     p_option=$4   # Recursive swapping or not.
     
-    #***** Code *****
+    #**** Code ****
     # The "chown" command has to be used with super-user privileges,
     CheckRootEUID
 

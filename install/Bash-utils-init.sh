@@ -30,11 +30,11 @@ fi
 # Use this function to have a better view about a bug location during a "bash -x" debug.
 function DbgMsg()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_code=$1               # Exit code.
     p_sleep=$2              # Pause time in seconds.
 
-    #***** Code *****
+    #**** Code ****
 printf "
 
 -------------------------------------------------
@@ -59,11 +59,11 @@ printf "
 # Rewriting the library's languages messages.
 function Moduleinitializer_PrintModInitDefaultLanguage()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_missing=$1            # Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
     p_filepath=$2           # File which retrieval or sourcing failed.
 
-    #***** Code *****
+    #**** Code ****
     if [ -z "$p_missing" ]; then
         echo >&2;
         echo "en | Warning : no given information about the << gettext.sh >> file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
@@ -111,14 +111,14 @@ function __bu_export_textdomain()
 # Getting and sourcing the "gettext.sh" file.
 function ModuleInitializer_Get_gettext_sh_File()
 {
-    #***** Variables *****
+    #**** Variables ****
     local v_path_file_path  # Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
         v_path_file_path="$(command -v "gettext.sh")"
 
     local v_spare_file_path # Defining a variable to store the spare gettext.sh file if its path have to move in the future.
         v_spare_file_path=".Bash-utils/config/initializer/gettext.sh"
 
-    #***** Code *****
+    #**** Code ****
     # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
     if [ -f "$v_path_file_path" ]; then
         # shellcheck disable=SC1090
@@ -165,11 +165,11 @@ function ModuleInitializer_CheckBashMinimalVersion()
 # TODO : Check where I called this function or tried to do so.
 function __ModuleInitializer_CheckPath()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1         # Path of the target file or directory.
     local p_target=$2       # Specify if the target is a directory or a file.
 
-    #***** Code *****
+    #**** Code ****
     if [ -z "$p_path" ]; then
         printf "<No file path>"
 
@@ -190,10 +190,10 @@ function __ModuleInitializer_CheckPath()
 # Create a file directly in the computer's memory to redirect .
 function ModuleInitializer_CreateFileInMemory()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_filename=$1
 
-    #***** Code *****
+    #**** Code ****
 }
 
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
@@ -215,14 +215,14 @@ function ModuleInitializer_GetModuleName()
 # Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
 function ModuleInitializer_ListInstalledModules()
 {
-    #***** Variables *****
+    #**** Variables ****
     local v_module_tmp_d="$__BU_MODULE_UTILS_ROOT/tmp"
 
     local v_module_conf_f="$v_module_tmp_d/BU_modules_config_dir.out"
     local v_module_diff_f="$v_module_tmp_d/BU_modules_init_diff.out"
     local v_module_init_f="$v_module_tmp_d/BU_modules_init_dir.out"
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
@@ -278,24 +278,24 @@ function ModuleInitializer_ListInstalledModules()
 # Checking and processing the global status variables value's arguments given after the module's name.
 function ModuleInitializer_ProcessStat()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_module=$1       # The module's name from the "for module in "${p_module_list[@]}"; do" loop.
     local p_module_name=$2  # The "$v_module_name" variable defined at each loop's iteration.
 
-    #***** Code *****
+    #**** Code ****
     # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
-    if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
-        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf"; then
+    if [ "$module" = "$p_module_name --stat=\"*" ] || [ "$module" = "$p_module_name --stat='*" ]; then
+        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name/" "ChangeStat.conf"; then
             echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
-            echo "No << ChangeStat.conf >> status configuration script found in the << $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name >> folder !" >&2; echo >&2
+            echo "No << ChangeStat.conf >> status configuration script found in the << $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name >> folder !" >&2; echo >&2
             echo "Please create this file, and write the necessary conditions that changes the status global variables values" >&2; echo >&2
 
             echo "Aborting the module's initialization" >&2; echo >&2
 
             exit 1
         else
-            echo; echo "Processing the $v_module_name module's global status variables' configuration script"; echo
+            echo; echo "Processing the $p_module_name module's global status variables' configuration script"; echo
         fi
     fi
 }
@@ -303,11 +303,11 @@ function ModuleInitializer_ProcessStat()
 # Printing an error message if a file cannot be sourced.
 function ModuleInitializer_SourcingFailure()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1         # Path of the file that cannot be sourced.
     local p_module=$2       # Name of the module.
 
-    #***** Code *****
+    #**** Code ****
     echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS << $p_module >> MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
 }
 
@@ -324,6 +324,18 @@ function ModuleInitializer_SourcingFailure()
 # Checking the currently used Bash language's version.
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
 ModuleInitializer_CheckBashMinimalVersion
+
+# -----------------------------------------------
+
+## CHECKING IF THE CURRENT SHELL IS BASH
+
+if [ "${SHELL##*/}" != 'bash' ]; then
+    echo >&2;
+    echo "ERROR : Your current shell interpreter is not Bash, but << ${SHELL##*/} >>" >&2
+    echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le << ${SHELL##*/} >>" >&2
+
+    echo >&2; exit 1
+fi
 
 # -----------------------------------------------
 
