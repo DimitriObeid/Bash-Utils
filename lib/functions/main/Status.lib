@@ -413,7 +413,13 @@ function ChangeSTAT_ECHO            { __BU_MAIN_STAT_ECHO="$1";             Chec
 function ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";            CheckSTAT_ERROR             "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
-function ChangeSTAT_INITIALIZING    { __BU_MAIN_STAT_INITIALIZING="$1";     CheckSTAT_INITIALIZING      "$2" "$3" || return 1; return 0; }
+# WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
+function ChangeSTAT_INITIALIZING    {
+	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
+		EchoWarning "WARNING : It's strongly discouraged to change the $(DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(DechoHighlight 'false') to $(DechoHighlight 'true')"
+	else
+		__BU_MAIN_STAT_INITIALIZING="$1";     CheckSTAT_INITIALIZING      "$2" "$3" || return 1
+	fi; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
 function ChangeSTAT_LOG             { __BU_MAIN_STAT_LOG="$1";              CheckSTAT_LOG               "$2" "$3" || return 1; return 0; }

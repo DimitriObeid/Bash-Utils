@@ -23,7 +23,7 @@ fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### FIRST STEP : DEFINING USEFUL FUNCTIONS
+#### STEP ONE : DEFINING USEFUL FUNCTIONS
 
 ## DEFINING FUNCTIONS
 
@@ -55,7 +55,7 @@ function InitializerAddInitStrArrayVal()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SECOND STEP : SOURCING FILES
+#### STEP TWO : SOURCING FILES
 
 ## SOURCING LIBRARY FILES FIRST
 
@@ -93,7 +93,7 @@ InitializerAddInitStrArrayVal ""
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### THIRD STEP : PROCESSING PROJECT'S RESOURCES
+#### STEP THREE : PROCESSING PROJECT'S RESOURCES
 
 ## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
 
@@ -121,6 +121,14 @@ if CheckStatIsLogging; then
 		return 1
 	fi
 fi
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### STEP FOUR : PROCESSING MODULE'S PARAMETERS
 
 # -----------------------------------------------
 

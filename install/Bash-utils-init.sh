@@ -66,8 +66,17 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     #***** Code *****
     if [ -z "$p_missing" ]; then
         echo >&2;
-        echo "en | Error : No specification about the kind of file that was not found" >&2
-        echo "fr | Erreur : " >&2; echo >&2
+        echo "en | Warning : no given information about the << gettext.sh >> file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
+        echo "fr | Attention : aucune information donnée à propos du fichier << gettext.sh >> ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2
+
+		echo >&2; exit 1
+
+	elif [ -z "$p_filepath" ]; then
+		echo >&2;
+		echo "en | Warning : no file path has been passed as second argument" >&2
+		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2
+
+		echo >&2; exit 1
     fi
 
     if [ "${p_missing^^}" = 'PATH' ]; then
@@ -145,7 +154,7 @@ function ModuleInitializer_CheckBashMinimalVersion()
 		echo -e "Your Bash version is : $BASH_VERSION" >&2
 		echo >&2
 
-		echo -e "Please install at least the Bash version 4.0.0 to use this library"
+		echo -e "Please install at least the Bash version 4.0.0 to use this library" >&2
 		echo >&2
 
 		exit 1
@@ -170,10 +179,10 @@ function __ModuleInitializer_CheckPath()
 
             echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the << ${FUNCNAME[0]} >> function." >&2; echo >&2; exit 1
         elif [ -n "$p_path" ] && [ "$p_target" = "[D-d]" ] && [ ! -d "$p_path" ]; then
-            printf "%s (bad directory : not found)" "$p_path"
+            printf "%s (bad directory : not found)" "$p_path" >&2
 
         elif [ -n "$p_path" ] && [ "$p_target" = "[F-f]" ] && [ ! -f "$p_path" ]; then
-            printf "%s (bad file path : not found)" "$p_path"
+            printf "%s (bad file path : not found)" "$p_path" >&2
         fi
     fi
 }
@@ -217,7 +226,7 @@ function ModuleInitializer_ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-			echo "Unable to create the logs temporary directory ''tmp'' in the ''$__BU_MODULE_UTILS_ROOT/'' directory" >&2; echo >&2
+			echo "Unable to create the logs temporary directory << tmp >> in the << $__BU_MODULE_UTILS_ROOT/ >> directory" >&2; echo >&2
 
 			echo "If the problem persists, please create this folder manually" >&2; echo >&2
 
@@ -236,15 +245,20 @@ function ModuleInitializer_ListInstalledModules()
 
             cat "$v_module_conf_f"; echo; sleep 1
         else
-            echo; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE << $__BU_MODULE_UTILS_CONFIG_MODULES >> OR IN THE << $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS"; echo >&2
+            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE << $__BU_MODULE_UTILS_CONFIG_MODULES >> OR IN THE << $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS" >&2; echo >&2
 
-            echo "MODULES CONFIGURATION FOLDER LIST :"; echo
+            echo "MODULES CONFIGURATION FOLDER LIST :" >&2; echo >&2
 
-            cat "$v_module_conf_f"; echo
+            cat "$v_module_conf_f" >&2; echo >&2
 
-            echo "MODULES INITIALIZATION FOLDER LIST :"; echo
+            echo "MODULES INITIALIZATION FOLDER LIST :" >&2; echo >&2
 
-            cat "$v_module_init_f"; echo
+            cat "$v_module_init_f"; echo >&2; echo >&2
+
+			# TODO : get the differences between the two files.
+			echo "THE DIFFERENCES BETWEEN THESE TWO FILES ARE LISTED BELOW" >&2; echo >&2
+
+			sdiff "$v_module_conf_f" "$v_module_conf_f"; echo >&2
         fi
     else
         if [ ! -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ] && [ ! -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
@@ -254,6 +268,8 @@ function ModuleInitializer_ListInstalledModules()
         elif [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
             echo "WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !" >&2
         fi
+
+		echo >&2
     fi
 
     exit 1
@@ -272,7 +288,7 @@ function ModuleInitializer_ProcessStat()
         if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf"; then
             echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
-            echo "No ''ChangeStat.conf'' status configuration script found in the ''$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name'' folder !" >&2; echo >&2
+            echo "No << ChangeStat.conf >> status configuration script found in the << $__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name >> folder !" >&2; echo >&2
             echo "Please create this file, and write the necessary conditions that changes the status global variables values" >&2; echo >&2
 
             echo "Aborting the module's initialization" >&2; echo >&2
@@ -292,7 +308,7 @@ function ModuleInitializer_SourcingFailure()
     local p_module=$2       # Name of the module.
 
     #***** Code *****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS ''$p_module'' MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS << $p_module >> MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -308,9 +324,6 @@ function ModuleInitializer_SourcingFailure()
 # Checking the currently used Bash language's version.
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
 ModuleInitializer_CheckBashMinimalVersion
-
-# find "/usr/local/lib/" -maxdepth 1 ! -prune -o -iname "Bash-utils"  -print 2>&1 | grep -v "Permission non accordée"
-
 
 # -----------------------------------------------
 
@@ -361,21 +374,44 @@ for module in "${p_module_list[@]}"; do
     # Defining variables for each iteration.
     v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
-    # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-    if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
-		true
-    else
-        echo >&2; echo "WARNING --> THE ''main'' MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
-        echo >&2; "Please do so by modifying the ''main'' module's argument position in your script" >&2
+	# -----------------------------------------------
+	
+	## INITIALIZER'S FIRST ARGUMENTS PROCESSING
 
-        echo >&2; echo "Aborting the library's initialization" >&2
+	# Checking if the "module" value is optionally passed as first argument when this script is called, in order to configure easier several things, like the language used.
+	# Else, the "main" module MUST be passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
+	if [[ "${p_module_list[0]}" = "module --*" ]]; then
+		if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
+			true
+		else
+	        echo >&2; echo "WARNING --> THE << main >> MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
+			echo >&2; "Please do so by modifying the << main >> module's argument position in your script" >&2
 
-        exit 1
+			echo >&2; echo "Aborting the library's initialization" >&2
+
+			exit 1
+		fi
+	else
+		# Checking if the "main" module is passed as first argument (if the 'module' value is not passed as first argument), in order to avoid unexpected bugs during the other modules' initialization process.
+		if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
+			true
+		else
+			echo >&2; echo "WARNING --> THE << main >> MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
+			echo >&2; "Please do so by modifying the << main >> module's argument position in your script" >&2
+
+			echo >&2; echo "Aborting the library's initialization" >&2
+
+			exit 1
+		fi
 	fi
+
+	# -----------------------------------------------
+	
+	# MODULES' CONFIGURATION FILES SOURCING
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name"; then
-		printf '\n'; printf "WARNING ! THE ''%s'' module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$v_module_name" >&2
+		printf '\n'; printf "WARNING ! THE << %s >> module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$v_module_name" >&2
 
         # Listing all the installed modules in the user's hard drive.
 		ModuleInitializer_ListInstalledModules
@@ -388,9 +424,13 @@ for module in "${p_module_list[@]}"; do
         source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
     fi
 
+	# -----------------------------------------------
+
+	# MODULES' INITIALIZATION FILES SOURCING
+
     # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-        printf "WARNING ! THE ''%s'' module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name" >&2
+        printf "WARNING ! THE << %s >> module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name" >&2
 
         exit 1
     else
