@@ -380,7 +380,7 @@ function CheckProjectStatusVars()
     CheckSTAT_ECHO          "$p_file" "$p_lineno" || return 1
     CheckSTAT_DEBUG         "$p_file" "$p_lineno" || return 1
     CheckSTAT_ERROR         "$p_file" "$p_lineno" || return 1
-	ChangeSTAT_INITIALIZING	"$p_file" "$p_lineno" || return 1
+	CheckSTAT_INITIALIZING	"$p_file" "$p_lineno" || return 1
     CheckSTAT_LOG           "$p_file" "$p_lineno" || return 1
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno" || return 1
     CheckSTAT_TIME_TXT      "$p_file" "$p_lineno" || return 1
@@ -416,7 +416,7 @@ function ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";            Chec
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 function ChangeSTAT_INITIALIZING    {
 	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
-		EchoWarning "WARNING : It's strongly discouraged to change the $(DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(DechoHighlight 'false') to $(DechoHighlight 'true')"
+		EchoWarning "WARNING : It's strongly discouraged to change the $(DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(DechoHighlight 'false') to $(DechoHighlight 'true')"; return 1
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     CheckSTAT_INITIALIZING      "$2" "$3" || return 1
 	fi; return 0; }

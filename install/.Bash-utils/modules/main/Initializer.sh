@@ -130,12 +130,15 @@ fi
 
 #### STEP FOUR : PROCESSING MODULE'S PARAMETERS
 
+
+
+
 # -----------------------------------------------
 
 ## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
 
 # TODO : After adding the status configuration arguments, 
-if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf")" ]; then
+if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
     echo "STAT"
 else
     ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"

@@ -234,10 +234,10 @@ function ModuleInitializer_ListInstalledModules()
 		}
     fi
 
-    if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
+    if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
 
                                                                             # In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES"   > "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"   > "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
         ls -l "$__BU_MODULE_UTILS_MODULES_DIR"      > "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
@@ -245,7 +245,7 @@ function ModuleInitializer_ListInstalledModules()
 
             cat "$v_module_conf_f"; echo; sleep 1
         else
-            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE << $__BU_MODULE_UTILS_CONFIG_MODULES >> OR IN THE << $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS" >&2; echo >&2
+            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE << $__BU_MODULE_UTILS_CONFIG_MODULES_DIR >> OR IN THE << $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS" >&2; echo >&2
 
             echo "MODULES CONFIGURATION FOLDER LIST :" >&2; echo >&2
 
@@ -261,9 +261,9 @@ function ModuleInitializer_ListInstalledModules()
 			sdiff "$v_module_conf_f" "$v_module_conf_f"; echo >&2
         fi
     else
-        if [ ! -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ] && [ ! -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
+        if [ ! -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ ! -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
             echo "WARNING ! THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !" >&2
-        elif [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES" ]; then
+        elif [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ]; then
             echo "WARNING ! THE MODULES CONFIGURATION FOLDER IS MISSING !" >&2
         elif [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
             echo "WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !" >&2
@@ -285,10 +285,10 @@ function ModuleInitializer_ProcessStat()
     #***** Code *****
     # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
     if [ "$module" = "$v_module_name --stat=\"*" ] || [ "$module" = "$v_module_name --stat='*" ]; then
-        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/" "ChangeStat.conf"; then
+        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf"; then
             echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
-            echo "No << ChangeStat.conf >> status configuration script found in the << $__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name >> folder !" >&2; echo >&2
+            echo "No << ChangeStat.conf >> status configuration script found in the << $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name >> folder !" >&2; echo >&2
             echo "Please create this file, and write the necessary conditions that changes the status global variables values" >&2; echo >&2
 
             echo "Aborting the module's initialization" >&2; echo >&2
@@ -347,8 +347,8 @@ __BU_MODULE_UTILS_ROOT_HOME="$HOME"
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
-	__BU_MODULE_UTILS_CONFIG="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
-	__BU_MODULE_UTILS_CONFIG_MODULES="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG" "modules")"
+	__BU_MODULE_UTILS_CONFIG_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
+	__BU_MODULE_UTILS_CONFIG_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "modules")"
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
@@ -370,6 +370,13 @@ ModuleInitializer_Get_gettext_sh_File
 
 # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 for module in "${p_module_list[@]}"; do
+
+	## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
+	
+	# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
+	if [[ "${p_module_list[i]}" = "* --*" ]]; then
+		__BU_MODULE_UTILS_MODULE_ARGS="$module"
+	fi
 
     # Defining variables for each iteration.
     v_module_name="$(echo "$module" | cut -d' ' -f1)"
@@ -410,8 +417,8 @@ for module in "${p_module_list[@]}"; do
 	# MODULES' CONFIGURATION FILES SOURCING
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
-    if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name"; then
-		printf '\n'; printf "WARNING ! THE << %s >> module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG\n" "$v_module_name" >&2
+    if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
+		printf '\n'; printf "WARNING ! THE << %s >> module is not installed, doesn't exists, or the << ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" "$v_module_name" >&2
 
         # Listing all the installed modules in the user's hard drive.
 		ModuleInitializer_ListInstalledModules
@@ -421,7 +428,7 @@ for module in "${p_module_list[@]}"; do
         ModuleInitializer_ProcessStat "$module" "$v_module_name"
 
         # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES/$v_module_name/module.conf" "$v_module_name"
+        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
     fi
 
 	# -----------------------------------------------
