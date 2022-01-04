@@ -66,8 +66,8 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     #**** Code ****
     if [ -z "$p_missing" ]; then
         echo >&2;
-        echo "en | Warning : no given information about the « gettext.sh >> file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
-        echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh >> ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2
+        echo "en | Warning : no given information about the « gettext.sh»file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
+        echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh»('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2
 
 		echo >&2; exit 1
 
@@ -81,18 +81,18 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 
     if [ "${p_missing^^}" = 'PATH' ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath >> FILE FOR THE « .po >> FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath >> POUR LA TRADUCTION DES FICHIER « .po >>" >&2; echo >&2
+        echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath»FILE FOR THE « .po»FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath»POUR LA TRADUCTION DES FICHIER « .po >>" >&2; echo >&2
 
     elif [ "${p_missing,,}" = "config-missing" ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath >> FILE FOR THE « .po >> FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath >> POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2
+        echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath»FILE FOR THE « .po»FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath»POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2
 
     elif [ "${p_missing,,}" = 'config-source' ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath >> FILE FOR THE « .po >> FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath >> POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2  
+        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath»FILE FOR THE « .po»FILES TRANSLATION" >&2
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath»POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2  
     fi
 
     echo >&2;
@@ -175,9 +175,9 @@ function __ModuleInitializer_CheckPath()
 
     else
         if [ -z "$p_target" ]; then
-            echo  >&2; echo ">>>>> BASH-UTILS ERROR >>>>> IN « ${FUNCNAME[0]} >>, LINE « $LINENO >> >>>>> NO SPECIFICATION ABOUT THE TARGET !!!" >&2; echo >&2
+            echo  >&2; echo ">>>>> BASH-UTILS ERROR >>>>> IN « ${FUNCNAME[0]} >>, LINE « $LINENO»>>>>> NO SPECIFICATION ABOUT THE TARGET !!!" >&2; echo >&2
 
-            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the « ${FUNCNAME[0]} >> function." >&2; echo >&2; exit 1
+            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the « ${FUNCNAME[0]}»function." >&2; echo >&2; exit 1
         elif [ -n "$p_path" ] && [ "$p_target" = "[D-d]" ] && [ ! -d "$p_path" ]; then
             printf "%s (bad directory : not found)" "$p_path" >&2
 
@@ -226,7 +226,7 @@ function ModuleInitializer_ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-			echo "Unable to create the logs temporary directory « tmp >> in the « $__BU_MODULE_UTILS_ROOT/ >> directory" >&2; echo >&2
+			echo "Unable to create the logs temporary directory « tmp»in the « $__BU_MODULE_UTILS_ROOT/»directory" >&2; echo >&2
 
 			echo "If the problem persists, please create this folder manually" >&2; echo >&2
 
@@ -245,7 +245,7 @@ function ModuleInitializer_ListInstalledModules()
 
             cat "$v_module_conf_f"; echo; sleep 1
         else
-            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE « $__BU_MODULE_UTILS_CONFIG_MODULES_DIR >> OR IN THE « $__BU_MODULE_UTILS_MODULES_DIR >> FOLDERS" >&2; echo >&2
+            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE « $__BU_MODULE_UTILS_CONFIG_MODULES_DIR»OR IN THE « $__BU_MODULE_UTILS_MODULES_DIR»FOLDERS" >&2; echo >&2
 
             echo "MODULES CONFIGURATION FOLDER LIST :" >&2; echo >&2
 
@@ -288,7 +288,7 @@ function ModuleInitializer_ProcessStat()
         if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name/" "ChangeStat.conf"; then
             echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
-            echo "No « ChangeStat.conf >> status configuration script found in the « $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name >> folder !" >&2; echo >&2
+            echo "No « ChangeStat.conf»status configuration script found in the « $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name»folder !" >&2; echo >&2
             echo "Please create this file, and write the necessary conditions that changes the status global variables values" >&2; echo >&2
 
             echo "Aborting the module's initialization" >&2; echo >&2
@@ -308,7 +308,7 @@ function ModuleInitializer_SourcingFailure()
     local p_module=$2       # Name of the module.
 
     #**** Code ****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module >> MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module»MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -365,7 +365,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
-	echo "The Bash Utils configurations root folder « .Bash-utils >> doesn't exists in your home directory." >&2; echo >&2
+	echo "The Bash Utils configurations root folder « .Bash-utils»doesn't exists in your home directory." >&2; echo >&2
 	echo "Please copy this folder in your home directory. You can install it by executing the installation file, or you can find it in the Bash-utils/install directory." >&2; echo >&2
 
 	echo "Aborting the library's initialization." >&2; echo >&2
@@ -403,8 +403,8 @@ for module in "${p_module_list[@]}"; do
 		if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
 			true
 		else
-	        echo >&2; echo "WARNING --> THE « main >> MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
-			echo >&2; "Please do so by modifying the « main >> module's argument position in your script" >&2
+	        echo >&2; echo "WARNING --> THE « main»MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
+			echo >&2; "Please do so by modifying the « main»module's argument position in your script" >&2
 
 			echo >&2; echo "Aborting the library's initialization" >&2
 
@@ -415,8 +415,8 @@ for module in "${p_module_list[@]}"; do
 		if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
 			true
 		else
-			echo >&2; echo "WARNING --> THE « main >> MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
-			echo >&2; "Please do so by modifying the « main >> module's argument position in your script" >&2
+			echo >&2; echo "WARNING --> THE « main»MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
+			echo >&2; "Please do so by modifying the « main»module's argument position in your script" >&2
 
 			echo >&2; echo "Aborting the library's initialization" >&2
 
@@ -430,7 +430,7 @@ for module in "${p_module_list[@]}"; do
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
-		printf '\n'; printf "WARNING ! THE « %s >> module is not installed, doesn't exists, or the « ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" "$v_module_name" >&2
+		printf '\n'; printf "WARNING ! THE « %s»module is not installed, doesn't exists, or the « ls»command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" "$v_module_name" >&2
 
         # Listing all the installed modules in the user's hard drive.
 		ModuleInitializer_ListInstalledModules
@@ -449,7 +449,7 @@ for module in "${p_module_list[@]}"; do
 
     # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-        printf "WARNING ! THE « %s >> module is not installed, doesn't exists, or the « ls >> command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name" >&2
+        printf "WARNING ! THE « %s»module is not installed, doesn't exists, or the « ls»command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name" >&2
 
         exit 1
     else

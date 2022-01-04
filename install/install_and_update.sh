@@ -336,11 +336,11 @@ if [ "$__UNROOT" = 'true' ]; then
     cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE « $__F_USERS_LIST_FILE_PATH.tmp » FILE"; $ exit 1; }
     PrintLog 'Done' 'log'
 
-    PrintLog "Copying back the content of the « $__F_USERS_LIST_FILE_PATH.tmp >> file to the « $__F_USERS_LIST_FILE_PATH' file" 'log'
+    PrintLog "Copying back the content of the « $__F_USERS_LIST_FILE_PATH.tmp»file to the « $__F_USERS_LIST_FILE_PATH' file" 'log'
     cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { PrintLog "UNABLE TO COPY THE CONTENT OF THE « $__F_USERS_LIST_FILE_PATH.tmp » TO THE « $__F_USERS_LIST_FILE_PATH » FILE"; exit 1; }
     PrintLog 'Done' 'log'
 
-    PrintLog "Removing the « $__F_USERS_LIST_FILE_PATH.tmp >> file" 'log'
+    PrintLog "Removing the « $__F_USERS_LIST_FILE_PATH.tmp»file" 'log'
     rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { PrintLog "UNABLE TO REMOVE THE « $__F_USERS_LIST_FILE_PATH.tmp » FILE"; exit 1; }
     PrintLog 'Done' 'log'
 
