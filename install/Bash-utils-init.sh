@@ -226,7 +226,7 @@ function ModuleInitializer_ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-			echo "Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_UTILS_ROOT/ » directory" >&2; echo >&2
+			echo "In « ${BASH_SOURCE[0]}, line $(( LINENO-2 )) » Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_UTILS_ROOT/ » directory" >&2; echo >&2
 
 			echo "If the problem persists, please create this folder manually" >&2; echo >&2
 
@@ -236,9 +236,9 @@ function ModuleInitializer_ListInstalledModules()
 
     if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
 
-                                                                            # In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"   > "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
-        ls -l "$__BU_MODULE_UTILS_MODULES_DIR"      > "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+																				# In case the "ls" command points towards a bad path because of a bad variable's value.
+        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+        ls -l "$__BU_MODULE_UTILS_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
             echo; echo "INSTALLED MODULES LIST :"; echo; sleep ".5"
@@ -262,11 +262,11 @@ function ModuleInitializer_ListInstalledModules()
         fi
     else
         if [ ! -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ ! -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
-            echo "WARNING ! THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !" >&2
+            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !" >&2
         elif [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ]; then
-            echo "WARNING ! THE MODULES CONFIGURATION FOLDER IS MISSING !" >&2
+            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES CONFIGURATION FOLDER IS MISSING !" >&2
         elif [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
-            echo "WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !" >&2
+            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !" >&2
         fi
 
 		echo >&2
@@ -331,8 +331,8 @@ ModuleInitializer_CheckBashMinimalVersion
 
 if [ "${SHELL##*/}" != 'bash' ]; then
     echo >&2;
-    echo "ERROR : Your current shell interpreter is not Bash, but « ${SHELL##*/} >>" >&2
-    echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le « ${SHELL##*/} >>" >&2
+    echo "ERROR : Your current shell interpreter is not Bash, but « ${SHELL##*/} »" >&2
+    echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le « ${SHELL##*/} »" >&2
 
     echo >&2; exit 1
 fi
@@ -345,7 +345,7 @@ fi
 p_module_list=("$@")
 
 if [ -z "${p_module_list[*]}" ]; then
-    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE %s MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
+    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
 fi
 
 # TODO : Ajouter un séparateur d'arguments, et prendre en charge des arguments supplémentaires, comme la modification de la valeur d'une variable globale de statut
@@ -398,25 +398,35 @@ for module in "${p_module_list[@]}"; do
 	## INITIALIZER'S FIRST ARGUMENTS PROCESSING
 
 	# Checking if the "module" value is optionally passed as first argument when this script is called, in order to configure easier several things, like the language used.
-	# Else, the "main" module MUST be passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
 	if [[ "${p_module_list[0]}" = "module --*" ]]; then
 		if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
 			true
 		else
-	        echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
+	        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
 			echo >&2; "Please do so by modifying the « main » module's argument position in your script" >&2
 
 			echo >&2; echo "Aborting the library's initialization" >&2
 
 			exit 1
 		fi
+	
+	# Else, if the "module" value is called without an argument.
+	elif [[ "${p_module_list[0]}" = 'module' ]]; then
+		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE CAME WITHOUT ARGUMENTS" >&2
+		echo >&2; echo "Please add a supported argument inside the « module » value's argument main quote" >&2
+
+		echo >&2; echo "Aborting the library's initialization" >&2
+
+		exit 1
+
+	# Else, the "main" module MUST be passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
 	else
 		# Checking if the "main" module is passed as first argument (if the 'module' value is not passed as first argument), in order to avoid unexpected bugs during the other modules' initialization process.
 		if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
 			true
 		else
-			echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
-			echo >&2; "Please do so by modifying the « main » module's argument position in your script" >&2
+			echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
+			echo >&2; echo "Please do so by modifying the « main » module's argument position in your script" >&2
 
 			echo >&2; echo "Aborting the library's initialization" >&2
 
@@ -430,7 +440,11 @@ for module in "${p_module_list[@]}"; do
 
     # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
-		printf '\n'; printf "WARNING ! THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\nCheck if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" "$v_module_name" >&2
+		printf '\n' >&2;
+
+		printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
+		
+		printf "Please check if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" >&2
 
         # Listing all the installed modules in the user's hard drive.
 		ModuleInitializer_ListInstalledModules
@@ -449,7 +463,11 @@ for module in "${p_module_list[@]}"; do
 
     # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
     if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-        printf "WARNING ! THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\nInstall this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name" >&2
+        printf '\n' >&2;
+
+		printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+		
+		printf "Install this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR\n" >&2
 
         exit 1
     else

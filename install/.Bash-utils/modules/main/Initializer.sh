@@ -201,7 +201,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_LOG global status variable
 
-				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+				if [ "$stat_value" = 'log=true' ] || [ "$stat_value" = 'log=false' ]; then
 					__BU_MAIN_STAT_LOG="${stat_value#*=}"
 				else
 					echo "$stat_value_warning true, false"
@@ -210,10 +210,10 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_LOG_REDIRECT global status variable
 
-				if [ "$stat_value" = '' ]; then
+				if [ "$stat_value" = 'log-redirect=void' ]; then
 					__BU_MAIN_STAT_LOG_REDIRECT=''
 
-				elif [ "$stat_value" = 'log' ] || [ "$stat_value" = 'tee' ]; then
+				elif [ "$stat_value" = 'log-redirect=log' ] || [ "$stat_value" = 'log-redirect=tee' ]; then
 					__BU_MAIN_STAT_LOG_REDIRECT="${stat_value#*=}"
 				else
 					echo "$stat_value_warning log, tee, \e[3man empty string\e[0m"
@@ -222,7 +222,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_OPERATE_ROOT global status variable
 
-				if [ "$stat_value" = 'authorized' ] || [ "$stat_value" = 'forbidden' ] || [ "$stat_value" = 'restricted' ]; then
+				if [ "$stat_value" = 'op-root=authorized' ] || [ "$stat_value" = 'op-root=forbidden' ] || [ "$stat_value" = 'op-root=restricted' ]; then
 					__BU_MAIN_STAT_OPERATE_ROOT="${stat_value#*=}"
 				else
 					echo "$stat_value_warning authorized, forbidden, restricted"
@@ -231,7 +231,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_PRINT_INIT_LOG global status variable
 
-				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+				if [ "$stat_value" = 'print-init-log=true' ] || [ "$stat_value" = 'print-init-log=false' ]; then
 					__BU_MAIN_STAT_PRINT_INIT_LOG="${stat_value#*=}"
 				else
 					echo "$stat_value_warning true, false"
@@ -240,7 +240,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_TIME_TXT global status variable
 
-				if IsFloat "$stat_value"; then
+				if [ "$stat_value" = "stat-time-txt=$(IsFloat "$stat_value#*=")" ]; then
 					__BU_MAIN_STAT_TIME_TXT="$stat_value"
 				else
 					echo "$stat_value_warning \e[3ma floating number\e[0m"
@@ -249,7 +249,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
 
-				if [ "$stat_value" = 'true' ] || [ "$stat_value" = 'false' ]; then
+				if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
 					__BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
 				else
 					echo "$stat_value_warning true, false"
