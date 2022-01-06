@@ -107,9 +107,10 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 		# --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
 		# Extracting the "--stat" option's values.
 		if [ "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]" = "--stat=*" ]; then
-			__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT="$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]"
 
-			# TODO : get the --stat option's values between its single quotes.
+
+			# TODO : get the --stat option's values between its single quotes, with a command called in this variable declaration.
+			__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT="$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]"
 
 			# Creating a new array of words for the supported "--stat" option's values.
 			# The __BU_MAIN_STAT_INITIALIZING value change is NOT supported, this status global variable's value MUST stay untouched.
@@ -240,6 +241,11 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 				ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 				ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			fi
+		fi
+
+		# Else, if an unsupported argument is passed.
+		else
+			echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « $value » ARGUMENT IS NOT SUPPORTED" >&2
 		fi
 	done
 fi
