@@ -105,6 +105,10 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 
 function __bu_export_textdomain()
 {
+	#**** Variables ****
+	# __BU_MODULE_
+
+	#**** Code ****
     return 0
 }
 
@@ -124,7 +128,6 @@ function ModuleInitializer_Get_gettext_sh_File()
         # shellcheck disable=SC1090
         source "$v_path_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'PATH' "$v_path_file_path"
 
-        __BU_MODULE_
 
     # Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
     else
@@ -319,14 +322,6 @@ function ModuleInitializer_SourcingFailure()
 
 #### BEGIN INITIALIZATION
 
-## CHECKING THE BASH VERSION
-
-# Checking the currently used Bash language's version.
-# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!!
-ModuleInitializer_CheckBashMinimalVersion
-
-# -----------------------------------------------
-
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
 if [ "${SHELL##*/}" != 'bash' ]; then
@@ -336,20 +331,6 @@ if [ "${SHELL##*/}" != 'bash' ]; then
 
     echo >&2; exit 1
 fi
-
-# -----------------------------------------------
-
-## CHECKING THE ARGUMENTS ARRAY LENGTH
-
-# List of all the modules to include passed as arguments.
-p_module_list=("$@")
-
-if [ -z "${p_module_list[*]}" ]; then
-    printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION SCRIPT" "$(basename "${BASH_SOURCE[0]}")"
-fi
-
-# TODO : Ajouter un séparateur d'arguments, et prendre en charge des arguments supplémentaires, comme la modification de la valeur d'une variable globale de statut
-# sans avoir à la modifier manuellement avant chaque exécution d'un script.
 
 # -----------------------------------------------
 
@@ -375,53 +356,48 @@ fi
 
 # -----------------------------------------------
 
-## INITIALIZATION CODE
+# CALLING THE NEEDED FUNCTIONS DEFINED IN THIS FILE
 
-# Getting and sourcing the "gettext.sh" file.
+# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!! --> Checking the currently used Bash language's version.
+ModuleInitializer_CheckBashMinimalVersion
+
+# Setting the whole project's language by getting and sourcing the "gettext.sh" file.
 ModuleInitializer_Get_gettext_sh_File
 
-# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
-for module in "${p_module_list[@]}"; do
+# -----------------------------------------------
 
-	## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
+## LIBRARY SOURCING'S FUNCTION
 
-    # Defining variables for each iteration.
-    v_module_name="$(echo "$module" | cut -d' ' -f1)"
-	
-	# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-	if [[ "${p_module_list[i]}" = "$v_module_name --*" ]]; then
-		__BU_MODULE_UTILS_MODULE_ARGS="$module"
+function BashUtils_InitModules()
+{
+	#**** Parameters ****
+	p_module_list=("$@")	# List of all the modules to include passed as arguments
+
+	#**** Code ****
+	## Checking if the arguments array length is equal to zero (no arguments passed).
+	if [ -z "${p_module_list[*]}" ]; then
+		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
-
-	# -----------------------------------------------
 	
-	## INITIALIZER'S FIRST ARGUMENTS PROCESSING
+	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
+	for module in "${p_module_list[@]}"; do
 
-	# Checking if the "module" value is optionally passed as first argument when this script is called, in order to configure easier several things, like the language used.
-	if [[ "${p_module_list[0]}" = "module --*" ]]; then
-		if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
-			true
-		else
-	        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT" >&2
-			echo >&2; "Please do so by modifying the « main » module's argument position in your script" >&2
+		## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
-			echo >&2; echo "Aborting the library's initialization" >&2
-
-			exit 1
+		# Defining variables for each iteration.
+		v_module_name="$(echo "$module" | cut -d' ' -f1)"
+		
+		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
+		if [[ "${p_module_list[i]}" = "$v_module_name --*" ]]; then
+			__BU_MODULE_UTILS_MODULE_ARGS="$module"
 		fi
-	
-	# Else, if the "module" value is called without an argument.
-	elif [[ "${p_module_list[0]}" = 'module' ]]; then
-		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE CAME WITHOUT ARGUMENTS" >&2
-		echo >&2; echo "Please add a supported argument inside the « module » value's argument main quote" >&2
 
-		echo >&2; echo "Aborting the library's initialization" >&2
+		# -----------------------------------------------
+		
+		## INITIALIZER'S FIRST ARGUMENTS PROCESSING
 
-		exit 1
 
-	# Else, the "main" module MUST be passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-	else
-		# Checking if the "main" module is passed as first argument (if the 'module' value is not passed as first argument), in order to avoid unexpected bugs during the other modules' initialization process.
+		# Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
 		if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
 			true
 		else
@@ -430,63 +406,65 @@ for module in "${p_module_list[@]}"; do
 
 			echo >&2; echo "Aborting the library's initialization" >&2
 
-			exit 1
+			echo >&2; return 1
 		fi
+
+		# -----------------------------------------------
+		
+		# MODULES' CONFIGURATION FILES SOURCING
+
+		# Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
+		if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
+			printf '\n' >&2;
+
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
+			
+			printf "Please check if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n\n" >&2
+
+			# Listing all the installed modules in the user's hard drive.
+			ModuleInitializer_ListInstalledModules
+
+			return 1
+		else
+			ModuleInitializer_ProcessStat "$module" "$v_module_name"
+
+			# shellcheck disable=SC1090
+			source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
+		fi
+
+		# -----------------------------------------------
+
+		# MODULES' INITIALIZATION FILES SOURCING
+
+		# Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
+		if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
+			printf '\n' >&2;
+
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+			
+			printf "Install this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR\n" >&2
+
+			return 1
+		else
+			# shellcheck disable=SC1090
+			source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
+
+			HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
+		fi
+	done
+
+	# Testing a Decho_FMT function
+	# Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"
+
+	# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+	#### ENDING THE WHOLE INITIALIZATION PROCESS
+
+	HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_PATH") !"
+
+	if CheckStatIsInitializing; then
+		ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
-	# -----------------------------------------------
-	
-	# MODULES' CONFIGURATION FILES SOURCING
-
-    # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
-    if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
-		printf '\n' >&2;
-
-		printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
-		
-		printf "Please check if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n" >&2
-
-        # Listing all the installed modules in the user's hard drive.
-		ModuleInitializer_ListInstalledModules
-
-		exit 1
-    else
-        ModuleInitializer_ProcessStat "$module" "$v_module_name"
-
-        # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
-    fi
-
-	# -----------------------------------------------
-
-	# MODULES' INITIALIZATION FILES SOURCING
-
-    # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
-    if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-        printf '\n' >&2;
-
-		printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
-		
-		printf "Install this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR\n" >&2
-
-        exit 1
-    else
-        # shellcheck disable=SC1090
-        source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
-
-		HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
-	fi
-done
-
-# Testing a Decho_FMT function
-# Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### ENDING THE WHOLE INITIALIZATION PROCESS
-
-HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_PATH") !"
-
-if CheckStatIsInitializing; then
-    ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-fi
+	return 0
+}
