@@ -93,48 +93,15 @@ InitializerAddInitStrArrayVal ""
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP THREE : PROCESSING PROJECT'S RESOURCES
+#### STEP THREE : PROCESSING MODULE'S PARAMETERS
 
-## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
-
-ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-MkTmpDir
-
-# -----------------------------------------------
-
-## PROCESSING SOME DIRECTORIES AND FILES
-
-if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
-	HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
-else
-	EchoSuccess ""
-fi
-
-# Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
-if CheckStatIsLogging; then
-	if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
-		HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
-
-		return 1
-	fi
-fi
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### STEP FOUR : PROCESSING MODULE'S PARAMETERS
-
+# If arguments were given in the same double quotes as the "main" module's value.
 if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 	# Defining a variable that transforms the module's argument string into an array of words.
 	__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY=("${__BU_MODULE_UTILS_MODULE_ARGS}")
 
+	# Process each supported arguments in this "for" loop.
 	for value in "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY"; do
 
 		# --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
@@ -255,28 +222,63 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 					echo "$stat_value_warning true, false"
 				fi
 			done
+
+		# Else, if no "--stat" argument is passed, then the default values are set to each status global variables.
+		else
+			## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
+
+			# TODO : After adding the status configuration arguments, 
+			if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
+				echo "STAT"
+			else
+				ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+				# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
+				ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			fi
 		fi
 	done
 fi
 
 
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### STEP FOUR : PROCESSING PROJECT'S RESOURCES
+
+## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
+
+# ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+# Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
+MkTmpDir
+
 # -----------------------------------------------
 
-## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
+## PROCESSING SOME DIRECTORIES AND FILES
 
-# TODO : After adding the status configuration arguments, 
-if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
-    echo "STAT"
+if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+	HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
 else
-    ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-    # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-    ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	EchoSuccess ""
 fi
+
+# Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
+if CheckStatIsLogging; then
+	if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+		HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
+
+		return 1
+	fi
+fi
+
+# -----------------------------------------------
 
 # -----------------------------------------------
 

@@ -368,6 +368,7 @@ ModuleInitializer_Get_gettext_sh_File
 
 ## LIBRARY SOURCING'S FUNCTION
 
+# Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
 function BashUtils_InitModules()
 {
 	#**** Parameters ****
@@ -462,6 +463,8 @@ function BashUtils_InitModules()
 
 	HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(DechoGreen "$__BU_MAIN_PROJECT_PATH") !"
 
+	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
+	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
 	if CheckStatIsInitializing; then
 		ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
