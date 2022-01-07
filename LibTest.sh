@@ -11,3 +11,6 @@ if ! BashUtils_InitModules "main --stat='debug=true error=fatal log=true log-red
 fi
 
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
+
+# Testing a Decho_FMT function
+# Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"

@@ -354,7 +354,7 @@ function BashUtils_InitModules()
 	if [ -z "${p_module_list[*]}" ]; then
 		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
-	
+
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_module_list[@]}"; do
 
@@ -362,14 +362,14 @@ function BashUtils_InitModules()
 
 		# Defining variables for each iteration.
 		v_module_name="$(echo "$module" | cut -d' ' -f1)"
-		
+
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_module_list[i]}" = "$v_module_name --*" ]]; then
 			__BU_MODULE_UTILS_MODULE_ARGS="$module"
 		fi
 
 		# -----------------------------------------------
-		
+
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING
 
 		# Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
@@ -385,7 +385,7 @@ function BashUtils_InitModules()
 		fi
 
 		# -----------------------------------------------
-		
+
 		# MODULES' CONFIGURATION FILES SOURCING
 
 		# Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
@@ -393,7 +393,7 @@ function BashUtils_InitModules()
 			printf '\n' >&2;
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
-			
+
 			printf "Please check if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n\n" >&2
 
 			# Listing all the installed modules in the user's hard drive.
@@ -414,7 +414,7 @@ function BashUtils_InitModules()
 			printf '\n' >&2;
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
-			
+
 			printf "Install this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR\n" >&2
 
 			return 1
@@ -425,9 +425,6 @@ function BashUtils_InitModules()
 			HeaderGreen "END OF THE $(DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 		fi
 	done
-
-	# Testing a Decho_FMT function
-	# Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
