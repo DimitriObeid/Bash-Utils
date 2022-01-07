@@ -198,7 +198,7 @@ function HeaderTeal			{ HeaderBase "$__BU_MAIN_COLOR_TEAL"	"$__BU_MAIN_TXT_CHAR_
 # Copy-paste this function to avoid losing time while creating bicolor headers :
 # function Header<col1><col2>   { HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_<COLOR>" "$1" || return 1; return 0; }
 
-# Aqua line, differently colored text.
+# Aqua blue lines, differently colored text.
 function HeaderAquaBlack		{ HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"		"$1" || return 1; return 0; }
 function HeaderAquaBlue			{ HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"		"$1" || return 1; return 0; }
 function HeaderAquaCyan			{ HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CYAN"		"$1" || return 1; return 0; }
@@ -218,7 +218,7 @@ function HeaderAquaWhite		{ HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_C
 function HeaderAquaYellow		{ HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"		"$1" || return 1; return 0; }
 
 
-# Black line, differently colored text.
+# Black lines, differently colored text.
 function HeaderBlackAqua        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"      	"$1" || return 1; return 0; }
 function HeaderBlackBlue        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
 function HeaderBlackCyan        { HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CYAN"      	"$1" || return 1; return 0; }
@@ -313,7 +313,7 @@ function HeaderGrayTurquoise    { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN
 function HeaderGrayWhite        { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function HeaderGrayYellow       { HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
-# Green lines, differently colored text.
+# Light green lines, differently colored text.
 function HeaderGreenAqua		{ HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"      	"$1" || return 1; return 0; }
 function HeaderGreenBlack       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"     	"$1" || return 1; return 0; }
 function HeaderGreenBlue        { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
@@ -332,7 +332,7 @@ function HeaderGreenTurquoise   { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAI
 function HeaderGreenWhite       { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"     	"$1" || return 1; return 0; }
 function HeaderGreenYellow      { HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW" 		"$1" || return 1; return 0; }
 
-# Lime lines, differently colored text.
+# Lime green lines, differently colored text.
 function HeaderLimeAqua			{ HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"      	"$1" || return 1; return 0; }
 function HeaderLimeBlack		{ HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"      	"$1" || return 1; return 0; }
 function HeaderLimeBlue			{ HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"      	"$1" || return 1; return 0; }
@@ -445,7 +445,7 @@ function HeaderRedTurquoise { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_
 function HeaderRedWhite     { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       		"$1" || return 1; return 0; }
 function HeaderRedYellow    { HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      		"$1" || return 1; return 0; }
 
-# Silver color, differently colored text.
+# Silver lines, differently colored text.
 function HeaderSilverAqua	    { HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"        "$1" || return 1; return 0; }
 function HeaderSilverBlack     	{ HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"       "$1" || return 1; return 0; }
 function HeaderSilverBlue      	{ HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"        "$1" || return 1; return 0; }

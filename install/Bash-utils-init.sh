@@ -278,31 +278,6 @@ function ModuleInitializer_ListInstalledModules()
     exit 1
 }
 
-# Checking and processing the global status variables value's arguments given after the module's name.
-function ModuleInitializer_ProcessStat()
-{
-    #**** Parameters ****
-    local p_module=$1       # The module's name from the "for module in "${p_module_list[@]}"; do" loop.
-    local p_module_name=$2  # The "$v_module_name" variable defined at each loop's iteration.
-
-    #**** Code ****
-    # If extra arguments are passed in order to modify status variables, then a script provided with the module is called to modify their values automatically in a copy of the "Status.conf" file, before sourcing it instead of the original configuration file.
-    if [ "$module" = "$p_module_name --stat=\"*" ] || [ "$module" = "$p_module_name --stat='*" ]; then
-        if ! ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name/" "ChangeStat.conf"; then
-            echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
-
-            echo "No « ChangeStat.conf » status configuration script found in the « $__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$p_module_name » folder !" >&2; echo >&2
-            echo "Please create this file, and write the necessary conditions that changes the status global variables values" >&2; echo >&2
-
-            echo "Aborting the module's initialization" >&2; echo >&2
-
-            exit 1
-        else
-            echo; echo "Processing the $p_module_name module's global status variables' configuration script"; echo
-        fi
-    fi
-}
-
 # Printing an error message if a file cannot be sourced.
 function ModuleInitializer_SourcingFailure()
 {
@@ -397,9 +372,8 @@ function BashUtils_InitModules()
 		
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING
 
-
 		# Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-		if [[ "${p_module_list[0]}" = 'main' ]] || [[ "${p_module_list[0]}" = "main --*" ]]; then
+		if [[ "${p_module_list[0]}" == 'main' ]] || [[ "${p_module_list[0]}" == "main --"* ]]; then
 			true
 		else
 			echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
@@ -427,8 +401,6 @@ function BashUtils_InitModules()
 
 			return 1
 		else
-			ModuleInitializer_ProcessStat "$module" "$v_module_name"
-
 			# shellcheck disable=SC1090
 			source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
 		fi
