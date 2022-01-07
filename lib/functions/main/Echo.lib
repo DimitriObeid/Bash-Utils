@@ -391,6 +391,18 @@ function EchoWarning()
 
 # Note : These function call the "EchoMsg()" function in order to avoid rewriting tons of lines that would do the same thing.
 
+# Aqua blue colored message.
+function EchoAqua()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_AQUA}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
 # Black colored message.
 function EchoBlack()
 {
@@ -427,6 +439,18 @@ function EchoCyan()
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
 
+# Fuschia colored message.
+function EchoFuschia()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_FUSCHIA}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
 # Gray colored message.
 function EchoGray()
 {
@@ -447,6 +471,30 @@ function EchoGreen()
 
     #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_GREEN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Lime green colored message.
+function EchoLime()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_LIME}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Maroon blue colored message.
+function EchoMaroon()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_MAROON}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
@@ -495,6 +543,30 @@ function EchoRed()
 
     #**** Code ****
     EchoMsg "${__BU_MAIN_COLOR_RED}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Silver colored message.
+function EchoSilver()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_SILVER}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+}
+
+# Teal colored message.
+function EchoTeal()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    EchoMsg "${__BU_MAIN_COLOR_TEAL}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
 }
