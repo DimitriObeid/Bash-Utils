@@ -252,7 +252,7 @@ function PrintLine()
     done; PrintLog "$(Newline)"; return 0
 }
 
-# Checking if the 
+# Checking if the
 function PrintLog()
 {
     if [ "$__NOLOG" = 'nolog' ]; then
@@ -330,7 +330,7 @@ fi
 # If the installation is made without super-user's privileges.
 if [ "$__UNROOT" = 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
-    PrintLog "Copying and sorting the content of the « $__F_USERS_LIST_FILE_PATH » file to the « $__F_USERS_LIST_FILE_PATH.tmp » file" 'log'; 
+    PrintLog "Copying and sorting the content of the « $__F_USERS_LIST_FILE_PATH » file to the « $__F_USERS_LIST_FILE_PATH.tmp » file" 'log';
 
     # shellcheck disable=SC2002
     cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE « $__F_USERS_LIST_FILE_PATH.tmp » FILE"; $ exit 1; }

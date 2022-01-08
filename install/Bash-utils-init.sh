@@ -92,7 +92,7 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     elif [ "${p_missing,,}" = 'config-source' ]; then
         echo >&2;
         echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2  
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2
     fi
 
     echo >&2;
@@ -106,7 +106,7 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 function __bu_export_textdomain()
 {
 	#**** Variables ****
-	# __BU_MODULE_
+	export TEXTDOMAINDIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")"
 
 	#**** Code ****
     return 0
@@ -120,7 +120,7 @@ function ModuleInitializer_Get_gettext_sh_File()
         v_path_file_path="$(command -v "gettext.sh")"
 
     local v_spare_file_path # Defining a variable to store the spare gettext.sh file if its path have to move in the future.
-        v_spare_file_path=".Bash-utils/config/initializer/gettext.sh"
+        v_spare_file_path="$__BU_MODULE_UTILS_CONFIG_INIT_DIR/gettext.sh"
 
     #**** Code ****
     # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
@@ -144,7 +144,7 @@ function ModuleInitializer_Get_gettext_sh_File()
 
 # -----------------------------------------------
 
-## 
+##
 
 # Checking the currently used Bash language's version.
 function ModuleInitializer_CheckBashMinimalVersion()
@@ -305,7 +305,7 @@ function ModuleInitializer_SourcingFailure()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### BEGIN INITIALIZATION
+#### BEGIN INITIALIZATION PROCESS
 
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
@@ -325,8 +325,13 @@ __BU_MODULE_UTILS_ROOT_HOME="$HOME"
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
+
+    # Configurations directories
 	__BU_MODULE_UTILS_CONFIG_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
+    __BU_MODULE_UTILS_CONFIG_INIT_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "initializer")"
 	__BU_MODULE_UTILS_CONFIG_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "modules")"
+
+    # Modules directories
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
@@ -341,15 +346,21 @@ fi
 
 # -----------------------------------------------
 
-# CALLING THE NEEDED FUNCTIONS DEFINED IN THIS FILE
+# CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
 
-# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!! --> Checking the currently used Bash language's version.
-ModuleInitializer_CheckBashMinimalVersion
-
-# Setting the whole project's language by getting and sourcing the "gettext.sh" file.
+# THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!! --> Setting the whole project's language by getting and sourcing the "gettext.sh" file.
 ModuleInitializer_Get_gettext_sh_File
 
+# Checking the currently used Bash language's version.
+ModuleInitializer_CheckBashMinimalVersion
+
 # -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SOURCING THE MODULES
 
 ## LIBRARY SOURCING'S FUNCTION
 
