@@ -60,18 +60,23 @@ function InitializerAddInitStrArrayVal()
 ## SOURCING LIBRARY FILES FIRST
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
+function BUMain_SourceLib()
+{
+	# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
+	InitializerAddInitStrArrayVal ""
 
-InitializerAddInitStrArrayVal ""
+	# shellcheck disable=SC1090
+	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
+		source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
 
-# shellcheck disable=SC1090
-for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
+		InitializerAddInitStrArrayVal "Successfully sourced this library file : $f"
+	done
 
-	InitializerAddInitStrArrayVal "Successfully sourced this library file : $f"
-done
+	# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
+	InitializerAddInitStrArrayVal ""
+}
 
-# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
-InitializerAddInitStrArrayVal ""
+BUMain_SourceLib
 
 # -----------------------------------------------
 

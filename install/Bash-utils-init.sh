@@ -164,9 +164,8 @@ function ModuleInitializer_CheckBashMinimalVersion()
 	fi
 }
 
-# Check if the given path exists
-# TODO : Check where I called this function or tried to do so.
-function __ModuleInitializer_CheckPath()
+# Check if the given path exists (This function is called by the "ModuleInitializer_SourcingFailure()" function).
+function ModuleInitializer_CheckPath()
 {
     #**** Parameters ****
     local p_path=$1         # Path of the target file or directory.
@@ -174,18 +173,29 @@ function __ModuleInitializer_CheckPath()
 
     #**** Code ****
     if [ -z "$p_path" ]; then
-        printf "<No file path>"
+        printf "<No file path>" >&2; return 1
 
     else
         if [ -z "$p_target" ]; then
-            echo  >&2; echo ">>>>> BASH-UTILS ERROR >>>>> IN « ${FUNCNAME[0]} >>, LINE « $LINENO » >>>>> NO SPECIFICATION ABOUT THE TARGET !!!" >&2; echo >&2
+            echo  >&2; echo ">>>>> BASH-UTILS ERROR >>>>> IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » >>>>> NO SPECIFICATION ABOUT THE TARGET !!!" >&2; echo >&2
 
-            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the « ${FUNCNAME[0]} » function." >&2; echo >&2; exit 1
-        elif [ -n "$p_path" ] && [ "$p_target" = "[D-d]" ] && [ ! -d "$p_path" ]; then
-            printf "%s (bad directory : not found)" "$p_path" >&2
-
-        elif [ -n "$p_path" ] && [ "$p_target" = "[F-f]" ] && [ ! -f "$p_path" ]; then
-            printf "%s (bad file path : not found)" "$p_path" >&2
+            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the « ${FUNCNAME[0]} » function." >&2; echo >&2; return 1
+        else
+            if [[ "$p_target" = [D-d] ]]; then
+                if [ -d "$p_path" ]; then
+                    printf "%s" "$p_path"; return 0
+                else
+                    printf "%s (bad directory : not found)" "$p_path" >&2; return 1
+                fi
+            elif [[ "$p_target" = [F-f] ]]; then
+                if [ -f "$p_path" ]; then
+                    printf "%s" "$p_path"; return 0
+                else
+                    printf "%s (bad file path : not found)" "$p_path" >&2; return 1
+                fi
+            else
+                echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « p_target » PARAMETER'S VALUE IS « $p_target », NOT 'D', 'd', 'F' OR 'f'" >&2; echo >&2; return 1
+            fi
         fi
     fi
 }
@@ -286,7 +296,7 @@ function ModuleInitializer_SourcingFailure()
     local p_module=$2       # Name of the module.
 
     #**** Code ****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(__ModuleInitializer_SourcingFailure_CheckPath "$p_path")" >&2; echo >&2; exit 1
+    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(ModuleInitializer_CheckPath "$p_path" 'f')" >&2; echo >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -394,7 +404,7 @@ function BashUtils_InitModules()
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-			printf "Please check if the module's configuration files exist in this folder --> $__BU_MODULE_UTILS_CONFIG_DIR\n\n" >&2
+			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR" >&2
 
 			# Listing all the installed modules in the user's hard drive.
 			ModuleInitializer_ListInstalledModules
@@ -415,7 +425,7 @@ function BashUtils_InitModules()
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
 
-			printf "Install this module, or check its name in this folder --> $__BU_MODULE_UTILS_MODULES_DIR\n" >&2
+			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR" >&2
 
 			return 1
 		else
