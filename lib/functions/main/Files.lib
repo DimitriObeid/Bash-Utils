@@ -51,15 +51,15 @@ function __ProcessingFile()
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
         BU::EchoError "End of processing the $(BU::DechoHighlight "$p_name") file"
-        BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-        BU:Newline
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        BU::Newline
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
         BU::EchoSuccess "End of processing the $(BU::DechoS "$p_name") file"
-        BU::EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
-        BU:Newline
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
+        BU::Newline
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
     else
@@ -70,7 +70,7 @@ function __ProcessingFile()
 # Separate processing steps displays from the rest of the main script between two horizontal lines.
 
 # Featured functions and files from the "functions" folder :
-#   - DrawLine      -> Headers.lib
+#   - BU::Main::Headers::DrawLine      -> Headers.lib
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function ProcessingFile()
 {
@@ -87,9 +87,9 @@ function ProcessingFile()
     CheckArgs_ProcessingFile "$p_function"
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT"
-    BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
     BU::EchoNewstep "Processing the $(BU::DechoHighlight "$p_name") file in the $(BU::DechoHighlight "$p_parent") parent directory."
-    BU:Newline
+    BU::Newline
 
     case "$p_function" in
         'BU::Main::Files::Make')
@@ -117,7 +117,7 @@ function ProcessingFile()
 #	- BU::EchoError			-> Echo.lib
 #	- BU::EchoNewstep		-> Echo.lib
 #	- BU::EchoSuccess		-> Echo.lib
-#	- BU:Newline			-> Echo.lib
+#	- BU::Newline			-> Echo.lib
 function OverwriteFile()
 {
     #**** Parameters ****
@@ -134,13 +134,13 @@ function OverwriteFile()
     if [ "$p_authorization" = "true" ]; then
 		BU::EchoNewstep "The $(BU::DechoHighlight "$p_path/") file already exists and is not empty."
 		BU::EchoNewstep "Overwriting data from file $(BU::DechoHighlight "$p_path/")"
-		BU:Newline
+		BU::Newline
 
 		true > "$p_path"
 		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(KeepFormatting "$(BU::DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 		BU::EchoSuccess "The content of the $(BU::DechoS "$p_path/") file has been successfully overwritten"
-		BU:Newline
+		BU::Newline
 	else
 		return
 	fi
@@ -156,7 +156,7 @@ function OverwriteFile()
 # LORS DE SON APPEL, LA SORTIE DE CETTE FONCTION DOIT ÊTRE REDIRIGÉE SOIT VERS LE TERMINAL ET LE FICHIER DE LOGS, SOIT VERS LE FICHIER DE LOGS UNIQUEMENT.
 
 # Featured functions and files from the "functions" folder :
-#   - DrawLine          -> Headers.lib
+#   - BU::Main::Headers::DrawLine          -> Headers.lib
 #   - BU::EchoError         -> Echo.lib
 #   - BU::EchoNewstep       -> Echo.lib
 #   - BU::EchoSuccess       -> Echo.lib
@@ -191,7 +191,7 @@ function BU::Main::Files::Make()
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
 
 		BU::EchoSuccess "The $(BU::DechoS "$p_name") file was successfully created in the $(BU::DechoS "$p_parent") folder."
-        BU:Newline
+        BU::Newline
 
         return 0
 
@@ -206,7 +206,7 @@ function BU::Main::Files::Make()
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
 		BU::EchoSuccess "The $(BU::DechoS "$p_path/") file already exists in the $(BU::DechoS "$p_parent/") folder and is empty."
-		BU:Newline
+		BU::Newline
 
 		return 0
 	fi
@@ -240,13 +240,13 @@ function CreateProjectLogFile()
     if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	BU::Main:Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
     # Redirecting the initializer's log file content into the log file.
-    HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
+    BU::HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-    BU::EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU:Newline
-    BU::EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU:Newline
+    BU::EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline
+    BU::EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline
 
 	if (( "${#__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}" >= 1 )); then
-		BU::EchoNewstep "Initialization log output :"; BU:Newline
+		BU::EchoNewstep "Initialization log output :"; BU::Newline
 
         for val in "${__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
@@ -254,34 +254,34 @@ function CreateProjectLogFile()
     fi
 
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
-    HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
+    BU::HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
 	# Getting operating system name.
 	BU::EchoNewstep "Operating system name : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"
-	BU:Newline
+	BU::Newline
 
     # Getting operating system family.
     BU::EchoNewstep "Operating system family : $(BU::DechoHighlight "$OSTYPE")"
-    BU:Newline
+    BU::Newline
 
     # Gathering OS informations from the "/etc/os-release" file.
     BU::EchoNewstep "Operating system general informations :"
     if [ -f "/etc/os-release" ]; then BU::EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else BU::EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
-    BU:Newline
+    BU::Newline
 
 	# Getting operating system extra informations (Windows Subsystem for Linux, etc...).
 	BU::EchoNewstep "Operating system extra informations :"
 	if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then BU::EchoMsg "Distro running on Windows Subsystem for Linux : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"; fi
-	BU:Newline
+	BU::Newline
 
 	# Getting Bash language's version.
     BU::EchoNewstep "Bash version : $(BU::DechoHighlight "$BASH_VERSION")"
-    BU:Newline
+    BU::Newline
 
 	# Getting terminal emulator's name and version.
 	# shellcheck disable=SC2016
     BU::EchoNewstep "Terminal (emulator) version : $(BU::DechoHighlight "$v_terminfo_v")" || BU::EchoWarning "$(BU::DechoHighlight '$v_terminfo_v') : bad command call."
-    BU:Newline
+    BU::Newline
 
     BU::EchoSuccess "Successfully got the user's system's informations."
 }
@@ -369,7 +369,7 @@ function Compress()
 # Featured functions and files from the "functions" folder :
 #   - BU::Main::Errors::HandleErrors      -> Handles.lib
 #   - BU::EchoSuccess       -> Echo.lib
-#   - BU:Newline           -> Echo.lib
+#   - BU::Newline           -> Echo.lib
 function Uncompress()
 {
 #     #***** Paramètres *****
@@ -384,7 +384,7 @@ function Uncompress()
 #     "$cmd $opts $p_path"
 #     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlight "$p_name") A ÉCHOUÉE"
 #     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlight "$p_name") s'est effectuée avec brio."
-#     BU:Newline
+#     BU::Newline
 
     return 0
 }

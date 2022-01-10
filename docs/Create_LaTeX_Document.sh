@@ -46,11 +46,11 @@ __BU_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" 
 
 BU::EchoNewstep "In which language do you want to write your LaTeX document ?"
 BU::EchoNewstep "Currently supported languages --> English (en), French (fr)"
-BU:Newline
+BU::Newline
 
 read -rp "Please type the wanted language's code in the above parenthesis : " __read_lang
 BU::EchoRead "$__read_lang"
-BU:Newline
+BU::Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	# shellcheck disable=SC2016
@@ -71,28 +71,28 @@ else
 	BU::EchoMsg "3 - Basic functions documentation	$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_basis_functions")"
 	BU::EchoMsg "4 - Main functions documentation	$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_main_functions")"
 	BU::EchoMsg "5 - Variables documentation		$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_variables")"
-	BU:Newline
+	BU::Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
 	BU::EchoRead "$__read_folder_code"
-	BU:Newline
+	BU::Newline
 
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
 		1)
-			Makedir "$__BU_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BU_MAIN_DOCS/$__path_Bash"
+			BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__path_Bash" && __folder_path="$__BU_MAIN_DOCS/$__path_Bash"
 			;;
 		2)
-			Makedir "$__BU_MAIN_DOCS" "$__path_config" && __folder_path="$__BU_MAIN_DOCS/$__path_config"
+			BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__path_config" && __folder_path="$__BU_MAIN_DOCS/$__path_config"
 			;;
 		3)
-			Makedir "$__BU_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_basis_functions"
+			BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__path_basis_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_basis_functions"
 			;;
 		4)
-			Makedir "$__BU_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_main_functions"
+			BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__path_main_functions" && __folder_path="$__BU_MAIN_DOCS/$__path_main_functions"
 			;;
 		5)
-			Makedir "$__BU_MAIN_DOCS" "$__path_variables" && __folder_path="$__BU_MAIN_DOCS/$__path_variables"
+			BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__path_variables" && __folder_path="$__BU_MAIN_DOCS/$__path_variables"
 			;;
 		*)
 			# shellcheck disable=SC2016

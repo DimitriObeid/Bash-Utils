@@ -49,7 +49,7 @@ fi
 #	- BU::EchoError			-> Echo.lib
 #	- BU::EchoNewstep		-> Echo.lib
 #	- BU::EchoSuccess		-> Echo.lib
-#	- BU:Newline			-> Echo.lib
+#	- BU::Newline			-> Echo.lib
 #	- BU::Main::Errors::HandleErrors		-> Headers.lib
 function ChownRec()
 {
@@ -68,7 +68,7 @@ function ChownRec()
     fi
 
     BU::EchoNewstep "Recursive change of the ownership rights of the new folder $(BU::DechoHighlight "$p_path/") from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
-	BU:Newline
+	BU::Newline
 
     # On change les droits du fichier créé par le script.
 	# Comme il est exécuté en mode super-utilisateur, tout dossier ou fichier créé appartient à l'utilisateur root.
@@ -78,12 +78,12 @@ function ChownRec()
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$p_newOwner" "$p_path"; then
 		BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path/") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
-		BU:Newline
+		BU::Newline
 
 		return 0
 	else
         BU::EchoError "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder"
-		BU:Newline
+		BU::Newline
 
 		return 1
     fi
@@ -103,7 +103,7 @@ function ChownRec()
 #   - BU::EchoError     -> Echo.lib
 #   - BU::EchoNewstep   -> Echo.lib
 #   - BU::EchoSuccess   -> Echo.lib
-#   - DrawLine      -> Headers.lib
+#   - BU::Main::Headers::DrawLine      -> Headers.lib
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function Chown()
 {
@@ -120,19 +120,19 @@ function Chown()
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
         BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlight "$p_path/") folder from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
-        BU:Newline
+        BU::Newline
         
         # Changing ownership recursively.
         case "$p_option" in
             'R')
                 if chown -Rv "$p_newOwner" "$p_path"; then
                     BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
-                    BU:Newline
+                    BU::Newline
 
                     return 0
                 else
                     BU::Main::Errors::HandleErrors "1" "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))"
-                    BU:Newline
+                    BU::Newline
 
                     return 1
                 fi
@@ -141,7 +141,7 @@ function Chown()
                 # Changing ownership non-recursively.
                 if chown -v "$p_newOwner" "$p_path"; then
                     BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
-                    BU:Newline
+                    BU::Newline
 
                     return 0
 
@@ -149,7 +149,7 @@ function Chown()
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU::DechoHighlight "$p_path/") FOLDER" \
                         "Please run the script with the command $(BU::DechoHighlight "bash -x $PROJECT_NAME") to check what happened" \
                         "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))"
-                    BU:Newline
+                    BU::Newline
 
                     return 1
                 fi
@@ -165,17 +165,17 @@ function Chown()
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$p_path" ]; then
             BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlight "$p_path/") file from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
-            BU:Newline
+            BU::Newline
 
             # Changing ownership
             if chown -v "$p_newOwner" "$p_path"; then
                 BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
-                BU:Newline
+                BU::Newline
 
                 return 0
             else
                 BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlight "$p_path") file !"
-                BU:Newline
+                BU::Newline
 
                 return 1
             fi

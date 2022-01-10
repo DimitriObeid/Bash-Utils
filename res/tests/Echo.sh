@@ -12,18 +12,18 @@ source "$ROOTPATH/lib/variables/text.var"
 source "$ROOTPATH/lib/functions/Echo.lib"
 
 BU::EchoError "Erreur"
-BU:Newline
+BU::Newline
 
 MAIN_SCRIPT_LOG="log"
 BU::EchoNewstep "Nouvelle étape" "3"
-BU:Newline
+BU::Newline
 
 MAIN_SCRIPT_LOG="tee"
 BU::EchoSuccess "Succès"
-BU:Newline
+BU::Newline
 
 MAIN_SCRIPT_LOG="random"
 BU::EchoError "Random"
-BU:Newline
+BU::Newline
 
 echo test

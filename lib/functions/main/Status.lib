@@ -61,8 +61,8 @@ function BU::Main::Status::ConfEcho()
 
     #**** Code ****
     if [ "$__BU_MAIN_STAT_TRANSLATED" != 'true' ]; then
-        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-        else DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
+        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+        else BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
 
         echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
         echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
@@ -88,9 +88,9 @@ function BU::Main::Status::ConfEcho()
         done
     else
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+            BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR"
+            BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR"
         fi
 
         echo -ne "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ERROR_HAPPENED" >&2
@@ -418,7 +418,7 @@ function BU::Main:Status::ChangeSTAT_INITIALIZING    {
 	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
 		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlight 'false') to $(BU::DechoHighlight 'true')"; return 1
 	else
-		__BU_MAIN_STAT_INITIALIZING="$1";     CheckSTAT_INITIALIZING      "$2" "$3" || return 1
+		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || return 1
 	fi; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.

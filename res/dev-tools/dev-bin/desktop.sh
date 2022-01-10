@@ -15,12 +15,12 @@ if test "$#" -ne 1; then
 	BU::EchoError "Usage : $(BU::DechoechoE "./Desktop.sh /path/to/the/file.desktop")"
 	BU::EchoError "or"
 	BU::EchoError "$(BU::DechoechoE "sudo ./Desktop.sg /path/to/the/file.desktop")"
-	BU:Newline
+	BU::Newline
 	exit 1
 fi
 
 BU::EchoNewstep "Creating the $(BU::DechoechoN "$p_path") file"
-BU:Newline
+BU::Newline
 
 cat <<-EOF > "$p_path"
 #!/usr/bin/env xdg-open
@@ -37,8 +37,8 @@ EOF
 
 if test "$?" -eq 0; then
 	BU::EchoSuccess "The $(BU::DechoechoS "$p_path") file was successfully created."
-	BU:Newline; exit 0
+	BU::Newline; exit 0
 else
 	BU::EchoError "An error occured during the $(BU::DechoechoE "$p_path") file creation."
-	BU:Newline; exit 1
+	BU::Newline; exit 1
 fi

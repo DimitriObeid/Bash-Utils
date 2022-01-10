@@ -164,9 +164,9 @@
 \subsection{Création de base d'un header}\color{white}
 
 \color{blue}
-\subsubsection{DrawLine}\color{white}
+\subsubsection{BU::Main::Headers::DrawLine}\color{white}
 
-\textbf{Fonction : \color{mauve}DrawLine}\\[1\baselineskip]
+\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\[1\baselineskip]
 
 \begin{justify}
     \textbf{Description :}\\
@@ -189,7 +189,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
-    La fonction \textbf{\color{mauve}DrawLine} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}\$p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
+    La fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}\$p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
 \end{justify}
 
 \begin{justify}
@@ -216,9 +216,9 @@ configurations \textbf{\color{lime}Text.conf}.
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
 \color{blue}
-\subsubsection{HeaderBase}\color{white}
+\subsubsection{BU::HeaderBase}\color{white}
 
-\textbf{Fonction : \color{mauve}HeaderBase}\\[1\baselineskip]
+\textbf{Fonction : \color{mauve}BU::HeaderBase}\\[1\baselineskip]
 
 \begin{justify}
     \textbf{Description :}\\
@@ -240,7 +240,7 @@ configurations \textbf{\color{lime}Text.conf}.
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
-    Tout d'abord, la fonction \textbf{\color{mauve}HeaderBase} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}DrawLine} en y passant en arguments ses deux premiers paramètres.
+    Tout d'abord, la fonction \textbf{\color{mauve}BU::HeaderBase} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments ses deux premiers paramètres.
 \end{justify}
 
 \begin{justify}
@@ -272,7 +272,7 @@ configurations \textbf{\color{lime}Text.conf}.
 
 \begin{justify}
     \textbf{Description :}
-    Chacune de ces fonctions appelle la fonction \textbf{\color{mauve}HeaderBase}, en lui passant ses trois premiers arguments prédéfinis.
+    Chacune de ces fonctions appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant ses trois premiers arguments prédéfinis.
 \end{justify}
 
 \begin{justify}
@@ -282,7 +282,7 @@ configurations \textbf{\color{lime}Text.conf}.
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
-    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}HeaderBase}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).
+    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).
 \end{justify}
 
 \begin{justify}
@@ -347,7 +347,7 @@ configurations \textbf{\color{lime}Text.conf}.
 \end{justify}
 
 \begin{justify}
-    Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}HeaderBase}, suivie de ses 4 arguments, dont chaque valeur sera différente des autres.
+    Il faudra donc se contenter d'appeler la fonction \textbf{\color{mauve}BU::HeaderBase}, suivie de ses 4 arguments, dont chaque valeur sera différente des autres.
 \end{justify}
 
 \end{document}

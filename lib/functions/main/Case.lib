@@ -68,7 +68,7 @@ function CaseRead_TriggerRootDirWarning()
     BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	BU::EchoRead "$__read_TriggerRootDirWarning"
-	BU:Newline
+	BU::Newline
 
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
@@ -95,7 +95,7 @@ function CaseRead_BU::Main::Errors::HandleErrors()
 	BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	BU::EchoRead "$__read_TriggerRootDirWarning"
-    BU:Newline
+    BU::Newline
 
 	# shellcheck disable=SC2154
 	case "${__read_BU::Main::Errors::HandleErrors,,}" in

@@ -64,7 +64,7 @@ function BU::Decho()
     local v_oldColor
 
     #**** Code ****
-    CheckDecho
+    BU::Main::Checkings::CheckDecho
 
     if test "$?" -ne 0; then
         echo -ne "« $p_string »"
