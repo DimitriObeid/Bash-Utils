@@ -2,7 +2,7 @@
 
 __BU_MAIN_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FIFO"
 
-function Decho { echo -e "$(tput setaf 6)$1$(tput sgr0)"; }
+function BU::Decho { echo -e "$(tput setaf 6)$1$(tput sgr0)"; }
 
 # This function is called once in the next function.
 function __CreateFIFO
@@ -29,7 +29,7 @@ function CreateFIFO
 
     #***** Code *****
     if [ ! -d "$__BU_MAIN_PROJECT_FIFO_DIR_PATH" ]; then
-        echo -e "Creating the $(Decho "$__BU_MAIN_PROJECT_FIFO_DIR_PATH")"; echo
+        echo -e "Creating the $(BU::Decho "$__BU_MAIN_PROJECT_FIFO_DIR_PATH")"; echo
         mkdir -pv "$__BU_MAIN_PROJECT_FIFO_DIR_PATH"
     fi
     
@@ -41,7 +41,7 @@ function CreateFIFO
             echo -e "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
             echo
         else
-            echo -e "Error : Unable to create this FIFO --> $(Decho "$p_path")"
+            echo -e "Error : Unable to create this FIFO --> $(BU::Decho "$p_path")"
         fi
     else
         echo -e "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-1 ))"
@@ -80,7 +80,7 @@ function ReadFromFIFO
                 echo -e "$p_newVar"
                 break
             else
-                echo -e "${FUNCNAME[0]} --> Error : the $(Decho "$v_varLine") string was not found in the $(Decho "$p_fifoPath") FIFO" >&2
+                echo -e "${FUNCNAME[0]} --> Error : the $(BU::Decho "$v_varLine") string was not found in the $(BU::Decho "$p_fifoPath") FIFO" >&2
                 kill "$$"
             fi
         fi
@@ -112,7 +112,7 @@ function WriteIntoFIFO
         else
             echo
             
-            # As this function is called by the functions called in the "HandleErrors" function, calling this last function will cause an infinite loop
+            # As this function is called by the functions called in the "BU::Main::Errors::HandleErrors" function, calling this last function will cause an infinite loop
             # Redefining a part of its behavior was necessary to prevent this situation.
             echo -e "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"
             echo -e "NO VALUE PASSED IN THE  \"p_existingPath\"  PARAMETER !" "-e"

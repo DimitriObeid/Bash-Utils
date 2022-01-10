@@ -12,8 +12,8 @@ function SetLibLang()
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$__BU_MAIN_LANG" \
                 "Translation file found : $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
-                "ERROR : CANNOT FIND THE $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv") FILE" \
-                "Please make sure that the file path passed as $(DechoHighlight "${FUNCNAME[0]}") function's first argument is valid"
+                "ERROR : CANNOT FIND THE $(BU::DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv") FILE" \
+                "Please make sure that the file path passed as $(BU::DechoHighlight "${FUNCNAME[0]}") function's first argument is valid"
             ;;
         fr_*)
             # French | Français (fr_*)
@@ -23,8 +23,8 @@ function SetLibLang()
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$__BU_MAIN_LANG" \
 				"Fichier de traduction trouvé : $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
-                "ERREUR : IMPOSSIBLE DE TROUVER LE FICHIER $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv")" \
-                "Assurez-vous que le chemin du fichier passé en premier argument de la fonction $(DechoHighlight "${FUNCNAME[0]}") soit valide"
+                "ERREUR : IMPOSSIBLE DE TROUVER LE FICHIER $(BU::DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv")" \
+                "Assurez-vous que le chemin du fichier passé en premier argument de la fonction $(BU::DechoHighlight "${FUNCNAME[0]}") soit valide"
             ;;
         *)
             # Else, if the detected language is not (yet) supported, the default language will be set as English.
@@ -39,19 +39,19 @@ function SetLibLang()
             # Backup the "$__BU_MAIN_STAT_LOG_REIDRECT" status variable's value.
             if [ "$__BU_MAIN_STAT_LOG_REIDRECT" = 'log' ]; then
                 local __BU_MAIN_STAT_LOG_REIDRECT_OLD='log'
-                ChangeSTAT_LOG_REDIRECT "tee" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
             fi
 
-            EchoMsg "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
-            EchoMsg "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
+            BU::EchoMsg "YOUR CURRENT LANGUAGE IS NOT YET SUPPORTED !!" "1"
+            BU::EchoMsg "The $__BU_MAIN_PROJECT_NAME library language will be set in English" "1"
 
             # Changing the "$__BU_MAIN_LANG" variable's value for the mandatory arguments call.
             __BU_MAIN_LANG="en_US.UTF-8"
 
             ParseCSVLibLang "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" "$__BU_MAIN_LANG" \
                 "Translation file found : $__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv" \
-                "ERROR : CANNOT FIND THE $(DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv") FILE" \
-                "Please make sure that the file path passed as $(DechoHighlight "${FUNCNAME[0]}") function's first argument is valid"
+                "ERROR : CANNOT FIND THE $(BU::DechoHighlight "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/lang.csv") FILE" \
+                "Please make sure that the file path passed as $(BU::DechoHighlight "${FUNCNAME[0]}") function's first argument is valid"
 
             # Setting the backupped value to the "$__BU_MAIN_STAT_LOG_REIDRECT" function.
             if [ -n "$__BU_MAIN_STAT_LOG_REIDRECT_OLD" ] && [ "$__BU_MAIN_STAT_LOG_REIDRECT_OLD" = 'log' ]; then

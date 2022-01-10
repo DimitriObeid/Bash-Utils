@@ -167,7 +167,7 @@
 \subsection{Sous-section ``CHECKING VALUES''}
 
 \color{blue}
-\subsubsection{ConfEcho}\color{white}
+\subsubsection{BU::Main::Status::ConfEcho}\color{white}
 
 \begin{justify}
 \textbf{Description de la fonction :}\\
@@ -372,7 +372,7 @@
 
 \begin{justify}
     \textbf{Description de la variable :}\\
-    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction \textbf{\color{mauve}HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
+    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
 \end{justify}
 
 \begin{justify}
@@ -380,7 +380,7 @@
 
     \begin{itemize}
         \item \textbf{\textit{vide}} : Sans valeur enregistrée, le script demande à l'utilisateur s'il souhaite que son exécution
-        continue ou non (via la fonction \textbf{\color{mauve}HandleErrors()}).\\
+        continue ou non (via la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()}).\\
 
         \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.
     \end{itemize}

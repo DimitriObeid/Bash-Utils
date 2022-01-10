@@ -44,17 +44,17 @@ __BU_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" 
 
 ## CODE
 
-EchoNewstep "In which language do you want to write your LaTeX document ?"
-EchoNewstep "Currently supported languages --> English (en), French (fr)"
-Newline
+BU::EchoNewstep "In which language do you want to write your LaTeX document ?"
+BU::EchoNewstep "Currently supported languages --> English (en), French (fr)"
+BU:Newline
 
 read -rp "Please type the wanted language's code in the above parenthesis : " __read_lang
-EchoRead "$__read_lang"
-Newline
+BU::EchoRead "$__read_lang"
+BU:Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	# shellcheck disable=SC2016
-	HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
@@ -65,17 +65,17 @@ else
 	__path_variables="$__read_lang/Bash/variable"
 
 	#***** Asking for the new document's path.
-	EchoNewstep "What kind of document do you want to write ?"
-	EchoMsg "1 - Master documentation			$(DechoGreen "Targeted folder") --> $(Decho "$__path_Bash")"
-	EchoMsg "2 - Configuration documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_config")"
-	EchoMsg "3 - Basic functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_basis_functions")"
-	EchoMsg "4 - Main functions documentation	$(DechoGreen "Targeted folder") --> $(Decho "$__path_main_functions")"
-	EchoMsg "5 - Variables documentation		$(DechoGreen "Targeted folder") --> $(Decho "$__path_variables")"
-	Newline
+	BU::EchoNewstep "What kind of document do you want to write ?"
+	BU::EchoMsg "1 - Master documentation			$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_Bash")"
+	BU::EchoMsg "2 - Configuration documentation	$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_config")"
+	BU::EchoMsg "3 - Basic functions documentation	$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_basis_functions")"
+	BU::EchoMsg "4 - Main functions documentation	$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_main_functions")"
+	BU::EchoMsg "5 - Variables documentation		$(BU::DechoGreen "Targeted folder") --> $(BU::Decho "$__path_variables")"
+	BU:Newline
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
-	EchoRead "$__read_folder_code"
-	Newline
+	BU::EchoRead "$__read_folder_code"
+	BU:Newline
 
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
@@ -96,21 +96,21 @@ else
 			;;
 		*)
 			# shellcheck disable=SC2016
-			HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
+			BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
 
-	EchoNewstep "How do you want to name your document ?"
+	BU::EchoNewstep "How do you want to name your document ?"
 	read -rp "Enter the file's name (no ''.tek'' extension, this script will complete it) : " __read_doc_name
-	EchoRead "$__read_doc_name"
+	BU::EchoRead "$__read_doc_name"
 
 	if [ -z "$__read_doc_name" ]; then
 		# shellcheck disable=SC2016
-		HandleErrors "1" "THE $(ToLowercase "$(DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+		BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
 	__full_path="$__folder_path/$__read_doc_name"
 
-	Makefile "$__folder_path" "$__read_doc_name.tex" && EchoSuccess "Your LaTeX file ($(DechoS "$__full_path")) was successfully created."
+	BU::Main::Files::Make "$__folder_path" "$__read_doc_name.tex" && BU::EchoSuccess "Your LaTeX file ($(BU::DechoS "$__full_path")) was successfully created."
 
 	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
 

@@ -17,10 +17,10 @@ Toutes les colonnes suivantes contiennent chacune le message à afficher, pour c
 
     - Sinon, récupérer la valeur de la ligne en question (toujours dans la première colonne), l'écrire dans un fichier temporaire, puis écrire, sans espace, le signe '=".
         - Une fois ceci fait, en utilisant le même index de la ligne, obtenir la valeur de la ligne dans la troisième colonne, contenant le type de message à afficher.
-            - Si la valeur est égale à "Error" --> Écrire, dans le fichier, sans espace après le '=' --> "$(EchoError "
-            - Si la valeur est égale à "Newstep" --> Écrire, dans le fichier, sans espace après le '=' --> "$(EchoNewstep "
+            - Si la valeur est égale à "Error" --> Écrire, dans le fichier, sans espace après le '=' --> "$(BU::EchoError "
+            - Si la valeur est égale à "Newstep" --> Écrire, dans le fichier, sans espace après le '=' --> "$(BU::EchoNewstep "
             - Si la valeur est égale à "None" --> Écrire, dans le fichier, sans espace après le '=' --> "$(echo -e "
-            - Si la valeur est égale à "Success" --> Écrire, dans le fichier, sans espace après le '=' --> "$(EchoSuccess "
+            - Si la valeur est égale à "Success" --> Écrire, dans le fichier, sans espace après le '=' --> "$(BU::EchoSuccess "
             - Sinon, afficher un message d'erreur et quitter le programme. Renvoyer un code d'erreur. 
             
         - Une fois ceci fait, récupérer la valeur entregistrée sur la même ligne dans la colonne contenant le message selon la langue.

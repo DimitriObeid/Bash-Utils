@@ -46,7 +46,7 @@ fi
 
 # Featured functions and files from the "functions" folder :
 #   - DrawLine      -> Headers.lib
-#   - HandleErrors  -> Headers.lib
+#   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function ProcessingDir()
 {
     #**** Parameters ****
@@ -63,20 +63,20 @@ function ProcessingDir()
 	CheckArgsMain_ProcessingDir "$p_function" "$p_parent" "$p_name"
     
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
-    EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-    EchoNewstep "Processing the $(DechoHighlight "$p_name") folder in the parent folder $(DechoHighlight "$p_parent")."
-    Newline
+    BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    BU::EchoNewstep "Processing the $(BU::DechoHighlight "$p_name") folder in the parent folder $(BU::DechoHighlight "$p_parent")."
+    BU:Newline
     
     if "$p_function"; then
-        EchoSuccess "End of processing the $(DechoHighlight "$p_name/") folder."
-		EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        BU::EchoSuccess "End of processing the $(BU::DechoHighlight "$p_name/") folder."
+		BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
-		Newline
+		BU:Newline
     else
-        EchoError "End of processing the $(DechoHighlight "$p_name/") folder."
-		EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        BU::EchoError "End of processing the $(BU::DechoHighlight "$p_name/") folder."
+		BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
-		Newline
+		BU:Newline
     fi
 }
 
@@ -87,10 +87,10 @@ function ProcessingDir()
 # Overwriting an existing directory's content
 
 # Featured functions and files from the "functions" folder :
-#	- EchoError			-> Echo.lib
-#	- EchoNewstep		-> Echo.lib
-#	- EchoSuccess		-> Echo.lib
-#	- Newline			-> Echo.lib
+#	- BU::EchoError			-> Echo.lib
+#	- BU::EchoNewstep		-> Echo.lib
+#	- BU::EchoSuccess		-> Echo.lib
+#	- BU:Newline			-> Echo.lib
 function OverwriteDir()
 {
     #**** Parameters ****
@@ -104,9 +104,9 @@ function OverwriteDir()
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$p_path"
 
-    EchoNewstep "A non-empty folder with exactly the same name ($(DechoHighlight "$p_name")) is already in the target folder $(DechoHighlight "$p_parent/")"
-	EchoNewstep "Deleting the contents of the $(DechoHighlight "$v_path/") folder"
-	Newline
+    BU::EchoNewstep "A non-empty folder with exactly the same name ($(BU::DechoHighlight "$p_name")) is already in the target folder $(BU::DechoHighlight "$p_parent/")"
+	BU::EchoNewstep "Deleting the contents of the $(BU::DechoHighlight "$v_path/") folder"
+	BU:Newline
 
 	if [ "$p_authorization" = "true" ]; then
         # TODO : Si la variable n'est pas initialisée.
@@ -117,16 +117,16 @@ function OverwriteDir()
 
             # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
             rm -rfv "${v_path/:?}/"*
-            HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(KeepFormatting "$(DechoHighlight "$v_path/")") FOLDER." \
+            BU::Main::Errors::HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(KeepFormatting "$(BU::DechoHighlight "$v_path/")") FOLDER." \
                 "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
-            EchoSuccess "Deletion of the contents of the folder $(DechoHighlight "$v_path/") performed successfully"
-            Newline
+            BU::EchoSuccess "Deletion of the contents of the folder $(BU::DechoHighlight "$v_path/") performed successfully"
+            BU:Newline
 
 			return 0
         else
-            HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            BU::Main::Errors::HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
 			return 1
         fi
@@ -141,11 +141,11 @@ function OverwriteDir()
 # When this function is called, if a log file is used in the project, the output of this function must be redirected either to the terminal AND the log file (2>&1 | tee -a "$FILE_LOG_PATH"), or to the log file only (>> "$FILE_LOG_PATH") after passing all the mandatory arguments. Otherwise, leave everything blank after passing the arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - Echo.sh       -> EchoErrorTimer
-#   - Echo.sh       -> EchoNewstepTimer
-#   - Echo.sh       -> EchoSuccessTimer
+#   - BU::Echo.sh       -> BU::EchoErrorTimer
+#   - BU::Echo.sh       -> BU::EchoNewstepTimer
+#   - BU::Echo.sh       -> BU::EchoSuccessTimer
 #   - Headers.sh    -> DrawLine   
-#   - Headers.sh    -> HandleErrors
+#   - Headers.sh    -> BU::Main::Errors::HandleErrors
 function Makedir()
 {
 	#**** Parameters ****
@@ -164,15 +164,15 @@ function Makedir()
 	
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
-		EchoNewstep "Creating the $(DechoHighlight "$p_name") folder in the parent folder $(DechoHighlight "$p_parent/")."
-		Newline
+		BU::EchoNewstep "Creating the $(BU::DechoHighlight "$p_name") folder in the parent folder $(BU::DechoHighlight "$p_parent/")."
+		BU:Newline
 
         mkdir -pv "$v_path"
-        HandleErrors "$?" \
-            "THE $(KeepFormatting "$(DechoHighlight "$p_name/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(KeepFormatting "$(DechoHighlight "$p_parent/")") !" \
+        BU::Main::Errors::HandleErrors "$?" \
+            "THE $(KeepFormatting "$(BU::DechoHighlight "$p_name/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(KeepFormatting "$(BU::DechoHighlight "$p_parent/")") !" \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-        EchoSuccess "The $(DechoHighlight "$p_name") folder was successfully created in the $(DechoHighlight "$p_parent/") folder."
-        Newline
+        BU::EchoSuccess "The $(BU::DechoHighlight "$p_name") folder was successfully created in the $(BU::DechoHighlight "$p_parent/") folder."
+        BU:Newline
         
         return 0
 
@@ -187,8 +187,8 @@ function Makedir()
 
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
 	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then
-		EchoSuccess "The $(DechoHighlight "$p_name/") folder already exists in the $(DechoHighlight "$p_parent/") folder and is empty."
-		Newline
+		BU::EchoSuccess "The $(BU::DechoHighlight "$p_name/") folder already exists in the $(BU::DechoHighlight "$p_parent/") folder and is empty."
+		BU:Newline
 
 		return 0
     fi
@@ -201,13 +201,13 @@ function MkTmpDir()
     local lineno="$LINENO"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
-			ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main:Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			
-			HandleErrors "1" "THE $(CheckDirPathExists "$(DechoHighlight "$__BU_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+			BU::Main::Errors::HandleErrors "1" "THE $(CheckDirPathExists "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
             "Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
 
-			ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 			return 1
 		}
@@ -241,7 +241,7 @@ function GetDirectoryName()
 
 		return 0
     else
-        HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
+        BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
 		
 		return 1
@@ -262,7 +262,7 @@ function GetDirectoryPath()
 
 		return 0
     else
-        HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
+        BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 
 		return 1
@@ -280,7 +280,7 @@ function GetParentDirectoryName()
     CheckArgsMain_GetParentDirectoryName "$p_path" "$p_iterations"
 
     if ! IsInt "$p_iterations"; then
-        EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
+        BU::EchoWarning "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
     fi
 
     if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
@@ -290,7 +290,7 @@ function GetParentDirectoryName()
     for ((i=0; i<p_iterations; i++)); do
         local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
             || {
-                HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
             }; pwd -P )"
 
@@ -322,7 +322,7 @@ function GetParentDirectoryPath()
         for ((i=0; i<p_iterations; i++)); do
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
-                    HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                    BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
                 }; pwd -P )"
 
@@ -340,7 +340,7 @@ function GetParentDirectoryPath()
         for ((i=0; i<p_iterations; i++)); do
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
-                    HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                    BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
                 }; pwd -P )"
             
@@ -350,7 +350,7 @@ function GetParentDirectoryPath()
             # Removing the unnecessary folders.
             # WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
             # DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
-            rmdir "$v_current_path"; HandleErrors "$?" "UNABLE TO ERASE THE $(DechoHighlight "$v_current_path") NEWLY CREATED FOLDER !"
+            rmdir "$v_current_path"; BU::Main::Errors::HandleErrors "$?" "UNABLE TO ERASE THE $(BU::DechoHighlight "$v_current_path") NEWLY CREATED FOLDER !"
             
             local v_current_path="$v_parent"
         done

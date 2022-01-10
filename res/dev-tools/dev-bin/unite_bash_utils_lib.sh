@@ -16,9 +16,9 @@ function PrintLine()
 }
 
 
-# function Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
+# function BU:Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
 function CatBU { cat "$1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO DISPLAY THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-function EchoBU { echo -e "# $1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO WRITE THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+function BU::EchoBU { echo -e "# $1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO WRITE THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 
 if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
 	touch "$__BU_MAIN_FULL_FILE_PATH"
@@ -30,25 +30,25 @@ fi
 
 
 # Processing the modules initializer file.
-EchoBU "$HOME/Bash-utils-init.sh"; Newline '1'; CatBU "$i"
+BU::EchoBU "$HOME/Bash-utils-init.sh"; BU:Newline '1'; CatBU "$i"
 
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
-	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
+	BU:Newline '2'; :' BU::EchoBU "${i^^}"; BU:Newline "1"'; CatBU "$i"
 done
 
 # Processing the modules files.
 for i in "$HOME/.Bash-utils/modules/main/"*; do
-	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
+	BU:Newline '2'; :' BU::EchoBU "${i^^}"; BU:Newline "1"'; CatBU "$i"
 done
 
 # Processing the function files.
 for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-	Newline '2'; :' EchoBU "${i^^}"; Newline "1"'; CatBU "$i"
+	BU:Newline '2'; :' BU::EchoBU "${i^^}"; BU:Newline "1"'; CatBU "$i"
 done
 
 # Processing the remaining files.
-Newline '2'; :'EchoBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"; Newline "1"'; CatBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"
+BU:Newline '2'; :'BU::EchoBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"; BU:Newline "1"'; CatBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"
 
 
 PrintLine

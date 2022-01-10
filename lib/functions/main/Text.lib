@@ -58,7 +58,7 @@ function CutFromCharacter()
 
     #**** Code ****
     if [ -n "$p_iterations" ] && ! IsInt "$p_iterations"; then
-        EchoWarning "$(DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
+        BU::EchoWarning "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
     fi
 
     if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then

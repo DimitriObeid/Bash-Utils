@@ -11,19 +11,19 @@ source "$ROOTPATH/lib/variables/text.var"
 
 source "$ROOTPATH/lib/functions/Echo.lib"
 
-EchoError "Erreur"
-Newline
+BU::EchoError "Erreur"
+BU:Newline
 
 MAIN_SCRIPT_LOG="log"
-EchoNewstep "Nouvelle étape" "3"
-Newline
+BU::EchoNewstep "Nouvelle étape" "3"
+BU:Newline
 
 MAIN_SCRIPT_LOG="tee"
-EchoSuccess "Succès"
-Newline
+BU::EchoSuccess "Succès"
+BU:Newline
 
 MAIN_SCRIPT_LOG="random"
-EchoError "Random"
-Newline
+BU::EchoError "Random"
+BU:Newline
 
 echo test

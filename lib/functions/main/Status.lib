@@ -43,7 +43,7 @@ fi
 ## CHECKING VALUES
 
 # Easy writing text function.
-function ConfEcho()
+function BU::Main::Status::ConfEcho()
 {
     #**** Parameters ****
     local p_file=$1;
@@ -88,21 +88,21 @@ function ConfEcho()
         done
     else
         if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
         else
-            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR"
+            DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR"
         fi
 
-        echo -ne "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED" >&2
-        echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED_TYPE" >&2
+        echo -ne "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ERROR_HAPPENED" >&2
+        echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ERROR_HAPPENED_TYPE" >&2
 
         if [ -z "$p_badVal" ]; then
-            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE_EMPTY" >&2
+            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_BAD_VALUE_EMPTY" >&2
         else
-            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE" >&2
+            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_BAD_VALUE" >&2
         fi
 
-        echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VALS_LIST_MSG" >&2
+        echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VALS_LIST_MSG" >&2
 
         # Displaying the list of every allowed arguments.
         for val in "${pa_correctValues[@]}"; do
@@ -125,7 +125,7 @@ function ConfEcho()
 ## CHECKINGS
 
 # Checking the "$__BU_MAIN_STAT_DEBUG" status variable's value.
-function CheckSTAT_DEBUG()
+function BU::Main::Status::CheckSTAT_DEBUG()
 {
     #**** Parameters ****
     local p_file=$1
@@ -136,14 +136,14 @@ function CheckSTAT_DEBUG()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MAIN_STAT_DEBUG,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function CheckSTAT_DECHO()
+function BU::Main::Status::CheckSTAT_DECHO()
 {
     #**** Parameters ****
     local p_file=$1
@@ -154,14 +154,14 @@ function CheckSTAT_DECHO()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DECHO,,}" != "authorize" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "forbid" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "restrict" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Check the "$__BU_MAIN_STAT_ECHO" status variable's value.
-function CheckSTAT_ECHO()
+function BU::Main::Status::CheckSTAT_ECHO()
 {
     #**** Parameters ****
     local p_file=$1
@@ -172,14 +172,14 @@ function CheckSTAT_ECHO()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_ECHO,,}" != "true" ] && [ "${__BU_MAIN_STAT_ECHO,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function CheckSTAT_ERROR()
+function BU::Main::Status::CheckSTAT_ERROR()
 {
     #**** Parameters ****
     local p_file=$1
@@ -190,14 +190,14 @@ function CheckSTAT_ERROR()
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
-function CheckSTAT_INITIALIZING()
+function BU::Main::Status::CheckSTAT_INITIALIZING()
 {
     #**** Parameters ****
     local p_file=$1
@@ -208,14 +208,14 @@ function CheckSTAT_INITIALIZING()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "true" ] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1
 	fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_LOG" status variable's value.
-function CheckSTAT_LOG()
+function BU::Main::Status::CheckSTAT_LOG()
 {
     #**** Parameters ****
     local p_file=$1
@@ -226,7 +226,7 @@ function CheckSTAT_LOG()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1
 
     elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         CreateProjectLogFile || return 1
@@ -236,7 +236,7 @@ function CheckSTAT_LOG()
 }
 
 # Checking the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function CheckSTAT_LOG_REDIRECT()
+function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 {
     #**** Parameters ****
     local p_file=$1
@@ -247,14 +247,14 @@ function CheckSTAT_LOG_REDIRECT()
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function CheckSTAT_OPERATE_ROOT()
+function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 {
 	#**** Parameters ****
 	local p_file=$1
@@ -265,14 +265,14 @@ function CheckSTAT_OPERATE_ROOT()
 
 	#**** Code ****
 	if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "authorized" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "forbidden" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "restricted" ]; then
-		ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1
+		BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1
 	fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
-function CheckSTAT_PRINT_INIT_LOG()
+function BU::Main::Status::CheckSTAT_PRINT_INIT_LOG()
 {
     #**** Parameters ****
     p_file=$1
@@ -283,14 +283,14 @@ function CheckSTAT_PRINT_INIT_LOG()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function CheckSTAT_TIME_TXT()
+function BU::Main::Status::CheckSTAT_TIME_TXT()
 {
     #**** Parameters ****
     local p_file=$1
@@ -300,20 +300,20 @@ function CheckSTAT_TIME_TXT()
     if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
         local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
     else
-        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT")
+        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VAL_FLOAT_INT")
     fi
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
     if ! IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
 }
 
 # Checking the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function CheckSTAT_TRANSLATED()
+function BU::Main::Status::CheckSTAT_TRANSLATED()
 {
     #**** Parameters ****
     p_file=$1
@@ -324,7 +324,7 @@ function CheckSTAT_TRANSLATED()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "true" ] && [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -332,7 +332,7 @@ function CheckSTAT_TRANSLATED()
 
 # Checking the "$__BU_MAIN_STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
-function CheckSTAT_USER_OS()
+function BU::Main::Status::CheckSTAT_USER_OS()
 {
     #**** Parameters ****
     local p_file=$1
@@ -349,7 +349,7 @@ function CheckSTAT_USER_OS()
 
 
 # Checking all the project's status variables values if multiple values had been modified.
-function CheckProjectStatusVars()
+function BU::Main::Status::CheckProjectStatusVars()
 {
     #**** Parameters ****
     local p_file=$1
@@ -357,17 +357,17 @@ function CheckProjectStatusVars()
 
     #**** Code ****
     # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
-    CheckSTAT_LOG_REDIRECT  "$p_file" "$p_lineno" || return 1
-    CheckSTAT_DECHO         "$p_file" "$p_lineno" || return 1
-    CheckSTAT_ECHO          "$p_file" "$p_lineno" || return 1
-    CheckSTAT_DEBUG         "$p_file" "$p_lineno" || return 1
-    CheckSTAT_ERROR         "$p_file" "$p_lineno" || return 1
-	CheckSTAT_INITIALIZING	"$p_file" "$p_lineno" || return 1
-    CheckSTAT_LOG           "$p_file" "$p_lineno" || return 1
-	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno" || return 1
-    CheckSTAT_TIME_TXT      "$p_file" "$p_lineno" || return 1
-    CheckSTAT_TRANSLATED    "$p_file" "$p_lineno" || return 1
-    CheckSTAT_USER_OS       "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_DECHO           "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_ECHO            "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_DEBUG           "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_ERROR           "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_INITIALIZING    "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_LOG             "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_TIME_TXT        "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_TRANSLATED      "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_USER_OS         "$p_file" "$p_lineno" || return 1
 
 	return 0
 }
@@ -382,62 +382,62 @@ function CheckProjectStatusVars()
 #   $3  --> line where the change was made.
 
 # Changing the "$__BU_MAIN_STAT_DEBUG" status variable's value.
-function ChangeSTAT_DEBUG           { __BU_MAIN_STAT_DEBUG="$1";            CheckSTAT_DEBUG             "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_DEBUG           { __BU_MAIN_STAT_DEBUG="$1";            BU::Main::Status::CheckSTAT_DEBUG             "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1";            CheckSTAT_DECHO             "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1";            BU::Main::Status::CheckSTAT_DECHO             "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value.
-function ChangeSTAT_ECHO            { __BU_MAIN_STAT_ECHO="$1";             CheckSTAT_ECHO              "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_ECHO            { __BU_MAIN_STAT_ECHO="$1";             BU::Main::Status::CheckSTAT_ECHO              "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";            CheckSTAT_ERROR             "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";            BU::Main::Status::CheckSTAT_ERROR             "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
-function ChangeSTAT_INITIALIZING    {
+function BU::Main:Status::ChangeSTAT_INITIALIZING    {
 	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
-		EchoWarning "WARNING : It's strongly discouraged to change the $(DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(DechoHighlight 'false') to $(DechoHighlight 'true')"; return 1
+		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlight 'false') to $(BU::DechoHighlight 'true')"; return 1
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     CheckSTAT_INITIALIZING      "$2" "$3" || return 1
 	fi; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function ChangeSTAT_LOG             { __BU_MAIN_STAT_LOG="$1";              CheckSTAT_LOG               "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_LOG             { __BU_MAIN_STAT_LOG="$1";              BU::Main::Status::CheckSTAT_LOG               "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function ChangeSTAT_LOG_REDIRECT    { __BU_MAIN_STAT_LOG_REDIRECT="$1";     CheckSTAT_LOG_REDIRECT      "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_LOG_REDIRECT    { __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU::Main::Status::CheckSTAT_LOG_REDIRECT      "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function ChangeSTAT_OPERATE_ROOT    { __BU_MAIN_STAT_OPERATE_ROOT="$1";     CheckSTAT_OPERATE_ROOT      "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_OPERATE_ROOT    { __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT      "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
-function ChangeSTAT_PRINT_INIT_LOG  { __BU_MAIN_STAT_PRINT_INIT_LOG="$1";   CheckSTAT_PRINT_INIT_LOG    "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG  { __BU_MAIN_STAT_PRINT_INIT_LOG="$1";   BU::Main::Status::CheckSTAT_PRINT_INIT_LOG    "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function ChangeSTAT_TIME_TXT        { __BU_MAIN_STAT_TIME_TXT="$1";         CheckSTAT_TIME_TXT          "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TIME_TXT        { __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT          "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function ChangeSTAT_TRANSLATED      { __BU_MAIN_STAT_TRANSLATED="$1";       CheckSTAT_TRANSLATED        "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TRANSLATED      { __BU_MAIN_STAT_TRANSLATED="$1";       BU::Main::Status::CheckSTAT_TRANSLATED        "$2" "$3" || return 1; return 0; }
 
 # -----------------------------------------------
 
 ## EASIER CHECKING BOOLEAN VALUES
 
 # Checking if the debug mode is active.
-function CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
 
-# Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop.
-function CheckStatIsBackupEchoing() { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
+# Checking if the "BU::Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop.
+function BU::Main::Status::CheckStatIsBackupEchoing() { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
-function CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "true" ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "true" ]; then return 0; else return 1; fi; }
 
 # Checking if the log redirection mode is active.
-function CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LOG"            = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LOG"            = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the initialization logs can be printed on the terminal.
-function CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the main module is translated.
-function CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }

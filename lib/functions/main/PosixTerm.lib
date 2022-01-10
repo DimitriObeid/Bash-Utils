@@ -69,7 +69,7 @@ function DisplaySpinner()
     #**** Code ****
     echo -n ' '
 
-    EchoMsg "$__BU_MAIN_TXT_TAB $p_string"
+    BU::EchoMsg "$__BU_MAIN_TXT_TAB $p_string"
 
     while [ -d "/proc/$p_pid" ]; do
         printf "%s" "\b${sp:i++%${#sp}:1}"

@@ -50,20 +50,20 @@ function __ProcessingFile()
 
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
-        EchoError "End of processing the $(DechoHighlight "$p_name") file"
-        EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-        Newline
+        BU::EchoError "End of processing the $(BU::DechoHighlight "$p_name") file"
+        BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+        BU:Newline
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
-        EchoSuccess "End of processing the $(DechoS "$p_name") file"
-        EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
-        Newline
+        BU::EchoSuccess "End of processing the $(BU::DechoS "$p_name") file"
+        BU::EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
+        BU:Newline
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
     else
-        EchoWarning ""
+        BU::EchoWarning ""
     fi
 }
 
@@ -71,7 +71,7 @@ function __ProcessingFile()
 
 # Featured functions and files from the "functions" folder :
 #   - DrawLine      -> Headers.lib
-#   - HandleErrors  -> Headers.lib
+#   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function ProcessingFile()
 {
     #**** Parameters ****
@@ -87,13 +87,13 @@ function ProcessingFile()
     CheckArgs_ProcessingFile "$p_function"
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT"
-    EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-    EchoNewstep "Processing the $(DechoHighlight "$p_name") file in the $(DechoHighlight "$p_parent") parent directory."
-    Newline
+    BU::EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    BU::EchoNewstep "Processing the $(BU::DechoHighlight "$p_name") file in the $(BU::DechoHighlight "$p_parent") parent directory."
+    BU:Newline
 
     case "$p_function" in
-        'Makefile')
-            if Makefile "${arr[@]}"; then
+        'BU::Main::Files::Make')
+            if BU::Main::Files::Make "${arr[@]}"; then
                 __ProcessingFile 'S' "$p_name" "$p_char"
             else
                 __ProcessingFile 'E' "$p_name" "$p_char"
@@ -114,10 +114,10 @@ function ProcessingFile()
 # Overwrite a file
 
 # Featured functions and files from the "functions" folder :
-#	- EchoError			-> Echo.lib
-#	- EchoNewstep		-> Echo.lib
-#	- EchoSuccess		-> Echo.lib
-#	- Newline			-> Echo.lib
+#	- BU::EchoError			-> Echo.lib
+#	- BU::EchoNewstep		-> Echo.lib
+#	- BU::EchoSuccess		-> Echo.lib
+#	- BU:Newline			-> Echo.lib
 function OverwriteFile()
 {
     #**** Parameters ****
@@ -132,15 +132,15 @@ function OverwriteFile()
     TriggerRootDirWarning "$p_path"
 
     if [ "$p_authorization" = "true" ]; then
-		EchoNewstep "The $(DechoHighlight "$p_path/") file already exists and is not empty."
-		EchoNewstep "Overwriting data from file $(DechoHighlight "$p_path/")"
-		Newline
+		BU::EchoNewstep "The $(BU::DechoHighlight "$p_path/") file already exists and is not empty."
+		BU::EchoNewstep "Overwriting data from file $(BU::DechoHighlight "$p_path/")"
+		BU:Newline
 
 		true > "$p_path"
-		HandleErrors "$?" "THE CONTENT OF THE $(KeepFormatting "$(DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(KeepFormatting "$(BU::DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
-		EchoSuccess "The content of the $(DechoS "$p_path/") file has been successfully overwritten"
-		Newline
+		BU::EchoSuccess "The content of the $(BU::DechoS "$p_path/") file has been successfully overwritten"
+		BU:Newline
 	else
 		return
 	fi
@@ -157,11 +157,11 @@ function OverwriteFile()
 
 # Featured functions and files from the "functions" folder :
 #   - DrawLine          -> Headers.lib
-#   - EchoError         -> Echo.lib
-#   - EchoNewstep       -> Echo.lib
-#   - EchoSuccess       -> Echo.lib
-#   - HandleErrors      -> Handles.lib
-function Makefile()
+#   - BU::EchoError         -> Echo.lib
+#   - BU::EchoNewstep       -> Echo.lib
+#   - BU::EchoSuccess       -> Echo.lib
+#   - BU::Main::Errors::HandleErrors      -> Handles.lib
+function BU::Main::Files::Make()
 {
 	#**** Parameters ****
 	local p_parent=$1      # Emplacement of the currently processed file's parent folder from the root directory.
@@ -172,26 +172,26 @@ function Makefile()
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given
-    CheckArgs_Makefile "$p_parent" "$p_name"
+    CheckArgs_BU::Main::Files::Make "$p_parent" "$p_name"
 
     # Checking second if the script is operating at the root directory.
     TriggerRootDirWarning "$v_path"
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
-        EchoNewstep "Creating the $(DechoHighlight "$p_name") file in the parent folder $(DechoHighlight "$p_parent/")."
+        BU::EchoNewstep "Creating the $(BU::DechoHighlight "$p_name") file in the parent folder $(BU::DechoHighlight "$p_parent/")."
 
 		touch "$v_path"; CheckFilePathWasCreated "$v_path"
 
-		# Testing if the file has been created by checking the return code of the "CheckFilePathWasCreated" function via the "HandleErrors" function.
+		# Testing if the file has been created by checking the return code of the "CheckFilePathWasCreated" function via the "BU::Main::Errors::HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		HandleErrors "$?" "THE $(KeepFormatting "$(DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(DechoHighlight "$p_parent/")") PARENT FOLDER." \
+		BU::Main::Errors::HandleErrors "$?" "THE $(KeepFormatting "$(BU::DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(BU::DechoHighlight "$p_parent/")") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
 
-		EchoSuccess "The $(DechoS "$p_name") file was successfully created in the $(DechoS "$p_parent") folder."
-        Newline
+		BU::EchoSuccess "The $(BU::DechoS "$p_name") file was successfully created in the $(BU::DechoS "$p_parent") folder."
+        BU:Newline
 
         return 0
 
@@ -205,8 +205,8 @@ function Makefile()
 
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
-		EchoSuccess "The $(DechoS "$p_path/") file already exists in the $(DechoS "$p_parent/") folder and is empty."
-		Newline
+		BU::EchoSuccess "The $(BU::DechoS "$p_path/") file already exists in the $(BU::DechoS "$p_parent/") folder and is empty."
+		BU:Newline
 
 		return 0
 	fi
@@ -232,21 +232,21 @@ function CreateProjectLogFile()
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
     #**** Code ****
-    if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then EchoError "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; ExitError '1'; fi
+    if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; ExitError '1'; fi
 
-    EchoSuccess "Successfully created the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
+    BU::EchoSuccess "Successfully created the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
 
-	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
-    if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+    if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	BU::Main:Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
     # Redirecting the initializer's log file content into the log file.
     HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT"
 
-    EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
-    EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do EchoMsg "$val"; done; Newline
+    BU::EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU:Newline
+    BU::EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU:Newline
 
 	if (( "${#__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}" >= 1 )); then
-		EchoNewstep "Initialization log output :"; Newline
+		BU::EchoNewstep "Initialization log output :"; BU:Newline
 
         for val in "${__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}"; do
             CheckProjectLogStatus "$(CutDateFromString "$val")"
@@ -257,33 +257,33 @@ function CreateProjectLogFile()
     HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM"
 
 	# Getting operating system name.
-	EchoNewstep "Operating system name : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"
-	Newline
+	BU::EchoNewstep "Operating system name : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"
+	BU:Newline
 
     # Getting operating system family.
-    EchoNewstep "Operating system family : $(DechoHighlight "$OSTYPE")"
-    Newline
+    BU::EchoNewstep "Operating system family : $(BU::DechoHighlight "$OSTYPE")"
+    BU:Newline
 
     # Gathering OS informations from the "/etc/os-release" file.
-    EchoNewstep "Operating system general informations :"
-    if [ -f "/etc/os-release" ]; then EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
-    Newline
+    BU::EchoNewstep "Operating system general informations :"
+    if [ -f "/etc/os-release" ]; then BU::EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else BU::EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
+    BU:Newline
 
 	# Getting operating system extra informations (Windows Subsystem for Linux, etc...).
-	EchoNewstep "Operating system extra informations :"
-	if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then EchoMsg "Distro running on Windows Subsystem for Linux : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"; fi
-	Newline
+	BU::EchoNewstep "Operating system extra informations :"
+	if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then BU::EchoMsg "Distro running on Windows Subsystem for Linux : $(awk -F= '/^NAME/{print $2}' /etc/os-release)"; fi
+	BU:Newline
 
 	# Getting Bash language's version.
-    EchoNewstep "Bash version : $(DechoHighlight "$BASH_VERSION")"
-    Newline
+    BU::EchoNewstep "Bash version : $(BU::DechoHighlight "$BASH_VERSION")"
+    BU:Newline
 
 	# Getting terminal emulator's name and version.
 	# shellcheck disable=SC2016
-    EchoNewstep "Terminal (emulator) version : $(DechoHighlight "$v_terminfo_v")" || EchoWarning "$(DechoHighlight '$v_terminfo_v') : bad command call."
-    Newline
+    BU::EchoNewstep "Terminal (emulator) version : $(BU::DechoHighlight "$v_terminfo_v")" || BU::EchoWarning "$(BU::DechoHighlight '$v_terminfo_v') : bad command call."
+    BU:Newline
 
-    EchoSuccess "Successfully got the user's system's informations."
+    BU::EchoSuccess "Successfully got the user's system's informations."
 }
 
 # -----------------------------------------------
@@ -300,12 +300,12 @@ function SourceFile()
     if [ -f "$p_path" ]; then
         # shellcheck disable=SC1090
         if source "$p_path"; then
-            EchoSuccess "Sourced file : $(DechoHighlight "$p_path")"
+            BU::EchoSuccess "Sourced file : $(BU::DechoHighlight "$p_path")"
         else
-            HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(KeepFormatting "$(DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        HandleErrors "1" "UNABLE TO FIND THIS FILE : $(KeepFormatting "$(DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+        BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 
@@ -367,9 +367,9 @@ function Compress()
 # Uncompressing archives according to the used compression method.
 
 # Featured functions and files from the "functions" folder :
-#   - HandleErrors      -> Handles.lib
-#   - EchoSuccess       -> Echo.lib
-#   - Newline           -> Echo.lib
+#   - BU::Main::Errors::HandleErrors      -> Handles.lib
+#   - BU::EchoSuccess       -> Echo.lib
+#   - BU:Newline           -> Echo.lib
 function Uncompress()
 {
 #     #***** Paramètres *****
@@ -382,9 +382,9 @@ function Uncompress()
 #     #**** Code ****
 #     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
 #     "$cmd $opts $p_path"
-#     HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
-#     EchoSuccess "La décompression de l'archive $(DechoHighlight "$p_name") s'est effectuée avec brio."
-#     Newline
+#     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlight "$p_name") A ÉCHOUÉE"
+#     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlight "$p_name") s'est effectuée avec brio."
+#     BU:Newline
 
     return 0
 }

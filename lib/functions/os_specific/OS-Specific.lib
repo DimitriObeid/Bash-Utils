@@ -17,7 +17,7 @@ function CheckSupportedOSType
             ;;
         *)
             STAT_ERROR="fatal"
-            HandleErrors "1" "YOUR OS IS NOT SUPPORTED (YET)" "" "$LINENO"
+            BU::Main::Errors::HandleErrors "1" "YOUR OS IS NOT SUPPORTED (YET)" "" "$LINENO"
     esac
 }
 

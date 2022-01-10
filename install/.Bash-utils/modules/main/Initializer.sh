@@ -227,14 +227,14 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 			if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
 				echo "STAT"
 			else
-				ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-				ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-				ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-				ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				BU::Main:Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				BU::Main:Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				BU::Main:Status::ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
                 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-				ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+				BU::Main:Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			fi
 
 		# Else, if an unsupported argument is passed.
@@ -260,15 +260,15 @@ MkTmpDir
 ## PROCESSING SOME DIRECTORIES AND FILES
 
 if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
-	HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
+	BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
 else
-	EchoSuccess ""
+	BU::EchoSuccess ""
 fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
-if CheckStatIsLogging; then
+if BU::Main::Status::CheckStatIsLogging; then
 	if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
-		HandleErrors '1' "UNABLE TO CREATE THE $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
+		BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
 
 		return 1
 	fi

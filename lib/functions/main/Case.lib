@@ -42,15 +42,15 @@ fi
 
 ## VARIABLES
 
-__BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !"
+__BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU::DechoHighlight 'yes') or ($(BU::DechoHighlight 'no')) !"
 
 __BU_MAIN_CASE_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)"
 
 __BU_MAIN_CASE_ANSWER_PROMPT="Enter your answer : "
 
-__BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME") script."
+__BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") script."
 
-__BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution."
+__BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution."
 
 # -----------------------------------------------
 
@@ -65,53 +65,53 @@ __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(DechoHighlight "$__BU_MAIN_PROJECT_NA
 # "TriggerRootDirWarning" function.
 function CaseRead_TriggerRootDirWarning()
 {
-    EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+    BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
-	EchoRead "$__read_TriggerRootDirWarning"
-	Newline
+	BU::EchoRead "$__read_TriggerRootDirWarning"
+	BU:Newline
 
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
 		"yes")
-            EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
+            BU::EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
 
 			return 0
 			;;
 		"no")
-            EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
+            BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
 
 			return 1
 			;;
 		*)
-			EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
+			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
 			CaseRead_TriggerRootDirWarning
 			;;
 	esac
 }
 
-# "HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
-function CaseRead_HandleErrors()
+# "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
+function CaseRead_BU::Main::Errors::HandleErrors()
 {
-	EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+	BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
-	EchoRead "$__read_TriggerRootDirWarning"
-    Newline
+	BU::EchoRead "$__read_TriggerRootDirWarning"
+    BU:Newline
 
 	# shellcheck disable=SC2154
-	case "${__read_HandleErrors,,}" in
+	case "${__read_BU::Main::Errors::HandleErrors,,}" in
 		"yes")
-			EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
+			BU::EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC"
 
 			return 0
 			;;
 		"no")
-			EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
+			BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
 
 			ExitError '1'
 			;;
 		*)
-			EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
-			CaseRead_HandleErrors
+			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
+			CaseRead_BU::Main::Errors::HandleErrors
 			;;
 	esac
 }
