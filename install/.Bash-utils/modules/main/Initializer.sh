@@ -155,8 +155,8 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 				else
 					echo "$stat_value_warning true, false"
 				fi
-				
-				
+
+
 				# -------- __BU_MAIN_STAT_ERROR global status variable
 
 				if   [ "$stat_value" = 'error=fatal' ]; then
@@ -215,33 +215,26 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 				else
 					echo "$stat_value_warning \e[3ma floating number\e[0m"
 				fi
-
-
-				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
-
-				if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
-					__BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
-				else
-					echo "$stat_value_warning true, false"
-				fi
 			done
 
 		# Else, if no "--stat" argument is passed, then the default values are set to each status global variables.
 		else
 			## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
 
-			# TODO : After adding the status configuration arguments, 
+            # Note : only some variables are changed, the other variables values are still set to their default value.
+
+			# TODO : After adding the status configuration arguments,
 			if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
 				echo "STAT"
 			else
-				ChangeSTAT_TXT_FMT      "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 				ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-				# The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-				ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 				ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 				ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 				ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+                # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
+				ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 			fi
 
 		# Else, if an unsupported argument is passed.
@@ -257,11 +250,7 @@ fi
 
 #### STEP FOUR : PROCESSING PROJECT'S RESOURCES
 
-## MODIFYING STATUS VARIABLES FOR THE INITIALIZATION PROCESS AND CREATING THE PROJECT'S TEMPORARY FOLDER
-
-# ChangeSTAT_ERROR        "fatal"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-# ChangeSTAT_TIME_TXT     "0"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-# ChangeSTAT_TXT_FMT      "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+## CALLING NECESSARY FUNCTIONS
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
 MkTmpDir

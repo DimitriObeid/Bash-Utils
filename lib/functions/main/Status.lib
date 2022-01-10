@@ -5,9 +5,9 @@
 
 # Name          : CheckSTAT.lib
 # Module        : Main
-# Description   : 
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
 # ----------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -330,24 +330,6 @@ function CheckSTAT_TRANSLATED()
     return 0
 }
 
-# Checking the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function CheckSTAT_TXT_FMT()
-{
-    #**** Parameters ****
-    p_file=$1
-    p_lineno=$2
-
-    #**** Variables ****
-    local pa_correctValues=("true" "false")
-
-    #**** Code ****
-    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"; return 1
-    fi
-
-    return 0
-}
-
 # Checking the "$__BU_MAIN_STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
 function CheckSTAT_USER_OS()
@@ -360,7 +342,7 @@ function CheckSTAT_USER_OS()
     # local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
 
     #**** Variables ****
-    
+
     #**** Code ****
     return 0
 }
@@ -385,7 +367,6 @@ function CheckProjectStatusVars()
 	CheckSTAT_OPERATE_ROOT  "$p_file" "$p_lineno" || return 1
     CheckSTAT_TIME_TXT      "$p_file" "$p_lineno" || return 1
     CheckSTAT_TRANSLATED    "$p_file" "$p_lineno" || return 1
-    CheckSTAT_TXT_FMT       "$p_file" "$p_lineno" || return 1
     CheckSTAT_USER_OS       "$p_file" "$p_lineno" || return 1
 
 	return 0
@@ -439,9 +420,6 @@ function ChangeSTAT_TIME_TXT        { __BU_MAIN_STAT_TIME_TXT="$1";         Chec
 # Changing the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
 function ChangeSTAT_TRANSLATED      { __BU_MAIN_STAT_TRANSLATED="$1";       CheckSTAT_TRANSLATED        "$2" "$3" || return 1; return 0; }
 
-# Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function ChangeSTAT_TXT_FMT         { __BU_MAIN_STAT_TXT_FMT="$1";          CheckSTAT_TXT_FMT           "$2" "$3" || return 1; return 0; }
-
 # -----------------------------------------------
 
 ## EASIER CHECKING BOOLEAN VALUES
@@ -449,7 +427,7 @@ function ChangeSTAT_TXT_FMT         { __BU_MAIN_STAT_TXT_FMT="$1";          Chec
 # Checking if the debug mode is active.
 function CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
 
-# Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop. 
+# Checking if the "Echo<...>()" functions can call the "CheckProjectLogStatus()" function without provoking an infinite loop.
 function CheckStatIsBackupEchoing() { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
@@ -463,6 +441,3 @@ function CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 't
 
 # Checking if the main module is translated.
 function CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }
-
-# Checking if the text formatting is allowed.
-function CheckStatAllowFormatting() { if [ "$__BU_MAIN_STAT_TXT_FMT"        = 'true' ]; then return 0; else return 1; fi; }

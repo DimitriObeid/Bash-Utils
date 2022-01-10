@@ -5,9 +5,9 @@
 
 # Name          : Decho.lib
 # Module        : Main
-# Description   : 
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
 # ----------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -49,7 +49,7 @@ function __Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && IsInt "$v_ol
 
 # Featured functions and files from the "functions" folder :
 #   - CheckDecho                        --> This file.
-#       - 
+#       -
 function Decho()
 {
     #**** Parameters ****
@@ -68,7 +68,7 @@ function Decho()
 
     if test "$?" -ne 0; then
         echo -ne "« $p_string »"
-        
+
         return 1
     else
         local v_oldColor
@@ -110,20 +110,30 @@ function Decho()
                     echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}"
                     ;;
                 *)
-                    # WARNING ! >>> DO NOT RESET «< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" «<, or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET «< the "$__BU_MAIN_STAT_DECHO" variable's value to any other value than >>> "forbid" <<<, or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_DECHO" status variable's value is set to "false", the script will not call the following function indefinitely.
 
-                    ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                    # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to 'forbid'
+                    if [ "$__BU_MAIN_STAT_DECHO" != 'forbid' ]; then
+                        local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"
+                    fi
+
+                    ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
                     HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
                         "Check if the value is supported in the first value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
 
-                    ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                    # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to it's original value.
+                    if [ -n "$v_bu_stat_decho_old" ]; then
+                        ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+                        v_bu_stat_decho_old=''
+                    fi
 
                     return 1
-                    ;; 
+                    ;;
             esac
         done
 
@@ -154,18 +164,28 @@ function Decho()
                     echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}"
                     ;;
                 *)
-                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_TXT_FMT" variable's value  to "true", or else the program will be stuck in an infinite loop.
+                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_DECHO" variable's value  to "true", or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
+                    # if the "$__BU_MAIN_STAT_DECHO" status variable's value is set to "false", the script will not call the following function indefinitely.
+
+                    # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to 'forbid'
+                    if [ "$__BU_MAIN_STAT_DECHO" != 'forbid' ]; then
+                        local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"
+                    fi
 
                     # shellcheck disable=SC2034
-                    ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-                    
+                    ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
                     HandleErrors "1" "AT LEAST ONE OF THE $(DechoHighlight "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
                     "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
 
-                    ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                    # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to it's original value.
+                    if [ -n "$v_bu_stat_decho_old" ]; then
+                        ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+
+                        v_bu_stat_decho_old=''
+                    fi
                     ;;
             esac
         done

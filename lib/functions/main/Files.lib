@@ -236,8 +236,6 @@ function CreateProjectLogFile()
 
     EchoSuccess "Successfully created the $(DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
 
-    ChangeSTAT_TXT_FMT 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
 	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
     if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
