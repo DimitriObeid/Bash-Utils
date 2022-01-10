@@ -200,15 +200,6 @@ function ModuleInitializer_CheckPath()
     fi
 }
 
-# Create a file directly in the computer's memory to redirect .
-function ModuleInitializer_CreateFileInMemory()
-{
-    #**** Parameters ****
-    p_filename=$1
-
-    #**** Code ****
-}
-
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
 function ModuleInitializer_FindPath()
 {

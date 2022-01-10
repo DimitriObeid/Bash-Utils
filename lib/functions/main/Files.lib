@@ -5,9 +5,9 @@
 
 # Name          : Files.lib
 # Module        : Main
-# Description   : 
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
 # ----------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -53,14 +53,14 @@ function __ProcessingFile()
         EchoError "End of processing the $(DechoHighlight "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
         Newline
-            
+
         sleep "$__BU_MAIN_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
         EchoSuccess "End of processing the $(DechoS "$p_name") file"
         EchoMsg "$(DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
         Newline
-        
+
         sleep "$__BU_MAIN_STAT_TIME_TXT"
     else
         EchoWarning ""
@@ -78,19 +78,19 @@ function ProcessingFile()
     local p_function=$1; shift
     local p_name=$2
     local arr; arr=$("$@")
-    
+
     #**** Variables ****
     local v_char="'"
-    
+
     #**** Code ****
     # Arguments checking.
     CheckArgs_ProcessingFile "$p_function"
-    
+
 	sleep "$__BU_MAIN_STAT_TIME_TXT"
     EchoMsg "$(DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
     EchoNewstep "Processing the $(DechoHighlight "$p_name") file in the $(DechoHighlight "$p_parent") parent directory."
     Newline
-    
+
     case "$p_function" in
         'Makefile')
             if Makefile "${arr[@]}"; then
@@ -123,7 +123,7 @@ function OverwriteFile()
     #**** Parameters ****
     local p_path=$1
 	local p_authorization=$2
-    
+
     #**** Code ****
     # Checking first if the awaited arguments are given
     CheckArgs_OverwriteFile
@@ -212,14 +212,16 @@ function Makefile()
 	fi
 }
 
-# Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive (safer for SSD drives and no permissions are needed).
+# Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.
+# This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
 function CreateFileInMemory()
 {
     #**** Parameters ****
     p_filename=$1
 
     #**** Code ****
-    
+
+
     return 0
 }
 
@@ -319,10 +321,10 @@ function GetLineFromTextFile()
     #**** Parameters ****
     local p_source=$1           # File to parse
     local p_wanted_line=$2      # Line to get in the file
-    
+
     #**** Variables ****
     local i=0                   # Line incrementer
-    
+
     #**** Code ****
 	# shellcheck disable=SC2002
     cat "$p_source" | while read -r line; do
@@ -346,10 +348,10 @@ function GetLineFromTextFile()
 
 ## (UN)COMPRESSION FUNCTIONS
 
-# 
+#
 
 # Featured functions and files from the "functions" folder :
-#   - 
+#   -
 function Compress()
 {
     #**** Parameters ****
@@ -357,10 +359,10 @@ function Compress()
 #     local opts=$2     # Options of the compression command.
 #     local p_path=$3     # Path to the file/folder to archivate.
 #     local p_name=$4     # Archive's name (only used into displayed messages).
-    
+
     #**** Code ****
-    
-    
+
+
     return 0
 }
 
@@ -378,13 +380,13 @@ function Uncompress()
 #     local p_opts=$2     # Options of the compression command. (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
 #     local p_path=$3     # Path to the l'archive to uncompress.
 #     local p_name=$4     # Archive's name (only used into displayed messages).
-# 
+#
 #     #**** Code ****
 #     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
 #     "$cmd $opts $p_path"
 #     HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(DechoHighlight "$p_name") A ÉCHOUÉE"
 #     EchoSuccess "La décompression de l'archive $(DechoHighlight "$p_name") s'est effectuée avec brio."
 #     Newline
-    
+
     return 0
 }
