@@ -95,7 +95,7 @@ function PackInstall
     package=$2  # Package's name
     
     #***** Code *****
-    CheckRootEUID
+    BU::Main::Checkings::CheckRootEUID
 
     if [ "$OSTYPE" = "linux-gnu" ]; then
         if [ "$manager" = "apt" ]; then APTInstall
@@ -139,7 +139,7 @@ function SoftwareInstall
 	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
 
 	#***** Code *****
-	CheckRootEUID
+	BU::Main::Checkings::CheckRootEUID
 	
 	BU::EchoNewstep "Téléchargement du logiciel $(BU::DechoN "$name")."
 

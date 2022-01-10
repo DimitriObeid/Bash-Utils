@@ -121,7 +121,7 @@
 \subsection{Sous-section CLASSIC ERRORS HANDLING}\color{white}
 
 \color{blue}
-\subsubsection{HandleSmallErrors}\color{white}
+\subsubsection{BU::Main::Errors::HandleSmallErrors}\color{white}
 
 \begin{justify}
     \textbf{Description :}\\
@@ -140,7 +140,7 @@
 
         \item \textbf{\color{orange}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\
         
-        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{mauve}CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{mauve}BU::Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
+        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{mauve}BU::Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
     \end{itemize}
 \end{justify}
 

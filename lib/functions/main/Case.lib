@@ -62,10 +62,11 @@ __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU::DechoHighlight "$__BU_MAIN_PROJEC
 
 ## "Checkings.lib" FILE
 
-# "TriggerRootDirWarning" function.
-function CaseRead_TriggerRootDirWarning()
+# "BU::Main::Directories::TriggerRootDirWarning" function.
+function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 {
     BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	BU::EchoRead "$__read_TriggerRootDirWarning"
 	BU::Newline
@@ -84,15 +85,16 @@ function CaseRead_TriggerRootDirWarning()
 			;;
 		*)
 			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
-			CaseRead_TriggerRootDirWarning
+			BU::Main::Case::Read_Directories::TriggerRootDirWarning
 			;;
 	esac
 }
 
 # "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
-function CaseRead_BU::Main::Errors::HandleErrors()
+function BU::Main::Case::Read_Errors::HandleErrors()
 {
 	BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC"
+
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning
 	BU::EchoRead "$__read_TriggerRootDirWarning"
     BU::Newline
@@ -107,11 +109,11 @@ function CaseRead_BU::Main::Errors::HandleErrors()
 		"no")
 			BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
 
-			ExitError '1'
+			BU::Main::Errors::ExitError '1'
 			;;
 		*)
 			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"
-			CaseRead_BU::Main::Errors::HandleErrors
+			BU::Main::Case::Read_Errors::HandleErrors
 			;;
 	esac
 }

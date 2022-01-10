@@ -51,7 +51,7 @@ function BU::Main::Headers::DrawLine()
 	
 	#**** Code ****
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
-	if ! IsAlphaNumChar "$p_lineChar"; then
+	if ! BU::IsAlphaNumChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}"
 	fi
 	
@@ -103,7 +103,7 @@ function BU::Main::Headers::DrawLine()
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
 
-# Since this function can be called in the "__BU::EchoOutput()" function,
+# Since this function can be called in the "BU::Main::Echo::__EchoOutput()" function,
 # even if the "$__BU_MAIN_STAT_ECHO" status variable's value is set to "true",
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 function BU::HeaderBase()
@@ -365,7 +365,7 @@ function BU::HeaderMaroonPurple		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__
 function BU::HeaderMaroonRed		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"  	    "$1" || return 1; return 0; }
 function BU::HeaderMaroonSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      "$1" || return 1; return 0; }
 function BU::HeaderMaroonTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
-function BU::HeaderMaroonTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"   "$1" || return 1; return 0; }
+function BU::HeaderMaroonTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"	"$1" || return 1; return 0; }
 function BU::HeaderMaroonWhite		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderMaroonYellow		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
 

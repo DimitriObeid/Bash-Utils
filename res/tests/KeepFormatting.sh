@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function KeepFormattingl
+function BU::Main::Echo::KeepFormattingl
 {
     #***** Parameters *****
     p_string=$1
@@ -9,7 +9,7 @@ function KeepFormattingl
     echo -e "$p_string" | tr '[lower]' '[lower]'
 }
 
-function KeepFormattingU
+function BU::Main::Echo::KeepFormattingU
 {
 	#***** Parameters *****
 	p_string=$1
@@ -18,8 +18,8 @@ function KeepFormattingU
 	echo -e "$p_string" | tr '[upper]' '[upper]'
 }
 
-string1="Test de la fonction $(KeepFormattingl "KeepFormattingl") en LOW"
+string1="Test de la fonction $(BU::Main::Echo::KeepFormattingl "BU::Main::Echo::KeepFormattingl") en LOW"
 echo -e "${string1,,}"
 
-string2="Test de la fonction $(KeepFormattingU "KeepFormattingU") EN up"
+string2="Test de la fonction $(BU::Main::Echo::KeepFormattingU "BU::Main::Echo::KeepFormattingU") EN up"
 echo -e "${string2^^}"

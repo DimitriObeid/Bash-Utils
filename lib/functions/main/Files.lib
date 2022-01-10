@@ -41,7 +41,7 @@ fi
 #### TEXT FILES PROCESSING FUNCTIONS
 
 # This function only repeats some parts of the following function.
-function __ProcessingFile()
+function BU::Main::Files::__ProcessingFile()
 {
     #**** Parameters ****
     p_output=$1
@@ -72,7 +72,7 @@ function __ProcessingFile()
 # Featured functions and files from the "functions" folder :
 #   - BU::Main::Headers::DrawLine      -> Headers.lib
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
-function ProcessingFile()
+function BU::Main::Files::ProcessingFile()
 {
     #**** Parameters ****
     local p_function=$1; shift
@@ -84,7 +84,7 @@ function ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    CheckArgs_ProcessingFile "$p_function"
+    BU::Main::CheckArgs__Files::ProcessingFile "$p_function"
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT"
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
@@ -94,16 +94,16 @@ function ProcessingFile()
     case "$p_function" in
         'BU::Main::Files::Make')
             if BU::Main::Files::Make "${arr[@]}"; then
-                __ProcessingFile 'S' "$p_name" "$p_char"
+                BU::Main::Files::__ProcessingFile 'S' "$p_name" "$p_char"
             else
-                __ProcessingFile 'E' "$p_name" "$p_char"
+                BU::Main::Files::__ProcessingFile 'E' "$p_name" "$p_char"
             fi
             ;;
         'OverwriteFile')
-            if OverwriteFile "$arr"; then
-                __ProcessingFile 'S' "$p_name" "$p_char"
+            if BU::Main::Files::OverwriteFile "$arr"; then
+                BU::Main::Files::__ProcessingFile 'S' "$p_name" "$p_char"
             else
-                __ProcessingFile 'E' "$p_name" "$p_char"
+                BU::Main::Files::__ProcessingFile 'E' "$p_name" "$p_char"
             fi
             ;;
     esac
@@ -118,7 +118,7 @@ function ProcessingFile()
 #	- BU::EchoNewstep		-> Echo.lib
 #	- BU::EchoSuccess		-> Echo.lib
 #	- BU::Newline			-> Echo.lib
-function OverwriteFile()
+function BU::Main::Files::OverwriteFile()
 {
     #**** Parameters ****
     local p_path=$1
@@ -126,10 +126,10 @@ function OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    CheckArgs_OverwriteFile
+    BU::Main::CheckArgs__Files::OverwriteFile
 
     # Checking second if the script is operating at the root directory.
-    TriggerRootDirWarning "$p_path"
+    BU::Main::Directories::TriggerRootDirWarning "$p_path"
 
     if [ "$p_authorization" = "true" ]; then
 		BU::EchoNewstep "The $(BU::DechoHighlight "$p_path/") file already exists and is not empty."
@@ -137,7 +137,7 @@ function OverwriteFile()
 		BU::Newline
 
 		true > "$p_path"
-		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(KeepFormatting "$(BU::DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 		BU::EchoSuccess "The content of the $(BU::DechoS "$p_path/") file has been successfully overwritten"
 		BU::Newline
@@ -172,22 +172,22 @@ function BU::Main::Files::Make()
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given
-    CheckArgs_BU::Main::Files::Make "$p_parent" "$p_name"
+    BU::Main::CheckArgs__Files::Make "$p_parent" "$p_name"
 
     # Checking second if the script is operating at the root directory.
-    TriggerRootDirWarning "$v_path"
+    BU::Main::Directories::TriggerRootDirWarning "$v_path"
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
         BU::EchoNewstep "Creating the $(BU::DechoHighlight "$p_name") file in the parent folder $(BU::DechoHighlight "$p_parent/")."
 
-		touch "$v_path"; CheckFilePathWasCreated "$v_path"
+		touch "$v_path"; BU::Main::Checkings::CheckFilePathWasCreated "$v_path"
 
-		# Testing if the file has been created by checking the return code of the "CheckFilePathWasCreated" function via the "BU::Main::Errors::HandleErrors" function.
+		# Testing if the file has been created by checking the return code of the "BU::Main::Checkings::CheckFilePathWasCreated" function via the "BU::Main::Errors::HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		BU::Main::Errors::HandleErrors "$?" "THE $(KeepFormatting "$(BU::DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(KeepFormatting "$(BU::DechoHighlight "$p_parent/")") PARENT FOLDER." \
+		BU::Main::Errors::HandleErrors "$?" "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_parent/")") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
 
 		BU::EchoSuccess "The $(BU::DechoS "$p_name") file was successfully created in the $(BU::DechoS "$p_parent") folder."
@@ -197,7 +197,7 @@ function BU::Main::Files::Make()
 
 	# Else, if the file to be created already exists AND it is NOT empty.
 	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
-        if OverwriteFile "$p_path"; then
+        if BU::Main::Files::OverwriteFile "$p_path"; then
             return 0
         else
             return 1
@@ -214,7 +214,7 @@ function BU::Main::Files::Make()
 
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.
 # This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
-function CreateFileInMemory()
+function BU::Main::Files::CreateFileInMemory()
 {
     #**** Parameters ****
     p_filename=$1
@@ -226,13 +226,13 @@ function CreateFileInMemory()
 }
 
 # Creating the project's log file.
-function CreateProjectLogFile()
+function BU::Main::Files::CreateProjectLogFile()
 {
     #**** Variables ****
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)"
 
     #**** Code ****
-    if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; ExitError '1'; fi
+    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU::Main::Errors::ExitError '1'; fi
 
     BU::EchoSuccess "Successfully created the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
 
@@ -249,7 +249,7 @@ function CreateProjectLogFile()
 		BU::EchoNewstep "Initialization log output :"; BU::Newline
 
         for val in "${__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}"; do
-            CheckProjectLogStatus "$(CutDateFromString "$val")"
+            BU::CheckProjectLogStatus "$(CutDateFromString "$val")"
         done
     fi
 
@@ -291,7 +291,7 @@ function CreateProjectLogFile()
 ## FILE SOURCING
 
 # Sourcing dependencies files.
-function SourceFile()
+function BU::Main::Files::SourceFile()
 {
     #**** Parameters ****
     local p_path=$1
@@ -302,10 +302,10 @@ function SourceFile()
         if source "$p_path"; then
             BU::EchoSuccess "Sourced file : $(BU::DechoHighlight "$p_path")"
         else
-            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+        BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 
@@ -314,7 +314,7 @@ function SourceFile()
 ## TEXT FILES PARSING
 
 # Getting a specific line from a text file.
-function GetLineFromTextFile()
+function BU::Main::Files::GetLineFromTextFile()
 {
     #**** Parameters ****
     local p_source=$1           # File to parse
@@ -350,7 +350,7 @@ function GetLineFromTextFile()
 
 # Featured functions and files from the "functions" folder :
 #   -
-function Compress()
+function BU::Main::Files::Compress()
 {
     #**** Parameters ****
 #     local cmd=$1      # Compression command.
@@ -370,7 +370,7 @@ function Compress()
 #   - BU::Main::Errors::HandleErrors      -> Handles.lib
 #   - BU::EchoSuccess       -> Echo.lib
 #   - BU::Newline           -> Echo.lib
-function Uncompress()
+function BU::Main::Files::Uncompress()
 {
 #     #***** Paramètres *****
 #     local p_cmd=$1      # Compression command.

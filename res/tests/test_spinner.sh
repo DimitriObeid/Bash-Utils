@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Display a spinner while a task is ongoing.
-function DisplaySpinner()
+function BU::Main::PosixTerm::DisplaySpinner()
 {
     #***** Parameters *****
     p_string=$1
@@ -22,4 +22,4 @@ function DisplaySpinner()
     done
 }
 
-DisplaySpinner "Chaîne de caractères de test" "2" "$!"
+BU::Main::PosixTerm::DisplaySpinner "Chaîne de caractères de test" "2" "$!"

@@ -45,13 +45,13 @@ fi
 # Calling the "chown" command to change recursively directory ownership
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#	- CheckRootEUID		-> Checkings.lib
+#	- BU::Main::Checkings::CheckRootEUID		-> Checkings.lib
 #	- BU::EchoError			-> Echo.lib
 #	- BU::EchoNewstep		-> Echo.lib
 #	- BU::EchoSuccess		-> Echo.lib
 #	- BU::Newline			-> Echo.lib
 #	- BU::Main::Errors::HandleErrors		-> Headers.lib
-function ChownRec()
+function BU::Main::Permissions::ChownRec()
 {
     #***** Paramètres *****
     local p_currentOwner=$1    # This parameter is used in the messages.
@@ -60,11 +60,11 @@ function ChownRec()
 
     #**** Code ****
     # The "chown" command has to be used with super-user privileges,
-    CheckRootEUID
+    BU::Main::Checkings::CheckRootEUID
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$p_path" ]; then
-        HandleError "1" "" "" ""
+        BU::Main::Errors::HandleErrors "1" "" "" ""
     fi
 
     BU::EchoNewstep "Recursive change of the ownership rights of the new folder $(BU::DechoHighlight "$p_path/") from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
@@ -99,13 +99,13 @@ function ChownRec()
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#   - CheckRootEUID -> Checkings.lib
+#   - BU::Main::Checkings::CheckRootEUID -> Checkings.lib
 #   - BU::EchoError     -> Echo.lib
 #   - BU::EchoNewstep   -> Echo.lib
 #   - BU::EchoSuccess   -> Echo.lib
 #   - BU::Main::Headers::DrawLine      -> Headers.lib
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
-function Chown()
+function BU::Main::Permissions::Chown()
 {
     #**** Parameters ****
     p_currentOwner=$1    # This parameter is used in the translated messages, stored into their own variables.
@@ -115,7 +115,7 @@ function Chown()
     
     #**** Code ****
     # The "chown" command has to be used with super-user privileges,
-    CheckRootEUID
+    BU::Main::Checkings::CheckRootEUID
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
@@ -155,7 +155,7 @@ function Chown()
                 fi
                 ;;
             *)
-                HandleError "1" "THE $(BU::DechoHighlight "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlight "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
+                BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlight "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlight "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
                 ;;
         esac

@@ -48,7 +48,7 @@ fi
 
 # WARNING ! DO NOT CALL ANY FUNCTION THAT CALL THIS FUNCTION DIRECTLY OR INDIRECTLY HERE,
 # OR THE SCRIPT WILL LOOP FOREVER IN CASE OF AN ERROR DURING THIS FUNCTION CALL !!!
-function HandleSmallErrors()
+function BU::Main::Errors::HandleSmallErrors()
 {
     #**** Parameters ****
     local p_type=$1         # Type of message to display ('E' = BU::EchoError; 'W' = BU::EchoWarning)
@@ -92,10 +92,10 @@ function HandleSmallErrors()
     elif [ "${p_return^^}" = 'E' ]; then
         if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
 
-        ExitError '1'
+        BU::Main::Errors::ExitError '1'
 
     else 
-        BU::EchoWarning "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_WARNING} --> Warning : bad exit or return code given as second argument !"; ExitError '1'
+        BU::EchoWarning "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Errors::ExitError '1'
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
@@ -107,7 +107,7 @@ function HandleSmallErrors()
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function ExitError()
+function BU::Main::Errors::ExitError()
 {
     if [[ "$1" =~ [0-9] ]]; then
         exit "$1"; kill "$$"
@@ -166,7 +166,7 @@ function BU::Main::Errors::HandleErrors()
     else
         # -------- PART 1 : MANAGING THE CALL OF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU::Main::Errors::HandleErrors()" FUNCTION
 
-        # If the function needs to be called in the "CheckProjectLogStatus()" function, then
+        # If the function needs to be called in the "BU::CheckProjectLogStatus()" function, then
         # this status variable's value MUST be set at "true", or else the script will loop forever.
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
@@ -178,19 +178,19 @@ function BU::Main::Errors::HandleErrors()
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                    else BU::EchoError "$__BU_MAIN_MSG_BU::Main::Errors::HandleErrors_FATAL_ERROR_OCCURED_SAFEMODE"; fi
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    else BU::EchoError "$__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED_SAFEMODE"; fi
                 else
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "A FATAL ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
-                    else BU::EchoError "$__BU_MAIN_MSG_BU::Main::Errors::HandleErrors_FATAL_ERROR_OCCURED"; fi
+                    else BU::EchoError "$__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED"; fi
                 fi
             else
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
-                    else BU::EchoError "$__BU_MAIN_MSG_BU::Main::Errors::HandleErrors_ERROR_OCCURED_SAFEMODE"; fi
+                    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    else BU::EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED_SAFEMODE"; fi
                 else
                     if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "AN ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
-                    else BU::EchoError "$__BU_MAIN_MSG_BU::Main::Errors::HandleErrors_ERROR_OCCURED"; fi
+                    else BU::EchoError "$__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED"; fi
                 fi
             fi
         fi
@@ -200,15 +200,15 @@ function BU::Main::Errors::HandleErrors()
 
         # Redirecting the log messages to the terminal, to show them to the user. 
         if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
-            local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
-            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_ : $p_errorString" >&2; fi
+            else BU::HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
         else
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
-            else HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_ : $p_errorString" >&2; fi
+            else BU::HeaderRed "$v_hdrString $__BU_MAIN_MSG_ERRORS_HandleErrors_ : $p_errorString" >&2; fi
         fi
 
 
@@ -229,27 +229,27 @@ function BU::Main::Errors::HandleErrors()
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
             if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then BU::EchoError "Stopping the execution of $(BU::DechoHighlight "$(basename "$0")")."; BU::Newline >&2; else BU::EchoError "$__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_"; fi
-            ExitError "1"
+            BU::Main::Errors::ExitError "1"
         else
             # Calling the function that processes the given answer.
-            CaseRead_BU::Main::Errors::HandleErrors
+            BU::Main::Case::Read_Errors::HandleErrors
         fi
 
-        # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "CheckProjectLogStatus()" FUNCTION).
+        # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU::CheckProjectLogStatus()" FUNCTION).
 
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
             BU::EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
             {
                 if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-                    HandleSmallErrors "Unable to write in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU::DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                    BU::Main::Errors::HandleSmallErrors "Unable to write in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU::DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
                 else
-                    HandleSmallErrors "$__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_" 'R' 'CPLS'
+                    BU::Main::Errors::HandleSmallErrors "$__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_" 'R' 'CPLS'
                 fi
             }
         fi
 
         if [ "$v_log_old" = "true" ]; then
-            __BU_MAIN_STAT_LOG_REDIRECT="log"; CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+            __BU_MAIN_STAT_LOG_REDIRECT="log"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
     fi
 

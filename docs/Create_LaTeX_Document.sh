@@ -54,7 +54,7 @@ BU::Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	# shellcheck disable=SC2016
-	BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Echo::ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
@@ -96,7 +96,7 @@ else
 			;;
 		*)
 			# shellcheck disable=SC2016
-			BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
+			BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Echo::ToLowercase "$(BU::DechoE '$__read_doc_name')'s")) ENTERED VALUE IS INVALID" "Please type an integer value ranging from 1 to 5" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid"
 			;;
 	esac
 
@@ -106,7 +106,7 @@ else
 
 	if [ -z "$__read_doc_name" ]; then
 		# shellcheck disable=SC2016
-		BU::Main::Errors::HandleErrors "1" "THE $(ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+		BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Echo::ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE IS EMPTY" "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
 	fi
 	__full_path="$__folder_path/$__read_doc_name"
 

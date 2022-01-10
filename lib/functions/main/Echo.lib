@@ -60,7 +60,7 @@ printf "
 
 # "BU::Echo<...>()" functions debug output for a better view during a debug process.
 # It's better to also execute the project's script with the "bash - x $project_name" command, instead of the "./$project_name" way.
-function __BU::EchoOutput()
+function BU::Main::Echo::__EchoOutput()
 {
 	#**** Parameters ****
 	local p_string=$1		# String to display.
@@ -77,21 +77,21 @@ function __BU::EchoOutput()
 	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0
 
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
-		CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { HandleSmallErrors 'E' "$(BU::DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
+		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "${p_context,,}" = "begin" ]; then
             __BU::EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -103,15 +103,15 @@ function __BU::EchoOutput()
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -124,8 +124,8 @@ function __BU::EchoOutput()
     fi
 }
 
-# Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
-function __BU::EchoCPLS()
+# Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
+function BU::Main::Echo::__EchoCPLS()
 {
     #**** Parameters ****
     p_string=$1
@@ -201,10 +201,10 @@ function __BU::EchoCPLS()
 # Error message
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoError()
 {
     #**** Parameters ****
@@ -215,17 +215,17 @@ function BU::EchoError()
 
     #**** Code ****
     if ! BU::Main::Status::CheckEcho; then
-        __BU::EchoOutput "$p_string" 'begin' 'E' || return 1
-        CheckProjectLogStatus "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'E' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || return 1
 
-    # Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+    # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        __BU::EchoOutput "$p_string" 'begin' 'E' || return 1
-        __BU::EchoCPLS "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'E' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || return 1
     fi
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -234,10 +234,10 @@ function BU::EchoError()
 # Normal message (without any extra color), with redirection checking.
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoMsg()
 {
     #**** Parameters ****
@@ -249,17 +249,17 @@ function BU::EchoMsg()
 
     #**** Code ****
     if ! BU::Main::Status::CheckEcho; then
-        __BU::EchoOutput "$p_string" 'begin' 'm' || return 1
-        CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1
+        BU::CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'm' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || return 1
 
-    # Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+    # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        __BU::EchoOutput "$p_string" 'begin' 'm' || return 1
-        __BU::EchoCPLS "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1
+        BU::Main::Echo::__EchoCPLS "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'm' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || return 1
     fi
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -268,10 +268,10 @@ function BU::EchoMsg()
 # New sub-step message
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoNewstep()
 {
     #**** Parameters ****
@@ -283,17 +283,17 @@ function BU::EchoNewstep()
 
     #**** Code ****
     if ! BU::Main::Status::CheckEcho; then
-        __BU::EchoOutput "$p_string" 'begin' 'N' || return 1
-        CheckProjectLogStatus "${__BU_MAIN_COLOR_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'N' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || return 1
 
-    # Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+    # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        __BU::EchoOutput "$p_string" 'begin' 'N' || return 1
-        __BU::EchoCPLS "${__BU_MAIN_COLOR_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'N' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || return 1
     fi
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -302,10 +302,10 @@ function BU::EchoNewstep()
 # Read input values
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#	- CheckProjectLogStatus		--> Checkings.lib
+#	- BU::CheckProjectLogStatus		--> Checkings.lib
 function BU::EchoRead()
 {
 	#**** Parameters ****
@@ -313,17 +313,17 @@ function BU::EchoRead()
 	
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(BU::DechoHighlight "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { HandleSmallErrors '' "" '' ""; return 1; }
+		echo -e "Keyboard input value : $(BU::DechoHighlight "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors '' "" '' ""; return 1; }
 	fi; return 0
 }
 
 # Success message
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoSuccess()
 {
     #**** Parameters ****
@@ -335,17 +335,17 @@ function BU::EchoSuccess()
 
     #**** Code ****
     if ! BU::Main::Status::CheckEcho; then
-        __BU::EchoOutput "$p_string" 'begin' 'S' || return 1
-        CheckProjectLogStatus "${__BU_MAIN_COLOR_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'S' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || return 1
 
-    # Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+    # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        __BU::EchoOutput "$p_string" 'begin' 'S' || return 1
-        __BU::EchoCPLS "${__BU_MAIN_COLOR_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'S' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || return 1
     fi
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -354,10 +354,10 @@ function BU::EchoSuccess()
 # Warning message
 
 # Usage :
-#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the CheckProjectLogStatus() function>"
+#	BU::EchoError "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU::CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoWarning()
 {
     #**** Parameters ****
@@ -369,17 +369,17 @@ function BU::EchoWarning()
 
     #**** Code ****
     if ! BU::Main::Status::CheckEcho; then
-        __BU::EchoOutput "$p_string" 'begin' 'W' || return 1
-        CheckProjectLogStatus "${__BU_MAIN_COLOR_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'W' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || return 1
 
-    # Failsafe if any "BU::Echo<...>()" function has to be called in the "CheckProjectLogStatus()" function.
+    # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        __BU::EchoOutput "$p_string" 'begin' 'W' || return 1
-        __BU::EchoCPLS "${__BU_MAIN_COLOR_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-        __BU::EchoOutput "$p_string" 'end' 'W' || return 1
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || return 1
     fi
 
     sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
@@ -611,9 +611,9 @@ function BU::EchoYellow()
 
 ## TEXT FORMATTING
 
-# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("ToLowercase()" OR "ToUppercase()") or a parameter expansion.
+# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU::Main::Echo::ToLowercase()" OR "BU::Main::Echo::ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
-function KeepFormatting()
+function BU::Main::Echo::KeepFormatting()
 {
 	#**** Parameters ****
 	p_string=$1            # String to display.
@@ -623,11 +623,11 @@ function KeepFormatting()
 # 	echo -ne &>/dev/null; echo -ne "$p_string"
 # 
 # 	if [ "${p_old_formatting,,}" = 'l' ]; then
-#         echo -ne "$(ToLowercase "$p_string")"
+#         echo -ne "$(BU::Main::Echo::ToLowercase "$p_string")"
 # 	elif [ "${p_old_formatting^^}" = 'U' ]; then
-#         echo -ne "$(ToUppercase "$p_string")"
+#         echo -ne "$(BU::Main::Echo::ToUppercase "$p_string")"
 # 	else
-#         echo -ne "<<|| No reformatting precised in the $(ToLowercase "${FUNCNAME[0]}()") function ||>>"
+#         echo -ne "<<|| No reformatting precised in the $(BU::Main::Echo::ToLowercase "${FUNCNAME[0]}()") function ||>>"
 # 	fi
 
 	return 0
@@ -636,8 +636,8 @@ function KeepFormatting()
 # Print a lowercased text.
 
 # Usage :
-#	ToLowercase "<Text to write>"
-function ToLowercase()
+#	BU::Main::Echo::ToLowercase "<Text to write>"
+function BU::Main::Echo::ToLowercase()
 {
 	#**** Parameters ****
 	p_string=$1
@@ -649,8 +649,8 @@ function ToLowercase()
 # Print an uppercased text.
 
 # Usage :
-#	ToUppercase "<Text to write>"
-function ToUppercase()
+#	BU::Main::Echo::ToUppercase "<Text to write>"
+function BU::Main::Echo::ToUppercase()
 {
 	#**** Parameters ****
 	p_string=$1
@@ -672,7 +672,7 @@ function ToUppercase()
 # Redirecting the output of the "echo" command
 
 # Featured functions and files from the "functions" folder :
-#   - CheckProjectLogStatus     --> Checkings.lib
+#   - BU::CheckProjectLogStatus     --> Checkings.lib
 #	- BU::Main::Errors::HandleErrors				--> Checkings.lib
 function BU::Newline()
 {
@@ -682,9 +682,9 @@ function BU::Newline()
     #**** Code ****
 
     if [ -n "$number" ]; then
-        if ! IsInt "$number"; then
+        if ! BU::IsInt "$number"; then
             BU::EchoMsg "" "" "nodate"
-            HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
+            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
             BU::EchoMsg "" "" "nodate"
         else
             # Doing X line breaks according to the number passed as argument.

@@ -41,14 +41,14 @@ __LINUX_REINSTALL_VARS="$(BU::Main::Directories::GetParentDirectoryPath "$__BU_M
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
 BU::EchoNewstep "IN $(BU::DechoN "$__BU_MAIN_PROJECT_FILE"), LINE $(BU::DechoN "$LINENO") : CHECKING FOR ${__BU_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
-GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"
-GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"
-GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"; BU::Newline
+BU::Main::Directories::GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"
+BU::Main::Directories::GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"
+BU::Main::Directories::GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && BU::EchoSuccess "Got this $PROJECT_NAME's directory : $(BU::DechoS "$__LINUX_REINSTALL_INST")"; BU::Newline
 BU::EchoNewstep "All the needed directories are found !"
 
 # Sourcing the Linux-reinstall language files.
 # BU::EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
-# SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
+# BU::Main::Files::SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
 # BU::Newline #; BU::Newline
 
 # Ending the initialization process.

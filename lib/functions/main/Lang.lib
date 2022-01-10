@@ -59,7 +59,7 @@ function CheckNotTranslated_ParseCSVLang_PrintBadOption()
     if [ "$p_option" = 'z' ]; then
         BU::Main:Status::ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-		BU::Main::Errors::HandleErrors "1" "THE $p_funcname's $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
+		BU::Main::Errors::HandleErrors "1" "THE $p_funcname's $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$p_funcname" "$p_lineno"
 
 		return 1
@@ -67,7 +67,7 @@ function CheckNotTranslated_ParseCSVLang_PrintBadOption()
     elif [ "$p_option" = '!f' ]; then
         BU::Main:Status::ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname's $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname's $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$(basename "${BASH_SOURCE[0]}")" "$p_funcname" "$p_lineno"
 
 		return 1

@@ -43,13 +43,13 @@ fi
 ## 
 
 # Cut the date displayed before a string.
-function CutLogDateFromString()     { CutLastFieldFromDelimiter "$1" '] ';  return 0; }
+function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutLastFieldFromDelimiter "$1" '] ';  return 0; }
 
 # Cut the dash written before a command option call (to be improved).
-function CutDashFromOption()        { CutLastFieldFromDelimiter "$1" '-';   return 0; }
+function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutLastFieldFromDelimiter "$1" '-';   return 0; }
 
 # Cut every part of a string before and with the delimiter.
-function CutFromCharacter()
+function BU::Main::Text::CutFromCharacter()
 {
     #**** Parameters ****
     p_target=$1         # String to process.
@@ -57,7 +57,7 @@ function CutFromCharacter()
     p_iterations=$3     # Iterations.
 
     #**** Code ****
-    if [ -n "$p_iterations" ] && ! IsInt "$p_iterations"; then
+    if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
     fi
 
@@ -75,7 +75,7 @@ function CutFromCharacter()
 }
 
 # Cut the last field of a string.
-function CutLastFieldFromDelimiter()
+function BU::Main::Text::CutLastFieldFromDelimiter()
 {
     #**** Parameters ****
     #   $1  --> string to process
@@ -86,7 +86,7 @@ function CutLastFieldFromDelimiter()
 }
 
 # Cut any part of a string after a delimiter.
-function CutStringAfterDelim()
+function BU::Main::Text::CutStringAfterDelim()
 {
     #**** Parameters ****
     #   $1  --> string to process
@@ -98,7 +98,7 @@ function CutStringAfterDelim()
 }
 
 # Getting the size of a string.
-function GetStringSize()
+function BU::Main::Text::GetStringSize()
 {
     #**** Parameters ****
     p_string=$1
@@ -111,7 +111,7 @@ function GetStringSize()
 }
 
 # Getting the number of words in a string.
-function GetStringWordsNumber()
+function BU::Main::Text::GetStringWordsNumber()
 {
     #**** Parameters ****
     p_string=$1
@@ -125,7 +125,7 @@ function GetStringWordsNumber()
 # Examples with the '|' and '/' delimiter:
 # animal | big | car | donut    --> donut | car | big | animal
 # /home/user/Documents          --> Documents/user/home
-function ReverseStringWordsOrder()
+function BU::Main::Text::ReverseStringWordsOrder()
 {
     #**** Parameters ****
     #   $1  --> string to process

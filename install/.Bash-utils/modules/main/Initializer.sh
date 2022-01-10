@@ -210,7 +210,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 
 				# -------- __BU_MAIN_STAT_TIME_TXT global status variable
 
-				if [ "$stat_value" = "stat-time-txt=$(IsFloat "$stat_value#*=")" ]; then
+				if [ "$stat_value" = "stat-time-txt=$(BU::IsFloat "$stat_value#*=")" ]; then
 					__BU_MAIN_STAT_TIME_TXT="$stat_value"
 				else
 					echo "$stat_value_warning \e[3ma floating number\e[0m"
@@ -261,13 +261,13 @@ fi
 ## CALLING NECESSARY FUNCTIONS
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
-MkTmpDir
+BU::Main::Directories::MkTmpDir
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
 	BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
 else
 	BU::EchoSuccess ""
@@ -275,7 +275,7 @@ fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
 if BU::Main::Status::CheckStatIsLogging; then
-	if ! CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+	if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
 		BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
 
 		return 1
@@ -294,5 +294,5 @@ fi
 ## JUNK
 
 # Future functionnality : translating the library.
-# SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
+# BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_LIB_LANG_DIR_PATH/SetLibLang.sh"
 # GetLibLang

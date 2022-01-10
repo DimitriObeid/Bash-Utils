@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Reverse a string.
-function ReverseStringWordsOrder()
+function BU::Main::Text::ReverseStringWordsOrder()
 {
     #***** Parameters *****
     p_str=$1
@@ -41,7 +41,7 @@ function BU::Main::Directories::GetParentDirectoryPathMkdir()
     done
 
     local v_print_path
-		v_print_path="$(ReverseStringWordsOrder "$v_path_str" '/')"
+		v_print_path="$(BU::Main::Text::ReverseStringWordsOrder "$v_path_str" '/')"
 	echo "$v_print_path"
 }
 

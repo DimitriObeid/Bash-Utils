@@ -92,98 +92,98 @@ function  BU::Main::CheckArgs::PrintBadOption()
     #**** Code ****
 	# If no value is passed as argument.
     if [[ "$p_option" = [Z-z] ]]; then
-		BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
+		BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "${p_option,,}" = '!alphachar' ]; then
-        BU::Main::Errors::HandleErrors '1' "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
+        BU::Main::Errors::HandleErrors '1' "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastr' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastrchar' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumchar' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstr' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstrchar' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
     # Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" = '!charnum' ]; then
-        BU::Main::Errors::HandleErrors '1' "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
+        BU::Main::Errors::HandleErrors '1' "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
         return 1
 
 	# Else, if the value passed as argument is not a valid directory path.
     elif [ "${p_option,,}" = '!d' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a valid file path.
     elif [ "${p_option,,}" = '!f' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a floating number.
     elif [ "${p_option,,}" = '!float' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "${p_option,,}" = '!floatneg' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not a positive floating number.
     elif [ "${p_option,,}" = '!floatpos' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
 
 	# Else, if the value passed as argument is not an integer.
     elif [ "${p_option,,}" = '!int' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
@@ -191,13 +191,13 @@ function  BU::Main::CheckArgs::PrintBadOption()
 	# Else, if the value passed as argument is not a negative integer.
     elif [ "${p_option,,}" = '!intneg' ]; then
 
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 		return 1
 
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "${p_option,,}" = '!intpos' ]; then
-        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+        BU::Main::Errors::HandleErrors "1" "THE $p_funcname FUNCTION'S $(BU::DechoHighlight "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$p_funcname" "$p_lineno"
 
 		return 1
@@ -221,7 +221,7 @@ function  BU::Main::CheckArgs::PrintBadOption()
 
 ## "Checkings.lib" FILE'S FUNCTIONS - FILES PATHS CHECKING CATEGORY
 
-# "CheckProjectRelatedFile" function.
+# "BU::Main::Checkings::CheckProjectRelatedFile" function.
 function BU::Main::CheckArgs__Checkings::CheckProjectRelatedFile()
 {
 	#**** Parameters ****
@@ -231,19 +231,19 @@ function BU::Main::CheckArgs__Checkings::CheckProjectRelatedFile()
 
 	#**** Code ****
 	local lineno="$LINENO"; if [ -z "$p_parent" ]; then
-		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
+		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
 			'p_parent' "$p_parent" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
 	
 	local lineno="$LINENO"; elif [ -z "$p_child" ]; then
-		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as second argument to work properly" \
+		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as second argument to work properly" \
 			'p_child' "$p_child" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
 
 	local lineno="$LINENO"; elif [ -z "$p_type" ]; then
-		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as third argument to work properly" \
+		 BU::Main::CheckArgs::PrintBadOption 'z' "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as third argument to work properly" \
 			'p_type' "$p_type" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
@@ -277,7 +277,7 @@ function BU::Main::CheckArgs__Directories::ProcessingDir()
 
     #**** Code ****
     local lineno="$LINENO"; if [ -z "$p_function" ]; then
-         BU::Main::CheckArgs::PrintBadOption 'z' "The function $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
+         BU::Main::CheckArgs::PrintBadOption 'z' "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") needs a function passed as first argument to work properly" \
             'p_function' "$p_function" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
@@ -366,7 +366,7 @@ function BU::Main::CheckArgs__Directories::GetDirectoryName()
 
     #**** Code ****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-         BU::Main::CheckArgs::PrintBadOption 'z' "The $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "${FUNCNAME[0]}" "$lineno"
+         BU::Main::CheckArgs::PrintBadOption 'z' "The $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "${FUNCNAME[0]}" "$lineno"
 
 		return 1
     fi
@@ -382,7 +382,7 @@ function BU::Main::CheckArgs__Directories::GetDirectoryPath()
 
     #**** Code ****
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
-         BU::Main::CheckArgs::PrintBadOption 'z' "The $(CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
+         BU::Main::CheckArgs::PrintBadOption 'z' "The $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlight "${FUNCNAME[0]}")") function takes a path as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"
 
 		return 1
     fi
