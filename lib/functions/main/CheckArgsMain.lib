@@ -61,7 +61,7 @@ function CheckArgsMain_IsBadArgc0()
 ## QUICK MESSAGE PRINTING
 
 # Print a message without the need to write the whole "BU::Main::Errors::HandleErrors()" function's second argument, and according to the test option which failed :
-function  BU::Main::CheckArgs::PrintBadOption()
+function BU::Main::CheckArgs::PrintBadOption()
 {
     #**** Parameters ****
     local p_option=$1   # Test option.

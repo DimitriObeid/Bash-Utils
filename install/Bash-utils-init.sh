@@ -54,7 +54,7 @@ printf "
 
 # -----------------------------------------------
 
-## TRANSLATION FUNCTIONS
+## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
 
 # Rewriting the library's languages messages.
 function Moduleinitializer_PrintModInitDefaultLanguage()
@@ -106,14 +106,14 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 function __bu_export_textdomain()
 {
 	#**** Variables ****
-	export TEXTDOMAINDIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")"
+	export TEXTDOMAINDIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")"
 
 	#**** Code ****
     return 0
 }
 
 # Getting and sourcing the "gettext.sh" file.
-function ModuleInitializer_Get_gettext_sh_File()
+function ModuleInit_Get_gettext_sh_File()
 {
     #**** Variables ****
     local v_path_file_path  # Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
@@ -144,10 +144,47 @@ function ModuleInitializer_Get_gettext_sh_File()
 
 # -----------------------------------------------
 
-##
+## FUNCTIONS NEEDED FOR THE 
+
+# Displaying the information on the initialized global variables
+function ModuleInit_DisplayInitGlobalVarsInfos()
+{
+    #**** Parameters ****
+    p_var_name=$1
+    p_var_val=$2
+
+    #**** Code ****
+    ModuleInit_Msg "Declared global variable : $p_var_name"
+    ModuleInit_Msg "Value --> $p_var_val"
+    ModuleInit_Msg
+}
+
+# Handling the initializer's messages.
+function ModuleInit_Msg()
+{
+    #**** Parameters ****
+    p_str=$1            # The string to display.
+    p_status=$2         # The "--print-init='true'" parameter of the "BashUtils_SourcingModules" function.
+
+    #**** Code ****
+    __BU_MODULE_UTILS_MSG_ARRAY+="$p_str"
+
+    # If the "--print-init='true'" argument is passed at the "module" value
+    if [ "$p_status" = "--print-init='true'" ] || [ "${p_status^^}" = 'E' ]; then
+        if [ -z "$p_str" ]; then echo
+
+        else echo "$p_str"; fi
+    fi
+
+    return 0
+}
+
+# -----------------------------------------------
+
+## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
 # Checking the currently used Bash language's version.
-function ModuleInitializer_CheckBashMinimalVersion()
+function ModuleInit_CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
 		printf "BASH-UTILS MODULES INITIALIZATION ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2
@@ -164,8 +201,8 @@ function ModuleInitializer_CheckBashMinimalVersion()
 	fi
 }
 
-# Check if the given path exists (This function is called by the "ModuleInitializer_SourcingFailure()" function).
-function ModuleInitializer_CheckPath()
+# Check if the given path exists (This function is called by the "ModuleInit_SourcingFailure()" function).
+function ModuleInit_CheckPath()
 {
     #**** Parameters ****
     local p_path=$1         # Path of the target file or directory.
@@ -201,7 +238,7 @@ function ModuleInitializer_CheckPath()
 }
 
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
-function ModuleInitializer_FindPath()
+function ModuleInit_FindPath()
 {
 	#	$1	--> Parent directory.
     #	$2	--> Targeted directory or file.
@@ -209,7 +246,7 @@ function ModuleInitializer_FindPath()
 }
 
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
-function ModuleInitializer_GetModuleName()
+function ModuleInit_GetModuleName()
 {
     v_module="$(cd "$(dirname "$1")" || { echo >&2; echo -e "Unable to get the module's name from the parent directory name" >&2; echo >&2; exit 1; }; pwd -P)"
 
@@ -217,7 +254,7 @@ function ModuleInitializer_GetModuleName()
 }
 
 # Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
-function ModuleInitializer_ListInstalledModules()
+function ModuleInit_ListInstalledModules()
 {
     #**** Variables ****
     local v_module_tmp_d="$__BU_MODULE_UTILS_ROOT/tmp"
@@ -280,14 +317,14 @@ function ModuleInitializer_ListInstalledModules()
 }
 
 # Printing an error message if a file cannot be sourced.
-function ModuleInitializer_SourcingFailure()
+function ModuleInit_SourcingFailure()
 {
     #**** Parameters ****
     local p_path=$1         # Path of the file that cannot be sourced.
     local p_module=$2       # Name of the module.
 
     #**** Code ****
-    echo >&2; echo -e ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(ModuleInitializer_CheckPath "$p_path" 'f')" >&2; echo >&2; exit 1
+    ModuleInit_Msg >&2; ModuleInit_Msg ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(ModuleInit_CheckPath "$p_path" 'f')" >&2; ModuleInit_Msg >&2; exit 1
 }
 
 # -----------------------------------------------
@@ -315,15 +352,15 @@ fi
 __BU_MODULE_UTILS_ROOT_HOME="$HOME"
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
-	__BU_MODULE_UTILS_ROOT="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
+	__BU_MODULE_UTILS_ROOT="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
 
     # Configurations directories
-	__BU_MODULE_UTILS_CONFIG_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
-    __BU_MODULE_UTILS_CONFIG_INIT_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "initializer")"
-	__BU_MODULE_UTILS_CONFIG_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "modules")"
+	__BU_MODULE_UTILS_CONFIG_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
+    __BU_MODULE_UTILS_CONFIG_INIT_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "initializer")"
+	__BU_MODULE_UTILS_CONFIG_MODULES_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "modules")"
 
     # Modules directories
-	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
@@ -337,13 +374,32 @@ fi
 
 # -----------------------------------------------
 
-# CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
+## CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
 
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!! --> Setting the whole project's language by getting and sourcing the "gettext.sh" file.
-ModuleInitializer_Get_gettext_sh_File
+ModuleInit_Get_gettext_sh_File
 
 # Checking the currently used Bash language's version.
-ModuleInitializer_CheckBashMinimalVersion
+ModuleInit_CheckBashMinimalVersion
+
+## DEFINING A NEW GLOBAL VARIABLE TO STORE THE INITIALIZATION LOGS AND DISPLAY IT OR NO
+
+declare __BU_MODULE_UTILS_MSG_ARRAY=()
+
+# -----------------------------------------------
+
+## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
+
+ModuleInit_Msg "INITIALIZING THE MODULES"
+ModuleInit_Msg
+
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             "$__BU_MODULE_UTILS_ROOT_HOME";             ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  "$__BU_MODULE_UTILS_ROOT";                  ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            "$__BU_MODULE_UTILS_CONFIG_DIR";            ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "$__BU_MODULE_UTILS_CONFIG_INIT_DIR";       ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR";    ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           "$__BU_MODULE_UTILS_MODULES_DIR";           ModuleInit_Msg
+
 
 # -----------------------------------------------
 
@@ -382,19 +438,50 @@ function BashUtils_InitModules()
 
 		# -----------------------------------------------
 
-		## INITIALIZER'S FIRST ARGUMENTS PROCESSING
+		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
-		# Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-		if [[ "${p_module_list[0]}" == 'main' ]] || [[ "${p_module_list[0]}" == "main --"* ]]; then
-			true
-		else
-			echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
-			echo >&2; echo "Please do so by modifying the « main » module's argument position in your script" >&2
+        # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
+        if [[ "${p_module_list[0]}" = 'module --'* ]]; then
 
-			echo >&2; echo "Aborting the library's initialization" >&2
+                # Creating a new global variable to store the word array made with the .
+                __BU_MODULE_UTILS_p_module_list_ARR="${p_module_list[0]}"
 
-			echo >&2; return 1
-		fi
+                for module_vals in "${__BU_MODULE_UTILS_p_module_list_ARR[@]}"; do
+                    true
+                    # If the "main" value's argument is "--lang="
+                    # if [[ "${}" ]]; then
+
+                    # Else, if the "main" value's argument is "--print-init='true'"
+                    # elif [[  ]]; then
+
+                    # Else, if the "main" value's argument is not a supported value.
+                    # else
+
+                    # fi
+                done
+
+            if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
+                true
+            else
+                echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_module_list[0]}" >&2
+                echo >&2; echo "Please do so by setting the « ${p_module_list[1]} » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+
+                echo >&2; echo "Aborting the library's initialization" >&2
+
+                exit 1
+            fi
+        else
+            # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
+            if [[ "${p_module_list[0]}" == 'main' ]] || [[ "${p_module_list[0]}" == "main --"* ]]; then
+                true
+            else
+                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
+                echo >&2; echo "Please do so by modifying the « main » module's argument position in your script" >&2
+
+                echo >&2; echo "Aborting the library's initialization" >&2
+
+                echo >&2; return 1
+            fi
 
 		# -----------------------------------------------
 
@@ -409,12 +496,12 @@ function BashUtils_InitModules()
 			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR" >&2
 
 			# Listing all the installed modules in the user's hard drive.
-			ModuleInitializer_ListInstalledModules
+			ModuleInit_ListInstalledModules
 
 			return 1
 		else
 			# shellcheck disable=SC1090
-			source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
+			source "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInit_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
 		fi
 
 		# -----------------------------------------------
@@ -432,7 +519,7 @@ function BashUtils_InitModules()
 			return 1
 		else
 			# shellcheck disable=SC1090
-			source "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInitializer_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
+			source "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || ModuleInit_SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
 
 			BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 		fi

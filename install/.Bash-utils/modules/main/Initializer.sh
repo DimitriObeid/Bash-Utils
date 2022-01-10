@@ -66,7 +66,7 @@ InitializerAddInitStrArrayVal ""
 
 # shellcheck disable=SC1090
 for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
+    source "$f" || ModuleInit_SourcingFailure "$f" "$(ModuleInit_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
 
 	InitializerAddInitStrArrayVal "Successfully sourced this library file : $f"
 done
@@ -80,7 +80,7 @@ InitializerAddInitStrArrayVal ""
 
 # shellcheck disable=SC1090
 for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-    source "$f" || ModuleInitializer_SourcingFailure "$f" "$(ModuleInitializer_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
+    source "$f" || ModuleInit_SourcingFailure "$f" "$(ModuleInit_GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f")
 
 	InitializerAddInitStrArrayVal "Successfully sourced this configuration file : $f"
 done
@@ -232,7 +232,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # Note : only some variables are changed, the other variables values are still set to their default value.
 
 			# TODO : After adding the status configuration arguments,
-			if [ -f "$(ModuleInitializer_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
+			if [ -f "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
 				echo "STAT"
 			else
 				BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -270,7 +270,7 @@ BU::Main::Directories::MkTmpDir
 if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
 	BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
 else
-	BU::EchoSuccess ""
+	BU::EchoSuccess "The $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") color code file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT")"; BU::Newline
 fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
@@ -279,6 +279,8 @@ if BU::Main::Status::CheckStatIsLogging; then
 		BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"
 
 		return 1
+	else
+		BU::EchoSuccess "The $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_NAME") log file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")"; BU::Newline
 	fi
 fi
 

@@ -49,7 +49,7 @@ function BU::Main::PosixTerm::DisplayCountdown()
 }
 
 # Display a progress bar while a task is ongoing.
-function  BU::Main::PosixTerm::DisplayProgressBar()
+function BU::Main::PosixTerm::DisplayProgressBar()
 {
     return 0
 }
