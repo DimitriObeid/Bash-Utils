@@ -69,7 +69,7 @@ function __BU::EchoOutput()
 
     #**** Variables ****
     # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
-    if ! CheckStatIsBackupBU::Echoing; then
+    if ! CheckStatIsBackupEchoing; then
         local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
     fi
 

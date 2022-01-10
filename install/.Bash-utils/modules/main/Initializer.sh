@@ -215,6 +215,14 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 				else
 					echo "$stat_value_warning \e[3ma floating number\e[0m"
 				fi
+
+				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
+
+                if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
+                    __BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
+                else
+					echo "$stat_value_warning true, false"
+            	fi
 			done
 
 		# Else, if no "--stat" argument is passed, then the default values are set to each status global variables.
