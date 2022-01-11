@@ -170,7 +170,7 @@ function ModuleInit_Msg()
     __BU_MODULE_UTILS_MSG_ARRAY+="$p_str"
 
     # If the "--print-init='true'" argument is passed at the "module" value
-    if [ "$p_status" = "--print-init='true'" ] || [ "${p_status^^}" = 'E' ]; then
+    if [ "$p_status" = '--print-init=' ]; then
         if [ -z "$p_str" ]; then echo
 
         else echo "$p_str"; fi
@@ -384,10 +384,12 @@ ModuleInit_CheckBashMinimalVersion
 
 ## DEFINING NEW GLOBAL VARIABLES TO STORE THE INITIALIZATION LOGS AND DISPLAY THEM OR NO
 
+# This global variable stores the log messages 
 declare __BU_MODULE_UTILS_MSG_ARRAY=()
 
-# This function stores the value (given in the "BashUtils_InitModules()" function's main loop) which authorizes the displaying of the logs messages on the screen.
-declare __BU_MODULE_UTILS_MSG_ARRAY=''
+# This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
+# which authorizes the displaying of the logs messages on the screen. By default, it stores no value.
+declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION=''
 
 # -----------------------------------------------
 
@@ -430,7 +432,7 @@ function BashUtils_InitModules()
 	ModuleInit_Msg "INTIALIZING THESE MODULES :"
 
 	for modules_args in "${p_module_list[@]}"; do
-        ModuleInit_Msg "- $modules_args"
+        ModuleInit_Msg "--> $modules_args"
 	done
 
 	ModuleInit_Msg
@@ -466,10 +468,11 @@ function BashUtils_InitModules()
                         true
 
                     # Else, if the "module" value's argument is "--print-init"
-                    elif [[ "${module_vals}" = 'print-init' ]]; then
+                    elif [[ "$module_vals" = '--print-init' ]]; then
                         # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                         # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                        true
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_vals"
+
                     # Else, if the "module" value's argument is not a supported one
                     else
                         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_vals » IS NOT SUPPORTED" >&2;
@@ -481,7 +484,7 @@ function BashUtils_InitModules()
                     fi
                 done
 
-            if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
+            if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --"* ]]; then
                 true
             else
                 echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_module_list[0]}" >&2
