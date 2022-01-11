@@ -144,7 +144,7 @@ function ModuleInit_Get_gettext_sh_File()
 
 # -----------------------------------------------
 
-## FUNCTIONS NEEDED FOR THE 
+## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
 # Displaying the information on the initialized global variables
 function ModuleInit_DisplayInitGlobalVarsInfos()
@@ -159,7 +159,7 @@ function ModuleInit_DisplayInitGlobalVarsInfos()
     ModuleInit_Msg
 }
 
-# Handling the initializer's messages.
+# Handling the initializer's messages. In case of an error, there's no need to call this function, as the error messages MUST be displayed.
 function ModuleInit_Msg()
 {
     #**** Parameters ****
@@ -382,9 +382,12 @@ ModuleInit_Get_gettext_sh_File
 # Checking the currently used Bash language's version.
 ModuleInit_CheckBashMinimalVersion
 
-## DEFINING A NEW GLOBAL VARIABLE TO STORE THE INITIALIZATION LOGS AND DISPLAY IT OR NO
+## DEFINING NEW GLOBAL VARIABLES TO STORE THE INITIALIZATION LOGS AND DISPLAY THEM OR NO
 
 declare __BU_MODULE_UTILS_MSG_ARRAY=()
+
+# This function stores the value (given in the "BashUtils_InitModules()" function's main loop) which authorizes the displaying of the logs messages on the screen.
+declare __BU_MODULE_UTILS_MSG_ARRAY=''
 
 # -----------------------------------------------
 
@@ -423,6 +426,15 @@ function BashUtils_InitModules()
 		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
 
+    # Writing the list of the 
+	ModuleInit_Msg "INTIALIZING THESE MODULES :"
+
+	for modules_args in "${p_module_list[@]}"; do
+        ModuleInit_Msg "- $modules_args"
+	done
+
+	ModuleInit_Msg
+
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_module_list[@]}"; do
 
@@ -448,16 +460,25 @@ function BashUtils_InitModules()
 
                 for module_vals in "${__BU_MODULE_UTILS_p_module_list_ARR[@]}"; do
                     true
-                    # If the "main" value's argument is "--lang="
-                    # if [[ "${}" ]]; then
+                    # If the "module" value's argument is "--lang="
+                    if [[ "$module_vals" = '--lang=en_US' ]]; then
+                        # Temporary solution to avoid crashes when executing this file.
+                        true
 
-                    # Else, if the "main" value's argument is "--print-init='true'"
-                    # elif [[  ]]; then
+                    # Else, if the "module" value's argument is "--print-init"
+                    elif [[ "${module_vals}" = 'print-init' ]]; then
+                        # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
+                        # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
+                        true
+                    # Else, if the "module" value's argument is not a supported one
+                    else
+                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_vals » IS NOT SUPPORTED" >&2;
+                        echo >&2; echo "Please remove this value, called at the index « ${#module_vals} »" >&2
 
-                    # Else, if the "main" value's argument is not a supported value.
-                    # else
+                        echo >&2; echo "Aborting the library's initialization" >&2
 
-                    # fi
+                        echo >&2; return 1
+                    fi
                 done
 
             if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --*" ]]; then
@@ -475,13 +496,14 @@ function BashUtils_InitModules()
             if [[ "${p_module_list[0]}" == 'main' ]] || [[ "${p_module_list[0]}" == "main --"* ]]; then
                 true
             else
-                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS FIRST ARGUMENT" >&2
-                echo >&2; echo "Please do so by modifying the « main » module's argument position in your script" >&2
+                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
+                echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly " >&2
 
                 echo >&2; echo "Aborting the library's initialization" >&2
 
                 echo >&2; return 1
             fi
+        fi
 
 		# -----------------------------------------------
 
@@ -500,6 +522,7 @@ function BashUtils_InitModules()
 
 			return 1
 		else
+            ModuleInit_Msg ""; ModuleInit_Msg
 			# shellcheck disable=SC1090
 			source "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || ModuleInit_SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
 		fi
