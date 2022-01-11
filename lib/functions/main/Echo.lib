@@ -228,7 +228,7 @@ function BU::EchoError()
         BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -262,7 +262,7 @@ function BU::EchoMsg()
         BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # New sub-step message
@@ -296,7 +296,7 @@ function BU::EchoNewstep()
         BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Read input values
@@ -348,7 +348,7 @@ function BU::EchoSuccess()
         BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Warning message
@@ -382,7 +382,7 @@ function BU::EchoWarning()
         BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || return 1
     fi
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # -----------------------------------------------
@@ -400,7 +400,7 @@ function BU::EchoAqua()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_AQUA}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Black colored message.
@@ -412,7 +412,7 @@ function BU::EchoBlack()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_BLACK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Blue colored message.
@@ -424,7 +424,7 @@ function BU::EchoBlue()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_BLUE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Cyan colored message.
@@ -436,7 +436,7 @@ function BU::EchoCyan()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_CYAN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Fuschia colored message.
@@ -448,7 +448,7 @@ function BU::EchoFuschia()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_FUSCHIA}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Gray colored message.
@@ -460,7 +460,7 @@ function BU::EchoGray()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_GRAY}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Green colored message.
@@ -472,7 +472,7 @@ function BU::EchoGreen()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_GREEN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Lime green colored message.
@@ -484,7 +484,7 @@ function BU::EchoLime()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_LIME}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Maroon blue colored message.
@@ -496,7 +496,7 @@ function BU::EchoMaroon()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_MAROON}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Orange colored message.
@@ -508,7 +508,7 @@ function BU::EchoOrange()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_ORANGE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Pink colored message.
@@ -520,7 +520,7 @@ function BU::EchoPink()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_PINK}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Purple colored message.
@@ -532,7 +532,7 @@ function BU::EchoPurple()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_PURPLE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Red colored message.
@@ -544,7 +544,7 @@ function BU::EchoRed()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_RED}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Silver colored message.
@@ -556,7 +556,7 @@ function BU::EchoSilver()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_SILVER}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Teal colored message.
@@ -568,7 +568,7 @@ function BU::EchoTeal()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TEAL}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Turquoise colored message.
@@ -580,7 +580,7 @@ function BU::EchoTurquoise()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TURQUOISE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # White colored message.
@@ -592,7 +592,7 @@ function BU::EchoWhite()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_WHITE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # Yellow colored message.
@@ -604,7 +604,7 @@ function BU::EchoYellow()
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_YELLOW}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
-    sleep "$__BU_MAIN_STAT_TIME_TXT"; return 0
+    return 0
 }
 
 # -----------------------------------------------
