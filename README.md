@@ -8,14 +8,15 @@ Bash Utils is a group of utilities for Bash programming : configurations, docume
 
 ### REQUIREMENTS :
 - **Bash version :** 4.0.0
+- **RAM :** 5 MB
 - **Operating system :**
-	- **_General functionnalities :_**
+	- **_General functionalities :_**
 		- _UNIX-like :_
 			- Linux (native or with WSL)
 			- OSX
 			- BSD
-<br /><br />
-	- **_Specific functionnalities :_**
+			<br /><br />
+	- **_Specific functionalities :_**
 		- _Supported Linux distributions :_
 			- Ubuntu
 
@@ -33,13 +34,14 @@ Bash Utils est un regroupement d'utilitaires pour la programmation en Bash : con
 
 ### CONFIGURATION REQUISE :
 - **Version de Bash :** 4.0.0
+- **Mémoire vive :** 5 Mo
 - **Système d'exploitation :**
 	- **_Fonctionnalités générales :_**
 		- _Famille UNIX :_
 			- Linux (natif ou WSL)
 			- OSX
 			- BSD
-<br /><br />
+			<br /><br />
 	- **_Fonctionnalités spécifiques :_**
 		- _Distributions Linux supportées :_
 			- Ubuntu
