@@ -344,21 +344,11 @@ function BU::CheckProjectLogStatus()
     # Setting the "$__BU_MAIN_STAT_ECHO" status variable's value to "true", in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
     local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
-    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-        local v_redirectionError
-            v_redirectionError="$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> "
-    else
-        local v_redirectionError
-            v_redirectionError=""
-    fi
+    local v_redirectionError
+        v_redirectionError="$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> "
 
-    if [ "$__BU_MAIN_STAT_TRANSLATED" = 'false' ]; then
-        local v_warning_array_value
-            v_warning_array_value="$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU::DechoHighlight "${BASH_SOURCE[0]}"), function $(BU::DechoHighlight "${FUNCNAME[0]}()").\nValue --> $(BU::DechoHighlight "$val")\nLine -->"
-    else
-        local v_warning_array_value
-            v_warning_array_value=""
-    fi
+    local v_warning_array_value
+        v_warning_array_value="$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU::DechoHighlight "${BASH_SOURCE[0]}"), function $(BU::DechoHighlight "${FUNCNAME[0]}()").\nValue --> $(BU::DechoHighlight "$val")\nLine -->"
 
     #**** Code *****
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.

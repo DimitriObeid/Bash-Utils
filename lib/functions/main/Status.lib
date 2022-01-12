@@ -48,8 +48,8 @@ function BU::Main::Status::ConfEcho()
     #**** Parameters ****
     local p_file=$1;
     local p_lineno=$2;
-    local p_badVal=$3;
-    local p_varVal=$4
+    local p_bad_value=$3;
+    local p_var_name=$4
 
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
@@ -60,62 +60,44 @@ function BU::Main::Status::ConfEcho()
     local i=0
 
     #**** Code ****
-    if [ "$__BU_MAIN_STAT_TRANSLATED" != 'true' ]; then
-        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then { BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-        else BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"; BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; fi
+    if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+        { BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"
 
-        echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
-        echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+        echo "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!"
+        
+        BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"
+    } 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
-        if [ -z "$p_badVal" ]; then
-            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
-        else
-            echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET}" >&2
-        fi
-
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
-
-        # Displaying the list of every allowed arguments.
-        for val in "${pa_correctValues[@]}"; do
-            i=$(( i+1 ))
-
-            # If an empty argument is allowed.
-            if [ -z "$val" ]; then
-                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
-            else
-                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
-            fi
-        done
     else
-        if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-            BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-        else
-            BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_HEADER_ERROR"
-        fi
+        BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"
 
-        echo -ne "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ERROR_HAPPENED" >&2
-        echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ERROR_HAPPENED_TYPE" >&2
+        echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!"
 
-        if [ -z "$p_badVal" ]; then
-            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_BAD_VALUE_EMPTY" >&2
-        else
-            echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_BAD_VALUE" >&2
-        fi
-
-        echo >&2; echo -e "$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VALS_LIST_MSG" >&2
-
-        # Displaying the list of every allowed arguments.
-        for val in "${pa_correctValues[@]}"; do
-            i=$(( i+1 ))
-
-            # If an empty argument is allowed.
-            if [ -z "$val" ]; then
-                echo -e "" >&2
-            else
-                echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
-            fi
-        done
+        BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_CHAR_HEADER_LINE"
     fi
+
+    echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2
+    echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_var_name${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2
+
+    if [ -z "$p_bad_value" ]; then
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2
+    else
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_bad_value.${__BU_MAIN_COLOR_RESET}" >&2
+    fi
+
+    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2
+
+    # Displaying the list of every allowed arguments.
+    for val in "${pa_correctValues[@]}"; do
+        i=$(( i+1 ))
+
+        # If an empty argument is allowed.
+        if [ -z "$val" ]; then
+            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2
+        else
+            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2
+        fi
+    done
 
     echo >&2; BU::Main::Errors::ExitError 1
 }
@@ -297,11 +279,7 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     local p_lineno=$2
 
     #**** Variables ****
-    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
-        local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
-    else
-        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VAL_FLOAT_INT")
-    fi
+    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
@@ -320,11 +298,7 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
     local p_lineno=$2
 
     #**** Variables ****
-    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
-        local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
-    else
-        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VAL_FLOAT_INT")
-    fi
+    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
@@ -343,34 +317,12 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
     local p_lineno=$2
 
     #**** Variables ****
-    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
-        local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
-    else
-        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VAL_FLOAT_INT")
-    fi
+    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
     if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
         BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1
-    fi
-
-    return 0
-}
-
-# Checking the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function BU::Main::Status::CheckSTAT_TRANSLATED()
-{
-    #**** Parameters ****
-    p_file=$1
-    p_lineno=$2
-
-    #**** Variables ****
-    local pa_correctValues=("true" "false")
-
-    #**** Code ****
-    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "true" ] && [ "${__BU_MAIN_STAT_TRANSLATED,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TRANSLATED" '__BU_MAIN_STAT_TRANSLATED' "${pa_correctValues[@]}"; return 1
     fi
 
     return 0
@@ -432,7 +384,6 @@ function BU::Main::Status::CheckProjectStatusVars()
 	BU::Main::Status::CheckSTAT_TIME_HEADER    "$p_file" "$p_lineno" || return 1
 	BU::Main::Status::CheckSTAT_TIME_NEWLINE   "$p_file" "$p_lineno" || return 1
     BU::Main::Status::CheckSTAT_TIME_TXT       "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_TRANSLATED     "$p_file" "$p_lineno" || return 1
     BU::Main::Status::CheckSTAT_TXT_FMT        "$p_file" "$p_lineno" || return 1
     BU::Main::Status::CheckSTAT_USER_OS        "$p_file" "$p_lineno" || return 1
 
@@ -493,9 +444,6 @@ function BU::Main:Status::ChangeSTAT_TIME_TXT       { __BU_MAIN_STAT_TIME_TXT="$
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
 function BU::Main:Status::ChangeSTAT_TXT_FMT        { __BU_MAIN_STAT_TXT_FMT="$1";          BU::Main:Status::CheckSTAT_TXT_FMT          "$2" "$3" || return 1; return 0; }
 
-# Changing the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function BU::Main:Status::ChangeSTAT_TRANSLATED     { __BU_MAIN_STAT_TRANSLATED="$1";       BU::Main::Status::CheckSTAT_TRANSLATED      "$2" "$3" || return 1; return 0; }
-
 # -----------------------------------------------
 
 ## EASIER CHECKING BOOLEAN VALUES
@@ -514,9 +462,6 @@ function BU::Main::Status::CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LO
 
 # Checking if the initialization logs can be printed on the terminal.
 function BU::Main::Status::CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
-
-# Checking if the main module is translated.
-function BU::Main::Status::CheckStatIsTranslated()    { if [ "$__BU_MAIN_STAT_TRANSLATED"     = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the text formatting is allowed.
 function BU::Main::Status::CheckStatAllowFormatting() { if [ "$__BU_MAIN_STAT_TXT_FMT"        = 'true' ]; then return 0; else return 1; fi; }

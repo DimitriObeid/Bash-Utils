@@ -368,17 +368,25 @@ function BU::Main::Directories::TriggerRootDirWarning()
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
-	if [ "$p_path" = "/" ] || [ "$(BU::Main::Directories::GetParentDirectoryPath "$p_path")" = '/' ]; then
+	if [ "$(pwd "$p_path")" = "/" ] || [ "$(BU::Main::Directories::GetParentDirectoryPath "$p_path")" = '/' ]; then
 		if [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "forbidden" ]; then
+            BU::EchoError "-------------------------------------------------"
 			BU::EchoError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
+			BU::EchoError "-------------------------------------------------"
+
 			BU::EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
 			BU::EchoError "Given path : $(BU::DechoHighlight "$p_path")"
+			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT"
 			BU::Newline
 
-			BU::Main::Errors::ExitError
+			BU::Main::Errors::ExitError '1'; return 1
+
 		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
+            BU::EchoWarning "---------------------------------------------------------------------------"
 			BU::EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
-			BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
+            BU::EchoWarning "---------------------------------------------------------------------------"
+
+            BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			BU::EchoWarning "Given path : $(BU::DechoHighlight "$p_path")"
 			BU::Newline
 
