@@ -123,7 +123,7 @@ function BU::Main::Errors::ExitError()
 ## SCRIPT'S ERRORS HANDLING
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling file name presence.
-function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; BU::DechoHighlight "<no specified file>"; else BU::DechoHighlight "$1"; fi; }
+function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; then BU::DechoHighlight "<no specified file>"; else BU::DechoHighlight "$1"; fi; }
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling function name presence.
 function BU::Main::Errors::HandleErrors_Function()    { if [ -z "$1" ]; then BU::DechoHighlight "<no specified function>"; else BU::DechoHighlight "$1"; fi; }
