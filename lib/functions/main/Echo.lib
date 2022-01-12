@@ -55,7 +55,10 @@ printf "
     
     
     
-" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"
+" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || 
+    {
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH »" >&2; echo >&2; exit 1
+    }
 }
 
 # "BU::Echo<...>()" functions debug output for a better view during a debug process.
@@ -67,16 +70,15 @@ function BU::Main::Echo::__EchoOutput()
 	local p_context=$2		# Begin or end of the debug process.
 	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
-    #**** Variables ****
-    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
-    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
-    fi
-
 	#**** Code ****
 	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0
 
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
+	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
+        if ! BU::Main::Status::CheckStatIsBackupEchoing; then
+            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
+        fi
+
 		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "${p_context,,}" = "begin" ]; then
@@ -95,8 +97,8 @@ function BU::Main::Echo::__EchoOutput()
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
-            if [ "$v_BU_MAIN_STAT_ECHO_val" = 'false' ]; then
-                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"
+            if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
+                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val=''
             fi
 
             return 0
@@ -115,8 +117,8 @@ function BU::Main::Echo::__EchoOutput()
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
-            if [ "$v_BU_MAIN_STAT_ECHO_val" = 'false' ]; then
-                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"
+            if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
+                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val=''
             fi
 
             __BU::EchoVoid; return 0
