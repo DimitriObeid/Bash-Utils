@@ -384,11 +384,14 @@ ModuleInit_CheckBashMinimalVersion
 
 ## DEFINING NEW GLOBAL VARIABLES TO STORE THE INITIALIZATION LOGS AND DISPLAY THEM OR NO
 
-# This global variable stores the log messages 
+# This global variable stores the log messages.
 declare __BU_MODULE_UTILS_MSG_ARRAY=()
 
+
 # This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
-# which authorizes the displaying of the logs messages on the screen. By default, it stores no value.
+# which authorizes the displaying of the logs messages on the screen.
+
+# By default, it stores no value, and should stay like this.
 declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION=''
 
 # -----------------------------------------------

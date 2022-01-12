@@ -10,6 +10,9 @@ if ! BashUtils_InitModules "main --stat-debug=true stat-error=fatal --stat-log=t
 	echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1
 fi
 
+# This command pauses the script, in order to see how much memory it uses.
+sleep 30
+
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
 
 # Testing a BU::Decho_FMT function
