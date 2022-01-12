@@ -278,8 +278,8 @@ function ModuleInit_ListInstalledModules()
     if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
 
 																				# In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -l "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
-        ls -l "$__BU_MODULE_UTILS_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+        ls -1 "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+        ls -1 "$__BU_MODULE_UTILS_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
             echo; echo "INSTALLED MODULES LIST :"; echo; sleep ".5"
@@ -361,6 +361,15 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 
     # Modules directories
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
+
+	# Files
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME="Bash-utils-root-val.path"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH="$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR/$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"
+
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME="Bash-utils-root-val-ROOT.path"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
@@ -401,13 +410,34 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION=''
 ModuleInit_Msg "INITIALIZING THE MODULES"
 ModuleInit_Msg
 
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             "$__BU_MODULE_UTILS_ROOT_HOME";             ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  "$__BU_MODULE_UTILS_ROOT";                  ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            "$__BU_MODULE_UTILS_CONFIG_DIR";            ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "$__BU_MODULE_UTILS_CONFIG_INIT_DIR";       ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR";    ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           "$__BU_MODULE_UTILS_MODULES_DIR";           ModuleInit_Msg
+ModuleInit_Msg "INITIALIZING THE VARIABLES"
 
+ModuleInit_Msg "Initializing the modules manager's root directory variables"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME";             ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT";                  ModuleInit_Msg
+ModuleInit_Msg
+
+ModuleInit_Msg "Initializing the configuration directories paths"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR";            ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR";       ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR";    ModuleInit_Msg
+ModuleInit_Msg
+
+ModuleInit_Msg "Initializing the modules initializers files directory"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR";           ModuleInit_Msg
+ModuleInit_Msg
+
+ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME" 				"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME";				ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" 		"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR";			ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"				"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH";				ModuleInit_Msg
+ModuleInit_Msg
+
+ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME" 			"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME";			ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"	"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR";	ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH" 			"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH";			ModuleInit_Msg
+ModuleInit_Msg
 
 # -----------------------------------------------
 
@@ -460,35 +490,37 @@ function BashUtils_InitModules()
         # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
         if [[ "${p_module_list[0]}" = 'module --'* ]]; then
 
-                # Creating a new global variable to store the word array made with the .
-                __BU_MODULE_UTILS_p_module_list_ARR="${p_module_list[0]}"
+            # Creating a new global variable to store the word array made with the .
+            __BU_MODULE_UTILS_p_module_list_ARR="${p_module_list[0]}"
 
-                for module_vals in "${__BU_MODULE_UTILS_p_module_list_ARR[@]}"; do
+            for module_vals in "${__BU_MODULE_UTILS_p_module_list_ARR[@]}"; do
+                true
+                # If the "module" value's argument is "--lang="
+                if [[ "$module_vals" = *'--lang=en_US' ]]; then
+                    # Temporary solution to avoid crashes when executing this file.
                     true
-                    # If the "module" value's argument is "--lang="
-                    if [[ "$module_vals" = '--lang=en_US' ]]; then
-                        # Temporary solution to avoid crashes when executing this file.
-                        true
 
-                    # Else, if the "module" value's argument is "--print-init"
-                    elif [[ "$module_vals" = '--print-init' ]]; then
-                        # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                        # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_vals"
+                # Else, if the "module" value's argument is "--print-init"
+                elif [[ "$module_vals" = *'--print-init' ]]; then
+                    # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
+                    # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
+                    __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_vals"
 
-                    # Else, if the "module" value's argument is not a supported one
-                    else
-                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_vals » IS NOT SUPPORTED" >&2;
-                        echo >&2; echo "Please remove this value, called at the index « ${#module_vals} »" >&2
+                # Else, if the "module" value's argument is not a supported one
+                else
+                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_vals » IS NOT SUPPORTED" >&2;
+                    echo >&2; echo "Please remove this value, called at the index « ${#module_vals} »" >&2
 
-                        echo >&2; echo "Aborting the library's initialization" >&2
+                    echo >&2; echo "Aborting the library's initialization" >&2
 
-                        echo >&2; return 1
-                    fi
-                done
+                    echo >&2; return 1
+                fi
+            done
 
             if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --"* ]]; then
-                true
+                if [ "${p_module_list[i]}" = "${p_module_list[0]}" ]; then
+					true
+				fi
             else
                 echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_module_list[0]}" >&2
                 echo >&2; echo "Please do so by setting the « ${p_module_list[1]} » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
@@ -519,9 +551,9 @@ function BashUtils_InitModules()
 		if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
 			printf '\n' >&2;
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR" >&2
+			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2
 
 			# Listing all the installed modules in the user's hard drive.
 			ModuleInit_ListInstalledModules
@@ -541,9 +573,9 @@ function BashUtils_InitModules()
 		if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
 			printf '\n' >&2;
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
 
-			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR" >&2
+			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR//$v_module_name" >&2
 
 			return 1
 		else
