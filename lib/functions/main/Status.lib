@@ -312,6 +312,29 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     return 0
 }
 
+# Checking the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
+function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
+{
+    #**** Parameters ****
+    local p_file=$1
+    local p_lineno=$2
+
+    #**** Variables ****
+    if [ "${__BU_MAIN_STAT_TRANSLATED,,}" = 'false' ]; then
+        local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number")
+    else
+        local pa_correctValues=("$__BU_MAIN_MSG_CHECKSTAT_BU::Main::Status::ConfEcho_ALLOWED_VAL_FLOAT_INT")
+    fi
+
+    #**** Code ****
+    # If the status variable's value is not a float or an integer.
+    if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${pa_correctValues[@]}"; return 1
+    fi
+
+    return 0
+}
+
 # Checking the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
 function BU::Main::Status::CheckSTAT_TIME_TXT()
 {
@@ -446,28 +469,31 @@ function BU::Main:Status::ChangeSTAT_INITIALIZING    {
 	fi; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function BU::Main:Status::ChangeSTAT_LOG            { __BU_MAIN_STAT_LOG="$1";             BU::Main::Status::CheckSTAT_LOG             "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_LOG            { __BU_MAIN_STAT_LOG="$1";              BU::Main::Status::CheckSTAT_LOG             "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function BU::Main:Status::ChangeSTAT_LOG_REDIRECT   { __BU_MAIN_STAT_LOG_REDIRECT="$1";    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_LOG_REDIRECT   { __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function BU::Main:Status::ChangeSTAT_OPERATE_ROOT   { __BU_MAIN_STAT_OPERATE_ROOT="$1";    BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_OPERATE_ROOT   { __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
-function BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG	{ __BU_MAIN_STAT_PRINT_INIT_LOG="$1";  BU::Main::Status::CheckSTAT_PRINT_INIT_LOG  "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG { __BU_MAIN_STAT_PRINT_INIT_LOG="$1";   BU::Main::Status::CheckSTAT_PRINT_INIT_LOG  "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
-function BU::Main:Status::ChangeSTAT_TIME_HEADER	{ __BU_MAIN_STAT_TIME_HEADER="$1";     BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TIME_HEADER    { __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }
+
+# Changing the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
+function BU::Main:Status::ChangeSTAT_TIME_NEWLINE   { __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function BU::Main:Status::ChangeSTAT_TIME_TXT       { __BU_MAIN_STAT_TIME_TXT="$1";        BU::Main::Status::CheckSTAT_TIME_TXT        "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TIME_TXT       { __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT        "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function BU::Main:Status::ChangeSTAT_TXT_FMT        { __BU_MAIN_STAT_TXT_FMT="$1";         BU::Main:Status::CheckSTAT_TXT_FMT          "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TXT_FMT        { __BU_MAIN_STAT_TXT_FMT="$1";          BU::Main:Status::CheckSTAT_TXT_FMT          "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TRANSLATED" status variable's value.
-function BU::Main:Status::ChangeSTAT_TRANSLATED     { __BU_MAIN_STAT_TRANSLATED="$1";      BU::Main::Status::CheckSTAT_TRANSLATED      "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TRANSLATED     { __BU_MAIN_STAT_TRANSLATED="$1";       BU::Main::Status::CheckSTAT_TRANSLATED      "$2" "$3" || return 1; return 0; }
 
 # -----------------------------------------------
 
