@@ -283,7 +283,7 @@
 \subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_DECHO}\color{white}
 
 \begin{justify}
-    \textbf{Description de la variable :}
+    \textbf{Description de la variable :}\\
     Cette variable de statut sert à restreindre ou empêcher l'exécution de la fonction de décoration de texte avancée \textbf{\color{mauve}Decho}, dans les situations où l'appel de cette fonctions peut provoquer une boucle infinie.
 \end{justify}
 
@@ -296,7 +296,7 @@
     \textbf{Description des valeurs :}
 
     \begin{itemize}
-        \item \textbf{allow} : Cette valeur autorise tout formattage de texte, allant de la couleur au clignotement du texte, à la mise en gras ou en italique, à l'assombrissement, au soulignage, à la rayure ou au camouflage.\\
+        \item \textbf{allow} : Cette valeur autorise tout formatage de texte, allant de la couleur au clignotement du texte, à la mise en gras ou en italique, à l'assombrissement, au soulignage, à la rayure ou au camouflage.\\
 
         \item \textbf{restrict} : Cette valeur restreint la décoration de texte à la couleur.\\
 
@@ -343,14 +343,14 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soient enregistrées dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
 \end{justify}
 
 \begin{justify}
     \textbf{Description des valeurs :}
 
     \begin{itemize}
-        \item \textbf{false} : Cette valeur autorise l'appel de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, donc la redirection du texte vers un fichier de logs\\
+        \item \textbf{false} : Cette valeur autorise l'appel de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, donc la redirection du texte vers un fichier de logs.\\
 
         \item \textbf{true} : Cette valeur interdit l'appel de la fonction sus-mentionnée, car une fonction l'appelant doit impérativement être appelée. Dans ce cas, la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoCPLS} est appelée à la place.
     \end{itemize}
@@ -394,7 +394,7 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-        Cette fonction vérifie que l'une des valeurs suivantes soient enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ERROR}.
+        Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ERROR}.
 \end{justify}
 
 \begin{justify}
@@ -444,11 +444,18 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soient enregistrées dans cette variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_INITIALIZING} \textbf{true} ou \textbf{false}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description des valeurs}
+    \textbf{Description des valeurs :}
+
+    \begin{itemize}
+        \item \textbf{false} : Cette valeur indique que le script n'est plus en phase d'initialisation, et les fonctions qui vérifient la valeur de cette variable globale de statut peuvent s'exécuter normalement.\\
+
+        \item \textbf{true} : Cette valeur indique que le script est en phase d'initialisation, et les fonctions qui vérifient la valeur de cette variable globale de statut adaptent le traitement des données.
+    \end{itemize}
+
 \end{justify}
 
 
@@ -489,8 +496,19 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
 \end{justify}
+
+\begin{justify}
+    \textbf{Description des valeurs :}
+
+    \begin{itemize}
+        \item \textbf{false} : Le fichier de logs ne peut pas être créé, tous les messages seront redirigés vers l'écran.\\
+
+        \item \textbf{true} : Le fichier de logs peut être créé, et la redirection des messages peut être configurée via la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}.
+    \end{itemize}
+\end{justify}
+
 
 \begin{justify}
     \textbf{Paramètres :}
@@ -523,13 +541,27 @@
 
 \begin{justify}
     \textbf{Description de la variable :}\\
-
+    Cette variable vérifie si un message peut être affiché à l'écran, redirigé vers un fichier de logs, ou les deux à la fois.
 \end{justify}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} soit vide ou corresponde aux chaînes de caractères \textbf{log} ou \textbf{tee}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}.
 \end{justify}
+
+\begin{justify}
+    \textbf{Description des valeurs :}
+
+    \begin{itemize}
+        \item \textbf{\textit{vide (Pas de valeur enregistrée)}} : Chaque message du projet sera redirigé uniquement vers la sortie standard ou d'erreur (affichés à l'écran).\\
+
+        \item \textbf{log} : Chaque message sera redirigé vers le fichier de logs uniquement.\\
+
+        \item \textbf{tee} : Chaque message sera redirigé à la fois vers le fichier de logs \textbf{ET} vers la sortie standard ou d'erreur (affichés à l'écran).
+    \end{itemize}
+
+\end{justify}
+
 
 \begin{justify}
     \textbf{Paramètres :}
@@ -561,13 +593,26 @@
 \subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_OPERATE\_ROOT}\color{white}
 
 \begin{justify}
-    \item \textbf{Description de la variable :}\\
-
+    \textbf{Description de la variable :}\\
+    Cette variable vérifie si une opération sur un fichier ou un dossier localisé à la racine du système de fichiers peut être effectuée.
 \end{justify}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut\\ \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{authorized} : Cette valeur donne l'autorisation au script d'opérer à la racine du système de fichiers, sans demander l'autorisation de l'utilisateur \textbf{(\textbf{\color{red}POTENTIELLEMENT DANGEREUX, À N'UTILISER QUE SI VOUS SAVEZ CE QUE VOUS FAITES} + PRIVILÈGES DU SUPER-UTILISATEUR REQUIS)}.\\
+
+        \item \textbf{forbidden} : Cette valeur interdit \textbf{\color{green}TOTALEMENT} au script d'opérer à la racine du système de fichiers.\\
+
+        \item \textbf{restricted} : Cette valeur donne l'autorisation au script d'opérer à la racine du système de fichiers, en demandant l'autorisation de l'utilisateur \textbf{(\textbf{\color{yellow}MÉTHODE RECOMMANDÉE} + PRIVILÈGES DU SUPER-UTILISATEUR REQUIS)}.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -608,7 +653,18 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut\\ \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{false} : Aucun message d'initialisation n'est affiché à l'écran, excepté les messages d'erreur.\\
+
+        \item \textbf{true} : Tous les messages d'initialisation sont affichés à l'écran.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -648,7 +704,16 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER} soit un nombre entier ou décimal.
+    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -688,7 +753,16 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} soit un nombre entier ou décimal.
+    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -705,7 +779,7 @@
     \textbf{Variables :}
 
     \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
+        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
     \end{itemize}
 \end{justify}
 
@@ -728,7 +802,16 @@
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT} soit un nombre entier ou décimal.
+    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -761,6 +844,8 @@
 \color{blue}
 \subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_TRANSLATED}\color{white}
 
+\textbf{ATTENTION : Cette variable est dépreciée et sera enlevée dans une prochaine mise à jour}
+
 \begin{justify}
     \textbf{Description de la variable :}\\
     Cette variable de statut .
@@ -769,6 +854,17 @@
 \begin{justify}
     \textbf{Description de la fonction :}\\
     Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{} : .\\
+
+        \item \textbf{} : .
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -803,12 +899,23 @@
 
 \begin{justify}
     \textbf{Description de la variable :}\\
-    Cette variable de statut .
+    Cette variable de statut vérifie que le script ait la permission de formater le texte (couleurs, gras, italique, soulignage, clignotement, etc...).
 \end{justify}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
+    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG}.
+\end{justify}
+
+\begin{justify}
+    \textbf{Description de la valeur :}
+
+    \begin{itemize}
+        \item \textbf{false} : Aucun formatage n'est appliqué lors de l'appel de la fonction \textbf{\color{mauve}BU::Decho}.\\
+
+        \item \textbf{true} : Le formatage choisi est appliqué lors de l'appel de la fonction \textbf{\color{mauve}BU::Decho}.
+    \end{itemize}
+
 \end{justify}
 
 \begin{justify}
@@ -840,6 +947,8 @@
 
 \color{blue}
 \subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_USER\_OS}\color{white}
+
+\textbf{ATTENTION : Cette variable est dépreciée et sera déplacée dans le module \textbf{\color{lime}os\_specific} dans une prochaine mise à jour}
 
 \begin{justify}
     \textbf{Description de la variable :}\\
