@@ -549,6 +549,18 @@ function BU::EchoRed()
     return 0
 }
 
+# Salmon colored message.
+function BU::EchoSalmon()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    BU::EchoMsg "${__BU_MAIN_COLOR_SALMON}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    return 0
+}
+
 # Silver colored message.
 function BU::EchoSilver()
 {
@@ -557,6 +569,18 @@ function BU::EchoSilver()
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_SILVER}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    return 0
+}
+
+# Tan colored message.
+function BU::EchoTan()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    BU::EchoMsg "${__BU_MAIN_COLOR_TAN}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     return 0
 }
@@ -581,6 +605,18 @@ function BU::EchoTurquoise()
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TURQUOISE}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
+
+    return 0
+}
+
+# Violet colored message.
+function BU::EchoViolet()
+{
+    #**** Parameters ****
+    p_string=$1; p_msg=$2; shift 2; local pa_extraArgs=("$@")
+
+    #**** Code ****
+    BU::EchoMsg "${__BU_MAIN_COLOR_VIOLET}$p_string${__BU_MAIN_COLOR_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1
 
     return 0
 }
