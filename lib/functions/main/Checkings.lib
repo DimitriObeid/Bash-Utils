@@ -682,31 +682,31 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 function BU::Main::Checkings::CheckDecho()
 {
     #**** Code ****
-    # Creating the "colors.tmp" file in case it doesn't exists.
-    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then
-        if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
-            BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file" 'E' 'CPLS'
-        fi
-    fi
-
     # If the , then the "Decho()" function will not decorate the targeted text, but put it between 
     if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
         return 1
-	fi
-	
-    if [ -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
-        echo "$__BU_MAIN_COLOR_RESET" > "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" || \
-        {
-			# It's better to call the "BU::EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
-			# It's also better to not call the "BU::Main::Errors::HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
-            BU::EchoMsg "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH${__BU_MAIN_COLOR_WARNING} file." 'R' ''
-
-            return 1
-        }
-
-        return 0
     else
-        return 0
+        # Creating the "colors.tmp" file in case it doesn't exists.
+        if [ ! -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ]; then
+            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") file" 'E' 'CPLS'; return 1
+            fi
+        fi
+        
+        if [ -f "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH")" = '' ]; then
+            echo "$__BU_MAIN_COLOR_RESET" > "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH" || \
+            {
+                # It's better to call the "BU::EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
+                # It's also better to not call the "BU::Main::Errors::HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
+                BU::EchoMsg "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH${__BU_MAIN_COLOR_WARNING} file." 'R' ''
+
+                return 1
+            }
+
+            return 0
+        else
+            return 0
+        fi
 	fi
 }
 

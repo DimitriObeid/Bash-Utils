@@ -1,27 +1,42 @@
 #!/usr/bin/env bash
 
 # ----------------------
-## SCRIPT'S INFORMATIONS
+# SCRIPT'S INFORMATIONS
 
-# Name : Initializer.sh
-# Description : Module initializer file, initializing all the module's functions and variables you need for your scripts.
-# Author(s) : Dimitri Obeid
-# Version : 1.0
+# Name          : Initializer.sh
+# Module        : Main
+# Description   : Module initializer file, initializing all the module's functions and variables you need for your scripts.
+# Author(s)     : Dimitri Obeid
+# Version       : 1.0
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
+# ----------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in the "Bash-utils-init.sh" file's function "BashUtils_InitModules()"
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     echo -e "WARNING !" >&2; echo >&2
-    echo -e "This script is not meant to be executed directly !" >&2
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
 
     exit 1
 fi
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################### INITIALIZING THE MAIN MODULE ##################################
 
 #### STEP ONE : DEFINING USEFUL FUNCTIONS
 
@@ -103,153 +118,147 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
 	__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY=("${__BU_MODULE_UTILS_MODULE_ARGS}")
 
 	# Process each supported arguments in this "for" loop.
-	for value in "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY"; do
+	for value in "${__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[@]}"; do
+
+        stat_value_warning="$(echo "${__BU_MAIN_COLOR_WARNING}Warning : the « $value » value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")"
 
 		# --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
 		# Extracting the "--stat" option's values.
-		if [ "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]" = "--stat=*" ]; then
-
-
-			# TODO : get the --stat option's values between its single quotes, with a command called in this variable declaration.
-			__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT="$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]"
-			echo "$__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[i]"
-
-			# Creating a new array of words for the supported "--stat" option's values.
-			# The __BU_MAIN_STAT_INITIALIZING value change is NOT supported, this status global variable's value MUST stay untouched.
-			for stat_value in "${__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY_STAT[@]}"; do
-
-				stat_value_warning="$(echo "${__BU_MAIN_COLOR_WARNING}Warning : the « ${stat_value#*=} » value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")"
-
-				# -------- __BU_MAIN_STAT_DEBUG global status variable
-
-				if [ "$stat_value" = 'debug=false' ] || [ "$stat_value" = 'debug=true' ]; then
-					__BU_MAIN_STAT_DEBUG="${stat_value#*=}"
-				else
-					echo "$stat_value_warning false, true"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_DECHO global status variable
-
-				if   [ "$stat_value" = 'decho=authorize' ] || [ "$stat_value" = 'decho=restrict' ]; then
-					 # Warning : don't set the « __BU_MAIN_STAT_DECHO » global status variable's value to "authorize" or "restrict" during the script's initialization, in order to avoid bugs.
-					 # Instead, a variable is set, and the "__BU_MAIN_STAT_DECHO" value will be set to this value after the initialization.
-					 __BU_MAIN_STAT_DECHO_TMP="${stat_value#*=}"
-
-				elif [ "$stat_value" = 'decho=forbid' ]; then
-					__BU_MAIN_STAT_DECHO='forbid'
-				else
-					echo "$stat_value_warning authorize, restrict, forbid"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_ECHO global status variable
-
-				if   [ "$stat_value" = 'echo=false' ]; then
-					 # Warning : don't set the « __BU_MAIN_STAT_ECHO » global status variable's value to "false" during the script's initialization, in order to avoid bugs and infinite loops.
-					 # Instead, a variable is set, and the "__BU_MAIN_STAT_ECHO" value will be set to this value after the initialization.
-					__BU_MAIN_STAT_ECHO_TMP="false"
-
-				elif [ "$stat_value" = 'echo=true' ]; then
-					__BU_MAIN_STAT_ECHO='true'
-				else
-					echo "$stat_value_warning true, false"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_ERROR global status variable
-
-				if   [ "$stat_value" = 'error=fatal' ]; then
-					__BU_MAIN_STAT_ERROR='fatal'
-
-				elif [ "$stat_value" = 'error=void' ]; then
-					__BU_MAIN_STAT_ERROR=''
-				else
-					echo "$stat_value_warning fatal, \e[3man empty string\e[0m"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_LOG global status variable
-
-				if [ "$stat_value" = 'log=true' ] || [ "$stat_value" = 'log=false' ]; then
-					__BU_MAIN_STAT_LOG="${stat_value#*=}"
-				else
-					echo "$stat_value_warning true, false"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_LOG_REDIRECT global status variable
-
-				if [ "$stat_value" = 'log-redirect=void' ]; then
-					__BU_MAIN_STAT_LOG_REDIRECT=''
-
-				elif [ "$stat_value" = 'log-redirect=log' ] || [ "$stat_value" = 'log-redirect=tee' ]; then
-					__BU_MAIN_STAT_LOG_REDIRECT="${stat_value#*=}"
-				else
-					echo "$stat_value_warning log, tee, \e[3man empty string\e[0m"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_OPERATE_ROOT global status variable
-
-				if [ "$stat_value" = 'op-root=authorized' ] || [ "$stat_value" = 'op-root=forbidden' ] || [ "$stat_value" = 'op-root=restricted' ]; then
-					__BU_MAIN_STAT_OPERATE_ROOT="${stat_value#*=}"
-				else
-					echo "$stat_value_warning authorized, forbidden, restricted"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_PRINT_INIT_LOG global status variable
-
-				if [ "$stat_value" = 'print-init-log=true' ] || [ "$stat_value" = 'print-init-log=false' ]; then
-					__BU_MAIN_STAT_PRINT_INIT_LOG="${stat_value#*=}"
-				else
-					echo "$stat_value_warning true, false"
-				fi
-
-
-				# -------- __BU_MAIN_STAT_TIME_TXT global status variable
-
-				if [ "$stat_value" = "stat-time-txt=$(BU::IsFloat "$stat_value#*=")" ]; then
-					__BU_MAIN_STAT_TIME_TXT="$stat_value"
-				else
-					echo "$stat_value_warning \e[3ma floating number\e[0m"
-				fi
-
-				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
-
-                if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
-                    __BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
+        case "${value[i],,}" in
+ 
+             # "$__BU_MAIN_STAT_DEBUG" global status variable.
+           '--stat-debug='*)
+                if      [ "${value[i],,}" = "--stat-debug=false" ]          || [ "${value[i],,}" = "--stat-debug=true" ]; then
+                        __BU_MAIN_STAT_DEBUG="${value#*=}"
                 else
-					echo "$stat_value_warning true, false"
-            	fi
-			done
+                    ModuleInit_Msg "$stat_value_warning « --stat-debug=false », « --stat-debug=true »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_DECHO" global status variable.
+            '--stat-decho='*)
+                if      [ "${value[i],,}" = '--stat-decho=authorize' ]      || [ "${value[i],,}" = '--stat-decho=forbid' ]  || [ "${value[i],,}" = '--stat-decho=restrict' ]; then
+                        __BU_MAIN_STAT_DECHO="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_ECHO" global status variable.
+            '--stat-echo'*)
+                if      [ "${value[i],,}" = '--stat-echo=false' ]           || [ "${value[i],,}" = '--stat-echo=true' ]; then
+                        __BU_MAIN_STAT_ECHO="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-echo=false », « stat-echo=true »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_ERROR" global status variable.
+            'stat-error='*)
+                if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
+                        __BU_MAIN_STAT_ERROR="${value#*=}"
+
+                elif    [ "${value[i],,}" = 'stat-error=void' ]; then
+                        __BU_MAIN_STAT_ERROR=''
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-error=fatal », « stat-error=void »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_LOG" global status variable.
+            '--stat-log='*)
+                if      [ "${value[i],,}" = '--stat-log=false' ]            || [ "${value[i],,}" = '--stat-log=true' ]; then
+                        __BU_MAIN_STAT_LOG="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-log=false », « stat-log=true »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_LOG_REDIRECT" global status variable.
+            'stat-log-r='*)
+                if      [ "${value[i],,}" = 'stat-log-r=log' ]              || [ "${value[i],,}" = '--stat-log-r=tee' ]; then
+                        __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}"
+
+                elif    [ "${value[i],,}" = '--stat-log-r=void' ]; then
+                        __BU_MAIN_STAT_LOG_REDIRECT=''
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_OPERATE_ROOT" global status variable.
+            '--stat-op-root='*)
+                if      [ "${value[i],,}" = '--stat-op-root=authorized' ]   || [ "${value[i],,}" = '--stat-op-root=forbidden' ] || [ "${value[i],,}" = '--stat-op-root=restricted' ]; then
+                        __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable.
+            '--stat-print-init-log='*)
+                if      [ "${value[i],,}" = '--stat-print-init-log=false' ] || [ "${value[i],,}" = '--stat-print-init-log=true' ]; then
+                        __BU_MAIN_STAT_PRINT_INIT_LOG="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning --stat-print-init-log=false », « stat-print-init-log=true »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
+            '--stat-time-header='*)
+                if      [ "${value[i],,}" = "--stat-time-header=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
+                        __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
+            '--stat-time-txt='*)
+                if      [ "${value[i],,}" = "--stat-time-txt=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
+                        __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »"
+                fi;;
+
+            # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
+            '--stat-txt-fmt'*)
+                if      [ "${value[i],,}" = '--stat-txt-fmt=false' ]        || [ "${value[i],,}" = '--stat-txt-fmt=true' ]; then
+                        __BU_MAIN_STAT_TXT_FMT="${value#*=}"
+                else
+                        ModuleInit_Msg "$stat_value_warning « --stat-txt-fmt=false », « --stat-txt-fmt=true »"
+                fi;;
+            *)
+                        ModuleInit_Msg "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED ARGUMENT FOR THE $(ModuleInit_GetModuleName "")"
+        esac
+    done
+
+
+# 				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
+# 
+#                 if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
+#                     __BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
+#                 else
+# 					echo "$stat_value_warning true, false"
+#             	fi
+# 			done
 
 		# Else, if no "--stat" argument is passed, then the default values are set to each status global variables.
-		else
-			## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
-
-            # Note : only some variables are changed, the other variables values are still set to their default value.
-
-			# TODO : After adding the status configuration arguments,
-			if [ -f "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
-				echo "STAT"
-			else
-				BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-				BU::Main:Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-				BU::Main:Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-				BU::Main:Status::ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-
-                # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-				BU::Main:Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-			fi
-
-		# Else, if an unsupported argument is passed.
-	#	else
-	#		echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « $value » ARGUMENT IS NOT SUPPORTED" >&2
-		fi
-	done
+# 		else
+# 			## CHANGING THE GLOBAL STATUS VARIABLE'S VALUES AFTER THE MAIN MODULE'S SUCCESSFUL INITIALIZATION.
+# 
+#             # Note : only some variables are changed, the other variables values are still set to their default value.
+# 
+# 			# TODO : After adding the status configuration arguments,
+# 			if [ -f "$(ModuleInit_FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/" "ChangeStat.conf")" ]; then
+# 				echo "STAT"
+# 			else
+# 				BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# 
+# 				BU::Main:Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# 				BU::Main:Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# 				BU::Main:Status::ChangeSTAT_TIME_TXT     '0'         "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# 
+#                 # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
+# 				BU::Main:Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+# 			fi
+# 
+# 		# Else, if an unsupported argument is passed.
+# 	#	else
+# 	#		echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « $value » ARGUMENT IS NOT SUPPORTED" >&2
+# 		fi
+# 	done
 fi
 
 
@@ -267,10 +276,13 @@ BU::Main::Directories::MkTmpDir
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
-	BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
-else
-	BU::EchoSuccess "The $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") color code file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT")"; BU::Newline
+# Creating the color code file if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
+if BU::Main::Status::CheckStatAllowFormatting; then
+    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
+        BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1
+    else
+        BU::EchoSuccess "The $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") color code file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT")"; BU::Newline
+    fi
 fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
