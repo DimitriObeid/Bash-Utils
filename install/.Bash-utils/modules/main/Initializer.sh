@@ -129,7 +129,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
              # "$__BU_MAIN_STAT_DEBUG" global status variable.
            '--stat-debug='*)
                 if      [ "${value[i],,}" = "--stat-debug=false" ]          || [ "${value[i],,}" = "--stat-debug=true" ]; then
-                        __BU_MAIN_STAT_DEBUG="${value#*=}"
+                        __BU_MAIN_STAT_DEBUG="${value#*=}";                 ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DEBUG" "$__BU_MAIN_STAT_DEBUG"
                 else
                     ModuleInit_Msg "$stat_value_warning « --stat-debug=false », « --stat-debug=true »"
                 fi;;
@@ -137,7 +137,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_DECHO" global status variable.
             '--stat-decho='*)
                 if      [ "${value[i],,}" = '--stat-decho=authorize' ]      || [ "${value[i],,}" = '--stat-decho=forbid' ]  || [ "${value[i],,}" = '--stat-decho=restrict' ]; then
-                        __BU_MAIN_STAT_DECHO="${value#*=}"
+                        __BU_MAIN_STAT_DECHO="${value#*=}";                 ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DECHO" "$__BU_MAIN_STAT_DECHO"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »"
                 fi;;
@@ -145,7 +145,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_ECHO" global status variable.
             '--stat-echo'*)
                 if      [ "${value[i],,}" = '--stat-echo=false' ]           || [ "${value[i],,}" = '--stat-echo=true' ]; then
-                        __BU_MAIN_STAT_ECHO="${value#*=}"
+                        __BU_MAIN_STAT_ECHO="${value#*=}";                  ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ECHO" "$__BU_MAIN_STAT_ECHO"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-echo=false », « stat-echo=true »"
                 fi;;
@@ -153,10 +153,10 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_ERROR" global status variable.
             'stat-error='*)
                 if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
-                        __BU_MAIN_STAT_ERROR="${value#*=}"
+                        __BU_MAIN_STAT_ERROR="${value#*=}";                 ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR"
 
                 elif    [ "${value[i],,}" = 'stat-error=void' ]; then
-                        __BU_MAIN_STAT_ERROR=''
+                        __BU_MAIN_STAT_ERROR='';                            ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-error=fatal », « stat-error=void »"
                 fi;;
@@ -164,7 +164,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_LOG" global status variable.
             '--stat-log='*)
                 if      [ "${value[i],,}" = '--stat-log=false' ]            || [ "${value[i],,}" = '--stat-log=true' ]; then
-                        __BU_MAIN_STAT_LOG="${value#*=}"
+                        __BU_MAIN_STAT_LOG="${value#*=}";                   ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-log=false », « stat-log=true »"
                 fi;;
@@ -172,10 +172,10 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_LOG_REDIRECT" global status variable.
             'stat-log-r='*)
                 if      [ "${value[i],,}" = 'stat-log-r=log' ]              || [ "${value[i],,}" = '--stat-log-r=tee' ]; then
-                        __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}"
+                        __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}";          ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT"
 
                 elif    [ "${value[i],,}" = '--stat-log-r=void' ]; then
-                        __BU_MAIN_STAT_LOG_REDIRECT=''
+                        __BU_MAIN_STAT_LOG_REDIRECT='';                     ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »"
                 fi;;
@@ -183,7 +183,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_OPERATE_ROOT" global status variable.
             '--stat-op-root='*)
                 if      [ "${value[i],,}" = '--stat-op-root=authorized' ]   || [ "${value[i],,}" = '--stat-op-root=forbidden' ] || [ "${value[i],,}" = '--stat-op-root=restricted' ]; then
-                        __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}"
+                        __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}";          ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_OPERATE_ROOT" "$__BU_MAIN_STAT_OPERATE_ROOT"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »"
                 fi;;
@@ -191,7 +191,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable.
             '--stat-print-init-log='*)
                 if      [ "${value[i],,}" = '--stat-print-init-log=false' ] || [ "${value[i],,}" = '--stat-print-init-log=true' ]; then
-                        __BU_MAIN_STAT_PRINT_INIT_LOG="${value#*=}"
+                        __BU_MAIN_STAT_PRINT_INIT_LOG="${value#*=}";        ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_PRINT_INIT_LOG" "$__BU_MAIN_STAT_PRINT_INIT_LOG"
                 else
                         ModuleInit_Msg "$stat_value_warning --stat-print-init-log=false », « stat-print-init-log=true »"
                 fi;;
@@ -199,7 +199,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
             '--stat-time-header='*)
                 if      [ "${value[i],,}" = "--stat-time-header=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
-                        __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}"
+                        __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}";        ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_HEADER" "$__BU_MAIN_STAT_TIME_HEADER"
                 else
                         ModuleInit_Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »"
                 fi;;
@@ -207,7 +207,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
             '--stat-time-txt='*)
                 if      [ "${value[i],,}" = "--stat-time-txt=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
-                        __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}"
+                        __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}";           ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_TXT" "$__BU_MAIN_STAT_TIME_TXT"
                 else
                         ModuleInit_Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »"
                 fi;;
@@ -215,7 +215,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
             # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
             '--stat-txt-fmt'*)
                 if      [ "${value[i],,}" = '--stat-txt-fmt=false' ]        || [ "${value[i],,}" = '--stat-txt-fmt=true' ]; then
-                        __BU_MAIN_STAT_TXT_FMT="${value#*=}"
+                        __BU_MAIN_STAT_TXT_FMT="${value#*=}";               ModuleInit_DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TXT_FMT" "$__BU_MAIN_STAT_TXT_FMT"
                 else
                         ModuleInit_Msg "$stat_value_warning « --stat-txt-fmt=false », « --stat-txt-fmt=true »"
                 fi;;
@@ -225,14 +225,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
     done
 
 
-# 				# -------- __BU_MAIN_STAT_TXT_FMT global status variable
-# 
-#                 if [ "$stat_value" = 'stat-txt-fmt=true' ] || [ "$stat_value" = 'stat-txt-fmt=false' ]; then
-#                     __BU_MAIN_STAT_TXT_FMT="${stat_value#*=}"
-#                 else
-# 					echo "$stat_value_warning true, false"
-#             	fi
-# 			done
+
 
 		# Else, if no "--stat" argument is passed, then the default values are set to each status global variables.
 # 		else
