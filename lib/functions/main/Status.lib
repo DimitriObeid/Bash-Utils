@@ -421,19 +421,20 @@ function BU::Main::Status::CheckProjectStatusVars()
 
     #**** Code ****
     # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
-    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_DECHO           "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_ECHO            "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_DEBUG           "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_ERROR           "$p_file" "$p_lineno" || return 1
-	BU::Main::Status::CheckSTAT_INITIALIZING    "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_LOG             "$p_file" "$p_lineno" || return 1
-	BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$p_file" "$p_lineno" || return 1
-	BU::Main::Status::CheckSTAT_TIME_HEADER		"$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_TIME_TXT        "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_TRANSLATED      "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_TXT_FMT         "$p_file" "$p_lineno" || return 1
-    BU::Main::Status::CheckSTAT_USER_OS         "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_LOG_REDIRECT   "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_DECHO          "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_ECHO           "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_DEBUG          "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_ERROR          "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_INITIALIZING   "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_LOG            "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_OPERATE_ROOT   "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_TIME_HEADER    "$p_file" "$p_lineno" || return 1
+	BU::Main::Status::CheckSTAT_TIME_NEWLINE   "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_TIME_TXT       "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_TRANSLATED     "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_TXT_FMT        "$p_file" "$p_lineno" || return 1
+    BU::Main::Status::CheckSTAT_USER_OS        "$p_file" "$p_lineno" || return 1
 
 	return 0
 }
@@ -484,7 +485,7 @@ function BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG { __BU_MAIN_STAT_PRINT_INIT_
 function BU::Main:Status::ChangeSTAT_TIME_HEADER    { __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
-function BU::Main:Status::ChangeSTAT_TIME_NEWLINE   { __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }
+function BU::Main:Status::ChangeSTAT_TIME_NEWLINE   { __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_NEWLINE    "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
 function BU::Main:Status::ChangeSTAT_TIME_TXT       { __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT        "$2" "$3" || return 1; return 0; }
