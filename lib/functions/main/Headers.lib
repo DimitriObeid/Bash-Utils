@@ -193,8 +193,11 @@ function BU::HeaderAqua			{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_T
 function BU::HeaderFuschia		{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_FUSCHIA"		"$1" || return 1; return 0; }
 function BU::HeaderLime			{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_LIME"			"$1" || return 1; return 0; }
 function BU::HeaderMaroon		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_MAROON"			"$1" || return 1; return 0; }
+function BU::HeaderSalmon       { BU::HeaderBase "$__BU_MAIN_COLOR_SALMON"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"			"$1" || return 1; return 0; }
 function BU::HeaderSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"			"$1" || return 1; return 0; }
+function BU::HeaderTan          { BU::HeaderBase "$__BU_MAIN_COLOR_TAN"     "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"			"$1" || return 1; return 0; }
 function BU::HeaderTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"			"$1" || return 1; return 0; }
+function BU::HeaderViolet       { BU::HeaderBase "$__BU_MAIN_COLOR_VIOLET"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"			"$1" || return 1; return 0; }
 
 # -----------------------------------------------
 
@@ -216,9 +219,12 @@ function BU::HeaderAquaOrange		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_M
 function BU::HeaderAquaPink			{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"		"$1" || return 1; return 0; }
 function BU::HeaderAquaPurple		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"		"$1" || return 1; return 0; }
 function BU::HeaderAquaRed			{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"		"$1" || return 1; return 0; }
+function BU::HeaderAquaSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"		"$1" || return 1; return 0; }
 function BU::HeaderAquaSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"		"$1" || return 1; return 0; }
+function BU::HeaderAquaTan		    { BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"		"$1" || return 1; return 0; }
 function BU::HeaderAquaTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"		"$1" || return 1; return 0; }
 function BU::HeaderAquaTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"	"$1" || return 1; return 0; }
+function BU::HeaderAquaViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"		"$1" || return 1; return 0; }
 function BU::HeaderAquaWhite		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"		"$1" || return 1; return 0; }
 function BU::HeaderAquaYellow		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"		"$1" || return 1; return 0; }
 
@@ -236,9 +242,12 @@ function BU::HeaderBlackOrange      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$
 function BU::HeaderBlackPink        { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
 function BU::HeaderBlackPurple      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"    	"$1" || return 1; return 0; }
 function BU::HeaderBlackRed         { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function BU::HeaderBlackSalmon      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
 function BU::HeaderBlackSilver      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderBlackTan         { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderBlackTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"			"$1" || return 1; return 0; }
 function BU::HeaderBlackTurquoise   { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function BU::HeaderBlackViolet      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderBlackWhite       { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"     	"$1" || return 1; return 0; }
 function BU::HeaderBlackYellow      { BU::HeaderBase "$__BU_MAIN_COLOR_BLACK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
@@ -255,9 +264,12 @@ function BU::HeaderBlueOrange       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$_
 function BU::HeaderBluePink         { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
 function BU::HeaderBluePurple       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
 function BU::HeaderBlueRed          { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function BU::HeaderBlueSalmon       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
 function BU::HeaderBlueSilver       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderBlueTan          { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"         	"$1" || return 1; return 0; }
 function BU::HeaderBlueTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"			"$1" || return 1; return 0; }
 function BU::HeaderBlueTurquoise    { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function BU::HeaderBlueViolet       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderBlueWhite        { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderBlueYellow       { BU::HeaderBase "$__BU_MAIN_COLOR_BLUE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
@@ -271,12 +283,15 @@ function BU::HeaderCyanGreen        { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$_
 function BU::HeaderCyanLime         { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_LIME"      	"$1" || return 1; return 0; }
 function BU::HeaderCyanMaroon       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_MAROON"      	"$1" || return 1; return 0; }
 function BU::HeaderCyanOrange       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
-function BU::HeaderCyanPink         { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
-function BU::HeaderCyanPurple       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
-function BU::HeaderCyanRed          { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
-function BU::HeaderCyanSilver       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
-function BU::HeaderCyanTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"			"$1" || return 1; return 0; }
+function BU::HeaderCyanPink         { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"          "$1" || return 1; return 0; }
+function BU::HeaderCyanPurple       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"        "$1" || return 1; return 0; }
+function BU::HeaderCyanRed          { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"           "$1" || return 1; return 0; }
+function BU::HeaderCyanSalmon       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"        "$1" || return 1; return 0; }
+function BU::HeaderCyanSilver       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"        "$1" || return 1; return 0; }
+function BU::HeaderCyanTan          { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"           "$1" || return 1; return 0; }
+function BU::HeaderCyanTeal         { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"          "$1" || return 1; return 0; }
 function BU::HeaderCyanTurquoise    { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function BU::HeaderCyanViolet       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderCyanWhite        { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderCyanYellow       { BU::HeaderBase "$__BU_MAIN_COLOR_CYAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
@@ -293,9 +308,12 @@ function BU::HeaderFuschiaOrange	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$_
 function BU::HeaderFuschiaPink		{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaPurple	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaRed		{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"		"$1" || return 1; return 0; }
+function BU::HeaderFuschiaSalmon	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaSilver	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"		"$1" || return 1; return 0; }
+function BU::HeaderFuschiaTan       { BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"	"$1" || return 1; return 0; }
+function BU::HeaderFuschiaViolet	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaWhite		{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"		"$1" || return 1; return 0; }
 function BU::HeaderFuschiaYellow	{ BU::HeaderBase "$__BU_MAIN_COLOR_FUSCHIA" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"		"$1" || return 1; return 0; }
 
@@ -312,9 +330,12 @@ function BU::HeaderGrayOrange       { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$_
 function BU::HeaderGrayPink         { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"       	"$1" || return 1; return 0; }
 function BU::HeaderGrayPurple       { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
 function BU::HeaderGrayRed          { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function BU::HeaderGraySalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
 function BU::HeaderGraySilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderGrayTan  		{ BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"       	"$1" || return 1; return 0; }
 function BU::HeaderGrayTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderGrayTurquoise    { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function BU::HeaderGrayViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderGrayWhite        { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderGrayYellow       { BU::HeaderBase "$__BU_MAIN_COLOR_GRAY" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
@@ -331,9 +352,12 @@ function BU::HeaderGreenOrange      { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$
 function BU::HeaderGreenPink        { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
 function BU::HeaderGreenPurple      { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"		"$1" || return 1; return 0; }
 function BU::HeaderGreenRed         { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function BU::HeaderGreenSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
 function BU::HeaderGreenSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderGreenTan         { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderGreenTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderGreenTurquoise   { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function BU::HeaderGreenViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderGreenWhite       { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"     	"$1" || return 1; return 0; }
 function BU::HeaderGreenYellow      { BU::HeaderBase "$__BU_MAIN_COLOR_GREEN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW" 		"$1" || return 1; return 0; }
 
@@ -350,9 +374,12 @@ function BU::HeaderLimeOrange		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_M
 function BU::HeaderLimePink			{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
 function BU::HeaderLimePurple		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      	"$1" || return 1; return 0; }
 function BU::HeaderLimeRed			{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"  	    	"$1" || return 1; return 0; }
+function BU::HeaderLimeSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
 function BU::HeaderLimeSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderLimeTan  		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"       	"$1" || return 1; return 0; }
 function BU::HeaderLimeTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderLimeTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"    	"$1" || return 1; return 0; }
+function BU::HeaderLimeViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderLimeWhite		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderLimeYellow		{ BU::HeaderBase "$__BU_MAIN_COLOR_LIME" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      	"$1" || return 1; return 0; }
 
@@ -368,9 +395,12 @@ function BU::HeaderMaroonOrange		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__
 function BU::HeaderMaroonPink		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
 function BU::HeaderMaroonPurple		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      "$1" || return 1; return 0; }
 function BU::HeaderMaroonRed		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"  	    "$1" || return 1; return 0; }
+function BU::HeaderMaroonSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      "$1" || return 1; return 0; }
 function BU::HeaderMaroonSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      "$1" || return 1; return 0; }
+function BU::HeaderMaroonTan		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"         "$1" || return 1; return 0; }
 function BU::HeaderMaroonTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderMaroonTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"	"$1" || return 1; return 0; }
+function BU::HeaderMaroonViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      "$1" || return 1; return 0; }
 function BU::HeaderMaroonWhite		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderMaroonYellow		{ BU::HeaderBase "$__BU_MAIN_COLOR_MAROON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
 
@@ -387,9 +417,12 @@ function BU::HeaderOrangeMaroon		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__
 function BU::HeaderOrangePink       { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"        "$1" || return 1; return 0; }
 function BU::HeaderOrangePurple     { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      "$1" || return 1; return 0; }
 function BU::HeaderOrangeRed        { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"         "$1" || return 1; return 0; }
+function BU::HeaderOrangeSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      "$1" || return 1; return 0; }
 function BU::HeaderOrangeSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      "$1" || return 1; return 0; }
+function BU::HeaderOrangeTan		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"         "$1" || return 1; return 0; }
 function BU::HeaderOrangeTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"     	"$1" || return 1; return 0; }
 function BU::HeaderOrangeTurquoise  { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
+function BU::HeaderOrangeViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      "$1" || return 1; return 0; }
 function BU::HeaderOrangeWhite      { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
 function BU::HeaderOrangeYellow     { BU::HeaderBase "$__BU_MAIN_COLOR_ORANGE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
 
@@ -406,9 +439,12 @@ function BU::HeaderPinkMaroon		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_M
 function BU::HeaderPinkOrange       { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
 function BU::HeaderPinkPurple       { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
 function BU::HeaderPinkRed          { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
-function BU::HeaderPinkSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
-function BU::HeaderPinkTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderPinkSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      	"$1" || return 1; return 0; }
+function BU::HeaderPinkSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      	"$1" || return 1; return 0; }
+function BU::HeaderPinkTan  		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"       	"$1" || return 1; return 0; }
+function BU::HeaderPinkTeal			{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"      	"$1" || return 1; return 0; }
 function BU::HeaderPinkTurquoise    { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"  	"$1" || return 1; return 0; }
+function BU::HeaderPinkViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      	"$1" || return 1; return 0; }
 function BU::HeaderPinkWhite        { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"      	"$1" || return 1; return 0; }
 function BU::HeaderPinkYellow       { BU::HeaderBase "$__BU_MAIN_COLOR_PINK" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
 
@@ -425,9 +461,12 @@ function BU::HeaderPurpleMaroon	    { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "
 function BU::HeaderPurpleOrange     { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"      "$1" || return 1; return 0; }
 function BU::HeaderPurplePink       { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"        "$1" || return 1; return 0; }
 function BU::HeaderPurpleRed        { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"         "$1" || return 1; return 0; }
+function BU::HeaderPurpleSalmon	    { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      "$1" || return 1; return 0; }
 function BU::HeaderPurpleSilver	    { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      "$1" || return 1; return 0; }
+function BU::HeaderPurpleTan        { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"         "$1" || return 1; return 0; }
 function BU::HeaderPurpleTeal	    { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"	   	"$1" || return 1; return 0; }
 function BU::HeaderPurpleTurquoise  { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"   "$1" || return 1; return 0; }
+function BU::HeaderPurpleViolet	    { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      "$1" || return 1; return 0; }
 function BU::HeaderPurpleWhite      { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
 function BU::HeaderPurpleYellow     { BU::HeaderBase "$__BU_MAIN_COLOR_PURPLE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
 
@@ -444,11 +483,36 @@ function BU::HeaderRedMaroon        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__
 function BU::HeaderRedOrange        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"         "$1" || return 1; return 0; }
 function BU::HeaderRedPink          { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"           "$1" || return 1; return 0; }
 function BU::HeaderRedPurple        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"         "$1" || return 1; return 0; }
+function BU::HeaderRedSalmon        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"         "$1" || return 1; return 0; }
 function BU::HeaderRedSilver        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"         "$1" || return 1; return 0; }
+function BU::HeaderRedTan           { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"            "$1" || return 1; return 0; }
 function BU::HeaderRedTeal          { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"           "$1" || return 1; return 0; }
 function BU::HeaderRedTurquoise     { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"      "$1" || return 1; return 0; }
+function BU::HeaderRedViolet        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"         "$1" || return 1; return 0; }
 function BU::HeaderRedWhite         { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"          "$1" || return 1; return 0; }
 function BU::HeaderRedYellow        { BU::HeaderBase "$__BU_MAIN_COLOR_RED" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"         "$1" || return 1; return 0; }
+
+# Salmon lines, differently colored text.
+function BU::HeaderSalmonAqua	    { BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonBlack     	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"       "$1" || return 1; return 0; }
+function BU::HeaderSalmonBlue      	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonCyan      	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CYAN"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonFuschia	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_FUSCHIA"     "$1" || return 1; return 0; }
+function BU::HeaderSalmonGray      	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_GRAY"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonGreen     	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_GREEN"       "$1" || return 1; return 0; }
+function BU::HeaderSalmonLime	    { BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_LIME"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonMaroon    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_MAROON"      "$1" || return 1; return 0; }
+function BU::HeaderSalmonOrange  	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"      "$1" || return 1; return 0; }
+function BU::HeaderSalmonPink    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"        "$1" || return 1; return 0; }
+function BU::HeaderSalmonPurple  	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      "$1" || return 1; return 0; }
+function BU::HeaderSalmonRed    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function BU::HeaderSalmonSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"		"$1" || return 1; return 0; }
+function BU::HeaderSalmonTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"		"$1" || return 1; return 0; }
+function BU::HeaderSalmonTan		{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"   		"$1" || return 1; return 0; }
+function BU::HeaderSalmonTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"   "$1" || return 1; return 0; }
+function BU::HeaderSalmonViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"		"$1" || return 1; return 0; }
+function BU::HeaderSalmonWhite     	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
+function BU::HeaderSalmonYellow    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SALMON" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
 
 # Silver lines, differently colored text.
 function BU::HeaderSilverAqua	    { BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"        "$1" || return 1; return 0; }
@@ -464,10 +528,36 @@ function BU::HeaderSilverOrange  	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$_
 function BU::HeaderSilverPink    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"        "$1" || return 1; return 0; }
 function BU::HeaderSilverPurple  	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      "$1" || return 1; return 0; }
 function BU::HeaderSilverRed    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"        	"$1" || return 1; return 0; }
+function BU::HeaderSilverSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"		"$1" || return 1; return 0; }
 function BU::HeaderSilverTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"		"$1" || return 1; return 0; }
+function BU::HeaderSilverTan		{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"   		"$1" || return 1; return 0; }
 function BU::HeaderSilverTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"   "$1" || return 1; return 0; }
+function BU::HeaderSilverViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"		"$1" || return 1; return 0; }
 function BU::HeaderSilverWhite     	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
 function BU::HeaderSilverYellow    	{ BU::HeaderBase "$__BU_MAIN_COLOR_SILVER" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"      "$1" || return 1; return 0; }
+
+# Tan lines, differently colored text.
+function BU::TanAqua                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"     		"$1" || return 1; return 0; }
+function BU::TanBlue                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"     		"$1" || return 1; return 0; }
+function BU::TanBlack               { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLUE"     		"$1" || return 1; return 0; }
+function BU::TanCyan                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CYAN"     		"$1" || return 1; return 0; }
+function BU::TanFuschia             { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_FUSCHIA"     	"$1" || return 1; return 0; }
+function BU::TanGray                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_GRAY"     		"$1" || return 1; return 0; }
+function BU::TanGreen               { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_GREEN"     		"$1" || return 1; return 0; }
+function BU::TanLime                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_LIME"     		"$1" || return 1; return 0; }
+function BU::TanMaroon              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_MAROON"     	"$1" || return 1; return 0; }
+function BU::TanOrange              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ORANGE"     	"$1" || return 1; return 0; }
+function BU::TanPink                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"     		"$1" || return 1; return 0; }
+function BU::TanPurple              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"     	"$1" || return 1; return 0; }
+function BU::TanRed                 { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"     		"$1" || return 1; return 0; }
+function BU::TanSalmon              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"     	"$1" || return 1; return 0; }
+function BU::TanSilver              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"     	"$1" || return 1; return 0; }
+function BU::TanTeal                { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"     		"$1" || return 1; return 0; }
+function BU::TanTurquoise           { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"     	"$1" || return 1; return 0; }
+function BU::TanViolet              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"     	"$1" || return 1; return 0; }
+function BU::TanWhite               { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"     		"$1" || return 1; return 0; }
+function BU::TanYellow              { BU::HeaderBase "$__BU_MAIN_COLOR_TAN" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"     	"$1" || return 1; return 0; }
+
 
 # Teal lines, differently colored text.
 function BU::HeaderTealAqua    		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_AQUA"     		"$1" || return 1; return 0; }
@@ -483,8 +573,11 @@ function BU::HeaderTealOrange  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU
 function BU::HeaderTealPink		    { BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"     		"$1" || return 1; return 0; }
 function BU::HeaderTealPurple  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"   		"$1" || return 1; return 0; }
 function BU::HeaderTealRed     		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"			"$1" || return 1; return 0; }
+function BU::HeaderTealSalmon  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"   		"$1" || return 1; return 0; }
 function BU::HeaderTealSilver  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"   		"$1" || return 1; return 0; }
+function BU::HeaderTealTan  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"   		"$1" || return 1; return 0; }
 function BU::HeaderTealTurquoise	{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"		"$1" || return 1; return 0; }
+function BU::HeaderTealViolet  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"   		"$1" || return 1; return 0; }
 function BU::HeaderTealWhite   		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE" 		"$1" || return 1; return 0; }
 function BU::HeaderTealYellow  		{ BU::HeaderBase "$__BU_MAIN_COLOR_TEAL" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"   		"$1" || return 1; return 0; }
 
@@ -503,8 +596,11 @@ function BU::HeaderTurquoiseOrange  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE
 function BU::HeaderTurquoisePink    { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"     "$1" || return 1; return 0; }
 function BU::HeaderTurquoisePurple  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"   "$1" || return 1; return 0; }
 function BU::HeaderTurquoiseRed     { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"		"$1" || return 1; return 0; }
+function BU::HeaderTurquoiseSalmon  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"   "$1" || return 1; return 0; }
 function BU::HeaderTurquoiseSilver  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"   "$1" || return 1; return 0; }
+function BU::HeaderTurquoiseTan     { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"      "$1" || return 1; return 0; }
 function BU::HeaderTurquoiseTeal  	{ BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"		"$1" || return 1; return 0; }
+function BU::HeaderTurquoiseViolet  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"   "$1" || return 1; return 0; }
 function BU::HeaderTurquoiseWhite   { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE" 	"$1" || return 1; return 0; }
 function BU::HeaderTurquoiseYellow  { BU::HeaderBase "$__BU_MAIN_COLOR_TURQUOISE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"   "$1" || return 1; return 0; }
 
@@ -522,8 +618,11 @@ function BU::HeaderWhiteOrange      { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$
 function BU::HeaderWhitePink        { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"      	"$1" || return 1; return 0; }
 function BU::HeaderWhitePurple      { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"    	"$1" || return 1; return 0; }
 function BU::HeaderWhiteRed         { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"       	"$1" || return 1; return 0; }
+function BU::HeaderWhiteSalmon		{ BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"     	"$1" || return 1; return 0; }
 function BU::HeaderWhiteSilver		{ BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"     	"$1" || return 1; return 0; }
+function BU::HeaderWhiteTan         { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"       	"$1" || return 1; return 0; }
 function BU::HeaderWhiteTeal		{ BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"     	"$1" || return 1; return 0; }
+function BU::HeaderWhiteViolet		{ BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"     	"$1" || return 1; return 0; }
 function BU::HeaderWhiteTurquoise   { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE" 	"$1" || return 1; return 0; }
 function BU::HeaderWhiteYellow      { BU::HeaderBase "$__BU_MAIN_COLOR_WHITE" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_YELLOW"    	"$1" || return 1; return 0; }
 
@@ -541,7 +640,10 @@ function BU::HeaderYellowOrange     { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "
 function BU::HeaderYellowPink       { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PINK"        "$1" || return 1; return 0; }
 function BU::HeaderYellowPurple     { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_PURPLE"      "$1" || return 1; return 0; }
 function BU::HeaderYellowRed        { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RED"         "$1" || return 1; return 0; }
-function BU::HeaderYellowWhite      { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
+function BU::HeaderYellowSalmon     { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SALMON"      "$1" || return 1; return 0; }
 function BU::HeaderYellowSilver     { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SILVER"      "$1" || return 1; return 0; }
+function BU::HeaderYellowTan        { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TAN"         "$1" || return 1; return 0; }
 function BU::HeaderYellowTeal       { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TEAL"        "$1" || return 1; return 0; }
 function BU::HeaderYellowTurquoise  { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TURQUOISE"   "$1" || return 1; return 0; }
+function BU::HeaderYellowViolet     { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_VIOLET"      "$1" || return 1; return 0; }
+function BU::HeaderYellowWhite      { BU::HeaderBase "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_WHITE"       "$1" || return 1; return 0; }
