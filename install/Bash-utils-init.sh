@@ -48,7 +48,7 @@ printf "
 
         return
     else
-        exit 1
+        exit 1		# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     fi
 }
 
@@ -69,6 +69,7 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
         echo "en | Warning : no given information about the « gettext.sh » file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
         echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh » ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2
 
+		# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 		echo >&2; exit 1
 
 	elif [ -z "$p_filepath" ]; then
@@ -76,6 +77,7 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 		echo "en | Warning : no file path has been passed as second argument" >&2
 		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2
 
+		# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 		echo >&2; exit 1
     fi
 
@@ -200,7 +202,7 @@ function ModuleInit_Msg()
     if [ -z "$p_str" ]; then
         __BU_MODULE_UTILS_MSG_ARRAY+='\n'
     else
-        __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULES_UTILS_DATE_LOG $p_str\n"
+        __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"
     fi
 
     # If the "--print-init='true'" argument is passed at the "module" value
@@ -230,6 +232,7 @@ function ModuleInit_PrintLog()
         printf "$value"
     done
 
+	# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     exit 1
 }
 
@@ -251,6 +254,7 @@ function ModuleInit_CheckBashMinimalVersion()
 		echo -e "Please install at least the Bash version 4.0.0 to use this library" >&2
 		echo >&2
 
+		# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 		exit 1
 	fi
 }
@@ -307,7 +311,7 @@ function ModuleInit_FindPath()
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
 function ModuleInit_GetModuleName()
 {
-    v_module="$(cd "$(dirname "$1")" || { echo >&2; echo -e "Unable to get the module's name from the parent directory name" >&2; echo >&2; exit 1; }; pwd -P)"
+    v_module="$(cd "$(dirname "$1")" || { echo >&2; echo -e "Unable to get the module's name from the parent directory name" >&2; echo >&2; ModuleInit_AskPrintLog; exit 1; }; pwd -P)"
 
     echo "${v_module##*/}"; return 0
 }
@@ -330,15 +334,15 @@ function ModuleInit_ListInstalledModules()
 
 			echo "If the problem persists, please create this folder manually" >&2; echo >&2
 
-			exit 1
+			ModuleInit_AskPrintLog; exit 1
 		}
     fi
 
     if [ -d "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_UTILS_MODULES_DIR" ]; then
 
 																				# In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -1 "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
-        ls -1 "$__BU_MODULE_UTILS_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; exit 1; }
+        ls -1 "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; ModuleInit_AskPrintLog; exit 1; }
+        ls -1 "$__BU_MODULE_UTILS_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; ModuleInit_AskPrintLog; exit 1; }
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
             echo; echo "INSTALLED MODULES LIST :"; echo; sleep ".5"
@@ -372,6 +376,8 @@ function ModuleInit_ListInstalledModules()
 		echo >&2
     fi
 
+	ModuleInit_AskPrintLog
+
     exit 1
 }
 
@@ -383,7 +389,7 @@ function ModuleInit_SourcingFailure()
     local p_module=$2       # Name of the module.
 
     #**** Code ****
-    ModuleInit_Msg >&2; ModuleInit_Msg ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(ModuleInit_CheckPath "$p_path" 'f')" >&2; ModuleInit_Msg >&2; exit 1
+    ModuleInit_Msg >&2; ModuleInit_Msg ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(ModuleInit_CheckPath "$p_path" 'f')" >&2; ModuleInit_Msg >&2; ModuleInit_AskPrintLog; exit 1
 }
 
 # -----------------------------------------------
@@ -401,6 +407,7 @@ if [ "${SHELL##*/}" != 'bash' ]; then
     echo "ERROR : Your current shell interpreter is not Bash, but « ${SHELL##*/} »" >&2
     echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le « ${SHELL##*/} »" >&2
 
+	# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     echo >&2; exit 1
 fi
 
@@ -423,16 +430,16 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_MODULES_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT" "modules")"
 
 	# Files
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME="Bash-utils-root-val.path"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME")"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME="Bash-utils-root-val.path"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME")"
 
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME="Bash-utils-root-val-ROOT.path"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME")"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME="Bash-utils-root-val-ROOT.path"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME")"
 
 	# Misc
-	__BU_MODULES_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]"
+	__BU_MODULE_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
@@ -441,6 +448,7 @@ else
 
 	echo "Aborting the library's initialization." >&2; echo >&2
 
+	# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 	exit 1
 fi
 
@@ -492,15 +500,15 @@ ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           
 ModuleInit_Msg
 
 ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path"; ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path"
 ModuleInit_Msg
 
 ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)"
 ModuleInit_Msg
 
 # -----------------------------------------------
@@ -594,7 +602,7 @@ function BashUtils_InitModules()
 
                 echo >&2; echo "Aborting the library's initialization" >&2
 
-                exit 1
+                ModuleInit_AskPrintLog; exit 1
             fi
         else
             # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
@@ -606,7 +614,7 @@ function BashUtils_InitModules()
 
                 echo >&2; echo "Aborting the library's initialization" >&2
 
-                echo >&2; return 1
+                echo >&2; ModuleInit_AskPrintLog; return 1
             fi
         fi
 
