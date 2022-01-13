@@ -155,7 +155,7 @@ function ModuleInit_AskPrintLog()
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--print-init' ]; then
 		echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"; echo
 
-		read -rp "Enter your answer : "read_ask_print_log
+		read -rp "Enter your answer : " read_ask_print_log
 
 		if [ "${read_ask_print_log,,}" = 'yes' ]; then
 			ModuleInit_PrintLog
@@ -222,13 +222,16 @@ function ModuleInit_PrintLog()
     #**** Code ****
     echo
 
+    echo "Here are the initialization logs"
+    echo
+
     echo "------------------"
     echo "INTIALIZATION LOGS"
     echo "------------------"
 
     echo
 
-    for value in "${__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION[@]}"; do
+    for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
         printf "$value"
     done
 
@@ -359,7 +362,7 @@ function ModuleInit_ListInstalledModules()
 
             cat "$v_module_init_f"; echo >&2; echo >&2
 
-			# TODO : get the differences between the two files.
+			# Getting the differences between the two files.
 			echo "THE DIFFERENCES BETWEEN THESE TWO FILES ARE LISTED BELOW" >&2; echo >&2
 
 			sdiff "$v_module_conf_f" "$v_module_conf_f"; echo >&2
