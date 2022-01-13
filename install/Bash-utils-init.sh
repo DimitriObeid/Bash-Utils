@@ -150,12 +150,22 @@ function ModuleInit_Get_gettext_sh_File()
 function ModuleInit_DisplayInitGlobalVarsInfos()
 {
     #**** Parameters ****
-    p_var_name=$1
-    p_var_val=$2
+    p_var_name=$1       # Name of the variable.
+    p_var_val=$2        # Value stored in the variable.
+    p_var_desc=$3       # Description of the variable.
 
     #**** Code ****
     ModuleInit_Msg "Declared global variable : $p_var_name"
-    ModuleInit_Msg "Value --> $p_var_val"
+
+    ModuleInit_Msg "Description : $p_var_desc"
+
+    # If a variable is stored in the processed variable
+    if [ -n "$p_var_val" ]; then
+        ModuleInit_Msg "Value --> $p_var_val"
+    else
+        ModuleInit_Msg "No value stored in this variable"
+    fi
+
     ModuleInit_Msg
 }
 
@@ -167,16 +177,44 @@ function ModuleInit_Msg()
     p_status=$2         # The "--print-init='true'" parameter of the "BashUtils_SourcingModules" function.
 
     #**** Code ****
-    __BU_MODULE_UTILS_MSG_ARRAY+="$p_str"
+    # If no value is stored in the string parameter, it must be interpreted as a newline.
+    if [ -z "$p_str" ]; then
+        __BU_MODULE_UTILS_MSG_ARRAY+='\n'
+    else
+        __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULES_UTILS_DATE_LOG $p_str\n"
+    fi
 
     # If the "--print-init='true'" argument is passed at the "module" value
     if [ "$p_status" = '--print-init=' ]; then
-        if [ -z "$p_str" ]; then echo
+        if [ -z "$p_str" ]; then printf '\n'
 
-        else echo "$p_str"; fi
+        else printf "$p_str\n"; fi
     fi
 
     return 0
+}
+
+# Printing the initialization on the screen. This function should be used as a help, in case the "module" value's parameters
+# (passed in optional first argument in the BashUtils_InitModules() function) doesn't work in case of a rework.
+function ModuleInit_PrintLog()
+{
+    #**** Parameters ****
+    local pa_logs=("$@")
+
+    #**** Code ****
+    echo
+
+    echo "------------------"
+    echo "INTIALIZATION LOGS"
+    echo "------------------"
+
+    echo
+
+    for value in "${pa_logs[@]}"; do
+        printf "$value"
+    done
+
+    exit 1
 }
 
 # -----------------------------------------------
@@ -353,6 +391,7 @@ __BU_MODULE_UTILS_ROOT_HOME="$HOME"
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")"
+	__BU_MODULE_UTILS_INITALIZER_PATH="${BASH_SOURCE[0]}"
 
     # Configurations directories
 	__BU_MODULE_UTILS_CONFIG_DIR="$(ModuleInit_FindPath "$__BU_MODULE_UTILS_ROOT" "config")"
@@ -365,11 +404,14 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	# Files
 	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME="Bash-utils-root-val.path"
 	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH="$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR/$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME")"
 
 	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME="Bash-utils-root-val-ROOT.path"
 	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT"
-	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"
+	__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$(ModuleInit_FindPath "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME")"
+
+	# Misc
+	__BU_MODULES_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]"
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
@@ -410,33 +452,34 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION=''
 ModuleInit_Msg "INITIALIZING THE MODULES"
 ModuleInit_Msg
 
-ModuleInit_Msg "INITIALIZING THE VARIABLES"
-
-ModuleInit_Msg "Initializing the modules manager's root directory variables"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME";             ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT";                  ModuleInit_Msg
+ModuleInit_Msg "INITIALIZING THE GLOBAL VARIABLES"
 ModuleInit_Msg
 
-ModuleInit_Msg "Initializing the configuration directories paths"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR";            ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR";       ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR";    ModuleInit_Msg
+ModuleInit_Msg "Initializing the modules manager's root directory variables";       ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"     "This global variable stores the path to the parent directory of each module configuration directories"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"          "This global variable stores the path to the configuration directory of each module"
 ModuleInit_Msg
 
-ModuleInit_Msg "Initializing the modules initializers files directory"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR";           ModuleInit_Msg
+ModuleInit_Msg "Initializing the configuration directories paths";                  ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"            "This global variable stores the path to the configuration directory of each module"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "This global variable stores the path of the configuration folder used by the module initialization file"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "This global variable stores the configuration folder of the current module"
 ModuleInit_Msg
 
-ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME" 				"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME";				ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" 		"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR";			ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"				"$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH";				ModuleInit_Msg
+ModuleInit_Msg "Initializing the modules initializers files directory";             ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"           "This global variable stores the path to the initialization files of the current module."
 ModuleInit_Msg
 
-ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME" 			"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME";			ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"	"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR";	ModuleInit_Msg
-ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH" 			"$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH";			ModuleInit_Msg
+ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path"; ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path"
+ModuleInit_Msg
+
+ModuleInit_Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; ModuleInit_Msg
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
+ModuleInit_DisplayInitGlobalVarsInfos "__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULES_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)"
 ModuleInit_Msg
 
 # -----------------------------------------------
