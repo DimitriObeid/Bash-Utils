@@ -146,6 +146,25 @@ function ModuleInit_Get_gettext_sh_File()
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
+# Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
+function ModuleInit_AskPrintLog()
+{
+	#**** Code ****
+	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--print-init' ]; then
+		echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"; echo
+
+		read -rp "Enter your answer : "read_ask_print_log
+
+		if [ "${read_ask_print_log,,}" = 'yes' ]; then
+			ModuleInit_PrintLog
+		else
+			echo "The logs wil not be displayed on your screen"; echo
+		fi
+	fi
+
+	return 0
+}
+
 # Displaying the information on the initialized global variables
 function ModuleInit_DisplayInitGlobalVarsInfos()
 {
@@ -198,9 +217,6 @@ function ModuleInit_Msg()
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function ModuleInit_PrintLog()
 {
-    #**** Parameters ****
-    local pa_logs=("$@")
-
     #**** Code ****
     echo
 
@@ -210,7 +226,7 @@ function ModuleInit_PrintLog()
 
     echo
 
-    for value in "${pa_logs[@]}"; do
+    for value in "${__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION[@]}"; do
         printf "$value"
     done
 
