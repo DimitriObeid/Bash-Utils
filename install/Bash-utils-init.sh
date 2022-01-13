@@ -194,8 +194,8 @@ function ModuleInit_Msg()
     return 0
 }
 
-# Printing the initialization on the screen. This function should be used as a help, in case the "module" value's parameters
-# (passed in optional first argument in the BashUtils_InitModules() function) doesn't work in case of a rework.
+# Printing the initialization on the screen. Although this function is called if the '--print-init' value is passed with the
+# "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function ModuleInit_PrintLog()
 {
     #**** Parameters ****
@@ -280,7 +280,12 @@ function ModuleInit_FindPath()
 {
 	#	$1	--> Parent directory.
     #	$2	--> Targeted directory or file.
-    find "$1" -maxdepth 1 -iname "$2"  -print 2>&1 | grep -v "Permission denied" || return 1; return 0
+    find "$1" -maxdepth 1 -iname "$2"  -print 2>&1 | grep -v "Permission denied" ||
+	{
+		echo >&2; echo "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; echo >&2
+
+		return 1
+	}; return 0
 }
 
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
@@ -416,7 +421,7 @@ else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2
 
 	echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory." >&2; echo >&2
-	echo "Please copy this folder in your home directory. You can install it by executing the installation file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2
+	echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2
 
 	echo "Aborting the library's initialization." >&2; echo >&2
 
@@ -547,7 +552,10 @@ function BashUtils_InitModules()
                 elif [[ "$module_vals" = *'--print-init' ]]; then
                     # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                     # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                    __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_vals"
+                    __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$--print-init"
+
+					# Calling the function that prints the former log entries on the terminal.
+					ModuleInit_PrintLog
 
                 # Else, if the "module" value's argument is not a supported one
                 else
