@@ -160,7 +160,7 @@ function ModuleInit_AskPrintLog()
 		if [ "${read_ask_print_log,,}" = 'yes' ]; then
 			ModuleInit_PrintLog
 		else
-			echo "The logs wil not be displayed on your screen"; echo
+			echo; echo "The logs will not be displayed on your screen"; echo
 		fi
 	fi
 
@@ -205,8 +205,8 @@ function ModuleInit_Msg()
         __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"
     fi
 
-    # If the "--print-init='true'" argument is passed at the "module" value
-    if [ "$p_status" = '--print-init=' ]; then
+    # If the "--print-init" argument is passed at the "module" value
+    if [ "$p_status" = '--print-init' ]; then
         if [ -z "$p_str" ]; then printf '\n'
 
         else printf "$p_str\n"; fi
@@ -234,6 +234,8 @@ function ModuleInit_PrintLog()
     for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
         printf "$value"
     done
+
+    echo ">>>>> END OF THE INITIALIZATION LOGS"; echo
 
 	# WARNING : Do not call the "ModuleInit_AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     exit 1
@@ -539,8 +541,12 @@ function BashUtils_InitModules()
     # Writing the list of the 
 	ModuleInit_Msg "INTIALIZING THESE MODULES :"
 
-	for modules_args in "${p_module_list[@]}"; do
-        ModuleInit_Msg "--> $modules_args"
+	for modules_args in "${!p_modules_list[@]}"; do
+        if [[ "${modules_args[$p_module_list]}" == 'module --'* ]]; then
+            ModuleInit_Msg "Arguments passed to configure the initialization process : $modules_args"
+        else
+            ModuleInit_Msg "Module ${p_modules_list} --> $modules_args"
+        fi
 	done
 
 	ModuleInit_Msg
