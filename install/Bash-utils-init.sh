@@ -171,9 +171,9 @@ function BU::ModuleInit::AskPrintLog()
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
     #**** Parameters ****
-    p_var_name=$1       # Name of the variable.
-    p_var_val=$2        # Value stored in the variable.
-    p_var_desc=$3       # Description of the variable.
+    local p_var_name=$1       # Name of the variable.
+    local p_var_val=$2        # Value stored in the variable.
+    local p_var_desc=$3       # Description of the variable.
 
     #**** Code ****
     BU::ModuleInit::Msg "Declared global variable : $p_var_name"
@@ -194,8 +194,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 function BU::ModuleInit::Msg()
 {
     #**** Parameters ****
-    p_str=$1            # The string to display.
-    p_status=$2         # The "--print-init='true'" parameter of the "BashUtils_SourcingModules" function.
+    local p_str=$1            # The string to display.
+    local p_status=$2         # The "--print-init" parameter of the "BashUtils_SourcingModules" function.
 
     #**** Code ****
     # If no value is stored in the string parameter, it must be interpreted as a newline.
@@ -239,21 +239,20 @@ function BU::ModuleInit::PrintLog()
     echo ">>>>> END OF THE INITIALIZATION LOGS"; echo
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array, and it calls this function.
-    exit 1
 }
 
 # Print an error message in the log storage variable.
 function BU::ModuleInit::PrintLogError()
 {
     #**** Parameters ****
-    p_desc=$1           # Description of the error.
-    p_lineno=$2         # Line where the error happened.
+    local p_desc=$1           # Description of the error.
+    local p_lineno=$2         # Line where the error happened.
 
     #**** Code ****
-    BU::ModuleInit::PrintLog >&2
+    BU::ModuleInit::Msg >&2
 
-    BU::ModuleInit::PrintLog "ERROR : DESC = $1 | LINE = $2" >&2
-    BU::ModuleInit::PrintLog >&2
+    BU::ModuleInit::Msg "ERROR : DESC = $p_desc | LINE = $p_lineno" >&2
+    BU::ModuleInit::Msg >&2
 
     return 0
 }
@@ -261,6 +260,8 @@ function BU::ModuleInit::PrintLogError()
 # -----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
+
+function BU::ModuleInit::AbortMsg() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
 
 # Checking the currently used Bash language's version.
 function BU::ModuleInit::CheckBashMinimalVersion()
@@ -416,6 +417,128 @@ function BU::ModuleInit::SourcingFailure()
 
 # -----------------------------------------------
 
+## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
+
+function BU::ModuleInit::ProcessFirstModuleArguments()
+{
+    #**** Parameters ****
+    local p_module=$1   # Mmodules to include passed as argument, with its own parameters.
+    local p_count=$2    # Counting the times the function was called in the "BashUtils_InitModules" function's main loop.
+    
+    echo "$p_count"
+
+    #**** Variables ****
+    local v_module_name
+        v_module_name="$(echo "$p_module" | cut -d' ' -f1)"
+
+    #**** Code ****
+    # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
+
+    # These numbers stored in the "$p_count" variable refer to the modules indexes.
+    if [ "$p_count" -eq 0 ]; then
+
+        # If the "module" value is passed without parameters.
+        if [[ "$p_module" == "$v_module_name" ]]; then
+            BU::ModuleInit::PrintLogError "« module » value passed without argument(s)" "$LINENO"
+
+            echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE IS PASSED WITHOUT PARAMETERS" >&2
+            echo >&2; echo "Please pass a valid argument between the double quotes where you pass the « module » value" >&2
+
+            BU::ModuleInit::AbortMsg
+
+            BU::ModuleInit::AskPrintLog; exit 1
+    
+        elif [[ "$p_module" == 'module --'* ]] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
+
+            # Creating a new global variable to store the word array made with the "module" value and the values that come with it.
+            IFS='' read -ra module_array <<< "$p_module"
+
+            for module_args in "${module_array[@]}"; do
+
+                # If the "module" value's argument is "--lang="
+                if [[ "$module_args" == *'--lang=en_US' ]]; then
+
+                    # Temporary solution to avoid crashes when executing this file.
+                    true
+
+                # Else, if the "module" value's argument is "--print-init" or "--nolog" (WARNING : these arguments are incompatible with each other).
+                elif [[ "$module_args" == *'--print-init' ]] || [[ "$module_args" = *'--nolog' ]]; then
+
+                    if [[ "$module_args" == *'--print-init' ]]; then
+
+                        # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
+                        # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--print-init"
+
+                        # Calling the function that prints the former log entries on the terminal.
+                        # BU::ModuleInit::PrintLog
+
+                    elif [[ "$module_args" = *'--nolog' ]]; then
+
+                        # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                        # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
+                        true
+                    fi
+
+                # Else, if the "module" value's argument is not a supported one.
+                else
+                    BU::ModuleInit::PrintLogError "Bad module value's argument" "$LINENO"
+
+                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_args » IS NOT SUPPORTED" >&2;
+                    echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2
+
+                    BU::ModuleInit::AbortMsg
+
+                    BU::ModuleInit::AskPrintLog; exit 1
+                fi
+            done
+
+            # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
+            else
+                BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
+
+                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
+                echo >&2; echo "Please do so by setting the « $p_module » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+
+                BU::ModuleInit::AbortMsg
+
+                BU::ModuleInit::AskPrintLog; exit 1
+            fi
+
+        # Else, if the "main" module is passed as second argument, after the "module" value.
+        elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+
+            # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
+            return 0
+
+        # Else, if the "module --*" value is not passed as first argument.
+
+        # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
+        elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+
+            # Temporary solution to avoid crashes when executing this file.
+            true
+
+        # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
+        elif [ "$p_count" -ge 1 ]; then
+            return 0
+
+        else
+            BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
+
+            echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
+            echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
+
+            BU::ModuleInit::AbortMsg
+
+            echo >&2; BU::ModuleInit::AskPrintLog; return 1
+        fi
+
+    return 0
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -468,7 +591,7 @@ else
 	echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory." >&2; echo >&2
 	echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2
 
-	echo "Aborting the library's initialization." >&2; echo >&2
+	BU::ModuleInit::AbortMsg
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 	exit 1
@@ -488,7 +611,6 @@ BU::ModuleInit::CheckBashMinimalVersion
 
 # This global variable stores the log messages.
 declare __BU_MODULE_UTILS_MSG_ARRAY=()
-
 
 # This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
 # which authorizes the displaying of the logs messages on the screen.
@@ -547,7 +669,10 @@ BU::ModuleInit::Msg
 function BashUtils_InitModules()
 {
 	#**** Parameters ****
-	p_modules_list=("$@")	# List of all the modules to include passed as arguments
+	local p_modules_list=("$@")	# List of all the modules to include passed as arguments
+
+	#**** Variables ****
+    local v_index=0     # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
 
 	#**** Code ****
 	## Checking if the arguments array length is equal to zero (no arguments passed).
@@ -562,7 +687,7 @@ function BashUtils_InitModules()
         if [[ "$module_args" == 'module --'* ]]; then
             BU::ModuleInit::Msg "Arguments passed to configure the initialization process : $module_args"; BU::ModuleInit::Msg
         else
-            i="$(( i+1 ))" # Incrementer
+            i="$(( i+1 ))" # Module's array index incrementer.
 
             # Name and arguments of the module stored as the nth index of the module list array.
             BU::ModuleInit::Msg "Module $i : $module_args"
@@ -577,7 +702,8 @@ function BashUtils_InitModules()
 		## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
 		# Defining variables for each iteration.
-		v_module_name="$(echo "$module" | cut -d' ' -f1)"
+		local v_module_name
+            v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_modules_list[i]}" = "$v_module_name --*" ]]; then
@@ -587,76 +713,8 @@ function BashUtils_InitModules()
 		# -----------------------------------------------
 
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
-
-        # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
-        if [[ "${p_modules_list[0]}" = 'module --'* ]]; then
-
-            # Creating a new global variable to store the word array made with the .
-            __BU_MODULE_UTILS_p_modules_list_ARR="${p_modules_list[0]}"
-
-            for module_vals in "${__BU_MODULE_UTILS_p_modules_list_ARR[@]}"; do
-                true
-                # If the "module" value's argument is "--lang="
-                if [[ "$module_vals" = *'--lang=en_US' ]]; then
-                    # Temporary solution to avoid crashes when executing this file.
-                    true
-
-                # Else, if the "module" value's argument is "--print-init"
-                elif [[ "$module_vals" = *'--print-init' ]]; then
-                    # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                    # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                    __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--print-init"
-
-					# Calling the function that prints the former log entries on the terminal.
-					# BU::ModuleInit::PrintLog
-
-                # Else, if the "module" value's argument is not a supported one
-                else
-                    BU::ModuleInit::PrintLogError "Bad module value's argument" "$LINENO"
-
-                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_vals » IS NOT SUPPORTED" >&2;
-                    echo >&2; echo "Please remove this value, called at the index « ${#module_vals} »" >&2
-
-                    echo >&2; echo "Aborting the library's initialization" >&2
-
-                    echo >&2; return 1
-                fi
-            done
-
-            # Skipping the current iteration if the first argument is "module --*", in order to not find an unexistent module named "module", starting at the "MODULES' CONFIGURATION FILES SOURCING" sub-section.
-            if [[ "${p_modules_list[1]}" = 'main' ]] || [[ "${p_modules_list[1]}" = "main --"* ]]; then
-                if [ "${p_modules_list[i]}" = "${p_modules_list[0]}" ]; then
-					true
-				fi
-
-            # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
-            else
-                BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
-
-                echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_modules_list[0]}" >&2
-                echo >&2; echo "Please do so by setting the « ${p_modules_list[1]} » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
-
-                echo >&2; echo "Aborting the library's initialization" >&2
-
-                BU::ModuleInit::AskPrintLog; exit 1
-            fi
-
-        # Else, if the "module --*" value is not passed as first argument.
-        else
-            # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-            if [[ "${p_modules_list[0]}" == 'main' ]] || [[ "${p_modules_list[0]}" == "main --"* ]]; then
-                true
-            else
-                BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
-
-                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
-                echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
-
-                echo >&2; echo "Aborting the library's initialization" >&2
-
-                echo >&2; BU::ModuleInit::AskPrintLog; return 1
-            fi
-        fi
+        
+        BU::ModuleInit::ProcessFirstModuleArguments "$module" "$v_index"
 
 		# -----------------------------------------------
 
@@ -668,12 +726,14 @@ function BashUtils_InitModules()
 
 			printf '\n' >&2;
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
 			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2
 
 			# Listing all the installed modules in the user's hard drive.
 			BU::ModuleInit::ListInstalledModules
+
+			# No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the previous function "BU::ModuleInit::ListInstalledModules".
 
 			return 1
 		else
@@ -693,9 +753,11 @@ function BashUtils_InitModules()
 
 			printf '\n' >&2;
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
 
-			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIRs/$v_module_name" >&2
+			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2
+
+			BU::ModuleInit::AbortMsg
 
 			return 1
 		else
@@ -706,6 +768,9 @@ function BashUtils_InitModules()
 
 			BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 		fi
+
+		# Incrementing the 
+		v_index="$(( v_index+1 ))"
 	done
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
