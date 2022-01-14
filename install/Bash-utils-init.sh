@@ -424,8 +424,6 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
     #**** Parameters ****
     local p_module=$1   # Mmodules to include passed as argument, with its own parameters.
     local p_count=$2    # Counting the times the function was called in the "BashUtils_InitModules" function's main loop.
-    
-    echo "$p_count"
 
     #**** Variables ****
     local v_module_name
