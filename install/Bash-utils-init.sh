@@ -530,29 +530,32 @@ ModuleInit_Msg
 function BashUtils_InitModules()
 {
 	#**** Parameters ****
-	p_module_list=("$@")	# List of all the modules to include passed as arguments
+	p_modules_list=("$@")	# List of all the modules to include passed as arguments
 
 	#**** Code ****
 	## Checking if the arguments array length is equal to zero (no arguments passed).
-	if [ -z "${p_module_list[*]}" ]; then
+	if [ -z "${p_modules_list[*]}" ]; then
 		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
 
     # Writing the list of the 
 	ModuleInit_Msg "INTIALIZING THESE MODULES :"
 
-	for modules_args in "${!p_modules_list[@]}"; do
-        if [[ "${modules_args[$p_module_list]}" == 'module --'* ]]; then
-            ModuleInit_Msg "Arguments passed to configure the initialization process : $modules_args"
+	for module_args in "${p_modules_list[@]}"; do
+        if [[ "$module_args" == 'module --'* ]]; then
+            ModuleInit_Msg "Arguments passed to configure the initialization process : $module_args"; ModuleInit_Msg
         else
-            ModuleInit_Msg "Module ${p_modules_list} --> $modules_args"
+            i="$(( i+1 ))" # Incrementer
+
+            # Name and arguments of the module stored as the nth index of the module list array.
+            ModuleInit_Msg "Module $i : $module_args"
         fi
 	done
 
 	ModuleInit_Msg
 
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
-	for module in "${p_module_list[@]}"; do
+	for module in "${p_modules_list[@]}"; do
 
 		## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
@@ -560,7 +563,7 @@ function BashUtils_InitModules()
 		v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-		if [[ "${p_module_list[i]}" = "$v_module_name --*" ]]; then
+		if [[ "${p_modules_list[i]}" = "$v_module_name --*" ]]; then
 			__BU_MODULE_UTILS_MODULE_ARGS="$module"
 		fi
 
@@ -569,12 +572,12 @@ function BashUtils_InitModules()
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
         # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
-        if [[ "${p_module_list[0]}" = 'module --'* ]]; then
+        if [[ "${p_modules_list[0]}" = 'module --'* ]]; then
 
             # Creating a new global variable to store the word array made with the .
-            __BU_MODULE_UTILS_p_module_list_ARR="${p_module_list[0]}"
+            __BU_MODULE_UTILS_p_modules_list_ARR="${p_modules_list[0]}"
 
-            for module_vals in "${__BU_MODULE_UTILS_p_module_list_ARR[@]}"; do
+            for module_vals in "${__BU_MODULE_UTILS_p_modules_list_ARR[@]}"; do
                 true
                 # If the "module" value's argument is "--lang="
                 if [[ "$module_vals" = *'--lang=en_US' ]]; then
@@ -601,13 +604,13 @@ function BashUtils_InitModules()
                 fi
             done
 
-            if [[ "${p_module_list[1]}" = 'main' ]] || [[ "${p_module_list[1]}" = "main --"* ]]; then
-                if [ "${p_module_list[i]}" = "${p_module_list[0]}" ]; then
+            if [[ "${p_modules_list[1]}" = 'main' ]] || [[ "${p_modules_list[1]}" = "main --"* ]]; then
+                if [ "${p_modules_list[i]}" = "${p_modules_list[0]}" ]; then
 					true
 				fi
             else
-                echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_module_list[0]}" >&2
-                echo >&2; echo "Please do so by setting the « ${p_module_list[1]} » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+                echo >&2; echo "WARNING --> THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : ${p_modules_list[0]}" >&2
+                echo >&2; echo "Please do so by setting the « ${p_modules_list[1]} » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
 
                 echo >&2; echo "Aborting the library's initialization" >&2
 
@@ -615,7 +618,7 @@ function BashUtils_InitModules()
             fi
         else
             # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-            if [[ "${p_module_list[0]}" == 'main' ]] || [[ "${p_module_list[0]}" == "main --"* ]]; then
+            if [[ "${p_modules_list[0]}" == 'main' ]] || [[ "${p_modules_list[0]}" == "main --"* ]]; then
                 true
             else
                 echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
