@@ -446,7 +446,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
 
             BU::ModuleInit::AskPrintLog; exit 1
     
-        elif [[ "$p_module" == 'module --'* ]] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
+        elif [[ "$p_module" == 'module --'* ]]; then
 
             # Creating a new global variable to store the word array made with the "module" value and the values that come with it.
             IFS='' read -ra module_array <<< "$p_module"
@@ -490,47 +490,47 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     BU::ModuleInit::AskPrintLog; exit 1
                 fi
             done
-
-            # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
-            else
-                BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
-
-                echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
-                echo >&2; echo "Please do so by setting the « $p_module » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
-
-                BU::ModuleInit::AbortMsg
-
-                BU::ModuleInit::AskPrintLog; exit 1
-            fi
-
-        # Else, if the "main" module is passed as second argument, after the "module" value.
-        elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
-
-            # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
-            return 0
-
-        # Else, if the "module --*" value is not passed as first argument.
-
-        # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-        elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
-
-            # Temporary solution to avoid crashes when executing this file.
-            true
-
-        # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
-        elif [ "$p_count" -ge 1 ]; then
-            return 0
-
-        else
-            BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
-
-            echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
-            echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
-
-            BU::ModuleInit::AbortMsg
-
-            echo >&2; BU::ModuleInit::AskPrintLog; return 1
         fi
+
+    # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
+    elif [ "$p_count" -eq 1 ] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
+        BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
+
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
+        echo >&2; echo "Please do so by setting the « $p_module » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+
+        BU::ModuleInit::AbortMsg
+
+        BU::ModuleInit::AskPrintLog; exit 1
+
+    # Else, if the "main" module is passed as second argument, after the "module" value.
+    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+
+        # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
+        return 0
+
+    # Else, if the "module --*" value is not passed as first argument.
+
+    # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
+    elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+
+        # Temporary solution to avoid crashes when executing this file.
+        true
+
+    # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
+    elif [ "$p_count" -ge 1 ]; then
+        return 0
+
+    else
+        BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
+
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
+        echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
+
+        BU::ModuleInit::AbortMsg
+
+        echo >&2; BU::ModuleInit::AskPrintLog; return 1
+    fi
 
     return 0
 }
@@ -711,64 +711,68 @@ function BashUtils_InitModules()
 		# -----------------------------------------------
 
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
-        
+
         BU::ModuleInit::ProcessFirstModuleArguments "$module" "$v_index"
 
-		# -----------------------------------------------
+        # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU::ModuleInit::ProcessFirstModuleArguments()" function).
+        if [[ "$module" != 'module --'* ]]; then
 
-		# MODULES' CONFIGURATION FILES SOURCING
+            # -----------------------------------------------
 
-		# Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
-		if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
-            BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO"
+            # MODULES' CONFIGURATION FILES SOURCING
 
-			printf '\n' >&2;
+            # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
+            if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
+                BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO"
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
+                printf '\n' >&2;
 
-			printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2
+                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-			# Listing all the installed modules in the user's hard drive.
-			BU::ModuleInit::ListInstalledModules
+                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2
 
-			# No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the previous function "BU::ModuleInit::ListInstalledModules".
+                # Listing all the installed modules in the user's hard drive.
+                BU::ModuleInit::ListInstalledModules
 
-			return 1
-		else
-            BU::ModuleInit::Msg "Sourcing the $v_module_name module's main configuration file"; BU::ModuleInit::Msg
+                # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the previous function "BU::ModuleInit::ListInstalledModules".
 
-			# shellcheck disable=SC1090
-			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
-		fi
+                return 1
+            else
+                BU::ModuleInit::Msg "Sourcing the $v_module_name module's main configuration file"; BU::ModuleInit::Msg
 
-		# -----------------------------------------------
+                # shellcheck disable=SC1090
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
+            fi
 
-		# MODULES' INITIALIZATION FILES SOURCING
+            # -----------------------------------------------
 
-		# Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
-		if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-            BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO"
+            # MODULES' INITIALIZATION FILES SOURCING
 
-			printf '\n' >&2;
+            # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
+            if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
+                BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO"
 
-			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+                printf '\n' >&2;
 
-			printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2
+                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
 
-			BU::ModuleInit::AbortMsg
+                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2
 
-			return 1
-		else
-            BU::ModuleInit::Msg "Sourcing the $v_module_name module's initialization file"; BU::ModuleInit::Msg
+                BU::ModuleInit::AbortMsg
 
-			# shellcheck disable=SC1090
-			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"; exit 1; }
+                return 1
+            else
+                BU::ModuleInit::Msg "Sourcing the $v_module_name module's initialization file"; BU::ModuleInit::Msg
 
-			BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
-		fi
+                # shellcheck disable=SC1090
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"; exit 1; }
 
-		# Incrementing the 
-		v_index="$(( v_index+1 ))"
+                BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
+            fi
+
+            # Incrementing the 
+            v_index="$(( v_index+1 ))"
+        fi
 	done
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
