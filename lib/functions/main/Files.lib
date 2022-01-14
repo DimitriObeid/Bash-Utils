@@ -284,6 +284,9 @@ function BU::Main::Files::CreateProjectLogFile()
     BU::Newline
 
     BU::EchoSuccess "Successfully got the user's system's informations."
+    
+    # Purging the "$__BU_MODULE_UTILS_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file.
+    __BU_MODULE_UTILS_MSG_ARRAY=''
 }
 
 # -----------------------------------------------

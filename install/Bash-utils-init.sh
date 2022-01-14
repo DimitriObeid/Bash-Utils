@@ -647,7 +647,7 @@ function BashUtils_InitModules()
             if [[ "${p_modules_list[0]}" == 'main' ]] || [[ "${p_modules_list[0]}" == "main --"* ]]; then
                 true
             else
-                BU::ModuleInit::PrintLogError "" "$LINENO"
+                BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
 
                 echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-1 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
                 echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
@@ -664,6 +664,8 @@ function BashUtils_InitModules()
 
 		# Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
 		if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
+            BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO"
+
 			printf '\n' >&2;
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
@@ -675,9 +677,10 @@ function BashUtils_InitModules()
 
 			return 1
 		else
-            BU::ModuleInit::Msg ""; BU::ModuleInit::Msg
+            BU::ModuleInit::Msg "Sourcing the $v_module_name module's main configuration file"; BU::ModuleInit::Msg
+
 			# shellcheck disable=SC1090
-			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"
+			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
 		fi
 
 		# -----------------------------------------------
@@ -686,6 +689,8 @@ function BashUtils_InitModules()
 
 		# Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
 		if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
+            BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO"
+
 			printf '\n' >&2;
 
 			printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
@@ -694,8 +699,10 @@ function BashUtils_InitModules()
 
 			return 1
 		else
+            BU::ModuleInit::Msg "Sourcing the $v_module_name module's initialization file"; BU::ModuleInit::Msg
+
 			# shellcheck disable=SC1090
-			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"
+			source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"; exit 1; }
 
 			BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
 		fi
@@ -709,9 +716,11 @@ function BashUtils_InitModules()
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
-	if BU::Main::Status::CheckStatIsInitializing; then
-		BU::Main:Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+    if  BU::Main::Status::CheckStatIsInitializing; then
+        BU::Main:Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
+
+	# Note : the "$__BU_MODULE_UTILS_MSG_ARRAY" variable is purged from the logged messages after writing its content in the project's log file.
 
 	return 0
 }
