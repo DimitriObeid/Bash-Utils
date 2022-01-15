@@ -152,7 +152,7 @@ function BU::ModuleInit::Get_gettext_sh_File()
 function BU::ModuleInit::AskPrintLog()
 {
 	#**** Code ****
-	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--print-init' ]; then
+	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-print' ]; then
 		echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"; echo
 
 		read -rp "Enter your answer : " read_ask_print_log
@@ -195,7 +195,7 @@ function BU::ModuleInit::Msg()
 {
     #**** Parameters ****
     local p_str=$1            # The string to display.
-    local p_status=$2         # The "--print-init" parameter of the "BashUtils_SourcingModules" function.
+    local p_status=$2         # The "--log-print" parameter of the "BashUtils_SourcingModules" function.
 
     #**** Code ****
     # If no value is stored in the string parameter, it must be interpreted as a newline.
@@ -205,8 +205,8 @@ function BU::ModuleInit::Msg()
         __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"
     fi
 
-    # If the "--print-init" argument is passed at the "module" value
-    if [ "$p_status" = '--print-init' ]; then
+    # If the "--log-print" argument is passed at the "module" value
+    if [ "$p_status" = '--log-print' ]; then
         if [ -z "$p_str" ]; then printf '\n'
 
         else printf "%s\n" "$p_str"; fi
@@ -215,7 +215,10 @@ function BU::ModuleInit::Msg()
     return 0
 }
 
-# Printing the initialization on the screen. Although this function is called if the '--print-init' value is passed with the
+# Displaying a text when the script's execution must be stopped.
+function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
+
+# Printing the initialization on the screen. Although this function is called if the '--log-print' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function BU::ModuleInit::PrintLog()
 {
@@ -260,8 +263,6 @@ function BU::ModuleInit::PrintLogError()
 # -----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
-
-function BU::ModuleInit::AbortMsg() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
 
 # Checking the currently used Bash language's version.
 function BU::ModuleInit::CheckBashMinimalVersion()
@@ -442,7 +443,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
             echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE IS PASSED WITHOUT PARAMETERS" >&2
             echo >&2; echo "Please pass a valid argument between the double quotes where you pass the « module » value" >&2
 
-            BU::ModuleInit::AbortMsg
+            BU::ModuleInit::MsgAbort
 
             BU::ModuleInit::AskPrintLog; exit 1
     
@@ -459,14 +460,14 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     # Temporary solution to avoid crashes when executing this file.
                     true
 
-                # Else, if the "module" value's argument is "--print-init" or "--nolog" (WARNING : these arguments are incompatible with each other).
-                elif [[ "$module_args" == *'--print-init' ]] || [[ "$module_args" = *'--nolog' ]]; then
+                # Else, if the "module" value's argument is "--log-print" or "--nolog" (WARNING : these arguments are incompatible with each other).
+                elif [[ "$module_args" == *'--log-print' ]] || [[ "$module_args" = *'--nolog' ]]; then
 
-                    if [[ "$module_args" == *'--print-init' ]]; then
+                    if [[ "$module_args" == *'--log-print' ]]; then
 
                         # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                         # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--print-init"
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-print"
 
                         # Calling the function that prints the former log entries on the terminal.
                         # BU::ModuleInit::PrintLog
@@ -485,7 +486,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_args » IS NOT SUPPORTED" >&2;
                     echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2
 
-                    BU::ModuleInit::AbortMsg
+                    BU::ModuleInit::MsgAbort
 
                     BU::ModuleInit::AskPrintLog; exit 1
                 fi
@@ -499,7 +500,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
         echo >&2; echo "Please do so by setting the « $p_module » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
 
-        BU::ModuleInit::AbortMsg
+        BU::ModuleInit::MsgAbort
 
         BU::ModuleInit::AskPrintLog; exit 1
 
@@ -527,7 +528,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
         echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
 
-        BU::ModuleInit::AbortMsg
+        BU::ModuleInit::MsgAbort
 
         echo >&2; BU::ModuleInit::AskPrintLog; return 1
     fi
@@ -589,7 +590,7 @@ else
 	echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory." >&2; echo >&2
 	echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2
 
-	BU::ModuleInit::AbortMsg
+	BU::ModuleInit::MsgAbort
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
 	exit 1
@@ -758,7 +759,7 @@ function BashUtils_InitModules()
 
                 printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2
 
-                BU::ModuleInit::AbortMsg
+                BU::ModuleInit::MsgAbort
 
                 return 1
             else
