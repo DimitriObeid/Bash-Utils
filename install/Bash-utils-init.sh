@@ -513,37 +513,42 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
 
                 ## MODULE : LOG MESSAGES PROCESSING
 
-                # Else, if the "module" value's argument is "--log-display" or "--log-shut" (WARNING : these arguments are incompatible with each other).
-                elif [[ "$module_args" == *'--log-display' ]] || [[ "$module_args" = *'--log-shut' ]]; then
+                # Else, if the "module" value's argument is "--log-display", "--log-shut" or '--log-shut-display' (WARNING : these arguments are incompatible with each other).
+                elif [[ "$module_args" == *'--log-'* ]]; then
 
-                    if [[ "$module_args" == *'--log-display' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                    # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+                    # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+                    if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
-                        # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                        # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-display"
+                        if [[ "$module_args" == *'--log-display' ]]; then
 
-                        # Displaying on the screen the previously logged messages.
-                        for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
-                            # shellcheck disable=SC2059
-                            printf "$value"
-                        done
+                            # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
+                            # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
+                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-display"
 
-                    elif [[ "$module_args" = *'--log-shut' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                            # Displaying on the screen the previously logged messages.
+                            for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
+                                # shellcheck disable=SC2059
+                                printf "$value"
+                            done
 
-                        # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                        # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut'
+                        elif [[ "$module_args" = *'--log-shut' ]]; then
 
-                        # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-                        __BU_MODULE_UTILS_MSG_ARRAY=''
-                    
-                    elif [[ "$module_args" = *'--log-shut-display' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                            # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
+                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut'
 
-                        # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                        # but all the log messages will be displayed on the screen.
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut-display'
+                            # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
+                            __BU_MODULE_UTILS_MSG_ARRAY=''
+                        
+                        elif [[ "$module_args" = *'--log-shut-display' ]]; then
 
-                    # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments.
+                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                            # but all the log messages will be displayed on the screen.
+                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut-display'
+                        fi
+
+                    # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" already contains a value.
                     else
                         BU::ModuleInit::PrintLogError "'--log-display', 'log-shut' and / or '--log-shut-display' passed together" "$LINENO"
 
@@ -563,7 +568,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                 else
                     BU::ModuleInit::PrintLogError "Bad module value's argument" "$LINENO"
 
-                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $module_args » IS NOT SUPPORTED" >&2;
+                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
                     echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2
 
                     BU::ModuleInit::MsgAbort
