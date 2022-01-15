@@ -151,9 +151,16 @@ function BU::ModuleInit::Get_gettext_sh_File()
 # Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
 function BU::ModuleInit::AskPrintLog()
 {
+    #**** Variables ****
+    local v_ask="Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"
+
 	#**** Code ****
-	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-print' ]; then
-		echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"; echo
+	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-display' ]; then
+        echo
+
+        BU::ModuleInit::MsgLine "${#v_ask}"
+
+		echo "$v_ask"; echo
 
 		read -rp "Enter your answer : " read_ask_print_log
 
@@ -195,42 +202,62 @@ function BU::ModuleInit::Msg()
 {
     #**** Parameters ****
     local p_str=$1            # The string to display.
-    local p_status=$2         # The "--log-print" parameter of the "BashUtils_SourcingModules" function.
+    local p_status=$2         # The "--log-display" parameter of the "BashUtils_SourcingModules" function.
 
     #**** Code ****
-    # If no value is stored in the string parameter, it must be interpreted as a newline.
-    if [ -z "$p_str" ]; then
-        __BU_MODULE_UTILS_MSG_ARRAY+='\n'
-    else
-        __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"
-    fi
+    # If the '--log-display' argument is passed after the 'module' value
+    if [ "$p_status" = '--log-display' ]; then
 
-    # If the "--log-print" argument is passed at the "module" value
-    if [ "$p_status" = '--log-print' ]; then
-        if [ -z "$p_str" ]; then printf '\n'
+        if [ -z "$p_str" ]; then
 
-        else printf "%s\n" "$p_str"; fi
+            # If no value is stored in the string parameter, it must be interpreted as a newline.
+            __BU_MODULE_UTILS_MSG_ARRAY+='\n'
+
+            printf '\n'
+
+        else
+            # Printing the date before the text to log.
+            __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"
+
+            printf "%s\n" "$p_str"; fi
+
+    # Else, if the '--log-shut' argument is passed after the 'module' value.
+    elif [ "$p_status" = '--log-shut' ]; then
+        echo "$p_str" > /dev/null
+
+    # Else, if the '--log-shut-display' argument is passed after the 'module' value.
+    elif [ "$p_status" = '--log-shut-display' ]; then
+        echo "$p_str"
     fi
 
     return 0
 }
 
+# Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
+# The "number" value must be passed as argument like this : BU::ModuleInit::MsgLine "${#string}".
+function BU::ModuleInit::MsgLine() { number=$1; for ((i=0; i<number; i++)); do printf "-"; done; echo; }
+
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
 
-# Printing the initialization on the screen. Although this function is called if the '--log-print' value is passed with the
+# Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function BU::ModuleInit::PrintLog()
 {
+    #**** Variables ****
+    local v_init_logs_str="INTIALIZATION LOGS"
+    local v_here="Here are the initialization logs"
+
     #**** Code ****
     echo
 
-    echo "Here are the initialization logs"
+    BU::ModuleInit::MsgLine "${#v_here}"
+    echo "$v_here"
     echo
 
-    echo "------------------"
-    echo "INTIALIZATION LOGS"
-    echo "------------------"
+    BU::ModuleInit::MsgLine "${#v_init_logs_str}"
+    echo "$v_init_logs_str"
+    BU::ModuleInit::MsgLine "${#v_init_logs_str}"
 
     echo
 
@@ -251,10 +278,15 @@ function BU::ModuleInit::PrintLogError()
     local p_desc=$1           # Description of the error.
     local p_lineno=$2         # Line where the error happened.
 
+    #**** Variables ****
+    local v_string="ERROR : DESC = $p_desc | LINE = $p_lineno"
+
     #**** Code ****
     BU::ModuleInit::Msg >&2
 
-    BU::ModuleInit::Msg "ERROR : DESC = $p_desc | LINE = $p_lineno" >&2
+    BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_string}")"
+
+    BU::ModuleInit::Msg "$v_string" >&2
     BU::ModuleInit::Msg >&2
 
     return 0
@@ -324,11 +356,15 @@ function BU::ModuleInit::FindPath()
 {
 	#	$1	--> Parent directory.
     #	$2	--> Targeted directory or file.
-    find "$1" -maxdepth 1 -iname "$2"  -print 2>&1 | grep -v "Permission denied" ||
+    find "$1" -maxdepth 1 -iname "$2" -print 2>&1 | grep -v "Permission denied" ||
 	{
-		echo >&2; echo "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; echo >&2
+        if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_EXISTS" ]; then
+            echo >&2; echo "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; echo >&2
+        else
+            BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; BU::ModuleInit::Msg >&2
+        fi
 
-		return 1
+        return 1
 	}; return 0
 }
 
@@ -354,7 +390,9 @@ function BU::ModuleInit::ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-			echo "In « ${BASH_SOURCE[0]}, line $(( LINENO-2 )) » Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_UTILS_ROOT/ » directory" >&2; echo >&2
+            BU::ModuleInit::PrintLogError "Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_UTILS_ROOT/ » directory" "$LINENO"
+
+			echo "In « ${BASH_SOURCE[0]}, line $(( LINENO-4 )) » Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_UTILS_ROOT/ » directory" >&2; echo >&2
 
 			echo "If the problem persists, please create this folder manually" >&2; echo >&2
 
@@ -431,6 +469,11 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
         v_module_name="$(echo "$p_module" | cut -d' ' -f1)"
 
     #**** Code ****
+
+    # -----------------------------------------------
+
+    ## PROCESSING THE 'module' VALUE'S ARGUMENTS VALUES
+
     # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
 
     # These numbers stored in the "$p_count" variable refer to the modules indexes.
@@ -453,31 +496,68 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
             IFS='' read -ra module_array <<< "$p_module"
 
             for module_args in "${module_array[@]}"; do
+                echo "$module_args"
+
+
+                # -----------------------------------------------
+
+                ## MODULE : USER'S LANGUAGE PROCESSING
 
                 # If the "module" value's argument is "--lang="
                 if [[ "$module_args" == *'--lang=en_US' ]]; then
 
-                    # Temporary solution to avoid crashes when executing this file.
+                    # Temporary solution to avoid crashes while executing this file, before .
                     true
 
-                # Else, if the "module" value's argument is "--log-print" or "--nolog" (WARNING : these arguments are incompatible with each other).
-                elif [[ "$module_args" == *'--log-print' ]] || [[ "$module_args" = *'--nolog' ]]; then
+                # -----------------------------------------------
 
-                    if [[ "$module_args" == *'--log-print' ]]; then
+                ## MODULE : LOG MESSAGES PROCESSING
+
+                # Else, if the "module" value's argument is "--log-display" or "--log-shut" (WARNING : these arguments are incompatible with each other).
+                elif [[ "$module_args" == *'--log-display' ]] || [[ "$module_args" = *'--log-shut' ]]; then
+
+                    if [[ "$module_args" == *'--log-display' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
                         # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                        # To print the initialization logs on the screen, you have to pass the 'print-init' argument when you pass the "module" value as first argument
-                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-print"
+                        # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-display"
 
-                        # Calling the function that prints the former log entries on the terminal.
-                        # BU::ModuleInit::PrintLog
+                        # Displaying on the screen the previously logged messages.
+                        for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
+                            # shellcheck disable=SC2059
+                            printf "$value"
+                        done
 
-                    elif [[ "$module_args" = *'--nolog' ]]; then
+                    elif [[ "$module_args" = *'--log-shut' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
                         # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
                         # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
-                        true
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut'
+
+                        # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
+                        __BU_MODULE_UTILS_MSG_ARRAY=''
+                    
+                    elif [[ "$module_args" = *'--log-shut-display' ]] && [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+
+                        # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                        # but all the log messages will be displayed on the screen.
+                        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut-display'
+
+                    # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments.
+                    else
+                        BU::ModuleInit::PrintLogError "'--log-display', 'log-shut' and / or '--log-shut-display' passed together" "$LINENO"
+
+                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETERS '--log-display', '--log-shut' AND / OR '--log-shut-display' ARE INCOMPATIBLE"
+                        echo >&2; echo "Please choose only one of these parameters : " >&2
+
+                        BU::ModuleInit::MsgAbort
+
+                        BU::ModuleInit::AskPrintLog; exit 1
                     fi
+
+                # -----------------------------------------------
+
+                ## MODULE : HANDLING UNSUPPORTED ARGUMENTS
 
                 # Else, if the "module" value's argument is not a supported one.
                 else
@@ -493,22 +573,36 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
             done
         fi
 
+    # -----------------------------------------------
+
+    ## MISSING 'main' MODULE AFTER THE 'module' VALUE
+
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
     elif [ "$p_count" -eq 1 ] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
         BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
-        echo >&2; echo "Please do so by setting the « $p_module » module's argument in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+        echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
 
         BU::ModuleInit::MsgAbort
 
         BU::ModuleInit::AskPrintLog; exit 1
+
+
+    # -----------------------------------------------
+
+    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
 
     # Else, if the "main" module is passed as second argument, after the "module" value.
     elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0
+
+
+    # -----------------------------------------------
+
+    ## 'module' VALUE NOT PASSED, BUT 'main' MODULE PASSED AS FIRST ARGUMENT
 
     # Else, if the "module --*" value is not passed as first argument.
 
@@ -518,12 +612,20 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
         # Temporary solution to avoid crashes when executing this file.
         true
 
+    # -----------------------------------------------
+
+    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
+
     # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
     elif [ "$p_count" -ge 1 ]; then
         return 0
 
+    # -----------------------------------------------
+
+    ## NO 'module' AND 'main' PASSED AS FIRST, THEN SECOND ARGUMENT
+
     else
-        BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first and second arguments" "$LINENO"
+        BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first, then second arguments" "$LINENO"
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2
         echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2
@@ -617,6 +719,9 @@ declare __BU_MODULE_UTILS_MSG_ARRAY=()
 # By default, it stores no value, and should stay like this.
 declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION=''
 
+# This global variables stores a random text. It's enough to determine if the messages can be printed and / or stored in the "$__BU_MODULE_UTILS_MSG_ARRAY" array with the "BU::ModuleInit::Msg" function.
+declare __BU_MODULE_UTILS_MSG_ARRAY_EXISTS="$((RANDOM % 255))"
+
 # -----------------------------------------------
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
@@ -705,7 +810,7 @@ function BashUtils_InitModules()
             v_module_name="$(echo "$module" | cut -d' ' -f1)"
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-		if [[ "${p_modules_list[i]}" = "$v_module_name --*" ]]; then
+		if [[ "${p_modules_list[i]}" = "$v_module_name --"* ]]; then
 			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module"
 		fi
 
@@ -770,10 +875,10 @@ function BashUtils_InitModules()
 
                 BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
             fi
-
-            # Incrementing the 
-            v_index="$(( v_index+1 ))"
         fi
+
+        # Incrementing the modules array index variable.
+        v_index="$(( v_index+1 ))"
 	done
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
