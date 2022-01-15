@@ -34,22 +34,33 @@ EchoBU "$HOME/Bash-utils-init.sh"; BU::Newline '1'; CatBU "$i"
 
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
-	BU::Newline '2'; :' EchoBU "${i^^}"; BU::Newline "1"'; CatBU "$i"
+	# BU::Newline '2';
+    EchoBU "${i^^}";
+
+    # BU::Newline "1"'
+    CatBU "$i"
 done
 
 # Processing the modules files.
 for i in "$HOME/.Bash-utils/modules/main/"*; do
-	BU::Newline '2'; :' EchoBU "${i^^}"; BU::Newline "1"'; CatBU "$i"
+	# BU::Newline '2';
+    EchoBU "${i^^}"
+
+    # BU::Newline "1"';
+    CatBU "$i"
 done
 
 # Processing the function files.
 for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-	BU::Newline '2'; :' EchoBU "${i^^}"; BU::Newline "1"'; CatBU "$i"
+	# BU::Newline '2';
+    EchoBU "${i^^}";
+
+    #BU::Newline "1"';
+    CatBU "$i"
 done
 
 # Processing the remaining files.
-BU::Newline '2'; :'EchoBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"; BU::Newline "1"'; CatBU "$__BU_ROOT_PATH/lib/lang/SetLibLang.sh"
-
+# Nothing to process for now
 
 PrintLine
 
