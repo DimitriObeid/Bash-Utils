@@ -114,7 +114,7 @@ InitializerAddInitStrArrayVal ""
 # If arguments were given in the same double quotes as the "main" module's value.
 if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
-	# Defining a variable that transforms the module's argument string into an array of words.
+	# Defining an array ($main_module_array) to store the module's arguments string as an array of words.
 	IFS='' read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING"
 
 	# Process each supported arguments in this "for" loop.
