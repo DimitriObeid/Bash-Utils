@@ -112,17 +112,17 @@ InitializerAddInitStrArrayVal ""
 #### STEP THREE : PROCESSING MODULE'S PARAMETERS
 
 # If arguments were given in the same double quotes as the "main" module's value.
-if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
+if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
 	# Defining a variable that transforms the module's argument string into an array of words.
-	__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY=("${__BU_MODULE_UTILS_MODULE_ARGS}")
+	IFS='' read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING"
 
 	# Process each supported arguments in this "for" loop.
-	for value in "${__BU_MAIN_INITIALIZER_MODULE_ARGS_ARRAY[@]}"; do
+	for value in "${main_module_array[@]}"; do
 
         stat_value_warning="$(echo "${__BU_MAIN_COLOR_WARNING}Warning : the « $value » value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")"
 
-        if [[ "${value[i]}" = "--stat-"* ]]; then
+        if [[ "${value[i],,}" = *"--stat-"* ]]; then
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
             # Extracting the "--stat" option's values.
             case "${value[i],,}" in
@@ -222,7 +222,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_ARGS" = "main --*" ]; then
                     fi;;
 
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
-                '--stat-txt-fmt'*)
+                '--stat-txt-fmt='*)
                     if      [ "${value[i],,}" = '--stat-txt-fmt=false' ]        || [ "${value[i],,}" = '--stat-txt-fmt=true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="${value#*=}";               BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TXT_FMT" "$__BU_MAIN_STAT_TXT_FMT"
                     else

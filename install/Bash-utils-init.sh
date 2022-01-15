@@ -706,7 +706,7 @@ function BashUtils_InitModules()
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_modules_list[i]}" = "$v_module_name --*" ]]; then
-			__BU_MODULE_UTILS_MODULE_ARGS="$module"
+			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module"
 		fi
 
 		# -----------------------------------------------
