@@ -576,6 +576,10 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     BU::ModuleInit::AskPrintLog; exit 1
                 fi
             done
+
+            # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
+            __BU_MODULE_UTILS_MODULE_FIRST_ARG='true'
+
         fi
 
     # -----------------------------------------------
@@ -583,7 +587,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
     ## MISSING 'main' MODULE AFTER THE 'module' VALUE
 
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
-    elif [ "$p_count" -eq 1 ] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
+    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
         BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
