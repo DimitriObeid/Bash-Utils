@@ -542,10 +542,6 @@ function BU::ModuleInit::SourcingFailure()
 
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-# Add value in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array that stores the initialization log output, according to the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
-#   "true"  --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array AND display text to the terminal.
-#   "false" --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array WITHOUT displaying any text.
-
 # Processing the "module" value's parameters.
 function BU::ModuleInit::ProcessFirstModuleParameters()
 {
@@ -696,7 +692,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     fi
 
                 # Setting the "" global variable to 'full', in order to print every initialization messages, and not only the essential initialization messages.
-                if [[ "$module_args" = '--log-mode-full' ]]; then
+                if [[ "${module_args,,}" = '--log-mode-full' ]]; then
                     __BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args"
                 fi
 
@@ -727,11 +723,13 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     ## MISSING 'main' MODULE AFTER THE 'module' VALUE
 
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
-    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "$p_module" != 'main' ]] || [[ "$p_module" != "main --"* ]]; then
-        BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO"
 
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2
-        echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2
+    # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
+    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn] --* ]]; then
+        BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO";
+
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2;
+        echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -743,7 +741,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
 
     # Else, if the "main" module is passed as second argument, after the "module" value.
-    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+
+    # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
+    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
@@ -756,7 +756,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the "module --*" value is not passed as first argument.
 
     # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
-    elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == "main --"* ]]; then
+    
+    # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
+    elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
 
         # Temporary solution to avoid crashes when executing this file.
         true;
