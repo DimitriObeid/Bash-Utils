@@ -249,7 +249,7 @@ function BU::ModuleInit::Msg()
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen, without carriage returns.
                 else
-                    echo -ne "$p_str";;
+                    echo -ne "$p_str"; fi;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -263,7 +263,7 @@ function BU::ModuleInit::Msg()
 
     # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable stores no value (empty by default), then every
     # initialization messages must be stored in the "$__BU_MODULE_UTILS_MSG_ARRAY" array without being printed on the screen.
-    elif [ -z "$__BU_MODULE_UTILS_MSG_ARRAY" ]; then
+    elif [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
@@ -289,7 +289,10 @@ function BU::ModuleInit::Msg()
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global varaible's value.
     else
-        BU::ModuleInit::MsgAbort;
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » IS NOT SUPPORTED" >&2;
+        echo >&2; echo "Please change its value by '--log-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value." >&2
+
+        BU::ModuleInit::MsgAbort; exit 1;
     fi
 
     return 0
