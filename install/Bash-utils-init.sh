@@ -14,11 +14,11 @@
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
-    echo -e "WARNING !" >&2; echo >&2
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2
-    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
 
-    exit 1
+    exit 1;
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -493,7 +493,10 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
         elif [[ "$p_module" == 'module --'* ]]; then
 
             # Creating a new global variable to store the word array made with the "module" value and the values that come with it.
-            IFS='' read -ra module_array <<< "$p_module"
+            read -ra module_array <<< "$p_module"
+
+			# Unset the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
+			unset module_array[0]
 
             for module_args in "${module_array[@]}"; do
                 echo "$module_args"
@@ -520,7 +523,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
                     if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
-                        if [[ "$module_args" == *'--log-display' ]]; then
+                        if [[ "$module_args" == '--log-display' ]]; then
 
                             # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                             # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
@@ -532,7 +535,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                                 printf "$value"
                             done
 
-                        elif [[ "$module_args" = *'--log-shut' ]]; then
+                        elif [[ "$module_args" = '--log-shut' ]]; then
 
                             # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
                             # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
@@ -541,7 +544,7 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                             # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
                             __BU_MODULE_UTILS_MSG_ARRAY=''
                         
-                        elif [[ "$module_args" = *'--log-shut-display' ]]; then
+                        elif [[ "$module_args" = '--log-shut-display' ]]; then
 
                             # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
                             # but all the log messages will be displayed on the screen.
@@ -552,8 +555,8 @@ function BU::ModuleInit::ProcessFirstModuleArguments()
                     else
                         BU::ModuleInit::PrintLogError "'--log-display', 'log-shut' and / or '--log-shut-display' passed together" "$LINENO"
 
-                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETERS '--log-display', '--log-shut' AND / OR '--log-shut-display' ARE INCOMPATIBLE"
-                        echo >&2; echo "Please choose only one of these parameters : " >&2
+                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETERS '--log-display', '--log-shut' AND / OR '--log-shut-display' ARE INCOMPATIBLE WITH EACH OTHER"
+                        echo >&2; echo "Please choose only one of these parameters" >&2
 
                         BU::ModuleInit::MsgAbort
 
