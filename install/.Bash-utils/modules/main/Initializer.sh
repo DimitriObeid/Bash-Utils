@@ -94,7 +94,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING";
 	
 	# Unsetting the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
-	unset main_module_array[0];
+	unset "main_module_array[0]";
 
 	# Process each supported arguments in this "for" loop.
 	for value in "${main_module_array[@]}"; do

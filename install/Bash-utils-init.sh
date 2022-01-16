@@ -177,24 +177,28 @@ function BU::ModuleInit::AskPrintLog()
 # Displaying the information on the initialized global variables
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
-    #**** Parameters ****
-    local p_var_name=$1       # Name of the variable.
-    local p_var_val=$2        # Value stored in the variable.
-    local p_var_desc=$3       # Description of the variable.
+    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+        #**** Parameters ****
+        local p_var_name=$1       # Name of the variable.
+        local p_var_val=$2        # Value stored in the variable.
+        local p_var_desc=$3       # Description of the variable.
 
-    #**** Code ****
-    BU::ModuleInit::Msg "Declared global variable : $p_var_name"
+        #**** Code ****
+        BU::ModuleInit::Msg "Declared global variable : $p_var_name"
 
-    BU::ModuleInit::Msg "Description : $p_var_desc"
+        BU::ModuleInit::Msg "Description : $p_var_desc"
 
-    # If a variable is stored in the processed variable
-    if [ -n "$p_var_val" ]; then
-        BU::ModuleInit::Msg "Value --> $p_var_val"
+        # If a variable is stored in the processed variable
+        if [ -n "$p_var_val" ]; then
+            BU::ModuleInit::Msg "Value --> $p_var_val"
+        else
+            BU::ModuleInit::Msg "No value stored in this variable"
+        fi
+
+        BU::ModuleInit::Msg
     else
-        BU::ModuleInit::Msg "No value stored in this variable"
+        return 0
     fi
-
-    BU::ModuleInit::Msg
 }
 
 # Handling the initializer's messages. In case of an error, there's no need to call this function, as the error messages MUST be displayed.
@@ -323,6 +327,12 @@ function BU::ModuleInit::PrintLog()
     BU::ModuleInit::MsgLine "${#v_here}";
     echo "$v_here";
     echo;
+
+    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-partial' ]; then
+        echo "Logging mode : partial"; echo
+    elif [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+        echo "Logging mode : full"; echo
+    fi
 
     BU::ModuleInit::MsgLine "${#v_init_logs_str}";
     echo "$v_init_logs_str";
@@ -575,11 +585,45 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             read -ra module_array <<< "$p_module";
 
 			# Unsetting the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
-			unset module_array[0];
+			unset "module_array[0]";
+
+            # -----------------------------------------------
+
+            ## MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
+
+            # Defining a function to optimize the displaying of errors for the 3 "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's accepted values.
+            function BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize()
+            {
+                #**** Parameters ****
+                local p_value=$1;   # New value to assign to the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable.
+
+                #**** Code ****
+                # If the current value AND the new value are the same.
+                if [ "$p_value" = "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's argument « $p_value » passed twice" "$LINENO";
+
+                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed the « $p_value » as « module » value's argument for the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable" >&2;
+
+                    echo >&2; return 1;
+                else
+                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's arguments « $p_value » and « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » passed together" "$LINENO";
+
+                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2;
+                    echo "Please choose only one of these parameters." >&2; echo >&2
+
+                    echo "The new value will be assignated to the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable." >&2; echo >&2;
+
+                    echo >&2;
+                    echo "Current value stored in the permission variable : $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" >&2;
+                    echo "New value : $p_value" >&2;
+
+                    echo >&2; return 1;
+                fi
+            }
+
 
             for module_args in "${module_array[@]}"; do
                 echo "$module_args";
-
 
                 # -----------------------------------------------
 
@@ -594,36 +638,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # -----------------------------------------------
 
                 ## MODULE : LOG MESSAGES PROCESSING
-
-                # Defining a function to optimize the displaying of errors for the 3 "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's accepted values.
-                function BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize()
-                {
-                    #**** Parameters ****
-                    local p_value=$1;   # New value to assign to the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable.
-
-                    #**** Code ****
-                    # If the current value AND the new value are the same.
-                    if [ "$p_value" = "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
-                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's argument « $p_value » passed twice" "$LINENO";
-
-                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed the « $p_value » as « module » value's argument for the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable" >&2;
-
-                        echo >&2; return 1;
-                    else
-                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's arguments « $p_value » and « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » passed together" "$LINENO";
-
-                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2;
-                        echo "Please choose only one of these parameters." >&2; echo >&2
-
-                        echo "The new value will be assignated to the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable." >&2; echo >&2;
-
-                        echo >&2;
-                        echo "Current value stored in the permission variable : $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" >&2;
-                        echo "New value : $p_value" >&2;
-
-                        echo >&2; return 1;
-                    fi
-                }
 
                 # Else, if the "module" value's argument is "--log-display", "--log-shut" or '--log-shut-display' (WARNING : these arguments are incompatible with each other).
                 elif [[ "${module_args,,}" == *'--log-'* ]]; then
@@ -643,6 +657,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
                         fi
+                    fi
 
                     if [[ "${module_args,,}" = '--log-shut' ]]; then
 
@@ -662,8 +677,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args"; __BU_MODULE_UTILS_MSG_ARRAY='';
                         fi
+                    fi
                         
-                    elif [[ "${module_args,,}" = '--log-shut-display' ]]; then
+                    if [[ "${module_args,,}" = '--log-shut-display' ]]; then
 
                         if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
                             # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
@@ -677,11 +693,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
                         fi
-
-                    # Setting the "" global variable to 'full', in order to print every initialization messages, and not only the essential initialization messages.
-                    elif [[ "$module_args" = '--log-mode-full' ]]; then
-                        __BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args"
                     fi
+
+                # Setting the "" global variable to 'full', in order to print every initialization messages, and not only the essential initialization messages.
+                if [[ "$module_args" = '--log-mode-full' ]]; then
+                    __BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args"
+                fi
 
                 # -----------------------------------------------
 
@@ -694,10 +711,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
                     echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
 
-                    BU::ModuleInit::MsgAbort;
+                        BU::ModuleInit::MsgAbort;
 
-                    BU::ModuleInit::AskPrintLog; exit 1;
-                fi
+                        BU::ModuleInit::AskPrintLog; exit 1;
+                    fi
             done
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
@@ -869,38 +886,40 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='';
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
-BU::ModuleInit::Msg "INITIALIZING THE MODULES"
-BU::ModuleInit::Msg
+BU::ModuleInit::Msg "INITIALIZING THE MODULES";
+BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "INITIALIZING THE GLOBAL VARIABLES"
-BU::ModuleInit::Msg
+if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+    BU::ModuleInit::Msg "INITIALIZING THE GLOBAL VARIABLES";
+    BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "Initializing the modules manager's root directory variables";       BU::ModuleInit::Msg
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"     "This global variable stores the path to the parent directory of each module configuration directories"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"          "This global variable stores the path to the configuration directory of each module"
-BU::ModuleInit::Msg
+    BU::ModuleInit::Msg "Initializing the modules manager's root directory variables";       BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"     "This global variable stores the path to the parent directory of each module configuration directories";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"          "This global variable stores the path to the configuration directory of each module";
+    BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "Initializing the configuration directories paths";                  BU::ModuleInit::Msg
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"            "This global variable stores the path to the configuration directory of each module"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "This global variable stores the path of the configuration folder used by the module initialization file"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "This global variable stores the configuration folder of the current module"
-BU::ModuleInit::Msg
+    BU::ModuleInit::Msg "Initializing the configuration directories paths";                  BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"            "This global variable stores the path to the configuration directory of each module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "This global variable stores the path of the configuration folder used by the module initialization file";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "This global variable stores the configuration folder of the current module";
+    BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "Initializing the modules initializers files directory";             BU::ModuleInit::Msg
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"           "This global variable stores the path to the initialization files of the current module."
-BU::ModuleInit::Msg
+    BU::ModuleInit::Msg "Initializing the modules initializers files directory";             BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"           "This global variable stores the path to the initialization files of the current module.";
+    BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path"; BU::ModuleInit::Msg
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path"
-BU::ModuleInit::Msg
+    BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path"; BU::ModuleInit::Msg
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path";
+    BU::ModuleInit::Msg;
 
-BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; BU::ModuleInit::Msg
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)"
-BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)"
-BU::ModuleInit::Msg
+    BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)";
+    BU::ModuleInit::Msg;
+fi
 
 # -----------------------------------------------
 
@@ -932,16 +951,16 @@ function BashUtils_InitModules()
 
 	for module_args in "${p_modules_list[@]}"; do
         if [[ "$module_args" == 'module --'* ]]; then
-            BU::ModuleInit::Msg "Arguments passed to configure the initialization process : $module_args"; BU::ModuleInit::Msg
+            BU::ModuleInit::Msg "Arguments passed to configure the initialization process : $module_args";
         else
             i="$(( i+1 ))" # Module's array index incrementer.
 
             # Name and arguments of the module stored as the nth index of the module list array.
-            BU::ModuleInit::Msg "Module $i : $module_args"
+            BU::ModuleInit::Msg "Module $i : $module_args";
         fi
 	done
 
-	BU::ModuleInit::Msg
+	BU::ModuleInit::Msg;
 
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_modules_list[@]}"; do
@@ -949,8 +968,8 @@ function BashUtils_InitModules()
 		## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
 		# Defining variables for each iteration.
-		local v_module_name
-            v_module_name="$(echo "$module" | cut -d' ' -f1)"
+		local v_module_name;
+            v_module_name="$(echo "$module" | cut -d' ' -f1)";
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_modules_list[i]}" = "$v_module_name --"* ]]; then
@@ -961,7 +980,7 @@ function BashUtils_InitModules()
 
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
-        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index"
+        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index";
 
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU::ModuleInit::ProcessFirstModuleParameters()" function).
         if [[ "$module" != 'module --'* ]]; then
@@ -972,22 +991,21 @@ function BashUtils_InitModules()
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
-                BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO"
+                BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO";
 
                 printf '\n' >&2;
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2
+                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2;
 
                 # Listing all the installed modules in the user's hard drive.
-                BU::ModuleInit::ListInstalledModules
+                # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
+                BU::ModuleInit::ListInstalledModules;
 
-                # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the previous function "BU::ModuleInit::ListInstalledModules".
-
-                return 1
+                return 1;
             else
-                BU::ModuleInit::Msg "Sourcing the $v_module_name module's main configuration file"; BU::ModuleInit::Msg
+                BU::ModuleInit::Msg "Sourcing the $v_module_name module's main configuration file"; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
@@ -999,44 +1017,44 @@ function BashUtils_InitModules()
 
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-                BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO"
+                BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO";
 
                 printf '\n' >&2;
 
-                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2
+                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2
+                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2;
 
-                BU::ModuleInit::MsgAbort
+                BU::ModuleInit::MsgAbort;
 
-                return 1
+                return 1;
             else
-                BU::ModuleInit::Msg "Sourcing the $v_module_name module's initialization file"; BU::ModuleInit::Msg
+                BU::ModuleInit::Msg "Sourcing the $v_module_name module's initialization file"; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"; exit 1; }
 
-                BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !"
+                BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !";
             fi
         fi
 
         # Incrementing the modules array index variable.
-        v_index="$(( v_index+1 ))"
+        v_index="$(( v_index+1 ))";
 	done
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 	#### ENDING THE WHOLE INITIALIZATION PROCESS
 
-	BU::HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(BU::DechoGreen "$__BU_MAIN_PROJECT_FILE_PATH") !"
+	BU::HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(BU::DechoGreen "$__BU_MAIN_PROJECT_FILE_PATH") !";
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
     if  BU::Main::Status::CheckStatIsInitializing; then
-        BU::Main:Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+        BU::Main:Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 	fi
 
 	# Note : the "$__BU_MODULE_UTILS_MSG_ARRAY" variable is purged from the logged messages after writing its content in the project's log file.
 
-	return 0
+	return 0;
 }
