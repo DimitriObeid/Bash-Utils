@@ -141,14 +141,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
+                        BU::ModuleInit::Msg "$p_string" 'n' || return 1
                     else
                         echo -ne "$p_string"
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" || return 1
+                        BU::ModuleInit::Msg "$p_string" || return 1
                     else
                         echo -e "$p_string"
                     fi
@@ -158,14 +158,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
+                        BU::ModuleInit::Msg "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" || return 1
+                        BU::ModuleInit::Msg "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
@@ -175,14 +175,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" 'n' || return 1
+                        BU::ModuleInit::Msg "$p_string" 'n' || return 1
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        InitializerAddInitStrArrayVal "$p_string" || return 1
+                        BU::ModuleInit::Msg "$p_string" || return 1
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
                     fi

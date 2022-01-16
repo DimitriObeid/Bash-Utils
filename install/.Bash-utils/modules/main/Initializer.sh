@@ -40,54 +40,7 @@ fi
 
 #### STEP ONE : DEFINING USEFUL FUNCTIONS
 
-## DEFINING FUNCTIONS
-
-# Add value in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array that stores the initialization log output, according to the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variables's value :
-#   "true"  --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array AND display text to the terminal.
-#   "false" --> store the text into the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array WITHOUT displaying any text.
-function InitializerAddInitStrArrayVal()
-{
-    #**** Parameters ****
-    p_string=$1             # String to store in the "$__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE" array.
-    p_option=$2             # "echo" command's options.
-
-    #**** Code ****
-    # If the user decided to process the initialization messages from the modules initializer script. 
-    if [ -n "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
-
-        # If the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-display' (the user wants to log the modules initialization 
-        # script's messages (AND the modules initialization messages)), then the messages must be stored in the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-        if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" = "--log-display" ]; then
-            case "${p_option,,}" in
-                '-' | 'n')
-                    __BU_MODULE_UTILS_MSG_ARRAY+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
-                '' | *)
-                    __BU_MODULE_UTILS_MSG_ARRAY+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
-            esac
-
-        # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-shut" (the user doesn't want to store the log
-        # messages in the array, nor displaying the messages on the screen), then the messages have to be redirected towards the /dev/null virtual device file.
-        elif [  ]
-
-        # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-shut-display' (the user wants to log
-
-    # Else, if the user decided to process the initialization messages from the main module only.
-    else
-        # If the user decided to use the main module's initialization messages' processor.
-        if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
-            case "${p_option,,}" in
-                '-n' | 'n')
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
-                '' | *)
-                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string#* ] }";;    # Cutting the log entry's date from a string, before displaying it on the terminal.
-            esac
-
-        # Else, if no messages must be stored in one of these arrays, then they have to be printed on the computer's screen.
-        else
-            __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string");
-        fi
-    fi
-}
+## PLEASE DEFINE ANY NEEDED FUNCTIONS HERE
 
 # -----------------------------------------------
 
@@ -97,8 +50,8 @@ function InitializerAddInitStrArrayVal()
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
-InitializerAddInitStrArrayVal ""
+# Leaving a newline for a better text display in the log file and the terminal.
+BU::ModuleInit::Msg "";
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
 
@@ -106,11 +59,11 @@ InitializerAddInitStrArrayVal ""
 for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
     source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
 
-	InitializerAddInitStrArrayVal "Successfully sourced this library file : $f";
+	BU::ModuleInit::Msg "Successfully sourced this library file : $f";
 done
 
-# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
-InitializerAddInitStrArrayVal "";
+# Leaving a newline for a better text display in the log file and the terminal.
+BU::ModuleInit::Msg "";
 
 # -----------------------------------------------
 
@@ -120,11 +73,11 @@ InitializerAddInitStrArrayVal "";
 for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
     source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
 
-	InitializerAddInitStrArrayVal "Successfully sourced this configuration file : $f";
+	BU::ModuleInit::Msg "Successfully sourced this configuration file : $f";
 done
 
-# Leaving a newline for a better text display in the log file and the terminal (if the "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable's value is set to "true").
-InitializerAddInitStrArrayVal "";
+# Leaving a newline for a better text display in the log file and the terminal.
+BU::ModuleInit::Msg "";
 
 # -----------------------------------------------
 
@@ -140,7 +93,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	# Defining an array ($main_module_array) to store the module's arguments string as an array of words.
 	read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING";
 	
-	# Unset the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
+	# Unsetting the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
 	unset main_module_array[0];
 
 	# Process each supported arguments in this "for" loop.

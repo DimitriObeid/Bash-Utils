@@ -155,7 +155,7 @@ function BU::ModuleInit::AskPrintLog()
     local v_ask="Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"
 
 	#**** Code ****
-	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-display' ]; then
+	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
         BU::ModuleInit::MsgLine "${#v_ask}"
@@ -290,9 +290,13 @@ function BU::ModuleInit::Msg()
     # Else, if an incorrect value is passed as "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global varaible's value.
     else
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » IS NOT SUPPORTED" >&2;
-        echo >&2; echo "Please change its value by '--log-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value." >&2
+        echo >&2; echo "Please change its value by '--log-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value." >&2;
 
-        BU::ModuleInit::MsgAbort; exit 1;
+        BU::ModuleInit::MsgAbort;
+        
+        BU::ModuleInit::AskPrintLog;
+
+        exit 1;
     fi
 
     return 0
@@ -570,7 +574,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             # Creating a new global variable to store the word array made with the "module" value and the values that come with it.
             read -ra module_array <<< "$p_module";
 
-			# Unset the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
+			# Unsetting the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
 			unset module_array[0];
 
             for module_args in "${module_array[@]}"; do
@@ -591,45 +595,84 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 ## MODULE : LOG MESSAGES PROCESSING
 
+                # Defining a function to optimize the displaying of errors for the 3 "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's accepted values.
+                function BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize()
+                {
+                    #**** Parameters ****
+                    local p_value=$1;   # New value to assign to the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable.
+
+                    #**** Code ****
+                    # If the current value AND the new value are the same.
+                    if [ "$p_value" = "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's argument « $p_value » passed twice" "$LINENO";
+
+                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed the « $p_value » as « module » value's argument for the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable" >&2;
+
+                        echo >&2; return 1;
+                    else
+                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's arguments « $p_value » and « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » passed together" "$LINENO";
+
+                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2;
+                        echo >&2; echo "Please choose only one of these parameters" >&2; echo >&2;
+
+                        echo >&2;
+                        echo "Current value stored in the permission variable : $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" >&2;
+                        echo "New value : $p_value" >&2;
+
+                        echo >&2; return 1;
+                    fi
+                }
+
                 # Else, if the "module" value's argument is "--log-display", "--log-shut" or '--log-shut-display' (WARNING : these arguments are incompatible with each other).
                 elif [[ "$module_args" == *'--log-'* ]]; then
 
-                    # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
-                    # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
-                    if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                    if [[ "$module_args" == '--log-display' ]]; then
 
-                        if [[ "$module_args" == '--log-display' ]]; then
+                        if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
                             # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                             # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-display";
 
-                        elif [[ "$module_args" = '--log-shut' ]]; then
+                        # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+                        # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+                        else
+                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args"
+                        fi
 
-                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                            # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut';
+                        if [[ "$module_args" = '--log-shut' ]]; then
 
-                            # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-                            __BU_MODULE_UTILS_MSG_ARRAY=''
+                            if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                                # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                                # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
+                                __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut';
+
+                                # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
+                                __BU_MODULE_UTILS_MSG_ARRAY=''
+                            
+                            # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+                            # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+                            else
+                                BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args"
+                            fi
                         
                         elif [[ "$module_args" = '--log-shut-display' ]]; then
 
-                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                            # but all the log messages will be displayed on the screen.
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut-display';
+                            if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+                                # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+                                # but all the log messages will be displayed on the screen.
+                                __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='--log-shut-display';
+
+                            # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+                            # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+                            else
+                                BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args"
+                            fi
                         fi
 
                     # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" already contains a value.
                     else
-                        BU::ModuleInit::PrintLogError "'--log-display', 'log-shut' and / or '--log-shut-display' passed together" "$LINENO";
 
-                        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETERS '--log-display', '--log-shut' AND / OR '--log-shut-display' ARE INCOMPATIBLE WITH EACH OTHER";
-                        echo >&2; echo "Please choose only one of these parameters" >&2;
-
-                        BU::ModuleInit::MsgAbort;
-
-                        BU::ModuleInit::AskPrintLog; exit 1;
                     fi
 
                 # -----------------------------------------------
