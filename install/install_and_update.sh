@@ -101,9 +101,9 @@ function ChangeDirOwnership()
 	p_dir=$2
 
 	#***** Code *****
-	PrintLog "Changing recursively the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » directory, from root to « ${user##*/} »"
+	PrintLog "Changing recursively the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » directory, from « root » to « ${user##*/} »"
 	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"; return 0
-    else BU::Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; PrintRoot; exit 1; fi
+    else BU::Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; BU::NewlineF; PrintRoot; exit 1; fi
 
 }
 
@@ -115,7 +115,7 @@ function ChangeFileOwnership()
 	p_file=$2
 
 	#***** Code *****
-	PrintLog "Changing the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » file, from root to « ${user##*/} »"
+	PrintLog "Changing the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » file, from « root » to « ${user##*/} »"
 	if chown -v "${p_user##*/}" "$p_file"; then return 0; else PrintLog "UNABLE TO CHANGE THE OWNERSHIP OF THE « $p_file » FILE TO « ${user##*/} »"; PrintRoot; exit 1; fi
 }
 
@@ -324,6 +324,8 @@ if [ "$EUID" -ne 0 ]; then
         exit 1
     fi
 
+	echo
+
     __UNROOT="true"
 fi
 
@@ -334,15 +336,15 @@ if [ "$__UNROOT" = 'true' ]; then
 
     # shellcheck disable=SC2002
     cat "$__F_USERS_LIST_FILE_PATH" | sort > "$__F_USERS_LIST_FILE_PATH.tmp"  || { PrintLog "UNABLE TO CREATE THE « $__F_USERS_LIST_FILE_PATH.tmp » FILE"; $ exit 1; }
-    PrintLog 'Done' 'log'
+    PrintLog 'Done' 'log'; echo
 
-    PrintLog "Copying back the content of the « $__F_USERS_LIST_FILE_PATH.tmp»file to the « $__F_USERS_LIST_FILE_PATH' file" 'log'
+    PrintLog "Copying back the content of the « $__F_USERS_LIST_FILE_PATH.tmp » file to the « $__F_USERS_LIST_FILE_PATH » file" 'log'
     cat "$__F_USERS_LIST_FILE_PATH.tmp" > "$__F_USERS_LIST_FILE_PATH"         || { PrintLog "UNABLE TO COPY THE CONTENT OF THE « $__F_USERS_LIST_FILE_PATH.tmp » TO THE « $__F_USERS_LIST_FILE_PATH » FILE"; exit 1; }
-    PrintLog 'Done' 'log'
+    PrintLog 'Done' 'log'; echo
 
-    PrintLog "Removing the « $__F_USERS_LIST_FILE_PATH.tmp»file" 'log'
+    PrintLog "Removing the « $__F_USERS_LIST_FILE_PATH.tmp » file" 'log'
     rm "$__F_USERS_LIST_FILE_PATH.tmp"      || { PrintLog "UNABLE TO REMOVE THE « $__F_USERS_LIST_FILE_PATH.tmp » FILE"; exit 1; }
-    PrintLog 'Done' 'log'
+    PrintLog 'Done' 'log'; echo
 
     # Finding the "/root" path at the end of the users list file.
     LAST=$(tail -n 1 "$__F_USERS_LIST_FILE_PATH")
@@ -400,7 +402,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 			BU::NewlineF; PrintLog "$(PrintLine)"; BU::NewlineF; sleep 0.5
 
-			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
+			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
 
 		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
 
@@ -419,12 +421,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				BU::Newline
 			fi
 
-			PrintLog "$(ChangeOwnership "$user")"; sleep 0.5
+			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
 		else
-			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENTThe accepted values are « install » or « i » for the installation of the modules manager, or « update » or « u » for the update of the Bash Utils root directory's path."; PrintRoot; exit 1
+			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are « install » or « i » for the installation of the modules manager, or « update » or « u » for the update of the Bash Utils root directory's path."; PrintRoot; exit 1
 		fi
 
-		PrintLog "$(PrintLine)"; BU::NewlineF
+		PrintLog "$(PrintLine)";
 
 		PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR THE « ${user##*/} » USER !"
     fi
@@ -435,10 +437,10 @@ PrintLog "$(PrintLine)"; BU::NewlineF
 PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :"
 
 for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
-	PrintLog "${user##*/}"
+	PrintLog "- ${user##*/}"
 done
 
-printf ""
+PrintLog ""
 
 # Printing back the "/root" path into the users list file if the installation was done without the super-user's privileges.
 PrintRoot
