@@ -52,17 +52,40 @@ function InitializerAddInitStrArrayVal()
     p_option=$2             # "echo" command's options.
 
     #**** Code ****
-    if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
-        case "$p_option" in
-            '-n' | 'n')
-                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string#* ] }";   # Cutting the log entry's date from a string, before displaying it on the terminal.
-                ;;
-            '' | *)
-                __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string#* ] }";    # Cutting the log entry's date from a string, before displaying it on the terminal.
-                ;;
-        esac
+    # If the user decided to process the initialization messages from the modules initializer script. 
+    if [ -n "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+
+        # If the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-display' (the user wants to log the modules initialization 
+        # script's messages (AND the modules initialization messages)), then the messages must be stored in the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
+        if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" = "--log-display" ]; then
+            case "${p_option,,}" in
+                '-' | 'n')
+                    __BU_MODULE_UTILS_MSG_ARRAY+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
+                '' | *)
+                    __BU_MODULE_UTILS_MSG_ARRAY+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
+            esac
+
+        # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-shut" (the user doesn't want to store the log
+        # messages in the array, nor displaying the messages on the screen), then the messages have to be redirected towards the /dev/null virtual device file.
+        elif [  ]
+
+        # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value is set to '--log-shut-display' (the user wants to log
+
+    # Else, if the user decided to process the initialization messages from the main module only.
     else
-        __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string");
+        # If the user decided to use the main module's initialization messages' processor.
+        if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = "true" ]; then
+            case "${p_option,,}" in
+                '-n' | 'n')
+                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -ne "${p_string#* ] }";;   # Cutting the log entry's date from a string, before displaying it on the terminal.
+                '' | *)
+                    __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string"); echo -e "${p_string#* ] }";;    # Cutting the log entry's date from a string, before displaying it on the terminal.
+            esac
+
+        # Else, if no messages must be stored in one of these arrays, then they have to be printed on the computer's screen.
+        else
+            __BU_MAIN_MODULE_STR_ARRAY_LOG_DATE+=("$p_string");
+        fi
     fi
 }
 
