@@ -31,8 +31,8 @@ fi
 function DbgMsg()
 {
     #**** Parameters ****
-    p_code=$1               # Exit code.
-    p_sleep=$2              # Pause time in seconds.
+    local p_code=$1		# Exit code.
+    local p_sleep=$2	# Pause time in seconds.
 
     #**** Code ****
 printf "
@@ -60,86 +60,86 @@ printf "
 function Moduleinitializer_PrintModInitDefaultLanguage()
 {
     #**** Parameters ****
-    p_missing=$1            # Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
-    p_filepath=$2           # File which retrieval or sourcing failed.
+    local p_missing=$1;		# Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
+    local p_filepath=$2;	# File which retrieval or sourcing failed.
 
     #**** Code ****
     if [ -z "$p_missing" ]; then
         echo >&2;
-        echo "en | Warning : no given information about the « gettext.sh » file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2
-        echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh » ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2
+        echo "en | Warning : no given information about the « gettext.sh » file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2;
+        echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh » ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2;
 
 		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-		echo >&2; exit 1
+		echo >&2; exit 1;
 
 	elif [ -z "$p_filepath" ]; then
 		echo >&2;
-		echo "en | Warning : no file path has been passed as second argument" >&2
-		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2
+		echo "en | Warning : no file path has been passed as second argument" >&2;
+		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2;
 
 		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-		echo >&2; exit 1
+		echo >&2; exit 1;
     fi
 
     if [ "${p_missing^^}" = 'PATH' ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po >>" >&2; echo >&2
+        echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po >>" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = "config-missing" ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2
+        echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = 'config-source' ]; then
         echo >&2;
-        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2
+        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2;
     fi
 
     echo >&2;
     echo "en | The rest of the library will use english as default language" >&2
-    echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2
+    echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2;
 
-    echo >&2
+    echo >&2;
 }
 
 
 function __bu_export_textdomain()
 {
 	#**** Variables ****
-	export TEXTDOMAINDIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")"
+	export TEXTDOMAINDIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")";
 
 	#**** Code ****
-    return 0
+    return 0;
 }
 
 # Getting and sourcing the "gettext.sh" file.
 function BU::ModuleInit::Get_gettext_sh_File()
 {
     #**** Variables ****
-    local v_path_file_path  # Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
-        v_path_file_path="$(command -v "gettext.sh")"
+    local v_path_file_path;		# Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
+        v_path_file_path="$(command -v "gettext.sh")";
 
-    local v_spare_file_path # Defining a variable to store the spare gettext.sh file if its path have to move in the future.
-        v_spare_file_path="$__BU_MODULE_UTILS_CONFIG_INIT_DIR/gettext.sh"
+    local v_spare_file_path;	# Defining a variable to store the spare gettext.sh file if its path have to move in the future.
+        v_spare_file_path="$__BU_MODULE_UTILS_CONFIG_INIT_DIR/gettext.sh";
 
     #**** Code ****
     # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
     if [ -f "$v_path_file_path" ]; then
         # shellcheck disable=SC1090
-        source "$v_path_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'PATH' "$v_path_file_path"
+        source "$v_path_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'PATH' "$v_path_file_path";
 
 
     # Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
     else
         if [ -f "$v_spare_file_path" ]; then
             # shellcheck disable=SC1090
-            source "$v_spare_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'config-source' "$v_spare_file_path"
+            source "$v_spare_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'config-source' "$v_spare_file_path";
 
         # Else, if the spare "gettext.sh" file is also missing.
         else
-            Moduleinitializer_PrintModInitDefaultLanguage 'config-missing'
+            Moduleinitializer_PrintModInitDefaultLanguage 'config-missing';
         fi
     fi
 }
@@ -152,26 +152,26 @@ function BU::ModuleInit::Get_gettext_sh_File()
 function BU::ModuleInit::AskPrintLog()
 {
     #**** Variables ****
-    local v_ask="Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)"
+    local v_ask="Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)";
 
 	#**** Code ****
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
-        BU::ModuleInit::MsgLine "${#v_ask}"
+        BU::ModuleInit::MsgLine "${#v_ask}";
 
-		echo "$v_ask"; echo
+		echo "$v_ask"; echo;
 
-		read -rp "Enter your answer : " read_ask_print_log
+		read -rp "Enter your answer : " read_ask_print_log;
 
 		if [ "${read_ask_print_log,,}" = 'yes' ]; then
-			BU::ModuleInit::PrintLog
+			BU::ModuleInit::PrintLog;
 		else
-			echo; echo "The logs will not be displayed on your screen"; echo
+			echo; echo "The logs will not be displayed on your screen"; echo;
 		fi
 	fi
 
-	return 0
+	return 0;
 }
 
 # Displaying the information on the initialized global variables
@@ -179,25 +179,25 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
         #**** Parameters ****
-        local p_var_name=$1       # Name of the variable.
-        local p_var_val=$2        # Value stored in the variable.
-        local p_var_desc=$3       # Description of the variable.
+        local p_var_name=$1;	# Name of the variable.
+        local p_var_val=$2;		# Value stored in the variable.
+        local p_var_desc=$3;	# Description of the variable.
 
         #**** Code ****
-        BU::ModuleInit::Msg "Declared global variable : $p_var_name"
+        BU::ModuleInit::Msg "Declared global variable : $p_var_name";
 
-        BU::ModuleInit::Msg "Description : $p_var_desc"
+        BU::ModuleInit::Msg "Description : $p_var_desc";
 
         # If a variable is stored in the processed variable
         if [ -n "$p_var_val" ]; then
-            BU::ModuleInit::Msg "Value --> $p_var_val"
+            BU::ModuleInit::Msg "Value --> $p_var_val";
         else
-            BU::ModuleInit::Msg "No value stored in this variable"
+            BU::ModuleInit::Msg "No value stored in this variable";
         fi
 
-        BU::ModuleInit::Msg
+        BU::ModuleInit::Msg;
     else
-        return 0
+        return 0;
     fi
 }
 
@@ -223,7 +223,9 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str";
 
-                    echo -ne "$p_str"; fi;;
+                    echo -ne "$p_str"; fi;
+
+					return 0;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -234,13 +236,15 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n";
 
-                    echo -e "$p_str"; fi;;
+                    echo -e "$p_str"; fi;
+
+					return 0;;
         esac
 
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
     # messages must be redirected towards the "/dev/null" virtual device file, and the array must be emptied.
     elif [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" = '--log-shut' ]; then
-        echo "$p_str" > /dev/null; __BU_MODULE_UTILS_MSG_ARRAY='';
+        return 0;
 
     # Else, if the '--log-shut-display' argument is passed as a 'module' parameter, then
     # every initialization messages must be redirected to the screen only, not to the array.
@@ -249,11 +253,13 @@ function BU::ModuleInit::Msg()
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
                 if [ -z "$p_str" ]; then
-                    echo -ne ''
+                    echo -ne '';
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen, without carriage returns.
                 else
-                    echo -ne "$p_str"; fi;;
+                    echo -ne "$p_str"; fi
+
+					return 0;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -262,7 +268,9 @@ function BU::ModuleInit::Msg()
                 # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns. 
                 else
                     # Printing the date before the text to log.
-                    echo -e "$p_str"; fi;;
+                    echo -e "$p_str"; fi
+
+					return 0;;
         esac
 
     # Else, if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable stores no value (empty by default), then every
@@ -279,7 +287,9 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str";
 
-                    echo -ne "$p_str"; fi;;
+                    echo -ne "$p_str"; fi;
+
+					return 0;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -288,7 +298,9 @@ function BU::ModuleInit::Msg()
                 # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns. 
                 else
                     # Printing the date before the text to log.
-                    __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"; fi;;
+                    __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n"; fi
+
+					return 0;;
         esac
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global varaible's value.
@@ -303,7 +315,7 @@ function BU::ModuleInit::Msg()
         exit 1;
     fi
 
-    return 0
+    return 0;
 }
 
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
@@ -322,16 +334,16 @@ function BU::ModuleInit::PrintLog()
     local v_here="Here are the initialization logs";
 
     #**** Code ****
-    echo
+    echo;
 
     BU::ModuleInit::MsgLine "${#v_here}";
     echo "$v_here";
     echo;
 
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-partial' ]; then
-        echo "Logging mode : partial"; echo
+        echo "Logging mode : partial"; echo;
     elif [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
-        echo "Logging mode : full"; echo
+        echo "Logging mode : full"; echo;
     fi
 
     BU::ModuleInit::MsgLine "${#v_init_logs_str}";
@@ -348,6 +360,8 @@ function BU::ModuleInit::PrintLog()
     echo ">>>>> END OF THE INITIALIZATION LOGS"; echo;
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array, and it calls this function.
+
+	return 0;
 }
 
 # Print an error message in the log storage variable.
@@ -368,7 +382,7 @@ function BU::ModuleInit::PrintLogError()
     BU::ModuleInit::Msg "$v_string" >&2;
     BU::ModuleInit::Msg >&2;
 
-    return 0
+    return 0;
 }
 
 # -----------------------------------------------
@@ -524,7 +538,7 @@ function BU::ModuleInit::ListInstalledModules()
 
 	BU::ModuleInit::AskPrintLog;
 
-    exit 1
+    exit 1;
 }
 
 # Printing an error message if a file cannot be sourced.
@@ -566,7 +580,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "« module » value passed without argument(s)" "$LINENO";
+            BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value passed without argument(s)" "$LINENO";
 
             echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE IS PASSED WITHOUT PARAMETERS" >&2;
             echo >&2; echo "Please pass a valid argument between the double quotes where you pass the « module » value" >&2;
@@ -702,7 +716,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 # Else, if the "module" value's argument is not a supported one.
                 else
-                    BU::ModuleInit::PrintLogError "Bad module value's argument" "$LINENO";
+                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's argument" "$LINENO";
 
                     echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
                     echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
@@ -726,7 +740,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn] --* ]]; then
-        BU::ModuleInit::PrintLogError "Main module not passed after the « module » value" "$LINENO";
+        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Main module not passed after the « module » value" "$LINENO";
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2;
         echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2;
@@ -748,6 +762,14 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
+    # -----------------------------------------------
+
+    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
+
+    # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
+    elif [ "$p_count" -ge 1 ]; then
+
+        return 0;
 
     # -----------------------------------------------
 
@@ -758,19 +780,26 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
     
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 0 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
+    elif [ "$p_count" -eq 0 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
 
-        # Temporary solution to avoid crashes when executing this file.
-        true;
-
-    # -----------------------------------------------
-
-    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
-
-    # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
-    elif [ "$p_count" -ge 1 ]; then
-
+        # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
+
+	# -----------------------------------------------
+
+    ## 'Main' MODULE PASSED AS FIRST ARGUMENT, BUT BEFORE THE 'module' VALUE
+	
+	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
+	
+	elif [ "$p_count" -eq 1 ] && [[ "$p_module" == "module --"* ]]; then
+		BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « main » module passed as first argument, but before the « module -- » value";
+
+		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » VALUE" >&2;
+		echo >&2; echo "Please reverse this order, call the « module » with its arguments BEFORE the « main » module" >&2;
+
+        BU::ModuleInit::MsgAbort;
+
+        BU::ModuleInit::AskPrintLog; exit 1;
 
     # -----------------------------------------------
 
