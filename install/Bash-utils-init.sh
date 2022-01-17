@@ -164,7 +164,7 @@ function BU::ModuleInit::AskPrintLog()
 
 		read -rp "Enter your answer : " read_ask_print_log;
 
-		if [ "${read_ask_print_log,,}" = 'yes' ]; then
+		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
 			BU::ModuleInit::PrintLog;
 		else
 			echo; echo "The logs will not be displayed on your screen"; echo;
@@ -183,7 +183,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_var_name=$1;	# Name of the variable.
         local p_var_val=$2;		# Value stored in the variable.
 		local p_var_type=$3;	# Type of variable (array, integer, float, path, string).
-        local p_var_desc=$3;	# Description of the variable.
+        local p_var_desc=$4;	# Description of the variable.
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -638,7 +638,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             ## MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
 
             # Defining a function to optimize the displaying of errors for the 3 "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's accepted values.
-            function BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize()
+            function BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize()
             {
                 #**** Parameters ****
                 local p_value=$1;   # New value to assign to the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable.
@@ -698,7 +698,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
                         # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
                         else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args";
+                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
                             
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
                         fi
@@ -718,7 +718,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
                         # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
                         else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args";
+                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
 
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args"; __BU_MODULE_UTILS_MSG_ARRAY='';
                         fi
@@ -734,7 +734,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
                         # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
                         else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionErrorOptimize "$module_args";
+                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
 
                             __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
                         fi
