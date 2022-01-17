@@ -30,7 +30,8 @@ fi
 
 
 # Processing the modules initializer file.
-EchoBU "$HOME/Bash-utils-init.sh"; BU::Newline '1'; CatBU "$i"
+EchoBU "$HOME/Bash-utils-init.sh"; # BU::Newline '1';
+CatBU "$HOME/Bash-utils-init.sh"
 
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
