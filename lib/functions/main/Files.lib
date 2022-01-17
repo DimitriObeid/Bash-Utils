@@ -50,14 +50,14 @@ function BU::Main::Files::__ProcessingFile()
 
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
-        BU::EchoError "End of processing the $(BU::DechoHighlight "$p_name") file"
+        BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name") file"
         BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
         BU::Newline
 
         sleep "$__BU_MAIN_STAT_TIME_TXT"
 
     elif [ "$p_output" = 'S' ]; then
-        BU::EchoSuccess "End of processing the $(BU::DechoS "$p_name") file"
+        BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name") file"
         BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate'
         BU::Newline
 
@@ -88,7 +88,7 @@ function BU::Main::Files::ProcessingFile()
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT"
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
-    BU::EchoNewstep "Processing the $(BU::DechoHighlight "$p_name") file in the $(BU::DechoHighlight "$p_parent") parent directory."
+    BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") file in the $(BU::DechoHighlightPath "$p_parent") parent directory."
     BU::Newline
 
     case "$p_function" in
@@ -132,12 +132,12 @@ function BU::Main::Files::OverwriteFile()
     BU::Main::Directories::TriggerRootDirWarning "$p_path"
 
     if [ "$p_authorization" = "true" ]; then
-		BU::EchoNewstep "The $(BU::DechoHighlight "$p_path/") file already exists and is not empty."
-		BU::EchoNewstep "Overwriting data from file $(BU::DechoHighlight "$p_path/")"
+		BU::EchoNewstep "The $(BU::DechoHighlightPath "$p_path/") file already exists and is not empty."
+		BU::EchoNewstep "Overwriting data from file $(BU::DechoHighlightPath "$p_path/")"
 		BU::Newline
 
 		true > "$p_path"
-		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path/")") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		BU::Main::Errors::HandleErrors "$?" "THE CONTENT OF THE $(BU::DechoHighlightPath "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
 		BU::EchoSuccess "The content of the $(BU::DechoS "$p_path/") file has been successfully overwritten"
 		BU::Newline
@@ -179,7 +179,7 @@ function BU::Main::Files::Make()
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
-        BU::EchoNewstep "Creating the $(BU::DechoHighlight "$p_name") file in the parent folder $(BU::DechoHighlight "$p_parent/")."
+        BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$p_name") file in the parent folder $(BU::DechoHighlightPath "$p_parent/")."
 
 		touch "$v_path"; BU::Main::Checkings::CheckFilePathWasCreated "$v_path"
 
@@ -187,10 +187,10 @@ function BU::Main::Files::Make()
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		BU::Main::Errors::HandleErrors "$?" "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_name")") FILE CANNOT BE CREATED IN THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_parent/")") PARENT FOLDER." \
+		BU::Main::Errors::HandleErrors "$?" "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_name")") FILE CANNOT BE CREATED IN THE $(BU::DechoHighlightPath "$p_parent/") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))"
 
-		BU::EchoSuccess "The $(BU::DechoS "$p_name") file was successfully created in the $(BU::DechoS "$p_parent") folder."
+		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") file was successfully created in the $(BU::DechoHighlightPath "$p_parent") folder."
         BU::Newline
 
         return 0
@@ -205,7 +205,7 @@ function BU::Main::Files::Make()
 
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
-		BU::EchoSuccess "The $(BU::DechoS "$p_path/") file already exists in the $(BU::DechoS "$p_parent/") folder and is empty."
+		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_path/") file already exists in the $(BU::DechoHighlightPath "$p_parent/") folder and is empty."
 		BU::Newline
 
 		return 0
@@ -234,7 +234,7 @@ function BU::Main::Files::CreateProjectLogFile()
     #**** Code ****
     if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU::Main::Errors::ExitError '1'; fi
 
-    BU::EchoSuccess "Successfully created the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
+    BU::EchoSuccess "Successfully created the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file."
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
     if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	BU::Main:Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
@@ -303,12 +303,12 @@ function BU::Main::Files::SourceFile()
     if [ -f "$p_path" ]; then
         # shellcheck disable=SC1090
         if source "$p_path"; then
-            BU::EchoSuccess "Sourced file : $(BU::DechoHighlight "$p_path")"
+            BU::EchoSuccess "Sourced file : $(BU::DechoHighlightPath "$p_path")"
         else
-            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE ! $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
+            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))"
         fi
     else
-        BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlight "$p_path")")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
+        BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))"
     fi
 }
 
@@ -385,8 +385,8 @@ function BU::Main::Files::Uncompress()
 #     #**** Code ****
 #     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
 #     "$cmd $opts $p_path"
-#     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlight "$p_name") A ÉCHOUÉE"
-#     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlight "$p_name") s'est effectuée avec brio."
+#     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlightPath "$p_name") A ÉCHOUÉE"
+#     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlightPath "$p_name") s'est effectuée avec brio."
 #     BU::Newline
 
     return 0

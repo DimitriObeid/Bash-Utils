@@ -67,7 +67,7 @@ function BU::Main::Permissions::ChownRec()
         BU::Main::Errors::HandleErrors "1" "" "" ""
     fi
 
-    BU::EchoNewstep "Recursive change of the ownership rights of the new folder $(BU::DechoHighlight "$p_path/") from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
+    BU::EchoNewstep "Recursive change of the ownership rights of the new folder $(BU::DechoHighlightPath "$p_path/") from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
 	BU::Newline
 
     # On change les droits du fichier créé par le script.
@@ -77,12 +77,12 @@ function BU::Main::Permissions::ChownRec()
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$p_newOwner" "$p_path"; then
-		BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path/") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
+		BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path/") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
 		BU::Newline
 
 		return 0
 	else
-        BU::EchoError "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder"
+        BU::EchoError "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path/") folder"
 		BU::Newline
 
 		return 1
@@ -119,14 +119,14 @@ function BU::Main::Permissions::Chown()
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
-        BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlight "$p_path/") folder from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
+        BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlightPath "$p_path/") folder from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
         BU::Newline
         
         # Changing ownership recursively.
         case "$p_option" in
             'R')
                 if chown -Rv "$p_newOwner" "$p_path"; then
-                    BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
+                    BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
                     BU::Newline
 
                     return 0
@@ -140,13 +140,13 @@ function BU::Main::Permissions::Chown()
             '')
                 # Changing ownership non-recursively.
                 if chown -v "$p_newOwner" "$p_path"; then
-                    BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
+                    BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")"
                     BU::Newline
 
                     return 0
 
                 else
-                    BU::Main::Errors::HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU::DechoHighlight "$p_path/") FOLDER" \
+                    BU::Main::Errors::HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU::DechoHighlightPath "$p_path/") FOLDER" \
                         "Please run the script with the command $(BU::DechoHighlight "bash -x $PROJECT_NAME") to check what happened" \
                         "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))"
                     BU::Newline
@@ -155,7 +155,7 @@ function BU::Main::Permissions::Chown()
                 fi
                 ;;
             *)
-                BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlight "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlight "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
+                BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightFunction "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlightPath "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"
                 ;;
         esac
@@ -164,23 +164,23 @@ function BU::Main::Permissions::Chown()
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$p_path" ]; then
-            BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlight "$p_path/") file from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
+            BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlightPath "$p_path/") file from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
             BU::Newline
 
             # Changing ownership
             if chown -v "$p_newOwner" "$p_path"; then
-                BU::EchoSuccess "The rights of the $(BU::DechoHighlight "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
+                BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")."
                 BU::Newline
 
                 return 0
             else
-                BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlight "$p_path") file !"
+                BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path") file !"
                 BU::Newline
 
                 return 1
             fi
         else
-            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlight "$p_path") FILE DOESN'T EXISTS" && return 1
+            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightPath "$p_path") FILE DOESN'T EXISTS" && return 1
         fi
     fi
 }

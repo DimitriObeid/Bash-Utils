@@ -112,7 +112,7 @@ function BU::Main::Errors::ExitError()
     if [[ "$1" =~ [0-9] ]]; then
         exit "$1"; kill "$$"
     else
-        BU::EchoWarning "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument."
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument."
 
         kill "$$"
     fi
@@ -123,10 +123,10 @@ function BU::Main::Errors::ExitError()
 ## SCRIPT'S ERRORS HANDLING
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling file name presence.
-function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; then BU::DechoHighlight "<no specified file>"; else BU::DechoHighlight "$1"; fi; }
+function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; then BU::DechoHighlightPath "<no specified file>"; else BU::DechoHighlightPath "$1"; fi; }
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling function name presence.
-function BU::Main::Errors::HandleErrors_Function()    { if [ -z "$1" ]; then BU::DechoHighlight "<no specified function>"; else BU::DechoHighlight "$1"; fi; }
+function BU::Main::Errors::HandleErrors_Function()    { if [ -z "$1" ]; then BU::DechoHighlightFunction "<no specified function>"; else BU::DechoHighlightFunction "$1"; fi; }
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling line number presence.
 function BU::Main::Errors::HandleErrors_Line()        { if [ -z "$1" ]; then BU::DechoHighlight "<no specified line>"; else BU::DechoHighlight "$1"; fi; }
@@ -178,13 +178,13 @@ function BU::Main::Errors::HandleErrors()
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    BU::EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    BU::EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
                 else
                     BU::EchoError "A FATAL ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
                 fi
             else
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    BU::EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlight "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    BU::EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
                 else
                     BU::EchoError "AN ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
                 fi
@@ -217,7 +217,7 @@ function BU::Main::Errors::HandleErrors()
         if [ -z "$p_badValue" ]; then
             BU::EchoError "Value(s) that caused this error : $(BU::DechoOrange 'no value') OR $(BU::DechoOrange 'an unknown error')"; BU::Newline >&2
         else
-            BU::EchoError "Value(s) that caused this error : $(BU::DechoHighlight "$p_badValue")"; BU::Newline >&2
+            BU::EchoError "Value(s) that caused this error : $(BU::DechoHighlightVar "$p_badValue")"; BU::Newline >&2
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
@@ -233,7 +233,7 @@ function BU::Main::Errors::HandleErrors()
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
             BU::EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
             {
-                BU::Main::Errors::HandleSmallErrors "Unable to write in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU::DechoHighlight "${FUNCNAME[0]}()") function" 'R' 'CPLS'
+                BU::Main::Errors::HandleSmallErrors "Unable to write in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU::DechoHighlightFunction "${FUNCNAME[0]}()") function" 'R' 'CPLS'
             }
         fi
 

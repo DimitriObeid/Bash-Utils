@@ -415,7 +415,7 @@ function BU::Main:Status::ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1"
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 function BU::Main:Status::ChangeSTAT_INITIALIZING    {
 	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
-		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlight 'false') to $(BU::DechoHighlight 'true')"; return 1
+		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlightVar 'false') to $(BU::DechoHighlightVar 'true')"; return 1
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || return 1
 	fi; return 0; }

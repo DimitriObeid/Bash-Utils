@@ -188,12 +188,12 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
 		if [ "${p_var_type,,}" != 'array' ]	\
-			|| [ "${p_var_type,,}" != 'dir' ] \
-			|| [ "${p_var_type,,}" != 'file' ] \
-			|| [ "${p_var_type,,}" != 'float' ]	\
-			|| [ "${p_var_type,,}" != 'integer' ] \
-			|| [ "${p_var_type,,}" != 'path' ] \
-			|| [ "${p_var_type}" != 'string' ]
+			&& [ "${p_var_type,,}" != 'dir' ] \
+			&& [ "${p_var_type,,}" != 'file' ] \
+			&& [ "${p_var_type,,}" != 'float' ]	\
+			&& [ "${p_var_type,,}" != 'integer' ] \
+			&& [ "${p_var_type,,}" != 'path' ] \
+			&& [ "${p_var_type}" != 'string' ]
 			then
 				p_var_val="unknown value";
 		fi
@@ -215,7 +215,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 			# If a value or more are stored in the processed array.
 			if [ -n "$p_var_val" ]; then
-				for _ in "$p_var_val"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
+				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
 
 			else
 				BU::ModuleInit::Msg "The array is empty";
@@ -654,10 +654,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 else
                     BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's arguments « $p_value » and « $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » passed together" "$LINENO";
 
-                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2;
+                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2; echo >&2;
                     echo "Please choose only one of these parameters." >&2; echo >&2
 
-                    echo "The new value will be assignated to the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable." >&2; echo >&2;
+                    echo "The new value will be assignated to the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » global variable." >&2;
 
                     echo >&2;
                     echo "Current value stored in the permission variable : $__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" >&2;
@@ -775,7 +775,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn] --* ]]; then
+    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_UTILS_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
         BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Main module not passed after the « module » value" "$LINENO";
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2;
@@ -793,7 +793,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the "main" module is passed as second argument, after the "module" value.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
+    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
@@ -816,7 +816,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Checking if the "main" module is passed as first argument, in order to avoid unexpected bugs during the other modules' initialization process.
     
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 0 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn] --* ]]; then
+    elif [ "$p_count" -eq 0 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
@@ -1017,7 +1017,7 @@ function BashUtils_InitModules()
 	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"
 
 	for module_args in "${p_modules_list[@]}"; do
-        if [[ "$module_args" == 'module --'* ]]; then
+        if [[ "${module_args,,}" == 'module --'* ]]; then
             BU::ModuleInit::Msg "Arguments passed to configure the initialization process : $module_args";
         else
             i="$(( i+1 ))" # Module's array index incrementer.

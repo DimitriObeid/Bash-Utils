@@ -79,21 +79,21 @@ function BU::Main::Echo::__EchoOutput()
             local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
         fi
 
-		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlight "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
+		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "${p_context,,}" = "begin" ]; then
             __BU::EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -105,15 +105,15 @@ function BU::Main::Echo::__EchoOutput()
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -315,7 +315,7 @@ function BU::EchoRead()
 	
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(BU::DechoHighlight "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors '' "" '' ""; return 1; }
+		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors '' "" '' ""; return 1; }
 	fi; return 0
 }
 
@@ -722,7 +722,7 @@ function BU::Newline()
     if [ -n "$number" ]; then
         if ! BU::IsInt "$number"; then
             BU::EchoMsg "" "" "nodate"
-            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlight "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
+            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R'
             BU::EchoMsg "" "" "nodate"
         else
             # Doing X line breaks according to the number passed as argument.
