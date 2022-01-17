@@ -667,7 +667,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 fi
             }
 
-
             for module_args in "${module_array[@]}"; do
                 echo "$module_args";
 
