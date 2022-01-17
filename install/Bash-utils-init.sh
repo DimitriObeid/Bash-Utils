@@ -178,26 +178,62 @@ function BU::ModuleInit::AskPrintLog()
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+
         #**** Parameters ****
         local p_var_name=$1;	# Name of the variable.
         local p_var_val=$2;		# Value stored in the variable.
+		local p_var_type=$3;	# Type of variable (array, integer, float, path, string).
         local p_var_desc=$3;	# Description of the variable.
 
         #**** Code ****
-        BU::ModuleInit::Msg "Declared global variable : $p_var_name";
+		# Checking if the "$p_var_type" argument value matches an awaited pattern.
+		if [ "${p_var_type,,}" != 'array' ]	\
+			|| [ "${p_var_type,,}" != 'dir' ] \
+			|| [ "${p_var_type,,}" != 'file' ] \
+			|| [ "${p_var_type,,}" != 'float' ]	\
+			|| [ "${p_var_type,,}" != 'integer' ] \
+			|| [ "${p_var_type,,}" != 'path' ] \
+			|| [ "${p_var_type}" != 'string' ]
+			then
+				p_var_val="unknown value";
+		fi
 
-        BU::ModuleInit::Msg "Description : $p_var_desc";
+		# Checking if the variable is an array.
+		if [ "$p_var_type" = 'array' ] || [ "${p_var_type^^}" = 'A' ]; then
+			BU::ModuleInit::Msg "Declared global variable : $p_var_name";
+		
+		# Checking if the variable is not an array.
+		else
+			BU::ModuleInit::Msg "Declared global array : $p_var_name";
+		fi
 
-        # If a variable is stored in the processed variable
-        if [ -n "$p_var_val" ]; then
-            BU::ModuleInit::Msg "Value --> $p_var_val";
-        else
-            BU::ModuleInit::Msg "No value stored in this variable";
-        fi
+		BU::ModuleInit::Msg "Description : $p_var_desc";
 
-        BU::ModuleInit::Msg;
-    else
-        return 0;
+		BU::ModuleInit::Msg "Type : array";
+
+		if [ "${p_var_type,,}" = 'array' ]; then
+
+			# If a value or more are stored in the processed array.
+			if [ -n "$p_var_val" ]; then
+				for _ in "$p_var_val"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
+
+			else
+				BU::ModuleInit::Msg "The array is empty";
+			fi
+		else
+
+			# If a variable is stored in the processed variable.
+			if [ -n "$p_var_val" ]; then
+				BU::ModuleInit::Msg "Value --> $p_var_val";
+
+			else
+				BU::ModuleInit::Msg "No value stored in this variable";
+			fi
+
+			BU::ModuleInit::Msg;
+		fi
+	else
+		return 0;
     fi
 }
 
@@ -925,30 +961,30 @@ if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the modules manager's root directory variables";       BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"     "This global variable stores the path to the parent directory of each module configuration directories";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"          "This global variable stores the path to the configuration directory of each module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"	'Path'		"This global variable stores the path to the parent directory of each module configuration directories";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"		'Path'		"This global variable stores the path to the configuration directory of each module";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the configuration directories paths";                  BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"            "This global variable stores the path to the configuration directory of each module";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"       "This global variable stores the path of the configuration folder used by the module initialization file";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    "This global variable stores the configuration folder of the current module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"			'Path'		"This global variable stores the path to the configuration directory of each module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"	'Path'		"This global variable stores the path of the configuration folder used by the module initialization file";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	'Path'		"This global variable stores the configuration folder of the current module";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the modules initializers files directory";             BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"           "This global variable stores the path to the initialization files of the current module.";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"		'Path'		"This global variable stores the path to the initialization files of the current module.";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path"; BU::ModuleInit::Msg
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        "Name of the file containing the path to the root folder of the library";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  "Name of the parent folder of the file containing the path to the root folder of the library";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        "Path of the file containing the library's root folder's path";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        'Path'	"Name of the file containing the path to the root folder of the library";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  'Path'	"Name of the parent folder of the file containing the path to the root folder of the library";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        'Path'	"Path of the file containing the library's root folder's path";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"       "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"       "Path of the file containing the library's root folder's path (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"		'Path'		"Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" 	'Path'		"Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"		'Path'		"Path of the file containing the library's root folder's path (if this file is owned by the super-user)";
     BU::ModuleInit::Msg;
 fi
 
