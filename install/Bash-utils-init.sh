@@ -592,6 +592,21 @@ function BU::ModuleInit::SourcingFailure()
 
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
+# Usage function
+function BU::ModuleInit::Usage()
+{
+	echo >&2; echo "The supported values are :" >&2;
+	echo "--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-shut » and « --log-shut-display » parameters)" >&2;
+	echo "--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-display » and « --log-shut-display » parameters)" >&2;
+	echo "--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-display » and « --log-shut » parameters)" >&2;
+	echo >&2;
+
+	echo "--log-mode-full       : " >&2;
+	echo "--log-mode-partial    : " >&2;
+
+	return 0;
+}
+
 # Processing the "module" value's parameters.
 function BU::ModuleInit::ProcessFirstModuleParameters()
 {
@@ -756,10 +771,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
                     echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
 
-                        BU::ModuleInit::MsgAbort;
+					BU::ModuleInit::Usage;
 
-                        BU::ModuleInit::AskPrintLog; exit 1;
-                    fi
+                    BU::ModuleInit::MsgAbort;
+
+                    BU::ModuleInit::AskPrintLog; exit 1;
+                fi
             done
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
