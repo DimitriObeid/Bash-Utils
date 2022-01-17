@@ -38,9 +38,9 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### 
+#### TEXT PROCESSING FUNCTIONS
 
-## 
+## CUTTING TEXT
 
 # Cut the date displayed before a string.
 function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutLastFieldFromDelimiter "$1" '] ';  return 0; }
@@ -52,9 +52,9 @@ function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutLastFie
 function BU::Main::Text::CutFromCharacter()
 {
     #**** Parameters ****
-    p_target=$1         # String to process.
+    p_target=$1;        # String to process.
     # $2                # Delimiter.
-    p_iterations=$3     # Iterations.
+    p_iterations=$3;    # Iterations.
 
     #**** Code ****
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
@@ -62,16 +62,16 @@ function BU::Main::Text::CutFromCharacter()
     fi
 
     if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
-        p_iterations='1'
+        p_iterations='1';
     fi
 
     for ((i=0; i<p_iterations; i++)); do
         #shellcheck disable=SC2001
-        p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")"
-        p_target="$p_target"
+        p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")";
+        p_target="$p_target";
     done
 
-    echo -ne "$p_target"; return 0
+    echo -ne "$p_target"; return 0;
 }
 
 # Cut the last field of a string.
@@ -82,7 +82,7 @@ function BU::Main::Text::CutLastFieldFromDelimiter()
     #   $2  --> delimiter
 
     #**** Code ****
-    "$1"="${1##*$2)}"; echo -ne "$1" && return 0
+    "$1"="${1##*$2)}"; echo -ne "$1" && return 0;
 }
 
 # Cut any part of a string after a delimiter.
@@ -94,31 +94,39 @@ function BU::Main::Text::CutStringAfterDelim()
     #   $3  --> iterations
 
     #**** Code ****
-    return
+    return 0;
 }
+
+# -----------------------------------------------
+
+## GETTING TEXT
 
 # Getting the size of a string.
 function BU::Main::Text::GetStringSize()
 {
     #**** Parameters ****
-    p_string=$1
+    p_string=$1;
 
     #**** Variables ****
-    v_size="${#p_string}"
+    v_size="${#p_string}";
 
     #**** Code ****
-    echo "$v_size"; return 0
+    echo "$v_size"; return 0;
 }
 
 # Getting the number of words in a string.
 function BU::Main::Text::GetStringWordsNumber()
 {
     #**** Parameters ****
-    p_string=$1
+    p_string=$1;
 
     #**** Code ****
-    echo "$p_string" | wc -w; return 0
+    echo "$p_string" | wc -w; return 0;
 }
+
+# -----------------------------------------------
+
+## REVERSING TEXT
 
 # Reverse words of a string according to a delimiter.
 
@@ -132,5 +140,5 @@ function BU::Main::Text::ReverseStringWordsOrder()
     #   $2  --> delimiter
 
     #**** Code ****
-    echo -ne "$1" | tr "$2" '\n' | tac | tr '\n' "$2" && return 0
+    echo -ne "$1" | tr "$2" '\n' | tac | tr '\n' "$2" && return 0;
 }
