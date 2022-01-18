@@ -158,7 +158,7 @@ function BU::ModuleInit::AskPrintLog()
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
-        BU::ModuleInit::MsgLine "${#v_ask}";
+        BU::ModuleInit::MsgLine "${#v_ask}" '#';
 
 		echo "$v_ask"; echo;
 
@@ -190,9 +190,12 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_line=$7;        # Line where the variable was declared.
 
         #**** Variables ****
-        local v_file="$([[ -n "$p_file" ]] && echo "File : $p_file"     || echo "File : none")";
-        local v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
-        local v_line="$([[ -n "$p_line" ]] && echo "Line : $p_line"     || echo "Line : unknown")";
+        local v_declared_arr="Declared global array : $p_var_name"
+        local v_declared_var="Declared global variable : $p_var_name"
+
+        local v_file; v_file="$([[ -n "$p_file" ]] && echo "File     : $p_file" || echo "File : none")";
+        local v_func; v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
+        local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line     : $p_line" || echo "Line : unknown")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -207,22 +210,30 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				p_var_type="unknown type";
 		fi
 
+        BU::ModuleInit::Msg;
+
 		# Checking if the variable is an array.
-		if [ "$p_var_type" = 'array' ] || [ "${p_var_type^^}" = 'A' ]; then
-			BU::ModuleInit::Msg "Declared global variable : $p_var_name";
+		if [ "$p_var_type" = 'array' ]; then
+            BU::ModuleInit::MsgLine "${#v_declared_arr}" '-';
+
+			BU::ModuleInit::Msg "$(BU::ModuleInit::Msg "$v_declared_arr")";
 		
 		# Checking if the variable is not an array.
 		else
-			BU::ModuleInit::Msg "Declared global array : $p_var_name";
+            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_declared_var}" '-')";
+			BU::ModuleInit::Msg "$v_declared_var";
 		fi
 
+		BU::ModuleInit::Msg;
+
 		BU::ModuleInit::Msg "Description : $p_var_desc";
+		BU::ModuleInit::Msg;
 
 		BU::ModuleInit::Msg "$v_file";
 		BU::ModuleInit::Msg "$v_func";
 		BU::ModuleInit::Msg "$v_line";
 
-		BU::ModuleInit::Msg "Type : array";
+		BU::ModuleInit::Msg "Type     : array";
 
 		if [ "${p_var_type,,}" = 'array' ]; then
 
@@ -231,6 +242,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
 
 			else
+                BU::ModuleInit::Msg;
 				BU::ModuleInit::Msg "The array is empty";
 			fi
 		else
@@ -240,6 +252,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				BU::ModuleInit::Msg "Value --> $p_var_val";
 
 			else
+                BU::ModuleInit::Msg;
 				BU::ModuleInit::Msg "No value stored in this variable";
 			fi
 
@@ -369,12 +382,12 @@ function BU::ModuleInit::Msg()
 
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
 # The "number" value must be passed as argument like this : BU::ModuleInit::MsgLine "${#string}".
-function BU::ModuleInit::MsgLine() { number=$1; for ((i=0; i<number; i++)); do printf "-"; done; echo; }
+function BU::ModuleInit::MsgLine() { local p_number=$1; local p_line=$2; for ((i=0; i<p_number; i++)); do printf "%s" "$p_line"; done; echo; return 0; }
 
 # Displaying a text when the script's execution must be stopped.
-function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
+function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
 
-function BU::ModuleInit::PressAnyKey() { echo; read -r "Press any key to $1"; echo; }
+function BU::ModuleInit::PressAnyKey() { echo; read -r "Press any key to $1" v_read_press_any_key; case "$v_read_press_any_key" in *) return;; esac; echo; return 0; }
 
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
@@ -387,7 +400,7 @@ function BU::ModuleInit::PrintLog()
     #**** Code ****
     echo;
 
-    BU::ModuleInit::MsgLine "${#v_here}";
+    BU::ModuleInit::MsgLine "${#v_here}" '#';
     echo "$v_here";
     echo;
 
@@ -397,9 +410,9 @@ function BU::ModuleInit::PrintLog()
         echo "Logging mode : full"; echo;
     fi
 
-    BU::ModuleInit::MsgLine "${#v_init_logs_str}";
+    BU::ModuleInit::MsgLine "${#v_init_logs_str}" '-';
     echo "$v_init_logs_str";
-    BU::ModuleInit::MsgLine "${#v_init_logs_str}";
+    BU::ModuleInit::MsgLine "${#v_init_logs_str}" '-';
 
     BU::ModuleInit::PressAnyKey 'display the logs';
 
@@ -428,7 +441,7 @@ function BU::ModuleInit::PrintLogError()
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
-    BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_string}")";
+    BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_string}" '-')";
 
     BU::ModuleInit::Msg "$v_string" >&2;
     BU::ModuleInit::Msg >&2;
@@ -913,7 +926,9 @@ __BU_MODULE_UTILS_ROOT_HOME="$HOME";
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")";
-	__BU_MODULE_UTILS_INITALIZER_PATH="${BASH_SOURCE[0]}";
+
+	# shellcheck disable=SC2034
+	__BU_MODULE_UTILS_INITALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "$(basename "${BASH_SOURCE[0]}")")";
 
     # Configurations directories
 	__BU_MODULE_UTILS_CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "config")";
@@ -926,11 +941,11 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	# Files
 	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME="Bash-utils-root-val.path";
 	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT";
-	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR" "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME")";
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH="$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR/$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME";
 
 	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME="Bash-utils-root-val-ROOT.path";
 	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="$__BU_MODULE_UTILS_ROOT";
-	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME")";
+	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME";
 
 	# Misc
 	__BU_MODULE_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]";
@@ -1071,6 +1086,8 @@ function BashUtils_InitModules()
 
 		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_modules_list[i]}" = "$v_module_name --"* ]]; then
+
+            # shellcheck disable=SC2034
 			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module"
 		fi
 
