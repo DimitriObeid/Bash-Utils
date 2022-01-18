@@ -84,17 +84,17 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     if [ "${p_missing^^}" = 'PATH' ]; then
         echo >&2;
         echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po >>" >&2; echo >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po »" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = "config-missing" ]; then
         echo >&2;
         echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = 'config-source' ]; then
         echo >&2;
         echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po >>" >&2; echo >&2;
+        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
     fi
 
     echo >&2;
@@ -184,6 +184,14 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_var_val=$2;		# Value stored in the variable.
 		local p_var_type=$3;	# Type of variable (array, integer, float, path, string).
         local p_var_desc=$4;	# Description of the variable.
+        local p_file=$5;        # File where the variable was declared.
+        local p_func=$6;        # Function where the variable was declared.
+        local p_line=$7;        # Line where the variable was declared.
+
+        #**** Variables ****
+        local v_file="$([[ -n "$p_file" ]] && echo "File : $p_file"     || echo "File : none")";
+        local v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
+        local v_line="$([[ -n "$p_line" ]] && echo "Line : $p_line"     || echo "Line : unknown")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -195,7 +203,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			&& [ "${p_var_type,,}" != 'path' ] \
 			&& [ "${p_var_type}" != 'string' ]
 			then
-				p_var_val="unknown value";
+				p_var_type="unknown type";
 		fi
 
 		# Checking if the variable is an array.
@@ -208,6 +216,10 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		fi
 
 		BU::ModuleInit::Msg "Description : $p_var_desc";
+
+		BU::ModuleInit::Msg "$v_file";
+		BU::ModuleInit::Msg "$v_func";
+		BU::ModuleInit::Msg "$v_line";
 
 		BU::ModuleInit::Msg "Type : array";
 
@@ -977,30 +989,30 @@ if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the modules manager's root directory variables";       BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"	'Path'		"This global variable stores the path to the parent directory of each module configuration directories";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"		'Path'		"This global variable stores the path to the configuration directory of each module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"	'Path'		"This global variable stores the path to the parent directory of each module configuration directories" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"		'Path'		"This global variable stores the path to the configuration directory of each module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the configuration directories paths";                  BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"			'Path'		"This global variable stores the path to the configuration directory of each module";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"	'Path'		"This global variable stores the path of the configuration folder used by the module initialization file";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	'Path'		"This global variable stores the configuration folder of the current module";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"			'Path'		"This global variable stores the path to the configuration directory of each module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"	'Path'		"This global variable stores the path of the configuration folder used by the module initialization file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	'Path'		"This global variable stores the configuration folder of the current module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the modules initializers files directory";             BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"		'Path'		"This global variable stores the path to the initialization files of the current module.";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_MODULES_DIR"           	"$__BU_MODULE_UTILS_MODULES_DIR"		'Path'		"This global variable stores the path to the initialization files of the current module." "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path"; BU::ModuleInit::Msg
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        'Path'	"Name of the file containing the path to the root folder of the library";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  'Path'	"Name of the parent folder of the file containing the path to the root folder of the library";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        'Path'	"Path of the file containing the library's root folder's path";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_NAME"        'Path'	"Name of the file containing the path to the root folder of the library" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"         "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PARENT_DIR"  'Path'	"Name of the parent folder of the file containing the path to the root folder of the library" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"               "$__BU_MODULE_UTILS_LIB_ROOT_DIR_FILE_PATH"        'Path'	"Path of the file containing the library's root folder's path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::Msg "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)"; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"		'Path'		"Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" 	'Path'		"Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"		'Path'		"Path of the file containing the library's root folder's path (if this file is owned by the super-user)";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"		'Path'		"Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" 	'Path'		"Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"		'Path'		"Path of the file containing the library's root folder's path (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 fi
 
