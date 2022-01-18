@@ -197,6 +197,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local v_func; v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
         local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line     : $p_line" || echo "Line : unknown")";
 
+		local v_no_val_arr="";
+		local v_no_val_var="";
+
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
 		if [ "${p_var_type,,}" != 'array' ]	\
@@ -217,7 +220,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
             BU::ModuleInit::MsgLine "${#v_declared_arr}" '-';
 
 			BU::ModuleInit::Msg "$(BU::ModuleInit::Msg "$v_declared_arr")";
-		
+
 		# Checking if the variable is not an array.
 		else
             BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_declared_var}" '-')";
@@ -244,6 +247,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			else
                 BU::ModuleInit::Msg;
 				BU::ModuleInit::Msg "The array is empty";
+				BU::ModuleInit::MsgLine ""
 			fi
 		else
 
