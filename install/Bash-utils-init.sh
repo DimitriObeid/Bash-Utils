@@ -828,15 +828,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # -----------------------------------------------
 
-    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
-
-    # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
-    elif [ "$p_count" -ge 1 ]; then
-
-        return 0;
-
-    # -----------------------------------------------
-
     ## 'module' VALUE NOT PASSED, BUT 'main' MODULE PASSED AS FIRST ARGUMENT
 
     # Else, if the "module --*" value is not passed as first argument.
@@ -855,7 +846,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 	
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 	
-	elif [ "$p_count" -eq 1 ] && [[ "$p_module" == "module --"* ]]; then
+	elif [ "$p_count" -ge 1 ] && [[ "$p_module" == "module --"* ]]; then
 		BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « main » module passed as first argument, but before the « module -- » value";
 
 		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » VALUE" >&2;
@@ -864,6 +855,15 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
         BU::ModuleInit::MsgAbort;
 
         BU::ModuleInit::AskPrintLog; exit 1;
+
+    # -----------------------------------------------
+
+    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
+
+    # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
+    elif [ "$p_count" -ge 1 ]; then
+
+        return 0;
 
     # -----------------------------------------------
 
