@@ -177,6 +177,7 @@ function BU::ModuleInit::AskPrintLog()
 # Displaying the information on the initialized global variables
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
+    echo "Ici"
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
 
         #**** Parameters ****
@@ -373,6 +374,8 @@ function BU::ModuleInit::MsgLine() { number=$1; for ((i=0; i<number; i++)); do p
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; }
 
+function BU::ModuleInit::PressAnyKey() { echo; read -r "Press any key to $1"; echo; }
+
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function BU::ModuleInit::PrintLog()
@@ -398,7 +401,7 @@ function BU::ModuleInit::PrintLog()
     echo "$v_init_logs_str";
     BU::ModuleInit::MsgLine "${#v_init_logs_str}";
 
-    echo
+    BU::ModuleInit::PressAnyKey 'display the logs';
 
     for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
         # shellcheck disable=SC2059
