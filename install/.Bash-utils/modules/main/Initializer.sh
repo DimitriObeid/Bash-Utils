@@ -111,7 +111,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = "--stat-debug=false" ]          || [ "${value[i],,}" = "--stat-debug=true" ]; then
                             __BU_MAIN_STAT_DEBUG="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DEBUG" "$__BU_MAIN_STAT_DEBUG";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                         BU::ModuleInit::Msg "$stat_value_warning « --stat-debug=false », « --stat-debug=true »";
                     fi;;
@@ -121,7 +121,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-decho=authorize' ]      || [ "${value[i],,}" = '--stat-decho=forbid' ]  || [ "${value[i],,}" = '--stat-decho=restrict' ]; then
                             __BU_MAIN_STAT_DECHO="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DECHO" "$__BU_MAIN_STAT_DECHO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
 
@@ -133,7 +133,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-echo=false' ]           || [ "${value[i],,}" = '--stat-echo=true' ]; then
                             __BU_MAIN_STAT_ECHO="${value#*=}";                  BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ECHO" "$__BU_MAIN_STAT_ECHO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-echo=false », « stat-echo=true »";
                     fi;;
@@ -143,12 +143,12 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
                             __BU_MAIN_STAT_ERROR="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR";
                     
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = 'stat-error=void' ]; then
                             __BU_MAIN_STAT_ERROR='';                            BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-error=fatal », « stat-error=void »";
                     fi;;
@@ -158,7 +158,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-log=false' ]            || [ "${value[i],,}" = '--stat-log=true' ]; then
                             __BU_MAIN_STAT_LOG="${value#*=}";                   BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-log=false », « stat-log=true »";
                     fi;;
@@ -168,12 +168,12 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = 'stat-log-r=log' ]              || [ "${value[i],,}" = '--stat-log-r=tee' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = '--stat-log-r=void' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT='';                     BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
                     fi;;
@@ -183,7 +183,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-op-root=authorized' ]   || [ "${value[i],,}" = '--stat-op-root=forbidden' ] || [ "${value[i],,}" = '--stat-op-root=restricted' ]; then
                             __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_OPERATE_ROOT" "$__BU_MAIN_STAT_OPERATE_ROOT";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
                     fi;;
@@ -193,7 +193,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-print-init-log=false' ] || [ "${value[i],,}" = '--stat-print-init-log=true' ]; then
                             __BU_MAIN_STAT_PRINT_INIT_LOG="${value#*=}";        BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_PRINT_INIT_LOG" "$__BU_MAIN_STAT_PRINT_INIT_LOG";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning --stat-print-init-log=false », « stat-print-init-log=true »";
                     fi;;
@@ -203,7 +203,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = "--stat-time-header=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
                             __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}";        BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_HEADER" "$__BU_MAIN_STAT_TIME_HEADER";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
                     fi;;
@@ -213,7 +213,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = "--stat-time-newline=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
                             __BU_MAIN_STAT_TIME_NEWLINE="${value[i]#*=}";       BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_NEWLINE" "$__BU_MAIN_STAT_TIME_NEWLINE";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
                     fi;;
@@ -223,7 +223,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = "--stat-time-txt=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
                             __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}";           BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_TXT" "$__BU_MAIN_STAT_TIME_TXT";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
                     fi;;
@@ -233,7 +233,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value[i],,}" = '--stat-txt-fmt=false' ]        || [ "${value[i],,}" = '--stat-txt-fmt=true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="${value#*=}";               BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TXT_FMT" "$__BU_MAIN_STAT_TXT_FMT";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value"
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-txt-fmt=false », « --stat-txt-fmt=true »";
                     fi;;
@@ -304,7 +304,7 @@ if BU::Main::Status::CheckStatIsLogging; then
 	if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
 		BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") LOG FILE FOR THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
-		return 1
+		return 1;
 	else
 		BU::EchoSuccess "The $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME") log file was successfully created in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")"; BU::Newline;
 	fi
