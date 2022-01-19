@@ -183,7 +183,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         #**** Parameters ****
         local p_var_name=$1;	# Name of the variable.
         local p_var_val=$2;		# Value stored in the variable.
-		local p_var_type=$3;	# Type of variable (array, integer, float, path, string).
+		local p_var_type=$3;	# Type of variable (array, int (integer), float, path, string).
         local p_var_desc=$4;	# Description of the variable.
         local p_file=$5;        # File where the variable was declared.
         local p_func=$6;        # Function where the variable was declared.
@@ -202,11 +202,20 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
+		# - array	: this variable is an array.
+		# - code	: this variable stores code in order to perform an action (either a function, a command or a condition)
+		# - dir		: this variable stores the name of a directory.
+		# - file	: this variable stores the name of a file.
+		# - float	: this variable stores a floating number.
+		# - int		: this variable stores an integer.
+		# - path:	: this variable stores a path.
+		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
 		if [ "${p_var_type,,}" != 'array' ]	\
+			&& [ "${p_var_type,,}" != 'cmd' ] \
 			&& [ "${p_var_type,,}" != 'dir' ] \
 			&& [ "${p_var_type,,}" != 'file' ] \
 			&& [ "${p_var_type,,}" != 'float' ]	\
-			&& [ "${p_var_type,,}" != 'integer' ] \
+			&& [ "${p_var_type,,}" != 'int' ] \
 			&& [ "${p_var_type,,}" != 'path' ] \
 			&& [ "${p_var_type}" != 'string' ]
 			then
