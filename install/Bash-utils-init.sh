@@ -151,14 +151,11 @@ function BU::ModuleInit::Get_gettext_sh_File()
 # Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
 function BU::ModuleInit::AskPrintLog()
 {
-    #**** Variables ****
-    local v_ask="Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)";
-
 	#**** Code ****
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
-        BU::ModuleInit::MsgLine "${#v_ask}" '#';
+        BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#';
 
 		echo "$v_ask"; echo;
 
@@ -190,15 +187,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_line=$7;        # Line where the variable was declared.
 
         #**** Variables ****
-        local v_declared_arr="Declared global array : $p_var_name"
-        local v_declared_var="Declared global variable : $p_var_name"
-
         local v_file; v_file="$([[ -n "$p_file" ]] && echo "File     : $p_file" || echo "File : none")";
         local v_func; v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
         local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line     : $p_line" || echo "Line : unknown")";
-
-		local v_no_val_arr="";
-		local v_no_val_var="";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -217,23 +208,18 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			&& [ "${p_var_type,,}" != 'float' ]	\
 			&& [ "${p_var_type,,}" != 'int' ] \
 			&& [ "${p_var_type,,}" != 'path' ] \
-			&& [ "${p_var_type}" != 'string' ]
+			&& [ "${p_var_type,,}" != 'string' ]
 			then
 				p_var_type="unknown type";
 		fi
 
-        BU::ModuleInit::Msg;
-
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "${#v_declared_arr}" '-';
-
-			BU::ModuleInit::Msg "$(BU::ModuleInit::Msg "$v_declared_arr")";
+            BU::ModuleInit::MsgLine "Declared global array : $p_var_name" '-';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_declared_var}" '-')";
-			BU::ModuleInit::Msg "$v_declared_var";
+            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-')";
 		fi
 
 		BU::ModuleInit::Msg;
@@ -245,20 +231,19 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		BU::ModuleInit::Msg "$v_func";
 		BU::ModuleInit::Msg "$v_line";
 
-		BU::ModuleInit::Msg "Type     : array";
-
 		if [ "${p_var_type,,}" = 'array' ]; then
+            BU::ModuleInit::Msg "Type     : array";
 
-			# If a value or more are stored in the processed array.
+    		# If a value or more are stored in the processed array.
 			if [ -n "$p_var_val" ]; then
 				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
 
 			else
+				BU::ModuleInit::MsgLine "The array is empty";
                 BU::ModuleInit::Msg;
-				BU::ModuleInit::Msg "The array is empty";
-				BU::ModuleInit::MsgLine ""
 			fi
 		else
+            BU::ModuleInit::Msg "Type     : $p_var_type"
 
 			# If a variable is stored in the processed variable.
 			if [ -n "$p_var_val" ]; then
@@ -394,8 +379,7 @@ function BU::ModuleInit::Msg()
 }
 
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
-# The "number" value must be passed as argument like this : BU::ModuleInit::MsgLine "${#string}".
-function BU::ModuleInit::MsgLine() { local p_number=$1; local p_line=$2; for ((i=0; i<p_number; i++)); do printf "%s" "$p_line"; done; echo; return 0; }
+function BU::ModuleInit::MsgLine() { local p_str=$1; local p_line=$2; local v_str_count="${#p_str}"; for ((i=0; i<v_str_count; i++)); do printf "%s" "$p_line"; done; echo; BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str"; return 0; }
 
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
