@@ -155,7 +155,7 @@ function BU::ModuleInit::AskPrintLog()
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
-        BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#';
+        echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#';
 
 		echo "$v_ask"; echo;
 
@@ -174,7 +174,6 @@ function BU::ModuleInit::AskPrintLog()
 # Displaying the information on the initialized global variables
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
-    echo "Ici"
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
 
         #**** Parameters ****
@@ -213,9 +212,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				p_var_type="unknown type";
 		fi
 
+        BU::ModuleInit::Msg;
+
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "Declared global array : $p_var_name" '-';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_UTILS_DATE_LOG Declared global array : $p_var_name" '-';
 
 		# Checking if the variable is not an array.
 		else
@@ -283,6 +284,7 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str";
 
+                    # TODO : Remove the log date before printing the message.
                     echo -ne "$p_str"; fi;
 
 					return 0;;
@@ -378,8 +380,11 @@ function BU::ModuleInit::Msg()
     return 0;
 }
 
+# Writing a text under a line with the same size.
+function BU::ModuleInit::MsgLine() { local p_str=$1; local p_line=$2; BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line"; echo; BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str"; }
+
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
-function BU::ModuleInit::MsgLine() { local p_str=$1; local p_line=$2; local v_str_count="${#p_str}"; for ((i=0; i<v_str_count; i++)); do printf "%s" "$p_line"; done; echo; BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str"; return 0; }
+function BU::ModuleInit::MsgLineCount() { local p_number=$1; local p_line=$2; for ((i=0; i<p_number; i++)); do printf "%s" "$p_line"; done; return 0; }
 
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
@@ -392,14 +397,11 @@ function BU::ModuleInit::PrintLog()
 {
     #**** Variables ****
     local v_init_logs_str="INTIALIZATION LOGS";
-    local v_here="Here are the initialization logs";
 
     #**** Code ****
     echo;
 
-    BU::ModuleInit::MsgLine "${#v_here}" '#';
-    echo "$v_here";
-    echo;
+    echo "Here are the initialization logs" '#';
 
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-partial' ]; then
         echo "Logging mode : partial"; echo;
@@ -407,9 +409,8 @@ function BU::ModuleInit::PrintLog()
         echo "Logging mode : full"; echo;
     fi
 
-    BU::ModuleInit::MsgLine "${#v_init_logs_str}" '-';
-    echo "$v_init_logs_str";
-    BU::ModuleInit::MsgLine "${#v_init_logs_str}" '-';
+    BU::ModuleInit::MsgLine "$v_init_logs_str" '-';
+    BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-';
 
     BU::ModuleInit::PressAnyKey 'display the logs';
 
@@ -432,13 +433,10 @@ function BU::ModuleInit::PrintLogError()
     local p_desc=$1;    # Description of the error.
     local p_lineno=$2;  # Line where the error happened.
 
-    #**** Variables ****
-    local v_string="ERROR : DESC = $p_desc | LINE = $p_lineno";
-
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
-    BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "${#v_string}" '-')";
+    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-';
 
     BU::ModuleInit::Msg "$v_string" >&2;
     BU::ModuleInit::Msg >&2;
