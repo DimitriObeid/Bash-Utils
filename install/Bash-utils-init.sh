@@ -424,12 +424,12 @@ function BU::ModuleInit::MsgLine()
     local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
-    BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'msg'; echo;
-
     if      [ "${p_context,,}" = 'echo' ]; then
+        BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'echo';
         echo "$p_str";
 
     elif    [ "${p_context,,}" = 'msg' ]; then
+        BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'msg';
         BU::ModuleInit::Msg "$p_str";
 
     else
@@ -449,23 +449,10 @@ function BU::ModuleInit::MsgLineCount()
 
     #**** Code ****
     if      [ "${p_context,,}" = 'echo' ]; then
-        for ((i=0; i<p_number; i++)); do echo -n "$p_line"; done;
+        for ((i=0; i<p_number; i++)); do echo -n "$p_line"; done; echo;
 
     elif    [ "${p_context,,}" = 'msg' ]; then
-
-        # Backupping the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value.
-        local v_bu_module_utils_array_permission_old="$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION";
-
-        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-shut-display";
-
-        for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n'; done
-
-        # Resetting the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value.
-        if [ -n "$v_bu_module_utils_array_permission_old" ]; then
-            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$v_bu_module_utils_array_permission_old";
-
-            v_bu_module_utils_array_permission_old='';
-        fi
+        for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n'; done; BU::ModuleInit::Msg;
 
     else
         echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; exit 1;
@@ -1121,16 +1108,19 @@ function BashUtils_InitModules()
 	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"; BU::ModuleInit::Msg;
 
 	for module_args in "${p_modules_list[@]}"; do
+        i=0; # Module's array index incrementer.
+
         if [[ "${module_args,,}" == 'module --'* ]]; then
-            BU::ModuleInit::Msg "Arguments passed to configure the initialization process : $module_args";
+            BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process";
         else
-            i="$(( i+1 ))" # Module's array index incrementer.
+            i="$(( i+1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
             BU::ModuleInit::Msg "Module $i : $module_args";
         fi
 	done
 
+	BU::ModuleInit::Msg;
 	BU::ModuleInit::Msg;
 
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
