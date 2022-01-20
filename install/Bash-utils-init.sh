@@ -214,11 +214,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "$__BU_MODULE_UTILS_DATE_LOG Declared global array : $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "Declared global array : $p_var_name" '-' 'msg';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-') 'msg'";
+            BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-' 'msg';
 		fi
 
 		BU::ModuleInit::Msg;
@@ -232,26 +232,28 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		if [ "${p_var_type,,}" = 'array' ]; then
             BU::ModuleInit::Msg "Type     : array";
+            BU::ModuleInit::Msg;
 
     		# If a value or more are stored in the processed array.
 			if [ -n "$p_var_val" ]; then
 				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
 
 			else
-				BU::ModuleInit::MsgLine "The array is empty";
+				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
                 BU::ModuleInit::Msg;
 			fi
 		else
-            BU::ModuleInit::Msg "Type     : $p_var_type"
+            BU::ModuleInit::Msg "Type     : $p_var_type";
+            BU::ModuleInit::Msg;
 
 			# If a variable is stored in the processed variable.
 			if [ -n "$p_var_val" ]; then
 				BU::ModuleInit::Msg "Value --> $p_var_val";
 
 			else
+				BU::ModuleInit::Msg "No value stored in this variable" '-' 'msg';
                 BU::ModuleInit::Msg;
-				BU::ModuleInit::Msg "No value stored in this variable";
-			fi
+            fi
 
 			BU::ModuleInit::Msg;
 		fi
@@ -386,21 +388,55 @@ function BU::ModuleInit::MsgLine()
     local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
-    BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line"; echo;
+    BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'msg'; echo;
 
-    if      [ "${p_context,,}" = 'msg' ]; then
-        BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str";
-    elif    [ "${p_context,,}" = 'echo' ]; then
+    if      [ "${p_context,,}" = 'echo' ]; then
         echo "$p_str";
+
+    elif    [ "${p_context,,}" = 'msg' ]; then
+        BU::ModuleInit::Msg "$p_str";
+
     else
-        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; exit 1
+        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; exit 1;
     fi
 
     return 0;
 }
 
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
-function BU::ModuleInit::MsgLineCount() { local p_number=$1; local p_line=$2; for ((i=0; i<p_number; i++)); do printf "%s" "$p_line"; done; return 0; }
+function BU::ModuleInit::MsgLineCount()
+{
+    #**** Parameters ****
+    local p_number=$1;  # Number of times the character has to be display.
+    local p_line=$2;    # Line character.
+    local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
+
+    #**** Code ****
+    if      [ "${p_context,,}" = 'echo' ]; then
+        for ((i=0; i<p_number; i++)); do echo -n "$p_line"; done;
+
+    elif    [ "${p_context,,}" = 'msg' ]; then
+
+        # Backupping the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value.
+        local v_bu_module_utils_array_permission_old="$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION";
+
+        __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="--log-shut-display";
+
+        for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n'; done
+
+        # Resetting the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable's value.
+        if [ -n "$v_bu_module_utils_array_permission_old" ]; then
+            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$v_bu_module_utils_array_permission_old";
+
+            v_bu_module_utils_array_permission_old='';
+        fi
+
+    else
+        echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; exit 1;
+    fi
+
+    return 0;
+}
 
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
@@ -427,7 +463,7 @@ function BU::ModuleInit::PrintLog()
     fi
 
     BU::ModuleInit::MsgLine "$v_init_logs_str" '-' 'echo';
-    BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-';
+    BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-' 'echo';
 
     BU::ModuleInit::Msg;
     BU::ModuleInit::PressAnyKey 'display the logs';
@@ -1074,7 +1110,7 @@ function BashUtils_InitModules()
 	fi
 
     # Writing the list of the 
-	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"
+	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"; BU::ModuleInit::Msg;
 
 	for module_args in "${p_modules_list[@]}"; do
         if [[ "${module_args,,}" == 'module --'* ]]; then
