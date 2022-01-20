@@ -51,7 +51,7 @@ fi
 ## SOURCING LIBRARY FILES FIRST
 
 # Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg "";
+BU::ModuleInit::Msg;
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
 
@@ -63,7 +63,7 @@ for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
 done
 
 # Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg "";
+BU::ModuleInit::Msg;
 
 # -----------------------------------------------
 
@@ -77,7 +77,7 @@ for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
 done
 
 # Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg "";
+BU::ModuleInit::Msg;
 
 # -----------------------------------------------
 

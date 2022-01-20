@@ -473,6 +473,11 @@ function BU::ModuleInit::PrintLog()
 {
     #**** Variables ****
     local v_init_logs_str="INITIALIZATION LOGS";
+    local v_tmp_file;
+        v_tmp_file="$(echo "$RANDOM" | md5sum).tmp";
+
+        shopt -s extglob; v_tmp_file="${v_tmp_file%%+( - )}"    # Removing the extra whitespace with the dash.
+        shopt -u extglob;
 
     #**** Code ****
     echo;
@@ -489,13 +494,23 @@ function BU::ModuleInit::PrintLog()
     BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-' 'echo';
 
     BU::ModuleInit::Msg;
-    BU::ModuleInit::PressAnyKey 'display the logs';
+    BU::ModuleInit::PressAnyKey 'display the logs with the « less » command';
     BU::ModuleInit::Msg;
+
+    touch "$v_tmp_file" || { echo >&2; echo "Unable to create the temporary file to store the logs" >&2; echo >&2; return 1; };
+
+    echo "DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND" >> "$v_tmp_file";
+    echo >> "$v_tmp_file";
+    echo >> "$v_tmp_file";
 
     for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
         # shellcheck disable=SC2059
-        printf "${value##* ] }";
+        printf "${value##* ] }" >> "$v_tmp_file";
     done
+
+    less "$v_tmp_file";
+
+    rm "$v_tmp_file";
 
     echo; echo ">>>>> END OF THE INITIALIZATION LOGS"; echo;
 
