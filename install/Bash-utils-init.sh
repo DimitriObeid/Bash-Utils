@@ -155,11 +155,9 @@ function BU::ModuleInit::AskPrintLog()
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo
 
-        echo "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#';
+        BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#' 'echo';
 
-		echo "$v_ask"; echo;
-
-		read -rp "Enter your answer : " read_ask_print_log;
+		echo; read -rp "Enter your answer : " read_ask_print_log;
 
 		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
 			BU::ModuleInit::PrintLog;
@@ -216,11 +214,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "$__BU_MODULE_UTILS_DATE_LOG Declared global array : $p_var_name" '-';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_UTILS_DATE_LOG Declared global array : $p_var_name" '-' 'msg';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-')";
+            BU::ModuleInit::Msg "$(BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-') 'msg'";
 		fi
 
 		BU::ModuleInit::Msg;
@@ -284,8 +282,7 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str";
 
-                    # TODO : Remove the log date before printing the message.
-                    echo -ne "$p_str"; fi;
+                    echo -ne "${p_str##* ] }"; fi;
 
 					return 0;;
             '' | *)
@@ -298,7 +295,7 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str\n";
 
-                    echo -e "$p_str"; fi;
+                    echo -e "${p_str##* ] }"; fi;
 
 					return 0;;
         esac
@@ -349,7 +346,7 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_UTILS_MSG_ARRAY+="$__BU_MODULE_UTILS_DATE_LOG $p_str";
 
-                    echo -ne "$p_str"; fi;
+                    echo -ne "${p_str##* ] }"; fi;
 
 					return 0;;
             '' | *)
@@ -381,7 +378,26 @@ function BU::ModuleInit::Msg()
 }
 
 # Writing a text under a line with the same size.
-function BU::ModuleInit::MsgLine() { local p_str=$1; local p_line=$2; BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line"; echo; BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str"; }
+function BU::ModuleInit::MsgLine()
+{
+    #**** Parameters ****
+    local p_str=$1;     # String to display.
+    local p_line=$2;    # Line character.
+    local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
+
+    #**** Code ****
+    BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line"; echo;
+
+    if      [ "${p_context,,}" = 'msg' ]; then
+        BU::ModuleInit::Msg "$__BU_MODULE_UTILS_DATE_LOG $p_str";
+    elif    [ "${p_context,,}" = 'echo' ]; then
+        echo "$p_str";
+    else
+        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; exit 1
+    fi
+
+    return 0;
+}
 
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
 function BU::ModuleInit::MsgLineCount() { local p_number=$1; local p_line=$2; for ((i=0; i<p_number; i++)); do printf "%s" "$p_line"; done; return 0; }
@@ -389,19 +405,20 @@ function BU::ModuleInit::MsgLineCount() { local p_number=$1; local p_line=$2; fo
 # Displaying a text when the script's execution must be stopped.
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
 
-function BU::ModuleInit::PressAnyKey() { echo; read -r "Press any key to $1" v_read_press_any_key; case "$v_read_press_any_key" in *) return;; esac; echo; return 0; }
+# Pressing any key on the keyboard to do an action.
+function BU::ModuleInit::PressAnyKey() { echo; read -n 1 -s -r -p "Press any key to $1" v_read_press_any_key; echo; return 0; }
 
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function BU::ModuleInit::PrintLog()
 {
     #**** Variables ****
-    local v_init_logs_str="INTIALIZATION LOGS";
+    local v_init_logs_str="INITIALIZATION LOGS";
 
     #**** Code ****
     echo;
 
-    echo "Here are the initialization logs" '#';
+    BU::ModuleInit::MsgLine "Here are the initialization logs" '#' 'echo'; echo
 
     if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-partial' ]; then
         echo "Logging mode : partial"; echo;
@@ -409,10 +426,12 @@ function BU::ModuleInit::PrintLog()
         echo "Logging mode : full"; echo;
     fi
 
-    BU::ModuleInit::MsgLine "$v_init_logs_str" '-';
+    BU::ModuleInit::MsgLine "$v_init_logs_str" '-' 'echo';
     BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-';
 
+    BU::ModuleInit::Msg;
     BU::ModuleInit::PressAnyKey 'display the logs';
+    BU::ModuleInit::Msg;
 
     for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
         # shellcheck disable=SC2059
