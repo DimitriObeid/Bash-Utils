@@ -87,6 +87,31 @@ BU::ModuleInit::Msg "";
 
 #### STEP THREE : PROCESSING MODULE'S PARAMETERS
 
+# Usage function.
+function BU::Main::Initializer::Usage()
+{
+    echo >&2; echo "The supported arguments are :" >&2;
+
+    echo "--stat-debug=false          OR --stat-debug=true" >&2;
+    echo "--stat-decho=authorize      OR --stat-decho=forbid        OR --stat-decho=resctrict" >&2;
+    echo "--stat-echo=false           OR --stat-echo=true" >&2;
+    echo "--stat-error=fatal          OR --stat-error=void" >&2;
+    echo "--stat-log=false            OR --stat-log=true" >&2;
+    echo "--stat-log-r=log            OR --stat-log-r=tee           OR --stat-log-r=void" >&2;
+    echo "--stat-op-root=authorized   OR --stat-op-root=forbidden   OR --stat-op-root=restricted" >&2;
+    echo >&2;
+
+    echo "--stat-time-header=float, where float is a floating point number" >&2;
+    echo "--stat-time-newline=float, where float is a floating point number" >&2;
+    echo "--stat-time-txt=flot, where float is a floating point number" >&2;
+    echo >&2;
+
+    echo "--stat-txt-fmt=false        OR --stat-txt-fmt=true" >&2;
+    echo >&2;
+
+    return 0;
+}
+
 # If arguments were given in the same double quotes as the "main" module's value.
 if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
@@ -241,6 +266,8 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # Any unsupported global status variable.
                 *)
                             BU::ModuleInit::Msg "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")";
+
+                            BU::Main::Initializer::Usage;
             esac
 
         # Else, if an unsupported value is passed as « main » module's argument.
