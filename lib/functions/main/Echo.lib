@@ -758,5 +758,5 @@ function BU::Newline()
         BU::EchoMsg "" "" "nodate";
     fi
 
-    return 0;;
+    return 0;
 }

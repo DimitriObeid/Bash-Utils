@@ -153,16 +153,21 @@ function BU::ModuleInit::AskPrintLog()
 {
 	#**** Code ****
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
-        echo
+        echo;
 
-        BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#' 'echo';
+		if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-shut' ] || [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then
 
-		echo; read -rp "Enter your answer : " read_ask_print_log;
+			BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#' 'echo';
 
-		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
-			BU::ModuleInit::PrintLog;
+			echo; read -rp "Enter your answer : " read_ask_print_log;
+
+			if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
+				BU::ModuleInit::PrintLog;
+			else
+				echo; echo "The logs will not be displayed on your screen"; echo;
+			fi
 		else
-			echo; echo "The logs will not be displayed on your screen"; echo;
+			return 0;
 		fi
 	fi
 
@@ -292,6 +297,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
             fi
 
 			BU::ModuleInit::Msg;
+
+			return 0;
 		fi
 	else
 		return 0;
@@ -535,7 +542,7 @@ function BU::ModuleInit::PrintLogError()
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
-    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-' >&2;
+    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-' 'msg' >&2;
 
     BU::ModuleInit::Msg >&2;
 
@@ -804,7 +811,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             }
 
             for module_args in "${module_array[@]}"; do
-                echo "$module_args";
 
                 # -----------------------------------------------
 
@@ -1026,7 +1032,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")";
 
 	# shellcheck disable=SC2034
-	__BU_MODULE_UTILS_INITALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "$(basename "${BASH_SOURCE[0]}")")";
+	__BU_MODULE_UTILS_INITALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")";
 
     # Configurations directories
 	__BU_MODULE_UTILS_CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "config")";
@@ -1084,7 +1090,7 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_EXISTS="$((RANDOM % 255))";
 # This global variable stores the processing mode (partial or full).
 
 # By default, it stores the '--log-mode-partial' value, in order to avoid the initialization process being too much verbose.
-declare __BU_MODULE_UTILS_MSG_ARRAY_MODE='--log-mode-full'
+declare __BU_MODULE_UTILS_MSG_ARRAY_MODE='--log-mode-partial'
 
 # This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
 # which authorizes the displaying of the logs messages on the screen.
@@ -1097,8 +1103,9 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='';
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
-BU::ModuleInit::Msg "INITIALIZING THE MODULES";
-BU::ModuleInit::Msg;
+# Writing the initialization content into the messages array. It will be displayed later on the screen if the « --log-init-display » argument is passed with the « module » argument.
+__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INITIALIZING THE MODULES")");
+__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # -----------------------------------------------
 
@@ -1126,23 +1133,23 @@ function BashUtils_InitModules()
 	fi
 
     # Writing the list of the 
-	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"; BU::ModuleInit::Msg;
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")"); __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 	for module_args in "${p_modules_list[@]}"; do
         i=0; # Module's array index incrementer.
 
         if [[ "${module_args,,}" == 'module --'* ]]; then
-            BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process";
+            __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process")");
         else
             i="$(( i+1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
-            BU::ModuleInit::Msg "Module $i : $module_args";
+            __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args")");
         fi
 	done
 
-	BU::ModuleInit::Msg;
-	BU::ModuleInit::Msg;
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_modules_list[@]}"; do
@@ -1225,7 +1232,10 @@ function BashUtils_InitModules()
 
         # Incrementing the modules array index variable.
         v_index="$(( v_index+1 ))";
-	done
+
+	done < <(echo foo);
+
+	BU::ModuleInit::AskPrintLog
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 

@@ -53,12 +53,12 @@ function BU::__Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && BU::IsIn
 function BU::Decho()
 {
     #**** Parameters ****
-    local p_string=$1
-    local p_newColor=$2
-    shift 2
+    local p_string=$1;
+    local p_newColor=$2;
+    shift 2;
 
-    local pa_fmtArgs
-        pa_fmtArgs=$("$@")
+    local pa_fmtArgs;
+        pa_fmtArgs=$("$@");
 
     #**** Variables ****
     local v_oldColor
