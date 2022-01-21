@@ -206,7 +206,7 @@ function BU::HeaderViolet       { BU::HeaderBase "$__BU_MAIN_COLOR_VIOLET"	"$__B
 ## BICOLOR HEADERS
 
 # Copy-paste this function to avoid losing time while creating bicolor headers :
-# function BU::Header<col1><col2>   { BU::HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_<COLOR>" "$1" || return 1; return 0; }
+# function BU::Header<col1><col2>   { BU::HeaderBase "$__BU_MAIN_COLOR_<COLOR1>" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_<COLOR2>" "$1" || return 1; return 0; }
 
 # Aqua blue lines, differently colored text.
 function BU::HeaderAquaBlack		{ BU::HeaderBase "$__BU_MAIN_COLOR_AQUA"	"$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_BLACK"		"$1" || return 1; return 0; }
