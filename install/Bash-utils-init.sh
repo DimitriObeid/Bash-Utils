@@ -98,7 +98,7 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     fi
 
     echo >&2;
-    echo "en | The rest of the library will use english as default language" >&2
+    echo "en | The rest of the library will use english as default language" >&2;
     echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2;
 
     echo >&2;
