@@ -129,7 +129,7 @@ function BU::Main::Permissions::Chown()
                     BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
                     BU::Newline;
 
-                    return 0
+                    return 0;
                 else
                     BU::Main::Errors::HandleErrors "1" "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))";
                     BU::Newline;
@@ -172,7 +172,7 @@ function BU::Main::Permissions::Chown()
                 BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
                 BU::Newline;
 
-                return 0
+                return 0;
             else
                 BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path") file !";
                 BU::Newline;

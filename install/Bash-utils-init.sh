@@ -202,7 +202,7 @@ function BU::ModuleInit::DisplayInitializedGlobalVarsInfos()
     BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"		'Path'		"Path of the file containing the library's root folder's path (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
-    return 0
+    return 0;
 }
 
 # Displaying the information on the initialized global variables

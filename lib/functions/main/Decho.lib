@@ -83,7 +83,7 @@ function BU::Decho()
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
-        echo -e "$p_newColor$p_string$v_oldColor"; return 0
+        echo -e "$p_newColor$p_string$v_oldColor"; return 0;
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -191,7 +191,7 @@ function BU::Decho()
         done
     fi
 
-    return 0
+    return 0;
 }
 
 # -----------------------------------------------
@@ -215,6 +215,8 @@ function BU::DechoGray              { BU::Decho "$1" "$__BU_MAIN_COLOR_GRAY"    
 function BU::DechoGreen             { BU::Decho "$1" "$__BU_MAIN_COLOR_GREEN"       || return 1; return 0; }
 function BU::DechoLime              { BU::Decho "$1" "$__BU_MAIN_COLOR_LIME"        || return 1; return 0; }
 function BU::DechoMaroon            { BU::Decho "$1" "$__BU_MAIN_COLOR_MAROON"      || return 1; return 0; }
+function BU::DechoNavy              { BU::Decho "$1" "$__BU_MAIN_COLOR_NAVY"        || return 1; return 0; }
+function BU::DechoOlive             { BU::Decho "$1" "$__BU_MAIN_COLOR_OLIVE"       || return 1; return 0; }
 function BU::DechoOrange            { BU::Decho "$1" "$__BU_MAIN_COLOR_ORANGE"      || return 1; return 0; }
 function BU::DechoPink              { BU::Decho "$1" "$__BU_MAIN_COLOR_PINK"        || return 1; return 0; }
 function BU::DechoPurple            { BU::Decho "$1" "$__BU_MAIN_COLOR_PURPLE"      || return 1; return 0; }

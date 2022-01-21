@@ -45,13 +45,13 @@ fi
 # Display a countdown while a task is ongoing.
 function BU::Main::PosixTerm::DisplayCountdown()
 {
-    return 0
+    return 0;
 }
 
 # Display a progress bar while a task is ongoing.
 function BU::Main::PosixTerm::DisplayProgressBar()
 {
-    return 0
+    return 0;
 }
 
 # Display a spinner while a task is ongoing.
@@ -75,5 +75,5 @@ function BU::Main::PosixTerm::DisplaySpinner()
         printf "%s" "\b${sp:i++%${#sp}:1}"
     done
 
-    return 0
+    return 0;
 }

@@ -30,7 +30,7 @@ function GetMainPackageManager
         command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
         command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
     else
-        BU::EchoError "Your operating system is not (yet) supported !"; BU::Newline
+        BU::EchoError "Your operating system is not (yet) supported !"; BU::Newline;
         exit 1
     fi
 
@@ -150,11 +150,11 @@ function SoftwareInstall
 
 	if test wget -v "$software_dl_link" -O "$inst_path" >> "$FILE_LOG_PATH"; then
 		BU::EchoSuccess "L'archive du logiciel $(BU::DechoS "$name") a été téléchargé avec succès."
-		BU::Newline
+		BU::Newline;
 
 	else
 		BU::EchoError "Échec du téléchargement de l'archive du logiciel $(BU::DechoE "$name")."
-		BU::Newline
+		BU::Newline;
 
 		return
 	fi
@@ -180,7 +180,7 @@ function SoftwareInstall
 				;;
 			*)
 				BU::EchoError "Le format de fichier de l'archive $(BU::DechoE "$archive") n'est pas supporté."
-				BU::Newline
+				BU::Newline;
 
 				return
 				;;
@@ -191,7 +191,7 @@ function SoftwareInstall
 	# S'il n'existe pas, alors le script le crée
 	if test ! -d "$shortcut_dir"; then
 		BU::EchoNewstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau)."
-		BU::Newline
+		BU::Newline;
 
 		BU::Main::Directories::Make "$DIR_HOMEDIR/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
 
@@ -203,14 +203,14 @@ function SoftwareInstall
 
 	if test "$?" == "0"; then
 		BU::EchoSuccess "Le lien symbolique a été créé avec succès."
-		BU::Newline
+		BU::Newline;
 	else
         BU::EchoError "Impossible de créer un lien symbolique pointant vers $(BU::DechoE "$exec")."
-        BU::Newline
+        BU::Newline;
 	fi
 
 	BU::EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(BU::DechoN "$name")."
-	BU::Newline
+	BU::Newline;
 
 	cat <<-EOF > "$shortcut_dir/$name.desktop"
 	[Desktop Entry]
@@ -223,17 +223,17 @@ function SoftwareInstall
 	EOF
 
 	BU::EchoSuccess "Le fichier $(BU::DechoS "$name.desktop") a été créé avec succès dans le dossier $(BU::DechoS "$shortcut_dir")."
-	BU::Newline
+	BU::Newline;
 
 	BU::EchoNewstep "Suppression de l'archive $(BU::DechoN "$archive")."
-	BU::Newline
+	BU::Newline;
 
 	# On vérifie que l'archive a bien été supprimée.
 	if test rm -f "$inst_path/$archive"; then
         BU::EchoSuccess "L'archive $(BU::DechoS "$archive") a été correctement supprimée."
-		BU::Newline
+		BU::Newline;
     else
 		BU::EchoError "La suppression de l'archive $(BU::DechoE "$archive") a échouée."
-		BU::Newline
+		BU::Newline;
 	fi
 }

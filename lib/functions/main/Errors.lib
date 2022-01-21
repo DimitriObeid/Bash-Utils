@@ -162,7 +162,7 @@ function BU::Main::Errors::HandleErrors()
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	if [ "$p_returnCode" -eq 0 ]; then
-        return 0
+        return 0;
     else
         # -------- PART 1 : MANAGING THE CALL OF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU::Main::Errors::HandleErrors()" FUNCTION
 

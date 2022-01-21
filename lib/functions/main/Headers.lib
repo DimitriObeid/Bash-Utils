@@ -98,7 +98,7 @@ function BU::Main::Headers::DrawLine()
 	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
 	echo
 
-	return 0
+	return 0;
 }
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
@@ -121,16 +121,16 @@ function BU::HeaderBase()
 	__BU_MAIN_STAT_TIME_HEADER="0"
 
 	if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
-        BU::Newline
+        BU::Newline;
 
         BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
         BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
         BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
-        BU::Newline
+        BU::Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"
 
-        return 0
+        return 0;
 
     elif [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
         echo -e
@@ -142,7 +142,7 @@ function BU::HeaderBase()
 
         sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"
 
-        return 0
+        return 0;
     fi
 }
 

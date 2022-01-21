@@ -87,7 +87,7 @@ function AskUser()
 
     read -rp "Enter your answer : " __ANS_ASK
 
-    return 0
+    return 0;
 }
 
 # Behavior if the "cd" command failed.
@@ -102,7 +102,7 @@ function ChangeDirOwnership()
 
 	#***** Code *****
 	PrintLog "Changing recursively the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » directory, from « root » to « ${user##*/} »"
-	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"; return 0
+	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"; return 0;
     else BU::Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; BU::NewlineF; PrintRoot; exit 1; fi
 
 }
@@ -132,7 +132,7 @@ function ChangeOwnership()
         PrintLog "Changing recursively the ownership of the newly installed « $__D_MODULE_MANAGER_NEW_PATH » folder, from 'root' to « ${user##*/} »"
         ChangeDirOwnership "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH"
 
-        BU::Newline
+        BU::Newline;
         PrintLog "The « $__D_MODULE_MANAGER_NEW_PATH » folder ownership was successfully changed"
 
         BU::Newline; PrintLine; BU::Newline; sleep 0.5
@@ -140,12 +140,12 @@ function ChangeOwnership()
         PrintLog "Changing the ownership of the newly « $__F_MODULE_INITIALIZER_NEW_PATH » file, from root to « ${user##*/} »"
         ChangeFileOwnership "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH"
 
-        BU::Newline
+        BU::Newline;
         PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"
 
-        return 0
+        return 0;
     else
-        return 0
+        return 0;
     fi
 }
 
@@ -160,7 +160,7 @@ function CopyModulesInitializer()
         PrintLog "Copying the « $__F_MODULE_INITIALIZER_OLD_PATH » file in the « $user » directory"
         cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_MODULE_INITIALIZER_OLD_PATH » FILE IN THE « $user » DIRECTORY"; PrintRoot; exit 1; }
 
-	BU::Newline
+	BU::Newline;
 
 	else
         PrintLog "Overwriting the « $__F_MODULE_INITIALIZER_NEW_PATH » file in the « $user » directory"
@@ -188,17 +188,17 @@ function CopyModulesManagerDirectory()
 
         # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
         rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { PrintLog "UNABLE TO OVERWRITE THE HIDDEN « $__D_MODULE_MANAGER_NEW_PATH » MODULES MANAGER'S DIRECTORY !"; PrintRoot; exit 1; }
-        BU::Newline
+        BU::Newline;
 
         PrintLog "Copying the « $__D_MODULE_MANAGER_NEW_PATH » modules manager directory into the « $user » directory"
 		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { PrintLog "UNABLE TO COPY THE « $__D_MODULE_MANAGER_OLD_PATH » DIRECTORY INTO THE « $user » DIRECTORY !"; PrintRoot; exit 1; }
 
-		BU::Newline
+		BU::Newline;
     else
         PrintLog "Copying the « $__D_MODULE_MANAGER_NEW_PATH » modules manager directory into the « $user » directory"
         cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE « $user » DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
 
-		BU::Newline
+		BU::Newline;
 	fi
 }
 
@@ -249,7 +249,7 @@ function PrintLine()
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
-    done; PrintLog "$(BU::Newline)"; return 0
+    done; PrintLog "$(BU::Newline)"; return 0;
 }
 
 # Checking if the
@@ -257,12 +257,12 @@ function PrintLog()
 {
     if [ "$__NOLOG" = 'nolog' ]; then
         if [ -n "$2" ] && [ "$2" = 'log' ]; then
-            echo -e "$1"; BU::Newline; return 0 # >> "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0
+            echo -e "$1"; BU::Newline; return 0 # >> "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0;
         else
-            echo -e "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0
+            echo -e "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0;
         fi
     else
-        echo -e "$1"; return 0
+        echo -e "$1"; return 0;
     fi
 }
 
@@ -413,12 +413,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH » file in the $__D_MODULE_MANAGER_NEW_PATH » directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_LIBRARY_PATH_OLD_PARENT_PATH » FILE IN THE « $__F_LIBRARY_PATH_NEW_PARENT_PATH » DIRECTORY"; PrintRoot; exit 1; }
 
-				BU::Newline
+				BU::Newline;
 			else
 				PrintLog "Copying the « $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the « $__D_MODULE_MANAGER_NEW_PATH » directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_LIBRARY_PATH_OLD_PARENT_PATH » FILE IN THE « $__F_LIBRARY_PATH_NEW_PARENT_PATH » DIRECTORY"; PrintRoot; exit 1; }
 
-				BU::Newline
+				BU::Newline;
 			fi
 
 			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi

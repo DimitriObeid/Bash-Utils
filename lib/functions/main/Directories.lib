@@ -65,18 +65,18 @@ function BU::Main::Directories::ProcessingDir()
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
     BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent")."
-    BU::Newline
+    BU::Newline;
     
     if "$p_function"; then
         BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
 		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
-		BU::Newline
+		BU::Newline;
     else
         BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
 		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
-		BU::Newline
+		BU::Newline;
     fi
 }
 
@@ -106,7 +106,7 @@ function BU::Main::Directories::OverwriteDir()
 
     BU::EchoNewstep "A non-empty folder with exactly the same name ($(BU::DechoHighlightPath "$p_name")) is already in the target folder $(BU::DechoHighlightPath "$p_parent/")"
 	BU::EchoNewstep "Deleting the contents of the $(BU::DechoHighlightPath "$v_path/") folder"
-	BU::Newline
+	BU::Newline;
 
 	if [ "$p_authorization" = "true" ]; then
         # TODO : Si la variable n'est pas initialisée.
@@ -122,9 +122,9 @@ function BU::Main::Directories::OverwriteDir()
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
             BU::EchoSuccess "Deletion of the contents of the folder $(BU::DechoHighlightPath "$v_path/") performed successfully"
-            BU::Newline
+            BU::Newline;
 
-			return 0
+			return 0;
         else
             BU::Main::Errors::HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 
@@ -132,7 +132,7 @@ function BU::Main::Directories::OverwriteDir()
         fi
 	fi
 
-    return 0
+    return 0;
 }
 
 
@@ -165,22 +165,22 @@ function BU::Main::Directories::Make()
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
 		BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent/")."
-		BU::Newline
+		BU::Newline;
 
         mkdir -pv "$v_path"
         BU::Main::Errors::HandleErrors "$?" \
             "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_name/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_parent/")") !" \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
         BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") folder was successfully created in the $(BU::DechoHighlightPath "$p_parent/") folder."
-        BU::Newline
+        BU::Newline;
         
-        return 0
+        return 0;
 
     # Else, if the folder to create already exists in its parent directory AND this folder already contains AT LEAST one file or folder.
 	elif [ -d "$v_path" ] && [ "$(ls -A "$v_path")" ]; then
         BU::Main::Directories::OverwriteDir "$p_parent" "$p_name"
         if test "$?" -eq 0; then
-            return 0
+            return 0;
 		else
             return 1
 		fi
@@ -188,9 +188,9 @@ function BU::Main::Directories::Make()
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
 	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then
 		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name/") folder already exists in the $(BU::DechoHighlightPath "$p_parent/") folder and is empty."
-		BU::Newline
+		BU::Newline;
 
-		return 0
+		return 0;
     fi
 }
 
@@ -212,10 +212,10 @@ function BU::Main::Directories::MkTmpDir()
 			return 1
 		}
     
-		return 0
+		return 0;
 	fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -239,7 +239,7 @@ function BU::Main::Directories::GetDirectoryName()
 
         echo -e "$result"
 
-		return 0
+		return 0;
     else
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
@@ -260,7 +260,7 @@ function BU::Main::Directories::GetDirectoryPath()
     if [ -d "$p_path" ]; then
         echo -e "$p_path"
 
-		return 0
+		return 0;
     else
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
@@ -377,7 +377,7 @@ function BU::Main::Directories::TriggerRootDirWarning()
 			BU::EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
 			BU::EchoError "Given path : $(BU::DechoHighlightPath "$p_path")"
 			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT"
-			BU::Newline
+			BU::Newline;
 
 			BU::Main::Errors::ExitError '1'; return 1
 
@@ -388,16 +388,16 @@ function BU::Main::Directories::TriggerRootDirWarning()
 
             BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			BU::EchoWarning "Given path : $(BU::DechoHighlightPath "$p_path")"
-			BU::Newline
+			BU::Newline;
 
 			# Calling the function that processes the given answer.
 			if BU::Main::Case::Read_Directories::TriggerRootDirWarning; then
-				return 0
+				return 0;
 			else
 				return 1
 			fi
 		fi
 	fi
 
-	return 0
+	return 0;
 }

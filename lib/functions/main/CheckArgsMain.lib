@@ -49,7 +49,7 @@ function CheckArgsMain_IsBadArgc0()
         BU::Main::Errors::HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -208,7 +208,7 @@ function BU::Main::CheckArgs::PrintBadOption()
 		BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 	fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -254,7 +254,7 @@ function BU::Main::CheckArgs__Checkings::CheckProjectRelatedFile()
 		return 1
 	fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -295,7 +295,7 @@ function BU::Main::CheckArgs__Directories::ProcessingDir()
 		return 1
 	fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Directories::OverwriteDir" function.
@@ -319,7 +319,7 @@ function BU::Main::CheckArgs__Directories::OverwriteDir()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Directories::Make" function.
@@ -351,7 +351,7 @@ function BU::Main::CheckArgs__Directories::Make()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -371,7 +371,7 @@ function BU::Main::CheckArgs__Directories::GetDirectoryName()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Directories::GetDirectoryPath" function.
@@ -387,7 +387,7 @@ function BU::Main::CheckArgs__Directories::GetDirectoryPath()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Directories::GetParentDirectoryName" function.
@@ -400,7 +400,7 @@ function BU::Main::CheckArgs__Directories::GetParentDirectoryName()
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then  BU::Main::CheckArgs::PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"; return 1; fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Directories::GetParentDirectoryPath" function.
@@ -413,7 +413,7 @@ function BU::Main::CheckArgs__Directories::GetParentDirectoryPath()
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then  BU::Main::CheckArgs::PrintBadOption 'z' "Please pass the path of the directory to overwrite as argument" 'p_path' "$p_path" "${FUNCNAME[0]}" "$lineno"; return 1; fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------
@@ -449,7 +449,7 @@ function BU::Main::CheckArgs__Files::ProcessingFile()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Files::OverwriteFile" function.
@@ -480,7 +480,7 @@ function BU::Main::CheckArgs__Files::OverwriteFile()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # "BU::Main::Files::Make" function's arguments.
@@ -512,7 +512,7 @@ function BU::Main::CheckArgs__Files::Make()
 		return 1
     fi
 
-	return 0
+	return 0;
 }
 
 # -----------------------------------------------

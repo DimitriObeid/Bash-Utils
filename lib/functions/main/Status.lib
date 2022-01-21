@@ -417,7 +417,7 @@ function BU::Main:Status::ChangeSTAT_INITIALIZING    {
 	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
 		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlightVar 'false') to $(BU::DechoHighlightVar 'true')"; return 1
 	else
-		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || return 1
+		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || return 1;
 	fi; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.

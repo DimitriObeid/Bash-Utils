@@ -14,7 +14,7 @@ function __for()
         sleep 1; printf "\b"
     done
 
-    return 0
+    return 0;
 }
 
 function remaining()
@@ -29,7 +29,7 @@ function remaining()
         printf "Remaining time = %s" "$(__for "$p_secs")";
     fi
 
-    printf "\n"; return 0
+    printf "\n"; return 0;
 }
 
 remaining "$__ARG"

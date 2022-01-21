@@ -88,7 +88,7 @@ function BU::Main::Files::ProcessingFile()
     # Arguments checking.
     BU::Main::CheckArgs__Files::ProcessingFile "$p_function";
 
-	sleep "$__BU_MAIN_STAT_TIME_TXT"
+	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate';
     BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") file in the $(BU::DechoHighlightPath "$p_parent") parent directory.";
     BU::Newline;
@@ -391,7 +391,7 @@ function BU::Main::Files::Uncompress()
 #     "$cmd $opts $p_path"
 #     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlightPath "$p_name") A ÉCHOUÉE"
 #     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlightPath "$p_name") s'est effectuée avec brio."
-#     BU::Newline
+#     BU::Newline;
 
     return 0;
 }
