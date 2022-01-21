@@ -474,10 +474,13 @@ function BU::ModuleInit::PrintLog()
     #**** Variables ****
     local v_init_logs_str="INITIALIZATION LOGS";
     local v_tmp_file;
-        v_tmp_file="$(echo "$RANDOM" | md5sum).tmp";
+        v_tmp_file_original="$(echo "$RANDOM" | md5sum).tmp";
 
-        shopt -s extglob; v_tmp_file="${v_tmp_file%%+( - )}"    # Removing the extra whitespace with the dash.
-        shopt -u extglob;
+    shopt -s extglob;
+
+    local v_tmp_file;
+         v_tmp_file="${v_tmp_file_original%%+( - )}";   # Removing the extra whitespace with the dash.
+    shopt -u extglob;
 
     #**** Code ****
     echo;
@@ -492,8 +495,11 @@ function BU::ModuleInit::PrintLog()
 
     BU::ModuleInit::MsgLine "$v_init_logs_str" '-' 'echo';
     BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-' 'echo';
-
     BU::ModuleInit::Msg;
+
+    BU::ModuleInit::Msg "DISPLAYING THE LOGS WITH THE « less » COMMAND";
+    BU::ModuleInit::Msg;
+
     BU::ModuleInit::PressAnyKey 'display the logs with the « less » command';
     BU::ModuleInit::Msg;
 
@@ -1042,7 +1048,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	# Misc
 	__BU_MODULE_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]";
 else
-	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $LINENO --> ERROR !" >&2; echo >&2;
+	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) --> ERROR !" >&2; echo >&2;
 
 	echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory." >&2; echo >&2;
 	echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2;
