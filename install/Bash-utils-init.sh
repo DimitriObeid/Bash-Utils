@@ -284,7 +284,12 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 			# If a variable is stored in the processed variable.
 			if [ -n "$p_var_val" ]; then
-				BU::ModuleInit::Msg "Value --> $p_var_val";
+			
+				if [ "${p_var_type,,}" = 'cmd' ]; then
+					BU::ModuleInit::Msg "Value : The $p_var_name value is a command substition";
+				else
+					BU::ModuleInit::Msg "Value --> $p_var_val";
+				fi
 
 			else
 				BU::ModuleInit::Msg "No value stored in this variable" '-' 'msg';
