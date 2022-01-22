@@ -1165,7 +1165,9 @@ function BashUtils_InitModules()
 	#**** Parameters ****
 	local p_modules_list=("$@")	# List of all the modules to include passed as arguments
 
-	#**** Variables ****
+	#**** Variables (global) ****
+
+	#**** Variables (local) ****
     local v_index=0     # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
 
 	#**** Code ****
@@ -1175,7 +1177,8 @@ function BashUtils_InitModules()
 	fi
 
     # Writing the list of the 
-	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")"); __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")");
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 	for module_args in "${p_modules_list[@]}"; do
         i=0; # Module's array index incrementer.
@@ -1196,17 +1199,40 @@ function BashUtils_InitModules()
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_modules_list[@]}"; do
 
-		## DEFINING VARIABLES FOR EACH MODULE TO BE INITIALIZED
+		# -----------------------------------------------
+
+		## DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
 		# Defining variables for each iteration.
 		local v_module_name;
             v_module_name="$(echo "$module" | cut -d' ' -f1)";
 
-		# Defining a global variable which stores the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
+		# -----------------------------------------------
+
+		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+
+		# Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
+		__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "$v_module_name")";
+		
+		BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'Path' \
+			"This global variable stores the path of the currently processed module's configurations directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH)" \
+			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+		# Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
+		__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR" "$v_module_name")";
+
+		BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'Path' \
+			"This global variable stores the path of the currently processed module's initialization directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH)" \
+			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+		# Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
 		if [[ "${p_modules_list[i]}" = "$v_module_name --"* ]]; then
 
             # shellcheck disable=SC2034
-			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module"
+			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module";
+
+			BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING' "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" 'String' \
+				"This global variable stores the current value passed as argument when calling the « ${FUNCNAME[0]} » function (current index : ${#p_module_list} | value : $module)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
 
 		# -----------------------------------------------
@@ -1223,14 +1249,14 @@ function BashUtils_InitModules()
             # MODULES' CONFIGURATION FILES SOURCING
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
-            if ! ls --directory "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name"; then
+            if ! ls --directory "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH"; then
                 BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO";
 
                 printf '\n' >&2;
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CONFIG_DIR/$v_module_name" >&2;
+                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" >&2;
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
@@ -1242,7 +1268,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "Sourcing the $v_module_name module's main configuration file" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
             fi
 
             # -----------------------------------------------

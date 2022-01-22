@@ -267,13 +267,13 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 *)
                             BU::ModuleInit::Msg "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")";
 
-                            BU::Main::Initializer::Usage;
+                            BU::Main::Initializer::Usage; exit 1;
             esac
 
         # Else, if an unsupported value is passed as « main » module's argument.
         else
             # Temporary situation.
-            return 1;
+            BU::Main::Initializer::Usage; exit 1;
         fi
     done
 fi
