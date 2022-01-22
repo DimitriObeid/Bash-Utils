@@ -153,20 +153,20 @@ function BU::ModuleInit::AskPrintLog()
 {
 	#**** Code ****
 	if [ "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
-        echo
+        echo;
 
-        BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#' 'echo';
+		BU::ModuleInit::MsgLine "Do you want to display the initialization logs (stored in the « __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION » variable) ? (yes / no)" '#' 'echo';
 
 		echo; read -rp "Enter your answer : " read_ask_print_log;
 
 		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
-			BU::ModuleInit::PrintLog;
+			BU::ModuleInit::PrintLog; return 0;
 		else
-			echo; echo "The logs will not be displayed on your screen"; echo;
+			echo; echo "The logs will not be displayed on your screen"; echo; return 0;
 		fi
+	else
+		return 0;
 	fi
-
-	return 0;
 }
 
 # Printing and / or logging the global variables already defined.
@@ -208,7 +208,7 @@ function BU::ModuleInit::DisplayInitializedGlobalVarsInfos()
 # Displaying the information on the initialized global variables
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
-    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
 
         #**** Parameters ****
         local p_var_name=$1;	# Name of the variable.
@@ -292,6 +292,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
             fi
 
 			BU::ModuleInit::Msg;
+
+			return 0;
 		fi
 	else
 		return 0;
@@ -487,9 +489,9 @@ function BU::ModuleInit::PrintLog()
 
     BU::ModuleInit::MsgLine "Here are the initialization logs" '#' 'echo'; echo
 
-    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-partial' ]; then
+    if [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--mode-log-partial' ]; then
         echo "Logging mode : partial"; echo;
-    elif [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--log-mode-full' ]; then
+    elif [ "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
         echo "Logging mode : full"; echo;
     fi
 
@@ -535,7 +537,7 @@ function BU::ModuleInit::PrintLogError()
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
-    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-' >&2;
+    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-' 'msg' >&2;
 
     BU::ModuleInit::Msg >&2;
 
@@ -717,13 +719,17 @@ function BU::ModuleInit::SourcingFailure()
 function BU::ModuleInit::Usage()
 {
 	echo >&2; echo "The supported values are :" >&2;
-	echo "--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-shut » and « --log-shut-display » parameters)" >&2;
-	echo "--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-display » and « --log-shut-display » parameters)" >&2;
-	echo "--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_UTILS_MSG_ARRAY » array (WARNING : this parameter is incompatible with the « --log-display » and « --log-shut » parameters)" >&2;
+	echo "WARNING : the three following parameters are incompatible with each other, they will overwrite each other";
 	echo >&2;
 
-	echo "--log-mode-full       : " >&2;
-	echo "--log-mode-partial    : " >&2;
+	echo "--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_UTILS_MSG_ARRAY » array" >&2;
+	echo "--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_UTILS_MSG_ARRAY » array" >&2;
+	echo "--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_UTILS_MSG_ARRAY » array" >&2;
+	echo >&2;
+
+	echo "WARNING : the two following parameters are incompatible with each other, they will overwrite each other";
+	echo "--mode-log-full       : display all informations about the initialization process" >&2;
+	echo "--mode-log-partial    : display only the essential informations" >&2;
 
 	return 0;
 }
@@ -804,7 +810,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             }
 
             for module_args in "${module_array[@]}"; do
-                echo "$module_args";
 
                 # -----------------------------------------------
 
@@ -820,71 +825,114 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 ## MODULE : LOG MESSAGES PROCESSING
 
-                # Else, if the "module" value's argument is "--log-display", "--log-shut" or '--log-shut-display' (WARNING : these arguments are incompatible with each other).
+                # Else, if the "module" value's argument is a log redirection parameter : "--log-display", "--log-shut" or '--log-shut-display'
+
+				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
                 elif [[ "${module_args,,}" == *'--log-'* ]]; then
 
-                    if [[ "${module_args,,}" == '--log-display' ]]; then
+					case "${module_args,,}" in
 
-                        if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+						# Log value : --log-display (printing the initialization messages on the screen while they are appened to the "$__BU_MODULE_UTILS_MSG_ARRAY" array).
+						'--log-display')
+							if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
-                            # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                            # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
+								# By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
+								# To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
 
-                        # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
-                        # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
-                        else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
-                            
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
-                        fi
-                    fi
+							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+							# by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+							else
+								BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
+								
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
+							fi;;
 
-                    if [[ "${module_args,,}" = '--log-shut' ]]; then
+						# Log value : --log-shut (don't print the initialization messages on the screen, nor append them into the "$__BU_MODULE_UTILS_MSG_ARRAY" array).
+						'--log-shut')
+							if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
 
-                        if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+								# If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+								# the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
 
-                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                            # the existing logged messages will be erased, and no initialization messages will be displayed, unless it's an error message.
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
+								# Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
+								__BU_MODULE_UTILS_MSG_ARRAY=();
+								
+							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+							# by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+							else
+								BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
 
-                            # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-                            __BU_MODULE_UTILS_MSG_ARRAY=();
-                            
-                        # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
-                        # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
-                        else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
 
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
+								# Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
+								__BU_MODULE_UTILS_MSG_ARRAY=();
+							fi;;
 
-                            # Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-                            __BU_MODULE_UTILS_MSG_ARRAY=();
-                        fi
-                    fi
-                        
-                    if [[ "${module_args,,}" = '--log-shut-display' ]]; then
+						# Log value : --log-shut-display (print the initialization messages on the screen without appening them into the "$__BU_MODULE_UTILS_MSG_ARRAY" array).
+						'--log-shut-display')
+							if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
+								# If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
+								# but all the log messages will be displayed on the screen.
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args"
 
-                        if [ -z "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" ]; then
-                            # If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_UTILS_MSG_ARRAY" variable,
-                            # but all the log messages will be displayed on the screen.
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args"
+							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+							# by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
+							else
+								BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
 
-                        # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
-                        # by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
-                        else
-                            BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize "$module_args";
+								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
+							fi;;
 
-                            __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
-                        fi
-                    fi
+						# An unsupported log argument is passed.
+						*)
+							BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's log permission argument : $module_args" "$LINENO";
 
-                # Setting the "" global variable to 'full', in order to print every initialization messages, and not only the essential initialization messages.
-                if [[ "${module_args,,}" = '--log-mode-full' ]]; then
-                    __BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args"
+							echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S LOG PERMISSION PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
+							echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
 
-                    BU::ModuleInit::DisplayInitializedGlobalVarsInfos;
-                fi
+							BU::ModuleInit::Usage;
+
+							BU::ModuleInit::MsgAbort;
+
+							BU::ModuleInit::AskPrintLog; exit 1;;
+					esac
+
+                # -----------------------------------------------
+
+                ## MODULE : MODES PROCESSING
+
+				# Else, if the 
+
+                elif [[ "${module_args,,}" = '--mode-'* ]]; then
+
+					case "${module_args,,}" in
+
+						# Setting the "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" global variable to '--mode-log-full', in order to print every initialization messages, and not only the essential initialization messages.
+						'--mode-log-full')
+							__BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args";
+
+							# Displaying the initialization messages already appened in the "$__BU_MODULE_UTILS_MSG_ARRAY" global variable.
+							BU::ModuleInit::DisplayInitializedGlobalVarsInfos;;
+
+						# Setting the "$__BU_MODULE_UTILS_MSG_ARRAY_MODE" global variable to '--mode-log-partial', in order to print the essential initialization messages only (already set by default).
+						'--mode-log-partial')
+							__BU_MODULE_UTILS_MSG_ARRAY_MODE="$module_args";;
+
+						# An unsupported mode argument is passed.
+						*)
+							BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's mode argument : $module_args" "$LINENO";
+
+							echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S MODE PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
+							echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
+
+							BU::ModuleInit::Usage;
+
+							BU::ModuleInit::MsgAbort;
+
+							BU::ModuleInit::AskPrintLog; exit 1;;
+					esac
 
                 # -----------------------------------------------
 
@@ -1026,7 +1074,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT_HOME" ".Bash-utils")";
 
 	# shellcheck disable=SC2034
-	__BU_MODULE_UTILS_INITALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "$(basename "${BASH_SOURCE[0]}")")";
+	__BU_MODULE_UTILS_INITALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")";
 
     # Configurations directories
 	__BU_MODULE_UTILS_CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "config")";
@@ -1083,8 +1131,8 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_EXISTS="$((RANDOM % 255))";
 
 # This global variable stores the processing mode (partial or full).
 
-# By default, it stores the '--log-mode-partial' value, in order to avoid the initialization process being too much verbose.
-declare __BU_MODULE_UTILS_MSG_ARRAY_MODE='--log-mode-full'
+# By default, it stores the '--mode-log-partial' value, in order to avoid the initialization process being too much verbose.
+declare __BU_MODULE_UTILS_MSG_ARRAY_MODE='--mode-log-partial'
 
 # This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
 # which authorizes the displaying of the logs messages on the screen.
@@ -1097,8 +1145,9 @@ declare __BU_MODULE_UTILS_MSG_ARRAY_PERMISSION='';
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
-BU::ModuleInit::Msg "INITIALIZING THE MODULES";
-BU::ModuleInit::Msg;
+# Writing the initialization content into the messages array. It will be displayed later on the screen if the « --log-init-display » argument is passed with the « module » argument.
+__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INITIALIZING THE MODULES")");
+__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # -----------------------------------------------
 
@@ -1126,23 +1175,23 @@ function BashUtils_InitModules()
 	fi
 
     # Writing the list of the 
-	BU::ModuleInit::Msg "INTIALIZING THESE MODULES :"; BU::ModuleInit::Msg;
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")"); __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 	for module_args in "${p_modules_list[@]}"; do
         i=0; # Module's array index incrementer.
 
         if [[ "${module_args,,}" == 'module --'* ]]; then
-            BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process";
+            __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process")");
         else
             i="$(( i+1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
-            BU::ModuleInit::Msg "Module $i : $module_args";
+            __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args")");
         fi
 	done
 
-	BU::ModuleInit::Msg;
-	BU::ModuleInit::Msg;
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
+	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_modules_list[@]}"; do
@@ -1225,13 +1274,14 @@ function BashUtils_InitModules()
 
         # Incrementing the modules array index variable.
         v_index="$(( v_index+1 ))";
-	done
+
+	done < <(echo foo);
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 	#### ENDING THE WHOLE INITIALIZATION PROCESS
 
-	BU::HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(BU::DechoGreen "$__BU_MAIN_PROJECT_FILE_PATH") !";
+	BU::HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_PATH") !";
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
