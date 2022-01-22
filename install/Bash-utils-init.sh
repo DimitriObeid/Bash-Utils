@@ -1250,7 +1250,7 @@ function BashUtils_InitModules()
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH"; then
-                BU::ModuleInit::PrintLogError "The $v_module_name module's configurations directory does not exists" "$LINENO";
+                BU::ModuleInit::PrintLogError "The « $v_module_name module's » configurations directory does not exists" "$LINENO";
 
                 printf '\n' >&2;
 
@@ -1268,7 +1268,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "Sourcing the $v_module_name module's main configuration file" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR/$v_module_name/module.conf" "$v_module_name"; exit 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; exit 1; }
             fi
 
             # -----------------------------------------------
@@ -1276,14 +1276,14 @@ function BashUtils_InitModules()
             # MODULES' INITIALIZATION FILES SOURCING
 
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
-            if ! ls --directory "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name"; then
-                BU::ModuleInit::PrintLogError "The $v_module_name module's initialization files directory does not exists" "$LINENO";
+            if ! ls --directory "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH"; then
+                BU::ModuleInit::PrintLogError "The « $v_module_name » module's initialization files directory does not exists" "$LINENO";
 
                 printf '\n' >&2;
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" >&2;
+                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" >&2;
 
                 BU::ModuleInit::MsgAbort;
 
@@ -1292,7 +1292,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "Sourcing the $v_module_name module's initialization file" '-' 'msg';
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR/$v_module_name" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_MODULES_DIR/$module/Initializer.sh" "$v_module_name"; exit 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; exit 1; }
 
                 BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !";
             fi
