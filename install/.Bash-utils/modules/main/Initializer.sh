@@ -50,13 +50,15 @@ function BU::Main::Initializer::SourceLibrary()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
-		source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
 		BU::ModuleInit::Msg "Successfully sourced this library file : $f";
 	done
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
+
+	return 0;
 }
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
@@ -64,13 +66,15 @@ function BU::Main::Initializer::SourceConfig()
 {
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
 		BU::ModuleInit::Msg "Successfully sourced this configuration file : $f";
 	done
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
+
+	return 0;
 }
 
 # -----------------------------------------------
