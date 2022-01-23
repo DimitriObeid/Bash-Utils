@@ -38,46 +38,40 @@ fi
 
 ################################### INITIALIZING THE MAIN MODULE ##################################
 
-#### STEP ONE : DEFINING USEFUL FUNCTIONS
+#### STEP ONE : DEFINING THE NEEDED RESOURCES
 
-## PLEASE DEFINE ANY NEEDED FUNCTIONS HERE
+## FUNCTIONS
 
-# -----------------------------------------------
+# Sourcing each library file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" array.
+function BU::Main::Initializer::SourceLibrary()
+{
+	# Leaving a newline for a better text display in the log file and the terminal.
+	BU::ModuleInit::Msg;
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+	# shellcheck disable=SC1090
+	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
+		source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
 
-#### STEP TWO : SOURCING FILES
+		BU::ModuleInit::Msg "Successfully sourced this library file : $f";
+	done
 
-## SOURCING LIBRARY FILES FIRST
+	# Leaving a newline for a better text display in the log file and the terminal.
+	BU::ModuleInit::Msg;
+}
 
-# Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg;
+# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+function BU::Main::Initializer::SourceConfig()
+{
+	# shellcheck disable=SC1090
+	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
+		source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
 
-# Sourcing each file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
+		BU::ModuleInit::Msg "Successfully sourced this configuration file : $f";
+	done
 
-# shellcheck disable=SC1090
-for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH[@]}"; do
-    source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
-
-	BU::ModuleInit::Msg "Successfully sourced this library file : $f";
-done
-
-# Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg;
-
-# -----------------------------------------------
-
-## SOURCING CONFIGURATION FILES
-
-# shellcheck disable=SC1090
-for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-    source "$f" || BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f");
-
-	BU::ModuleInit::Msg "Successfully sourced this configuration file : $f";
-done
-
-# Leaving a newline for a better text display in the log file and the terminal.
-BU::ModuleInit::Msg;
+	# Leaving a newline for a better text display in the log file and the terminal.
+	BU::ModuleInit::Msg;
+}
 
 # -----------------------------------------------
 
@@ -85,7 +79,7 @@ BU::ModuleInit::Msg;
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP THREE : PROCESSING MODULE'S PARAMETERS
+#### STEP TWO : PROCESSING MODULE'S PARAMETERS
 
 # Usage function.
 function BU::Main::Initializer::Usage()
@@ -301,6 +295,30 @@ for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
     fi
 done
 
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### STEP THREE : SOURCING FILES
+
+## SOURCING LIBRARY FILES FIRST
+
+# Sourcing each library file listed into the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH" variable.
+BU::Main::Initializer::SourceLibrary
+
+# -----------------------------------------------
+
+## SOURCING CONFIGURATION FILES
+
+# TODO : avoid the overwriting of the status variables defined with the "main" module's arguments.
+
+
+# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceConfig
+
+# -----------------------------------------------
 
 
 
