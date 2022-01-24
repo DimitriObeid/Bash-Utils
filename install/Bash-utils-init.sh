@@ -279,7 +279,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
     		# If a value or more are stored in the processed array.
 			if [ -n "$pa_var_val_array" ]; then
-				for _ in "${pa_var_val_array[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val_array"; done;
+				for _ in "${pa_var_val_array[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val_array" 'n'; done;
+				BU::ModuleInit::Msg;
 
 			else
 				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
@@ -293,14 +294,13 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			if [ -n "$p_var_val" ]; then
 			
 				if [ "${p_var_type,,}" = 'cmd' ]; then
-					BU::ModuleInit::Msg "Value : The $p_var_name value is a command substition";
+					BU::ModuleInit::Msg "Value : The « $p_var_name global » variable's value is a command substition";
 				else
 					BU::ModuleInit::Msg "Value --> $p_var_val";
 				fi
 
 			else
 				BU::ModuleInit::Msg "No value stored in this variable" '-' 'msg';
-                BU::ModuleInit::Msg;
             fi
 
 			BU::ModuleInit::Msg;
