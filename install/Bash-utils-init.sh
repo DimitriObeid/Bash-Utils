@@ -1242,7 +1242,7 @@ function BashUtils_InitModules()
 
 
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
-            __BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR" "$v_module_name")";
+            __BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_MODULES_DIR" "$v_module_name")";
 
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
                 "This global variable stores the path of the currently processed module's initialization directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH)" \
