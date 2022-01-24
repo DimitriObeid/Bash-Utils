@@ -46,8 +46,8 @@ fi
 function BU::Main::Headers::DrawLine()
 {
 	#**** Parameters ****
-	local p_lineColor=$1	# Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	local p_lineChar=$2	# Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineChar=$1    # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineColor=$2   # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
 	
 	#**** Code ****
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
@@ -109,10 +109,11 @@ function BU::Main::Headers::DrawLine()
 function BU::HeaderBase()
 {
 	#**** Parameters ****
-	local p_lineColor=$1      # Premier paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
-	local p_lineChar=$2       # Deuxième paramètre servant à définir le caractère souhaité lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
-	local p_stringColor=$3	  # Définition de la couleur de la chaîne de caractères du header.
-	local p_stringTxt=$4      # Chaîne de caractères affichée dans chaque header.
+	local p_lineColor=$1       # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
+	local p_lineChar=$2        # Defining the wanted character to display when calling the "BU::Main::Headers::DrawLine()" function.
+	local p_stringColor=$3     # Defining the color of the header's string
+	local p_stringTxt=$4       # String displayed between the two lines.
+	local p_strlen=$5          # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
 
 	#**** Variables ****
     local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"  # Setting the text display time global status variable to 0 seconds, because the header's pause time is already set.
@@ -123,9 +124,9 @@ function BU::HeaderBase()
 	if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
         BU::Newline;
 
-        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"
         BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
-        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")" "" "nodate"
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"
         BU::Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"
@@ -135,9 +136,9 @@ function BU::HeaderBase()
     elif [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
         echo -e
 
-        echo -e "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")"
+        echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"
         echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
-        echo -e "$(BU::Main::Headers::DrawLine "$p_lineColor" "$p_lineChar")"
+        echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"
         echo -e
 
         sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"

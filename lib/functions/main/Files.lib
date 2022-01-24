@@ -51,14 +51,14 @@ function BU::Main::Files::__ProcessingFile()
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
         BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name") file";
-        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate';
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
         BU::Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
     elif [ "$p_output" = 'S' ]; then
         BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name") file";
-        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$p_char")" '-n' 'nodate';
+        BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
         BU::Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
@@ -89,7 +89,7 @@ function BU::Main::Files::ProcessingFile()
     BU::Main::CheckArgs__Files::ProcessingFile "$p_function";
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
-    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate';
+    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
     BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") file in the $(BU::DechoHighlightPath "$p_parent") parent directory.";
     BU::Newline;
 

@@ -63,18 +63,18 @@ function BU::Main::Directories::ProcessingDir()
 	BU::Main::CheckArgs__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name"
     
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
-    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
     BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent")."
     BU::Newline;
     
     if "$p_function"; then
         BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
-		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		BU::Newline;
     else
         BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
-		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__COL_RESET" "$v_char")" '-n' 'nodate'
+		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
 		sleep "$PROJECT_STATUS_SLEEP_LINE"
 		BU::Newline;
     fi
@@ -363,16 +363,20 @@ function BU::Main::Directories::GetParentDirectoryPath()
 function BU::Main::Directories::TriggerRootDirWarning()
 {
 	#**** Parameters ****
-	p_path=$1
+	local p_path=$1
+
+    #**** Variables ****
+    local v_forbidden="WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
+    local v_restricted="WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
 
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 	if [ "$(pwd "$p_path")" = "/" ] || [ "$(BU::Main::Directories::GetParentDirectoryPath "$p_path")" = '/' ]; then
 		if [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "forbidden" ]; then
-            BU::EchoError "-------------------------------------------------"
-			BU::EchoError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
-			BU::EchoError "-------------------------------------------------"
+            BU::EchoError "${#v_forbidden}"
+			BU::EchoError "$v_forbidden"
+			BU::EchoError "${#v_forbidden}"
 
 			BU::EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
 			BU::EchoError "Given path : $(BU::DechoHighlightPath "$p_path")"
@@ -382,9 +386,9 @@ function BU::Main::Directories::TriggerRootDirWarning()
 			BU::Main::Errors::ExitError '1'; return 1
 
 		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
-            BU::EchoWarning "---------------------------------------------------------------------------"
-			BU::EchoWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
-            BU::EchoWarning "---------------------------------------------------------------------------"
+            BU::EchoWarning "${#v_restricted}"
+			BU::EchoWarning "$v_restricted"
+            BU::EchoWarning "${#v_restricted}"
 
             BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
 			BU::EchoWarning "Given path : $(BU::DechoHighlightPath "$p_path")"

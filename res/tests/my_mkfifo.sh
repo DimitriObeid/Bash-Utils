@@ -122,7 +122,7 @@ function WriteIntoFIFO
         fi
     fi
     # If the file size is equal to 0 (empty file)
-    # TODO : Ça bloque par ici
+    # À FAIRE : Ça bloque par ici
     if [ ! -s "$p_fifoPath" ]; then
         cat <<-EOF > "$p_fifoPath"
         $v_varLine="$p_newVar"

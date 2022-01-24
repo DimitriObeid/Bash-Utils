@@ -165,7 +165,7 @@ function BU::Main::Errors::HandleErrors()
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
 
             # Drawing an extra line to differenciate the message below from the rest of the error messages.
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__BU_MAIN_COLOR_ERROR" "$__BU_MAIN_TXT_PRINT_HEADER_LINE")" '' 'nodate'
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_PRINT_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR")" '' 'nodate'
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
