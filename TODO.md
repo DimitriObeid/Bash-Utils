@@ -10,7 +10,7 @@ Make the project's script's name displaying when all the modules are initialized
 
 Porting the library on these operating systems :
 
-- Mac OS
+- Android (via Termux)
 - FreeBSD | NetBSD | OpenBSD
 - Haiku
-
+- OSX
