@@ -1275,7 +1275,8 @@ function BashUtils_InitModules()
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « config » directory !!!\n\n" "$v_module_name" >&2;
 
-                echo -e "Please check if the module's configuration files exist in this folder --> $(BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'f')\n\n" >&2;
+                echo -e "Please check if the module's configuration files exist in this folder --> " >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'f' >&2;
+                printf '\n\n'
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
@@ -1302,7 +1303,8 @@ function BashUtils_InitModules()
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « install » directory !!!\n\n" "$v_module_name" >&2;
 
-                echo -e "Install this module, or check its name in this folder --> $(BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'f')\n\n" >&2;
+                printf "Install this module, or check its name in this folder --> "; >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'f' >&2;
+                printf '\n\n' >&2;
 
                 BU::ModuleInit::MsgAbort;
 
