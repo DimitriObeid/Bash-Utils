@@ -219,6 +219,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_func=$6;        # Function where the variable was declared.
         local p_line=$7;        # Line where the variable was declared.
 
+        # If the variable type is an array, then the values must be passed as an array,
+        # or else only the first index's value will be displayed.
+        shift 7
+        local pa_var_val_array=("$@")
+
         #**** Variables ****
         local v_file; v_file="$([[ -n "$p_file" ]] && echo "File : $p_file" || echo "File : none")";
         local v_func; v_func="$([[ -f "$p_func" ]] && echo "Func : $p_func" || echo "Func : none")";
@@ -273,8 +278,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
             BU::ModuleInit::Msg;
 
     		# If a value or more are stored in the processed array.
-			if [ -n "$p_var_val" ]; then
-				for _ in "${p_var_val[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val"; done;
+			if [ -n "$pa_var_val_array" ]; then
+				for _ in "${pa_var_val_array[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val_array"; done;
 
 			else
 				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
