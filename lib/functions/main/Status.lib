@@ -253,24 +253,6 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
     return 0;
 }
 
-# Checking the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
-function BU::Main::Status::CheckSTAT_PRINT_INIT_LOG()
-{
-    #**** Parameters ****
-    p_file=$1;
-    p_lineno=$2;
-
-    #**** Variables ****
-    local pa_correctValues=("true" "false");
-
-    #**** Code ****
-    if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_PRINT_INIT_LOG" '__BU_MAIN_STAT_PRINT_INIT_LOG' "${pa_correctValues[@]}"; return 1;
-    fi
-
-    return 0;
-}
-
 # Checking the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
 function BU::Main::Status::CheckSTAT_TIME_HEADER()
 {
@@ -428,9 +410,6 @@ function BU::Main:Status::ChangeSTAT_LOG_REDIRECT   { __BU_MAIN_STAT_LOG_REDIREC
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
 function BU::Main:Status::ChangeSTAT_OPERATE_ROOT   { __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$2" "$3" || return 1; return 0; }
-
-# Changing the "$__BU_MAIN_STAT_PRINT_INIT_LOG" status variable's value.
-function BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG { __BU_MAIN_STAT_PRINT_INIT_LOG="$1";   BU::Main::Status::CheckSTAT_PRINT_INIT_LOG  "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
 function BU::Main:Status::ChangeSTAT_TIME_HEADER    { __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER     "$2" "$3" || return 1; return 0; }

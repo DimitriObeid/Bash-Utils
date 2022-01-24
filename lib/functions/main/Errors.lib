@@ -146,17 +146,8 @@ function BU::Main::Errors::HandleErrors()
 	local p_lineno=$7          # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #**** Variables ****
-    if BU::Main::Status::CheckStatIsInitializing && ! BU::Main::Status::CheckStatIsPrintingInit; then
-        local v_stat_print_init_log_old='false'; BU::Main:Status::ChangeSTAT_PRINT_INIT_LOG 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-    fi
-
-    if BU::Main::Status::CheckStatIsTranslated; then
-        local v_hdrString;
-            v_hdrString="$(echo -ne "$__BU_MAIN_MSG_ERRORS_BU::Main::Errors::HandleErrors_HDR_STRING")"
-    else
-        local v_hdrString;
-            v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")"
-    fi
+    local v_hdrString;
+        v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")"
 
 	# ***** Code *****
 	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
@@ -240,10 +231,6 @@ function BU::Main::Errors::HandleErrors()
         if [ "$v_log_old" = "true" ]; then
             __BU_MAIN_STAT_LOG_REDIRECT="log"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi
-    fi
-
-    if BU::Main::Status::CheckStatIsInitializing && [ "$v_stat_print_init_log_old" = 'false' ]; then
-        __BU_MAIN_STAT_PRINT_INIT_LOG="$v_stat_print_init_log_old"; v_stat_print_init_log_old=''    # Reassigning the "$v_stat_print_init_log_old" variable to an empty value.
     fi
 
     return 1

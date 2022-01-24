@@ -247,10 +247,10 @@ function BU::Main::Files::CreateProjectLogFile()
     BU::EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline;
     BU::EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline;
 
-	if (( "${#__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}" >= 1 )); then
+	if (( "${#__BU_MODULE_UTILS_MSG_ARRAY[@]}" >= 1 )); then
 		BU::EchoNewstep "Initialization log output :"; BU::Newline;
 
-        for val in "${__BU_MAIN_MODULE_STR_ARRAY_LOG_DATE[@]}"; do
+        for val in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
             BU::CheckProjectLogStatus "$(CutDateFromString "$val")";
         done
     fi

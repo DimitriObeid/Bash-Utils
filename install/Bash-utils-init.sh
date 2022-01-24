@@ -220,9 +220,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_line=$7;        # Line where the variable was declared.
 
         #**** Variables ****
-        local v_file; v_file="$([[ -n "$p_file" ]] && echo "File     : $p_file" || echo "File : none")";
-        local v_func; v_func="$([[ -f "$p_func" ]] && echo "Function : $p_func" || echo "Function : none")";
-        local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line     : $p_line" || echo "Line : unknown")";
+        local i_arr=0;  # Array index counter.
+
+        local v_file; v_file="$([[ -n "$p_file" ]] && echo "File : $p_file" || echo "File : none")";
+        local v_func; v_func="$([[ -f "$p_func" ]] && echo "Func : $p_func" || echo "Func : none")";
+        local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line : $p_line" || echo "Line : unknown")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -269,19 +271,21 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		BU::ModuleInit::Msg "$v_line";
 
 		if [ "${p_var_type,,}" = 'array' ]; then
-            BU::ModuleInit::Msg "Type     : array";
+            BU::ModuleInit::Msg "Type : array";
             BU::ModuleInit::Msg;
 
     		# If a value or more are stored in the processed array.
 			if [ -n "$p_var_val" ]; then
-				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_}] --> $_"; done
+				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_[@]}] --> $_"; done;
+
+				i_arr=0 # Resetting the array index variable's value to 0.
 
 			else
 				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
                 BU::ModuleInit::Msg;
 			fi
 		else
-            BU::ModuleInit::Msg "Type     : $p_var_type";
+            BU::ModuleInit::Msg "Type : $p_var_type";
             BU::ModuleInit::Msg;
 
 			# If a variable is stored in the processed variable.
@@ -574,6 +578,12 @@ function BU::ModuleInit::CheckBashMinimalVersion()
 	fi
 }
 
+# Checking the script's initialization process.
+function BU::ModuleInit::CheckIsInitializing()
+{
+    if [ "" ]
+}
+
 # Check if the given path exists (This function is called by the "BU::ModuleInit::SourcingFailure()" function).
 function BU::ModuleInit::CheckPath()
 {
@@ -583,7 +593,7 @@ function BU::ModuleInit::CheckPath()
 
     #**** Code ****
     if [ -z "$p_path" ]; then
-        printf "<No file path>" >&2; return 1;
+        printf "<No file path>" >&2; return 0;
 
     else
         if [ -z "$p_target" ]; then
@@ -597,7 +607,7 @@ function BU::ModuleInit::CheckPath()
                     printf "%s" "$p_path"; return 0;
 
                 else
-                    printf "%s (bad directory : not found)" "$p_path" >&2; return 1;
+                    printf "%s (bad directory : not found)" "$p_path" >&2; return 0;
                 fi
 
             elif [[ "$p_target" = [F-f] ]]; then
@@ -606,7 +616,7 @@ function BU::ModuleInit::CheckPath()
                     printf "%s" "$p_path"; return 0;
 
                 else
-                    printf "%s (bad file path : not found)" "$p_path" >&2; return 1;
+                    printf "%s (bad file path : not found)" "$p_path" >&2; return 0;
                 fi
             else
                 echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « p_target » PARAMETER'S CURRENT VALUE IS « $p_target », NOT THE EXPECTED 'D', 'd', 'F' OR 'f'" >&2; echo >&2; return 1;
@@ -990,7 +1000,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the "main" module is passed as second argument, after the "module" value.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [[ "$p_module" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
+    elif [ "$p_count" -eq 1 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
@@ -1015,7 +1025,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 	
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 	
-	elif [ "$p_count" -ge 1 ] && [[ "$p_module" == "module --"* ]]; then
+	elif [ "$p_count" -ge 1 ] && [[ "${p_module,,}" == "module --"* ]]; then
 		BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « main » module passed as first argument, but before the « module -- » value";
 
 		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » VALUE" >&2;
@@ -1225,28 +1235,33 @@ function BashUtils_InitModules()
 
 		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
-		# Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
-		__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "$v_module_name")";
-		
-		BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'Dirpath' \
-			"This global variable stores the path of the currently processed module's configurations directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH)" \
-			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))"; exit 0
+		# Getting the current module's configurations directory AND its initialization directory (the "module --"* value is NOT a module).
+		if [[ "$module" != 'module --'* ]]; then
 
-		# Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
-		__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR" "$v_module_name")";
+            # Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
+            __BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR" "$v_module_name")";
+            
+            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'Dirpath' \
+                "This global variable stores the path of the currently processed module's configurations directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH)" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 
-		BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
-			"This global variable stores the path of the currently processed module's initialization directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH)" \
-			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+            # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
+            __BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR" "$v_module_name")";
+
+            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
+                "This global variable stores the path of the currently processed module's initialization directory (current : $v_module_name | path : $__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH)" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+        fi
 
 		# Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-		if [[ "${p_modules_list[i]}" = "$v_module_name --"* ]]; then
+		if [[ "${p_modules_list[i]}" == "$v_module_name --"* ]]; then
 
             # shellcheck disable=SC2034
 			__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING="$module";
 
 			BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING' "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" 'String' \
-				"This global variable stores the current value passed as argument when calling the « ${FUNCNAME[0]} » function (current index : ${#p_module_list} | value : $module)" \
+				"This global variable stores the current value passed as argument when calling the « ${FUNCNAME[0]} » function (current index : ${#p_modules_list} | value : $module)" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
 
@@ -1265,7 +1280,7 @@ function BashUtils_InitModules()
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « config » directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Please check if the module's configuration files exist in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" >&2;
+                echo -e "Please check if the module's configuration files exist in this folder --> $(BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'f')\n\n" >&2;
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
@@ -1292,7 +1307,7 @@ function BashUtils_InitModules()
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « install » directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Install this module, or check its name in this folder --> %s\n\n" "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" >&2;
+                echo -e "Install this module, or check its name in this folder --> $(BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'f')\n\n" >&2;
 
                 BU::ModuleInit::MsgAbort;
 

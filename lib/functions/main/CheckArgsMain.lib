@@ -422,16 +422,6 @@ function BU::Main::CheckArgs__Directories::GetParentDirectoryPath()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### "Lang.lib" FILE'S FUNCTIONS
-
-## PLEASE CHECK THE "CheckNotTranslated_ParseCSVLang()" FUNCTION IN THE AFOREMENTIONED LIBRARY FILE.
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
 #### MAIN MODULE'S "Files.lib" FILE'S FUNCTIONS
 
 ## TEXT FILE PROCESSING CATEGORY

@@ -211,16 +211,6 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
                     fi;;
 
-                # "$__BU_MAIN_STAT_PRINT_INIT_LOG" global status variable.
-                '--stat-print-init-log='*)
-                    if      [ "${value[i],,}" = '--stat-print-init-log=false' ] || [ "${value[i],,}" = '--stat-print-init-log=true' ]; then
-                            __BU_MAIN_STAT_PRINT_INIT_LOG="${value#*=}";        BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_PRINT_INIT_LOG" "$__BU_MAIN_STAT_PRINT_INIT_LOG";
-
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
-                    else
-                            BU::ModuleInit::Msg "$stat_value_warning --stat-print-init-log=false », « stat-print-init-log=true »";
-                    fi;;
-
                 # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
                 '--stat-time-header='*)
                     if      [ "${value[i],,}" = "--stat-time-header=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
