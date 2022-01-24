@@ -220,8 +220,6 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local p_line=$7;        # Line where the variable was declared.
 
         #**** Variables ****
-        local i_arr=0;  # Array index counter.
-
         local v_file; v_file="$([[ -n "$p_file" ]] && echo "File : $p_file" || echo "File : none")";
         local v_func; v_func="$([[ -f "$p_func" ]] && echo "Func : $p_func" || echo "Func : none")";
         local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line : $p_line" || echo "Line : unknown")";
@@ -276,9 +274,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
     		# If a value or more are stored in the processed array.
 			if [ -n "$p_var_val" ]; then
-				for _ in "${p_var_val[@]}"; do BU::ModuleInit::Msg "- Value [${#_[@]}] --> $_"; done;
-
-				i_arr=0 # Resetting the array index variable's value to 0.
+				for _ in "${p_var_val[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val"; done;
 
 			else
 				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
@@ -578,12 +574,6 @@ function BU::ModuleInit::CheckBashMinimalVersion()
 	fi
 }
 
-# Checking the script's initialization process.
-function BU::ModuleInit::CheckIsInitializing()
-{
-    if [ "" ]
-}
-
 # Check if the given path exists (This function is called by the "BU::ModuleInit::SourcingFailure()" function).
 function BU::ModuleInit::CheckPath()
 {
@@ -874,7 +864,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
 
 								# Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-								__BU_MODULE_UTILS_MSG_ARRAY=();
+								unset __BU_MODULE_UTILS_MSG_ARRAY;
 								
 							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "$__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION" global variable already contains a value.
@@ -884,7 +874,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 								__BU_MODULE_UTILS_MSG_ARRAY_PERMISSION="$module_args";
 
 								# Erasing the content of the "$__BU_MODULE_UTILS_MSG_ARRAY" variable, since it's no more useful.
-								__BU_MODULE_UTILS_MSG_ARRAY=();
+								unset __BU_MODULE_UTILS_MSG_ARRAY;
 							fi;;
 
 						# Log value : --log-shut-display (print the initialization messages on the screen without appening them into the "$__BU_MODULE_UTILS_MSG_ARRAY" array).
