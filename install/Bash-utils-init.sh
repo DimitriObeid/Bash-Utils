@@ -278,8 +278,12 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
             BU::ModuleInit::Msg;
 
     		# If a value or more are stored in the processed array.
-			if [ -n "$pa_var_val_array" ]; then
-				for _ in "${pa_var_val_array[@]}"; do local v_val="${#_[@]}"; BU::ModuleInit::Msg "Value [$(( v_val-1 ))] : $p_var_val_array" 'n'; done;
+			if [ -n "${pa_var_val_array[*]}" ]; then
+
+                local v_index=0;
+
+                for _ in "${pa_var_val_array[@]}"; do BU::ModuleInit::Msg "Value [$v_index] : $_"; v_index=$(( v_index+1 )); done;
+				
 				BU::ModuleInit::Msg;
 
 			else
@@ -1303,7 +1307,7 @@ function BashUtils_InitModules()
 
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « install » directory !!!\n\n" "$v_module_name" >&2;
 
-                printf "Install this module, or check its name in this folder --> "; >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'f' >&2;
+                printf "Install this module, or check its name in this folder --> "; BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_INIT_PATH" 'f' >&2;
                 printf '\n\n' >&2;
 
                 BU::ModuleInit::MsgAbort;
