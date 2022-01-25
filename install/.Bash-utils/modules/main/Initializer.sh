@@ -331,10 +331,10 @@ BU::Main::Directories::MkTmpDir;
 
 # Creating the color code file if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
 if BU::Main::Status::CheckStatAllowFormatting; then
-    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_NAME" "f"; then
-        BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoPath "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_NAME" "f"; then
+        BU::Main::Errors::HandleErrors '1' "UNABLE TO CREATE THE $(BU::DechoPath "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH") COLOR CODE FILE" "" "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
     else
-        BU::EchoSuccess "The $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PATH") color code file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_CODE_FILE_PARENT")"; BU::Newline;
+        BU::EchoSuccess "The $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH") color code file was successfully created in the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PARENT")"; BU::Newline;
     fi
 fi
 
