@@ -207,10 +207,10 @@
 \subsubsection{Consignes}\color{white}
 
 \begin{justify}
-    Dans le fichier de configuration \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR ENCODING}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
+    Dans le fichier de configuration \textbf{\color{lime}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR TEXT ENCODING (OTHERS)}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
 
     \begin{itemize}
-        \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}\\
+        \item \textbf{\color{orange}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}
     \end{itemize}
 \end{justify}
 
@@ -223,7 +223,7 @@
 \end{justify}
 
 \begin{justify}
-    Une fois le code couleur ajouté, repérez, dans le même fichier, la sous-section :\\
+    Une fois le code couleur ajouté, repérez, dans le même fichier, la section :
 
     \begin{itemize}
         \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::ModConfig::Colors::CheckTextColor" FUNCTIONS}
@@ -231,7 +231,16 @@
 \end{justify}
 
 \begin{justify}
-    Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR ENCODING}.
+    Puis la sous-section suivante :
+    
+    \begin{itemize}
+        \item \textbf{TEXT ENCODING}
+    \end{itemize}
+\end{justify}
+
+
+\begin{justify}
+    Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::CheckTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR TEXT ENCODING}.
 \end{justify}
 
 \begin{justify}

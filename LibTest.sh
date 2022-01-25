@@ -20,4 +20,4 @@ fi
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
 
 # Testing a BU::Decho_FMT function
-# BU::Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_ORANGE"
+# BU::Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_TXT_ORANGE"
