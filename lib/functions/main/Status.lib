@@ -62,31 +62,31 @@ function BU::Main::Status::ConfEcho()
     #**** Code ****
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         {
-			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR";
+			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
 			echo "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
 			
-			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR";
+			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
     else
-        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR";
+        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
         echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
 
-        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR";
+        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    echo -ne "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} --> " >&2;
-    echo -e "Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_var_name${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2;
+    echo -ne "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_TXT_ERROR}, line ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_TXT_ERROR} --> " >&2;
+    echo -e "Error : the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_var_name${__BU_MAIN_COLOR_TXT_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_TXT_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2;
+        echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_TXT_YELLOW} An empty string.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
     else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_VAR}$p_bad_value.${__BU_MAIN_COLOR_RESET}" >&2;
+        echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_TXT_VAR}$p_bad_value.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
     fi
 
-    echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2;
+    echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_TXT_RESET}" >&2;
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
@@ -94,9 +94,9 @@ function BU::Main::Status::ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET}" >&2;
+            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_ORANGE}An empty argument.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
         else
-            echo -e "${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_HIGHLIGHT}$val${__BU_MAIN_COLOR_RESET}" >&2;
+            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$val${__BU_MAIN_COLOR_TXT_RESET}" >&2;
         fi
     done
 
@@ -262,7 +262,7 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_VAR}An integer or a floating number");
+    local pa_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
@@ -281,7 +281,7 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_VAR}An integer or a floating number");
+    local pa_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.

@@ -74,9 +74,9 @@ function BU::Main::Errors::HandleSmallErrors()
     # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
     else
         if [ "$(( RANDOM%2 ))" = "0" ]; then
-            BU::EchoError "$p_string    | ${__BU_MAIN_COLOR_RESET}$v_advise" '' ''
+            BU::EchoError "$p_string    | ${__BU_MAIN_COLOR_TXT_RESET}$v_advise" '' ''
         else
-            BU::EchoWarning "$p_string  | ${__BU_MAIN_COLOR_RESET}$v_advise" '' ''
+            BU::EchoWarning "$p_string  | ${__BU_MAIN_COLOR_TXT_RESET}$v_advise" '' ''
         fi
     fi
 
@@ -95,7 +95,7 @@ function BU::Main::Errors::HandleSmallErrors()
         BU::Main::Errors::ExitError '1'
 
     else 
-        BU::EchoWarning "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Errors::ExitError '1'
+        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Errors::ExitError '1'
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
@@ -165,7 +165,7 @@ function BU::Main::Errors::HandleErrors()
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
 
             # Drawing an extra line to differenciate the message below from the rest of the error messages.
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_PRINT_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR")" '' 'nodate'
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_PRINT_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR")" '' 'nodate'
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then

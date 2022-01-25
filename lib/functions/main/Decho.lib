@@ -137,7 +137,7 @@ function BU::Decho()
             esac
         done
 
-        echo -e "$p_string$p_newColor$__BU_MAIN_COLOR_RESET"
+        echo -e "$p_string$p_newColor$__BU_MAIN_COLOR_TXT_RESET"
 
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -231,10 +231,10 @@ function BU::DechoWhite             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_WHITE
 function BU::DechoYellow            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      || return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with specific text display colors.
-function BU::DechoHighlight         { BU::Decho             "$1" "$__BU_MAIN_COLOR_HIGHLIGHT"   || return 1; return 0; }
-function BU::DechoHighlightFunction { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_FUNCTION"    || return 1; return 0; }
-function BU::DechoHighlightPath     { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_PATH"        || return 1; return 0; }
-function BU::DechoHighlightVar      { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_VAR"         || return 1; return 0; }
+function BU::DechoHighlight         { BU::Decho             "$1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT"   || return 1; return 0; }
+function BU::DechoHighlightFunction { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_FUNCTION"    || return 1; return 0; }
+function BU::DechoHighlightPath     { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_PATH"        || return 1; return 0; }
+function BU::DechoHighlightVar      { BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_VAR"         || return 1; return 0; }
 
 
 # Tip : you can also pass a second argument when you call the following functions, which is the same than the "Decho" function's second argument

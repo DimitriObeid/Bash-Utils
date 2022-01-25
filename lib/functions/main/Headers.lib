@@ -87,7 +87,7 @@ function BU::Main::Headers::DrawLine()
                 echo -n "$p_lineChar"
             done
         else
-            HandleSmallErrors 'W' "${__BU_MAIN_COLOR_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_WARNING} --> Warning : The " 'R' 'CPLS'
+            HandleSmallErrors 'W' "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : The " 'R' 'CPLS'
         fi
 
 	else
@@ -106,7 +106,7 @@ function BU::Main::Headers::DrawLine()
 	# commandes encodée avec la couleur des headers si l'exécution du script est interrompue de force avec la combinaison "CTRL + C"
 	# ou mise en pause avec la combinaison "CTRL + Z", par exemple.
 	if test "$p_lineColor" != ""; then
-        echo -ne "$__BU_MAIN_COLOR_RESET"
+        echo -ne "$__BU_MAIN_COLOR_TXT_RESET"
 	fi
 
 	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
@@ -140,11 +140,11 @@ function BU::HeaderBase()
 
         if [ "${p_strlen,,}" = 'strlen' ]; then
             BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")" "" "nodate"
-            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
+            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
             BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")" "" "nodate"
         else
             BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"
-            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
+            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
             BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"        
         fi
 
@@ -159,11 +159,11 @@ function BU::HeaderBase()
 
         if [ "${p_strlen,,}" = 'strlen' ]; then
             echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")"
-            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
+            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
             echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")"
         else
             echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"
-            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_RESET}"
+            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
             echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"        
         fi
 
@@ -180,25 +180,25 @@ function BU::HeaderBase()
 ## UNICOLOR HEADERS
 
 # Header to display without color.
-function BU::Header         { BU::HeaderBase "$__BU_MAIN_COLOR_RESET"    "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_RESET"      "$1" "$2" || return 1; return 0; } 
+function BU::Header         { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_RESET"    "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_RESET"      "$1" "$2" || return 1; return 0; } 
 
 # Header to display in case of an error.
-function BU::HeaderError    { BU::HeaderBase "$__BU_MAIN_COLOR_ERROR"    "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_ERROR"      "$1" "$2" || return 1; return 0; }
+function BU::HeaderError    { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_ERROR"    "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR"      "$1" "$2" || return 1; return 0; }
 
 # Header to display when switching to a new package category during package installation.
 function BU::HeaderInstall  { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_YELLOW"   "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_GREEN"      "$1" "$2" || return 1; return 0; }
 
 # Header to display when changing step.
-function BU::HeaderNewstep  { BU::HeaderBase "$__BU_MAIN_COLOR_NEWSTEP"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_NEWSTEP"    "$1" "$2" || return 1; return 0; }
+function BU::HeaderNewstep  { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_NEWSTEP"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NEWSTEP"    "$1" "$2" || return 1; return 0; }
 
 # Header to display when changing step.
 function BU::HeaderStep     { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_CYAN"     "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_CYAN"       "$1" "$2" || return 1; return 0; }
 
 # Header to display in case of a successfully done step.
-function BU::HeaderSuccess  { BU::HeaderBase "$__BU_MAIN_COLOR_SUCCESS"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_SUCCESS"    "$1" "$2" || return 1; return 0; }
+function BU::HeaderSuccess  { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_SUCCESS"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_SUCCESS"    "$1" "$2" || return 1; return 0; }
 
 # Header to display in case of a minor error.
-function BU::HeaderWarning  { BU::HeaderBase "$__BU_MAIN_COLOR_WARNING"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE"  "$__BU_MAIN_COLOR_WARNING"   "$1" "$2" || return 1; return 0; }
+function BU::HeaderWarning  { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_WARNING"  "$__BU_MAIN_TXT_CHAR_HEADER_LINE"  "$__BU_MAIN_COLOR_TXT_WARNING"   "$1" "$2" || return 1; return 0; }
 
 # Copy-paste this function to avoid losing time while creating unicolor headers :
 # function BU::Header<col> { BU::HeaderBase "$__BU_MAIN_COLOR_<COLOR>" "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_<COLOR>" "$1" "$2" || return 1; return 0; }

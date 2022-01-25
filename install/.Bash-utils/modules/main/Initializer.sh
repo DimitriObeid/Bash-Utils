@@ -122,7 +122,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	# Process each supported arguments in this "for" loop.
 	for value in "${main_module_array[@]}"; do
 
-        stat_value_warning="$(echo "${__BU_MAIN_COLOR_WARNING}Warning : the « $value » value is incorrect.${__BU_MAIN_COLOR_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")";
+        stat_value_warning="$(echo "${__BU_MAIN_COLOR_TXT_WARNING}Warning : the « $value » value is incorrect.${__BU_MAIN_COLOR_TXT_RESET}" >&2; echo >&2; echo "Try these accepted values for this global status variable : ")";
 
         if [[ "${value[i],,}" = "--stat-"* ]]; then
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
@@ -218,7 +218,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
+                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable.
@@ -228,7 +228,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
+                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
@@ -238,7 +238,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_HIGHLIGHT") »";
+                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
