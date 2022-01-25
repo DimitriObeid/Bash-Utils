@@ -46,10 +46,10 @@ fi
 function BU::Main::Status::ConfEcho()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
-    local p_bad_value=$3;
-    local p_var_name=$4
+    local p_file=$1;        # File where the function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_lineno=$2;      # Line where the function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_bad_value=$3;   # Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
+    local p_var_name=$4     # Name of the variable that stores the bad value.
 
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
@@ -57,7 +57,7 @@ function BU::Main::Status::ConfEcho()
     local pa_correctValues=("$@");
 
     #**** Variables ****
-    local i=0;
+    local i=0;      # 
 
     #**** Code ****
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
@@ -83,7 +83,7 @@ function BU::Main::Status::ConfEcho()
     if [ -z "$p_bad_value" ]; then
         echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET}" >&2;
     else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_bad_value.${__BU_MAIN_COLOR_RESET}" >&2;
+        echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_VAR}$p_bad_value.${__BU_MAIN_COLOR_RESET}" >&2;
     fi
 
     echo >&2; echo -e "${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET}" >&2;
@@ -262,7 +262,7 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number");
+    local pa_correctValues=("${__BU_MAIN_COLOR_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
@@ -281,7 +281,7 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_ORANGE}An integer or a floating number");
+    local pa_correctValues=("${__BU_MAIN_COLOR_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.

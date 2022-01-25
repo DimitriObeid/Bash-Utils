@@ -1322,7 +1322,7 @@ function BashUtils_InitModules()
         # Incrementing the modules array index variable.
         v_index="$(( v_index+1 ))";
 
-	done < <(echo foo);
+	done || { echo "ERROR"; exit 1; }; 
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
