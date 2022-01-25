@@ -282,9 +282,22 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
                 local v_index=0;
 
-                for _ in "${pa_var_val_array[@]}"; do BU::ModuleInit::Msg "Value [$v_index] : $_"; v_index=$(( v_index+1 )); done;
-				
-				BU::ModuleInit::Msg;
+                for _ in "${pa_var_val_array[@]}"; do
+                    BU::ModuleInit::Msg "Value [$v_index] : $_";
+
+                    # Line break every five lines, in order to keep the values list readable for a human.
+                    local v_value_line=$(( v_index + 1 ));
+
+                    if [ $(( v_value_line % 5 )) -eq 0 ]; then
+                        BU::ModuleInit::Msg;
+                    fi
+
+                    v_index=$(( v_index+1 ));
+                done;
+
+                BU::ModuleInit::Msg;
+
+                local v_index=0;
 
 			else
 				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
