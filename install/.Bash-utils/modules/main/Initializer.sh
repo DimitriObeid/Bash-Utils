@@ -42,14 +42,14 @@ fi
 
 ## FUNCTIONS
 
-# Sourcing each library file stored into the function/main directory.
+# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 function BU::Main::Initializer::SourceLibrary()
 {
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
 
 	# shellcheck disable=SC1090
-	for f in "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH/"*.lib; do
+	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
 		BU::ModuleInit::Msg "Successfully sourced this library file : $f";
@@ -299,7 +299,7 @@ done
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Sourcing each library file stored into the function/main directory.
+# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 BU::Main::Initializer::SourceLibrary
 
 # -----------------------------------------------
