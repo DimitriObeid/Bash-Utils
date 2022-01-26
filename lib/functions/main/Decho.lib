@@ -43,7 +43,7 @@ fi
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 
 # Quick multi commands execution for the below "Decho()" function.
-function BU::__Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && BU::IsInt "$v_oldColor" && echo -e "$v_oldColor" > "$__BU_MAIN_FILE_COLOR_CODE_PATH"; }
+function BU::__Decho { local v_oldTextColor=$1; tput setaf "$v_oldTextColor" && BU::IsInt "$v_oldTextColor" && echo -e "$v_oldTextColor" > "$__BU_MAIN_FILE_COLOR_CODE_PATH"; }
 
 # Text's inside decoration/formatting procssing.
 
@@ -70,19 +70,25 @@ function BU::Decho()
 
         return 1;
     else
-        local v_oldColor;
-            v_oldColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
+        local v_oldBGColor;
+            v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")";
+
+        local v_oldTextColor;
+            v_oldTextColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
     fi
 
-    if [ "$p_newTextColor" = "$v_oldColor" ]; then
+    if [ "$p_newTextColor" = "$v_oldTextColor" ] || [ "$p_newBGColor" = "$v_oldBGColor" ]; then
 
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
 		p_newTextColor="$(( p_newTextColor+38 ))";
 		tput setaf "$p_newTextColor";
+		
+		p_newBGColor="$(( p_newBGColor+38 ))";
+		tput setab "$p_newBGColor";
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
-        echo -e "$p_newTextColor$p_string$v_oldColor"; return 0;
+        echo -e "$p_newTextColor$p_string$v_oldTextColor"; return 0;
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -230,7 +236,7 @@ function BU::DechoBGColor           { BU::Decho "$1" "$2" "$3"; }
 
 
 # Tip : you can also pass a second argument when you call the following functions, which is the same than the "Decho" function's second argument
-# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::ModConfig::Colors::CheckTextColor" FUNCTIONS" sub-section).
+# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::ModConfig::Colors::SetTextColor" FUNCTIONS" sub-section).
 
 # Positionnal parameters :
 #   $1  --> String to display

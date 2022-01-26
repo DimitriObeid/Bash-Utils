@@ -87,7 +87,7 @@ function BU::Main::Headers::DrawLine()
                 echo -n "$p_lineChar"
             done
         else
-            HandleSmallErrors 'W' "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : The " 'R' 'CPLS'
+            HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
         fi
 
 	else
@@ -128,48 +128,64 @@ function BU::HeaderBase()
 	local p_stringColor=$3     # Defining the color of the header's string
 	local p_stringTxt=$4       # String displayed between the two lines.
 	local p_strlen=$5          # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+	local p_bgColorCol=$6      # Defining the background color.
+	local p_bgColorPos=$7      # Defining the background color's position (first line, text or second line, or a mix ?).
 
 	#**** Variables ****
-    local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"  # Setting the text display time global status variable to 0 seconds, because the header's pause time is already set.
+    local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; # Setting the text display time global status variable to 0 seconds, because the header's pause time is already set.
+
+    if [ -n "$p_strlen" ]; then local v_strlen="${#p_stringTxt}"; fi
 
 	#**** Code ****
-	__BU_MAIN_STAT_TIME_HEADER="0"
+	__BU_MAIN_STAT_TIME_HEADER="0";
 
 	if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
         BU::Newline;
 
-        if [ "${p_strlen,,}" = 'strlen' ]; then
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")" "" "nodate"
+        # If no value is passed via the background color's position's parameter.
+        if [ -z "$p_bgColorPos" ]; then
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate"
             BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")" "" "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate"
+
+        # Else, if a value is passed via the background color's position's parameter.
         else
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"
-            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")" "" "nodate"        
+
+            # This value MUST be an integer.
+            if BU::IsIntPos "$p_bgColorPos"; then
+
+                if [[ "$p_bgColorPos" == *'1'* ]]; then
+                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate")"; fi
+
+                if [[ "$p_bgColorPos" == *'2'* ]]; then
+                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")"; fi
+
+                if [[ "$p_bgColorPos" == *'3'* ]]; then
+                    BU::DechoBGColor "$(BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate")"; fi
+
+                if [[ "$p_bgColorPos" > ]]; then
+                    HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R'; fi
+            else
+                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
+            fi
         fi
 
         BU::Newline;
 
-        sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"
+        sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header";
 
         return 0;
 
     elif [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
         echo -e
 
-        if [ "${p_strlen,,}" = 'strlen' ]; then
-            echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")"
-            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "${#p_stringTxt}")"
-        else
-            echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"
-            echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor")"        
-        fi
+        echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")";
+        echo -e "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}";
+        echo -e "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")";
 
         echo -e
 
-        sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header"
+        sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header";
 
         return 0;
     fi
