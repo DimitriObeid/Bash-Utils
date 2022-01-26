@@ -679,19 +679,26 @@ function BU::Main::Checkings::CheckDecho()
     if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
         return 1
     else
-        # Creating the "fgcolors.tmp" file in case it doesn't exists.
-        if [ ! -f "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH" ]; then
-            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_NAME" "f"; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH") file" 'E' 'CPLS'; return 1
+        # Creating the "fgcolors.tmp" (text color) file in case it doesn't exists.
+        if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then
+            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" 'f'; then
+                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") file" 'E' 'CPLS'; return 1;
             fi
         fi
         
-        if [ -f "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH")" = '' ]; then
-            echo "$__BU_MAIN_COLOR_TXT_RESET" > "$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH" || \
+        # Creating the "bgcolors.tmp" (background color) file in case it doesn't exists.
+        if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
+            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
+                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH") file" 'E' 'CPLS'; return 1;
+            fi
+        fi
+        
+        if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" = '' ]; then
+            echo "$__BU_MAIN_COLOR_TXT_RESET" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || \
             {
                 # It's better to call the "BU::EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
                 # It's also better to not call the "BU::Main::Errors::HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
-                BU::EchoMsg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_TEXT_COLOR_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' ''
+                BU::EchoMsg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' ''
 
                 return 1
             }
