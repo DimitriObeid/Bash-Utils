@@ -62,26 +62,23 @@ function BU::Decho()
     local pa_fmtArgs;
         pa_fmtArgs=$("$@");
 
-    #**** Variables ****
-    local v_oldColor
-
     #**** Code ****
-    BU::Main::Checkings::CheckDecho
+    BU::Main::Checkings::CheckDecho;
 
     if test "$?" -ne 0; then
-        echo -ne "« $p_string »"
+        echo -ne "« $p_string »";
 
-        return 1
+        return 1;
     else
-        local v_oldColor
-            v_oldColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")"
+        local v_oldColor;
+            v_oldColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
     fi
 
     if [ "$p_newTextColor" = "$v_oldColor" ]; then
 
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
-		p_newTextColor="$(( p_newTextColor+38 ))"
-		tput setaf "$p_newTextColor"
+		p_newTextColor="$(( p_newTextColor+38 ))";
+		tput setaf "$p_newTextColor";
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
@@ -90,27 +87,20 @@ function BU::Decho()
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
-                "$(BU::IsInt "${#val}")")
-                    return
-                    ;;
-                'BLINK')
-                    echo -ne "${__BU_MAIN_TXT_FMT_BLINK}"
-                    ;;
-                'BOLD')
-                    echo -ne "${__BU_MAIN_TXT_FMT_BOLD}"
-                    ;;
-                'D')
-                    echo -ne "${__BU_MAIN_TXT_FMT_DIM}"
-                    ;;
-                'I')
-                    echo -ne "${__BU_MAIN_TXT_FMT_ITALIC}"
-                    ;;
-                'S')
-                    echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH}"
-                    ;;
-                'U')
-                    echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}"
-                    ;;
+                "$(BU::IsInt "${#val}")") return;;
+
+                'BLINK') echo -ne "${__BU_MAIN_TXT_FMT_BLINK}";;
+
+                'BOLD')  echo -ne "${__BU_MAIN_TXT_FMT_BOLD}";;
+
+                'D') echo -ne "${__BU_MAIN_TXT_FMT_DIM}";;
+
+                'I') echo -ne "${__BU_MAIN_TXT_FMT_ITALIC}";;
+
+                'S') echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH}";;
+
+                'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}";;
+
                 *)
                     # WARNING ! >>> DO NOT RESET «< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" «<, or else the program will be stuck in an infinite loop.
 
@@ -119,22 +109,22 @@ function BU::Decho()
 
                     # Saving the "true" value from the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
                     if BU::Main::Status::CheckStatAllowFormatting; then
-                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT"
+                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT";
 
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
                     fi
 
                     BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
-                        "Check if the value is supported in the first value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
+                        "Check if the value is supported in the first value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    BU::Main::Status::ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                    BU::Main::Status::ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
                     # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
                     if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
-                        __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val"
+                        __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi
 
-                    return 1
+                    return 1;
                     ;;
             esac
         done
@@ -144,27 +134,20 @@ function BU::Decho()
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
-                "$(BU::IsInt "${#val}")")
-                    return
-                    ;;
-                'BLINK')
-                    echo -ne "${__BU_MAIN_TXT_FMT_BLINK_RESET}"
-                    ;;
-                'BOLD')
-                    echo -ne "${__BU_MAIN_TXT_FMT_BOLD_RESET}"
-                    ;;
-                'D')
-                    echo -ne "${__BU_MAIN_TXT_FMT_DIM_RESET}"
-                    ;;
-                'I')
-                    echo -ne "${__BU_MAIN_TXT_FMT_ITALIC_RESET}"
-                    ;;
-                'S')
-                    echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH_RESET}"
-                    ;;
-                'U')
-                    echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}"
-                    ;;
+                "$(BU::IsInt "${#val}")") return;;
+
+                'BLINK') echo -ne "${__BU_MAIN_TXT_FMT_BLINK_RESET}";;
+
+                'BOLD')  echo -ne "${__BU_MAIN_TXT_FMT_BOLD_RESET}";;
+
+                'D') echo -ne "${__BU_MAIN_TXT_FMT_DIM_RESET}";;
+
+                'I') echo -ne "${__BU_MAIN_TXT_FMT_ITALIC_RESET}";;
+
+                'S') echo -ne "${__BU_MAIN_TXT_FMT_STRIKETHROUGH_RESET}";;
+
+                'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}";;
+
                 *)
                     # WARNING ! Do not reset the "$__BU_MAIN_STAT_DECHO" variable's value  to "true", or else the program will be stuck in an infinite loop.
 
@@ -173,20 +156,20 @@ function BU::Decho()
 
                     # Saving the "true" value from the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
                     if BU::Main::Status::CheckStatAllowFormatting; then
-                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT"
+                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT";
 
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
                     fi
 
                     # shellcheck disable=SC2034
-                    BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+                    BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
                     BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
-                    "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"
+                    "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                     # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
                     if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
-                        __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val"
+                        __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi
                     ;;
             esac
@@ -208,29 +191,29 @@ function BU::Decho()
 # echo -e "Lorem ipsum $(BU::DechoOrange "$(BU::Decho_FMT_BlinkBoldDISU "dolor")") sit amet..."
 
 # Easy "BU::Decho()" function calls with colors.
-function BU::DechoAqua              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_AQUA"        || return 1; return 0; }
-function BU::DechoBlack             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLACK"       || return 1; return 0; }
-function BU::DechoBlue              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLUE"        || return 1; return 0; }
-function BU::DechoCyan              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_CYAN"        || return 1; return 0; }
-function BU::DechoFuschia           { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_FUSCHIA"     || return 1; return 0; }
-function BU::DechoGray              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GRAY"        || return 1; return 0; }
-function BU::DechoGreen             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GREEN"       || return 1; return 0; }
-function BU::DechoLime              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_LIME"        || return 1; return 0; }
-function BU::DechoMaroon            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_MAROON"      || return 1; return 0; }
-function BU::DechoNavy              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_NAVY"        || return 1; return 0; }
-function BU::DechoOlive             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_OLIVE"       || return 1; return 0; }
-function BU::DechoOrange            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_ORANGE"      || return 1; return 0; }
-function BU::DechoPink              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PINK"        || return 1; return 0; }
-function BU::DechoPurple            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PURPLE"      || return 1; return 0; }
-function BU::DechoRed               { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_RED"         || return 1; return 0; }
-function BU::DechoSalmon            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SALMON"      || return 1; return 0; }
-function BU::DechoSilver            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SILVER"      || return 1; return 0; }
-function BU::DechoTan               { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TAN"         || return 1; return 0; }
-function BU::DechoTeal              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TEAL"        || return 1; return 0; }
-function BU::DechoTurquoise         { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TURQUOISE"   || return 1; return 0; }
-function BU::DechoViolet            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_VIOLET"      || return 1; return 0; }
-function BU::DechoWhite             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_WHITE"       || return 1; return 0; }
-function BU::DechoYellow            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      || return 1; return 0; }
+function BU::DechoAqua              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_AQUA"        "$2"    || return 1; return 0; }
+function BU::DechoBlack             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLACK"       "$2"    || return 1; return 0; }
+function BU::DechoBlue              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLUE"        "$2"    || return 1; return 0; }
+function BU::DechoCyan              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_CYAN"        "$2"    || return 1; return 0; }
+function BU::DechoFuschia           { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_FUSCHIA"     "$2"    || return 1; return 0; }
+function BU::DechoGray              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GRAY"        "$2"    || return 1; return 0; }
+function BU::DechoGreen             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GREEN"       "$2"    || return 1; return 0; }
+function BU::DechoLime              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_LIME"        "$2"    || return 1; return 0; }
+function BU::DechoMaroon            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_MAROON"      "$2"    || return 1; return 0; }
+function BU::DechoNavy              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_NAVY"        "$2"    || return 1; return 0; }
+function BU::DechoOlive             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_OLIVE"       "$2"    || return 1; return 0; }
+function BU::DechoOrange            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_ORANGE"      "$2"    || return 1; return 0; }
+function BU::DechoPink              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PINK"        "$2"    || return 1; return 0; }
+function BU::DechoPurple            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PURPLE"      "$2"    || return 1; return 0; }
+function BU::DechoRed               { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_RED"         "$2"    || return 1; return 0; }
+function BU::DechoSalmon            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SALMON"      "$2"    || return 1; return 0; }
+function BU::DechoSilver            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SILVER"      "$2"    || return 1; return 0; }
+function BU::DechoTan               { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TAN"         "$2"    || return 1; return 0; }
+function BU::DechoTeal              { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TEAL"        "$2"    || return 1; return 0; }
+function BU::DechoTurquoise         { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TURQUOISE"   "$2"    || return 1; return 0; }
+function BU::DechoViolet            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_VIOLET"      "$2"    || return 1; return 0; }
+function BU::DechoWhite             { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_WHITE"       "$2"    || return 1; return 0; }
+function BU::DechoYellow            { BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      "$2"    || return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with specific text display colors.
 function BU::DechoHighlight         { BU::Decho             "$1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT"   || return 1; return 0; }
