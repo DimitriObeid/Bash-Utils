@@ -311,7 +311,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			if [ -n "$p_var_val" ]; then
 			
 				if [ "${p_var_type,,}" = 'cmd' ]; then
-					BU::ModuleInit::Msg "Value : The « $p_var_name global » variable's value is a command substition";
+					BU::ModuleInit::Msg "Value : The « $p_var_name » global variable's value is a command substition";
 				else
 					BU::ModuleInit::Msg "Value --> $p_var_val";
 				fi
