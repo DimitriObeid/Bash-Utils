@@ -53,8 +53,10 @@ function BU::__Decho { local v_oldColor=$1; tput setaf "$v_oldColor" && BU::IsIn
 function BU::Decho()
 {
     #**** Parameters ****
-    local p_string=$1;
-    local p_newColor=$2;
+    local p_string=$1;          # String to display
+    local p_newTextColor=$2;    # Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Color to apply in the text's background.
+
     shift 2;
 
     local pa_fmtArgs;
@@ -75,15 +77,15 @@ function BU::Decho()
             v_oldColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")"
     fi
 
-    if [ "$p_newColor" = "$v_oldColor" ]; then
+    if [ "$p_newTextColor" = "$v_oldColor" ]; then
 
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
-		p_newColor="$(( p_newColor+38 ))"
-		tput setaf "$p_newColor"
+		p_newTextColor="$(( p_newTextColor+38 ))"
+		tput setaf "$p_newTextColor"
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then # || [ -z "${pa_fmtArgs[@]}" ]; then
-        echo -e "$p_newColor$p_string$v_oldColor"; return 0;
+        echo -e "$p_newTextColor$p_string$v_oldColor"; return 0;
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -137,7 +139,7 @@ function BU::Decho()
             esac
         done
 
-        echo -e "$p_string$p_newColor$__BU_MAIN_COLOR_TXT_RESET"
+        echo -e "$p_string$p_newTextColor$__BU_MAIN_COLOR_TXT_RESET"
 
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
