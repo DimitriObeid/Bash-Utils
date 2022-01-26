@@ -219,7 +219,7 @@ function BU::Main::Files::Make()
 function BU::Main::Files::CreateFileInMemory()
 {
     #**** Parameters ****
-    p_filename=$1;
+#    p_filename=$1;
 
     #**** Code ****
 

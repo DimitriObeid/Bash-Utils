@@ -134,7 +134,7 @@ function BU::HeaderBase()
 	#**** Variables ****
     local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; # Setting the text display time global status variable to 0 seconds, because the header's pause time is already set.
 
-    if [ -n "$p_strlen" ]; then local v_strlen="${#p_stringTxt}"; fi
+    if [ "$p_strlen" = 'strlen' ]; then local v_strlen="${#p_stringTxt}"; fi
 
 	#**** Code ****
 	__BU_MAIN_STAT_TIME_HEADER="0";
@@ -194,6 +194,12 @@ function BU::HeaderBase()
 # -----------------------------------------------
 
 ## UNICOLOR HEADERS
+
+# Positional parameters :
+#   $1  --> String to display
+#   $2  --> "strlen" value for the "$BU::HeaderBase()" function's "$p_strlen" argument.
+#   $3  --> "$p_bgColorCol"
+#   $4  --> "$p_bgColorPos"
 
 # Header to display without color.
 function BU::Header         { BU::HeaderBase "$__BU_MAIN_COLOR_TXT_RESET"    "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_RESET"      "$1" "$2" || return 1; return 0; } 

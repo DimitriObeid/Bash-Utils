@@ -59,7 +59,7 @@ function BU::Main::PosixTerm::DisplaySpinner()
 {
     #**** Parameters ****
     p_string=$1
-    p_countdown=$2
+#    p_countdown=$2
     p_pid=$3
 
     #**** Variables ****
