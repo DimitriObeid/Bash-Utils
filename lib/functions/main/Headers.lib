@@ -133,7 +133,7 @@ function BU::HeaderBase()
 	local p_bgColorPos=$7      # Defining the background color's position (first line, text or second line, or a mix ?).
 
 	#**** Variables ****
-    local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; # Setting the text display time global status variable to 0 seconds, because the header's pause time is already set.
+    local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER";     # Setting the header display time's global status variable to 0 seconds, because the header's pause time is already set.
 
     if [ "$p_strlen" = 'strlen' ]; then local v_strlen="${#p_stringTxt}"; fi
 
