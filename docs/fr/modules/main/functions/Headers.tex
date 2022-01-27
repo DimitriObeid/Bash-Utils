@@ -176,9 +176,13 @@
 \textbf{Paramètres :}\\[1\baselineskip]
 \begin{tabular}{|l|l|}
 \hline
-\textbf{\color{orange}p\_lineColor} & Ce paramètre attend un code couleur * \\
+\textbf{Paramètre} & \textbf{Type} \\
 \hline
-\textbf{\color{orange}p\_lineChar} & Ce paramètre attend un seul caractère, qui sera affiché sur chaque colonne \\
+\textbf{\color{orange}p\_lineChar} & Caractère\\
+\hline
+\textbf{\color{orange}p\_lineColor} & Substitution de commande\\
+\hline
+\textbf{\color{orange}p\_strlen} & Nombre entier\\
 \hline
 \end{tabular}
 
@@ -193,7 +197,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette fonction vérifie ensuite qu'une valeur soit passée en premier argument (paramètre \textbf{\color{orange}p\_lineColor}). Si c'est le cas, la commande \textbf{\color{gray}echo} est appelée avec ses options \textbf{\color{gray}-ne} pour encoder la couleur de la ligne de caractère à dessiner.
+    Ensuite, la fonction actuelle exécute la substitution de commande passée en second argument (paramètre \textbf{\color{orange}p\_lineColor}), qui \textbf{DOIT} appeler la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor}. Une fois la commande exécutée, la commande \textbf{\color{gray}echo} est appelée avec ses options \textbf{\color{gray}-ne} pour encoder la couleur de la ligne de caractère à dessiner.
 \end{justify}
 
 \begin{justify}
@@ -240,7 +244,9 @@ configurations \textbf{\color{lime}Text.conf}.
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
-    Tout d'abord, la fonction \textbf{\color{mauve}BU::HeaderBase} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, puis en adaptant la commande d'affichage de texte à appeler, cette fonction appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments ses deux premiers paramètres.
+    Tout d'abord, la fonction \textbf{\color{mauve}BU::HeaderBase} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, puis en adaptant la commande d'affichage de texte à appeler.\\[1\baselineskip]
+
+    Ensuite, elle appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments ses deux premiers paramètres.
 \end{justify}
 
 \begin{justify}

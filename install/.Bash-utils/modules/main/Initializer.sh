@@ -361,3 +361,5 @@ fi
 # -----------------------------------------------
 
 ## END OF THE "MAIN" MODULE INITIALIZATION PROCESS
+
+__BU_MAIN_STAT_ECHO='true'
