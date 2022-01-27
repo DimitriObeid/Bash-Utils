@@ -1093,7 +1093,7 @@ if [ "${SHELL##*/}" != 'bash' ]; then
     echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le « ${SHELL##*/} »" >&2;
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-    echo >&2; exit 1;
+    exit 1;
 fi
 
 # -----------------------------------------------
