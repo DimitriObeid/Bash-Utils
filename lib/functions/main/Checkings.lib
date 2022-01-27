@@ -368,9 +368,9 @@ function BU::CheckProjectLogStatus()
         };
     fi
 
-    CheckSTAT_LOG           "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
-    CheckSTAT_LOG_REDIRECT  "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
-    CheckSTAT_TIME_TXT      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+    BU::Main::Status::CheckSTAT_LOG             "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+    BU::Main::Status::CheckSTAT_TIME_TXT        "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ]; then

@@ -538,6 +538,9 @@ function BU::ModuleInit::PrintLog()
 
     echo "DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND" >> "$v_tmp_file";
     echo >> "$v_tmp_file";
+    
+    echo "Don't press the « Q » button, or else you will close this  and you will have to execute again the script" >> "$v_tmp_file"
+    echo >> "$v_tmp_file";
     echo >> "$v_tmp_file";
 
     for value in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do

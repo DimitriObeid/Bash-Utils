@@ -144,9 +144,9 @@ function BU::HeaderBase()
 
         # If no value is passed via the background color's position's parameter.
         if [ -z "$p_bgColorPos" ]; then
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" '' "nodate"
             BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" '' "nodate"
 
         # Else, if a value is passed via the background color's position's parameter.
         else
@@ -155,15 +155,15 @@ function BU::HeaderBase()
             if BU::IsIntPos "$p_bgColorPos"; then
 
                 if [[ "$p_bgColorPos" == *'1'* ]]; then
-                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate")"; fi
+                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "nodate")" "$p_stringColor" "$p_bgColorCol"; fi
 
                 if [[ "$p_bgColorPos" == *'2'* ]]; then
-                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")"; fi
+                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol"; fi
 
                 if [[ "$p_bgColorPos" == *'3'* ]]; then
-                    BU::DechoBGColor "$(BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "$p_strlen" "nodate")"; fi
+                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" "nodate")" "$p_stringColor" "$p_bgColorCol"; fi
 
-                if [[ "$p_bgColorPos" > ]]; then
+                if ! grep -Eq '[1-3]{3}' <<< "$p_bgColorPos"; then
                     HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R'; fi
             else
                 HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
