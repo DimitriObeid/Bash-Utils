@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-ps -p "$$" | grep "bash"
-
 # shellcheck disable=SC1090
 if ! source "$HOME/Bash-utils-init.sh"; then
     echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1
