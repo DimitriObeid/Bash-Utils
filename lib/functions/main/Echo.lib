@@ -85,15 +85,15 @@ function BU::Main::Echo::__EchoOutput()
             __BU::EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
@@ -105,15 +105,15 @@ function BU::Main::Echo::__EchoOutput()
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' ''; return 1; }
+                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
             fi
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
