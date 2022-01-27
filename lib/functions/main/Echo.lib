@@ -130,10 +130,13 @@ function BU::Main::Echo::__EchoOutput()
 function BU::Main::Echo::__EchoCPLS()
 {
     #**** Parameters ****
-    p_string=$1
-    p_option=$2
+    local p_string=$1
+    local p_option=$2
 
     shift 2; pa_extraArgs=("$@")
+
+	#**** Variables ****
+	local v_
 
     #**** Code ****
     for val in "${pa_extraArgs[@]}"; do
@@ -190,7 +193,9 @@ function BU::Main::Echo::__EchoCPLS()
             esac
         fi
 
-        sleep "$__BU_MAIN_STAT_TIME_TXT";
+		if [ "$__BU_MAIN_STAT_TIME_HEADER" > 0 ]; then sleep "0"; fi
+		if [ "$__BU_MAIN_STAT_TIME_NEWLINE" > 0 ]; then sleep "0"; fi
+		if [ "__BU_MAIN_STAT_TIME_TXT" > 0 ]; then sleep "2"; fi
     done
 
     return 0;

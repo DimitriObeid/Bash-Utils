@@ -378,10 +378,13 @@ function BU::CheckProjectLogStatus()
         # If messages must be redirected in the log file only ("$__BU_MAIN_STAT_LOG_REDIRECT" value is equal to "log").
         if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
         
-            # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is displayed on the screen.
+            # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
             local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU::Main:Status::ChangeSTAT_TIME_HEADER "0";
 
-            # Setting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to 0 seconds, since no text is displayed on the screen.
+			# Setting the "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable's value to 0 seconds, since no text is being displayed on the screen.
+			local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU::Main::Status::ChangeSTAT_TIME_NEWLINE "0";
+
+            # Setting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to 0 seconds, since no text is being displayed on the screen.
             local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU::Main:Status::ChangeSTAT_TIME_TXT "0";
 
             for val in "${pa_extraArgs[@]}"; do
@@ -460,6 +463,9 @@ function BU::CheckProjectLogStatus()
 
 			# Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
 			BU::Main:Status::ChangeSTAT_TIME_HEADER  "$v_stat_time_header";
+
+			# Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
+			BU::Main::Status::ChangeSTAT_TIME_NEWLINE "$v_stat_time_newline";
 
 			# Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
 			BU::Main:Status::ChangeSTAT_TIME_TXT     "$v_stat_time_txt";
