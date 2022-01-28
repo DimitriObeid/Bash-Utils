@@ -1,18 +1,19 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{inputenc}     % Encodage du texte.
+\usepackage[utf8]{inputenc}     % Encodage du texte (caractères accentués).
 \usepackage[french]{babel}      % Langue du document.
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}					%
-\usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
-\usepackage{verbatim}						% Mise en page de paragraphes.
-\usepackage{fancyhdr}						%
+\usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur).
+\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+
+\usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
+\usepackage{verbatim}						% Mise en page des paragraphes.
+
 \usepackage[document]{ragged2e}								% Justification du texte.
-\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.					%
-\usepackage{hyperref}
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-
-\fontfamily{}
+\fontfamily{Roboto}
 
 \pagecolor{black}
 \title{\color{red}Fonctions du fichier de librairie \color{lime}Errors.lib}\color{white}
@@ -29,6 +30,7 @@
   /Keywords ()
 }
 
+% Définition de couleurs.
 \definecolor{mauve}{RGB}{128, 0, 128}
 
 \begin{document}

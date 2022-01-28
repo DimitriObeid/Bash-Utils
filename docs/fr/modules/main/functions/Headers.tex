@@ -1,17 +1,20 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{inputenc}     % Encodage du texte.
+\usepackage[utf8]{inputenc}     % Encodage du texte (caractères accentués).
 \usepackage[french]{babel}      % Langue du document.
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}					%
-\usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
-\usepackage{verbatim}						% Mise en page de paragraphes.
-\usepackage{fancyhdr}						%
+\usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur).
+
+\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+
+\usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
+\usepackage{verbatim}						% Mise en page des paragraphes.
+
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
-\usepackage{hyperref}                                       % Table des matières cliquable.
 
-\fontfamily{}
+\fontfamily{Roboto}
 
 \pagecolor{black}
 \title{\color{red}Fonctions du fichier de librairie \color{lime}Headers.lib}\color{white}
@@ -28,8 +31,9 @@
   /Keywords ()
 }
 
-% Definition de couleurs
+% Definition de couleurs.
 \definecolor{mauve}{RGB}{128, 0, 128}
+\definecolor{brick}{HTML}{be480a}
 
 \begin{document}
  \maketitle
@@ -166,12 +170,16 @@
 \color{blue}
 \subsubsection{BU::Main::Headers::DrawLine}\color{white}
 
-\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\[1\baselineskip]
+\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Description :}\\
     Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec un caractère choisi et passé en second argument.
 \end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \textbf{Paramètres :}\\[1\baselineskip]
 \begin{tabular}{|l|l|}
@@ -184,50 +192,96 @@
 \hline
 \textbf{\color{orange}p\_strlen} & Nombre entier\\
 \hline
-\end{tabular}
+\textbf{\color{orange}p\_bgColor} & Substitution de commande\\
+\hline
+\end{tabular}\\[1\baselineskip]
 
-
-\begin{justify}
-    * Chaque code couleur est défini dans le fichier \textbf{\color{lime}Colors.conf}.
-\end{justify}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
-    La fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}\$p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
+    La fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
 \end{justify}
 
 \begin{justify}
-    Ensuite, la fonction actuelle exécute la substitution de commande passée en second argument (paramètre \textbf{\color{orange}p\_lineColor}), qui \textbf{DOIT} appeler la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor}. Une fois la commande exécutée, la commande \textbf{\color{gray}echo} est appelée avec ses options \textbf{\color{gray}-ne} pour encoder la couleur de la ligne de caractère à dessiner.
+    \textbf{\color{brick}Si} une substitution de commande est passée au paramètre \textbf{\color{orange}p\_lineColor}, \textbf{\color{brick}alors} la fonction actuelle l'exécute. Cette substitution \textbf{DOIT} être un appel de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor}.
 \end{justify}
 
 \begin{justify}
-    Une fois ceci fait, une boucle \textbf{for} est exécutée. Pour un nombre \textbf{i} allant de 1 au nombre de colonnes présentes dans la fenêtre du terminal obtenu grâce à la commande \textbf{\color{gray}eval echo}, on affiche \textbf{i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}) dans le fichier de
-configurations \textbf{\color{lime}Text.conf}.
+    Une fois la commande exécutée pendant la comparaison, la commande \textbf{\color{gray}echo} est appelée avec ses options \textbf{\color{gray}-ne} pour encoder la couleur de la ligne de caractère à dessiner.
 \end{justify}
 
 \begin{justify}
-    Enfin, une fois la boucle exécutée, la fonction ré-encode la couleur d'affichage selon la couleur par défaut du terminal, si le paramètre \textbf{\color{orange}\$p\_lineColor} contient une valeur.
+    \textbf{\color{brick}Fin de la condition.}\\
 \end{justify}
+
+
+\begin{justify}
+    Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{brick}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{orange}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor}.
+\end{justify}
+
+\begin{justify}
+    Une fois les deux condition précédentes vérifiées, la fonction vérifie si une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, pour créer une ligne d'une longueur définie.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Si} une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors},
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Si} cette valeur est un nombre entier, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour afficher \textbf{n} caractères selon la longueur du mode texte.
+\end{justify}
+
+\begin{justify}
+     \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre enregistré dans le paramètre \textbf{\color{orange}p\_strlen}, on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}). \textbf{\color{cyan}Fin de la boucle « pour »}.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}. \textbf{\color{brick}Fin de la condition}.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour .
+\end{justify}
+
+\begin{justify}
+     \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre de colonnes présentes dans le mode texte du terminal (nombre obtenu grâce à la commande \textbf{\color{gray}eval echo}), on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}). \textbf{\color{cyan}Fin de la boucle « pour »}.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Fin de la condition}.
+\end{justify}
+
+\begin{justify}
+    Enfin, une fois l'une des deux boucles exécutée, \textbf{\color{brick}si} les paramètres \textbf{\color{orange}\$p\_lineColor} \textbf{\color{brick}OU} \textbf{\color{orange}\$p\_bgColor} contiennent une valeur, \textbf{\color{brick}alors} la fonction ré-encode la couleur d'affichage du texte \textbf{ET} du fond selon la couleur par défaut du terminal. \textbf{\color{brick}Fin de la condition}.
+\end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}\\
-    Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal.\\
+    Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal.
 \end{justify}
 
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
 \subsubsection{BU::HeaderBase}\color{white}
 
-\textbf{Fonction : \color{mauve}BU::HeaderBase}\\[1\baselineskip]
+\textbf{Fonction : \color{mauve}BU::HeaderBase}\\
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Description :}\\
     Cette fonction affiche un header complet, avec ses deux lignes entourant une chaîne de caractères.
 \end{justify}
+
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \textbf{Paramètres :}\\[1\baselineskip]
 \begin{tabular}{|l|l|}
@@ -241,6 +295,17 @@ configurations \textbf{\color{lime}Text.conf}.
 \textbf{\color{orange}p\_stringTxt} & Ce paramètre attend une chaîne de caractères\\ 
 \hline 
 \end{tabular}\\[1\baselineskip]
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\textbf{Variables :}\\[1\baselineskip]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{\color{orange}p\_lineColor} & Ce paramètre attend un code couleur \\ 
+\hline
+\end{tabular}
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Fonctionnement :}\\
@@ -260,6 +325,8 @@ configurations \textbf{\color{lime}Text.conf}.
 \begin{justify}
     Appelez cette fonction pour afficher un texte entre deux lignes, et pour davantage personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sections suivantes : \textbf{\color{green}Headers unicolores} et \textbf{\color{green}Headers multicolores}.
 \end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}\\
@@ -281,15 +348,21 @@ configurations \textbf{\color{lime}Text.conf}.
     Chacune de ces fonctions appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant ses trois premiers arguments prédéfinis.
 \end{justify}
 
+\par\noindent\rule{\textwidth}{0.4pt}
+
 \begin{justify}
     \textbf{Paramètre :}\\
     \textbf{\color{orange}\$1} --> Ce paramètre attend la chaîne de caractère à afficher.
 \end{justify}
 
+\par\noindent\rule{\textwidth}{0.4pt}
+
 \begin{justify}
     \textbf{Fonctionnement :}\\
     Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).
 \end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}\\
@@ -307,9 +380,10 @@ configurations \textbf{\color{lime}Text.conf}.
 \subsection{Headers bicolores}\color{white}
 
 \begin{justify}
-    \textbf{Note :} En raison du trop grand nombre de fonctions à déclarer, plus aucune nouvelle couleur ne sera ajoutée parmi les 23 couleurs actuelles.
+    \textbf{Note :} En raison du trop grand nombre de fonctions à déclarer, plus aucune nouvelle couleur ne sera ajoutée parmi les 23 couleurs actuelles (qui représentent en tout plus de 500 fonctions déclarées rien que dans ce fichier de librairie).
 \end{justify}
 
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     Pour davantage faciliter la tâche des développeurs, des fonctions de création de headers bicolores existent.

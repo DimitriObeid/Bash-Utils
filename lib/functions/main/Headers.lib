@@ -50,11 +50,11 @@ function BU::Main::Headers::DrawLine()
 	local p_lineColor=$2   # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
 	local p_strlen=$3      # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
 	local p_bgColor=$4     # Setting a background color behind the line.
-	
+
 	#**** Code ****
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! BU::IsAlphaNumChar "$p_lineChar"; then
-        p_lineChar="${p_lineChar:0:1}"
+        p_lineChar="${p_lineChar:0:1}";
 	fi
 	
     # Defining the color of the wished character for the whole line before displaying the first character.
@@ -71,7 +71,11 @@ function BU::Main::Headers::DrawLine()
     
 	# Since all the columns in the row are used, the following characters will be written in the row, as if a line break has been made.
 	if test "$p_lineColor" != ""; then
-		echo -ne "$p_lineColor"
+		echo -ne "$p_lineColor";
+	fi
+
+	if test "$p_bgColor" != ""; then
+        echo -ne "$p_bgColor";
 	fi
 
     # Displaying the desired character on the whole line. To do this, using a "for" loop, we start reading it from
@@ -106,7 +110,7 @@ function BU::Main::Headers::DrawLine()
 	# Cette réinitialisation de la couleur du texte n'est qu'une mini-sécurité permettant d'éviter d'avoir la couleur de l'invite de
 	# commandes encodée avec la couleur des headers si l'exécution du script est interrompue de force avec la combinaison "CTRL + C"
 	# ou mise en pause avec la combinaison "CTRL + Z", par exemple.
-	if test "$p_lineColor" != ""; then
+	if test "$p_lineColor" != "" || test "$p_bgColor" != ""; then
         echo -ne "$__BU_MAIN_COLOR_TXT_RESET"
 	fi
 
@@ -145,9 +149,9 @@ function BU::HeaderBase()
 
         # If no value is passed via the background color's position's parameter.
         if [ -z "$p_bgColorPos" ]; then
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" '' "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate"
             BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen")" '' "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate"
 
         # Else, if a value is passed via the background color's position's parameter.
         else
