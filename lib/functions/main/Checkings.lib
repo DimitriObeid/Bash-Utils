@@ -737,8 +737,9 @@ function BU::Main::Checkings::CheckTextFormat()
     if [ "$__BU_MAIN_STAT_TXT_FMT" = "true" ]; then
         if [ -n "$1" ]; then
 			if command -v "tput" &> /dev/null; then
+
 				# Formatting text with the tput command or directly with the backslash escapes.
-				tput "$1" || echo -ne "\e[$2m";
+				tput "$1" || echo -ne "\e[$2m";	# If the "tput" command fails, then the text is encoded with ANSI control sequences.
 
 				return 0;
 			else
