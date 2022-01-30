@@ -7,6 +7,7 @@
 
 \usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}
 
 \usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
 \usepackage{verbatim}						% Mise en page des paragraphes.
@@ -34,6 +35,9 @@
 % Definition de couleurs.
 \definecolor{mauve}{RGB}{128, 0, 128}
 \definecolor{brick}{HTML}{be480a}
+
+% Mise en page des paragraphes.
+\setlength{\parskip}{1em}
 
 \begin{document}
  \maketitle
@@ -118,10 +122,26 @@
 \color{blue}
 \subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
+\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_BG\_...}\\[1\baselineskip]
 
 \begin{justify}
-    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
+    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
+\end{justify}
+
+\textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
+
+
+% -----------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{blue}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
+
+\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_TXT\_...}\\[1\baselineskip]
+
+\begin{justify}
+    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
@@ -170,37 +190,40 @@
 \color{blue}
 \subsubsection{BU::Main::Headers::DrawLine}\color{white}
 
-\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\
+\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\setlength{\parskip}{1em}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}\\
+    \textbf{Description :}\\[1\baselineskip]
     Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec un caractère choisi et passé en second argument.
+\end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}\\
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Paramètre} & \textbf{Type}\\
+        \hline
+        \textbf{\color{orange}p\_lineChar} & Caractère\\
+        \hline
+        \textbf{\color{orange}p\_lineColor} & Substitution de commande\\
+        \hline
+        \textbf{\color{orange}p\_strlen} & Nombre entier\\
+        \hline
+        \textbf{\color{orange}p\_bgColor} & Substitution de commande\\
+        \hline
+    \end{tabular}
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{Paramètres :}\\[1\baselineskip]
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Paramètre} & \textbf{Type} \\
-\hline
-\textbf{\color{orange}p\_lineChar} & Caractère\\
-\hline
-\textbf{\color{orange}p\_lineColor} & Substitution de commande\\
-\hline
-\textbf{\color{orange}p\_strlen} & Nombre entier\\
-\hline
-\textbf{\color{orange}p\_bgColor} & Substitution de commande\\
-\hline
-\end{tabular}\\[1\baselineskip]
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
 \begin{justify}
-    \textbf{Fonctionnement :}\\
-    La fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} vérifie d'abord que la valeur du second paramètre \textbf{\color{orange}p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
+    \textbf{Fonctionnement :}\\[1\baselineskip]
+    La fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} vérifie tout d'abord que la valeur du second paramètre \textbf{\color{orange}p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{mauve}IsChar}, définie dans le fichier \textbf{\color{lime}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
 \end{justify}
 
 \begin{justify}
@@ -212,55 +235,84 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{brick}Fin de la condition.}\\
-\end{justify}
+    \textbf{\color{brick}Fin de la condition.}
+\end{justify}\setlength{\parskip}{2em}
 
 
 \begin{justify}
     Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{brick}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{orange}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor}.
-\end{justify}
+\end{justify}\setlength{\parskip}{1em}
 
 \begin{justify}
     Une fois les deux condition précédentes vérifiées, la fonction vérifie si une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, pour créer une ligne d'une longueur définie.
-\end{justify}
+\end{justify}\setlength{\parskip}{2em}
 
 \begin{justify}
-    \textbf{\color{brick}Si} une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors},
-\end{justify}
+    \textbf{\color{brick}Si} une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors} :\par
+\end{justify}\setlength{\parskip}{1em}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{brick}Si} cette valeur est un nombre entier, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour afficher \textbf{n} caractères selon le nombre de colonnes défini via ce paramètre.\setlength{\parskip}{2em}
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}
+                    \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre enregistré dans le paramètre \textbf{\color{orange}p\_strlen}, on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}).
+                \end{justify}\setlength{\parskip}{1em}
+
+                \begin{justify}
+                    \textbf{\color{cyan}Fin de la boucle « pour »}.
+                \end{justify}
+            }
+        \end{itemize}
+
+        \begin{justify}
+            \textbf{\color{brick}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}.
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{justify}
+            \textbf{\color{brick}Fin de la condition}.
+        \end{justify}\setlength{\parskip}{1em}
+    }
+\end{itemize}
+
 
 \begin{justify}
-    \textbf{\color{brick}Si} cette valeur est un nombre entier, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour afficher \textbf{n} caractères selon la longueur du mode texte.
-\end{justify}
+    \textbf{\color{brick}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour afficher \textbf{n} caractères selon la longueur du mode texte.
+\end{justify}\setlength{\parskip}{1em}
 
-\begin{justify}
-     \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre enregistré dans le paramètre \textbf{\color{orange}p\_strlen}, on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}). \textbf{\color{cyan}Fin de la boucle « pour »}.
-\end{justify}
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre de colonnes présentes dans le mode texte du terminal (nombre obtenu grâce à la commande \textbf{\color{gray}eval echo}), on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}).
+        \end{justify}\setlength{\parskip}{1em}
 
-\begin{justify}
-    \textbf{\color{brick}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}. \textbf{\color{brick}Fin de la condition}.
-\end{justify}
-
-\begin{justify}
-    \textbf{\color{brick}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour .
-\end{justify}
-
-\begin{justify}
-     \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} allant de \textbf{\color{cyan}1} au nombre de colonnes présentes dans le mode texte du terminal (nombre obtenu grâce à la commande \textbf{\color{gray}eval echo}), on affiche \textbf{\color{orange}i} fois, sans retour à la ligne, le caractère passé en deuxième argument (\textbf{\color{orange}\$p\_lineChar}). \textbf{\color{cyan}Fin de la boucle « pour »}.
-\end{justify}
+        \begin{justify}
+            \textbf{\color{cyan}Fin de la boucle « pour »}.
+        \end{justify}
+    }
+\end{itemize}
 
 \begin{justify}
     \textbf{\color{brick}Fin de la condition}.
-\end{justify}
+\end{justify}\setlength{\parskip}{2em}
+
 
 \begin{justify}
-    Enfin, une fois l'une des deux boucles exécutée, \textbf{\color{brick}si} les paramètres \textbf{\color{orange}\$p\_lineColor} \textbf{\color{brick}OU} \textbf{\color{orange}\$p\_bgColor} contiennent une valeur, \textbf{\color{brick}alors} la fonction ré-encode la couleur d'affichage du texte \textbf{ET} du fond selon la couleur par défaut du terminal. \textbf{\color{brick}Fin de la condition}.
-\end{justify}
+    Enfin, une fois l'une des deux boucles exécutée, \textbf{\color{brick}si} les paramètres \textbf{\color{orange}p\_lineColor} \textbf{\color{brick}OU} \textbf{\color{orange}p\_bgColor} contiennent une valeur, \textbf{\color{brick}alors} la fonction ré-encode la couleur d'affichage du texte \textbf{ET} celle de coloration du fond, selon la couleur par défaut du terminal. \textbf{\color{brick}Fin de la condition}.
+\end{justify}\setlength{\parskip}{1em}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :}\\
-    Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal.
+    \textbf{Utilisation :}\\[1\baselineskip]
+    Appelez cette fonction pour dessiner une ligne devant remplir la totalité des colonnes d'une ligne du terminal \textbf{ou} une ligne au nombre de colonnes bien défini.
 \end{justify}
 
 
@@ -276,61 +328,148 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}\\
+    \textbf{Description :}\\[1\baselineskip]
     Cette fonction affiche un header complet, avec ses deux lignes entourant une chaîne de caractères.
 \end{justify}
 
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\textbf{Paramètres :}\\[1\baselineskip]
-\begin{tabular}{|l|l|}
-\hline 
-\textbf{\color{orange}p\_lineColor} & Ce paramètre attend un code couleur \\ 
-\hline 
-\textbf{\color{orange}p\_lineChar} & Ce paramètre attend un seul caractère \\ 
-\hline 
-\textbf{\color{orange}p\_stringColor} & Ce paramètre attend un code couleur \\ 
-\hline 
-\textbf{\color{orange}p\_stringTxt} & Ce paramètre attend une chaîne de caractères\\ 
-\hline 
-\end{tabular}\\[1\baselineskip]
+\begin{justify}
+    \textbf{Paramètres :}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{orange}p\_lineColor} & Substitution de commande\\ 
+        \hline
+        \textbf{\color{orange}p\_lineChar} & Caractère\\ 
+        \hline
+        \textbf{\color{orange}p\_stringColor} & Substitution de commande\\ 
+        \hline
+        \textbf{\color{orange}p\_stringTxt} & Chaîne de caractères\\ 
+        \hline
+        \textbf{\color{orange}p\_strlen} & Chaîne de caractères « strlen »\\
+        \hline
+        \textbf{\color{orange}p\_bgColorCol} & Substitution de commande\\
+        \hline
+        \textbf{\color{orange}p\_bgColorPos} & Nombre entier « 1 », « 2 » et / ou « 3 »\\
+        \hline
+    \end{tabular}
+\end{justify}
 
-\textbf{Variables :}\\[1\baselineskip]
-\begin{tabular}{|l|l|}
-\hline
-\textbf{\color{orange}p\_lineColor} & Ce paramètre attend un code couleur \\ 
-\hline
-\end{tabular}
+\par\noindent\rule{\textwidth}{0.4pt}\\
+
+\begin{justify}
+    \textbf{Variables :}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{orange}v\_stat\_time\_newline} & Nombre décimal\\
+        \hline
+        \textbf{\color{orange}v\_stat\_time\_txt} & Nombre décimal\\
+        \hline
+        \textbf{\color{orange}v\_strlen} & Nombre entier\\
+        \hline
+    \end{tabular}
+\end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Fonctionnement :}\\
-    Tout d'abord, la fonction \textbf{\color{mauve}BU::HeaderBase} vérifie l'état de la variable de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, puis en adaptant la commande d'affichage de texte à appeler.\\[1\baselineskip]
-
-    Ensuite, elle appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments ses deux premiers paramètres.
+    \textbf{Fonctionnement :}\\[1\baselineskip]
+    Tout d'abord, sachant que le paramètre \textbf{\color{orange}p\_strlen} attend précisément la chaîne de caractères \textbf{strlen}, la fonction se doit de récupérer la longueur de la chaîne de caractères principale précédemment passée en argument (paramètre \textbf{\color{orange}p\_stringTxt}).
 \end{justify}
 
 \begin{justify}
-    Une fois ceci fait, un saut de ligne est effectué, et un message est affiché, avec la couleur choisie encodée en premier (troisième paramètre) et le texte passé en quatrième argument.
+    Il en est ainsi pour éviter que l'utilisateur n'ait à retaper la même chaîne de caractères ou à définir une nouvelle variable pour afficher cette dernière, puis récupérer son nombre de caractères via un enchaînement de processus avec un tube (\textbf{\color{gray}echo \color{orange}"\$var" \color{white} | \color{gray}wc -c}) (méthode utilisée par la fonction actuelle) ou de cette manière : \textbf{\color{gray}echo \color{orange}``\$\{\#var\}''}.
+\end{justify}\setlength{\parskip}{2em}
+
+
+\begin{justify}
+    Dans un soucis de temps de pause cohérent, la fonction \textbf{\color{mauve}BU::HeaderBase} change la valeur des variables globales de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} et \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}, mettant ainsi le temps de pause du script de ces variable à 0 secondes.\par
 \end{justify}
+
+\begin{justify}
+    Pour laisser le choix aux développeurs quant à la ligne à colorer (première ou deuxième ligne de caractères, ou la chaîne de caractères du milieu), le paramètre \textbf{\color{orange}p\_bgColorPos} accepte un nombre comprenant entre un et chiffres, correspondants à la ligne à colorer, et dont les valeurs acceptées sont \textbf{1}, \textbf{2} et / ou \textbf{3}.
+\end{justify}\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{brick}Si} aucune valeur n'est passée au paramètre \textbf{\color{orange}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{brick}alors} cette dernière appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments la valeur des paramètres et variables \textbf{\color{orange}p\_lineChar}, \textbf{\color{orange}p\_lineColor}, \textbf{\color{orange}v\_strlen} et \textbf{\color{orange}p\_bgColor} (ces deux derniers arguments seront traités par la fonction appelée s'ils contiennent une valeur).
+\end{justify}\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{brick}Sinon, si} une valeur est passée au paramètre \textbf{\color{orange}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{brick}alors} :\par
+\end{justify}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{brick}Si} un nombre entier positif est passé à ce même paramètre \textbf{ET} que ce nombre entier soit plus grand ou égal à 1 \textbf{ET} qu'il soit plus petit ou égal à 3, \textbf{\color{brick}alors} :
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}
+                    \textbf{\color{brick}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
+                \end{justify}\setlength{\parskip}{1em}
+                
+                \begin{justify}
+                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
+                \end{justify}\setlength{\parskip}{1em}
+
+                \begin{justify}
+                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{3}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour coloriee le fond de la zone de texte où la seconde ligne de caractères est affichée.
+                \end{justify}\setlength{\parskip}{1em}
+                
+                \begin{justify}
+                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres n'est pas égal à l'une des trois valeurs attendues, \textbf{\color{brick}Sinon, si} un message d'avertissement est affiché sur la zone de texte.
+                \end{justify}\setlength{\parskip}{1em}
+
+                \begin{justify}
+                    \textbf{\color{brick}Fin de la condition}.
+                \end{justify}
+            }
+        \end{itemize}
+
+        \item
+        {
+            \begin{justify}
+                \textbf{\color{brick}Sinon, si} un nombre entier positif est passé à ce paramètre \textbf{ET} que sa longueur est supérieure à trois chiffres, \textbf{\color{brick}alors} un message d'avertissement est affiché sur la zone de texte.
+            \end{justify}\setlength{\parskip}{1em}
+
+            \begin{justify}
+                \textbf{\color{brick}Sinon, si} aucune valeur n'est passée à ce paramètre, \textbf{\color{brick}alors} un message d'avertissement est affiché sur la zone de texte.
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{brick}Sinon, si} une valeur inattendue est passée à ce paramètre, \textbf{\color{brick}alors} un message d'avertissement est affiché sur la zone de texte.
+            \end{justify}
+            
+            \begin{justify}
+                \textbf{\color{brick}Fin de la condition}.
+            \end{justify}
+        }
+    }
+\end{itemize}
+
+\begin{justify}
+    \textbf{\color{brick}Fin de la condition}.
+\end{justify}\setlength{\parskip}{2em}
+
+
+\begin{justify}
+    Une fois le header (ou un message d'avertissement affiché), un saut de ligne est effectué, le script se met en pause pendant le nombre de secondes défini par la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
+\end{justify}\setlength{\parskip}{1em}
 
 \begin{justify}
     La commande de ré-initialisation de décoration du terminal (définie dans les fichiers \textbf{\color{lime}Colors.conf} et \textbf{\color{lime}Text.conf}) est ensuite appelée pour réinitialiser la couleur d'affichage de texte selon la configuration du terminal.
 \end{justify}
 
-\begin{justify}
-    Appelez cette fonction pour afficher un texte entre deux lignes, et pour davantage personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sections suivantes : \textbf{\color{green}Headers unicolores} et \textbf{\color{green}Headers multicolores}.
-\end{justify}
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :}\\
-    Appelez cette fonction pour marquer une séparation entre plusieurs étapes de votre script, tout en affichant un header dont vous pouvez personnaliser l'affichage des couleurs.
+    \textbf{Utilisation :}\\[1\baselineskip]
+    Appelez cette fonction pour afficher un texte entre deux lignes, pour marquer une séparation entre plusieurs étapes de votre script, et pour davantage personnaliser cet affichage si vous ne trouvez pas votre compte parmi les fonctions proposées dans les sous-sections suivantes : \textbf{\color{green}Headers unicolores} et \textbf{\color{green}Headers multicolores}.
 \end{justify}
 
 
@@ -393,7 +532,7 @@
     Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :
 
     \begin{itemize}
-        \item \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\\
+        \item \textbf{le nom :} chaque fonction porte le nom de la couleur à afficher sur chaque ligne, puis le nom de la couleur à appliquer au texte.\setlength{\parskip}{1em}
 
         \item \textbf{le nom (bis) :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, car le rendu serait le même que celui des fonctions de la catégorie précédente.
     \end{itemize}

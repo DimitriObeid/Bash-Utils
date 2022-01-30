@@ -195,7 +195,7 @@ function BU::Main::Echo::__EchoCPLS()
 
 		if [ "$__BU_MAIN_STAT_TIME_HEADER" > 0 ]; then sleep "0"; fi
 		if [ "$__BU_MAIN_STAT_TIME_NEWLINE" > 0 ]; then sleep "0"; fi
-		if [ "__BU_MAIN_STAT_TIME_TXT" > 0 ]; then sleep "2"; fi
+		if [ "$__BU_MAIN_STAT_TIME_TXT" > 0 ]; then sleep "0"; fi
     done
 
     return 0;

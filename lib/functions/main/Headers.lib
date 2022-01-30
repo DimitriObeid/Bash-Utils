@@ -137,12 +137,14 @@ function BU::HeaderBase()
 	local p_bgColorPos=$7      # Defining the background color's position (first line, text or second line, or a mix ?).
 
 	#**** Variables ****
-    local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER";     # Setting the header display time's global status variable to 0 seconds, because the header's pause time is already set.
+    local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
+    local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT";           # Setting the normal text display time's global status variable to 0 seconds, because the header's pause time is already set.
 
-    if [ "$p_strlen" = 'strlen' ]; then local v_strlen="${#p_stringTxt}"; fi
+    if [ "$p_strlen" = 'strlen' ]; then local v_strlen="$(echo "$p_stringTxt" | wc -m)"; fi
 
 	#**** Code ****
-	__BU_MAIN_STAT_TIME_HEADER="0";
+	__BU_MAIN_STAT_TIME_NEWLINE="0";
+	__BU_MAIN_STAT_TIME_TXT="0";
 
 	# if [ "$__BU_MAIN_STAT_ECHO" = "false" ]; then
         BU::Newline;
@@ -157,19 +159,33 @@ function BU::HeaderBase()
         else
 
             # This value MUST be an integer.
-            if BU::IsIntPos "$p_bgColorPos"; then
+            if BU::IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
 
-                if [[ "$p_bgColorPos" == *'1'* ]]; then
-                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol"; fi
+                # Transforming the "$p_bgColorPos" variable in an array of integers.
+                read -ra int_array <<< "$p_bgColorPos";
 
-                if [[ "$p_bgColorPos" == *'2'* ]]; then
-                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol"; fi
+                for i in "${int_array[@]}"; do
 
-                if [[ "$p_bgColorPos" == *'3'* ]]; then
-                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol"; fi
+                    if [[ "$i" == *'1'* ]]; then
+                        BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
 
-                if ! grep -Eq '[1-3]{3}' <<< "$p_bgColorPos"; then
-                    HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R'; fi
+                    elif [[ "$i" == *'2'* ]]; then
+                        BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol"; fi
+
+                    elif [[ "$i" == *'3'* ]]; then
+                        BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol"; fi
+
+                    else
+                        HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R';
+                    fi
+                done
+
+            elif BU::IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
+                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is too big" 'R';
+
+            elif [ "${#p_bgColorPos}" -lt 1 ]; then
+                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is null" 'R';
+
             else
                 HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
             fi
@@ -177,7 +193,10 @@ function BU::HeaderBase()
 
         BU::Newline;
 
-        sleep "$__BU_MAIN_STAT_TIME_HEADER"; __BU_MAIN_STAT_TIME_HEADER="$v_stat_time_header";
+        sleep "$__BU_MAIN_STAT_TIME_HEADER";
+
+        __BU_MAIN_STAT_TIME_NEWLINE="$v_stat_time_newline";     # Resetting the new lines display time's global status variable to its original value.
+        __BU_MAIN_STAT_TIME_TXT="$v_stat_time_txt";             # Resetting the normal text display time's global status variable to its original value.
 
         return 0;
 
