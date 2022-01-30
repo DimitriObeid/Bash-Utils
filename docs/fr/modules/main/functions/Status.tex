@@ -4,8 +4,10 @@
 \usepackage[french]{babel}      % Langue du document.
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur).
+
 \usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}
 
 \usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
 \usepackage{verbatim}						% Mise en page des paragraphes.
@@ -13,7 +15,7 @@
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-\fontfamily{}
+\fontfamily{Roboto}
 
 \pagecolor{black}
 \title{\color{red}Fonctions du fichier de librairie \color{lime}Status.lib}\color{white}
@@ -30,9 +32,12 @@
   /Keywords ()
 }
 
-% Définition de couleurs
+% Definition de couleurs.
 \definecolor{mauve}{RGB}{128, 0, 128}
+\definecolor{brick}{HTML}{be480a}
 
+% Mise en page des paragraphes.
+\setlength{\parskip}{1em}
 
 \begin{document}
 \maketitle
@@ -171,7 +176,7 @@
 \subsubsection{\color{mauve}BU::Main::Status::ConfEcho}\color{white}
 
 \begin{justify}
-\textbf{Description de la fonction :}\\
+\textbf{Description de la fonction :}\\[1\baselineskip]
     Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.
 \end{justify}
 
@@ -179,31 +184,34 @@
    	Ce message est structuré de la manière suivante :
 
    	\begin{itemize}
-   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,\\
+   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,\setlength{\parskip}{1em}
 
-   		\item la valeur défectueuse enregistrée,\\
+   		\item la valeur défectueuse enregistrée,
 
    		\item la liste des valeurs autorisées.
    	\end{itemize}
 \end{justify}
 
+\par\noindent\rule{\textwidth}{0.4pt}
+
 \begin{justify}
-    \textbf{Paramètres :}
-
+    \textbf{Paramètres :}\\
     \begin{itemize}
-        \item \textbf{\color{orange}\$p\_file\color{white} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}.\\
+        \item \textbf{\color{orange}\$p\_file\color{white} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}.\setlength{\parskip}{1em}
 
-        \item \textbf{\color{orange}\$p\_lineno\color{white} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}).\\
+        \item \textbf{\color{orange}\$p\_lineno\color{white} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}).
 
-        \item \textbf{\color{orange}\$p\_bad\_value\color{white} :} La mauvaise valeur passée en argument\color{white}.\\
+        \item \textbf{\color{orange}\$p\_bad\_value\color{white} :} La mauvaise valeur passée en argument\color{white}.
 
-        \item \textbf{\color{orange}\$p\_var\_name\color{white} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{white}\\
-        
+        \item \textbf{\color{orange}\$p\_var\_name\color{white} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{white}
+
         \item \textbf{\color{orange}\$pa\_correctValues\color{white} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
     \end{itemize}
-\end{justify}
-    
-\begin{justify}
+\end{justify}\setlength{\parskip}{2em}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}\setlength{\parskip}{1em}
     \textbf{Variables :}
 
     \begin{itemize}
@@ -230,6 +238,42 @@
 \begin{justify}
     Cette section contient toutes les fonctions vérifiant que la variable de statut associée possède une valeur valide.
 \end{justify}
+
+\color{blue}
+\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_*}\color{white}
+
+\begin{justify}
+    \textbf{Description :}\\[1\baselineskip]
+    Chacune de ces fonctions vérifie que la valeur de la variable globale de statut en cours de traitement soit égale à une valeur attendue, sans quoi l'exécution du script s'arrête.
+\end{justify}\setlength{\parskip}{1em}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{} & \\
+        \hline
+        \textbf{} & \\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Variables :}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{} & \\
+        \hline
+        \textbf{} & \\
+        \hline
+    \end{tabular}
+\end{justify}
+
+
 
 \color{blue}
 \subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_DEBUG}\color{white}
