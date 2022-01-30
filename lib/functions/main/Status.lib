@@ -54,7 +54,7 @@ function BU::Main::Status::ConfEcho()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4;
-    local pa_correctValues=("$@");
+    local va_correctValues=("$@");
 
     #**** Variables ****
     local i=0;      # 
@@ -89,14 +89,14 @@ function BU::Main::Status::ConfEcho()
     echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_TXT_RESET}" >&2;
 
     # Displaying the list of every allowed arguments.
-    for val in "${pa_correctValues[@]}"; do
+    for val in "${va_correctValues[@]}"; do
         i=$(( i+1 ));
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_ORANGE}An empty argument.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#va_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_ORANGE}An empty argument.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
         else
-            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$val${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#va_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$val${__BU_MAIN_COLOR_TXT_RESET}" >&2;
         fi
     done
 
@@ -115,11 +115,11 @@ function BU::Main::Status::CheckSTAT_DEBUG()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("true" "false");
+    local va_correctValues=("true" "false");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MAIN_STAT_DEBUG,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -133,11 +133,11 @@ function BU::Main::Status::CheckSTAT_DECHO()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("authorize" "forbid" "restrict");
+    local va_correctValues=("authorize" "forbid" "restrict");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DECHO,,}" != "authorize" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "forbid" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "restrict" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -151,11 +151,11 @@ function BU::Main::Status::CheckSTAT_ECHO()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("true" "false");
+    local va_correctValues=("true" "false");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_ECHO,,}" != "true" ] && [ "${__BU_MAIN_STAT_ECHO,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -169,11 +169,11 @@ function BU::Main::Status::CheckSTAT_ERROR()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("" "fatal");
+    local va_correctValues=("" "fatal");
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -187,11 +187,11 @@ function BU::Main::Status::CheckSTAT_INITIALIZING()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("true" "false");
+    local va_correctValues=("true" "false");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "true" ] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${va_correctValues[@]}"; return 1;
 	fi
 
     return 0;
@@ -205,11 +205,11 @@ function BU::Main::Status::CheckSTAT_LOG()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("true" "false");
+    local va_correctValues=("true" "false");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${va_correctValues[@]}"; return 1;
 
     elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         BU::Main::Files::CreateProjectLogFile || return 1;
@@ -226,11 +226,11 @@ function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("" "log" "tee");
+    local va_correctValues=("" "log" "tee");
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -244,11 +244,11 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 	local p_lineno=$2;
 
 	#**** Variables ****
-	local pa_correctValues=("authorized" "forbidden" "restricted");
+	local va_correctValues=("authorized" "forbidden" "restricted");
 
 	#**** Code ****
 	if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "authorized" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "forbidden" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "restricted" ]; then
-		BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${pa_correctValues[@]}"; return 1;
+		BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${va_correctValues[@]}"; return 1;
 	fi
 
     return 0;
@@ -262,12 +262,12 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
+    local va_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
     if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -281,12 +281,12 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
+    local va_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
     if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -300,12 +300,12 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
     local p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("${__BU_MAIN_COLOR_TXT_ORANGE}An integer or a floating number");
+    local va_correctValues=("${__BU_MAIN_COLOR_TXT_ORANGE}An integer or a floating number");
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
     if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${pa_correctValues[@]}"; return 1;
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;
@@ -319,11 +319,11 @@ function BU::Main::Status::CheckSTAT_TXT_FMT()
     p_lineno=$2;
 
     #**** Variables ****
-    local pa_correctValues=("true" "false");
+    local va_correctValues=("true" "false");
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${pa_correctValues[@]}"; return 1;
+        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${va_correctValues[@]}"; return 1;
     fi
 
     return 0;

@@ -253,9 +253,9 @@
     \textbf{Paramètres :}\\[1\baselineskip]
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{} & \\
+        \textbf{\color{orange}p\_file} & Chemin\\
         \hline
-        \textbf{} & \\
+        \textbf{\color{orange}p\_lineno} & Nombre entier\\
         \hline
     \end{tabular}
 \end{justify}
@@ -266,13 +266,79 @@
     \textbf{Variables :}\\[1\baselineskip]
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{} & \\
-        \hline
-        \textbf{} & \\
+        \textbf{\color{orange}va\_correctValues} & Tableau\\
         \hline
     \end{tabular}
 \end{justify}
 
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :}\\[1\baselineskip]
+    Pour chaque fonction, un tableau est d'abord défini (\textbf{\color{orange}va\_correctValues}) pour y enregistrer les valeurs acceptées par la variable globale de statut en cours de traitement.
+\end{justify}
+
+\begin{justify}
+    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{mauve}BU::Main::Status::ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
+    
+    \begin{enumerate}
+        \item Le fichier dans lequel la valeur de cette variable a été vérifiée,
+        \item La ligne à laquelle l'opération mentionnée ci-dessus a été effectuée,
+        \item La valeur actuelle de la variable globale de statut en cours de traitement,
+        \item Le nom de cette variable,
+        \item Le tableau de valeurs correctes de la variable.
+    \end{enumerate}
+\end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}\\[1\baselineskip]
+    Appelez la fonction dédiée au traitement de la variable globale de statut dont vous souhaitez vérifier si sa valeur est correcte.
+\end{justify}
+
+\begin{justify}
+    Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{green}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
+\end{justify}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+     \textbf{Liste des variables globales de statut :}\\[1\baselineskip]
+     \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
+        \hline
+     \end{tabular}
+
+\end{justify}
+
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 
 \color{blue}
