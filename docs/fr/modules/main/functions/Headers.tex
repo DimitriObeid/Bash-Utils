@@ -403,33 +403,50 @@
     \item
     {
         \begin{justify}
+            Pour connaitre la valeur de chaque chiffre enregistré dans ce paramètre, Un tableau est créé et prend en valeurs chacun des chiffres.
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{justify}
             \textbf{\color{brick}Si} un nombre entier positif est passé à ce même paramètre \textbf{ET} que ce nombre entier soit plus grand ou égal à 1 \textbf{ET} qu'il soit plus petit ou égal à 3, \textbf{\color{brick}alors} :
         \end{justify}\setlength{\parskip}{1em}
 
-        \begin{itemize}
+        \begin{justify}
             \item
             {
                 \begin{justify}
-                    \textbf{\color{brick}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
-                \end{justify}\setlength{\parskip}{1em}
-                
-                \begin{justify}
-                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
-                \end{justify}\setlength{\parskip}{1em}
+                    \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} de valeurs dans l'intervalle autorisée :
+                \end{justify}
+
+                \begin{itemize}
+                    \item
+                    {
+                        \begin{justify}
+                            \textbf{\color{brick}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
+                        \end{justify}\setlength{\parskip}{1em}
+                        
+                        \begin{justify}
+                            \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
+                        \end{justify}\setlength{\parskip}{1em}
+
+                        \begin{justify}
+                            \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{3}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour coloriee le fond de la zone de texte où la seconde ligne de caractères est affichée.
+                        \end{justify}\setlength{\parskip}{1em}
+                        
+                        \begin{justify}
+                            \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres n'est pas égal à l'une des trois valeurs attendues, \textbf{\color{brick}Sinon, si} un message d'avertissement est affiché sur la zone de texte.
+                        \end{justify}\setlength{\parskip}{1em}
+
+                        \begin{justify}
+                            \textbf{\color{brick}Fin de la condition}.
+                        \end{justify}
+                    }
+                \end{itemize}
 
                 \begin{justify}
-                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{3}, \textbf{\color{brick}alors} la fonction \textbf{\color{mauve}BU::DechoBGColor} est appelée pour coloriee le fond de la zone de texte où la seconde ligne de caractères est affichée.
-                \end{justify}\setlength{\parskip}{1em}
-                
-                \begin{justify}
-                    \textbf{\color{brick}Sinon, si} l'un des chiffres de ce nombre à trois chiffres n'est pas égal à l'une des trois valeurs attendues, \textbf{\color{brick}Sinon, si} un message d'avertissement est affiché sur la zone de texte.
-                \end{justify}\setlength{\parskip}{1em}
-
-                \begin{justify}
-                    \textbf{\color{brick}Fin de la condition}.
+                    \textbf{\color{cyan}Fin de la boucle « pour »}.
                 \end{justify}
             }
-        \end{itemize}
+        \end{justify}
 
         \item
         {
@@ -458,11 +475,11 @@
 
 
 \begin{justify}
-    Une fois le header (ou un message d'avertissement affiché), un saut de ligne est effectué, le script se met en pause pendant le nombre de secondes défini par la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
+    Une fois le header (ou un message d'avertissement affiché), un saut de ligne est effectué, puis le script se met en pause pendant le nombre de secondes défini par la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
 \end{justify}\setlength{\parskip}{1em}
 
 \begin{justify}
-    La commande de ré-initialisation de décoration du terminal (définie dans les fichiers \textbf{\color{lime}Colors.conf} et \textbf{\color{lime}Text.conf}) est ensuite appelée pour réinitialiser la couleur d'affichage de texte selon la configuration du terminal.
+    Finalement, les valeurs des deux variables globales de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} et \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}, modifiées au début de la fonction, sont restaurées.
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -490,21 +507,35 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Paramètre :}\\
-    \textbf{\color{orange}\$1} --> Ce paramètre attend la chaîne de caractère à afficher.
+    \textbf{Paramètres positionnels :}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{orange}\$1} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{orange}\$2} & Chaîne de caractères « strlen »\\
+        \hline
+        \textbf{\color{orange}\$3} & Substitution de commande\\
+        \hline
+        \textbf{\color{orange}\$4} & Nombre entier « 1 », « 2 » et / ou « 3 »\\
+        \hline
+    \end{tabular}
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Fonctionnement :}\\
-    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant en premier et troisième arguments un même code couleur \textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...}, un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument, puis la chaîne de caractères à afficher en quatrième argument (seul paramètre que prennent ces fonctions).
+    \textbf{Fonctionnement :}\\[1\baselineskip]
+    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{mauve}BU::HeaderBase}, en lui passant en premier et troisième arguments une même substitution de commande (\textbf{\color{orange}\$\_\_BU\_MAIN\_COLOR...}), puis un caractère défini par la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument.
+\end{justify}
+
+\begin{justify}
+    Vient enfin le passage des valeurs des paramètres positionnels : la chaîne de caractères à afficher (\textbf{\color{orange}\$1}), la chaîne de caractères \textbf{strlen} (\textbf{\color{orange}\$2}), la substitution de commande colorant l'arrière plan du texte (\textbf{\color{orange}\$3}) et la position de la ligne à colorer (\textbf{\color{orange}\$4}).
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :}\\
+    \textbf{Utilisation :}\\[1\baselineskip]
     Appelez une de ces fonctions pour marquer une séparation entre plusieurs étapes de votre script, tout en affichant un header unicolore sans avoir à passer ses trois premiers arguments.
 \end{justify}
 
@@ -519,7 +550,7 @@
 \subsection{Headers bicolores}\color{white}
 
 \begin{justify}
-    \textbf{Note :} En raison du trop grand nombre de fonctions à déclarer, plus aucune nouvelle couleur ne sera ajoutée parmi les 23 couleurs actuelles (qui représentent en tout plus de 500 fonctions déclarées rien que dans ce fichier de librairie).
+    \textbf{Note :} En raison du trop grand nombre de fonctions à déclarer, plus aucune nouvelle couleur ne sera officiellement ajoutée parmi les 23 couleurs actuelles (qui représentent en tout plus de 500 fonctions déclarées rien que dans ce fichier de librairie).
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
