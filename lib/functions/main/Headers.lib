@@ -92,7 +92,7 @@ function BU::Main::Headers::DrawLine()
                 echo -n "$p_lineChar"
             done
         else
-            HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
+            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
         fi
 
 	else
@@ -176,18 +176,18 @@ function BU::HeaderBase()
                         BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
 
                     else
-                        HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R';
+                        BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R';
                     fi
                 done
 
             elif BU::IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
-                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is too big" 'R';
+                BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is too big" 'R';
 
             elif [ "${#p_bgColorPos}" -lt 1 ]; then
-                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is null" 'R';
+                BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is null" 'R';
 
             else
-                HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
+               BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
             fi
         fi
 

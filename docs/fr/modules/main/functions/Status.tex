@@ -70,47 +70,31 @@
 \color{blue}
 \subsubsection{Chemins de fichiers}\color{white}
 
-\textbf{Nom du fichier : \color{lime}Checkings.lib}\\[1\baselineskip]
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}\\[1\baselineskip]
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
+        \hline
+    \end{tabular}
+\end{justify}\setlength{\parskip}{2em}
 
 
 % -----------------------
 
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Colors.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Status.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Text.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
 
 \color{blue}
 \subsubsection{Fonctions externes appelées}\color{white}
 
 \textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\[1\baselineskip]
-
-\textbf{Description :} .\\[1\baselineskip]
 
 \textbf{Fichier de définition : \color{lime}Checkings.lib}\\[1\baselineskip]
 
@@ -124,8 +108,10 @@
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
+    Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
@@ -137,8 +123,10 @@
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{gray}true}.
+    Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{gray}true}.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Project.conf} \\[1\baselineskip]
@@ -151,6 +139,7 @@
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 
 \textbf{Description :}
+
 \begin{justify}
     Cette variable contient le caractère à afficher en tant que ligne de header.
 \end{justify}
@@ -170,7 +159,7 @@
 \section{Fonctions}\color{white}
 
 \color{green}
-\subsection{Sous-section ``CHECKING VALUES''}
+\subsection{Sous-section « CHECKING VALUES »}
 
 \color{blue}
 \subsubsection{BU::Main::Status::ConfEcho}\color{white}

@@ -70,65 +70,81 @@
 \color{blue}
 \subsubsection{Chemins de fichiers}\color{white}
 
-\textbf{Nom du fichier : \color{lime}Checkings.lib}\\[1\baselineskip]
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
+        \hline
+    \end{tabular}
+    
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Decho.lib}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Echo.lib}\\
+        \hline
+        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Errors.lib}\\
+        \hline
+    \end{tabular}
 
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Colors.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Status.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
-
-
-% -----------------------
-
-\color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
-
-\textbf{Nom du fichier : \color{lime}Text.conf}\\[1\baselineskip]
-
-\textbf{Dossier parent : \color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}\\[1\baselineskip]
+\end{justify}\setlength{\parskip}{2em}
 
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
 
 \color{blue}
 \subsubsection{Fonctions externes appelées}\color{white}
 
-\textbf{Fonction : \color{mauve}BU::IsChar}\\[1\baselineskip]
-
 \begin{justify}
-    \textbf{Description :} Cette fonction verifie que la valeur enregistrée dans une variable soit un simple caractère alphanumérique.
-\end{justify}
-
-\textbf{Fichier de définition : \color{lime}Checkings.lib}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Fonction} & \textbf{Fichier de définition}\\
+        \hline
+        \textbf{\color{mauve}BU::IsAlphaNumChar}    & \textbf{\color{lime}Checkings.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::IsInt}             & \textbf{\color{lime}Checkings.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::IsIntpos}          & \textbf{\color{lime}Checkings.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::DechoBGColor}              & \textbf{\color{lime}Decho.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::DechoHighlightFunction}    & \textbf{\color{lime}Decho.lib}\\
+        \hline  
+        \textbf{\color{mauve}BU::Newline}           & \textbf{\color{lime}Echo.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::EchoMsg}           & \textbf{\color{lime}Echo.lib}\\
+        \hline
+        \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}   & \textbf{\color{lime}Errors.lib}\\
+        \hline      
+    \end{tabular}
+\end{justify}\setlength{\parskip}{2em}
 
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
 
 \color{blue}
 \subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_BG\_...}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
+    Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
@@ -143,8 +159,10 @@
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_TXT\_...}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Chacune des variables globales commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
@@ -156,8 +174,10 @@
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Cette variable globale sert à mettre le script dans un état dit ``stable'', vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies, dans le cas où un rappel de la même fonction dans l'état précédent peut causer ceci.
+    Cette variable globale sert à mettre le script dans un état dit ``stable'', vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies, dans le cas où un rappel de la même fonction dans l'état précédent peut causer ceci.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Status.conf}\\[1\baselineskip]
@@ -169,8 +189,10 @@
 
 \textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 
+\textbf{Description :}
+
 \begin{justify}
-    \textbf{Description :} Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.
+    Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.
 \end{justify}
 
 \textbf{Fichier de définition : \color{lime}Text.conf}\\[1\baselineskip]

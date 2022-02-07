@@ -43,7 +43,7 @@ fi
 ## DEBUGGING AND HANDLING TEXT DISPLAY ERRORS
 
 # Print void lines before and after calling a header.
-function __BU::EchoVoid()
+function BU::__EchoVoid()
 {
 printf "
     
@@ -76,13 +76,13 @@ function BU::Main::Echo::__EchoOutput()
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
+            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
         fi
 
 		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "${p_context,,}" = "begin" ]; then
-            __BU::EchoVoid
+            BU::__EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
                 echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
@@ -121,7 +121,7 @@ function BU::Main::Echo::__EchoOutput()
                 __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val=''
             fi
 
-            __BU::EchoVoid; return 0;
+            BU::__EchoVoid; return 0;
         fi
     fi
 }
@@ -201,7 +201,13 @@ function BU::Main::Echo::__EchoCPLS()
     return 0;
 }
 
-# --------------------------------------------
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### TEXT DISPLAYING
 
 ## DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
