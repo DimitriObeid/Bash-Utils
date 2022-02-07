@@ -192,6 +192,8 @@
    	\end{itemize}
 \end{justify}
 
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
@@ -247,6 +249,8 @@
     Chacune de ces fonctions vérifie que la valeur de la variable globale de statut en cours de traitement soit égale à une valeur attendue, sans quoi l'exécution du script s'arrête.
 \end{justify}\setlength{\parskip}{1em}
 
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
@@ -260,6 +264,8 @@
     \end{tabular}
 \end{justify}
 
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
@@ -270,6 +276,8 @@
         \hline
     \end{tabular}
 \end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -290,6 +298,41 @@
     \end{enumerate}
 \end{justify}
 
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Exceptions par fonctions :}
+\end{justify}
+
+\begin{justify}
+    \begin{enumerate}
+        \item
+        {
+            ère exception :
+
+            \begin{justify}
+                La fonction \textbf{\color{mauve}BU::Main::Status::CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{brick}Si} la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG} correspond à la chaîne \textbf{true} \textbf{\color{brick}ET si} le fichier de logs n'existe pas encore (la chaîne de caractères (chemin) enregistrée dans la variable globale de projet \textbf{\color{orange}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}),
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{brick} alors} la fonction \textbf{\color{mauve}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{brick}Fin de la condition}.
+            \end{justify}
+        }
+    \end{enumerate}
+\end{justify}
+
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
@@ -301,747 +344,273 @@
     Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{green}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
 \end{justify}
 
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-     \textbf{Liste des variables globales de statut :}\\[1\baselineskip]
-     \begin{tabular}{|l|l|l|}
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_} & &\\[1\baselineskip]
-        \hline
-     \end{tabular}
-
+     \textbf{Liste des variables globales de statut :}
 \end{justify}
 
+\begin{justify}
+    \textit{Description de la variable :}
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{Nom de la variable} & \textbf{Type} & \textbf{Valeurs acceptées}
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_DEBUG}\color{white}
-
 \begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut :\textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{false} : Cette valeur ne permet pas de lancer la moindre procédure de déboguage lors de l'exécution du script.\\
-
-        \item \textbf{true} : Cette valeur permet de lancer un déboguage sur certaines parties spécifiques et prévues du script.
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG}  & Bool & \textbf{false} || \textbf{true} \\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
-
-\end{justify}
-
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO})
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :} \\
-    \end{itemize}
-\end{justify}
-
-\textbf{Code :}
-
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_DECHO}\color{white}
-
-\begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut sert à restreindre ou empêcher l'exécution de la fonction de décoration de texte avancée \textbf{\color{mauve}Decho}, dans les situations où l'appel de cette fonctions peut provoquer une boucle infinie.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DECHO}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{allow} : Cette valeur autorise tout formatage de texte, allant de la couleur au clignotement du texte, à la mise en gras ou en italique, à l'assombrissement, au soulignage, à la rayure ou au camouflage.\\
-
-        \item \textbf{restrict} : Cette valeur restreint la décoration de texte à la couleur.\\
-
-        \item \textbf{forbid} : Cette valeur interdit purement la décoration de texte et entoure simplement le texte à décorer de guillemets.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
-
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_ECHO}\color{white}
-
-\begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut sert à empêcher l'exécution de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{false} : Cette valeur autorise l'appel de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, donc la redirection du texte vers un fichier de logs.\\
-
-        \item \textbf{true} : Cette valeur interdit l'appel de la fonction sus-mentionnée, car une fonction l'appelant doit impérativement être appelée. Dans ce cas, la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoCPLS} est appelée à la place.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_ERROR}\color{white}
-
-\begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et cette variable est traitée par la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la fonction :}\\
-        Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ERROR}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{\textit{vide (Pas de valeur enregistrée)}} : Sans valeur enregistrée, le script demande à l'utilisateur s'il souhaite que son exécution
-        continue ou non (via la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()}).\\
-
-        \item \textbf{fatal} : Le script interrompt son exécution sans demander l'avis de l'utilisateur, car l'erreur rencontrée est jugée trop importante pour que le script continue son exécution sans problèmes.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-    \begin{itemize}
-        \item \textbf{\color{orange}\$p\_file\color{white}:} fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO})
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
 \end{justify}
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_INITALIZING}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut sert à indiquer si la librairie est en phase d'initialisation des modules.
+    Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{mauve}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{false} : Cette valeur indique que le script n'est plus en phase d'initialisation, et les fonctions qui vérifient la valeur de cette variable globale de statut peuvent s'exécuter normalement.\\
-
-        \item \textbf{true} : Cette valeur indique que le script est en phase d'initialisation, et les fonctions qui vérifient la valeur de cette variable globale de statut adaptent le traitement des données.
-    \end{itemize}
-
-\end{justify}
-
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DECHO}  & String    & \textbf{authorize} || \textbf{forbid} || \textbf{restrict}\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_LOG}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut sert à autoriser ou non la création d'un fichier de logs pour le projet.
+    Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG} corresponde aux chaînes de caractères \textbf{true} ou \textbf{false}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{false} : Le fichier de logs ne peut pas être créé, tous les messages seront redirigés vers l'écran.\\
-
-        \item \textbf{true} : Le fichier de logs peut être créé, et la redirection des messages peut être configurée via la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}.
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}   & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-
-\begin{justify}
-    \textbf{Paramètres :}
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_LOG\_REDIRECT}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
+    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ERROR}  & String    & \textit{aucune valeur} || \textbf{fatal}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable de statut sert à déterminer si la librairie est en phase d'initialisation des modules.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}       & Bool  & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable de statut sert à autoriser ou non la création d'un fichier de logs pour le projet en cours.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG}    & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
     Cette variable vérifie si un message peut être affiché à l'écran, redirigé vers un fichier de logs, ou les deux à la fois.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description des valeurs :}
-
-    \begin{itemize}
-        \item \textbf{\textit{vide (Pas de valeur enregistrée)}} : Chaque message du projet sera redirigé uniquement vers la sortie standard ou d'erreur (affichés à l'écran).\\
-
-        \item \textbf{log} : Chaque message sera redirigé vers le fichier de logs uniquement.\\
-
-        \item \textbf{tee} : Chaque message sera redirigé à la fois vers le fichier de logs \textbf{ET} vers la sortie standard ou d'erreur (affichés à l'écran).
-    \end{itemize}
-
-\end{justify}
-
-
-\begin{justify}
-    \textbf{Paramètres :}
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}  & String & \textit{aucune valeur} || \textbf{log} || \textbf{tee}\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_OPERATE\_ROOT}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable vérifie si une opération sur un fichier ou un dossier localisé à la racine du système de fichiers peut être effectuée.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{authorized} : Cette valeur donne l'autorisation au script d'opérer à la racine du système de fichiers, sans demander l'autorisation de l'utilisateur \textbf{(\textbf{\color{red}POTENTIELLEMENT DANGEREUX, À N'UTILISER QUE SI VOUS SAVEZ CE QUE VOUS FAITES} + PRIVILÈGES DU SUPER-UTILISATEUR REQUIS)}.\\
-
-        \item \textbf{forbidden} : Cette valeur interdit \textbf{\color{green}TOTALEMENT} au script d'opérer à la racine du système de fichiers.\\
-
-        \item \textbf{restricted} : Cette valeur donne l'autorisation au script d'opérer à la racine du système de fichiers, en demandant l'autorisation de l'utilisateur \textbf{(\textbf{\color{yellow}MÉTHODE RECOMMANDÉE} + PRIVILÈGES DU SUPER-UTILISATEUR REQUIS)}.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}  & String & \textbf{authorized} || \textbf{forbidden} || \textbf{restricted}\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_PRINT\_INIT\_LOG}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
-    Cette variable de statut détermine l'autorisation pour la librairie d'afficher les messages d'initialisation sur le terminal lors de cette procédure.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{false} : Aucun message d'initialisation n'est affiché à l'écran, excepté les messages d'erreur.\\
-
-        \item \textbf{true} : Tous les messages d'initialisation sont affichés à l'écran.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_TIME\_HEADER}\color{white}
-
-\begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un header.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}   & Float\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_TIME\_NEWLINE}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un saut de ligne.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}  & Float\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_TIME\_TXT}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un message à l'écran.
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur numérique suivante soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{\textit{Un nombre à virgule}} : La commande \textbf{\color{gray}sleep} est appelée et un nombre entier ou à virgule doit être passé en argument.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}  & Float\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
-
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_TXT\_FMT}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description de la variable :}\\
     Cette variable de statut vérifie que le script ait la permission de formater le texte (couleurs, gras, italique, soulignage, clignotement, etc...).
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que l'une des valeurs suivantes soit enregistrée dans cette variable globale de statut : \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_PRINT\_INIT\_LOG}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Description de la valeur :}
-
-    \begin{itemize}
-        \item \textbf{false} : Aucun formatage n'est appliqué lors de l'appel de la fonction \textbf{\color{mauve}BU::Decho}.\\
-
-        \item \textbf{true} : Le formatage choisi est appliqué lors de l'appel de la fonction \textbf{\color{mauve}BU::Decho}.
-    \end{itemize}
-
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT}   & Bool & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-\end{justify}
-
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\par\noindent\rule{\textwidth}{0.4pt}
 
-\color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_USER\_OS}\color{white}
-
+\begin{justify}
 \textbf{ATTENTION : Cette variable est dépreciée et sera déplacée dans le module \textbf{\color{lime}os\_specific} dans une prochaine mise à jour}
-
-\begin{justify}
-    \textbf{Description de la variable :}\\
-    
 \end{justify}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
-    Cette fonction vérifie que la valeur enregistrée dans la variable de statut "\$\_\_BU\_MAIN\_STAT\_USER\_OS" soit
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Variables :}
-
-    \begin{itemize}
-        \item \textbf{\color{orange}\$v\_array\color{white} :}
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Code :}
-    
-    \begin{itemize}
-        \item \textbf{}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_USER\_OS}   & &\\[1\baselineskip]
+            \end{tabular}
+        }
     \end{itemize}
 \end{justify}
 
@@ -1051,7 +620,7 @@
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckProjectStatusVars}\color{white}
+\subsubsection{BU::Main::Status::CheckProjectStatusVars}\color{white}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\
@@ -1060,6 +629,9 @@
 
 \begin{justify}
     \textbf{Paramètres :}
+\end{justify}
+
+\begin{justify}
     \begin{itemize}
         \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
 
@@ -1069,7 +641,6 @@
 
 \begin{justify}
     \textbf{Variables :}
-
     \begin{itemize}
         \item \textbf{Aucune}
     \end{itemize}
