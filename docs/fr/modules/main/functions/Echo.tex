@@ -1,24 +1,27 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{inputenc}     % Encodage du texte.
+\usepackage[utf8]{inputenc}     % Encodage du texte (caractères accentués).
 \usepackage[french]{babel}      % Langue du document.
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}					%
-\usepackage[usenames,dvipsnames]{xcolor}	% Coloration de texte.
-\usepackage{verbatim}						% Mise en page de paragraphes.
-\usepackage{fancyhdr}						%
-\usepackage[document]{ragged2e}								% Justification du texte.
-\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.					%
-\usepackage{hyperref}
+\usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur).
 
-\fontfamily{}
+\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}
+
+\usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
+\usepackage{verbatim}						% Mise en page des paragraphes.
+
+\usepackage[document]{ragged2e}								% Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
+
+\fontfamily{Roboto}
 
 \pagecolor{black}
 \title{\color{red}Fonctions du fichier de librairie \color{lime}Echo.lib}\color{white}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
-\justifying
 
 \pdfinfo{
   /Title    (Fonctions du fichier de librairie Echo.lib)
@@ -29,9 +32,20 @@
   /Keywords ()
 }
 
-\begin{document}
+% Definition de couleurs.
+\definecolor{mauve}{RGB}{128, 0, 128}
+\definecolor{brick}{HTML}{be480a}
 
+% Mise en page des paragraphes.
+\setlength{\parskip}{1em}
+
+\begin{document}
 \maketitle
+\newpage
+
+\hypertarget{contents}{}
+\tableofcontents
+\newpage
 
 \begin{abstract}
 

@@ -173,7 +173,7 @@
 \subsection{Sous-section ``CHECKING VALUES''}
 
 \color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::ConfEcho}\color{white}
+\subsubsection{BU::Main::Status::ConfEcho}\color{white}
 
 \begin{justify}
 \textbf{Description de la fonction :}\\[1\baselineskip]
@@ -197,7 +197,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Paramètres :}\\
+    \textbf{Paramètres :}
     \begin{itemize}
         \item \textbf{\color{orange}\$p\_file\color{white} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}.\setlength{\parskip}{1em}
 
@@ -242,7 +242,7 @@
 \end{justify}
 
 \color{blue}
-\subsubsection{\color{mauve}BU::Main::Status::CheckSTAT\_*}\color{white}
+\subsubsection{BU::Main::Status::CheckSTAT\_*}\color{white}
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
@@ -623,21 +623,28 @@
 \subsubsection{BU::Main::Status::CheckProjectStatusVars}\color{white}
 
 \begin{justify}
-    \textbf{Description de la fonction :}\\
+    \textbf{Description de la fonction :}\\[1\baselineskip]
     Cette fonction appelle toutes les fonctions précédemment définies pour tester chacune des valeurs des variables globales de statut une par une.
 \end{justify}
 
-\begin{justify}
-    \textbf{Paramètres :}
-\end{justify}
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \begin{itemize}
-        \item \color{orange}\textbf{\$p\_file}\color{white} : fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}\\
-
-        \item \color{orange}\textbf{\$p\_lineno}\color{white} : le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}))
-    \end{itemize}
+    \textbf{Paramètres :}\\[1\baselineskip]
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{orange}p\_file} & Chemin\\
+        \hline
+        \textbf{\color{orange}p\_lineno} & Nombre entier\\
+        \hline
+    \end{tabular}
 \end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Variables :}
@@ -662,15 +669,24 @@
 
 \begin{justify}
     \textbf{Note 2 :} Chaque fonction définie dans cette sous-section attend les trois mêmes paramètres positionnels, dont les informations sont données en commentaire sous le nom de la sous-section.
-
-    \begin{itemize}
-        \item \textbf{\$1 :} Ce paramètre contient la nouvelle valeur à assigner à la variable globale de statut traitée par la fonction.\\
-
-        \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.\\
-
-        \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
-    \end{itemize}
 \end{justify}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\$1 :} Ce paramètre contient la nouvelle valeur à assigner à la variable globale de statut traitée par la fonction.
+        \end{justify}
+
+        \begin{justify}
+            \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
+        \end{justify}
+
+        \begin{justify}
+            \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
+        \end{justify}
+    }
+\end{itemize}
 
 
 % -----------------------
@@ -680,7 +696,7 @@
 \color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
-\subsection{Sous-section "EASIER CHECKING BOOLEAN VALUES"}\color{white}
+\subsection{Sous-section "EASIER BOOLEAN VALUES CHECKINGS"}\color{white}
 
 \begin{justify}
     Ces fonctions servent à vérifier si la valeur d'une des variables globales de statut contienne la valeur \textbf{vrai} ou la valeur \textbf{faux} (variables booléenes uniquement).
