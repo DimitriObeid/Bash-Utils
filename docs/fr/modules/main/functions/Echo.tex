@@ -572,7 +572,7 @@
                 \item
                 {
                     \begin{justify}
-                        \textbf{\color{cond}Dans le cas où} la valeur du paramètre \textbf{\color{vars}p\_option} correspond à la chaîne de caractères \textbf{-n} (avec ou sans le tiret) :
+                        \textbf{\color{case}Dans le cas où} la valeur du paramètre \textbf{\color{vars}p\_option} correspond à la chaîne de caractères \textbf{-n} (avec ou sans le tiret) :
                     \end{justify}
 
                     \setlength{\parskip}{1em}
@@ -580,12 +580,73 @@
                     \begin{itemize}
                         \item
                         {
-                            \textbf{\color{cond}Si} 
+                            \begin{justify}
+                                \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne. 
+                            \end{justify}
+
+                            \setlength{\parskip}{1em}
+
+                            \begin{justify}
+                                \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}.
+                            \end{justify}
+
+                            \begin{justify}
+                                \textbf{\color{cond}Fin de la condition}.
+                            \end{justify}
+                        }
+                    \end{itemize}
+                    
+                    \item
+                    {
+                        \setlength{\parskip}{2em}
+
+                        \begin{justify}
+                            \textbf{\color{case}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+                        \end{justify}
+
+                        \setlength{\parskip}{1em}
+                    }
+                    
+                    \begin{itemize}
+                        \item
+                        {
+                            \begin{justify}
+                                \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne. 
+                            \end{justify}
+
+                            \setlength{\parskip}{1em}
+
+                            \begin{justify}
+                                \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, toujours avec la date de log écrite auparavant.
+                            \end{justify}
+
+                            \begin{justify}
+                                \textbf{\color{cond}Fin de la condition}.
+                            \end{justify}
                         }
                     \end{itemize}
                 }
-            \end{itemize}
 
+                \item
+                {
+                    \setlength{\parskip}{2em}
+
+                    \begin{justify}
+                        \textbf{\color{cond}Sinon, si} une valeur non-supportée est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+
+                        \setlength{\parskip}{1em}
+
+                        \begin{itemize}
+                            \item
+                            {
+                                \begin{justify}
+                                    
+                                \end{justify}
+                            }
+                        \end{itemize}
+                    \end{justify}
+                }
+            \end{itemize}
         }
     \end{itemize}
 
