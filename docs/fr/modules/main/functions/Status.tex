@@ -29,15 +29,15 @@
 \definecolor{path}{HTML}{bfff00}        % Citron vert   - Chemins de dossiers et de fichiers
 \definecolor{sec1}{HTML}{ff0000}        % Rouge         - Titres de premier niveau
 \definecolor{sec2}{HTML}{00ff00}        % Vert          - Titres de deuxième niveau
-\definecolor{sec3}{HTML}{0070ff}        % Bleu          - Titres de troisième niveau
+\definecolor{sec3}{HTML}{0060ff}        % Bleu          - Titres de troisième niveau
 \definecolor{text}{HTML}{ffffff}        % Blanc         - Texte normal
 \definecolor{vars}{HTML}{FF7F00}        % Orange        - Noms des paramètres et des variables
 
 
 \fontfamily{Roboto}
 
-\pagecolor{black}
-\title{\color{red}Fonctions du fichier de librairie \color{lime}Status.lib}\color{white}
+\pagecolor{back}
+\title{\color{sec1}Fonctions du fichier de librairie \color{lime}Status.lib}\color{text}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
@@ -51,10 +51,6 @@
   /Keywords ()
 }
 
-% Definition de couleurs.
-\definecolor{mauve}{RGB}{128, 0, 128}
-\definecolor{brick}{HTML}{be480a}
-
 % Mise en page des paragraphes.
 \setlength{\parskip}{1em}
 
@@ -66,11 +62,11 @@
 \tableofcontents
 \newpage
 
-\color{red}
-\section{Présentation}\color{white}
+\color{sec1}
+\section{Présentation}\color{text}
 
-\color{green}
-\subsection{Présentation}\color{white}
+\color{sec2}
+\subsection{Présentation}\color{text}
 
 \begin{justify}
     Ce fichier source inclut des fonctions servant à la gestion des valeurs des variables globales de statut : gestions d'erreurs et changement de valeur assité.
@@ -81,26 +77,26 @@
 
 % -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{green}
-\subsection{Définitions des éléments mentionnés}\color{white}
+\color{sec2}
+\subsection{Définitions des éléments mentionnés}\color{text}
 
-\color{blue}
-\subsubsection{Chemins de fichiers}\color{white}
+\color{sec3}
+\subsubsection{Chemins de fichiers}\color{text}
 
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Dossier parent} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -109,10 +105,10 @@
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
-\color{blue}
-\subsubsection{Fonctions externes appelées}\color{white}
+\color{sec3}
+\subsubsection{Fonctions externes appelées}\color{text}
 
 \textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\[1\baselineskip]
 
@@ -121,12 +117,12 @@
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{blue}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
+\color{sec3}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
 
 \textbf{Description :}
 
@@ -139,9 +135,9 @@
 
 % -----------------------
 
-\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}\\[1\baselineskip]
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}\\[1\baselineskip]
 
 \textbf{Description :}
 
@@ -154,9 +150,9 @@
 
 % -----------------------
 
-\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 
 \textbf{Description :}
 
@@ -173,16 +169,16 @@
 
 % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{red}
-\section{Fonctions}\color{white}
+\color{sec1}
+\section{Fonctions}\color{text}
 
-\color{green}
+\color{sec2}
 \subsection{Sous-section « CHECKING VALUES »}
 
-\color{blue}
-\subsubsection{BU::Main::Status::ConfEcho}\color{white}
+\color{sec3}
+\subsubsection{BU::Main::Status::ConfEcho}\color{text}
 
 \begin{justify}
 \textbf{Description de la fonction :}\\[1\baselineskip]
@@ -208,15 +204,15 @@
 \begin{justify}
     \textbf{Paramètres :}
     \begin{itemize}
-        \item \textbf{\color{orange}\$p\_file\color{white} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{white}"\color{orange}\$BASH\_SOURCE[0]\color{white}")")}}.\setlength{\parskip}{1em}
+        \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
 
-        \item \textbf{\color{orange}\$p\_lineno\color{white} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{orange}\$LINENO}).
+        \item \textbf{\color{vars}\$p\_lineno\color{text} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{vars}\$LINENO}).
 
-        \item \textbf{\color{orange}\$p\_bad\_value\color{white} :} La mauvaise valeur passée en argument\color{white}.
+        \item \textbf{\color{vars}\$p\_bad\_value\color{text} :} La mauvaise valeur passée en argument\color{text}.
 
-        \item \textbf{\color{orange}\$p\_var\_name\color{white} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{white}
+        \item \textbf{\color{vars}\$p\_var\_name\color{text} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{text}
 
-        \item \textbf{\color{orange}\$pa\_correctValues\color{white} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
+        \item \textbf{\color{vars}\$pa\_correctValues\color{text} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
     \end{itemize}
 \end{justify}\setlength{\parskip}{2em}
 
@@ -226,7 +222,7 @@
     \textbf{Variables :}
 
     \begin{itemize}
-        \item \textbf{\color{orange}\$i\color{white} :} .
+        \item \textbf{\color{vars}\$i\color{text} :} .
     \end{itemize}
 \end{justify}
 
@@ -241,17 +237,17 @@
 
 % -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{green}
-\subsection{Sous-section "CHECKINGS"}\color{white}
+\color{sec2}
+\subsection{Sous-section "CHECKINGS"}\color{text}
 
 \begin{justify}
     Cette section contient toutes les fonctions vérifiant que la variable de statut associée possède une valeur valide.
 \end{justify}
 
-\color{blue}
-\subsubsection{BU::Main::Status::CheckSTAT\_*}\color{white}
+\color{sec3}
+\subsubsection{BU::Main::Status::CheckSTAT\_*}\color{text}
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
@@ -267,9 +263,9 @@
 
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{\color{orange}p\_file} & Chemin\\
+        \textbf{\color{vars}p\_file} & Chemin\\
         \hline
-        \textbf{\color{orange}p\_lineno} & Nombre entier\\
+        \textbf{\color{vars}p\_lineno} & Nombre entier\\
         \hline
     \end{tabular}
 \end{justify}
@@ -284,7 +280,7 @@
 
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{\color{orange}va\_correctValues} & Tableau\\
+        \textbf{\color{vars}va\_correctValues} & Tableau\\
         \hline
     \end{tabular}
 \end{justify}\setlength{\parskip}{1em}
@@ -295,7 +291,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    Pour chaque fonction, un tableau est d'abord défini (\textbf{\color{orange}va\_correctValues}) pour y enregistrer les valeurs acceptées par la variable globale de statut en cours de traitement.
+    Pour chaque fonction, un tableau est d'abord défini (\textbf{\color{vars}va\_correctValues}) pour y enregistrer les valeurs acceptées par la variable globale de statut en cours de traitement.
 \end{justify}
 
 \begin{justify}
@@ -329,15 +325,15 @@
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{brick}Si} la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG} correspond à la chaîne \textbf{true} \textbf{\color{brick}ET si} le fichier de logs n'existe pas encore (la chaîne de caractères (chemin) enregistrée dans la variable globale de projet \textbf{\color{orange}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}),
+                \textbf{\color{cond}Si} la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} correspond à la chaîne \textbf{true} \textbf{\color{cond}ET si} le fichier de logs n'existe pas encore (la chaîne de caractères (chemin) enregistrée dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}),
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{brick} alors} la fonction \textbf{\color{mauve}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
+                \textbf{\color{cond} alors} la fonction \textbf{\color{mauve}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{brick}Fin de la condition}.
+                \textbf{\color{cond}Fin de la condition}.
             \end{justify}
         }
     \end{enumerate}
@@ -353,7 +349,7 @@
 \end{justify}
 
 \begin{justify}
-    Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{green}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
+    Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{sec2}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
 \end{justify}
 
 % -----------------------
@@ -392,7 +388,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG}  & Bool & \textbf{false} || \textbf{true} \\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG}  & Bool & \textbf{false} || \textbf{true} \\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -411,7 +407,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DECHO}  & String    & \textbf{authorize} || \textbf{forbid} || \textbf{restrict}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO}  & String    & \textbf{authorize} || \textbf{forbid} || \textbf{restrict}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -430,7 +426,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}   & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}   & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -449,7 +445,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ERROR}  & String    & \textit{aucune valeur} || \textbf{fatal}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ERROR}  & String    & \textit{aucune valeur} || \textbf{fatal}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -468,7 +464,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}       & Bool  & \textbf{false} || \textbf{true}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}       & Bool  & \textbf{false} || \textbf{true}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -487,7 +483,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG}    & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG}    & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -506,7 +502,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}  & String & \textit{aucune valeur} || \textbf{log} || \textbf{tee}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}  & String & \textit{aucune valeur} || \textbf{log} || \textbf{tee}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -525,7 +521,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}  & String & \textbf{authorized} || \textbf{forbidden} || \textbf{restricted}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}  & String & \textbf{authorized} || \textbf{forbidden} || \textbf{restricted}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -544,7 +540,7 @@
         \item
         {
             \begin{tabular}{l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}   & Float\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}   & Float\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -563,7 +559,7 @@
         \item
         {
             \begin{tabular}{l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}  & Float\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}  & Float\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -582,7 +578,7 @@
         \item
         {
             \begin{tabular}{l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}  & Float\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}  & Float\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -601,7 +597,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT}   & Bool & \textbf{false} || \textbf{true}\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT}   & Bool & \textbf{false} || \textbf{true}\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -620,7 +616,7 @@
         \item
         {
             \begin{tabular}{l|l|l}
-                \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_USER\_OS}   & &\\[1\baselineskip]
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_USER\_OS}   & &\\[1\baselineskip]
             \end{tabular}
         }
     \end{itemize}
@@ -629,10 +625,10 @@
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{blue}
-\subsubsection{BU::Main::Status::CheckProjectStatusVars}\color{white}
+\color{sec3}
+\subsubsection{BU::Main::Status::CheckProjectStatusVars}\color{text}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\[1\baselineskip]
@@ -647,9 +643,9 @@
     \textbf{Paramètres :}\\[1\baselineskip]
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{\color{orange}p\_file} & Chemin\\
+        \textbf{\color{vars}p\_file} & Chemin\\
         \hline
-        \textbf{\color{orange}p\_lineno} & Nombre entier\\
+        \textbf{\color{vars}p\_lineno} & Nombre entier\\
         \hline
     \end{tabular}
 \end{justify}
@@ -670,10 +666,10 @@
 
 % -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{green}
-\subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{white}
+\color{sec2}
+\subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{text}
 
 \begin{justify}
     \textbf{Note 1 :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.
@@ -705,10 +701,10 @@
 
 % -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{green}
-\subsection{Sous-section "EASIER BOOLEAN VALUES CHECKINGS"}\color{white}
+\color{sec2}
+\subsection{Sous-section "EASIER BOOLEAN VALUES CHECKINGS"}\color{text}
 
 \begin{justify}
     Ces fonctions servent à vérifier si la valeur d'une des variables globales de statut contienne la valeur \textbf{vrai} ou la valeur \textbf{faux} (variables booléenes uniquement).

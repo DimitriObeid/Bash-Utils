@@ -29,14 +29,14 @@
 \definecolor{path}{HTML}{bfff00}        % Citron vert   - Chemins de dossiers et de fichiers
 \definecolor{sec1}{HTML}{ff0000}        % Rouge         - Titres de premier niveau
 \definecolor{sec2}{HTML}{00ff00}        % Vert          - Titres de deuxième niveau
-\definecolor{sec3}{HTML}{0070ff}        % Bleu          - Titres de troisième niveau
+\definecolor{sec3}{HTML}{0060ff}        % Bleu          - Titres de troisième niveau
 \definecolor{text}{HTML}{ffffff}        % Blanc         - Texte normal
 \definecolor{vars}{HTML}{FF7F00}        % Orange        - Noms des paramètres et des variables
 
 
 \fontfamily{Roboto}
 
-\pagecolor{black}
+\pagecolor{back}
 \title{\color{sec1}Fonctions du fichier de librairie \color{path}Echo.lib}\color{text}
 \author{Dimitri OBEID}
 \date{2021}
@@ -278,7 +278,7 @@
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
-    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{func}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{gray}bash -x}, qui affiche tous.
+    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{func}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{cmds}bash -x}, qui affiche tous.
 \end{justify}
 
 % -----------------------
@@ -296,7 +296,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{gray}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{gray}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
+    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
 
 % -----------------------
@@ -327,7 +327,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{path}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{func}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{gray}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
+    Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{path}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{func}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{cmds}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
 \end{justify}
 
 % -----------------------
@@ -413,7 +413,7 @@
             \item
             {
                 \begin{justify}
-                    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{gray}bash -x} sur le terminal.
+                    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{cmds}bash -x} sur le terminal.
                 \end{justify}
             }
 
@@ -422,7 +422,7 @@
                 \setlength{\parskip}{2em}
 
                 \begin{justify}
-                    \textbf{\color{cond}Si} le caractère enregistré dans le paramètre \textbf{\color{vars}p\_type} est égal au premier caractère du type de message à afficher (\textbf{E} --> \textbf{Error}, \textbf{m} --> \textbf{Msg}, \textbf{N} --> \textbf{Newstep}, \textbf{S} --> \textbf{Success}, \textbf{W} --> \textbf{Warning}), \textbf{\color{cond}alors} la commande \textbf{\color{gray}echo -e} est appelée et une substitution de commande y est passée en argument.
+                    \textbf{\color{cond}Si} le caractère enregistré dans le paramètre \textbf{\color{vars}p\_type} est égal au premier caractère du type de message à afficher (\textbf{E} --> \textbf{Error}, \textbf{m} --> \textbf{Msg}, \textbf{N} --> \textbf{Newstep}, \textbf{S} --> \textbf{Success}, \textbf{W} --> \textbf{Warning}), \textbf{\color{cond}alors} la commande \textbf{\color{cmds}echo -e} est appelée et une substitution de commande y est passée en argument.
                 \end{justify}
 
                 \setlength{\parskip}{1em}
@@ -555,7 +555,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    \textbf{\color{cyan}Pour} chaque valeur enregistrée dans le tableau \textbf{\color{vars}pa\_extraArgs} :
+    \textbf{\color{loop}Pour} chaque valeur enregistrée dans le tableau \textbf{\color{vars}pa\_extraArgs} :
 \end{justify}
 
 \begin{justify}
