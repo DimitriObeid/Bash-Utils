@@ -15,10 +15,29 @@
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
+% Definition de couleurs.
+\definecolor{mauve}{RGB}{228, 0, 228}
+\definecolor{brick}{HTML}{be480a}
+
+% Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
+\definecolor{back}{HTML}{000000}        % Noir          - Fond
+\definecolor{case}{HTML}{fcff00}        % Jaune clair   - Conditions case
+\definecolor{cmds}{HTML}{909090}        % Gris          - Commandes + arguments
+\definecolor{cond}{HTML}{be480a}        % Brique        - Conditions
+\definecolor{func}{HTML}{8F00FF}        % Violet        - Fonctions
+\definecolor{loop}{HTML}{00ffff}        % Cyan          - Boucles
+\definecolor{path}{HTML}{bfff00}        % Citron vert   - Chemins de dossiers et de fichiers
+\definecolor{sec1}{HTML}{ff0000}        % Rouge         - Titres de premier niveau
+\definecolor{sec2}{HTML}{00ff00}        % Vert          - Titres de deuxième niveau
+\definecolor{sec3}{HTML}{0070ff}        % Bleu          - Titres de troisième niveau
+\definecolor{text}{HTML}{ffffff}        % Blanc         - Texte normal
+\definecolor{vars}{HTML}{FF7F00}        % Orange        - Noms des paramètres et des variables
+
+
 \fontfamily{Roboto}
 
 \pagecolor{black}
-\title{\color{red}Fonctions du fichier de librairie \color{lime}Echo.lib}\color{white}
+\title{\color{sec1}Fonctions du fichier de librairie \color{path}Echo.lib}\color{text}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
@@ -32,10 +51,6 @@
   /Keywords ()
 }
 
-% Definition de couleurs.
-\definecolor{mauve}{RGB}{128, 0, 128}
-\definecolor{brick}{HTML}{be480a}
-
 % Mise en page des paragraphes.
 \setlength{\parskip}{1em}
 
@@ -47,11 +62,11 @@
 \tableofcontents
 \newpage
 
-\color{red}
-\section{Présentation}\color{white}
+\color{sec1}
+\section{Présentation}\color{text}
 
-\color{green}
-\subsection{Présentation}\color{white}
+\color{sec2}
+\subsection{Présentation}\color{text}
 
 \begin{justify}
     Ce fichier source inclut des fonctions servant au traitement du texte, comprenant entre autre l'affichage, les redirections vers le fichier de logs et / ou le terminal, ainsi que la vérification de la casse.
@@ -61,20 +76,20 @@
 
 % -----------------------------------------------
 
-\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{green}
-\subsection{Définitions des éléments mentionnés}\color{white}
+\color{sec2}
+\subsection{Définitions des éléments mentionnés}\color{text}
 
-\color{blue}
-\subsubsection{Chemins de fichiers}\color{white}
+\color{sec3}
+\subsubsection{Chemins de fichiers}\color{text}
 
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Dossier parent} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_INSTALL\color{lime}/}                           & \textbf{\color{lime}Bash-utils-init.sh}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_INSTALL\color{path}/}                           & \textbf{\color{path}Bash-utils-init.sh}\\
         \hline
     \end{tabular}
     
@@ -82,11 +97,11 @@
         \hline
         \textbf{Dossier parent} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Colors.conf}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Status.conf}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Text.conf}\\
         \hline
     \end{tabular}
 
@@ -94,133 +109,148 @@
         \hline
         \textbf{Dossier parent} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Decho.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Errors.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Errors.lib}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Headers.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Status.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
-\color{blue}
-\subsubsection{Fonctions externes appelées}\color{white}
+\color{sec3}
+\subsubsection{Fonctions externes appelées}\color{text}
 
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Fonction} & \textbf{Fichier de définition}\\
         \hline
-        \textbf{\color{mauve}BU::ModuleInit::Msg}                           & \textbf{\color{lime}Bash-utils-init.sh}\\
+        \textbf{\color{func}BU::ModuleInit::Msg}                           & \textbf{\color{path}Bash-utils-init.sh}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Checkings::CheckProjectRelatedFile}  & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile}  & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{mauve}BU::IsInt}                                     & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{func}BU::IsInt}                                     & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Checkings::CheckEcho}                & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{func}BU::Main::Checkings::CheckEcho}                & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{mauve}BU::CheckProjectLogStatus}                     & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{func}BU::CheckProjectLogStatus}                     & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{mauve}BU::DechoHighlightFunction}                    & \textbf{\color{lime}Decho.lib}\\
+        \textbf{\color{func}BU::DechoHighlightFunction}                    & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{mauve}BU::DechoHighlightVar}                         & \textbf{\color{lime}Decho.lib}\\
+        \textbf{\color{func}BU::DechoHighlightVar}                         & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}           & \textbf{\color{lime}Errors.lib}\\
+        \textbf{\color{func}BU::Main::Errors::HandleSmallErrors}           & \textbf{\color{path}Errors.lib}\\
         \hline
-        \textbf{\color{mauve}BU::HeaderError}                               & \textbf{\color{lime}Headers.lib}\\
+        \textbf{\color{func}BU::HeaderError}                               & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{mauve}BU::HeaderNewstep}                             & \textbf{\color{lime}Headers.lib}\\
+        \textbf{\color{func}BU::HeaderNewstep}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{mauve}BU::HeaderSuccess}                             & \textbf{\color{lime}Headers.lib}\\
+        \textbf{\color{func}BU::HeaderSuccess}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{mauve}BU::HeaderWarning}                             & \textbf{\color{lime}Headers.lib}\\
+        \textbf{\color{func}BU::HeaderWarning}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Status::CheckStatIsInitializing}     & \textbf{\color{lime}Status.lib}\\
+        \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}     & \textbf{\color{path}Status.lib}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Status::CheckStatIsBackupEchoing}    & \textbf{\color{lime}Status.lib}\\
+        \textbf{\color{func}BU::Main::Status::CheckStatIsBackupEchoing}    & \textbf{\color{path}Status.lib}\\
         \hline
-        \textbf{\color{mauve}BU::Main::Status::ChangeSTAT\_ECHO}            & \textbf{\color{lime}Status.lib}\\
+        \textbf{\color{func}BU::Main::Status::ChangeSTAT\_ECHO}            & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
-
-% -----------------------
-
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
-
-\color{blue}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
-
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_BG\_...}\\[1\baselineskip]
-
-\begin{justify}
-    \textbf{Description :} Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
-
-
+\setlength{\parskip}{2em}
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
-\color{blue}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{white}
+\color{sec3}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_COLOR\_TXT\_...}\\[1\baselineskip]
-
-\begin{justify}\setlength{\parskip}{2em}
-    \textbf{Description :}
-\end{justify}\setlength{\parskip}{1em}
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR\_BG\_...}\\[1\baselineskip]
 
 \begin{justify}
-    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{mauve}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    \textbf{Description :} Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
 
 
 % -----------------------
 
-\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}\\[1\baselineskip]
+\color{sec3}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
 
-\begin{justify}\setlength{\parskip}{2em}
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...}\\[1\baselineskip]
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
     \textbf{Description :}
-\end{justify}\setlength{\parskip}{1em}
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+\end{justify}
+
+\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
+
+
+% -----------------------
+
+\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
+
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}\\[1\baselineskip]
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
+    \textbf{Description :}
+\end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
     Cette variable globale sert à mettre le script dans un état dit ``stable'', vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies, dans le cas où un rappel de la même fonction dans l'état précédent peut causer ceci.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Status.conf}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Status.conf}\\[1\baselineskip]
 
 
 % -----------------------
 
-\color{orange}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
+\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
-\textbf{Variable : \color{orange}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
+\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 
-\begin{justify}\setlength{\parskip}{2em}
+\setlength{\parskip}{2em}
+
+\begin{justify}
     \textbf{Description :}
-\end{justify}\setlength{\parskip}{1em}
+\end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
     Cette variable globale enregistre le caractère par défaut à afficher sur chaque colonne d'une ligne d'un header.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Text.conf}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Text.conf}\\[1\baselineskip]
 
 
 % -----------------------
@@ -229,18 +259,18 @@
 
 % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\color{red}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{red}
-\section{Fonctions - Section « PRINTING FORMATTED STRINGS »}\color{white}
+\color{sec1}
+\section{Fonctions - Section « PRINTING FORMATTED STRINGS »}\color{text}
 
-\color{green}
-\subsection{Sous-section « DEBUGGING »}\color{white}
+\color{sec2}
+\subsection{Sous-section « DEBUGGING »}\color{text}
 
-\color{blue}
-\subsubsection{BU::Main::Echo::\_\_EchoVoid}\color{white}
+\color{sec3}
+\subsubsection{BU::Main::Echo::\_\_EchoVoid}\color{text}
 
-\textbf{Fonction : \color{mauve}BU::Main::Echo::\_\_EchoVoid}\setlength{\parskip}{1em}
+\textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoVoid}\setlength{\parskip}{1em}
 
 % -----------------------
 
@@ -248,7 +278,7 @@
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
-    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{mauve}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{gray}bash -x}, qui affiche tous.
+    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{func}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{gray}bash -x}, qui affiche tous.
 \end{justify}
 
 % -----------------------
@@ -266,7 +296,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{gray}printf} sur 10 lignes, le redirige vers un \textbf{\color{lime}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{orange}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{gray}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
+    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{gray}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{gray}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
 
 % -----------------------
@@ -275,19 +305,19 @@
 
 \begin{justify}
     \textbf{Utilisation :}\\[1\baselineskip]
-    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} définie à la suite.
+    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} définie à la suite.
 \end{justify}
 
 
 % -----------------------
 
-\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
-\color{blue}
-\subsubsection{BU::Main::Echo::\_\_EchoOutput}\color{white}
+\color{sec3}
+\subsubsection{BU::Main::Echo::\_\_EchoOutput}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{mauve}BU::Main::Echo::\_\_EchoOutput}
+    \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoOutput}
 \end{justify}
 
 % -----------------------
@@ -297,7 +327,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Selon les étapes des fonctions \textbf{\color{mauve}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{lime}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{mauve}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{gray}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
+    Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{path}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{func}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{gray}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
 \end{justify}
 
 % -----------------------
@@ -309,14 +339,16 @@
 
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{\color{orange}p\_string} & String\\
+        \textbf{\color{vars}p\_string} & String\\
         \hline
-        \textbf{\color{orange}p\_context} & String\\
+        \textbf{\color{vars}p\_context} & String\\
         \hline
-        \textbf{\color{orange}p\_type} & Char\\
+        \textbf{\color{vars}p\_type} & Char\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 % -----------------------
 
@@ -325,83 +357,99 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} vérifie en premier la valeur de l'argument \textbf{\color{orange}p\_type}.
+    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} vérifie en premier la valeur de l'argument \textbf{\color{vars}p\_type}.
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{brick}Si} sa valeur n'est pas un simple caractère alphabétique, \textbf{\color{brick}alors} la valeur est assignée à une nouvelle variable nommée \textbf{\color{orange}v\_type}, tout en ne récupérant que le premier caractère, avant de redéclarer la variable \textbf{\color{orange}p\_type} et d'y assigner la valeur de la variable \textbf{\color{orange}v\_type}.
+    \textbf{\color{cond}Si} sa valeur n'est pas un simple caractère alphabétique, \textbf{\color{cond}alors} la valeur est assignée à une nouvelle variable nommée \textbf{\color{vars}v\_type}, tout en ne récupérant que le premier caractère, avant de redéclarer la variable \textbf{\color{vars}p\_type} et d'y assigner la valeur de la variable \textbf{\color{vars}v\_type}.
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{brick}Fin de la condition}.
-\end{justify}\setlength{\parskip}{2em}
+    \textbf{\color{cond}Fin de la condition}.
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 \begin{justify}
-    \textbf{\color{brick}Si} le script n'est pas en mode déboguage (la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG} est fixée à \textbf{false}), \textbf{\color{brick}alors} l'exécution de la fonction est interrompue, et cette dernière retourne la valeur 0.
-\end{justify}\setlength{\parskip}{1em}
+    \textbf{\color{cond}Si} le script n'est pas en mode déboguage (la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} est fixée à \textbf{false}), \textbf{\color{cond}alors} l'exécution de la fonction est interrompue, et cette dernière retourne la valeur 0.
+\end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{\color{brick}Sinon, si} le script est en mode déboguage, \textbf{\color{brick}alors} :
+    \textbf{\color{cond}Sinon, si} le script est en mode déboguage, \textbf{\color{cond}alors} :
 \end{justify}
 
 \begin{itemize}
     \item
     {
         \begin{justify}
-            \textbf{\color{brick}Si} le traitement de texte à afficher n'est pas en mode sécurisé (la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO} est définie à \textbf{false}), \textbf{\color{brick}alors} une nouvelle variable locale nommée \textbf{\color{orange}v\_BU\_MAIN\_STAT\_ECHO\_val} est crée pour y enregistrer la valeur actuelle de la variable globale de statut sus-mentionnée, avant qu'elle ne soit modifiée à \textbf{true}.
-        \end{justify}\setlength{\parskip}{1em}
+            \textbf{\color{cond}Si} le traitement de texte à afficher n'est pas en mode sécurisé (la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est définie à \textbf{false}), \textbf{\color{cond}alors} une nouvelle variable locale nommée \textbf{\color{vars}v\_BU\_MAIN\_STAT\_ECHO\_val} est crée pour y enregistrer la valeur actuelle de la variable globale de statut sus-mentionnée, avant qu'elle ne soit modifiée à \textbf{true}.
+        \end{justify}
+
+        \setlength{\parskip}{1em}
 
         \begin{justify}
-            \textbf{\color{brick}Fin de la condition}.
+            \textbf{\color{cond}Fin de la condition}.
         \end{justify}
     }
 
     \begin{justify}\setlength{\parskip}{2em}
-        La fonction \textbf{\color{mauve}BU::Main::Checkings::CheckProjectRelatedFile} est appelée pour vérifier la présence du \textbf{\color{lime}fichier temporaire} où la sortie de la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} doit être redirigée, ou le créer le cas échéant. En cas d'échec, un message d'erreur est affiché sur le terminal.
+        La fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile} est appelée pour vérifier la présence du \textbf{\color{path}fichier temporaire} où la sortie de la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} doit être redirigée, ou le créer le cas échéant. En cas d'échec, un message d'erreur est affiché sur le terminal.
     \end{justify}
 
     \item
     {
-        \begin{justify}\setlength{\parskip}{2em}
-            \textbf{\color{brick}Si} la valeur de l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{begin}, \textbf{\color{brick}alors} :
-        \end{justify}\setlength{\parskip}{1em}
+        \setlength{\parskip}{2em}
+
+        \begin{justify}
+            \textbf{\color{cond}Si} la valeur de l'argument \textbf{\color{vars}p\_context} correspond à la chaîne de caractères \textbf{begin}, \textbf{\color{cond}alors} :
+        \end{justify}
+
+        \setlength{\parskip}{1em}
 
         \begin{itemize}
             \item
             {
                 \begin{justify}
-                    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{gray}bash -x} sur le terminal.
+                    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{gray}bash -x} sur le terminal.
                 \end{justify}
             }
 
             \item
             {
-                \begin{justify}\setlength{\parskip}{2em}
-                    \textbf{\color{brick}Si} le caractère enregistré dans le paramètre \textbf{\color{orange}p\_type} est égal au premier caractère du type de message à afficher (\textbf{E} --> \textbf{Error}, \textbf{m} --> \textbf{Msg}, \textbf{N} --> \textbf{Newstep}, \textbf{S} --> \textbf{Success}, \textbf{W} --> \textbf{Warning}), \textbf{\color{brick}alors} la commande \textbf{\color{gray}echo -e} est appelée et une substitution de commande y est passée en argument.
-                \end{justify}\setlength{\parskip}{1em}
+                \setlength{\parskip}{2em}
 
                 \begin{justify}
-                    Dans cette substitution de commande, une fonction d'affichage de header coloré (correspondant au code couleur associé au type du message traité) est appelée, et la chaîne de caractère \textbf{« BEGIN DEBUGGING TEXT : »} est passée avec la valeur du paramètre \textbf{\color{orange}p\_string}, correspondant à la chaîne de caractères de la fonction \textbf{\color{mauve}Echo<...>} d'origine.
+                    \textbf{\color{cond}Si} le caractère enregistré dans le paramètre \textbf{\color{vars}p\_type} est égal au premier caractère du type de message à afficher (\textbf{E} --> \textbf{Error}, \textbf{m} --> \textbf{Msg}, \textbf{N} --> \textbf{Newstep}, \textbf{S} --> \textbf{Success}, \textbf{W} --> \textbf{Warning}), \textbf{\color{cond}alors} la commande \textbf{\color{gray}echo -e} est appelée et une substitution de commande y est passée en argument.
+                \end{justify}
+
+                \setlength{\parskip}{1em}
+
+                \begin{justify}
+                    Dans cette substitution de commande, une fonction d'affichage de header coloré (correspondant au code couleur associé au type du message traité) est appelée, et la chaîne de caractère \textbf{« BEGIN DEBUGGING TEXT : »} est passée avec la valeur du paramètre \textbf{\color{vars}p\_string}, correspondant à la chaîne de caractères de la fonction \textbf{\color{func}Echo<...>} d'origine.
                 \end{justify}
                 
                 \begin{justify}
-                    Ensuite, la sortie de la fonction d'affichage de headers est redirigée vers le \textbf{\color{lime}même fichier temporaire} en écrasant le contenu déjà écrit pour ne pas alourdir l'espace disque. Le cas échéant, un message d'avertissement est affiché à l'écran.
+                    Ensuite, la sortie de la fonction d'affichage de headers est redirigée vers le \textbf{\color{path}même fichier temporaire} en écrasant le contenu déjà écrit pour ne pas alourdir l'espace disque. Le cas échéant, un message d'avertissement est affiché à l'écran.
                 \end{justify}
 
                 \begin{justify}
-                    \textbf{\color{brick}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition}.
                 \end{justify}
             }
 
             \item
             {
-                \begin{justify}\setlength{\parskip}{2em}
-                    \textbf{\color{brick}Si} la variable locale \textbf{\color{orange}v\_BU\_MAIN\_STAT\_ECHO\_val} contient la valeur précédente de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, \textbf{\color{brick}alors} la valeur enregistrée dans la variable locale est réassignée à la variable globale, avant que celle enregistrée dans la variable locale ne soit effacée.
+                \setlength{\parskip}{2em}
+
+                \begin{justify}
+                    \textbf{\color{cond}Si} la variable locale \textbf{\color{vars}v\_BU\_MAIN\_STAT\_ECHO\_val} contient la valeur précédente de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, \textbf{\color{cond}alors} la valeur enregistrée dans la variable locale est réassignée à la variable globale, avant que celle enregistrée dans la variable locale ne soit effacée.
                 \end{justify}\setlength{\parskip}{1em}
                 
                 \begin{justify}
-                    \textbf{\color{brick}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition}.
                 \end{justify}
             }
         \end{itemize}
@@ -409,37 +457,41 @@
 
     \item
     {
-        \begin{justify}\setlength{\parskip}{2em}
-            \textbf{\color{brick}Sinon, si} la valeur de l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{end}, \textbf{\color{brick}alors} :
+        \setlength{\parskip}{2em}
+
+        \begin{justify}
+            \textbf{\color{cond}Sinon, si} la valeur de l'argument \textbf{\color{vars}p\_context} correspond à la chaîne de caractères \textbf{end}, \textbf{\color{cond}alors} :
         \end{justify}
-        
+
+        \setlength{\parskip}{1em}
+
         \begin{itemize}
             \item
             {
-                \begin{justify}\setlength{\parskip}{1em}
-                    Le code exécuté dans \textbf{\color{brick}cette nouvelle condition} est sensiblement le même que dans la condition précédente, où la l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{begin}, à deux exceptions près :
+                \begin{justify}
+                    Le code exécuté dans \textbf{\color{cond}cette nouvelle condition} est sensiblement le même que dans la condition précédente, où la l'argument \textbf{\color{vars}p\_context} correspond à la chaîne de caractères \textbf{begin}, à deux exceptions près :
                     
                     \begin{enumerate}
                         \item Le mot \textbf{« BEGIN »} de la chaîne de caractères passée en argument de la fonction d'affichage de headers est remplacé par le mot \textbf{« END »}.
 
-                        \item La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier. 
+                        \item La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier. 
                     \end{enumerate}
                 \end{justify}\setlength{\parskip}{1em}
                 
                 \begin{justify}
-                    \textbf{\color{brick}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition}.
                 \end{justify}
             }
         \end{itemize}
 
         \begin{justify}\setlength{\parskip}{2em}
-            \textbf{\color{brick}Fin de la condition}.
+            \textbf{\color{cond}Fin de la condition}.
         \end{justify}
     }
 \end{itemize}
 
 \begin{justify}\setlength{\parskip}{2em}
-    \textbf{\color{brick}Fin de la condition}.
+    \textbf{\color{cond}Fin de la condition}.
 \end{justify}
 
 % -----------------------
@@ -448,6 +500,95 @@
 
 \begin{justify}
     \textbf{Utilisation :}
+
+    Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU::EchoMsg}.
+\end{justify}
+
+
+% -----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{sec3}
+\subsubsection{BU::Main::Echo::\_\_EchoCPLS}\color{text}
+
+\begin{justify}
+    \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoCPLS}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Cette fonction remplit le même rôle que la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus}, à la différence qu'elle ne sert que de fonction de secours lorsque la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, dans les situations où le rappel de cette même fonction pour gérer l'affichage du texte crée une boucle infinie.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_string} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}p\_option} & Caractère \textbf{OU} chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}pa\_extraArgs} & Tableau\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    \textbf{\color{cyan}Pour} chaque valeur enregistrée dans le tableau \textbf{\color{vars}pa\_extraArgs} :
+\end{justify}
+
+\begin{justify}
+    \begin{itemize}
+        \item
+        {
+            \begin{justify}
+                \textbf{\color{cond}Si} la valeur correspond à la chaîne de caractères \textbf{nodate}, \textbf{\color{cond}alors} :
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+            
+            \begin{itemize}
+                \item
+                {
+                    \begin{justify}
+                        \textbf{\color{cond}Dans le cas où} la valeur du paramètre \textbf{\color{vars}p\_option} correspond à la chaîne de caractères \textbf{-n} (avec ou sans le tiret) :
+                    \end{justify}
+
+                    \setlength{\parskip}{1em}
+
+                    \begin{itemize}
+                        \item
+                        {
+                            \textbf{\color{cond}Si} 
+                        }
+                    \end{itemize}
+                }
+            \end{itemize}
+
+        }
+    \end{itemize}
+
 \end{justify}
 
 

@@ -97,8 +97,9 @@
         \hline
     \end{tabular}
 
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
 
+\setlength{\parskip}{2em}
 
 % -----------------------
 
@@ -129,8 +130,9 @@
         \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}   & \textbf{\color{lime}Errors.lib}\\
         \hline      
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
 
+\setlength{\parskip}{2em}
 
 % -----------------------
 
@@ -217,12 +219,16 @@
 
 \textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\setlength{\parskip}{1em}
 
+% -----------------------
+
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
     Cette fonction dessine une ligne en remplissant chaque colonne du terminal avec un caractère choisi et passé en second argument.
 \end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\\
 
@@ -242,7 +248,10 @@
         \textbf{\color{orange}p\_bgColor} & Substitution de commande\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
@@ -261,7 +270,9 @@
 
 \begin{justify}
     \textbf{\color{brick}Fin de la condition.}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 \begin{justify}
@@ -270,7 +281,10 @@
 
 \begin{justify}
     Une fois les deux condition précédentes vérifiées, la fonction vérifie si une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, pour créer une ligne d'une longueur définie.
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
 
 \begin{justify}
     \textbf{\color{brick}Si} une valeur est passée au paramètre \textbf{\color{orange}p\_strlen}, \textbf{\color{brick}alors} :\par
@@ -281,7 +295,9 @@
     {
         \begin{justify}
             \textbf{\color{brick}Si} cette valeur est un nombre entier, \textbf{\color{brick}alors} une boucle \textbf{\color{cyan}for} est exécutée pour afficher \textbf{n} caractères selon le nombre de colonnes défini via ce paramètre.\setlength{\parskip}{2em}
-        \end{justify}\setlength{\parskip}{1em}
+        \end{justify}
+
+        \setlength{\parskip}{1em}
 
         \begin{itemize}
             \item
@@ -298,11 +314,15 @@
 
         \begin{justify}
             \textbf{\color{brick}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleSmallErrors}.
-        \end{justify}\setlength{\parskip}{1em}
+        \end{justify}
+
+        \setlength{\parskip}{1em}
 
         \begin{justify}
             \textbf{\color{brick}Fin de la condition}.
-        \end{justify}\setlength{\parskip}{1em}
+        \end{justify}
+        
+        \setlength{\parskip}{1em}
     }
 \end{itemize}
 
@@ -326,7 +346,9 @@
 
 \begin{justify}
     \textbf{\color{brick}Fin de la condition}.
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 \begin{justify}
@@ -379,8 +401,9 @@
         \textbf{\color{orange}p\_bgColorPos} & Nombre entier « 1 », « 2 » et / ou « 3 »\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
 
+\setlength{\parskip}{2em}
 \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
 \begin{justify}
@@ -394,8 +417,9 @@
         \textbf{\color{orange}v\_strlen} & Nombre entier\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
 
+\setlength{\parskip}{2em}
 \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
 \begin{justify}
@@ -405,7 +429,9 @@
 
 \begin{justify}
     Il en est ainsi pour éviter que l'utilisateur n'ait à retaper la même chaîne de caractères ou à définir une nouvelle variable pour afficher cette dernière, puis récupérer son nombre de caractères via un enchaînement de processus avec un tube (\textbf{\color{gray}echo \color{orange}"\$var" \color{white} | \color{gray}wc -c}) (méthode utilisée par la fonction actuelle) ou de cette manière : \textbf{\color{gray}echo \color{orange}``\$\{\#var\}''}.
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 \begin{justify}
@@ -414,11 +440,15 @@
 
 \begin{justify}
     Pour laisser le choix aux développeurs quant à la ligne à colorer (première ou deuxième ligne de caractères, ou la chaîne de caractères du milieu), le paramètre \textbf{\color{orange}p\_bgColorPos} accepte un nombre comprenant entre un et chiffres, correspondants à la ligne à colorer, et dont les valeurs acceptées sont \textbf{1}, \textbf{2} et / ou \textbf{3}.
-\end{justify}\setlength{\parskip}{1em}
+\end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
     \textbf{\color{brick}Si} aucune valeur n'est passée au paramètre \textbf{\color{orange}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{brick}alors} cette dernière appelle la fonction \textbf{\color{mauve}BU::Main::Headers::DrawLine} en y passant en arguments la valeur des paramètres et variables \textbf{\color{orange}p\_lineChar}, \textbf{\color{orange}p\_lineColor}, \textbf{\color{orange}v\_strlen} et \textbf{\color{orange}p\_bgColor} (ces deux derniers arguments seront traités par la fonction appelée s'ils contiennent une valeur).
-\end{justify}\setlength{\parskip}{1em}
+\end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
     \textbf{\color{brick}Sinon, si} une valeur est passée au paramètre \textbf{\color{orange}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{brick}alors} :
@@ -440,7 +470,9 @@
             {
                 \begin{justify}
                     \textbf{\color{cyan}Pour} un nombre \textbf{\color{orange}i} de valeurs dans l'intervalle autorisée :
-                \end{justify}\setlength{\parskip}{1em}
+                \end{justify}
+
+                \setlength{\parskip}{1em}
 
                 \begin{itemize}
                     \item
@@ -477,7 +509,9 @@
         {
             \begin{justify}
                 \textbf{\color{brick}Sinon, si} un nombre entier positif est passé à ce paramètre \textbf{ET} que sa longueur est supérieure à trois chiffres, \textbf{\color{brick}alors} un message d'avertissement est affiché sur la zone de texte.
-            \end{justify}\setlength{\parskip}{1em}
+            \end{justify}
+
+            \setlength{\parskip}{1em}
 
             \begin{justify}
                 \textbf{\color{brick}Sinon, si} aucune valeur n'est passée à ce paramètre, \textbf{\color{brick}alors} un message d'avertissement est affiché sur la zone de texte.
@@ -496,16 +530,22 @@
 
 \begin{justify}
     \textbf{\color{brick}Fin de la condition}.
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 
 \begin{justify}
     Une fois le header (ou un message d'avertissement affiché), un saut de ligne est effectué, puis le script se met en pause pendant le nombre de secondes défini par la valeur enregistrée dans la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}.
-\end{justify}\setlength{\parskip}{1em}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 \begin{justify}
     Finalement, les valeurs des deux variables globales de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} et \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}, modifiées au début de la fonction, sont restaurées.
 \end{justify}
+
+\setlength{\parskip}{1em}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -544,8 +584,9 @@
         \textbf{\color{orange}\$4} & Nombre entier « 1 », « 2 » et / ou « 3 »\\
         \hline
     \end{tabular}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
 
+\setlength{\parskip}{2em}
 \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
 \begin{justify}
@@ -592,10 +633,11 @@
     Elles fonctionnent chacune de la même manière que les fonctions de la catégorie précédente, à deux exceptions près :
 
     \begin{itemize}
-        \item \textbf{le nom des fonctions et des variables :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, ni d'appels double des mêmes variables, car le résultat et le rendu seraient le même que celui des fonctions de la sous-catégorie précédente.\setlength{\parskip}{1em}
+        \item \textbf{le nom des fonctions et des variables :} Il n'y a pas de fonction portant deux fois le nom de la même couleur, ni d'appels double des mêmes variables, car le résultat et le rendu seraient le même que celui des fonctions de la sous-catégorie précédente.
     \end{itemize}
 \end{justify}
 
+\setlength{\parskip}{1em}
 
 % -----------------------
 
