@@ -40,10 +40,10 @@ fi
 
 #### PRINTING FORMATTED STRINGS
 
-## DEBUGGING AND HANDLING TEXT DISPLAY ERRORS
+## DEBUGGING
 
 # Print void lines before and after calling a header.
-function BU::__EchoVoid()
+function BU::Main::Echo::__EchoVoid()
 {
 printf "
     
@@ -57,7 +57,7 @@ printf "
     
 " > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || 
     {
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH »" >&2; echo >&2; exit 1
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH »" >&2; echo >&2; exit 1;
     }
 }
 
@@ -66,23 +66,30 @@ printf "
 function BU::Main::Echo::__EchoOutput()
 {
 	#**** Parameters ****
-	local p_string=$1		# String to display.
-	local p_context=$2		# Begin or end of the debug process.
-	local p_type=$3			# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
+	local p_string=$1;		# String to display.
+	local p_context=$2;		# Begin or end of the debug process.
+	local p_type=$3;		# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
 	#**** Code ****
+	# If the "$p_type" argument is a string, then the first character is extracted.
+	if ! IsAlphaChar "$p_type"; then
+        local v_type=${p_type::1};
+
+        p_type="$v_type";
+	fi
+
 	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0;
 
 	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO"
+            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO";
         fi
 
 		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
         if [ "${p_context,,}" = "begin" ]; then
-            BU::__EchoVoid
+            BU::Main::Echo::__EchoVoid
 
             if [ "${p_type^^}" = "E" ]; then
                 echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
@@ -118,10 +125,10 @@ function BU::Main::Echo::__EchoOutput()
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
             if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
-                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val=''
+                __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val='';
             fi
 
-            BU::__EchoVoid; return 0;
+            BU::Main::Echo::__EchoVoid; return 0;
         fi
     fi
 }
@@ -130,10 +137,10 @@ function BU::Main::Echo::__EchoOutput()
 function BU::Main::Echo::__EchoCPLS()
 {
     #**** Parameters ****
-    local p_string=$1
-    local p_option=$2
+    local p_string=$1;
+    local p_option=$2;
 
-    shift 2; pa_extraArgs=("$@")
+    shift 2; pa_extraArgs=("$@");
 
 	#**** Variables ****
 	local v_
@@ -163,14 +170,14 @@ function BU::Main::Echo::__EchoCPLS()
                     if BU::Main::Status::CheckStatIsInitializing; then
                         BU::ModuleInit::Msg "$p_string" 'n' || return 1;
                     else
-                        echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                        echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
                         BU::ModuleInit::Msg "$p_string" || return 1;
                     else
-                        echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                        echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
             esac
@@ -180,14 +187,14 @@ function BU::Main::Echo::__EchoCPLS()
                     if BU::Main::Status::CheckStatIsInitializing; then
                         BU::ModuleInit::Msg "$p_string" 'n' || return 1;
                     else
-                        echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                        echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
                         BU::ModuleInit::Msg "$p_string" || return 1;
                     else
-                        echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                        echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
             esac

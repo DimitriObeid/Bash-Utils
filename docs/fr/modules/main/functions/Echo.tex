@@ -235,39 +235,220 @@
 \section{Fonctions - Section « PRINTING FORMATTED STRINGS »}\color{white}
 
 \color{green}
-\subsection{Sous-section « DEBUGGING AND HANDLING TEXT DISPLAY ERRORS »}\color{white}
+\subsection{Sous-section « DEBUGGING »}\color{white}
 
 \color{blue}
-\subsubsection{BU::\_\_EchoVoid}\color{white}
+\subsubsection{BU::Main::Echo::\_\_EchoVoid}\color{white}
 
-\textbf{Fonction : \color{mauve}BU::\_\_EchoVoid}\setlength{\parskip}{1em}
+\textbf{Fonction : \color{mauve}BU::Main::Echo::\_\_EchoVoid}\setlength{\parskip}{1em}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
-    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{mauve}Echo<...>()} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{gray}bash -x}, qui affiche tous.
+    Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{mauve}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{gray}bash -x}, qui affiche tous.
 \end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\\
 
 \begin{justify}
     \textbf{Paramètres :}\\[1\baselineskip]
-    Aucun paramètre
+    Aucun paramètre n'est supporté.
 \end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{mauve}BU::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{gray}printf} sur 10 lignes, le redirige vers un fichier temporaire pour ne pas l'afficher sur le terminal si la commande \textbf{\color{gray}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
+    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{gray}printf} sur 10 lignes, le redirige vers un \textbf{\color{lime}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{orange}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{gray}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
+
+% -----------------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}\\[1\baselineskip]
-    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} définie à la suite
+    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} définie à la suite.
 \end{justify}
+
+
+% -----------------------
+
+\color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\setlength{\parskip}{1em}
+
+\color{blue}
+\subsubsection{BU::Main::Echo::\_\_EchoOutput}\color{white}
+
+\begin{justify}
+    \textbf{Fonction : \color{mauve}BU::Main::Echo::\_\_EchoOutput}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Selon les étapes des fonctions \textbf{\color{mauve}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{lime}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{mauve}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{gray}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{orange}p\_string} & String\\
+        \hline
+        \textbf{\color{orange}p\_context} & String\\
+        \hline
+        \textbf{\color{orange}p\_type} & Char\\
+        \hline
+    \end{tabular}
+\end{justify}\setlength{\parskip}{2em}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} vérifie en premier la valeur de l'argument \textbf{\color{orange}p\_type}.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Si} sa valeur n'est pas un simple caractère alphabétique, \textbf{\color{brick}alors} la valeur est assignée à une nouvelle variable nommée \textbf{\color{orange}v\_type}, tout en ne récupérant que le premier caractère, avant de redéclarer la variable \textbf{\color{orange}p\_type} et d'y assigner la valeur de la variable \textbf{\color{orange}v\_type}.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{brick}Fin de la condition}.
+\end{justify}\setlength{\parskip}{2em}
+
+
+\begin{justify}
+    \textbf{\color{brick}Si} le script n'est pas en mode déboguage (la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_DEBUG} est fixée à \textbf{false}), \textbf{\color{brick}alors} l'exécution de la fonction est interrompue, et cette dernière retourne la valeur 0.
+\end{justify}\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{brick}Sinon, si} le script est en mode déboguage, \textbf{\color{brick}alors} :
+\end{justify}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{brick}Si} le traitement de texte à afficher n'est pas en mode sécurisé (la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO} est définie à \textbf{false}), \textbf{\color{brick}alors} une nouvelle variable locale nommée \textbf{\color{orange}v\_BU\_MAIN\_STAT\_ECHO\_val} est crée pour y enregistrer la valeur actuelle de la variable globale de statut sus-mentionnée, avant qu'elle ne soit modifiée à \textbf{true}.
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{justify}
+            \textbf{\color{brick}Fin de la condition}.
+        \end{justify}
+    }
+
+    \begin{justify}\setlength{\parskip}{2em}
+        La fonction \textbf{\color{mauve}BU::Main::Checkings::CheckProjectRelatedFile} est appelée pour vérifier la présence du \textbf{\color{lime}fichier temporaire} où la sortie de la fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoOutput} doit être redirigée, ou le créer le cas échéant. En cas d'échec, un message d'erreur est affiché sur le terminal.
+    \end{justify}
+
+    \item
+    {
+        \begin{justify}\setlength{\parskip}{2em}
+            \textbf{\color{brick}Si} la valeur de l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{begin}, \textbf{\color{brick}alors} :
+        \end{justify}\setlength{\parskip}{1em}
+
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}
+                    La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{gray}bash -x} sur le terminal.
+                \end{justify}
+            }
+
+            \item
+            {
+                \begin{justify}\setlength{\parskip}{2em}
+                    \textbf{\color{brick}Si} le caractère enregistré dans le paramètre \textbf{\color{orange}p\_type} est égal au premier caractère du type de message à afficher (\textbf{E} --> \textbf{Error}, \textbf{m} --> \textbf{Msg}, \textbf{N} --> \textbf{Newstep}, \textbf{S} --> \textbf{Success}, \textbf{W} --> \textbf{Warning}), \textbf{\color{brick}alors} la commande \textbf{\color{gray}echo -e} est appelée et une substitution de commande y est passée en argument.
+                \end{justify}\setlength{\parskip}{1em}
+
+                \begin{justify}
+                    Dans cette substitution de commande, une fonction d'affichage de header coloré (correspondant au code couleur associé au type du message traité) est appelée, et la chaîne de caractère \textbf{« BEGIN DEBUGGING TEXT : »} est passée avec la valeur du paramètre \textbf{\color{orange}p\_string}, correspondant à la chaîne de caractères de la fonction \textbf{\color{mauve}Echo<...>} d'origine.
+                \end{justify}
+                
+                \begin{justify}
+                    Ensuite, la sortie de la fonction d'affichage de headers est redirigée vers le \textbf{\color{lime}même fichier temporaire} en écrasant le contenu déjà écrit pour ne pas alourdir l'espace disque. Le cas échéant, un message d'avertissement est affiché à l'écran.
+                \end{justify}
+
+                \begin{justify}
+                    \textbf{\color{brick}Fin de la condition}.
+                \end{justify}
+            }
+
+            \item
+            {
+                \begin{justify}\setlength{\parskip}{2em}
+                    \textbf{\color{brick}Si} la variable locale \textbf{\color{orange}v\_BU\_MAIN\_STAT\_ECHO\_val} contient la valeur précédente de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}, \textbf{\color{brick}alors} la valeur enregistrée dans la variable locale est réassignée à la variable globale, avant que celle enregistrée dans la variable locale ne soit effacée.
+                \end{justify}\setlength{\parskip}{1em}
+                
+                \begin{justify}
+                    \textbf{\color{brick}Fin de la condition}.
+                \end{justify}
+            }
+        \end{itemize}
+    }
+
+    \item
+    {
+        \begin{justify}\setlength{\parskip}{2em}
+            \textbf{\color{brick}Sinon, si} la valeur de l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{end}, \textbf{\color{brick}alors} :
+        \end{justify}
+        
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}\setlength{\parskip}{1em}
+                    Le code exécuté dans \textbf{\color{brick}cette nouvelle condition} est sensiblement le même que dans la condition précédente, où la l'argument \textbf{\color{orange}p\_context} correspond à la chaîne de caractères \textbf{begin}, à deux exceptions près :
+                    
+                    \begin{enumerate}
+                        \item Le mot \textbf{« BEGIN »} de la chaîne de caractères passée en argument de la fonction d'affichage de headers est remplacé par le mot \textbf{« END »}.
+
+                        \item La fonction \textbf{\color{mauve}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier. 
+                    \end{enumerate}
+                \end{justify}\setlength{\parskip}{1em}
+                
+                \begin{justify}
+                    \textbf{\color{brick}Fin de la condition}.
+                \end{justify}
+            }
+        \end{itemize}
+
+        \begin{justify}\setlength{\parskip}{2em}
+            \textbf{\color{brick}Fin de la condition}.
+        \end{justify}
+    }
+\end{itemize}
+
+\begin{justify}\setlength{\parskip}{2em}
+    \textbf{\color{brick}Fin de la condition}.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{Utilisation :}
+\end{justify}
+
 
 \end{document}
