@@ -72,7 +72,7 @@ function BU::Main::Echo::__EchoOutput()
 
 	#**** Code ****
 	# If the "$p_type" argument is a string, then the first character is extracted.
-	if ! IsAlphaChar "$p_type"; then
+	if ! BU::IsAlphaChar "$p_type"; then
         local v_type=${p_type::1};
 
         p_type="$v_type";
@@ -200,10 +200,11 @@ function BU::Main::Echo::__EchoCPLS()
             esac
         fi
 
-		if [ "$__BU_MAIN_STAT_TIME_HEADER" -ge 0 ];   then sleep "0"; fi
-		if [ "$__BU_MAIN_STAT_TIME_NEWLINE" -ge 0 ];  then sleep "0"; fi
-		if [ "$__BU_MAIN_STAT_TIME_TXT" -ge 0 ];      then sleep "0"; fi
+		if (( $(echo "$__BU_MAIN_STAT_TIME_HEADER > 0"    | bc -l ) )); then sleep "0"; fi
+		if (( $(echo "$__BU_MAIN_STAT_TIME_NEWLINE > 0"   | bc -l ) )); then sleep "0"; fi
+		if (( $(echo "$__BU_MAIN_STAT_TIME_TXT > 0"       | bc -l ) )); then sleep "0"; fi
     done
+   # if (( $(echo "$num1 > $num2" |bc -l) ));
 
     return 0;
 }
