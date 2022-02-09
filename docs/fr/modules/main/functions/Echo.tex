@@ -483,19 +483,19 @@
             }
         \end{itemize}
 
-        \begin{justify}\setlength{\parskip}{2em}
+        \begin{justify}
             \textbf{\color{cond}Fin de la condition « if »}.
         \end{justify}
     }
 \end{itemize}
 
-\begin{justify}\setlength{\parskip}{2em}
+\begin{justify}
     \textbf{\color{cond}Fin de la condition « if »}.
 \end{justify}
 
 % -----------------------
 
-\par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}
@@ -650,16 +650,11 @@
             }
         \end{itemize}
 
-        \setlength{\parskip}{2em}
-
         \begin{justify}
             \textbf{\color{cond}Fin de la condition « if »}.
         \end{justify}
     }
 \end{itemize}
-
-
-\setlength{\parskip}{2em}
 
 \begin{justify}
     \textbf{\color{loop}Fin de la boucle « pour »}.
@@ -1043,9 +1038,46 @@
     \textbf{\color{cond}Si} le paramètre \textbf{\color{vars}p\_number} contient une valeur, \textbf{\color{cond}alors} :
     
     \begin{itemize}
-        \item \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU::EchoMsg}
+        \item
+        {
+            \begin{justify}
+                \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU::EchoMsg}, puis la fonction \textbf{\color{func}BU::Main::Errors::HandleSmallErrors} est appelée pour afficher un message d'avertissement, avant que la fonction \textbf{\color{func}BU::EchoMsg} ne soit rappelée pour effectuer un dernier saut de ligne.
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+
+            \begin{justify}
+                \textbf{\color{cond}Sinon}, une boucle \textbf{\color{loop}pour} est lancée :
+
+                \begin{itemize}
+                    \item
+                    {
+                        \begin{justify}
+                            \textbf{\color{loop}Pour} un nombre \textbf{\color{vars}i} inférieur à la valeur du paramètre \textbf{\color{vars}p\_number}, et incrémenté à chaque itération, la fonction \textbf{\color{func}BU::EchoMsg} est appelée.
+                        \end{justify}
+
+                        \setlength{\parskip}{1em}
+
+                        \begin{justify}
+                            \textbf{\color{loop}Fin de la boucle « pour »}.
+                        \end{justify}
+                    }
+                \end{itemize}
+            \end{justify}
+            
+            \begin{justify}
+                \textbf{\color{cond}Fin de la condition « if »}.
+            \end{justify}
+        }
     \end{itemize}
 \end{justify}
 
+\begin{justify}
+    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU::EchoMsg} est effectué.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond}Fin de la condition « if »}.
+\end{justify}
 
 \end{document}
