@@ -365,7 +365,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Fin de la condition}.
+    \textbf{\color{cond}Fin de la condition « if »}.
 \end{justify}
 
 \setlength{\parskip}{2em}
@@ -391,7 +391,7 @@
         \setlength{\parskip}{1em}
 
         \begin{justify}
-            \textbf{\color{cond}Fin de la condition}.
+            \textbf{\color{cond}Fin de la condition « if »}.
         \end{justify}
     }
 
@@ -436,7 +436,7 @@
                 \end{justify}
 
                 \begin{justify}
-                    \textbf{\color{cond}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition « if »}.
                 \end{justify}
             }
 
@@ -449,7 +449,7 @@
                 \end{justify}\setlength{\parskip}{1em}
                 
                 \begin{justify}
-                    \textbf{\color{cond}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition « if »}.
                 \end{justify}
             }
         \end{itemize}
@@ -479,19 +479,19 @@
                 \end{justify}\setlength{\parskip}{1em}
                 
                 \begin{justify}
-                    \textbf{\color{cond}Fin de la condition}.
+                    \textbf{\color{cond}Fin de la condition « if »}.
                 \end{justify}
             }
         \end{itemize}
 
         \begin{justify}\setlength{\parskip}{2em}
-            \textbf{\color{cond}Fin de la condition}.
+            \textbf{\color{cond}Fin de la condition « if »}.
         \end{justify}
     }
 \end{itemize}
 
 \begin{justify}\setlength{\parskip}{2em}
-    \textbf{\color{cond}Fin de la condition}.
+    \textbf{\color{cond}Fin de la condition « if »}.
 \end{justify}
 
 % -----------------------
@@ -558,99 +558,292 @@
     \textbf{\color{loop}Pour} chaque valeur enregistrée dans le tableau \textbf{\color{vars}pa\_extraArgs} :
 \end{justify}
 
-\begin{justify}
-    \begin{itemize}
-        \item
-        {
-            \begin{justify}
-                \textbf{\color{cond}Si} la valeur correspond à la chaîne de caractères \textbf{nodate}, \textbf{\color{cond}alors} :
-            \end{justify}
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{cond}Si} la valeur correspond à la chaîne de caractères \textbf{nodate}, \textbf{\color{cond}alors} :
+        \end{justify}
 
-            \setlength{\parskip}{1em}
+        \setlength{\parskip}{1em}
             
-            \begin{itemize}
-                \item
-                {
-                    \begin{justify}
-                        \textbf{\color{case}Dans le cas où} la valeur du paramètre \textbf{\color{vars}p\_option} correspond à la chaîne de caractères \textbf{-n} (avec ou sans le tiret) :
-                    \end{justify}
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}
+                    \textbf{\color{case}Dans le cas où} la valeur du paramètre \textbf{\color{vars}p\_option} correspond à la chaîne de caractères \textbf{-n} (avec ou sans le tiret) :
+                \end{justify}
 
-                    \setlength{\parskip}{1em}
+                \setlength{\parskip}{1em}
 
-                    \begin{itemize}
-                        \item
-                        {
-                            \begin{justify}
-                                \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne. 
-                            \end{justify}
-
-                            \setlength{\parskip}{1em}
-
-                            \begin{justify}
-                                \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}.
-                            \end{justify}
-
-                            \begin{justify}
-                                \textbf{\color{cond}Fin de la condition}.
-                            \end{justify}
-                        }
-                    \end{itemize}
-                    
+                \begin{itemize}
                     \item
                     {
-                        \setlength{\parskip}{2em}
-
                         \begin{justify}
-                            \textbf{\color{case}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne. 
                         \end{justify}
 
                         \setlength{\parskip}{1em}
+
+                        \begin{justify}
+                            \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}.
+                        \end{justify}
+
+                        \begin{justify}
+                            \textbf{\color{cond}Fin de la condition « if »}.
+                    \end{justify}
                     }
-                    
-                    \begin{itemize}
-                        \item
-                        {
-                            \begin{justify}
-                                \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne. 
-                            \end{justify}
-
-                            \setlength{\parskip}{1em}
-
-                            \begin{justify}
-                                \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, toujours avec la date de log écrite auparavant.
-                            \end{justify}
-
-                            \begin{justify}
-                                \textbf{\color{cond}Fin de la condition}.
-                            \end{justify}
-                        }
-                    \end{itemize}
-                }
+                \end{itemize}
 
                 \item
                 {
                     \setlength{\parskip}{2em}
 
                     \begin{justify}
-                        \textbf{\color{cond}Sinon, si} une valeur non-supportée est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+                        \textbf{\color{case}Sinon, si} aucune valeur n'est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+                    \end{justify}
+
+                    \setlength{\parskip}{1em}
+                }
+
+                \begin{itemize}
+                    \item
+                    {
+                        \begin{justify}
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne. 
+                        \end{justify}
 
                         \setlength{\parskip}{1em}
 
-                        \begin{itemize}
-                            \item
-                            {
-                                \begin{justify}
-                                    
-                                \end{justify}
-                            }
-                        \end{itemize}
-                    \end{justify}
-                }
-            \end{itemize}
+                        \begin{justify}
+                            \textbf{\color{cond}Sinon}, la commande \textbf{\color{cmds}echo -ne} est appelée pour afficher la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, toujours avec la date de log écrite auparavant.
+                        \end{justify}
+
+                        \begin{justify}
+                            \textbf{\color{cond}Fin de la condition « if »}.
+                        \end{justify}
+                    }
+                \end{itemize}
+            }
+
+            \item
+            {
+                \setlength{\parskip}{2em}
+
+                \begin{justify}
+                    \textbf{\color{case}Sinon, si} une valeur non-supportée est passée au paramètre \textbf{\color{vars}p\_option}, \textbf{\color{case}alors} :
+                \end{justify}
+
+                \setlength{\parskip}{1em}
+
+                \begin{itemize}
+                    \item
+                    {
+                        \begin{justify}
+                            Les mêmes \textbf{\color{cond}vérifications que \color{case}dans la condition case précédente} sont effectuées.
+                        \end{justify}
+                    }
+                \end{itemize}
+                
+                \begin{justify}
+                    \textbf{\color{case}Fin de la condition « case »}.
+                \end{justify}
+            }
+        \end{itemize}
+
+        \setlength{\parskip}{2em}
+
+        \begin{justify}
+            \textbf{\color{cond}Fin de la condition « if »}.
+        \end{justify}
+    }
+\end{itemize}
+
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
+    \textbf{\color{loop}Fin de la boucle « pour »}.
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez cette fonction pour remplacer .
+\end{justify}
+
+\begin{justify}
+    Normalement, cette partie est déjà gérée par les fonctions principales de traitement de texte du module \textbf{main}.
+\end{justify}
+
+
+% -----------------------
+
+% -----------------------------------------------
+
+% /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{sec1}
+\section{Section « TEXT DISPLAYING »}\color{text}
+
+\color{sec2}
+\subsection{Sous-section « DISPLAYING A CONTEXT MESSAGE »}\color{text}
+
+\color{sec3}
+\subsubsection{BU::EchoError | Msg | Newstep | Success | Warning}\color{text}
+
+\begin{justify}
+    \textbf{Fonctions :}
+    \begin{enumerate}
+        \item \textbf{\color{red}BU::EchoError}
+        \item \textbf{\color{text}BU::EchoMsg}
+        \item \textbf{\color{orange}BU::EchoNewstep}
+        \item \textbf{\color{green}BU::EchoSuccess}
+        \item \textbf{\color{yellow}BU::EchoWarning}
+    \end{enumerate}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Chacune de ces fonctions gère le texte à afficher et / ou rediriger vers un fichier de logs selon la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, tout en appelant la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} (voir la description de cette fonction).
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_string} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}p\_option} & Caractère ou chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}pa\_extraArgs} & Tableau\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \setlength{\parskip}{1em}
+
+    \textbf{Fonctionnement :}
+
+    \textbf{\color{cond}Si} le mode de traitement de texte n'est pas en mode sûr (la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est donc fixée à \textbf{false}), \textbf{\color{cond}alors} :
+
+    \begin{itemize}
+        \item
+        {
+            \begin{justify}
+                La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} est appelée (voir la description de cette fonction).
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+
+            \begin{justify}
+                La fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus} est appelée en lui passant en arguments :
+                \begin{enumerate}
+                    \item La chaîne de caractères à traiter (paramètre \textbf{\color{vars}p\_string}),
+                    \item L'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
+                    \item Chaque valeur du tableau \textbf{\color{vars}pa\_extraArgs}.
+                \end{enumerate}
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+
+            \begin{justify}
+                La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} est rappelée (voir la description de cette fonction).
+            \end{justify}
         }
     \end{itemize}
-
 \end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{cond}Sinon, si} le mode de traitement de texte est en mode sûr (la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est donc fixée à \textbf{true}), \textbf{\color{cond}alors} :
+
+    \begin{itemize}
+        \item
+        {
+            \begin{justify}
+                Le code à exécuter est sensiblement le même que dans la vérification précédente, à l'exception que la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoCPLS} est appelée pour gérer l'affichage de texte à la place de la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus}.
+            \end{justify}
+        }
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond}Fin de la condition « if »}
+\end{justify}
+
+
+% -----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{sec3}
+\subsubsection{BU::EchoRead}\color{text}
+
+\begin{justify}
+    \textbf{Fonction : \color{func}BU::EchoRead}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Cette fonction crée une chaîne de caractères indiquant la valeur saisie en entrée de la commande \textbf{\color{cmds}read}.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_string} & Chaîne de caractères\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    \textbf{\color{cond}Si} le fichier de logs existe \textbf{\color{cond}ET si} la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} est fixée à \textbf{true} (autorisation de rediriger le texte vers un fichier de logs) \textbf{\color{cond}ET si} la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} contient un valeur, \textbf{\color{cond}alors} : 
+\end{justify}
+
 
 
 \end{document}

@@ -216,7 +216,9 @@ function BU::Main::Echo::__EchoCPLS()
 
 #### TEXT DISPLAYING
 
-## DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
+## DISPLAYING A CONTEXT MESSAGE
+
+# --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
 # Error message
 
@@ -228,10 +230,12 @@ function BU::Main::Echo::__EchoCPLS()
 function BU::EchoError()
 {
     #**** Parameters ****
-    local p_string=$1
-    local p_option=$2; shift 2
+    local p_string=$1;
+    local p_option=$2;
+    
+    shift 2;
 
-    local pa_extraArgs=("$@")
+    local pa_extraArgs=("$@");
 
     #**** Code ****
     if ! BU::Main::Checkings::CheckEcho; then
@@ -261,11 +265,11 @@ function BU::EchoError()
 function BU::EchoMsg()
 {
     #**** Parameters ****
-    local p_string=$1
+    local p_string=$1;
     local p_option=$2;
-    shift 2
+    shift 2;
 
-    local pa_extraArgs=("$@")
+    local pa_extraArgs=("$@");
 
     #**** Code ****
     if ! BU::Main::Checkings::CheckEcho; then
@@ -295,11 +299,11 @@ function BU::EchoMsg()
 function BU::EchoNewstep()
 {
     #**** Parameters ****
-    local p_string=$1
+    local p_string=$1;
     local p_option=$2;
-    shift 2
+    shift 2;
 
-    local pa_extraArgs=("$@")
+    local pa_extraArgs=("$@");
 
     #**** Code ****
     if ! BU::Main::Checkings::CheckEcho; then
@@ -329,7 +333,7 @@ function BU::EchoNewstep()
 function BU::EchoRead()
 {
 	#**** Parameters ****
-	local p_string=$1      # User's keyboard input.
+	local p_string=$1;     # User's keyboard input.
 	
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
@@ -347,11 +351,11 @@ function BU::EchoRead()
 function BU::EchoSuccess()
 {
     #**** Parameters ****
-    local p_string=$1
+    local p_string=$1;
     local p_option=$2;
-    shift 2
+    shift 2;
 
-    local pa_extraArgs=("$@")
+    local pa_extraArgs=("$@");
 
     #**** Code ****
     if ! BU::Main::Checkings::CheckEcho; then
@@ -381,11 +385,11 @@ function BU::EchoSuccess()
 function BU::EchoWarning()
 {
     #**** Parameters ****
-    local p_string=$1
+    local p_string=$1;
     local p_option=$2;
-    shift 2
+    shift 2;
 
-    local pa_extraArgs=("$@")
+    local pa_extraArgs=("$@");
 
     #**** Code ****
     if ! BU::Main::Checkings::CheckEcho; then
@@ -415,7 +419,7 @@ function BU::EchoWarning()
 function BU::EchoAqua()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_AQUA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -427,7 +431,7 @@ function BU::EchoAqua()
 function BU::EchoBlack()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLACK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -439,7 +443,7 @@ function BU::EchoBlack()
 function BU::EchoBlue()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLUE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -451,7 +455,7 @@ function BU::EchoBlue()
 function BU::EchoCyan()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_CYAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -463,7 +467,7 @@ function BU::EchoCyan()
 function BU::EchoFuschia()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUSCHIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -475,7 +479,7 @@ function BU::EchoFuschia()
 function BU::EchoGray()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GRAY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -487,7 +491,7 @@ function BU::EchoGray()
 function BU::EchoGreen()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GREEN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -499,7 +503,7 @@ function BU::EchoGreen()
 function BU::EchoLime()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_LIME}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -511,7 +515,7 @@ function BU::EchoLime()
 function BU::EchoMaroon()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_MAROON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -523,7 +527,7 @@ function BU::EchoMaroon()
 function BU::EchoNavy()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_NAVY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -535,7 +539,7 @@ function BU::EchoNavy()
 function BU::EchoOlive()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_OLIVE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -547,7 +551,7 @@ function BU::EchoOlive()
 function BU::EchoOrange()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_ORANGE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -559,7 +563,7 @@ function BU::EchoOrange()
 function BU::EchoPink()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PINK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -571,7 +575,7 @@ function BU::EchoPink()
 function BU::EchoPurple()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PURPLE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -583,7 +587,7 @@ function BU::EchoPurple()
 function BU::EchoRed()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_RED}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -595,7 +599,7 @@ function BU::EchoRed()
 function BU::EchoSalmon()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SALMON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -607,7 +611,7 @@ function BU::EchoSalmon()
 function BU::EchoSilver()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SILVER}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -619,7 +623,7 @@ function BU::EchoSilver()
 function BU::EchoTan()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -631,7 +635,7 @@ function BU::EchoTan()
 function BU::EchoTeal()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TEAL}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -643,7 +647,7 @@ function BU::EchoTeal()
 function BU::EchoTurquoise()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@")
+    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TURQUOISE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
