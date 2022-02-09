@@ -9,15 +9,14 @@
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}
 
-\usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour l'affichage numérique)
+% en option "dvipsnames" (basé sur le modèle CMYK, meilleur pour l'impression) via le script de conversion en format imprimable.
+\usepackage[usenames,svgnames]{xcolor}      % Coloration du texte.
 \usepackage{verbatim}						% Mise en page des paragraphes.
 
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-% Definition de couleurs.
-\definecolor{mauve}{RGB}{228, 0, 228}
-\definecolor{brick}{HTML}{be480a}
 
 % Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
 \definecolor{back}{HTML}{000000}        % Noir          - Fond
@@ -764,7 +763,7 @@
             \begin{justify}
                 La fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus} est appelée en lui passant en arguments :
                 \begin{enumerate}
-                    \item La chaîne de caractères à traiter (paramètre \textbf{\color{vars}p\_string}),
+                    \item La chaîne de caractères à traiter (paramètre \textbf{\color{vars}p\_string}), avec la substitution de commande pour encoder la couleur associée au contexte, une séparation pour mieux distinguer ce texte et une dernière substitution de commande pour réinitialiser la couleur du texte.
                     \item L'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
                     \item Chaque valeur du tableau \textbf{\color{vars}pa\_extraArgs}.
                 \end{enumerate}
@@ -796,6 +795,16 @@
 
 \begin{justify}
     \textbf{\color{cond}Fin de la condition « if »}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez une de ces fonctions 
 \end{justify}
 
 
@@ -841,9 +850,202 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    \textbf{\color{cond}Si} le fichier de logs existe \textbf{\color{cond}ET si} la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} est fixée à \textbf{true} (autorisation de rediriger le texte vers un fichier de logs) \textbf{\color{cond}ET si} la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} contient un valeur, \textbf{\color{cond}alors} : 
+    \textbf{\color{cond}Si \color{path}le fichier de logs} existe \textbf{\color{cond}ET si} la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} est fixée à \textbf{true} (autorisation de rediriger le texte vers un fichier de logs) \textbf{\color{cond}ET si} la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} contient un valeur, \textbf{\color{cond}alors} : 
+
+    \begin{itemize}
+        \item
+        {
+            \begin{justify}
+                Un message est écrit avec la commande \textbf{\color{cmds}echo}, puis redirigé vers \textbf{\color{path}le fichier de logs}. le cas échéant, un message d'avertissement est affiché à l'écran.
+            \end{justify}
+        }
+    \end{itemize}
 \end{justify}
 
+\begin{justify}
+    \textbf{\color{cond}Fin de la condition « if »}.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez cette fonction immédiatement après avoir appelé la commande \textbf{\color{gray}read} pour mieux voir quelle valeur a été entrée au clavier.
+\end{justify}
+
+
+% -----------------------
+
+% -----------------------------------------------
+
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec2}
+\subsection{Sous-section « DISPLAYING A COLORED MESSAGE »}\color{text}
+
+\color{sec3}
+\subsubsection{BU::Echo<\$nom de la couleur en anglais>}\color{text}
+
+\begin{justify}
+    \textbf{Fonctions :}
+    \begin{enumerate}
+        \item \textbf{\color{Aqua}BU::EchoAqua}\setlength{\parskip}{0em}
+        \item \textbf{\color{text}BU::EchoBlack}
+        \item \textbf{\color{Blue}BU::EchoBlue}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Cyan}BU::EchoCyan}\setlength{\parskip}{0em}
+        \item \textbf{\color{Fuchsia}BU::EchoFuschia}
+        \item \textbf{\color{Gray}BU::EchoGray}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Green}BU::EchoGreen}\setlength{\parskip}{0em}
+        \item \textbf{\color{Lime}BU::EchoLime}
+        \item \textbf{\color{Maroon}BU::EchoMaroon}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Navy}BU::EchoNavy}\setlength{\parskip}{0em}
+        \item \textbf{\color{Olive}BU::EchoOlive}
+        \item \textbf{\color{Orange}BU::EchoOrange}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Pink}BU::EchoPink}\setlength{\parskip}{0em}
+        \item \textbf{\color{Purple}BU::EchoPurple}
+        \item \textbf{\color{Red}BU::EchoRed}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Salmon}BU::EchoSalmon}\setlength{\parskip}{0em}
+        \item \textbf{\color{Silver}BU::EchoSilver}
+        \item \textbf{\color{Tan}BU::EchoTan}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{Teal}BU::EchoTeal}\setlength{\parskip}{0em}
+        \item \textbf{\color{Turquoise}BU::EchoTurquoise}
+        \item \textbf{\color{Violet}BU::EchoViolet}
+
+        \setlength{\parskip}{1em}
+
+        \item \textbf{\color{text}BU::EchoWhite}\setlength{\parskip}{0em}
+        \item \textbf{\color{Yellow}BU::EchoYellow}
+    \end{enumerate}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Chacune de ces fonctions sert à afficher un texte coloré selon une couleur définie.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_string} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}p\_option} & Caractère ou chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}pa\_extraArgs} & Tableau\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    Pour ne pas avoir à réécrire le même code que dans les fonctions de la sous-section \textbf{\color{sec2}DISPLAYING A CONTEXT MESSAGE}, chacune de ces fonctions appellent simplement la fonction d'affichage de message \textbf{\color{func}BU::EchoMsg}, en passant respectivement en argument :
+    \begin{enumerate}
+        \item la substitution de commande servant à colorer le texte selon la couleur souhaitée, puis la chaîne de caractères à afficher, puis la substitution de commande pour réinitialiser la couleur du texte,
+        \item l'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
+        \item Chaque valeur du tableau \textbf{\color{vars}pa\_extraArgs}.
+    \end{enumerate}    
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez une de ces fonctions si vous souhaitez afficher un message coloré hors de tout contexte (\textbf{\color{Red}erreur}, \textbf{\color{Orange}nouvelle étape}, \textbf{\color{Green}succès}, \textbf{\color{Yellow}avertissement}).
+\end{justify}
+
+
+% -----------------------
+
+% -----------------------------------------------
+
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec2}
+\subsection{Sous-section « LINE BREAKS »}\color{text}
+
+\color{sec3}
+\subsubsection{BU::Newline}\color{text}
+
+\begin{justify}
+    \textbf{Fonction : \textbf{\color{func}BU::Newline}}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :}
+
+    Cette fonction permet d'effectuer des sauts de lignes et de les rediriger ou non vers le fichier de logs.
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_number} & Nombre entier\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% -----------------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    \textbf{\color{cond}Si} le paramètre \textbf{\color{vars}p\_number} contient une valeur, \textbf{\color{cond}alors} :
+    
+    \begin{itemize}
+        \item \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU::EchoMsg}
+    \end{itemize}
+\end{justify}
 
 
 \end{document}

@@ -711,18 +711,18 @@ function BU::EchoYellow()
 function BU::Newline()
 {
     #**** Parameters ****
-    local number=$1;
+    local p_number=$1;
 
     #**** Code ****
 
-    if [ -n "$number" ]; then
-        if ! BU::IsInt "$number"; then
+    if [ -n "$p_number" ]; then
+        if ! BU::IsPositiveInt "$p_number"; then
             BU::EchoMsg "" "" "nodate";
             BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R';
             BU::EchoMsg "" "" "nodate";
         else
             # Doing X line breaks according to the number passed as argument.
-            for ((i=0; i<number; i++)); do
+            for ((i=0; i<p_number; i++)); do
                 BU::EchoMsg "" "" "nodate";
             done
         fi

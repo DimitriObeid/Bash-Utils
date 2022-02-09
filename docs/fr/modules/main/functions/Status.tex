@@ -9,15 +9,14 @@
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}
 
-\usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour l'affichage numérique)
+% en option "dvipsnames" (basé sur le modèle CMYK, meilleur pour l'impression) via le script de conversion en format imprimable.
+\usepackage[usenames,svgnames]{xcolor}      % Coloration du texte.
 \usepackage{verbatim}						% Mise en page des paragraphes.
 
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-% Definition de couleurs.
-\definecolor{mauve}{RGB}{228, 0, 228}
-\definecolor{brick}{HTML}{be480a}
 
 % Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
 \definecolor{back}{HTML}{000000}        % Noir          - Fond
@@ -110,7 +109,7 @@
 \color{sec3}
 \subsubsection{Fonctions externes appelées}\color{text}
 
-\textbf{Fonction : \color{mauve}BU::Main::Headers::DrawLine}\\[1\baselineskip]
+\textbf{Fonction : \color{func}BU::Main::Headers::DrawLine}\\[1\baselineskip]
 
 \textbf{Fichier de définition : \color{lime}Checkings.lib}\\[1\baselineskip]
 
@@ -295,7 +294,7 @@
 \end{justify}
 
 \begin{justify}
-    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{mauve}BU::Main::Status::ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
+    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{func}BU::Main::Status::ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
     
     \begin{enumerate}
         \item Le fichier dans lequel la valeur de cette variable a été vérifiée,
@@ -321,7 +320,7 @@
             ère exception :
 
             \begin{justify}
-                La fonction \textbf{\color{mauve}BU::Main::Status::CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
+                La fonction \textbf{\color{func}BU::Main::Status::CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
             \end{justify}
 
             \begin{justify}
@@ -329,7 +328,7 @@
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{cond} alors} la fonction \textbf{\color{mauve}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
+                \textbf{\color{cond} alors} la fonction \textbf{\color{func}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
             \end{justify}
 
             \begin{justify}
@@ -399,7 +398,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{mauve}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
+    Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{func}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
 \end{justify}
 
 \begin{justify}
@@ -418,7 +417,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
+    Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{func}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
 \end{justify}
 
 \begin{justify}
@@ -437,7 +436,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
+    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{func}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
 \end{justify}
 
 \begin{justify}
@@ -687,11 +686,11 @@
         \end{justify}
 
         \begin{justify}
-            \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
+            \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
         \end{justify}
 
         \begin{justify}
-            \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{mauve}CheckSTAT\_} définie dans la sous-section précédente.
+            \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
         \end{justify}
     }
 \end{itemize}
