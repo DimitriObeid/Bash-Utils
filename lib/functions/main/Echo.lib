@@ -337,7 +337,7 @@ function BU::EchoRead()
 	
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors '' "" '' ""; return 1; }
+		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors 'W' "" 'R' "CPLS"; return 1; }
 	fi; return 0;
 }
 
@@ -411,7 +411,9 @@ function BU::EchoWarning()
 
 # -----------------------------------------------
 
-## DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
+## DISPLAYING A COLORED MESSAGE
+
+# --> DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
 # Note : These function call the "BU::EchoMsg()" function in order to avoid rewriting tons of lines that would do the same thing.
 
@@ -689,58 +691,6 @@ function BU::EchoYellow()
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_YELLOW}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
-}
-
-# -----------------------------------------------
-
-## TEXT FORMATTING
-
-# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU::Main::Echo::ToLowercase()" OR "BU::Main::Echo::ToUppercase()") or a parameter expansion.
-# This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
-function BU::Main::Echo::KeepFormatting()
-{
-	#**** Parameters ****
-#	p_string=$1;           # String to display.
-#	p_old_formatting=$2;   # Former tectxt formatting.
-
-	#**** Code ****
-# 	echo -ne &>/dev/null; echo -ne "$p_string";
-# 
-# 	if [ "${p_old_formatting,,}" = 'l' ]; then
-#         echo -ne "$(BU::Main::Echo::ToLowercase "$p_string")";
-# 	elif [ "${p_old_formatting^^}" = 'U' ]; then
-#         echo -ne "$(BU::Main::Echo::ToUppercase "$p_string")";
-# 	else
-#         echo -ne "<<|| No reformatting precised in the $(BU::Main::Echo::ToLowercase "${FUNCNAME[0]}()") function ||>>";
-# 	fi
-
-	return 0;
-}
-
-# Print a lowercased text.
-
-# Usage :
-#	BU::Main::Echo::ToLowercase "<Text to write>"
-function BU::Main::Echo::ToLowercase()
-{
-	#**** Parameters ****
-	p_string=$1;
-
-	#**** Code ****
-	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'; return 0;
-}
-
-# Print an uppercased text.
-
-# Usage :
-#	BU::Main::Echo::ToUppercase "<Text to write>"
-function BU::Main::Echo::ToUppercase()
-{
-	#**** Parameters ****
-	p_string=$1;
-
-	#**** Code ****
-	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'; return 0;
 }
 
 # -----------------------------------------------

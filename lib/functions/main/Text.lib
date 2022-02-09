@@ -99,6 +99,58 @@ function BU::Main::Text::CutStringAfterDelim()
 
 # -----------------------------------------------
 
+## TEXT FORMATTING
+
+# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU::Main::Echo::ToLowercase()" OR "BU::Main::Echo::ToUppercase()") or a parameter expansion.
+# This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
+function BU::Main::Echo::KeepFormatting()
+{
+	#**** Parameters ****
+#	p_string=$1;           # String to display.
+#	p_old_formatting=$2;   # Former tectxt formatting.
+
+	#**** Code ****
+# 	echo -ne &>/dev/null; echo -ne "$p_string";
+# 
+# 	if [ "${p_old_formatting,,}" = 'l' ]; then
+#         echo -ne "$(BU::Main::Echo::ToLowercase "$p_string")";
+# 	elif [ "${p_old_formatting^^}" = 'U' ]; then
+#         echo -ne "$(BU::Main::Echo::ToUppercase "$p_string")";
+# 	else
+#         echo -ne "<<|| No reformatting precised in the $(BU::Main::Echo::ToLowercase "${FUNCNAME[0]}()") function ||>>";
+# 	fi
+
+	return 0;
+}
+
+# Print a lowercased text.
+
+# Usage :
+#	BU::Main::Echo::ToLowercase "<Text to write>"
+function BU::Main::Echo::ToLowercase()
+{
+	#**** Parameters ****
+	p_string=$1;
+
+	#**** Code ****
+	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'; return 0;
+}
+
+# Print an uppercased text.
+
+# Usage :
+#	BU::Main::Echo::ToUppercase "<Text to write>"
+function BU::Main::Echo::ToUppercase()
+{
+	#**** Parameters ****
+	p_string=$1;
+
+	#**** Code ****
+	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'; return 0;
+}
+
+# -----------------------------------------------
+
 ## GETTING TEXT
 
 # Getting the size of a string.
