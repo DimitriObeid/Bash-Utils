@@ -54,7 +54,7 @@ function BU::Main::Status::ConfEcho()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4;
-    local va_correctValues=("$@");
+    local pa_correctValues=("$@");
 
     #**** Variables ****
     local i=0;      # 
@@ -64,13 +64,14 @@ function BU::Main::Status::ConfEcho()
     BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_STATUS_FILE_PATH";
     
     # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
-    __BU_MAIN_STAT_DECHO='allow'
+    __BU_MAIN_STAT_DECHO='allow';
 
+    # Since the "$__BU_MAIN_STAT_ECHO" status global variable is reset to "true", it's totally safe to call an "Echo<...>()" function here.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         {
 			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-			echo "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
+			EchoError "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
 			
 			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -78,31 +79,31 @@ function BU::Main::Status::ConfEcho()
     else
         BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-        echo "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
+        EchoError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
 
         BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU::EchoError -ne "In $(BU::DechoHighlightPath "$p_file"), line $(BU::DechoHighlight "$p_lineno") --> " >&2;
-    BU::EchoError "Error : the $(BU::DechoHighlightVar "$p_file") variable's value is incorrect." >&2;
+    BU::EchoError "In $(BU::DechoHighlightPath "$p_file"), line $(BU::DechoHighlight "$p_lineno") --> " '-n' >&2;
+    BU::EchoError "Error : the $(BU::DechoHighlightVar "$p_var_name") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_TXT_YELLOW} An empty string.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+        echo >&2; EchoError "Bad value : $(BU::DechoYellow 'An empty string')." >&2;
     else
-        echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_TXT_VAR}$p_bad_value.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+        echo >&2; EchoError "Bad value : $(BU::DechoHighlightVar "$p_bad_value")." >&2;
     fi
 
-    echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+    echo >&2; EchoError "The allowed values are :" >&2;
 
     # Displaying the list of every allowed arguments.
-    for val in "${va_correctValues[@]}"; do
+    for val in "${pa_correctValues[@]}"; do
         i=$(( i+1 ));
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#va_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_ORANGE}An empty argument.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::DechoHighlightVar 'An empty argument')" >&2;
         else
-            echo -e "${__BU_MAIN_COLOR_TXT_ERROR}$i/${#va_correctValues[@]}  --> ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$val${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::DechoHighlight "$val")" >&2;
         fi
     done
 

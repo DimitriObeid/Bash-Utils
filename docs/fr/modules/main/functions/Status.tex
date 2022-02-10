@@ -257,11 +257,6 @@
     \end{itemize}
 \end{justify}
 
-\setlength{\parskip}{1em}
-    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
-    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
-    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
@@ -315,13 +310,89 @@
     \textbf{\color{cond}Fin de la condition « si »}.
 \end{justify}
 
+\setlength{\parskip}{2em}
+
 
 \begin{justify}
-    
+    Sachant qu'il est désormais sûr d'appeler une fonction du fichier \textbf{\color{path}Echo.lib}, car la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, un message d'erreur est affiché par le biais de la fonction \textbf{\color{func}BU::EchoError}.
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    Ce message d'erreur affiche :
+    \begin{enumerate}
+        \item le \textbf{\color{path}nom du fichier} où l'erreur s'est produite,
+        \item la ligne où l'erreur s'est produite,
+        \item le nom de la \textbf{\color{vars}variable} en faute.
+    \end{enumerate}
 \end{justify}
 
 
+\setlength{\parskip}{2em}
 
+\begin{justify}
+    L'affichage de la valeur actuellement enregistrée dans la variable actuellement traitée est traité via une condition.
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{cond}Si} aucune valeur n'est enregistrée, \textbf{\color{cond}alors} un message indiquant qu'aucune valeur n'est enregistrée est affiché à l'écran.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond}Sinon}, la valeur enregistrée est affichée à l'écran.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond} Fin de la condition « si »}.
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+
+\begin{justify}
+    La liste des valeur acceptées est ensuite parcourue par une \textbf{\color{loop}boucle « pour »}, pour les afficher en liste.
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    \textbf{\color{loop}Pour} toute valeur \textbf{\color{vars}val} enregistrée dans le tableau \textbf{\color{vars}pa\_correctValues} :
+\end{justify}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            \textbf{\color{cond}Si} aucune valeur n'est enregistrée à l'index en cours de traitement, \textbf{\color{cond}alors} la chaîne de caractères \textbf{« un argument vide »} est ajoutée à la liste s'affichant à l'écran. 
+        \end{justify}
+
+        \setlength{\parskip}{1em}
+
+        \begin{justify}
+            \textbf{\color{cond}Sinon}, la valeur est ajoutée à la liste s'affichant à l'écran.
+        \end{justify}
+
+        \begin{justify}
+            \textbf{\color{cond} Fin de la condition « si »}.
+        \end{justify}
+    }
+\end{itemize}
+
+\begin{justify}
+    \textbf{\color{loop} Fin de la boucle « pour »}.
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
+    Une fois le tableau parcouru, la commande \textbf{\color{cmds}exit} est appelée pour arrêter l'exécution du script, vu que l'erreur rencontrée en vérifiant la valeur de la variable globale de statut est une erreur fatale.
+\end{justify}
+
+
+\setlength{\parskip}{1em}
 
 % ------------
 
