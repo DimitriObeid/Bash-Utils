@@ -7,7 +7,7 @@
 # Module        : Main
 # Description   : (Colored) text display functions.
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
 # ----------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -46,16 +46,16 @@ fi
 function BU::Main::Echo::__EchoVoid()
 {
 printf "
-    
-    
-    
-    
-    
-    
-    
-    
-    
-" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || 
+
+
+
+
+
+
+
+
+
+" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" ||
     {
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH »" >&2; echo >&2; exit 1;
     }
@@ -147,7 +147,7 @@ function BU::Main::Echo::__EchoCPLS()
 
     #**** Code ****
     for val in "${pa_extraArgs[@]}"; do
-        if [ "$val" = 'nodate' ]; then 
+        if [ "$val" = 'nodate' ]; then
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
@@ -233,7 +233,7 @@ function BU::EchoError()
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;
-    
+
     shift 2;
 
     local pa_extraArgs=("$@");
@@ -335,7 +335,7 @@ function BU::EchoRead()
 {
 	#**** Parameters ****
 	local p_string=$1;     # User's keyboard input.
-	
+
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
 		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors 'W' "" 'R' "CPLS"; return 1; }
@@ -466,14 +466,14 @@ function BU::EchoCyan()
     return 0;
 }
 
-# Fuschia colored message.
-function BU::EchoFuschia()
+# Fuchsia colored message.
+function BU::EchoFuchsia()
 {
     #**** Parameters ****
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUSCHIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+    BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUCHSIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
 }
