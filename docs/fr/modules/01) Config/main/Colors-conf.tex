@@ -36,17 +36,17 @@
 \fontfamily{Roboto}
 
 \pagecolor{back}
-\title{\color{sec1}Variables du fichier de configuration \color{path}Status.conf}\color{text}
+\title{\color{sec1}Variables et fonctions du fichier de configuration \color{path}Colors.conf}\color{text}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
 
 \pdfinfo{
-  /Title    (Fonctions du fichier de librairie Status.conf)
+  /Title    (Fonctions du fichier de librairie Colors.conf)
   /Author   (Dimitri OBEID)
   /Creator  (Dimitri OBEID)
   /Producer (Dimitri OBEID)
-  /Subject  (Fonctions du fichier de librairie Status.conf)
+  /Subject  (Fonctions du fichier de librairie Colors.conf)
   /Keywords ()
 }
 
@@ -65,7 +65,7 @@
 \section{Présentation}\color{text}
 
 \begin{justify}
-    Ce fichier de configurations liste chaque variable globale de statut utilisée par la librairie, avec leurs valeurs par défaut, qui sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
+    Ce fichier de configurations liste chaque variable globale de couleur utilisée par la librairie, avec leurs valeurs par défaut, qui sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
 \end{justify}
 
 % ----------------------
@@ -100,7 +100,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
+
 \end{justify}
 
 % ------------
@@ -114,7 +114,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{func}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
+
 \end{justify}
 
 % ------------
@@ -128,7 +128,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{func}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
+
 \end{justify}
 
 % ------------
@@ -142,7 +142,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{func}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
+
 \end{justify}
 
 % ------------
@@ -156,7 +156,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à déterminer si la librairie est en phase d'initialisation des modules.
+
 \end{justify}
 
 % ------------
@@ -170,7 +170,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable de statut sert à autoriser ou non la création d'un fichier de logs pour le projet en cours.
+
 \end{justify}
 
 % ------------
@@ -184,7 +184,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable vérifie si un message peut être affiché à l'écran, redirigé vers un fichier de logs, ou les deux à la fois.
+
 \end{justify}
 
 % ------------
@@ -198,7 +198,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable vérifie si une opération sur un fichier ou un dossier localisé à la racine du système de fichiers peut être effectuée.
+
 \end{justify}
 
 % ------------
@@ -226,7 +226,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un saut de ligne.
+
 \end{justify}
 
 % ------------
@@ -240,7 +240,7 @@
 \end{justify}
 
 \begin{justify}
-    Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un message à l'écran.
+
 \end{justify}
 
 % ------------
@@ -268,7 +268,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{ATTENTION : Cette variable est dépreciée et sera déplacée dans le module \textbf{\color{lime}os\_specific} dans une prochaine mise à jour}
+
 \end{justify}
 
 \end{document}
