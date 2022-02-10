@@ -63,8 +63,9 @@
     Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix s'explique non seulement par sa vaste présence, mais aussi par sa très vaste documentation disponible et ses fonctionnalités (notamment les tableaux).
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -85,8 +86,9 @@
     Ce script initialise tous les modules de la librairie passés en argument lors de l'exécution de ce dernier.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -112,9 +114,9 @@
 \begin{justify}
     Ce dossier contient les fichiers exécutables nécessaires au bon fonctionnement de la librairie.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -124,9 +126,9 @@
 \begin{justify}
     Ce dossier contient toute la documentation utile aux développeurs et aux utilisateurs.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -136,9 +138,9 @@
 \begin{justify}
     Ce dossier contient les fichiers et dossiers nécessaires à l'installation automatique de la librairie.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -193,9 +195,9 @@
 \begin{justify}
     Chaque fichier définit des variables propres aux catégories décrites dans le nom de chaque fichier. Par exemple, les variables définies dans le fichier \textbf{\color{lime}colors.var} sont des variables définissant le code de la couleur d'un texte à afficher.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -215,9 +217,9 @@
         \item \textbf{\color{lime}tests\color{white} :} Ce dossier contient de nombreux scripts servant ou ayant servi de fichiers de tests pour de nombreuses fonctionnalités, implémentées ou en cours d'implémentation.
     \end{itemize}
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -227,9 +229,9 @@
 \begin{justify}
     Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs, de traduction, etc...
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -240,8 +242,9 @@
     À l'instar du symlink (lien symbolique) \textbf{\color{blue}bin}, ce raccourci Windows (pour les utilisateurs de Windows Subsystem for Linux, sachant que les symlinks UNIX ne sont pas nativement reconnus par l'explorateur de fichier de Windows) pointe vers le dossier \textbf{\color{lime}res/dev-tools/dev-bin}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -296,9 +299,9 @@
 \begin{justify}
     En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers du gestionnaire de modules.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -309,9 +312,9 @@
     En second lieu, le script vérifie que la version de Bash utilisée soit la version 4.0.0 ou une version supérieure.
 \end{justify}
 
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -329,9 +332,9 @@
 \begin{justify}
     Ensuite, le script en fait de même pour le fichier d'initialisation des fonctions de librairie associé, situé dans le dossier \textbf{\color{lime}\~/.Bash-utils/modules/\$nom\_du\_module}, et nommé \textbf{\color{lime}Initializer.sh}, avant de reboucler tant que tous les modules n'ont pas été initialisés.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -342,8 +345,9 @@
     En quatrième et dernier lieu, le script modifie des variables de statut, dont la valeur initialement assignée dans le fichier \textbf{\color{lime}\~/.Bash-utils/config/modules/main/Status.conf} servait à initialiser la librairie.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -361,8 +365,9 @@
     Tous les fichiers de documentation en français concernant la description des fonctions se situent dans le dossier \textbf{\color{lime}docs/fr/Bash/functions}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -392,8 +397,9 @@
     La première variable est définie dans le fichier \textbf{\color{lime}\$HOME/Bash-utils-init.sh}, tandis que la seconde variable est définie dans le fichier \textbf{\color{lime}\$HOME/.Bash-utils/config/modules/main/module.conf}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -411,8 +417,9 @@
     Pour utiliser les fonctionnalités de la librairie depuis n'importe quel chemin sans avoir à réécrire le chemin du fichier d'initialisation dans une myriade de fichiers éparpillés sur le disque dur, il est fortement recommandé d'installer le gestionnaire de modules de la façon décrite dans le fichier \textbf{\color{lime}README INSTALL.md}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -425,8 +432,9 @@
 
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 

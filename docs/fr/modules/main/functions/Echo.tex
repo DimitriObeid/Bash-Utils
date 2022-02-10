@@ -71,8 +71,9 @@
     Ce fichier source inclut des fonctions servant au traitement du texte, comprenant entre autre l'affichage, les redirections vers le fichier de logs et / ou le terminal, ainsi que la vérification de la casse.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -92,7 +93,7 @@
         \textbf{\color{vars}\$\_\_BU\_MODULE\_INSTALL\color{path}/}                           & \textbf{\color{path}Bash-utils-init.sh}\\
         \hline
     \end{tabular}
-    
+
     \begin{tabular}{|l|l|}
         \hline
         \textbf{Dossier parent} & \textbf{Nom du fichier}\\
@@ -124,8 +125,9 @@
 
 \setlength{\parskip}{2em}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
@@ -171,7 +173,8 @@
 \end{justify}
 
 \setlength{\parskip}{2em}
-% -----------------------
+
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
@@ -186,8 +189,9 @@
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
@@ -210,8 +214,11 @@
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
 
+% ------------
 
-% -----------------------
+% ----------------------
+
+% ----------------------------------------------
 
 \color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
@@ -231,8 +238,11 @@
 
 \textbf{Fichier de définition : \color{path}Status.conf}\\[1\baselineskip]
 
+% ------------
 
-% -----------------------
+% ----------------------
+
+% ----------------------------------------------
 
 \color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
@@ -252,8 +262,9 @@
 
 \textbf{Fichier de définition : \color{path}Text.conf}\\[1\baselineskip]
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -272,7 +283,7 @@
 
 \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoVoid}\setlength{\parskip}{1em}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -281,7 +292,7 @@
     Cette fonction affiche un espace vide de 10 lignes de hauteur pour séparer toutes les sorties des commandes appelées lors de l'exécution des fonctions \textbf{\color{func}Echo<...>} du reste des sorties du script, lors de l'exécution du script avec la commande \textbf{\color{cmds}bash -x}, qui affiche tous.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\\
 
@@ -290,7 +301,7 @@
     Aucun paramètre n'est supporté.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -299,7 +310,7 @@
     La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -308,8 +319,9 @@
     Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} définie à la suite.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
@@ -320,7 +332,7 @@
     \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoOutput}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -330,7 +342,7 @@
     Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes redirigé vers le \textbf{\color{path}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{func}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{cmds}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -350,7 +362,7 @@
 
 \setlength{\parskip}{2em}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
@@ -430,7 +442,7 @@
                 \begin{justify}
                     Dans cette substitution de commande, une fonction d'affichage de header coloré (correspondant au code couleur associé au type du message traité) est appelée, et la chaîne de caractère \textbf{« BEGIN DEBUGGING TEXT : »} est passée avec la valeur du paramètre \textbf{\color{vars}p\_string}, correspondant à la chaîne de caractères de la fonction \textbf{\color{func}Echo<...>} d'origine.
                 \end{justify}
-                
+
                 \begin{justify}
                     Ensuite, la sortie de la fonction d'affichage de headers est redirigée vers le \textbf{\color{path}même fichier temporaire} en écrasant le contenu déjà écrit pour ne pas alourdir l'espace disque. Le cas échéant, un message d'avertissement est affiché à l'écran.
                 \end{justify}
@@ -447,7 +459,7 @@
                 \begin{justify}
                     \textbf{\color{cond}Si} la variable locale \textbf{\color{vars}v\_BU\_MAIN\_STAT\_ECHO\_val} contient la valeur précédente de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, \textbf{\color{cond}alors} la valeur enregistrée dans la variable locale est réassignée à la variable globale, avant que celle enregistrée dans la variable locale ne soit effacée.
                 \end{justify}\setlength{\parskip}{1em}
-                
+
                 \begin{justify}
                     \textbf{\color{cond}Fin de la condition « if »}.
                 \end{justify}
@@ -470,14 +482,14 @@
             {
                 \begin{justify}
                     Le code exécuté dans \textbf{\color{cond}cette nouvelle condition} est sensiblement le même que dans la condition précédente, où la l'argument \textbf{\color{vars}p\_context} correspond à la chaîne de caractères \textbf{begin}, à deux exceptions près :
-                    
+
                     \begin{enumerate}
                         \item Le mot \textbf{« BEGIN »} de la chaîne de caractères passée en argument de la fonction d'affichage de headers est remplacé par le mot \textbf{« END »}.
 
-                        \item La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier. 
+                        \item La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier.
                     \end{enumerate}
                 \end{justify}\setlength{\parskip}{1em}
-                
+
                 \begin{justify}
                     \textbf{\color{cond}Fin de la condition « if »}.
                 \end{justify}
@@ -494,7 +506,7 @@
     \textbf{\color{cond}Fin de la condition « if »}.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -504,8 +516,9 @@
     Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU::EchoMsg}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
@@ -516,7 +529,7 @@
     \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoCPLS}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -526,7 +539,7 @@
     Cette fonction remplit le même rôle que la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus}, à la différence qu'elle ne sert que de fonction de secours lorsque la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, dans les situations où le rappel de cette même fonction pour gérer l'affichage du texte crée une boucle infinie.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -546,7 +559,7 @@
 
 \setlength{\parskip}{2em}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -566,7 +579,7 @@
         \end{justify}
 
         \setlength{\parskip}{1em}
-            
+
         \begin{itemize}
             \item
             {
@@ -580,7 +593,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne. 
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -610,7 +623,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne. 
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -644,7 +657,7 @@
                         \end{justify}
                     }
                 \end{itemize}
-                
+
                 \begin{justify}
                     \textbf{\color{case}Fin de la condition « case »}.
                 \end{justify}
@@ -663,7 +676,7 @@
 
 \setlength{\parskip}{1em}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -677,8 +690,9 @@
     Normalement, cette partie est déjà gérée par les fonctions principales de traitement de texte du module \textbf{main}.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -706,7 +720,7 @@
     \end{enumerate}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -716,7 +730,7 @@
     Chacune de ces fonctions gère le texte à afficher et / ou rediriger vers un fichier de logs selon la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, tout en appelant la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} (voir la description de cette fonction).
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -736,7 +750,7 @@
 
 \setlength{\parskip}{2em}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -793,18 +807,19 @@
     \textbf{\color{cond}Fin de la condition « if »}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Utilisation :}
 
-    Appelez une de ces fonctions 
+    Appelez une de ces fonctions
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
@@ -815,7 +830,7 @@
     \textbf{Fonction : \color{func}BU::EchoRead}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -825,7 +840,7 @@
     Cette fonction crée une chaîne de caractères indiquant la valeur saisie en entrée de la commande \textbf{\color{cmds}read}.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -839,14 +854,14 @@
     \end{tabular}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    \textbf{\color{cond}Si \color{path}le fichier de logs} existe \textbf{\color{cond}ET si} la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} est fixée à \textbf{true} (autorisation de rediriger le texte vers un fichier de logs) \textbf{\color{cond}ET si} la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} contient un valeur, \textbf{\color{cond}alors} : 
+    \textbf{\color{cond}Si \color{path}le fichier de logs} existe \textbf{\color{cond}ET si} la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} est fixée à \textbf{true} (autorisation de rediriger le texte vers un fichier de logs) \textbf{\color{cond}ET si} la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT} contient un valeur, \textbf{\color{cond}alors} :
 
     \begin{itemize}
         \item
@@ -862,7 +877,7 @@
     \textbf{\color{cond}Fin de la condition « if »}.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -872,8 +887,9 @@
     Appelez cette fonction immédiatement après avoir appelé la commande \textbf{\color{gray}read} pour mieux voir quelle valeur a été entrée au clavier.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -935,7 +951,7 @@
     \end{enumerate}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -945,7 +961,7 @@
     Chacune de ces fonctions sert à afficher un texte coloré selon une couleur définie.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -963,7 +979,7 @@
     \end{tabular}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -975,10 +991,10 @@
         \item la substitution de commande servant à colorer le texte selon la couleur souhaitée, puis la chaîne de caractères à afficher, puis la substitution de commande pour réinitialiser la couleur du texte,
         \item l'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
         \item Chaque valeur du tableau \textbf{\color{vars}pa\_extraArgs}.
-    \end{enumerate}    
+    \end{enumerate}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -988,8 +1004,9 @@
     Appelez une de ces fonctions si vous souhaitez afficher un message coloré hors de tout contexte (\textbf{\color{Red}erreur}, \textbf{\color{Orange}nouvelle étape}, \textbf{\color{Green}succès}, \textbf{\color{Yellow}avertissement}).
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -1005,7 +1022,7 @@
     \textbf{Fonction : \textbf{\color{func}BU::Newline}}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -1015,7 +1032,7 @@
     Cette fonction permet d'effectuer des sauts de lignes et de les rediriger ou non vers le fichier de logs.
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -1029,7 +1046,7 @@
     \end{tabular}
 \end{justify}
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -1037,7 +1054,7 @@
     \textbf{Fonctionnement :}
 
     \textbf{\color{cond}Si} le paramètre \textbf{\color{vars}p\_number} contient une valeur, \textbf{\color{cond}alors} :
-    
+
     \begin{itemize}
         \item
         {
@@ -1065,7 +1082,7 @@
                     }
                 \end{itemize}
             \end{justify}
-            
+
             \begin{justify}
                 \textbf{\color{cond}Fin de la condition « if »}.
             \end{justify}

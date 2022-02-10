@@ -48,8 +48,9 @@
     Ce fichier source inclut des fonctions servant à la gestion d'erreurs.
 \end{justify}
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -68,9 +69,9 @@
 \begin{justify}
     \textbf{*} : Voir la variable \textbf{\color{orange}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH/lib/functions/main} dans la sous-sous-catégorie\linebreak \textbf{\color{blue}Variables}.
 \end{justify}
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{lime}\par\noindent\rule{\textwidth}{0.4pt}\color{white}\\[1\baselineskip]
 
@@ -81,9 +82,9 @@
 \textbf{Fonction : \color{mauve}}\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{lime}}\\[1\baselineskip]
+% ------------
 
-
-% -----------------------
+% ----------------------
 
 \color{blue}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
@@ -97,7 +98,7 @@
 \textbf{Fichier de définition : \color{lime}}\\[1\baselineskip]
 
 
-% -----------------------
+% ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
 
@@ -107,8 +108,9 @@
 
 \textbf{Fichier de définition : \color{lime}}\\[1\baselineskip]
 
+% ------------
 
-% -----------------------
+% ----------------------
 
 % -----------------------------------------------
 
@@ -141,7 +143,7 @@
         \item \textbf{\color{orange}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{orange}p\_type}\\
 
         \item \textbf{\color{orange}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\
-        
+
         \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{mauve}BU::CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{mauve}BU::Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
     \end{itemize}
 \end{justify}
@@ -155,7 +157,7 @@
     Passer cette valeur à ce paramètre est absolument nécessaire dans les situations où l'appel des fonctions \textbf{\color{mauve}BU::Echo<...>()} peut provoquer une boucle infinie.
 \end{justify}
 
-\begin{justify}    
+\begin{justify}
     Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{mauve}BU::EchoWarning}, et E = error, donc appel de la fonction \textbf{\color{mauve}BU::EchoError}).
 \end{justify}
 
