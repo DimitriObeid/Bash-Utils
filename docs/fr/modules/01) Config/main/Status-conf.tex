@@ -68,8 +68,6 @@
     Ce fichier de configurations liste chaque variable globale de statut utilisée par la librairie, avec leurs valeurs par défaut, qui sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
 \end{justify}
 
-% ------------
-
 % ----------------------
 
 % -----------------------------------------------
@@ -81,279 +79,266 @@
 \color{sec1}
 \section{Liste des variables}\color{text}
 
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG}\\[1\baselineskip]
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
 \begin{justify}
-    \textbf{Description :}
+    \textit{Description de la variable :}
 \end{justify}
 
-\setlength{\parskip}{1em}
-
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{Nom de la variable} & \textbf{Type} & \textbf{Valeurs acceptées}
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% -------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG}  & Bool & \textbf{false} || \textbf{true} \\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{func}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO}  & String    & \textbf{authorize} || \textbf{forbid} || \textbf{restrict}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{func}BU::CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}   & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{func}BU::Main::Errors::HandleErrors()} du fichier de librairie \textbf{\color{lime}Checkings.lib}.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ERROR}  & String    & \textit{aucune valeur} || \textbf{fatal}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à déterminer si la librairie est en phase d'initialisation des modules.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}       & Bool  & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_}\\[1\baselineskip]
-
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :}
+    Cette variable de statut sert à autoriser ou non la création d'un fichier de logs pour le projet en cours.
 \end{justify}
-
-\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Type : }
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG}    & Bool      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
 \end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeurs acceptées :}
-\begin{enumerate}
-    \item
-\end{enumerate}
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\textbf{Valeur par défaut :}
 
 % ------------
 
-% ----------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
-% ----------------------------------------------
+\begin{justify}
+    Cette variable vérifie si un message peut être affiché à l'écran, redirigé vers un fichier de logs, ou les deux à la fois.
+\end{justify}
 
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}  & String & \textit{aucune valeur} || \textbf{log} || \textbf{tee}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable vérifie si une opération sur un fichier ou un dossier localisé à la racine du système de fichiers peut être effectuée.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}  & String & \textbf{authorized} || \textbf{forbidden} || \textbf{restricted}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un header.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}   & Float\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un saut de ligne.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}  & Float\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un message à l'écran.
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}  & Float\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    Cette variable de statut vérifie que le script ait la permission de formater le texte (couleurs, gras, italique, soulignage, clignotement, etc...).
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT}   & Bool & \textbf{false} || \textbf{true}\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+\textbf{ATTENTION : Cette variable est dépreciée et sera déplacée dans le module \textbf{\color{lime}os\_specific} dans une prochaine mise à jour}
+\end{justify}
+
+\begin{justify}
+     \begin{itemize}
+        \item
+        {
+            \begin{tabular}{l|l|l}
+                \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_USER\_OS}   & &\\[1\baselineskip]
+            \end{tabular}
+        }
+    \end{itemize}
+\end{justify}
 
 \end{document}
