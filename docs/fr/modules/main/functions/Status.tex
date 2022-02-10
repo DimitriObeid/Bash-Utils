@@ -213,6 +213,37 @@
 
 \begin{justify}
     \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}p\_file} & Chemin de fichier (chaîne de caractères)\\
+        \hline
+        \textbf{\color{vars}p\_lineno} & Nombre entier\\
+        \hline
+        \textbf{\color{vars}p\_bad\_value} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}p\_var\_name} & Chaîne de caractères\\
+        \hline
+        \textbf{\color{vars}pa\_correct\_values} & Tableau\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Variables}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}\$i} & \\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\begin{justify}
     \begin{itemize}
         \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
 
@@ -224,24 +255,86 @@
 
         \item \textbf{\color{vars}\$pa\_correctValues\color{text} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
     \end{itemize}
-\end{justify}\setlength{\parskip}{2em}
+\end{justify}
+
+\setlength{\parskip}{1em}
+    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
+    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
+    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
-\begin{justify}\setlength{\parskip}{1em}
-    \textbf{Variables :}
+\begin{justify}
+    \textbf{Fonctionnement :}
+
+    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
+    Le fichier de configurations \textbf{\color{path}Status.conf} est resourcé pour réinitialiser la valeur de toutes les variables globales de statut, pour éviter que le moindre bug ne se produise lors de l'exécution de cette fonction si des valeurs non-supportées sont enregistrées dans d'autres variables globales de statut, sachant que cette fonction ne vérifie que la valeur d'une variable à la fois.
+\end{justify}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    La variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO} est remise à \textbf{allow} pour afficher les décorations de texte.
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+\begin{justify}
+    \textbf{\color{cond}Si} le \textbf{\color{path}fichier de logs} du projet existe, \textbf{\color{cond}alors} :
+
+    \setlength{\parskip}{1em}
 
     \begin{itemize}
-        \item \textbf{\color{vars}\$i\color{text} :} .
+        \item
+        {
+            \begin{justify}
+                La fonction \textbf{\color{func}BU::Main::Headers::DrawLine} est appelée pour afficher une ligne complète sur le terminal, avant d'afficher un message d'erreur concernant le fait qu'une mauvaise valeur a été enregistrée dans la variable globale de statut traitée, affichant également le nom de cette variable, et sa valeur. La même fonction est rappelée pour dessiner la deuxième ligne.
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+
+            \begin{justify}
+                Tout ce message est redirigé vers le fichier de logs, et affiché à l'écran.
+            \end{justify}
+        }
     \end{itemize}
 \end{justify}
 
-\begin{justify}
-    \textbf{Code :}
-    \begin{itemize}
-        \item
-    \end{itemize}
+\setlength{\parskip}{1em}
 
+\begin{justify}
+    \textbf{\color{cond}Sinon}, le même code est exécuté, mais le texte n'est affiché qu'à l'écran.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond}Fin de la condition « si »}.
+\end{justify}
+
+
+\begin{justify}
+    
+\end{justify}
+
+
+
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez cette fonction lorsque vous créez une nouvelle fonction de gestion de variables globales de statut (voir la sous-section suivante).
+\end{justify}
+
+\begin{justify}
+    \textbf{Conseil :} Vous pouvez gagner du temps en copiant-collant l'une des fonctions existantes, et en modifiant simplement le nom de la variable globale, puis les valeurs enregistrées dans le tableau de valeurs supportées \textbf{\color{vars}pa\_extraArgs}.
 \end{justify}
 
 % ------------
@@ -263,6 +356,10 @@
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
     Chacune de ces fonctions vérifie que la valeur de la variable globale de statut en cours de traitement soit égale à une valeur attendue, sans quoi l'exécution du script s'arrête.
+\end{justify}
+
+\begin{justify}
+     Le document \textbf{\color{lime}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
 \end{justify}\setlength{\parskip}{1em}
 
 % ------------
@@ -345,7 +442,7 @@
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{cond}Fin de la condition « if »}.
+                \textbf{\color{cond}Fin de la condition « si »}.
             \end{justify}
         }
     \end{enumerate}
@@ -362,16 +459,6 @@
 
 \begin{justify}
     Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{sec2}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-     \textbf{Liste des variables globales de statut :}
-
-     Le document \textbf{\color{lime}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
 \end{justify}
 
 % ------------
@@ -403,16 +490,7 @@
     \end{tabular}
 \end{justify}
 
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \textbf{Variables :}
-    \begin{itemize}
-        \item \textbf{Aucune}
-    \end{itemize}
-\end{justify}
+\setlength{\parskip}{2em}
 
 % ------------
 
@@ -428,6 +506,8 @@
 \begin{justify}
     \textbf{Note 1 :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.
 \end{justify}
+
+\setlength{\parskip}{1em}
 
 \begin{justify}
     \textbf{Note 2 :} Chaque fonction définie dans cette sous-section attend les trois mêmes paramètres positionnels, dont les informations sont données en commentaire sous le nom de la sous-section.

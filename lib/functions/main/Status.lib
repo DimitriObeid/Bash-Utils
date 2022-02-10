@@ -60,6 +60,12 @@ function BU::Main::Status::ConfEcho()
     local i=0;      # 
 
     #**** Code ****
+    # Sourcing the "Status.conf" file to reset every status global variables values
+    BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_STATUS_FILE_PATH";
+    
+    # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
+    __BU_MAIN_STAT_DECHO='allow'
+
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         {
 			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
@@ -77,8 +83,8 @@ function BU::Main::Status::ConfEcho()
         BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    echo -ne "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_TXT_ERROR}, line ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_TXT_ERROR} --> " >&2;
-    echo -e "Error : the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$p_var_name${__BU_MAIN_COLOR_TXT_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
+    BU::EchoError -ne "In $(BU::DechoHighlightPath "$p_file"), line $(BU::DechoHighlight "$p_lineno") --> " >&2;
+    BU::EchoError "Error : the $(BU::DechoHighlightVar "$p_file") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
         echo >&2; echo -e "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_TXT_YELLOW} An empty string.${__BU_MAIN_COLOR_TXT_RESET}" >&2;
