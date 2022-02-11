@@ -470,12 +470,74 @@
 
 \begin{justify}
     \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_CODE\_...}  & Substitution de commande\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_CODE\_...}  & Nombre entier\\
     \end{tabular}
 \end{justify}
 
 \begin{justify}
-    Chacune de ces variables enregistrent le code couleur
+    Chacune de ces variables globales de couleur de texte enregistre en mémoire le code couleur associé à la couleur dont le nom figure après les points de suspension.
+\end{justify}
+
+\begin{justify}
+    Liste des couleurs disponibles :
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Couleur système} & \textbf{Code couleur associé}\\
+        \hline
+        \textbf{\color{text}Black} & \textbf{\color{text}0}\\
+        \hline
+        \textbf{\color{Maroon}Maroon} & \textbf{\color{Maroon}1}\\
+        \hline
+        \textbf{\color{Green}Green} & \textbf{\color{Green}2}\\
+        \hline
+        \textbf{\color{Olive}Olive} & \textbf{\color{Olive}3}\\
+        \hline
+        \textbf{\color{Navy}Navy} & \textbf{\color{Navy}4}\\
+        \hline
+        \textbf{\color{Purple}Purple} & \textbf{\color{Purple}5}\\
+        \hline
+        \textbf{\color{Teal}Teal} & \textbf{\color{Teal}6}\\
+        \hline
+        \textbf{\color{Silver}Silver} & \textbf{\color{Silver}7}\\
+        \hline
+        \textbf{\color{Gray}Gray} & \textbf{\color{Gray}8}\\
+        \hline
+        \textbf{\color{Red}red} & \textbf{\color{Red}9}\\
+        \hline
+        \textbf{\color{Lime}Lime} & \textbf{\color{Lime}10}\\
+        \hline
+        \textbf{\color{Yellow}Yellow} & \textbf{\color{Yellow}11}\\
+        \hline
+        \textbf{\color{Blue}Blue} & \textbf{\color{Blue}12}\\
+        \hline
+        \textbf{\color{Fuchsia}Fuchsia} & \textbf{\color{Fuchsia}13}\\
+        \hline
+        \textbf{\color{Aqua}Aqua} & \textbf{\color{Aqua}14}\\
+        \hline
+        \textbf{\color{text}White} & \textbf{\color{text}15}\\
+        \hline
+    \end{tabular}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Couleurs supplémentaires} & \textbf{Code couleur associé}\\
+        \hline
+        \textbf{\color{Cyan}Cyan} & \textbf{\color{Cyan}51}\\
+        \hline
+        \textbf{\color{Orange}Orange} & \textbf{\color{Orange}166}\\
+        \hline
+        \textbf{\color{Pink}Pink} & \textbf{\color{Pink}200}\\
+        \hline
+        \textbf{\color{Salmon}Salmon} & \textbf{\color{Salmon}209}\\
+        \hline
+        \textbf{\color{Tan}Tan} & \textbf{\color{Tan}180}\\
+        \hline
+        \textbf{\color{Turquoise}Turquoise} & \textbf{\color{Turquoise}51}\\
+        \hline
+        \textbf{\color{Violet}Violet} & \textbf{\color{Violet}177}\\
+        \hline
+    \end{tabular}
 \end{justify}
 
 % ------------
@@ -484,12 +546,12 @@
 
 \begin{justify}
     \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Chaîne de caractères \\[1\baselineskip]
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_BG\_...} & Substitution de commandes\\
     \end{tabular}
 \end{justify}
 
 \begin{justify}
-    Cette variable invoque un appel de la fonction \textbf{\color{func}BU::Main::}
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 % ------------
@@ -498,12 +560,12 @@
 
 \begin{justify}
     \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}   & \\[1\baselineskip]
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...} & Substitution de commandes\\
     \end{tabular}
 \end{justify}
 
 \begin{justify}
-    Cette variable
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 % ------------
