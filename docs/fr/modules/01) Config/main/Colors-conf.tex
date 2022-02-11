@@ -64,9 +64,85 @@
 \color{sec1}
 \section{Présentation}\color{text}
 
+\color{sec2}
+\subsection{Description}\color{text}
+
 \begin{justify}
     Ce fichier de configurations liste chaque variable globale de couleur utilisée par la librairie, avec leurs valeurs par défaut, qui sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
 \end{justify}
+
+% ------------
+
+% ----------------------
+
+\color{sec2}
+\subsection{Définition des éléments mentionnés}\color{text}
+
+\color{sec3}
+\subsubsection{Chemins des fichiers}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent (dossier des configurations)} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT} & \textbf{\color{path}Status.conf}\\
+        \hline
+    \end{tabular}
+
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent (dossier de la librairie)} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH} & \textbf{\color{path}Status.lib}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% ------------
+
+% ----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec3}
+\subsubsection{Fonctions externes appelées}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Fonction} & \textbf{Fichier de définition}\\
+        \hline
+        \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} & \textbf{\color{path}Status.lib}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% ------------
+
+% ----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec3}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Variable} & \textbf{Fichier de définition}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} & \textbf{\color{path}}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 % ------------
 
@@ -91,14 +167,10 @@
     \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::SetBGColor}
 \end{justify}
 
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
+\setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{Description :}
-
-    Cette fonction colore le fond de la zone de texte où est entré le moindre caractère.
+    \textbf{Description :} Cette fonction colore le fond de la zone de texte où est entré le moindre caractère.
 \end{justify}
 
 % ------------
@@ -182,9 +254,11 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :}
+    \textbf{Utilisation :} Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
+\end{justify}
 
-    Appelez cette fonction
+\begin{justify}
+    Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}«  »}
 \end{justify}
 
 
@@ -204,9 +278,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{Description :}
-
-    Cette fonction colore chaque caractère.
+    \textbf{Description :} Cette fonction colore chaque caractère.
 \end{justify}
 
 % ------------
@@ -232,8 +304,8 @@
 
     La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor}, à quelques différences près :
     \begin{enumerate}
-        \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground).
-        \item
+        \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground),
+        \item le code couleur est enregistré dans un autre fichier temporaire,
     \end{enumerate}
 \end{justify}
 
@@ -243,15 +315,12 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :}
-
-    Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
+    \textbf{Utilisation :} Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
 \end{justify}
 
 \begin{justify}
-    Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}}
+    Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}«  »}
 \end{justify}
-
 
 
 
@@ -265,6 +334,109 @@
 
 \color{sec2}
 \subsection{Fonctions d'affichage de texte}\color{text}
+
+\color{sec3}
+\subsubsection{BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}\color{text}
+
+\begin{justify}
+    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}
+\end{justify}
+
+\begin{justify}
+    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos}.
+\end{justify}
+
+\begin{justify}
+    Ce message doit être le même pour chaque variable globale de couleur de fond. Cette fonction évite donc de le réécrire ou de le modifier pour chaque variable.
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}\$1} & Chaîne de caractères\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :} La commande \textbf{\color{cmds}printf} est appelée pour afficher un message sans saut de ligne, décrivant le comportement de la substitution de commandes traitée et donnant le nom de la couleur de fond, qui est passé en premier argument.
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :} Appelez cette fonction en quatrième argument de la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos} lorsque vous créez une nouvelle variable globale de couleur, ici pour une variable globale enregistrant une substitution de commande permettant la coloration du fond.
+\end{justify}
+
+% ------------
+
+% ----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{sec3}
+\subsubsection{BU::Main::ModConfig::Colors::PrintColorTextVarsNameSubsCmd}\color{text}
+
+\begin{justify}
+    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::PrintColorTextVarsNameSubsCmd}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos}.
+\end{justify}
+
+\begin{justify}
+    Ce message doit être le même pour chaque variable globale de couleur de texte. Cette fonction évite donc de le réécrire ou de le modifier pour chaque variable.
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Paramètres :}
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{\color{vars}\$1} & Chaîne de caractères\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Fonctionnement :} Le fonctionnement est identique à la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}, mais le message varie.
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :} Même cas d'utilisation que pour la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}, mais la coloration du texte lui-même.
+\end{justify}
+
+
+
 
 % ------------
 
