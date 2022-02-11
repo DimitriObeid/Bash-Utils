@@ -310,6 +310,7 @@
 \end{justify}
 
 
+
 % ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -321,6 +322,7 @@
 \begin{justify}
     Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}«  »}
 \end{justify}
+
 
 
 
@@ -460,7 +462,7 @@
     \end{tabular}
 \end{justify}
 
-\begin{justify}
+\begin{justify}TEXT
     \textit{Description de la variable :}
 \end{justify}
 
@@ -540,6 +542,28 @@
     \end{tabular}
 \end{justify}
 
+\setlength{\parskip}{2em}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\setlength{\parskip}{1em}
+
+\begin{justify}
+    \begin{tabular}{l|l}
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...} & Substitution de commandes\\
+    \end{tabular}
+\end{justify}
+
+\begin{justify}
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+\end{justify}
+
+\begin{justify}
+    \textbf{Note :} Ces variables globales sont définies avant celles servant à l'encodage de la ouleur de fond, car elles sont appelées pour encoder la couleur du texte pour mieux lire les informations concernant les variables globales de couleur de fond si la valeur \textbf{--log-mode-partial} est passée à l'argument \textbf{module} lors de l'exécution du script principal.
+\end{justify}
+
 % ------------
 
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -552,160 +576,6 @@
 
 \begin{justify}
     Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...} & Substitution de commandes\\
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-                \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Chaîne de caractères \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}       & Booléen \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}    & Booléen \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Chaîne de caractères \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Chaîne de caractères \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}   & Nombre décimal\\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Nombre décimal\\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}  & Nombre décimal\\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}   & Booléen \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \begin{tabular}{l|l}
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_}   & \\[1\baselineskip]
-    \end{tabular}
-\end{justify}
-
-\begin{justify}
-    Cette variable
 \end{justify}
 
 \end{document}
