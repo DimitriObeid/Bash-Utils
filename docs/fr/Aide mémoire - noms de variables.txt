@@ -1,6 +1,0 @@
-Les noms de toutes les variables globales créées dans les fichiers du répertoire "config" commencent par "__BU_MAIN_"
-Les noms de toutes celles définies dans le fichier "~/.bash_profile" commencent par "__BU_MAIN_" ou "__BU_MAIN_MODULE_"
-
-Suivant ce début :
-	- ""
-	- "TRANSL_" fait référence à chaque text traduit.
