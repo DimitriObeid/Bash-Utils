@@ -36,17 +36,17 @@
 \fontfamily{Roboto}
 
 \pagecolor{back}
-\title{\color{sec1}Fonctions du fichier de librairie \color{path}Checkings.lib}\color{text}
+\title{\color{sec1}Variables et fonctions du fichier de configuration \color{path}Text.conf}\color{text}
 \author{Dimitri OBEID}
 \date{2022}
 \pagestyle{fancy}
 
 \pdfinfo{
-  /Title    (Fonctions du fichier de librairie Checkings.lib)
+  /Title    (Fonctions du fichier de librairie Text.conf)
   /Author   (Dimitri OBEID)
   /Creator  (Dimitri OBEID)
   /Producer (Dimitri OBEID)
-  /Subject  (Fonctions du fichier de librairie Checkings.lib)
+  /Subject  (Fonctions du fichier de librairie Text.conf)
   /Keywords ()
 }
 
@@ -68,13 +68,80 @@
 \subsection{Description}\color{text}
 
 \begin{justify}
-    Ce fichier source inclut des fonctions servant de contrôleurs, servant elles-mêmes à contrôler l'exécution de fonctions via des vérifications :
-    \begin{enumerate}
-        \item de valeurs de \textbf{\color{vars}variables globales},
-        \item de présence de \textbf{\color{path}dossiers} et de \textbf{\color{path}fichiers},
-        \item de la valeur d'UID (\textbf{U}ser \textbf{ID}entifier)
-    \end{enumerate}
+    Ce fichier de configurations liste chaque variable globale de texte utilisée par la librairie, avec sa ou ses valeurs par défaut.
 \end{justify}
+
+\begin{justify}
+    Elles sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
+\end{justify}
+
+% ------------
+
+% ----------------------
+
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{sec2}
+\subsection{Définition des éléments mentionnés}\color{text}
+
+\color{sec3}
+\subsubsection{Chemins des fichiers}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Dossier parent (gestionnaire de modules)} & \textbf{Nom du fichier}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT} & \textbf{\color{path}Status.conf}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% ------------
+
+% ----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec3}
+\subsubsection{Fonctions externes appelées}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Fonction} & \textbf{Fichier de définition}\\
+        \hline
+        \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos} & \textbf{\color{path}Bash-utils-init.sh}\\
+        \hline
+        \textbf{\color{func}BU::ModuleInit::Msg}                        & \textbf{\color{path}Bash-utils-init.sh}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
+
+% ------------
+
+% ----------------------
+
+\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+\color{sec3}
+\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Variable globale} & \textbf{Fichier de définition}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} & \textbf{\color{path}Statut.lib}\\
+        \hline
+    \end{tabular}
+\end{justify}
+
+\setlength{\parskip}{2em}
 
 % ------------
 
@@ -82,14 +149,11 @@
 
 % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+% /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\color{sec2}
-\subsection{Définitions des éléments mentionnés}\color{text}
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}
-\subsubsection{Chemins des fichiers}\color{text}
-
-
+\color{sec1}
+\section{Liste des fonctions}\color{text}
 
 \end{document}

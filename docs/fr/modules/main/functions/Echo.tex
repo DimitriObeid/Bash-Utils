@@ -38,7 +38,7 @@
 \pagecolor{back}
 \title{\color{sec1}Fonctions du fichier de librairie \color{path}Echo.lib}\color{text}
 \author{Dimitri OBEID}
-\date{2021}
+\date{2022}
 \pagestyle{fancy}
 
 \pdfinfo{
@@ -88,7 +88,7 @@
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Dossier parent (gestionaire de modules)} & \textbf{Nom du fichier}\\
+        \textbf{Dossier parent (gestionnaire de modules)} & \textbf{Nom du fichier}\\
         \hline
         \textbf{\color{vars}\$\_\_BU\_MODULE\_INSTALL\color{path}/}                           & \textbf{\color{path}Bash-utils-init.sh}\\
         \hline
@@ -184,73 +184,20 @@
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Variable} & \textbf{Fichier de définition}\\
+        \textbf{Variable globale} & \textbf{Fichier de définition}\\
         \hline
         \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_BG\_...} & \textbf{\color{path}Colors.conf}\\
         \hline
         \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...} & \textbf{\color{path}Colors.conf}\\
         \hline
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} & \textbf{\color{path}Status.conf}\\
+        \hline
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} & \textbf{\color{path}Text.conf}\\
+        \hline
     \end{tabular}
-
 \end{justify}
 
 
-\begin{justify}
-    \textbf{Description :} Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
-\end{justify}
-
-\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
-
-% ------------
-
-% ----------------------
-
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec3}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...}\\[1\baselineskip]
-
-\setlength{\parskip}{2em}
-
-\begin{justify}
-    \textbf{Description :}
-\end{justify}
-
-\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
-
-% ------------
-
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}\\[1\baselineskip]
-
-\setlength{\parskip}{2em}
-
-\begin{justify}
-    \textbf{Description :}
-\end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    Cette variable globale sert à mettre le script dans un état dit ``stable'', vérifiant si un texte peut être redirigé vers un fichier de logs sans provoquer de boucles infinies, dans le cas où un rappel de la même fonction dans l'état précédent peut causer ceci.
-\end{justify}
-
-\textbf{Fichier de définition : \color{path}Status.conf}\\[1\baselineskip]
-
-% ------------
-
-% ----------------------
-
-% ----------------------------------------------
-
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
 \textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 

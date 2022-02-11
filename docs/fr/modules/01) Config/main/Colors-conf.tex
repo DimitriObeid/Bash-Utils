@@ -38,7 +38,7 @@
 \pagecolor{back}
 \title{\color{sec1}Variables et fonctions du fichier de configuration \color{path}Colors.conf}\color{text}
 \author{Dimitri OBEID}
-\date{2021}
+\date{2022}
 \pagestyle{fancy}
 
 \pdfinfo{
@@ -68,12 +68,18 @@
 \subsection{Description}\color{text}
 
 \begin{justify}
-    Ce fichier de configurations liste chaque variable globale de couleur utilisée par la librairie, avec leurs valeurs par défaut, qui sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
+    Ce fichier de configurations liste chaque variable globale de couleur utilisée par la librairie, avec sa ou ses valeurs par défaut.
+\end{justify}
+
+\begin{justify}
+    Elles sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
 \end{justify}
 
 % ------------
 
 % ----------------------
+
+\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec2}
 \subsection{Définition des éléments mentionnés}\color{text}
@@ -84,18 +90,18 @@
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Dossier parent (dossier des configurations)} & \textbf{Nom du fichier}\\
+        \textbf{Dossier parent (dossier des configurations)}    & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT} & \textbf{\color{path}Status.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT}      & \textbf{\color{path}Status.conf}\\
         \hline
     \end{tabular}
 
 
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Dossier parent (dossier de la librairie)} & \textbf{Nom du fichier}\\
+        \textbf{Dossier parent (dossier de la librairie)}       & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH} & \textbf{\color{path}Status.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH}    & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -135,9 +141,9 @@
 \begin{justify}
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Variable} & \textbf{Fichier de définition}\\
+        \textbf{Variable globale}                           & \textbf{Fichier de définition}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} & \textbf{\color{path}}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
 \end{justify}
