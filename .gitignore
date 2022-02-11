@@ -30,6 +30,8 @@ install/.Bash-utils/config/modules/main/LangISOCode.conf
 # LaTeX
 **/*.aux
 **/*.dvi
+**/*.fdb_latexmk
+**/*.fls
 **/*.out
 **/*.synctex.gz
 **/*.synctex\(busy\)
