@@ -98,7 +98,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Cette fonction
+    Cette fonction colore le fond de la zone de texte où est entré le moindre caractère.
 \end{justify}
 
 % ------------
@@ -122,7 +122,69 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    
+    \textbf{\color{cond}Si} la fonction \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{true}, \textbf{\color{cond}alors} :
+\end{justify}
+
+\begin{itemize}
+    \item
+    {
+        \begin{justify}
+            La commande \textbf{\color{cmds}command -v} est invoquée dans une condition pour déterminer si la commande \textbf{\color{cmds}tput} est installée sur le système.
+        \end{justify}
+
+        \setlength{\parskip}{1em}
+
+        \begin{justify}
+            \textbf{\color{cond}Si} la commande \textbf{\color{cmds}tput} est trouvée, \textbf{\color{cond}alors} :
+
+            \begin{itemize}
+                \item
+                {
+                    \begin{justify}
+                        la commande \textbf{\color{cmds}tput} est invoquée avec l'option \textbf{\color{cmds}setab} (\textbf{set} \textbf{A}NSI \textbf{b}ackground) pour décorer le fond de la zone d'affichage de texte. Le cas échétant, la séquence d'échappement ANSI traditionnelle est invoquée via la commande \textbf{\color{cmds}echo -e} (l'option \textbf{\color{cmds}-e} permet de créer des séquences d'échappement).
+                    \end{justify}
+
+                    \setlength{\parskip}{2em}
+
+                    \begin{justify}
+                        \textbf{\color{cond}Si} le \textbf{\color{path}fichier temporaire dédié au stockage du code couleur pour la couleur de fond} n'existe pas \textbf{ET} ne peut pas être créé (via la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile}), \textbf{\color{cond}alors} un message d'erreur est affiché à l'écran.
+                    \end{justify}
+
+                    \setlength{\parskip}{1em}
+
+                    \begin{justify}
+                        \textbf{\color{cond}Fin de la condition « si »}.
+                    \end{justify}
+                }
+            \end{itemize}
+        \end{justify}
+
+        \begin{justify}
+            \textbf{\color{cond}Sinon, si} la commande \textbf{\color{cmds}tput} n'est pas installée sur le système, \textbf{\color{cond}alors} la séquence d'échappement ANSI traditionnelle est invoquée via la commande \textbf{\color{cmds}echo -e}.
+        \end{justify}
+
+        \begin{justify}
+            \textbf{\color{cond}Fin de la condition « si »}.
+        \end{justify}
+    }
+\end{itemize}
+
+\begin{justify}
+    \textbf{\color{cond}Sinon, si} la fonction \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{false}, \textbf{\color{cond}alors} l'exécution de la fonction est interrompue.
+\end{justify}
+
+\begin{justify}
+    \textbf{\color{cond}Fin de la condition « si »}.
+\end{justify}
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez cette fonction
 \end{justify}
 
 
@@ -144,7 +206,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Cette fonction
+    Cette fonction colore chaque caractère.
 \end{justify}
 
 % ------------
@@ -168,7 +230,26 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    
+    La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor}, à quelques différences près :
+    \begin{enumerate}
+        \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground).
+        \item
+    \end{enumerate}
+\end{justify}
+
+
+% ------------
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{justify}
+    \textbf{Utilisation :}
+
+    Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
+\end{justify}
+
+\begin{justify}
+    Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}}
 \end{justify}
 
 
@@ -222,7 +303,7 @@
 \end{justify}
 
 \begin{justify}
-    Chacune de ces variables enregistrent le code couleur 
+    Chacune de ces variables enregistrent le code couleur
 \end{justify}
 
 % ------------
