@@ -5,9 +5,18 @@
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 # shellcheck disable=SC1090
-source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to source the '$__BU_MOD_MAIN/Initializer.sh' file" >&2; echo >&2; exit 1; }
+if ! source "$HOME/Bash-utils-init.sh"; then
+    echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1
+fi
 
+# Calling the "BashUtils_InitModules()" function.
+if ! BashUtils_InitModules \
+    "module --log-shut" \
+    "main --stat-debug=false stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true" \
 
+    then
+	    echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1
+fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -25,36 +34,44 @@ source "$HOME/Bash-utils-init.sh" "main" || { echo >&2; echo -e "Unable to sourc
 __RES_DIR="$__BU_MAIN_MODULE_DOCS_DIR_PATH/.$__BU_MAIN_PROJECT_NAME"
 
 # Supported languages array.
-__supported_languages=('en' 'fr')
+__supported_languages=('en (English)' 'fr (French | Français)')
 
 # -----------------------------------------------
 
 ## STATUS VARIABLES MODIFICATION
 
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_ERROR="fatal"; CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+ChangeSTAT_ERROR 'fatal' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 # -----------------------------------------------
 
 ## FUNCTIONS DEFINITION
 
-# Please define any needed functions here.
+# Listing the supported languages.
+function LatexCreateDoc:BU::ListLanguages()
+{
+    BU::EchoNewstep "Currently supported languages --> English (en), French (fr)"
+
+    for i in "${__supported_languages[@]}"; do
+        echo "  - $i"
+    done
+}
 
 # ----------------------------------------------
 
 ## CODE
 
 BU::EchoNewstep "In which language do you want to write your LaTeX document ?"
-BU::EchoNewstep "Currently supported languages --> English (en), French (fr)"
-BU::Newline;
+LatexCreateDoc:BU::ListLanguages
+BU::Newline
 
-read -rp "Please type the wanted language's code in the above parenthesis : " __read_lang
+read -rp "Please type the wanted language's code from one of the above parenthesis : " __read_lang
 BU::EchoRead "$__read_lang"
-BU::Newline;
+BU::Newline
 
 if [[ "$__read_lang" =~ ${__supported_languages[*]} ]]; then
 	# shellcheck disable=SC2016
-	BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Echo::ToLowercase "$(BU::DechoE '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" "The currently supported languages are : $(for _ in "${__supported_languages[@]}"; do echo -e "- $_\n"; done)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+	BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Echo::ToLowercase "$(BU::DechoHighlightError '$__read_doc_name')'s") VARIABLE'S VALUE IS INCORRECT" \
+        "$(LatexCreateDoc:BU::ListLanguages)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
 else
 
 	#***** Conditions variables definition.
@@ -75,7 +92,7 @@ else
 
 	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code
 	BU::EchoRead "$__read_folder_code"
-	BU::Newline;
+	BU::Newline
 
 	#***** Verifying if the entered code is valid.
 	lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
