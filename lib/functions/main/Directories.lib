@@ -5,9 +5,9 @@
 
 # Name          : Directories.lib
 # Module        : Main
-# Description   : 
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
 # ----------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -53,20 +53,20 @@ function BU::Main::Directories::ProcessingDir()
     local p_function=$1
     local p_parent=$2
     local p_name=$3
-    
+
     #**** Variables ****
     local v_char='"'
     local v_path="$p_parent/$p_name"
-    
+
     #**** Code ****
     # Arguments checking.
 	BU::Main::CheckArgs__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name"
-    
+
 	sleep "$PROJECT_STATUS_SLEEP_LINE"
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
     BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent")."
     BU::Newline;
-    
+
     if "$p_function"; then
         BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
 		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
@@ -100,7 +100,7 @@ function BU::Main::Directories::OverwriteDir()
     #**** Code ****
     # Checking first if the awaited arguments are given
     if ! BU::Main::CheckArgs__Directories::OverwriteDir "$p_path" "$p_authorization"; then return 1; fi
-	
+
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$p_path"
 
@@ -138,7 +138,7 @@ function BU::Main::Directories::OverwriteDir()
 # folder creation function, with the parent folder's path and the new folder's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Main::CheckArgs__Directories::Make        -> Main -> CheckArgsMain.lib
+#   - BU::Main::CheckArgs__Directories::Make        -> Main -> CheckArgs.lib
 #   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
 #   - BU::Main::Directories::OverwriteDir           -> Main -> Directories.lib (this file)
 #   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib (this file)
@@ -162,10 +162,10 @@ function BU::Main::Directories::Make()
 	#**** Code ****
 	# Checking first if the awaited arguments are given
     if ! BU::Main::CheckArgs__Directories::Make "$p_parent" "$p_name"; then return 1; fi
-    
+
     # Checking second if the script is operating at the root directory.
     if ! BU::Main::Directories::TriggerRootDirWarning "$v_path"; then return 1; fi
-	
+
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
 		BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent/")."
@@ -177,7 +177,7 @@ function BU::Main::Directories::Make()
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
         BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") folder was successfully created in the $(BU::DechoHighlightPath "$p_parent/") folder."
         BU::Newline;
-        
+
         return 0;
 
     # Else, if the folder to create already exists in its parent directory AND this folder already contains AT LEAST one file or folder.
@@ -222,7 +222,7 @@ function BU::Main::Directories::MkTmpDir()
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
 			BU::Main:Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
-			
+
 			BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Checkings::CheckDirPathExists "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
             "Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
@@ -231,7 +231,7 @@ function BU::Main::Directories::MkTmpDir()
 
 			return 1
 		}
-    
+
 		return 0;
 	fi
 
@@ -247,10 +247,10 @@ function BU::Main::Directories::GetDirectoryName()
 {
     #**** Parameters ****
     local p_path=$1
-    
+
     #**** Code ****
     BU::Main::CheckArgs__Directories::GetDirectoryName "$p_path"
-    
+
     if [ -d "$p_path" ]; then
         shopt -s extglob            # enable +(...) glob syntax
 
@@ -263,7 +263,7 @@ function BU::Main::Directories::GetDirectoryName()
     else
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
-		
+
 		return 1
     fi
 }
@@ -348,7 +348,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
 
             p_path="$v_parent"
         done
-        
+
         shopt -s extglob            # enable +(...) glob syntax.
         result=${p_path%%+(/)}      # trim however many trailing slashes exist.
 
@@ -363,7 +363,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
                 }; pwd -P )"
-            
+
             local v_path_cut; v_path_cut="${v_parent##*/}"
             local v_path_str+="$v_path_cut/"
 
@@ -371,7 +371,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
             # WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
             # DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
             rmdir "$v_current_path"; BU::Main::Errors::HandleErrors "$?" "UNABLE TO ERASE THE $(BU::DechoHighlightPath "$v_current_path") NEWLY CREATED FOLDER !"
-            
+
             local v_current_path="$v_parent"
         done
 

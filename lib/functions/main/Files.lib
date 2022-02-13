@@ -157,7 +157,7 @@ function BU::Main::Files::OverwriteFile()
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Main::CheckArgs__Files::Make              -> Main -> CheckArgsMain.lib
+#   - BU::Main::CheckArgs__Files::Make              -> Main -> CheckArgs.lib
 #   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
 #   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib
 #   - BU::Main::Errors::HandleErrors                -> Main -> Errors.lib
@@ -227,6 +227,8 @@ function BU::Main::Files::MakePath()
 
     #**** Code ****
     if ! BU::Main::CheckArgs__Files::MakePath "$p_path"; then return 1; fi
+
+
 
     return 0;
 }
@@ -303,7 +305,7 @@ function BU::Main::Files::CreateProjectLogFile()
     BU::Newline;
 
     BU::EchoSuccess "Successfully got the user's system's informations.";
-    
+
     # Purging the "$__BU_MODULE_UTILS_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file.
     __BU_MODULE_UTILS_MSG_ARRAY='';
 }

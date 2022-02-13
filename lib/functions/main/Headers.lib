@@ -140,7 +140,7 @@ function BU::HeaderBase()
     local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
     local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT";           # Setting the normal text display time's global status variable to 0 seconds, because the header's pause time is already set.
 
-    if [ "$p_strlen" = 'strlen' ]; then local v_strlen="$(echo "$p_stringTxt" | wc -m)"; fi
+    if [ "$p_strlen" = 'strlen' ]; then local v_strlen; v_strlen="$("${#p_stringTxt}")"; fi
 
 	#**** Code ****
 	__BU_MAIN_STAT_TIME_NEWLINE="0";
