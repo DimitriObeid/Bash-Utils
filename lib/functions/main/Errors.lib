@@ -150,7 +150,7 @@ function BU::Main::Errors::HandleErrors()
         v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")"
 
 	# ***** Code *****
-	CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+	BU::CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 	if [ "$p_returnCode" -eq 0 ]; then
         return 0;
@@ -191,9 +191,9 @@ function BU::Main::Errors::HandleErrors()
         fi
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-            HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
+            BU::HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2
         else
-            HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
+            BU::HeaderRed "$v_hdrString ERROR : $p_errorString" >&2
         fi
 
 

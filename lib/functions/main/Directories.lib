@@ -108,7 +108,7 @@ function BU::Main::Directories::OverwriteDir()
 	BU::EchoNewstep "Deleting the contents of the $(BU::DechoHighlightPath "$v_path/") folder"
 	BU::Newline;
 
-	if [ "$p_authorization" = "true" ]; then
+	if [ "$p_authorization" = "--rmdir" ]; then
         # TODO : Si la variable n'est pas initialisée.
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
@@ -151,6 +151,7 @@ function BU::Main::Directories::Make()
 	#**** Parameters ****
 	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
 	local p_name=$2    # Name of the folder to process (into its parent directory).
+	local p_rm=$3      # Authorization
 
 	#**** Variables ****
 	local v_path="$p_parent/$p_name"	# Path of the file to process.
@@ -178,12 +179,15 @@ function BU::Main::Directories::Make()
 
     # Else, if the folder to create already exists in its parent directory AND this folder already contains AT LEAST one file or folder.
 	elif [ -d "$v_path" ] && [ "$(ls -A "$v_path")" ]; then
-        BU::Main::Directories::OverwriteDir "$p_parent" "$p_name"
-        if test "$?" -eq 0; then
-            return 0;
-		else
-            return 1
-		fi
+
+        if [ "$p_rm" = '--rmdir' ]; then
+            BU::Main::Directories::OverwriteDir "$v_path" "$p_rm"
+            if test "$?" -eq 0; then
+                return 0;
+            else
+                return 1
+            fi
+        fi
 
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
 	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then

@@ -114,7 +114,7 @@ else
     ## PROCESSING THE TARGET DIRECTORY
 
 	#***** Target paths variables definition.
-	__target_path_master="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__read_lang"
+	__target_path_master="$__read_lang"
 	__target_path_module="$__target_path_master/modules"
 
 	__target_path_initscript="$__target_path_module/01) ScriptInit"
@@ -151,22 +151,22 @@ else
         #***** Verifying if the given code is valid.
         lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
             1)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_master" && __folder_path="$__BU_MAIN_DOCS/$__target_path_master"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_master"
                 ;;
             2)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_master" && __folder_path="$__BU_MAIN_DOCS/$__target_path_module"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_module"
                 ;;
             3)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_initscript" && __folder_path="$__BU_MAIN_DOCS/$__target_path_initscript"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_initscript" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_initscript"
                 ;;
             4)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_config" && __folder_path="$__BU_MAIN_DOCS/$__target_path_config"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_config" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_config"
                 ;;
             5)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_init" && __folder_path="$__BU_MAIN_DOCS/$__target_path_init"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_init" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_init"
                 ;;
             6)
-                BU::Main::Directories::Make "$__BU_MAIN_DOCS" "$__target_path_main_functions" && __folder_path="$__BU_MAIN_DOCS/$__target_path_main_functions"
+                BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_main_functions" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_main_functions"
                 ;;
             *)
                 if [ -n "$__ARG_TYPE" ]; then
