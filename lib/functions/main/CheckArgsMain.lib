@@ -354,6 +354,19 @@ function BU::Main::CheckArgs__Directories::Make()
 	return 0;
 }
 
+# "BU::Main::Directories::MakePath" function.
+function BU::Main::CheckArgs__Directories::MakePath()
+{
+    #**** Parameters ****
+    local p_path=$1         # Full path of the directory to create.
+    local p_overwrite=$2    #
+
+    #**** Code ****
+    
+
+    return 0;
+}
+
 # -----------------------------------------------
 
 ## MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING CATEGORY
@@ -504,6 +517,17 @@ function BU::Main::CheckArgs__Files::Make()
 
 	return 0;
 }
+
+# "BU::Main::Files::MakePath" function.
+function BU::Main::CheckArgs__Files::MakePath()
+{
+    #**** Parameters ****
+    local p_path=$1         # Full path of the file to create.
+
+    #**** Code ****
+    
+
+    return 0;
 
 # -----------------------------------------------
 

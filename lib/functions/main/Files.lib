@@ -40,6 +40,8 @@ fi
 
 #### TEXT FILES PROCESSING FUNCTIONS
 
+## PROCESSING FUNCTIONS
+
 # This function only repeats some parts of the following function.
 function BU::Main::Files::__ProcessingFile()
 {
@@ -111,7 +113,9 @@ function BU::Main::Files::ProcessingFile()
     esac
 }
 
-## OVERWRITING CONTENT
+# -----------------------------------------------
+
+## FILE CREATION FUNCTIONS
 
 # Overwriting a file
 
@@ -150,19 +154,20 @@ function BU::Main::Files::OverwriteFile()
 	return 0;
 }
 
-# -----------------------------------------------
-
-## FILE CREATION
-
-# File creation function.
-# LORS DE SON APPEL, LA SORTIE DE CETTE FONCTION DOIT ÊTRE REDIRIGÉE SOIT VERS LE TERMINAL ET LE FICHIER DE LOGS, SOIT VERS LE FICHIER DE LOGS UNIQUEMENT.
+# File creation function, with the parent folder's path and the file's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Main::Headers::DrawLine       -> Main -> Headers.lib
+#   - BU::Main::CheckArgs__Files::Make              -> Main -> CheckArgsMain.lib
+#   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
+#   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib
+#   - BU::Main::Errors::HandleErrors                -> Main -> Errors.lib
+#   - BU::Main::Files::OverwriteFile                -> Main -> Files.lib (this file)
+#   - BU::Main::Headers::DrawLine                   -> Main -> Headers.lib
+
+#   - BU::DechoHighlightPath            -> Main -> Decho.lib
 #   - BU::EchoError                     -> Main -> Echo.lib
 #   - BU::EchoNewstep                   -> Main -> Echo.lib
 #   - BU::EchoSuccess                   -> Main -> Echo.lib
-#   - BU::Main::Errors::HandleErrors    -> Main -> Handles.lib
 function BU::Main::Files::Make()
 {
 	#**** Parameters ****
@@ -189,7 +194,7 @@ function BU::Main::Files::Make()
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		BU::Main::Errors::HandleErrors "$?" "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_name")") FILE CANNOT BE CREATED IN THE $(BU::DechoHighlightPath "$p_parent/") PARENT FOLDER." \
+		BU::Main::Errors::HandleErrors "$?" "THE $(BU::DechoHighlightPath "$p_name") FILE CANNOT BE CREATED IN THE $(BU::DechoHighlightPath "$p_parent/") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
 
 		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") file was successfully created in the $(BU::DechoHighlightPath "$p_parent") folder.";
@@ -212,6 +217,18 @@ function BU::Main::Files::Make()
 
 		return 0;
 	fi
+}
+
+# File creation function, with the parent folder's path and the file's name as unique argument.
+function BU::Main::Files::MakePath()
+{
+    #**** Parameters ****
+    p_path=$1           # Full path of the file to create.
+
+    #**** Code ****
+    if ! BU::Main::CheckArgs__Files::MakePath "$p_path"; then return 1; fi
+
+    return 0;
 }
 
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.

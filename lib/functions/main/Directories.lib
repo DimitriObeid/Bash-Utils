@@ -135,23 +135,26 @@ function BU::Main::Directories::OverwriteDir()
     return 0;
 }
 
-
-
-# Folder creation AND recursively assigning read and write rights to the user.
-# When this function is called, if a log file is used in the project, the output of this function must be redirected either to the terminal AND the log file (2>&1 | tee -a "$FILE_LOG_PATH"), or to the log file only (>> "$FILE_LOG_PATH") after passing all the mandatory arguments. Otherwise, leave everything blank after passing the arguments.
+# folder creation function, with the parent folder's path and the new folder's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Echo.sh       -> BU::EchoErrorTimer
-#   - BU::Echo.sh       -> BU::EchoNewstepTimer
-#   - BU::Echo.sh       -> BU::EchoSuccessTimer
-#   - Headers.sh    -> BU::Main::Headers::DrawLine   
-#   - Headers.sh    -> BU::Main::Errors::HandleErrors
+#   - BU::Main::CheckArgs__Directories::Make        -> Main -> CheckArgsMain.lib
+#   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
+#   - BU::Main::Directories::OverwriteDir           -> Main -> Directories.lib (this file)
+#   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib (this file)
+#   - BU::Main::Errors::HandleErrors                -> Main -> Errors.lib
+#   - BU::Main::Headers::DrawLine                   -> Main -> Headers.lib
+
+#   - BU::DechoHighlightPath            -> Main -> Decho.lib
+#   - BU::EchoError                     -> Main -> Echo.lib
+#   - BU::EchoNewstep                   -> Main -> Echo.lib
+#   - BU::EchoSuccess                   -> Main -> Echo.lib
 function BU::Main::Directories::Make()
 {
 	#**** Parameters ****
 	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
 	local p_name=$2    # Name of the folder to process (into its parent directory).
-	local p_rm=$3      # Authorization
+	local p_rm=$3      # Authorization to overwrite the targeted directory.
 
 	#**** Variables ****
 	local v_path="$p_parent/$p_name"	# Path of the file to process.
@@ -196,6 +199,19 @@ function BU::Main::Directories::Make()
 
 		return 0;
     fi
+}
+
+# Folder creation function, with the parent folder's path and the directory's name as unique argument.
+function BU::Main::Files::MakePath()
+{
+    #**** Parameters ****
+    local p_path=$1         # Full path of the directory to create.
+    local p_overwrite=$2    # Authorization to overwrite the directory.
+
+    #**** Code ****
+    if ! BU::Main::CheckArgs__Directories::MakePath "$p_path" "$p_overwrite"; then return 1; fi
+
+    return 0;
 }
 
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MAIN_STAT_LOG variable's value is "true",
