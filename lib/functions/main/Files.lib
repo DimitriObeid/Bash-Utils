@@ -312,6 +312,84 @@ function BU::Main::Files::CreateProjectLogFile()
 
 # -----------------------------------------------
 
+## GATHERING FILE INFORMATIONS
+
+# Getting the size of a file in bytes.
+function BU::Main::File::GetFileByteSize()
+{
+    #**** Parameters ****
+    local p_filepath=$1;    # Path to the file to process.
+    local p_base=$2;        # Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
+    local p_yes=$3;         # 
+
+    #**** Code ****
+    
+    if [ -z "$p_base" ]; then
+        wc --bytes < "$p_filepath" || \
+            { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+
+            
+    elif [ -n "$p_base" ] && BU::IsInt "$b_base"; then
+
+        # Convert the size from plain number to human readable metric prefix.
+        if [ "$p_base" -ne 1024 ]; then
+            BU::Main::BasicMaths::BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
+                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+
+        # Convert the size from plain number to human readable binary prefix.
+        else
+            BU::Main::BasicMaths::BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
+                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+        fi
+    else
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : The byte measure unit byte $(BU::DechoHighlight "$p_base") is not an integer"; BU::Newline >&2; return 1;
+    fi
+
+    return 0;
+}
+
+# Getting the total number of characters in a file.
+function BU::Main::File::GetFileCharactersNumber()
+{
+    #**** Parameters ****
+    local p_filepath;
+
+    #**** Code ****
+    wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# Getting the total number of lines in a file.
+function BU::Main::File::GetFileLinesNumber()
+{
+    #**** Parameters ****
+    local p_filepath;
+
+    #**** Code ****
+    wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# Getting the max line length in a file.
+function BU::Main::File::GetFileMaxLineLength()
+{
+    #**** Parameters ****
+    local p_filepath;
+
+    #**** Code ****
+    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# Getting the total number of characters in a file.
+function BU::Main::File::GetFileWordsNumber()
+{
+    #**** Parameters ****
+    local p_filepath;
+
+    #**** Code ****
+    wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# -----------------------------------------------
+
 ## FILE SOURCING
 
 # Sourcing dependencies files.

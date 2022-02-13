@@ -205,13 +205,15 @@ else
 
 	# BU::Main::Files::Make "$__folder_path" "$__read_doc_name.tex" && BU::EchoSuccess "Your LaTeX file ($(BU::DechoHighlightPath "$__tex_full_path")) was successfully created."
     lineno_case_copy_file="$LINENO"; case "$__read_folder_code" in
-        1) BU::Main::Files::Make "" "";;
-        2) BU::Main::Files::Make "" "";;
-        3) BU::Main::Files::Make "" "";;
+        1) BU::Main::Files::MakePath "";;
+        2) BU::Main::Files::MakePath "";;
+        3) BU::Main::Files::MakePath "";;
 
-        4) BU::Main::Files::Make "" "";;
-        5) BU::Main::Files::Make "" "";;
-        6) BU::Main::Files::Make "" "";;
+        4) BU::Main::Files::MakePath "";;
+        5) BU::Main::Files::MakePath "";;
+        6) BU::Main::Files::MakePath "";;
+
+        7) BU::Main::Files::MakePath "";;
     esac
 
 	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
