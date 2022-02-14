@@ -42,9 +42,9 @@ fi
 
 ## CONVERSIONS FUNCTIONS
 
-# Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. switchable to padded format and base-1000 (eg : MB) if desired.
+# Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since I added more informations) : https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
+# Initial source of this AWK script (since it's not mine and I added more informations as comments) : https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU::Main::BasicMaths::BytesToHuman()
 {
     #**** Parameters ****
@@ -62,8 +62,8 @@ function BU::Main::BasicMaths::BytesToHuman()
         # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
          basesuf=(base==1024)?"iB":"B"
 
-        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta).
-         s="BKMGTEPYZ"
+        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta.
+         s="BKMGTPEZY"
 
         # While the "x" ("human" function first parameter value) is superior or equal to the "base" (human function third parameter value) AND
          while (x>=base && length(s)>1)
