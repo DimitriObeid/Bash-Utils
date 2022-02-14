@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# ----------------------
+# ---------------------
 # SCRIPT'S INFORMATIONS
 
 # Name          : Permissions.lib
 # Module        : Main
-# Description   : 
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
-# ----------------------
+# ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
@@ -20,7 +20,7 @@
 
 # shellcheck disable=SC2154
 
-# ----------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -110,9 +110,9 @@ function BU::Main::Permissions::Chown()
     #**** Parameters ****
     p_currentOwner=$1;  # This parameter is used in the translated messages, stored into their own variables.
     p_newOwner=$2;      # New owner of the directory / file.
-    p_path=$3;          # Path of the directory / file to process. 
+    p_path=$3;          # Path of the directory / file to process.
     p_option=$4;        # Recursive swapping or not.
-    
+
     #**** Code ****
     # The "chown" command has to be used with super-user privileges,
     BU::Main::Checkings::CheckRootEUID;
@@ -121,7 +121,7 @@ function BU::Main::Permissions::Chown()
     if [ -d "$p_path" ]; then
         BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlightPath "$p_path/") folder from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
         BU::Newline;
-        
+
         # Changing ownership recursively.
         case "$p_option" in
             'R')
@@ -159,8 +159,8 @@ function BU::Main::Permissions::Chown()
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
                 ;;
         esac
-        
-        
+
+
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$p_path" ]; then

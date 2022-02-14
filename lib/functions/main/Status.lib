@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ----------------------
+# ---------------------
 # SCRIPT'S INFORMATIONS
 
 # Name          : CheckSTAT.lib
@@ -9,7 +9,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       :
 
-# ----------------------
+# ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
@@ -20,7 +20,7 @@
 
 # shellcheck disable=SC2154
 
-# ----------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -57,12 +57,12 @@ function BU::Main::Status::ConfEcho()
     local pa_correctValues=("$@");
 
     #**** Variables ****
-    local i=0;      # 
+    local i=0;      #
 
     #**** Code ****
     # Sourcing the "Status.conf" file to reset every status global variables values
     BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_STATUS_FILE_PATH";
-    
+
     # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
     __BU_MAIN_STAT_DECHO='allow';
 
@@ -72,7 +72,7 @@ function BU::Main::Status::ConfEcho()
 			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
 			EchoError "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
-			
+
 			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 

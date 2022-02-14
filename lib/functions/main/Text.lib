@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ----------------------
+# ---------------------
 # SCRIPT'S INFORMATIONS
 
 # Name          : Text.lib
@@ -9,7 +9,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       :
 
-# ----------------------
+# ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
@@ -20,7 +20,7 @@
 
 # shellcheck disable=SC2154
 
-# ----------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

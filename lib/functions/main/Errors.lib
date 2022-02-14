@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# ----------------------
+# ---------------------
 # SCRIPT'S INFORMATIONS
 
 # Name          : Errors.lib
 # Module        : Main
 # Description   : Errors handling functions.
 # Author(s)     : Dimitri Obeid
-# Version       : 
+# Version       :
 
-# ----------------------
+# ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
@@ -20,7 +20,7 @@
 
 # shellcheck disable=SC2154
 
-# ----------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -94,7 +94,7 @@ function BU::Main::Errors::HandleSmallErrors()
 
         BU::Main::Errors::ExitError '1'
 
-    else 
+    else
         BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Errors::ExitError '1'
     fi
 
@@ -133,7 +133,7 @@ function BU::Main::Errors::HandleErrors_Line()        { if [ -z "$1" ]; then BU:
 
 # Handling command outputs.
 # Featured functions and files from the "basis" category :
-#   - 
+#   -
 function BU::Main::Errors::HandleErrors()
 {
 	#**** Parameters ****
@@ -185,7 +185,7 @@ function BU::Main::Errors::HandleErrors()
 
         # -------- PART 2 : PRINTING THE HEADER
 
-        # Redirecting the log messages to the terminal, to show them to the user. 
+        # Redirecting the log messages to the terminal, to show them to the user.
         if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
             local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
         fi

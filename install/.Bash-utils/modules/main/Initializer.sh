@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ----------------------
+# ---------------------
 # SCRIPT'S INFORMATIONS
 
 # Name          : Initializer.sh
@@ -9,7 +9,7 @@
 # Author(s)     : Dimitri Obeid
 # Version       : 1.0
 
-# ----------------------
+# ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
 
 # Add a coma after each warning code to disable multiple warnings at one go.
@@ -115,7 +115,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
 	# Defining an array ($main_module_array) to store the module's arguments string as an array of words.
 	read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING";
-	
+
 	# Unsetting the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
 	unset "main_module_array[0]";
 
@@ -128,7 +128,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
             # Extracting the "--stat" option's values.
             case "${value[i],,}" in
-    
+
                 # "$__BU_MAIN_STAT_DEBUG" global status variable.
             '--stat-debug='*)
                     if      [ "${value[i],,}" = "--stat-debug=false" ]          || [ "${value[i],,}" = "--stat-debug=true" ]; then
@@ -148,7 +148,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     else
                             BU::ModuleInit::Msg "$stat_value_warning « --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
 
-                            
+
                     fi;;
 
                 # "$__BU_MAIN_STAT_ECHO" global status variable.
@@ -165,7 +165,7 @@ if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 'stat-error='*)
                     if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
                             __BU_MAIN_STAT_ERROR="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR";
-                    
+
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = 'stat-error=void' ]; then
