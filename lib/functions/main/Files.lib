@@ -230,8 +230,8 @@ function BU::Main::Files::MakePath()
     local p_path=$1;    # Full path of the file to create.
 
     #**** Variables ****
-    local v_parent="$(echo "$p_path" | rev | cut -d/ -f2- | rev)";      # Getting the parent directory of the file to create.
-    local v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)";   # Getting the name of the file to create.
+    local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
+    local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
 
     #**** Code ****
     if ! BU::Main::CheckArgs__Files::MakePath "$p_path"; then return 1; fi
@@ -328,7 +328,6 @@ function BU::Main::File::GetFileByteSize()
     #**** Parameters ****
     local p_filepath=$1;    # Path to the file to process.
     local p_base=$2;        # Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
-    local p_yes=$3;         #
 
     #**** Code ****
 
@@ -356,14 +355,33 @@ function BU::Main::File::GetFileByteSize()
     return 0;
 }
 
+# Getting the file's creation date.
+
+# Please note, some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
+function BU::Main::File::GetFileCreationDate()
+{
+    #**** Parameters ****
+    local p_filepath=$1;
+
+    #**** Code ****
+    if ! stat -c %W "$p_filepath"; then
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; return 1;
+
+    elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$(df -Th . | awk 'FNR == 2 {print $2}')")) does not stores the files creation dates"; return 1;
+    fi
+
+    return 0;
+}
+
 # Getting the total number of characters in a file.
 function BU::Main::File::GetFileCharactersNumber()
 {
     #**** Parameters ****
-    local p_filepath;
+    local p_filepath=$1;
 
     #**** Code ****
-    wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+    wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; }; return 0;
 }
 
 # Getting the last file's access date.
@@ -373,7 +391,8 @@ function BU::Main::File::GetFileLastAccess()
     local p_filepath=$1;
 
     #**** Code ****
-    
+     "$p_filename" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; };
+
     return 0;
 }
 
@@ -384,7 +403,8 @@ function BU::Main::File::GetFileLastModification()
     local p_filepath=$1;
 
     #**** Code ****
-    
+    date -r "$p_filename" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; };
+
     return 0;
 }
 
@@ -395,7 +415,7 @@ function BU::Main::File::GetFileLinesNumber()
     local p_filepath=$1;
 
     #**** Code ****
-    wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+    wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; }; return 0;
 }
 
 # Getting the max line length in a file.
@@ -405,7 +425,7 @@ function BU::Main::File::GetFileMaxLineLength()
     local p_filepath=$1;
 
     #**** Code ****last access date
-    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; }; return 0;
 }
 
 # Getting the owner of a file.
@@ -415,7 +435,7 @@ function BU::Main::File::GetFileOwnerName()
     local p_filepath=$1;
 
     #**** Code ****
-    stat -c "%U" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; };
+    stat -c "%U" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; };
 
     return 0;
 }
@@ -427,7 +447,7 @@ function BU::Main::File::GetFileOwnerGroup()
     local p_filepath=$1;
 
     #**** Code ****
-    stat -c "%G" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; };
+    stat -c "%G" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; };
 
     return 0;
 }
@@ -436,10 +456,10 @@ function BU::Main::File::GetFileOwnerGroup()
 function BU::Main::File::GetFileWordsNumber()
 {
     #**** Parameters ****
-    local p_filepath;
+    local p_filepath=$1;
 
     #**** Code ****
-    wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+    wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; return 1; }; return 0;
 }
 
 # -----------------------------------------------
@@ -475,7 +495,7 @@ function BU::Main::Files::SourceFile()
         if source "$p_path"; then
             BU::EchoSuccess "Sourced file : $(BU::DechoHighlightPath "$p_path")";
         else
-            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please verify that the filepath passed as argument exists." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+            BU::Main::Errors::HandleErrors "1" "UNABLE TO SOURCE THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
         fi
     else
         BU::Main::Errors::HandleErrors "1" "UNABLE TO FIND THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";

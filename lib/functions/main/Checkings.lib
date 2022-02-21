@@ -40,6 +40,33 @@ fi
 
 #### VARIABLES VALUES CHECKING
 
+## DATE FORMAT
+
+# Checking if a given date is formatted in timestamp format, with separators, and in these formats :
+#   - YYYY-MM-DD
+#   - DD-MM-YYYY
+#   - YYYY/MM/DD
+#   - DD/MM/YYYY
+function BU::IsDateYMD() { [[ $(date -d "${1//-/\/}" 2> /dev/null) ]] || [[ $(date "+%d/%m/%Y") ]] || return 1; return 0; }
+
+
+# Help : DATE="04:30:2005"; [[ $(date -d "${DATE//:/\/}" 2> /dev/null) ]] && echo $DATE
+
+# Checking if a given date in YYYY-MM-DD Hh:Mm:Ss is formatted in timestamp format, with separators, and in these formats.
+#   - YYYY-MM-DD hh:mm:ss
+#   - DD-MM-YYYY hh:mm:ss
+#   - YYYY/MM/DD hh:mm:ss
+#   - DD/MM/YYYY hh:mm:ss
+function BU::IsDateYMDhms()
+{
+     local v_date; v_date="$(echo "$1" | rev | cut -d '' -f2- | rev)";  # Getting the year, the month and the day.
+     local v_hour; v_hour="$(echo "$1" | rev | cut -d '' -f 1 | rev)";  # Getting the hour.
+     
+     echo "$v_date"; echo "$v_hour";
+}
+
+# -----------------------------------------------
+
 ## NUMBER VALUES
 
 # Checking floating value.
@@ -104,7 +131,7 @@ function BU::IsPositiveInt()
 
 # -----------------------------------------------
 
-## STRING VALUES
+## CHARACTERS AND STRING VALUES
 
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU::IsAlphaChar()

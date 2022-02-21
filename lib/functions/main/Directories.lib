@@ -209,13 +209,17 @@ function BU::Main::Directories::MakePath()
     local p_overwrite=$2    # Authorization to overwrite the directory.
 
     #**** Variables ****
-    local v_parent="$(echo "$p_path" | rev | cut -d/ -f2- | rev)";      # Getting the parent directory of the folder to create.
-    local v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)";   # Getting the name of the folder to create.
+    local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the folder to create.
+    local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
 
     #**** Code ****
     if ! BU::Main::CheckArgs__Directories::MakePath "$p_path"; then return 1; fi
 
-    BU::Main::Directories::Make "$v_parent" "$v_target" || return 1;
+    if [ "$p_overwrite" != 'rmdir' ]; then
+        BU::Main::Directories::Make "$v_parent" "$v_target" || return 1;
+    else
+        BU::Main::Directories::Make "$v_parent" "$v_target" '--rmdir'
+    fi
 
     return 0;
 }

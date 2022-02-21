@@ -172,17 +172,20 @@ function BU::HeaderBase()
 
                 for i in "${int_array[@]}"; do
 
-                    if [[ "$i" == *'1'* ]]; then
+                    if [[ "$i" == '1'* ]]; then
                         BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
 
                     elif [[ "$i" == *'2'* ]]; then
                         BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol";
 
-                    elif [[ "$i" == *'3'* ]]; then
+                    elif [[ "$i" == *'3' ]]; then
                         BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
 
+                    elif [[ "$i" == *'1'* ]] || [[ "$i" == *'3'* ]]; then
+                        BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the values were not arranged in ascending order, like 123, 12, 13 or 23" 'R';
+
                     else
-                        BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported)" 'R';
+                        BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported), " 'R';
                     fi
                 done
 

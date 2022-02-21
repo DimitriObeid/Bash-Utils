@@ -102,11 +102,11 @@ function BU::Decho()
 	fi
 
 	if [ "$__BU_MAIN_STAT_DECHO" = 'restrict' ]; then
-        printf "$p_newTextColor";
-        printf "$p_newBGColor";
-        printf "$p_string";
-        printf "$v_oldBGColor";
-        printf "$v_oldTextColor";
+        printf "%s" "$p_newTextColor";
+        printf "%s" "$p_newBGColor";
+        printf "%s" "$p_string";
+        printf "%s" "$v_oldBGColor";
+        printf "%s" "$v_oldTextColor";
         printf "\n";
 
         return 0;

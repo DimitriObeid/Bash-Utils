@@ -240,52 +240,52 @@ function BU::Main::Text::ReverseStringWordsOrder()
 ## SPLITTING TEXT
 
 # Splitting a string from a given delimiter.
-function BU::Main::Text::SplitStringFromDelim()
-{
-    #**** Parameters ****
-    local p_string=$1;          # String to process.
-    local p_delim=$2;           # Delimiter.
-    local p_order=$3;           # Splitting order (L|l = left to right, R|r = right to left).
-    local p_iterations=$4;      # Number of delimiters to process.
-    local p_ignore_delim=$5;    # Number of delimiters to ignore before splitting the string.
-
-    #**** Code ****
-    if [ -z "$p_iterations" ] || [ "$p_iterations" -eq 0 ]; then
-        p_iterations='1';
-    fi
-
-    # If the string has to be processed from left to right.
-    if [ "${p_order^^}" = 'L|l' ]; then
-        for ((i=0; i<p_iterations; i++)); do
-            if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
-                true
-            else
-                for ((j=0; j<p_ignore_delim; i++)); do
-                    true
-                done
-            fi
-        done
-
-    # Else, if the string has to be processed from right to left.
-    elif [ "${p_order^^}" = 'R|r' ]; then
-        for ((i=0; i<p_iterations; i++)); do
-            if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
-                true
-            else
-                for ((j=0; j<p_ignore_delim; i++)); do
-                    true
-                done
-            fi
-        done
-
-    # Else, if no value is passed to the order processer.
-    elif [ -z "$p_order" ]; then
-        false
-
-    # Else, if an unsupported value is passed to the order processer.
-    else
-        false
-    fi
-
-    return 0;
-}
+# function BU::Main::Text::SplitStringFromDelim()
+# {
+#     #**** Parameters ****
+#     local p_string=$1;          # String to process.
+#     local p_delim=$2;           # Delimiter.
+#     local p_order=$3;           # Splitting order (L|l = left to right, R|r = right to left).
+#     local p_iterations=$4;      # Number of delimiters to process.
+#     local p_ignore_delim=$5;    # Number of delimiters to ignore before splitting the string.
+# 
+#     #**** Code ****
+#     if [ -z "$p_iterations" ] || [ "$p_iterations" -eq 0 ]; then
+#         p_iterations='1';
+#     fi
+# 
+#     # If the string has to be processed from left to right.
+#     if [ "${p_order^^}" = 'L|l' ]; then
+#         for ((i=0; i<p_iterations; i++)); do
+#             if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
+#                 true
+#             else
+#                 for ((j=0; j<p_ignore_delim; i++)); do
+#                     true
+#                 done
+#             fi
+#         done
+# 
+#     # Else, if the string has to be processed from right to left.
+#     elif [ "${p_order^^}" = 'R|r' ]; then
+#         for ((i=0; i<p_iterations; i++)); do
+#             if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
+#                 true
+#             else
+#                 for ((j=0; j<p_ignore_delim; i++)); do
+#                     true
+#                 done
+#             fi
+#         done
+# 
+#     # Else, if no value is passed to the order processer.
+#     elif [ -z "$p_order" ]; then
+#         false
+# 
+#     # Else, if an unsupported value is passed to the order processer.
+#     else
+#         false
+#     fi
+# 
+#     return 0;
+# }

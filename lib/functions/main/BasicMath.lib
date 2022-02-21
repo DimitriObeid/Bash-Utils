@@ -54,7 +54,7 @@ function BU::Main::BasicMaths::BytesToHuman()
 
     #**** Code ****
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
-    local BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" 'function human(x, pad, base) {
+    local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" 'function human(x, pad, base) {
 
         # If the desired base format is not the binary prefix, then the base format used will be the metric one.
          if(base!=1024)base=1000
