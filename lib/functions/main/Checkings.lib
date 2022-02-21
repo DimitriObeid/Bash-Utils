@@ -59,10 +59,24 @@ function BU::IsDateYMD() { [[ $(date -d "${1//-/\/}" 2> /dev/null) ]] || [[ $(da
 #   - DD/MM/YYYY hh:mm:ss
 function BU::IsDateYMDhms()
 {
-     local v_date; v_date="$(echo "$1" | rev | cut -d '' -f2- | rev)";  # Getting the year, the month and the day.
-     local v_hour; v_hour="$(echo "$1" | rev | cut -d '' -f 1 | rev)";  # Getting the hour.
-     
-     echo "$v_date"; echo "$v_hour";
+    #**** Variables ****
+    local v_date; v_date="$(echo "$1" | rev | cut -d ' ' -f2- | rev)"; # Getting the year, the month and the day.
+    local v_hour; v_hour="$(echo "$1" | rev | cut -d ' ' -f 1 | rev)"; # Getting the hour.
+
+    #**** Code ****
+    [[ $(date -d "${1//-/\/}" 2> /dev/null) ]] || [[ $(date "+%d/%m/%Y") ]] || \
+    {
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
+        BU::EchoWarning "Please use one of these formats :";
+        BU::EchoWarning "YYYY-MM-DD";
+        BU::EchoWarning "DD-MM-YYYY";
+        BU::EchoWarning "YYYY/MM/DD";
+        BU::EchoWarning "DD/MM/YYYY";
+
+        return 1;
+    };
+
+    return 0;
 }
 
 # -----------------------------------------------
