@@ -534,6 +534,24 @@ function BU::Main::CheckArgs__Files::MakePath()
 
 #### MAIN MODULE'S "Text.lib" FILE'S FUNCTIONS
 
+## CUTTING TEXT CATEGORY
+
+# "BU::Main::Text::CutFromCharacter" function.
+function BU::Main::CheckArgs__Text::CutFromCharacter()
+{
+    #**** Parameters ****
+    local p_string=$1;      # String to process.
+    local p_delimiter=$2;   # Delimiter.
+    local p_iterations=$3;  # Iterations.
+
+    #**** Code ****
+    
+
+    return 0;
+}
+
+# -----------------------------------------------
+
 ## GETTING TEXT CATEGORY
 
 # "BU::Main::Text::GetCharacterOccurences" function.

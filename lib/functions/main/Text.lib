@@ -52,11 +52,13 @@ function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutLastFie
 function BU::Main::Text::CutFromCharacter()
 {
     #**** Parameters ****
-    local p_target=$1;      # String to process.
+    local p_string=$1;      # String to process.
     # $2                    # Delimiter.
     local p_iterations=$3;  # Iterations.
 
     #**** Code ****
+    if ! BU::Main::CheckArgs__Text::CutFromCharacter "$p_string" "$2" "$p_iterations"; then return 1; fi
+
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
@@ -67,11 +69,11 @@ function BU::Main::Text::CutFromCharacter()
 
     for ((i=0; i<p_iterations; i++)); do
         #shellcheck disable=SC2001
-        p_target="$(sed "s/^[^$2]*$2//" <<< "$p_target")";
-        p_target="$p_target";
+        p_string="$(sed "s/^[^$2]*$2//" <<< "$p_string")";
+        p_string="$p_string";
     done
 
-    echo -ne "$p_target"; return 0;
+    echo -ne "$p_string"; return 0;
 }
 
 # Cut the last field of a string.
@@ -164,9 +166,7 @@ function BU::Main::Text::GetCharacterOccurences()
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if [ -z "$p_target" ]; then
-        EchoWarning "$(DechoHighlightFunction "${FUNCNAME[0]}") : No character selected"; return 1;
-    fi
+    if ! BU::Main::CheckArgs__Text::GetCharacterOccurences "$p_string" "$p_target"; then return 1; fi
 
     BU::EchoMsg "${#v_occurences}";
 
@@ -203,7 +203,7 @@ function BU::Main::Text::GetStringCharactersNumber()
     local p_string=$1;
 
     #**** Code ****
-    BU::EchoMsg "$p_string" | wc --chars; return 0
+    BU::EchoMsg "$p_string" | wc --chars; return 0;
 }
 
 # Getting the number of words in a string.
