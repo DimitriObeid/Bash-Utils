@@ -2,19 +2,19 @@
 
 function BU::Main::Echo::KeepFormattingl
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1
 
-    #***** Code *****
+    #**** Code ****
     echo -e "$p_string" | tr '[lower]' '[lower]'
 }
 
 function BU::Main::Echo::KeepFormattingU
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_string=$1
 
-	#***** Code *****
+	#**** Code ****
 	echo -e "$p_string" | tr '[upper]' '[upper]'
 }
 

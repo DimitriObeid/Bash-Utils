@@ -101,8 +101,8 @@ function CheckArgs
 
     # shellcheck disable=SC2034
     __BU_MAIN_STAT_TIME_TXT=".1";       CheckSTAT_TIME_TXT      "$(basename "$0")" "$LINENO"
-    
-    #***** Code *****
+
+    #**** Code ****
 	# If the script is not run as super-user (root)
         local lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
             BU::EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)."
@@ -126,16 +126,16 @@ function CheckArgs
         BU::EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo -e "    sudo $0 \$username" >&2
         BU::Newline >&2
-        
+
         exit 1
     fi
-    
+
 	# If the mandatory installation type argument is not passed.
 	local lineno=$LINENO; if [ -z "$__ARG_INSTALL" ]; then
         BU::EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
         echo -e "    sudo $0 \$username" >&2
         BU::Newline >&2
-        
+
         BU::Main::Errors::HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
             "Les valeurs attendues sont : $(BU::DechoE "perso") ou $(BU::DechoE "sio")." \
             "$__ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
@@ -165,7 +165,7 @@ function CheckArgs
 
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
-	# Checking if the user passed a string named "debug" as last argument. 
+	# Checking if the user passed a string named "debug" as last argument.
 	if [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
 		BU::EchoMsg "PROJECT_STATUS_DEBUG status : $(BU::Decho "true")"
 		BU::Newline;
@@ -180,7 +180,7 @@ function CheckArgs
     		echo -e "$__BU_MAIN_PROJECT_LOG_FILE_NAME"
 
 		__BU_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MAIN_PROJECT_LOG_DIR_PATH/$__BU_MAIN_PROJECT_LOG_FILE_NAME"
-		
+
 		# Changing the name of the log file.
         if [ "$(BU::EchoMsg "$(mv -v "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD" "$__BU_MAIN_PROJECT_LOG_FILE_NAME")")" ]; then
             ## APPEL DES FONCTIONS D'INITIALISATION
@@ -257,7 +257,7 @@ function CheckInternetConnection
 # SAUF EN CAS D'AJOUT D'UN NOUVEAU GESTIONNAIRE DE PAQUETS PRINCIPAL (PAS DE SNAP OU DE FLATPAK) !!!.
 function DistUpgrade
 {
-	#***** Variables *****
+	#**** Variables ****
 	# Noms du dossier et des fichiers temporaires contenant les commandes de mise à jour selon le gestionnaire de paquets principal de l'utilisateur.
 	local update_d_name="Update"		# Dossier contenant les fichiers.
 	local pack_upg_f_name="pack.tmp"	# Fichier contenant la commande de mise à jour des paquets.
@@ -269,7 +269,7 @@ function DistUpgrade
 	# Vérification du succès des mises à jour.
 	local packs_updated="0"
 
-	#***** Code *****
+	#**** Code ****
 	HeaderStep "MISE À JOUR DU SYSTÈME"
 
 	# On crée le dossier contenant les commandes de mise à jour.
@@ -453,25 +453,25 @@ function SetSudo
 # Installation du framework PHP Laravel.
 function LaravelInstall
 {
-    #***** Variables *****
+    #**** Variables ****
 #    phpver=
     local envpath="$DIR_HOMEDIR/.config/composer/vendor/bin:"
     local php_ini_path="/etc/php/7.4/apache2/php.ini"
 
-    #***** Code *****
+    #**** Code ****
     HeaderInstall "INSTALLATION DU FRAMEWORK LARAVEL"
-    
+
     CommandLogs systemctl start apache2     # Démarrage du serveur Apache.
     CommandLogs systemctl enable apache2    # Démarrage du serveur Apache lors de la procédure de boot du système d'exploitation.
-    
+
     # Ajout des services HTTP, HTTPS et SSH au firewall UFW.
     for svc in http https ssh; do
         ufw allow $svc
     done
-    
+
     # Démarrage du firewall UFW
     uwf enable
-    
+
     # Installation des paquets et modules PHP importants pour le bon fonctionnement de Laravel et des outils associés
     PackInstall "$main" libapache2-mod-php
     # PackInstall "$main" php                   # Le paquet étant déja installé avec Apache 2, il reste là comme rappel, au cas où vous souhaitez récupérer la fonction "LaravelInstall" pour l'implémenter dans un script personnel
@@ -502,7 +502,7 @@ function LaravelInstall
 
     # Installation de Laravel
     composer global require laravel/installer
-    
+
     # Ajout du dossier ~/.config/composer/vendor/bin dans la variable d'environnement "$PATH"
     local lineno=$LINENO; cat <<-EOF >> "$DIR_HOMEDIR/.bashrc"
     export PATH="$envpath$PATH"
@@ -512,12 +512,12 @@ EOF
     # shellcheck disable=SC1090
     source "$DIR_HOME/.bashrc"
     echo -e "$PATH" | grep "$envpath"
-    
+
     BU::Main::Errors::HandleErrors "$?" "LA VARIABLE D'ENVIRONNEMENT $(BU::DechoE "\$PATH") N'A PAS ÉTÉ MODIFÉE" \
         "Échec de l'installation de Laravel." "$lineno"
     BU::EchoSuccess "La variable d'environnement $(BU::DechoS "\$PATH") a été modifiée avec succès."
     BU::Newline;
-    
+
     BU::EchoSuccess "Le framework Laravel a été installé avec succès sur votre système"
 }
 
@@ -526,13 +526,13 @@ EOF
 function InstallAndConfig
 {
     HeaderStep "INSTALLATIONS ET CONFIGURATIONS"
-    
+
     BU::EchoNewstep "Installation des programmes et configurations"
     BU::Newline;
- 
+
     # Installation de sudo (pour les distributions livrées sans la commande) et configuration du fichier "sudoers" ("/etc/sudoers").
     SetSudo
- 
+
     case ${VER_PACKS,,} in
     "sio")
         # shellcheck source=../src/install/sio.sh

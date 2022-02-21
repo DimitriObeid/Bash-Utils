@@ -53,29 +53,29 @@ function GetMainPackageManager
 
 function APTInstall
 {
-    #***** Parameters *****
+    #**** Parameters ****
     package="$1"
-    
-    #***** Code *****
-    
+
+    #**** Code ****
+
 }
 
 function DNFInstall
 {
-    #***** Parameters *****
+    #**** Parameters ****
     package="$1"
-    
-    #***** Code *****
-    
+
+    #**** Code ****
+
 }
 
 function PacmanInstall
 {
-    #***** Parameters *****
+    #**** Parameters ****
     package="$1"
-    
-    #***** Code *****
-    
+
+    #**** Code ****
+
 }
 
 function PackHDCheck
@@ -90,11 +90,11 @@ function PackDBCheck
 
 function PackInstall
 {
-    #***** Parameters *****
+    #**** Parameters ****
     manager=$1  # Package manager
     package=$2  # Package's name
-    
-    #***** Code *****
+
+    #**** Code ****
     BU::Main::Checkings::CheckRootEUID
 
     if [ "$OSTYPE" = "linux-gnu" ]; then
@@ -120,7 +120,7 @@ function PackInstall
 # Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
 function SoftwareInstall
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local weblink=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
 	local archive=$2		# Nom de l'archive contenant les fichiers du logiciel.
 	local name=$3			# Nom du logiciel.
@@ -130,7 +130,7 @@ function SoftwareInstall
 	local type=$7			# Détermine si le fichier ".desktop" pointe vers une application, un lien ou un dossier.
 	local category=$8		# Catégorie(s) du logiciel (jeu, développement, bureautique, etc...).
 
-	#***** Variables *****
+	#**** Variables ****
 	# Dossiers
  	local inst_path="$DIR_SOFTWARE_PATH/$name"	   # Dossier d'installation du logiciel.
 	local shortcut_dir="$DIR_HOMEDIR/Bureau/Linux-reinstall.links"	   # Dossier de stockage des raccourcis vers les fichiers exécutables des logiciels téléchargés.
@@ -138,9 +138,9 @@ function SoftwareInstall
 	# Fichiers
 	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
 
-	#***** Code *****
+	#**** Code ****
 	BU::Main::Checkings::CheckRootEUID
-	
+
 	BU::EchoNewstep "Téléchargement du logiciel $(BU::DechoN "$name")."
 
 	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.

@@ -7,13 +7,13 @@ function BU::Decho { echo -e "$(tput setaf 6)$1$(tput sgr0)"; }
 # This function is called once in the next function.
 function __CreateFIFO
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local arr=("$@")
 
-    #***** Variables *****
+    #**** Variables ****
     local i=0
 
-    #***** Code *****
+    #**** Code ****
     for val in "${arr[@]}"; do
         i=$(( i+1 ))
 
@@ -24,18 +24,18 @@ function __CreateFIFO
 # Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
 function CreateFIFO
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -d "$__BU_MAIN_PROJECT_FIFO_DIR_PATH" ]; then
         echo -e "Creating the $(BU::Decho "$__BU_MAIN_PROJECT_FIFO_DIR_PATH")"; echo
         mkdir -pv "$__BU_MAIN_PROJECT_FIFO_DIR_PATH"
     fi
-    
+
     echo -e "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
     echo
-    
+
     if [ ! -p "$p_path" ]; then
         if mkfifo "$p_path"; then
             echo -e "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
@@ -61,18 +61,18 @@ function CreateFIFO
 # Reading from a named pipe.
 function ReadFromFIFO
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_fifoPath=$1               # FIFO's path.
     p_fifoVarName=$2            # Stored variable's name.
     p_fifoCurrentVarValue=$3    # Stored variable's value to get.
 
-    #***** Variables *****
+    #**** Variables ****
     v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
 
-    #***** Code *****
-    echo -e "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value." 
+    #**** Code ****
+    echo -e "Read the $p_fifoPath FIFO to find the $p_fifoCurrentVarValue value."
     echo
-        
+
     while true; do
         if read -r line < "$p_fifoPath"; then
             if [[ "$line" == "$v_varLine" ]]; then
@@ -96,22 +96,22 @@ function ReadFromFIFO
 # Writing into a named pipe
 function WriteIntoFIFO
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_fifoPath=$1		# FIFO's path to write into.
     p_fifoVarName=$2    # Stored variable's name
     p_newVar=$3         # Stored variable's new value.
     p_existingPath=$4   # Handling missing FIFO, to define specific instructions.
 
-    #***** Variables *****
+    #**** Variables ****
     v_varLine="$p_fifoVarName=\"$p_fifoCurrentVarValue\""
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -p "$p_fifoPath" ]; then
         if [ "$p_existingPath" = "nopath" ]; then
             return
         else
             echo
-            
+
             # As this function is called by the functions called in the "BU::Main::Errors::HandleErrors" function, calling this last function will cause an infinite loop
             # Redefining a part of its behavior was necessary to prevent this situation.
             echo -e "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $LINENO --> ERROR :" "-ne"

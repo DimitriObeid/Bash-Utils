@@ -3,11 +3,11 @@
 # Reverse a string.
 function BU::Main::Text::ReverseStringWordsOrder()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_str=$1
     p_delim=$2
 
-    #***** Code *****
+    #**** Code ****
     echo "$p_str" | tr "$p_delim" '\n' | tac | tr '\n' "$p_delim"
 
 }

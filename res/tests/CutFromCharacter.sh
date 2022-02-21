@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#***** Parameters *****
+#**** Parameters ****
 p_target=$1         # string to process
 #   $2  --> delimiter
 p_iterations=$3     # iterations
 
-#***** Code *****
+#**** Code ****
 if [ "$p_iterations" -eq 0 ]; then
     p_iterations='1'
 fi

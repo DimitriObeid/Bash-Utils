@@ -72,11 +72,11 @@ __F_USERS_LIST_FILE_PATH="$__D_INSTALL_DIR_PATH/$__F_USERS_LIST_FILE_NAME"
 # Asking to user before engaging an action.
 function AskUser()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_main_question=$1
     p_more_informations=$2
 
-    #***** Code *****
+    #**** Code ****
     printf "%s" "$p_main_question"
 
     if [ -n "$p_more_informations" ]; then
@@ -96,11 +96,11 @@ function CDfail() { printf "UNABLE TO CHANGE DIRECTORY"; PrintRoot; exit 1; }
 # Changing recursively a directory's ownership rights.
 function ChangeDirOwnership()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_user=$1
 	p_dir=$2
 
-	#***** Code *****
+	#**** Code ****
 	PrintLog "Changing recursively the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » directory, from « root » to « ${user##*/} »"
 	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"; return 0;
     else BU::Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; BU::NewlineF; PrintRoot; exit 1; fi
@@ -110,11 +110,11 @@ function ChangeDirOwnership()
 # Changing individually the files ownership rights.
 function ChangeFileOwnership()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	p_user=$1
 	p_file=$2
 
-	#***** Code *****
+	#**** Code ****
 	PrintLog "Changing the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » file, from « root » to « ${user##*/} »"
 	if chown -v "${p_user##*/}" "$p_file"; then return 0; else PrintLog "UNABLE TO CHANGE THE OWNERSHIP OF THE « $p_file » FILE TO « ${user##*/} »"; PrintRoot; exit 1; fi
 }
@@ -122,10 +122,10 @@ function ChangeFileOwnership()
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
 function ChangeOwnership()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	user=$1
 
-	#***** Code *****
+	#**** Code ****
 	if [ "$user" != '/root' ]; then
         if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; BU::Newline; return 0; fi
 
@@ -152,10 +152,10 @@ function ChangeOwnership()
 # Copying the modules inititializer file into the user's home directory.
 function CopyModulesInitializer()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	user=$1
 
-	#***** Code *****
+	#**** Code ****
     if [ ! -f "$__F_MODULE_INITIALIZER_NEW_PATH" ]; then
         PrintLog "Copying the « $__F_MODULE_INITIALIZER_OLD_PATH » file in the « $user » directory"
         cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_MODULE_INITIALIZER_OLD_PATH » FILE IN THE « $user » DIRECTORY"; PrintRoot; exit 1; }
@@ -174,10 +174,10 @@ function CopyModulesInitializer()
 # Copying the modules manager directory into the user's home directory.
 function CopyModulesManagerDirectory()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	user=$1
 
-	#***** Code *****
+	#**** Code ****
     if [ -d "$__D_MODULE_MANAGER_NEW_PATH" ]; then
 
         PrintLog "Erasing the existing « $__D_MODULE_MANAGER_NEW_PATH » modules manager directory into the « $user » directory"
@@ -222,10 +222,10 @@ function Log()
 # New line function for the functions called into the following "for" loop.
 function BU::Newline()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_line_breaks=$1
 
-#     #***** Code *****
+#     #**** Code ****
     if [[ "$p_line_breaks" =~ ^[\-0-9]+$ ]]; then
         for (( i=0; i<p_line_breaks; i++ )); do
             echo;

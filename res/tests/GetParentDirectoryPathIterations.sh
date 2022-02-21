@@ -3,11 +3,11 @@
 # Getting parent folder's path from the root directory, then printing it
 function BU::Main::Directories::GetParentDirectoryPath()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     local p_path=$1         # Path of the child file or folder.
     local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
-    #***** Code *****
+    #**** Code ****
 	if [ -z "$p_iterations" ]; then
         p_iterations='0'
 	fi

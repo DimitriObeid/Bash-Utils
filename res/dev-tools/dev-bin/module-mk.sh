@@ -15,10 +15,10 @@ fi
 # Check if the required files for the modules initialization exists in their right folder, or else create them.
 function check_mandatory_file_exists()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_path=$1
 
-    #***** Code *****
+    #**** Code ****
     if [ ! -f "$p_path" ]; then
         touch "$p_path" || { echo "Unable to create this required file ''$p_path''"; echo; echo "Please create this file manually."; }
     fi

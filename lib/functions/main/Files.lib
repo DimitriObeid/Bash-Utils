@@ -178,7 +178,7 @@ function BU::Main::Files::Make()
 	local v_path="$p_parent/$p_name";	# Path of the file to process.
 
 	#**** Code ****
-	# Checking first if the awaited arguments are given
+	# Checking first if the awaited arguments are given.
     BU::Main::CheckArgs__Files::Make "$p_parent" "$p_name";
 
     # Checking second if the script is operating at the root directory.

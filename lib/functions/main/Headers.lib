@@ -46,12 +46,17 @@ fi
 function BU::Main::Headers::DrawLine()
 {
 	#**** Parameters ****
-	local p_lineChar=$1    # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	local p_lineColor=$2   # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	local p_strlen=$3      # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-	local p_bgColor=$4     # Setting a background color behind the line.
+	local p_lineChar=$1;   # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineColor=$2;  # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	local p_strlen=$3;     # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+	local p_bgColor=$4;    # Setting a background color behind the line.
 
 	#**** Code ****
+    # If no character is specified for the character line.
+    if [ -z "$p_lineChar" ]; then
+        p_lineChar="$__BU_MAIN_TXT_CHAR_HEADER_LINE";
+    fi
+
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! BU::IsAlphaNumChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}";
@@ -111,11 +116,12 @@ function BU::Main::Headers::DrawLine()
 	# commandes encodée avec la couleur des headers si l'exécution du script est interrompue de force avec la combinaison "CTRL + C"
 	# ou mise en pause avec la combinaison "CTRL + Z", par exemple.
 	if test "$p_lineColor" != "" || test "$p_bgColor" != ""; then
-        echo -ne "$__BU_MAIN_COLOR_TXT_RESET"
+        echo -ne "$__BU_MAIN_COLOR_TXT_RESET";
 	fi
 
-	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
-	echo
+	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir
+	# à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
+	echo;
 
 	return 0;
 }
@@ -151,9 +157,9 @@ function BU::HeaderBase()
 
         # If no value is passed via the background color's position's parameter.
         if [ -z "$p_bgColorPos" ]; then
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate"
-            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}"
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate"
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate";
+            BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}";
+            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate";
 
         # Else, if a value is passed via the background color's position's parameter.
         else
@@ -219,9 +225,11 @@ function BU::HeaderBase()
 
 ## UNICOLOR HEADERS
 
-# Positional parameters :
-#   $1  --> String to display
-#   $2  --> "strlen" value for the "$BU::HeaderBase()" function's "$p_strlen" argument.
+# Positional parameters, and their correspondences with the parameters of the "BU::HeaderBase()" function :
+
+# Except for the "$1" positional parameter, the three other are totally optional.
+#   $1  --> "$p_stringTxt"
+#   $2  --> "$p_strlen"
 #   $3  --> "$p_bgColorCol"
 #   $4  --> "$p_bgColorPos"
 

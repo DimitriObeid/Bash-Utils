@@ -158,13 +158,13 @@ function BU::Main::Text::GetCharacterOccurences()
 {
     #**** Parameters ****
     local p_string=$1;  # String to process.
-    local p_char=$2;    # Targeted character.
+    local p_target=$2;  # Targeted character.
 
     #**** Variables ****
-    local v_occurences="${p_string//[^$p_char]}";
+    local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if [ -z "$p_char" ]; then
+    if [ -z "$p_target" ]; then
         EchoWarning "$(DechoHighlightFunction "${FUNCNAME[0]}") : No character selected"; return 1;
     fi
 

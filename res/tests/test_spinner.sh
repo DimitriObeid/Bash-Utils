@@ -3,16 +3,16 @@
 # Display a spinner while a task is ongoing.
 function BU::Main::PosixTerm::DisplaySpinner()
 {
-    #***** Parameters *****
+    #**** Parameters ****
     p_string=$1
     p_countdown=$2
     p_pid=$3
 
-    #***** Variables *****
+    #**** Variables ****
     i=1
     sp="/-\|"
 
-    #***** Code *****
+    #**** Code ****
     echo -n ' '
 
     echo ">>>> $p_string"

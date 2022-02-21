@@ -10,14 +10,14 @@ source "$__BU_MAIN_CONF_FILE_COLORS" || { echo "Fail colors.conf"; exit 1; }
 
 function D_Array()
 {
-	#***** Parameters *****
+	#**** Parameters ****
 	local p_string=$1
 	local p_newcolor=$2
 	shift 2
 
 	local pa_formatting=$("$@")
 
-	#***** Code *****
+	#**** Code ****
 	for val in "${pa_formatting[@]^^}"; do
 		case "$val" in
 			'Blink')
