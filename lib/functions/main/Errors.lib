@@ -164,20 +164,17 @@ function BU::Main::Errors::HandleErrors()
 
         if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
 
-            # Drawing an extra line to differenciate the message below from the rest of the error messages.
-            BU::EchoMsg "$(BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_PRINT_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR")" '' 'nodate'
-
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    BU::EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    BU::HeaderError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen'
                 else
-                    BU::EchoError "A FATAL ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
+                    BU::HeaderError "A FATAL ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen'
                 fi
             else
                 if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
-                    BU::EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !"
+                    BU::HeaderError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen'
                 else
-                    BU::EchoError "AN ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION"
+                    BU::HeaderError "AN ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen'
                 fi
             fi
         fi

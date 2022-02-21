@@ -169,12 +169,12 @@ else
             *)
                 if [ -n "$__ARG_TYPE" ]; then
                     BU::Main::Errors::HandleErrors "1" "THE SECOND ARGUMENT'S VALUE ($__ARG_TYPE) IS INVALID" \
-                        "Please type an integer value ranging from 1 to 6" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
+                        "Please type an integer value ranging from 1 to 7" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
 
                 else
                     # shellcheck disable=SC2016
-                    BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoE '$__read_doc_name')'s) ENTERED VALUE IS INVALID" \
-                        "Please type an integer value ranging from 1 to 6" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
+                    BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightError "$__read_doc_name")'s ENTERED VALUE IS INVALID" \
+                        "Please type an integer value ranging from 1 to 7" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
                 fi
                 ;;
         esac

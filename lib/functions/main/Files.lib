@@ -173,6 +173,10 @@ function BU::Main::Files::Make()
 	#**** Parameters ****
     local p_parent=$1;  # Emplacement of the currently processed file's parent folder from the root directory.
     local p_name=$2;    # Name of the file to process (into its parent directory).
+    
+    shift 2;
+    
+    pa_touchVals=("$@");
 
 	#**** Variables ****
 	local v_path="$p_parent/$p_name";	# Path of the file to process.
@@ -316,7 +320,7 @@ function BU::Main::Files::CreateProjectLogFile()
 
 # -----------------------------------------------
 
-## GATHERING FILE INFORMATIONS
+## GETTING FILE INFORMATIONS
 
 # Getting the size of a file in bytes.
 function BU::Main::File::GetFileByteSize()
@@ -362,11 +366,33 @@ function BU::Main::File::GetFileCharactersNumber()
     wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
 }
 
+# Getting the last file's access date.
+function BU::Main::File::GetFileLastAccess()
+{
+    #**** Parameters ****
+    local p_filepath=$1;
+
+    #**** Code ****
+    
+    return 0;
+}
+
+# Getting the last file's modification date.
+function BU::Main::File::GetFileLastModification()
+{
+    #**** Parameters ****
+    local p_filepath=$1;
+
+    #**** Code ****
+    
+    return 0;
+}
+
 # Getting the total number of lines in a file.
 function BU::Main::File::GetFileLinesNumber()
 {
     #**** Parameters ****
-    local p_filepath;
+    local p_filepath=$1;
 
     #**** Code ****
     wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
@@ -376,10 +402,34 @@ function BU::Main::File::GetFileLinesNumber()
 function BU::Main::File::GetFileMaxLineLength()
 {
     #**** Parameters ****
-    local p_filepath;
+    local p_filepath=$1;
+
+    #**** Code ****last access date
+    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# Getting the owner of a file.
+function BU::Main::File::GetFileOwnerName()
+{
+    #**** Parameters ****
+    local p_filepath=$1;
 
     #**** Code ****
-    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+    stat -c "%U" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; };
+
+    return 0;
+}
+
+# Getting the group of the owner of a file.
+function BU::Main::File::GetFileOwnerGroup()
+{
+    #**** Parameters ****
+    local p_filepath=$1;
+
+    #**** Code ****
+    stat -c "%G" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; };
+
+    return 0;
 }
 
 # Getting the total number of characters in a file.
@@ -390,6 +440,23 @@ function BU::Main::File::GetFileWordsNumber()
 
     #**** Code ****
     wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; return 1; }; return 0;
+}
+
+# -----------------------------------------------
+
+## SETTING FILE INFORMATIONS
+
+# Setting a fake last access date to a file.
+function BU::Main::File::SetFileLastAccess
+{
+    #**** Parameters ****
+    local p_filepath=$1;
+    local p_fakedate=$2;
+
+    #**** Code ****
+    
+
+    return 0;
 }
 
 # -----------------------------------------------
