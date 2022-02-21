@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Authorization to delete the generated file.
+__BU_ARG_RM="$1"
+
 __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"
 
 __BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh"
@@ -72,3 +75,14 @@ echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH") character
 echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH") lines"
 echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH") columns"
 echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH") words"
+
+# Deleting the generated file if the awaited value is passed as script's first argument.
+if [ "$__BU_ARG_RM" = 'rm' ]; then
+    if rm "$__BU_MAIN_FULL_FILE_PATH"; then
+        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH file » file was successfully deleted"
+    else
+        echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH file » file"; exit 1
+    fi
+fi
+
+exit 0
