@@ -533,6 +533,10 @@ function BU::Main::CheckArgs__Files::Make()
 		return 1;
     fi
 
+    local lineno="$LINENO"; if [ "${#p_name}" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then
+        BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" "THE FILE NAME IS TOO LONG FOR THIS FILESYSTEM" "Please give a name length smaller than "
+    fi
+
 	return 0;
 }
 
