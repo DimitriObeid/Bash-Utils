@@ -44,7 +44,7 @@ fi
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
-function BU::IsDatehms() { [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
+function BU::IsDateHMS() { [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats :
 #   - YYYY-MM-DD
@@ -62,7 +62,7 @@ function BU::IsDateYMD() { [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || retu
 #   - DD/MM/YYYY hh:mm:ss
 #   - YYYYMMDD hh:mm:ss
 #   - DDMMYYYY hh:mm:ss
-function BU::IsDateYMDhms()
+function BU::IsDateYMD_HMS()
 {
     #**** Variables ****
     local v_date; v_date="$(echo "$1" | rev | cut -d ' ' -f2- | rev)"; # Getting the year, the month and the day.
@@ -445,7 +445,7 @@ function BU::CheckProjectLogStatus()
 
                 # If the 'nodate' value is passed as argument.
                 if [ "${val,,}" = 'nodate' ]; then
-                    case "$p_option" in
+                    case "${p_option,,}" in
                         '-n' | 'n')
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "${p_string#* ] }" 'n'
@@ -464,7 +464,7 @@ function BU::CheckProjectLogStatus()
 
                 # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ -z "$val" ]; then
-                    case "$p_option" in
+                    case "${p_option,,}" in
                         '-n' | 'n')
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
@@ -483,7 +483,7 @@ function BU::CheckProjectLogStatus()
                 # Else, if an unsupported option is passed (note for myself : the extra args checking
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "log" option)).
                 else
-                    case "$p_option" in
+                    case "${p_option,,}" in
                         '-n' | 'n')
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
@@ -533,7 +533,7 @@ function BU::CheckProjectLogStatus()
 
                 # If the 'nodate' value is passed as argument.
                 if [ "${val,,}" = 'nodate' ]; then
-                    case "$p_option" in
+                    case "${p_option,,}" in
                         '-n' | 'n')
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "${p_string#* ] }" 'n'
@@ -552,7 +552,7 @@ function BU::CheckProjectLogStatus()
 
                 # Else, if no argument is passed in "$pa_extraArgs" parameter array.
                 elif [ -z "$val" ]; then
-                    case "$p_option" in
+                    case "${p_option,,}" in
                     '-n' | 'n')
                         if BU::Main::Status::CheckStatIsInitializing; then
                             BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
@@ -574,7 +574,7 @@ function BU::CheckProjectLogStatus()
                 # Else, if an unsupported option is passed (note for myself : the extra args checking
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "tee" option)).
                 else
-                    case "$p_option" in
+                    case "${p_option,,}" in
                         '-n' | 'n')
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
@@ -606,18 +606,20 @@ function BU::CheckProjectLogStatus()
 			BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 			return 0;
+        
+        # Else, if messages must not be redirected in the log file.
         else
-            case "$p_option" in
+            case "${p_option,,}" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
+                        BU::ModuleInit::Msg "$p_string";
                     else
                         echo -ne "$p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                        BU::ModuleInit::Msg "$p_string";
                     else
                         echo -e "$p_string";
                     fi
@@ -638,7 +640,7 @@ function BU::CheckProjectLogStatus()
 
     # Else, if no log file exists OR if "$__BU_MAIN_STAT_LOG" value is "false" OR if "$__BU_MAIN_STAT_LOG_REDIRECT" has no redirection value.
     else
-        case "$p_option" in
+        case "${p_option,,}" in
             '-n' | 'n')
                 if BU::Main::Status::CheckStatIsInitializing; then
                     BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'

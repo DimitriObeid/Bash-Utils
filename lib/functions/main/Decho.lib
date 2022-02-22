@@ -62,7 +62,7 @@ function BU::Decho()
     local pa_fmtArgs;
         pa_fmtArgs=$("$@");
 
-        echo "STRING : $p_string"
+    echo "STRING : $p_string"
     echo "TEXT COLOR : $p_newTextColor"
     echo "BG COLOR : $p_newBGColor"
 
@@ -243,8 +243,9 @@ function BU::DechoWhite             { shift 2; local pa_arr=("$@"); BU::Decho "$
 function BU::DechoYellow            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with specific text display colors.
-function BU::DechoHighlight         { shift 2; local pa_arr=("$@"); BU::Decho             "$__1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT" "$__2"	"${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightError    { shift 2; local pa_arr=("$@"); BU::Decho_FMT_BoldIU  "$1" "$__BU_MAIN_COLOR_TXT_ERROR"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlight         { shift 2; local pa_arr=("$@"); BU::Decho               "$__1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT" "$__2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightCMD      { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_CMD"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightError    { shift 2; local pa_arr=("$@"); BU::Decho_FMT_BoldIU    "$1" "$__BU_MAIN_COLOR_TXT_ERROR"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightFunction { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_FUNCTION"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightNewstep  { shift 2; local pa_arr=("$@"); BU::Decho_FMT_I       "$1" "$__BU_MAIN_COLOR_TXT_NEWSTEP"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightPath     { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_PATH"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }

@@ -393,7 +393,7 @@ function BU::ModuleInit::Msg()
                 if [ -z "$p_str" ]; then
                     echo -e '';
 
-                # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns. 
+                # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns.
                 else
                     # Printing the date before the text to log.
                     echo -e "$p_str"; fi

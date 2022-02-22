@@ -263,6 +263,30 @@ function BU::Main::CheckArgs__Checkings::CheckProjectRelatedFile()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### "CMDS.lib" FILE'S FUNCTIONS
+
+## CATEGORY : 
+
+# "BU::Main::CMDS::GetCommandPath" function.
+function BU::Main::CheckArgs__CMDS::GetCommandPath()
+{
+    #**** Parameters ****
+    local p_cmd=$1;     # Command's name.
+
+    #**** Code ****
+    local lineno="$LINENO"; if [ -z "$p_cmd" ]; then
+        BU::Main::CheckArgs::PrintBadOption 'z' "You must specify the name of the command whose path you want to know (mandatory argument)" 'p_cmd' "$p_cmd" "${FUNCNAME[0]}" "$lineno"; return 1;
+    fi
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### "Directories.lib" FILE'S FUNCTION
 
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - DIRECTORIES PROCESSING
