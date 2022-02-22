@@ -1126,7 +1126,7 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME";
 
 	# Misc
-	__BU_MODULE_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %Hh:%Mm:%Ss") ]";
+	__BU_MODULE_UTILS_DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) --> ERROR !" >&2; echo >&2;
 

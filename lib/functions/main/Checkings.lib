@@ -44,6 +44,7 @@ fi
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
+function BU::IsDatehms() { [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats :
 #   - YYYY-MM-DD
@@ -68,7 +69,7 @@ function BU::IsDateYMDhms()
     local v_hour; v_hour="$(echo "$1" | rev | cut -d ' ' -f 1 | rev)"; # Getting the hour.
 
     #**** Code ****
-    [[ $(BU::IsDateYMD "$1") ]] || \
+    [[ $(BU::IsDateYMD "$v_date" > /dev/null) ]] || \
     {
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
         BU::EchoWarning "Please use one of these formats :";
@@ -79,8 +80,14 @@ function BU::IsDateYMDhms()
 
         return 1;
     };
-    
-    
+
+    date "+%H:%M:%S" -d "$v_hour" || \
+    {
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the hour is not formatted in a correct timestamp";
+        BU::EchoWarning "Please use only this format : hh:mm:ss";
+
+        return 1;
+    };
 
     return 0;
 }
