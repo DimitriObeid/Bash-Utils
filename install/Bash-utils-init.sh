@@ -1200,7 +1200,7 @@ function BashUtils_InitModules()
 	#**** Variables (global) ****
 
 	#**** Variables (local) ****
-    local v_index=0     # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_index=0         # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
 
 	#**** Code ****
 	## Checking if the arguments array length is equal to zero (no arguments passed).
@@ -1208,7 +1208,7 @@ function BashUtils_InitModules()
 		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
 
-    # Writing the list of the 
+    # Writing the list of the installed modules.
 	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")");
 	__BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 

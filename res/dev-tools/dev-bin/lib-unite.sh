@@ -79,9 +79,9 @@ echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH") words"
 # Deleting the generated file if the awaited value is passed as script's first argument.
 if [ "$__BU_ARG_RM" = 'rm' ]; then
     if rm "$__BU_MAIN_FULL_FILE_PATH"; then
-        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH file » file was successfully deleted"
+        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH » file was successfully deleted"
     else
-        echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH file » file"; exit 1
+        echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH » file"; exit 1
     fi
 fi
 

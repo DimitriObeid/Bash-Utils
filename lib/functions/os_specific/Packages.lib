@@ -36,7 +36,7 @@ function GetMainPackageManager
 
 	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
 	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
-        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "CheckArgs" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU::Main::Errors::HandleErrors" sans que le moindre bug ne se produise.
+        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "Args" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU::Main::Errors::HandleErrors" sans que le moindre bug ne se produise.
 		BU::Main::Errors::HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU::DechoE "APT"), $(BU::DechoE "DNF") et $(BU::DechoE "Pacman")." "$LINENO"
 	else
 		BU::EchoSuccess "Gestionnaire de paquets principal trouvé : $(BU::DechoS "$PACK_MAIN_PACKAGE_MANAGER")"

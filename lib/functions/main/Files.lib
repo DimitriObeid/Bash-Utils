@@ -88,7 +88,7 @@ function BU::Main::Files::ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    BU::Main::CheckArgs__Files::ProcessingFile "$p_function";
+    BU::Main::Args__Files::ProcessingFile "$p_function";
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
@@ -132,7 +132,7 @@ function BU::Main::Files::OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    BU::Main::CheckArgs__Files::OverwriteFile;
+    BU::Main::Args__Files::OverwriteFile;
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$p_path";
@@ -157,7 +157,7 @@ function BU::Main::Files::OverwriteFile()
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Main::CheckArgs__Files::Make              -> Main -> CheckArgs.lib
+#   - BU::Main::Args__Files::Make              -> Main -> Args.lib
 #   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
 #   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib
 #   - BU::Main::Errors::HandleErrors                -> Main -> Errors.lib
@@ -173,9 +173,9 @@ function BU::Main::Files::Make()
 	#**** Parameters ****
     local p_parent=$1;  # Emplacement of the currently processed file's parent folder from the root directory.
     local p_name=$2;    # Name of the file to process (into its parent directory).
-    
+
     shift 2;
-    
+
     pa_touchVals=("$@");
 
 	#**** Variables ****
@@ -183,7 +183,7 @@ function BU::Main::Files::Make()
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given.
-    BU::Main::CheckArgs__Files::Make "$p_parent" "$p_name";
+    BU::Main::Args__Files::Make "$p_parent" "$p_name";
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$v_path";
@@ -234,7 +234,7 @@ function BU::Main::Files::MakePath()
     local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
 
     #**** Code ****
-    if ! BU::Main::CheckArgs__Files::MakePath "$p_path"; then return 1; fi
+    if ! BU::Main::Args__Files::MakePath "$p_path"; then return 1; fi
 
     BU::Main::Files::Make "$v_parent" "$v_target" || return 1;
 
@@ -474,7 +474,7 @@ function BU::Main::File::SetFileLastAccess
     local p_fakedate=$2;
 
     #**** Code ****
-    
+
 
     return 0;
 }

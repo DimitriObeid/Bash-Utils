@@ -87,7 +87,7 @@ __ARG_INSTALL_INDEX='1'   # Packages installation argument's index.
 ## DEFINING INITIALIZATION FUNCTIONS
 
 # Détection du passage des arguments au script.
-function CheckArgs
+function Args
 {
     #***** Status *****
     # shellcheck disable=SC2034
@@ -209,7 +209,7 @@ function CheckArgs
 # Script's initialization.
 function ScriptInit
 {
-    CheckArgs				# On appelle la fonction de vérification des arguments passés au script,
+    Args				# On appelle la fonction de vérification des arguments passés au script,
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
 
 	# On écrit dans le fichier de logs que l'on passe à la première étape "visible dans le terminal", à savoir l'étape d'initialisation du script.

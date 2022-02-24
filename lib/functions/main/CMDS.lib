@@ -49,7 +49,7 @@ function BU::Main::CMDS::GetCommandPath()
     local p_cmd=$1;     # Command's name.
 
     #**** Code ****
-    if ! BU::Main::CheckArgs__CMDS::GetCommandPath "$p_cmd"; then return 1; fi
+    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd"; then return 1; fi
 
     command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight)" 'E'; return 1; }
 }
