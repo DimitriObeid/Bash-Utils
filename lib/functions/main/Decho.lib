@@ -53,24 +53,26 @@ function BU::__Decho { local v_oldTextColor=$1; tput setaf "$v_oldTextColor" && 
 function BU::Decho()
 {
     #**** Parameters ****
-    local p_string=$1;          # String to display
-    local p_newTextColor=$2;    # Color to apply on each string's characters.
-    local p_newBGColor=$3;      # Color to apply in the text's background.
-
+    local p_string=$1;          # String    - String to display.
+    local p_newTextColor=$2;    # Int       - Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Int       - Color to apply in the text's background.
     shift 3;
 
     local pa_fmtArgs;
         pa_fmtArgs=$("$@");
 
-    echo "STRING : $p_string"
-    echo "TEXT COLOR : $p_newTextColor"
-    echo "BG COLOR : $p_newBGColor"
+    # Test code, to check the values from the command substitutes, and to test if a loop stops before exiting the script when the exit command is called.
+    echo "STRING : $p_string";
+    echo "TEXT COLOR : $p_newTextColor";
+    echo "BG COLOR : $p_newBGColor";
 
     exit 0; return 1;
+
     #**** Code ****
     BU::Main::Checkings::CheckDecho;
 
     if test "$?" -ne 0; then
+        # If the text formatting is forbidden, the text to decorate will be put between French guillemets
         echo -ne "« $p_string »";
 
         return 1;
@@ -243,7 +245,7 @@ function BU::DechoWhite             { shift 3; local pa_arr=("$@"); BU::Decho "$
 function BU::DechoYellow            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with specific text display colors.
-function BU::DechoHighlight         { BU::Decho               "$1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT"   "$2"; shift 3; local pa_arr=("$@");	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlight         { BU::Decho               "$1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT"   "$2"; shift 2; local pa_arr=("$@");	"${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightCMD      { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_CMD"		    "$2"	"${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightError    { shift 3; local pa_arr=("$@"); BU::Decho_FMT_BoldIU    "$1" "$__BU_MAIN_COLOR_TXT_ERROR"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
 function BU::DechoHighlightFunction { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_FUNCTION"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }

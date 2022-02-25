@@ -820,7 +820,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 function BU::Main::Checkings::CheckDecho()
 {
     #**** Code ****
-    # If the , then the "Decho()" function will not decorate the targeted text, but put it between
+    # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text : 
     if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
         return 1;
     else
