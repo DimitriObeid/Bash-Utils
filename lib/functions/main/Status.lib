@@ -61,7 +61,7 @@ function BU::Main::Status::ConfEcho()
 
     #**** Code ****
     # Sourcing the "Status.conf" file to reset every status global variables values
-    BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_STATUS_FILE_PATH";
+    BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH";
 
     # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
     __BU_MAIN_STAT_DECHO='allow';

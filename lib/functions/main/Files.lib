@@ -46,9 +46,9 @@ fi
 function BU::Main::Files::__ProcessingFile()
 {
     #**** Parameters ****
-    p_output=$1
-    p_name=$2
-    p_char=$3
+    local p_output=$1;
+    local p_name=$2;
+    local p_char=$3;
 
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
@@ -246,7 +246,7 @@ function BU::Main::Files::MakePath()
 function BU::Main::Files::MakeFileInMemory()
 {
     #**** Parameters ****
-    p_filename=$1;      # String :name of the file to create in the computer's random access memory.
+    local p_filename=$1;    # String :name of the file to create in the computer's random access memory.
 
     #**** Code ****
     echo "$p_filename";
@@ -368,7 +368,7 @@ function BU::Main::File::GetFileCreationDate()
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; return 1;
 
     elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$(df -Th . | awk 'FNR == 2 {print $2}')")) does not stores the files creation dates"; return 1;
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; return 1;
     fi
 
     return 0;
