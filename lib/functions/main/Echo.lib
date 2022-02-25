@@ -239,7 +239,7 @@ function BU::EchoError()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckEcho; then
+    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
@@ -273,7 +273,7 @@ function BU::EchoMsg()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckEcho; then
+    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1;
         BU::CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
@@ -307,7 +307,7 @@ function BU::EchoNewstep()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckEcho; then
+    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
@@ -359,7 +359,7 @@ function BU::EchoSuccess()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckEcho; then
+    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
@@ -393,7 +393,7 @@ function BU::EchoWarning()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckEcho; then
+    if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 

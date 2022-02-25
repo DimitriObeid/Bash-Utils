@@ -413,7 +413,7 @@ function BU::Main::Directories::TriggerRootDirWarning()
 			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT"
 			BU::Newline;
 
-			BU::Main::Errors::ExitError '1'; return 1
+			BU::Exit '1'; return 1
 
 		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
             BU::EchoWarning "${#v_restricted}"

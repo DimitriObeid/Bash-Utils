@@ -109,7 +109,7 @@ function BU::Main::Case::Read_Errors::HandleErrors()
 		"no")
 			BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC"
 
-			BU::Main::Errors::ExitError '1'
+			BU::Exit '1'
 			;;
 		*)
 			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER"

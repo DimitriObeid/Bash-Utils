@@ -218,40 +218,40 @@ function BU::Decho()
 # echo -e "Lorem ipsum $(BU::DechoOrange "$(BU::Decho_FMT_BlinkBoldDISU "dolor")") sit amet..."
 
 # Easy "BU::Decho()" function calls with colors.
-function BU::DechoAqua              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_AQUA"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoBlack             { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLACK"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoBlue              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLUE"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoCyan              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_CYAN"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoFuchsia           { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_FUCHSIA"     "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoGray              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GRAY"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoGreen             { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GREEN"       "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
-function BU::DechoLime              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_LIME"        "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
-function BU::DechoMaroon            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_MAROON"      "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
-function BU::DechoNavy              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_NAVY"        "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
-function BU::DechoOlive             { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_OLIVE"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoOrange            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_ORANGE"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoPink              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PINK"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoPurple            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PURPLE"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoRed               { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_RED"         "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoSalmon            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SALMON"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoSilver            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SILVER"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoTan               { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TAN"         "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoTeal              { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TEAL"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoTurquoise         { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TURQUOISE"   "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoViolet            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_VIOLET"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoWhite             { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_WHITE"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoYellow            { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoAqua              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_AQUA"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoBlack             { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLACK"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoBlue              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_BLUE"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoCyan              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_CYAN"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoFuchsia           { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_FUCHSIA"     "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoGray              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GRAY"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoGreen             { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_GREEN"       "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
+function BU::DechoLime              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_LIME"        "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
+function BU::DechoMaroon            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_MAROON"      "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
+function BU::DechoNavy              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_NAVY"        "$2"        "${pa_arr[@]}"  	|| return 1; return 0; }
+function BU::DechoOlive             { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_OLIVE"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoOrange            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_ORANGE"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoPink              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PINK"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoPurple            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_PURPLE"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoRed               { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_RED"         "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoSalmon            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SALMON"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoSilver            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_SILVER"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoTan               { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TAN"         "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoTeal              { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TEAL"        "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoTurquoise         { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_TURQUOISE"   "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoViolet            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_VIOLET"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoWhite             { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_WHITE"       "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoYellow            { shift 3; local pa_arr=("$@"); BU::Decho "$1" "$__BU_MAIN_COLOR_TXT_YELLOW"      "$2"        "${pa_arr[@]}"	|| return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with specific text display colors.
-function BU::DechoHighlight         { shift 2; local pa_arr=("$@"); BU::Decho               "$__1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT" "$__2"	"${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightCMD      { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_CMD"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightError    { shift 2; local pa_arr=("$@"); BU::Decho_FMT_BoldIU    "$1" "$__BU_MAIN_COLOR_TXT_ERROR"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightFunction { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_FUNCTION"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightNewstep  { shift 2; local pa_arr=("$@"); BU::Decho_FMT_I       "$1" "$__BU_MAIN_COLOR_TXT_NEWSTEP"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightPath     { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_PATH"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightSuccess  { shift 2; local pa_arr=("$@"); BU::Decho_FMT_I       "$1" "$__BU_MAIN_COLOR_TXT_SUCCESS"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightVar      { shift 2; local pa_arr=("$@"); BU::Decho_FMT_Bold    "$1" "$__BU_MAIN_COLOR_TXT_VAR"		"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
-function BU::DechoHighlightWarning  { shift 2; local pa_arr=("$@"); BU::Decho_FMT_BoldIU  "$1" "$__BU_MAIN_COLOR_TXT_WARNING"	"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlight         { BU::Decho               "$1" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT"   "$2"; shift 3; local pa_arr=("$@");	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightCMD      { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_CMD"		    "$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightError    { shift 3; local pa_arr=("$@"); BU::Decho_FMT_BoldIU    "$1" "$__BU_MAIN_COLOR_TXT_ERROR"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightFunction { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_FUNCTION"	"$2"    "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightNewstep  { shift 3; local pa_arr=("$@"); BU::Decho_FMT_I         "$1" "$__BU_MAIN_COLOR_TXT_NEWSTEP"     "$2"    "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightPath     { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_PATH"		"$2"	"${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightSuccess  { shift 3; local pa_arr=("$@"); BU::Decho_FMT_I         "$1" "$__BU_MAIN_COLOR_TXT_SUCCESS"	    "$2"    "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightVar      { shift 3; local pa_arr=("$@"); BU::Decho_FMT_Bold      "$1" "$__BU_MAIN_COLOR_TXT_VAR"		    "$2"    "${pa_arr[@]}"	|| return 1; return 0; }
+function BU::DechoHighlightWarning  { shift 3; local pa_arr=("$@"); BU::Decho_FMT_BoldIU    "$1" "$__BU_MAIN_COLOR_TXT_WARNING"	    "$2"	"${pa_arr[@]}"	|| return 1; return 0; }
 
 # Easy "BU::Decho()" function calls with background color display.
 function BU::DechoBGColor           { shift 2; local pa_arr=("$@"); BU::Decho "$1" "$2" "${pa_arr[@]}"; }

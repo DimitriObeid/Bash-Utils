@@ -92,10 +92,10 @@ function BU::Main::Errors::HandleSmallErrors()
     elif [ "${p_return^^}" = 'E' ]; then
         if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
 
-        BU::Main::Errors::ExitError '1'
+        BU::Exit '1'
 
     else
-        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Errors::ExitError '1'
+        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Exit '1'
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
@@ -107,14 +107,28 @@ function BU::Main::Errors::HandleSmallErrors()
 ## EXIT HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function BU::Main::Errors::ExitError()
+function BU::Exit()
 {
-    if [[ "$1" =~ [0-9] ]]; then
-        exit "$1"; kill "$$"
-    else
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument."
+    #**** Parameters ****
+    local p_exitcode=$1;    # Int   : Exit code.
+    local p_behavior=$2;    # Char  : Use "exit" or "return" keywords.
 
-        kill "$$"
+    #**** Code ****
+    if BU::IsPositiveInt "$p_exitcode"; then
+
+        if [ "${p_behavior^^}" = 'E' ] || [ -z "$p_behavior" ]; then
+            exit "$p_exitcode" || kill "$$";
+
+        elif [ "${p_behavior^^}" = 'W' ]; then
+            return "$p_exitcode";
+
+        else
+            exit "$p_exitcode" || kill "$$";
+        fi
+    else
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
+
+        exit 1; kill "$$";
     fi
 }
 
@@ -210,7 +224,7 @@ function BU::Main::Errors::HandleErrors()
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
             BU::EchoError "Stopping the execution of $(BU::DechoHighlight "$(basename "$0")")."; BU::Newline >&2
-            BU::Main::Errors::ExitError "1"
+            BU::Exit "1"
         else
             # Calling the function that processes the given answer.
             BU::Main::Case::Read_Errors::HandleErrors

@@ -157,7 +157,7 @@ function BU::Main::Files::OverwriteFile()
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU::Main::Args__Files::Make              -> Main -> Args.lib
+#   - BU::Main::Args__Files::Make                   -> Main -> Args.lib
 #   - BU::Main::Checkings::CheckFilePathWasCreated  -> Main -> Checkings.lib
 #   - BU::Main::Directories::TriggerRootDirWarning  -> Main -> Directories.lib
 #   - BU::Main::Errors::HandleErrors                -> Main -> Errors.lib
@@ -171,8 +171,8 @@ function BU::Main::Files::OverwriteFile()
 function BU::Main::Files::Make()
 {
 	#**** Parameters ****
-    local p_parent=$1;  # Emplacement of the currently processed file's parent folder from the root directory.
-    local p_name=$2;    # Name of the file to process (into its parent directory).
+    local p_parent=$1;  # String    : Emplacement of the currently processed file's parent folder from the root directory.
+    local p_name=$2;    # String    : Name of the file to process (into its parent directory).
 
     shift 2;
 
@@ -227,7 +227,7 @@ function BU::Main::Files::Make()
 function BU::Main::Files::MakePath()
 {
     #**** Parameters ****
-    local p_path=$1;    # Full path of the file to create.
+    local p_path=$1;    # String : Full path of the file to create.
 
     #**** Variables ****
     local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
@@ -243,13 +243,13 @@ function BU::Main::Files::MakePath()
 
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.
 # This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
-function BU::Main::Files::CreateFileInMemory()
+function BU::Main::Files::MakeFileInMemory()
 {
     #**** Parameters ****
-#    p_filename=$1;
+    p_filename=$1;      # String :name of the file to create in the computer's random access memory.
 
     #**** Code ****
-
+    echo "$p_filename";
 
     return 0;
 }
@@ -261,7 +261,7 @@ function BU::Main::Files::CreateProjectLogFile()
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)";
 
     #**** Code ****
-    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU::Main::Errors::ExitError '1'; fi
+    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU::EchoError "UNABLE TO CREATE THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU::Exit '1'; fi
 
     BU::EchoSuccess "Successfully created the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
