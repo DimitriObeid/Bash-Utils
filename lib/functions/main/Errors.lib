@@ -164,7 +164,7 @@ function BU::Main::Errors::HandleErrors()
         v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")";
 
 	# ***** Code *****
-	BU::CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+	BU::Main::Status::CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 	if [ "$p_returnCode" -eq 0 ]; then
         return 0;
