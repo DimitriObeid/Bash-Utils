@@ -165,7 +165,7 @@
 \textbf{Description :}
 
 \begin{justify}
-    Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
+    Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
@@ -184,7 +184,7 @@
 \textbf{Description :}
 
 \begin{justify}
-    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
@@ -285,7 +285,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Si} une substitution de commande est passée au paramètre \textbf{\color{vars}p\_lineColor}, \textbf{\color{cond}alors} la fonction actuelle l'exécute. Cette substitution \textbf{DOIT} être un appel de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor}.
+    \textbf{\color{cond}Si} une substitution de commande est passée au paramètre \textbf{\color{vars}p\_lineColor}, \textbf{\color{cond}alors} la fonction actuelle l'exécute. Cette substitution \textbf{DOIT} être un appel de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor}.
 \end{justify}
 
 \begin{justify}
@@ -300,7 +300,7 @@
 
 
 \begin{justify}
-    Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{cond}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{vars}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor}.
+    Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{cond}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{vars}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor}.
 \end{justify}\setlength{\parskip}{1em}
 
 \begin{justify}

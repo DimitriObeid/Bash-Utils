@@ -167,10 +167,10 @@
 \subsection{Fonctions d'encodage}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::ModConfig::Colors::SetBGColor}\color{text}
+\subsubsection{BU::Main::Decho::SetBGColor}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::SetBGColor}
+    \textbf{Fonction : \color{func}BU::Main::Decho::SetBGColor}
 \end{justify}
 
 \setlength{\parskip}{1em}
@@ -277,10 +277,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::ModConfig::Colors::SetTextColor}\color{text}
+\subsubsection{BU::Main::Decho::SetTextColor}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::SetTextColor}
+    \textbf{Fonction : \color{func}BU::Main::Decho::SetTextColor}
 \end{justify}
 
 \begin{justify}
@@ -308,7 +308,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor}, à quelques différences près :
+    La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor}, à quelques différences près :
     \begin{enumerate}
         \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground),
         \item le code couleur est enregistré dans un autre fichier temporaire,
@@ -563,7 +563,7 @@
 \end{justify}
 
 \begin{justify}
-    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \begin{justify}
@@ -581,7 +581,7 @@
 \end{justify}
 
 \begin{justify}
-    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \end{document}
