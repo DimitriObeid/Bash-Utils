@@ -142,9 +142,6 @@ function BU::Main::Echo::__EchoCPLS()
 
     shift 2; pa_extraArgs=("$@");
 
-	#**** Variables ****
-	local v_
-
     #**** Code ****
     for val in "${pa_extraArgs[@]}"; do
         if [ "$val" = 'nodate' ]; then

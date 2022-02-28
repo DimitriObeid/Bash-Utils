@@ -215,8 +215,8 @@ function BU::Main::Errors::HandleErrors()
         else
             # Check if the ' [/|\] ' substring exists, as separator from the advice and another string.
             if [[ "$p_adviceString" == *" [/|\] "* ]]; then
-                local v_string_part_1="$(echo "$1" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting first sub-string.
-                local v_string_part_2="$(echo "$1" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting second sub-string.
+                local v_string_part_1; v_string_part_1="$(echo "$1" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting first sub-string.
+                local v_string_part_2; v_string_part_2="$(echo "$1" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting second sub-string.
 
                 BU::EchoError "$(BU::DechoHighlight "Advice") : $v_string_part_1" >&2;
                 BU::Newline;

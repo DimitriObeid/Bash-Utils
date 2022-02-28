@@ -295,7 +295,7 @@ function BU::Main::Files::CreateProjectLogFile()
 
     # Gathering OS informations from the "/etc/os-release" file.
     BU::EchoNewstep "Operating system general informations :";
-    if [ -f "/etc/os-release" ]; then BU::EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else BU::EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
+    BU::IsOSLinux && if [ -f "/etc/os-release" ]; then BU::EchoMsg "$(cat "/etc/os-release")" "" "nodate"; else BU::EchoMsg 'No available informations ("/etc/os-release" file not found)'; fi
     BU::Newline;
 
 	# Getting operating system extra informations (Windows Subsystem for Linux, etc...).
@@ -323,7 +323,7 @@ function BU::Main::Files::CreateProjectLogFile()
 ## GETTING FILE INFORMATIONS
 
 # Getting the size of a file in bytes.
-function BU::Main::File::GetFileByteSize()
+function BU::Main::Files::GetByteSize()
 {
     #**** Parameters ****
     local p_filepath=$1;    # Path to the file to process.
@@ -358,7 +358,7 @@ function BU::Main::File::GetFileByteSize()
 # Getting the file's creation date.
 
 # Please note, some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
-function BU::Main::File::GetFileCreationDate()
+function BU::Main::Files::GetCreationDate()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -375,7 +375,7 @@ function BU::Main::File::GetFileCreationDate()
 }
 
 # Getting the total number of characters in a file.
-function BU::Main::File::GetFileCharactersNumber()
+function BU::Main::Files::GetCharactersNumber()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -385,7 +385,7 @@ function BU::Main::File::GetFileCharactersNumber()
 }
 
 # Getting the last file's access date.
-function BU::Main::File::GetFileLastAccess()
+function BU::Main::Files::GetLastAccess()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -397,7 +397,7 @@ function BU::Main::File::GetFileLastAccess()
 }
 
 # Getting the last file's modification date.
-function BU::Main::File::GetFileLastModification()
+function BU::Main::Files::GetLastModification()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -409,7 +409,7 @@ function BU::Main::File::GetFileLastModification()
 }
 
 # Getting the total number of lines in a file.
-function BU::Main::File::GetFileLinesNumber()
+function BU::Main::Files::GetLinesNumber()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -419,7 +419,7 @@ function BU::Main::File::GetFileLinesNumber()
 }
 
 # Getting the max line length in a file.
-function BU::Main::File::GetFileMaxLineLength()
+function BU::Main::Files::GetMaxLineLength()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -429,7 +429,7 @@ function BU::Main::File::GetFileMaxLineLength()
 }
 
 # Getting the owner of a file.
-function BU::Main::File::GetFileOwnerName()
+function BU::Main::Files::GetOwnerName()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -441,7 +441,7 @@ function BU::Main::File::GetFileOwnerName()
 }
 
 # Getting the group of the owner of a file.
-function BU::Main::File::GetFileOwnerGroup()
+function BU::Main::Files::GetOwnerGroup()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -453,7 +453,7 @@ function BU::Main::File::GetFileOwnerGroup()
 }
 
 # Getting the total number of characters in a file.
-function BU::Main::File::GetFileWordsNumber()
+function BU::Main::Files::GetWordsNumber()
 {
     #**** Parameters ****
     local p_filepath=$1;
@@ -474,7 +474,7 @@ function BU::Main::File::SetFileLastAccess
     local p_fakedate=$2;
 
     #**** Code ****
-
+    BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate";
 
     return 0;
 }

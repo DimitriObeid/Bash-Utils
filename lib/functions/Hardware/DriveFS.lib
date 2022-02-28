@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : DriveFS.lib
+# Module        : Hardware
+# Description   : 
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# shellcheck disable=SC2154
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+    exit 1;
+fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+
+##
+
+# Getting the file system path.
+function BU::Hardware::DriveFS::GetFSDev()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code **** 
+    df -Th "$p_path" | awk 'FNR == 2 {print $1}' || { BU::EchoWarning ""; return 1; }
+
+    return 0;
+}
+
+# Getting the total size in bytes allocated to a given file system.
+function BU::Hardware::DriveFS::GetFSSizeTotal()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning ""; return 1; }
+
+    return 0;
+}
+
+# Getting the mounted partition of a given file system.
+function BU::Hardware::DriveFS::GetFSMountedPartition()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $7}' || { BU::EchoWarning ""; return 1; }
+ 
+    return 0;
+
+}
+
+# Getting the used size in bytes of a given file system.
+function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $4}' || { BU::EchoWarning ""; return 1; }
+ 
+    return 0;
+}
+
+# Getting the percentage of the used space of a given file system.
+function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $6}' || { BU::EchoWarning ""; return 1; }
+ 
+    return 0;   
+}
+
+
+# Getting the available size in bytes of a given file system.
+function BU::Hardware::DriveFS::GetFSSizeAvailable()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+ 
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $5}' || { BU::EchoWarning ""; return 1; }
+ 
+    return 0;
+
+}
+
+# Getting the type of the file system of a directory or a file.
+function BU::Hardware::DriveFS::GetFSType()
+{
+    #**** Parameters ****
+    local p_path=$1     # String    - Path of the file or the folder to process.
+
+    #**** Code ****
+    df -Th "$p_path" | awk 'FNR == 2 {print $2}' || { BU::EchoWarning ""; return 1; }
+
+    return 0;
+}
+

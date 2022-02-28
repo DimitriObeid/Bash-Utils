@@ -374,7 +374,7 @@ function BU::Main::Args::Argc()
     # Grouping the file, function and line informations.
     local v_funcinfos; v_funcinfos="In $(BU::Main::Args::PrintFFL "$p_filename" "$p_funcname" "$p_lineno") -->";
 
-    local v_funcname="$(BU::DechoHighlight "$(BU::Main::Args::GetFileName "$p_funcname")")"
+    local v_funcname; v_funcname="$(BU::DechoHighlight "$(BU::Main::Args::GetFileName "$p_funcname")")"
 
     #**** Code ****
     # If both "$p_argcount" and "$p_argawait" arguments contain a value.
@@ -989,8 +989,8 @@ function BU::Main::Args__Files::MakePath()
 
 ## CATEGORY : SETTING FILE INFORMATIONS
 
-# "BU::Main::Files::SetFileLastAccess" function.
-function BU::Main::Args__Files::SetFileLastAccess()
+# "BU::Main::Files::SetLastAccess" function.
+function BU::Main::Args__Files::SetLastAccess()
 {
     #**** Parameters ****
     local p_filepath=$1;    # String    - Path of the file to check its last access.
