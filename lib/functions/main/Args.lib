@@ -214,6 +214,47 @@ function BU::Main::Args::PrintBadOption()
 
 ## ARGUMENT PRESENCE CHECKING
 
+# Checking the values stored in the argument array of a function.
+function BU::Main::Args::GetFuncArgsArrayValues()
+{
+    #**** Parameters ****
+    local p_funcname=$1; shift 1;
+
+    local pa_argsArray=("$@");
+
+    #**** Code ****
+    BU::Main::Status::CheckStatIsBackupEchoing || {
+        BU::Main::Status::ChangeSTAT_ECHO "true";
+
+        local v_echo="$__BU_MAIN_STAT_ECHO";
+    }
+
+    BU::Main::Status::CheckStatIsDebugging && {
+        BU::EchoNewstep "Values stored in the $v_funcname function's array of arguments :";
+
+        for i in "${pa_argsArray[@]}"; do
+            local v_index=0;
+
+            BU::EchoMsg "Value [$v_index] : $i"
+
+            # Line break every five lines, in order to keep the values list readable for a human.
+            local v_value_line=$(( v_index + 1 ));
+
+            if [ $(( v_value_line % 5 )) -eq 0 ]; then
+                BU::Newline;
+            fi
+
+            v_index=$(( v_index+1 ));
+        done
+    }
+
+    if [ -n "$v_echo" ] && [ "${v_echo,,}" = 'false' ]; then
+        __BU_MAIN_STAT_ECHO="$v_echo";
+    fi
+
+    return 0;
+}
+
 # Checking a file's name passed as argument.
 function BU::Main::Args::GetFileName()
 {
@@ -238,8 +279,6 @@ function BU::Main::Args::GetFunctionName()
     if [ -z "$p_funcname" ]; then printf "« no function identified »"; else printf "« %s »" "$p_filename"; fi;
 
     return 0;
-
-    local v_lineno; v_lineno="$()";
 }
 
 # Checking a file's name passed as argument.
@@ -316,7 +355,7 @@ function BU::Main::Args::GetFFL()
 
 # Printing the file, function and line.
 
-# This function is called in the "BU::Main::Args::Argc" function.
+# This function is called in the "BU::Main::Args::Argc" and "BU::Main::Echo::__EchoOutput" functions, for example.
 function BU::Main::Args::PrintFFL()
 {
     #**** Parameters ****
@@ -330,7 +369,7 @@ function BU::Main::Args::PrintFFL()
     local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno")";
 
     #**** Code ****
-    echo -n "$(BU::DechoHighlightPath "$v_filename") file, function $(BU::DechoHighlightFunction "$v_funcname"), line $(BU::DechoHighlight "$v_lineno")";
+    echo -n "$v_filename file, function $v_funcname, line $v_lineno";
 
     return 0;
 }
@@ -352,7 +391,7 @@ function BU::Main::Args::PrintFFLErrorOccured()
     local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno")";
 
     #**** Code ****
-    echo -n "The error occured in the $(BU::DechoHighlightPath "$v_filename") file, at function $(BU::DechoHighlightFunction "$v_funcname"), on line $(BU::DechoHighlight "$v_lineno"), during the checking of the $(BU::DechoHighlightFunction "$p_target_f") function";
+    echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $(BU::DechoHighlightFunction "$p_target_f") function";
 
     return 0;
 }
@@ -393,42 +432,42 @@ function BU::Main::Args::Argc()
                 if [ "$p_argawait" -eq 1 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
                     BU::Main::Errors::HandleErrors "1" "$v_funcinfos The function $v_funcname needs an argument" \
                         "Please pass only one argument to the $v_funcname function" \
-                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; exit 1;
+                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if the function awaits more than one argument AND less arguments are passed to the function.
                 elif [ "$p_argawait" -ge 1 ] && [ "$p_argcount" -eq 0 ]; then
                     BU::Main::Errors::HandleErrors "1" "$v_funcinfos The function $v_funcname needs $(BU::DechoHighlight "$p_argawait") arguments" \
                         "Please pass $(BU::DechoHighlight "$p_argawait") arguments to the $v_funcname function" \
-                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; exit 1;
+                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if the function awaits more than one argument AND not enough arguments are passed to the function.
                 elif [ "$p_argcount" -gt 0 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
                     BU::Main::Errors::HandleErrors "1" "$v_funcinfos The function $v_funcname has not enough arguments" \
                         "Please pass $(BU::DechoHighlight "$(( p_argawait-p_argcount ))") more arguments to the $v_funcname function" \
-                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; exit 1;
+                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if more arguments than expected are given to the function.
                 elif [ "$p_argcount" -gt "$p_argawait" ]; then
                     BU::Main::Errors::HandleErrors "1" "$v_funcinfos The function $v_funcname has too much arguments" \
                         "Please remove $(BU::DechoHighlight "$(( p_argcount-p_argawait ))") arguments to the $v_funcname function" \
-                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; exit 1;
+                        "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
                 fi
             fi
 
-        # Else, if "$p_argcount" AND / OR "$p_argawait" argument values are not integer.
+        # Else, if "$p_argcount" AND / OR "$p_argawait" argumeBU::Main::Args::GetFFLnt values are not integer.
         else
             local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_argcount"; then
                 BU::Main::Errors::HandleErrors '1' \
                     "$v_funcinfos \nTHE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "$v_funcinfos The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter" \
-                    "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+                    "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
 
             local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_argawait"; then
                 BU::Main::Args::PrintBadOption '1' \
                     "$v_funcinfos \nTHE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "$v_funcinfos The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit" \
-                    "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+                    "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
         fi
 
@@ -438,14 +477,14 @@ function BU::Main::Args::Argc()
             BU::Main::Errors::HandleErrors '1' \
                 "$v_funcinfos \nTHE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER HAS NO VALUE" \
                 "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter" \
-                "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+                "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         fi
 
         local lineno="$LINENO"; if [ -z "$p_argawait" ]; then
             BU::Main::Errors::HandleErrors '1' \
                 "$v_funcinfos \nTHE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER HAS NO VALUE" \
                 "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit" \
-                "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+                "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         fi
     fi
 }
@@ -462,8 +501,10 @@ function BU::Main::Args::GetArgc-FFL()
     #   $4  -> BU::Main::Args::Argc && BU::Main::Args::GetFFL "$p_funcname" parameter.
     #   $5  -> BU::Main::Args::Argc && BU::Main::Args::GetFFL "$p_lineno" parameter.
 
-    BU::Main::Args::Argc "$1" "$2" "$3" "$4" "$5";
-    BU::Main::Args::GetFFL "$3" "$4" "$5";
+    BU::Main::Args::Argc "$1" "$2" "$3" "$4" "$5" || return 1;
+    BU::Main::Args::GetFFL "$3" "$4" "$5" || return 1;
+
+    return 0;
 }
 
 # -----------------------------------------------

@@ -40,7 +40,7 @@ fi
 
 ####
 
-##
+## GETTING FILE SYSTEM'S INFORMATIONS
 
 # Getting the file system path.
 function BU::Hardware::DriveFS::GetFSDev()
@@ -129,3 +129,5 @@ function BU::Hardware::DriveFS::GetFSType()
     return 0;
 }
 
+
+# -----------------------------------------------

@@ -70,6 +70,9 @@ function BU::Main::Echo::__EchoOutput()
 	local p_context=$2;		# Begin or end of the debug process.
 	local p_type=$3;		# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
 
+	#**** Variables ****
+	local v_strlen="${#p_string}";
+
 	#**** Code ****
 	# If the "$p_type" argument is a string, then the first character is extracted.
 	if ! BU::IsAlphaChar "$p_type"; then
@@ -86,22 +89,26 @@ function BU::Main::Echo::__EchoOutput()
             local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO";
         fi
 
-		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
+		BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU::Main::Echo::__EchoCPLS "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
+
+		BU::Main::Header::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
         if [ "${p_context,,}" = "begin" ]; then
-            BU::Main::Echo::__EchoVoid
+            BU::Main::Echo::__EchoVoid;
 
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "BEGIN DEBUGGING TEXT : $p_string")"     > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "BEGIN DEBUGGING TEXT : $p_string")"          > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "BEGIN DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             fi
+
+            BU::Main::Header::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
             if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
@@ -112,16 +119,18 @@ function BU::Main::Echo::__EchoOutput()
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                echo -e "$(BU::HeaderError "END DEBUGGING TEXT : $p_string")"   > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                echo -e "$(BU::Header "END DEBUGGING TEXT : $p_string")"        > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                echo -e "$(BU::HeaderNewstep "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                echo -e "$(BU::HeaderSuccess "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                echo -e "$(BU::HeaderWarning "END DEBUGGING TEXT : $p_string")" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" 	|| { BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")" 'W' 'CPLS'; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
             fi
+
+            BU::Main::Header::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
             if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
@@ -143,6 +152,8 @@ function BU::Main::Echo::__EchoCPLS()
     shift 2; pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     for val in "${pa_extraArgs[@]}"; do
         if [ "$val" = 'nodate' ]; then
             case "$p_option" in
@@ -236,6 +247,8 @@ function BU::EchoError()
     local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -270,6 +283,8 @@ function BU::EchoMsg()
     local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1;
         BU::CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -304,6 +319,8 @@ function BU::EchoNewstep()
     local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -334,8 +351,10 @@ function BU::EchoRead()
 	local p_string=$1;     # User's keyboard input.
 
 	#**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Errors::HandleSmallErrors 'W' "" 'R' "CPLS"; return 1; }
+		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "" 'R' "CPLS"; return 1; }
 	fi; return 0;
 }
 
@@ -356,6 +375,8 @@ function BU::EchoSuccess()
     local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -390,6 +411,8 @@ function BU::EchoWarning()
     local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1;
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -422,6 +445,8 @@ function BU::EchoAqua()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_AQUA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -434,6 +459,8 @@ function BU::EchoBlack()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLACK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -446,6 +473,8 @@ function BU::EchoBlue()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLUE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -458,6 +487,8 @@ function BU::EchoCyan()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_CYAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -470,6 +501,8 @@ function BU::EchoFuchsia()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUCHSIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -482,6 +515,8 @@ function BU::EchoGray()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GRAY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -494,6 +529,8 @@ function BU::EchoGreen()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GREEN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -506,6 +543,8 @@ function BU::EchoLime()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_LIME}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -515,6 +554,8 @@ function BU::EchoLime()
 function BU::EchoMaroon()
 {
     #**** Parameters ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
@@ -530,6 +571,8 @@ function BU::EchoNavy()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_NAVY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -542,6 +585,8 @@ function BU::EchoOlive()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_OLIVE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -554,6 +599,8 @@ function BU::EchoOrange()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_ORANGE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -566,6 +613,8 @@ function BU::EchoPink()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PINK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -578,6 +627,8 @@ function BU::EchoPurple()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PURPLE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -590,6 +641,8 @@ function BU::EchoRed()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_RED}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -602,6 +655,8 @@ function BU::EchoSalmon()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SALMON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -614,6 +669,8 @@ function BU::EchoSilver()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SILVER}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -626,6 +683,8 @@ function BU::EchoTan()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -638,6 +697,8 @@ function BU::EchoTeal()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TEAL}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -650,6 +711,8 @@ function BU::EchoTurquoise()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TURQUOISE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -662,6 +725,8 @@ function BU::EchoViolet()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_VIOLET}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -674,6 +739,8 @@ function BU::EchoWhite()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_WHITE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -686,6 +753,8 @@ function BU::EchoYellow()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_YELLOW}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -712,11 +781,10 @@ function BU::Newline()
     local p_number=$1;
 
     #**** Code ****
-
     if [ -n "$p_number" ]; then
         if ! BU::IsPositiveInt "$p_number"; then
             BU::EchoMsg "" "" "nodate";
-            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R';
+            BU::Main::Echo::__EchoCPLS "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R';
             BU::EchoMsg "" "" "nodate";
         else
             # Doing X line breaks according to the number passed as argument.
