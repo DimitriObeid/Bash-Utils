@@ -80,15 +80,14 @@ function BU::Main::Files::ProcessingFile()
     local p_function=$1;
     local p_name=$2;
 
-    shift; local arr;
-        arr=$("$@");
+    shift; local pa_arr; pa_arr=$("$@");
 
     #**** Variables ****
     local v_char="'";
 
     #**** Code ****
     # Arguments checking.
-    BU::Main::Args__Files::ProcessingFile "$p_function";
+    if ! BU::Main::Args__Files::ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
@@ -97,14 +96,14 @@ function BU::Main::Files::ProcessingFile()
 
     case "$p_function" in
         'BU::Main::Files::Make')
-            if BU::Main::Files::Make "${arr[@]}"; then
+            if BU::Main::Files::Make "${pa_arr[@]}"; then
                 BU::Main::Files::__ProcessingFile 'S' "$p_name" "$p_char";
             else
                 BU::Main::Files::__ProcessingFile 'E' "$p_name" "$p_char";
             fi
             ;;
         'OverwriteFile')
-            if BU::Main::Files::OverwriteFile "$arr"; then
+            if BU::Main::Files::OverwriteFile "${pa_arr[@]}"; then
                 BU::Main::Files::__ProcessingFile 'S' "$p_name" "$p_char";
             else
                 BU::Main::Files::__ProcessingFile 'E' "$p_name" "$p_char";
@@ -132,7 +131,7 @@ function BU::Main::Files::OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    BU::Main::Args__Files::OverwriteFile;
+    if BU::Main::Args__Files::OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$p_path";
@@ -183,10 +182,10 @@ function BU::Main::Files::Make()
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given.
-    BU::Main::Args__Files::Make "$p_parent" "$p_name";
+    if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi;
 
     # Checking second if the script is operating at the root directory.
-    BU::Main::Directories::TriggerRootDirWarning "$v_path";
+    BU::Main::Directories::TriggerRootDirWarning "$v_path" || return 1;
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
@@ -234,7 +233,7 @@ function BU::Main::Files::MakePath()
     local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
 
     #**** Code ****
-    if ! BU::Main::Args__Files::MakePath "$p_path"; then return 1; fi
+    if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     BU::Main::Files::Make "$v_parent" "$v_target" || return 1;
 
@@ -474,7 +473,7 @@ function BU::Main::File::SetFileLastAccess
     local p_fakedate=$2;
 
     #**** Code ****
-    BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate";
+    if ! BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     return 0;
 }

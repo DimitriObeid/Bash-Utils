@@ -438,8 +438,7 @@ function BU::Main:Status::ChangeSTAT_ECHO            {
         fi
     fi
 
-    __BU_MAIN_STAT_ECHO="$1";             BU::Main::Status::CheckSTAT_ECHO           "$2" "$3" || return 1; return 0;
-}
+    __BU_MAIN_STAT_ECHO="$1";             BU::Main::Status::CheckSTAT_ECHO           "$2" "$3" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
 function BU::Main:Status::ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";           BU::Main::Status::CheckSTAT_ERROR           "$2" "$3" || return 1; return 0; }

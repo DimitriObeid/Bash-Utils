@@ -60,22 +60,23 @@ function BU::Main::Directories::ProcessingDir()
 
     #**** Code ****
     # Arguments checking.
-	BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name"
+	if ! BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name"; then return 1; fi
 
-	sleep "$PROJECT_STATUS_SLEEP_LINE"
-    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
-    BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent")."
+	sleep "$PROJECT_STATUS_SLEEP_LINE";
+
+    BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+    BU::EchoNewstep "Processing the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent").";
     BU::Newline;
 
     if "$p_function"; then
-        BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
-		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
-		sleep "$PROJECT_STATUS_SLEEP_LINE"
+        BU::EchoSuccess "End of processing the $(BU::DechoHighlightPath "$p_name/") folder.";
+		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+		sleep "$PROJECT_STATUS_SLEEP_LINE";
 		BU::Newline;
     else
-        BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name/") folder."
-		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate'
-		sleep "$PROJECT_STATUS_SLEEP_LINE"
+        BU::EchoError "End of processing the $(BU::DechoHighlightPath "$p_name/") folder.";
+		BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+		sleep "$PROJECT_STATUS_SLEEP_LINE";
 		BU::Newline;
     fi
 }
@@ -94,18 +95,18 @@ function BU::Main::Directories::ProcessingDir()
 function BU::Main::Directories::OverwriteDir()
 {
     #**** Parameters ****
-    local p_path=$1
-	local p_authorization=$2
+    local p_path=$1;
+	local p_authorization=$2;
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU::Main::Args__Directories::OverwriteDir "$p_path" "$p_authorization"; then return 1; fi
+    if ! BU::Main::Args__Directories::OverwriteDir "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     # Checking second if the script is operating at the root directory.
-    BU::Main::Directories::TriggerRootDirWarning "$p_path"
+    BU::Main::Directories::TriggerRootDirWarning "$p_path";
 
-    BU::EchoNewstep "A non-empty folder with exactly the same name ($(BU::DechoHighlightPath "$p_name")) is already in the target folder $(BU::DechoHighlightPath "$p_parent/")"
-	BU::EchoNewstep "Deleting the contents of the $(BU::DechoHighlightPath "$v_path/") folder"
+    BU::EchoNewstep "A non-empty folder with exactly the same name ($(BU::DechoHighlightPath "$p_name")) is already in the target folder $(BU::DechoHighlightPath "$p_parent/")";
+	BU::EchoNewstep "Deleting the contents of the $(BU::DechoHighlightPath "$v_path/") folder";
 	BU::Newline;
 
 	if [ "$p_authorization" = "--rmdir" ]; then
@@ -116,19 +117,19 @@ function BU::Main::Directories::OverwriteDir()
             # VARIABLES INTO THIS FUNCTION, OR ELSE THIS PROGRAM COULD OPERATE FROM THE ROOT DIRECTORY !!!!!!!!!
 
             # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
-            rm -rfv "${v_path/:?}/"*
+            rm -rfv "${v_path/:?}/"*;
             BU::Main::Errors::HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$v_path/")") FOLDER." \
                 "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
-                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
-            BU::EchoSuccess "Deletion of the contents of the folder $(BU::DechoHighlightPath "$v_path/") performed successfully"
+            BU::EchoSuccess "Deletion of the contents of the folder $(BU::DechoHighlightPath "$v_path/") performed successfully";
             BU::Newline;
 
 			return 0;
         else
-            BU::Main::Errors::HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
+            BU::Main::Errors::HandleErrors "1" "" "" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
-			return 1
+			return 1;
         fi
 	fi
 
@@ -152,30 +153,30 @@ function BU::Main::Directories::OverwriteDir()
 function BU::Main::Directories::Make()
 {
 	#**** Parameters ****
-	local p_parent=$1  # Emplacement of the currently processed directory's parent folder from the root directory.
-	local p_name=$2    # Name of the folder to process (into its parent directory).
-	local p_rm=$3      # Authorization to overwrite the targeted directory.
+	local p_parent=$1;	# String	- Emplacement of the currently processed directory's parent folder from the root directory.
+	local p_name=$2;    # String	- Name of the folder to process (into its parent directory).
+	local p_rm=$3;      # String	- Authorization to overwrite the targeted directory.
 
 	#**** Variables ****
-	local v_path="$p_parent/$p_name"	# Path of the file to process.
+	local v_path="$p_parent/$p_name";	# String	- Path of the file to process.
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given
-    if ! BU::Main::Args__Directories::Make "$p_parent" "$p_name"; then return 1; fi
+    if ! BU::Main::Args__Directories::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     # Checking second if the script is operating at the root directory.
     if ! BU::Main::Directories::TriggerRootDirWarning "$v_path"; then return 1; fi
 
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
 	if [ ! -d "$v_path" ]; then
-		BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent/")."
+		BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$p_name") folder in the parent folder $(BU::DechoHighlightPath "$p_parent/").";
 		BU::Newline;
 
         mkdir -pv "$v_path"
         BU::Main::Errors::HandleErrors "$?" \
             "THE $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_name/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(BU::Main::Echo::KeepFormatting "$(BU::DechoHighlightPath "$p_parent/")") !" \
-            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"
-        BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") folder was successfully created in the $(BU::DechoHighlightPath "$p_parent/") folder."
+            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+        BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") folder was successfully created in the $(BU::DechoHighlightPath "$p_parent/") folder.";
         BU::Newline;
 
         return 0;
@@ -184,17 +185,18 @@ function BU::Main::Directories::Make()
 	elif [ -d "$v_path" ] && [ "$(ls -A "$v_path")" ]; then
 
         if [ "$p_rm" = '--rmdir' ]; then
-            BU::Main::Directories::OverwriteDir "$v_path" "$p_rm"
-            if test "$?" -eq 0; then
+            BU::Main::Directories::OverwriteDir "$v_path" "$p_rm";
+
+			if test "$?" -eq 0; then
                 return 0;
             else
-                return 1
+                return 1;
             fi
         fi
 
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
 	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then
-		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name/") folder already exists in the $(BU::DechoHighlightPath "$p_parent/") folder and is empty."
+		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name/") folder already exists in the $(BU::DechoHighlightPath "$p_parent/") folder and is empty.";
 		BU::Newline;
 
 		return 0;
@@ -205,20 +207,20 @@ function BU::Main::Directories::Make()
 function BU::Main::Directories::MakePath()
 {
     #**** Parameters ****
-    local p_path=$1         # Full path of the directory to create.
-    local p_overwrite=$2    # Authorization to overwrite the directory.
+    local p_path=$1;		# String	- Full path of the directory to create.
+    local p_overwrite=$2;	# String	- Authorization to overwrite the directory.
 
     #**** Variables ****
     local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the folder to create.
     local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::MakePath "$p_path"; then return 1; fi
+    if ! BU::Main::Args__Directories::MakePath "$p_path" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ "$p_overwrite" != 'rmdir' ]; then
         BU::Main::Directories::Make "$v_parent" "$v_target" || return 1;
     else
-        BU::Main::Directories::Make "$v_parent" "$v_target" '--rmdir'
+        BU::Main::Directories::Make "$v_parent" "$v_target" '--rmdir';
     fi
 
     return 0;

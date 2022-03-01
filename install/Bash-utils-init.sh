@@ -162,7 +162,7 @@ function BU::ModuleInit::AskPrintLog()
 		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
 			BU::ModuleInit::PrintLog; return 0;
 		else
-			echo; echo "The logs will not be displayed on your screen"; echo; return 0;
+			echo; echo "The initializer script's log file's content will not be displayed on your screen"; echo; return 0;
 		fi
 	else
 		return 0;
@@ -173,6 +173,10 @@ function BU::ModuleInit::AskPrintLog()
 function BU::ModuleInit::DisplayInitializedGlobalVarsInfos()
 {
     BU::ModuleInit::MsgLine "INITIALIZING THE GLOBAL VARIABLES" '#' 'msg';
+    BU::ModuleInit::Msg;
+
+	BU::ModuleInit::MsgLine "Initializing the script's informations" '+' 'msg'; BU::ModuleInit::Msg;
+	BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_UTILS_PROJECT_PID'				"$__BU_MODULE_UTILS_PROJECT_PID" 'Int' "This global variable stores the PID of the current program" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "Initializing the modules manager's root directory variables" '+' 'msg';       BU::ModuleInit::Msg;
@@ -1100,6 +1104,8 @@ fi
 
 ## DEFINING GLOBAL VARIABLES
 
+__BU_MODULE_UTILS_PROJECT_PID="$$";
+
 __BU_MODULE_UTILS_ROOT_HOME="$HOME";
 
 if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
@@ -1296,7 +1302,7 @@ function BashUtils_InitModules()
                 printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « config » directory !!!\n\n" "$v_module_name" >&2;
 
                 echo -e "Please check if the module's configuration files exist in this folder --> " >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_UTILS_CURRENT_MODULE_CONF_PATH" 'f' >&2;
-                printf '\n\n'
+                printf '\n\n';
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".

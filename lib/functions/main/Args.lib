@@ -54,7 +54,7 @@ function BU::Main::Args::PrintBadOption()
     local p_advice=$2;      # String    - "BU::Main::Errors::HandleErrors()"'s advice argument.
     local p_argname=$3;     # String    - Name of the parameter that stores the argument.
     local p_value=$4;       # Any       - "BU::Main::Errors::HandleErrors()"'s value argument.
-    local p_filename="$5";  # String    - Name of the file where the error occured.
+    local p_filename=$5;	# String    - Name of the file where the error occured.
     local p_funcname=$6;    # String    - Name of the function where the test failed.
     local p_lineno=$7;      # Int       - Line where the test failed.
 
@@ -530,7 +530,7 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
     local p_lineno=$6;      # Int       - Line where this argument processing function is called.
 
 	#**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	local lineno="$LINENO"; if [ -z "$p_parent" ]; then
 		 BU::Main::Args::PrintBadOption 'z' \
@@ -585,7 +585,7 @@ function BU::Main::Args__CMDS::GetCommandPath()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_cmd" ]; then
         BU::Main::Args::PrintBadOption 'z' \
@@ -619,7 +619,7 @@ function BU::Main::Args__Decho::Decho()
     local p_lineno=$6;          # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_string" ]; then
         false;
@@ -663,7 +663,7 @@ function BU::Main::Args__Directories::ProcessingDir()
     local p_lineno=$6;          # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_function" ]; then
          BU::Main::Args::PrintBadOption 'z' \
@@ -699,7 +699,7 @@ function BU::Main::Args__Directories::OverwriteDir()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -730,7 +730,7 @@ function BU::Main::Args__Directories::Make()
     local p_lineno=$5;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
     local lineno="$LINENO"; if [ -z  "$p_parent" ]; then
@@ -761,14 +761,14 @@ function BU::Main::Args__Directories::MakePath()
 {
     #**** Parameters ****
     local p_path=$1;        # Full path of the directory to create.
-    local p_overwrite=$2;   #
+    local p_overwrite=$2;   # String	- Authorization to overwrite the directory.
 
     local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
     local p_funcname=$4;    # String    - Name of the currently processed function.
     local p_lineno=$5;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new folder's full path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -776,6 +776,12 @@ function BU::Main::Args__Directories::MakePath()
             "Please pass the full path of the directory to create as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
+
+	local lineno="$LINENO"; if [ -n "$p_overwrite" ] && [ "$p_overwrite" != "--rmdir" ]; then
+		BU::Main::Args::PrintBadOption '' \
+			"Please pass the valid string $(BU::DechoHighlightVar "--rmdir") that allows overwriting the $(BU::DechoHighlightFunction "$p_path") directory (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+			'p_overwrite' "$p_overwrite" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+	fi
 
     return 0;
 }
@@ -795,7 +801,7 @@ function BU::Main::Args__Directories::GetDirectoryName()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
          BU::Main::Args::PrintBadOption 'z' \
@@ -819,7 +825,7 @@ function BU::Main::Args__Directories::GetDirectoryPath()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
          BU::Main::Args::PrintBadOption 'z' \
@@ -843,7 +849,7 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -866,7 +872,7 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -899,7 +905,7 @@ function BU::Main::Args__Files::ProcessingFile()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_function" ]; then
 		 BU::Main::Args::PrintBadOption 'z' \
@@ -924,7 +930,7 @@ function BU::Main::Args__Files::OverwriteFile()
     local p_lineno=$5;          # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target file's path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -967,7 +973,7 @@ function BU::Main::Args__Files::Make()
     local p_lineno=$5;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_parent" ]; then
@@ -1014,7 +1020,7 @@ function BU::Main::Args__Files::MakePath()
     local p_lineno=$4;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new file's full path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -1042,7 +1048,7 @@ function BU::Main::Args__Files::SetLastAccess()
     local p_lineno=$5;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_filepath" ]; then
         BU::Main::Args::PrintBadOption 'z' \
@@ -1088,7 +1094,7 @@ function BU::Main::Args__Text::CutFromCharacter()
     local p_lineno=$6;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_string" ]; then
         BU::Main::Args::PrintBadOption 'z' \
@@ -1127,7 +1133,7 @@ function BU::Main::Args__Text::GetCharacterOccurences()
     local p_lineno=$5;      # Int       - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$v_filename" "$v_funcname" "$v_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     local lineno="$LINENO"; if [ -z "$p_string" ]; then
         BU::Main::Args::PrintBadOption 'z' \
