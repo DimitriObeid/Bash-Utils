@@ -301,16 +301,16 @@ function BU::Main::Files::CreateProjectLogFile()
     # Getting operating system's informations (Linux platforms or Android without the Termux terminal emulator) :
     BU::IsOSLinux && {
         if [ -f "/etc/os-release" ]; then
-            # Getting operating system name.
-            BU::EchoNewstep "Operating system name : $(awk -F= '/^NAME/{print $2}' /etc/os-release)";
+            # Getting operating pretty system name.
+            BU::EchoNewstep "Operating system pretty name : $(awk -F= '/PRETTY/ {print $2}' '/etc/os-release')";
             BU::Newline;
 
             # Gathering OS informations from the "/etc/os-release" file.
             BU::EchoNewstep "Operating system general informations :";
-            BU::EchoMsg "$(cat '/etc/os-release')" "" "nodate"; else BU::EchoMsg "No available informations ($(BU::DechoHighlight '/etc/os-release') file not found)"; fi
+            BU::EchoMsg "$(cat '/etc/os-release')" "" "nodate";
             BU::Newline;
         else
-            BU::EchoWarning "";
+            BU::EchoWarning "No available informations ($(BU::DechoHighlight '/etc/os-release') file not found)";
             BU::Newline;
         fi
 
@@ -322,7 +322,12 @@ function BU::Main::Files::CreateProjectLogFile()
 
     # Getting operating system's informations (Haiku OS) :
     BU::IsOSHaiku && {
-        true;
+        # Getting operating system pretty name.
+        BU::EchoNewstep "Operating system pretty name : Haiku OS";
+        BU::Newline;
+
+        # Gathering OS informations.
+        BU::EchoNewstep "Operating system general informations :";
     }
 
     # Getting operating system's informations (OpenBSD) :
@@ -337,7 +342,11 @@ function BU::Main::Files::CreateProjectLogFile()
 
     # Getting operating system's informations (Mac OS) :
     BU::IsOSx && {
-        true;
+        # Getting operating system pretty name.
+        BU::EchoNewstep "Operating system pretty name : ";
+
+        # Gathering OS informations.
+        BU::EchoNewstep "Operating system general informations :";
     }
 
 	# Getting Bash language's version.
@@ -351,7 +360,7 @@ function BU::Main::Files::CreateProjectLogFile()
 
     BU::EchoSuccess "Successfully got the user's system's informations.";
 
-    # Purging the "$__BU_MODULE_UTILS_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file.
+    # Purging the "$__BU_MODULE_UTILS_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
     __BU_MODULE_UTILS_MSG_ARRAY='';
 }
 
