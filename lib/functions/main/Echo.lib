@@ -152,7 +152,7 @@ function BU::Main::Echo::__EchoCPLS()
     shift 2; pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     for val in "${pa_extraArgs[@]}"; do
         if [ "$val" = 'nodate' ]; then
@@ -247,7 +247,7 @@ function BU::EchoError()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1;
@@ -283,7 +283,7 @@ function BU::EchoMsg()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1;
@@ -319,7 +319,7 @@ function BU::EchoNewstep()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1;
@@ -351,8 +351,6 @@ function BU::EchoRead()
 	local p_string=$1;     # User's keyboard input.
 
 	#**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
 		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "" 'R' "CPLS"; return 1; }
 	fi; return 0;
@@ -375,7 +373,7 @@ function BU::EchoSuccess()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1;
@@ -411,7 +409,7 @@ function BU::EchoWarning()
     local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
+    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1;
@@ -445,8 +443,6 @@ function BU::EchoAqua()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_AQUA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -459,8 +455,6 @@ function BU::EchoBlack()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLACK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -473,8 +467,6 @@ function BU::EchoBlue()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLUE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -487,8 +479,6 @@ function BU::EchoCyan()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_CYAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -501,8 +491,6 @@ function BU::EchoFuchsia()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUCHSIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -515,8 +503,6 @@ function BU::EchoGray()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GRAY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -529,8 +515,6 @@ function BU::EchoGreen()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GREEN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -543,8 +527,6 @@ function BU::EchoLime()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_LIME}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -554,8 +536,6 @@ function BU::EchoLime()
 function BU::EchoMaroon()
 {
     #**** Parameters ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
@@ -571,8 +551,6 @@ function BU::EchoNavy()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_NAVY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -585,8 +563,6 @@ function BU::EchoOlive()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_OLIVE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -599,8 +575,6 @@ function BU::EchoOrange()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_ORANGE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -613,8 +587,6 @@ function BU::EchoPink()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PINK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -627,8 +599,6 @@ function BU::EchoPurple()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PURPLE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -641,8 +611,6 @@ function BU::EchoRed()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_RED}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -655,8 +623,6 @@ function BU::EchoSalmon()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SALMON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -669,8 +635,6 @@ function BU::EchoSilver()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SILVER}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -683,8 +647,6 @@ function BU::EchoTan()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -697,8 +659,6 @@ function BU::EchoTeal()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TEAL}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -711,8 +671,6 @@ function BU::EchoTurquoise()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TURQUOISE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -725,8 +683,6 @@ function BU::EchoViolet()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_VIOLET}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -739,8 +695,6 @@ function BU::EchoWhite()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_WHITE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
@@ -753,8 +707,6 @@ function BU::EchoYellow()
     p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
 
     #**** Code ****
-    BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs}";
-
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_YELLOW}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
 
     return 0;
