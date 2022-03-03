@@ -43,25 +43,25 @@ fi
 ## OS TYPE CHECKINGS
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU::IsOSAndroidTermux() { if [[ "$OSTYPE" == 'linux-android' ]]; then return 0; else return 1; fi }
+function BU::IsOSAndroidTermux()    { if [[ "$OSTYPE" == 'linux-android' ]];    then return 0; else return 1; fi }
 
 # Checking if current OS is FreeBSD.
-function BU::IsOSFreeBSD() { if [[ "$OSTYPE" == 'FreeBSD' ]]; then return 0; else return 1; fi }
+function BU::IsOSFreeBSD()          { if [[ "$OSTYPE" == 'FreeBSD' ]];          then return 0; else return 1; fi }
 
 # Checking if current OS is Haiku OS.
-function BU::IsOSHaiku() { if [[ "$OSTYPE" == 'haiku' ]]; then return 0; else return 1; fi }
+function BU::IsOSHaiku()            { if [[ "$OSTYPE" == 'haiku' ]];            then return 0; else return 1; fi }
 
 # Checking if current OS is OpenBSD.
-function BU::IsOSOpenBSD() { if [[ "$OSTYPE" == 'openbsd'* ]]; then return 0; else return 1; fi }
+function BU::IsOSOpenBSD()          { if [[ "$OSTYPE" == 'openbsd'* ]];         then return 0; else return 1; fi }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU::IsOSLinux() { if [[ "$OSTYPE" == 'linux'* ]]; then return 0; else return 1; fi }
+function BU::IsOSLinux()            { if [[ "$OSTYPE" == 'linux'* ]];           then return 0; else return 1; fi }
 
 # Checking if current OS is NetBSD.
-function BU::IsOSNetBSD() { if [[ "$OSTYPE" == 'netbsd' ]]; then return 0; else return 1; fi }
+function BU::IsOSNetBSD()           { if [[ "$OSTYPE" == 'netbsd' ]];           then return 0; else return 1; fi }
 
 # Checking if current OS is OSx.
-function BU::IsOSx() { if [[ "$OSTYPE" == 'darwin'* ]]; then return 0; else return 1; fi }
+function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          then return 0; else return 1; fi }
 
 # -----------------------------------------------
 
