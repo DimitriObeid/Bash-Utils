@@ -66,9 +66,9 @@ printf "
 function BU::Main::Echo::__EchoOutput()
 {
 	#**** Parameters ****
-	local p_string=$1;		# String to display.
-	local p_context=$2;		# Begin or end of the debug process.
-	local p_type=$3;		# Type of message (error 'E', newstep 'N', success 'S' or warning 'W').
+	local p_string=$1;     # String    - String to display.
+	local p_context=$2;    # String    - Begin or end of the debug process.
+	local p_type=$3;       # Char      - Type of message (error 'E', Msg 'm', newstep 'N', success 'S' or warning 'W').
 
 	#**** Variables ****
 	local v_strlen="${#p_string}";
@@ -146,10 +146,10 @@ function BU::Main::Echo::__EchoOutput()
 function BU::Main::Echo::__EchoCPLS()
 {
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;  # Any       - Text to display.
+    local p_option=$2;  # String    - "echo" command options.
 
-    shift 2; pa_extraArgs=("$@");
+    shift 2; pa_extraArgs=("$@");   # Array - More processing arguments (like the processing of a whole line-long string).
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -244,7 +244,7 @@ function BU::EchoError()
 
     shift 2;
 
-    local pa_extraArgs=("$@");
+    local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -280,7 +280,7 @@ function BU::EchoMsg()
     local p_option=$2;
     shift 2;
 
-    local pa_extraArgs=("$@");
+    local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -316,7 +316,7 @@ function BU::EchoNewstep()
     local p_option=$2;
     shift 2;
 
-    local pa_extraArgs=("$@");
+    local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -370,7 +370,7 @@ function BU::EchoSuccess()
     local p_option=$2;
     shift 2;
 
-    local pa_extraArgs=("$@");
+    local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -406,7 +406,7 @@ function BU::EchoWarning()
     local p_option=$2;
     shift 2;
 
-    local pa_extraArgs=("$@");
+    local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
@@ -440,7 +440,11 @@ function BU::EchoWarning()
 function BU::EchoAqua()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_AQUA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -452,7 +456,11 @@ function BU::EchoAqua()
 function BU::EchoBlack()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLACK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -464,7 +472,11 @@ function BU::EchoBlack()
 function BU::EchoBlue()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_BLUE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -476,7 +488,11 @@ function BU::EchoBlue()
 function BU::EchoCyan()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_CYAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -488,7 +504,11 @@ function BU::EchoCyan()
 function BU::EchoFuchsia()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_FUCHSIA}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -500,7 +520,11 @@ function BU::EchoFuchsia()
 function BU::EchoGray()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GRAY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -512,7 +536,11 @@ function BU::EchoGray()
 function BU::EchoGreen()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_GREEN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -524,7 +552,11 @@ function BU::EchoGreen()
 function BU::EchoLime()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_LIME}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -536,7 +568,11 @@ function BU::EchoLime()
 function BU::EchoMaroon()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_MAROON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -548,7 +584,11 @@ function BU::EchoMaroon()
 function BU::EchoNavy()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_NAVY}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -560,7 +600,11 @@ function BU::EchoNavy()
 function BU::EchoOlive()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_OLIVE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -572,7 +616,11 @@ function BU::EchoOlive()
 function BU::EchoOrange()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_ORANGE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -584,7 +632,11 @@ function BU::EchoOrange()
 function BU::EchoPink()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PINK}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -596,7 +648,11 @@ function BU::EchoPink()
 function BU::EchoPurple()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_PURPLE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -608,7 +664,11 @@ function BU::EchoPurple()
 function BU::EchoRed()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_RED}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -620,7 +680,11 @@ function BU::EchoRed()
 function BU::EchoSalmon()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SALMON}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -632,7 +696,11 @@ function BU::EchoSalmon()
 function BU::EchoSilver()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_SILVER}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -644,7 +712,11 @@ function BU::EchoSilver()
 function BU::EchoTan()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TAN}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -656,7 +728,11 @@ function BU::EchoTan()
 function BU::EchoTeal()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TEAL}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -668,7 +744,11 @@ function BU::EchoTeal()
 function BU::EchoTurquoise()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_TURQUOISE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -680,7 +760,11 @@ function BU::EchoTurquoise()
 function BU::EchoViolet()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_VIOLET}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -692,7 +776,11 @@ function BU::EchoViolet()
 function BU::EchoWhite()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_WHITE}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
@@ -704,7 +792,11 @@ function BU::EchoWhite()
 function BU::EchoYellow()
 {
     #**** Parameters ****
-    p_string=$1; p_option=$2; shift 2; local pa_extraArgs=("$@");
+    p_string=$1;        # Any       - String to display.
+    p_option=$2;        # String    - "echo" command options.
+    shift 2;
+
+    local pa_extraArgs=("$@");      # Array - More processing arguments (like the processing of a whole line-long string) for the "BU::Main::Checkings::CheckProjectLogStatus" or the "BU::Main::Echo::__EchoCPLS" functions.
 
     #**** Code ****
     BU::EchoMsg "${__BU_MAIN_COLOR_TXT_YELLOW}$p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;

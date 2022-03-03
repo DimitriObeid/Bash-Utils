@@ -48,8 +48,10 @@ function BU::Hardware::DriveFS::GetFSDev()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
-    #**** Code **** 
-    df -Th "$p_path" | awk 'FNR == 2 {print $1}' || { BU::EchoWarning ""; return 1; }
+    #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
+    df -Th "$p_path" | awk 'FNR == 2 {print $1}' || { BU::EchoWarning "" '-n' 'nodate'; return 1; }
 
     return 0;
 }
@@ -61,7 +63,9 @@ function BU::Hardware::DriveFS::GetFSSizeTotal()
     local p_path=$1     # String    - Path of the file or the folder to process.
 
     #**** Code ****
-    df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning ""; return 1; }
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
+    df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning "" '-n' 'nodate'; return 1; }
 
     return 0;
 }
@@ -73,6 +77,8 @@ function BU::Hardware::DriveFS::GetFSMountedPartition()
     local p_path=$1     # String    - Path of the file or the folder to process.
 
     #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
     df -Th "$p_path" | awk 'FNR == 2 {print $7}' || { BU::EchoWarning ""; return 1; }
  
     return 0;
@@ -86,6 +92,8 @@ function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
     local p_path=$1     # String    - Path of the file or the folder to process.
 
     #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
     df -Th "$p_path" | awk 'FNR == 2 {print $4}' || { BU::EchoWarning ""; return 1; }
  
     return 0;
@@ -98,6 +106,8 @@ function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
     local p_path=$1     # String    - Path of the file or the folder to process.
 
     #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
     df -Th "$p_path" | awk 'FNR == 2 {print $6}' || { BU::EchoWarning ""; return 1; }
  
     return 0;   
@@ -111,6 +121,8 @@ function BU::Hardware::DriveFS::GetFSSizeAvailable()
     local p_path=$1     # String    - Path of the file or the folder to process.
  
     #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
     df -Th "$p_path" | awk 'FNR == 2 {print $5}' || { BU::EchoWarning ""; return 1; }
  
     return 0;
@@ -124,6 +136,8 @@ function BU::Hardware::DriveFS::GetFSType()
     local p_path=$1     # String    - Path of the file or the folder to process.
 
     #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+
     df -Th "$p_path" | awk 'FNR == 2 {print $2}' || { BU::EchoWarning ""; return 1; }
 
     return 0;

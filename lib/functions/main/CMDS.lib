@@ -42,14 +42,24 @@ fi
 
 ## GET COMMAND OUTPUTS
 
-# Check command path.
+# Get command's executable file's path.
 function BU::Main::CMDS::GetCommandPath()
 {
     #**** Parameters ****
-    local p_cmd=$1;     # Command's name.
+    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 
     #**** Code ****
-    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd"; then return 1; fi
+    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight)" 'E'; return 1; }
+}
+
+# Get the command's return output.
+function BU::Main::CMDS::GetCommandReturnOutputValue()
+{
+    #**** Parameters ****
+    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
+
+    #**** Code ****
+    if eval "$p_cmd" > /dev/null; then return 0; else return 1; fi
 }

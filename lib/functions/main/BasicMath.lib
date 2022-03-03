@@ -44,13 +44,14 @@ fi
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since it's not mine and I added more informations as comments) : https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
+# Initial source of this AWK script (since it's not mine and I added more informations as comments) :
+# https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU::Main::BasicMaths::BytesToHuman()
 {
     #**** Parameters ****
-    local L_BYTES="${1:-0}"
-    local L_PAD="${2:-no}"
-    local L_BASE="${3:-1024}"
+    local L_BYTES="${1:-0}"     # Int       - Default : 0       - Raw size in bytes.
+    local L_PAD="${2:-no}"      # String    - Default : "no"    - Allow result display padding.
+    local L_BASE="${3:-1024}"   # Int       - Default : 1024    - Base (1000 (metric) or 1024 (binary notation))
 
     #**** Code ****
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
@@ -79,4 +80,28 @@ function BU::Main::BasicMaths::BytesToHuman()
 
       EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate'
     return $?
+}
+
+# Negative number (float or int) to positive number (float or int).
+function BU::Main::BasicMaths::NegativeToPositive()
+{
+    #**** Parameters ****
+    local x=$1;         # Number    - Default : NULL    - Value to convert.
+
+    #**** Code ****
+    EchoMsg "$(( x = x < 0 ? x * -1 : x ))" '-n' 'nodate';
+
+    return 0;
+}
+
+# Positive number (float or int) to negative number (float or int).
+function BU::Main::BasicMaths::PositiveToNegative()
+{
+    #**** Parameters ****
+    local x=$1;         # Number    - Default : NULL    - Value to convert.
+
+    #**** Code ****
+    EchoMsg "$(( x = x > 0 ? x * -1 : x ))" '-n' 'nodate';
+
+    return 0;
 }

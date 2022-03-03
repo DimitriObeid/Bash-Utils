@@ -50,15 +50,15 @@ fi
 function BU::Main::Args::PrintBadOption()
 {
     #**** Parameters ****
-    local p_option=$1;      # String    - Test option.
-    local p_advice=$2;      # String    - "BU::Main::Errors::HandleErrors()"'s advice argument.
-    local p_argname=$3;     # String    - Name of the parameter that stores the argument.
+    local p_option=$1;      # String    - Default : NULL    - Test option.
+    local p_advice=$2;      # String    - Default : NULL    - "BU::Main::Errors::HandleErrors()"'s advice argument.
+    local p_argname=$3;     # String    - Default : NULL    - Name of the parameter that stores the argument.
 
-    local p_value=$4;       # Any       - "BU::Main::Errors::HandleErrors()"'s value argument.
-    local p_filename=$5;	# String    - Name of the file where the error occured.
-    local p_funcname=$6;    # String    - Name of the function where the test failed.
+    local p_value=$4;       # Any       - Default : NULL    - "BU::Main::Errors::HandleErrors()"'s value argument.
+    local p_filename=$5;	# String    - Default : NULL    - Name of the file where the error occured.
+    local p_funcname=$6;    # String    - Default : NULL    - Name of the function where the test failed.
 
-    local p_lineno=$7;      # Int       - Line where the test failed.
+    local p_lineno=$7;      # Int       - Default : NULL    - Line where the test failed.
 
     #**** Variables ****
 	# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value to "true" in case this function is called during a .
@@ -74,7 +74,7 @@ function BU::Main::Args::PrintBadOption()
 	else
         local v_filename; v_filename="$(BU::Main::Args::GetFileName)";
 	fi
-	
+
 	if [ -n "$p_funcname" ]; then
         local v_funcname; v_funcname="$p_funcname";
 	else
@@ -220,9 +220,9 @@ function BU::Main::Args::PrintBadOption()
 function BU::Main::Args::GetFuncArgsArrayValues()
 {
     #**** Parameters ****
-    local p_funcname=$1; shift 1;
+    local p_funcname=$1; shift 1;   # String    - Default : NULL    - Name of the function where the array was set.
 
-    local pa_argsArray=("$@");
+    local pa_argsArray=("$@");      # Array     - Default : NULL    - Array of values to check and display.
 
     #**** Code ****
     BU::Main::Status::CheckStatIsBackupEchoing || {
@@ -261,7 +261,7 @@ function BU::Main::Args::GetFuncArgsArrayValues()
 function BU::Main::Args::GetFileName()
 {
     #**** Parameters ****
-    local p_filename=$1;    # String    - Name of the file to process.
+    local p_filename=$1;    # String    - Default : NULL    - Name of the file to process.
 
     #**** Code ****
     # Checking if the file's name was specified, in order to print it.
@@ -274,7 +274,7 @@ function BU::Main::Args::GetFileName()
 function BU::Main::Args::GetFunctionName()
 {
     #**** Parameters ****
-    local p_funcname=$1;    # String    - Name of the function to process.
+    local p_funcname=$1;    # String    - Default : NULL    - Name of the function to process.
 
     #**** Code ****
     # Checking if the function's name was specified, in order to print it.
@@ -287,7 +287,7 @@ function BU::Main::Args::GetFunctionName()
 function BU::Main::Args::GetLineNumber()
 {
     #**** Parameters ****
-    local p_lineno=$1;      # Int   - Line number to process.
+    local p_lineno=$1;  # Int   - Default : NULL    - Line number to process.
 
     #**** Code ****
     # Checking if the file's name was specified, in order to print it.
@@ -300,9 +300,9 @@ function BU::Main::Args::GetLineNumber()
 function BU::Main::Args::GetFFL()
 {
     #**** Parameters ****
-    local p_filename=$1;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$2;    # String    - Name of the currently processed function.
-    local p_lineno=$3;      # Int       - Line where this argument processing function is called.
+    local p_filename=$1;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$2;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$3;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
     if [ -n "$p_filename" ] && [ -n "$p_funcname" ] && [ -n "$p_lineno" ] && BU::IsPositiveInt "$p_lineno"; then
@@ -361,9 +361,9 @@ function BU::Main::Args::GetFFL()
 function BU::Main::Args::PrintFFL()
 {
     #**** Parameters ****
-    local p_filename=$1;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$2;    # String    - Name of the currently processed function.
-    local p_lineno=$3;      # Int       - Line where this argument processing function is called.
+    local p_filename=$1;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$2;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$3;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Variables ****
     local v_filename; v_filename="$(BU::Main::Args::GetFileName "$p_filename")";
@@ -382,10 +382,11 @@ function BU::Main::Args::PrintFFL()
 function BU::Main::Args::PrintFFLErrorOccured()
 {
     #**** Parameters ****
-    local p_target_f=$1;    # String    - Function where the checking happened.
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_target_f=$1;    # String    - Default : NULL    - Function where the checking happened.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Variables ****
     local v_filename; v_filename="$(BU::Main::Args::GetFileName "$p_filename")";
@@ -404,12 +405,12 @@ function BU::Main::Args::PrintFFLErrorOccured()
 function BU::Main::Args::Argc()
 {
     #**** Parameters ****
-    local p_argcount=$1;    # Int       - Number of arguments passed.
-    local p_argawait=$2;    # Int       - Number of arguments awaited.
+    local p_argcount=$1;    # Int       - Default : NULL    - Number of arguments passed.
+    local p_argawait=$2;    # Int       - Default : NULL    - Number of arguments awaited.
 
-    local p_filename=$3;    # Path      - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # Path      - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Variables ****
     # Grouping the file, function and line informations.
@@ -523,13 +524,13 @@ function BU::Main::Args::GetArgc-FFL()
 function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 {
 	#**** Parameters ****
-    local p_parent=$1;      # String    - Name of the folder to process (into its parent directory).
-    local p_child=$2;       # String    - Name of the file or folder to process (into its parent directory).
-    local p_type=$3;        # Char      - Type of data to create (d = directory, f = file).
+    local p_parent=$1;      # String    - Default : NULL    - Name of the folder to process (into its parent directory).
+    local p_child=$2;       # String    - Default : NULL    - Name of the file or folder to process (into its parent directory).
+    local p_type=$3;        # Char      - Default : NULL    - Type of data to create (d = directory, f = file).
 
-    local p_filename=$4;    # Path      - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;    # String    - Name of the currently processed function.
-    local p_lineno=$6;      # Int       - Line where this argument processing function is called.
+    local p_filename=$4;    # Path      - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
 	#**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
@@ -580,11 +581,11 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 function BU::Main::Args__CMDS::GetCommandPath()
 {
     #**** Parameters ****
-    local p_cmd=$1;         # Command's name.
+    local p_cmd=$1;         # String    - Default : NULL    - Command's name.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
@@ -612,13 +613,13 @@ function BU::Main::Args__CMDS::GetCommandPath()
 function BU::Main::Args__Decho::Decho()
 {
     #**** Parameters ****
-    local p_string=$1;          # String    - String to display.
-    local p_newTextColor=$2;    # Int       - Color to apply on each string's characters.
-    local p_newBGColor=$3;      # Int       - Color to apply in the text's background.
+    local p_string=$1;          # String    - Default : NULL    - String to display.
+    local p_newTextColor=$2;    # Int       - Default : NULL    - Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Int       - Default : NULL    - Color to apply in the text's background.
 
-    local p_filename=$4;        # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;        # String    - Name of the currently processed function.
-    local p_lineno=$6;          # Int       - Line where this argument processing function is called.
+    local p_filename=$4;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;        # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
@@ -629,13 +630,13 @@ function BU::Main::Args__Decho::Decho()
 
     local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_newTextColor"; then
         BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass an integer as text color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass a positive integer as text color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno"; return 1;
     fi
 
     local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_newBGColor"; then
         BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass an integer as background color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass a positive integer as background color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
@@ -656,13 +657,13 @@ function BU::Main::Args__Decho::Decho()
 function BU::Main::Args__Directories::ProcessingDir()
 {
     #**** Parameters ****
-    local p_function=$1;    # String    - Name of the function to process.
-    local p_parent=$2;      # String    - path of the target directory's parent.
-    local p_name=$3;        # String    - name of the target directory.
+    local p_function=$1;    # String    - Default : NULL    - Name of the function to process.
+    local p_parent=$2;      # String    - Default : NULL    - Path of the target directory's parent.
+    local p_name=$3;        # String    - Default : NULL    - name of the target directory.
 
-    local p_filename=$4;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;    # String    - Name of the currently processed function.
-    local p_lineno=$6;      # Int       - Line where this argument processing function is called.
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
@@ -694,11 +695,11 @@ function BU::Main::Args__Directories::ProcessingDir()
 function BU::Main::Args__Directories::OverwriteDir()
 {
     #**** Parameters ****
-    local p_path=$1;        # String    - Path of the directory to overwrite.
+    local p_path=$1;        # String    - Default : NULL    - Path of the directory to overwrite.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
@@ -724,12 +725,12 @@ function BU::Main::Args__Directories::OverwriteDir()
 function BU::Main::Args__Directories::Make()
 {
     #**** Parameters ****
-    local p_parent=$1;      # Parent folder's path.
-    local p_name=$2;        # Name of the folder to create.
+    local p_parent=$1;      # String    - Default : NULL    - Parent folder's path.
+    local p_name=$2;        # String    - Default : NULL    - Name of the folder to create.
 
-    local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
@@ -762,12 +763,12 @@ function BU::Main::Args__Directories::Make()
 function BU::Main::Args__Directories::MakePath()
 {
     #**** Parameters ****
-    local p_path=$1;        # Full path of the directory to create.
-    local p_overwrite=$2;   # String	- Authorization to overwrite the directory.
+    local p_path=$1;        # String    - Default : NULL    - Full path of the directory to create.
+    local p_overwrite=$2;   # String    - Default : NULL    - Authorization to overwrite the directory.
 
-    local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
@@ -796,11 +797,11 @@ function BU::Main::Args__Directories::MakePath()
 function BU::Main::Args__Directories::GetDirectoryName()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the directory to process.
+    local p_path=$1;        # Path of the directory to process.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
@@ -820,11 +821,11 @@ function BU::Main::Args__Directories::GetDirectoryName()
 function BU::Main::Args__Directories::GetDirectoryPath()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the directory to process.
+    local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
@@ -844,14 +845,15 @@ function BU::Main::Args__Directories::GetDirectoryPath()
 function BU::Main::Args__Directories::GetParentDirectoryName()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the directory to process.
+    local p_path=$1;        # Path of the directory to process.
+    local p_iterations=$2;  # Number of iterations.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -867,14 +869,15 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
 function BU::Main::Args__Directories::GetParentDirectoryPath()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the directory to process.
+    local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
+    local p_iterations=$2;  # Int       - Default : 1       - Number of iterations.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     local lineno="$LINENO"; if [ -z "$p_path" ]; then
@@ -883,7 +886,13 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-	return 0;
+    local lineno="$LINENO"; if [ -n "$p_iterations" ] ! BU::IsPositiveInt "$p_iterations"; then
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as number of iterations (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    return 0;
 }
 
 # -----------------------------------------------
@@ -902,9 +911,9 @@ function BU::Main::Args__Files::ProcessingFile()
     #**** Parameters ****
     local p_function=$1;    # Function to process.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
@@ -970,9 +979,9 @@ function BU::Main::Args__Files::Make()
     local p_parent=$1;      # String    - Parent folder path of the file to create.
     local p_name=$2;        # String    - Name of the file to create.
 
-    local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
@@ -1017,9 +1026,9 @@ function BU::Main::Args__Files::MakePath()
     #**** Parameters ****
     local p_path=$1;        # String    - Full path of the file to create.
 
-    local p_filename=$2;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Line where this argument processing function is called.
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
@@ -1045,9 +1054,9 @@ function BU::Main::Args__Files::SetLastAccess()
     local p_filepath=$1;    # String    - Path of the file to check its last access.
     local p_fakedate=$2;    # Date      - Access date to replace.
 
-    local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
@@ -1091,9 +1100,9 @@ function BU::Main::Args__Text::CutFromCharacter()
     local p_delimiter=$2;   # Delimiter.
     local p_iterations=$3;  # Iterations.
 
-    local p_filename=$4;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;    # String    - Name of the currently processed function.
-    local p_lineno=$6;      # Int       - Line where this argument processing function is called.
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
@@ -1130,9 +1139,9 @@ function BU::Main::Args__Text::GetCharacterOccurences()
     local p_string=$1       # String    - String to process.
     local p_target=$2       # Char      - Targeted character.
 
-    local p_filename=$3;    # String    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";

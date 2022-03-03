@@ -261,7 +261,7 @@ function BU::Main::Directories::GetDirectoryName()
     local p_path=$1
 
     #**** Code ****
-    BU::Main::Args__Directories::GetDirectoryName "$p_path"
+    if ! BU::Main::Args__Directories::GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -d "$p_path" ]; then
         shopt -s extglob            # enable +(...) glob syntax
@@ -284,10 +284,10 @@ function BU::Main::Directories::GetDirectoryName()
 function BU::Main::Directories::GetDirectoryPath()
 {
     #**** Parameters ****
-    local p_path=$1
+    local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
 
     #**** Code ****
-    BU::Main::Args__Directories::GetDirectoryPath "$p_path"
+    if ! BU::Main::Args__Directories::GetDirectoryPath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -d "$p_path" ]; then
         echo -e "$p_path"
@@ -305,19 +305,11 @@ function BU::Main::Directories::GetDirectoryPath()
 function BU::Main::Directories::GetParentDirectoryName()
 {
     #**** Parameters ****
-    local p_path=$1         # Path of the child file or folder.
-    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=$1;            # Int   - Default : NULL    - Path of the child file or folder.
+    local p_iterations=${2-1}   # Int   - Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
-    BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations"
-
-    if ! BU::IsInt "$p_iterations"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1'
-    fi
-
-    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
-        p_iterations='1'
-    fi
+    if ! BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     for ((i=0; i<p_iterations; i++)); do
         local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
@@ -344,7 +336,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
     local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
-    BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations"
+    if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
         p_iterations='1'
