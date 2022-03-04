@@ -57,8 +57,6 @@ function BU::Main::Errors::HandleSmallErrors()
     local p_cpls=$4;        # Enable the safe text printing mode.
 
     #**** Variables ****
-    local v_advise="Please don't forget to pass a type of message to display as first argument ('E' = BU::EchoError; 'W' = BU::EchoWarning)";
-
     if [ "${p_cpls^^}" = 'CPLS' ]; then
         if [ "$__BU_MAIN_STAT_ECHO" = 'false' ]; then
             local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
@@ -73,6 +71,8 @@ function BU::Main::Errors::HandleSmallErrors()
 
     # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
     else
+		local v_advise="Please don't forget to pass a type of message to display as first argument ('E' = BU::EchoError; 'W' = BU::EchoWarning)";
+
         if [ "$(( RANDOM%2 ))" = "0" ]; then
             BU::EchoError "$p_string    | ${__BU_MAIN_COLOR_TXT_RESET}$v_advise" '' '';
         else
@@ -104,7 +104,7 @@ function BU::Main::Errors::HandleSmallErrors()
 
 # -----------------------------------------------
 
-## EXIT HANDLING
+## EXIT AND RETURN CODES HANDLING
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function BU::Exit()
@@ -130,6 +130,20 @@ function BU::Exit()
 
         exit 1; kill "$$";
     fi
+}
+
+# 
+function BU::SetLastReturnValue()
+{
+	#**** Parameters ****
+	local p_code=${1:-1};		# Int	- Default : 1	- Return value.
+
+	#**** Code ****
+	if ! BU::Main::Args__Errors::SetLastReturnValue "$p_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then __BU_MAIN_EXIT_CURRENT_CODE='1'; return 1; fi
+
+	__BU_MAIN_EXIT_CURRENT_CODE="$p_code";
+
+	return 0;
 }
 
 # -----------------------------------------------

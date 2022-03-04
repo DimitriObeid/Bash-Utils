@@ -901,6 +901,46 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### MAIN MODULE'S "Errors.lib" FILE'S FUNCTIONS
+
+## CATEGORY : EXIT AND RETURN CODES HANDLING
+
+# "BU::Main::Errors::SetLastReturnValue" function.
+BU::Main::Args__Errors::SetLastReturnValue()
+{
+	#**** Parameters ****
+	local p_code=$1;	# Int	- Default : 1	- Return value
+
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+	#**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+
+	# If no return value is passed to as 1st argument.
+	local lineno="$LINENO"; if [ -z "$p_code" ]; then
+		BU::Main::Args::PrintBadOption 'z' \
+			"Please pass a valid integer value, from $(BU::DechoHighlight '0') to $(BU::DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+	fi
+
+	# If the return value is not an integer.
+	local lineno="$LINENO"; if [ -n "$p_code" ] && ! BU::IsPositiveInt "$p_code"; then
+		BU::Main::Args::PrintBadOption '!intpos' \
+			"Please pass a valid integer value, from $(BU::DechoHighlight '0') to $(BU::DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+	fi
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### MAIN MODULE'S "Files.lib" FILE'S FUNCTIONS
 
 ## CATEGORY : TEXT FILE PROCESSING

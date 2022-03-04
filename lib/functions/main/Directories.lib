@@ -401,7 +401,9 @@ function BU::Main::Directories::TriggerRootDirWarning()
 			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU::Newline;
 
-			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+			BU::SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+
+			return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
             BU::HeaderWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
@@ -414,7 +416,9 @@ function BU::Main::Directories::TriggerRootDirWarning()
 			if BU::Main::Case::Read_Directories::TriggerRootDirWarning; then
 				return 0;
 			else
-				return 1;
+				BU::SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+
+				return "$__BU_MAIN_EXIT_CURRENT_CODE";
 			fi
 		fi
 	fi
