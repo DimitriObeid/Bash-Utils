@@ -233,15 +233,15 @@ function BU::Main::Directories::MkTmpDir()
     local lineno="$LINENO"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
-			BU::Main:Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main:Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 			BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Checkings::CheckDirPathExists "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
-            "Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"
+				"Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
+				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-			BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-			return 1
+			return 1;
 		}
 
 		return 0;
@@ -258,23 +258,23 @@ function BU::Main::Directories::MkTmpDir()
 function BU::Main::Directories::GetDirectoryName()
 {
     #**** Parameters ****
-    local p_path=$1
+    local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
 
     #**** Code ****
     if ! BU::Main::Args__Directories::GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -d "$p_path" ]; then
-        shopt -s extglob            # enable +(...) glob syntax
+        shopt -s extglob;           # enable +(...) glob syntax
 
-        result=${p_path%%+(/)}      # trim however many trailing slashes exist
-        result=${result##*/}        # remove everything before the last / that still remains
+        result=${p_path%%+(/)};     # trim however many trailing slashes exist
+        result=${result##*/}:       # remove everything before the last / that still remains
 
-        echo -e "$result"
+        echo -e "$result";
 
 		return 0;
     else
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))"
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))";
 
 		return 1
     fi
@@ -290,14 +290,14 @@ function BU::Main::Directories::GetDirectoryPath()
     if ! BU::Main::Args__Directories::GetDirectoryPath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -d "$p_path" ]; then
-        echo -e "$p_path"
+        echo -e "$p_path";
 
 		return 0;
     else
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))"
+            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
 
-		return 1
+		return 1;
     fi
 }
 
@@ -305,8 +305,8 @@ function BU::Main::Directories::GetDirectoryPath()
 function BU::Main::Directories::GetParentDirectoryName()
 {
     #**** Parameters ****
-    local p_path=$1;            # Int   - Default : NULL    - Path of the child file or folder.
-    local p_iterations=${2-1}   # Int   - Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=$1;            # String	- Default : NULL    - Path of the child file or folder.
+    local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
     if ! BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
@@ -315,31 +315,31 @@ function BU::Main::Directories::GetParentDirectoryName()
         local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
             || {
                 BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
-            }; pwd -P )"
+                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1;
+            }; pwd -P )";
 
-        p_path="$v_parent"
+        p_path="$v_parent";
     done
 
-    shopt -s extglob            # enable +(...) glob syntax.
-    result=${p_path%%+(/)}      # trim however many trailing slashes exist.
-    result=${result##*/}        # remove everything before the last / that still remains.
+    shopt -s extglob;       # enable +(...) glob syntax.
+    result=${p_path%%+(/)};	# trim however many trailing slashes exist.
+    result=${result##*/};   # remove everything before the last / that still remains.
 
-    echo -e "$result"
+    echo -e "$result";
 }
 
 # Getting parent folder's path from the root directory, then printing it
 function BU::Main::Directories::GetParentDirectoryPath()
 {
     #**** Parameters ****
-    local p_path=$1         # Path of the child file or folder.
-    local p_iterations=$2   # Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=$1;            # String   	- Default : NULL    - Path of the child file or folder.
+    local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
     if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
-    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
-        p_iterations='1'
+    if [ "$p_iterations" -lt 1 ]; then
+        p_iterations="$(echo "$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")")";
     fi
 
     if [ -d "$p_path" ]; then
@@ -347,39 +347,39 @@ function BU::Main::Directories::GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
-                }; pwd -P )"
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1;
+                }; pwd -P )";
 
-            p_path="$v_parent"
+            p_path="$v_parent";
         done
 
-        shopt -s extglob            # enable +(...) glob syntax.
-        result=${p_path%%+(/)}      # trim however many trailing slashes exist.
+        shopt -s extglob;       # enable +(...) glob syntax.
+        result=${p_path%%+(/)};	# trim however many trailing slashes exist.
 
-        echo -e "$result"
+        echo -e "$result";
     else
-        local v_path_str=""
-        local v_current_path="$p_path"
+        local v_path_str="";
+        local v_current_path="$p_path";
 
         for ((i=0; i<p_iterations; i++)); do
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1;
                 }; pwd -P )"
 
-            local v_path_cut; v_path_cut="${v_parent##*/}"
-            local v_path_str+="$v_path_cut/"
+            local v_path_cut; v_path_cut="${v_parent##*/}";
+            local v_path_str+="$v_path_cut/";
 
             # Removing the unnecessary folders.
             # WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
             # DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
-            rmdir "$v_current_path"; BU::Main::Errors::HandleErrors "$?" "UNABLE TO ERASE THE $(BU::DechoHighlightPath "$v_current_path") NEWLY CREATED FOLDER !"
+            rmdir "$v_current_path"; BU::Main::Errors::HandleErrors "$?" "UNABLE TO ERASE THE $(BU::DechoHighlightPath "$v_current_path") NEWLY CREATED FOLDER !";
 
-            local v_current_path="$v_parent"
+            local v_current_path="$v_parent";
         done
 
-        BU::Main::Text::ReverseStringWordsOrder "$v_path_str" '/'
+        BU::Main::Text::ReverseStringWordsOrder "$v_path_str" '/';
     fi
 }
 
@@ -387,42 +387,34 @@ function BU::Main::Directories::GetParentDirectoryPath()
 function BU::Main::Directories::TriggerRootDirWarning()
 {
 	#**** Parameters ****
-	local p_path=$1
-
-    #**** Variables ****
-    local v_forbidden="WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!"
-    local v_restricted="WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!"
+	local p_path=$1;	# String	- Default : NULL	- Path of the folder to check.
 
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 	if [ "$(pwd "$p_path")" = "/" ] || [ "$(BU::Main::Directories::GetParentDirectoryPath "$p_path")" = '/' ]; then
 		if [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "forbidden" ]; then
-            BU::EchoError "${#v_forbidden}"
-			BU::EchoError "$v_forbidden"
-			BU::EchoError "${#v_forbidden}"
+			BU::HeaderError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!" 'strlen';
 
-			BU::EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization"
-			BU::EchoError "Given path : $(BU::DechoHighlightPath "$p_path")"
-			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT"
+			BU::EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization";
+			BU::EchoError "Given path : $(BU::DechoHighlightPath "$p_path")";
+			BU::EchoError "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU::Newline;
 
-			BU::Exit '1'; return 1
+			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 
 		elif [ "$__BU_MAIN_STAT_OPERATE_ROOT" = "restricted" ]; then
-            BU::EchoWarning "${#v_restricted}"
-			BU::EchoWarning "$v_restricted"
-            BU::EchoWarning "${#v_restricted}"
+            BU::HeaderWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
 
-            BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !"
-			BU::EchoWarning "Given path : $(BU::DechoHighlightPath "$p_path")"
+            BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !";
+			BU::EchoWarning "Given path : $(BU::DechoHighlightPath "$p_path")";
 			BU::Newline;
 
 			# Calling the function that processes the given answer.
 			if BU::Main::Case::Read_Directories::TriggerRootDirWarning; then
 				return 0;
 			else
-				return 1
+				return 1;
 			fi
 		fi
 	fi

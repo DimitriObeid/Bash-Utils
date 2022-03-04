@@ -51,7 +51,7 @@ function BU::Hardware::DriveFS::GetFSDev()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $1}' || { BU::EchoWarning "" '-n' 'nodate'; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $1}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's name" '-n' 'nodate'; return 1; }
 
     return 0;
 }
@@ -65,13 +65,13 @@ function BU::Hardware::DriveFS::GetFSSizeTotal()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning "" '-n' 'nodate'; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's total size in bytes" '-n' 'nodate'; return 1; }
 
     return 0;
 }
 
 # Getting the mounted partition of a given file system.
-function BU::Hardware::DriveFS::GetFSMountedPartition()
+function BU::Hardware::DriveFS::GetFSMountPoint()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
@@ -79,7 +79,7 @@ function BU::Hardware::DriveFS::GetFSMountedPartition()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $7}' || { BU::EchoWarning ""; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $7}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's mount point" '-n' 'nodate'; return 1; }
  
     return 0;
 
@@ -94,7 +94,7 @@ function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $4}' || { BU::EchoWarning ""; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $4}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's used size in bytes" '-n' 'nodate'; return 1; }
  
     return 0;
 }
@@ -108,7 +108,7 @@ function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $6}' || { BU::EchoWarning ""; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $6}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's used size percentage" '-n' 'nodate'; return 1; }
  
     return 0;   
 }
@@ -123,7 +123,7 @@ function BU::Hardware::DriveFS::GetFSSizeAvailable()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $5}' || { BU::EchoWarning ""; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $5}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's available size in bytes" '-n' 'nodate'; return 1; }
  
     return 0;
 
@@ -138,7 +138,7 @@ function BU::Hardware::DriveFS::GetFSType()
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $2}' || { BU::EchoWarning ""; return 1; }
+    df -Th "$p_path" | awk 'FNR == 2 {print $2}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's type" '-n' 'nodate'; return 1; }
 
     return 0;
 }

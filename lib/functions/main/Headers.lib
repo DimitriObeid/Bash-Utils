@@ -94,7 +94,7 @@ function BU::Main::Headers::DrawLine()
 	if [ -n "$p_strlen" ]; then
         if BU::IsInt "$p_strlen"; then
             for _ in $(eval echo -e "{1..$__p_strlen}"); do
-                echo -n "$p_lineChar"
+                echo -n "$p_lineChar";
             done
         else
             BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
@@ -102,7 +102,7 @@ function BU::Main::Headers::DrawLine()
 
 	else
         for _ in $(eval echo -e "{1..$__BU_MAIN_TXT_COLS}"); do
-            echo -n "$p_lineChar"
+            echo -n "$p_lineChar";
         done
     fi
 
@@ -134,15 +134,15 @@ function BU::Main::Headers::DrawLine()
 function BU::HeaderBase()
 {
 	#**** Parameters ****
-	local p_lineColor=$1       # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
-	local p_lineChar=$2        # Defining the wanted character to display when calling the "BU::Main::Headers::DrawLine()" function.
-	local p_stringColor=$3     # Defining the color of the header's string
+	local p_lineColor=$1;      # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
+	local p_lineChar=$2;       # Defining the wanted character to display when calling the "BU::Main::Headers::DrawLine()" function.
+	local p_stringColor=$3;    # Defining the color of the header's string
 
-	local p_stringTxt=$4       # String displayed between the two lines.
-	local p_strlen=$5          # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-	local p_bgColorCol=$6      # Defining the background color.
+	local p_stringTxt=$4;      # String displayed between the two lines.
+	local p_strlen=$5;         # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+	local p_bgColorCol=$6;     # Defining the background color.
 
-	local p_bgColorPos=$7      # Defining the background color's position (first line, text or second line, or a mix ?).
+	local p_bgColorPos=$7;     # Defining the background color's position (first line, text or second line, or a mix ?).
 
 	#**** Variables ****
     local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
