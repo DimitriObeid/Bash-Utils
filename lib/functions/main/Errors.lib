@@ -85,21 +85,26 @@ function BU::Main::Errors::HandleSmallErrors()
     # As the "BU::EchoWarning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_MAIN_STAT_ECHO" status variable condition per condition.
     if [ "${p_return^^}" = 'R' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
+        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; fi
 
-        return 1
+        BU::SetLastReturnValue 1;
+
+        return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     elif [ "${p_return^^}" = 'E' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
+        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO"; fi
 
-        BU::Exit '1'
+        BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     else
-        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Exit '1';
+        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
 
+    BU::SetLastReturnValue 0;
+
+    return "$__BU_MAIN_EXIT_CURRENT_CODE";
 }
 
 # -----------------------------------------------
@@ -132,14 +137,21 @@ function BU::Exit()
     fi
 }
 
-# 
+# Unsetting the last return value's variable value.
+function BU::DeleteLastReturnValue() { unset __BU_MAIN_EXIT_CURRENT_CODE && return 0; }
+
+# Setting the last function's return value in order to process it in another function.
 function BU::SetLastReturnValue()
 {
 	#**** Parameters ****
 	local p_code=${1:-1};		# Int	- Default : 1	- Return value.
 
 	#**** Code ****
-	if ! BU::Main::Args__Errors::SetLastReturnValue "$p_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then __BU_MAIN_EXIT_CURRENT_CODE='1'; return 1; fi
+	if ! BU::Main::Args__Errors::SetLastReturnValue "$p_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then
+        __BU_MAIN_EXIT_CURRENT_CODE="$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+        return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+    fi
 
 	__BU_MAIN_EXIT_CURRENT_CODE="$p_code";
 
@@ -271,7 +283,7 @@ function BU::Main::Errors::HandleErrors()
         fi
     fi
 
-    return 1;
+    return 0;
 }
 
 # -----------------------------------------------
