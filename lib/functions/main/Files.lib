@@ -18,6 +18,8 @@
 
 # DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
 # shellcheck disable=SC2154
 
 # --------------------------------------------------------------------------------------------------------------------------------------------
@@ -594,6 +596,8 @@ function BU::Main::Files::GetLineFromTextFile()
             __BU_MAIN_TXT_STORE_LINE="$line";
         fi
     done
+
+    return 0;
 }
 
 # -----------------------------------------------
