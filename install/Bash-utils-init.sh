@@ -1093,8 +1093,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 if ! ps ax | egrep "$$" | grep "bash"; then
     echo >&2;
-    echo "ERROR : Your current shell interpreter is not Bash, but « ${SHELL##*/} »" >&2;
-    echo "ERREUR : Votre interpréteur shell actuel n'est pas le Bash, mais le « ${SHELL##*/} »" >&2;
+
+    echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2;
+    echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2;
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     exit 1;
@@ -1200,7 +1201,11 @@ __BU_MODULE_UTILS_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 # Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
 function BashUtils_InitModules()
 {
-	#**** Parameters ****
+    if [ -n "$__BU_MODULE_UTILS_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_UTILS_IS_SOURCED" ]; then
+        BU::HeaderWarning "You have already called the $(BU::DechoHighlightFunction "${FUNCNAME[0]}") in your script"; return 1;
+    fi
+
+    #**** Parameters ****
 	local p_modules_list=("$@")	# List of all the modules to include passed as arguments
 
 	#**** Variables (global) ****
@@ -1365,6 +1370,9 @@ function BashUtils_InitModules()
 	fi
 
 	# Note : the "$__BU_MODULE_UTILS_MSG_ARRAY" variable is purged from the logged messages after writing its content in the project's log file.
+
+	# Setting a global variable that prevent a new call of this function.
+	__BU_MODULE_UTILS_IS_SOURCED='sourced';
 
 	return 0;
 }
