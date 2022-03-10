@@ -67,7 +67,7 @@ function BU::Hardware::DriveFS::GetFSDevice()
 }
 
 # Getting the total size in bytes allocated to a given file system.
-function BU::Hardware::DriveFS::GetFSSizeTotal()
+function BU::Hardware::DriveFS::GetFSTotalSize()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
@@ -111,7 +111,7 @@ function BU::Hardware::DriveFS::GetFSMountPoint()
 }
 
 # Getting the used size in bytes of a given file system.
-function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
+function BU::Hardware::DriveFS::GetFSUsedSizeBytes()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
@@ -121,11 +121,26 @@ function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
 
     local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's used size in bytes";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
+
+    # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
+    BU::IsOSHaiku && {
+        # Getting the file system's total size in bytes.
+        local v_totalSize="$(BU::Hardware::DriveFS::GetFSTotalSize "$p_path")";
+
+        # Getting the file system's available size in bytes.
+        local v_availableSize="$(BU::Hardware::DriveFS::GetFSAvailableSize "$p_path")";
+
+        # Getting the used size by substracting the available size from the total size.
+        local v_usedSize="$(( v_totalSize-v_availableSize ))";
+
+        BU::EchoMsg "$v_usedSize" '-n' 'nodate';
+
+        return "$v_code";
+    }
 
     eval "$v_cmd";
 
@@ -133,7 +148,7 @@ function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
 }
 
 # Getting the percentage of the used space of a given file system.
-function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
+function BU::Hardware::DriveFS::GetFSUsedSizePercent()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
@@ -146,6 +161,23 @@ function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
    # BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$6}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
+    #**** Code ****
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
+
+    # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
+    BU::IsOSHaiku && {
+        # Getting the file system's total size in bytes.
+        local v_totalSize="$(BU::Hardware::DriveFS::GetFSTotalSize "$p_path")";
+
+        # Getting the file system's available size in bytes.
+        local v_availableSize="$(BU::Hardware::DriveFS::GetFSAvailableSize "$p_path")";
+
+        # Getting the used percentage.
+        local v_usedSize="$(( v_totalSize*v_availableSize/100 ))";
+
+        BU::EchoMsg "$v_usedSize%" '-n' 'nodate';
+    }
+
     eval "$v_cmd";
 
     return "$v_code";
@@ -153,7 +185,7 @@ function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
 
 
 # Getting the available size in bytes of a given file system.
-function BU::Hardware::DriveFS::GetFSSizeAvailable()
+function BU::Hardware::DriveFS::GetFSAvailableSize()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
