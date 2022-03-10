@@ -48,22 +48,22 @@ fi
 function BU::Hardware::DriveFS::GetFSDevice()
 {
     #**** Parameters ****
-    local p_path=$1     # String    - Path of the file or the folder to process.
+    local p_path=$1;    # String    - Path of the file or the folder to process.
 
     #**** Variables ****
-    local v_return_code='0';    # Return code to modify in the "$v_cmd" string.
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
     local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's device";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\" | awk 'FNR == 2 {print \$5}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; return 1; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\" | awk 'FNR == 2 {print \$1}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; return 1; }";
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 5 {print \$2}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df "$path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
     eval "$v_cmd";
 
-    return 0;
+    return "$v_code";
 }
 
 # Getting the total size in bytes allocated to a given file system.
@@ -72,14 +72,20 @@ function BU::Hardware::DriveFS::GetFSSizeTotal()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's total size in bytes";
+
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
     #**** Code ****
-    BU::IsOSLinux && {
-        if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
-        df -Th "$p_path" | awk 'FNR == 2 {print $3}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's total size in bytes" '-n' 'nodate'; return 1; }
-    }
+    eval "$v_cmd";
 
-    return 0;
+    return "$v_code";
 }
 
 # Getting the mounted partition of a given file system.
@@ -88,13 +94,20 @@ function BU::Hardware::DriveFS::GetFSMountPoint()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's mount point";
+
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
     #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $7}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's mount point" '-n' 'nodate'; return 1; }
+    eval "$v_cmd";
 
-    return 0;
-
+    return "$v_code";
 }
 
 # Getting the used size in bytes of a given file system.
@@ -103,12 +116,20 @@ function BU::Hardware::DriveFS::GetFSSizeUsedBytes()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's used size in bytes";
+
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
     #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $4}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's used size in bytes" '-n' 'nodate'; return 1; }
+    eval "$v_cmd";
 
-    return 0;
+    return "$v_code";
 }
 
 # Getting the percentage of the used space of a given file system.
@@ -117,12 +138,17 @@ function BU::Hardware::DriveFS::GetFSSizeUsedPercent()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
-    #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $6}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's used size percentage" '-n' 'nodate'; return 1; }
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's used size percentage";
 
-    return 0;
+   # BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$6}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
+    eval "$v_cmd";
+
+    return "$v_code";
 }
 
 
@@ -132,13 +158,20 @@ function BU::Hardware::DriveFS::GetFSSizeAvailable()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's available size in bytes";
+
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 10 {print \$3}'       || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
     #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $5}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's available size in bytes" '-n' 'nodate'; return 1; }
+    eval "$v_cmd";
 
-    return 0;
-
+    return "$v_code";
 }
 
 # Getting the type of the file system of a directory or a file.
@@ -147,12 +180,20 @@ function BU::Hardware::DriveFS::GetFSType()
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
 
+    #**** Variables ****
+    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+
+    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's type";
+
+    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 4 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+
     #**** Code ****
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue 'df -Th "$p_path"'; then return 1; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return 1; fi
 
-    df -Th "$p_path" | awk 'FNR == 2 {print $2}' || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path")) file system's type" '-n' 'nodate'; return 1; }
+    eval "$v_cmd";
 
-    return 0;
+    return "$v_code";
 }
 
 
