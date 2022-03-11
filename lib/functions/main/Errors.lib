@@ -265,7 +265,10 @@ function BU::Main::Errors::HandleErrors()
 
         if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
             BU::EchoError "Stopping the execution of $(BU::DechoHighlight "$(basename "$0")")."; BU::Newline >&2;
-            BU::Exit "1";
+
+            BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
+
+            BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
         else
             # Calling the function that processes the given answer.
             BU::Main::Case::Read_Errors::HandleErrors;
@@ -283,9 +286,17 @@ function BU::Main::Errors::HandleErrors()
         if [ "$v_log_old" = "true" ]; then
             __BU_MAIN_STAT_LOG_REDIRECT="log"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
         fi
-    fi
 
-    return 0;
+        if BU::IsInt "$p_returnCode"; then
+            BU::SetLastReturnValue "$p_returnCode"
+
+            return "$p_returnCode";
+        else
+            BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
+
+            return "$__BU_MAIN_EXIT_CURRENT_CODE";
+        fi
+    fi
 }
 
 # -----------------------------------------------

@@ -293,7 +293,13 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                     local v_value_line=$(( v_index + 1 ));
 
                     if [ $(( v_value_line % 5 )) -eq 0 ]; then
-                        BU::ModuleInit::Msg;
+
+                        # Avoid line breaks when the end of the array is reached, if it's last index's modulo of five is equal to 0.
+                        if [ "$i" -eq "${pa_var_val_array[${#pa_var_val_array[@]} -1]}" ]; then BU::ModuleInit::Msg '' '-n';
+
+                        else BU::ModuleInit::Msg;
+
+                        fi
                     fi
 
                     v_index=$(( v_index+1 ));
@@ -304,7 +310,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 local v_index=0;
 
 			else
-				BU::ModuleInit::Msg "The array is empty" '-' 'msg';
+				BU::ModuleInit::MsgLine "The array is empty" '-' 'msg';
                 BU::ModuleInit::Msg;
 			fi
 		else
