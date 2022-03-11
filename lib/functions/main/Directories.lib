@@ -62,7 +62,7 @@ function BU::Main::Directories::ProcessingDir()
 
     #**** Code ****
     # Arguments checking.
-	if ! BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name"; then return 1; fi
+	if ! BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
 	sleep "$PROJECT_STATUS_SLEEP_LINE";
 

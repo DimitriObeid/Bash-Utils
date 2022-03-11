@@ -59,7 +59,7 @@ function BU::Main::Text::CutFromCharacter()
     local p_iterations=$3;  # Iterations.
 
     #**** Code ****
-    if ! BU::Main::Args__Text::CutFromCharacter "$p_string" "$2" "$p_iterations"; then return 1; fi
+    if ! BU::Main::Args__Text::CutFromCharacter "$p_string" "$2" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -168,7 +168,7 @@ function BU::Main::Text::GetCharacterOccurences()
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target"; then return 1; fi
+    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     BU::EchoMsg "${#v_occurences}";
 

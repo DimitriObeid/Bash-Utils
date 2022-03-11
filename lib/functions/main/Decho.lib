@@ -145,6 +145,8 @@ function BU::Decho()
     fi
 
     #**** Code ****
+    if ! BU::Main::Args__Decho::Decho "$p_string" "$p_newTextColor" "$p_newTextColor" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+
     BU::Main::Checkings::CheckDecho;
 
     if test "$?" -ne 0; then
