@@ -159,7 +159,7 @@ function BU::Main::Args::PrintBadOption()
 
 	# Else, if the value passed as argument is not a valid directory path.
     elif [ "${p_option,,}" = '!d' ]; then
-        BU::Main::Errors::HandleErrors "1" \
+        BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
@@ -167,7 +167,7 @@ function BU::Main::Args::PrintBadOption()
 
 	# Else, if the value passed as argument is not a valid file path.
     elif [ "${p_option,,}" = '!f' ]; then
-        BU::Main::Errors::HandleErrors "1" \
+        BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 

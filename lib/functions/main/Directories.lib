@@ -278,7 +278,7 @@ function BU::Main::Directories::GetDirectoryName()
         BU::Main::Errors::HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
             "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))";
 
-		return 1
+		return 1;
     fi
 }
 
@@ -338,7 +338,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
     local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     if [ "$p_iterations" -lt 1 ]; then
         p_iterations="$(echo "$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")")";
@@ -349,7 +349,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1;
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
                 }; pwd -P )";
 
             p_path="$v_parent";
@@ -367,7 +367,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return 1;
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
                 }; pwd -P )"
 
             local v_path_cut; v_path_cut="${v_parent##*/}";
@@ -383,6 +383,10 @@ function BU::Main::Directories::GetParentDirectoryPath()
 
         BU::Main::Text::ReverseStringWordsOrder "$v_path_str" '/';
     fi
+
+	BU::SetLastReturnValue 0;
+
+	return 0;
 }
 
 # Check if the script is about to work at the root directory ('/').
@@ -412,14 +416,13 @@ function BU::Main::Directories::TriggerRootDirWarning()
 
             BU::EchoWarning "You are about to operate at the root directory or one of its present sub-folders !";
 			BU::EchoWarning "Given path : $(BU::DechoHighlightPath "$p_path")";
+			BU::EchoWarning "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU::Newline;
 
 			# Calling the function that processes the given answer.
 			if BU::Main::Case::Read_Directories::TriggerRootDirWarning; then
-				return 0;
+				return "$__BU_MAIN_EXIT_CURRENT_CODE";
 			else
-				BU::SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
-
 				return "$__BU_MAIN_EXIT_CURRENT_CODE";
 			fi
 		fi

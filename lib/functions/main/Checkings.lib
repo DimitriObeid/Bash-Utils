@@ -347,9 +347,81 @@ function BU::Main::Checkings::CheckRootEUID()
 
 # -----------------------------------------------
 
-## INITIALIZATION CHECKINGS
+## BASIC HARDWARE CHECKINGS
 
+# Check if hard drive is full.
+function BU::Main::Checkings::CheckDiskUsedSpace()
+{
+	#**** Parameters ****
+	local p_fileFS=$1;	# Target file's file system.
 
+	#**** Code ****
+	BU::IsOSAndroidTermux && {
+	
+	}
+
+	BU::IsOSFreeBSD && {
+	
+	}
+
+	BU::IsOSHaiku && {
+		if [[ "$(df -th "$p_fileFS | awk 'FNR==10 {print $3}'")" == 0 ]]; then
+
+			local lineno="$LINENO";
+
+			# There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
+			__BU_MAIN_STAT_ECHO="true";
+
+			BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+
+			HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
+				"NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
+				"Please empty this file system (partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
+				"" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+				exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+		else
+			BU::SetLastReturnValue 0;
+
+			return 0;
+		fi
+	}
+
+	BU::IsOSLinux && {
+		if [[ "$(df -Th "$p_fileFS" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
+
+			local lineno="$(( LINENO-2 ))";
+
+			BU::SetLastReturnValue "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+
+			# There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
+			__BU_MAIN_STAT_ECHO="true";
+
+			HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
+				"NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
+				"Please empty this file system (partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
+				"" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+				exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+		else
+			BU::SetLastReturnValue 0;
+
+			return 0;
+		fi
+	}
+
+	BU::IsOSNetBSD && {
+	
+	}
+
+	BU::IsOSOpenBSD && {
+	
+	}
+
+	BU::IsOSx && {
+		
+	}
+}
 
 # -----------------------------------------------
 
