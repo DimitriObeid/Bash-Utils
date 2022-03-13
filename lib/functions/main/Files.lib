@@ -183,6 +183,9 @@ function BU::Main::Files::Make()
 	local v_path="$p_parent/$p_name";	# Path of the file to process.
 
 	#**** Code ****
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path";
+
 	# Checking first if the awaited arguments are given.
     if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi;
 
@@ -235,6 +238,9 @@ function BU::Main::Files::MakePath()
     local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
 
     #**** Code ****
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+
     if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     BU::Main::Files::Make "$v_parent" "$v_target" || return 1;
@@ -258,6 +264,9 @@ function BU::Main::Files::MakeFileInMemory()
 # Creating the project's log file.
 function BU::Main::Files::CreateProjectLogFile()
 {
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+
     #**** Variables ****
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)";
 

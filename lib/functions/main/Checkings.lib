@@ -537,6 +537,9 @@ function BU::Main::Checkings::CheckProjectLogPath()
 # Accepted arguments : 'nodate', '<an empty string>'
 function BU::CheckProjectLogStatus()
 {
+	# Checking first if the partition where the log file exists is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+
     #**** Parameters ****
     local p_string=$1;      # Any       - Text to display.
     local p_option=$2;      # String    - "echo" command options.
@@ -846,6 +849,9 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
     local v_path="$p_parent/$p_child";
 
 	#**** Code ****
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path";
+
 	if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then exit 1; fi
 
 	if [ "$p_type" = 'f' ]; then

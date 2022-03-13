@@ -47,6 +47,9 @@ fi
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 function BU::Main::Decho::SetBGColor()
 {
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
+
 	#**** Parameters ****
 	# $1 --> Color code
 
@@ -58,7 +61,7 @@ function BU::Main::Decho::SetBGColor()
 
             # Checking if the "bgcolors.tmp" (background color) file exists.
             if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" "f"; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") file" 'E' 'CPLS'
+                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH") file" 'E' 'CPLS'
             fi
 
             # Redirecting the background's color code in its dedicated temporary file.
@@ -80,6 +83,9 @@ function BU::Main::Decho::SetBGColor()
 # Writing the text's color code into a file, to be processed by any function which needs to know what is the current text color.
 function BU::Main::Decho::SetTextColor()
 {
+	# Checking first if the target partition is not fully used.
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+
 	#**** Parameters ****
 	# $1 --> Color code
 
