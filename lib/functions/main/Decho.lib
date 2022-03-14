@@ -20,7 +20,7 @@
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
-# shellcheck disable=SC2154
+# shellcheck disable=SC2154,SC2181
 
 # --------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.

@@ -357,11 +357,11 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 
 	#**** Code ****
 	BU::IsOSAndroidTermux && {
-	
+        true;
 	}
 
 	BU::IsOSFreeBSD && {
-	
+        true;
 	}
 
 	BU::IsOSHaiku && {
@@ -411,15 +411,15 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 	}
 
 	BU::IsOSNetBSD && {
-	
+        true;
 	}
 
 	BU::IsOSOpenBSD && {
-	
+        true;
 	}
 
 	BU::IsOSx && {
-		
+		true;
 	}
 }
 
@@ -556,9 +556,16 @@ function BU::CheckProjectLogStatus()
     # If you need to call a function here, please verify if it doesn't calls the "BU::CheckProjectLogStatus()" function,
     # nor any function called by the function you want to add, or else set the "$__BU_MAIN_STAT_ECHO" status variable value to "true" BEFORE calling the wanted function.
 
+    # -------------------------------------------
+
+    # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to 'restrict', in case an error occurs during a function call.
+
+    # Also disabling a shellcheck warning, which is a false positive (saying that "$__BU_MAIN_STAT_DECHO" may not be assigned, but "$__BU_MAIN_STAT_ECHO" is (both of them are valid and working differently)).
+    
+    # shellcheck disable=SC2153
     local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU::Main:Status::ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-    # Setting the "$__BU_MAIN_STAT_ECHO" status variable's value to "true", in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
+    # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
     local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
     local v_redirectionError;

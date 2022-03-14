@@ -130,7 +130,10 @@ function BU::Exit()
             return "$p_exitcode";
 
         else
+            # shellcheck disable=SC2034
             __BU_MAIN_STAT_DECHO='restrict';
+
+            # shellcheck disable=SC2034
             __BU_MAIN_STAT_ECHO='true';
 
             BU::Newline 2 >&2;

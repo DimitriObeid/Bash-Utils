@@ -1097,7 +1097,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
-if ! ps -a | egrep "$$" | grep "bash"; then
+if ! ps -a | egrep "$$" | grep "bash" > /dev/null; then
     echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2;
     echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2;
 
