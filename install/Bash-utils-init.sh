@@ -1097,11 +1097,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
-if ! ps ax | egrep "$$" | grep "bash"; then
-    echo >&2;
-
+if ! ps -a | egrep "$$" | grep "bash"; then
     echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2;
     echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2;
+
+    echo >&2;
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
     exit 1;
