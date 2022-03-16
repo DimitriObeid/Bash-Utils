@@ -372,12 +372,13 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 			# There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
 			__BU_MAIN_STAT_ECHO="true";
 
+			# As mentioned in the previous comment, it is mandatory that the script's execution ends.
 			BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
 			HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
 				"NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
-				"" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+				"Please empty this file system (mounted on the « $(df -Th "$p_fileFS" | awk 'FNR == 2 {print $7}') » partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
+				"No space left on the target device's partition" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
 				exit "$__BU_MAIN_EXIT_CURRENT_CODE";
 		else
@@ -397,10 +398,13 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 			# There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
 			__BU_MAIN_STAT_ECHO="true";
 
+			# As mentioned in the previous comment, it is mandatory that the script's execution ends.
+			BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+
 			HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
 				"NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
-				"" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+				"Please empty this file system (mounted on the « $(df "$p_fileFS" | awk 'FNR == 2 {print $3}') » partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
+				"No space left on the target device's partition" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
 				exit "$__BU_MAIN_EXIT_CURRENT_CODE";
 		else

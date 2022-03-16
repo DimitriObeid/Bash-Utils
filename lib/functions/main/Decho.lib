@@ -147,7 +147,7 @@ function BU::Decho()
             BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}";
         fi
     else
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
     #**** Code ****
@@ -158,7 +158,7 @@ function BU::Decho()
     if test "$?" -ne 0; then
         if [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
 
-            # If the text formatting is forbidden, but the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true", the text to decorate will be put between French guillemets
+            # If the text formatting is forbidden, but the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true", the text to decorate will be put between French guillemets.
             if BU::Main::Status::CheckStatAllowFormatting; then
                 echo -ne "« $p_string »";
 
@@ -170,7 +170,7 @@ function BU::Decho()
             echo -ne "« $p_string »";
         fi
 
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
     else
         local v_oldBGColor;
             v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")";
@@ -181,7 +181,7 @@ function BU::Decho()
 
     # If both of the new colors are equal.
     if [ "$p_newBGColor" = "$p_newTextColor" ]; then
-        p_newBGColor="$(( p_newBGColor+38 ))"
+        p_newBGColor="$(( p_newBGColor+34 ))"
     fi
 
     # If the text color code's value is equal to it's former value.
