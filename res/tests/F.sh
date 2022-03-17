@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function BU::Hardware::DriveFS::GetFSDevice()
+function BU::Main::Filesystem::GetFSDevice()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.

@@ -157,7 +157,7 @@ function BU::Main::Args::PrintBadOption()
 
         return 1;
 
-	# Else, if the value passed as argument is not a valid directory path.
+	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
     elif [ "${p_option,,}" = '!d' ]; then
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
@@ -165,7 +165,15 @@ function BU::Main::Args::PrintBadOption()
 
 		return 1;
 
-	# Else, if the value passed as argument is not a valid file path.
+	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
+    elif [ "${p_option,,}" = '!df' ]; then
+        BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
+            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
+            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+
+		return 1;
+
+	# Else, if the value passed as argument is not a valid file path (only files accepted).
     elif [ "${p_option,,}" = '!f' ]; then
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
@@ -490,14 +498,14 @@ function BU::Main::Args::Argc()
 
         # Else, if "$p_argcount" AND / OR "$p_argawait" argument values are not integer.
         else
-            local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_argcount"; then
+            if ! BU::IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
                 BU::Main::Errors::HandleErrors '1' \
                     "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
 
-            local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_argawait"; then
+            if ! BU::IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
                 BU::Main::Args::PrintBadOption '1' \
                     "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -507,14 +515,14 @@ function BU::Main::Args::Argc()
 
     # Else, if "$p_argcount" AND / OR "$p_argawait" argument values are empty.
     else
-        local lineno="$LINENO"; if [ -z "$p_argcount" ]; then
+        if [ -z "$p_argcount" ]; then local lineno="$LINENO";
             BU::Main::Errors::HandleErrors '1' \
                 "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER HAS NO VALUE" \
                 "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         fi
 
-        local lineno="$LINENO"; if [ -z "$p_argawait" ]; then
+        if [ -z "$p_argawait" ]; then local lineno="$LINENO";
             BU::Main::Errors::HandleErrors '1' \
                 "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER HAS NO VALUE" \
                 "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -566,31 +574,34 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 	#**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
-	local lineno="$LINENO"; if [ -z "$p_parent" ]; then
+	if [ -z "$p_parent" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno";
 
 		return 1;
+    fi
 
-	local lineno="$LINENO"; elif [ -z "$p_child" ]; then
+    if [ -z "$p_child" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno";
 
 		return 1;
+    fi
 
-	local lineno="$LINENO"; elif [ -z "$p_type" ]; then
+	if [ -z "$p_type" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "The function $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno";
 
 		return 1;
+    fi
 
-	local lineno="$LINENO"; elif [ "$p_type" != 'd' ] && [ "$p_type" != 'f' ]; then
-		 BU::Main::Args::PrintBadOption 'z' \
-            "You need to precise if what you want to create is a directory or a file (mandatory argument)" \
-            'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+	if [ "$p_type" != 'd' ] && [ "$p_type" != 'f' ]; then local lineno="$LINENO";
+		 BU::Main::Args::PrintBadOption '!df' \
+            "You need to precise if what you want to create is a directory or a file (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno";
 
 		return 1;
 	fi
@@ -621,7 +632,7 @@ function BU::Main::Args__CMDS::GetCommandPath()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_cmd" ]; then
+    if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "You must specify the name of the command whose path you want to know (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -659,13 +670,13 @@ function BU::Main::Args__Decho::Decho()
         false;
     fi
 
-    local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_newTextColor"; then
+    if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as text color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if ! BU::IsPositiveInt "$p_newBGColor"; then
+    if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as background color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -699,7 +710,7 @@ function BU::Main::Args__Directories::ProcessingDir()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_function" ]; then
+    if [ -z "$p_function" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass a function's name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -707,13 +718,13 @@ function BU::Main::Args__Directories::ProcessingDir()
 		return 1;
     fi
 
-    local lineno="$LINENO"; if [ -z "$p_parent" ]; then
+    if [ -z "$p_parent" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass a valid parent directory path as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -z "$p_name" ]; then
+    if [ -z "$p_name" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the name of the folder to process as third argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -736,14 +747,14 @@ function BU::Main::Args__Directories::OverwriteDir()
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
     # Else, if the given folder path is incorrect.
-    local lineno="$LINENO"; if [ ! -d "$p_path" ]; then
+    if [ ! -d "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption '!d' \
             "Please pass the correct path of the directory to overwrite as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -767,21 +778,21 @@ function BU::Main::Args__Directories::Make()
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z  "$p_parent" ]; then
+    if [ -z  "$p_parent" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the new directory's parent folder as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_parent' "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
     # Else, if the parent folder's path is incorrect.
-    local lineno="$LINENO"; if [ ! -d "$p_parent" ]; then
+    if [ ! -d "$p_parent" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption '!d' \
             "Please pass a valid parent directory path as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
     # Else, if the folder's name is missing (no name is given).
-    local lineno="$LINENO"; if [ -z "$p_name" ]; then
+    if [ -z "$p_name" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "Please pass the name of the directory to create as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -805,13 +816,13 @@ function BU::Main::Args__Directories::MakePath()
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new folder's full path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass the full path of the directory to create as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-	local lineno="$LINENO"; if [ -n "$p_overwrite" ] && [ "$p_overwrite" != "--rmdir" ]; then
+	if [ -n "$p_overwrite" ] && [ "$p_overwrite" != "--rmdir" ]; then local lineno="$LINENO";
 		BU::Main::Args::PrintBadOption '' \
 			"Please pass the valid string $(BU::DechoHighlightVar "--rmdir") that allows overwriting the $(BU::DechoHighlightFunction "$p_path") directory (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_overwrite' "$p_overwrite" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -837,7 +848,7 @@ function BU::Main::Args__Directories::GetDirectoryName()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "The $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -861,7 +872,7 @@ function BU::Main::Args__Directories::GetDirectoryPath()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "The $(BU::Main::Text::CutFromCharacter "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -887,7 +898,7 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -911,13 +922,13 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -n "$p_iterations" ] ! BU::IsPositiveInt "$p_iterations"; then
+    if [ -n "$p_iterations" ] ! BU::IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as number of iterations (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -950,14 +961,14 @@ BU::Main::Args__Errors::SetLastReturnValue()
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
 	# If no return value is passed to as 1st argument.
-	local lineno="$LINENO"; if [ -z "$p_code" ]; then
+	if [ -z "$p_code" ]; then local lineno="$LINENO";
 		BU::Main::Args::PrintBadOption 'z' \
 			"Please pass a valid integer value, from $(BU::DechoHighlight '0') to $(BU::DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
 	fi
 
 	# If the return value is not an integer.
-	local lineno="$LINENO"; if [ -n "$p_code" ] && ! BU::IsPositiveInt "$p_code"; then
+	if [ -n "$p_code" ] && ! BU::IsPositiveInt "$p_code"; then local lineno="$LINENO";
 		BU::Main::Args::PrintBadOption '!intpos' \
 			"Please pass a valid integer value, from $(BU::DechoHighlight '0') to $(BU::DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -989,7 +1000,7 @@ function BU::Main::Args__Files::ProcessingFile()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_function" ]; then
+    if [ -z "$p_function" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "Please pass a valid file processing function as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1015,7 +1026,7 @@ function BU::Main::Args__Files::OverwriteFile()
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target file's path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1024,7 +1035,7 @@ function BU::Main::Args__Files::OverwriteFile()
     fi
 
     # Else, if the given file path is incorrect.
-    local lineno="$LINENO"; if [ ! -d "$p_path" ]; then
+    if [ ! -d "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption '!d' \
             "Please pass the correct path of the directory to overwrite as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1032,7 +1043,7 @@ function BU::Main::Args__Files::OverwriteFile()
 		return 1;
     fi
 
-	local lineno="$LINENO"; if [ -z "$p_authorization" ]; then
+	if [ -z "$p_authorization" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
             "Please enter a valid value for the overwrite authorization as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_authorization' "$p_authorization" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1058,7 +1069,7 @@ function BU::Main::Args__Files::Make()
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_parent" ]; then
+    if [ -z "$p_parent" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the path of the new file's parent folder as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1067,7 +1078,7 @@ function BU::Main::Args__Files::Make()
     fi
 
     # Else, if the parent folder's path is incorrect.
-    local lineno="$LINENO"; if [ ! -d "$p_parent" ]; then
+    if [ ! -d "$p_parent" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption '!d' \
             "Please pass a valid parent directory path as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1076,7 +1087,7 @@ function BU::Main::Args__Files::Make()
     fi
 
     # Else, if the file's name is missing (no name is given).
-    local lineno="$LINENO"; if [ -z "$p_name" ]; then
+    if [ -z "$p_name" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass the name of the file to create as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1084,7 +1095,7 @@ function BU::Main::Args__Files::Make()
 		return 1;
     fi
 
-    local lineno="$LINENO"; if [ "$(echo "$p_name" | wc --bytes)" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then
+    if [ "$(echo "$p_name" | wc --bytes)" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then local lineno="$LINENO";
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" \
             "THE FILE NAME IS TOO LONG FOR THIS FILESYSTEM" \
             "Please give a name length smaller than $(BU::DechoHighlight "$__BU_MAIN_FS_MAX_FILENAME_LENGTH") bytes [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -1108,7 +1119,7 @@ function BU::Main::Args__Files::MakePath()
 	BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new file's full path is missing (no path is given).
-    local lineno="$LINENO"; if [ -z "$p_path" ]; then
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass the full path of the directory to create as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1135,22 +1146,80 @@ function BU::Main::Args__Files::SetLastAccess()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_filepath" ]; then
+    if [ -z "$p_filepath" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass as first argument the path of the file whose last access date you wish to change (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ ! -f "$p_filepath" ]; then
+    if [ ! -f "$p_filepath" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!f' \
             "Please pass a valid file path as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -z "$p_fakedate" ]; then
+    if [ -z "$p_fakedate" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
             "Please pass a date in $(BU::DechoHighlight "[[CC]YY]MMDDhhmm[.ss]") format as second argument (like 20220221212020.22 | 2022 02 21 21h 20m 20s and 22 ms) (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_fakedate' "$p_fakedate" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MAIN MODULE'S "Filesystem.lib" FILE'S FUNCTIONS
+
+## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
+
+# "" function.
+
+# -----------------------------------------------
+
+## CATEGORY : RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+# "BU::Main::Permissions::ChownRec" function.
+function BU::Main::Args__Filesystem::ChownRec()
+{
+    #**** Parameters ****
+    local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory (this parameter is used in the translated / log messages, stored into their own variables).
+    local p_newOwner=$2;        # String    - Default : NULL    - New owner of the directory.
+    local p_path=$3;            # String    - Default : NULL    - Path of the directory to process.
+
+    local p_filename=$4;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;        # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+    BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_currentOwner" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the name of the former directory's owner (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    if [ -z "$p_newOwner" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the name of the new directory's owner (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the path to the directory to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    if [ -n "$p_path" ] && [ ! -d "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!d' \
+            "Please give a valid path for the directory to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
     return 0;
@@ -1170,9 +1239,9 @@ function BU::Main::Args__Files::SetLastAccess()
 function BU::Main::Args__Text::CutFromCharacter()
 {
     #**** Parameters ****
-    local p_string=$1;      # String to process.
-    local p_delimiter=$2;   # Delimiter.
-    local p_iterations=$3;  # Iterations.
+    local p_string=$1;      # String    - Default : NULL    - String to process.
+    local p_delimiter=$2;   # Char      - Default : NULL    - Delimiter.
+    local p_iterations=$3;  # Int       - Default : 1       - Iterations.
 
     local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
     local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
@@ -1181,19 +1250,19 @@ function BU::Main::Args__Text::CutFromCharacter()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_string" ]; then
+    if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -z "$p_delimiter" ]; then
+    if [ -z "$p_delimiter" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -n "$p_iterations" ] && ! BU::IsPositiveInt "$p_iterations"; then
+    if [ -n "$p_iterations" ] && ! BU::IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
@@ -1210,8 +1279,8 @@ function BU::Main::Args__Text::CutFromCharacter()
 function BU::Main::Args__Text::GetCharacterOccurences()
 {
     #**** Parameters ****
-    local p_string=$1       # String    - String to process.
-    local p_target=$2       # Char      - Targeted character.
+    local p_string=$1       # String    - Default : NULL  - String to process.
+    local p_target=$2       # Char      - Default : NULL  - Targeted character.
 
     local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
     local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
@@ -1220,13 +1289,13 @@ function BU::Main::Args__Text::GetCharacterOccurences()
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
-    local lineno="$LINENO"; if [ -z "$p_string" ]; then
+    if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
     fi
 
-    local lineno="$LINENO"; if [ -z "$p_target" ]; then
+    if [ -z "$p_target" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please give any character to process as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
