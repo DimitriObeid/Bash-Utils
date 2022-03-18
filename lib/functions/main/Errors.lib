@@ -217,7 +217,7 @@ function BU::Main::Errors::HandleErrors()
 
         if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ]; then
 
-            if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
+            if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
                 if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                     BU::HeaderError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                 else
@@ -252,8 +252,11 @@ function BU::Main::Errors::HandleErrors()
         if [ -z "$p_adviceString" ]; then
             BU::EchoError "No advice to give."; BU::Newline >&2;
         else
-            # Check if the ' [/|\] ' substring exists, as separator from the advice and another string.
-            if [[ "$p_adviceString" == *" [/|\] "* ]]; then
+            # Checking if the ' [/|\] ' substring exists only once, as separator from the advice and another comment.
+
+            # IMPORTANT : the second argument of the "BU::Main::Text::GetCharacterOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
+            if [[ "$p_adviceString" == *" [/|\] "* ]] && [ "$(BU::Main::Text::GetCharacterOccurences "$p_advice" ' [/|\] ')" -eq 1 ]; then
+
                 local v_string_part_1; v_string_part_1="$(echo "$1" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting first sub-string.
                 local v_string_part_2; v_string_part_2="$(echo "$1" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting second sub-string.
 
@@ -261,6 +264,12 @@ function BU::Main::Errors::HandleErrors()
                 BU::Newline;
 
                 BU::EchoError "$(BU::DechoHighlight "Other comments") : $v_string_part_2";
+
+            # Checking if the ' [/|\] ' substring exists more than once, as separators from the advice and any other comments.
+
+            # IMPORTANT : the second argument of the "BU::Main::Text::GetCharacterOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
+            elif [[ "$p_adviceString" == *" [/|\] "* ]] && [ "$(BU::Main::Text::GetCharacterOccurences "$p_advice" " [/|\] ")" -gt 1 ]; then
+                
             else
                 BU::EchoError "$(BU::DechoHighlight "Advice") : $p_adviceString" >&2;
             fi

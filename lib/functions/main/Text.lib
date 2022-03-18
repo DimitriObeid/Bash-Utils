@@ -51,28 +51,34 @@ function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutLastFie
 function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutLastFieldFromDelim "$1" '-';   return 0; }
 
 # Cut every part of a string before and with the delimiter.
-function BU::Main::Text::CutFromCharacter()
+function BU::Main::Text::CutFromDelim()
 {
     #**** Parameters ****
-    local p_string=$1;      # String to process.
-    # $2                    # Delimiter.
-    local p_iterations=$3;  # Iterations.
+    local p_string=$1;              # String    - Default : NULL    - String to process.
+    local p_delimType=$2;           # String    - Default : NULL    - Type of delimiter (char (character) or string).
+    local p_delimiter=$3;           # String    - Default : NULL    - Delimiter.
+    local p_iterations=${4:-1};     # Int       - Default : 1       - Iterations.
 
     #**** Code ****
-    if ! BU::Main::Args__Text::CutFromCharacter "$p_string" "$2" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Text::CutFromDelim "$p_string" "$p_delimType" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
-    if [ -z "$p_iterations" ] || [ "$p_iterations" -lt 1 ]; then
-        p_iterations='1';
-    fi
+    if [ "$p_iterations" -lt 1 ]; then p_iterations='1'; fi
 
     for ((i=0; i<p_iterations; i++)); do
-        #shellcheck disable=SC2001
-        p_string="$(sed "s/^[^$2]*$2//" <<< "$p_string")";
-        p_string="$p_string";
+
+        if [ "${p_delimType,,}" = 'char' ] || [ "${p_delimType,,}" = 'character' ]; then
+
+            #shellcheck disable=SC2001
+            p_string="$(sed "s/^[^$p_delimiter]*$p_delimiter//" <<< "$p_string")";
+            p_string="$p_string";
+
+        elif [ "${p_delimType,,}" = 'str' ] || [ "${p_delimType,,}" = 'string' ]; then
+
+        fi
     done
 
     echo -ne "$p_string"; return 0;
@@ -82,7 +88,7 @@ function BU::Main::Text::CutFromCharacter()
 function BU::Main::Text::CutLastFieldFromDelim()
 {
     #**** Parameters ****
-    #   $1  --> string to process
+    #   $1  --> String    - Default : NULL    - String to process.
     #   $2  --> delimiter
 
     #**** Code ****
@@ -93,7 +99,7 @@ function BU::Main::Text::CutLastFieldFromDelim()
 function BU::Main::Text::CutStringAfterDelim()
 {
     #**** Parameters ****
-    #   $1  --> string to process
+    #   $1  --> String    - Default : NULL    - String to process.
     #   $2  --> delimiter
     #   $3  --> iterations
 
@@ -134,7 +140,7 @@ function BU::Main::Echo::KeepFormatting()
 function BU::Main::Echo::ToLowercase()
 {
 	#**** Parameters ****
-	local p_string=$1;
+    local p_string=$1;  # String    - Default : NULL    - String to process.
 
 	#**** Code ****
 	echo -e "$p_string" | tr '[:upper:]' '[:lower:]'; return 0;
@@ -147,7 +153,7 @@ function BU::Main::Echo::ToLowercase()
 function BU::Main::Echo::ToUppercase()
 {
 	#**** Parameters ****
-	local p_string=$1;
+    local p_string=$1;  # String    - Default : NULL    - String to process.
 
 	#**** Code ****
 	echo -e "$p_string" | tr '[:lower:]' '[:upper:]'; return 0;
@@ -157,18 +163,19 @@ function BU::Main::Echo::ToUppercase()
 
 ## GETTING TEXT
 
-# Getting the occurences of a character.
+# Getting the occurences of a character or a sub-string in a main string.
 function BU::Main::Text::GetCharacterOccurences()
 {
     #**** Parameters ****
-    local p_string=$1;  # String to process.
-    local p_target=$2;  # Targeted character.
+    local p_string=$1;  # String    - Default : NULL    - String to process.
+    local p_type=$2;    # String    - Default : NULL    - Type of delimiter (char (character) or string).
+    local p_target=$3;  # String    - Default : NULL    - Targeted character.
 
     #**** Variables ****
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_type" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     BU::EchoMsg "${#v_occurences}";
 
@@ -179,7 +186,7 @@ function BU::Main::Text::GetCharacterOccurences()
 function BU::Main::Text::GetStringByteSize()
 {
     #**** Parameters ****
-    local p_string=$1;
+    local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
     BU::EchoMsg "$p_string" | wc --bytes; return 0;
@@ -189,7 +196,7 @@ function BU::Main::Text::GetStringByteSize()
 function BU::Main::Text::GetStringCharactersNumber()
 {
     #**** Parameters ****
-    local p_string=$1;
+    local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
     BU::EchoMsg "$p_string" | wc --chars; return 0;
@@ -199,7 +206,7 @@ function BU::Main::Text::GetStringCharactersNumber()
 function BU::Main::Text::GetStringWordsNumber()
 {
     #**** Parameters ****
-    local p_string=$1;
+    local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
     BU::EchoMsg "$p_string" | wc -w; return 0;
@@ -217,7 +224,7 @@ function BU::Main::Text::GetStringWordsNumber()
 function BU::Main::Text::ReverseStringWordsOrder()
 {
     #**** Parameters ****
-    #   $1  --> string to process
+    #   $1  --> String    - Default : NULL    - String to process.
     #   $2  --> delimiter
 
     #**** Code ****
@@ -232,7 +239,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
 # function BU::Main::Text::SplitStringFromDelim()
 # {
 #     #**** Parameters ****
-#     local p_string=$1;          # String to process.
+#     local p_string=$1;          # String    - Default : NULL    - String to process.
 #     local p_delim=$2;           # Delimiter.
 #     local p_order=$3;           # Splitting order (L|l = left to right, R|r = right to left).
 #     local p_iterations=$4;      # Number of delimiters to process.
