@@ -99,7 +99,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "${p_option,,}" = '!alphachar' ]; then
@@ -107,7 +109,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastr' ]; then
@@ -115,7 +119,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastrchar' ]; then
@@ -123,7 +129,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumchar' ]; then
@@ -131,7 +139,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstr' ]; then
@@ -139,7 +149,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstrchar' ]; then
@@ -147,7 +159,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     # Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" = '!charnum' ]; then
@@ -163,7 +177,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_DIR";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
     elif [ "${p_option,,}" = '!df' ]; then
@@ -171,7 +187,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
     elif [ "${p_option,,}" = '!f' ]; then
@@ -179,7 +197,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not a floating number.
     elif [ "${p_option,,}" = '!float' ]; then
@@ -187,7 +207,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "${p_option,,}" = '!floatneg' ]; then
@@ -203,7 +225,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not an integer.
     elif [ "${p_option,,}" = '!int' ]; then
@@ -211,7 +235,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not a negative integer.
     elif [ "${p_option,,}" = '!intneg' ]; then
@@ -220,7 +246,9 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-        return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "${p_option,,}" = '!intpos' ]; then
@@ -228,14 +256,18 @@ function BU::Main::Args::PrintBadOption()
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
-		return 1;
+        BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
+
+		return "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
 	if [ "$v_STAT_ECHO_was_false" = "true" ]; then
 		BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 	fi
 
-	return 0;
+    BU::SetLastReturnValue 0;
+
+    return "$__BU_MAIN_EXIT_CURRENT_CODE";
 }
 
 # -----------------------------------------------
@@ -1177,13 +1209,117 @@ function BU::Main::Args__Files::SetLastAccess()
 
 ## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
 
-# "" function.
+# "BU::Main::Filesystem::IsPartitionFull" function.
+function BU::Main::Args__Filesystem::IsPartitionFull()
+{
+    #**** Parameters ****
+    local p_fileFS=$1;  # String    - Default : NULL    - Path of the file or folder's file system host.
+
+    local p_filename=$2;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;        # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;          # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+    BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_fileFS" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass a path to get the file or folder's host file system (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    if [ -n "$p_fileFS" ] && [ ! -d "$p_fileFS" ] || [ ! -f "$p_fileFS" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!df' \
+            "Please pass a valid path to get the file or folder's host file system (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
+
+# "BU::Main::Filesystem::GetFS<...>()" functions.
+function BU::Main::Args__Filesystem::GetFSInfos()
+{
+    #**** Parameters ****
+    local p_path=$1;        # String    - Default : NULL    - Path of the file or folder's file system host.
+
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+    BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass a path to get the file or folder's host file system (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    if [ -n "$p_path" ] && [ ! -d "$p_path" ] || [ ! -f "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!df' \
+            "Please pass a valid path to get the file or folder's host file system (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## CATEGORY : NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+
+# "BU::Main::Filesystem::Chown" function.
+function BU::Main::Args__Filesystem::Chown()
+{
+    #**** Parameters ****
+    local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory or the file (this parameter is used in the translated / log messages, stored into their own variables).
+    local p_newOwner=$2;        # String    - Default : NULL    - New owner of the directory or the file.
+    local p_path=$3;            # String    - Default : NULL    - Path of the directory or the file to process.
+
+    local p_filename=$4;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;        # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+    BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_currentOwner" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the name of the former directory's or file's owner (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    if [ -z "$p_newOwner" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the name of the new directory's or file's owner (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+    fi
+
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give the path to the directory or the file to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    if [ -n "$p_path" ] && [ ! -d "$p_path" ] || [ ! -f "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!df' \
+            "Please give a valid path for the directory or the file to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    fi
+
+    return 0;
+}
 
 # -----------------------------------------------
 
 ## CATEGORY : RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 
-# "BU::Main::Permissions::ChownRec" function.
+# "BU::Main::Filesystem::ChownRec" function.
 function BU::Main::Args__Filesystem::ChownRec()
 {
     #**** Parameters ****
@@ -1219,7 +1355,7 @@ function BU::Main::Args__Filesystem::ChownRec()
     if [ -n "$p_path" ] && [ ! -d "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!d' \
             "Please give a valid path for the directory to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return 1;
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_DIR"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
     return 0;
