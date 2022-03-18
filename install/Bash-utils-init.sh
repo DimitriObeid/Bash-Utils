@@ -66,7 +66,11 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
     #**** Code ****
     if [ -z "$p_missing" ]; then
         echo >&2;
+        echo "de | ";
         echo "en | Warning : no given information about the « gettext.sh » file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2;
+		echo "es | " >&2;
+		echo >&2;
+
         echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh » ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2;
 
 		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
@@ -74,7 +78,11 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 
 	elif [ -z "$p_filepath" ]; then
 		echo >&2;
+		echo "de | Achtung : Als zweites Argument wurde kein Dateipfad übergeben.";
 		echo "en | Warning : no file path has been passed as second argument" >&2;
+		echo "es | Advertencia : no se ha pasado ninguna ruta de archivo como segundo argumento." >&2;
+		echo >&2;
+
 		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2;
 
 		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
@@ -83,22 +91,38 @@ function Moduleinitializer_PrintModInitDefaultLanguage()
 
     if [ "${p_missing^^}" = 'PATH' ]; then
         echo >&2;
+        echo "DE | ";
         echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+		echo "ES | " >&2;
+		echo >&2;
+
         echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po »" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = "config-missing" ]; then
         echo >&2;
+        echo "DE | ";
         echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+		echo "ES | " >&2;
+		echo >&2;
+
         echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
 
     elif [ "${p_missing,,}" = 'config-source' ]; then
         echo >&2;
+        echo "DE | ";
         echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
+		echo "ES | ADVERTENCIA --> IMPOSIBLE OBTENER EL ARCHIVO DE RESPALDO « $p_filepath » PARA LA TRADUCCIÓN DE LOS ARCHIVOS « .po »." >&2;
+		echo >&2;
+
         echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
     fi
 
     echo >&2;
+    echo "de | Der Rest der Bibliothek wird Englisch als Standardsprache verwenden.";
     echo "en | The rest of the library will use english as default language" >&2;
+    echo "es | El resto de la biblioteca utilizará el inglés como idioma por defecto." >&2;
+    echo >&2;
+
     echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2;
 
     echo >&2;
@@ -1131,7 +1155,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
 if ! ps -a | egrep "$$" | grep "bash" > /dev/null; then
+    echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2;
     echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2;
+    echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »"
+    echo >&2;
+
     echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2;
 
     echo >&2;
