@@ -89,7 +89,7 @@ function BU::Main::Files::ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    if ! BU::Main::Args__Files::ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi;
+    if ! BU::Main::Args__Files::ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
@@ -133,7 +133,7 @@ function BU::Main::Files::OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if BU::Main::Args__Files::OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Files::OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$p_path";
@@ -186,8 +186,8 @@ function BU::Main::Files::Make()
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$v_path";
 
-	# Checking first if the awaited arguments are given.
-    if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi;
+	# Checking if the awaited arguments are given.
+    if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi;
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$v_path" || return 1;
@@ -241,7 +241,7 @@ function BU::Main::Files::MakePath()
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
 
-    if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     BU::Main::Files::Make "$v_parent" "$v_target" || return 1;
 

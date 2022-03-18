@@ -51,9 +51,9 @@ function BU::Main::CMDS::GetCommandPath()
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 
     #**** Code ****
-    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
-    command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight)" 'E'; return 1; }
+    command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight "$p_cmd") command was not found on your system" 'E'; return 1; }
 }
 
 # Get the command's return output.

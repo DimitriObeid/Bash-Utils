@@ -60,7 +60,7 @@ function BU::Main::Text::CutFromDelim()
     local p_iterations=${4:-1};     # Int       - Default : 1       - Iterations.
 
     #**** Code ****
-    if ! BU::Main::Args__Text::CutFromDelim "$p_string" "$p_delimType" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Text::CutFromDelim "$p_string" "$p_delimType" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -77,7 +77,7 @@ function BU::Main::Text::CutFromDelim()
             p_string="$p_string";
 
         elif [ "${p_delimType,,}" = 'str' ] || [ "${p_delimType,,}" = 'string' ]; then
-
+            true;
         fi
     done
 
@@ -163,21 +163,33 @@ function BU::Main::Echo::ToUppercase()
 
 ## GETTING TEXT
 
-# Getting the occurences of a character or a sub-string in a main string.
+# Getting the occurences of a character in a main string.
 function BU::Main::Text::GetCharacterOccurences()
 {
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
-    local p_type=$2;    # String    - Default : NULL    - Type of delimiter (char (character) or string).
-    local p_target=$3;  # String    - Default : NULL    - Targeted character.
+    local p_target=$2;  # Char      - Default : NULL    - Targeted character.
 
     #**** Variables ****
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_type" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     BU::EchoMsg "${#v_occurences}";
+
+    return 0;
+}
+
+# Getting the occurences of a sub-string in a main string.
+function BU::Main::Text::GetSubStringOccurences()
+{
+    #**** Parameters ****
+    local p_string=$1;  # String    - Default : NULL    - String to process.
+    local p_target=$2;  # String    - Default : NULL    - Targeted sub-string.
+
+    #**** Code ****
+    if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     return 0;
 }

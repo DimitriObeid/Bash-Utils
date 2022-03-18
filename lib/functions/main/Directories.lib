@@ -62,7 +62,7 @@ function BU::Main::Directories::ProcessingDir()
 
     #**** Code ****
     # Arguments checking.
-	if ! BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+	if ! BU::Main::Args__Directories::ProcessingDir "$p_function" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
 	sleep "$PROJECT_STATUS_SLEEP_LINE";
 
@@ -102,7 +102,7 @@ function BU::Main::Directories::OverwriteDir()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU::Main::Args__Directories::OverwriteDir "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::OverwriteDir "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$p_path";
@@ -164,7 +164,7 @@ function BU::Main::Directories::Make()
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given
-    if ! BU::Main::Args__Directories::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     # Checking second if the script is operating at the root directory.
     if ! BU::Main::Directories::TriggerRootDirWarning "$v_path"; then return 1; fi
@@ -217,7 +217,7 @@ function BU::Main::Directories::MakePath()
     local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::MakePath "$p_path" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::MakePath "$p_path" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ "$p_overwrite" != 'rmdir' ]; then
         BU::Main::Directories::Make "$v_parent" "$v_target" || return 1;
@@ -263,7 +263,7 @@ function BU::Main::Directories::GetDirectoryName()
     local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ -d "$p_path" ]; then
         shopt -s extglob;           # enable +(...) glob syntax
@@ -289,7 +289,7 @@ function BU::Main::Directories::GetDirectoryPath()
     local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::GetDirectoryPath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::GetDirectoryPath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ -d "$p_path" ]; then
         echo -e "$p_path";
@@ -311,7 +311,7 @@ function BU::Main::Directories::GetParentDirectoryName()
     local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Code ****
-    if ! BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
+    if ! BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     for ((i=0; i<p_iterations; i++)); do
         local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \

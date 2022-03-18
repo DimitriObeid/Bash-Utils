@@ -240,7 +240,7 @@ function BU::Decho()
                 'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}";;
 
                 *)
-                    # WARNING ! >>> DO NOT RESET «< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" «<, or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
 
                     # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
                     # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
@@ -257,7 +257,7 @@ function BU::Decho()
 
                     BU::Main::Status::ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
+                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable, since it's possible to do so now.
                     if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
                         __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi
@@ -296,7 +296,7 @@ function BU::Decho()
                 'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}";;
 
                 *)
-                    # WARNING ! Do not reset the "$__BU_MAIN_STAT_DECHO" variable's value  to "true", or else the program will be stuck in an infinite loop.
+                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
 
                     # The function "BU::Main::Errors::HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
                     # if the "$__BU_MAIN_STAT_DECHO" status variable's value is set to "false", the script will not call the following function indefinitely.
@@ -314,7 +314,7 @@ function BU::Decho()
                     BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
                     "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
+                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable, since it's possible to do so now.
                     if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
                         __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi

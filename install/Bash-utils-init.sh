@@ -851,6 +851,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 fi
             }
 
+            # Processing the list of arguments for the "module" module.
             for module_args in "${module_array[@]}"; do
 
                 # -----------------------------------------------
@@ -858,10 +859,36 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 ## MODULE : USER'S LANGUAGE PROCESSING
 
                 # If the "module" value's argument is "--lang="
-                if [[ "$module_args" == *'--lang=en_US' ]]; then
+                if [[ "$module_args" == *'--lang='* ]]; then
 
-                    # Temporary solution to avoid crashes while executing this file, before .
-                    true;
+                    if [ -n "$__BU_MODULE_UTILS_MODULE_LANG_ARG" ]; then
+                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_UTILS_MODULE_LANG_ARG | New : $module_args)" "$LINENO";
+
+                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
+                        echo "Please choose only one of these languages" >&2;
+                        echo >&2;
+
+                        echo "Current language : $__BU_MODULE_UTILS_MODULE_LANG_ARG" >&2;
+                        echo "Chosen language : $module_args" >&2;
+                    else
+                        case "$module_args" in
+                            # Spanish | Espanol
+                            'es_'[A-Z][A-Z])
+                                
+                            # English
+                            'en_'[A-Z][A-Z])
+                                # Creating a new variable to store the language currently used by the operating system.
+                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";;
+
+                            # French | Français
+                            'fr_'[A-Z][A-Z])
+                                # Création d'une nouvelle variable pour enregistrer la langue actuellement utilisée par le système d'exploitation.
+                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";
+                            *)
+                                ;;
+                        esac
+                    fi
+                fi
 
                 # -----------------------------------------------
 

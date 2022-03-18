@@ -123,7 +123,7 @@ function BU::Main::Filesystem::GetFSDevice()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -147,7 +147,7 @@ function BU::Main::Filesystem::GetFSTotalSize()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -171,7 +171,7 @@ function BU::Main::Filesystem::GetFSMountPoint()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -194,7 +194,7 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -234,7 +234,7 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
     BU::IsOSLinux           && local v_cmd="df -Th \"$p_path\"  | awk 'FNR == 2 {print \$6}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -274,7 +274,7 @@ function BU::Main::Filesystem::GetFSAvailableSize()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -298,7 +298,7 @@ function BU::Main::Filesystem::GetFSType()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
@@ -335,7 +335,7 @@ function BU::Main::Filesystem::Chown()
     p_option=$4;        # Chown command option(s).
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     # The "chown" command has to be used with super-user privileges,
     if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
@@ -429,7 +429,7 @@ function BU::Main::Filesystem::ChownRec()
     local p_path=$3;
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     # The "chown" command has to be used with super-user privileges,
     if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
