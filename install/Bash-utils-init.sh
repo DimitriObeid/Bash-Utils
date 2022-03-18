@@ -872,23 +872,29 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         echo "Chosen language : $module_args" >&2;
                     else
                         case "$module_args" in
-                            # Spanish | Espanol
-                            'es_'[A-Z][A-Z])
-                                
+                            # Deutch | German
+                            'de_'[A-Z][A-Z])
+                                # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
+                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";;
+
                             # English
                             'en_'[A-Z][A-Z])
                                 # Creating a new variable to store the language currently used by the operating system.
                                 __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";;
 
-                            # French | Français
+                            # Español | Spanish
+                            'es_'[A-Z][A-Z])
+                                # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
+                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";;
+    
+                            # Français | French
                             'fr_'[A-Z][A-Z])
-                                # Création d'une nouvelle variable pour enregistrer la langue actuellement utilisée par le système d'exploitation.
-                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";
+                                # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
+                                __BU_MODULE_UTILS_MODULE_LANG_ARG="$module_args";;
                             *)
                                 ;;
                         esac
                     fi
-                fi
 
                 # -----------------------------------------------
 
