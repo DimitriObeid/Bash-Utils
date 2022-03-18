@@ -60,7 +60,7 @@ function BU::Main::Errors::HandleSmallErrors()
 
     #**** Variables ****
     if [ "${p_cpls^^}" = 'CPLS' ]; then
-        if [ "$__BU_MAIN_STAT_ECHO" = 'false' ]; then
+        if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
             local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
         fi
     fi
@@ -215,16 +215,16 @@ function BU::Main::Errors::HandleErrors()
 
         # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
-        if [ "$__BU_MAIN_STAT_ECHO" = "true" ]; then
+        if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ]; then
 
             if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
-                if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
+                if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                     BU::HeaderError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                 else
                     BU::HeaderError "A FATAL ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
                 fi
             else
-                if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ]; then
+                if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                     BU::HeaderError "AN ERROR OCCURED DURING A TEST IN THE $(BU::DechoHighlightFunction "BU::CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                 else
                     BU::HeaderError "AN ERROR OCCURED DURING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
@@ -236,11 +236,11 @@ function BU::Main::Errors::HandleErrors()
         # -------- PART 2 : PRINTING THE HEADER
 
         # Redirecting the log messages to the terminal, to show them to the user.
-        if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
+        if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
             local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
         fi
 
-        if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
+        if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
             BU::HeaderRed "$v_hdrString FATAL ERROR : $p_errorString" >&2;
         else
             BU::HeaderRed "$v_hdrString ERROR : $p_errorString" >&2;
@@ -274,7 +274,7 @@ function BU::Main::Errors::HandleErrors()
             BU::EchoError "Value(s) that caused this error : $(BU::DechoHighlightVar "$p_badValue")"; BU::Newline >&2;
         fi
 
-        if [ "$__BU_MAIN_STAT_ERROR" = "fatal" ]; then
+        if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
             BU::EchoError "Stopping the execution of $(BU::DechoHighlight "$(basename "$0")")."; BU::Newline >&2;
 
             BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
@@ -287,7 +287,7 @@ function BU::Main::Errors::HandleErrors()
 
         # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU::CheckProjectLogStatus()" FUNCTION).
 
-        if [ "$__BU_MAIN_STAT_ECHO" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+        if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
             BU::EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
             {
                 BU::Main::Errors::HandleSmallErrors "Unable to write in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU::DechoHighlightFunction "${FUNCNAME[0]}()") function" 'R' 'CPLS';

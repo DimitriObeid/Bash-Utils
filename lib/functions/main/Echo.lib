@@ -83,9 +83,9 @@ function BU::Main::Echo::__EchoOutput()
         p_type="$v_type";
 	fi
 
-	if [ "$__BU_MAIN_STAT_DEBUG" = 'false' ]; then return 0;
+	if [ "${__BU_MAIN_STAT_DEBUG,,}" = 'false' ]; then return 0;
 
-	elif [ "$__BU_MAIN_STAT_DEBUG" = "true" ]; then
+	elif [ "${__BU_MAIN_STAT_DEBUG,,}" = "true" ]; then
 	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         if ! BU::Main::Status::CheckStatIsBackupEchoing; then
             local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO";

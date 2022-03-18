@@ -259,7 +259,6 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
     return "$v_code";
 }
 
-
 # Getting the available size in bytes of a given file system.
 function BU::Main::Filesystem::GetFSAvailableSize()
 {

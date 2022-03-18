@@ -103,7 +103,7 @@ function BU::Main::Initializer::Usage()
 
     echo "--stat-time-header=float, where float is a floating point number" >&2;
     echo "--stat-time-newline=float, where float is a floating point number" >&2;
-    echo "--stat-time-txt=flot, where float is a floating point number" >&2;
+    echo "--stat-time-txt=float, where float is a floating point number" >&2;
     echo >&2;
 
     echo "--stat-txt-fmt=false        OR --stat-txt-fmt=true" >&2;

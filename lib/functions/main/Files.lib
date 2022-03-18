@@ -275,8 +275,8 @@ function BU::Main::Files::CreateProjectLogFile()
 
     BU::EchoSuccess "Successfully created the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
-	if [ "$__BU_MAIN_STAT_DECHO" = 'true' ]; then	BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
-    if [ "$__BU_MAIN_STAT_ECHO"  = 'true' ]; then	BU::Main:Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+	if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU::Main:Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
 
     # Redirecting the initializer's log file content into the log file.
     BU::HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT";

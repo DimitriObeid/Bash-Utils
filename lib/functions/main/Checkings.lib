@@ -363,7 +363,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 	# Changing the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in order to avoid an infinite
 	# loop during the call of any function from the "Filesystem.lib" file, which call an "Echo<...>()" function.
 
-	if [ "$__BU_MAIN_STAT_ECHO" = 'false' ]; then
+	if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
         local v_echoBackup="$__BU_MAIN_STAT_ECHO";
 
         # There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
@@ -388,7 +388,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
     fi
 
     # Resetting the former "$__BU_MAIN_STAT_ECHO" global status variable's value.
-	if [ "$v_echoBackup" = 'false' ]; then
+	if [ "${v_echoBackup,,}" = 'false' ]; then
         __BU_MAIN_STAT_ECHO="$v_echoBackup";
 	fi
 }
@@ -531,7 +531,7 @@ function BU::CheckProjectLogStatus()
     # Setting the "$__BU_MAIN_STAT_DECHO" global status variable's value to 'restrict', in case an error occurs during a function call.
 
     # Also disabling a shellcheck warning, which is a false positive (saying that "$__BU_MAIN_STAT_DECHO" may not be assigned, but "$__BU_MAIN_STAT_ECHO" is (both of them are valid and working differently)).
-    
+
     # shellcheck disable=SC2153
     local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU::Main:Status::ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
@@ -546,7 +546,7 @@ function BU::CheckProjectLogStatus()
 
     #**** Code *****
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
-    if [ "$__BU_MAIN_STAT_LOG" = "true" ]; then
+    if [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
         BU::Main::Checkings::CheckProjectLogPath || \
         {
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is stopped.
@@ -564,10 +564,10 @@ function BU::CheckProjectLogStatus()
     BU::Main::Status::CheckSTAT_TIME_TXT        "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
-    if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ]; then
+    if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
 
         # If messages must be redirected in the log file only ("$__BU_MAIN_STAT_LOG_REDIRECT" value is equal to "log").
-        if [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "log" ]; then
+        if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
 
             # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
             local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU::Main:Status::ChangeSTAT_TIME_HEADER "0";
@@ -664,7 +664,7 @@ function BU::CheckProjectLogStatus()
 			return 0;
 
         # Else, if messages must be redirected in the log file AND to the terminal ("$__BU_MAIN_STAT_LOG_REDIRECT" value is equal to "tee").
-        elif [ "$__BU_MAIN_STAT_LOG_REDIRECT" = "tee" ]; then
+        elif [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "tee" ]; then
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -878,7 +878,7 @@ function BU::Main::Checkings::CheckDecho()
 {
     #**** Code ****
     # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text :
-    if [ "$__BU_MAIN_STAT_TXT_FMT" = "false" ] || [ "$__BU_MAIN_STAT_DECHO" = 'forbid' ]; then
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" = 'forbid' ]; then
         return 1;
     else
         # Creating the "fgcolors.tmp" (text color) file in case it doesn't exists.
@@ -920,7 +920,7 @@ function BU::Main::Checkings::CheckTextFormat()
     #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
     #**** Code ****
-    if [ "$__BU_MAIN_STAT_TXT_FMT" = "true" ]; then
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "true" ]; then
         if [ -n "$1" ]; then
 			if command -v "tput" &> /dev/null; then
 

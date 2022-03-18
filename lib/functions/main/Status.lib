@@ -220,7 +220,7 @@ function BU::Main::Status::CheckSTAT_LOG()
     if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
         BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${va_correctValues[@]}"; return 1;
 
-    elif [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+    elif [ "${__BU_MAIN_STAT_LOG,,}" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         BU::Main::Files::CreateProjectLogFile || return 1;
 	fi
 
@@ -448,7 +448,7 @@ function BU::Main:Status::ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1"
 # Changing the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 function BU::Main:Status::ChangeSTAT_INITIALIZING    {
-	if [ "$__BU_MAIN_STAT_INITIALIZING" = 'false' ] && [ 'true' = "$1" ]; then
+	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
 		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlightVar 'false') to $(BU::DechoHighlightVar 'true')"; return 1;
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || return 1;
@@ -481,19 +481,19 @@ function BU::Main:Status::ChangeSTAT_TXT_FMT        { __BU_MAIN_STAT_TXT_FMT="$1
 ## EASIER BOOLEAN VALUES CHECKINGS
 
 # Checking if the debug mode is active.
-function BU::Main::Status::CheckStatIsDebugging()     { if [ "$__BU_MAIN_STAT_DEBUG"          = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsDebugging()     { if [ "${__BU_MAIN_STAT_DEBUG,,}"            = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the "BU::Echo<...>()" functions can call the "BU::CheckProjectLogStatus()" function without provoking an infinite loop.
-function BU::Main::Status::CheckStatIsBackupEchoing() { if [ "$__BU_MAIN_STAT_ECHO"           = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsBackupEchoing() { if [ "${__BU_MAIN_STAT_ECHO,,}"             = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
-function BU::Main::Status::CheckStatIsInitializing()  { if [ "$__BU_MAIN_STAT_INITIALIZING"   = "true" ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsInitializing()  { if [ "${__BU_MAIN_STAT_INITIALIZING,}"      = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the log redirection mode is active.
-function BU::Main::Status::CheckStatIsLogging()       { if [ "$__BU_MAIN_STAT_LOG"            = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsLogging()       { if [ "${__BU_MAIN_STAT_LOG,,}"              = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the initialization logs can be printed on the terminal.
-function BU::Main::Status::CheckStatIsPrintingInit()  { if [ "$__BU_MAIN_STAT_PRINT_INIT_LOG" = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatIsPrintingInit()  { if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}"   = 'true' ]; then return 0; else return 1; fi; }
 
 # Checking if the text formatting is allowed.
-function BU::Main::Status::CheckStatAllowFormatting() { if [ "$__BU_MAIN_STAT_TXT_FMT"        = 'true' ]; then return 0; else return 1; fi; }
+function BU::Main::Status::CheckStatAllowFormatting() { if [ "${__BU_MAIN_STAT_TXT_FMT,,}"          = 'true' ]; then return 0; else return 1; fi; }
