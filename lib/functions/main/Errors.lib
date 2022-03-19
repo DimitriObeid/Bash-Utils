@@ -141,12 +141,12 @@ function BU::Exit()
             BU::EchoError "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
             BU::Newline >&2;
 
-            exit "$p_exitcode"; kill "$__BU_MODULE_UTILS_PROJECT_PID";
+            exit "$p_exitcode"; kill "$__BU_MODULE_INIT_PROJECT_PID";
         fi
     else
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
 
-        exit 1; kill "$__BU_MODULE_UTILS_PROJECT_PID";
+        exit 1; kill "$__BU_MODULE_INIT_PROJECT_PID";
     fi
 }
 

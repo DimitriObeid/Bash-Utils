@@ -284,10 +284,10 @@ function BU::Main::Files::CreateProjectLogFile()
     BU::EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline;
     BU::EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU::EchoMsg "$val"; done; BU::Newline;
 
-	if (( "${#__BU_MODULE_UTILS_MSG_ARRAY[@]}" >= 1 )); then
+	if (( "${#__BU_MODULE_INIT_MSG_ARRAY[@]}" >= 1 )); then
 		BU::EchoNewstep "Initialization log output :"; BU::Newline;
 
-        for val in "${__BU_MODULE_UTILS_MSG_ARRAY[@]}"; do
+        for val in "${__BU_MODULE_INIT_MSG_ARRAY[@]}"; do
             BU::CheckProjectLogStatus "$val";
         done
     fi
@@ -387,8 +387,8 @@ function BU::Main::Files::CreateProjectLogFile()
 
     BU::EchoSuccess "Successfully got the user's system's informations.";
 
-    # Purging the "$__BU_MODULE_UTILS_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
-    __BU_MODULE_UTILS_MSG_ARRAY='';
+    # Purging the "$__BU_MODULE_INIT_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
+    __BU_MODULE_INIT_MSG_ARRAY='';
 
     return 0;
 }

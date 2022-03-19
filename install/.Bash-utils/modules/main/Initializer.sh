@@ -113,10 +113,10 @@ function BU::Main::Initializer::Usage()
 }
 
 # If arguments were given in the same double quotes as the "main" module's value.
-if [ "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING" = "main --*" ]; then
+if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
 	# Defining an array ($main_module_array) to store the module's arguments string as an array of words.
-	read -ra main_module_array <<< "$__BU_MODULE_UTILS_MODULE_AND_ARGS_STRING";
+	read -ra main_module_array <<< "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING";
 
 	# Unsetting the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
 	unset "main_module_array[0]";
