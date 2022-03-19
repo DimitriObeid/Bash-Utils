@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+## "BU::ModuleInit::DisplayInitializedGlobalVarsInfos" FUNCTION
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INIT_GLOBAL_VARS='INITIALIZING THE GLOBAL VARIABLES';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_SCRIPT_INFO='Initializing the script's informations';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_PID='This global variable stores the PID of the current program';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_INIT_ROOT_DIR_VARS='Initializing the modules manager's root directory variables';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_ROOT_HOME='This global variable stores the path to the parent directory of each module configuration and initialization directories';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_ROOT='This global variable stores the path to the configuration and initialization directories of each module';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_INIT_CONF_DIRS='Initializing the configuration directories paths';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_CONFIG_DIR='This global variable stores the path to the configuration directory of each module';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_CONFIG_INIT_DIR='This global variable stores the path of the configuration folder used by the modules initialization file';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_CONFIG_MODULES_DIR='This global variable stores the configuration folder of the current module';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_CONFIG_INIT_LANG_DIR='This global variable stores the path of the language folder, used by the modules initialization file';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_INIT_MODULE_INIT_DIR='Initializing the modules initializers files directory';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_MODULES_DIR='This global variable stores the path to the initialization files of the current module';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_INIT_VARS_LIB_ROOT_DIR_FILE_PATH='Initializing the variables of the file which contains the library's root folder's path';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_NAME='Name of the file containing the path to the root folder of the library';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR='Name of the parent folder of the file containing the path to the root folder of the library';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_PATH='Path of the file containing the library's root folder's path';
+
+#
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_INIT_VARS_LIB_ROOT_DIR_ROOT_FILE='Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_NAME='Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR='Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)';
+__BU_MODULE_INIT_MSG_DISP_GLOB_VARS_INFO_LIB_ROOT_DIR_ROOT_FILE_PATH='Path of the file containing the library's root folder's path (if this file is owned by the super-user)';
+
+# -----------------------------------------------
+
+## "" FUNCTION

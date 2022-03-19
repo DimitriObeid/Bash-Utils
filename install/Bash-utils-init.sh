@@ -56,115 +56,80 @@ printf "
 
 ## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
 
-# Rewriting the library's languages messages.
-function Moduleinitializer_PrintModInitDefaultLanguage()
+function BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary()
 {
-    #**** Parameters ****
-    local p_missing=$1;		# Which file is missing (the one found in the "$PATH" global variable, or the one provided with the library).
-    local p_filepath=$2;	# File which retrieval or sourcing failed.
-
-    #**** Code ****
-    if [ -z "$p_missing" ]; then
-        echo >&2;
-        echo "de | ";
-        echo "en | Warning : no given information about the « gettext.sh » file ('PATH', 'config-missing' or 'config-source' in first argument)" >&2;
-		echo "es | " >&2;
-		echo >&2;
-
-        echo "fr | Attention : aucune information donnée à propos du fichier « gettext.sh » ('PATH', 'config-missing' ou 'config-source' en premier argument)" >&2;
-
-		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-		echo >&2; exit 1;
-
-	elif [ -z "$p_filepath" ]; then
-		echo >&2;
-		echo "de | Achtung : Als zweites Argument wurde kein Dateipfad übergeben.";
-		echo "en | Warning : no file path has been passed as second argument" >&2;
-		echo "es | Advertencia : no se ha pasado ninguna ruta de archivo como segundo argumento." >&2;
-		echo >&2;
-
-		echo "fr | Attention : aucun chemin de fichier n'a été passé en second argument" >&2;
-
-		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, it's defined before the "$__BU_MODULE_UTILS_MSG_ARRAY" array.
-		echo >&2; exit 1;
-    fi
-
-    if [ "${p_missing^^}" = 'PATH' ]; then
-        echo >&2;
-        echo "DE | ";
-        echo "EN | WARNING --> UNABLE TO SOURCE THE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-		echo "ES | " >&2;
-		echo >&2;
-
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER « $p_filepath » POUR LA TRADUCTION DES FICHIER « .po »" >&2; echo >&2;
-
-    elif [ "${p_missing,,}" = "config-missing" ]; then
-        echo >&2;
-        echo "DE | ";
-        echo "EN | WARNING --> UNABLE TO GET THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-		echo "ES | " >&2;
-		echo >&2;
-
-        echo "FR | ATTENTION --> IMPOSSIBLE DE TROUVER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
-
-    elif [ "${p_missing,,}" = 'config-source' ]; then
-        echo >&2;
-        echo "DE | ";
-        echo "EN | WARNING --> UNABLE TO SOURCE THE SPARE « $p_filepath » FILE FOR THE « .po » FILES TRANSLATION" >&2;
-		echo "ES | ADVERTENCIA --> IMPOSIBLE OBTENER EL ARCHIVO DE RESPALDO « $p_filepath » PARA LA TRADUCCIÓN DE LOS ARCHIVOS « .po »." >&2;
-		echo >&2;
-
-        echo "FR | ATTENTION --> IMPOSSIBLE DE SOURCER LE FICHIER DE SECOURS « $p_filepath » POUR LA TRADUCTION DES FICHIERS « .po »" >&2; echo >&2;
-    fi
-
     echo >&2;
-    echo "de | Der Rest der Bibliothek wird Englisch als Standardsprache verwenden.";
+    echo "de | Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2;
     echo "en | The rest of the library will use english as default language" >&2;
-    echo "es | El resto de la biblioteca utilizará el inglés como idioma por defecto." >&2;
+    echo "es | El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2;
     echo >&2;
 
     echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2;
-
     echo >&2;
+
+    BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage;
 }
 
-
-function __bu_export_textdomain()
+function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
-	#**** Variables ****
-	export TEXTDOMAINDIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR/" "po/")";
+    source "$__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR/en.list" || {
+        echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2;
+        echo >&2;
 
-	#**** Code ****
-    return 0;
+        echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
+        echo "Aborting the script's execution" >&2;
+        echo >&2;
+
+        exit 1;
+    }
 }
 
-# Getting and sourcing the "gettext.sh" file.
-function BU::ModuleInit::Get_gettext_sh_File()
+# Rewriting the library's languages messages.
+function BU::ModuleInit::GetModuleInitLanguage()
 {
-    #**** Variables ****
-    local v_path_file_path;		# Getting the "gettext.sh" file from a path registered in the "$PATH" global variable.
-        v_path_file_path="$(command -v "gettext.sh")";
-
-    local v_spare_file_path;	# Defining a variable to store the spare gettext.sh file if its path have to move in the future.
-        v_spare_file_path="$__BU_MODULE_UTILS_CONFIG_INIT_DIR/gettext.sh";
+    #**** Parameters ****
+    local p_lang=$1;    # Wanted language.
 
     #**** Code ****
-    # Checking if the "gettext.sh" file exists in the "$PATH" global variable listed paths.
-    if [ -f "$v_path_file_path" ]; then
-        # shellcheck disable=SC1090
-        source "$v_path_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'PATH' "$v_path_file_path";
+	if [ -z "$p_lang" ]; then
+		echo >&2;
 
+		echo "DE | ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2;
+		echo "EN | WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+		echo "ES | ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2;
+		echo >&2;
 
-    # Else, if the file is not found, the spare "gettext.sh" file which came with the library "install" folder is called
+		echo "FR | Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2;
+		echo >&2;
+
+		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+
+    elif [ -n "$p_lang" ] && [ ! -f "$__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR/$p_lang.list" ]; then
+		echo >&2;
+
+		echo "DE | ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2;
+		echo "EN | WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR » directory" >&2;
+		echo "ES | ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR »" >&2;
+		echo >&2;
+
+		echo "FR | ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR »" >&2;
+        echo >&2;
+
+        BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+
     else
-        if [ -f "$v_spare_file_path" ]; then
-            # shellcheck disable=SC1090
-            source "$v_spare_file_path" || Moduleinitializer_PrintModInitDefaultLanguage 'config-source' "$v_spare_file_path";
+        source "$__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR/$p_lang.list" || {
+            echo >&2;
 
-        # Else, if the spare "gettext.sh" file is also missing.
-        else
-            Moduleinitializer_PrintModInitDefaultLanguage 'config-missing';
-        fi
+            echo "DE | ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2;
+            echo "EN | WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+            echo "ES | ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2;
+            echo >&2;
+
+            echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2;
+
+            BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+        }
     fi
 }
 
@@ -204,14 +169,16 @@ function BU::ModuleInit::DisplayInitializedGlobalVarsInfos()
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "Initializing the modules manager's root directory variables" '+' 'msg';       BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"	'Dirpath'		"This global variable stores the path to the parent directory of each module configuration directories" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"		'Dirpath'		"This global variable stores the path to the configuration directory of each module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT_HOME"             	"$__BU_MODULE_UTILS_ROOT_HOME"	'Dirpath'		"This global variable stores the path to the parent directory of each module configuration and initialization directories" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_ROOT"                  	"$__BU_MODULE_UTILS_ROOT"		'Dirpath'		"This global variable stores the path to the configuration and initialization directories of each module"                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "Initializing the configuration directories paths" '+' 'msg';                  BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"            	"$__BU_MODULE_UTILS_CONFIG_DIR"			'Dirpath'		"This global variable stores the path to the configuration directory of each module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"       	"$__BU_MODULE_UTILS_CONFIG_INIT_DIR"	'Dirpath'		"This global variable stores the path of the configuration folder used by the module initialization file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"    	"$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"	'Dirpath'		"This global variable stores the configuration folder of the current module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_DIR"               "$__BU_MODULE_UTILS_CONFIG_DIR"             'Dirpath'		"This global variable stores the path to the configuration directory of each module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_DIR"          "$__BU_MODULE_UTILS_CONFIG_INIT_DIR"        'Dirpath'		"This global variable stores the path of the configuration folder used by the modules initialization file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_MODULES_DIR"       "$__BU_MODULE_UTILS_CONFIG_MODULES_DIR"     'Dirpath'		"This global variable stores the configuration folder of the current module" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR"     "$__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR"   'Dirpath'       "This global variable stores the path of the language folder, used by the modules initialization file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "Initializing the modules initializers files directory" '+' 'msg';             BU::ModuleInit::Msg;
@@ -225,9 +192,9 @@ function BU::ModuleInit::DisplayInitializedGlobalVarsInfos()
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "Initializing the variables of the file which contains the library's root folder's path (installed with the root privileges with the installer file)" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"		'File'		"Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" 	'Dirpath'		"Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"		'Filepath'		"Path of the file containing the library's root folder's path (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_NAME"        'File'      "Name of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"  'Dirpath'   "Name of the parent folder of the file containing the path to the root folder of the library (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"          "$__BU_MODULE_UTILS_LIB_ROOT_DIR_ROOT_FILE_PATH"        'Filepath'  "Path of the file containing the library's root folder's path (if this file is owned by the super-user)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
     BU::ModuleInit::Msg;
 
     return 0;
@@ -1187,6 +1154,8 @@ if [ -d "$__BU_MODULE_UTILS_ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_UTILS_CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "initializer")";
 	__BU_MODULE_UTILS_CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_DIR" "modules")";
 
+	__BU_MODULE_UTILS_CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_CONFIG_INIT_DIR" "lang")";
+
     # Modules directories
 	__BU_MODULE_UTILS_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_UTILS_ROOT" "modules")";
 
@@ -1218,7 +1187,7 @@ fi
 ## CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
 
 # THIS FUNCTION MUST BE THE FIRST FUNCTION TO BE CALLED !!!! --> Setting the whole project's language by getting and sourcing the "gettext.sh" file.
-BU::ModuleInit::Get_gettext_sh_File;
+BU::ModuleInit::GetModuleInitLanguage "$(echo "$LANG" | cut -d _ -f1)";
 
 # Checking the currently used Bash language's version.
 BU::ModuleInit::CheckBashMinimalVersion;
