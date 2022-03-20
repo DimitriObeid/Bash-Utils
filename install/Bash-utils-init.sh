@@ -93,8 +93,8 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 
         # Deutch | German
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && {
-            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
-            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
+            echo '-----------------------------------------------------------------------------------------------' >&2 && echo >&2;
+            echo "FATALER FEHLER: DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
             echo "Da die Nachrichten in der Modulinitialisierungsdatei in Variablen gespeichert werden, stützt sich diese Datei auf diese Übersetzungsdateien, die diese Variablen definieren" >&2;
             echo "Anhalten der Skriptausführung" >&2;
@@ -119,8 +119,8 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 
         # Español | Spanish
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && {
-            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
-            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
+            echo '-----------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
 
             echo "Como los mensajes del fichero de inicialización del módulo se almacenan en variables, este fichero es asumido por estos ficheros de traducción, que definen estas variables" >&2;
             echo "Detener la ejecución del script" >&2;
