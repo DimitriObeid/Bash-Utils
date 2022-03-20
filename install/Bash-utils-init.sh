@@ -125,7 +125,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
 		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
-    elif [ -n "$p_lang" ] && [ ! -f "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.list" ]; then
+    elif [ -n "$p_lang" ] && [ ! -f "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" ]; then
 		echo "DE | ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2;
 		echo "EN | WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » directory" >&2;
 		echo "ES | ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2;
@@ -163,6 +163,11 @@ function BU::ModuleInit::AskPrintLog()
 
 		BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY" '#' 'echo';
 
+		# If the user's defined language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
+		if [ "${__BU_MODULE_INIT_USER_LANG,}" != 'en' ]; then
+            echo "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH";
+		fi
+
 		echo; read -rp "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS" read_ask_print_log;
 
 		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
@@ -180,41 +185,43 @@ function BU::ModuleInit::AskPrintLog()
 # Printing and / or logging the global variables already defined.
 function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos()
 {
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_GLOBAL_VARS" '#' 'msg';
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS" '#' 'msg';
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__SCRIPT_INFO" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_PROJECT_PID'           "$__BU_MODULE_INIT_PROJECT_PID" 'Int'       "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__PID"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_project_pid_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO" '+' 'msg'; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_PROJECT_PID'           "$__BU_MODULE_INIT_PROJECT_PID" 'Int'       "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID"       "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_project_pid_lineno";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_ROOT_DIR_VARS" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_ROOT_HOME"             "$__BU_MODULE_INIT_ROOT_HOME"  'Dirpath'    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ROOT_HOME"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_root_home_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_ROOT"                  "$__BU_MODULE_INIT_ROOT"       'Dirpath'    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ROOT"         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_root_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS" '+' 'msg'; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_ROOT_HOME"             "$__BU_MODULE_INIT_ROOT_HOME"  'Dirpath'    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_root_home_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_ROOT"                  "$__BU_MODULE_INIT_ROOT"       'Dirpath'    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT"      "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_root_lineno";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_CONF_DIRS" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_DIR"            "$__BU_MODULE_INIT_CONFIG_DIR"              'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CONFIG_DIR"             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_dir_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_INIT_DIR"       "$__BU_MODULE_INIT_CONFIG_INIT_DIR"         'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CONFIG_INIT_DIR"        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_init_dir_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_MODULES_DIR"    "$__BU_MODULE_INIT_CONFIG_MODULES_DIR"      'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CONFIG_MODULES_DIR"     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_modules_dir_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS" '+' 'msg'; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_DIR"            "$__BU_MODULE_INIT_CONFIG_DIR"              'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR"              "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_dir_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_INIT_DIR"       "$__BU_MODULE_INIT_CONFIG_INIT_DIR"         'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR"         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_init_dir_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_MODULES_DIR"    "$__BU_MODULE_INIT_CONFIG_MODULES_DIR"      'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR"      "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_modules_dir_lineno";
 
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR"  "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR"    'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CONFIG_INIT_LANG_DIR"   "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_init_lang_dir_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR"  "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR"    'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_config_init_lang_dir_lineno";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_MODULE_INIT_DIR" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_MODULES_DIR"           "$__BU_MODULE_INIT_MODULES_DIR"             'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODULES_DIR"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_modules_dir_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR" '+' 'msg'; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_MODULES_DIR"           "$__BU_MODULE_INIT_MODULES_DIR"             'Dirpath' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR"             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_modules_dir_lineno";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_VARS_LIB_ROOT_DIR_FILE_PATH" '+' 'msg'; BU::ModuleInit::Msg
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_NAME"            "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_NAME"          'File'      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_NAME"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_name_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PARENT_DIR"      "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PARENT_DIR"    'Dirpath'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_parent_dir_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PATH"            "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PATH"          'Filepath'  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_PATH"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_path_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH" '+' 'msg'; BU::ModuleInit::Msg
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_NAME"            "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_NAME"          'File'      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME"           "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_name_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PARENT_DIR"      "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PARENT_DIR"    'Dirpath'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_parent_dir_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PATH"            "$__BU_MODULE_INIT_LIB_ROOT_DIR_FILE_PATH"          'Filepath'  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH"           "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_file_path_lineno";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME"       "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME"         'File'      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_NAME"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_name_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"   'Dirpath'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_parent_dir_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH"       "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH"         'Filepath'  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LIB_ROOT_DIR_ROOT_FILE_PATH"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_path_lineno";
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE" '+' 'msg'; BU::ModuleInit::Msg;
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME"       "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME"         'File'      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME"       "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_name_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR"   'Dirpath'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_parent_dir_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH"       "$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH"         'Filepath'  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH"       "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_lib_root_dir_root_file_path_lineno";
     BU::ModuleInit::Msg;
+
+    exit 0;
 }
 
 # Displaying the information on the initialized global variables
@@ -1185,6 +1192,7 @@ if [ -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
 
 	# Misc
 	__BU_MODULE_INIT_DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
+	__BU_MODULE_INIT_USER_LANG="$(echo "$LANG" | cut -d _ -f1)";
 else
 	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) --> ERROR !" >&2; echo >&2;
 
@@ -1207,7 +1215,7 @@ fi
 # a new value to the "$LANG" environment variable before calling the "BashUtils_InitModules()" function in your main script file.
 
 # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
-BU::ModuleInit::GetModuleInitLanguage "$(echo "$LANG" | cut -d _ -f1)";
+BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT_USER_LANG";
 
 # Checking the currently used Bash language's version.
 BU::ModuleInit::CheckBashMinimalVersion;
