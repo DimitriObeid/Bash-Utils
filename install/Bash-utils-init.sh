@@ -75,13 +75,11 @@ function BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary()
     echo '------------------------------------------------------------------------' >&2;
     echo >&2;
 
-    echo "de | Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2;
-    echo "en | The rest of the library will use english as default language" >&2;
-    echo "es | El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2;
-    echo >&2;
+    [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "The rest of the library will use english as default language" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && echo >&2;
 
-    echo "fr | Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2;
-    echo >&2;
+    [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && echo >&2;
 
     sleep 0.5;
 
@@ -92,18 +90,58 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
     source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/en.locale" || {
         echo >&2;
-        echo '-----------------------------------------------------------' >&2;
-        echo >&2;
 
-        echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2;
-        echo >&2;
+        # Deutch | German
+        [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && {
+            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
 
-        echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
-        echo "Aborting the script's execution" >&2;
-        echo >&2;
+            echo "Da die Nachrichten in der Modulinitialisierungsdatei in Variablen gespeichert werden, stützt sich diese Datei auf diese Übersetzungsdateien, die diese Variablen definieren" >&2;
+            echo "Anhalten der Skriptausführung" >&2;
+            echo >&2;
 
-        # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-        exit 1;
+            # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+            exit 1;
+        }
+
+        # English
+        [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && {
+            echo '-----------------------------------------------------------' >&2 && echo >&2;
+            echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
+        
+            echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
+            echo "Aborting the script's execution" >&2;
+            echo >&2;
+
+            # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+            exit 1;
+        }
+
+        # Español | Spanish
+        [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && {
+            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
+
+            echo "Como los mensajes del fichero de inicialización del módulo se almacenan en variables, este fichero es asumido por estos ficheros de traducción, que definen estas variables" >&2;
+            echo "Detener la ejecución del script" >&2;
+            echo >&2;
+
+            # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+            exit 1;
+        }
+
+        # Français | French
+        [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && {
+            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
+
+            echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
+            echo "Arrêt de l'exécution du script" >&2;
+            echo >&2;
+
+            # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+            exit 1;
+        }
     }
 }
 
@@ -115,35 +153,30 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
     #**** Code ****
 	if [ -z "$p_lang" ]; then
-        echo "DE | ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2;
-		echo "EN | WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
-		echo "ES | ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2;
-		echo >&2;
+        [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-		echo "FR | Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2;
-		echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
 		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
     elif [ -n "$p_lang" ] && [ ! -f "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" ]; then
-		echo "DE | ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2;
-		echo "EN | WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » directory" >&2;
-		echo "ES | ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2;
-		echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
 
-		echo "FR | ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2;
-        echo >&2;
+		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
 
         BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
     else
         source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" || {
-            echo "DE | ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2;
-            echo "EN | WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
-            echo "ES | ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2;
-            echo >&2;
+            [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT_USER_LANG,,}" = "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-            echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2;
+            [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
             BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
         }
