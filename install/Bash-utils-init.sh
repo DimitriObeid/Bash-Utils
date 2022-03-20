@@ -3,12 +3,26 @@
 # ----------------------
 ## SCRIPT'S INFORMATIONS
 
-# Name : Bash-utils-init.sh
-# Description : Library initializer file, initializing all the modules you need for your scripts.
-# Author(s) : Dimitri Obeid
-# Version : 3.0
+# Name          : Bash-utils-init.sh
+# Description   : Library initializer file, initializing all the modules you need for your scripts.
+# Author(s)     : Dimitri Obeid
+# Version       : 3.0
 
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your script file
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154,SC1090
+
+# -----------------------------------------------------------------------------
+# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your main script file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -76,7 +90,7 @@ function BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary()
 
 function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
-    source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/en.list" || {
+    source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/en.locale" || {
         echo >&2;
         echo '-----------------------------------------------------------' >&2;
         echo >&2;
@@ -123,7 +137,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
         BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
     else
-        source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.list" || {
+        source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" || {
             echo "DE | ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2;
             echo "EN | WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
             echo "ES | ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2;
@@ -1155,7 +1169,7 @@ if [ -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_INIT_CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_DIR" "initializer")";
 	__BU_MODULE_INIT_CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_DIR" "modules")";
 
-	__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_INIT_DIR" "lang")";
+	__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_INIT_DIR" "locale")";
 
     # Modules directories
 	__BU_MODULE_INIT_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_ROOT" "modules")";
