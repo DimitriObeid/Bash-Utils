@@ -27,6 +27,9 @@ __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
 # Path of the modules initializer file.
 __BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
 
+# Path of the modules initialization script's translations files.
+__BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_ROOT_PATH/install.Bash-utils/config/initializer/locale"
+
 # -----------------------------------------------
 
 
@@ -131,6 +134,15 @@ done
 # Processing the function files.
 for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
 	# BU::Newline '2';
+    EchoBU "${i^^}";
+
+    #BU::Newline "1"';
+    CatBU "$i";
+done
+
+# Path of the modules initialization script's translations files.
+for i in "$__BU_MODULE_INIT_TRANSLATIONS_PATH/"*.locale; do
+    # BU::Newline '2';
     EchoBU "${i^^}";
 
     #BU::Newline "1"';

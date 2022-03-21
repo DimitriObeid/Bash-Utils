@@ -4,7 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : Bash-utils-init.sh
-# Description   : Library initializer file, initializing all the modules you need for your scripts.
+# Description   : Library initializer script, initializing all the modules you need for your scripts.
 # Author(s)     : Dimitri Obeid
 # Version       : 3.0
 
@@ -108,7 +108,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && {
             echo '-----------------------------------------------------------' >&2 && echo >&2;
             echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
-        
+
             echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
             echo "Aborting the script's execution" >&2;
             echo >&2;
@@ -319,9 +319,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local pa_var_val_array=("$@")
 
         #**** Variables ****
-        local v_file; v_file="$([[ -n "$p_file" ]] && echo "File : $p_file" || echo "File : none")";
-        local v_func; v_func="$([[ -f "$p_func" ]] && echo "Func : $p_func" || echo "Func : none")";
-        local v_line; v_line="$([[ -n "$p_line" ]] && echo "Line : $p_line" || echo "Line : unknown")";
+        local v_file; v_file="$([[ -n "$p_file" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE : $p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
+        local v_func; v_func="$([[ -f "$p_func" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC : $p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
+        local v_line; v_line="$([[ -n "$p_line" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE : $p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -351,16 +351,16 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "Declared global array : $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY : $p_var_name" '-' 'msg';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::MsgLine "Declared global variable : $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY : $p_var_name" '-' 'msg';
 		fi
 
 		BU::ModuleInit::Msg;
 
-		BU::ModuleInit::Msg "Description : $p_var_desc";
+		BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION : $p_var_desc";
 		BU::ModuleInit::Msg;
 
 		BU::ModuleInit::Msg "$v_file";
@@ -368,7 +368,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		BU::ModuleInit::Msg "$v_line";
 
 		if [ "${p_var_type,,}" = 'array' ]; then
-            BU::ModuleInit::Msg "Type : array";
+            BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE";
             BU::ModuleInit::Msg;
 
     		# If a value or more are stored in the processed array.
@@ -377,7 +377,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 local v_index=0;
 
                 for _ in "${pa_var_val_array[@]}"; do
-                    BU::ModuleInit::Msg "Value [$v_index] : $_";
+                    BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE [$v_index] : $_";
 
                     # Line break every five lines, in order to keep the values list readable for a human.
                     local v_value_line=$(( v_index + 1 ));
@@ -400,24 +400,24 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 local v_index=0;
 
 			else
-				BU::ModuleInit::MsgLine "The array is empty" '-' 'msg';
+				BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY" '-' 'msg';
                 BU::ModuleInit::Msg;
 			fi
 		else
-            BU::ModuleInit::Msg "Type : $p_var_type";
+            BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE : $p_var_type";
             BU::ModuleInit::Msg;
 
 			# If a variable is stored in the processed variable.
 			if [ -n "$p_var_val" ]; then
 
 				if [ "${p_var_type,,}" = 'cmd' ]; then
-					BU::ModuleInit::Msg "Value : The « $p_var_name » global variable's value is a command substition";
+					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD" "$p_var_name")";
 				else
-					BU::ModuleInit::Msg "Value --> $p_var_val";
+					BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD : $p_var_val";
 				fi
 
 			else
-				BU::ModuleInit::Msg "No value stored in this variable" '-' 'msg';
+				BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY" '-' 'msg';
             fi
 
 			BU::ModuleInit::Msg;
@@ -533,8 +533,8 @@ function BU::ModuleInit::Msg()
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value.
     else
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE « $__BU_MODULE_INIT_MSG_ARRAY_PERMISSION » IS NOT SUPPORTED" >&2;
-        echo >&2; echo "Please change its value by '--log-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value." >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
+        echo >&2; echo "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -593,17 +593,17 @@ function BU::ModuleInit::MsgLineCount()
 }
 
 # Displaying a text when the script's execution must be stopped.
-function BU::ModuleInit::MsgAbort() { echo >&2; echo "Aborting the library's initialization" >&2; echo >&2; return 0; }
+function BU::ModuleInit::MsgAbort() { echo >&2; echo "$__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT" >&2; echo >&2; return 0; }
 
 # Pressing any key on the keyboard to do an action.
-function BU::ModuleInit::PressAnyKey() { echo; read -n 1 -s -r -p "Press any key to $1"; echo; return 0; }
+function BU::ModuleInit::PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "$__BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS %s" "$1")"; echo; return 0; }
 
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
 function BU::ModuleInit::PrintLog()
 {
     #**** Variables ****
-    local v_init_logs_str="INITIALIZATION LOGS";
+    local v_init_logs_str="$__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS";
     local v_tmp_file;
         v_tmp_file_original="$(echo "$RANDOM" | md5sum).tmp";
 
@@ -616,30 +616,31 @@ function BU::ModuleInit::PrintLog()
     #**** Code ****
     echo;
 
-    BU::ModuleInit::MsgLine "Here are the initialization logs" '#' 'echo'; echo
+    BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__PRINTLOG__HERE" '#' 'echo'; echo
 
-    if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-partial' ]; then
-        echo "Logging mode : partial"; echo;
-    elif [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
-        echo "Logging mode : full"; echo;
+    if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
+        echo "$__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE"; echo;
+
+    elif [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-partial' ]; then
+        echo "$__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE"; echo;
     fi
 
     BU::ModuleInit::MsgLine "$v_init_logs_str" '-' 'echo';
     BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-' 'echo';
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::Msg "DISPLAYING THE LOGS WITH THE « less » COMMAND";
+    BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE";
     BU::ModuleInit::Msg;
 
-    BU::ModuleInit::PressAnyKey 'display the logs with the « less » command';
+    BU::ModuleInit::PressAnyKey "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT";
     BU::ModuleInit::Msg;
 
-    touch "$v_tmp_file" || { echo >&2; echo "Unable to create the temporary file to store the logs" >&2; echo >&2; return 1; };
+    touch "$v_tmp_file" || { echo >&2; echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE" >&2; echo >&2; return 1; };
 
-    echo "DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND" >> "$v_tmp_file";
+    echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE" >> "$v_tmp_file";
     echo >> "$v_tmp_file";
 
-    echo "Don't press the « Q » button, or else you will close this  and you will have to execute again the script" >> "$v_tmp_file"
+    echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q" >> "$v_tmp_file"
     echo >> "$v_tmp_file";
     echo >> "$v_tmp_file";
 
@@ -652,7 +653,7 @@ function BU::ModuleInit::PrintLog()
 
     rm "$v_tmp_file";
 
-    echo; echo ">>>>> END OF THE INITIALIZATION LOGS"; echo;
+    echo; echo ">>>>> $__BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT"; echo;
 
 	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array, and it calls this function.
 

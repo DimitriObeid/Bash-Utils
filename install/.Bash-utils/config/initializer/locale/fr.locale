@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 
-## "BU::ModuleInit::AskPrintLog" FUNCTION
+# ----------------------
+## SCRIPT'S INFORMATIONS
 
-#
+# Name          : fr.locale
+# Description   : Messages de traduction en français du script d'initialisation des modules.
+# Author(s)     : Dimitri Obeid
+# Version       : 1.0
+
+# ----------------------------
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
+
+## FONCTION "BU::ModuleInit::AskPrintLog"
+
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » ) ?";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le contenu du tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION », veuillez entrer « yes » ou « Y » (aucune sensibilité à la casse)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Entrez votre réponse : ";
@@ -10,49 +23,127 @@ __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Le contenu du fichier de logs du 
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::DisplayInitializedGlobalVarsInfos" FUNCTION
+## FONCTION "BU::ModuleInit::DisplayInitializedGlobalVarsInfos"
 
-#
+# Message d'initialisation.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
 
-#
+# Identifiant du processus (PID).
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="Initialisation des informations du script";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="Cette variable globale enregistre l'identifiant de processus (PID) du programme actuel";
 
-#
+# Chemins du gestionnaire de modules.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="Initialisation des variables du dossier racine du gestionnaire de modules";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="Cette variable globale enregistre le chemin d'accès au répertoire parent des répertoires de configuration et d'initialisation de chaque module";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="Cette variable globale enregistre le chemin vers les répertoires de configuration et d'initialisation de chaque module";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="Cette variable globale enregistre le chemin vers le script d'initialisation des modules";
 
-#
+# Chemins des dossiers de configuration.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
 
-#
+# Chemins des scripts d'initialisation de chaque module.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
 
-#
+# Chemin du répertoire racine de la librairie.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Nom du fichier contenant le chemin d'accès au dossier racine de la librairie";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Chemin du fichier contenant le chemin du dossier racine de la librairie";
 
-#
+# Chemin du répertoire racine de la librairie (avec les privilèges du super-utilisateur).
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie (installée avec les privilèges du super-utilisateur avec le fichier d'installation).";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Nom du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Chemin du fichier contenant le chemin du dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
 
-#
+# Variables diverses.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="Initialisation des variables diverses";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
 
 # -----------------------------------------------
 
-## "" FUNCTION
+## FONCTION "BU::ModuleInit::DisplayInitGlobalVarsInfos"
+
+# Fichiers, fonctions et numéros de ligne connus.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE="Fichier   :";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC="Fonction  :";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE="Ligne     :";
+
+# Fichiers, fonctions et numéros de ligne inconnus.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL="Fichier  : Inconnu";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL="Fonction : Aucune";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL="Ligne    : Inconnu";
+
+# Vérification des tableaux.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY="Tableau global déclaré";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY="Variable globale déclarée";
+
+# Description.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION="Description";
+
+# Traitement des tableaux.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE="Type : tableau";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="Valeur";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY="Le tableau est vide";
+
+# Traitement des autres valeurs (pas de tableaux).
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE="Type";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="Valeur : La valeur de la variable globale « %s » est une substition de commande";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="Valeur";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="Aucune valeur n'est enregistrée dans cette variable globale";
+
+# -----------------------------------------------
+
+## FONCTION "BU::ModuleInit::Msg"
+
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> ATTENTION : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par « --log-display », « --log-shut », « --log-shut-display » ou une valeur vide où vous avez (re)défini la valeur.";
+
+# -----------------------------------------------
+
+# FONCTION "BU::ModuleInit::MsgAbort"
+
+__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
+
+# -----------------------------------------------
+
+# FONCTION "BU::ModuleInit::MsgAbort"
+
+__BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche pour";
+
+# -----------------------------------------------
+
+# FONCTION "BU::ModuleInit::PrintLog"
+
+# Titre.
+__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="ENTRÉE DU JOURNAL D'INITIALISATION";
+
+# Display log informations.
+__BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
+__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Mode de journalisation : totale (paramètre « --mode-log-full » passé lors de l'appel du module 0 « module »)";
+__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Mode de journalisation : partielle (paramètre « --mode-log-partial » passé lors de l'appel du module 0 « module »)";
+
+__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="AFFICHAGE DES JOURNAUX D'INITIALISATION AVEC LA COMMANDE « less »";
+__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="afficher les journaux d'initialisation avec la commande « less »";
+__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="N'appuyez pas sur le bouton « Q », sinon vous fermerez ce fichier et vous devrez exécuter à nouveau le script.";
+
+# Cannot create the temporary file.
+__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="Impossible de créer le fichier temporaire pour stocker les entrées du journal d'initialisation";
+
+# Post-display instructions.
+__BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="FIN DE L'AFFICHAGE DES JOURNAUX D'INITIALISATION";
+
+
+
+
+
+
+
+
+#
