@@ -223,11 +223,16 @@ __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODU
 
 # -----------------------------------------------
 
-# "" FUNCTION
+# "BU::ModuleInit::SourcingFailure" FUNCTION
+
+__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
+
+# -----------------------------------------------
 
 
 
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-
-#
+## "BU::ModuleInit::Usage" FUNCTION
