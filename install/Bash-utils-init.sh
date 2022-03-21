@@ -322,9 +322,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local pa_var_val_array=("$@")
 
         #**** Variables ****
-        local v_file; v_file="$([[ -n "$p_file" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE : $p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
-        local v_func; v_func="$([[ -f "$p_func" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC : $p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
-        local v_line; v_line="$([[ -n "$p_line" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE : $p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
+        local v_file; v_file="$([[ -n "$p_file" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE $p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
+        local v_func; v_func="$([[ -f "$p_func" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC $p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
+        local v_line; v_line="$([[ -n "$p_line" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE $p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -354,16 +354,16 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY : $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY $p_var_name" '-' 'msg';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY : $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY $p_var_name" '-' 'msg';
 		fi
 
 		BU::ModuleInit::Msg;
 
-		BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION : $p_var_desc";
+		BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION $p_var_desc";
 		BU::ModuleInit::Msg;
 
 		BU::ModuleInit::Msg "$v_file";
@@ -407,7 +407,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 BU::ModuleInit::Msg;
 			fi
 		else
-            BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE : $p_var_type";
+            BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE $p_var_type";
             BU::ModuleInit::Msg;
 
 			# If a variable is stored in the processed variable.
@@ -416,7 +416,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				if [ "${p_var_type,,}" = 'cmd' ]; then
 					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD" "$p_var_name")";
 				else
-					BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD : $p_var_val";
+					BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD $p_var_val";
 				fi
 
 			else
@@ -860,18 +860,18 @@ function BU::ModuleInit::SourcingFailure()
 # Usage function
 function BU::ModuleInit::Usage()
 {
-	echo >&2; echo "The supported values are :" >&2;
-	echo "WARNING : the three following parameters are incompatible with each other, they will overwrite each other";
+	echo >&2; echo "$__BU_MODULE_INIT_MSG__USAGE__SUPVALS" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG";
 	echo >&2;
 
-	echo "--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array" >&2;
-	echo "--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_INIT_MSG_ARRAY » array" >&2;
-	echo "--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY" >&2;
 	echo >&2;
 
-	echo "WARNING : the two following parameters are incompatible with each other, they will overwrite each other";
-	echo "--mode-log-full       : display all informations about the initialization process" >&2;
-	echo "--mode-log-partial    : display only the essential informations" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG";
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL" >&2;
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL" >&2;
 }
 
 # Processing the "module" value's parameters.
@@ -898,9 +898,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value passed without argument(s)" "$LINENO";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS\h")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-            echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE IS PASSED WITHOUT PARAMETERS" >&2;
+            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2;
             echo >&2; echo "Please pass a valid argument between the double quotes where you pass the « module » value" >&2;
 
             BU::ModuleInit::MsgAbort;

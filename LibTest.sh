@@ -4,12 +4,12 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
+LANG='en';
+
 # shellcheck disable=SC1090
 if ! source "$HOME/Bash-utils-init.sh"; then
     echo >&2; echo -e "In $(basename "$0"), line $(( LINENO-1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1
 fi
-
-LANG='fr';
 
 # Calling the "BashUtils_InitModules()" function.
 if ! BashUtils_InitModules \

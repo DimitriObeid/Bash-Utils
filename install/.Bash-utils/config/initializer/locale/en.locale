@@ -88,9 +88,9 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="This global va
 ## "BU::ModuleInit::DisplayInitGlobalVarsInfos" FUNCTION
 
 # Known files, functions and line numbers.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE="File";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC="Func";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE="Line";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE="File :";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC="Func :";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE="Line :";
 
 # Unknown files, functions and line numbers.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL="File : unknown";
@@ -106,13 +106,13 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION="Description";
 
 # Array processer.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE="Type : array";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="Value";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="Value :";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY="The array is empty";
 
 # Other value processer (not arrays).
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE="Type";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE="Type :";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="Value : The « %s » global variable's value is a command substition";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="Value";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="Value :";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="No value stored in this global variable";
 
 # -----------------------------------------------
@@ -223,7 +223,7 @@ __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODU
 
 # -----------------------------------------------
 
-# "BU::ModuleInit::SourcingFailure" FUNCTION
+## "BU::ModuleInit::SourcingFailure" FUNCTION
 
 __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
 
@@ -236,3 +236,21 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 #### SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
 ## "BU::ModuleInit::Usage" FUNCTION
+
+__BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
+
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="WARNING : the three following parameters are incompatible with each other, they will overwrite each other";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="WARNING : the two following parameters are incompatible with each other, they will overwrite each other";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="--mode-log-full       : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="--mode-log-partial    : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
+
+# -----------------------------------------------
+
+## "BU::ModuleInit::ProcessFirstModuleParameters" FUNCTION
+
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
+
