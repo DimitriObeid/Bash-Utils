@@ -898,10 +898,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS\h")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS\h")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
-            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2;
-            echo >&2; echo "Please pass a valid argument between the double quotes where you pass the « module » value" >&2;
+            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE" >&2;
 
             BU::ModuleInit::MsgAbort;
 
@@ -928,22 +928,22 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 #**** Code ****
                 # If the current value AND the new value are the same.
                 if [ "$p_value" = "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
-                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's argument « $p_value » passed twice" "$LINENO";
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$p_value")";
 
-                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed the « $p_value » as « module » value's argument for the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable" >&2;
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
                     echo >&2; return 1;
                 else
-                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « module » value's arguments « $p_value » and « $__BU_MODULE_INIT_MSG_ARRAY_PERMISSION » passed together" "$LINENO";
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")";
 
-                    echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other" >&2; echo >&2;
-                    echo "Please choose only one of these parameters." >&2; echo >&2
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2" >&2; echo >&2
 
-                    echo "The new value will be assignated to the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable." >&2;
+                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO" >&2;
 
                     echo >&2;
-                    echo "Current value stored in the permission variable : $__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
-                    echo "New value : $p_value" >&2;
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL\n" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL\n" "$p_value" >&2;
 
                     echo >&2; return 1;
                 fi
