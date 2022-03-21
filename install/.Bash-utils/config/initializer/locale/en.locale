@@ -272,5 +272,4 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 
 # No args given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Please pass a valid argument between the double quotes where you pass the « module » value";
-
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";

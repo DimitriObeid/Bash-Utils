@@ -270,3 +270,8 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 # -----------------------------------------------
 
 ## FONCTION "BU::ModuleInit::ProcessFirstModuleParameters"
+
+# Aucun argument n'a été passé en tant que valeur(s) du paramètre "module", dans le cas où ce paramètre a été invoqué en tant que premier argument lors de l'appel de la fonction "BashUtils_InitModules".
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR « module » A ÉTÉ PASSÉE SANS ARGUMENT(S)";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Veuillez passer au moins un argument valide entre les guillemets où vous passez la valeur « module »";
+
