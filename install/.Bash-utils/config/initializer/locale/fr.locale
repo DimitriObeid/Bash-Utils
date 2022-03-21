@@ -10,9 +10,26 @@
 
 # ----------------------------
 
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### DEFINING USEFUL VARIABLES
+
+## REPEATED MESSAGES
+
+# Writing the file, function and the line number where an error occured.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> ATTENTION"
+
+# -----------------------------------------------
+
+
+
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
 ## FONCTION "BU::ModuleInit::AskPrintLog"
 
@@ -102,16 +119,16 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="Aucune valeur n'es
 
 ## FONCTION "BU::ModuleInit::Msg"
 
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> ATTENTION : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par « --log-display », « --log-shut », « --log-shut-display » ou une valeur vide où vous avez (re)défini la valeur.";
 
 # -----------------------------------------------
 
-# FONCTION "BU::ModuleInit::MsgAbort"
+## FONCTION "BU::ModuleInit::MsgAbort"
 
 __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
 
-# -----------------------------------------------
+## -----------------------------------------------
 
 # FONCTION "BU::ModuleInit::MsgAbort"
 
@@ -119,12 +136,12 @@ __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche 
 
 # -----------------------------------------------
 
-# FONCTION "BU::ModuleInit::PrintLog"
+## FONCTION "BU::ModuleInit::PrintLog"
 
 # Titre.
 __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="ENTRÉE DU JOURNAL D'INITIALISATION";
 
-# Display log informations.
+# Informations sur l'afichage des journaux d'initialisation.
 __BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
 __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Mode de journalisation : totale (paramètre « --mode-log-full » passé lors de l'appel du module 0 « module »)";
 __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Mode de journalisation : partielle (paramètre « --mode-log-partial » passé lors de l'appel du module 0 « module »)";
@@ -133,12 +150,80 @@ __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="AFFICHAGE DES JOURNAUX D'INI
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="afficher les journaux d'initialisation avec la commande « less »";
 __BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="N'appuyez pas sur le bouton « Q », sinon vous fermerez ce fichier et vous devrez exécuter à nouveau le script.";
 
-# Cannot create the temporary file.
+# Impossibilité de créer le fichier temporaire.
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="Impossible de créer le fichier temporaire pour stocker les entrées du journal d'initialisation";
 
-# Post-display instructions.
+# Instructions post-affichage.
 __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="FIN DE L'AFFICHAGE DES JOURNAUX D'INITIALISATION";
 
+# -----------------------------------------------
+
+## FONCTION "BU::ModuleInit::PrintLogError"
+
+__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="ERREUR : DESCRIPTION = %s | LIGNE = %s";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
+
+## FONCTION "BU::ModuleInit::CheckPath"
+
+# Chemin de fichier manquant.
+__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="Aucun chemin de fichier";
+
+# Aucune cible spécifiée.
+__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : AUCUNE SPÉCIFICATION DONNÉE SUR LA CIBLE !!!";
+__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION="Veuillez spécifier si la cible est un fichier ou un dossier en passant la valeur 'f' (fichier) ou 'd' (dossier) en tant que second argument lors de l'appel de la fonction « %s »";
+
+# Cible spécifiée, main non-trouvée.
+__BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND="(mauvais chemin de dossier : non trouvé)";
+__BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND="(mauvais chemin de fichier : non trouvé)";
+
+# Cible spécifiée, mais le type est inconnu.
+__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR ACTUELLE DU PARAMÈTRE « p_target » EST « %s », ET PAS L'UNE DES VALEURS ATTENDUES : 'D', 'd', 'F' OR 'f'";
+
+# -----------------------------------------------
+
+## FONCTION "BU::ModuleInit::FindPath"
+
+__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE TROUVER CE CHEMIN";
+
+# -----------------------------------------------
+
+## FONCTION "BU::ModuleInit::GetModuleName"
+
+__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Impossible d'obtenir le nom du module depuis le nom de son dossier parent";
+
+# -----------------------------------------------
+
+## FONCTION "BU::ModuleInit::ListInstalledModules"
+
+# Unable to create the temporary directory.
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR="Impossible de créer le dossier temporaire « tmp » de stockage des journaux d'initialisation dans le dossier « %s/ »";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : $__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE="Si le problème persite, veuillez créer ce dossier manuellement";
+
+# Listing the installed modules.
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST="LISTE DES MODULES INSTALLÉS";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING="ATTENTION ! UN OU PLUSIEURS MODULES SONT MANQUANTS DANS LES DOSSIERS « %s » OU « %s »";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST="LISTE DES DOSSIERS DE CONFIGURATION DES MODULES INSTALLÉS";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_INITIALIZATION_FOLDER_LIST="MODULES INITIALIZATION FOLDER LIST";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW="THE DIFFERENCES BETWEEN THESE TWO FILES ARE LISTED BELOW";
+
+# Missing modules or modules not found.
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : The « ls -l » command pointed towards an unexistent path";
+
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MODULES CONFIGURATION FOLDER IS MISSING !";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MODULES INITIALIZATION FOLDER IS MISSING !";
+
+# -----------------------------------------------
+
+# "" FUNCTION
 
 
 

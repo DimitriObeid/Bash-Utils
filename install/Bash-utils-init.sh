@@ -88,6 +88,9 @@ function BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary()
 
 function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
+    # Changing the current language to English.
+    LANG="en_US.UTF-8";
+
     source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/en.locale" || {
         echo >&2;
 
@@ -538,7 +541,7 @@ function BU::ModuleInit::Msg()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog;
+        BU::ModuleInit::AskPrintLog >&2;
 
         exit 1;
     fi
@@ -670,7 +673,7 @@ function BU::ModuleInit::PrintLogError()
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
-    BU::ModuleInit::MsgLine "ERROR : DESC = $p_desc | LINE = $p_lineno" '-' 'msg' >&2;
+    BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR" "$p_desc" "$p_lineno")" '-' 'msg' >&2;
 
     BU::ModuleInit::Msg >&2;
 
@@ -709,13 +712,13 @@ function BU::ModuleInit::CheckPath()
 
     #**** Code ****
     if [ -z "$p_path" ]; then
-        printf "<No file path>" >&2; return 0;
+        printf "« $__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH »" >&2; return 0;
 
     else
         if [ -z "$p_target" ]; then
-            echo  >&2; echo ">>>>> BASH-UTILS ERROR >>>>> IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » >>>>> NO SPECIFICATION ABOUT THE TARGET !!!" >&2; echo >&2;
+            echo  >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
 
-            echo "Please specify if the target is a file or a folder by passing 'f' or 'd' as second argument when you call the « ${FUNCNAME[0]} » function." >&2; echo >&2; return 1;
+            printf "$__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION" "${FUNCNAME[0]}" >&2; echo >&2; return 1;
         else
             if [[ "$p_target" = [D-d] ]]; then
 
@@ -723,7 +726,7 @@ function BU::ModuleInit::CheckPath()
                     printf "%s" "$p_path"; return 0;
 
                 else
-                    printf "%s (bad directory : not found)" "$p_path" >&2; return 0;
+                    printf "%s $__BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND" "$p_path" >&2; return 0;
                 fi
 
             elif [[ "$p_target" = [F-f] ]]; then
@@ -732,10 +735,10 @@ function BU::ModuleInit::CheckPath()
                     printf "%s" "$p_path"; return 0;
 
                 else
-                    printf "%s (bad file path : not found)" "$p_path" >&2; return 0;
+                    printf "%s $__BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND" "$p_path" >&2; return 0;
                 fi
             else
-                echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> WARNING : THE « p_target » PARAMETER'S CURRENT VALUE IS « $p_target », NOT THE EXPECTED 'D', 'd', 'F' OR 'f'" >&2; echo >&2; return 1;
+                echo >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
             fi
         fi
     fi
@@ -749,9 +752,10 @@ function BU::ModuleInit::FindPath()
     find "$1" -maxdepth 1 -iname "$2" -print 2>&1 | grep -v "Permission denied" ||
 	{
         if [ -z "$__BU_MODULE_INIT_MSG_ARRAY_EXISTS" ]; then
-            echo >&2; echo "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; echo >&2;
+            echo >&2; printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2" >&2; echo >&2;
+
         else
-            BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "${FUNCNAME[0]} --> WARNING : UNABLE TO FIND THIS PATH --> $1/$2" >&2; BU::ModuleInit::Msg >&2;
+            BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
         fi
 
         return 1;
@@ -761,7 +765,7 @@ function BU::ModuleInit::FindPath()
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
 function BU::ModuleInit::GetModuleName()
 {
-    v_module="$(cd "$(dirname "$1")" || { echo >&2; echo -e "Unable to get the module's name from the parent directory name" >&2; echo >&2; BU::ModuleInit::AskPrintLog; exit 1; }; pwd -P)";
+    v_module="$(cd "$(dirname "$1")" || { echo >&2; printf "$__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; exit 1; }; pwd -P)";
 
     echo "${v_module##*/}"; return 0;
 }
@@ -780,49 +784,54 @@ function BU::ModuleInit::ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-            BU::ModuleInit::PrintLogError "Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_INIT_ROOT/ » directory" "$LINENO";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR" "$__BU_MODULE_INIT_ROOT")" "$LINENO";
 
-			echo "In « ${BASH_SOURCE[0]}, line $(( LINENO-4 )) » Unable to create the logs temporary directory « tmp » in the « $__BU_MODULE_INIT_ROOT/ » directory" >&2; echo >&2;
+			printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "$__BU_MODULE_INIT_ROOT" >&2; echo >&2;
 
-			echo "If the problem persists, please create this folder manually" >&2; echo >&2;
+			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE" >&2; echo >&2;
 
-			BU::ModuleInit::AskPrintLog; exit 1;
+			BU::ModuleInit::AskPrintLog >&2; exit 1;
 		}
     fi
 
     if [ -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
 
 																				# In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -1 "$__BU_MODULE_INIT_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; BU::ModuleInit::AskPrintLog; exit 1; };
-        ls -1 "$__BU_MODULE_INIT_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; echo "FUNCTION ${FUNCNAME[0]}, LINE $LINENO >>>>> Warning ! the ls -l command pointed towards an unexistent path" >&2; echo >&2; BU::ModuleInit::AskPrintLog; exit 1; };
+        ls -1 "$__BU_MODULE_INIT_CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; exit 1; };
+        ls -1 "$__BU_MODULE_INIT_MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; exit 1; };
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
-            echo; echo "INSTALLED MODULES LIST :"; echo; sleep ".5";
+            echo; echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST :"; echo; sleep ".5";
 
+            # Displaying the content of the file which stores both the found modules configuration folders and the the modules initialization folders.
             cat "$v_module_conf_f"; echo; sleep 1;
         else
-            echo >&2; echo "WARNING ! A MODULE OR MORE ARE MISSING IN THE « $__BU_MODULE_INIT_CONFIG_MODULES_DIR » OR IN THE « $__BU_MODULE_INIT_MODULES_DIR » FOLDERS" >&2; echo >&2;
+            echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING\n" "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$__BU_MODULE_INIT_MODULES_DIR" >&2; echo >&2;
 
-            echo "MODULES CONFIGURATION FOLDER LIST :" >&2; echo >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST :" >&2; echo >&2;
 
+            # Displaying the content of the file which stores the found modules configuration folders.
             cat "$v_module_conf_f" >&2; echo >&2;
 
-            echo "MODULES INITIALIZATION FOLDER LIST :" >&2; echo >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_INITIALIZATION_FOLDER_LIST :" >&2; echo >&2;
 
+            # Displaying the content of the file which stores the found modules initialization folders.
             cat "$v_module_init_f"; echo >&2; echo >&2;
 
 			# Getting the differences between the two files.
-			echo "THE DIFFERENCES BETWEEN THESE TWO FILES ARE LISTED BELOW" >&2; echo >&2;
+			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW" >&2; echo >&2;
 
 			sdiff "$v_module_conf_f" "$v_module_conf_f"; echo >&2;
         fi
     else
         if [ ! -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ] && [ ! -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
-            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !" >&2;
+            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+
         elif [ -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ]; then
-            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES CONFIGURATION FOLDER IS MISSING !" >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+
         elif [ -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
-            echo "IN « ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) » --> WARNING ! THE MODULES INITIALIZATION FOLDER IS MISSING !" >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
         fi
 
 		echo >&2;
@@ -841,7 +850,7 @@ function BU::ModuleInit::SourcingFailure()
     local p_module=$2;  # Name of the module.
 
     #**** Code ****
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog; exit 1;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg ">>>>> BASH-UTILS ERROR >>>>> UNABLE TO SOURCE THIS « $p_module » MODULE'S FILE --> $(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
 }
 
 # -----------------------------------------------
@@ -1060,7 +1069,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog; exit 1;;
+							BU::ModuleInit::AskPrintLog >&2; exit 1;;
 					esac
 
                 # -----------------------------------------------
@@ -1095,7 +1104,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog; exit 1;;
+							BU::ModuleInit::AskPrintLog >&2; exit 1;;
 					esac
 
                 # -----------------------------------------------
@@ -1113,7 +1122,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                     BU::ModuleInit::MsgAbort;
 
-                    BU::ModuleInit::AskPrintLog; exit 1;
+                    BU::ModuleInit::AskPrintLog >&2; exit 1;
                 fi
             done
 
@@ -1137,7 +1146,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog; exit 1;
+        BU::ModuleInit::AskPrintLog >&2; exit 1;
 
 
     # -----------------------------------------------
@@ -1180,7 +1189,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog; exit 1;
+        BU::ModuleInit::AskPrintLog >&2; exit 1;
 
     # -----------------------------------------------
 
@@ -1203,7 +1212,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        echo >&2; BU::ModuleInit::AskPrintLog; return 1;
+        echo >&2; BU::ModuleInit::AskPrintLog >&2; return 1;
     fi
 
     return 0;
