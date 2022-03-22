@@ -137,7 +137,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="$__BU_MODULE_INIT_MS
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="Aucune valeur n'est enregistrée dans cette variable globale";
 
-# Effacement des valeurs enregistrées dans les variables constituant la liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point, pour libérer de la mémoire.
+# Effacement des valeurs enregistrées dans les variables constituant la liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point, afin de libérer de la mémoire.
 unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3 \
@@ -274,16 +274,34 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 ## FONCTION "BU::ModuleInit::Usage"
 
+# Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3="--log-shut-display    : efficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
+
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1="--mode-log-full       : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
+
+# Affichage des valeurs supportées par l'option "module".
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="Les valeurs supportées sont :";
 
+# Affichage des valeurs supportées pour le paramètre de redirection du journal.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="ATENTION : Les trois paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="--log-shut-display    : efficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3";
 
+# Affichage des valeurs supportées pour le paramètre de journalisation.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="ATTENTION : les deux paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="--mode-log-full       : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="--mode-log-partial    : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2";
+
+# Effacement des valeurs enregistrées dans les variables constituant la liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point, afin de libérer de la mémoire.
+unset __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2
 
 # -----------------------------------------------
 
@@ -308,6 +326,25 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 ## FONCTION "BU::ModuleInit::ProcessFirstModuleParameters"
 
 # Aucun argument n'a été passé en tant que valeur(s) du paramètre "module", dans le cas où ce paramètre a été invoqué en tant que premier argument lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : LA VALEUR « module » A ÉTÉ PASSÉE SANS ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR « module » A ÉTÉ PASSÉE SANS ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Veuillez passer au moins un argument valide entre les guillemets où vous passez la valeur « module »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : LA VALEUR « module » A ÉTÉ PASSÉE SANS ARGUMENT(S)";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR « module » A ÉTÉ PASSÉE SANS ARGUMENT(S)";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE="Veuillez passer au moins un argument valide entre les guillemets où vous passez la valeur « module »";
+
+# Un ou plusieurs argumeont ont été donnés : option "--log-*" non supportée passée au paramètre "module".
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Mauvaise option d'autorisation de journalisation de la valeur du module : %s";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : L'OPTION DE PERMISSION DE JOURNALISATION « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉE";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s »";
+
+# Un ou plusieurs argumeont ont été donnés : option "--mode-log-*" non supportée passée au paramètre "module".
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="Mauvaise option de mode de la valeur du module : %s";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="L'OPTION DE JOURNALISATION « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉ";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s »";
+
+# Un ou plusieurs argumeont ont été donnés : option générale non supportée passée au paramètre "module".
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE="Mauvaise option générale du paramètre « module »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="L'OPTION GÉNÉRALE « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉE";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s »";
+
+# Le paramètre "Module" est passé, mais le module principal est manquant.
+
+

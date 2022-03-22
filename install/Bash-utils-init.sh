@@ -899,10 +899,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))";
 
-            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE" >&2;
+            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE" >&2;
 
             BU::ModuleInit::MsgAbort;
 
@@ -960,46 +960,46 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # If the "module" value's argument is "--lang="
                 if [[ "$module_args" == *'--lang='* ]]; then
 
-                    if [ -n "$__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
-                        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "$LINENO";
-
-                        echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
-                        echo "Please choose only one of these languages" >&2;
-                        echo >&2;
-
-                        echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
-                        echo "Chosen language : $module_args" >&2;
-                    else
-                        case "$module_args" in
-                            # Deutch | German
-                            'de_'[A-Z][A-Z])
-                                # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
-                                __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-
-                            # English
-                            'en_'[A-Z][A-Z])
-                                # Creating a new variable to store the language currently used by the operating system.
-                                __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-
-                            # Español | Spanish
-                            'es_'[A-Z][A-Z])
-                                # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
-                                __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-
-                            # Français | French
-                            'fr_'[A-Z][A-Z])
-                                # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
-                                __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-                            *)
-                                ;;
-                        esac
+#                     if [ -n "$__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
+#                         BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "$LINENO";
+# 
+#                         echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
+#                         echo "Please choose only one of these languages" >&2;
+#                         echo >&2;
+# 
+#                         echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
+#                         echo "Chosen language : $module_args" >&2;
+#                     else
+#                         case "$module_args" in
+#                             # Deutch | German
+#                             'de_'[A-Z][A-Z])
+#                                 # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
+#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
+# 
+#                             # English
+#                             'en_'[A-Z][A-Z])
+#                                 # Creating a new variable to store the language currently used by the operating system.
+#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
+# 
+#                             # Español | Spanish
+#                             'es_'[A-Z][A-Z])
+#                                 # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
+#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
+# 
+#                             # Français | French
+#                             'fr_'[A-Z][A-Z])
+#                                 # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
+#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
+#                             *)
+#                                 ;;
+#                         esac
                     fi
 
                 # -----------------------------------------------
 
                 ## MODULE : LOG MESSAGES PROCESSING
 
-                # Else, if the "module" value's argument is a log redirection parameter : "--log-display", "--log-shut" or '--log-shut-display'
+                # Else, if the "module" parameter's value is a log redirection parameter : '--log-display', '--log-shut' or '--log-shut-display'.
 
 				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
                 elif [[ "${module_args,,}" == *'--log-'* ]]; then
@@ -1061,10 +1061,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 						# An unsupported log argument is passed.
 						*)
-							BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's log permission argument : $module_args" "$LINENO";
+                            local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-							echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S LOG PERMISSION PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
-							echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
+							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
+
+							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_unsupported_log_param" >&2;
+							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1077,8 +1079,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 ## MODULE : MODES PROCESSING
 
-				# Else, if the
+				# Else, if the "module" parameter's value is a logging option : "--mode-log-full" or "--mode-log-partial".
 
+				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
                 elif [[ "${module_args,,}" = '--mode-'* ]]; then
 
 					case "${module_args,,}" in
@@ -1096,10 +1099,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 						# An unsupported mode argument is passed.
 						*)
-							BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's mode argument : $module_args" "$LINENO";
+                            local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-							echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S MODE PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
-							echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
+							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
+
+							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
+							echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1114,10 +1119,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 # Else, if the "module" value's argument is not a supported one.
                 else
-                    BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Bad module value's argument" "$LINENO";
+                    local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-                    echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module » VALUE'S PARAMETER « $(printf "%s" "$module_args" | sed "s/^[^ ]* //") » IS NOT SUPPORTED" >&2;
-                    echo >&2; echo "Please remove this value, called at the index « $p_count »" >&2;
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 3 ))";
+
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
 
 					BU::ModuleInit::Usage;
 
@@ -1140,7 +1147,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
-        BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Main module not passed after the « module » value" "$LINENO";
+        BU::ModuleInit::PrintLogError "$(printf "Main module not passed after the « module » value" "${FUNCNAME[0]}")" "$LINENO";
 
         echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2;
         echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2;

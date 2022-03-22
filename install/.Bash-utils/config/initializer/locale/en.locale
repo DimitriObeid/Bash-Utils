@@ -137,7 +137,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="$__BU_MODULE_INIT_MS
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="No value is stored in this global variable";
 
-# Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, to free up memory.
+# Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
 unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3 \
@@ -274,16 +274,34 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 ## "BU::ModuleInit::Usage" FUNCTION
 
+# List of different messages, used to better measure the space between the text and the colon.
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1="--log-display             : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2="--log-shut                : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3="--log-shut-display        : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1="--mode-log-full      : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2="--mode-log-partial   : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
+
+# Display of the values supported by the "module" option.
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
 
+# Display of the supported values for the log redirection parameter.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="WARNING : the three following parameters are incompatible with each other, they will overwrite each other";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="--log-display         : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="--log-shut            : don't display the initialization messages on the screen OR log them is the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="--log-shut-display    : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3";
 
+# Display of the supported values for the logging parameter.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="WARNING : the two following parameters are incompatible with each other, they will overwrite each other";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="--mode-log-full       : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="--mode-log-partial    : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2";
+
+# Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
+unset __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2
 
 # -----------------------------------------------
 
@@ -307,7 +325,37 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 
 ## "BU::ModuleInit::ProcessFirstModuleParameters" FUNCTION
 
-# No args given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
+# No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
+
+# One or more arguments were given : unsupported "--log-*" option passed to the "module" parameter.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's log permission option : %s";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE'S LOG PERMISSION OPTION « %s » IS NOT SUPPORTED";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+
+# One or more arguments were given : unsupported "--mode-log-*" option passed to the "module" parameter.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="Bad « module » parameter's mode option : %s";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="THE « module » PARAMETER'S LOG MODE MODE OPTION « %s » IS NOT SUPPORTED";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+
+# One or more arguments were given : unsupported general option passed to the "module" parameter.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE="Bad « module » parameter's general option";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="THE « module » PARAMETER'S GENERAL OPTION « %s » IS NOT SUPPORTED";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+
+# "module" parameter passed, but the main module is missing.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING_ADVICE="";
+
+# "module" parameter passed AFTER the call of the main module.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE_ADVICE="";
+
+# No "module" parameter passed, nor main module.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE="";
