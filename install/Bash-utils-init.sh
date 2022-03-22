@@ -536,7 +536,7 @@ function BU::ModuleInit::Msg()
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value.
     else
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
         echo >&2; echo "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2" >&2;
 
         BU::ModuleInit::MsgAbort;
@@ -716,7 +716,7 @@ function BU::ModuleInit::CheckPath()
 
     else
         if [ -z "$p_target" ]; then
-            echo  >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
+            echo  >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
 
             printf "$__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION" "${FUNCNAME[0]}" >&2; echo >&2; return 1;
         else
@@ -738,7 +738,7 @@ function BU::ModuleInit::CheckPath()
                     printf "%s $__BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND" "$p_path" >&2; return 0;
                 fi
             else
-                echo >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
+                echo >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
             fi
         fi
     fi
@@ -786,7 +786,7 @@ function BU::ModuleInit::ListInstalledModules()
 		{
             BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE" "$__BU_MODULE_INIT_ROOT")" "$LINENO";
 
-			printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "$__BU_MODULE_INIT_ROOT" >&2; echo >&2;
+			printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "$__BU_MODULE_INIT_ROOT" >&2; echo >&2;
 
 			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE" >&2; echo >&2;
 
@@ -826,13 +826,13 @@ function BU::ModuleInit::ListInstalledModules()
         fi
     else
         if [ ! -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ] && [ ! -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
-            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
 
         elif [ -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ]; then
-            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
 
         elif [ -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
-            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
         fi
 
 		echo >&2;
@@ -851,7 +851,7 @@ function BU::ModuleInit::SourcingFailure()
     local p_module=$2;  # Name of the module.
 
     #**** Code ****
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
 }
 
 # -----------------------------------------------
@@ -931,13 +931,13 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 if [ "$p_value" = "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}") "$p_value"" "$(( LINENO - 1 ))";
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
                     echo >&2; return 1;
                 else
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO";
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
                     echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2" >&2; echo >&2
 
                     echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO" >&2;
@@ -1147,10 +1147,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
-        BU::ModuleInit::PrintLogError "$(printf "Main module not passed after the « module » value" "${FUNCNAME[0]}")" "$LINENO";
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
 
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS NOT PASSED AS SECOND ARGUMENT, AFTER THE FIRST ARGUMENT : module" >&2;
-        echo >&2; echo "Please do so by setting the « $v_module_name » module's argument (with or without its parameters) in second position when you call the « ${FUNCNAME[0]} » function in your script" >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -1190,10 +1190,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 
 	elif [ "$p_count" -ge 1 ] && [[ "${p_module,,}" == "module --"* ]]; then
-		BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : « main » module passed as first argument, but before the « module -- » value";
+		BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
 
-		echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « main » MODULE IS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » VALUE" >&2;
-		echo >&2; echo "Please reverse this order, call the « module » with its arguments BEFORE the « main » module" >&2;
+		echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+		echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE_ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -1213,10 +1213,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     ## NO 'module' AND 'main' PASSED AS FIRST, THEN AS SECOND ARGUMENTS
 
     else
-        BU::ModuleInit::PrintLogError "No « module » value and no « main » module passed as first, then second arguments" "$LINENO";
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE\n" "${FUNCNAME[0]}")" "$LINENO";
 
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-3 )) --> WARNING : THE « module -- » VALUE WITH IT'S PARAMETERS, AND THE « main » MODULE ARE NOT PASSED AS FIRST ARGUMENT" >&2;
-        echo >&2; echo "Please do so by modifying the « main » module's argument position in your script, and optionnaly adding the « module » value with the needed mandatory arguments" >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+        echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
 
