@@ -1342,7 +1342,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
 # Writing the initialization content into the messages array. It will be displayed later on the screen if the « --log-init-display » argument is passed with the « module » argument.
-__BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INITIALIZING THE MODULES")");
+__BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES")");
 __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # -----------------------------------------------
@@ -1359,16 +1359,16 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 function BashUtils_InitModules()
 {
     if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_INIT_IS_SOURCED" ]; then
-        BU::HeaderWarning "You have already called the $(BU::DechoHighlightFunction "${FUNCNAME[0]}") in your script"; return 1;
+        BU::HeaderWarning "$(printf "You have already called the %s function in your script\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
     fi
 
     #**** Parameters ****
-	local p_modules_list=("$@")	# List of all the modules to include passed as arguments
+    local p_modules_list=("$@");    # List of all the modules to include passed as arguments
 
 	#**** Variables (global) ****
 
 	#**** Variables (local) ****
-    local v_index=0         # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_index=0;        # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
 
 	#**** Code ****
 	## Checking if the arguments array length is equal to zero (no arguments passed).

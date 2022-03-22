@@ -35,14 +35,28 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+#### MESSAGES HORS FONCTION
 
-## OUT OF FUNCTION MESSAGES
+## DOSSIER RACINE DES CONFIGURATIONS DE BASH UTILS MANQUANT
 
 if [ ! -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel";
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER_ADVICE="Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « install_and_update.sh », ou vous pouvez le trouver dans le dossier « Bash-utils/install ».";
 fi
+
+# -----------------------------------------------
+
+## SOUS-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION - APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION
+
+__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION DES MODULES";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES - FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION
 
 ## FONCTION "BU::ModuleInit::AskPrintLog"
 
@@ -215,7 +229,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="ERREUR : DESCRIPTION = %s | L
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION - FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES
 
 ## FONCTION "BU::ModuleInit::CheckPath"
 
@@ -280,7 +294,7 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
+#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING - FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES
 
 ## FONCTION "BU::ModuleInit::Usage"
 
@@ -370,4 +384,11 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE PARAMÈTRE « MODULE » ET LE MODULE PRINCIPAL N'ONT PAS ÉTÉ PASSÉS EN PREMIER, PUIS EN DEUXIÈME ARGUMENT LORS DE L'APPEL DE LA FONCTION « BashUtils_InitModules »";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE="Veuillez le faire en modifiant la position des arguments du module principal dans votre script, et en ajoutant éventuellement le paramètre « module » avec les arguments obligatoires nécessaires.";
 
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SOUS-SECTION : SOURCING THE MODULES - INCLUSION DES MODULES
 
