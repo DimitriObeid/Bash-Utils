@@ -392,3 +392,21 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 
 #### SOUS-SECTION : SOURCING THE MODULES - INCLUSION DES MODULES
 
+## FONCTION : "BashUtils_InitModules"
+
+# Premières vérifications.
+__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="Vous avez déjà appelé la fonction %s dans votre script";
+__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME="ATTENTION ! !! VOUS DEVEZ PASSER UN NOM DE MODULE LORSQUE VOUS APPELEZ LA FONCTION D'INITIALISATION DE MODULE « MODULE »";
+
+# Liste des modules inclus.
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG="INTIALISATION DE CES MODULES :";
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM="Module %s : %s       <-- Arguments passés pour configurer le processus d'initialisation";
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM="Module %s : %s";
+
+# ----------------------------------------------
+# La boucle principale est en cours d'exécution.
+
+# Inclusion des répertoires de configuration des modules.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_CONF_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire des configurations du module actuellement traité (actuel : %s | chemin : %s)";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_INIT_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire d'initialisation du module actuellement traité (actuel : %s | chemin : %s)";
+

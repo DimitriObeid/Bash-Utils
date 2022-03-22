@@ -58,7 +58,7 @@ __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING TH
 
 #### SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-## "BU::ModuleInit::AskPrintLog" FUNCTION
+## FUNCTION : "BU::ModuleInit::AskPrintLog"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array) ? (yes / no)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array, please type « yes » ou « Y » (no case sensibility)";
@@ -67,7 +67,7 @@ __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="The initializer script's log file
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::DisplayInitializedGlobalVarsInfos" FUNCTION
+## FUNCTION : "BU::ModuleInit::DisplayInitializedGlobalVarsInfos"
 
 # Initialization message.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALIZING THE GLOBAL VARIABLES";
@@ -112,7 +112,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="This global va
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::DisplayInitGlobalVarsInfos" FUNCTION
+## FUNCTION : "BU::ModuleInit::DisplayInitGlobalVarsInfos"
 
 # List of different messages, used to better measure the space between the text and the colon.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="File  : %s";
@@ -178,26 +178,26 @@ unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::Msg" FUNCTION
+## FUNCTION : "BU::ModuleInit::Msg"
 
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE « %s » IS NOT SUPPORTED\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by « --log-display », « --log-shut », « --log-shut-display » or an empty value where you (re)defined the value.";
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::MsgAbort" FUNCTION
+## FUNCTION : "BU::ModuleInit::MsgAbort"
 
 __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Aborting the module initialization script's execution";
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::MsgAbort" FUNCTION
+## FUNCTION : "BU::ModuleInit::MsgAbort"
 
 __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Press any key to";
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::PrintLog" FUNCTION
+## FUNCTION : "BU::ModuleInit::PrintLog"
 
 # Title.
 __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
@@ -219,7 +219,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="END OF THE INITIALIZATION LOG
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::PrintLogError" FUNCTION
+## FUNCTION : "BU::ModuleInit::PrintLogError"
 
 __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="ERROR : DESCRIPTION = %s | LINE = %s";
 
@@ -231,7 +231,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="ERROR : DESCRIPTION = %s | LI
 
 #### SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
-## "BU::ModuleInit::CheckPath" FUNCTION
+## FUNCTION : "BU::ModuleInit::CheckPath"
 
 # Missing file path.
 __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="No file path";
@@ -261,7 +261,7 @@ __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CUR
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::ListInstalledModules" FUNCTION
+## FUNCTION : "BU::ModuleInit::ListInstalledModules"
 
 # Unable to create the temporary directory.
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
@@ -296,7 +296,7 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 #### SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-## "BU::ModuleInit::Usage" FUNCTION
+## FUNCTION : "BU::ModuleInit::Usage"
 
 # List of different messages, used to better measure the space between the text and the colon.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1="--log-display             : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
@@ -329,7 +329,7 @@ unset __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1 \
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize" FUNCTION
+## FUNCTION : "BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize"
 
 # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : « module » value's argument « %s » passed twice when calling the « BashUtils_InitModules » function";
@@ -347,7 +347,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 
 # -----------------------------------------------
 
-## "BU::ModuleInit::ProcessFirstModuleParameters" FUNCTION
+## FUNCTION : "BU::ModuleInit::ProcessFirstModuleParameters"
 
 # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
@@ -391,3 +391,21 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### SUB-SECTION : SOURCING THE MODULES
+
+## FUNCTION : "BashUtils_InitModules"
+
+# First checkings.
+__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="You have already called the %s function in your script";
+__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME="WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION";
+
+# Listing the included modules.
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG="INTIALIZING THESE MODULES :";
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM="Module %s : %s       <-- Arguments passed to configure the initialization process";
+__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM="Module %s : %s";
+
+# -----------------------------
+# The main loop is running now.
+
+# Sourcing the modules configuration directories.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_CONF_PATH__DIGVI="This global variable stores the path of the currently processed module's configurations directory (current : %s | path : %s)";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_INIT_PATH__DIGVI="This global variable stores the path of the currently processed module's initialization directory (current : %s | path : %s";

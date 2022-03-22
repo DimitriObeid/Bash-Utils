@@ -962,11 +962,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 #                     if [ -n "$__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
 #                         BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "$LINENO";
-# 
+#
 #                         echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
 #                         echo "Please choose only one of these languages" >&2;
 #                         echo >&2;
-# 
+#
 #                         echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
 #                         echo "Chosen language : $module_args" >&2;
 #                     else
@@ -975,17 +975,17 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 #                             'de_'[A-Z][A-Z])
 #                                 # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
 #                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-# 
+#
 #                             # English
 #                             'en_'[A-Z][A-Z])
 #                                 # Creating a new variable to store the language currently used by the operating system.
 #                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-# 
+#
 #                             # Español | Spanish
 #                             'es_'[A-Z][A-Z])
 #                                 # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
 #                                 __BU_MODULE_INIT_MODULE_LANG_ARG="$module_args";;
-# 
+#
 #                             # Français | French
 #                             'fr_'[A-Z][A-Z])
 #                                 # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
@@ -1359,7 +1359,7 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 function BashUtils_InitModules()
 {
     if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_INIT_IS_SOURCED" ]; then
-        BU::HeaderWarning "$(printf "You have already called the %s function in your script\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
+        BU::HeaderWarning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
     fi
 
     #**** Parameters ****
@@ -1371,25 +1371,26 @@ function BashUtils_InitModules()
     local v_index=0;        # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
 
 	#**** Code ****
-	## Checking if the arguments array length is equal to zero (no arguments passed).
+	# Checking if the arguments array length is equal to zero (no arguments passed).
 	if [ -z "${p_modules_list[*]}" ]; then
-		printf "WARNING !!! YOU MUST PASS A MODULE NAME WHEN YOU CALL THE « %s » MODULE INITIALIZATION FUNCTION\n\n" "${FUNCNAME[0]}" >&2; return 1
+		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "${FUNCNAME[0]}" >&2; return 1
 	fi
 
     # Writing the list of the installed modules.
-	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "INTIALIZING THESE MODULES :")");
+	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG")");
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
+    # Listing the included modules.
 	for module_args in "${p_modules_list[@]}"; do
         i=0; # Module's array index incrementer.
 
         if [[ "${module_args,,}" == 'module --'* ]]; then
-            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args       <-- Arguments passed to configure the initialization process")");
+            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$("$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM" "$i" "$module_args")")");
         else
             i="$(( i+1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
-            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "Module $i : $module_args")");
+            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM" "$i" "$module_args")")");
         fi
 	done
 
@@ -1425,7 +1426,7 @@ function BashUtils_InitModules()
             __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$v_module_name")";
 
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'Dirpath' \
-                "This global variable stores the path of the currently processed module's configurations directory (current : $v_module_name | path : $__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH)" \
+                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_CONF_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 
 
@@ -1433,7 +1434,7 @@ function BashUtils_InitModules()
             __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_MODULES_DIR" "$v_module_name")";
 
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
-                "This global variable stores the path of the currently processed module's initialization directory (current : $v_module_name | path : $__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH)" \
+                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_INIT_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
         fi
 
@@ -1444,7 +1445,7 @@ function BashUtils_InitModules()
 			__BU_MODULE_INIT_MODULE_AND_ARGS_STRING="$module";
 
 			BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" 'String' \
-				"This global variable stores the current value passed as argument when calling the « ${FUNCNAME[0]} » function (current index : ${#p_modules_list} | value : $module)" \
+				"$(printf "This global variable stores the current value passed as argument when calling the « %s » function (current index : %s | value : %s)" "${FUNCNAME[0]}" "${#p_modules_list}" "$module")" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
 
