@@ -21,10 +21,13 @@
 ## REPEATED MESSAGES
 
 # Writing the file, function and the line number where an error occured.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s », FUNCTION « %s », LINE « %s » --> WARNING"
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING";
+
+# Writing the file, function and the line number where a fatal error occured.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS ERROR";
 
 # Writing the beginning of the text of any text that must be printed with the "BU::ModuleInit::PrintLogError" function.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s ";
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # -----------------------------------------------
 
@@ -33,6 +36,13 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s ";
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+
+## OUT OF FUNCTION MESSAGES
+
+if [ ! -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
+    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory";
+    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER_ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
+fi
 
 ## "BU::ModuleInit::AskPrintLog" FUNCTION
 
@@ -330,32 +340,32 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE=
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
 
-# One or more arguments were given : unsupported "--log-*" option passed to the "module" parameter.
+# One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--log-*" option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's log permission option : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE'S LOG PERMISSION OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
-# One or more arguments were given : unsupported "--mode-log-*" option passed to the "module" parameter.
+# One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--mode-log-*" option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's mode option : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » PARAMETER'S LOG MODE MODE OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
-# One or more arguments were given : unsupported general option passed to the "module" parameter.
+# One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported general option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's general option";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » PARAMETER'S GENERAL OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
-# "module" parameter passed, but the main module is missing.
+# "module" parameter passed in argument, during the call of the « BashUtils_InitModules » function, but the main module is missing.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The main module was not passed after the « module » parameter during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MAIN MODULE WAS NOT PASSED AFTER THE « MODULE » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING_ADVICE="Please do so by setting the « %s » module's argument (with or without its parameters) in second position when you call the « %s » function in your script";
 
-# "module" parameter passed AFTER the call of the main module.
+# "module" parameter passed in argument AFTER the call of the main module, during the call of the « BashUtils_InitModules » function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The main module was passed as first argument, but before the « module -- » parameter during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MAIN MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE_ADVICE="Please reverse this order, call the « module » with its arguments BEFORE the main module";
 
-# No "module" parameter passed, nor main module.
+# No "module" parameter passed in argument, nor main module, during the call of the « BashUtils_InitModules » function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : No « module » parameter and no « main » module passed as first, then second arguments during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : NO « MODULE » PARAMETER AND NO « MAIN » MODULE PASSED AS FIRST, THEN SECOND ARGUMENTS DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE="Please do so by modifying the main module's argument position in your script, and optionally adding the « module » parameter with the needed mandatory arguments";

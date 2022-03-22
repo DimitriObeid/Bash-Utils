@@ -1284,10 +1284,13 @@ if [ -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_INIT_DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";  __bu_module_init_date_log_lineno="$LINENO";
 	__BU_MODULE_INIT_USER_LANG="$(echo "$LANG" | cut -d _ -f1)";   __bu_module_init_user_lang_lineno="$LINENO";
 else
-	echo >&2; echo "IN ${BASH_SOURCE[0]}, LINE $(( LINENO-1 )) --> ERROR !" >&2; echo >&2;
+    # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
+    BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT_USER_LANG";
 
-	echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory." >&2; echo >&2;
-	echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install directory »." >&2; echo >&2;
+	echo >&2; printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
+
+	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER" >&2; echo >&2;
+	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER_ADVICE" >&2; echo >&2;
 
 	BU::ModuleInit::MsgAbort;
 
