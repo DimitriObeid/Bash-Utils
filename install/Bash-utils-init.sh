@@ -1447,8 +1447,6 @@ function BashUtils_InitModules()
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
 
-		exit 0;
-
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU::ModuleInit::ProcessFirstModuleParameters()" function).
         if [[ "$module" != 'module --'* ]]; then
 
