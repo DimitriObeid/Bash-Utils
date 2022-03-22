@@ -278,7 +278,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG \
-        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG \
+        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG
 
     # Unsetting the line number values.
     unset __bu_module_init_project_pid_lineno \
@@ -293,13 +293,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __bu_module_init_lib_root_dir_file_name_lineno \
         __bu_module_init_lib_root_dir_file_parent_dir_lineno \
         __bu_module_init_lib_root_dir_file_path_lineno \
-        __bu_module_init_lib_root_dir_root_file_name_lineno\
-        __bu_module_init_lib_root_dir_root_file_parent_dir_lineno\
-        __bu_module_init_lib_root_dir_root_file_path_lineno\
-        __bu_module_init_date_log_lineno\
-        __bu_module_init_user_lang_lineno\
-
-    exit 0;
+        __bu_module_init_lib_root_dir_root_file_name_lineno \
+        __bu_module_init_lib_root_dir_root_file_parent_dir_lineno \
+        __bu_module_init_lib_root_dir_root_file_path_lineno \
+        __bu_module_init_date_log_lineno \
+        __bu_module_init_user_lang_lineno
 }
 
 # Displaying the information on the initialized global variables
@@ -788,7 +786,7 @@ function BU::ModuleInit::ListInstalledModules()
 
 			printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "$__BU_MODULE_INIT_ROOT" >&2; echo >&2;
 
-			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE" >&2; echo >&2;
+			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE" >&2; echo >&2;
 
 			BU::ModuleInit::AskPrintLog >&2; exit 1;
 		}
@@ -902,7 +900,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))";
 
             echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE" >&2;
+            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE" >&2;
 
             BU::ModuleInit::MsgAbort;
 
@@ -937,8 +935,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 else
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO";
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
-                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2" >&2; echo >&2
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2" >&2; echo >&2
 
                     echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO" >&2;
 
@@ -958,8 +956,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 ## MODULE : USER'S LANGUAGE PROCESSING
 
                 # If the "module" value's argument is "--lang="
-                if [[ "$module_args" == *'--lang='* ]]; then
-
+#                 if [[ "$module_args" == *'--lang='* ]]; then
+#
 #                     if [ -n "$__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
 #                         BU::ModuleInit::PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "$LINENO";
 #
@@ -993,7 +991,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 #                             *)
 #                                 ;;
 #                         esac
-                    fi
+#                     fi
 
                 # -----------------------------------------------
 
@@ -1002,7 +1000,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # Else, if the "module" parameter's value is a log redirection parameter : '--log-display', '--log-shut' or '--log-shut-display'.
 
 				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
-                elif [[ "${module_args,,}" == *'--log-'* ]]; then
+                if [[ "${module_args,,}" == *'--log-'* ]]; then
 
 					case "${module_args,,}" in
 
@@ -1066,7 +1064,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
 
 							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_unsupported_log_param" >&2;
-							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
+							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1104,7 +1102,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
 
 							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
-							echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
+							echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1124,7 +1122,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 3 ))";
 
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE\n" "$p_count" >&2;
+                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
 					BU::ModuleInit::Usage;
 
@@ -1193,7 +1191,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 		BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
 
 		echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-		echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE_ADVICE" >&2;
+		echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -1216,7 +1214,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
         BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE\n" "${FUNCNAME[0]}")" "$LINENO";
 
         echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-        echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE" >&2;
+        echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -1290,7 +1288,7 @@ else
 	echo >&2; printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
 
 	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER" >&2; echo >&2;
-	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER_ADVICE" >&2; echo >&2;
+	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE" >&2; echo >&2;
 
 	BU::ModuleInit::MsgAbort;
 
@@ -1385,7 +1383,7 @@ function BashUtils_InitModules()
         i=0; # Module's array index incrementer.
 
         if [[ "${module_args,,}" == 'module --'* ]]; then
-            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$("$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM" "$i" "$module_args")")");
+            __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM" "$i" "$module_args")")");
         else
             i="$(( i+1 ))" # Incrementing the module's array index
 
@@ -1426,7 +1424,7 @@ function BashUtils_InitModules()
             __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$v_module_name")";
 
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'Dirpath' \
-                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_CONF_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH")" \
+                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 
 
@@ -1434,7 +1432,7 @@ function BashUtils_InitModules()
             __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_MODULES_DIR" "$v_module_name")";
 
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
-                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_INIT_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH")" \
+                "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
         fi
 
@@ -1445,9 +1443,11 @@ function BashUtils_InitModules()
 			__BU_MODULE_INIT_MODULE_AND_ARGS_STRING="$module";
 
 			BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" 'String' \
-				"$(printf "This global variable stores the current value passed as argument when calling the « %s » function (current index : %s | value : %s)" "${FUNCNAME[0]}" "${#p_modules_list}" "$module")" \
+				"$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS" "${FUNCNAME[0]}" "${#p_modules_list}" "$module")" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
+
+		exit 0;
 
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU::ModuleInit::ProcessFirstModuleParameters()" function).
         if [[ "$module" != 'module --'* ]]; then
@@ -1458,13 +1458,13 @@ function BashUtils_InitModules()
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH"; then
-                BU::ModuleInit::PrintLogError "The « $v_module_name module's » configurations directory does not exists" "$LINENO";
+                BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__CALL_PLE" "$v_module_name")" "$LINENO";
 
                 printf '\n' >&2;
 
-                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « config » directory !!!\n\n" "$v_module_name" >&2;
+                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_module_name" >&2;
 
-                echo -e "Please check if the module's configuration files exist in this folder --> " >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'f' >&2;
+                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE" >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'f' >&2;
                 printf '\n\n';
 
                 # Listing all the installed modules in the user's hard drive.
@@ -1474,7 +1474,7 @@ function BashUtils_InitModules()
                 return 1;
             else
                 BU::ModuleInit::Msg;
-                BU::ModuleInit::MsgLine "Sourcing the $v_module_name module's main configuration file" '#' 'msg'; BU::ModuleInit::Msg;
+                BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" $v_module_name)" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; exit 1; }
@@ -1486,25 +1486,25 @@ function BashUtils_InitModules()
 
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH"; then
-                BU::ModuleInit::PrintLogError "The « $v_module_name » module's initialization files directory does not exists" "$LINENO";
+                BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE" "$v_module_name")" "$LINENO";
 
                 printf '\n' >&2;
 
-                printf "IN « ${BASH_SOURCE[0]} », LINE $(( LINENO-5 )) --> WARNING : THE « %s » module is not installed, doesn't exists, or the « ls » command had pointed elsewhere, towards an unexistent « install » directory !!!\n\n" "$v_module_name" >&2;
+                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND\n\n" "" "" "" "$v_module_name" >&2;
 
-                printf "Install this module, or check its name in this folder --> "; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'f' >&2;
+                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE"; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'f' >&2;
                 printf '\n\n' >&2;
 
                 BU::ModuleInit::MsgAbort;
 
                 return 1;
             else
-                BU::ModuleInit::MsgLine "Sourcing the $v_module_name module's initialization file" '-' 'msg';
+                BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; exit 1; }
 
-                BU::HeaderGreen "END OF THE $(BU::DechoHighlight "$v_module_name") MODULE INITIALIZATION !";
+                BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";
             fi
         fi
 
@@ -1513,13 +1513,13 @@ function BashUtils_InitModules()
 
 	done;
 
-	echo "RETURN STATUS : $?"
+	echo "RETURN STATUS : $?";
 
 	# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 	#### ENDING THE WHOLE INITIALIZATION PROCESS
 
-	BU::HeaderGreen "END OF THE LIBRARY INITIALIZATION PROCESS ! BEGINNING PROCESSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S SCRIPT $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_TXT_PATH") !";
+	BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_TXT_PATH")")";
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.

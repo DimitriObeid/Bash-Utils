@@ -41,7 +41,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 if [ ! -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory";
-    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER_ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
+    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
 fi
 
 # -----------------------------------------------
@@ -266,7 +266,7 @@ __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CUR
 # Unable to create the temporary directory.
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE="If the problem persists, please create this folder manually";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE="If the problem persists, please create this folder manually";
 
 # Listing the installed modules.
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST="INSTALLED MODULES LIST";
@@ -337,8 +337,8 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PAS
 
 # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : « module » value's arguments « %s » and « %s » passed together when calling the « BashUtils_InitModules » function";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1="the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2="Please choose only one of these parameter values";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Please choose only one of these parameter values";
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable";
 
@@ -352,37 +352,37 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
 
 # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--log-*" option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's log permission option : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE'S LOG PERMISSION OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
 # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--mode-log-*" option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's mode option : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » PARAMETER'S LOG MODE MODE OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
 # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported general option passed.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Bad « module » parameter's general option";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » PARAMETER'S GENERAL OPTION « %s » IS NOT SUPPORTED";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL_ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
 # "module" parameter passed in argument, during the call of the « BashUtils_InitModules » function, but the main module is missing.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The main module was not passed after the « module » parameter during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MAIN MODULE WAS NOT PASSED AFTER THE « MODULE » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING_ADVICE="Please do so by setting the « %s » module's argument (with or without its parameters) in second position when you call the « %s » function in your script";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE="Please do so by setting the « %s » module's argument (with or without its parameters) in second position when you call the « %s » function in your script";
 
 # "module" parameter passed in argument AFTER the call of the main module, during the call of the « BashUtils_InitModules » function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The main module was passed as first argument, but before the « module -- » parameter during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE MAIN MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE_ADVICE="Please reverse this order, call the « module » with its arguments BEFORE the main module";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE="Please reverse this order, call the « module » with its arguments BEFORE the main module";
 
 # No "module" parameter passed in argument, nor main module, during the call of the « BashUtils_InitModules » function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : No « module » parameter and no « main » module passed as first, then second arguments during the call of the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : NO « MODULE » PARAMETER AND NO « MAIN » MODULE PASSED AS FIRST, THEN SECOND ARGUMENTS DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING_ADVICE="Please do so by modifying the main module's argument position in your script, and optionally adding the « module » parameter with the needed mandatory arguments";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE="Please do so by modifying the main module's argument position in your script, and optionally adding the « module » parameter with the needed mandatory arguments";
 
 # -----------------------------------------------
 
@@ -406,6 +406,32 @@ __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODU
 # -----------------------------
 # The main loop is running now.
 
-# Sourcing the modules configuration directories.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_CONF_PATH__DIGVI="This global variable stores the path of the currently processed module's configurations directory (current : %s | path : %s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE_INIT_PATH__DIGVI="This global variable stores the path of the currently processed module's initialization directory (current : %s | path : %s";
+# Definition of the information about the global variables that are defined in the "BashUtils_InitModules" function.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="This global variable stores the path of the currently processed module's configurations directory (current : %s | path : %s)";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI="This global variable stores the path of the currently processed module's initialization directory (current : %s | path : %s";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS="This global variable stores the current value passed as argument when calling the « %s » function (current index : %s | value : %s)";
+
+# Inclusion of the configuration files of the module being processed : configuration directory not found.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The « %s » module's configurations files directory does not exists";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « %s » MODULE IS NOT INSTALLED, DOESN'T EXISTS, OR THE « ls » COMMAND HAD POINTED ELSEWHERE, TOWARDS AN UNEXISTENT « config » DIRECTORY !!!";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE="Install this module, or check if the module's configuration files exist in this folder --> ";
+
+# Inclusion of the configuration files of the module being processed : configuration directory found.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE="Sourcing the « %s » module's main configuration file";
+
+# Inclusion of the initialization files of the module being processed : initialization directory not found.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : The « %s » module's initialization files directory does not exists";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « %s » MODULE IS NOT INSTALLED, DOESN'T EXISTS, OR THE « ls » COMMAND HAD POINTED ELSEWHERE, TOWARDS AN UNEXISTENT « modules » DIRECTORY !!!";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE="Install this module, or check if the module's initialization files exist in this folder --> ";
+
+# Inclusion of the initialization files of the module being processed : initialization directory found.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE="Sourcing the « %s » module's main initialization file";
+
+# End of the current module's initialization.
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="END OF THE %s MODULE INITIALIZATION !";
+
+# ---------------------------------
+# End of the main loop's execution.
+
+# End of the framework's initialization process.
+__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIALIZATION PROCESS ! BEGINNING PROCESSING THE %s PROJECT'S MAIN SCRIPT %s !";
