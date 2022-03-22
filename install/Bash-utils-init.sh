@@ -784,7 +784,7 @@ function BU::ModuleInit::ListInstalledModules()
     if [ ! -d "$v_module_tmp_d" ]; then
         mkdir -p "$v_module_tmp_d" ||
 		{
-            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR" "$__BU_MODULE_INIT_ROOT")" "$LINENO";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE" "$__BU_MODULE_INIT_ROOT")" "$LINENO";
 
 			printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "$__BU_MODULE_INIT_ROOT" >&2; echo >&2;
 
@@ -821,6 +821,7 @@ function BU::ModuleInit::ListInstalledModules()
 			# Getting the differences between the two files.
 			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW" >&2; echo >&2;
 
+			# Printing the differences between the two generated files.
 			sdiff "$v_module_conf_f" "$v_module_conf_f"; echo >&2;
         fi
     else
@@ -898,7 +899,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS\h")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))";
 
             echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
             echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE" >&2;
@@ -928,13 +929,13 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 #**** Code ****
                 # If the current value AND the new value are the same.
                 if [ "$p_value" = "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$p_value")";
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}") "$p_value"" "$(( LINENO - 1 ))";
 
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
                     echo >&2; return 1;
                 else
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")";
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO";
 
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
                     echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2" >&2; echo >&2

@@ -23,6 +23,9 @@
 # Writing the file, function and the line number where an error occured.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s », FUNCTION « %s », LINE « %s » --> WARNING"
 
+# Writing the beginning of the text of any text that must be printed with the "BU::ModuleInit::PrintLogError" function.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s ";
+
 # -----------------------------------------------
 
 
@@ -237,8 +240,8 @@ __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CUR
 ## "BU::ModuleInit::ListInstalledModules" FUNCTION
 
 # Unable to create the temporary directory.
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR="Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : $__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_CALL_PRINT_LOG_ERROR";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
+__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR_ADVICE="If the problem persists, please create this folder manually";
 
 # Listing the installed modules.
@@ -287,11 +290,11 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="--mode-log-part
 ## "BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize" FUNCTION
 
 # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : « module » value's argument « %s » passed twice when calling the « BashUtils_InitModules » function";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : « module » value's argument « %s » passed twice when calling the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : you already passed the « %s » value as « module » value's argument for the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable when calling the « BashUtils_InitModules » function"
 
 # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : « module » value's arguments « %s » and « %s » passed together when calling the « BashUtils_InitModules » function";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : « module » value's arguments « %s » and « %s » passed together when calling the « BashUtils_InitModules » function";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_1="the « module » value's parameters '--log-display', '--log-shut' and / or '--log-shut-display' are incompatible with each other";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_ADVICE_2="Please choose only one of these parameter values";
 
@@ -305,5 +308,6 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 ## "BU::ModuleInit::ProcessFirstModuleParameters" FUNCTION
 
 # No args given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_ARGS_ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
