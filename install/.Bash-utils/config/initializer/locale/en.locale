@@ -390,7 +390,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SUB-SECTION : SOURCING THE MODULES
+#### SUB-SECTION : INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
 ## FUNCTION : "BashUtils_InitModules"
 

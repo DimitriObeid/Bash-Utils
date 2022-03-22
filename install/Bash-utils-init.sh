@@ -927,7 +927,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 #**** Code ****
                 # If the current value AND the new value are the same.
                 if [ "$p_value" = "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}") "$p_value"" "$(( LINENO - 1 ))";
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}")" "$p_value" "$(( LINENO - 1 ))";
 
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
@@ -1059,7 +1059,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 						# An unsupported log argument is passed.
 						*)
-                            local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
+                            local v_unsupported_log_param;
+                                v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
 							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
 
@@ -1097,7 +1098,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 						# An unsupported mode argument is passed.
 						*)
-                            local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
+                            local v_unsupported_log_param;
+                                v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
 							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
 
@@ -1117,7 +1119,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 # Else, if the "module" value's argument is not a supported one.
                 else
-                    local v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
+                    local v_unsupported_log_param;
+                        v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 3 ))";
 
@@ -1351,7 +1354,21 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 #### SOURCING THE MODULES
 
-## LIBRARY SOURCING'S FUNCTION
+## INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
+
+# Parsing each module's translation CSV file.
+function BU::ModuleInit::ParseCSVLang()
+{
+    #**** Parameters ****
+    local p_path=$1;        # Path of the translations CSV file to parse.
+    local p_lang=$2;        # Language to fetch.
+    local p_success_msg=$3; # Success message to display in the targeted language.
+    local p_error_msg=$4;   # Error message to display in the targeted language.
+
+    #**** Code ****
+
+    return 0;
+}
 
 # Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
 function BashUtils_InitModules()
@@ -1472,7 +1489,7 @@ function BashUtils_InitModules()
                 return 1;
             else
                 BU::ModuleInit::Msg;
-                BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" $v_module_name)" '#' 'msg'; BU::ModuleInit::Msg;
+                BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; exit 1; }

@@ -1,0 +1,131 @@
+VARIABLE,COMMENTS,MESSAGE, en, fr
+__BU_MAIN_MSG_CASE_nofunction_INVALID_ANSWER,Any invalid answer given as user’s keyboard input.,Error,Please enter a valid answer ($(DechoHighlight 'yes') or ($(DechoHighlight 'no')) !,Veuillez entrer une réponse valide ($(DechoHighlight 'oui') ou ($(DechoHighlight 'non')) !
+,,,,Souhaitez-vous continuer l’exécution du script ?(oui / non)
+,,,,Entrez votre réponse : 
+__BU_MAIN_MSG_CASE_nofunction_ASK_CONTINUE_EXEC,Asking to the user if (s)he wants to continue the script’s execution.,Newstep,Do you want to continue the script's execution ? (yes / no),"Reprise de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
+__BU_MAIN_MSG_CASE_nofunction_ANSWER_PROMPT,Asking a keyboard input to the user.,Newstep,Enter your answer : ,"Annulation de l’exécution du script $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")."
+__BU_MAIN_MSG_CASE_nofunction_RESUME_EXEC,Displaying the message of resumption of the script’s execution.,Newstep,"Resuming the execution of the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"") script.",/
+__BU_MAIN_MSG_CASE_CANCEL_EXEC,Displaying the cancellation message of the script execution. ,Error,"Aborting the $(DechoHighlight ""$__BU_MAIN_PROJECT_NAME"")'s execution.",
+/,/,/,/,
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_NO_VAL,No value is passed as a mandatory function’s argument.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER HAS NO VALUE","LE PARAMÈTRE DE LA FONCTION  $(KeepFormatting ""$(CutFromCharacter ""$p_funcname"")'s"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’A PAS DE VALEUR"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHA,The value passed as mandatory function’s argument is not an alphabetic string.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING","LA VALEUR DU PARAMÈTRE DE LA FONCTION $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHABÉTIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_ALPHANUM,The value passed as mandatory function’s argument is not an alphanumeric string.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UNE CHAÎNE DE CARACTÈRES ALPHANUMÉRIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHA,The value passed as mandatory function’s argument is not an alphabetic character.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHABÉTIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_CHAR_ALPHANUM,The value passed as mandatory function’s argument is not an alphanumeric character.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CARACTÈRE ALPHANUMÉRIQUE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_DIR,The value passed as mandatory function’s argument is not a directory path.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE DOSSIER VALIDE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FILE,The value passed as mandatory function’s argument is not a file path.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A VALID FILE PATH","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN CHEMIN DE FICHER VALIDE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT,The value passed as mandatory function’s argument is not a decimal number.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A FLOAT","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_NEG,The value passed as mandatory function’s argument is not a negative decimal number.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE NÉGATIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_FLOAT_POS,The value passed as mandatory function’s argument is not a positive decimal number.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE DECIMAL NUMBER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE À VIRGULE POSITIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT,The value passed as mandatory function’s argument is not an integer.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT AN INTEGER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_NEG,The value passed as mandatory function’s argument is not a negative integer.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER NÉGATIF"
+__BU_MAIN_MSG_CARGSMAIN_PrintBadOption_BAD_VAL_INT_POS,The value passed as mandatory function’s argument is not a positive integer.,Error,"THE $p_funcname FUNCTION'S $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER","LA VALEUR DU PARAMÈTRE DE LA FONCTION  $(CutFromCharacter ""$p_funcname"") $(DechoHighlight ""$(ToLowercase ""$(echo -n '$')$p_argname"")"") N’EST PAS UN NOMBRE ENTIER POSITIF"
+/,,,,
+BU_MAIN_MSG_CHECKINGS_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_HEADER_ERROR,Telling that an error occured during a status variable value checking.,Error,AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!,
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED,Printing the location of this error.,Error,"${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}In ${__BU_MAIN_COLOR_HIGHLIGHT}$p_file${__BU_MAIN_COLOR_ERROR}, line ${__BU_MAIN_COLOR_HIGHLIGHT}$p_lineno${__BU_MAIN_COLOR_ERROR} →",
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ERROR_HAPPENED_TYPE,Printing the error that occured during a status variable value checking.,Error,Error : the ${__BU_MAIN_COLOR_HIGHLIGHT}$p_varVal${__BU_MAIN_COLOR_ERROR} variable's value is incorrect.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE_EMPTY,The bad status variable value is an empty string.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value :${__BU_MAIN_COLOR_YELLOW} An empty string.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_BAD_VALUE,The bad status variable value is an unexpected string.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}Bad value : ${__BU_MAIN_COLOR_HIGHLIGHT}$p_badVal.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VALS_LIST_MSG,Printing the message that preceds the list of accepted values.,Error,${__BU_MAIN_COLOR_ERROR}${__BU_MAIN_TXT_TAB}${__BU_MAIN_TXT_TAB}The allowed values are :${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_LIST_EMPTY,Printing the acceptance of an empty value.,Msg,${__BU_MAIN_COLOR_ERROR}$i/${#pa_correctValues[@]}  --> ${__BU_MAIN_COLOR_ORANGE}An empty argument.${__BU_MAIN_COLOR_RESET},
+__BU_MAIN_MSG_CHECKSTAT_ConfEcho_ALLOWED_VAL_FLOAT_INT,Printing the acceptance of a floating number or an integer.,Msg,${__BU_MAIN_COLOR_ORANGE}An integer or a floating number,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_DECHO_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_ECHO_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_ERRORS_,,,,
+__BU_MAIN_MSG_ERRORS_HandleErrors_File_NO_FILE,No specified file path passed as file argument for the HandleErrors function,DechoHighlight,<no specified file path>,<aucun chemin de fichier spécifié>
+__BU_MAIN_MSG_ERRORS_HandleErrors_Function_NO_FUNCTION,No specified function name passed as function argument for the HandleErrors function,DechoHighlight,<no specified function name>,<aucun nom de fonction spécifié>
+__BU_MAIN_MSG_ERRORS_HandleErrors_Line_NO_LINE,No specified line number passed as line argument for the HandleErrors function,DechoHighlight,<no specified line number>,<aucun numéro de ligne spécifié>
+__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED_SAFEMODE,A fatal error occured while the program was in safe mode or initilalizing,,,
+__BU_MAIN_MSG_HandleErrors_FATAL_ERROR_OCCURED,A fatal error occured,,,
+__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED_SAFEMODE,An error occured while the program was in safe mode or initilalizing,,,
+__BU_MAIN_MSG_HandleErrors_ERROR_OCCURED,An error occured,,,
+__BU_MAIN_MSG_ERRORS_HandleErrors_,,,,
+__BU_MAIN_MSG_ERRORS_HandleErrors_,,,,
+__BU_MAIN_MSG_ERRORS_HandleErrors_,,,,
+/,,,,
+__BU_MAIN_MSG_FILES_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_HEADERS_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_LANG_,,,,
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_PATH,"No specified translation file path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the path of the translations CVS file to parse as first argument,Veuillez passer en premier argument le chemin du fichier de traduction au format CSV à lire
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_BAD_PATH,"invalid path passed as file argument for the ""CheckNotTranslated_ParseCSVLang()""  function",,Please pass the valid path of the translations CVS file to parse as first argument,Veuillez passer en premier argument ln chemin valide vers le fichier de traduction au format CSV à lire
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ISO_639_1_LANG,No ISO 639-1 language’s code passed as language’s argument,,Please pass the ISO 639-1 language's code to fetch as second argument,Veuillez passer en second argument le code ISO 639-1 de la langue à utiliser
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_SUCC_MSG,No success message passed as target language’s succes message argument,,Please pass the success message of your language as third argument,Veuillez passer en troisième argument le message de succès écrit dans la langue de votre choix
+__BU_MAIN_MSG_LANG_CheckNotTranslated_ParseCSVLang_NO_ERR_MSG,No error message passed as target language’s error message argument,,Please pass the error message of your language as fourth argument,Veuillez passer en quatrième argument le message d’erreur écrit dans la langue de votre choix
+,,,,
+/,,,,
+__BU_MAIN_MSG_PERM_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+ ,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_TEXT_,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+,,,,
+/,,,,
+__BU_MAIN_MSG_TIME_,,,,
