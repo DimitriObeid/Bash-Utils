@@ -322,9 +322,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local pa_var_val_array=("$@")
 
         #**** Variables ****
-        local v_file; v_file="$([[ -n "$p_file" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE $p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
-        local v_func; v_func="$([[ -f "$p_func" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC $p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
-        local v_line; v_line="$([[ -n "$p_line" ]] && echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE $p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
+        local v_file; v_file="$([[ -n "$p_file" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE" "$p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
+        local v_func; v_func="$([[ -f "$p_func" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC" "$p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
+        local v_line; v_line="$([[ -n "$p_line" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE" "$p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
 
         #**** Code ****
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
@@ -354,11 +354,11 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is an array.
 		if [ "$p_var_type" = 'array' ]; then
-            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY" "$p_var_name")" '-' 'msg';
 
 		# Checking if the variable is not an array.
 		else
-            BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY $p_var_name" '-' 'msg';
+            BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY" "$p_var_name")" '-' 'msg';
 		fi
 
 		BU::ModuleInit::Msg;
@@ -407,7 +407,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 BU::ModuleInit::Msg;
 			fi
 		else
-            BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE $p_var_type";
+            BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE" "$p_var_type")";
             BU::ModuleInit::Msg;
 
 			# If a variable is stored in the processed variable.
@@ -416,7 +416,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 				if [ "${p_var_type,,}" = 'cmd' ]; then
 					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD" "$p_var_name")";
 				else
-					BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD $p_var_val";
+					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD" "$p_var_val")";
 				fi
 
 			else

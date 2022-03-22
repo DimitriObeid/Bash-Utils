@@ -4,7 +4,7 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
-LANG='en';
+LANG='fr';
 
 # shellcheck disable=SC1090
 if ! source "$HOME/Bash-utils-init.sh"; then
