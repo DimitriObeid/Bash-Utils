@@ -435,3 +435,38 @@ __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MO
 
 # Fin du processus d'initialisation du framework.
 __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALISATION DU FRAMEWORK ! DÉBUT DU TRAITEMENT DU PROJET %s VIA LE SCRIPT PRINCIPAL %s !";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### INITIALISATION DU MODULE PRINCIPAL
+
+## STEP ONE : DEFINING THE NEEDED RESOURCES - ÉTAPE UN : DÉFINITION DES RESSOURCES NÉCESAIRES
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="Ce fichier de librairie a été sourcé avec succès : %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de configuration a été sourcé avec succès : %s":
+
+# -----------------------------------------------
+
+## STEP TWO : PROCESSING THE MAIN MODULE'S PARAMETERS
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS="Les arguments supportés pour le module main sont :":
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DEBUG="--stat-debug=false            OU --stat-debug=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DECHO="--stat-decho=authorize        OU --stat-decho=forbid          OU --stat-decho=resctrict";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____ECHO="--stat-echo=false             OU --stat-echo=true";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____ERROR="--stat-error=fatal            OU --stat-error=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______LOG="--stat-log=false              OU --stat-log=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____LOG_R="--stat-log-r=log              OU --stat-log-r=tee             OU --stat-log-r=void";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__OP_ROOT="--stat-op-root=authorized     OU --stat-op-root=forbidden     OU --stat-op-root=restricted";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_H="--stat-time-header=float,     où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_N="--stat-time-newline=float,    où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_T="--stat-time-txt=float,        où « float » est un nombre à virgule flottante";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__TXT_FMT="--stat-txt-fmt=false          OU --stat-txt-fmt=true";

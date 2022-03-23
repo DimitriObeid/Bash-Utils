@@ -336,6 +336,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
 		if [ "${p_var_type,,}" != 'array' ]	\
 			&& [ "${p_var_type,,}" != 'cmd' ] \
+			&& [ "${p_var_type,,}" != 'bool' ] \
 			&& [ "${p_var_type,,}" != 'dir' ] \
 			&& [ "${p_var_type,,}" != 'file' ] \
 			&& [ "${p_var_type,,}" != 'float' ]	\
@@ -1366,6 +1367,8 @@ function BU::ModuleInit::ParseCSVLang()
     local p_error_msg=$4;   # Error message to display in the targeted language.
 
     #**** Code ****
+    if [ -z "$p_path" ]; then
+        BU::Main::Errors::HandleErrors ''
 
     return 0;
 }

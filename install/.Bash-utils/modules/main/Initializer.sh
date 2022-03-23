@@ -54,7 +54,7 @@ function BU::Main::Initializer::SourceLibrary()
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
-		BU::ModuleInit::Msg "Successfully sourced this library file : $f";
+		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
 
 	# Leaving a newline for a better text display in the log file and the terminal.
@@ -70,7 +70,7 @@ function BU::Main::Initializer::SourceConfig()
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
-		BU::ModuleInit::Msg "Successfully sourced this configuration file : $f";
+		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
 	done
 
 	# Leaving a newline for a better text display in the log file and the terminal.
@@ -85,28 +85,28 @@ function BU::Main::Initializer::SourceConfig()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP TWO : PROCESSING MODULE'S PARAMETERS
+#### STEP TWO : PROCESSING THE MAIN MODULE'S PARAMETERS
 
 # Usage function.
 function BU::Main::Initializer::Usage()
 {
-    echo >&2; echo "The supported arguments are :" >&2;
+    echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS" >&2;
 
-    echo "--stat-debug=false          OR --stat-debug=true" >&2;
-    echo "--stat-decho=authorize      OR --stat-decho=forbid        OR --stat-decho=resctrict" >&2;
-    echo "--stat-echo=false           OR --stat-echo=true" >&2;
-    echo "--stat-error=fatal          OR --stat-error=void" >&2;
-    echo "--stat-log=false            OR --stat-log=true" >&2;
-    echo "--stat-log-r=log            OR --stat-log-r=tee           OR --stat-log-r=void" >&2;
-    echo "--stat-op-root=authorized   OR --stat-op-root=forbidden   OR --stat-op-root=restricted" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DEBUG" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DECHO" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____ECHO" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____ERROR" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______LOG" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____LOG_R" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__OP_ROOT" >&2;
     echo >&2;
 
-    echo "--stat-time-header=float, where float is a floating point number" >&2;
-    echo "--stat-time-newline=float, where float is a floating point number" >&2;
-    echo "--stat-time-txt=float, where float is a floating point number" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_H" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_H" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_T" >&2;
     echo >&2;
 
-    echo "--stat-txt-fmt=false        OR --stat-txt-fmt=true" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_T" >&2;
     echo >&2;
 
     return 0;
@@ -134,7 +134,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_DEBUG" global status variable.
             '--stat-debug='*)
                     if      [ "${value[i],,}" = "--stat-debug=false" ]          || [ "${value[i],,}" = "--stat-debug=true" ]; then
-                            __BU_MAIN_STAT_DEBUG="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DEBUG" "$__BU_MAIN_STAT_DEBUG";
+                            __BU_MAIN_STAT_DEBUG="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DEBUG" "$__BU_MAIN_STAT_DEBUG" 'bool' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -144,7 +144,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_DECHO" global status variable.
                 '--stat-decho='*)
                     if      [ "${value[i],,}" = '--stat-decho=authorize' ]      || [ "${value[i],,}" = '--stat-decho=forbid' ]  || [ "${value[i],,}" = '--stat-decho=restrict' ]; then
-                            __BU_MAIN_STAT_DECHO="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DECHO" "$__BU_MAIN_STAT_DECHO";
+                            __BU_MAIN_STAT_DECHO="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_DECHO" "$__BU_MAIN_STAT_DECHO" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -156,7 +156,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_ECHO" global status variable.
                 '--stat-echo'*)
                     if      [ "${value[i],,}" = '--stat-echo=false' ]           || [ "${value[i],,}" = '--stat-echo=true' ]; then
-                            __BU_MAIN_STAT_ECHO="${value#*=}";                  BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ECHO" "$__BU_MAIN_STAT_ECHO";
+                            __BU_MAIN_STAT_ECHO="${value#*=}";                  BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ECHO" "$__BU_MAIN_STAT_ECHO" 'bool' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -166,12 +166,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_ERROR" global status variable.
                 'stat-error='*)
                     if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
-                            __BU_MAIN_STAT_ERROR="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR";
+                            __BU_MAIN_STAT_ERROR="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = 'stat-error=void' ]; then
-                            __BU_MAIN_STAT_ERROR='';                            BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR";
+                            __BU_MAIN_STAT_ERROR='';                            BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_ERROR" "$__BU_MAIN_STAT_ERROR" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -181,7 +181,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_LOG" global status variable.
                 '--stat-log='*)
                     if      [ "${value[i],,}" = '--stat-log=false' ]            || [ "${value[i],,}" = '--stat-log=true' ]; then
-                            __BU_MAIN_STAT_LOG="${value#*=}";                   BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG";
+                            __BU_MAIN_STAT_LOG="${value#*=}";                   BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG" 'bool' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";;
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -191,12 +191,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_LOG_REDIRECT" global status variable.
                 'stat-log-r='*)
                     if      [ "${value[i],,}" = 'stat-log-r=log' ]              || [ "${value[i],,}" = '--stat-log-r=tee' ]; then
-                            __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT";
+                            __BU_MAIN_STAT_LOG_REDIRECT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = '--stat-log-r=void' ]; then
-                            __BU_MAIN_STAT_LOG_REDIRECT='';                     BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT";
+                            __BU_MAIN_STAT_LOG_REDIRECT='';                     BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG_REDIRECT" "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -206,7 +206,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_OPERATE_ROOT" global status variable.
                 '--stat-op-root='*)
                     if      [ "${value[i],,}" = '--stat-op-root=authorized' ]   || [ "${value[i],,}" = '--stat-op-root=forbidden' ] || [ "${value[i],,}" = '--stat-op-root=restricted' ]; then
-                            __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_OPERATE_ROOT" "$__BU_MAIN_STAT_OPERATE_ROOT";
+                            __BU_MAIN_STAT_OPERATE_ROOT="${value#*=}";          BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_OPERATE_ROOT" "$__BU_MAIN_STAT_OPERATE_ROOT" 'string' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -216,7 +216,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
                 '--stat-time-header='*)
                     if      [ "${value[i],,}" = "--stat-time-header=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
-                            __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}";        BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_HEADER" "$__BU_MAIN_STAT_TIME_HEADER";
+                            __BU_MAIN_STAT_TIME_HEADER="${value[i]#*=}";        BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_HEADER" "$__BU_MAIN_STAT_TIME_HEADER" 'float' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -226,7 +226,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable.
                 '--stat-time-newline='*)
                     if      [ "${value[i],,}" = "--stat-time-newline=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
-                            __BU_MAIN_STAT_TIME_NEWLINE="${value[i]#*=}";       BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_NEWLINE" "$__BU_MAIN_STAT_TIME_NEWLINE";
+                            __BU_MAIN_STAT_TIME_NEWLINE="${value[i]#*=}";       BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_NEWLINE" "$__BU_MAIN_STAT_TIME_NEWLINE" 'float' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -236,7 +236,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
                 '--stat-time-txt='*)
                     if      [ "${value[i],,}" = "--stat-time-txt=$(BU::IsPositiveFloat "${value[i]#*=}")" ]; then
-                            __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}";           BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_TXT" "$__BU_MAIN_STAT_TIME_TXT";
+                            __BU_MAIN_STAT_TIME_TXT="${value[i]#*=}";           BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TIME_TXT" "$__BU_MAIN_STAT_TIME_TXT" 'float' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -246,7 +246,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
                 '--stat-txt-fmt='*)
                     if      [ "${value[i],,}" = '--stat-txt-fmt=false' ]        || [ "${value[i],,}" = '--stat-txt-fmt=true' ]; then
-                            __BU_MAIN_STAT_TXT_FMT="${value#*=}";               BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TXT_FMT" "$__BU_MAIN_STAT_TXT_FMT";
+                            __BU_MAIN_STAT_TXT_FMT="${value#*=}";               BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_TXT_FMT" "$__BU_MAIN_STAT_TXT_FMT" 'bool' "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
