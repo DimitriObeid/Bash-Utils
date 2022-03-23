@@ -96,8 +96,8 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 
         # Deutch | German
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && {
-            echo '-----------------------------------------------------------------------------------------------' >&2 && echo >&2;
-            echo "FATALER FEHLER: DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
+            echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
+            echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
             echo "Da die Nachrichten in der Modulinitialisierungsdatei in Variablen gespeichert werden, stützt sich diese Datei auf diese Übersetzungsdateien, die diese Variablen definieren" >&2;
             echo "Anhalten der Skriptausführung" >&2;
@@ -135,8 +135,8 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 
         # Français | French
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'fr' ] && {
-            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
-            echo "ERREUR FATALE : IMPOSSIBLE DE SOURCER LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
+            echo '----------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
 
             echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
             echo "Arrêt de l'exécution du script" >&2;
@@ -1128,7 +1128,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
                     echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
-					BU::ModuleInit::Usage;
+                    BU::ModuleInit::Usage;
 
                     BU::ModuleInit::MsgAbort;
 
@@ -1152,12 +1152,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
         BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
 
         echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2;
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
+        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
 
         BU::ModuleInit::MsgAbort;
 
         BU::ModuleInit::AskPrintLog >&2; exit 1;
-
 
     # -----------------------------------------------
 

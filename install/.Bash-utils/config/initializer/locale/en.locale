@@ -501,3 +501,25 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TXT_FMT="$_
 unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL \
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT \
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING
+
+# -----------------------------------------------
+
+## STEP THREE : SOURCING FILES
+
+# No text to display in this section for now.
+
+# -----------------------------------------------
+
+## STEP FOUR : PROCESSING PROJECT'S RESOURCES
+
+# Creation of the text color code file.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__ERROR="UNABLE TO CREATE THE %s TEXT COLOR CODE FILE IN THE %s DIRECTORY";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__SUCCESS="The %s text color code file was successfully created in the %s directory";
+
+# Creation of the background color code file.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__ERROR="Unable to create the %s background color file in the %s directory";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__SUCCESS="The %s background color code file was successfully created in the %s directory";
+
+# Creation of the project's log file.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__ERROR="UNABLE TO CREATE THE %s LOG FILE FOR THE %s PROJECT";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS="The %s log file was successfully created in the %s directory";
