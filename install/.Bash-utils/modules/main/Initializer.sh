@@ -302,7 +302,7 @@ done
 ## SOURCING LIBRARY FILES FIRST
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceLibrary
+BU::Main::Initializer::SourceLibrary;
 
 # -----------------------------------------------
 
@@ -312,7 +312,14 @@ BU::Main::Initializer::SourceLibrary
 
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceConfig
+BU::Main::Initializer::SourceConfig;
+
+# -----------------------------------------------
+
+## CALLING THE TRANSLATION FUNCTION
+
+# Translating the main module's library messages
+BU::ModuleInit::ParseCSVLang "" "$__BU_MODULE_INIT_USER_LANG";
 
 # -----------------------------------------------
 

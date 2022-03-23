@@ -1048,7 +1048,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 							if [ -z "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
 								# If this argument is passed, no initialization messages will be logged in the "$__BU_MODULE_INIT_MSG_ARRAY" variable,
 								# but all the log messages will be displayed on the screen.
-								__BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$module_args"
+								__BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$module_args";
 
 							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
@@ -1357,17 +1357,59 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 ## INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
 # Parsing each module's translation CSV file.
-function BU::ModuleInit::ParseCSVLang()
+
+# The "BU::ModuleInit::ParseCSVLang" function MUST be called in the current module's initialization script.
+
+# IMPORTANT : It MUST be called AFTER the "BU::Main::Initializer::SourceLibrary" and "BU::Main::Initializer::SourceConfig" 
+# functions in the main module's initialization file, in the "STEP THREE" sub-section, in order to get the main module's functions.
+function BU::ModuleInit::ParseCSVLang() 
 {
     #**** Parameters ****
     local p_path=$1;        # Path of the translations CSV file to parse.
     local p_lang=$2;        # Language to fetch.
-    local p_success_msg=$3; # Success message to display in the targeted language.
-    local p_error_msg=$4;   # Error message to display in the targeted language.
+
+    #**** Variables ****
+    local v_filename="$__BU_MODULE_INIT_MODULE-$__BU_MODULE_INIT_USER_LANG.csv";
 
     #**** Code ****
-    if [ -z "$p_path" ]; then
-        BU::Main::Errors::HandleErrors ''
+    # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
+    # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
+
+    # If no path to the module's translation CSV file is given.
+    if [ -z "$p_path" ]; then local lineno="$LINENO";
+        BU::Main::Errors::HandleErrors '1' "NO PATH TO THE $__BU_MODULE_INIT_MODULE MODULE'S TRANSLATION FILE WAS GIVEN" \
+            "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    fi
+
+    # If a path to the module's translation CSV was given, but doesn't matches to a valid file path.
+    if [ -n "$p_path" ] && [[ "$p_path" != *"/$v_filename" ]]; then local lineno="$LINENO";
+        BU::Main::Errors::HandleErrors '1' "THE GIVEN PATH TO $__BU_MODULE_INIT_MODULE THE TRANSLATION FILE IS NOT VALID" \
+            "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    fi
+
+    # If no language is specified, the system's language or the redefined "$LANG" environment variable's ISO 639-1 language code will be used.
+    if [ -z "$p_lang" ]; then 
+        $p_lang="$__BU_MODULE_INIT_USER_LANG";
+    fi
+
+    # Begin parsing the CSV file.
+    BU::HeaderBlue "PARSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S $(BU::DechoHighlight "$p_path") TRANSLATIONS CSV FILEs";
+
+    BU::EchoNewstep "Finding the variables list column";
+    BU::Newline;
+
+    if [ "$(awk 'NR==1{print $1}' "$p_path")" != "VARIABLE" ]; then
+        BU::Main::Errors::HandleErrors '1' "NO $(BU::DechoHighlight "VARIABLE") VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE $(BU::DechoHighlightPath "")" \
+            "Make sure the current module's CSV translations file is correctly formatted [/|\] You can check the main module's CSV file to check how the formatting should be done" \
+            "$(awk 'NR==1{print $1}' "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    else
+        BU::EchoNewstep "Parsing the $(BU::DechoHighlightPath "$p_path") translations file";
+        BU::Newline;
+
+        BU::EchoNewstep "Getting the chosen language's row (current language : $(BU::DechoHighlight "$__BU_MODULE_INIT_USER_LANG"))";
+        BU::Newline;
+    fi
+
 
     return 0;
 }
@@ -1435,6 +1477,8 @@ function BashUtils_InitModules()
 		# -----------------------------------------------
 
 		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+
+		__BU_MODULE_INIT_MODULE="$v_module_name";
 
 		# Getting the current module's configurations directory AND its initialization directory (the "module --"* value is NOT a module).
 		if [[ "$module" != 'module --'* ]]; then
@@ -1507,7 +1551,7 @@ function BashUtils_InitModules()
 
                 printf '\n' >&2;
 
-                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND\n\n" "" "" "" "$v_module_name" >&2;
+                printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_module_name" >&2;
 
                 printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE"; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'f' >&2;
                 printf '\n\n' >&2;
