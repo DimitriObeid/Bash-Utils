@@ -524,14 +524,14 @@ function BU::Main::Args::Argc()
         else
             if ! BU::IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
                 BU::Main::Errors::HandleErrors '1' \
-                    "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "THE $p_funcname FUNCTION'S ARGUMENT COUNTER $(BU::DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
 
             if ! BU::IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
                 BU::Main::Args::PrintBadOption '1' \
-                    "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')$p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "THE $p_funcname FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU::DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
