@@ -259,8 +259,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
     BU::ModuleInit::Msg;
 
     BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS" '+' 'msg'; BU::ModuleInit::Msg;
-    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_DATE_LOG'  "$__BU_MODULE_INIT_DATE_LOG"    'CMD' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_date_log_lineno";
-    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_USER_LANG' "$__BU_MODULE_INIT_USER_LANG"   'CMD' "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG"   "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_user_lang_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM'    "$__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM"              'Char'  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_csv_translation_file_delim_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_DATE_LOG'                      "$__BU_MODULE_INIT_DATE_LOG"                                'CMD'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG"                  "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_date_log_lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_USER_LANG'                     "$__BU_MODULE_INIT_USER_LANG"                               'CMD'   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG"                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init_user_lang_lineno";
 
     # Unsetting the string variables.
     unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS \
@@ -277,6 +278,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH \
+        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG
 
@@ -296,6 +298,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __bu_module_init_lib_root_dir_root_file_name_lineno \
         __bu_module_init_lib_root_dir_root_file_parent_dir_lineno \
         __bu_module_init_lib_root_dir_root_file_path_lineno \
+        __bu_module_init_csv_translation_file_delim_lineno \
         __bu_module_init_date_log_lineno \
         __bu_module_init_user_lang_lineno
 }
@@ -1282,6 +1285,7 @@ if [ -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME";  __bu_module_init_lib_root_dir_root_file_path_lineno="$LINENO";
 
 	# Misc
+	__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM='˥';               __bu_module_init_csv_translation_file_delim_lineno="$LINENO";
 	__BU_MODULE_INIT_DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";  __bu_module_init_date_log_lineno="$LINENO";
 	__BU_MODULE_INIT_USER_LANG="$(echo "$LANG" | cut -d _ -f1)";   __bu_module_init_user_lang_lineno="$LINENO";
 else
@@ -1358,18 +1362,26 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # Parsing each module's translation CSV file.
 
+# CSV delimiter : ˥ (Unicode symbol U+02E5).
+
 # The "BU::ModuleInit::ParseCSVLang" function MUST be called in the current module's initialization script.
 
-# IMPORTANT : It MUST be called AFTER the "BU::Main::Initializer::SourceLibrary" and "BU::Main::Initializer::SourceConfig" 
-# functions in the main module's initialization file, in the "STEP THREE" sub-section, in order to get the main module's functions.
-function BU::ModuleInit::ParseCSVLang() 
+# IMPORTANT : It MUST be called AFTER the "BU::Main::Initializer::SourceLibrary" and BEFORE the "BU::Main::Initializer::SourceConfig"
+# functions in the main module's initialization file, in the "STEP THREE" sub-section, in order to get the main module's functions and
+# to translate the global variables descriptions written with the "BU::ModuleInit::DisplayInitGlobalVarsInfos" function.
+function BU::ModuleInit::ParseCSVLang()
 {
     #**** Parameters ****
-    local p_path=$1;        # Path of the translations CSV file to parse.
-    local p_lang=$2;        # Language to fetch.
+    local p_path=$1;                                    # String    - Default : NULL                            - Path of the translations CSV file to parse.
+    local p_lang=${2:-$__BU_MODULE_INIT_USER_LANG};     # String    - Default : $__BU_MODULE_INIT_USER_LANG     - Language to fetch.
+    local p_delim=$3;                                   # Char      - Default : NULL                            - CSV file's delimiter.
 
     #**** Variables ****
-    local v_filename="$__BU_MODULE_INIT_MODULE-$__BU_MODULE_INIT_USER_LANG.csv";
+    local v_filename="$__BU_MODULE_INIT_MODULE_NAME-$__BU_MODULE_INIT_USER_LANG.csv";
+    local v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$p_path")" "$p_delim")"
+
+    # Getting the total number of columns.
+    local x;
 
     #**** Code ****
     # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
@@ -1377,37 +1389,59 @@ function BU::ModuleInit::ParseCSVLang()
 
     # If no path to the module's translation CSV file is given.
     if [ -z "$p_path" ]; then local lineno="$LINENO";
-        BU::Main::Errors::HandleErrors '1' "NO PATH TO THE $__BU_MODULE_INIT_MODULE MODULE'S TRANSLATION FILE WAS GIVEN" \
+        BU::Main::Errors::HandleErrors '1' "NO PATH TO THE $__BU_MODULE_INIT_MODULE_NAME MODULE'S TRANSLATION FILE WAS GIVEN" \
             "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
     # If a path to the module's translation CSV was given, but doesn't matches to a valid file path.
     if [ -n "$p_path" ] && [[ "$p_path" != *"/$v_filename" ]]; then local lineno="$LINENO";
-        BU::Main::Errors::HandleErrors '1' "THE GIVEN PATH TO $__BU_MODULE_INIT_MODULE THE TRANSLATION FILE IS NOT VALID" \
+        BU::Main::Errors::HandleErrors '1' "THE GIVEN PATH TO $__BU_MODULE_INIT_MODULE_NAME THE TRANSLATION FILE IS NOT VALID" \
             "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
     # If no language is specified, the system's language or the redefined "$LANG" environment variable's ISO 639-1 language code will be used.
-    if [ -z "$p_lang" ]; then 
-        $p_lang="$__BU_MODULE_INIT_USER_LANG";
+    if [ -z "$p_lang" ]; then
+        p_lang="$__BU_MODULE_INIT_USER_LANG";
+    fi
+
+    # If no delimiter is given.
+    if [ -z "$p_delim" ]; then local lineno="$LINENO";
+        BU::Main::Errors::HandleErrors '1' "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
+            "Please give a single unicode character as CSV delimiter in order to get each wanted cell" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    fi
+
+    if [ -n "$p_delim" ] && [ "${#p_delim}" -gt 1 ]; then
+        BU::Main::Errors::HandleErrors '1' "THE GIVEN DELIMITER MUST BE A SINGLE UNICODE CHARACTER" \
+            "Please give a single unicode character as valid CSV delimiter in order to get each wanted cell" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
     # Begin parsing the CSV file.
-    BU::HeaderBlue "PARSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S $(BU::DechoHighlight "$p_path") TRANSLATIONS CSV FILEs";
+    BU::HeaderBlue "PARSING THE $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") PROJECT'S $(BU::DechoHighlight "$p_path") TRANSLATIONS CSV FILE";
 
     BU::EchoNewstep "Finding the variables list column";
     BU::Newline;
 
-    if [ "$(awk 'NR==1{print $1}' "$p_path")" != "VARIABLE" ]; then
-        BU::Main::Errors::HandleErrors '1' "NO $(BU::DechoHighlight "VARIABLE") VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE $(BU::DechoHighlightPath "")" \
+    if [ "$v_CSVFirstColRow" != "VARIABLE" ]; then
+        BU::Main::Errors::HandleErrors '1' "NO $(BU::DechoHighlight "VARIABLE") VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE $(BU::DechoHighlightPath "$p_path")" \
             "Make sure the current module's CSV translations file is correctly formatted [/|\] You can check the main module's CSV file to check how the formatting should be done" \
-            "$(awk 'NR==1{print $1}' "$p_path")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     else
         BU::EchoNewstep "Parsing the $(BU::DechoHighlightPath "$p_path") translations file";
         BU::Newline;
 
         BU::EchoNewstep "Getting the chosen language's row (current language : $(BU::DechoHighlight "$__BU_MODULE_INIT_USER_LANG"))";
         BU::Newline;
+
+        # Getting the total number of columns.
+        x="$(awk -F, '{ print NF; exit }' "$p_path")";
+
+        # Getting the langage ISO 639-1 code from the first row.
+        awk -v col="${x}" '
+            function BU::ModuleInit::GetCSVRowWithAWK(col)
+            {
+
+            }
+        '
     fi
 
 
@@ -1478,7 +1512,7 @@ function BashUtils_InitModules()
 
 		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
-		__BU_MODULE_INIT_MODULE="$v_module_name";
+		__BU_MODULE_INIT_MODULE_NAME="$v_module_name";
 
 		# Getting the current module's configurations directory AND its initialization directory (the "module --"* value is NOT a module).
 		if [[ "$module" != 'module --'* ]]; then

@@ -306,6 +306,13 @@ BU::Main::Initializer::SourceLibrary;
 
 # -----------------------------------------------
 
+## CALLING THE TRANSLATION FUNCTION
+
+# Translating the main module's library messages
+BU::ModuleInit::ParseCSVLang "" "$__BU_MODULE_INIT_USER_LANG" "$__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM";
+
+# -----------------------------------------------
+
 ## SOURCING CONFIGURATION FILES
 
 # TODO : avoid the overwriting of the status variables defined with the "main" module's arguments.
@@ -313,13 +320,6 @@ BU::Main::Initializer::SourceLibrary;
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
 BU::Main::Initializer::SourceConfig;
-
-# -----------------------------------------------
-
-## CALLING THE TRANSLATION FUNCTION
-
-# Translating the main module's library messages
-BU::ModuleInit::ParseCSVLang "" "$__BU_MODULE_INIT_USER_LANG";
 
 # -----------------------------------------------
 

@@ -1436,17 +1436,52 @@ function BU::Main::Args__Text::GetCharacterOccurences()
 
     if [ -z "$p_target" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
-            "Please give any character to process as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please give any single character to process as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
     fi
 
-    if [ -n "$p_target" ] && ! BU::IsChar "$p_target"; then local lineno="$LINENO";
+    if [ -n "$p_target" ] && [ "${#p_target}" -gt 1 ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption '!alphanumchar' \
             "Please give only a single character to process as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
     fi
 
     return 0;
+}
+
+# "BU::Main::Text::GetSubStringBeforeDelim" function
+function BU::Main::Args__Text::GetSubStringBeforeDelim()
+{
+    #**** Parameters ****
+    local p_string=$1       # String    - Default : NULL  - String to process.
+    local p_delim=$2        # String    - Default : NULL  - Targeted sub-string
+
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+
+	if [ -z "$p_string" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give a string to process as first argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi
+
+	if [ -z "$p_delim" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give any single character as delimiter to process as second argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi
+
+    if [ -z "$p_delim" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!alphanumchar' \
+            "Please give only a single character as delimiter to process as second argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi
+
+	return 0;
 }
 
 # "BU::Main::Text::GetSubStringOccurences" function.

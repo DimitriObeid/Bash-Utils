@@ -181,6 +181,21 @@ function BU::Main::Text::GetCharacterOccurences()
     return 0;
 }
 
+# Getting substring before a delimiter.
+BU::Main::Text::GetSubStringBeforeDelim()
+{
+    #**** Parameters ****
+    local p_string=$1;  # String    - Default : NULL    - String to process.
+    local p_delim=$2;   # Char      - Default : NULL    - Delimiter
+
+    #**** Code ****
+    if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+    echo "${p_string%%$p_delim*}";
+
+    return 0;
+}
+
 # Getting the occurences of a sub-string in a main string.
 function BU::Main::Text::GetSubStringOccurences()
 {

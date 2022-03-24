@@ -107,6 +107,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PA
 
 # Variables diverses.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="Initialisation des variables diverses";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="Cette variable globale enregistre le caractère qui est utilisé comme délimiteur du fichier de traduction CSV du module principal.";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
 
@@ -303,8 +304,8 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1="--log-display         : af
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3="--log-shut-display    : efficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
 
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1="--mode-log-full       : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregister dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
 
 # Affichage des valeurs supportées par l'option "module".
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="Les valeurs supportées sont :";
@@ -409,7 +410,7 @@ __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODU
 # Définition des informations sur les variables globales qui sont définies dans la fonction "BashUtils_InitModules".
 __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire des configurations du module actuellement traité (actuel : %s | chemin : %s)";
 __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire d'initialisation du module actuellement traité (actuel : %s | chemin : %s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS="Cette variable globale enregiste la valeur courante passée en argument lors de l'appel de la fonction « %s » (current index : %s | value : %s)";
+__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS="Cette variable globale enregistre la valeur courante passée en argument lors de l'appel de la fonction « %s » (current index : %s | value : %s)";
 
 # Inclusion des fichiers de configuration du module en cours de traitement : dossier des configurations non trouvé.
 __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le répertoire des fichiers de configuration du module « %s » n'existe pas.";
