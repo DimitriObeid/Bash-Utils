@@ -1377,6 +1377,7 @@ function BU::ModuleInit::ParseCSVLang()
     local p_delim=$3;                                   # Char      - Default : NULL                            - CSV file's delimiter.
 
     #**** Variables ****
+    local v_outputFile="";
     local v_filename="$__BU_MODULE_INIT_MODULE_NAME-$__BU_MODULE_INIT_USER_LANG.csv";
     local v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$p_path")" "$p_delim")"
 
@@ -1387,20 +1388,28 @@ function BU::ModuleInit::ParseCSVLang()
     # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
     # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
 
+    # If the output file already exists, then it's not necessary to retranslate the module.
+    if [ -f "$v_outputFile" ]; then; return 0; fi
+
     # If no path to the module's translation CSV file is given.
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Errors::HandleErrors '1' "NO PATH TO THE $__BU_MODULE_INIT_MODULE_NAME MODULE'S TRANSLATION FILE WAS GIVEN" \
             "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
-    # if a path to the module's translation CSV was given, but doesn't matches to a valid file path.
+    # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
+    if [ -n "$p_path" ] && [ ! -f "$p_path" ]; then local lineno="$LINENO";
         BU::Main::Errors::HandleErrors '1' "THE GIVEN PATH TO $__BU_MODULE_INIT_MODULE_NAME THE TRANSLATION FILE IS NOT VALID" \
             "Please give a valid path to the current module's translations CSV file" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    fi
 
-    # If a path to the module's translation CSV was given, but the exact file name doesn't matches with the defined name pattern.
-    if [ -n "$p_path" ] && [ -f "$p_path" ] && [ "$(basename "$p_path")" != "$v_filename" ]; then local lineno="$LINENO";
-        BU::Main::Errors::HandleErrors '1' "THE NAME OF THE $__BU_MODULE_INIT_MODULE_NAME PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" \
-            "Please give a valid name to the current module's translations CSV file [/|\] The pattern is (without single quotes) : 'module_name'-'ISO_639-1_language_code'" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
+    # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
+    if [ -n "$p_path" ] \
+        && [ -f "$p_path" ] \
+        && [ ! -f "$v_outputFile" ] \
+        && [ "$(basename "$p_path")" != "$v_filename" ]; then local lineno="$LINENO";
+            BU::Main::Errors::HandleErrors '1' "THE NAME OF THE $__BU_MODULE_INIT_MODULE_NAME PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" \
+                "Please give a valid name to the current module's translations CSV file [/|\] The pattern is (without single quotes) : 'module_name'-'ISO_639-1_language_code'" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
     # If no language is specified, the system's language or the redefined "$LANG" environment variable's ISO 639-1 language code will be used.
