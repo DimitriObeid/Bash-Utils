@@ -123,7 +123,7 @@ function BU::Main::Args::PrintBadOption()
 
 		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
-	# Else, if the value passed as argument is not an alphabetic string.
+	# Else, if the value passed as argument is not an alphabetic string OR character.
     elif [ "${p_option,,}" = '!alphastrchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
@@ -133,7 +133,7 @@ function BU::Main::Args::PrintBadOption()
 
 		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
-	# Else, if the value passed as argument is not an alphanumeric string.
+	# Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" = '!alphanumchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
@@ -153,7 +153,7 @@ function BU::Main::Args::PrintBadOption()
 
 		return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
-	# Else, if the value passed as argument is not an alphanumeric string.
+	# Else, if the value passed as argument is not an alphanumeric string OR character.
     elif [ "${p_option,,}" = '!alphanumstrchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
             "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
@@ -162,14 +162,6 @@ function BU::Main::Args::PrintBadOption()
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
 
 		return "$__BU_MAIN_EXIT_CURRENT_CODE";
-
-    # Else, if the value passed as argument is not an alphanumeric character.
-    elif [ "${p_option,,}" = '!charnum' ]; then
-        BU::Main::Errors::HandleErrors '1' \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
-
-        return 1;
 
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
     elif [ "${p_option,,}" = '!d' ]; then

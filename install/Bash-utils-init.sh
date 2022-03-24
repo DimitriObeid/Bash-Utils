@@ -1285,7 +1285,7 @@ if [ -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
 	__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PATH="$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR/$__BU_MODULE_INIT_LIB_ROOT_DIR_ROOT_FILE_NAME";  __bu_module_init_lib_root_dir_root_file_path_lineno="$LINENO";
 
 	# Misc
-	__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM='˥';               __bu_module_init_csv_translation_file_delim_lineno="$LINENO";
+	__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM=',';               __bu_module_init_csv_translation_file_delim_lineno="$LINENO";
 	__BU_MODULE_INIT_DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";  __bu_module_init_date_log_lineno="$LINENO";
 	__BU_MODULE_INIT_USER_LANG="$(echo "$LANG" | cut -d _ -f1)";   __bu_module_init_user_lang_lineno="$LINENO";
 else
@@ -1362,7 +1362,7 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # Parsing each module's translation CSV file.
 
-# CSV delimiter : ˥ (Unicode symbol U+02E5).
+# CSV delimiter : , (comma).
 
 # The "BU::ModuleInit::ParseCSVLang" function MUST be called in the current module's initialization script.
 
