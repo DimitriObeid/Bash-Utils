@@ -50,7 +50,7 @@ function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutSubStri
 # Cut the dash written before a command option call (to be improved).
 function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutSubStringAfterNthDelim "$1" '-';   return 0; }
 
-# TODO
+## TODO
 # Cut every part of a string after and with the delimiter, which can be both a single character or a string.
 function BU::Main::Text::CutSubStringAfterNthDelim()
 {
@@ -116,22 +116,26 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
 function BU::Main::Text::CutFirstFieldBeforeDelim()
 {
     #**** Parameters ****
-    #   $1  --> String    - Default : NULL    - String to process.
-    #   $2  --> delimiter
+    local p_string=$1;	# String    - Default : NULL    - String to process.
+    local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-    echo "${1%$2*}" && return 0;
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+    echo "${p_string%$p_delim*}" && return 0;
 }
 
 # Cut the very last field of a string, in order to get everything that preceeds the last field.
 function BU::Main::Text::CutLastFieldAfterDelim()
 {
     #**** Parameters ****
-    #   $1  --> String    - Default : NULL    - String to process.
-    #   $2  --> delimiter
+    local p_string=$1;	# String    - Default : NULL    - String to process.
+    local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-    echo "${1#*$2}" && return 0;
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+    echo "${p_string#*$p_delim}" && return 0;
 }
 
 # -----------------------------------------------
@@ -212,22 +216,26 @@ function BU::Main::Text::GetCharacterOccurences()
 function BU::Main::Text::GetFirstFieldBeforeDelim()
 {
     #**** Parameters ****
-    #   $1  --> String    - Default : NULL    - String to process.
-    #   $2  --> delimiter
+    local p_string=$1;	# String    - Default : NULL    - String to process.
+    local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-    echo "${1%%$2*}" && return 0;
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+    echo "${p_string%%$p_delim*}" && return 0;
 }
 
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
 function BU::Main::Text::GetLastFieldAfterDelim()
 {
     #**** Parameters ****
-    #   $1  --> String    - Default : NULL    - String to process.
-    #   $2  --> delimiter
+    local p_string=$1;	# String    - Default : NULL    - String to process.
+    local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-    echo "${1##*$2}" && return 0;
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+	echo "${p_string##*$p_delim}" && return 0;
 }
 
 # Getting substring after a delimiter, which can be both a single character or a string.
