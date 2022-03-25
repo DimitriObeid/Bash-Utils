@@ -600,19 +600,19 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 
 	if [ -z "$p_parent" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
-            "The function $(BU::Main::Text::CutSubStringBeforeDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "The function $(BU::Main::Text::CutSubStringBeforeNthDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
     fi
 
     if [ -z "$p_child" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
-            "The function $(BU::Main::Text::CutSubStringBeforeDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "The function $(BU::Main::Text::CutSubStringBeforeNthDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
     fi
 
 	if [ -z "$p_type" ]; then local lineno="$LINENO";
 		 BU::Main::Args::PrintBadOption 'z' \
-            "The function $(BU::Main::Text::CutSubStringBeforeDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "The function $(BU::Main::Text::CutSubStringBeforeNthDelim "$(BU::DechoHighlightFunction "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
 			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; return $?;
     fi
 
@@ -866,7 +866,7 @@ function BU::Main::Args__Directories::GetDirectoryName()
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
-            "The $(BU::Main::Text::CutSubStringBeforeDelim "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "The $(BU::Main::Text::CutSubStringBeforeNthDelim "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
 
 		return 1;
@@ -890,7 +890,7 @@ function BU::Main::Args__Directories::GetDirectoryPath()
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU::Main::Args::PrintBadOption 'z' \
-            "The $(BU::Main::Text::CutSubStringBeforeDelim "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "The $(BU::Main::Text::CutSubStringBeforeNthDelim "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
 
 		return 1;
@@ -1349,8 +1349,44 @@ function BU::Main::Args__Filesystem::ChownRec()
 
 ## CATEGORY : CUTTING TEXT
 
-# "BU::Main::Text::CutSubStringBeforeDelim" function.
-function BU::Main::Args__Text::CutFromDelim()
+# "BU::Main::Text::CutSubStringAfterNthDelim" function.
+function BU::Main::Args__Text::CutSubStringAfterNthDelim()
+{
+    #**** Parameters ****
+    local p_string=$1;      # String    - Default : NULL    - String to process.
+    local p_delimiter=$2;   # Char      - Default : NULL    - Delimiter.
+    local p_iterations=$3;  # Int       - Default : 1       - Iterations.
+
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_string" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give a string to process as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+    fi
+
+    if [ -z "$p_delimiter" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give a character as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+    fi
+
+    if [ -n "$p_iterations" ] && ! BU::IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as third argument (optional) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+    fi
+
+    return 0;
+}
+
+# "BU::Main::Text::CutSubStringBeforeNthDelim" function.
+function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 {
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
