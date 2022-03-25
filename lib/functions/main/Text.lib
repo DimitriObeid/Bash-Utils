@@ -84,6 +84,34 @@ function BU::Main::Text::CutFromDelim()
     echo -ne "$p_string"; return 0;
 }
 
+# Cut every part of a string before and with the delimiter, which is a character only.
+function BU::Main::Text::CutFromDelimChar()
+{
+    #**** Parameters ****
+    local p_string=$1;              # String    - Default : NULL    - String to process.
+    local p_delimiter=$2;           # String    - Default : NULL    - Delimiter.
+    local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations.
+
+    #**** Code ****
+    BU::Main::Text::CutFromDelim "$p_string" 'char' "$p_iterations";
+
+    return "$?";
+}
+
+# Cut every part of a string before and with the delimiter, which is a string only.
+function BU::Main::Text::CutFromDelimString()
+{
+    #**** Parameters ****
+    local p_string=$1;              # String    - Default : NULL    - String to process.
+    local p_delimiter=$2;           # String    - Default : NULL    - Delimiter.
+    local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations.
+
+    #**** Code ****
+    BU::Main::Text::CutFromDelim "$p_string" 'str' "$p_iterations";
+
+    return "$?";
+}
+
 # Cut the last field of a string.
 function BU::Main::Text::CutLastFieldFromDelim()
 {
@@ -177,6 +205,34 @@ function BU::Main::Text::GetCharacterOccurences()
     if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     BU::EchoMsg "${#v_occurences}";
+
+    return 0;
+}
+
+# Getting substring after a delimiter.
+BU::Main::Text::GetSubStringAfterDelim()
+{
+    #**** Parameters ****
+    local p_string=$1;              # String    - Default : NULL    - String to process.
+    local p_delim=$2;               # Char      - Default : NULL    - Delimiter
+    local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
+    local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+
+    #**** Variables ****
+    # Note : the "$v_count_GetSubStringAfterDelim" variable is not local, in order to be accessed externally.
+
+    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then v_count_GetSubStringAfterDelim=0;
+
+    #**** Code ****
+    if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+    for i in $(seq "$p_iterations"); do
+        p_string="${p_string#*$p_delim}";
+
+        if [ -n "$v_count" ]; then v_count="$(( v_count + 1 ))" fi
+    done;
+
+    echo "$p_string";
 
     return 0;
 }

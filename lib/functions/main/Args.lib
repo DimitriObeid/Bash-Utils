@@ -1441,7 +1441,41 @@ function BU::Main::Args__Text::GetCharacterOccurences()
     return 0;
 }
 
-# "BU::Main::Text::GetSubStringBeforeDelim" function
+# "BU::Main::Args__Text::GetSubStringAfterDelim" function.
+function BU::Main::Args__Text::GetSubStringAfterDelim()
+{
+    #**** Parameters ****
+    local p_string=$1;              # String    - Default : NULL    - String to process.
+    local p_delim=$2;               # Char      - Default : NULL    - Delimiter
+    local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
+
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
+	if [ -z "$p_string" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give a string to process as first argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi
+
+	if [ -z "$p_delim" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please give any single character as delimiter to process as second argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi
+
+    if [ -z "$p_delim" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption '!alphanumchar' \
+            "Please give only a single character as delimiter to process as second argument [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")"
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
+	fi    
+}
+
+# "BU::Main::Text::GetSubStringBeforeDelim" function.
 function BU::Main::Args__Text::GetSubStringBeforeDelim()
 {
     #**** Parameters ****

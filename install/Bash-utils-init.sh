@@ -152,10 +152,40 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 function BU::ModuleInit::GetModuleInitLanguage()
 {
     #**** Parameters ****
-    local p_lang=$1;    # Wanted language.
+    local p_lang_ISO_639_1=$1; # Wanted language.
+
+    #**** Variables ****
+    local v_supportedLang=('de' 'en' 'es' 'fr');
+    local v_langMatch;
 
     #**** Code ****
-	if [ -z "$p_lang" ]; then
+    for i in "${v_supportedLang[@]}"; do
+        if [[ "$i" == "$p_lang_ISO_639_1" ]]; then
+            v_langMatch="match";
+
+            break;
+        fi
+    done
+
+    # If the selected language was not found.
+    if [ -z "$v_langMatch" ]; then
+
+        if [ -n "$p_lang_ISO_639_1" ]; then
+            echo "WARNING : Your selected language ($p_lang_ISO_639_1) is not (yet) supported by the initialisation script" >&2
+            echo >&2;
+        else
+            echo "WARNING : Your current language ($__BU_MODULE_INIT_USER_LANG) is not (yet) supported by the initialisation script" >&2
+            echo >&2;
+        fi
+
+        echo "The initialisation script will use english as default language" >&2;
+        echo >&2;
+
+        # Changing the current language to English.
+        LANG="en_US.UTF-8";
+    fi
+
+	if [ -z "$p_lang_ISO_639_1" ]; then
         [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
@@ -164,7 +194,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
 		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
-    elif [ -n "$p_lang" ] && [ ! -f "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" ]; then
+    elif [ -n "$p_lang_ISO_639_1" ] && [ ! -f "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" ]; then
 		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT_USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
@@ -174,7 +204,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
         BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
 
     else
-        source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang.locale" || {
+        source "$__BU_MODULE_INIT_CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" || {
             [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
             [ "${__BU_MODULE_INIT_USER_LANG,,}" = 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
             [ "${__BU_MODULE_INIT_USER_LANG,,}" = "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
@@ -1362,8 +1392,6 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 
 # Parsing each module's translation CSV file.
 
-# CSV delimiter : , (comma).
-
 # The "BU::ModuleInit::ParseCSVLang" function MUST be called in the current module's initialization script.
 
 # IMPORTANT : It MUST be called AFTER the "BU::Main::Initializer::SourceLibrary" and BEFORE the "BU::Main::Initializer::SourceConfig"
@@ -1373,23 +1401,33 @@ function BU::ModuleInit::ParseCSVLang()
 {
     #**** Parameters ****
     local p_path=$1;                                    # String    - Default : NULL                            - Path of the translations CSV file to parse.
-    local p_lang=${2:-$__BU_MODULE_INIT_USER_LANG};     # String    - Default : $__BU_MODULE_INIT_USER_LANG     - Language to fetch.
+    local p_lang_ISO_639_1=${2:-$__BU_MODULE_INIT_USER_LANG};     # String    - Default : $__BU_MODULE_INIT_USER_LANG     - Language to fetch.
     local p_delim=$3;                                   # Char      - Default : NULL                            - CSV file's delimiter.
 
     #**** Variables ****
-    local v_outputFile="";
-    local v_filename="$__BU_MODULE_INIT_MODULE_NAME-$__BU_MODULE_INIT_USER_LANG.csv";
-    local v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$p_path")" "$p_delim")"
+    local v_outputFileName="$__BU_MODULE_INIT_MODULE_NAME.$p_lang_ISO_639_1.translate";
+    local v_outputFileParent="$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH";
+    local v_outputFilePath="$v_outputFileParent/$v_outputFileName";
+
+    local v_filename="$__BU_MODULE_INIT_MODULE_NAME-$p_lang_ISO_639_1.csv";
+    local v_CSVFirstColRow;
+        v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$p_path")" "$p_delim")";
 
     # Getting the total number of columns.
     local x;
+
+    # Getting the wanted column.
+    local v_wantedColID;
+
+    # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
+    local v_CSVFirstColRowAfterNthDelim;
 
     #**** Code ****
     # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
     # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
 
     # If the output file already exists, then it's not necessary to retranslate the module.
-    if [ -f "$v_outputFile" ]; then; return 0; fi
+    if [ -f "$v_outputFile" ]; then return 0; fi
 
     # If no path to the module's translation CSV file is given.
     if [ -z "$p_path" ]; then local lineno="$LINENO";
@@ -1409,12 +1447,7 @@ function BU::ModuleInit::ParseCSVLang()
         && [ ! -f "$v_outputFile" ] \
         && [ "$(basename "$p_path")" != "$v_filename" ]; then local lineno="$LINENO";
             BU::Main::Errors::HandleErrors '1' "THE NAME OF THE $__BU_MODULE_INIT_MODULE_NAME PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" \
-                "Please give a valid name to the current module's translations CSV file [/|\] The pattern is (without single quotes) : 'module_name'-'ISO_639-1_language_code'" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
-    fi
-
-    # If no language is specified, the system's language or the redefined "$LANG" environment variable's ISO 639-1 language code will be used.
-    if [ -z "$p_lang" ]; then
-        p_lang="$__BU_MODULE_INIT_USER_LANG";
+                "Please give a valid name to the current module's translations CSV file [/|\] The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; exit 1;
     fi
 
     # If no delimiter is given.
@@ -1442,19 +1475,19 @@ function BU::ModuleInit::ParseCSVLang()
         BU::EchoNewstep "Parsing the $(BU::DechoHighlightPath "$p_path") translations file";
         BU::Newline;
 
-        BU::EchoNewstep "Getting the chosen language's row (current language : $(BU::DechoHighlight "$__BU_MODULE_INIT_USER_LANG"))";
+        BU::EchoNewstep "Getting the chosen language's row (targeted language : $(BU::DechoHighlight "$p_lang_ISO_639_1"))";
         BU::Newline;
 
         # Getting the total number of columns.
         x="$(awk -F, '{ print NF; exit }' "$p_path")";
 
-        # Getting the langage ISO 639-1 code from the first row.
-        awk -v col="${x}" '
-            function BU::ModuleInit::GetCSVRowWithAWK(col)
-            {
+        # Getting the wanted language's column.
+        v_wantedColID="$(( x - 1 ))";
 
-            }
-        '
+        # Getting the langage ISO 639-1 code from the first row.
+        v_CSVFirstColRowAfterNthDelim="$(BU::Main::Text::GetSubStringAfterDelim "$v_CSVFirstColRow" "$p_delim" "$v_wantedColID")";
+
+
     fi
 
 
