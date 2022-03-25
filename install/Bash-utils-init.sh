@@ -1416,8 +1416,8 @@ function BU::ModuleInit::ParseCSVLang()
     # Getting the total number of columns.
     local x;
 
-    # Getting the wanted column.
-    local v_wantedColID;
+    # Getting the wanted column (set to 0, and the value will be taken from a new assignation of the variable with the call of the "BU::Main::Text::GetSubStringAfterDelim" function as sub-shell).
+    local v_wantedColID=0;
 
     # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
     local v_CSVFirstColRowAfterNthDelim;
@@ -1481,11 +1481,11 @@ function BU::ModuleInit::ParseCSVLang()
         # Getting the total number of columns.
         x="$(awk -F, '{ print NF; exit }' "$p_path")";
 
-        # Getting the wanted language's column.
-        v_wantedColID="$(( x - 1 ))";
-
         # Getting the langage ISO 639-1 code from the first row.
-        v_CSVFirstColRowAfterNthDelim="$(BU::Main::Text::GetSubStringAfterDelim "$v_CSVFirstColRow" "$p_delim" "$v_wantedColID")";
+        v_CSVFirstColRowAfterNthDelim="$(BU::Main::Text::GetSubStringAfterDelim "$v_CSVFirstColRow" "$p_delim" "$(( x - 1 ))")";
+
+        # Getting the wanted language's column.
+        v_wantedColID="$(BU::Main::Text::GetSubStringAfterDelim "$v_CSVFirstColRow" "$p_delim" "$(( x - 1 ))" "count")";
 
 
     fi
