@@ -70,7 +70,11 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
-    for ((i=0; i<p_iterations; i++)); do
+	x="$(BU::Main::Text::GetCharacterOccurences "$p_string" "$p_target")";
+
+    for ((i=0; i<x; i++)); do
+		if [ "$i" = "$p_iterations" ]; then
+
         p_string="";
 
         if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
