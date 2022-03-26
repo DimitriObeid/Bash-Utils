@@ -77,7 +77,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
-	x="$(BU::Main::Text::GetCharacterOccurences "$p_string" "$p_target")";
+	x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
 
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
@@ -91,10 +91,10 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 			p_newString="${p_newString$p_delimiter$p_fieldtmp}";
 		fi
 
-        if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
-	if [ -z "$p_count" ]; then echo -ne "$p_newString"; else echo -ne "$v_count"; fi
+	if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_newString"; else echo -ne "$v_count"; fi
 
     return 0;
 }
@@ -124,10 +124,10 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
         p_string="$(sed "s/^[^$p_delimiter]*$p_delimiter//" <<< "$p_string")";
         p_string="$p_string";
 
-        if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
-    if [ -z "$p_count" ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
+    if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
 
     return 0;
 }
@@ -277,10 +277,10 @@ BU::Main::Text::GetSubStringAfterDelim()
     for i in $(seq "$p_iterations"); do
         p_string="${p_string#*$p_delim}";
 
-        if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done;
 
-    if [ -z "$p_count" ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
+    if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
 
     return 0;
 }
@@ -295,31 +295,66 @@ BU::Main::Text::GetSubStringBeforeDelim()
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
+    #**** Variables ****
+    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
+
+	# Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
+	local v_fieldtmp="";
+
+	# Let this variable empty, it is used to store the new string with every fields cut from the original string.
+	local v_newString="";
+
+	local x;
+
     #**** Code ****
-    if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
-    # WARNING ! DO NOT put double quotes between the "$(seq "$p_iterations")", or else it will not word split, and the loop will only run once !
-    for i in $(seq "$p_iterations"); do
-        p_string="";
+    if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+    fi
 
-        if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
+	x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
+
+    for ((i=0; i<x; i++)); do
+		if [ "$i" = "$p_iterations" ]; then break; fi
+
+        p_fieldtmp="${p_string##*$p_delim}";
+		p_fieldtmp="${p_fieldtmp%$p_delim*}";
+
+		if [ -z "$p_newString" ]; then
+			p_newString="$p_fieldtmp";
+		else
+			p_newString="${p_newString$p_delim$p_fieldtmp}";
+		fi
+
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
-    echo "${p_string%%$p_delim*}";
+	p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")";
+
+	if [ "${p_count,,}" != 'count' ]; then echo -e "$v_newString"; else echo "$p_count"; fi
 
     return 0;
 }
 
-## TO TEST : the "GetCharacterOccurences()" function.
-# Getting the occurences of a sub-string in a main string.
+# Getting the occurences of a sub-string in a main string (it also works with a single character).
 function BU::Main::Text::GetSubStringOccurences()
 {
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
     local p_target=$2;  # String    - Default : NULL    - Targeted sub-string.
 
+	#**** Variables ****
+	local tmp;
+	local count;
+
     #**** Code ****
     if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+
+	tmp="${p_string//$p_target}";
+	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
+
+	echo -e "$count";
 
     return 0;
 }
@@ -366,15 +401,27 @@ function BU::Main::Text::GetStringWordsNumber()
 function BU::Main::Text::ReverseStringWordsOrder()
 {
     #**** Parameters ****
-    #   $1  --> String    - Default : NULL    - String to process.
-    #   $2  --> delimiter
+    local p_string=$1;	# String    - Default : NULL    - String to process.
+    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+
+	#**** Variables ****
+	# Leave this variable empty, it will store the reversed string.
+	local reversed="";
 
     #**** Code ****
-    local v_echo;
-        v_echo="$(echo -ne "$1" | tr "$2" '\n' | tac | tr '\n' "$2")";
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
-    #**** Code ****
-    echo -ne "$v_echo"
+	IFS="$p_delim" read -ra line <<< "$p_string";
+
+	let x="${#line[@]}-1";
+
+	while [ "$x" -ge 0 ]; do
+		if [ "$x" -gt 0 ]; then reversed="$reversed${line[x]}$delim"; else reversed="$reversed${line[x]}"; fi
+
+		let x--;
+	done
+
+	echo -e "$reversed";
 
     return 0;
 }
