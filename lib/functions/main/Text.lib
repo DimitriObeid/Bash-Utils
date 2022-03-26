@@ -77,6 +77,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
+	# Getting the number of occurences of the character / string targeted as delimiter.
 	x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
 
     for ((i=0; i<x; i++)); do
@@ -312,6 +313,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
         BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
+	# Getting the number of occurences of the character / string targeted as delimiter.
 	x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
 
     for ((i=0; i<x; i++)); do
@@ -350,7 +352,17 @@ function BU::Main::Text::GetSubStringOccurences()
     #**** Code ****
     if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
+	# https://stackoverflow.com/a/50601141
+
+	# This removes all occurrences of "$p_string" from $CommandResult and places it in tmp.
+	# Actually we're using substring replacement here with replacement string missing.
+	
+	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
 	tmp="${p_string//$p_target}";
+
+	# This gives us the number of occurrences of "$p_string" in $CommandResult.
+
+	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "$p_target" (remember, we removed all occurrences of "$p_target" from "$p_string" and placed the result in "$tmp").
 	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
 
 	echo -e "$count";
