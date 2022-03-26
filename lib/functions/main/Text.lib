@@ -285,7 +285,6 @@ BU::Main::Text::GetSubStringAfterDelim()
     return 0;
 }
 
-## TODO
 # Getting substring before a delimiter, which can be both a single character or a string.
 BU::Main::Text::GetSubStringBeforeDelim()
 {
