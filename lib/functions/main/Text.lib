@@ -68,6 +68,8 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 	# Let this variable empty, it is used to store the new string with every fields cut from the original string.
 	local v_newString="";
 
+	local x;
+
     #**** Code ****
     if ! BU::Main::Args__Text::CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
