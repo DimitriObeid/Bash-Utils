@@ -429,7 +429,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
 ## SPLITTING TEXT
 
-# Splitting a string from a given delimiter.
+# Splitting a string from a given delimiter, in order to store it in an array.
 # function BU::Main::Text::SplitStringFromDelim()
 # {
 #     #**** Parameters ****
