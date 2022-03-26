@@ -50,7 +50,6 @@ function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutSubStri
 # Cut the dash written before a command option call (to be improved).
 function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutSubStringAfterNthDelim "$1" '-';   return 0; }
 
-## TODO
 # Cut every part of a string after and with the delimiter, which can be both a single character or a string.
 function BU::Main::Text::CutSubStringAfterNthDelim()
 {
@@ -63,6 +62,12 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
     #**** Variables ****
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
 
+	# Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
+	local v_fieldtmp="";
+
+	# Let this variable empty, it is used to store the new string with every fields cut from the original string.
+	local v_newString="";
+
     #**** Code ****
     if ! BU::Main::Args__Text::CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
@@ -73,12 +78,21 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 	x="$(BU::Main::Text::GetCharacterOccurences "$p_string" "$p_target")";
 
     for ((i=0; i<x; i++)); do
-		if [ "$i" = "$p_iterations" ]; then
+		if [ "$i" = "$p_iterations" ]; then break; fi
 
-        p_string="";
+        p_fieldtmp="${p_string%%$p_delimiter*}";
+		p_fieldtmp="${p_fieldtmp#*$p_delimiter}";
+
+		if [ -z "$p_newString" ]; then
+			p_newString="$p_fieldtmp";
+		else
+			p_newString="${p_newString$p_delimiter$p_fieldtmp}";
+		fi
 
         if [ -n "$p_count" ]; then v_count="$(( v_count + 1 ))"; fi
     done
+
+	if [ -z "$p_count" ]; then echo -ne "$p_newString"; else echo -ne "$v_count"; fi
 
     return 0;
 }
@@ -294,6 +308,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
     return 0;
 }
 
+## TO TEST : the "GetCharacterOccurences()" function.
 # Getting the occurences of a sub-string in a main string.
 function BU::Main::Text::GetSubStringOccurences()
 {
