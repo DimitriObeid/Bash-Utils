@@ -461,7 +461,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DEBUG="--stat-debug=f
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DECHO="--stat-decho=authorize        OR --stat-decho=forbid          OR --stat-decho=resctrict";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____ECHO="--stat-echo=false             OR --stat-echo=true";
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____ERROR="--stat-error=fatal            OR --stat-error=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____ERROR="--stat-error=fatal            OR --stat-error=void			OR --stat-error=warning";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______LOG="--stat-log=false              OR --stat-log=true";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____LOG_R="--stat-log-r=log              OR --stat-log-r=tee             OR --stat-log-r=void";
 

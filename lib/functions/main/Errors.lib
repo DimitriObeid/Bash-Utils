@@ -290,9 +290,11 @@ function BU::Main::Errors::HandleErrors()
 
             BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
         else
-            # Calling the function that processes the given answer.
-            BU::Main::Case::Read_Errors::HandleErrors;
-        fi
+			if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
+				# Calling the function that processes the given answer.
+				BU::Main::Case::Read_Errors::HandleErrors;
+			fi
+		fi
 
         # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU::CheckProjectLogStatus()" FUNCTION).
 

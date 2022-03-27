@@ -178,10 +178,10 @@ function BU::Main::Status::CheckSTAT_ERROR()
     local p_lineno=$2;
 
     #**** Variables ****
-    local va_correctValues=("" "fatal");
+    local va_correctValues=("" "fatal" "warning");
 
     #**** Code ****
-    if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ]; then
+    if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "warning" ]; then
         BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${va_correctValues[@]}"; return 1;
     fi
 
