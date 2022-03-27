@@ -83,13 +83,13 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
 
-        p_fieldtmp="${p_string%%$p_delimiter*}";
-		p_fieldtmp="${p_fieldtmp#*$p_delimiter}";
+        v_fieldtmp="${p_string%%$p_delimiter*}";
+		v_fieldtmp="${v_fieldtmp#*$p_delimiter}";
 
 		if [ -z "$p_newString" ]; then
-			p_newString="$p_fieldtmp";
+			p_newString="$v_fieldtmp";
 		else
-			p_newString="${p_newString$p_delimiter$p_fieldtmp}";
+			p_newString="$p_newString$p_delimiter$v_fieldtmp";
 		fi
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
@@ -319,13 +319,13 @@ BU::Main::Text::GetSubStringBeforeDelim()
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
 
-        p_fieldtmp="${p_string##*$p_delim}";
-		p_fieldtmp="${p_fieldtmp%$p_delim*}";
+        v_fieldtmp="${p_string##*$p_delim}";
+		v_fieldtmp="${v_fieldtmp%$p_delim*}";
 
 		if [ -z "$p_newString" ]; then
-			p_newString="$p_fieldtmp";
+			p_newString="$v_fieldtmp";
 		else
-			p_newString="${p_newString$p_delim$p_fieldtmp}";
+			p_newString="$p_newString$p_delim$v_fieldtmp";
 		fi
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
@@ -424,12 +424,14 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
 	IFS="$p_delim" read -ra line <<< "$p_string";
 
+	# shellcheck disable=SC2219
 	let x="${#line[@]}-1";
 
 	while [ "$x" -ge 0 ]; do
 		if [ "$x" -gt 0 ]; then reversed="$reversed${line[x]}$delim"; else reversed="$reversed${line[x]}"; fi
 
-		let x--;
+		
+		(( x-- ));
 	done
 
 	echo -e "$reversed";
