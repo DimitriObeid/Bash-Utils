@@ -440,11 +440,13 @@ function BU::Main::Files::GetCreationDate()
 
     #**** Code ****
     if ! stat -c %W "$p_filepath"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; return 1;
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
 
     elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; return 1;
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
     fi
+
+	## TODO
 
     return 0;
 }
@@ -549,7 +551,7 @@ function BU::Main::File::SetFileLastAccess
     local p_fakedate=$2;
 
     #**** Code ****
-    if ! BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; }; fi
+    if ! BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     return 0;
 }
@@ -566,14 +568,24 @@ function BU::Main::Files::SourceFile()
 
     #**** Code ****
     if [ -f "$p_path" ]; then
+		BU::EchoNewstep "Sourcing the $(BU::DechoHighlightPath "$p_path") file";
+		BU::Newline
+
         # shellcheck disable=SC1090
         if source "$p_path"; then
             BU::EchoSuccess "Sourced file : $(BU::DechoHighlightPath "$p_path")";
+			BU::Newline;
+
+			return 0;
         else
             BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO SOURCE THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+
+			return "$?"
         fi
     else
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO FIND THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
+
+		return "$?";
     fi
 }
 
