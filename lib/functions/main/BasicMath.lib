@@ -65,7 +65,7 @@ function BU::Main::BasicMaths::BytesToHuman()
         # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
          basesuf=(base==1024)?"iB":"B"
 
-        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta.
+        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta, which was present in the script on Stack Overflow.
          s="BKMGTPEZY"
 
         # While the "x" ("human" function first parameter value) is superior or equal to the "base" (human function third parameter value) AND
@@ -80,7 +80,7 @@ function BU::Main::BasicMaths::BytesToHuman()
       }
       BEGIN{print human(bytes, pad, base)}')
 
-      EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate'
+      BU::EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate'
     return $?
 }
 
@@ -91,7 +91,7 @@ function BU::Main::BasicMaths::NegativeToPositive()
     local x=$1;         # Number    - Default : NULL    - Value to convert.
 
     #**** Code ****
-    EchoMsg "$(( x = x < 0 ? x * -1 : x ))" '-n' 'nodate';
+    BU::EchoMsg "$(( x = x < 0 ? x * -1 : x ))" '-n' 'nodate';
 
     return 0;
 }
@@ -103,7 +103,7 @@ function BU::Main::BasicMaths::PositiveToNegative()
     local x=$1;         # Number    - Default : NULL    - Value to convert.
 
     #**** Code ****
-    EchoMsg "$(( x = x > 0 ? x * -1 : x ))" '-n' 'nodate';
+    BU::EchoMsg "$(( x = x > 0 ? x * -1 : x ))" '-n' 'nodate';
 
     return 0;
 }
