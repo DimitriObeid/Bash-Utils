@@ -1487,7 +1487,7 @@ function BU::ModuleInit::ParseCSVLang()
         # Getting the wanted language's column.
         v_wantedColID="$(BU::Main::Text::GetSubStringAfterDelim "$v_CSVFirstColRow" "$p_delim" "$(( x - 1 ))" "count")";
 
-
+        # The targeted column is acquired, the parsing program can finally be called.
     fi
 
 
@@ -1672,6 +1672,19 @@ function BashUtils_InitModules()
 
 	# Setting a global variable that prevent a new call of this function.
 	__BU_MODULE_INIT_IS_SOURCED='sourced';
+
+	# Backupping a message variable in case the current function is called again, in order to display again the same error message after unsetting every initialization message variables.
+	local var_backup="$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED";
+
+	# Unsetting every initialization message variables in order to free up some memory.
+
+	# Don't double quote the command substitution.
+
+	# shellcheck disable=SC2046
+	unset $(compgen -v "__BU_MODULE_INIT_MSG__");
+
+	# Resetting the "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED" variable.
+	__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="$var_backup";
 
 	return 0;
 }
