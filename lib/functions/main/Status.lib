@@ -86,13 +86,13 @@ function BU::Main::Status::ConfEcho()
         BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU::EchoError "In $(BU::DechoHighlightPath "$p_file"), line $(BU::DechoHighlight "$p_lineno") --> " '-n' >&2;
-    BU::EchoError "Error : the $(BU::DechoHighlightVar "$p_var_name") variable's value is incorrect." >&2;
+    BU::EchoError "In $(BU::__Decho "$p_file" "$__BU_MAIN_COLOR_PATH"), line $(BU::__Decho "$p_lineno" "$__BU_MAIN_COLOR_HIGHLIGHT") --> " '-n' >&2;
+    BU::EchoError "Error : the $(BU::__Decho "$p_var_name" "$__BU_MAIN_COLOR_VAR") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; EchoError "Bad value : $(BU::DechoYellow 'An empty string')." >&2;
+        echo >&2; EchoError "Bad value : $(BU::__Decho 'An empty string' "$__BU_MAIN_COLOR_YELLOW")." >&2;
     else
-        echo >&2; EchoError "Bad value : $(BU::DechoHighlightVar "$p_bad_value")." >&2;
+        echo >&2; EchoError "Bad value : $(BU::__Decho "$p_bad_value" "$__BU_MAIN_COLOR_VAR")." >&2;
     fi
 
     echo >&2; EchoError "The allowed values are :" >&2;
@@ -103,9 +103,9 @@ function BU::Main::Status::ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::DechoHighlightVar 'An empty argument')" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho 'An empty argument' "$__BU_MAIN_COLOR_VAR")" >&2;
         else
-            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::DechoHighlight "$val")" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho "$val" "$__BU_MAIN_COLOR_HIGHLIGHT")" >&2;
         fi
     done
 
@@ -397,7 +397,10 @@ function BU::Main:Status::ChangeSTAT_DEBUG           { __BU_MAIN_STAT_DEBUG="$1"
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main:Status::ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1";            BU::Main::Status::CheckSTAT_DECHO          "$2" "$3" || return 1; return 0; }
 
-# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value.
+
+# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
+
+## VERY IMPORTANT : DO NOT CALL ANY "BU::Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
 function BU::Main:Status::ChangeSTAT_ECHO            {
     #**** Parameters ****
     local p_value=$1;   # String    - Default : NULL    - Value to be changed.
@@ -456,7 +459,7 @@ function BU::Main:Status::ChangeSTAT_ECHO            {
             BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU::Newline;
 
-            " $(BU::DechoHighlightPath "$v_log_file_path") LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            " $(BU::__Decho "$v_log_file_path" "$__BU_MAIN_COLOR_PATH") LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
             # Emptying the array of strings.
             __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();

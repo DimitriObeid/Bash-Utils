@@ -663,50 +663,6 @@ function BU::Main::Args__CMDS::GetCommandPath()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### "Decho.lib" FILE'S FUNCTIONS
-
-## CATEGORY : WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
-
-# "BU::Decho" function.
-function BU::Main::Args__Decho::Decho()
-{
-    #**** Parameters ****
-    local p_string=$1;          # String    - Default : NULL    - String to display.
-    local p_newTextColor=$2;    # Int       - Default : NULL    - Color to apply on each string's characters.
-    local p_newBGColor=$3;      # Int       - Default : NULL    - Color to apply in the text's background.
-
-    local p_filename=$4;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;        # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
-
-    #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
-
-	if [ -z "$p_string" ]; then
-        false;
-    fi
-
-    if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as text color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno"; return "$?";
-    fi
-
-    if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as background color code, as second argument for the $(BU::DechoHighlightFunction "$p_funcname") function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
-    fi
-
-    return 0;
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
 #### "Directories.lib" FILE'S FUNCTION
 
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - DIRECTORIES PROCESSING
