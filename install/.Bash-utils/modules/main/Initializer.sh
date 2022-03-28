@@ -22,6 +22,16 @@
 
 # shellcheck disable=SC2154
 
+# ---------------------
+# NOTE ABOUT SHELLCHECK
+
+# To display the content of a variable in a translated string, the use of the printf command is mandatory in order to interpret each "%s" pattern as the value of a variable.
+
+# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
+
+# If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
+# command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
+
 # ----------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in the "Bash-utils-init.sh" file's function "BashUtils_InitModules()"
 
@@ -54,6 +64,7 @@ function BU::Main::Initializer::SourceLibrary()
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
+		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
 
@@ -70,6 +81,7 @@ function BU::Main::Initializer::SourceConfig()
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
 
+		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
 	done
 
@@ -124,7 +136,14 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	# Process each supported arguments in this "for" loop.
 	for value in "${main_module_array[@]}"; do
 
-        stat_value_warning="$(echo -ne "${__BU_MAIN_COLOR_TXT_WARNING}" >&2; printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN" "$value" >&2; echo -ne "${__BU_MAIN_COLOR_TXT_RESET}" >&2; echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN__ADVICE" >&2)";
+        stat_value_warning="$(echo -ne "${__BU_MAIN_COLOR_TXT_WARNING}" >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN" "$value" >&2;
+
+        echo -ne "${__BU_MAIN_COLOR_TXT_RESET}" >&2; echo >&2;
+
+        echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN__ADVICE" >&2)";
 
         if [[ "${value[i],,}" = "--stat-"* ]]; then
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
@@ -181,7 +200,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                 # "$__BU_MAIN_STAT_LOG" global status variable.
                 '--stat-log='*)
                     if      [ "${value[i],,}" = '--stat-log=false' ]            || [ "${value[i],,}" = '--stat-log=true' ]; then
-                            __BU_MAIN_STAT_LOG="${value#*=}";                   BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";;
+                            __BU_MAIN_STAT_LOG="${value#*=}";                   BU::ModuleInit::DisplayInitGlobalVarsInfos "__BU_MAIN_STAT_LOG" "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
@@ -271,20 +290,20 @@ fi
 # Checking if a new default status global variable's value was modified (passed as one of the « main » module's « --stat-* » arguments).
 for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
 
-    if [ "${value,,}" != '--stat-decho=authorize' ] || [ "${value,,}" != '--stat-decho-forbid' ] || [ "${value,,}" != '--stat-decho-restrict' ]; then
+    if [ "${value,,}" != '--stat-decho=authorize' ] && [ "${value,,}" != '--stat-decho-forbid' ] && [ "${value,,}" != '--stat-decho-restrict' ]; then
         BU::Main:Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
-    if [ "${value,,}" != '--stat-echo=false' ]      || [ "${value,,}" != '--stat-echo=true' ]; then
+    if [ "${value,,}" != '--stat-echo=false' ]      && [ "${value,,}" != '--stat-echo=true' ]; then
         BU::Main:Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     # Don't forget to set the "$__BU_MAIN_STAT_LOG_REDIRECT" value BEFORE calling a function which checks the value of the "$__BU_MAIN_STAT_LOG" value, since this function calls a function which creates the logs file.
-    if [ "${value,,}" != '--stat-log-r=log' ]       || [ "${value,,}" != '--stat-log-r=tee' ]   || [ "${value,,}" != '--stat-log-r=void' ]; then
+    if [ "${value,,}" != '--stat-log-r=log' ]       && [ "${value,,}" != '--stat-log-r=tee' ]   && [ "${value,,}" != '--stat-log-r=void' ]; then
         BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
-    if [ "${value,,}" != '--stat-log=false' ]       || [ "${value,,}" != '--stat-true' ]; then
+    if [ "${value,,}" != '--stat-log=false' ]       && [ "${value,,}" != '--stat-true' ]; then
 
         # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
         BU::Main:Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
@@ -309,7 +328,7 @@ BU::Main::Initializer::SourceLibrary;
 ## CALLING THE TRANSLATION FUNCTION
 
 # Translating the main module's library messages
-BU::ModuleInit::ParseCSVLang "" "$__BU_MODULE_INIT_USER_LANG" "$__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM";
+BU::ModuleInit::ParseCSVLang "$__BU_MODULE_INIT_USER_LANG" "$__BU_MODULE_INIT_CSV_TRANSLATION_FILE_DELIM";
 
 # -----------------------------------------------
 
@@ -343,15 +362,21 @@ if BU::Main::Status::CheckStatAllowFormatting; then
 
     # Creating the text color code file
     if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
+        # shellcheck disable=SC2059
         BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__ERROR" "$(BU::DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+
     else
+        # shellcheck disable=SC2059
         BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU::Newline;
     fi
 
     # Creating the background color code file
     if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
+        # shellcheck disable=SC2059
         BU::Main::Errors::HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__ERROR" "$(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+
     else
+        # shellcheck disable=SC2059
         BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU::Newline;
     fi
 fi
@@ -359,10 +384,12 @@ fi
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
 if BU::Main::Status::CheckStatIsLogging; then
 	if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+        # shellcheck disable=SC2059
 		BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__ERROR" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
 		return 1;
 	else
+        # shellcheck disable=SC2059
 		BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU::Newline;
 	fi
 fi
