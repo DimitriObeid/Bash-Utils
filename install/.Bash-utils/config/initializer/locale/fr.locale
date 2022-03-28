@@ -209,6 +209,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Mode de journalisation : totale (para
 __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Mode de journalisation : partielle (paramètre « --mode-log-partial » passé lors de l'appel du module 0 « module »)";
 
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="AFFICHAGE DES JOURNAUX D'INITIALISATION AVEC LA COMMANDE « less »";
+__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="Si rien ne s'affiche à l'écran après quelques secondes, veuillez arrêter l'exécution du script en appuyant sur CTRL + C.";
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="afficher les journaux d'initialisation avec la commande « less »";
 __BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="N'appuyez pas sur le bouton « Q », sinon vous fermerez ce fichier et vous devrez exécuter à nouveau le script.";
 

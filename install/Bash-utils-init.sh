@@ -667,6 +667,9 @@ function BU::ModuleInit::PrintLog()
     BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE";
     BU::ModuleInit::Msg;
 
+	BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED";
+	BU::ModuleInit::Msg;
+
     BU::ModuleInit::PressAnyKey "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT";
     BU::ModuleInit::Msg;
 

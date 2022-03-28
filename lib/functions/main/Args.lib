@@ -96,7 +96,7 @@ function BU::Main::Args::PrintBadOption()
 	# If no value is passed as argument.
     if [[ "$p_option" = [Z-z] ]]; then
 		BU::Main::Errors::HandleErrors "1" \
-            "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER HAS NO VALUE" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -106,7 +106,7 @@ function BU::Main::Args::PrintBadOption()
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "${p_option,,}" = '!alphachar' ]; then
         BU::Main::Errors::HandleErrors '1' \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -116,7 +116,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastr' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -126,7 +126,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an alphabetic string OR character.
     elif [ "${p_option,,}" = '!alphastrchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -136,7 +136,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" = '!alphanumchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -146,7 +146,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstr' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -156,7 +156,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric string OR character.
     elif [ "${p_option,,}" = '!alphanumstrchar' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -166,7 +166,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
     elif [ "${p_option,,}" = '!d' ]; then
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_DIR";
@@ -176,7 +176,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
     elif [ "${p_option,,}" = '!df' ]; then
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
@@ -186,7 +186,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
     elif [ "${p_option,,}" = '!f' ]; then
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -196,7 +196,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a floating number.
     elif [ "${p_option,,}" = '!float' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A FLOAT" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -206,7 +206,7 @@ function BU::Main::Args::PrintBadOption()
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "${p_option,,}" = '!floatneg' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
 		return 1;
@@ -214,7 +214,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a positive floating number.
     elif [ "${p_option,,}" = '!floatpos' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -224,7 +224,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not an integer.
     elif [ "${p_option,,}" = '!int' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT AN INTEGER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -235,7 +235,7 @@ function BU::Main::Args::PrintBadOption()
     elif [ "${p_option,,}" = '!intneg' ]; then
 
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -245,7 +245,7 @@ function BU::Main::Args::PrintBadOption()
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "${p_option,,}" = '!intpos' ]; then
         BU::Main::Errors::HandleErrors "1" \
-            "THE $v_funcname FUNCTION'S $(BU::DechoHighlightVar "$(BU::Main::Echo::ToLowercase "$(echo -n '$')$p_argname")") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+            "THE $v_funcname FUNCTION'S $(BU::__Decho "$(echo -n '$')$p_argname" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -460,7 +460,7 @@ function BU::Main::Args::PrintFFLErrorOccured()
     local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno")";
 
     #**** Code ****
-    echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $(BU::DechoHighlightFunction "$p_target_f") function";
+    echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $(BU::__Decho "$p_target_f" "$__BU_MAIN_COLOR_HIGHLIGHT") function";
 
     return 0;
 }
@@ -479,7 +479,7 @@ function BU::Main::Args::Argc()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Variables ****
-    local v_funcname; v_funcname="$(BU::DechoHighlight "$(BU::Main::Args::GetFunctionName "$p_funcname")")"
+    local v_funcname; v_funcname="$(BU::__Decho "$(BU::Main::Args::GetFunctionName "$p_funcname")" "$__BU_MAIN_COLOR_HIGHLIGHT")";
 
     #**** Code ****
     # If both "$p_argcount" and "$p_argawait" arguments contain a value.
@@ -496,26 +496,26 @@ function BU::Main::Args::Argc()
             else
                 # If the function awaits only one argument AND no argument is given to the function.
                 if [ "$p_argawait" -eq 1 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
-                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $v_funcname NEEDS AN ARGUMENT" \
-                        "Please pass only one argument to the $v_funcname function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") NEEDS AN ARGUMENT" \
+                        "Please pass only one argument to the $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if the function awaits more than one argument AND less arguments are passed to the function.
                 elif [ "$p_argawait" -ge 1 ] && [ "$p_argcount" -eq 0 ]; then
-                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $v_funcname NEEDS $(BU::DechoHighlight "$p_argawait") ARGUMENTS" \
-                        "Please pass $(BU::DechoHighlight "$p_argawait") arguments to the $v_funcname function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") NEEDS $(BU::__Decho "$p_argawait" "$__BU_MAIN_COLOR_HIGHLIGHT") ARGUMENTS" \
+                        "Please pass $(BU::__Decho "$p_argawait" "$__BU_MAIN_COLOR_HIGHLIGHT") arguments to the $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if the function awaits more than one argument AND not enough arguments are passed to the function.
                 elif [ "$p_argcount" -gt 0 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
-                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $v_funcname HAS NOT ENOUGH ARGUMENTS" \
-                        "Please pass $(BU::DechoHighlight "$(( p_argawait-p_argcount ))") more arguments to the $v_funcname function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") HAS NOT ENOUGH ARGUMENTS" \
+                        "Please pass $(BU::__Decho "$(( p_argawait-p_argcount ))" "$__BU_MAIN_COLOR_HIGHLIGHT") more arguments to the $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
 
                 # Else, if more arguments than expected are given to the function.
                 elif [ "$p_argcount" -gt "$p_argawait" ]; then
-                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $v_funcname HAS TOO MUCH ARGUMENTS" \
-                        "Please remove $(BU::DechoHighlight "$(( p_argcount-p_argawait ))") arguments to the $v_funcname function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    BU::Main::Errors::HandleErrors "1" "THE FUNCTION $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") HAS TOO MUCH ARGUMENTS" \
+                        "Please remove $(BU::__Decho "$(( p_argcount-p_argawait ))" "$__BU_MAIN_COLOR_HIGHLIGHT") arguments to the $(BU::__Decho "$v_funcname" "$__BU_MAIN_COLOR_FUNCTION") function [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; return 1;
                 fi
             fi
@@ -524,15 +524,15 @@ function BU::Main::Args::Argc()
         else
             if ! BU::IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
                 BU::Main::Errors::HandleErrors '1' \
-                    "THE $p_funcname FUNCTION'S ARGUMENT COUNTER $(BU::DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-                    "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    "THE $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") FUNCTION'S ARGUMENT COUNTER $(BU::__Decho "$(echo -n '$')p_argcount" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "The function $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") first argument $(BU::__Decho 'p_argcount' "$__BU_MAIN_COLOR_VAR")'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
 
             if ! BU::IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
                 BU::Main::Args::PrintBadOption '1' \
-                    "THE $p_funcname FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU::DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-                    "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                    "THE $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU::__Decho "$(echo -n '$')p_argawait" "$__BU_MAIN_COLOR_VAR") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "The function $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") second argument $(BU::__Decho 'p_argawait' "$__BU_MAIN_COLOR_VAR")'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
             fi
         fi
@@ -541,15 +541,15 @@ function BU::Main::Args::Argc()
     else
         if [ -z "$p_argcount" ]; then local lineno="$LINENO";
             BU::Main::Errors::HandleErrors '1' \
-                "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER HAS NO VALUE" \
-                "The function $(BU::DechoHighlightFunction "$p_funcname") first argument $(BU::DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                "THE $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") FUNCTION'S $(BU::__Decho "$(echo -n '$')p_argcount" "$__BU_MAIN_COLOR_CODE_VAR") PARAMETER HAS NO VALUE" \
+                "The function $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") first argument $(BU::__Decho 'p_argcount' "$__BU_MAIN_COLOR_VAR")'s value needs to be an integer, since it is an argument counter [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         fi
 
         if [ -z "$p_argawait" ]; then local lineno="$LINENO";
             BU::Main::Errors::HandleErrors '1' \
-                "THE $p_funcname FUNCTION'S $(BU::DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER HAS NO VALUE" \
-                "The function $(BU::DechoHighlightFunction "$p_funcname") second argument $(BU::DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                "THE $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") FUNCTION'S $(BU::__Decho "$(echo -n '$')p_argawait" "$__BU_MAIN_COLOR_VAR") PARAMETER HAS NO VALUE" \
+                "The function $(BU::__Decho "$p_funcname" "$__BU_MAIN_COLOR_FUNCTION") second argument $(BU::__Decho 'p_argawait' "$__BU_MAIN_COLOR_VAR")'s value needs to be an integer, since it is an argument limit [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         fi
     fi

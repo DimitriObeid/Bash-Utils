@@ -120,10 +120,37 @@ function BU::Main::Decho::SetTextColor()
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 
-# Quick multi commands execution for the below "Decho()" function.
-function BU::__Decho { local v_oldTextColor=$1; tput setaf "$v_oldTextColor" && BU::IsInt "$v_oldTextColor" && echo -e "$v_oldTextColor" > "$__BU_MAIN_FILE_COLOR_CODE_PATH"; }
+# Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
+function BU::__Decho()
+{
+	#**** Parameters ****
+	local p_string=$1;			# String	- Default : NULL	- String to display.
+	local p_newTextColor=$2;	# CMD		- Default : NULL	- Color to apply on each string's characters.
+	local p_newBGColor=$3;		# CMD		- Default : NULL	- Color to apply in the text's background.
 
-# Text's inside decoration/formatting procssing.
+	#**** Variables ****
+    local v_oldBGColor;
+    local v_oldTextColor;
+
+	v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")";
+    v_oldTextColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
+
+	#**** Code ****
+	if [ -n "$p_newTextColor" ]; then BU::Main::Decho::SetTextColor "$p_newTextColor"; fi
+
+    if [ -n "$p_newBGColor" ]; then BU::Main::Decho::SetBGColor "$p_newBGColor"; fi
+	
+	printf "%s" "$p_newTextColor";
+    printf "%s" "$p_newBGColor";
+    printf "%s" "$p_string";
+    printf "%s" "$v_oldBGColor" 2>&1	| tee "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
+    printf "%s" "$v_oldTextColor" 2>&1	| tee "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+    printf "\n";
+
+    return 0;
+}
+
+# Text's inside decoration/formatting procssing (complete version).
 
 # Featured functions and files from the "functions" folder :
 #   - BU::Main::Checkings::CheckDecho
@@ -131,9 +158,9 @@ function BU::__Decho { local v_oldTextColor=$1; tput setaf "$v_oldTextColor" && 
 function BU::Decho()
 {
     #**** Parameters ****
-    local p_string=$1;          # String    - String to display.
-    local p_newTextColor=$2;    # Int       - Color to apply on each string's characters.
-    local p_newBGColor=$3;      # Int       - Color to apply in the text's background.
+    local p_string=$1;          # String	- Default : NULL	- String to display.
+    local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
 
     if [ -n "$p_string" ]; then
         if [ -z "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
@@ -381,8 +408,9 @@ function BU::DechoBGColor           { local v_str=$1; local v_bg=$2; shift 2; lo
 # (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::Decho::SetTextColor" FUNCTIONS" sub-section).
 
 # Positionnal parameters :
-#   $1  --> String to display
-#   $2  --> Color to display
+#   $1  --> String to display.
+#   $2  --> Text color to display.
+#	$3	--> Background color display.
 
 # Blink formatting.
 function BU::Decho_FMT_Blink            { BU::Decho "$1" "$2" "$3" 'Blink'                          	|| return 1; return 0; }

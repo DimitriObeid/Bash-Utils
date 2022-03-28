@@ -209,6 +209,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full (parameter « --m
 __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
 
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND";
+__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="If nothing is displayed on the screen after a few seconds, please stop the script's execution by pressing CTRL + C";
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="display the initialization logs with the « less » command";
 __BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="Don't press the « Q » button, or else you will close this file and you will have to execute again the script";
 
