@@ -47,6 +47,8 @@ fi
 # Easy writing text function.
 function BU::Main::Status::ConfEcho()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
     local p_lineno=$2;      # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
@@ -119,6 +121,8 @@ function BU::Main::Status::ConfEcho()
 # Checking the "$__BU_MAIN_STAT_DEBUG" status variable's value.
 function BU::Main::Status::CheckSTAT_DEBUG()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -137,6 +141,8 @@ function BU::Main::Status::CheckSTAT_DEBUG()
 # Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main::Status::CheckSTAT_DECHO()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -155,6 +161,8 @@ function BU::Main::Status::CheckSTAT_DECHO()
 # Check the "$__BU_MAIN_STAT_ECHO" status variable's value.
 function BU::Main::Status::CheckSTAT_ECHO()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -173,6 +181,8 @@ function BU::Main::Status::CheckSTAT_ECHO()
 # Checking the "$__BU_MAIN_STAT_ERROR" status variable's value.
 function BU::Main::Status::CheckSTAT_ERROR()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -191,6 +201,8 @@ function BU::Main::Status::CheckSTAT_ERROR()
 # Checking the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
 function BU::Main::Status::CheckSTAT_INITIALIZING()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -209,6 +221,8 @@ function BU::Main::Status::CheckSTAT_INITIALIZING()
 # Checking the "$__BU_MAIN_STAT_LOG" status variable's value.
 function BU::Main::Status::CheckSTAT_LOG()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -230,6 +244,8 @@ function BU::Main::Status::CheckSTAT_LOG()
 # Checking the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
 function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -248,6 +264,8 @@ function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 # Checking the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
 function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_file=$1;   # String    - Default : NULL    - File where the current function is called.
 	local p_lineno=$2; # Int       - Default : NULL    - Line where the current function is called.
@@ -266,6 +284,8 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 # Checking the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
 function BU::Main::Status::CheckSTAT_TIME_HEADER()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -285,6 +305,8 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
 # Checking the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
 function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -304,6 +326,8 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 # Checking the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
 function BU::Main::Status::CheckSTAT_TIME_TXT()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -323,6 +347,8 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
 # Checking the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
 function BU::Main::Status::CheckSTAT_TXT_FMT()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -359,6 +385,8 @@ function BU::Main::Status::CheckSTAT_USER_OS()
 # Checking all the project's status variables values if multiple values had been modified.
 function BU::Main::Status::CheckProjectStatusVars()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
@@ -401,6 +429,8 @@ function BU::Main::Status::ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1
 
 ## VERY IMPORTANT : DO NOT CALL ANY "BU::Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
 function BU::Main::Status::ChangeSTAT_ECHO            {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_value=$1;   # String    - Default : NULL    - Value to be changed.
     local p_file=$2;    # String    - Default : NULL    - File where the current function is called.

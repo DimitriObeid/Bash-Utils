@@ -67,6 +67,8 @@ __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU::DechoHighlight "$__BU_MAIN_PROJEC
 # "BU::Main::Directories::TriggerRootDirWarning" function.
 function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning;
@@ -99,6 +101,8 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 # "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function BU::Main::Case::Read_Errors::HandleErrors()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_HandleErrors;

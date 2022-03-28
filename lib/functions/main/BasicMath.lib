@@ -50,6 +50,8 @@ fi
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU::Main::BasicMaths::BytesToHuman()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local L_BYTES="${1:-0}"     # Int       - Default : 0       - Raw size in bytes.
     local L_PAD="${2:-no}"      # String    - Default : "no"    - Allow result display padding.

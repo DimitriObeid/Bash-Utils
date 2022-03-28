@@ -47,6 +47,8 @@ fi
 # Get command's executable file's path.
 function BU::Main::CMDS::GetCommandPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 
@@ -59,6 +61,8 @@ function BU::Main::CMDS::GetCommandPath()
 # Get the command's return output.
 function BU::Main::CMDS::GetCommandReturnOutputValue()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 

@@ -44,17 +44,29 @@ fi
 
 ## DEBUGGING
 
+# Printing the name of the processed function if the main script is launched with the "bash -x" command.
+function BU::Main::Echo::Debug()
+{
+    #**** Parameters ****
+    local p_funcname=$1;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
+
+    #**** Code ****
+    BU::Main::Status::CheckStatIsDebugging && {
+        BU::Main::Echo::__EchoVoid;
+
+        echo "----------------------------------------";
+        echo "DEBUGGING THE FUNCTION $p_funcname";
+
+        BU::Main::Echo::__EchoVoid;
+    } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
+
+    return 0;
+}
+
 # Print void lines before and after calling a header.
 function BU::Main::Echo::__EchoVoid()
 {
 printf "
-
-
-
-
-
-
-
 
 
 " > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" ||
@@ -67,6 +79,8 @@ printf "
 # It's better to also execute the project's script with the "bash - x $project_name" command, instead of the "./$project_name" way.
 function BU::Main::Echo::__EchoOutput()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_string=$1;     # String    - String to display.
 	local p_context=$2;    # String    - Begin or end of the debug process.
@@ -147,6 +161,8 @@ function BU::Main::Echo::__EchoOutput()
 # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
 function BU::Main::Echo::__EchoCPLS()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;  # Any       - Text to display.
     local p_option=$2;  # String    - "echo" command options.
@@ -240,6 +256,8 @@ function BU::Main::Echo::__EchoCPLS()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoError()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;
@@ -277,6 +295,8 @@ function BU::EchoError()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoMsg()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;
@@ -313,6 +333,8 @@ function BU::EchoMsg()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoNewstep()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;
@@ -367,6 +389,8 @@ function BU::EchoRead()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoSuccess()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;
@@ -403,6 +427,8 @@ function BU::EchoSuccess()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoWarning()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;
     local p_option=$2;

@@ -66,13 +66,12 @@ printf "
 -------------------------------------------------
 
 "
+    sleep "$p_sleep";
 
-    if [ "$p_code" -eq 0 ]; then
-        sleep "$p_sleep"
-
-        return
+    if [ "$p_code" -eq 0 ]; then return 0;
     else
-        exit 1		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+        # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+        exit "$p_code";
     fi
 }
 

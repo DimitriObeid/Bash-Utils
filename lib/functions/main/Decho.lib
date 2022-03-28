@@ -47,6 +47,8 @@ fi
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 function BU::Main::Decho::SetBGColor()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
 
@@ -83,6 +85,8 @@ function BU::Main::Decho::SetBGColor()
 # Writing the text's color code into a file, to be processed by any function which needs to know what is the current text color.
 function BU::Main::Decho::SetTextColor()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
 
@@ -141,6 +145,8 @@ function BU::__Decho()
 #   -
 function BU::Decho()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;          # String	- Default : NULL	- String to display.
     local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.

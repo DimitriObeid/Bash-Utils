@@ -47,6 +47,8 @@ fi
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function BU::Main::Headers::DrawLine()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_lineChar=$1;   # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
 	local p_lineColor=$2;  # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
@@ -135,6 +137,8 @@ function BU::Main::Headers::DrawLine()
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 function BU::HeaderBase()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_lineColor=$1;      # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".
 	local p_lineChar=$2;       # Defining the wanted character to display when calling the "BU::Main::Headers::DrawLine()" function.

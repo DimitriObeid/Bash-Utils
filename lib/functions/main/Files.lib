@@ -47,6 +47,8 @@ fi
 # This function only repeats some parts of the following function.
 function BU::Main::Files::__ProcessingFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_output=$1;
     local p_name=$2;
@@ -78,6 +80,8 @@ function BU::Main::Files::__ProcessingFile()
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function BU::Main::Files::ProcessingFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_function=$1;
     local p_name=$2;
@@ -127,6 +131,8 @@ function BU::Main::Files::ProcessingFile()
 #	- BU::Newline			-> Main -> Echo.lib
 function BU::Main::Files::OverwriteFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;
 	local p_authorization=$2;
@@ -171,6 +177,8 @@ function BU::Main::Files::OverwriteFile()
 #   - BU::EchoSuccess                   -> Main -> Echo.lib
 function BU::Main::Files::Make()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
     local p_parent=$1;  # String    : Emplacement of the currently processed file's parent folder from the root directory.
     local p_name=$2;    # String    : Name of the file to process (into its parent directory).
@@ -230,6 +238,8 @@ function BU::Main::Files::Make()
 # File creation function, with the parent folder's path and the file's name as unique argument.
 function BU::Main::Files::MakePath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;    # String : Full path of the file to create.
 
@@ -252,6 +262,8 @@ function BU::Main::Files::MakePath()
 # This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
 function BU::Main::Files::MakeFileInMemory()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filename=$1;    # String :name of the file to create in the computer's random access memory.
 
@@ -264,6 +276,8 @@ function BU::Main::Files::MakeFileInMemory()
 # Creating the project's log file.
 function BU::Main::Files::CreateProjectLogFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
@@ -400,6 +414,8 @@ function BU::Main::Files::CreateProjectLogFile()
 # Getting the size of a file in bytes.
 function BU::Main::Files::GetByteSize()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;    # Path to the file to process.
     local p_base=$2;        # Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
@@ -435,6 +451,8 @@ function BU::Main::Files::GetByteSize()
 # Please note, some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
 function BU::Main::Files::GetCreationDate()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -454,6 +472,8 @@ function BU::Main::Files::GetCreationDate()
 # Getting the total number of characters in a file.
 function BU::Main::Files::GetCharactersNumber()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -464,6 +484,8 @@ function BU::Main::Files::GetCharactersNumber()
 # Getting the last file's access date.
 function BU::Main::Files::GetLastAccess()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -476,6 +498,8 @@ function BU::Main::Files::GetLastAccess()
 # Getting the last file's modification date.
 function BU::Main::Files::GetLastModification()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -488,6 +512,8 @@ function BU::Main::Files::GetLastModification()
 # Getting the total number of lines in a file.
 function BU::Main::Files::GetLinesNumber()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -498,6 +524,8 @@ function BU::Main::Files::GetLinesNumber()
 # Getting the max line length in a file.
 function BU::Main::Files::GetMaxLineLength()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -508,6 +536,8 @@ function BU::Main::Files::GetMaxLineLength()
 # Getting the owner of a file.
 function BU::Main::Files::GetOwnerName()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -520,6 +550,8 @@ function BU::Main::Files::GetOwnerName()
 # Getting the group of the owner of a file.
 function BU::Main::Files::GetOwnerGroup()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -532,6 +564,8 @@ function BU::Main::Files::GetOwnerGroup()
 # Getting the total number of characters in a file.
 function BU::Main::Files::GetWordsNumber()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
 
@@ -546,6 +580,8 @@ function BU::Main::Files::GetWordsNumber()
 # Setting a fake last access date to a file.
 function BU::Main::File::SetFileLastAccess
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;
     local p_fakedate=$2;
@@ -563,6 +599,8 @@ function BU::Main::File::SetFileLastAccess
 # Sourcing dependencies files.
 function BU::Main::Files::SourceFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;
 
@@ -596,6 +634,8 @@ function BU::Main::Files::SourceFile()
 # Getting a specific line from a text file.
 function BU::Main::Files::GetLineFromTextFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_source=$1;          # File to parse
     local p_wanted_line=$2;     # Line to get in the file
@@ -636,6 +676,8 @@ function BU::Main::Files::GetLineFromTextFile()
 #   -
 function BU::Main::Files::Compress()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
 #     local cmd=$1      # Compression command.
 #     local opts=$2     # Options of the compression command.
@@ -656,6 +698,8 @@ function BU::Main::Files::Compress()
 #   - BU::Newline           -> Echo.lib
 function BU::Main::Files::Uncompress()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 #     #***** Paramètres *****
 #     local p_cmd=$1      # Compression command.
 #     # TODO : Vérifier si cette procédure est bonne

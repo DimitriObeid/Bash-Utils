@@ -51,6 +51,8 @@ fi
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function BU::Main::Directories::ProcessingDir()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_function=$1
     local p_parent=$2
@@ -96,6 +98,8 @@ function BU::Main::Directories::ProcessingDir()
 #	- BU::Newline			-> Echo.lib
 function BU::Main::Directories::OverwriteDir()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;
 	local p_authorization=$2;
@@ -154,6 +158,8 @@ function BU::Main::Directories::OverwriteDir()
 #   - BU::EchoSuccess                   -> Main -> Echo.lib
 function BU::Main::Directories::Make()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_parent=$1;	# String	- Emplacement of the currently processed directory's parent folder from the root directory.
 	local p_name=$2;    # String	- Name of the folder to process (into its parent directory).
@@ -208,6 +214,8 @@ function BU::Main::Directories::Make()
 # Folder creation function, with the parent folder's path and the directory's name as unique argument.
 function BU::Main::Directories::MakePath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;		# String	- Full path of the directory to create.
     local p_overwrite=$2;	# String	- Authorization to overwrite the directory.
@@ -232,6 +240,8 @@ function BU::Main::Directories::MakePath()
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 function BU::Main::Directories::MkTmpDir()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     local lineno="$LINENO"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
@@ -259,6 +269,8 @@ function BU::Main::Directories::MkTmpDir()
 # Getting the name of a target directory without its path.
 function BU::Main::Directories::GetDirectoryName()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
 
@@ -285,6 +297,8 @@ function BU::Main::Directories::GetDirectoryName()
 # Checking if the directory's sub-folders paths passed as argument exists, then print its path.
 function BU::Main::Directories::GetDirectoryPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
 
@@ -306,6 +320,8 @@ function BU::Main::Directories::GetDirectoryPath()
 # Getting parent folder's name only (without its full path from the root directory), then printing it.
 function BU::Main::Directories::GetParentDirectoryName()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;            # String	- Default : NULL    - Path of the child file or folder.
     local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
@@ -333,6 +349,8 @@ function BU::Main::Directories::GetParentDirectoryName()
 # Getting parent folder's path from the root directory, then printing it
 function BU::Main::Directories::GetParentDirectoryPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;            # String   	- Default : NULL    - Path of the child file or folder.
     local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
@@ -392,6 +410,8 @@ function BU::Main::Directories::GetParentDirectoryPath()
 # Check if the script is about to work at the root directory ('/').
 function BU::Main::Directories::TriggerRootDirWarning()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_path=$1;	# String	- Default : NULL	- Path of the folder to check.
 

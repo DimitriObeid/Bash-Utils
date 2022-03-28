@@ -447,6 +447,8 @@ function BU::Main::Args::PrintFFL()
 # Please call this function after the advice given as second argument for the "BU::Main::Args::PrintBadOption" function.
 function BU::Main::Args::PrintFFLErrorOccured()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_target_f=$1;    # String    - Default : NULL    - Function where the checking happened.
     local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
@@ -460,6 +462,7 @@ function BU::Main::Args::PrintFFLErrorOccured()
     local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno")";
 
     #**** Code ****
+    DbgMsg "1" "2";
     echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $(BU::__Decho "$p_target_f" "$__BU_MAIN_COLOR_HIGHLIGHT") function";
 
     return 0;
@@ -470,6 +473,8 @@ function BU::Main::Args::PrintFFLErrorOccured()
 # This function is called in the "BU::Main::Args::PrintBadOption" function, DO NOT call the "BU::Main::Args::PrintBadOption" function here.
 function BU::Main::Args::Argc()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_argcount=$1;    # Int       - Default : NULL    - Number of arguments passed.
     local p_argawait=$2;    # Int       - Default : NULL    - Number of arguments awaited.
@@ -586,6 +591,8 @@ function BU::Main::Args::GetArgc-FFL()
 # "BU::Main::Checkings::CheckProjectRelatedFile" function.
 function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
     local p_parent=$1;      # String    - Default : NULL    - Name of the folder to process (into its parent directory).
     local p_child=$2;       # String    - Default : NULL    - Name of the file or folder to process (into its parent directory).
@@ -638,6 +645,8 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 # "BU::Main::CMDS::GetCommandPath" function.
 function BU::Main::Args__CMDS::GetCommandPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_cmd=$1;         # String    - Default : NULL    - Command's name.
 
@@ -670,6 +679,8 @@ function BU::Main::Args__CMDS::GetCommandPath()
 # "BU::Main::ProcessingDir" function.
 function BU::Main::Args__Directories::ProcessingDir()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_function=$1;    # String    - Default : NULL    - Name of the function to process.
     local p_parent=$2;      # String    - Default : NULL    - Path of the target directory's parent.
@@ -708,6 +719,8 @@ function BU::Main::Args__Directories::ProcessingDir()
 # "BU::Main::Directories::OverwriteDir" function.
 function BU::Main::Args__Directories::OverwriteDir()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to overwrite.
 
@@ -738,6 +751,8 @@ function BU::Main::Args__Directories::OverwriteDir()
 # "BU::Main::Directories::Make" function.
 function BU::Main::Args__Directories::Make()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_parent=$1;      # String    - Default : NULL    - Parent folder's path.
     local p_name=$2;        # String    - Default : NULL    - Name of the folder to create.
@@ -776,6 +791,8 @@ function BU::Main::Args__Directories::Make()
 # "BU::Main::Directories::MakePath" function.
 function BU::Main::Args__Directories::MakePath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Full path of the directory to create.
     local p_overwrite=$2;   # String    - Default : NULL    - Authorization to overwrite the directory.
@@ -810,6 +827,8 @@ function BU::Main::Args__Directories::MakePath()
 # "BU::Main::Directories::GetDirectoryName" function.
 function BU::Main::Args__Directories::GetDirectoryName()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # Path of the directory to process.
 
@@ -834,6 +853,8 @@ function BU::Main::Args__Directories::GetDirectoryName()
 # "BU::Main::Directories::GetDirectoryPath" function.
 function BU::Main::Args__Directories::GetDirectoryPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
 
@@ -858,6 +879,8 @@ function BU::Main::Args__Directories::GetDirectoryPath()
 # "BU::Main::Directories::GetParentDirectoryName" function.
 function BU::Main::Args__Directories::GetParentDirectoryName()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # Path of the directory to process.
     local p_iterations=$2;  # Number of iterations.
@@ -882,6 +905,8 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
 # "BU::Main::Directories::GetParentDirectoryPath" function.
 function BU::Main::Args__Directories::GetParentDirectoryPath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
     local p_iterations=$2;  # Int       - Default : 1       - Number of iterations.
@@ -922,6 +947,8 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
 # "BU::Main::Errors::SetLastReturnValue" function.
 BU::Main::Args__Errors::SetLastReturnValue()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
 	#**** Parameters ****
 	local p_code=$1;	# Int	- Default : 1	- Return value
 
@@ -962,6 +989,8 @@ BU::Main::Args__Errors::SetLastReturnValue()
 # "BU::Main::Files::ProcessingFile" function.
 function BU::Main::Args__Files::ProcessingFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_function=$1;    # Function to process.
 
@@ -986,6 +1015,8 @@ function BU::Main::Args__Files::ProcessingFile()
 # "BU::Main::Files::OverwriteFile" function.
 function BU::Main::Args__Files::OverwriteFile()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #***** Parameters ****
     local p_path=$1             # String    - Path of the file to overwrite.
     local p_authorization=$2;   # String    - Authorization to overwrite the file.
@@ -1029,6 +1060,8 @@ function BU::Main::Args__Files::OverwriteFile()
 # "BU::Main::Files::Make" function's arguments.
 function BU::Main::Args__Files::Make()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_parent=$1;      # String    - Parent folder path of the file to create.
     local p_name=$2;        # String    - Name of the file to create.
@@ -1074,6 +1107,8 @@ function BU::Main::Args__Files::Make()
 # "BU::Main::Files::MakePath" function.
 function BU::Main::Args__Files::MakePath()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Full path of the file to create.
 
@@ -1101,6 +1136,8 @@ function BU::Main::Args__Files::MakePath()
 # "BU::Main::Files::SetLastAccess" function.
 function BU::Main::Args__Files::SetLastAccess()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filepath=$1;    # String    - Path of the file to check its last access.
     local p_fakedate=$2;    # Date      - Access date to replace.
@@ -1146,6 +1183,8 @@ function BU::Main::Args__Files::SetLastAccess()
 # "BU::Main::Filesystem::IsPartitionFull" function.
 function BU::Main::Args__Filesystem::IsPartitionFull()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_fileFS=$1;  # String    - Default : NULL    - Path of the file or folder's file system host.
 
@@ -1178,6 +1217,8 @@ function BU::Main::Args__Filesystem::IsPartitionFull()
 # "BU::Main::Filesystem::GetFS<...>()" functions.
 function BU::Main::Args__Filesystem::GetFSInfos()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the file or folder's file system host.
 
@@ -1210,6 +1251,8 @@ function BU::Main::Args__Filesystem::GetFSInfos()
 # "BU::Main::Filesystem::Chown" function.
 function BU::Main::Args__Filesystem::Chown()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory or the file (this parameter is used in the translated / log messages, stored into their own variables).
     local p_newOwner=$2;        # String    - Default : NULL    - New owner of the directory or the file.
@@ -1256,6 +1299,8 @@ function BU::Main::Args__Filesystem::Chown()
 # "BU::Main::Filesystem::ChownRec" function.
 function BU::Main::Args__Filesystem::ChownRec()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory (this parameter is used in the translated / log messages, stored into their own variables).
     local p_newOwner=$2;        # String    - Default : NULL    - New owner of the directory.
@@ -1312,6 +1357,8 @@ function BU::Main::Args__Filesystem::ChownRec()
 #	- BU::Main::Text::GetLastFieldAfterDelim()
 function BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
     local p_delimiter=$2;   # Char      - Default : NULL    - Delimiter.
@@ -1345,6 +1392,8 @@ function BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims()
 # "BU::Main::Text::CutSubStringAfterNthDelim" function.
 function BU::Main::Args__Text::CutSubStringAfterNthDelim()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
     local p_delimiter=$2;   # Char      - Default : NULL    - Delimiter.
@@ -1381,6 +1430,8 @@ function BU::Main::Args__Text::CutSubStringAfterNthDelim()
 # "BU::Main::Text::CutSubStringBeforeNthDelim" function.
 function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
     local p_delimiter=$2;   # String	- Default : NULL    - Delimiter.
@@ -1421,6 +1472,8 @@ function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 # "BU::Main::Text::GetCharacterOccurences" function.
 function BU::Main::Args__Text::GetCharacterOccurences()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL  - String to process.
     local p_target=$2       # Char      - Default : NULL  - Targeted character.
@@ -1456,6 +1509,8 @@ function BU::Main::Args__Text::GetCharacterOccurences()
 # "BU::Main::Args__Text::GetSubStringAfterDelim" function.
 function BU::Main::Args__Text::GetSubStringAfterDelim()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
     local p_delim=$2;               # String	- Default : NULL    - Delimiter
@@ -1490,6 +1545,8 @@ function BU::Main::Args__Text::GetSubStringAfterDelim()
 # "BU::Main::Text::GetSubStringBeforeDelim" function.
 function BU::Main::Args__Text::GetSubStringBeforeDelim()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL	- String to process.
     local p_delim=$2        # String    - Default : NULL	- Delimiter
@@ -1526,6 +1583,8 @@ function BU::Main::Args__Text::GetSubStringBeforeDelim()
 # "BU::Main::Text::GetSubStringOccurences" function.
 function BU::Main::Args__Text::GetSubStringOccurences()
 {
+    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL  - String to process.
     local p_target=$2       # String    - Default : NULL  - Targeted sub-string
