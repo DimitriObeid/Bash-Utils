@@ -86,13 +86,13 @@ function BU::Main::Status::ConfEcho()
         BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU::EchoError "In $(BU::__Decho "$p_file" "$__BU_MAIN_COLOR_PATH"), line $(BU::__Decho "$p_lineno" "$__BU_MAIN_COLOR_HIGHLIGHT") --> " '-n' >&2;
-    BU::EchoError "Error : the $(BU::__Decho "$p_var_name" "$__BU_MAIN_COLOR_VAR") variable's value is incorrect." >&2;
+    BU::EchoError "In $(BU::__Decho "$p_file" "$__BU_MAIN_COLOR_PATH" "$__BU_MAIN_COLOR_ERROR"), line $(BU::__Decho "$p_lineno" "$__BU_MAIN_COLOR_HIGHLIGHT") --> " '-n' >&2;
+    BU::EchoError "Error : the $(BU::__Decho "$p_var_name" "$__BU_MAIN_COLOR_VAR" "$__BU_MAIN_COLOR_ERROR") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; EchoError "Bad value : $(BU::__Decho 'An empty string' "$__BU_MAIN_COLOR_YELLOW")." >&2;
+        echo >&2; EchoError "Bad value : $(BU::__Decho 'An empty string' "$__BU_MAIN_COLOR_YELLOW" "$__BU_MAIN_COLOR_ERROR")." >&2;
     else
-        echo >&2; EchoError "Bad value : $(BU::__Decho "$p_bad_value" "$__BU_MAIN_COLOR_VAR")." >&2;
+        echo >&2; EchoError "Bad value : $(BU::__Decho "$p_bad_value" "$__BU_MAIN_COLOR_VAR" "$__BU_MAIN_COLOR_ERROR")." >&2;
     fi
 
     echo >&2; EchoError "The allowed values are :" >&2;
@@ -103,9 +103,9 @@ function BU::Main::Status::ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho 'An empty argument' "$__BU_MAIN_COLOR_VAR")" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho 'An empty argument' "$__BU_MAIN_COLOR_VAR" "$__BU_MAIN_COLOR_ERROR")" >&2;
         else
-            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho "$val" "$__BU_MAIN_COLOR_HIGHLIGHT")" >&2;
+            EchoError "$i/${#pa_correctValues[@]}  --> $(BU::__Decho "$val" "$__BU_MAIN_COLOR_HIGHLIGHT" "$__BU_MAIN_COLOR_ERROR")" >&2;
         fi
     done
 

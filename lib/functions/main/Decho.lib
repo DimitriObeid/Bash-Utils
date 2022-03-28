@@ -126,26 +126,10 @@ function BU::__Decho()
 	#**** Parameters ****
 	local p_string=$1;			# String	- Default : NULL	- String to display.
 	local p_newTextColor=$2;	# CMD		- Default : NULL	- Color to apply on each string's characters.
-	local p_newBGColor=$3;		# CMD		- Default : NULL	- Color to apply in the text's background.
+	local p_oldTextColor=$3;	# CMD		- Default : NULL	- Color to apply in the text's background.
 
-	#**** Variables ****
-    local v_oldBGColor;
-    local v_oldTextColor;
-
-	v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")";
-    v_oldTextColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
-
-	#**** Code ****
-	if [ -n "$p_newTextColor" ]; then BU::Main::Decho::SetTextColor "$p_newTextColor"; fi
-
-    if [ -n "$p_newBGColor" ]; then BU::Main::Decho::SetBGColor "$p_newBGColor"; fi
-	
-	printf "%s" "$p_newTextColor";
-    printf "%s" "$p_newBGColor";
-    printf "%s" "$p_string";
-    printf "%s" "$v_oldBGColor" 2>&1	| tee "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
-    printf "%s" "$v_oldTextColor" 2>&1	| tee "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
-    printf "\n";
+	#**** Code ****	
+    printf "%s\n" "$p_newTextColor$p_string$p_oldTextColor";
 
     return 0;
 }
@@ -401,24 +385,31 @@ function BU::Decho()
 function BU::DechoAqua              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_AQUA"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoBlack             { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_BLACK"     "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoBlue              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_BLUE"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoCyan              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_CYAN"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoFuchsia           { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_FUCHSIA"   "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoGray              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_GRAY"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoGreen             { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_GREEN"     "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoLime              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_LIME"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoMaroon            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_MAROON"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoNavy              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_NAVY"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoOlive             { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_OLIVE"     "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoOrange            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_ORANGE"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoPink              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_PINK"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoPurple            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_PURPLE"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoRed               { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_RED"       "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoSalmon            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_SALMON"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoSilver            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_SILVER"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoTan               { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_TAN"       "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoTeal              { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_TEAL"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoTurquoise         { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_TURQUOISE" "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoViolet            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_VIOLET"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoWhite             { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_WHITE"     "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoYellow            { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$v_str" "$__BU_MAIN_COLOR_CODE_YELLOW"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 
@@ -426,9 +417,11 @@ function BU::DechoYellow            { local v_str=$1; local v_bg=$2; shift 2; lo
 function BU::DechoHighlight         { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho            "$v_str" "$__BU_MAIN_COLOR_CODE_HIGHLIGHT"  "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightCMD      { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_Bold   "$v_str" "$__BU_MAIN_COLOR_CODE_CMD"        "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightError    { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_BoldIU "$v_str" "$__BU_MAIN_COLOR_CODE_ERROR"      "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoHighlightFunction { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_Bold   "$v_str" "$__BU_MAIN_COLOR_CODE_FUNCTION"   "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightNewstep  { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_I      "$v_str" "$__BU_MAIN_COLOR_CODE_NEWSTEP"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightPath     { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_Bold   "$v_str" "$__BU_MAIN_COLOR_CODE_PATH"       "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
+
 function BU::DechoHighlightSuccess  { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_I      "$v_str" "$__BU_MAIN_COLOR_CODE_SUCCESS"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightVar      { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_Bold   "$v_str" "$__BU_MAIN_COLOR_CODE_VAR"        "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
 function BU::DechoHighlightWarning  { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho_FMT_BoldIU "$v_str" "$__BU_MAIN_COLOR_CODE_WARNING"    "$v_bg" "${pa_arr[@]}" || return 1; return 0; }
@@ -436,6 +429,50 @@ function BU::DechoHighlightWarning  { local v_str=$1; local v_bg=$2; shift 2; lo
 # Easy "BU::Decho()" function calls with background color display.
 function BU::DechoBGColor           { local v_str=$1; local v_bg=$2; shift 2; local pa_arr=("$@"); BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}"; BU::Decho "$1" "$2" "${pa_arr[@]}" || return 1; return 0; }
 
+# Easy "BU::__Decho()" function calls with colors.
+function BU::__DechoAqua        { BU::__Decho "$1" "$__BU_MAIN_COLOR_AQUA"      "$2"; }
+function BU::__DechoBlack       { BU::__Decho "$1" "$__BU_MAIN_COLOR_BLACK"     "$2"; }
+function BU::__DechoBlue        { BU::__Decho "$1" "$__BU_MAIN_COLOR_BLUE"      "$2"; }
+
+function BU::__DechoCyan        { BU::__Decho "$1" "$__BU_MAIN_COLOR_CYAN"      "$2"; }
+function BU::__DechoFuchsia     { BU::__Decho "$1" "$__BU_MAIN_COLOR_FUCHSIA"   "$2"; }
+function BU::__DechoGray        { BU::__Decho "$1" "$__BU_MAIN_COLOR_GRAY"      "$2"; }
+
+function BU::__DechoGreen       { BU::__Decho "$1" "$__BU_MAIN_COLOR_GREEN"     "$2"; }
+function BU::__DechoLime        { BU::__Decho "$1" "$__BU_MAIN_COLOR_LIME"      "$2"; }
+function BU::__DechoMaroon      { BU::__Decho "$1" "$__BU_MAIN_COLOR_MARRON"    "$2"; }
+
+function BU::__DechoNavy        { BU::__Decho "$1" "$__BU_MAIN_COLOR_NAVY"      "$2"; }
+function BU::__DechoOlive       { BU::__Decho "$1" "$__BU_MAIN_COLOR_OLIVE"     "$2"; }
+function BU::__DechoOrange      { BU::__Decho "$1" "$__BU_MAIN_COLOR_ORANGE"    "$2"; }
+
+function BU::__DechoPink        { BU::__Decho "$1" "$__BU_MAIN_COLOR_PINK"      "$2"; }
+function BU::__DechoPurple      { BU::__Decho "$1" "$__BU_MAIN_COLOR_PURPLE"    "$2"; }
+function BU::__DechoRed         { BU::__Decho "$1" "$__BU_MAIN_COLOR_RED"       "$2"; }
+
+function BU::__DechoSalmon      { BU::__Decho "$1" "$__BU_MAIN_COLOR_SALMON"    "$2"; }
+function BU::__DechoSilver      { BU::__Decho "$1" "$__BU_MAIN_COLOR_SILVER"    "$2"; }
+function BU::__DechoTan         { BU::__Decho "$1" "$__BU_MAIN_COLOR_TAN"       "$2"; }
+
+function BU::__DechoTeal        { BU::__Decho "$1" "$__BU_MAIN_COLOR_TEAL"      "$2"; }
+function BU::__DechoTurquoise   { BU::__Decho "$1" "$__BU_MAIN_COLOR_TURQUOISE" "$2"; }
+function BU::__DechoViolet      { BU::__Decho "$1" "$__BU_MAIN_COLOR_VIOLET"    "$2"; }
+
+function BU::__DechoWhite       { BU::__Decho "$1" "$__BU_MAIN_COLOR_WHITE"     "$2"; }
+function BU::__DechoYellow      { BU::__Decho "$1" "$__BU_MAIN_COLOR_YELLOW"    "$2"; }
+
+# Easy "BU::__Decho()" function calls with specific text display colors.
+function BU::__DechoHighlight           { BU::__Decho "$1" "$__BU_MAIN_COLOR_HIGLIGHT"  "$2"; }
+function BU::__DechoHighlightCMD        { BU::__Decho "$1" "$__BU_MAIN_COLOR_CMD"       "$2"; }
+function BU::__DechoHighlightError      { BU::__Decho "$1" "$__BU_MAIN_COLOR_ERROR"     "$2"; }
+
+function BU::__DechoHighlightFunction   { BU::__Decho "$1" "$__BU_MAIN_COLOR_FUNCTION"  "$2"; }
+function BU::__DechoHighlightNewstep    { BU::__Decho "$1" "$__BU_MAIN_COLOR_NEWSTEP"   "$2"; }
+function BU::__DechoHighlightPath       { BU::__Decho "$1" "$__BU_MAIN_COLOR_PATH"      "$2"; }
+
+function BU::__DechoHighlightSuccess    { BU::__Decho "$1" "$__BU_MAIN_COLOR_SUCCESS"   "$2"; }
+function BU::__DechoHighlightVar        { BU::__Decho "$1" "$__BU_MAIN_COLOR_VAR"       "$2"; }
+function BU::__DechoHighlightWarning    { BU::__Decho "$1" "$__BU_MAIN_COLOR_WARNING"   "$2"; }
 
 # Tip : you can also pass a second argument when you call the following functions, which is the same than the "Decho" function's second argument
 # (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::Decho::SetTextColor" FUNCTIONS" sub-section).
