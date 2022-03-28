@@ -492,76 +492,76 @@ function BU::__DechoHighlightWarning    { BU::__Decho "$1" "$__BU_MAIN_COLOR_WAR
 #	$3	--> Background color display.
 
 # Blink formatting.
-function BU::Decho_FMT_Blink            { BU::Decho "$1" "$3" 'Blink'                  "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBold        { BU::Decho "$1" "$3" 'Blink' 'Bold'           "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldD       { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D'       "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDI      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'I'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDIS     { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'I' S'"$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDISU    { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'I' S'"$2"; 'U'       || return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDIU     { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'I' U'"$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDS      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'S'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDSU     { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'S' U'"$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldDU      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'D' 'U'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldI       { BU::Decho "$1" "$3" 'Blink' 'Bold' 'I'       "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldIS      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'I' 'S'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldISU     { BU::Decho "$1" "$3" 'Blink' 'Bold' 'I' 'S' U'"$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldIU      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'I' 'U'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldS       { BU::Decho "$1" "$3" 'Blink' 'Bold' 'S'       "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldSU      { BU::Decho "$1" "$3" 'Blink' 'Bold' 'S' 'U'   "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkBoldU       { BU::Decho "$1" "$3" 'Blink' 'Bold' 'U'       "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkD           { BU::Decho "$1" "$3" 'Blink' 'D'              "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDI          { BU::Decho "$1" "$3" 'Blink' 'D' 'I'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDIS         { BU::Decho "$1" "$3" 'Blink' 'D' 'I' 'S'      "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDISU        { BU::Decho "$1" "$3" 'Blink' 'D' 'I' 'S' 'U'  "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDIU         { BU::Decho "$1" "$3" 'Blink' 'D' 'I' 'U'      "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDS          { BU::Decho "$1" "$3" 'Blink' 'D' 'S'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDSU         { BU::Decho "$1" "$3" 'Blink' 'D' 'S' 'U'      "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkDU          { BU::Decho "$1" "$3" 'Blink' 'D' 'U'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkI           { BU::Decho "$1" "$3" 'Blink' 'I'              "$2";           || return 1; return 0; }
-function BU::Decho_FMT_BlinkIS          { BU::Decho "$1" "$3" 'Blink' 'I' 'S'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkISU         { BU::Decho "$1" "$3" 'Blink' 'I' 'S' 'U'      "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkIU          { BU::Decho "$1" "$3" 'Blink' 'I' 'U'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkS           { BU::Decho "$1" "$3" 'Blink' 'S'              "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkSU          { BU::Decho "$1" "$3" 'Blink' 'S' 'U'          "$2";       	|| return 1; return 0; }
-function BU::Decho_FMT_BlinkU           { BU::Decho "$1" "$3" 'Blink' 'U'              "$2";           || return 1; return 0; }
+function BU::Decho_FMT_Blink            { BU::Decho "$1" "$2" "$3" 'Blink'                         	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBold        { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold'                  	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldD       { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D'              	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDI      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'I'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDIS     { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'I' 'S'       || return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDISU    { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'I' 'S' 'U'   || return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDIU     { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'I' 'U'       || return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDS      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'S'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDSU     { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'S' 'U'       || return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldDU      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'D' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldI       { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'I'              	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldIS      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'I' 'S'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldISU     { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'I' 'S' 'U'       || return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldIU      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'I' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldS       { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'S'              	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldSU      { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'S' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkBoldU       { BU::Decho "$1" "$2" "$3" 'Blink' 'Bold' 'U'              	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkD           { BU::Decho "$1" "$2" "$3" 'Blink' 'D'                     	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDI          { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'I'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDIS         { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'I' 'S'             	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDISU        { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'I' 'S' 'U'         	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDIU         { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'I' 'U'             	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDS          { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'S'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDSU         { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'S' 'U'             	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkDU          { BU::Decho "$1" "$2" "$3" 'Blink' 'D' 'U'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkI           { BU::Decho "$1" "$2" "$3" 'Blink' 'I'                      || return 1; return 0; }
+function BU::Decho_FMT_BlinkIS          { BU::Decho "$1" "$2" "$3" 'Blink' 'I' 'S'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkISU         { BU::Decho "$1" "$2" "$3" 'Blink' 'I' 'S' 'U'             	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkIU          { BU::Decho "$1" "$2" "$3" 'Blink' 'I' 'U'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkS           { BU::Decho "$1" "$2" "$3" 'Blink' 'S'                     	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkSU          { BU::Decho "$1" "$2" "$3" 'Blink' 'S' 'U'                 	|| return 1; return 0; }
+function BU::Decho_FMT_BlinkU           { BU::Decho "$1" "$2" "$3" 'Blink' 'U'                      || return 1; return 0; }
 
 # Bold formatting.
-function BU::Decho_FMT_Bold     { BU::Decho "$1" "$3" 'Bold'                  	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldD    { BU::Decho "$1" "$3" 'Bold' 'D'              	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDI   { BU::Decho "$1" "$3" 'Bold' 'D' 'I'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDIS  { BU::Decho "$1" "$3" 'Bold' 'D' 'I' 'S'      	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDISU { BU::Decho "$1" "$3" 'Bold' 'D' 'I' 'S' 'U'  	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDIU  { BU::Decho "$1" "$3" 'Bold' 'D' 'I' 'U'      	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDS   { BU::Decho "$1" "$3" 'Bold' 'D' 'S'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDSU  { BU::Decho "$1" "$3" 'Bold' 'D' 'S' 'U'      	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldDU   { BU::Decho "$1" "$3" 'Bold' 'D' 'U'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldI    { BU::Decho "$1" "$3" 'Bold' 'I'              	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldIS   { BU::Decho "$1" "$3" 'Bold' 'I' 'S'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldISU  { BU::Decho "$1" "$3" 'Bold' 'I' 'S' 'U'      	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldIU   { BU::Decho "$1" "$3" 'Bold' 'I' 'U'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldS    { BU::Decho "$1" "$3" 'Bold' 'S'              	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldSU   { BU::Decho "$1" "$3" 'Bold' 'S' 'U'          	"$2";|| return 1; return 0; }
-function BU::Decho_FMT_BoldU    { BU::Decho "$1" "$3" 'Bold' 'U'               "$2";   || return 1; return 0; }
+function BU::Decho_FMT_Bold     { BU::Decho "$1" "$2" "$3" 'Bold'                  	|| return 1; return 0; }
+function BU::Decho_FMT_BoldD    { BU::Decho "$1" "$2" "$3" 'Bold' 'D'              	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDI   { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'I'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDIS  { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'I' 'S'      	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDISU { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'I' 'S' 'U'   || return 1; return 0; }
+function BU::Decho_FMT_BoldDIU  { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'I' 'U'      	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDS   { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'S'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDSU  { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'S' 'U'      	|| return 1; return 0; }
+function BU::Decho_FMT_BoldDU   { BU::Decho "$1" "$2" "$3" 'Bold' 'D' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldI    { BU::Decho "$1" "$2" "$3" 'Bold' 'I'              	|| return 1; return 0; }
+function BU::Decho_FMT_BoldIS   { BU::Decho "$1" "$2" "$3" 'Bold' 'I' 'S'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldISU  { BU::Decho "$1" "$2" "$3" 'Bold' 'I' 'S' 'U'      	|| return 1; return 0; }
+function BU::Decho_FMT_BoldIU   { BU::Decho "$1" "$2" "$3" 'Bold' 'I' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldS    { BU::Decho "$1" "$2" "$3" 'Bold' 'S'              	|| return 1; return 0; }
+function BU::Decho_FMT_BoldSU   { BU::Decho "$1" "$2" "$3" 'Bold' 'S' 'U'          	|| return 1; return 0; }
+function BU::Decho_FMT_BoldU    { BU::Decho "$1" "$2" "$3" 'Bold' 'U'               || return 1; return 0; }
 
 # Dim formatting
-function BU::Decho_FMT_D    { BU::Decho "$1" "$3" 'D'              	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DI   { BU::Decho "$1" "$3" 'D' 'I'          	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DIS  { BU::Decho "$1" "$3" 'D' 'I' 'S'      	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DISU { BU::Decho "$1" "$3" 'D' 'I' 'S' 'U'  	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DIU  { BU::Decho "$1" "$3" 'D' 'I' 'U'      	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DS   { BU::Decho "$1" "$3" 'D' 'S'          	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DSU  { BU::Decho "$1" "$3" 'D' 'S' 'U'      	|| reur"$2";n 1; return 0; }
-function BU::Decho_FMT_DU   { BU::Decho "$1" "$3" 'D' 'U'              ||re"$2";turn 1; return 0; }
+function BU::Decho_FMT_D    { BU::Decho "$1" "$2" "$3" 'D'                  || return 1; return 0; }
+function BU::Decho_FMT_DI   { BU::Decho "$1" "$2" "$3" 'D' 'I'          	|| return 1; return 0; }
+function BU::Decho_FMT_DIS  { BU::Decho "$1" "$2" "$3" 'D' 'I' 'S'      	|| return 1; return 0; }
+function BU::Decho_FMT_DISU { BU::Decho "$1" "$2" "$3" 'D' 'I' 'S' 'U'  	|| return 1; return 0; }
+function BU::Decho_FMT_DIU  { BU::Decho "$1" "$2" "$3" 'D' 'I' 'U'      	|| return 1; return 0; }
+function BU::Decho_FMT_DS   { BU::Decho "$1" "$2" "$3" 'D' 'S'          	|| return 1; return 0; }
+function BU::Decho_FMT_DSU  { BU::Decho "$1" "$2" "$3" 'D' 'S' 'U'      	|| return 1; return 0; }
+function BU::Decho_FMT_DU   { BU::Decho "$1" "$2" "$3" 'D' 'U'              || return 1; return 0; }
 
 # Italic formatting.
-function BU::Decho_FMT_I    { BU::Decho "$1" "$3" 'I'          	|| return1;"$2"; return 0; }
-function BU::Decho_FMT_IS   { BU::Decho "$1" "$3" 'I' 'S'      	|| return1;"$2"; return 0; }
-function BU::Decho_FMT_ISU  { BU::Decho "$1" "$3" 'I' 'S' 'U'  	|| return1;"$2"; return 0; }
-function BU::Decho_FMT_IU   { BU::Decho "$1" "$3" 'I' 'U'          || retrn"$2"; 1; return 0; }
+function BU::Decho_FMT_I    { BU::Decho "$1" "$2" "$3" 'I'          	|| return 1; return 0; }
+function BU::Decho_FMT_IS   { BU::Decho "$1" "$2" "$3" 'I' 'S'      	|| return 1; return 0; }
+function BU::Decho_FMT_ISU  { BU::Decho "$1" "$2" "$3" 'I' 'S' 'U'      || return 1; return 0; }
+function BU::Decho_FMT_IU   { BU::Decho "$1" "$2" "$3" 'I' 'U'          || return 1; return 0; }
 
 # Strikethrough formatting.
-function BU::Decho_FMT_S    { BU::Decho "$1" "$3" 'S'      	|| return 1; et"$2";urn 0; }
-function BU::Decho_FMT_SU   { BU::Decho "$1" "$3" 'S' 'U'      || return ; "$2";return 0; }
+function BU::Decho_FMT_S    { BU::Decho "$1" "$2" "$3" 'S'          || return 1; return 0; }
+function BU::Decho_FMT_SU   { BU::Decho "$1" "$2" "$3" 'S' 'U'      || return 1; return 0; }
 
 # Underline formatting.
-function BU::Decho_FMT_U    { BU::Decho "$1" "$3" 'U'      || return 1; rtu"$2";rn 0; }
+function BU::Decho_FMT_U    { BU::Decho "$1" "$2" "$3" 'U'      || return 1; return 0; }
