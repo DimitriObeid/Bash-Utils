@@ -104,22 +104,30 @@ function BU::Main::Initializer::Usage()
 {
     echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS" >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DEBUG" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____DECHO" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____ECHO" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____ERROR" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______LOG" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE____LOG_R" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__OP_ROOT" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_________LOG" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______LOG_R" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____OP_ROOT" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_H" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_H" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_T" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_H" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_N" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_T" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___TIME_T" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____TXT_FMT" >&2;
     echo >&2;
+
+    echo >&2;
+    echo "Note : The << Debug by file >> variable is an array and can store these variables in order to specify which category of functions by file can be debugged" >&2;
+    echo "Here are the accepted values for the Args.lib file :" >&2;
+    echo "" >&2;
+    echo "" >&2;
+    echo "" >&2;
+    echo "" >&2;
 
     return 0;
 }

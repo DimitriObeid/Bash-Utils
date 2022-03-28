@@ -44,20 +44,57 @@ fi
 
 ## DEBUGGING
 
+# This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
+function BU::Main::Echo::__Debug()
+{
+    BU::Main::Echo::__EchoVoid;
+
+    echo "----------------------------------------";
+    echo "DEBUGGING THE FUNCTION $1";
+
+    BU::Main::Echo::__EchoVoid;
+}
+
 # Printing the name of the processed function if the main script is launched with the "bash -x" command.
 function BU::Main::Echo::Debug()
 {
     #**** Parameters ****
-    local p_funcname=$1;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
+    local p_filename=$1;    # String    - Default : NULL    - File where the function currently processed is defined.
+    local p_funcname=$2;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
 
     #**** Code ****
     BU::Main::Status::CheckStatIsDebugging && {
-        BU::Main::Echo::__EchoVoid;
+        local v_file="${p_filename%%.[Ll][Ii][Bb]*}";
 
-        echo "----------------------------------------";
-        echo "DEBUGGING THE FUNCTION $p_funcname";
+        [ "${v_file,,}" == 'args' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
-        BU::Main::Echo::__EchoVoid;
+        [ "${v_file,,}" == 'basicmaths' ]   && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file^^}" == 'CMDS' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'checkings' ]    && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'decho' ]        && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'directories' ]  && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'echo' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'errors' ]       && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'files' ]        && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'filesystem' ]   && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'headers' ]      && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'posixterm' ]    && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'status' ]       && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'text' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+
+        [ "${v_file,,}" == 'time' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
     } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 
     return 0;

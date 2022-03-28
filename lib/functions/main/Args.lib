@@ -51,6 +51,9 @@ fi
 # Print a message without the need to write the whole "BU::Main::Errors::HandleErrors()" function's second argument, and according to the test option which failed :
 function BU::Main::Args::PrintBadOption()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_option=$1;      # String    - Default : NULL    - Test option.
     local p_advice=$2;      # String    - Default : NULL    - "BU::Main::Errors::HandleErrors()"'s advice argument.
@@ -269,6 +272,9 @@ function BU::Main::Args::PrintBadOption()
 # Checking the values stored in the argument array of a function.
 function BU::Main::Args::GetFuncArgsArrayValues()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_funcname=$1; shift 1;   # String    - Default : NULL    - Name of the function where the array was set.
 
@@ -311,6 +317,9 @@ function BU::Main::Args::GetFuncArgsArrayValues()
 # Checking a file's name passed as argument.
 function BU::Main::Args::GetFileName()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filename=$1;    # String    - Default : NULL    - Name of the file to process.
 
@@ -324,6 +333,9 @@ function BU::Main::Args::GetFileName()
 # Checking a function's name passed argument.
 function BU::Main::Args::GetFunctionName()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_funcname=$1;    # String    - Default : NULL    - Name of the function to process.
 
@@ -350,6 +362,9 @@ function BU::Main::Args::GetLineNumber()
 # Getting the three informations simultaneously.
 function BU::Main::Args::GetFFL()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filename=$1;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
     local p_funcname=$2;    # String    - Default : NULL    - Name of the currently processed function.
@@ -426,6 +441,9 @@ function BU::Main::Args::GetFFL()
 # This function is called in the "BU::Main::Args::Argc" and "BU::Main::Echo::__EchoOutput" functions, for example.
 function BU::Main::Args::PrintFFL()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
+
     #**** Parameters ****
     local p_filename=$1;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
     local p_funcname=$2;    # String    - Default : NULL    - Name of the currently processed function.
