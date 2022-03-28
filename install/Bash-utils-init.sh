@@ -21,6 +21,16 @@
 
 # shellcheck disable=SC2154,SC1090
 
+# ---------------------
+# NOTE ABOUT SHELLCHECK
+
+# To display the content of a variable in a translated string, the use of the printf command is mandatory in order to interpret each "%s" pattern as the value of a variable.
+
+# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
+
+# If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
+# command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
+
 # -----------------------------------------------------------------------------
 # DO NOT EXECUTE IT DIRECTLY, instead, just source it in your main script file.
 
@@ -333,7 +343,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __bu_module_init_user_lang_lineno
 }
 
-# Displaying the information on the initialized global variables
+# Displaying the information on the initialized global variables.
+
+# shellcheck disable=SC2059
 function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 {
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
@@ -390,6 +402,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 
 		# Checking if the variable is not an array.
 		else
+            # shellcheck disable=SC2059
             BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY" "$p_var_name")" '-' 'msg';
 		fi
 
@@ -439,6 +452,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 BU::ModuleInit::Msg;
 			fi
 		else
+            # shellcheck disable=SC2059
             BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE" "$p_var_type")";
             BU::ModuleInit::Msg;
 
@@ -446,8 +460,10 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			if [ -n "$p_var_val" ]; then
 
 				if [ "${p_var_type,,}" = 'cmd' ]; then
+                    # shellcheck disable=SC2059
 					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD" "$p_var_name")";
 				else
+                    # shellcheck disable=SC2059
 					BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD" "$p_var_val")";
 				fi
 
@@ -568,8 +584,12 @@ function BU::ModuleInit::Msg()
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value.
     else
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
-        echo >&2; echo "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2" >&2;
+        echo >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2; echo >&2;
+
+        echo "$__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -631,6 +651,8 @@ function BU::ModuleInit::MsgLineCount()
 function BU::ModuleInit::MsgAbort() { echo >&2; echo "$__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT" >&2; echo >&2; return 0; }
 
 # Pressing any key on the keyboard to do an action.
+
+# shellcheck disable=SC2059
 function BU::ModuleInit::PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "$__BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS %s" "$1")"; echo; return 0; }
 
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
@@ -705,6 +727,7 @@ function BU::ModuleInit::PrintLogError()
     #**** Code ****
     BU::ModuleInit::Msg >&2;
 
+    # shellcheck disable=SC2059
     BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR" "$p_desc" "$p_lineno")" '-' 'msg' >&2;
 
     BU::ModuleInit::Msg >&2;
@@ -744,12 +767,17 @@ function BU::ModuleInit::CheckPath()
 
     #**** Code ****
     if [ -z "$p_path" ]; then
+        # shellcheck disable=SC2059
         printf "« $__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH »" >&2; return 0;
 
     else
         if [ -z "$p_target" ]; then
-            echo  >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
+            echo  >&2;
 
+            # shellcheck disable=SC2059
+            printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
+
+            # shellcheck disable=SC2059
             printf "$__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION" "${FUNCNAME[0]}" >&2; echo >&2; return 1;
         else
             if [[ "$p_target" = [D-d] ]]; then
@@ -770,7 +798,10 @@ function BU::ModuleInit::CheckPath()
                     printf "%s $__BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND" "$p_path" >&2; return 0;
                 fi
             else
-                echo >&2; printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
+                echo >&2;
+
+                # shellcheck disable=SC2059
+                printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
             fi
         fi
     fi
@@ -784,10 +815,16 @@ function BU::ModuleInit::FindPath()
     find "$1" -maxdepth 1 -iname "$2" -print 2>&1 | grep -v "Permission denied" ||
 	{
         if [ -z "$__BU_MODULE_INIT_MSG_ARRAY_EXISTS" ]; then
-            echo >&2; printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2" >&2; echo >&2;
+            echo >&2;
+
+            # shellcheck disable=SC2059
+            printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2" >&2; echo >&2;
 
         else
-            BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
+            BU::ModuleInit::Msg >&2;
+
+            # shellcheck disable=SC2059
+            BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
         fi
 
         return 1;
@@ -797,12 +834,23 @@ function BU::ModuleInit::FindPath()
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
 function BU::ModuleInit::GetModuleName()
 {
-    v_module="$(cd "$(dirname "$1")" || { echo >&2; printf "$__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; exit 1; }; pwd -P)";
+    v_module="$(cd "$(dirname "$1")" || {
+        echo >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
+
+        BU::ModuleInit::AskPrintLog >&2;
+
+        exit 1;
+    }; pwd -P)";
 
     echo "${v_module##*/}"; return 0;
 }
 
 # Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
+
+# shellcheck disable=SC2059
 function BU::ModuleInit::ListInstalledModules()
 {
     #**** Variables ****
@@ -838,7 +886,9 @@ function BU::ModuleInit::ListInstalledModules()
             # Displaying the content of the file which stores both the found modules configuration folders and the the modules initialization folders.
             cat "$v_module_conf_f"; echo; sleep 1;
         else
-            echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING\n" "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$__BU_MODULE_INIT_MODULES_DIR" >&2; echo >&2;
+            echo >&2;
+
+            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING\n" "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$__BU_MODULE_INIT_MODULES_DIR" >&2; echo >&2;
 
             echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST :" >&2; echo >&2;
 
@@ -861,10 +911,10 @@ function BU::ModuleInit::ListInstalledModules()
             printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
 
         elif [ -d "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" ]; then
-            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
 
         elif [ -d "$__BU_MODULE_INIT_MODULES_DIR" ]; then
-            echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
         fi
 
 		echo >&2;
@@ -931,10 +981,13 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # If the "module" value is passed without parameters.
         if [[ "$p_module" == "$v_module_name" ]]; then
-            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))";
+            # shellcheck disable=SC2059
+            BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE\n" "${FUNCNAME[0]}")" "$(( LINENO - 1 ))"; echo >&2;
 
-            echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-            echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE" >&2;
+            # shellcheck disable=SC2059
+            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2; echo >&2;
+
+            echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE" >&2;
 
             BU::ModuleInit::MsgAbort;
 
@@ -961,21 +1014,27 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 #**** Code ****
                 # If the current value AND the new value are the same.
                 if [ "$p_value" = "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" ]; then
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}")" "$p_value" "$(( LINENO - 1 ))";
+                    # shellcheck disable=SC2059
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE" "${FUNCNAME[0]}")" "$p_value" "$(( LINENO - 1 ))"; echo >&2;
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
+                    # shellcheck disable=SC2059
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
                     echo >&2; return 1;
                 else
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO";
+                    # shellcheck disable=SC2059
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO"; echo >&2;
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+                    # shellcheck disable=SC2059
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
                     echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2" >&2; echo >&2
 
-                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO" >&2;
+                    echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO" >&2; echo >&2;
 
-                    echo >&2;
+                    # shellcheck disable=SC2059
                     printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL\n" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" >&2;
+
+                    # shellcheck disable=SC2059
                     printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL\n" "$p_value" >&2;
 
                     echo >&2; return 1;
@@ -1096,10 +1155,14 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             local v_unsupported_log_param;
                                 v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
+                            # shellcheck disable=SC2059
+							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))"; echo >&2;
 
-							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_unsupported_log_param" >&2;
-							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
+							# shellcheck disable=SC2059
+							printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_unsupported_log_param" >&2; echo >&2;
+
+							# shellcheck disable=SC2059
+							printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1135,10 +1198,14 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             local v_unsupported_log_param;
                                 v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))";
+                            # shellcheck disable=SC2059
+							BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}" "$module_args")" "$(( LINENO - 3))"; echo >&2;
 
-							echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
-							echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
+							# shellcheck disable=SC2059
+							printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2; echo >&2;
+
+							# shellcheck disable=SC2059
+							printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
 							BU::ModuleInit::Usage;
 
@@ -1156,10 +1223,14 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     local v_unsupported_log_param;
                         v_unsupported_log_param="$(printf "%s" "$module_args" | sed "s/^[^ ]* //")";
 
-                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 3 ))";
+                    # shellcheck disable=SC2059
+                    BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 3 ))"; echo >&2;
 
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2;
-                    echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
+                    # shellcheck disable=SC2059
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))" "$v_unsupported_log_param" >&2; echo >&2;
+
+                    # shellcheck disable=SC2059
+                    printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE\n" "$p_count" >&2;
 
                     BU::ModuleInit::Usage;
 
@@ -1182,10 +1253,14 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
-        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
+        # shellcheck disable=SC2059
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
 
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2;
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
 
         BU::ModuleInit::MsgAbort;
 
@@ -1224,9 +1299,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 
 	elif [ "$p_count" -ge 1 ] && [[ "${p_module,,}" == "module --"* ]]; then
-		BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO";
+        # shellcheck disable=SC2059
+		BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
 
-		echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+		# shellcheck disable=SC2059
+		printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
 		echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
@@ -1247,9 +1324,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     ## NO 'module' AND 'main' PASSED AS FIRST, THEN AS SECOND ARGUMENTS
 
     else
-        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE\n" "${FUNCNAME[0]}")" "$LINENO";
-
-        echo >&2; printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
+        # shellcheck disable=SC2059
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE\n" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
+        
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
         echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE" >&2;
 
         BU::ModuleInit::MsgAbort;
@@ -1322,7 +1401,10 @@ else
     # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
     BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT_USER_LANG";
 
-	echo >&2; printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
+	echo >&2;
+
+	# shellcheck disable=SC2059
+	printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
 
 	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER" >&2; echo >&2;
 	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE" >&2; echo >&2;
@@ -1565,6 +1647,7 @@ function BU::ModuleInit::ParseCSVLang()
 function BashUtils_InitModules()
 {
     if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_INIT_IS_SOURCED" ]; then
+        # shellcheck disable=SC2059
         BU::HeaderWarning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
     fi
 
@@ -1579,7 +1662,10 @@ function BashUtils_InitModules()
 	#**** Code ****
 	# Checking if the arguments array length is equal to zero (no arguments passed).
 	if [ -z "${p_modules_list[*]}" ]; then
-		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "${FUNCNAME[0]}" >&2; return 1
+        # shellcheck disable=SC2059
+		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "${FUNCNAME[0]}" >&2;
+
+		return 1;
 	fi
 
     # Writing the list of the installed modules.
@@ -1591,11 +1677,14 @@ function BashUtils_InitModules()
         i=0; # Module's array index incrementer.
 
         if [[ "${module_args,,}" == 'module --'* ]]; then
+            # shellcheck disable=SC2059
             __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM" "$i" "$module_args")")");
         else
             i="$(( i+1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
+
+            # shellcheck disable=SC2059
             __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM" "$i" "$module_args")")");
         fi
 	done
@@ -1633,6 +1722,7 @@ function BashUtils_InitModules()
             # Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
             __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CONFIG_MODULES_DIR" "$v_module_name")";
 
+            # shellcheck disable=SC2059
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'Dirpath' \
                 "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
@@ -1641,6 +1731,7 @@ function BashUtils_InitModules()
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
             __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_MODULES_DIR" "$v_module_name")";
 
+            # shellcheck disable=SC2059
             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'Dirpath' \
                 "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI" "$v_module_name" "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH")" \
                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
@@ -1652,6 +1743,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2034
 			__BU_MODULE_INIT_MODULE_AND_ARGS_STRING="$module";
 
+			# shellcheck disable=SC2059
 			BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" 'String' \
 				"$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS" "${FUNCNAME[0]}" "${#p_modules_list}" "$module")" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
@@ -1666,12 +1758,15 @@ function BashUtils_InitModules()
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH"; then
+                # shellcheck disable=SC2059
                 BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__CALL_PLE" "$v_module_name")" "$LINENO";
 
                 printf '\n' >&2;
 
+                # shellcheck disable=SC2059
                 printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_module_name" >&2;
 
+                # shellcheck disable=SC2059
                 printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE" >&2; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'f' >&2;
                 printf '\n\n';
 
@@ -1682,6 +1777,8 @@ function BashUtils_InitModules()
                 return 1;
             else
                 BU::ModuleInit::Msg;
+
+                # shellcheck disable=SC2059
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
@@ -1694,12 +1791,15 @@ function BashUtils_InitModules()
 
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH"; then
+                # shellcheck disable=SC2059
                 BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE" "$v_module_name")" "$LINENO";
 
                 printf '\n' >&2;
 
+                # shellcheck disable=SC2059
                 printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "$v_module_name" >&2;
 
+                # shellcheck disable=SC2059
                 printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE"; BU::ModuleInit::CheckPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'f' >&2;
                 printf '\n\n' >&2;
 
@@ -1707,11 +1807,13 @@ function BashUtils_InitModules()
 
                 return 1;
             else
+                # shellcheck disable=SC2059
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
                 # shellcheck disable=SC1090
                 source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; exit 1; }
 
+                # shellcheck disable=SC2059
                 BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";
             fi
         fi
@@ -1727,6 +1829,7 @@ function BashUtils_InitModules()
 
 	#### ENDING THE WHOLE INITIALIZATION PROCESS
 
+	# shellcheck disable=SC2059
 	BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_TXT_PATH")")";
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
