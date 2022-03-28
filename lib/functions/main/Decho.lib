@@ -178,16 +178,37 @@ function BU::Decho()
     fi
 
 	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
+		# Changing the 
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "LINENO";
+		fi
+
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno"; return "$?";
+            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "LINENO"; fi
+
+		return "$?";
     fi
 
     if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "LINENO";
+		fi
+
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno"; return "$?";
-    fi
+            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "LINENO"; fi
+
+		return "$?";
+	fi
 
     #**** Code ****
     if ! BU::Main::Args__Decho::Decho "$p_string" "$p_newTextColor" "$p_newTextColor" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi

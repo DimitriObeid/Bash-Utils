@@ -397,11 +397,10 @@ function BU::Main:Status::ChangeSTAT_DEBUG           { __BU_MAIN_STAT_DEBUG="$1"
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main:Status::ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1";            BU::Main::Status::CheckSTAT_DECHO          "$2" "$3" || return 1; return 0; }
 
-
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
 
 ## VERY IMPORTANT : DO NOT CALL ANY "BU::Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
-function BU::Main:Status::ChangeSTAT_ECHO            {
+function BU::Main::Status::ChangeSTAT_ECHO            {
     #**** Parameters ****
     local p_value=$1;   # String    - Default : NULL    - Value to be changed.
     local p_file=$2;    # String    - Default : NULL    - File where the current function is called.
