@@ -79,7 +79,8 @@ printf "
 # It's better to also execute the project's script with the "bash - x $project_name" command, instead of the "./$project_name" way.
 function BU::Main::Echo::__EchoOutput()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
 	local p_string=$1;     # String    - String to display.
@@ -161,7 +162,8 @@ function BU::Main::Echo::__EchoOutput()
 # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
 function BU::Main::Echo::__EchoCPLS()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # Any       - Text to display.
@@ -256,7 +258,8 @@ function BU::Main::Echo::__EchoCPLS()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoError()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;
@@ -295,7 +298,8 @@ function BU::EchoError()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoMsg()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;
@@ -333,7 +337,8 @@ function BU::EchoMsg()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoNewstep()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;
@@ -389,7 +394,8 @@ function BU::EchoRead()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoSuccess()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;
@@ -427,7 +433,8 @@ function BU::EchoSuccess()
 #   - BU::CheckProjectLogStatus     --> Checkings.lib
 function BU::EchoWarning()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;

@@ -47,7 +47,8 @@ fi
 # Display a countdown while a task is ongoing.
 function BU::Main::PosixTerm::DisplayCountdown()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     return 0;
 }
@@ -55,7 +56,8 @@ function BU::Main::PosixTerm::DisplayCountdown()
 # Display a progress bar while a task is ongoing.
 function BU::Main::PosixTerm::DisplayProgressBar()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     return 0;
 }
@@ -63,7 +65,8 @@ function BU::Main::PosixTerm::DisplayProgressBar()
 # Display a spinner while a task is ongoing.
 function BU::Main::PosixTerm::DisplaySpinner()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     p_string=$1

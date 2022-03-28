@@ -53,7 +53,8 @@ function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutSubStri
 # Cut every part of a string after and with the delimiter, which can be both a single character or a string.
 function BU::Main::Text::CutSubStringAfterNthDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -105,7 +106,8 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 # Cut every part of a string before and with the delimiter, which can be both a single character or a string.
 function BU::Main::Text::CutSubStringBeforeNthDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -140,7 +142,8 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
 # Cut the very first field of a string, before the delimiter, in order to get everything that follows the first field.
 function BU::Main::Text::CutFirstFieldBeforeDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -155,7 +158,8 @@ function BU::Main::Text::CutFirstFieldBeforeDelim()
 # Cut the very last field of a string, in order to get everything that preceeds the last field.
 function BU::Main::Text::CutLastFieldAfterDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -175,7 +179,8 @@ function BU::Main::Text::CutLastFieldAfterDelim()
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 function BU::Main::Echo::KeepFormatting()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
 #	p_string=$1;           # String to display.
@@ -201,7 +206,8 @@ function BU::Main::Echo::KeepFormatting()
 #	BU::Main::Echo::ToLowercase "<Text to write>"
 function BU::Main::Echo::ToLowercase()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -216,7 +222,8 @@ function BU::Main::Echo::ToLowercase()
 #	BU::Main::Echo::ToUppercase "<Text to write>"
 function BU::Main::Echo::ToUppercase()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -232,7 +239,8 @@ function BU::Main::Echo::ToUppercase()
 # Getting the occurences of a character in a main string.
 function BU::Main::Text::GetCharacterOccurences()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -252,7 +260,8 @@ function BU::Main::Text::GetCharacterOccurences()
 # Get the very first field of a string, and cut everything that follows the first delimiter.
 function BU::Main::Text::GetFirstFieldBeforeDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -267,7 +276,8 @@ function BU::Main::Text::GetFirstFieldBeforeDelim()
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
 function BU::Main::Text::GetLastFieldAfterDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -282,7 +292,8 @@ function BU::Main::Text::GetLastFieldAfterDelim()
 # Getting substring after a delimiter, which can be both a single character or a string.
 BU::Main::Text::GetSubStringAfterDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -311,7 +322,8 @@ BU::Main::Text::GetSubStringAfterDelim()
 # Getting substring before a delimiter, which can be both a single character or a string.
 BU::Main::Text::GetSubStringBeforeDelim()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -365,7 +377,8 @@ BU::Main::Text::GetSubStringBeforeDelim()
 # Getting the occurences of a sub-string in a main string (it also works with a single character).
 function BU::Main::Text::GetSubStringOccurences()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -399,7 +412,8 @@ function BU::Main::Text::GetSubStringOccurences()
 # Getting the size of a string in byte.
 function BU::Main::Text::GetStringByteSize()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -411,7 +425,8 @@ function BU::Main::Text::GetStringByteSize()
 # Getting the size of a string in characters.
 function BU::Main::Text::GetStringCharactersNumber()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -423,7 +438,8 @@ function BU::Main::Text::GetStringCharactersNumber()
 # Getting the number of words in a string.
 function BU::Main::Text::GetStringWordsNumber()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -443,7 +459,8 @@ function BU::Main::Text::GetStringWordsNumber()
 # /home/user/Documents          --> Documents/user/home
 function BU::Main::Text::ReverseStringWordsOrder()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.

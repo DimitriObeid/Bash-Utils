@@ -47,7 +47,8 @@ fi
 # Checking if the current partition is full.
 function BU::Main::Filesystem::IsPartitionFull()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_fileFS=$1;
@@ -113,7 +114,8 @@ function BU::Main::Filesystem::IsPartitionFull()
 # Getting the file system path.
 function BU::Main::Filesystem::GetFSDevice()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -139,7 +141,8 @@ function BU::Main::Filesystem::GetFSDevice()
 # Getting the total size in bytes allocated to a given file system.
 function BU::Main::Filesystem::GetFSTotalSize()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -165,7 +168,8 @@ function BU::Main::Filesystem::GetFSTotalSize()
 # Getting the mounted partition of a given file system.
 function BU::Main::Filesystem::GetFSMountPoint()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -191,7 +195,8 @@ function BU::Main::Filesystem::GetFSMountPoint()
 # Getting the used size in bytes of a given file system.
 function BU::Main::Filesystem::GetFSUsedSizeBytes()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -232,7 +237,8 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
 # Getting the percentage of the used space of a given file system.
 function BU::Main::Filesystem::GetFSUsedSizePercent()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Default : NULL    - Path of the file or the folder to process.
@@ -274,7 +280,8 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
 # Getting the available size in bytes of a given file system.
 function BU::Main::Filesystem::GetFSAvailableSize()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -300,7 +307,8 @@ function BU::Main::Filesystem::GetFSAvailableSize()
 # Getting the type of the file system of a directory or a file.
 function BU::Main::Filesystem::GetFSType()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -344,7 +352,8 @@ function BU::Main::Filesystem::GetFSType()
 #   - BU::Main::Errors::HandleErrors  -> Headers.lib
 function BU::Main::Filesystem::Chown()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Parameters ****
     p_currentOwner=$1;  # This parameter is used in the translated messages, stored into their own variables.
@@ -441,7 +450,8 @@ function BU::Main::Filesystem::Chown()
 #	- BU::Main::Errors::HandleErrors		-> Headers.lib
 function BU::Main::Filesystem::ChownRec()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     #**** Paramètres ****
     local p_currentOwner=$1;   # This parameter is used in the messages.

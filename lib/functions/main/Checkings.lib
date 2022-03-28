@@ -352,7 +352,8 @@ function BU::Main::Checkings::CheckRootEUID()
 # Check if hard drive is full.
 function BU::Main::Checkings::CheckDiskUsedSpace()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
 	local p_fileFS=$1;	# Target file's file system.
@@ -474,7 +475,8 @@ function BU::Main::Checkings::CheckFilePathWasCreated()
 # Required functions and files :
 function BU::Main::Checkings::CheckProjectLogPath()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
     # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU::CheckProjectLogStatus()" function
     # (the only one where the "BU::Main::Checkings::CheckProjectLogPath()" function can be called), it's safe to call an "BU::Echo<...>()" function, the "BU::Main::Errors::HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
@@ -511,7 +513,8 @@ function BU::Main::Checkings::CheckProjectLogPath()
 # Accepted arguments : 'nodate', '<an empty string>'
 function BU::CheckProjectLogStatus()
 {
-    BU::Main::Echo::Debug "${FUNCNAME[0]}";
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	# Checking first if the partition where the log file exists is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
