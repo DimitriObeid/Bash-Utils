@@ -1492,7 +1492,6 @@ function BU::ModuleInit::ParseCSVLang()
 
     local v_filename="$__BU_MODULE_INIT_MODULE_NAME-$p_lang_ISO_639_1.csv";
     local v_CSVFirstColRow;
-        v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" "$p_delim")";
 
     # Getting the total number of columns.
     local x;
@@ -1562,6 +1561,25 @@ function BU::ModuleInit::ParseCSVLang()
 
     BU::EchoNewstep "Finding the variables list column";
     BU::Newline;
+
+    # If the targeted CSV file cannot be read by the current user.
+    if [ ! -r "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ]; then
+        BU::Main::Errors::HandleErrors "" \
+            "Unable to read the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH") file" \
+            "Please check the permissions of this file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+        exit 1;
+    fi
+
+    # Getting the first row and first column's cell.
+    v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" || {
+        BU::Main::Errors::HandleErrors "" \
+            "Unable to find the value « VARIABLE » in the first row and first column of the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH") file" \
+            "Please check if the value mentioned above is present on this EXACT cell of the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH") file" \
+            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+        exit 1;
+    })" "$p_delim")";
 
     if [ "$v_CSVFirstColRow" != "VARIABLE" ]; then
         BU::Main::Errors::HandleErrors '1' "NO $(BU::DechoHighlight "VARIABLE") VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \

@@ -99,7 +99,7 @@ function BU::Main::Headers::DrawLine()
                 echo -n "$p_lineChar";
             done
         else
-            BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
+            BU::Main::Errors::HandleSmallErrors 'W' "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : The value passed for the $(BU::DechoHighlightVar "strlen") parameter is not an integer" 'R' 'CPLS';
         fi
 
 	else

@@ -48,10 +48,10 @@ fi
 function BU::Main::Status::ConfEcho()
 {
     #**** Parameters ****
-    local p_file=$1;        # File where the function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_lineno=$2;      # Line where the function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_bad_value=$3;   # Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
-    local p_var_name=$4     # Name of the variable that stores the bad value.
+    local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_lineno=$2;      # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_bad_value=$3;   # String    - Default : NULL    - Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
+    local p_var_name=$4     # String    - Default : NULL    - Name of the variable that stores the bad value.
 
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
@@ -120,8 +120,8 @@ function BU::Main::Status::ConfEcho()
 function BU::Main::Status::CheckSTAT_DEBUG()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -138,8 +138,8 @@ function BU::Main::Status::CheckSTAT_DEBUG()
 function BU::Main::Status::CheckSTAT_DECHO()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("authorize" "forbid" "restrict");
@@ -156,8 +156,8 @@ function BU::Main::Status::CheckSTAT_DECHO()
 function BU::Main::Status::CheckSTAT_ECHO()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -174,8 +174,8 @@ function BU::Main::Status::CheckSTAT_ECHO()
 function BU::Main::Status::CheckSTAT_ERROR()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("" "fatal" "warning");
@@ -192,8 +192,8 @@ function BU::Main::Status::CheckSTAT_ERROR()
 function BU::Main::Status::CheckSTAT_INITIALIZING()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -210,8 +210,8 @@ function BU::Main::Status::CheckSTAT_INITIALIZING()
 function BU::Main::Status::CheckSTAT_LOG()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -231,8 +231,8 @@ function BU::Main::Status::CheckSTAT_LOG()
 function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("" "log" "tee");
@@ -249,8 +249,8 @@ function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 {
 	#**** Parameters ****
-	local p_file=$1;
-	local p_lineno=$2;
+	local p_file=$1;   # String    - Default : NULL    - File where the current function is called.
+	local p_lineno=$2; # Int       - Default : NULL    - Line where the current function is called.
 
 	#**** Variables ****
 	local va_correctValues=("authorized" "forbidden" "restricted");
@@ -267,8 +267,8 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 function BU::Main::Status::CheckSTAT_TIME_HEADER()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
@@ -286,8 +286,8 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
 function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("${__BU_MAIN_COLOR_TXT_VAR}An integer or a floating number");
@@ -305,8 +305,8 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 function BU::Main::Status::CheckSTAT_TIME_TXT()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("${__BU_MAIN_COLOR_TXT_ORANGE}An integer or a floating number");
@@ -324,8 +324,8 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
 function BU::Main::Status::CheckSTAT_TXT_FMT()
 {
     #**** Parameters ****
-    p_file=$1;
-    p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -343,8 +343,8 @@ function BU::Main::Status::CheckSTAT_TXT_FMT()
 function BU::Main::Status::CheckSTAT_USER_OS()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
     shift 2;
 
     # local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
@@ -360,8 +360,8 @@ function BU::Main::Status::CheckSTAT_USER_OS()
 function BU::Main::Status::CheckProjectStatusVars()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_lineno=$2;
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Code ****
     # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
@@ -399,48 +399,71 @@ function BU::Main:Status::ChangeSTAT_DECHO           { __BU_MAIN_STAT_DECHO="$1"
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value.
 function BU::Main:Status::ChangeSTAT_ECHO            {
+    #**** Parameters ****
+    local p_value=$1;   # String    - Default : NULL    - Value to be changed.
+    local p_file=$2;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$3;  # Int       - Default : NULL    - Line where the current function is called.
+
     #**** Variables ****
     local v_log_file_path="$__BU_MAIN_PROJECT_LOG_FILE_PATH";   # Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
 
     #*** Code ****
-    if [ "true" = "$1" ] && BU::IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
+    if [ "true" = "${p_value,,}" ] && BU::IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
 
         # Declare an array of strings, which will store the messages
         if BU::Main::Status::CheckStatIsLogging; then
             declare __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
 
             # Modifying and checking the global variable's value first, before
-            __BU_MAIN_STAT_ECHO="$1";             BU::Main::Status::CheckSTAT_ECHO           "$2" "$3" || return 1;
+            __BU_MAIN_STAT_ECHO="$p_value";
 
-            BU::HeaderAquaGreen "$(BU::DechoHighlightVar '__BU_MAIN_STAT_ECHO : true') --> BEGINNING REDIRECTING TEXT TO THE $(BU::DechoHighlightPath "$v_log_file_path") LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU::Main::Status::CheckSTAT_ECHO "$p_file" "$p_lineno" || return 1;
+
+            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU::EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU::Newline;
         fi
 
-    elif [ 'false' = "$1" ]; then
+    elif [ 'false' = "${p_value,,}" ]; then
         if BU::IsArrayNotEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}" && BU::Main::Status::CheckStatIsLogging; then
 
             for i in "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; do
                 echo "$i" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || \
                 {
-                    echo >&2;
-                    echo "In $(BU::DechoHighlightPath "$(basename "${BASH_SOURCE[0]}")") file, function $(BU::DechoHighlightFunction "${FUNCNAME[0]}"), line $(BU::DechoHighlight "$LINENO") --> Error :" >&2;
-                    echo "Unable to write in the $(BU::DechoHighlightFile "$__BU_MAIN_PROJECT_LOG_FILE_PATH") log file" >&2;
+                    local __bu_main_stat_log_redirect_backup="$__BU_MAIN_STAT_LOG_REDIRECT";
+                    __BU_MAIN_STAT_LOG_REDIRECT="";
 
                     echo >&2;
-                    echo "Please check the cause of this bug" >&2;
-                    echo "The cause may be a problem of read and / or write permission" >&2;
 
-                    echo >&2; return 1;
+                    BU::EchoError "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
+                    BU::EchoError "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
+
+                    echo >&2;
+                    BU::EchoError "Please check the cause of this bug" >&2;
+                    BU::EchoError "The cause may be a problem of read and / or write permission" >&2;
+
+                    echo >&2;
+
+                    __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
+
+                    return 1;
                 }
             done
 
-            BU::HeaderAquaGreen "$(BU::DechoHighlightVar '__BU_MAIN_STAT_ECHO : true') --> ENDED REDIRECTING TEXT TO THE $(BU::DechoHighlightPath "$v_log_file_path") LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU::EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU::Newline;
+
+            " $(BU::DechoHighlightPath "$v_log_file_path") LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
             # Emptying the array of strings.
             __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
         fi
     fi
 
-    __BU_MAIN_STAT_ECHO="$1";             BU::Main::Status::CheckSTAT_ECHO           "$2" "$3" || return 1; return 0; }
+    __BU_MAIN_STAT_ECHO="$p_value";             BU::Main::Status::CheckSTAT_ECHO           "$p_file" "$p_lineno" || return 1; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
 function BU::Main:Status::ChangeSTAT_ERROR           { __BU_MAIN_STAT_ERROR="$1";           BU::Main::Status::CheckSTAT_ERROR           "$2" "$3" || return 1; return 0; }
