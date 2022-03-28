@@ -369,7 +369,7 @@ function BU::Decho()
                     fi
 
                     # shellcheck disable=SC2034
-                    BU::Main:Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+                    BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
                     BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
                     "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";

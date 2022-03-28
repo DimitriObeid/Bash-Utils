@@ -291,22 +291,22 @@ fi
 for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
 
     if [ "${value,,}" != '--stat-decho=authorize' ] && [ "${value,,}" != '--stat-decho-forbid' ] && [ "${value,,}" != '--stat-decho-restrict' ]; then
-        BU::Main:Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     if [ "${value,,}" != '--stat-echo=false' ]      && [ "${value,,}" != '--stat-echo=true' ]; then
-        BU::Main:Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     # Don't forget to set the "$__BU_MAIN_STAT_LOG_REDIRECT" value BEFORE calling a function which checks the value of the "$__BU_MAIN_STAT_LOG" value, since this function calls a function which creates the logs file.
     if [ "${value,,}" != '--stat-log-r=log' ]       && [ "${value,,}" != '--stat-log-r=tee' ]   && [ "${value,,}" != '--stat-log-r=void' ]; then
-        BU::Main:Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     if [ "${value,,}" != '--stat-log=false' ]       && [ "${value,,}" != '--stat-true' ]; then
 
         # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-        BU::Main:Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 done
 

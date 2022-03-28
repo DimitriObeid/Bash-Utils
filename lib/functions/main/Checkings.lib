@@ -533,10 +533,10 @@ function BU::CheckProjectLogStatus()
     # Also disabling a shellcheck warning, which is a false positive (saying that "$__BU_MAIN_STAT_DECHO" may not be assigned, but "$__BU_MAIN_STAT_ECHO" is (both of them are valid and working differently)).
 
     # shellcheck disable=SC2153
-    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU::Main:Status::ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU::Main::Status::ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
     # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
-    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
     local v_redirectionError;
         v_redirectionError="$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> ";
@@ -550,10 +550,10 @@ function BU::CheckProjectLogStatus()
         BU::Main::Checkings::CheckProjectLogPath || \
         {
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is stopped.
-            BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is stopped.
-			BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
             return 1;
         };
@@ -570,13 +570,13 @@ function BU::CheckProjectLogStatus()
         if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
 
             # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU::Main:Status::ChangeSTAT_TIME_HEADER "0";
+            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU::Main::Status::ChangeSTAT_TIME_HEADER "0";
 
 			# Setting the "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable's value to 0 seconds, since no text is being displayed on the screen.
 			local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU::Main::Status::ChangeSTAT_TIME_NEWLINE "0";
 
             # Setting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU::Main:Status::ChangeSTAT_TIME_TXT "0";
+            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU::Main::Status::ChangeSTAT_TIME_TXT "0";
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -647,19 +647,19 @@ function BU::CheckProjectLogStatus()
             done
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 			# Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-			BU::Main:Status::ChangeSTAT_TIME_HEADER  "$v_stat_time_header";
+			BU::Main::Status::ChangeSTAT_TIME_HEADER  "$v_stat_time_header";
 
 			# Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
 			BU::Main::Status::ChangeSTAT_TIME_NEWLINE "$v_stat_time_newline";
 
 			# Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-			BU::Main:Status::ChangeSTAT_TIME_TXT     "$v_stat_time_txt";
+			BU::Main::Status::ChangeSTAT_TIME_TXT     "$v_stat_time_txt";
 
 			return 0;
 
@@ -737,10 +737,10 @@ function BU::CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
 			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
+			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO"
 
 			return 0;
 
@@ -766,10 +766,10 @@ function BU::CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
             return 0;
 
@@ -797,19 +797,19 @@ function BU::CheckProjectLogStatus()
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
         # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-        BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-		BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+		BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 		return 0;
 	fi
 
 	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main:Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+	BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main:Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+	BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 	return 0;
 }

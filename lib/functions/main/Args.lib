@@ -67,7 +67,7 @@ function BU::Main::Args::PrintBadOption()
 	if [ "${__BU_MAIN_STAT_ECHO,,}" = "false" ]; then
 		local v_STAT_ECHO_was_false="true";
 
-		BU::Main:Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+		BU::Main::Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 	fi
 
 	# Since this function can be called from the "Lang.lib" file, and eventually in other library files, it's better to include a support for an appropriated file name.
@@ -254,7 +254,7 @@ function BU::Main::Args::PrintBadOption()
     fi
 
 	if [ "$v_STAT_ECHO_was_false" = "true" ]; then
-		BU::Main:Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+		BU::Main::Status::ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 	fi
 
     BU::SetLastReturnValue 0;

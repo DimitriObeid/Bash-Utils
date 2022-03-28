@@ -61,7 +61,7 @@ function BU::Main::Errors::HandleSmallErrors()
     #**** Variables ****
     if [ "${p_cpls^^}" = 'CPLS' ]; then
         if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
-            local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU::Main:Status::ChangeSTAT_ECHO 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+            local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO 'true' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
         fi
     fi
 
