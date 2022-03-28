@@ -481,7 +481,6 @@ function BU::Main::Args::PrintFFLErrorOccured()
     local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno")";
 
     #**** Code ****
-    DbgMsg "1" "2";
     echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $(BU::__Decho "$p_target_f" "$__BU_MAIN_COLOR_HIGHLIGHT") function";
 
     return 0;
