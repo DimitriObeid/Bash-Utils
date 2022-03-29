@@ -45,13 +45,18 @@ fi
 ## SETTING
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
+
+## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU::__Decho()" AND "BU::Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
+#   - BU::Main::Checkings::CheckProjectRelatedFile()
+#   - BU::Main::Errors::HandleSmallErrors
+#   - BU::Main::Errors::HandleErrors
 function BU::Main::Decho::SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false';
 
 	#**** Parameters ****
 	# $1 --> Color code
@@ -63,15 +68,33 @@ function BU::Main::Decho::SetBGColor()
             tput setab "$1" || { echo -ne "\e[" && return 0; }
 
             # Checking if the "bgcolors.tmp" (background color) file exists.
-            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" "f"; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH") file" 'E' 'CPLS'
-            fi
+            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
+                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                echo >&2;
+
+                echo "Aborting the script's execution" >&2;
+                echo >&2;
+
+                exit 1;
+            }; fi
+
+            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
+                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                echo >&2;
+
+                echo "Aborting the script's execution" >&2;
+                echo >&2;
+
+                exit 1;
+            }; fi
 
             # Redirecting the background's color code in its dedicated temporary file.
             echo "$1" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
 
             [ "$?" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH") (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
                 exit 1;
             }
@@ -84,13 +107,18 @@ function BU::Main::Decho::SetBGColor()
 }
 
 # Writing the text's color code into a file, to be processed by any function which needs to know what is the current text color.
+
+## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU::__Decho()" AND "BU::Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
+#   - BU::Main::Checkings::CheckProjectRelatedFile()
+#   - BU::Main::Errors::HandleSmallErrors
+#   - BU::Main::Errors::HandleErrors
 function BU::Main::Decho::SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false';
 
 	#**** Parameters ****
 	# $1 --> Color code
@@ -101,16 +129,34 @@ function BU::Main::Decho::SetTextColor()
         if command -v tput &> /dev/null; then
             tput setaf "$1" || { echo -ne "\e[38;5;$1m" && return 0; }
 
-            # Checking if the "fgcolors.tmp" (foreground color) file exists.
-            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") file" 'E' 'CPLS'
-            fi
+            # Checking if the "bgcolors.tmp" (background color) file exists.
+            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
+                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                echo >&2;
+
+                echo "Aborting the script's execution" >&2;
+                echo >&2;
+
+                exit 1;
+            }; fi
+
+            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
+                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                echo >&2;
+
+                echo "Aborting the script's execution" >&2;
+                echo >&2;
+
+                exit 1;
+            }; fi
 
             # Redirecting the text's color code in its dedicated temporary file.
             echo "$1" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
 
             [ "$?" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
                 exit 1;
             }
@@ -134,7 +180,7 @@ function BU::__Decho()
 	local p_newTextColor=$2;	# CMD		- Default : NULL	- Color to apply on each string's characters.
 	local p_oldTextColor=$3;	# CMD		- Default : NULL	- Color to apply in the text's background.
 
-	#**** Code ****	
+	#**** Code ****
     printf "%s\n" "$p_newTextColor$p_string$p_oldTextColor";
 
     return 0;
@@ -171,7 +217,7 @@ function BU::Decho()
     fi
 
 	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
-		# Changing the 
+		# Changing the
 		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
 			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
 

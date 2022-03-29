@@ -252,7 +252,7 @@ function BU::Main::Directories::MkTmpDir()
 		{
 			BU::Main::Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-			BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Checkings::CheckDirPathExists "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_TMP_DIR_PATH")") CANNOT BE CREATED !" \
+			BU::Main::Errors::HandleErrors "1" "THE $(BU::Main::Checkings::CheckDirPathExists "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'true') CANNOT BE CREATED !" \
 				"Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 

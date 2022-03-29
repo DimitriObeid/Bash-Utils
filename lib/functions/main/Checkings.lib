@@ -356,7 +356,8 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	#**** Parameters ****
-	local p_fileFS=$1;	# Target file's file system.
+    local p_fileFS=$1;          # String    - Default : NULL    - Target file's file system.
+    local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::Main::Errors::HandleErrors()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and that "BU::__/Decho()" functions are called in the "BU::Main::Errors::HandleErrors()" function). Set this value to "false" to forbid this call.
 
 	#**** Code ****
 
@@ -382,12 +383,22 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
-        HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
-            "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-            "Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
-            "No space left on the target device's partition" "$(basneame "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+        if [ "${p_authorization,,}" = 'true' ]; then
+            BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
+                "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
+                "Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data on a file [/|\] Since the file system's disk space is full, the script has to be exited" \
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+        elif [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+            echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" >&2;
+            echo "Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data on a file" >&2;
+            echo >&2;
+
+            echo "Since the file system's disk space is full, the script has to be exited" >&2;
+            echo >&2;
 
             exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+        fi
     fi
 
     # Resetting the former "$__BU_MAIN_STAT_ECHO" global status variable's value.
@@ -410,13 +421,17 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 function BU::Main::Checkings::CheckDirPathExists()
 {
     #**** Parameters ****
-    local p_path=$1;    # String - Path of the (in)existent directory.
+    local p_path=$1;            # String    - Default : NULL    - Path of the (in)existent directory.
+    local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::__DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::__Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -d "$p_path" ]; then
-        BU::DechoHighlightPath "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
+    if [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
+        BU::__DechoHighlightPath "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
 
         return 1;
+
+    elif [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+        printf "<missing directory path>"; return 1;
     fi
 
     return 0;
@@ -444,13 +459,17 @@ function BU::Main::Checkings::CheckDirPathWasCreated()
 function BU::Main::Checkings::CheckFilePathExists()
 {
     #**** Parameters ****
-    local p_path=$1;    # String - Path of the (in)existent file.
+    local p_path=$1;            # String    - Default : NULL    - Path of the (in)existent file.
+    local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::__DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::__Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -f "$p_path" ]; then
-        BU::DechoHighlightPath "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
+    if [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
+        BU::__DechoHighlightPath "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
 
         return 1;
+
+    elif [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+        printf "<missing file path>"; return 1;
     fi
 
     return 0;
@@ -517,7 +536,7 @@ function BU::CheckProjectLogStatus()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'true';
 
     #**** Parameters ****
     local p_string=$1;      # Any       - Text to display.
@@ -836,36 +855,55 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path";
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true';
 
 	if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then exit 1; fi
 
 	if [ "$p_type" = 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
-				true > "$v_path" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::DechoHighlightPath "$(BU::Main::Checkings::CheckFilePathExists "$v_path")")" 'E'; return 1; }
+				true > "$v_path" || {
+                    BU::Main::Errors::HandleSmallErrors 'E' \
+                        "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
+
+                    return 1;
+                }
 			fi
 
 			return 0;
 		else
 			if [ ! -d "$p_parent" ]; then
-                mkdir -p "$p_parent" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::DechoHighlightPath "$(BU::Main::Checkings::CheckDirPathExists "$p_parent")")" 'E'; return 1; }
+                mkdir -p "$p_parent" || {
+                    BU::Main::Errors::HandleSmallErrors 'E' \
+                        "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::Main::Checkings::CheckDirPathExists "$p_parent" 'true')" 'E';
 
-				BU::Main::Checkings::CheckDirPathWasCreated "$p_parent" || return 1;
+                        return 1;
+                    }
+
+				BU::Main::Checkings::CheckDirPathWasCreated "$p_parent" || return "$?";
 			fi
 
-			touch "$v_path" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::DechoHighlightPath "$(BU::Main::Checkings::CheckFilePathExists "$v_path")")" 'E'; return 1; }
+			touch "$v_path" || {
+                BU::Main::Errors::HandleSmallErrors 'E' \
+                    "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
 
-			BU::Main::Checkings::CheckFilePathWasCreated "$v_path" || return 1; return 0;
+                    return 1;
+                }
+
+			BU::Main::Checkings::CheckFilePathWasCreated "$v_path"; return "$?";
 		fi
 
     elif [ "$p_type" = 'd' ]; then
 		if [ -d "$v_path" ]; then
 			return 0;
 		else
-			mkdir -p "$v_path" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU::DechoHighlight "$(BU::Main::Checkings::CheckDirPathExists "$v_path")")" 'E'; return 1; }
+			mkdir -p "$v_path" || {
+                BU::Main::Errors::HandleSmallErrors 'E' "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU::Main::Checkings::CheckDirPathExists "$v_path" 'true')" 'E';
 
-			BU::Main::Checkings::CheckDirPathWasCreated "$v_path" || return 1; return 0;
+                return 1;
+            }
+
+			BU::Main::Checkings::CheckDirPathWasCreated "$v_path"; return "$?";
 		fi
     fi
 }

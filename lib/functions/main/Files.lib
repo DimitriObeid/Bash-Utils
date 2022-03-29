@@ -196,7 +196,7 @@ function BU::Main::Files::Make()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path";
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true';
 
 	# Checking if the awaited arguments are given.
     if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi;
@@ -254,7 +254,7 @@ function BU::Main::Files::MakePath()
 
     #**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'true';
 
     if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
@@ -286,7 +286,7 @@ function BU::Main::Files::CreateProjectLogFile()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}";
 
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'true';
 
     #**** Variables ****
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)";
