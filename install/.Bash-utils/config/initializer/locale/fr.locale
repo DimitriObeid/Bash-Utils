@@ -458,21 +458,22 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de c
 # Liste des valeurs acceptées.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS="Les arguments supportés pour le module principal sont :":
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG="--stat-debug=false            OU --stat-debug=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO="--stat-decho=authorize        OU --stat-decho=forbid          OU --stat-decho=resctrict";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO="--stat-echo=false             OU --stat-echo=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG="--stat-debug=false             OU --stat-debug=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO="--stat-decho=authorize         OU --stat-decho=forbid          OU --stat-decho=resctrict";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_CAT="--stat-debug-cat=file          OU --stat-debug-cat=category    OU --stat-debug-cat=sub-category    OU  --stat-debug-cat=function"
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR="--stat-error=fatal            OU --stat-error=void			OU --stat-error=warning";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_________LOG="--stat-log=false              OU --stat-log=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______LOG_R="--stat-log-r=log              OU --stat-log-r=tee             OU --stat-log-r=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO="--stat-echo=false              OU --stat-echo=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR="--stat-error=fatal             OU --stat-error=void			OU --stat-error=warning";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_________LOG="--stat-log=false               OU --stat-log=true";
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____OP_ROOT="--stat-op-root=authorized     OU --stat-op-root=forbidden     OU --stat-op-root=restricted";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______LOG_R="--stat-log-r=log               OU --stat-log-r=tee             OU --stat-log-r=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____OP_ROOT="--stat-op-root=authorized      OU --stat-op-root=forbidden     OU --stat-op-root=restricted";
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_H="--stat-time-header=float,     où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_N="--stat-time-newline=float,    où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_T="--stat-time-txt=float,        où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_H="--stat-time-header=float,      où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_N="--stat-time-newline=float,     où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_T="--stat-time-txt=float,         où « float » est un nombre à virgule flottante";
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____TXT_FMT="--stat-txt-fmt=false          OU --stat-txt-fmt=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____TXT_FMT="--stat-txt-fmt=false           OU --stat-txt-fmt=true";
 
 # Une valeur incorrecte a été donnée à l'option "--stat-*".
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : La valeur « %s » de l'option '--stat-*' est incorrecte.";
@@ -485,17 +486,18 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING="Cette v
 
 # Traitement de la description de chaque variable globale de statut.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL activer les fonctionnalités de déboguage";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_CAT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING activer les fonctionnalités de déboguage avancées pour les fonctions lors d'une procédure de déboguage avec la commande « bash -x »";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer le niveau de décoration de texte";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL éviter de provoquer une boucle infinie lors de l'appel d'une fonction d'écriture de texte au cas où ces fonctions doivent être appelées pour fournir les mêmes fonctionnalités que d'habitude";
 
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL éviter de provoquer une boucle infinie lors de l'appel d'une fonction d'écriture de texte au cas où ces fonctions doivent être appelées pour fournir les mêmes fonctionnalités que d'habitude";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ERROR="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer si l'exécution du script doit être arrêtée en cas d'erreur";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL déterminer si un texte doit être redirigé vers un fichier de logs ou non";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG_R="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer si le texte doit être redirigé vers le fichier de logs uniquement, vers l'écran uniquement, ou vers les deux en même temps.";
 
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG_R="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer si le texte doit être redirigé vers le fichier de logs uniquement, vers l'écran uniquement, ou vers les deux en même temps.";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_OP_ROOT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer si le script peut modifier des fichiers ou des dossiers situés directement dans le dossier racine du système, ou dans l'un de ses sous-dossiers directs.";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_H="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT déterminer le temps de pause du script après l'affichage d'un en-tête";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_N="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT déterminer le temps de pause du script après l'affichage d'un saut de ligne";
 
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_N="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT déterminer le temps de pause du script après l'affichage d'un saut de ligne";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_T="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT déterminer le temps de pause du script après l'affichage de tout texte";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TXT_FMT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL déterminer si le script a le droit d'afficher une décoration textuelle.";
 
