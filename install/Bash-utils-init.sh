@@ -55,8 +55,8 @@ fi
 function DbgMsg()
 {
     #**** Parameters ****
-    local p_code=$1		# Exit code.
-    local p_sleep=$2	# Pause time in seconds.
+    local p_code=${1-1};    # Int   - Default : 1   - Exit code.
+    local p_sleep=${2-2};   # Int   - Default : 2   - Pause time in seconds.
 
     #**** Code ****
 printf "
@@ -161,7 +161,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 function BU::ModuleInit::GetModuleInitLanguage()
 {
     #**** Parameters ****
-    local p_lang_ISO_639_1=$1; # Wanted language.
+    local p_lang_ISO_639_1=$1; # String     - Default : NULL    - Wanted language.
 
     #**** Variables ****
     local v_supportedLang=('de' 'en' 'es' 'fr');
@@ -240,7 +240,7 @@ function BU::ModuleInit::AskPrintLog()
 
 		# If the user's defined language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
 		if [ "${__BU_MODULE_INIT__USER_LANG,}" != 'en' ]; then
-            echo "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH";
+            echo; echo "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH";
 		fi
 
 		echo; read -rp "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS" read_ask_print_log;
@@ -347,13 +347,13 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
 
         #**** Parameters ****
-        local p_var_name=$1;	# Name of the variable.
-        local p_var_val=$2;		# Value stored in the variable.
-		local p_var_type=$3;	# Type of variable (array, int (integer), float, path, string).
-        local p_var_desc=$4;	# Description of the variable.
-        local p_file=$5;        # File where the variable was declared.
-        local p_func=$6;        # Function where the variable was declared.
-        local p_line=$7;        # Line where the variable was declared.
+        local p_var_name=$1;	# String    - Default : NULL    - Name of the variable.
+        local p_var_val=$2;		# String    - Default : NULL    - Value stored in the variable.
+		local p_var_type=$3;	# String    - Default : NULL    - Type of variable (array, int (integer), float, path, string).
+        local p_var_desc=$4;	# String    - Default : NULL    - Description of the variable.
+        local p_file=$5;        # String    - Default : NULL    - File where the variable was declared.
+        local p_func=$6;        # String    - Default : NULL    - Function where the variable was declared.
+        local p_line=$7;        # Int       - Default : NULL    - Line where the variable was declared.
 
         # If the variable type is an array, then the values must be passed as an array,
         # or else only the first index's value will be displayed.
@@ -480,8 +480,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 function BU::ModuleInit::Msg()
 {
     #**** Parameters ****
-    local p_str=$1;     # The string to display.
-    local p_option=$2;  # The "echo" command's options.
+    local p_str=$1;     # String  - Default : NULL  - The string to display.
+    local p_option=$2;  # String  - Default : NULL  - The "echo" command's options.
 
     #**** Code ****
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
@@ -601,7 +601,7 @@ function BU::ModuleInit::Msg()
 function BU::ModuleInit::MsgLine()
 {
     #**** Parameters ****
-    local p_str=$1;     # String to display.
+    local p_str=$1;     # String  - Default : NULL  - String to display.
     local p_line=$2;    # Line character.
     local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
 
@@ -761,8 +761,8 @@ function BU::ModuleInit::CheckBashMinimalVersion()
 function BU::ModuleInit::CheckPath()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the target file or directory.
-    local p_target=$2;  # Specify if the target is a directory or a file.
+    local p_path=$1;    # String  - Default : NULL    - Path of the target file or directory.
+    local p_target=$2;  # String  - Default : NULL    - Specify if the target is a directory or a file.
 
     #**** Code ****
     if [ -z "$p_path" ]; then
@@ -809,8 +809,8 @@ function BU::ModuleInit::CheckPath()
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
 function BU::ModuleInit::FindPath()
 {
-	#	$1	--> Parent directory.
-    #	$2	--> Targeted directory or file.
+	#	$1	--> String  - Default : NULL    - Parent directory.
+    #	$2	--> String  - Default : NULL    - Targeted directory or file.
     find "$1" -maxdepth 1 -iname "$2" -print 2>&1 | grep -v "Permission denied" ||
 	{
         if [ -z "$__BU_MODULE_INIT_MSG_ARRAY_EXISTS" ]; then
@@ -928,8 +928,8 @@ function BU::ModuleInit::ListInstalledModules()
 function BU::ModuleInit::SourcingFailure()
 {
     #**** Parameters ****
-    local p_path=$1;    # Path of the file that cannot be sourced.
-    local p_module=$2;  # Name of the module.
+    local p_path=$1;    # String    - Default : NULL    - Path of the file that cannot be sourced.
+    local p_module=$2;  # String    - Default : NULL    - Name of the module.
 
     #**** Code ****
     BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
@@ -943,9 +943,9 @@ function BU::ModuleInit::SourcingFailure()
 function BU::ModuleInit::Usage()
 {
 	echo >&2; echo "$__BU_MODULE_INIT_MSG__USAGE__SUPVALS" >&2;
-	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG";
-	echo >&2;
+   	echo >&2;
 
+	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG";
 	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY" >&2;
 	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT" >&2;
 	echo "$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY" >&2;
@@ -1184,7 +1184,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 local stat_value_warning="";
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
-                if [[ "${module_args,,}" = '--stat-*' ]]; then
+                if [[ "${module_args,,}" = *'--stat-'* ]]; then
 
                     # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
                     source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
@@ -1220,7 +1220,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                                     BU::ModuleInit::Msg "$stat_value_warning « --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »,";
                                 fi
                             else
-
+                                BU::ModuleInit::Msg "NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
                             fi;;
                         *)
                             echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE « module » PARAMETER" >&2;
@@ -1228,7 +1228,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             BU::ModuleInit::Usage >&2; exit 1;
                             ;;
                     esac
-                fi
 
                 # -----------------------------------------------
 
@@ -1237,7 +1236,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # Else, if the "module" parameter's value is a log redirection parameter : '--log-display', '--log-shut' or '--log-shut-display'.
 
 				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
-                if [[ "${module_args,,}" == *'--log-'* ]]; then
+                elif [[ "${module_args,,}" == *'--log-'* ]]; then
 
 					case "${module_args,,}" in
 
@@ -1335,12 +1334,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 						# Setting the "$__BU_MODULE_INIT_MSG_ARRAY_MODE" global variable to '--mode-log-partial', in order to print the essential initialization messages only (already set by default).
 						'--mode-log-partial')
-							__BU_MODULE_INIT_MSG_ARRAY_MODE="$module_args";;
+							__BU_MODULE_INIT_MSG_ARRAY_MODE="$module_args";
 
                             # Unsetting every unsused string variables in order to free up some memory.
 
                             # shellcheck disable=SC2046
-                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");
+                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");;
 
 						# An unsupported mode argument is passed.
 						*)
