@@ -460,7 +460,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS="Les arg
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG="--stat-debug=false             OU --stat-debug=true";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO="--stat-decho=authorize         OU --stat-decho=forbid          OU --stat-decho=resctrict";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_CAT="--stat-debug-cat=file          OU --stat-debug-cat=category    OU --stat-debug-cat=sub-category    OU  --stat-debug-cat=function"
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_BASHX_FNCT_="--stat-debug-cat=file          OU --stat-debug-cat=category    OU --stat-debug-cat=sub-category    OU  --stat-debug-cat=function"
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO="--stat-echo=false              OU --stat-echo=true";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR="--stat-error=fatal             OU --stat-error=void			OU --stat-error=warning";
@@ -486,7 +486,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING="Cette v
 
 # Traitement de la description de chaque variable globale de statut.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL activer les fonctionnalités de déboguage";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_CAT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING activer les fonctionnalités de déboguage avancées pour les fonctions lors d'une procédure de déboguage avec la commande « bash -x »";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING activer les fonctionnalités de déboguage avancées pour les fonctions lors d'une procédure de déboguage avec la commande « bash -x »";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING déterminer le niveau de décoration de texte";
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL éviter de provoquer une boucle infinie lors de l'appel d'une fonction d'écriture de texte au cas où ces fonctions doivent être appelées pour fournir les mêmes fonctionnalités que d'habitude";

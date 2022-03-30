@@ -71,116 +71,90 @@ function BU::Main::Echo::Debug()
         [ -n "$__BU_MAIN_STAT_DEBUB_CAT" ] && {
             local v_file="${p_filename%%.[Ll][Ii][Bb]*}";
 
-        if [ "${__BU_MAIN_STATUS_DEBUG_CAT,,}" = 'file' ]; then
-            for targetFile in "${__BU_MAIN_STAT_DEBUG_CAT_FILES_ARRAY[@]}"; do
+        if [ "${__BU_MAIN_STATUS_DEBUG_BASHX_FNCT_,,}" = 'file' ]; then
+            for targetFile in "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT__FILES_ARRAY[@]}"; do
                 # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile".
-                [ "${targetFile,,}" == 'basicmaths' ]   && [ "${v_file,,}" == 'basicmaths' ]    && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'CMDS' ]         && [ "${v_file^^}" == 'CMDS' ]          && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'checkings' ]    && [ "${v_file,,}" == 'checkings' ]     && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'decho' ]        && [ "${v_file,,}" == 'decho' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'directories' ]  && [ "${v_file,,}" == 'directories' ]   && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'echo' ]         && [ "${v_file,,}" == 'echo' ]          && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'errors' ]       && [ "${v_file,,}" == 'errors' ]        && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'files' ]        && [ "${v_file,,}" == 'files' ]         && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'filesystem' ]   && [ "${v_file,,}" == 'filesystem' ]    && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'headers' ]      && [ "${v_file,,}" == 'headers' ]       && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'posixterm' ]    && [ "${v_file,,}" == 'posixterm' ]     && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'status' ]       && [ "${v_file,,}" == 'status' ]        && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'text' ]         && [ "${v_file,,}" == 'text' ]          && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-
-                [ "${targetFile^^}" == 'time' ]         && [ "${v_file,,}" == 'time' ]          && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                [ "${targetFile,,}" == "${v_file,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
             done
         fi
 
             #****** OLD
 
-            if [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'category' ] || [[ "${__BU_MAIN_STAT_DEBUG_CAT,,}" == sub?(-)category ]]; then
+            if [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'category' ] || [[ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" == sub?(-)category ]]; then
                 [ "${v_file,,}" == 'basicmaths' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
-                    if [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'category' ] || [[ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = sub?(-)category ]]; then
+                    if [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'category' ] || [[ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = sub?(-)category ]]; then
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file^^}" == 'CMDS' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'checkings' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'decho' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'directories' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'echo' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'errors' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'files' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'filesystem' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'headers' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
                 [ "${v_file,,}" == 'posixterm' ] &&
                 {
-                    [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
@@ -200,13 +174,13 @@ function BU::Main::Echo::Debug()
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 };
 
-            if [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'file' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT^^}" = 'F' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT^^}" = 'S' ]; then
+            if [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'file' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_^^}" = 'F' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_^^}" = 'S' ]; then
                 
 
-            elif [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'function' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT^^}" = 'FNCT' ]; then { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+            elif [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'function' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_^^}" = 'FNCT' ]; then { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
 
 
-            elif [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'category' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT^^}" = 'C' ]; then
+            elif [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'category' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_^^}" = 'C' ]; then
                 [ "${v_file,,}" == 'args' ] &&
                 {
                     [ "${p_category,,}" = '' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
@@ -214,7 +188,7 @@ function BU::Main::Echo::Debug()
                     [ "${p_category,,}" = '' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
                     [ "${p_category,,}" = '' ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
                 };
-            elif [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'subcategory' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" = 'sub-category' ] || [ "${__BU_MAIN_STAT_DEBUG_CAT^^}" = 'S' ]; then
+            elif [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'subcategory' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" = 'sub-category' ] || [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_^^}" = 'S' ]; then
         }
     } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 

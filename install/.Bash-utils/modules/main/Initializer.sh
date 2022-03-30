@@ -106,7 +106,7 @@ function BU::Main::Initializer::Usage()
     sleep 2;
 
     echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_CAT" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_BASHX_FNCT_" >&2;
     echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO" >&2;
     echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO" >&2;
     echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR" >&2;
@@ -124,7 +124,7 @@ function BU::Main::Initializer::Usage()
     echo >&2;
 
     echo >&2;
-    echo "If you plan to debug the framework, the « __BU_MAIN_STAT_DEBUG_CAT » status global variable can print the name of any function by file, category, sub-category or function" >&2;
+    echo "If you plan to debug the framework, the « __BU_MAIN_STAT_DEBUG_BASHX_FNCT_ » status global variable can print the name of any function by file, category, sub-category or function" >&2;
     echo "With this global variable, you can print the name of the function before each instructions execution reported with the output of the « bash -x » command" >&2;
     echo >&2;
 
@@ -167,15 +167,15 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                         BU::ModuleInit::Msg "$stat_value_warning « --stat-debug=false », « --stat-debug=true »";
                     fi;;
 
-                # "$__BU_MAIN_STAT_DEBUG_CAT" global status variable.
+                # "$__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" global status variable.
                 '--stat-debug-cat='*)
                     if      [ "${value[i],,}" = '--stat-debug-cat=file' ]       || [ "${value[i],,}" = 'category' ]             || [[ "${value[i],,}" == sub?(-)category ]]; then
-                        __BU_MAIN_STAT_DEBUG_CAT="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_DEBUG_CAT' "$__BU_MAIN_STAT_DEBUG_CAT" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_CAT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                        __BU_MAIN_STAT_DEBUG_BASHX_FNCT_="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_DEBUG_BASHX_FNCT_' "$__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                         __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value[i],,}" = '--stat-debug-void=void' ]; then
-                        __BU_MAIN_STAT_DEBUG_CAT='';                            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_DEBUG_CAT' "$__BU_MAIN_STAT_DEBUG_CAT" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_CAT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                        __BU_MAIN_STAT_DEBUG_BASHX_FNCT_='';                            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_DEBUG_BASHX_FNCT_' "$__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                     else
 

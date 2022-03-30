@@ -460,7 +460,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS="The sup
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG="--stat-debug=false             OR --stat-debug=true";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO="--stat-decho=authorize         OR --stat-decho=forbid          OR --stat-decho=resctrict";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_CAT="--stat-debug-cat=file          OR --stat-debug-cat=category    OR --stat-debug-cat=sub-category    OR  --stat-debug-cat=function"
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_BASHX_FNCT_="--stat-debug-cat=file          OR --stat-debug-cat=category    OR --stat-debug-cat=sub-category    OR  --stat-debug-cat=function"
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO="--stat-echo=false              OR --stat-echo=true";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR="--stat-error=fatal             OR --stat-error=void			OR --stat-error=warning";
@@ -486,7 +486,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING="This st
 
 # Processing each status global variable's value description.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL enable debugging features";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_CAT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING enable advanced debugging features for functions during a debugging procedure with the « bash -x » command";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING enable advanced debugging features for functions during a debugging procedure with the « bash -x » command";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING determine the level of text decoration";
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL avoid causing an infinite loop while calling a text writing function in case these functions must be called to provide the same features than usual";

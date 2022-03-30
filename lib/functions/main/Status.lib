@@ -140,8 +140,8 @@ function BU::Main::Status::CheckSTAT_DEBUG()
     return 0;
 }
 
-# Checking the "$__BU_MAIN_STAT_DEBUG_CAT" status variable's value.
-function BU::Main::Status::CheckSTAT_DEBUG_CAT()
+# Checking the "$__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" status variable's value.
+function BU::Main::Status::CheckSTAT_DEBUG_BASHX_FNCT_()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
@@ -154,8 +154,8 @@ function BU::Main::Status::CheckSTAT_DEBUG_CAT()
     local va_correctValues=("file" "category" "sub-category" "subcategory");
 
     #**** Code ****
-    if [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" != "file" ] && [ "${__BU_MAIN_STAT_DEBUG_CAT,,}" != "category" ] && [[ "${__BU_MAIN_STAT_DEBUG_CAT,,}" != sub?(-)category ]]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG_CAT" "__BU_MAIN_STAT_DEBUG_CAT" "${va_correctValues[@]}"; return "$?";
+    if [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" != "file" ] && [ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" != "category" ] && [[ "${__BU_MAIN_STAT_DEBUG_BASHX_FNCT_,,}" != sub?(-)category ]]; then
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" "__BU_MAIN_STAT_DEBUG_BASHX_FNCT_" "${va_correctValues[@]}"; return "$?";
     fi
 
     return 0;
@@ -458,7 +458,7 @@ function BU::Main::Status::CheckProjectStatusVars()
 function BU::Main::Status::ChangeSTAT_DEBUG             { __BU_MAIN_STAT_DEBUG="$1";            BU::Main::Status::CheckSTAT_DEBUG           "$2" "$3" || return "$?"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_DEBUG" status variable's value.
-function BU::Main::Status::ChangeSTAT_DEBUG_CAT         { __BU_MAIN_STAT_DEBUG_CAT="$1";        BU::Main::Status::CheckSTAT_DEBUG_CAT       "$2" "$3" || return "$?"; return 0; }
+function BU::Main::Status::ChangeSTAT_DEBUG_BASHX_FNCT_         { __BU_MAIN_STAT_DEBUG_BASHX_FNCT_="$1";        BU::Main::Status::CheckSTAT_DEBUG_BASHX_FNCT_       "$2" "$3" || return "$?"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main::Status::ChangeSTAT_DECHO             { __BU_MAIN_STAT_DECHO="$1";            BU::Main::Status::CheckSTAT_DECHO           "$2" "$3" || return "$?"; return 0; }
