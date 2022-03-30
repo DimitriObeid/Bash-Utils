@@ -166,7 +166,7 @@ function Args
 
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument.
-	if [ "${__BU_MAIN_STAT_DEBUG,,}" = "true" ]; then
+	if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = "true" ]; then
 		BU::EchoMsg "PROJECT_STATUS_DEBUG status : $(BU::Decho "true")"
 		BU::Newline;
 

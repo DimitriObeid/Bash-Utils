@@ -292,7 +292,7 @@ function BU::Main::Args::GetFuncArgsArrayValues()
         BU::Main::Status::ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     }
 
-    BU::Main::Status::CheckStatIsDebugging && {
+    BU::ModuleInit::CheckIsDebugging && {
         BU::EchoNewstep "Values stored in the $v_funcname function's array of arguments :";
 
         for i in "${pa_argsArray[@]}"; do

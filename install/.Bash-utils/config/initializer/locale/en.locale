@@ -39,7 +39,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 ## MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
 
-if [ ! -d "$__BU_MODULE_INIT_ROOT_HOME/.Bash-utils" ]; then
+if [ ! -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory";
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
 fi
@@ -88,6 +88,10 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="This global v
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR="This global variable stores the path of the configuration folder used by the modules initialization script";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR="This global variable stores the path of the configuration folder of the currently processed module";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="This global variable stores the path of the folder containing the translation files, used by the modules initialization script";
+
+# Initializer script's configuration files.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="Initializing the Initializer script's configuration files path";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="This global variable stores the path of the global status variables configuration file";
 
 # Module initializer script's paths.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initializing the modules initializers files directory";
@@ -308,6 +312,9 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3="--log-shut-display        
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1="--mode-log-full      : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2="--mode-log-partial   : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
 
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS________DEBUG="--stat-debug=false             OR --stat-debug=true";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__DEBUG_BASHX=" --stat-debug-bashx=category   OR--stat-debug-bashx=file   OR --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
+
 # Display of the values supported by the "module" option.
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
 
@@ -322,12 +329,18 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="WARNING : the two follo
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2";
 
+# Variables globales de statut.
+__BU_MODULE_INIT_MSG__USAGE__DEBUG="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS________DEBUG";
+__BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__DEBUG_BASHX";
+
 # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
 unset __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_1 \
     __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_2 \
     __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_3 \
     __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_1 \
-    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_2 \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS________DEBUG \
+    __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__DEBUG_BASHX
 
 # -----------------------------------------------
 
@@ -453,64 +466,61 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Successfully so
 
 # -----------------------------------------------
 
-## STEP TWO : PROCESSING THE MAIN MODULE'S PARAMETERS
+## STEP TWO : SOURCING FILES
 
-# List of accepted values.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS="The supported arguments for the main module are :":
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DEBUG="--stat-debug=false             OR --stat-debug=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______DECHO="--stat-decho=authorize         OR --stat-decho=forbid          OR --stat-decho=resctrict";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE___DEBUG_BASHX_FNCT_="--stat-debug-cat=file          OR --stat-debug-cat=category    OR --stat-debug-cat=sub-category    OR  --stat-debug-cat=function"
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE________ECHO="--stat-echo=false              OR --stat-echo=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______ERROR="--stat-error=fatal             OR --stat-error=void			OR --stat-error=warning";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_________LOG="--stat-log=false               OR --stat-log=true";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_______LOG_R="--stat-log-r=log               OR --stat-log-r=tee             OR --stat-log-r=void";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____OP_ROOT="--stat-op-root=authorized      OR --stat-op-root=forbidden     OR --stat-op-root=restricted";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_H="--stat-time-header=float,      where « float » is a floating point number";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_N="--stat-time-newline=float,     where « float » is a floating point number";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE______TIME_T="--stat-time-txt=float,         where « float » is a floating point number";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____TXT_FMT="--stat-txt-fmt=false           OR --stat-txt-fmt=true";
-
-# An incorrect value was given to the "--stat-*" option.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : the '--stat-*' option's « %s » value is incorrect.";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__BAD_VALUE_GIVEN__ADVICE="Try only one of these accepted values for this global status variable : ";
-
-# Processing each status global variable's value description : writing redundant sentences.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL="This status global variable stores a boolean value, which is used to";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT="This status global variable stores a floatig number, which is used to";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING="This status global variable stores a string, which is used to";
-
-# Processing each status global variable's value description.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL enable debugging features";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING enable advanced debugging features for functions during a debugging procedure with the « bash -x » command";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING determine the level of text decoration";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL avoid causing an infinite loop while calling a text writing function in case these functions must be called to provide the same features than usual";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_ERROR="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING determine if the script's execution must be stopped in case of an error";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL determine if any text must be redirected towards a log file or not";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_LOG_R="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING determine if the text must be redirected to the log file only, to the screen only, or both at the same time";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_OP_ROOT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING determine if the script can edit files or folders located directly in the system's root folder, or in one of it's direct sub-folders";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_H="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying a header";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_N="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying a line break";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TIME_T="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying any text";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR_DESC_TXT_FMT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL determine if the script has the permisiion to display any text decoration";
-
-# Unsetting the redundant sentences.
-unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__BOOL \
-    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__FLOAT \
-    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__STAT_GLOB_VAR__STRING
+# No text to display in this section for now.
 
 # -----------------------------------------------
 
-## STEP THREE : SOURCING FILES
+## STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
 
-# No text to display in this section for now.
+# List of accepted values.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS="The supported arguments for the main module are :":
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="--stat-decho=authorize         OR --stat-decho=forbid          OR --stat-decho=resctrict";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE________ECHO="--stat-echo=false              OR --stat-echo=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="--stat-error=fatal             OR --stat-error=void			OR --stat-error=warning";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_________LOG="--stat-log=false               OR --stat-log=true";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="--stat-log-r=log               OR --stat-log-r=tee             OR --stat-log-r=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="--stat-op-root=authorized      OR --stat-op-root=forbidden     OR --stat-op-root=restricted";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="--stat-time-header=float,      where « float » is a floating point number";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="--stat-time-newline=float,     where « float » is a floating point number";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="--stat-time-txt=float,         where « float » is a floating point number";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____TXT_FMT="--stat-txt-fmt=false           OR --stat-txt-fmt=true";
+
+# An incorrect value was given to the "--stat-*" option.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : the '--stat-*' option's « %s » value is incorrect.";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE="Try only one of these accepted values for this global status variable : ";
+
+# Processing each status global variable's value description : writing redundant sentences.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL="This status global variable stores a boolean value, which is used to";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__FLOAT="This status global variable stores a floatig number, which is used to";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING="This status global variable stores a string, which is used to";
+
+# Processing each status global variable's value description.
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL enable debugging features";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING enable advanced debugging features for functions during a debugging procedure with the « bash -x » command";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING determine the level of text decoration";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL avoid causing an infinite loop while calling a text writing function in case these functions must be called to provide the same features than usual";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING determine if the script's execution must be stopped in case of an error";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL determine if any text must be redirected towards a log file or not";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING determine if the text must be redirected to the log file only, to the screen only, or both at the same time";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING determine if the script can edit files or folders located directly in the system's root folder, or in one of it's direct sub-folders";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying a header";
+
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying a line break";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__FLOAT determine the script's pause time after displaying any text";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL determine if the script has the permisiion to display any text decoration";
+
+# Unsetting the redundant sentences.
+unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL \
+    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__FLOAT \
+    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__STRING
 
 # -----------------------------------------------
 
