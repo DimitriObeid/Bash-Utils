@@ -1181,14 +1181,20 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # -----------------------------------------------
 
                 ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
-                local stat_value_warning="";
+
+                # Creating a function to print the correct values for the current option in different languages structures.
+                function BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues()
+                {
+                    BU::ModuleInit::Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "$1" "$2")" >&2;
+                    BU::ModuleInit::Msg >&2;
+                }
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
                 if [[ "${module_args,,}" = *'--stat-'* ]]; then
 
                     # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
                     source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
-                        echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS file";
+                        echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file";
 
                         exit 1;
                     }
@@ -1202,7 +1208,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                             else
-                                BU::ModuleInit::Msg "$stat_value_warning « --stat-debug=false », « --stat-debug=true »";
+                                BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »";
                             fi;;
 
                         # "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
@@ -1217,13 +1223,15 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
-                                    BU::ModuleInit::Msg "$stat_value_warning « --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »,";
+                                    BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashxs" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »";
                                 fi
                             else
                                 BU::ModuleInit::Msg "NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
+                                BU::ModuleInit::Msg;
                             fi;;
                         *)
                             echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE « module » PARAMETER" >&2;
+                            echo >&2;
 
                             BU::ModuleInit::Usage >&2; exit 1;
                             ;;

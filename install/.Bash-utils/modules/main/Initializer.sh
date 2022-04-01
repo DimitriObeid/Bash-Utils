@@ -149,6 +149,13 @@ function BU::Main::Initializer::Usage()
     return 0;
 }
 
+# Creating a function to print the correct values for the current option in different languages structures.
+function BU::Main::Initializer::ProcessBadStatusOptionValues()
+{
+    BU::ModuleInit::Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "$1" "$2")" >&2;
+    BU::ModuleInit::Msg >&2;
+}
+
 # If arguments were given in the same double quotes as the "main" module's value.
 if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
@@ -161,7 +168,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	# Process each supported arguments in this "for" loop.
 	for value in "${main_module_array[@]}"; do
 
-        stat_value_warning="$(echo -ne "${__BU_MAIN_COLOR_TXT_WARNING}" >&2)";
+        stat_value_warning="Warning : the supported values for this option are :" >&2;
 
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN" "$value" >&2;
@@ -184,7 +191,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-decho" "« --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_ECHO" global status variable.
@@ -194,11 +201,11 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-echo=false », « stat-echo=true »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-echo" "« --stat-echo=false », « stat-echo=true »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_ERROR" global status variable.
-                'stat-error='*)
+                '--stat-error='*)
                     if      [ "${value[i],,}" = 'stat-error=fatal' ]; then
                             __BU_MAIN_STAT_ERROR="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
@@ -209,7 +216,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-error=fatal », « stat-error=void »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-error" "« --stat-error=fatal », « stat-error=void »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_LOG" global status variable.
@@ -219,7 +226,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-log=false », « stat-log=true »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-log" "« --stat-log=false », « stat-log=true »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_LOG_REDIRECT" global status variable.
@@ -234,7 +241,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-log-r" "« --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_OPERATE_ROOT" global status variable.
@@ -244,7 +251,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-op-root" "« --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
@@ -254,7 +261,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-header" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable.
@@ -264,7 +271,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
@@ -274,7 +281,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
@@ -284,12 +291,13 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::ModuleInit::Msg "$stat_value_warning « --stat-txt-fmt=false », « --stat-txt-fmt=true »";
+                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-txt-fmt" "« --stat-txt-fmt=false », « --stat-txt-fmt=true »";
                     fi;;
 
                 # Any unsupported global status variable.
                 *)
-                            BU::ModuleInit::Msg "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")";
+                            echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" >&2;
+                            echo >&2;
 
                             BU::Main::Initializer::Usage; exit 1;
             esac
