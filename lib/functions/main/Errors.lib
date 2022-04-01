@@ -202,13 +202,13 @@ function BU::Main::Errors::HandleErrors()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
 
 	#**** Parameters ****
-	local p_returnCode=$1;     # Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
-	local p_errorString=$2;    # String of the type of error to display.
-	local p_adviceString=$3;   # String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
-    local p_badValue=$4;       # Incorrect value which caused the error.
-	local p_file=$5;           # The name of the file where the error occured.
-	local p_function=$6;       # The name of the function where the error occured.
-	local p_lineno=$7;         # Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
+	local p_returnCode=$1;     # Int        - Default : NULL    - Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
+	local p_errorString=$2;    # String     - Default : NULL    - String of the type of error to display.
+	local p_adviceString=$3;   # String     - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
+    local p_badValue=$4;       # String     - Default : NULL    - Incorrect value which caused the error.
+	local p_file=$5;           # String     - Default : NULL    - The name of the file where the error occured.
+	local p_function=$6;       # String     - Default : NULL    - The name of the function where the error occured.
+	local p_lineno=$7;         # String     - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #**** Variables ****
     local v_hdrString;

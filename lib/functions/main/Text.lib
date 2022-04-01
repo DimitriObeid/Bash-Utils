@@ -300,12 +300,15 @@ BU::Main::Text::GetSubStringAfterDelim()
     local p_delim=$2;               # Char      - Default : NULL    - Delimiter
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+        if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    fi
 
     # WARNING ! DO NOT put double quotes between the "$(seq "$p_iterations")", or else it will not word split, and the loop will only run once !
     for i in $(seq "$p_iterations"); do
@@ -330,6 +333,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
     local p_delim=$2;               # Char      - Default : NULL    - Delimiter
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
@@ -343,10 +347,12 @@ BU::Main::Text::GetSubStringBeforeDelim()
 	local x;
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+        if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
-    if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
+            BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        fi
     fi
 
 	# Getting the number of occurences of the character / string targeted as delimiter.
@@ -367,7 +373,11 @@ BU::Main::Text::GetSubStringBeforeDelim()
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
-	p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")";
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+	    p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")";
+    else
+        p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")" '--init';
+    fi
 
 	if [ "${p_count,,}" != 'count' ]; then echo -e "$v_newString"; else echo "$p_count"; fi
 
@@ -465,13 +475,17 @@ function BU::Main::Text::ReverseStringWordsOrder()
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringAfterDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
+
 
 	#**** Variables ****
 	# Leave this variable empty, it will store the reversed string.
 	local reversed="";
 
     #**** Code ****
-	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+        if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    fi
 
 	IFS="$p_delim" read -ra line <<< "$p_string";
 
