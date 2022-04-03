@@ -48,7 +48,7 @@ fi
 function BU::Main::Status::ConfEcho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
@@ -123,7 +123,7 @@ function BU::Main::Status::ConfEcho()
 function BU::Main::Status::CheckSTAT_DECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -144,7 +144,7 @@ function BU::Main::Status::CheckSTAT_DECHO()
 function BU::Main::Status::CheckSTAT_ECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -165,7 +165,7 @@ function BU::Main::Status::CheckSTAT_ECHO()
 function BU::Main::Status::CheckSTAT_ERROR()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -186,7 +186,7 @@ function BU::Main::Status::CheckSTAT_ERROR()
 function BU::Main::Status::CheckSTAT_INITIALIZING()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -207,7 +207,7 @@ function BU::Main::Status::CheckSTAT_INITIALIZING()
 function BU::Main::Status::CheckSTAT_LOG()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -231,7 +231,7 @@ function BU::Main::Status::CheckSTAT_LOG()
 function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -252,7 +252,7 @@ function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
 	local p_file=$1;   # String    - Default : NULL    - File where the current function is called.
@@ -273,7 +273,7 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 function BU::Main::Status::CheckSTAT_TIME_HEADER()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -295,7 +295,7 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
 function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -317,7 +317,7 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 function BU::Main::Status::CheckSTAT_TIME_TXT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -339,7 +339,7 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
 function BU::Main::Status::CheckSTAT_TXT_FMT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -378,7 +378,7 @@ function BU::Main::Status::CheckSTAT_USER_OS()
 function BU::Main::Status::CheckProjectStatusVars()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -421,7 +421,7 @@ function BU::Main::Status::ChangeSTAT_DECHO             { __BU_MAIN_STAT_DECHO="
 function BU::Main::Status::ChangeSTAT_ECHO
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_value=$1;   # String    - Default : NULL    - Value to be changed.

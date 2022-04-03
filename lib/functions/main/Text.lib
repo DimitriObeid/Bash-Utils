@@ -41,8 +41,12 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT PROCESSING FUNCTIONS
+#### DEBUG ID : text::text-processing-functions
+__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
+## DEBUG ID : cutting-text
+__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
 
 # Cut the date displayed before a string.
 function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutSubStringAfterNthDelim "$1" '] ';  return 0; }
@@ -54,7 +58,7 @@ function BU::Main::Text::CutDashFromOption()        { BU::Main::Text::CutSubStri
 function BU::Main::Text::CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -77,7 +81,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
     if ! BU::Main::Args__Text::CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
 	# Getting the number of occurences of the character / string targeted as delimiter.
@@ -107,7 +111,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 function BU::Main::Text::CutSubStringBeforeNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -122,7 +126,7 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
     if ! BU::Main::Args__Text::CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
     for ((i=0; i<p_iterations; i++)); do
@@ -143,7 +147,7 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
 function BU::Main::Text::CutFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -159,7 +163,7 @@ function BU::Main::Text::CutFirstFieldBeforeDelim()
 function BU::Main::Text::CutLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -174,13 +178,14 @@ function BU::Main::Text::CutLastFieldAfterDelim()
 # -----------------------------------------------
 
 ## FORMATTING TEXT
+## DEBUG ID : text::text-processing-functions::formatting-text
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU::Main::Echo::ToLowercase()" OR "BU::Main::Echo::ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 function BU::Main::Echo::KeepFormatting()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
 #	p_string=$1;           # String to display.
@@ -207,7 +212,7 @@ function BU::Main::Echo::KeepFormatting()
 function BU::Main::Echo::ToLowercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -223,7 +228,7 @@ function BU::Main::Echo::ToLowercase()
 function BU::Main::Echo::ToUppercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -235,12 +240,14 @@ function BU::Main::Echo::ToUppercase()
 # -----------------------------------------------
 
 ## GETTING TEXT
+## DEBUG ID : getting-text
+__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::getting-text"
 
 # Getting the occurences of a character in a main string.
 function BU::Main::Text::GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -261,7 +268,7 @@ function BU::Main::Text::GetCharacterOccurences()
 function BU::Main::Text::GetFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -277,7 +284,7 @@ function BU::Main::Text::GetFirstFieldBeforeDelim()
 function BU::Main::Text::GetLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -293,7 +300,7 @@ function BU::Main::Text::GetLastFieldAfterDelim()
 BU::Main::Text::GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -326,7 +333,7 @@ BU::Main::Text::GetSubStringAfterDelim()
 BU::Main::Text::GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -351,7 +358,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
         if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
 
         if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
-            BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+            BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
         fi
     fi
 
@@ -388,7 +395,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
 function BU::Main::Text::GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -405,7 +412,7 @@ function BU::Main::Text::GetSubStringOccurences()
 
 	# This removes all occurrences of "$p_string" from $CommandResult and places it in tmp.
 	# Actually we're using substring replacement here with replacement string missing.
-	
+
 	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
 	tmp="${p_string//$p_target}";
 
@@ -423,7 +430,7 @@ function BU::Main::Text::GetSubStringOccurences()
 function BU::Main::Text::GetStringByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -436,7 +443,7 @@ function BU::Main::Text::GetStringByteSize()
 function BU::Main::Text::GetStringCharactersNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -449,7 +456,7 @@ function BU::Main::Text::GetStringCharactersNumber()
 function BU::Main::Text::GetStringWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
@@ -461,6 +468,8 @@ function BU::Main::Text::GetStringWordsNumber()
 # -----------------------------------------------
 
 ## REVERSING TEXT
+## DEBUG ID : reversing-text
+__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
 
 # Reverse words of a string according to a delimiter.
 
@@ -470,7 +479,7 @@ function BU::Main::Text::GetStringWordsNumber()
 function BU::Main::Text::ReverseStringWordsOrder()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
@@ -495,7 +504,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
 	while [ "$x" -ge 0 ]; do
 		if [ "$x" -gt 0 ]; then reversed="$reversed${line[x]}$delim"; else reversed="$reversed${line[x]}"; fi
 
-		
+
 		(( x-- ));
 	done
 
@@ -507,6 +516,8 @@ function BU::Main::Text::ReverseStringWordsOrder()
 # -----------------------------------------------
 
 ## SPLITTING TEXT
+## DEBUG ID : splitting-text
+# __BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
 
 # Splitting a string from a given delimiter, in order to store it in an array.
 # function BU::Main::Text::SplitStringFromDelim()

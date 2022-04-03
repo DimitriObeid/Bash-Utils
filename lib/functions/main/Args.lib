@@ -41,13 +41,18 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### ARGUMENT VALUES CHECKING : UTILITES FUNCTIONS
+#### DEBUG ID : args::argument-values-checking--utilities-functions
+__BU_MAIN_ARGS__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
 
 ## PATH CHECKING FUNCTIONS
+## DEBUG ID : path-checking-functions
+__BU_MAIN_ARGS__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
 
 # -----------------------------------------------
 
 ## QUICK MESSAGE PRINTING
-## DEBUG ID : stat-dbg-args-quick-message-printing
+## DEBUG ID : quick-message-printing
+__BU_MAIN_ARGS__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
 
 # Print a message without the need to write the whole "BU::Main::Errors::HandleErrors()" function's second argument, and according to the test option which failed :
 function BU::Main::Args::PrintBadOption()
@@ -269,13 +274,14 @@ function BU::Main::Args::PrintBadOption()
 # -----------------------------------------------
 
 ## ARGUMENT PRESENCE CHECKING
-## DEBUG ID = --stat-dbg-args-arg-presence-check
+## DEBUG ID = argument-presence-checking
+__BU_MAIN_ARGS__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
 function BU::Main::Args::GetFuncArgsArrayValues()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '--stat-dbg-args-arg-presence-check';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_funcname=$1; shift 1;   # String    - Default : NULL    - Name of the function where the array was set.
@@ -620,7 +626,7 @@ function BU::Main::Args::GetArgc-FFL()
 function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
     local p_parent=$1;      # String    - Default : NULL    - Name of the folder to process (into its parent directory).
@@ -676,7 +682,7 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 function BU::Main::Args__CMDS::GetCommandPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_cmd=$1;         # String    - Default : NULL    - Command's name.
@@ -712,7 +718,7 @@ function BU::Main::Args__CMDS::GetCommandPath()
 function BU::Main::Args__Directories::ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_function=$1;    # String    - Default : NULL    - Name of the function to process.
@@ -758,7 +764,7 @@ function BU::Main::Args__Directories::ProcessingDir()
 function BU::Main::Args__Directories::OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to overwrite.
@@ -791,7 +797,7 @@ function BU::Main::Args__Directories::OverwriteDir()
 function BU::Main::Args__Directories::Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_parent=$1;      # String    - Default : NULL    - Parent folder's path.
@@ -832,7 +838,7 @@ function BU::Main::Args__Directories::Make()
 function BU::Main::Args__Directories::MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Full path of the directory to create.
@@ -870,7 +876,7 @@ function BU::Main::Args__Directories::MakePath()
 function BU::Main::Args__Directories::GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # Path of the directory to process.
@@ -897,7 +903,7 @@ function BU::Main::Args__Directories::GetDirectoryName()
 function BU::Main::Args__Directories::GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
@@ -924,7 +930,7 @@ function BU::Main::Args__Directories::GetDirectoryPath()
 function BU::Main::Args__Directories::GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # Path of the directory to process.
@@ -951,7 +957,7 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
 function BU::Main::Args__Directories::GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
@@ -995,7 +1001,7 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
 BU::Main::Args__Errors::SetLastReturnValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
 	local p_code=$1;	# Int	- Default : 1	- Return value
@@ -1039,7 +1045,7 @@ BU::Main::Args__Errors::SetLastReturnValue()
 function BU::Main::Args__Files::ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_function=$1;    # Function to process.
@@ -1066,7 +1072,7 @@ function BU::Main::Args__Files::ProcessingFile()
 function BU::Main::Args__Files::OverwriteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #***** Parameters ****
     local p_path=$1             # String    - Path of the file to overwrite.
@@ -1112,7 +1118,7 @@ function BU::Main::Args__Files::OverwriteFile()
 function BU::Main::Args__Files::Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_parent=$1;      # String    - Parent folder path of the file to create.
@@ -1160,7 +1166,7 @@ function BU::Main::Args__Files::Make()
 function BU::Main::Args__Files::MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Full path of the file to create.
@@ -1191,7 +1197,7 @@ function BU::Main::Args__Files::MakePath()
 function BU::Main::Args__Files::SetLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_filepath=$1;    # String    - Path of the file to check its last access.
@@ -1240,7 +1246,7 @@ function BU::Main::Args__Files::SetLastAccess()
 function BU::Main::Args__Filesystem::IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_fileFS=$1;  # String    - Default : NULL    - Path of the file or folder's file system host.
@@ -1276,7 +1282,7 @@ function BU::Main::Args__Filesystem::IsPartitionFull()
 function BU::Main::Args__Filesystem::GetFSInfos()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_path=$1;        # String    - Default : NULL    - Path of the file or folder's file system host.
@@ -1312,7 +1318,7 @@ function BU::Main::Args__Filesystem::GetFSInfos()
 function BU::Main::Args__Filesystem::Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory or the file (this parameter is used in the translated / log messages, stored into their own variables).
@@ -1362,7 +1368,7 @@ function BU::Main::Args__Filesystem::Chown()
 function BU::Main::Args__Filesystem::ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_currentOwner=$1;    # String    - Default : NULL    - Former owner of the directory (this parameter is used in the translated / log messages, stored into their own variables).
@@ -1422,7 +1428,7 @@ function BU::Main::Args__Filesystem::ChownRec()
 function BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
@@ -1459,7 +1465,7 @@ function BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims()
 function BU::Main::Args__Text::CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
@@ -1498,7 +1504,7 @@ function BU::Main::Args__Text::CutSubStringAfterNthDelim()
 function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;      # String    - Default : NULL    - String to process.
@@ -1542,7 +1548,7 @@ function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 function BU::Main::Args__Text::GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL  - String to process.
@@ -1580,7 +1586,7 @@ function BU::Main::Args__Text::GetCharacterOccurences()
 function BU::Main::Args__Text::GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1;              # String    - Default : NULL    - String to process.
@@ -1617,7 +1623,7 @@ function BU::Main::Args__Text::GetSubStringAfterDelim()
 function BU::Main::Args__Text::GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL	- String to process.
@@ -1656,7 +1662,7 @@ function BU::Main::Args__Text::GetSubStringBeforeDelim()
 function BU::Main::Args__Text::GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_string=$1       # String    - Default : NULL  - String to process.

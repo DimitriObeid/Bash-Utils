@@ -48,7 +48,7 @@ fi
 function BU::Main::CMDS::GetCommandPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
@@ -63,7 +63,7 @@ function BU::Main::CMDS::GetCommandPath()
 function BU::Main::CMDS::GetCommandReturnOutputValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" '' '';
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
