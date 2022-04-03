@@ -43,6 +43,7 @@ fi
 #### FUNCTIONS DEFINITION
 
 ## CONVERSIONS FUNCTIONS
+## DEBUG ID : conversions
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 

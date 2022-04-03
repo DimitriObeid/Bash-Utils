@@ -61,8 +61,10 @@ __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU::DechoHighlight "$__BU_MAIN_PROJEC
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING CASE STATEMENTS BY FUNCTIONS
+#### DEBUG ID : case::reading-case-statements-by-functions
 
-## "Checkings.lib" FILE
+## "Directories.lib" FILE
+## DEBUG ID : directories.lib-file
 
 # "BU::Main::Directories::TriggerRootDirWarning" function.
 function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
@@ -98,6 +100,11 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 			;;
 	esac
 }
+
+# -----------------------------------------------
+
+## "Errors.lib" FILE
+## DEBUG ID : errors.lib-file
 
 # "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function BU::Main::Case::Read_Errors::HandleErrors()

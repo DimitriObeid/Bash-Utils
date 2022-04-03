@@ -42,11 +42,11 @@ fi
 
 #### TEXT PROCESSING FUNCTIONS
 #### DEBUG ID : text::text-processing-functions
-__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
 ## DEBUG ID : cutting-text
-__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
 
 # Cut the date displayed before a string.
 function BU::Main::Text::CutLogDateFromString()     { BU::Main::Text::CutSubStringAfterNthDelim "$1" '] ';  return 0; }
@@ -241,7 +241,7 @@ function BU::Main::Echo::ToUppercase()
 
 ## GETTING TEXT
 ## DEBUG ID : getting-text
-__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::getting-text"
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::getting-text"
 
 # Getting the occurences of a character in a main string.
 function BU::Main::Text::GetCharacterOccurences()
@@ -469,7 +469,7 @@ function BU::Main::Text::GetStringWordsNumber()
 
 ## REVERSING TEXT
 ## DEBUG ID : reversing-text
-__BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
 
 # Reverse words of a string according to a delimiter.
 
@@ -517,7 +517,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
 ## SPLITTING TEXT
 ## DEBUG ID : splitting-text
-# __BU_MAIN_TEXT__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
+# __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
 
 # Splitting a string from a given delimiter, in order to store it in an array.
 # function BU::Main::Text::SplitStringFromDelim()

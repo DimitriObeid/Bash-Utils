@@ -41,8 +41,10 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### HARD DRIVE'S FILE SYSTEM PROCESSING
+#### DEBUG ID : filesystem::hard-drive-file-system-processing
 
 ## CHECKING FILE SYSTEM'S INFORMATIONS
+## DEBUG ID : checking-filesystem-informations
 
 # Checking if the current partition is full.
 function BU::Main::Filesystem::IsPartitionFull()
@@ -110,6 +112,7 @@ function BU::Main::Filesystem::IsPartitionFull()
 # -----------------------------------------------
 
 ## GETTING FILE SYSTEM'S INFORMATIONS
+## DEBUG ID : getting-filesystem-informations
 
 # Getting the file system path.
 function BU::Main::Filesystem::GetFSDevice()
@@ -338,8 +341,10 @@ function BU::Main::Filesystem::GetFSType()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PERMISSION AND OWNERSHIP PROCESSING
+#### DEBUG ID : filesystem::permission-and-ownership-processing
 
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+## DEBUG ID : nonrecursive-permission-and-ownership-processing
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
@@ -438,6 +443,7 @@ function BU::Main::Filesystem::Chown()
 # -----------------------------------------------
 
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+## DEBUG ID : recursive-permission-and-ownership-processing
 
 # Calling the "chown" command to change recursively directory ownership
 
