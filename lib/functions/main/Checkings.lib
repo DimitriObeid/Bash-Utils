@@ -378,7 +378,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 
     if [ "$?" -eq "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then
 
-        local lineno="$LINENO";
+        local lineno="$(( LINENO -2 ))";
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
