@@ -44,7 +44,7 @@ if (-z $arg_file_path) {
 
 # If a path is passed as first argument, but it's a directory path.
 elsif (-f $arg_file_path) && (-d $arg_file_path) {
-	if (defined($arg_print)) { print "ERROR : The path passed as first argument is a directory path, and not a CSV file path\n"; }
+	if (defined($arg_print)) { print "ERROR : The path passed as first argument for the SetModuleLang.pl Perl script is a directory path, and not a CSV file path\n"; }
 
 	exit ;
 }
