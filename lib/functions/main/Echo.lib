@@ -41,8 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PRINTING FORMATTED STRINGS
+#### DEBUG ID : echo::printing-formatted-strings
+
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
 
 ## DEBUGGING
+## DEBUG ID : debugging
+
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS::debugging";
 
 # This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
 function BU::Main::Echo::__Debug()
@@ -121,7 +127,9 @@ printf "
 function BU::Main::Echo::__EchoOutput()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
 	#**** Parameters ****
 	local p_string=$1;     # String    - String to display.
@@ -204,7 +212,9 @@ function BU::Main::Echo::__EchoOutput()
 function BU::Main::Echo::__EchoCPLS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
     #**** Parameters ****
     local p_string=$1;  # Any       - Text to display.
@@ -285,8 +295,14 @@ function BU::Main::Echo::__EchoCPLS()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT DISPLAYING
+#### DEBUG ID : echo::text-displaying
+
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
+## DEBUG ID : displaying-a-context-message
+
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING::displaying-a-context-message";
 
 # --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
@@ -300,7 +316,9 @@ function BU::Main::Echo::__EchoCPLS()
 function BU::EchoError()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
     local p_string=$1;
@@ -340,7 +358,9 @@ function BU::EchoError()
 function BU::EchoMsg()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
     local p_string=$1;
@@ -379,7 +399,9 @@ function BU::EchoMsg()
 function BU::EchoNewstep()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
     local p_string=$1;
@@ -417,6 +439,11 @@ function BU::EchoNewstep()
 #	- BU::CheckProjectLogStatus		--> Checkings.lib
 function BU::EchoRead()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
+
 	#**** Parameters ****
 	local p_string=$1;     # User's keyboard input.
 
@@ -436,7 +463,9 @@ function BU::EchoRead()
 function BU::EchoSuccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
     local p_string=$1;
@@ -475,7 +504,9 @@ function BU::EchoSuccess()
 function BU::EchoWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
     local p_string=$1;
