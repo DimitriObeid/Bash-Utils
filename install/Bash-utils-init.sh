@@ -1881,7 +1881,7 @@ function BU::ModuleInit::ParseCSVLang()
 			fi
 		fi
 	fi
-}
+}
 
 # Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
 function BashUtils_InitModules()
