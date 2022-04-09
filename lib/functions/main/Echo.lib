@@ -918,8 +918,14 @@ function BU::EchoYellow()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### LINE BREAKS
+#### DEBUG ID : echo::line-breaks
 
-## LINE BREAKS ACCORDING TO THE "$MAIN_SCRIPT_LOG" VARIABLE VALUE
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="echo::line-breaks";
+
+## LINE BREAKS ACCORDING TO THE "$__BU_MAIN_PROJECT_LOG_FILE_PATH" VARIABLE VALUE
+## DEBUG ID : line-breaks-according-to-the-project-log-file-var-val
+
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS::line-breaks-according-to-the-project-log-file-var-val":
 
 # Redirecting the output of the "echo" command
 
@@ -928,6 +934,11 @@ function BU::EchoYellow()
 #	- BU::Main::Errors::HandleErrors				--> Checkings.lib
 function BU::Newline()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL";
+
     #**** Parameters ****
     local p_number=$1;
 
