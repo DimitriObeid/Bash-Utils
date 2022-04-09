@@ -41,14 +41,22 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### FUNCTIONS DEFINITION
+#### DEBUG ID : headers::functions-definition
+
+__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-definition";
 
 ## HEADERS BASIS CREATION FUNCTIONS
+## DEBUG ID : headers-basis-creation-functions
+
+__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION::headers-basis-creation-functions";
 
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function BU::Main::Headers::DrawLine()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION" \
+        "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
 	local p_lineChar=$1;   # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
@@ -139,7 +147,9 @@ function BU::Main::Headers::DrawLine()
 function BU::HeaderBase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION" \
+        "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
 	local p_lineColor=$1;      # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU::Main::Headers::DrawLine".

@@ -43,14 +43,20 @@ fi
 #### HARD DRIVE'S FILE SYSTEM PROCESSING
 #### DEBUG ID : filesystem::hard-drive-file-system-processing
 
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystem::hard-drive-file-system-processing";
+
 ## CHECKING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : checking-filesystem-informations
+
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::checking-filesystem-informations";
 
 # Checking if the current partition is full.
 function BU::Main::Filesystem::IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING";
 
     #**** Parameters ****
     local p_fileFS=$1;
@@ -114,11 +120,15 @@ function BU::Main::Filesystem::IsPartitionFull()
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : getting-filesystem-informations
 
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::getting-filesystem-informations";
+
 # Getting the file system path.
 function BU::Main::Filesystem::GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -145,7 +155,9 @@ function BU::Main::Filesystem::GetFSDevice()
 function BU::Main::Filesystem::GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -172,7 +184,9 @@ function BU::Main::Filesystem::GetFSTotalSize()
 function BU::Main::Filesystem::GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -199,7 +213,9 @@ function BU::Main::Filesystem::GetFSMountPoint()
 function BU::Main::Filesystem::GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -241,7 +257,9 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
 function BU::Main::Filesystem::GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Default : NULL    - Path of the file or the folder to process.
@@ -284,7 +302,9 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
 function BU::Main::Filesystem::GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -311,7 +331,9 @@ function BU::Main::Filesystem::GetFSAvailableSize()
 function BU::Main::Filesystem::GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Path of the file or the folder to process.
@@ -343,8 +365,12 @@ function BU::Main::Filesystem::GetFSType()
 #### PERMISSION AND OWNERSHIP PROCESSING
 #### DEBUG ID : filesystem::permission-and-ownership-processing
 
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystem::permission-and-ownership-processing";
+
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
-## DEBUG ID : nonrecursive-permission-and-ownership-processing
+## DEBUG ID : non-recursive
+
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::non-recursive";
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
@@ -358,7 +384,9 @@ function BU::Main::Filesystem::GetFSType()
 function BU::Main::Filesystem::Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE";
 
     #**** Parameters ****
     p_currentOwner=$1;  # This parameter is used in the translated messages, stored into their own variables.
@@ -443,7 +471,9 @@ function BU::Main::Filesystem::Chown()
 # -----------------------------------------------
 
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
-## DEBUG ID : recursive-permission-and-ownership-processing
+## DEBUG ID : recursive
+
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::recursive";
 
 # Calling the "chown" command to change recursively directory ownership
 
@@ -457,7 +487,9 @@ function BU::Main::Filesystem::Chown()
 function BU::Main::Filesystem::ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
+        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE";
 
     #**** Paramètres ****
     local p_currentOwner=$1;   # This parameter is used in the messages.
