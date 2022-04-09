@@ -50,7 +50,7 @@ __BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-ha
 ## CLASSIC ERRORS HANDLING
 ## DEBUG ID : classic-errors-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::classic-errors-handling";
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::classic-errors-handling";
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
@@ -59,7 +59,9 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="$__BU_MAIN_ERR
 function BU::Main::Errors::HandleSmallErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS" \
+        "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
 
     #**** Parameters ****
     local p_type=$1;        # Type of message to display ('E' = BU::EchoError; 'W' = BU::EchoWarning)
@@ -121,12 +123,17 @@ function BU::Main::Errors::HandleSmallErrors()
 # -----------------------------------------------
 
 ## EXIT AND RETURN CODES HANDLING
+## DEBUG ID : exit-and-return-codes-handling
+
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::exit-and-return-codes-handling";
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function BU::Exit()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS" \
+        "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
 
     #**** Parameters ****
     local p_exitcode=$1;    # Int   : Exit code.
@@ -169,7 +176,9 @@ function BU::DeleteLastReturnValue() { unset __BU_MAIN_EXIT_CURRENT_CODE && retu
 function BU::SetLastReturnValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS" \
+        "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
 
 	#**** Parameters ****
 	local p_code=${1:-1};		# Int	- Default : 1	- Return value.
@@ -189,6 +198,9 @@ function BU::SetLastReturnValue()
 # -----------------------------------------------
 
 ## SCRIPT'S ERRORS HANDLING
+## DEBUG ID : script-errors-handling
+
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::script-errors-handling";
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling file name presence.
 function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; then BU::DechoHighlightPath "<no specified file>"; else BU::DechoHighlightPath "$1"; fi; }
@@ -205,7 +217,9 @@ function BU::Main::Errors::HandleErrors_Line()        { if [ -z "$1" ]; then BU:
 function BU::Main::Errors::HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS" \
+        "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING";
 
 	#**** Parameters ****
 	local p_returnCode=$1;     # Int        - Default : NULL    - Return code of the last command executed. If you didn't launched any command before calling this function, you can pass any number different of '0' as first argument.
