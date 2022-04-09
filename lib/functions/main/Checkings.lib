@@ -41,29 +41,35 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### OPERATING SYSTEM CHECKINGS
+#### DEBUG ID : checkings::operating-system-checkings
+
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="checkings::operating-system-checkings";
 
 ## OS TYPE CHECKINGS
+## DEBUG ID : os-type-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU::IsOSAndroidTermux()    { if [[ "$OSTYPE" == 'linux-android' ]];    then return 0; else return 1; fi }
+function BU::IsOSAndroidTermux()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'linux-android' ]];    then return 0; else return 1; fi }
 
 # Checking if current OS is FreeBSD.
-function BU::IsOSFreeBSD()          { if [[ "$OSTYPE" == 'FreeBSD' ]];          then return 0; else return 1; fi }
+function BU::IsOSFreeBSD()          { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'FreeBSD' ]];          then return 0; else return 1; fi }
 
 # Checking if current OS is Haiku OS.
-function BU::IsOSHaiku()            { if [[ "$OSTYPE" == 'haiku' ]];            then return 0; else return 1; fi }
+function BU::IsOSHaiku()            { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'haiku' ]];            then return 0; else return 1; fi }
 
 # Checking if current OS is OpenBSD.
-function BU::IsOSOpenBSD()          { if [[ "$OSTYPE" == 'openbsd'* ]];         then return 0; else return 1; fi }
+function BU::IsOSOpenBSD()          { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'openbsd'* ]];         then return 0; else return 1; fi }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU::IsOSLinux()            { if [[ "$OSTYPE" == 'linux'* ]];           then return 0; else return 1; fi }
+function BU::IsOSLinux()            { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'linux'* ]];           then return 0; else return 1; fi }
 
 # Checking if current OS is NetBSD.
-function BU::IsOSNetBSD()           { if [[ "$OSTYPE" == 'netbsd' ]];           then return 0; else return 1; fi }
+function BU::IsOSNetBSD()           { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'netbsd' ]];           then return 0; else return 1; fi }
 
 # Checking if current OS is OSx.
-function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          then return 0; else return 1; fi }
+function BU::IsOSx()                { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS"; if [[ "$OSTYPE" == 'darwin'* ]];          then return 0; else return 1; fi }
 
 # -----------------------------------------------
 
@@ -71,13 +77,22 @@ function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### VARIABLES VALUES CHECKING
+#### VARIABLES VALUES CHECKINGS
+#### DEBUG ID : checkings::variable-values-checkings
+
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
 
 ## ARRAYS CHECKINGS
+## DEBUG ID : array-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::array-checkings";
 
 # Checking if the variable is an array.
 function BU::IsArray()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+
     if [[ -n ${1} ]]; then
         return 0;
     else
@@ -88,6 +103,9 @@ function BU::IsArray()
 # Checking if an array in empty.
 function BU::IsArrayEmpty()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+
     #**** Parameters ****
     local arr=("$@")
 
@@ -102,6 +120,9 @@ function BU::IsArrayEmpty()
 
 function BU::IsArrayNotEmpty()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+
     #**** Parameters ****
     local arr=("$@")
 
@@ -116,10 +137,13 @@ function BU::IsArrayNotEmpty()
 # -----------------------------------------------
 
 ## DATE FORMAT
+## DEBUG ID : date-format
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::date-format";
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
-function BU::IsDateHMS() { [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
+function BU::IsDateHMS() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats :
 #   - YYYY-MM-DD
@@ -128,7 +152,7 @@ function BU::IsDateHMS() { [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; 
 #   - DD/MM/YYYY
 #   - YYYYMMDD
 #   - DDMMYYYY
-function BU::IsDateYMD() { [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || return 1; return 0; }
+function BU::IsDateYMD() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats.
 #   - YYYY-MM-DD hh:mm:ss
@@ -139,6 +163,9 @@ function BU::IsDateYMD() { [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || retu
 #   - DDMMYYYY hh:mm:ss
 function BU::IsDateYMD_HMS()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT";
+
     #**** Variables ****
     local v_date; v_date="$(echo "$1" | rev | cut -d ' ' -f2- | rev)"; # Getting the year, the month and the day.
     local v_hour; v_hour="$(echo "$1" | rev | cut -d ' ' -f 1 | rev)"; # Getting the hour.
@@ -172,10 +199,16 @@ function BU::IsDateYMD_HMS()
 # -----------------------------------------------
 
 ## NUMBER VALUES
+## DEBUG ID : number-values
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::number-values";
 
 # Checking floating value.
 function BU::IsFloat()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
     if [[ "$1" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
         return 0;
     else
@@ -186,6 +219,9 @@ function BU::IsFloat()
 # Checking negative only floating value.
 function BU::IsNegativeFloat()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
     if BU::IsFloat "$1" && (( 1 < 0 )); then
         return 0;
     else
@@ -196,6 +232,9 @@ function BU::IsNegativeFloat()
 # Checking positive only floating value.
 function BU::IsPositiveFloat()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
     if BU::IsFloat "$1" && (( 1 >= 0 )); then
         return 0;
     else
@@ -206,6 +245,9 @@ function BU::IsPositiveFloat()
 # Checking integer value.
 function BU::IsInt()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
     if [[ "$1" =~ ^[\-0-9]+$ ]]; then
         return 0;
     else
@@ -216,6 +258,9 @@ function BU::IsInt()
 # Checking negative only integer value.
 function BU::IsNegativeInt()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
 	if BU::IsInt "$1" && (( 1 < 0 )); then
 		return 0;
 	else
@@ -226,6 +271,9 @@ function BU::IsNegativeInt()
 # Checking positive only integer value.
 function BU::IsPositiveInt()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+
 	if BU::IsInt "$1" && (( 1 >= 0 )); then
 		return 0;
 	else
@@ -236,10 +284,16 @@ function BU::IsPositiveInt()
 # -----------------------------------------------
 
 ## CHARACTERS AND STRING VALUES
+## DEBUG ID : characters-and-string-values
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU::IsAlphaChar()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
 	if [[ "$1" = [a-zA-Z] ]]; then
 		return 0;
 	else
@@ -250,6 +304,9 @@ function BU::IsAlphaChar()
 # Checking if the value is an alphabetic string (not any number allowed)
 function BU::IsAlphaString()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
     if [[ "$1" = [^a-zA-Z\ ] ]]; then
         return 0;
     else
@@ -260,6 +317,9 @@ function BU::IsAlphaString()
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
 function BU::IsAlphaStringOnly()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
 	if [ "${#1}" -lt 2 ]; then
     	echo "Not a string"; return 1;
 
@@ -275,6 +335,9 @@ function BU::IsAlphaStringOnly()
 # Checking if the value is a character.
 function BU::IsAlphaNumChar()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
 	if [[ "$1" = [a-zA-Z0-9] ]]; then
 		return 0;
 	else
@@ -285,6 +348,9 @@ function BU::IsAlphaNumChar()
 # Checking if the value is an alphanumeric string.
 function BU::IsAlphaNumString()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
     if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
         return 0;
     else
@@ -295,6 +361,9 @@ function BU::IsAlphaNumString()
 # Checking if the value is an alphabetic string only (not less than two characters).
 function BU::IsAlphaNumStringOnly()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+
 	if [ "${#1}" -lt 2 ]; then
     	echo "Not a string"; return 1;
 
@@ -310,10 +379,16 @@ function BU::IsAlphaNumStringOnly()
 # -----------------------------------------------
 
 ## OTHER VARIABLES CHECKINGS
+## DEBUG ID : other-variables-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::other-variables-checkings";
 
 # Checking if the variable is an array.
 function BU::IsArray()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS";
+
     if [[ -n ${1} ]]; then
         return 0;
     else
@@ -328,8 +403,14 @@ function BU::IsArray()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### DIFFERENT CHECKINGS
+#### DEBUG ID : checkings::different-checkings
+
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
+## DEBUG ID : checking-fort-identifiants
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::checking-fort-identifiants";
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
@@ -337,6 +418,11 @@ function BU::IsArray()
 #   - BU::Main::Errors::HandleErrors      --> From this file.
 function BU::Main::Checkings::CheckRootEUID()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";
+
     if [ "$EUID" -ne 0 ]; then
         BU::Main::Errors::HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
             "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
@@ -348,12 +434,17 @@ function BU::Main::Checkings::CheckRootEUID()
 # -----------------------------------------------
 
 ## BASIC HARDWARE CHECKINGS
+## DEBUG ID : basic-hardware-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::basic-hardware-checkings";
 
 # Check if hard drive is full.
 function BU::Main::Checkings::CheckDiskUsedSpace()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS";
 
 	#**** Parameters ****
     local p_fileFS=$1;          # String    - Default : NULL    - Target file's file system.
@@ -413,13 +504,24 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### PATHS CHECKING
+#### PATHS CHECKINGS
+#### DEBUG ID : checkings::paths-checkings
 
-## DIRECTORIES PATHS CHECKING
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
+
+## DIRECTORIES PATHS CHECKINGS
+## DEBUG ID : directories-paths-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::directories-paths-checkings";
 
 # Checking for an existent directory path (for the "BU::Main::Errors::HandleErrors()" function mainly).
 function BU::Main::Checkings::CheckDirPathExists()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS";
+
     #**** Parameters ****
     local p_path=$1;            # String    - Default : NULL    - Path of the (in)existent directory.
     local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::__DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::__Decho<...>()" functions). Set this value to "false" to forbid this call.
@@ -440,6 +542,11 @@ function BU::Main::Checkings::CheckDirPathExists()
 # Checking if a directory was successfully created.
 function BU::Main::Checkings::CheckDirPathWasCreated()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS";
+
 	#**** Parameters ****
     local p_path=$1;    # String - Path of the newly created directory.
 
@@ -453,11 +560,19 @@ function BU::Main::Checkings::CheckDirPathWasCreated()
 
 # -----------------------------------------------
 
-## FILES PATHS CHECKING
+## FILES PATHS CHECKINGS
+## DEBUG ID : files-path-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::files-paths-checkings";
 
 # Checking for an existent file path (for the "BU::Main::Errors::HandleErrors()" function mainly).
 function BU::Main::Checkings::CheckFilePathExists()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
+
     #**** Parameters ****
     local p_path=$1;            # String    - Default : NULL    - Path of the (in)existent file.
     local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::__DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::__Decho<...>()" functions). Set this value to "false" to forbid this call.
@@ -478,6 +593,11 @@ function BU::Main::Checkings::CheckFilePathExists()
 # Checking if a file was successfully created.
 function BU::Main::Checkings::CheckFilePathWasCreated()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
+
 	#**** Parameters ****
     local p_path=$1;    # String - Path of the newliy created file.
 
@@ -495,8 +615,10 @@ function BU::Main::Checkings::CheckFilePathWasCreated()
 function BU::Main::Checkings::CheckProjectLogPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
-
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
+ 
     # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU::CheckProjectLogStatus()" function
     # (the only one where the "BU::Main::Checkings::CheckProjectLogPath()" function can be called), it's safe to call an "BU::Echo<...>()" function, the "BU::Main::Errors::HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
     if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
@@ -533,7 +655,9 @@ function BU::Main::Checkings::CheckProjectLogPath()
 function BU::CheckProjectLogStatus()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
 	# Checking first if the partition where the log file exists is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'true';
@@ -846,6 +970,11 @@ function BU::CheckProjectLogStatus()
 # Check project related file presence, or create this file.
 function BU::Main::Checkings::CheckProjectRelatedFile()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
+
 	#**** Parameters ****
     local p_parent=$1;  # String    - Default : NULL    - Name of the folder to process (into its parent directory).
     local p_child=$2;   # String    - Default : NULL    - Name of the file or folder to process (into its parent directory).
@@ -942,8 +1071,14 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT CHECKINGS
+#### DEBUG ID : checkings::text-checkings
+
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="checkings::text-checkings";
 
 ## FORMATTING CHECKINGS
+## DEBUG ID : formatting-checkings
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS::formatting-checkings";
 
 # Checking if the project's color code file exists or not.
 
@@ -951,6 +1086,11 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 function BU::Main::Checkings::CheckDecho()
 {
     #**** Code ****
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
+ 
     # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text :
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" = 'forbid' ]; then
         return 1;
@@ -994,6 +1134,11 @@ function BU::Main::Checkings::CheckTextFormat()
     #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
 
     #**** Code ****
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
+
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "true" ]; then
         if [ -n "$1" ]; then
 			if command -v "tput" &> /dev/null; then

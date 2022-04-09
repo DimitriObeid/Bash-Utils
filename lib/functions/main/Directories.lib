@@ -368,7 +368,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
     if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     if [ "$p_iterations" -lt 1 ]; then
-        p_iterations="$(echo "$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")")";
+        p_iterations="$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")";
     fi
 
     if [ -d "$p_path" ]; then

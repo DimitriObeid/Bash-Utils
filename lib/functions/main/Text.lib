@@ -42,10 +42,14 @@ fi
 
 #### TEXT PROCESSING FUNCTIONS
 #### DEBUG ID : text::text-processing-functions
+
+# shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
 ## DEBUG ID : cutting-text
+
+# shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
 
 # Cut the date displayed before a string.
@@ -180,6 +184,9 @@ function BU::Main::Text::CutLastFieldAfterDelim()
 ## FORMATTING TEXT
 ## DEBUG ID : text::text-processing-functions::formatting-text
 
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__FORMATTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::formatting-text";
+
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU::Main::Echo::ToLowercase()" OR "BU::Main::Echo::ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 function BU::Main::Echo::KeepFormatting()
@@ -241,6 +248,8 @@ function BU::Main::Echo::ToUppercase()
 
 ## GETTING TEXT
 ## DEBUG ID : getting-text
+
+# shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::getting-text"
 
 # Getting the occurences of a character in a main string.
@@ -469,6 +478,8 @@ function BU::Main::Text::GetStringWordsNumber()
 
 ## REVERSING TEXT
 ## DEBUG ID : reversing-text
+
+# shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
 
 # Reverse words of a string according to a delimiter.
@@ -517,7 +528,9 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
 ## SPLITTING TEXT
 ## DEBUG ID : splitting-text
-# __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
 
 # Splitting a string from a given delimiter, in order to store it in an array.
 # function BU::Main::Text::SplitStringFromDelim()
