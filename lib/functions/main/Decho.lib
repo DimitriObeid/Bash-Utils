@@ -41,8 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT WRITING AND DECORATION (FORMATTING)
+#### DEBUG ID : decho::text-writing-and-decoration-(formatting)
+
+__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## SETTING
+## DEBUG ID : setting
+
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -53,7 +59,9 @@ fi
 function BU::Main::Decho::SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
+        "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING";
 
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false';
@@ -115,7 +123,9 @@ function BU::Main::Decho::SetBGColor()
 function BU::Main::Decho::SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
+        "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING";
 
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false';
@@ -171,10 +181,18 @@ function BU::Main::Decho::SetTextColor()
 # -----------------------------------------------
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
+## DEBUG ID : writing-differently-cf-text-between-text::basis
+
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-text::basis";
 
 # Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 function BU::__Decho()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
+        "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS";
+
 	#**** Parameters ****
 	local p_string=$1;			# String	- Default : NULL	- String to display.
 	local p_newTextColor=$2;	# CMD		- Default : NULL	- Color to apply on each string's characters.
@@ -194,7 +212,9 @@ function BU::__Decho()
 function BU::Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
+        "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS";
 
     #**** Parameters ****
     local p_string=$1;          # String	- Default : NULL	- String to display.

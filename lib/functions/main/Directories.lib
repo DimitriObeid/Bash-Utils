@@ -41,8 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### DIRECTORIES FUNCTIONS
+#### DEBUG ID : directories::directories-functions
+
+__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::directories-functions";
 
 ## PROCESSING FUNCTIONS
+## DEBUG ID : processing-functions
+
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::processing-functions";
 
 # Separate processing steps displays from the rest of the main script with a line.
 
@@ -52,7 +58,9 @@ fi
 function BU::Main::Directories::ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS";
 
     #**** Parameters ****
     local p_function=$1
@@ -89,6 +97,9 @@ function BU::Main::Directories::ProcessingDir()
 # -----------------------------------------------
 
 ## FOLDER CREATION FUNCTIONS
+## DEBUG ID : folder-creation-functions
+
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::folder-creation-functions";
 
 # Overwriting an existing directory's content
 
@@ -100,7 +111,9 @@ function BU::Main::Directories::ProcessingDir()
 function BU::Main::Directories::OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
 
     #**** Parameters ****
     local p_path=$1;
@@ -161,7 +174,9 @@ function BU::Main::Directories::OverwriteDir()
 function BU::Main::Directories::Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
 	local p_parent=$1;	# String	- Emplacement of the currently processed directory's parent folder from the root directory.
@@ -218,7 +233,9 @@ function BU::Main::Directories::Make()
 function BU::Main::Directories::MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
 
     #**** Parameters ****
     local p_path=$1;		# String	- Full path of the directory to create.
@@ -245,7 +262,9 @@ function BU::Main::Directories::MakePath()
 function BU::Main::Directories::MkTmpDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
 
     local lineno="$LINENO"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
@@ -270,12 +289,17 @@ function BU::Main::Directories::MkTmpDir()
 # -----------------------------------------------
 
 ## PATH PROCESSING
+## DEBUG ID : path-processing
+
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::path-processing";
 
 # Getting the name of a target directory without its path.
 function BU::Main::Directories::GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
     #**** Parameters ****
     local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
@@ -304,7 +328,9 @@ function BU::Main::Directories::GetDirectoryName()
 function BU::Main::Directories::GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
     #**** Parameters ****
     local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
@@ -328,7 +354,9 @@ function BU::Main::Directories::GetDirectoryPath()
 function BU::Main::Directories::GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
     #**** Parameters ****
     local p_path=$1;            # String	- Default : NULL    - Path of the child file or folder.
@@ -358,7 +386,9 @@ function BU::Main::Directories::GetParentDirectoryName()
 function BU::Main::Directories::GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
     #**** Parameters ****
     local p_path=$1;            # String   	- Default : NULL    - Path of the child file or folder.
@@ -368,7 +398,7 @@ function BU::Main::Directories::GetParentDirectoryPath()
     if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     if [ "$p_iterations" -lt 1 ]; then
-        p_iterations="$(echo "$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")")";
+        p_iterations="$(BU::Main::BasicMaths::NegativeToPositive "$p_iterations")";
     fi
 
     if [ -d "$p_path" ]; then
@@ -420,7 +450,9 @@ function BU::Main::Directories::GetParentDirectoryPath()
 function BU::Main::Directories::TriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
+        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
 	#**** Parameters ****
 	local p_path=$1;	# String	- Default : NULL	- Path of the folder to check.

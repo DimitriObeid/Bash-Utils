@@ -1940,7 +1940,7 @@ function BashUtils_InitModules()
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
 		# Calling the function which processes the « module » argument and its parameters, along with the « main » module.
-        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index";
+        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index" || return 1;
 
 		# -----------------------------------------------
 
@@ -2075,7 +2075,7 @@ function BashUtils_InitModules()
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
     if  BU::Main::Status::CheckStatIsInitializing; then
-        BU::Main::Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU::Main::Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || return 1;
 	fi
 
 	# Note : the "$__BU_MODULE_INIT_MSG_ARRAY" variable is purged from the logged messages after writing its content in the project's log file.
