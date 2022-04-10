@@ -932,7 +932,7 @@ function BU::ModuleInit::SourcingFailure()
     local p_module=$2;  # String    - Default : NULL    - Name of the module.
 
     #**** Code ****
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; exit 1;
 }
 
 # -----------------------------------------------
