@@ -79,28 +79,44 @@ function BU::Main::Echo::Debug()
             local v_file="${p_filename%%.[Ll][Ii][Bb]*}";
 
             if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'file' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'F' ]; then
-                for targetFile in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[@]}"; do
-                    # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile" variable's value.
-                    [ "${targetFile,,}" == "${v_file,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
-                done
+                if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[0],,}" == 'all' ]; then
+                    BU::Main::Echo::__Debug "$p_funcname"; return 0;
+                else
+                    for targetFile in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[@]}"; do
+                        # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile" variable's value.
+                        [ "${targetFile,,}" == "${v_file,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                    done
+                fi
 
             elif [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'function' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'FNCT' ]; then
-                for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
-                    # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
-                    [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; }
-                done
+                if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[0],,}" == 'all' ]; then
+                    BU::Main::Echo::__Debug "$p_funcname"; return 0;
+                else
+                    for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
+                        # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
+                        [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; }
+                    done
+                fi
 
             elif [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'category' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'C' ]; then
-                for targetCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[@]}"; do
-                    # If the "$targetCategory" value is found in the array, and the function which comes from the "$p_category" file matches with the "$targetCategory" variable's value.
-                    [ "${targetCategory,,}" == "${p_category,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
-                done
+                if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[0],,}" == 'all' ]; then
+                    BU::Main::Echo::__Debug "$p_funcname"; return 0;
+                else
+                    for targetCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[@]}"; do
+                        # If the "$targetCategory" value is found in the array, and the function which comes from the "$p_category" file matches with the "$targetCategory" variable's value.
+                        [ "${targetCategory,,}" == "${p_category,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
+                    done
+                fi
 
             elif [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'subcategory' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'sub-category' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
-                for targetSubCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[@]}"; do
-                    # If the "$targetSubCategory" value is found in the array, and the function which comes from the "$p_subcateg" file matches with the "$targetSubCategory" variable's value.
-                    [ "${targetSubCategory,,}" == "${p_subcateg,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
-                done
+                if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[0],,}" == 'all' ]; then
+                    BU::Main::Echo::__Debug "$p_funcname"; return 0;
+                else
+                    for targetSubCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[@]}"; do
+                        # If the "$targetSubCategory" value is found in the array, and the function which comes from the "$p_subcateg" file matches with the "$targetSubCategory" variable's value.
+                        [ "${targetSubCategory,,}" == "${p_subcateg,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
+                    done
+                fi
             fi
         }
     } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
