@@ -73,7 +73,7 @@ function BU::Main::Decho::SetBGColor()
     # If the script is allowed to format text.
     if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
-            tput setab "$1" || { echo -ne "\e[" && return 0; }
+            tput setab "$1" || { echo -ne "\e[" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
             # Checking if the "bgcolors.tmp" (background color) file exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
@@ -107,10 +107,10 @@ function BU::Main::Decho::SetBGColor()
                 exit 1;
             }
         else
-            echo -ne "\e["; return 0;
+            echo -ne "\e["; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
-        return 1;
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
@@ -128,7 +128,7 @@ function BU::Main::Decho::SetTextColor()
         "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING";
 
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false';
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false'; || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
 	#**** Parameters ****
 	# $1 --> Color code
@@ -137,7 +137,7 @@ function BU::Main::Decho::SetTextColor()
     # If the script is allowed to format text.
 	if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
-            tput setaf "$1" || { echo -ne "\e[38;5;$1m" && return 0; }
+            tput setaf "$1" || { echo -ne "\e[38;5;$1m" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
             # Checking if the "bgcolors.tmp" (background color) file exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
@@ -171,10 +171,10 @@ function BU::Main::Decho::SetTextColor()
                 exit 1;
             }
         else
-            echo -ne "\e[38;5;$1m"; return 0;
+            echo -ne "\e[38;5;$1m"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
-        return 1;
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
@@ -201,7 +201,7 @@ function BU::__Decho()
 	#**** Code ****
     printf "%s\n" "$p_newTextColor$p_string$p_oldTextColor";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Text's inside decoration/formatting procssing (complete version).
@@ -225,12 +225,12 @@ function BU::Decho()
         if [ -z "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
             shift 1; local pa_fmtArgs; pa_fmtArgs=$("$@");
 
-            BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}";
+            BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         elif [ -n "$p_newTextColor" ] && [ -z "$p_newTextColor" ] || [ -n "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
             shift 2; local pa_fmtArgs; pa_fmtArgs=$("$@");
 
-            BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}";
+            BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         fi
    # else
     #    BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
@@ -241,32 +241,36 @@ function BU::Decho()
 		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
 			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
 
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "LINENO";
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 		fi
 
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
 
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "LINENO"; fi
+        local C="$?";
 
-		return "$?";
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
     if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
 		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
 			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
 
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "LINENO";
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 		fi
 
         BU::Main::Args::PrintBadOption '!intpos' \
             "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
 
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "LINENO"; fi
+        local C="$1";
 
-		return "$?";
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
     #**** Code ****
@@ -279,14 +283,14 @@ function BU::Decho()
 
             # If the text formatting is forbidden, but the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true", the text to decorate will be put between French guillemets.
             if BU::Main::Status::CheckStatAllowFormatting; then
-                echo -ne "« $p_string »";
+                echo -ne "« $p_string »"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
             # Else, if the text formatting is forbidden, AND the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "false", no decoration nor highlighting will be made.
             else
-                echo -ne "$p_string";
+                echo -ne "$p_string"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
             fi
         else
-            echo -ne "« $p_string »";
+            echo -ne "« $p_string »"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
@@ -320,12 +324,10 @@ function BU::Decho()
 
     if [ -n "$p_newBGColor" ]; then BU::Main::Decho::SetBGColor "$p_newBGColor"; fi
 
-    # Test code, to check the values from the command substitutes, and to test if a loop stops before exiting the script when the exit command is called.
+    # Test code, to check the values from the command substitutes.
     echo "STRING : $p_string";
     echo "TEXT COLOR : $p_newTextColor";
     echo "BG COLOR : $p_newBGColor";
-
-    exit 0; return 1;
 
     # -----------------------------------------------
 
@@ -339,7 +341,7 @@ function BU::Decho()
         printf "%s" "$v_oldTextColor";
         printf "\n";
 
-        return 0;
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -381,8 +383,8 @@ function BU::Decho()
                         __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi
 
-                    return 1;
-                    ;;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                ;;
             esac
         done
 
@@ -424,11 +426,11 @@ function BU::Decho()
                     if BU::Main::Status::CheckStatAllowFormatting; then
                         local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT";
 
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
                     fi
 
                     # shellcheck disable=SC2034
-                    BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+                    BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
                     BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
                     "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
@@ -437,12 +439,14 @@ function BU::Decho()
                     if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
                         __BU_MAIN_STAT_TXT_FMT="$v_bu_main_stat_txt_fmt_old_val";
                     fi
-                    ;;
+
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                ;;
             esac
         done
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------

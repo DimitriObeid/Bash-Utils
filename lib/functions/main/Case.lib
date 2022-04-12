@@ -68,7 +68,7 @@ __BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="case::re
 ## "Directories.lib" FILE
 ## DEBUG ID : directories.lib-file
 
-__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::directories.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::directories.lib-file";
 
 # "BU::Main::Directories::TriggerRootDirWarning" function.
 function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
@@ -76,7 +76,7 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS" \
-        "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE";
+        "$__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE";
 
     #**** Variables ****
     local __read_TriggerRootDirWarning;
@@ -95,12 +95,16 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 
 			BU::SetLastReturnValue 0;
 
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
 			return 0;
 			;;
 		"no")
             BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
 
 			BU::SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
 			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			;;
@@ -116,7 +120,7 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 ## "Errors.lib" FILE
 ## DEBUG ID : errors.lib-file
 
-__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::errors.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::errors.lib-file";
 
 # "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function BU::Main::Case::Read_Errors::HandleErrors()
@@ -124,7 +128,7 @@ function BU::Main::Case::Read_Errors::HandleErrors()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS" \
-        "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE";
+        "$__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE";
 
     #**** Variables ****
     local __read_HandleErrors;
@@ -143,12 +147,16 @@ function BU::Main::Case::Read_Errors::HandleErrors()
 
 			BU::SetLastReturnValue 0;
 
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
 			return 0;
 			;;
 		"no")
 			BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
 
 			BU::SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
 			BU::Exit "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			;;

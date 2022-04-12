@@ -62,9 +62,11 @@ function BU::Main::CMDS::GetCommandPath()
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 
     #**** Code ****
-    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__CMDS::GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
-    command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight "$p_cmd") command was not found on your system" 'E'; return 1; }
+    command -v "$p_cmd" || { BU::Main::Errors::HandleSmallErrors 'E' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : The $(BU::DechoHighlight "$p_cmd") command was not found on your system" 'E'; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; };
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Get the command's return output.
@@ -79,5 +81,5 @@ function BU::Main::CMDS::GetCommandReturnOutputValue()
     local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
 
     #**** Code ****
-    if eval "$p_cmd" > /dev/null; then return 0; else return 1; fi
+    if eval "$p_cmd" > /dev/null; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
 }

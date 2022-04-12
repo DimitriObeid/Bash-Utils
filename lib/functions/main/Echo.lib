@@ -55,10 +55,28 @@ function BU::Main::Echo::__Debug()
 {
     BU::Main::Echo::__EchoVoid;
 
-    echo "----------------------------------------";
-    echo "DEBUGGING THE FUNCTION $1";
+    echo "----------------------------------------" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
+    echo "DEBUGGING THE FUNCTION $1" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 
     BU::Main::Echo::__EchoVoid;
+}
+
+# This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
+function BU::Main::Echo::DebugEnd()
+{
+    BU::ModuleInit::CheckIsDebugging && {
+        if [ "${__BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION,,}" = 'true' ]; then
+            BU::Main::Echo::__EchoVoid;
+
+            echo "---------------------------------------";
+            echo "END OF THE DEBUGGING OF THE FUNCTION $1";
+
+            BU::Main::Echo::__EchoVoid;
+
+            __BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION='false';
+        fi
+
+    } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 }
 
 # Printing the name of the processed function if the main script is launched with the "bash -x" command.
@@ -84,7 +102,7 @@ function BU::Main::Echo::Debug()
                 else
                     for targetFile in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[@]}"; do
                         # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile" variable's value.
-                        [ "${targetFile,,}" == "${v_file,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; };
+                        [ "${targetFile,,}" == "${v_file,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; break; };
                     done
                 fi
 
@@ -94,7 +112,7 @@ function BU::Main::Echo::Debug()
                 else
                     for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
                         # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
-                        [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; return 0; }
+                        [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU::Main::Echo::__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -104,7 +122,7 @@ function BU::Main::Echo::Debug()
                 else
                     for targetCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetCategory" value is found in the array, and the function which comes from the "$p_category" file matches with the "$targetCategory" variable's value.
-                        [ "${targetCategory,,}" == "${p_category,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
+                        [ "${targetCategory,,}" == "${p_category,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -114,11 +132,14 @@ function BU::Main::Echo::Debug()
                 else
                     for targetSubCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetSubCategory" value is found in the array, and the function which comes from the "$p_subcateg" file matches with the "$targetSubCategory" variable's value.
-                        [ "${targetSubCategory,,}" == "${p_subcateg,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; return 0; }
+                        [ "${targetSubCategory,,}" == "${p_subcateg,,}" ] && { BU::Main::Echo__Debug "$p_funcname"; break; }
                     done
                 fi
             fi
         }
+        
+        __BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION='true';
+
     } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 
     return 0;

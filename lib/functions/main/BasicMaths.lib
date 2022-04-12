@@ -40,10 +40,15 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### FUNCTIONS DEFINITION
+#### CONVERSIONS
+#### DEBUG ID : basicmaths::conversions
 
-## CONVERSIONS FUNCTIONS
-## DEBUG ID : conversions
+__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
+
+## NUMERIC CONVERSIONS
+## DEBUG ID : numeric-conversions
+
+__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS::numeric-conversions";
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
@@ -52,7 +57,9 @@ fi
 function BU::Main::BasicMaths::BytesToHuman()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS" \
+        "$__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS";
 
     #**** Parameters ****
     local L_BYTES="${1:-0}"     # Int       - Default : 0       - Raw size in bytes.
@@ -69,7 +76,7 @@ function BU::Main::BasicMaths::BytesToHuman()
         # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
          basesuf=(base==1024)?"iB":"B"
 
-        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta, which was present in the script on Stack Overflow.
+        # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta, which was present on the original script from Stack Overflow.
          s="BKMGTPEZY"
 
         # While the "x" ("human" function first parameter value) is superior or equal to the "base" (human function third parameter value) AND
@@ -84,8 +91,11 @@ function BU::Main::BasicMaths::BytesToHuman()
       }
       BEGIN{print human(bytes, pad, base)}')
 
-      BU::EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate'
-    return $?
+    BU::EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # Negative number (float or int) to positive number (float or int).
@@ -95,7 +105,7 @@ function BU::Main::BasicMaths::NegativeToPositive()
     local x=$1;         # Number    - Default : NULL    - Value to convert.
 
     #**** Code ****
-    BU::EchoMsg "$(( x = x < 0 ? x * -1 : x ))" '-n' 'nodate';
+    echo "$(( x = x < 0 ? x * -1 : x ))";
 
     return 0;
 }
@@ -107,7 +117,7 @@ function BU::Main::BasicMaths::PositiveToNegative()
     local x=$1;         # Number    - Default : NULL    - Value to convert.
 
     #**** Code ****
-    BU::EchoMsg "$(( x = x > 0 ? x * -1 : x ))" '-n' 'nodate';
+    echo "$(( x = x > 0 ? x * -1 : x ))";
 
     return 0;
 }
