@@ -807,19 +807,19 @@ function BU::CheckProjectLogStatus()
             done || return 1;
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_HEADER    "$v_stat_time_header"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_TIME_HEADER    "$v_stat_time_header"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_TXT       "$v_stat_time_txt"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_TIME_TXT       "$v_stat_time_txt"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -897,10 +897,10 @@ function BU::CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
 			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+			BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			return 0;
 
@@ -926,10 +926,10 @@ function BU::CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -957,19 +957,19 @@ function BU::CheckProjectLogStatus()
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
         # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-        BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+        BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-		BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+		BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		return 0;
 	fi
 
 	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+	BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+	BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -993,10 +993,10 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
 	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-        if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; }; fi
+        if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
     fi
 
 	if [ "$p_type" = 'f' ]; then
@@ -1015,10 +1015,12 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
                 }
 			fi
 
-			return 0;
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
 			if [ ! -d "$p_parent" ]; then
                 mkdir -p "$p_parent" || {
+                    local returnCode="$?";
+
                     if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
                         BU::Main::Errors::HandleSmallErrors 'E' \
                             "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::Main::Checkings::CheckDirPathExists "$p_parent" 'true')" 'E';
@@ -1027,10 +1029,10 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
                         BU::Newline;
                     fi
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
                 }
 
-				BU::Main::Checkings::CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; };
+				BU::Main::Checkings::CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
 			touch "$v_path" || {
@@ -1047,7 +1049,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
 
-			BU::Main::Checkings::CheckFilePathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; }; return "$?";
+			BU::Main::Checkings::CheckFilePathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; return 0;
 		fi
 
     elif [ "$p_type" = 'd' ]; then
@@ -1068,7 +1070,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
 
-			BU::Main::Checkings::CheckDirPathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?";
+			BU::Main::Checkings::CheckDirPathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
     fi
 }
