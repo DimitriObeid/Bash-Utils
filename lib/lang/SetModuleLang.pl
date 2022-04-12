@@ -31,7 +31,7 @@ my $output_file = ""
 #	- $arg_output_file	--> MANDATORY	: Targeted output file for the translations.
 #	- $arg_print		--> OPTIONAL	: Print the error messages or not (choose to not print these messages if you already process the exit codes in another program, like the Bash Utils framework).
 
-my ($arg_file_path; $arg_target_col $arg_print) = @ARGV;
+my ($arg_file_path; $arg_target_col $arg_output_file $arg_print) = @ARGV;
 
 # -----------------------------------------------
 
@@ -70,9 +70,19 @@ elsif (-n $arg_target_col) && ( ! $arg_target_col =~ /^[+-]?\d+$/ ) {
 	exit ;
 }
 
+open(FH, '>', "$arg_file_path") or die $!;
 
-
+while (<FH>) {
+	
+}
 
 # If the CSV file cannot be read by the Perl script.
 # open FILE, "<", $arg_file_path or die "$!:$arg_file_path";
+
+# The output file cannot be created by the Perl script.
+# if (-e "$arg_output_file") {
+	
+# }
 #}
+
+close(FH);
