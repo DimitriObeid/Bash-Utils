@@ -80,6 +80,8 @@ function BU::Main::Files::__ProcessingFile()
     else
         BU::EchoWarning "";
     fi
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Separate processing steps displays from the rest of the main script between two horizontal lines.
@@ -105,7 +107,7 @@ function BU::Main::Files::ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    if ! BU::Main::Args__Files::ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi;
+    if ! BU::Main::Args__Files::ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU::EchoMsg "$(BU::Main::Headers::DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
@@ -157,10 +159,10 @@ function BU::Main::Files::OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU::Main::Args__Files::OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Files::OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Checking second if the script is operating at the root directory.
-    BU::Main::Directories::TriggerRootDirWarning "$p_path";
+    BU::Main::Directories::TriggerRootDirWarning "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     if [ "$p_authorization" = "true" ]; then
 		BU::EchoNewstep "The $(BU::DechoHighlightPath "$p_path/") file already exists and is not empty.";
@@ -173,10 +175,10 @@ function BU::Main::Files::OverwriteFile()
 		BU::EchoSuccess "The content of the $(BU::DechoS "$p_path/") file has been successfully overwritten";
 		BU::Newline;
 	else
-		return 0;
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 	fi
 
-	return 0;
+	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # File creation function, with the parent folder's path and the file's name as separated arguments.
@@ -213,10 +215,10 @@ function BU::Main::Files::Make()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true';
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	# Checking if the awaited arguments are given.
-    if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi;
+    if ! BU::Main::Args__Files::Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi;
 
     # Checking second if the script is operating at the root directory.
     BU::Main::Directories::TriggerRootDirWarning "$v_path" || return 1;
@@ -237,14 +239,14 @@ function BU::Main::Files::Make()
 		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_name") file was successfully created in the $(BU::DechoHighlightPath "$p_parent") folder.";
         BU::Newline;
 
-        return 0;
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
 	# Else, if the file to be created already exists AND it is NOT empty.
 	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
         if BU::Main::Files::OverwriteFile "$p_path"; then
-            return 0;
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         else
-            return 1;
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
 
 	# Else, if the file to be created already exists AND it is empty.
@@ -252,7 +254,7 @@ function BU::Main::Files::Make()
 		BU::EchoSuccess "The $(BU::DechoHighlightPath "$p_path/") file already exists in the $(BU::DechoHighlightPath "$p_parent/") folder and is empty.";
 		BU::Newline;
 
-		return 0;
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 	fi
 }
 
@@ -275,7 +277,7 @@ function BU::Main::Files::MakePath()
 	# Checking first if the target partition is not fully used.
 	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'true';
 
-    if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Files::MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     BU::Main::Files::Make "$v_parent" "$v_target" || return 1;
 
@@ -297,7 +299,7 @@ function BU::Main::Files::MakeFileInMemory()
     #**** Code ****
     echo "$p_filename";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Creating the project's log file.
@@ -319,8 +321,8 @@ function BU::Main::Files::CreateProjectLogFile()
 
     BU::EchoSuccess "Successfully created the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
-	if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
-    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU::Main::Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";	fi
+    if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU::Main::Status::ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
     BU::HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT";
@@ -434,7 +436,7 @@ function BU::Main::Files::CreateProjectLogFile()
     # Purging the "$__BU_MODULE_INIT_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
     __BU_MODULE_INIT_MSG_ARRAY='';
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -460,7 +462,7 @@ function BU::Main::Files::GetByteSize()
 
     if [ -z "$p_base" ]; then
         wc --bytes < "$p_filepath" || \
-            { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+            { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; };
 
     # Else, if a value is passed to the "base" parameter AND this value is an integer.
     elif [ -n "$p_base" ] && BU::IsInt "$b_base"; then
@@ -468,18 +470,18 @@ function BU::Main::Files::GetByteSize()
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then
             BU::Main::BasicMaths::BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
-                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
             BU::Main::BasicMaths::BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
-                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; return 1; };
+                { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : The byte measure unit byte $(BU::DechoHighlight "$p_base") is not an integer"; BU::Newline >&2; return 1;
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : The byte measure unit byte $(BU::DechoHighlight "$p_base") is not an integer"; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the file's creation date.
@@ -497,15 +499,15 @@ function BU::Main::Files::GetCreationDate()
 
     #**** Code ****
     if ! stat -c %W "$p_filepath"; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU::DechoHighlightPath "$p_filepath") file's creation date"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
 
     elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU::DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU::Newline; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
     fi
 
 	## TODO
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the total number of characters in a file.
@@ -520,7 +522,9 @@ function BU::Main::Files::GetCharactersNumber()
     local p_filepath=$1;
 
     #**** Code ****
-    wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; }; return 0;
+    wc --chars < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the last file's access date.
@@ -535,9 +539,9 @@ function BU::Main::Files::GetLastAccess()
     local p_filepath=$1;
 
     #**** Code ****
-     "$p_filename" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+     "$p_filename" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the last file's modification date.
@@ -569,7 +573,9 @@ function BU::Main::Files::GetLinesNumber()
     local p_filepath=$1;
 
     #**** Code ****
-    wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; }; return 0;
+    wc --lines < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the max line length in a file.
@@ -584,7 +590,9 @@ function BU::Main::Files::GetMaxLineLength()
     local p_filepath=$1;
 
     #**** Code ****last access date
-    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; }; return 0;
+    wc --max-line-length < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the owner of a file.
@@ -599,9 +607,9 @@ function BU::Main::Files::GetOwnerName()
     local p_filepath=$1;
 
     #**** Code ****
-    stat -c "%U" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%U" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the group of the owner of a file.
@@ -616,9 +624,9 @@ function BU::Main::Files::GetOwnerGroup()
     local p_filepath=$1;
 
     #**** Code ****
-    stat -c "%G" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%G" "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the total number of characters in a file.
@@ -633,7 +641,9 @@ function BU::Main::Files::GetWordsNumber()
     local p_filepath=$1;
 
     #**** Code ****
-    wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; }; return 0;
+    wc --words < "$p_filepath" || { BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU::DechoHighlightPath "$p_filepath") file"; BU::EchoWarning "Please check the permissions of this file"; BU::Newline; BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -656,9 +666,9 @@ function BU::Main::File::SetFileLastAccess
     local p_fakedate=$2;
 
     #**** Code ****
-    if ! BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Files::SetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -689,16 +699,20 @@ function BU::Main::Files::SourceFile()
             BU::EchoSuccess "Sourced file : $(BU::DechoHighlightPath "$p_path")";
 			BU::Newline;
 
-			return 0;
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         else
+            local C="$?";
+
             BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO SOURCE THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
 
-			return "$?"
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
         fi
     else
+        local C="$?";
+
         BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO FIND THIS FILE : $(BU::DechoHighlightPath "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
 
-		return "$?";
+		return "$C";
     fi
 }
 
@@ -739,7 +753,7 @@ function BU::Main::Files::GetLineFromTextFile()
         fi
     done
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -777,7 +791,7 @@ function BU::Main::Files::Compress()
     #**** Code ****
 
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Uncompressing archives according to the used compression method.
@@ -807,5 +821,5 @@ function BU::Main::Files::Uncompress()
 #     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlightPath "$p_name") s'est effectuée avec brio."
 #     BU::Newline;
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }

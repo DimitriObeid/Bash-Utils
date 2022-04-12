@@ -66,11 +66,11 @@ function BU::Main::Filesystem::IsPartitionFull()
         if [[ "$(df -aH "$p_fileFS")" == 100% ]]; then
             BU::SetLastReturnValue "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 
-            return "$__BU_MAIN_EXIT_CURRENT_CODE";
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
 		else
 			BU::SetLastReturnValue 0;
 
-			return 0;
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
@@ -86,7 +86,7 @@ function BU::Main::Filesystem::IsPartitionFull()
 		else
 			BU::SetLastReturnValue 0;
 
-			return 0;
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
@@ -94,11 +94,11 @@ function BU::Main::Filesystem::IsPartitionFull()
 		if [[ "$(df -Th "$p_fileFS" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
             BU::SetLastReturnValue "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 
-            return "$__BU_MAIN_EXIT_CURRENT_CODE";
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
 		else
 			BU::SetLastReturnValue 0;
 
-			return 0;
+			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
@@ -142,13 +142,13 @@ function BU::Main::Filesystem::GetFSDevice()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the total size in bytes allocated to a given file system.
@@ -171,13 +171,13 @@ function BU::Main::Filesystem::GetFSTotalSize()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the mounted partition of a given file system.
@@ -200,13 +200,13 @@ function BU::Main::Filesystem::GetFSMountPoint()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the used size in bytes of a given file system.
@@ -228,29 +228,29 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU::IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || return "$__BU_MAIN_EXIT_CURRENT_CODE")";
+        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || return "$__BU_MAIN_EXIT_CURRENT_CODE")";
+        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used size by substracting the available size from the total size.
         local v_usedSize; v_usedSize="$(( v_totalSize - v_availableSize ))";
 
         BU::EchoMsg "$v_usedSize" '-n' 'nodate';
 
-        return "$v_code";
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
     }
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the percentage of the used space of a given file system.
@@ -273,29 +273,29 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
     BU::IsOSLinux           && local v_cmd="df -Th \"$p_path\"  | awk 'FNR == 2 {print \$6}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then  BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU::IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || return "$__BU_MAIN_EXIT_CURRENT_CODE")";
+        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || return "$__BU_MAIN_EXIT_CURRENT_CODE")";
+        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used percentage.
         local v_usedSize; v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
 
         BU::EchoMsg "$v_usedSize%" '-n' 'nodate';
 
-        return "$v_code";
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
     }
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the available size in bytes of a given file system.
@@ -318,13 +318,13 @@ function BU::Main::Filesystem::GetFSAvailableSize()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the type of the file system of a directory or a file.
@@ -347,13 +347,13 @@ function BU::Main::Filesystem::GetFSType()
     BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     eval "$v_cmd";
 
-    return "$v_code";
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # -----------------------------------------------
@@ -395,10 +395,10 @@ function BU::Main::Filesystem::Chown()
     p_option=$4;        # Chown command option(s).
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
@@ -412,12 +412,12 @@ function BU::Main::Filesystem::Chown()
                     BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
                     BU::Newline;
 
-                    return 0;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
                 else
                     BU::Main::Errors::HandleErrors "1" "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))";
                     BU::Newline;
 
-                    return 1;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
                 ;;
             '')
@@ -426,7 +426,7 @@ function BU::Main::Filesystem::Chown()
                     BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
                     BU::Newline;
 
-                    return 0;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
                     BU::Main::Errors::HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU::DechoHighlightPath "$p_path/") FOLDER" \
@@ -434,13 +434,15 @@ function BU::Main::Filesystem::Chown()
                         "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))";
                     BU::Newline;
 
-                    return 1;
+                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
                 ;;
             *)
                 BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightFunction "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlightPath "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-                ;;
+                    
+                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0
+            ;;
         esac
 
 
@@ -455,15 +457,15 @@ function BU::Main::Filesystem::Chown()
                 BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
                 BU::Newline;
 
-                return 0;
+                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
             else
                 BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path") file !";
                 BU::Newline;
 
-                return 1;
+                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
         else
-            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightPath "$p_path") FILE DOESN'T EXISTS" && return 1;
+            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightPath "$p_path") FILE DOESN'T EXISTS" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
     fi
 }
@@ -497,10 +499,10 @@ function BU::Main::Filesystem::ChownRec()
     local p_path=$3;
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$p_path" ]; then
@@ -520,12 +522,12 @@ function BU::Main::Filesystem::ChownRec()
 		BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path/") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
 		BU::Newline;
 
-		return 0;
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
         BU::EchoError "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path/") folder";
 		BU::Newline;
 
-		return 1;
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 

@@ -201,15 +201,15 @@ function BU::Main::Echo::__EchoOutput()
             BU::Main::Echo::__EchoVoid;
 
             if [ "${p_type^^}" = "E" ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
             BU::Main::Header::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
@@ -219,19 +219,19 @@ function BU::Main::Echo::__EchoOutput()
                 __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val=''
             fi
 
-            return 0;
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
         elif [ "${p_context,,}" = "end" ]; then
             if [ "${p_type^^}" = "E" ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type,,}" = 'm' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'N' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'S' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             elif [ "${p_type^^}" = 'W' ]; then
-                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; return 1; }
+                BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "In $(BU::Main::Args::PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU::Decho "END DEBUGGING TEXT") debug test in the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
             BU::Main::Header::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
@@ -241,7 +241,7 @@ function BU::Main::Echo::__EchoOutput()
                 __BU_MAIN_STAT_ECHO="$v_BU_MAIN_STAT_ECHO_val"; v_BU_MAIN_STAT_ECHO_val='';
             fi
 
-            BU::Main::Echo::__EchoVoid; return 0;
+            BU::Main::Echo::__EchoVoid; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     fi
 }
@@ -268,14 +268,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" 'n' || return 1;
+                        BU::ModuleInit::Msg "$p_string" 'n' || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -ne "$p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" || return 1;
+                        BU::ModuleInit::Msg "$p_string" || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -e "$p_string";
                     fi
@@ -285,14 +285,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" 'n' || return 1;
+                        BU::ModuleInit::Msg "$p_string" 'n' || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" || return 1;
+                        BU::ModuleInit::Msg "$p_string" || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
@@ -302,14 +302,14 @@ function BU::Main::Echo::__EchoCPLS()
             case "$p_option" in
                 '-n' | 'n')
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" 'n' || return 1;
+                        BU::ModuleInit::Msg "$p_string" 'n' || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
                     ;;
                 '' | *)
                     if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string" || return 1;
+                        BU::ModuleInit::Msg "$p_string" || BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                     else
                         echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                     fi
@@ -323,7 +323,7 @@ function BU::Main::Echo::__EchoCPLS()
     done
    # if (( $(echo "$num1 > $num2" |bc -l) ));
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -370,20 +370,20 @@ function BU::EchoError()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1;
-        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || return 1;
-        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Normal message (without any extra color), with redirection checking.
@@ -411,20 +411,20 @@ function BU::EchoMsg()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1;
-        BU::CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || return 1;
-        BU::Main::Echo::__EchoCPLS "$p_string" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'm' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoCPLS "$p_string" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'm' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # New sub-step message
@@ -452,20 +452,20 @@ function BU::EchoNewstep()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1;
-        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || return 1;
-        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'N' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'N' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Read input values
@@ -487,8 +487,8 @@ function BU::EchoRead()
 
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
-		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "" 'R' "CPLS"; return 1; }
-	fi; return 0;
+		echo -e "Keyboard input value : $(BU::DechoHighlightVar "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU::Main::Echo::__EchoCPLS "" 'R' "CPLS"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; }
+	fi; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Success message
@@ -516,20 +516,20 @@ function BU::EchoSuccess()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1;
-        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || return 1;
-        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'S' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'S' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Warning message
@@ -557,20 +557,20 @@ function BU::EchoWarning()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1;
-        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || return 1;
-        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || return 1;
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -996,5 +996,5 @@ function BU::Newline()
         BU::EchoMsg "" "" "nodate";
     fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
