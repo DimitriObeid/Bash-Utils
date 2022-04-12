@@ -58,7 +58,7 @@ function BU::Main::PosixTerm::DisplayCountdown()
         "$__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS" \
         "$__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Display a progress bar while a task is ongoing.
@@ -69,7 +69,7 @@ function BU::Main::PosixTerm::DisplayProgressBar()
         "$__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS" \
         "$__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Display a spinner while a task is ongoing.
@@ -98,5 +98,5 @@ function BU::Main::PosixTerm::DisplaySpinner()
         printf "%s" "\b${sp:i++%${#sp}:1}"
     done
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }

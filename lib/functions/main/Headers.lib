@@ -136,7 +136,7 @@ function BU::Main::Headers::DrawLine()
 	# à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
 	echo;
 
-	return 0;
+	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
@@ -225,7 +225,7 @@ function BU::HeaderBase()
     __BU_MAIN_STAT_TIME_NEWLINE="$v_stat_time_newline";     # Resetting the new lines display time's global status variable to its original value.
     __BU_MAIN_STAT_TIME_TXT="$v_stat_time_txt";             # Resetting the normal text display time's global status variable to its original value.
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
