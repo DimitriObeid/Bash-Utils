@@ -53,10 +53,10 @@ __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processi
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
 
 # Cut the date displayed before a string.
-function BU::Main::Text::CutLogDateFromString()     { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT"; BU::Main::Text::CutSubStringAfterNthDelim "$1" '] ';  return 0; }
+function BU::Main::Text::CutLogDateFromString()     { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT"; BU::Main::Text::CutSubStringAfterNthDelim "$1" '] ';  BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Cut the dash written before a command option call (to be improved).
-function BU::Main::Text::CutDashFromOption()        { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT"; BU::Main::Text::CutSubStringAfterNthDelim "$1" '-';   return 0; }
+function BU::Main::Text::CutDashFromOption()        { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT"; BU::Main::Text::CutSubStringAfterNthDelim "$1" '-';   BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Cut every part of a string after and with the delimiter, which can be both a single character or a string.
 function BU::Main::Text::CutSubStringAfterNthDelim()
@@ -84,7 +84,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 	local x;
 
     #**** Code ****
-    if ! BU::Main::Args__Text::CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Text::CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -110,7 +110,7 @@ function BU::Main::Text::CutSubStringAfterNthDelim()
 
 	if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_newString"; else echo -ne "$v_count"; fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Cut every part of a string before and with the delimiter, which can be both a single character or a string.
@@ -131,7 +131,7 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
 
     #**** Code ****
-    if ! BU::Main::Args__Text::CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Text::CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
         BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -148,7 +148,7 @@ function BU::Main::Text::CutSubStringBeforeNthDelim()
 
     if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Cut the very first field of a string, before the delimiter, in order to get everything that follows the first field.
@@ -164,9 +164,9 @@ function BU::Main::Text::CutFirstFieldBeforeDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
-    echo "${p_string%$p_delim*}" && return 0;
+    echo "${p_string%$p_delim*}" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Cut the very last field of a string, in order to get everything that preceeds the last field.
@@ -182,9 +182,9 @@ function BU::Main::Text::CutLastFieldAfterDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
-    echo "${p_string#*$p_delim}" && return 0;
+    echo "${p_string#*$p_delim}" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # -----------------------------------------------
@@ -219,7 +219,7 @@ function BU::Main::Echo::KeepFormatting()
 #         echo -ne "<<|| No reformatting precised in the $(BU::Main::Echo::ToLowercase "${FUNCNAME[0]}()") function ||>>";
 # 	fi
 
-	return 0;
+	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Print a lowercased text.
@@ -237,7 +237,7 @@ function BU::Main::Echo::ToLowercase()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
 	#**** Code ****
-	echo "$p_string" | tr '[:upper:]' '[:lower:]'; return 0;
+	echo "$p_string" | tr '[:upper:]' '[:lower:]'; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Print an uppercased text.
@@ -255,7 +255,7 @@ function BU::Main::Echo::ToUppercase()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
 	#**** Code ****
-	echo "$p_string" | tr '[:lower:]' '[:upper:]'; return 0;
+	echo "$p_string" | tr '[:lower:]' '[:upper:]'; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -282,11 +282,11 @@ function BU::Main::Text::GetCharacterOccurences()
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Text::GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     echo -ne "${#v_occurences}";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Get the very first field of a string, and cut everything that follows the first delimiter.
@@ -302,9 +302,9 @@ function BU::Main::Text::GetFirstFieldBeforeDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    echo "${p_string%%$p_delim*}" && return 0;
+    echo "${p_string%%$p_delim*}" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
@@ -320,9 +320,9 @@ function BU::Main::Text::GetLastFieldAfterDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+	if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-	echo "${p_string##*$p_delim}" && return 0;
+	echo "${p_string##*$p_delim}" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Getting substring after a delimiter, which can be both a single character or a string.
@@ -345,7 +345,7 @@ BU::Main::Text::GetSubStringAfterDelim()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
-        if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+        if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     fi
 
     # WARNING ! DO NOT put double quotes between the "$(seq "$p_iterations")", or else it will not word split, and the loop will only run once !
@@ -357,7 +357,7 @@ BU::Main::Text::GetSubStringAfterDelim()
 
     if [ "${p_count,,}" != 'count' ]; then echo -ne "$p_string"; else echo -ne "$v_count"; fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Getting substring before a delimiter, which can be both a single character or a string.
@@ -388,7 +388,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
-        if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+        if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?";; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
             BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -421,7 +421,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
 
 	if [ "${p_count,,}" != 'count' ]; then echo -e "$v_newString"; else echo "$p_count"; fi
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the occurences of a sub-string in a main string (it also works with a single character).
@@ -441,7 +441,7 @@ function BU::Main::Text::GetSubStringOccurences()
 	local count;
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
 	# https://stackoverflow.com/a/50601141
 
@@ -458,7 +458,7 @@ function BU::Main::Text::GetSubStringOccurences()
 
 	echo -e "$count";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the size of a string in byte.
@@ -473,7 +473,7 @@ function BU::Main::Text::GetStringByteSize()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc --bytes; return 0;
+    echo -ne "$p_string" | wc --bytes; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the size of a string in characters.
@@ -488,7 +488,7 @@ function BU::Main::Text::GetStringCharactersNumber()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc --chars; return 0;
+    echo -ne "$p_string" | wc --chars; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Getting the number of words in a string.
@@ -503,7 +503,7 @@ function BU::Main::Text::GetStringWordsNumber()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc -w; return 0;
+    echo -ne "$p_string" | wc -w; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -538,7 +538,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
-        if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+        if ! BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     fi
 
 	IFS="$p_delim" read -ra line <<< "$p_string";
@@ -549,13 +549,12 @@ function BU::Main::Text::ReverseStringWordsOrder()
 	while [ "$x" -ge 0 ]; do
 		if [ "$x" -gt 0 ]; then reversed="$reversed${line[x]}$delim"; else reversed="$reversed${line[x]}"; fi
 
-
 		(( x-- ));
 	done
 
 	echo -e "$reversed";
 
-    return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -619,5 +618,5 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="
 #         false
 #     fi
 #
-#     return 0;
+#     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 # }
