@@ -48,6 +48,7 @@ __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="checkings::op
 ## OS TYPE CHECKINGS
 ## DEBUG ID : os-type-checkings
 
+# shellcheck disable=SC2034
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.

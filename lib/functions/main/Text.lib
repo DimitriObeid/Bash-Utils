@@ -388,7 +388,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
-        if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?";; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
             BU::EchoWarning "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
