@@ -2100,7 +2100,7 @@ function BashUtils_InitModules()
 	done;
 
 	# Sourcing the user defined aliases file if the library is directly used from a script file.
-	if BU::IsInScript && [ -f "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ] && [ -n "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ]; then BU::Main::Files::SourceFile "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" || return 1; fi
+	if ! BU::IsInScript && [ -f "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ] && [ -n "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ]; then BU::Main::Files::SourceFile "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" || return 1; fi
 
 	echo "RETURN STATUS : $?";
 
