@@ -95,7 +95,7 @@ function BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary()
 
     sleep 0.5;
 
-    BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage;
+    BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage || return 1;
 }
 
 function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
@@ -116,7 +116,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
             echo >&2;
 
             # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-            BU::IsInScript && exit 1; return 1;
+            return 1;
         }
 
         # English
@@ -129,7 +129,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
             echo >&2;
 
             # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-            BU::IsInScript && exit 1; return 1;
+            return 1;
         }
 
         # Español | Spanish
@@ -142,7 +142,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
             echo >&2;
 
             # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-            BU::IsInScript && exit 1; return 1;
+            return 1;
         }
 
         # Français | French
@@ -155,7 +155,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
             echo >&2;
 
             # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-            BU::IsInScript && exit 1; return 1;
+            return 1;
         }
     }
 }
@@ -204,7 +204,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary || return 1;
 
     elif [ -n "$p_lang_ISO_639_1" ] && [ ! -f "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" ]; then
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
@@ -213,7 +213,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
 
-        BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+        BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary || return 1;
 
     else
         source "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" || {
@@ -223,7 +223,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
             [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-            BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary;
+            BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary || return 1;
         }
     fi
 }
@@ -249,7 +249,7 @@ function BU::ModuleInit::AskPrintLog()
 		echo; read -rp "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS" read_ask_print_log;
 
 		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
-			BU::ModuleInit::PrintLog;
+			BU::ModuleInit::PrintLog || return 1;
 
 			return 0;
 		else
@@ -537,7 +537,8 @@ function BU::ModuleInit::Msg()
                 else
                     echo -ne "$p_str"; fi
 
-					return 0;;
+					return 0;
+                ;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -548,7 +549,8 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     echo -e "$p_str"; fi
 
-					return 0;;
+                return 0;
+            ;;
         esac
 
     # Else, if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable stores no value (empty by default), then every
@@ -567,7 +569,8 @@ function BU::ModuleInit::Msg()
 
                     echo -ne "${p_str##* ] }"; fi;
 
-					return 0;;
+					return 0;
+                ;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -578,7 +581,8 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str\n"); fi
 
-					return 0;;
+                return 0;
+            ;;
         esac
 
     # Else, if an incorrect value is passed as "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value.
@@ -592,9 +596,9 @@ function BU::ModuleInit::Msg()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog >&2;
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
 
-        BU::IsInScript && exit 1; return 1;
+        return 1;
     fi
 
     return 0;
@@ -618,7 +622,7 @@ function BU::ModuleInit::MsgLine()
         BU::ModuleInit::Msg "$p_str";
 
     else
-        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; BU::IsInScript && exit 1; return 1;
+        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; return 1;
     fi
 
     return 0;
@@ -640,7 +644,7 @@ function BU::ModuleInit::MsgLineCount()
         for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n'; done; BU::ModuleInit::Msg;
 
     else
-        echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; BU::IsInScript && exit 1; return 1;
+        echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; return 1;
     fi
 
     return 0;
@@ -694,7 +698,7 @@ function BU::ModuleInit::PrintLog()
     BU::ModuleInit::PressAnyKey "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT";
     BU::ModuleInit::Msg;
 
-    touch "$v_tmp_file" || { echo >&2; echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE" >&2; echo >&2; BU::IsInScript && exit 1; return 1; };
+    touch "$v_tmp_file" || { echo >&2; echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE" >&2; echo >&2; return 1; };
 
     echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE" >> "$v_tmp_file";
     echo >> "$v_tmp_file";
@@ -756,7 +760,7 @@ function BU::ModuleInit::CheckBashMinimalVersion()
 		echo >&2;
 
 		# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-		BU::IsInScript && exit 1; return 1;
+		return 1;
 	fi
 }
 
@@ -780,7 +784,7 @@ function BU::ModuleInit::CheckPath()
             printf "$__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
 
             # shellcheck disable=SC2059
-            printf "$__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION" "${FUNCNAME[0]}" >&2; echo >&2; BU::IsInScript && exit 1; return 1;
+            printf "$__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION" "${FUNCNAME[0]}" >&2; echo >&2; return 1;
         else
             if [[ "$p_target" = [D-d] ]]; then
 
@@ -803,7 +807,7 @@ function BU::ModuleInit::CheckPath()
                 echo >&2;
 
                 # shellcheck disable=SC2059
-                printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; BU::IsInScript && exit 1; return 1;
+                printf "$__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$p_target" >&2; echo >&2; return 1;
             fi
         fi
     fi
@@ -829,7 +833,7 @@ function BU::ModuleInit::FindPath()
             BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
         fi
 
-        BU::IsInScript && exit 1; return 1;
+        return 1;
 	}; return 0;
 }
 
@@ -842,9 +846,9 @@ function BU::ModuleInit::GetModuleName()
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
 
-        BU::ModuleInit::AskPrintLog >&2;
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
 
-        BU::IsInScript && exit 1; return 1;
+        return 1;
     }; pwd -P)";
 
     echo "${v_module##*/}"; return 0;
@@ -872,15 +876,17 @@ function BU::ModuleInit::ListInstalledModules()
 
 			echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE" >&2; echo >&2;
 
-			BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+			BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+			return 1;
 		}
     fi
 
     if [ -d "$__BU_MODULE_INIT__CONFIG_MODULES_DIR" ] && [ -d "$__BU_MODULE_INIT__MODULES_DIR" ]; then
 
 																				# In case the "ls" command points towards a bad path because of a bad variable's value.
-        ls -1 "$__BU_MODULE_INIT__CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1; };
-        ls -1 "$__BU_MODULE_INIT__MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1; };
+        ls -1 "$__BU_MODULE_INIT__CONFIG_MODULES_DIR"	> "$v_module_conf_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2 || return 1; return 1; };
+        ls -1 "$__BU_MODULE_INIT__MODULES_DIR"			> "$v_module_init_f"    || { echo >&2; printf "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2; BU::ModuleInit::AskPrintLog >&2 || return 1; return 1; };
 
         if diff "$v_module_conf_f" "$v_module_init_f" > "$v_module_diff_f"; then
             echo; echo "$__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST :"; echo; sleep ".5";
@@ -922,9 +928,9 @@ function BU::ModuleInit::ListInstalledModules()
 		echo >&2;
     fi
 
-	BU::ModuleInit::AskPrintLog;
+	BU::ModuleInit::AskPrintLog >&2 || return 1;
 
-    BU::IsInScript && exit 1; return 1;
+    return 1;
 }
 
 # Printing an error message if a file cannot be sourced.
@@ -937,7 +943,7 @@ function BU::ModuleInit::SourcingFailure()
     local p_module=$2;  # String    - Default : NULL    - Name of the module.
 
     #**** Code ****
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2 || return 1; return 1;
 }
 
 # -----------------------------------------------
@@ -1008,7 +1014,9 @@ function BU::ModuleInit::DisplayStatError()
         fi
     done
 
-    echo >&2; BU::IsInScript && exit 1; return 1;
+    echo >&2;
+
+    return 1;
 }
 
 # Checking the "$__BU_MODULE_INIT_STAT_DEBUG" status variable's value.
@@ -1054,7 +1062,7 @@ function BU::ModuleInit::ChangeSTAT_DEBUG       { __BU_MODULE_INIT_STAT_DEBUG="$
 function BU::ModuleInit::ChangeSTAT_DEBUG_BASHX { __BU_MODULE_INIT_STAT_DEBUG_BASHX="$1";   BU::ModuleInit::CheckSTAT_DEBUG_BASHX   "$2" "$3" || return "$?"; return 0; }
 
 # Checking if the debug mode is active.
-function BU::ModuleInit::CheckIsDebugging() { if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ]; then return 0; else BU::IsInScript && exit 1; return 1; fi; }
+function BU::ModuleInit::CheckIsDebugging() { if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ]; then return 0; else return 1; fi; }
 
 # Processing the "module" value's parameters.
 function BU::ModuleInit::ProcessFirstModuleParameters()
@@ -1090,7 +1098,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
             BU::ModuleInit::MsgAbort;
 
-            BU::ModuleInit::AskPrintLog; BU::IsInScript && exit 1; return 1;
+            BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+            return 1;
 
         elif [[ "$p_module" == 'module --'* ]]; then
 
@@ -1119,7 +1129,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     # shellcheck disable=SC2059
                     printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "$p_value" >&2;
 
-                    echo >&2; BU::IsInScript && exit 1; return 1;
+                    echo >&2; return 1;
                 else
                     # shellcheck disable=SC2059
                     BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE" "${FUNCNAME[0]}" "$p_value" "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION")" "$LINENO"; echo >&2;
@@ -1136,7 +1146,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     # shellcheck disable=SC2059
                     printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL\n" "$p_value" >&2;
 
-                    echo >&2; BU::IsInScript && exit 1; return 1;
+                    echo >&2; return 1;
                 fi
             }
 
@@ -1203,7 +1213,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
                         echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file";
 
-                        BU::IsInScript && exit 1; return 1;
+                        return 1;
                     }
 
                     case "${module_args,,}" in
@@ -1215,7 +1225,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                             else
-                                BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »";
+                                BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || return 1;
                             fi
                         ;;
 
@@ -1231,7 +1241,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
-                                    BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »";
+                                    BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || return 1;
                                 fi
                             else
                                 BU::ModuleInit::Msg "NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
@@ -1243,7 +1253,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE « module » PARAMETER" >&2;
                             echo >&2;
 
-                            BU::ModuleInit::Usage >&2; BU::IsInScript && exit 1; return 1;
+                            return 1;
                         ;;
                     esac
 
@@ -1332,7 +1342,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1
+							BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+							return 1
                         ;;
 					esac
 
@@ -1382,7 +1394,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1
+							BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+							return 1
                         ;;
 					esac
 
@@ -1408,7 +1422,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                     BU::ModuleInit::MsgAbort;
 
-                    BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+                    BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+                    return 1;
                 fi
             done
 
@@ -1436,7 +1452,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+        return 1;
 
     # -----------------------------------------------
 
@@ -1480,7 +1498,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+        return 1;
 
     # -----------------------------------------------
 
@@ -1505,7 +1525,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         BU::ModuleInit::MsgAbort;
 
-        echo >&2; BU::ModuleInit::AskPrintLog >&2; BU::IsInScript && exit 1; return 1;
+        echo >&2; BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+        return 1;
     fi
 
     return 0;
@@ -1600,10 +1622,10 @@ fi
 # a new value to the "$LANG" environment variable before calling the "BashUtils_InitModules()" function in your main script file.
 
 # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
-BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG";
+BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG" || { if BU::IsInScript; then exit 1; else return 1; fi };
 
 # Checking the currently used Bash language's version.
-BU::ModuleInit::CheckBashMinimalVersion;
+BU::ModuleInit::CheckBashMinimalVersion || { if BU::IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
@@ -1669,7 +1691,7 @@ function BU::ModuleInit::HandleErrors()
     echo "Aborting the module intializer script" >&2;
     echo >&2;
 
-    BU::IsInScript && exit 1; return 1;
+    return 0;
 }
 
 # Parsing each module's translation CSV file.
@@ -1723,7 +1745,7 @@ function BU::ModuleInit::ParseCSVLang()
 
             BU::ModuleInit::HandleErrors "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "$v_outputFile")" \
                 "Please check what causes the script to not source the output file, which contains the target language's translations" \
-                "$v_outputFile" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+                "$v_outputFile" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
         }
 
 		return 0;
@@ -1735,7 +1757,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors "$(printf "NO PATH TO THE « %s » MODULE'S TRANSLATION FILE EXISTS" "__BU_MODULE_INIT_MODULE_NAME")" \
             "Please give a valid path to the current module's translations CSV file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
@@ -1743,7 +1765,7 @@ function BU::ModuleInit::ParseCSVLang()
         BU::ModuleInit::PrintLogError "THE PATH TO THE TARGET TRANSLATION FILE IS NOT VALID" "$lineno";
 
         BU::ModuleInit::HandleErrors "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "$__BU_MODULE_INIT_MODULE_NAME")" \
-            "Please give a valid path to the current module's translations CSV file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "Please give a valid path to the current module's translations CSV file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
@@ -1755,9 +1777,7 @@ function BU::ModuleInit::ParseCSVLang()
 
             BU::ModuleInit::HandleErrors "$(printf "THE NAME OF THE « %s » PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "$__BU_MODULE_INIT_MODULE_NAME")" \
                 "Please give a valid name to the current module's translations CSV file. The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" \
-				"$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
-
-			BU::IsInScript && exit 1; return 1;
+				"$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     # If no delimiter is given.
@@ -1766,7 +1786,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
             "Please give a « single unicode character » as CSV delimiter in order to get each wanted cell" \
-            "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     if [ -n "$p_delim" ] && [ "${#p_delim}" -gt 1 ]; then local lineno="$LINENO";
@@ -1774,7 +1794,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors '1' "THE GIVEN DELIMITER MUST BE A SINGLE UNICODE CHARACTER" \
             "Please give a « single unicode character » as valid CSV delimiter in order to get each wanted cell" \
-            "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     # Begin parsing the CSV file.
@@ -1789,7 +1809,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors "$(printf "Unable to read the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "Please check the permissions of this file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     fi
 
     # Getting the first row and first column's cell.
@@ -1800,7 +1820,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors "$(printf "Unable to find the value « VARIABLE » in the first row and first column of the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "$(printf "Please check if the value mentioned above is present on this EXACT cell of the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
-            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     })" "$p_delim" '--init')";
 
     if [ "$v_CSVFirstColRow" != "VARIABLE" ]; then local lineno="$LINENO";
@@ -1808,7 +1828,7 @@ function BU::ModuleInit::ParseCSVLang()
 
         BU::ModuleInit::HandleErrors "$(printf "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE « %s »" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "Make sure the current module's CSV translations file is correctly formatted. You can check the main module's CSV file to check how the formatting should be done" \
-            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::IsInScript && exit 1; return 1;
+            "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; return 1;
     else
         BU::EchoNewstep "$(printf "Parsing the « %s » translations file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
         BU::Newline;
@@ -1904,7 +1924,7 @@ function BashUtils_InitModules()
 {
     if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_INIT_IS_SOURCED" ]; then
         # shellcheck disable=SC2059
-        BU::HeaderWarning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; BU::IsInScript && exit 1; return 1;
+        BU::HeaderWarning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
     fi
 
     #**** Parameters ****
@@ -1921,7 +1941,7 @@ function BashUtils_InitModules()
         # shellcheck disable=SC2059
 		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "${FUNCNAME[0]}" >&2;
 
-		BU::IsInScript && exit 1; return 1;
+		return 1;
 	fi
 
     # Writing the list of the installed modules.
@@ -1956,7 +1976,7 @@ function BashUtils_InitModules()
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
 		# Calling the function which processes the « module » argument and its parameters, along with the « main » module.
-        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index" || BU::IsInScript && exit 1; return 1;
+        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index" || return 1;
 
 		# -----------------------------------------------
 
@@ -2028,9 +2048,9 @@ function BashUtils_InitModules()
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
-                BU::ModuleInit::ListInstalledModules;
+                BU::ModuleInit::ListInstalledModules || return 1;
 
-                BU::IsInScript && exit 1; return 1;
+                return 1;
             else
                 BU::ModuleInit::Msg;
 
@@ -2038,7 +2058,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; BU::IsInScript && exit 1; return 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; return 1; }
             fi
 
             # -----------------------------------------------
@@ -2061,13 +2081,13 @@ function BashUtils_InitModules()
 
                 BU::ModuleInit::MsgAbort;
 
-                BU::IsInScript && exit 1; return 1;
+                return 1;
             else
                 # shellcheck disable=SC2059
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; BU::IsInScript && exit 1; return 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; return 1; }
 
                 # shellcheck disable=SC2059
                 BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";
@@ -2078,6 +2098,9 @@ function BashUtils_InitModules()
         v_index="$(( v_index+1 ))";
 
 	done;
+
+	# Sourcing the user defined aliases file if the library is directly used from a script file.
+	if BU::IsInScript && [ -f "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ] && [ -n "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ]; then BU::Main::Files::SourceFile "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" || return 1; fi
 
 	echo "RETURN STATUS : $?";
 
@@ -2091,7 +2114,7 @@ function BashUtils_InitModules()
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.
     if  BU::Main::Status::CheckStatIsInitializing; then
-        BU::Main::Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || BU::IsInScript && exit 1; return 1;
+        BU::Main::Status::ChangeSTAT_INITIALIZING "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || return 1;
 	fi
 
 	# Note : the "$__BU_MODULE_INIT_MSG_ARRAY" variable is purged from the logged messages after writing its content in the project's log file.
