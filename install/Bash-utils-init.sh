@@ -1225,7 +1225,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     }
 
                     case "${module_args,,}" in
-                        
+
                         # "$__BU_MODULE_INIT_STAT_DEBUG" global status variable.
                         '--stat-debug='*)
                             if      [ "${value[i],,}" = '--stat-debug=false' ]          || [ "${value[i],,}" = '--stat-debug=true' ]; then
@@ -1526,7 +1526,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     else
         # shellcheck disable=SC2059
         BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE\n" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
-        
+
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
         echo >&2; echo "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE" >&2;
@@ -1902,7 +1902,7 @@ function BU::ModuleInit::ParseCSVLang()
 			return 0;
 		else
 			# The CSV file was not passed as first argument.
-			if		[ "$v_perlScriptReturnCode" -eq TODO ]; then
+			if		[ "$v_perlScriptReturnCode" -eq 10022 ]; then
                 BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
 
 				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "No CSV file given as first argument for the « %s » Perl script" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
@@ -1955,7 +1955,8 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "" "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "" "")" \
+                    "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1963,14 +1964,39 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# The output file cannot be created by the Perl script.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "UNABLE TO CREATE THE LANGUAGE'S OUTPUT FILE" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "" "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE PERL SCRIPT" "$v_outputFilePath")" \
+                    "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
-			fi
+
+            # Not enough storage is available to complete this operation.
+            elif    [ "$v_perlScriptReturnCode" -eq 14 ]; then
+                BU::ModuleInit::PrintLogError "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "$v_outputFilePath")" "$v_perlScriptExecLineno";
+
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "$v_outputFilePath")" \
+                    "Please free up some disk memory before using this script to translate the current module" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+
+                printf "Deleting the created language's output file « %s »\n" "$v_outputFilePath" >&2;
+                echo >&2;
+
+                if rm -v "$v_outputFilePath"; then
+                    printf "The « %s » file was successfully erased\n" "$v_outputFilePath" >&2;
+                    echo >&2;
+
+                else
+                    printf "UNABLE TO DELETE THE LANGUAGE'S OUTPUT FILE « %s »\n" "$v_outputFilePath" >&2;
+                    echo "Please do so before relaunching this script after freeing some space on your hard drive, in order to avoid this script to consider the translations already done" >&2;
+                    echo >&2;
+                fi
+
+                BU::ModuleInit::AskPrintLog >&2 || { if BU::IsInScript; then exit 1; else return 1; fi };
+
+                if BU::IsInScript; then exit "$v_perlScriptReturnCode"; else return "$v_perlScriptReturnCode"; fi
+            fi
 		fi
 	fi
 }

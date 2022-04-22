@@ -12,7 +12,6 @@ $__BU_SML__NO_FILE_SPECIFIED = 2;
 
 # 
 
-
 # 10022 : An invalid argument was supplied.
 $__BU_SML__INVALID_ARG = 10022;
 
