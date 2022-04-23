@@ -97,9 +97,11 @@ function BU::Main::Initializer::SourceConfig()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP TWO : SOURCING FILES
+#### STEP TWO : SOURCING FILES IN ORDER TO USE THEM DURING THE TRANSLATION PART
 
 ## SOURCING LIBRARY FILES FIRST
+
+# Note : Several functions from the main module are used 
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 BU::Main::Initializer::SourceLibrary;
@@ -339,7 +341,15 @@ done
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP FOUR : PROCESSING PROJECT'S RESOURCES
+#### STEP FOUR : RESOURCING THE SAME FILES IN ORDER TO GET THEIR 
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### STEP FIVE : PROCESSING PROJECT'S RESOURCES
 
 ## CALLING NECESSARY FUNCTIONS
 

@@ -1838,8 +1838,8 @@ function BU::ModuleInit::ParseCSVLang()
     # Begin parsing the CSV file.
     BU::HeaderBlue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
 
-    BU::EchoNewstep "Finding the variables list column";
-    BU::Newline;
+    BU::ModuleInit::Msg "${__BU_MAIN_COLOR_NEWSTEP}Finding the variables list column${__BU_MAIN_COLOR_RESET}";
+    BU::ModuleInit::Msg;
 
     # If the targeted CSV file cannot be read by the current user.
     if [ ! -r "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ]; then local lineno="$lineno";
@@ -1880,11 +1880,11 @@ function BU::ModuleInit::ParseCSVLang()
 
         return 1;
     else
-        BU::EchoNewstep "$(printf "Parsing the « %s » translations file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
-        BU::Newline;
+        BU::ModuleInit::Msg "$(printf "%sParsing the « %s » translations file%s" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$__BU_MAIN_COLOR_RESET")";
+        BU::ModuleInit::Msg;
 
-        BU::EchoNewstep "$(printf "Getting the chosen language's row (targeted language : %s)" "$p_lang_ISO_639_1")";
-        BU::Newline;
+        BU::ModuleInit::Msg "$(printf "%sGetting the chosen language's row (targeted language : %s%s%s)%s" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_COLOR_HIGHLIGHT" "$p_lang_ISO_639_1" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_COLOR_RESET")";
+        BU::ModuleInit::Msg;
 
         # Getting the total number of columns.
         x="$(awk -F, '{ print NF; exit }' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
@@ -1903,19 +1903,19 @@ function BU::ModuleInit::ParseCSVLang()
 
 		# Checking the eventual errors returned by the parsing program.
 		if [ "$v_perlScriptReturnCode" -eq 0 ]; then
-			BU::EchoSuccess "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath")";
-			BU::Newline;
+			BU::ModuleInit::Msg "$(printf "%sThe « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created%s" "$__BU_MAIN_COLOR_SUCCESS" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath" "$__BU_MAIN_COLOR_RESET")";
+			BU::ModuleInit::Msg;
 
-			BU::Main::Files::SourceFile "$v_outputFile" || return "$?";
+			source "$v_outputFile" || { BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME"; return "$?"; };
 
 			return 0;
 		else
 			# The CSV file was not passed as first argument.
 			if		[ "$v_perlScriptReturnCode" -eq 10022 ]; then
-                BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT given as first argument for the « %s » Perl script" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
-                    ""
+				BU::ModuleInit::HandleErrors "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+                    "Please pass as first argument the path of the translations CSV file you want to process"
                     "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
@@ -1924,11 +1924,11 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# A path was passed as first argument, but it's a directory path.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "DIRECTORY PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" \
-                    "The path passed as first argument for the SetModuleLang.pl Perl script is a directory path, and not a CSV file path" \
-                    "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+                    "Please pass as first argument the path of the translations CSV ${__BU_MAIN_TXT_FMT_ITALIC}>>> file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
+                    "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1936,9 +1936,11 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# A path was passed as first argument. It's a file, but not in CSV format.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT, BUT NOT A CSV FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "" "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+                    "Please pass as first argument the path of the translations ${__BU_MAIN_TXT_FMT_ITALIC}>>> CSV file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
+                    "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1946,9 +1948,10 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# The column's index was not passed as second argument.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "PERL TRANSLATION CSV FILE " "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "" "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+                    "Please pass as second argument the index of the column you want to process" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1958,8 +1961,9 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
-                    "Please pass an integer as second argument, as the target column ID" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+				BU::ModuleInit::HandleErrors "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
+                    "Please pass an integer as second argument, as the target column ID" "$v_perlScriptReturnCode" \
+                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
