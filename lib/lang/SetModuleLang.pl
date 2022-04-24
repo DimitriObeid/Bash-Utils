@@ -69,6 +69,13 @@ elsif (-n $arg_target_col) && ( ! $arg_target_col =~ /^[+-]?\d+$/ ) {
 	exit ;
 }
 
+# If the language file's output path was not passed as third argument.
+
+
+# If the CSV file cannot be read by the Perl scrip.
+
+
+
 open(FH, '>', "$arg_file_path") or die $!;
 
 while (<FH>) {

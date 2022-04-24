@@ -1951,7 +1951,7 @@ function BU::ModuleInit::ParseCSVLang()
                 BU::ModuleInit::PrintLogError "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
 				BU::ModuleInit::HandleErrors "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
-                    "Please pass as second argument the index of the column you want to process" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+                    "Please pass as second argument as the index of the column you want to process" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1959,7 +1959,7 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# The column's index passed as second argument was not an integer.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
 				BU::ModuleInit::HandleErrors "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
                     "Please pass an integer as second argument, as the target column ID" "$v_perlScriptReturnCode" \
@@ -1971,9 +1971,10 @@ function BU::ModuleInit::ParseCSVLang()
 
             # The language file's output path was not passed as third argument.
             elif    [ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-                BU::ModuleInit::HandleErrors "" "" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
+                BU::ModuleInit::HandleErrors "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+                    "Please pass a third argument as the output file path to create" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
 
@@ -1981,7 +1982,7 @@ function BU::ModuleInit::ParseCSVLang()
 
 			# The CSV file cannot be read by the Perl script.
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
-                BU::ModuleInit::PrintLogError "PERL TRANSLATION SCRIPT UNABLE TO READ THE CSV TRANSLATIONS FILE" "$v_perlScriptExecLineno";
+                BU::ModuleInit::PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT UNABLE TO READ THE CSV TRANSLATIONS FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
 				BU::ModuleInit::HandleErrors "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$v_filename")" \
                     "Please check the permissions of the targeted CSV file, then relaunch the script" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
@@ -1994,7 +1995,7 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "UNABLE TO CREATE THE LANGUAGE'S OUTPUT FILE" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE PERL TRANSLATION SCRIPT" "$v_outputFilePath")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE « %s » PERL TRANSLATION SCRIPT" "$v_outputFilePath" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please check the cause of this error, then relaunch the script" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;

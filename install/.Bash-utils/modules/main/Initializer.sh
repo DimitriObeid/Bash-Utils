@@ -103,8 +103,17 @@ function BU::Main::Initializer::SourceConfig()
 
 # Note : Several functions from the main module are used 
 
-# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceLibrary;
+# Sourcing only the "Text.lib" file, in order to use the functions "BU::Main::Text::GetSubStringAfterDelim()" and "BU::Main::Text::GetSubStringBeforeDelim()".
+__BU_MAIN_INITIALIZER__TEXT_LIB="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")"
+
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB" || \
+{
+    local ="$?";
+
+    BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB" "$__BU_MODULE_INIT_MODULE_NAME";
+
+    if BU::IsInScript; then exit "$C"; else return "$C"; fi
+};
 
 # -----------------------------------------------
 
@@ -341,7 +350,17 @@ done
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP FOUR : RESOURCING THE SAME FILES IN ORDER TO GET THEIR 
+#### STEP FOUR : RESOURCING THE SAME FILES IN ORDER TO GET THEIR TRANSLATED MESSAGES
+
+# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceLibrary;
+
+# -----------------------------------------------
+
+## SOURCING CONFIGURATION FILES
+
+# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceConfig;
 
 # -----------------------------------------------
 
