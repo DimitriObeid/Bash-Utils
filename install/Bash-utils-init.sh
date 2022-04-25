@@ -1973,7 +1973,6 @@ function BU::ModuleInit::ParseCSVLang()
             elif    [ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-                BU::ModuleInit::HandleErrors "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass a third argument as the output file path to create" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
 
                 BU::ModuleInit::AskPrintLog >&2 || return 1;
