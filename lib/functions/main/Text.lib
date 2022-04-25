@@ -344,7 +344,7 @@ BU::Main::Text::GetSubStringAfterDelim()
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
 
     #**** Code ****
-    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != '--init' ]; then
         if ! BU::Main::Args__Text::GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     fi
 
@@ -387,7 +387,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
 	local x;
 
     #**** Code ****
-    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != '--init' ]; then
         if ! BU::Main::Args__Text::GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         if [ -n "$p_iterations" ] && ! BU::IsInt "$p_iterations"; then
@@ -413,7 +413,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
-    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != 'init' ]; then
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != '--init' ]; then
 	    p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")";
     else
         p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")" '--init';

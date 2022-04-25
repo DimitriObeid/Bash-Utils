@@ -1838,7 +1838,7 @@ function BU::ModuleInit::ParseCSVLang()
     # Begin parsing the CSV file.
     BU::HeaderBlue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
 
-    BU::ModuleInit::Msg "${__BU_MAIN_COLOR_NEWSTEP}Finding the variables list column${__BU_MAIN_COLOR_RESET}";
+    BU::ModuleInit::Msg "Finding the variables list column";
     BU::ModuleInit::Msg;
 
     # If the targeted CSV file cannot be read by the current user.
@@ -1880,10 +1880,10 @@ function BU::ModuleInit::ParseCSVLang()
 
         return 1;
     else
-        BU::ModuleInit::Msg "$(printf "%sParsing the « %s » translations file%s" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$__BU_MAIN_COLOR_RESET")";
+        BU::ModuleInit::Msg "$(printf "Parsing the « %s » translations file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
         BU::ModuleInit::Msg;
 
-        BU::ModuleInit::Msg "$(printf "%sGetting the chosen language's row (targeted language : %s%s%s)%s" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_COLOR_HIGHLIGHT" "$p_lang_ISO_639_1" "$__BU_MAIN_COLOR_NEWSTEP" "$__BU_MAIN_COLOR_RESET")";
+        BU::ModuleInit::Msg "$(printf "Getting the chosen language's row (targeted language : %s)" "$p_lang_ISO_639_1")";
         BU::ModuleInit::Msg;
 
         # Getting the total number of columns.
@@ -1903,7 +1903,7 @@ function BU::ModuleInit::ParseCSVLang()
 
 		# Checking the eventual errors returned by the parsing program.
 		if [ "$v_perlScriptReturnCode" -eq 0 ]; then
-			BU::ModuleInit::Msg "$(printf "%sThe « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created%s" "$__BU_MAIN_COLOR_SUCCESS" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath" "$__BU_MAIN_COLOR_RESET")";
+			BU::ModuleInit::Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath")";
 			BU::ModuleInit::Msg;
 
 			source "$v_outputFile" || { BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME"; return "$?"; };
