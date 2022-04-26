@@ -103,17 +103,8 @@ function BU::Main::Initializer::SourceConfig()
 
 # Note : Several functions from the main module are used 
 
-# Sourcing only the "Text.lib" file, in order to use the functions "BU::Main::Text::GetSubStringAfterDelim()" and "BU::Main::Text::GetSubStringBeforeDelim()".
-__BU_MAIN_INITIALIZER__TEXT_LIB="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")"
-
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB" || \
-{
-    local ="$?";
-
-    BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB" "$__BU_MODULE_INIT_MODULE_NAME";
-
-    if BU::IsInScript; then exit "$C"; else return "$C"; fi
-};
+# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceLibrary;
 
 # -----------------------------------------------
 
@@ -418,8 +409,6 @@ if BU::Main::Status::CheckStatIsLogging; then
 		BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU::Newline;
 	fi
 fi
-
-# -----------------------------------------------
 
 # -----------------------------------------------
 

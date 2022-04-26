@@ -396,7 +396,11 @@ BU::Main::Text::GetSubStringBeforeDelim()
     fi
 
 	# Getting the number of occurences of the character / string targeted as delimiter.
-	x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
+    if [ "${p_init,,}" == '--init' ]; then
+        x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target" "--init")";
+	else
+        x="$(BU::Main::Text::GetSubStringOccurences "$p_string" "$p_target")";
+    fi
 
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
@@ -404,19 +408,19 @@ BU::Main::Text::GetSubStringBeforeDelim()
         v_fieldtmp="${p_string##*$p_delim}";
 		v_fieldtmp="${v_fieldtmp%$p_delim*}";
 
-		if [ -z "$p_newString" ]; then
-			p_newString="$v_fieldtmp";
+		if [ -z "$v_newString" ]; then
+			v_newString="$v_fieldtmp";
 		else
-			p_newString="$p_newString$p_delim$v_fieldtmp";
+			v_newString="$v_newString$p_delim$v_fieldtmp";
 		fi
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
 
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != '--init' ]; then
-	    p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")";
+	    v_newString="$(BU::Main::Text::ReverseStringWordsOrder "$v_newString" "$p_delim")";
     else
-        p_newString="$(BU::Main::Text::ReverseStringWordsOrder "$p_newString" "$p_delim")" '--init';
+        v_newString="$(BU::Main::Text::ReverseStringWordsOrder "$v_newString" "$p_delim" '--init')";
     fi
 
 	if [ "${p_count,,}" != 'count' ]; then echo -e "$v_newString"; else echo "$p_count"; fi
@@ -435,13 +439,16 @@ function BU::Main::Text::GetSubStringOccurences()
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
     local p_target=$2;  # String    - Default : NULL    - Targeted sub-string.
+    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringBeforeDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
 
 	#**** Variables ****
 	local tmp;
 	local count;
 
     #**** Code ****
-    if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if [ -z "$p_init" ] || [ -n "$p_init" ] && [ "${p_init,,}" != '--init' ]; then
+        if ! BU::Main::Args__Text::GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    fi
 
 	# https://stackoverflow.com/a/50601141
 
