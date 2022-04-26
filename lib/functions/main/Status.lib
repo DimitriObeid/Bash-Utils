@@ -551,7 +551,7 @@ function BU::Main::Status::ChangeSTAT_ECHO
 
     BU::Main::Status::CheckSTAT_ECHO "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    Bu::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.

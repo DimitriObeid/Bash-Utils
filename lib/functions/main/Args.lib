@@ -548,8 +548,6 @@ function BU::Main::Args::PrintFFL()
     #**** Code ****
     echo -n "$v_filename file, function $v_funcname, line $v_lineno";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
-
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
