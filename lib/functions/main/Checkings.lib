@@ -466,7 +466,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
         __BU_MAIN_STAT_ECHO="true";
     fi
 
-    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; local Code="$?";
+    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; local IsPartitionFullReturnCode="$?";
 
     if [ "$IsPartitionFullReturnCode" = "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
 
