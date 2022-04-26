@@ -97,11 +97,11 @@ function BU::Main::Initializer::SourceConfig()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP TWO : MINIMAL FILES SOURCING IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
+#### STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Note : Several functions from the main module are used 
+# Note : Several functions from the main module are used
 
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")";
@@ -343,7 +343,25 @@ done
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP FOUR : PROCESSING PROJECT'S RESOURCES
+#### STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
+
+# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceLibrary;
+
+# -----------------------------------------------
+
+## SOURCING CONFIGURATION FILES
+
+# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+BU::Main::Initializer::SourceConfig;
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### STEP FIVE : PROCESSING PROJECT'S RESOURCES
 
 ## CALLING NECESSARY FUNCTIONS
 
@@ -363,21 +381,21 @@ if BU::Main::Status::CheckStatAllowFormatting; then
     # Creating the text color code file
     if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-        BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__ERROR" "$(BU::DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+        BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU::DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU::Newline;
+        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU::Newline;
     fi
 
     # Creating the background color code file
     if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
         # shellcheck disable=SC2059
-        BU::Main::Errors::HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__ERROR" "$(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+        BU::Main::Errors::HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU::Newline;
+        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU::Newline;
     fi
 fi
 
@@ -385,7 +403,7 @@ fi
 if BU::Main::Status::CheckStatIsLogging; then
 	if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-		BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__ERROR" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
+		BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
 		return 1;
 	else
@@ -393,24 +411,6 @@ if BU::Main::Status::CheckStatIsLogging; then
 		BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU::Newline;
 	fi
 fi
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### STEP FIVE : RESOURCING THE SAME FILES IN ORDER TO GET THEIR TRANSLATED MESSAGES
-
-# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceLibrary;
-
-# -----------------------------------------------
-
-## SOURCING CONFIGURATION FILES
-
-# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceConfig;
 
 # -----------------------------------------------
 

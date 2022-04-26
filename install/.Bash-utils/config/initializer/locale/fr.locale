@@ -467,7 +467,7 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de c
 
 # -----------------------------------------------
 
-## STEP TWO : SOURCING FILES - ÉTAPE TROIS : INCLUSION DES FICHIERS
+## STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART - ÉTAPE DEUX : INCLUSION MINIMALE DE FICHIERS AFIN D'UTILISER LEURS RESSOURCES PENDANT LA PARTIE DE TRADUCTION
 
 # Aucun texte à afficher dans cette section pour le moment.
 
@@ -525,16 +525,20 @@ unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__BOOL \
 
 # -----------------------------------------------
 
-## STEP FOUR : PROCESSING PROJECT'S RESOURCES - ÉTAPE QUATRE : TRAITEMENT DES RESSOURCES DU PROJET
+# STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES - ÉTAPE QUATRE : INCLUSION DU RESTE DE LA LIBRAIRIE ET DES FICHIERS DE CONFIGURATION
+
+# -----------------------------------------------
+
+## STEP FIVE : PROCESSING PROJECT'S RESOURCES - ÉTAPE CINQ : TRAITEMENT DES RESSOURCES DU PROJET
 
 # Création du fichier de code couleur du texte.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__ERROR="IMPOSIBLE DE CRÉER LE FICHIER DE CODE COULEUR DU TEXTE %s DANS LE DOSSIER %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s an été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="IMPOSIBLE DE CRÉER LE FICHIER DE CODE COULEUR DU TEXTE %s DANS LE DOSSIER %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s an été créé avec succès dans le dossier %s";
 
 # Création du fichier de code de couleur de fond.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__ERROR="Impossible de créer le fichier de code de couleur de fond %s dans le dossier %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_BG_COL_FILE__SUCCESS="Le fichier de code couleur de fond %s a été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Impossible de créer le fichier de code de couleur de fond %s dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="Le fichier de code couleur de fond %s a été créé avec succès dans le dossier %s";
 
 # Création du fichier de logs du projet.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__ERROR="IMPOSSIBLE DE CRÉER LE FICHIER DE LOGS %s POUR LE PROJET %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="IMPOSSIBLE DE CRÉER LE FICHIER DE LOGS %s POUR LE PROJET %s";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS="Le fichier de logs %s a été créé avec succès dans le dossier %s";
