@@ -62,6 +62,12 @@ function BU::Main::Filesystem::IsPartitionFull()
     local p_fileFS=$1;  # String    - Default : NULL    - Target file's file system.
 
     #**** Code ****
+    if [ -z "$p_fileFS" ]; then return "$__BU_MAIN_EXIT_INVALID_ARGUMENT";
+
+    elif    [ ! -d "$p_fileFS" ] || \
+            [ ! -f "$p_fileFS" ]; then return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+    fi
+
 	BU::IsOSAndroidTermux && {
         if [[ "$(df -aH "$p_fileFS")" == 100% ]]; then
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";

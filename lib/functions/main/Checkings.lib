@@ -466,20 +466,62 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
         __BU_MAIN_STAT_ECHO="true";
     fi
 
-    BU::Main::Filesystem::IsPartitionFull "$p_fileFS";
+    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; local Code="$?";
 
-    if [ "$?" -eq "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then
-
-        local lineno="$(( LINENO -2 ))";
+    if [ "$IsPartitionFullReturnCode" = "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
-            BU::Main::Errors::HandleErrors "$__BU_MAIN_EXIT_CURRENT_CODE" \
+            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+                "Please give a filepath in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
+                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+            BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+        else
+            echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
+            echo "Please give a path in order to check if the target file system is full or not" >&2;
+            echo >&2;
+
+            echo "Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" >&2;
+            echo >&2;
+
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+        fi
+
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="$LINENO";
+
+        # As mentioned in the previous comment, it is mandatory that the script's execution ends.
+        BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+
+        if [ "${p_authorization,,}" = 'true' ]; then
+            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+                "Please give a valid path in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
+                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+            BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+        else
+            echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
+            echo "Please give a valid path in order to check if the target file system is full or not" >&2;
+            echo >&2;
+
+            echo "Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" >&2;
+            echo >&2;
+
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+        fi
+
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then local lineno="$LINENO";
+
+        # As mentioned in the previous comment, it is mandatory that the script's execution ends.
+        BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+
+        if [ "${p_authorization,,}" = 'true' ]; then
+            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
 				"Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file [/|\] Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
         elif [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" >&2;
@@ -489,7 +531,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
             echo "Since the file system's disk space is full, the script has to be exited" >&2;
             echo >&2;
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
     fi
 
