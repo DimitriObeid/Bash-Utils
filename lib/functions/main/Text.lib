@@ -202,6 +202,8 @@ function BU::Main::Text::DeleteLettersInString()
     local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
 
     #**** Code ****
+    if ! BU::ArrayIsNotEmpty; then BU::EchoError "No string passed as first argument"; BU::Newline; return 1; fi
+
     if ! BU::Main::Args__Text::DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0;

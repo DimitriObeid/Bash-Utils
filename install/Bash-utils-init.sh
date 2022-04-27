@@ -1240,7 +1240,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         # "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
                         '--stat-debug-bashx='*)
                             if BU::ModuleInit::CheckIsDebugging; then
-                                if      [ "${value[i],,}" = '--stat-debug-bashx=file' ]       || [ "${value[i],,}" = 'stat-debug-bashx=category' ]             || [[ "${value[i],,}" == stat-debug-bashx=sub(-)?category ]]; then
+                                if      [ "${value[i],,}" = '--stat-debug-bashx=file' ]       || [ "${value[i],,}" = 'stat-debug-bashx=category' ]             || [[ "${value[i],,}" == stat-debug-bashx=sub?(-)category ]]; then
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
