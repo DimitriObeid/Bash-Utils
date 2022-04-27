@@ -273,6 +273,9 @@ function BU::Decho()
 		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
+	#**** Variables ****
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+
     #**** Code ****
     if ! BU::Main::Args__Decho::Decho "$p_string" "$p_newTextColor" "$p_newTextColor" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
@@ -386,7 +389,7 @@ function BU::Decho()
                     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                 ;;
             esac
-        done
+        done; if [ "${v_loop_error}" = 'error' ]; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         echo -e "$p_string$p_newTextColor$__BU_MAIN_COLOR_CODE_RESET";
 

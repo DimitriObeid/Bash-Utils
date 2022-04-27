@@ -355,6 +355,9 @@ function BU::Main::Args::GetFuncArgsArrayValues()
     #**** Variables ****
     local v_index=0;    # Int   - Default : 0   - Initial value of the "for" loop's iterations counter.
 
+    # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+    local v_loop_error;
+
     #**** Code ****
     BU::Main::Status::CheckStatIsBackupEchoing || {
         local v_echo="$__BU_MAIN_STAT_ECHO";
@@ -366,17 +369,17 @@ function BU::Main::Args::GetFuncArgsArrayValues()
         BU::EchoNewstep "Values stored in the $v_funcname function's array of arguments :";
 
         for i in "${pa_argsArray[@]}"; do
-            BU::EchoMsg "Value [$v_index] : $i"
+            BU::EchoMsg "Value [$v_index] : $i" || { v_loop_error='error'; break; }
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
-                BU::Newline;
+                BU::Newline || { v_loop_error='error'; break; };
             fi
 
             v_index=$(( v_index+1 ));
-        done
+        done; if [ "${v_loop_error,,}" = 'error' ]; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     }
 
     if [ -n "$v_echo" ] && [ "${v_echo,,}" = 'false' ]; then
@@ -1080,6 +1083,36 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MAIN MODULE'S "Decho.lib" FILE'S FUNCTIONS
+
+## CATEGORY : TEXT WRITING AND DECORATION (FORMATTING)
+## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
+
+# "BU::Decho()" function.
+function BU::Main::Args__Decho::Decho()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+	#**** Parameters ****
+    local p_string=$1;          # String	- Default : NULL	- String to display.
+    local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
+
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+	#**** Code ****
+	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------

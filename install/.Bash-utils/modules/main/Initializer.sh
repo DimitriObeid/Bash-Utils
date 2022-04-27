@@ -58,7 +58,7 @@ fi
 function BU::Main::Initializer::SourceLibrary()
 {
     #**** Variables ****
-    local v_loop_error;
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
 
@@ -85,7 +85,7 @@ function BU::Main::Initializer::SourceLibrary()
 function BU::Main::Initializer::SourceConfig()
 {
     #**** Variables ****
-    local v_loop_error;
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
 
