@@ -5,6 +5,9 @@
 Make the project's script's name displaying when all the modules are initialized
 - **Hint** : It's in the ***GetProjectFilePath***
 
+Correct the loop errors :
+- Current file : Status.lib
+
 
 ## Long term ideas :
 

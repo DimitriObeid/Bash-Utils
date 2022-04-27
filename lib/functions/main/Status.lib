@@ -493,6 +493,9 @@ function BU::Main::Status::ChangeSTAT_ECHO
     #**** Variables ****
     local v_log_file_path="$__BU_MAIN_PROJECT_LOG_FILE_PATH";   # Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
 
+    # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+    local v_loop_error;
+
     #*** Code ****
     if [ "true" = "${p_value,,}" ] && BU::IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
 
@@ -535,7 +538,7 @@ function BU::Main::Status::ChangeSTAT_ECHO
 
                     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
                 }
-            done
+            done; if [ "${v_loop_error,,}" = 'error' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU::EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";

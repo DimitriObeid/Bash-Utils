@@ -166,6 +166,9 @@ function BU::HeaderBase()
     local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
     local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT";           # Setting the normal text display time's global status variable to 0 seconds, because the header's pause time is already set.
 
+    # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+    local v_loop_error;
+
     if [ -n "$p_strlen" ] && [ "$p_strlen" = 'strlen' ]; then local v_strlen; v_strlen="$("${#p_stringTxt}")"; fi
 
 	#**** Code ****
@@ -191,13 +194,13 @@ function BU::HeaderBase()
             for i in "${int_array[@]}"; do
 
                 if [[ "$i" == '1'* ]]; then
-                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
+                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'2'* ]]; then
-                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol";
+                    BU::DechoBGColor "$(BU::EchoMsg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'3' ]]; then
-                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol";
+                    BU::DechoBGColor "$(Bu::EchoMsg "$(BU::Main::Headers::DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'1'* ]] || [[ "$i" == *'3'* ]]; then
                     BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the values were not arranged in ascending order, like 123, 12, 13 or 23" 'R';
@@ -205,7 +208,7 @@ function BU::HeaderBase()
                 else
                     BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU::DechoHighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported), " 'R';
                 fi
-            done
+            done; if [ "${v_loop_error,,}" = 'error' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         elif BU::IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
             BU::Main::Errors::HandleSmallErrors 'W' "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU::DechoHighlightVar "p_bgColorPos") argument is too big" 'R';
