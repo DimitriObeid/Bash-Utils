@@ -841,7 +841,7 @@ function BU::ModuleInit::FindPath()
             BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
         fi
 
-        return 1;
+        if BU::IsInScript; then exit 1; else return 1; fi
 	}; return 0;
 }
 
@@ -1083,6 +1083,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     local v_module_name;
         v_module_name="$(echo "$p_module" | cut -d' ' -f1)";
 
+    # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+    local v_loop_error;
+
     #**** Code ****
 
     # -----------------------------------------------
@@ -1221,7 +1224,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
                         echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file";
 
-                        return 1;
+                        v_loop_error='error'; break;
                     }
 
                     case "${module_args,,}" in
@@ -1233,7 +1236,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                             else
-                                BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || return 1;
+                                BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || { v_loop_error='error'; break; };
                             fi
                         ;;
 
@@ -1249,7 +1252,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
-                                    BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || return 1;
+                                    BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || { v_loop_error='error'; break; };
                                 fi
                             else
                                 BU::ModuleInit::Msg "NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
@@ -1350,9 +1353,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog >&2 || return 1;
+							BU::ModuleInit::AskPrintLog >&2 || { v_loop_error='error'; break; }
 
-							return 1
+							v_loop_error='error'; break;
                         ;;
 					esac
 
@@ -1402,9 +1405,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 							BU::ModuleInit::MsgAbort;
 
-							BU::ModuleInit::AskPrintLog >&2 || return 1;
+							BU::ModuleInit::AskPrintLog >&2 || { v_loop_error='error'; break; }
 
-							return 1
+							v_loop_error='error'; break;
                         ;;
 					esac
 
@@ -1430,11 +1433,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                     BU::ModuleInit::MsgAbort;
 
-                    BU::ModuleInit::AskPrintLog >&2 || return 1;
+                    BU::ModuleInit::AskPrintLog >&2 || { v_loop_error='error'; break; };
 
-                    return 1;
+                    v_loop_error='error'; break;
                 fi
-            done
+            done; if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
             __BU_MODULE_INIT_MODULE_FIRST_ARG='true';
@@ -2043,7 +2046,8 @@ function BashUtils_InitModules()
 	#**** Variables (global) ****
 
 	#**** Variables (local) ****
-    local v_index=0;        # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
 	#**** Code ****
 	# Checking if the arguments array length is equal to zero (no arguments passed).
@@ -2086,7 +2090,7 @@ function BashUtils_InitModules()
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
 		# Calling the function which processes the « module » argument and its parameters, along with the « main » module.
-        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index" || return 1;
+        BU::ModuleInit::ProcessFirstModuleParameters "$module" "$v_index" || { v_loop_error='error'; break; }
 
 		# -----------------------------------------------
 
@@ -2158,7 +2162,7 @@ function BashUtils_InitModules()
 
                 # Listing all the installed modules in the user's hard drive.
                 # No need to call the function "BU::ModuleInit::AskPrintLog" function, it's already called in the function "BU::ModuleInit::ListInstalledModules".
-                BU::ModuleInit::ListInstalledModules || return 1;
+                BU::ModuleInit::ListInstalledModules || v_loop_error="error"; break;
 
                 return 1;
             else
@@ -2168,7 +2172,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; return 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; v_loop_error="error"; break; }
             fi
 
             # -----------------------------------------------
@@ -2197,7 +2201,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; return 1; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; v_loop_error="error"; break; }
 
                 # shellcheck disable=SC2059
                 BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";
@@ -2207,7 +2211,7 @@ function BashUtils_InitModules()
         # Incrementing the modules array index variable.
         v_index="$(( v_index+1 ))";
 
-	done;
+	done; if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
 	# Sourcing the user defined aliases file if the library is directly used from a script file.
 	if ! BU::IsInScript && [ -f "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ] && [ -n "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" ]; then BU::Main::Files::SourceFile "$__BU_MAIN_PROJECT_ALIAS_FILE_PATH" || return 1; fi

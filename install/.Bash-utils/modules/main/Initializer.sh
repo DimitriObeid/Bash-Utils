@@ -57,16 +57,23 @@ fi
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 function BU::Main::Initializer::SourceLibrary()
 {
+    #**** Variables ****
+    local v_loop_error;
+
+    #**** Code ****
+
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
+
+	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
@@ -77,13 +84,20 @@ function BU::Main::Initializer::SourceLibrary()
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
 function BU::Main::Initializer::SourceConfig()
 {
+    #**** Variables ****
+    local v_loop_error;
+
+    #**** Code ****
+
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); return 1; }
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
-	done
+	done;
+
+	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU::ModuleInit::Msg;
@@ -106,7 +120,7 @@ function BU::Main::Initializer::SourceConfig()
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")";
 
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; }
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; };
 
 # -----------------------------------------------
 
@@ -303,15 +317,15 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                             echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" >&2;
                             echo >&2;
 
-                            BU::Main::Initializer::Usage; exit 1;
+                            BU::Main::Initializer::Usage; v_loop_error='error'; break;
             esac
 
         # Else, if an unsupported value is passed as « main » module's argument.
         else
             # Temporary situation.
-            BU::Main::Initializer::Usage; exit 1;
+            BU::Main::Initializer::Usage; v_loop_error='error'; break;
         fi
-    done
+    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU::IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
 fi
 
 # Checking if a new default status global variable's value was modified (passed as one of the « main » module's « --stat-* » arguments).
@@ -346,14 +360,14 @@ done
 #### STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceLibrary;
+BU::Main::Initializer::SourceLibrary || { if BU::IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceConfig;
+BU::Main::Initializer::SourceConfig || { if BU::IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
