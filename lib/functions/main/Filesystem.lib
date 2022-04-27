@@ -138,7 +138,7 @@ function BU::Main::Filesystem::GetFSDevice()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -167,7 +167,7 @@ function BU::Main::Filesystem::GetFSTotalSize()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -196,7 +196,7 @@ function BU::Main::Filesystem::GetFSMountPoint()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -224,7 +224,7 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU::IsOSHaiku && {
@@ -269,7 +269,7 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then  BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU::IsOSHaiku && {
@@ -314,7 +314,7 @@ function BU::Main::Filesystem::GetFSAvailableSize()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -343,7 +343,7 @@ function BU::Main::Filesystem::GetFSType()
     #**** Code ****
     if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -392,7 +392,7 @@ function BU::Main::Filesystem::Chown()
     if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
@@ -496,7 +496,7 @@ function BU::Main::Filesystem::ChownRec()
     if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE"; fi
+    if ! BU::Main::Checkings::CheckRootEUID; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$p_path" ]; then
