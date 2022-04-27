@@ -369,17 +369,17 @@ function BU::Main::Args::GetFuncArgsArrayValues()
         BU::EchoNewstep "Values stored in the $v_funcname function's array of arguments :";
 
         for i in "${pa_argsArray[@]}"; do
-            BU::EchoMsg "Value [$v_index] : $i" || { v_loop_error='error'; break; }
+            BU::EchoMsg "Value [$v_index] : $i" || { local C="$?"; v_loop_error='error'; break; }
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
-                BU::Newline || { v_loop_error='error'; break; };
+                BU::Newline || { local C="$?"; v_loop_error='error'; break; };
             fi
 
             v_index=$(( v_index+1 ));
-        done; if [ "${v_loop_error,,}" = 'error' ]; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        done; if [ "${v_loop_error,,}" = 'error' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     }
 
     if [ -n "$v_echo" ] && [ "${v_echo,,}" = 'false' ]; then
@@ -1112,6 +1112,46 @@ function BU::Main::Args__Decho::Decho()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
 	#**** Code ****
+	# If the text's color code is not an integer.
+	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
+
+		# Changing the
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		fi
+
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
+
+        local C="$?";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
+    # If the background's color code is not an integer.
+    if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		fi
+
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
+
+        local C="$1";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+	fi
+
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
