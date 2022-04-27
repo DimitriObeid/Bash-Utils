@@ -539,7 +539,7 @@ function BU::Main::Args::GetFFL()
 
 # Printing the file, function and line.
 
-# This function is called in the "BU::Main::Args::Argc" and "BU::Main::Echo::__EchoOutput" functions, for example.
+# This function is called in the "BU::Main::Args::Argc()" and "BU::Main::Echo::__EchoOutput()" functions, for example.
 function BU::Main::Args::PrintFFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -565,7 +565,7 @@ function BU::Main::Args::PrintFFL()
 
 # Printing the file, function and line.
 
-# Please call this function after the advice given as second argument for the "BU::Main::Args::PrintBadOption" function.
+# Please call this function after the advice given as second argument for the "BU::Main::Args::PrintBadOption()" function.
 function BU::Main::Args::PrintFFLErrorOccured()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -595,7 +595,7 @@ function BU::Main::Args::PrintFFLErrorOccured()
 
 # Checking if any mandatory arguments are provided for any function.
 
-# This function is called in the "BU::Main::Args::PrintBadOption" function, DO NOT call the "BU::Main::Args::PrintBadOption" function here.
+# This function is called in the "BU::Main::Args::PrintBadOption()" function, DO NOT call the "BU::Main::Args::PrintBadOption()" function here.
 function BU::Main::Args::Argc()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -689,7 +689,7 @@ function BU::Main::Args::Argc()
 }
 
 # Checking if any mandatory arguments are provided for any function AND the file, function and line number
-# informations simultaneously, by calling both the "BU::Main::Args::Argc" and "BU::Main::Args::GetFFL" functions.
+# informations simultaneously, by calling both the "BU::Main::Args::Argc" and "BU::Main::Args::GetFFL()" functions.
 function BU::Main::Args::GetArgc-FFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -722,7 +722,7 @@ function BU::Main::Args::GetArgc-FFL()
 ## CATEGORY : FILES PATHS CHECKING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Checkings::CheckProjectRelatedFile" function.
+# "BU::Main::Checkings::CheckProjectRelatedFile()" function.
 function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -778,7 +778,7 @@ function BU::Main::Args__Checkings::CheckProjectRelatedFile()
 ## CATEGORY : GET COMMAND OUTPUTS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::CMDS::GetCommandPath" function.
+# "BU::Main::CMDS::GetCommandPath()" function.
 function BU::Main::Args__CMDS::GetCommandPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -814,7 +814,7 @@ function BU::Main::Args__CMDS::GetCommandPath()
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PROCESSING FUNCTIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::ProcessingDir" function.
+# "BU::Main::ProcessingDir()" function.
 function BU::Main::Args__Directories::ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -860,7 +860,7 @@ function BU::Main::Args__Directories::ProcessingDir()
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - FOLDER CREATION FUNCTIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Directories::OverwriteDir" function.
+# "BU::Main::Directories::OverwriteDir()" function.
 function BU::Main::Args__Directories::OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -893,7 +893,7 @@ function BU::Main::Args__Directories::OverwriteDir()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Directories::Make" function.
+# "BU::Main::Directories::Make()" function.
 function BU::Main::Args__Directories::Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -934,7 +934,7 @@ function BU::Main::Args__Directories::Make()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Directories::MakePath" function.
+# "BU::Main::Directories::MakePath()" function.
 function BU::Main::Args__Directories::MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -972,7 +972,7 @@ function BU::Main::Args__Directories::MakePath()
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Directories::GetDirectoryName" function.
+# "BU::Main::Directories::GetDirectoryName()" function.
 function BU::Main::Args__Directories::GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -997,7 +997,7 @@ function BU::Main::Args__Directories::GetDirectoryName()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Directories::GetDirectoryPath" function.
+# "BU::Main::Directories::GetDirectoryPath()" function.
 function BU::Main::Args__Directories::GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1022,7 +1022,7 @@ function BU::Main::Args__Directories::GetDirectoryPath()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Directories::GetParentDirectoryName" function.
+# "BU::Main::Directories::GetParentDirectoryName()" function.
 function BU::Main::Args__Directories::GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1049,7 +1049,7 @@ function BU::Main::Args__Directories::GetParentDirectoryName()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Directories::GetParentDirectoryPath" function.
+# "BU::Main::Directories::GetParentDirectoryPath()" function.
 function BU::Main::Args__Directories::GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1093,7 +1093,7 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
 ## CATEGORY : EXIT AND RETURN CODES HANDLING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Errors::SetLastReturnValue" function.
+# "BU::Main::Errors::SetLastReturnValue()" function.
 BU::Main::Args__Errors::SetLastReturnValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1137,7 +1137,7 @@ BU::Main::Args__Errors::SetLastReturnValue()
 ## CATEGORY : TEXT FILE PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Files::ProcessingFile" function.
+# "BU::Main::Files::ProcessingFile()" function.
 function BU::Main::Args__Files::ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1162,7 +1162,7 @@ function BU::Main::Args__Files::ProcessingFile()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Files::OverwriteFile" function.
+# "BU::Main::Files::OverwriteFile()" function.
 function BU::Main::Args__Files::OverwriteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1203,7 +1203,7 @@ function BU::Main::Args__Files::OverwriteFile()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Files::Make" function's arguments.
+# "BU::Main::Files::Make()" function's arguments.
 function BU::Main::Args__Files::Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1252,7 +1252,7 @@ function BU::Main::Args__Files::Make()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Files::MakePath" function.
+# "BU::Main::Files::MakePath()" function.
 function BU::Main::Args__Files::MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1283,7 +1283,7 @@ function BU::Main::Args__Files::MakePath()
 ## CATEGORY : SETTING FILE INFORMATIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Files::SetLastAccess" function.
+# "BU::Main::Files::SetLastAccess()" function.
 function BU::Main::Args__Files::SetLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1355,7 +1355,9 @@ function BU::Main::Args__Files::Compress()
         if  [ "${p_cmd^^}" = 'TGZ' ]
         || [[ "${p_cmd,,}" = tar?(.)gz ]] \
         || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]] \
-        || [[ "${p_cmd^^}" = TBZ?(2) ]]; then local lineno="$LINENO";
+        || [[ "${p_cmd^^}" = TBZ?(2) ]] \
+        || [ "${p_cmd^^}" = 'TXZ' ] \
+        || [[ "${p_cmd,,}" = tar?(.)xz ]]; then local lineno="$LINENO";
 
             BU::Main::Args::PrintBadOption '!CMDSTR' \
                 "Please pass an existing / installed compression command name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -1410,7 +1412,7 @@ function BU::Main::Args__Files::Uncompress()
 ## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Filesystem::IsPartitionFull" function.
+# "BU::Main::Filesystem::IsPartitionFull()" function.
 function BU::Main::Args__Filesystem::IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1482,7 +1484,7 @@ function BU::Main::Args__Filesystem::GetFSInfos()
 ## CATEGORY : NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Filesystem::Chown" function.
+# "BU::Main::Filesystem::Chown()" function.
 function BU::Main::Args__Filesystem::Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1532,7 +1534,7 @@ function BU::Main::Args__Filesystem::Chown()
 ## CATEGORY : RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Filesystem::ChownRec" function.
+# "BU::Main::Filesystem::ChownRec()" function.
 function BU::Main::Args__Filesystem::ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1629,7 +1631,7 @@ function BU::Main::Args__Text::CutBeforeAndAfterFirstAndLastDelims()
 ## CATEGORY : CUTTING TEXT
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Text::CutSubStringAfterNthDelim" function.
+# "BU::Main::Text::CutSubStringAfterNthDelim()" function.
 function BU::Main::Args__Text::CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1668,7 +1670,7 @@ function BU::Main::Args__Text::CutSubStringAfterNthDelim()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Text::CutSubStringBeforeNthDelim" function.
+# "BU::Main::Text::CutSubStringBeforeNthDelim()" function.
 function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1707,12 +1709,18 @@ function BU::Main::Args__Text::CutSubStringBeforeNthDelim()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# "BU::Main::Text::DeleteLettersInString()" function
+function BU::Main::Args__Text::DeleteLettersInString()
+{
+
+}
+
 # -----------------------------------------------
 
 ## CATEGORY : GETTING TEXT
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Text::GetCharacterOccurences" function.
+# "BU::Main::Text::GetCharacterOccurences()" function.
 function BU::Main::Args__Text::GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1750,7 +1758,7 @@ function BU::Main::Args__Text::GetCharacterOccurences()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Args__Text::GetSubStringAfterDelim" function.
+# "BU::Main::Args__Text::GetSubStringAfterDelim()" function.
 function BU::Main::Args__Text::GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1789,7 +1797,7 @@ function BU::Main::Args__Text::GetSubStringAfterDelim()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Text::GetSubStringBeforeDelim" function.
+# "BU::Main::Text::GetSubStringBeforeDelim()" function.
 function BU::Main::Args__Text::GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1828,7 +1836,7 @@ function BU::Main::Args__Text::GetSubStringBeforeDelim()
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU::Main::Text::GetSubStringOccurences" function.
+# "BU::Main::Text::GetSubStringOccurences()" function.
 function BU::Main::Args__Text::GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".

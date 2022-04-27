@@ -786,7 +786,7 @@ function BU::Main::Files::Compress()
     local p_cmd=$1  # String    - Default : NULL    - Compression command.
     local p_opts=$2 # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
     local p_name=$3 # String    - Default : NULL    - Archive's name.
-    unset 3;
+    shift 3;
 
     local p_path=("$@");    # Array - Default : NULL    - Paths to the files / folders to archivate.
 
@@ -813,17 +813,24 @@ function BU::Main::Files::Compress()
             return 1;
         }
 
+    # Else, if the Bzip2 compression format is wanted.
+    elif [[ "${p_cmd^^}" = TBZ?(2) ]] || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]]; then
+        tar "-jcf$p_opts" "" "" || {
+            # TODO : Gérer les cas d'erreur de compression au format Bzip2.
+            return 1;
+        }
+
     # Else, if the Gzip compression format is wanted.
     elif [ "${p_cmd^^}" = 'TGZ' ] || [[ "${p_cmd,,}" = tar?(.)gz ]]; then
-        tar -zcf"$p_opts" "$p_name" "${p_path[@]}" || {
+        tar "-zcf$p_opts" "$p_name" "${p_path[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
-    # Else, if the Bzip2 compression format is wanted.
-    elif [[ "${p_cmd^^}" = TBZ?(2) ]] || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]]; then
-        tar -jcf"$p_opts" "" "" || {
-            # TODO : Gérer les cas d'erreur de compression au format Bzip2.
+    # Else, if the LZMA compression is wanted for a Tar archive.
+    elif [ "${p_cmd^^}" = 'TXZ' ] || [[ "${p_cmd,,}" = tar?(.)xz ]]; then
+        tar "JCxf$p_opts" "$p_name" "${p_path[@]}" || {
+            # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
