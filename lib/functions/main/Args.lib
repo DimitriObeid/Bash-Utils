@@ -812,6 +812,76 @@ function BU::Main::Args__CMDS::GetCommandPath()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### MAIN MODULE'S "Decho.lib" FILE'S FUNCTIONS
+
+## CATEGORY : TEXT WRITING AND DECORATION (FORMATTING)
+## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
+
+# "BU::Decho()" function.
+function BU::Main::Args__Decho::Decho()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+	#**** Parameters ****
+    local p_string=$1;          # String	- Default : NULL	- String to display.
+    local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
+    local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
+
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+	#**** Code ****
+	# If the text's color code is not an integer.
+	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
+
+		# Changing the
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		fi
+
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
+
+        local C="$?";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
+    # If the background's color code is not an integer.
+    if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
+		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
+			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+
+			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		fi
+
+        BU::Main::Args::PrintBadOption '!intpos' \
+            "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
+
+        local C="$1";
+
+		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
+
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+	fi
+
+	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### "Directories.lib" FILE'S FUNCTION
 
 ## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PROCESSING FUNCTIONS
@@ -1083,76 +1153,6 @@ function BU::Main::Args__Directories::GetParentDirectoryPath()
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### MAIN MODULE'S "Decho.lib" FILE'S FUNCTIONS
-
-## CATEGORY : TEXT WRITING AND DECORATION (FORMATTING)
-## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
-
-# "BU::Decho()" function.
-function BU::Main::Args__Decho::Decho()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
-
-	#**** Parameters ****
-    local p_string=$1;          # String	- Default : NULL	- String to display.
-    local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
-    local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
-
-    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
-
-	#**** Code ****
-	# If the text's color code is not an integer.
-	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
-
-		# Changing the
-		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
-			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
-
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-		fi
-
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
-
-        local C="$?";
-
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
-
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
-    fi
-
-    # If the background's color code is not an integer.
-    if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
-		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
-			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
-
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-		fi
-
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
-
-        local C="$1";
-
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
-
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
-	fi
-
-	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
