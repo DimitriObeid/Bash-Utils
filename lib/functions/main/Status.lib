@@ -533,7 +533,7 @@ function BU::Main::Status::ChangeSTAT_ECHO()
 
                     __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                    local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 }
             done; if [ "${v_loop_error,,}" = 'error' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
