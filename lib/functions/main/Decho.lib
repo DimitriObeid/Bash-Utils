@@ -65,7 +65,7 @@ function BU::Main::Decho::SetBGColor()
 
 	#**** Parameters ****
 	local p_color_code=$1;     # Int       # Default : NULL    - Color code
-	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the creation of the background color's temporary file.
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
@@ -132,7 +132,7 @@ function BU::Main::Decho::SetTextColor()
 
 	#**** Parameters ****
 	local p_color_code=$1;     # Int       # Default : NULL    - Color code
-	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the creation of the text color's temporary file.
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
 
 	#**** Code ****
     # Checking first if the target partition is not fully used.
