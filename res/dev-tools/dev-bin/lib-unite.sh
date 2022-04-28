@@ -11,6 +11,12 @@
 # Authorization to delete the generated file.
 __BU_ARG_RM="$1";
 
+# Delete empty lines.
+__BU_ARG_DEL_EMPTY_LINES="$2";
+
+# Delete comments that are not on the same line as a piece of code.
+__BU_ARG_DEL_LINE_COMMENTS="$3";
+
 # -----------------------------------------------
 
 
@@ -24,7 +30,7 @@ __BU_ARG_RM="$1";
 # Getting the path of the library's root path from the path file.
 if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
 
-elif [ -d '~/.Bash-utils/Bash-utils' ]; then __BU_ROOT_PATH='~/.Bash-utils/Bash-utils';
+elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-utils/Bash-utils";
 
 else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
 
@@ -32,6 +38,12 @@ fi
 
 # Path of the modules initializer file.
 __BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
+
+__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES="$__BU_ROOT_PATH/Bash-utils-nolines.sh";
+
+__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE="$__BU_ROOT_PATH/Bash-utils-no-line-comments--base.sh";
+
+__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES="$__BU_ROOT_PATH/Bash-utils-no-line-comments--no-lines.sh";
 
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer"
@@ -179,6 +191,66 @@ echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH") character
 echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH") lines";
 echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH") columns";
 echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH") words";
+
+# Deleting the empty lines if the awaited value is passed as script's second argument.
+if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" = 'rmlines' ]; then
+    echo;
+
+    cat "$__BU_MAIN_FULL_FILE_PATH" | sed '/^[[:space:]]*$/d' > "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
+
+    PrintLine;
+
+    echo "Library statistics (without newlines) :"; echo;
+
+    echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES")" '' 1000)";
+    echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES") characters";
+    echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES") lines";
+    echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES") columns";
+    echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES") words";
+fi
+
+# Deleting the comments in the "$__BU_MAIN_FULL_FILE_PATH" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
+if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-base' ]; then
+    echo;
+
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
+        cat "$__BU_MAIN_FULL_FILE_PATH" | sed '/^#/d' < "$__BU_MAIN_FULL_FILE_PATH" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE";
+
+        rm "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
+
+        PrintLine;
+
+        echo "Library statistics (with empty lines and without line comments) :"; echo;
+
+        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE")" '' 1000)";
+        echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE") characters";
+        echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE") lines";
+        echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE") columns";
+        echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE") words";
+    fi
+fi
+
+# Deleting the comments in the "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
+if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-lines' ]; then
+    echo;
+
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" ]; then
+        cat "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" | sed '/^#/d' < "$__BU_MAIN_FULL_FILE_PATH" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES";
+
+        rm "$__BU_MAIN_FULL_FILE_PATH";
+
+        PrintLine;
+
+        echo "Library statistics (without empty lines and line comments) :"; echo;
+
+        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES")" '' 1000)";
+        echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES") characters";
+        echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES") lines";
+        echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES") columns";
+        echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES") words";
+    fi
+
+fi
 
 # Deleting the generated file if the awaited value is passed as script's first argument.
 if [ "${__BU_ARG_RM,,}" = 'rm' ]; then

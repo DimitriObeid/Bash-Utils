@@ -1225,7 +1225,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file";
 
                         v_loop_error='error'; break;
-                    }
+                    }; echo "Sourced the Status.conf file"; echo;
 
                     case "${module_args,,}" in
 
