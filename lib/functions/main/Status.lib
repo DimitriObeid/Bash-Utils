@@ -428,7 +428,6 @@ function BU::Main::Status::CheckSTAT_USER_OS()
     return 0;
 }
 
-
 # Checking all the project's status variables values if multiple values had been modified.
 function BU::Main::Status::CheckProjectStatusVars()
 {
@@ -473,12 +472,12 @@ __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALU
 #   $3  --> Int     : line where the change was made.
 
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function BU::Main::Status::ChangeSTAT_DECHO { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU::Main::Status::CheckSTAT_DECHO "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_DECHO() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU::Main::Status::CheckSTAT_DECHO "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
 
 ## VERY IMPORTANT : DO NOT CALL ANY "BU::Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
-function BU::Main::Status::ChangeSTAT_ECHO
+function BU::Main::Status::ChangeSTAT_ECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -520,18 +519,16 @@ function BU::Main::Status::ChangeSTAT_ECHO
             for i in "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; do
                 echo "$i" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || \
                 {
-                    local __bu_main_stat_log_redirect_backup="$__BU_MAIN_STAT_LOG_REDIRECT";
-                    __BU_MAIN_STAT_LOG_REDIRECT="";
+                    local __bu_main_stat_log_redirect_backup="$__BU_MAIN_STAT_LOG_REDIRECT"; __BU_MAIN_STAT_LOG_REDIRECT="";
 
                     echo >&2;
 
                     BU::EchoError "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
                     BU::EchoError "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
-
                     echo >&2;
+
                     BU::EchoError "Please check the cause of this bug" >&2;
                     BU::EchoError "The cause may be a problem of read and / or write permission" >&2;
-
                     echo >&2;
 
                     __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
@@ -558,8 +555,11 @@ function BU::Main::Status::ChangeSTAT_ECHO
 }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function BU::Main::Status::ChangeSTAT_ERROR
+function BU::Main::Status::ChangeSTAT_ERROR()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
+
     __BU_MAIN_STAT_ERROR="$1";
 
     BU::Main::Status::CheckSTAT_ERROR "$2" "$3" || {
@@ -573,7 +573,7 @@ function BU::Main::Status::ChangeSTAT_ERROR
 
 # Changing the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
-function BU::Main::Status::ChangeSTAT_INITIALIZING      {
+function BU::Main::Status::ChangeSTAT_INITIALIZING()    {
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
@@ -584,25 +584,25 @@ function BU::Main::Status::ChangeSTAT_INITIALIZING      {
 }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function BU::Main::Status::ChangeSTAT_LOG               { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU::Main::Status::CheckSTAT_LOG           "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_LOG()             { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU::Main::Status::CheckSTAT_LOG           "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function BU::Main::Status::ChangeSTAT_LOG_REDIRECT      { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU::Main::Status::CheckSTAT_LOG_REDIRECT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_LOG_REDIRECT()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU::Main::Status::CheckSTAT_LOG_REDIRECT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function BU::Main::Status::ChangeSTAT_OPERATE_ROOT      { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_OPERATE_ROOT()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_HEADER       { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER   "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_TIME_HEADER()     { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER   "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_NEWLINE      { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_NEWLINE  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_TIME_NEWLINE()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_NEWLINE  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_TXT          { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT      "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_TIME_TXT()        { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT      "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function BU::Main::Status::ChangeSTAT_TXT_FMT           { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU::Main::Status::CheckSTAT_TXT_FMT       "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU::Main::Status::ChangeSTAT_TXT_FMT()         { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU::Main::Status::CheckSTAT_TXT_FMT       "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # -----------------------------------------------
 

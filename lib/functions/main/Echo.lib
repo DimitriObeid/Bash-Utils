@@ -58,6 +58,8 @@ function BU::Main::Echo::__Debug()
     echo "----------------------------------------" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
     echo "DEBUGGING THE FUNCTION $1" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 
+    echo; echo "Waiting for the timer for the $1() function to elapse"; echo;
+
     BU::Main::Echo::__EchoVoid;
 }
 
