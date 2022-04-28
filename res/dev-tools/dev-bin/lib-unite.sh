@@ -22,7 +22,13 @@ __BU_ARG_RM="$1";
 ## PATHS
 
 # Getting the path of the library's root path from the path file.
-__BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
+if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
+
+elif [ -d '~/.Bash-utils/Bash-utils' ]; then __BU_ROOT_PATH='~/.Bash-utils/Bash-utils';
+
+else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
+
+fi
 
 # Path of the modules initializer file.
 __BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
