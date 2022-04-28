@@ -88,10 +88,19 @@ function BU::Main::Initializer::SourceConfig()
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
+    if [ "${__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS,,}" = 'true' ]; then
+        # Deleting the index 1 of the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]" array,
+        # which contains the path to the "Status.conf" configuration file, which was included just
+        # before the processing of the status global variables vaues given as main module's arguments.
+        unset '__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[1]';
+
+        # Shifting each array's indexes which followed the deleted index.
+        __BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY=( "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}" );
+    fi
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
@@ -120,6 +129,7 @@ function BU::Main::Initializer::SourceConfig()
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")";
 
+# shellcheck disable=SC1090
 source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; };
 
 # -----------------------------------------------
@@ -128,7 +138,10 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFail
 
 # Sourcing each needed configuration files listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
 
-# Remember that this file (Project.conf) does not call any library functions, so it is totally safe to include this file.
+# Remember that "Project.conf", the file whose path is stored in the "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" global variable,
+# does not call any library functions from the main module, so it is totally safe to include this file.
+
+# shellcheck disable=SC1090
 source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; }
 
 # -----------------------------------------------
@@ -321,6 +334,8 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             BU::Main::Initializer::Usage; v_loop_error='error'; break;
             esac
+
+            if [ -z "$__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS" ]; then __BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS='true'; fi
 
         # Else, if an unsupported value is passed as « main » module's argument.
         else

@@ -135,17 +135,21 @@ function BU::Main::Decho::SetTextColor()
 	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
 
 	#**** Code ****
+    shopt -s extglob;
+
     # Checking first if the target partition is not fully used.
-	if [[ "${p_init_ctrl,,}" != ?(-)?(-)init ]]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+    if [[ "${p_init_ctrl,,}" != *(-)init ]]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+
+    shopt -u extglob;
 
     # If the script is allowed to format text.
 	if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
             tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
-            if [[ "${p_init_ctrl,,}" == ?(-)?(-)init ]]; then return 0;
+            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)init ]]; then shopt -u extglob; return 0;
 
-            else
+            else shopt -u extglob;
                 # Checking if the "bgcolors.tmp" (background color) file exists.
                 if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;

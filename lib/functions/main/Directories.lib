@@ -306,14 +306,19 @@ function BU::Main::Directories::GetDirectoryName()
     #**** Parameters ****
     local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
 
+    #**** Variables ****
+    local result;
+
     #**** Code ****
     if ! BU::Main::Args__Directories::GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     if [ -d "$p_path" ]; then
-        shopt -s extglob;           # enable +(...) glob syntax
+        shopt -s extglob;           # Enable +(...) glob syntax.
 
-        result=${p_path%%+(/)};     # trim however many trailing slashes exist
-        result=${result##*/}:       # remove everything before the last / that still remains
+        result=${p_path%%+(/)};     # Trim however many trailing slashes exist
+        result=${result##*/}:       # Remove everything before the last / that still remains
+
+        shopt -u extglob;           # Disable +(...) glob syntax.
 
         echo -e "$result";
 
@@ -364,6 +369,9 @@ function BU::Main::Directories::GetParentDirectoryName()
     local p_path=$1;            # String	- Default : NULL    - Path of the child file or folder.
     local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
+    #**** Variables ****
+    local result;
+
     #**** Code ****
     if ! BU::Main::Args__Directories::GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
@@ -377,9 +385,12 @@ function BU::Main::Directories::GetParentDirectoryName()
         p_path="$v_parent";
     done
 
-    shopt -s extglob;       # enable +(...) glob syntax.
-    result=${p_path%%+(/)};	# trim however many trailing slashes exist.
-    result=${result##*/};   # remove everything before the last / that still remains.
+    shopt -s extglob;       # Enable +(...) glob syntax.
+
+    result=${p_path%%+(/)};	# Trim however many trailing slashes exist.
+    result=${result##*/};   # Remove everything before the last / that still remains.
+
+    shopt -u extglob;       # Disable +(...) glob syntax.
 
     echo -e "$result";
 }
@@ -393,8 +404,11 @@ function BU::Main::Directories::GetParentDirectoryPath()
         "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
 
     #**** Parameters ****
-    local p_path=$1;            # String   	- Default : NULL    - Path of the child file or folder.
-    local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=$1;            # String    - Default : NULL    - Path of the child file or folder.
+    local p_iterations=${2-1};  # Int       - Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
+
+    #**** Variables ****
+    local result;
 
     #**** Code ****
     if ! BU::Main::Args__Directories::GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
@@ -414,8 +428,14 @@ function BU::Main::Directories::GetParentDirectoryPath()
             p_path="$v_parent";
         done
 
-        shopt -s extglob;       # enable +(...) glob syntax.
-        result=${p_path%%+(/)};	# trim however many trailing slashes exist.
+        # Enable +(...) glob syntax.
+        shopt -s extglob;
+
+        # Trim however many trailing slashes exist.
+        result=${p_path%%+(/)};
+
+        # Disable +(...) glob syntax.
+        shopt -u extglob;
 
         echo -e "$result";
     else

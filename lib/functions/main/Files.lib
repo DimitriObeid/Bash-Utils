@@ -771,7 +771,16 @@ __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive
 
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS::(un)compression-functions";
 
-#
+# Adding files or folders into an archive.
+function BU::Main::Files::AddToArchive()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+}
+
+# Compressing archives according to the used compression method.
 
 # Featured functions and files from the "functions" folder :
 #   -
@@ -783,32 +792,34 @@ function BU::Main::Files::Compress()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-    local p_cmd=$1  # String    - Default : NULL    - Compression command.
-    local p_opts=$2 # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3 # String    - Default : NULL    - Archive's name.
+    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
+    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_name=$3;        # String    - Default : NULL    - Archive's name.
     shift 3;
 
-    local p_path=("$@");    # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
-    if BU::IsArrayEmpty "${p_path[@]}"; then local lineno="$LINENO";
+    if BU::IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_path[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
+    # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Compress()", as this is an optional current function's parameter.
+    # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
     if ! BU::Main::Args__Files::Compress "$cmd" "$opts" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the 7-Zip compression format is wanted.
     if [ "$p_cmd" == '7z' ]; then
-        7z "$p_opts" "" "" || {
+        7z a "$p_opts" "$p_opts" "$p_name" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format 7-Zip.
             return 1;
         }
 
     # Else, if the BinHex compression format is wanted (works on Apple operating systems).
     elif [ "$p_cmd" == 'binhex' ]; then
-        binhex "$p_opts" "${p_path[@]}" > "$p_name"|| {
+        binhex "$p_opts" "${p_paths[@]}" > "$p_name"|| {
             # TODO : Gérer les cas d'erreur de compression au format BinHex.
             return 1;
         }
@@ -822,27 +833,43 @@ function BU::Main::Files::Compress()
 
     # Else, if the Gzip compression format is wanted.
     elif [ "${p_cmd^^}" = 'TGZ' ] || [[ "${p_cmd,,}" = tar?(.)gz ]]; then
-        tar "-zcf$p_opts" "$p_name" "${p_path[@]}" || {
+        tar "-zcf$p_opts" "$p_name" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the LZMA compression is wanted for a Tar archive.
     elif [ "${p_cmd^^}" = 'TXZ' ] || [[ "${p_cmd,,}" = tar?(.)xz ]]; then
-        tar "JCxf$p_opts" "$p_name" "${p_path[@]}" || {
+        tar "JCxf$p_opts" "$p_name" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the zip compression format is wanted.
     elif [ "$p_cmd" == 'zip' ]; then
-        zip "$p_opts" "$p_name" "${p_path[@]}" || {
+        zip "$p_opts" "$p_name" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format zip.
             return 1;
         }
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Deleting a file or a folder stored in an archive.
+function BU::Main::Files::DeleteInArchive()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+
+    #**** Parameters ****
+    local p_cmd=$1;     # String    - Default : NULL    - Compression command.
+    local p_opts=$2;    # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_name=$3;    # String    - Default : NULL    - Archive's name.
+
+    #**** Code ****
 }
 
 # Uncompressing archives according to the used compression method.
@@ -859,18 +886,20 @@ function BU::Main::Files::Uncompress()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-    local p_cmd=$1  # String    - Default : NULL    - Compression command.
-    local p_opts=$2 # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3 # String    - Default : NULL    - Archive's name.
-    local p_path=$4 # String    - Default : NULL    - Path to the file/folder to uncompress.
+    local p_cmd=$1;     # String    - Default : NULL    - Compression command.
+    local p_opts=$2;    # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_name=$3;    # String    - Default : NULL    - Archive's name.
+    local p_dest=$4;    # String    - Default : NULL    - Folder destination of the uncompressed data.
 
     #**** Code ****
-    if ! BU::Main::Args__Files::Compress "$cmd" "$opts" "$p_name" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
-#     # On exécute la commande de décompression en passant en arguments ses options et le chemin vers l'archive.
-#     "$cmd $opts $p_path"
-#     BU::Main::Errors::HandleErrors "$?" "${FUNCNAME[0]} : LA DÉCOMPRESSION DE L'ARCHIVE $(BU::DechoHighlightPath "$p_name") A ÉCHOUÉE"
-#     BU::EchoSuccess "La décompression de l'archive $(BU::DechoHighlightPath "$p_name") s'est effectuée avec brio."
-#     BU::Newline;
+    # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Uncompress()", as this is an optional current function's parameter.
+    # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
+    if ! BU::Main::Args__Files::Compress "$cmd" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+
+    # If the 7-Zip compression format is wanted.
+    if [ "$p_cmd" == '7z' ]; then
+        7z x "" "" "" "";
+    fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
