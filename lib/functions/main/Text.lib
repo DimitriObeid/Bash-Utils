@@ -360,7 +360,7 @@ BU::Main::Text::GetSubStringAfterDelim()
     local p_delim=$2;               # Char      - Default : NULL    - Delimiter
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
-    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
+    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
@@ -395,7 +395,7 @@ BU::Main::Text::GetSubStringBeforeDelim()
     local p_delim=$2;               # Char      - Default : NULL    - Delimiter
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
-    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
+    local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
@@ -461,7 +461,7 @@ function BU::Main::Text::GetSubStringOccurences()
     #**** Parameters ****
     local p_string=$1;  # String    - Default : NULL    - String to process.
     local p_target=$2;  # String    - Default : NULL    - Targeted sub-string.
-    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringBeforeDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
+    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringBeforeDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
 
 	#**** Variables ****
 	local tmp;
@@ -558,7 +558,7 @@ function BU::Main::Text::ReverseStringWordsOrder()
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
-    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringAfterDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
+    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU::Main::Text::GetSubStringAfterDelim()" function, which is called in the "BU::ModuleInit::ParseCSVLang()" function).
 
 
 	#**** Variables ****

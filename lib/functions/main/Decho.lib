@@ -63,49 +63,52 @@ function BU::Main::Decho::SetBGColor()
         "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
         "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING";
 
-	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false';
-
 	#**** Parameters ****
-	# $1 --> Color code
+	local p_color_code=$1;     # Int       # Default : NULL    - Color code
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the creation of the background color's temporary file.
 
 	#**** Code ****
-    # If the script is allowed to format text.
+	# Checking first if the target partition is not fully used.
+	if [ "${p_init_ctrl,,}" != '--init' ]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+
+	# If the script is allowed to format text.
     if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
             tput setab "$1" || { echo -ne "\e[" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
-            # Checking if the "bgcolors.tmp" (background color) file exists.
-            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
-                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
-                echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
-                echo >&2;
+            if [ "${p_init_ctrl,,}" = '--init' ]; then return 0;
+                # Checking if the "bgcolors.tmp" (background color) file exists.
+                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                    echo >&2;
 
-                echo "Aborting the script's execution" >&2;
-                echo >&2;
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
 
-                exit 1;
-            }; fi
+                    exit 1;
+                }; fi
 
-            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
-                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
-                echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
-                echo >&2;
+                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                    echo >&2;
 
-                echo "Aborting the script's execution" >&2;
-                echo >&2;
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
 
-                exit 1;
-            }; fi
+                    exit 1;
+                }; fi
 
-            # Redirecting the background's color code in its dedicated temporary file.
-            echo "$1" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
+                # Redirecting the background's color code in its dedicated temporary file.
+                echo "$1" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH";
 
-            [ "$?" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                [ "$?" -ne 0 ] && {
+                    echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
-                exit 1;
-            }
+                    exit 1;
+                }
+            fi
         else
             echo -ne "\e["; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
@@ -127,49 +130,54 @@ function BU::Main::Decho::SetTextColor()
         "$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING" \
         "$__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING";
 
-	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
-
 	#**** Parameters ****
-	# $1 --> Color code
+	local p_color_code=$1;     # Int       # Default : NULL    - Color code
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE BASH UTILS FRAMEWORK INITIALIZATION PROCESS : Forbids the creation of the text color's temporary file.
 
 	#**** Code ****
+    # Checking first if the target partition is not fully used.
+	if [[ "${p_init_ctrl,,}" != ?(-)?(-)init ]]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+
     # If the script is allowed to format text.
 	if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
             tput setaf "$1" || { echo -ne "\e[38;5;$1m" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
-            # Checking if the "bgcolors.tmp" (background color) file exists.
-            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
-                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
-                echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
-                echo >&2;
+            if [ "${p_init_ctrl,,}" = '--init' ]; then return 0;
 
-                echo "Aborting the script's execution" >&2;
-                echo >&2;
+            else
+                # Checking if the "bgcolors.tmp" (background color) file exists.
+                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                    echo >&2;
 
-                exit 1;
-            }; fi
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
 
-            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
-                echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
-                echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
-                echo >&2;
+                    exit 1;
+                }; fi
 
-                echo "Aborting the script's execution" >&2;
-                echo >&2;
+                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                    echo >&2;
 
-                exit 1;
-            }; fi
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
 
-            # Redirecting the text's color code in its dedicated temporary file.
-            echo "$1" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
+                    exit 1;
+                }; fi
 
-            [ "$?" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                # Redirecting the text's color code in its dedicated temporary file.
+                echo "$1" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH";
 
-                exit 1;
-            }
+                [ "$?" -ne 0 ] && {
+                    echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+
+                    exit 1;
+                }
+            fi
         else
             echo -ne "\e[38;5;$1m"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi

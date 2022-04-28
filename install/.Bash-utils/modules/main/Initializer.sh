@@ -127,6 +127,8 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFail
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each needed configuration files listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+
+# Remember that this file (Project.conf) does not call any library functions, so it is totally safe to include this file.
 source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; }
 
 # -----------------------------------------------
