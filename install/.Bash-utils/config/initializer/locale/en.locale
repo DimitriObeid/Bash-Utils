@@ -48,7 +48,13 @@ if [ ! -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
 fi
 
-# -----------------------------------------------
+# -----------------------------------------------*
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SECTION : BEGIN INITIALIZATION PROCESS
 
 ## SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
@@ -60,7 +66,9 @@ __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING TH
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+#### SECTION : INITIALIZER RESOURCES - FUNCTIONS
+
+## SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
 ## FUNCTION : "BU::ModuleInit::AskPrintLog"
 
@@ -469,6 +477,25 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetTextColor() » function in order to color the text with the defined « %s » color's code";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+
+# -----------------------------------------------
+
+## FILE : "Exit.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="This global variable stores the return value of the last command in this situation : « %s »";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__CURRENT_CODE__VAR_DESC="This global variable stores the current return value of the last command, in order to be processed by another function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="the operation was not permitted";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="the target file or folder was not found";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="you don't have the permission to perform this action";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_EXISTS__VAR_DESC="the target file already exists";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_DIR__VAR_DESC="the target is not a directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__IS_DIR__VAR_DESC="the target is a directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__INVALID_ARGUMENT__VAR_DESC="bad argument provided";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="file is too large";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="no space left on the target hard drive's partition";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="read-only file system";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="the name of the file to create is too long";
 
 # -----------------------------------------------
 
