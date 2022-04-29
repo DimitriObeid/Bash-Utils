@@ -483,7 +483,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitia
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="This global variable stores the return value of the last command in this situation : « %s »";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__CURRENT_CODE__VAR_DESC="This global variable stores the current return value of the last command, in order to be processed by another function";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="the operation was not permitted";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="the operation is not permitted";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="the target file or folder was not found";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="you don't have the permission to perform this action";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_EXISTS__VAR_DESC="the target file already exists";
@@ -494,6 +494,16 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="file is
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="no space left on the target hard drive's partition";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="read-only file system";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="the name of the file to create is too long";
+
+# --------
+
+## FILE : "Filesystem.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="This global variable stores the maximum length in bytes of a file name according to a file system. This length is associated with the « %s » file system";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
 
 # -----------------------------------------------
 

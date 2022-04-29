@@ -481,20 +481,31 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitia
 
 ## FICHIER : "Exit.conf"
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="This global variable stores the return value of the last command in this situation : « %s »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="Cette variable globale stocke la valeur de retour de la dernière commande dans cette situation : « %s »";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__CURRENT_CODE__VAR_DESC="This global variable stores the current return value of the last command, in order to be processed by another function";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="the operation was not permitted";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="the target file or folder was not found";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="you don't have the permission to perform this action";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_EXISTS__VAR_DESC="the target file already exists";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_DIR__VAR_DESC="the target is not a directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__IS_DIR__VAR_DESC="the target is a directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__INVALID_ARGUMENT__VAR_DESC="bad argument provided";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="file is too large";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="no space left on the target hard drive's partition";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="read-only file system";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="the name of the file to create is too long";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__CURRENT_CODE__VAR_DESC="Cette variable globale stocke la valeur de retour actuelle de la dernière commande, afin d'être traitée par une autre fonction.";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="l'opération n'est pas permise";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="le dossier ou fichier cible n'a pas été trouvé";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="vous n'avez pas la permission d'effectuer cette action";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_EXISTS__VAR_DESC="le fichier cible existe déjà";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_DIR__VAR_DESC="la cible n'est pas un dossier";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__IS_DIR__VAR_DESC="la cible est un dossier";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__INVALID_ARGUMENT__VAR_DESC="mauvaise argument fourni";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="le fichier est trop gros";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="plus de mémoire de stockage restante sur la partition cible du disque dur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="système de fichier en lecture seule";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="le nom du fichier à créer est trop long";
+
+# --------
+
+## FILE : "Filesystem.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier selon le système de fichier. Cette longueur est associée au système de fichiers « %s »";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
+
 
 # -----------------------------------------------
 
