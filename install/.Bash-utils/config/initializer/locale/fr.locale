@@ -14,11 +14,11 @@
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
+############################# DÉFINITION DES RESSOURCES DE TRADUCTION #############################
 
-#### DEFINING USEFUL VARIABLES
+#### DÉFINITION DE VARIABLES UTILES
 
-## REPEATED MESSAGES
+## MESSAGES REDONDANTS
 
 # Écriture du fichier, de la fonction et du numéro de ligne où une erreur s'est produite.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
@@ -35,6 +35,10 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################## TRAITEMENT DU SCRIPT D'INITIALISATION DES MODULES ########################
+
 #### MESSAGES HORS FONCTION
 
 ## DOSSIER RACINE DES CONFIGURATIONS DE BASH UTILS MANQUANT
@@ -46,6 +50,12 @@ fi
 
 # -----------------------------------------------
 
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SECTION : BEGIN INITIALIZATION PROCESS - DÉBUT DU PROCESSUS D'INITIALISATION
+
 ## SOUS-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION - APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION
 
 __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION DES MODULES";
@@ -56,7 +66,9 @@ __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES - FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION
+#### SECTION : INITIALIZER RESOURCES - FUNCTIONS [|] RESSOUCES D'INITIALISATION - FONCTIONS
+
+## SOUS-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES - FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION
 
 ## FONCTION "BU::ModuleInit::AskPrintLog"
 
@@ -65,7 +77,7 @@ __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le cont
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Entrez votre réponse : ";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Le contenu du fichier de logs du script d'initialisation ne sera pas affiché sur votre écran";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::DisplayInitializedGlobalVarsInfos"
 
@@ -115,7 +127,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="C
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::DisplayInitGlobalVarsInfos"
 
@@ -181,26 +193,26 @@ unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::Msg"
 
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par « --log-display », « --log-shut », « --log-shut-display » ou une valeur vide où vous avez (re)défini la valeur.";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::MsgAbort"
 
 __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
 
-## -----------------------------------------------
+## -------
 
 # FONCTION "BU::ModuleInit::MsgAbort"
 
 __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche pour";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::PrintLog"
 
@@ -223,7 +235,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="Impossible 
 # Instructions post-affichage.
 __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="FIN DE L'AFFICHAGE DES JOURNAUX D'INITIALISATION";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::PrintLogError"
 
@@ -231,11 +243,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="# ERREUR # DESCRIPTION : %s |
 
 # -----------------------------------------------
 
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION - FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES
+## SOUS-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION - FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES
 
 ## FONCTION "BU::ModuleInit::CheckPath"
 
@@ -253,19 +261,19 @@ __BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND="(mauvais chemin de fichier : no
 # Cible spécifiée, mais le type est inconnu.
 __BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR ACTUELLE DU PARAMÈTRE « p_target » EST « %s », ET PAS L'UNE DES VALEURS ATTENDUES : 'D', 'd', 'F' OR 'f'";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::FindPath"
 
 __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE TROUVER CE CHEMIN";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::GetModuleName"
 
 __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Impossible d'obtenir le nom du module depuis le nom de son dossier parent";
 
-# -----------------------------------------------
+# --------
 
 ## FONCTION "BU::ModuleInit::ListInstalledModules"
 
@@ -458,7 +466,24 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### INITIALISATION DU MODULE PRINCIPAL
+#### INITIALISATION DU MODULE PRINCIPAL - INCLUSION DES FICHIERS DE CONFIGURATION
+
+## FICHIER : "Colors.conf"
+
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
+
+#
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### INITIALISATION DU MODULE PRINCIPAL - TRAITEMENT DU FICHIER D'INITIALISATION
 
 ## STEP ONE : DEFINING THE NEEDED RESOURCES - ÉTAPE UN : DÉFINITION DES RESSOURCES NÉCESAIRES
 

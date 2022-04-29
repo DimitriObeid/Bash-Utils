@@ -138,7 +138,7 @@ function BU::Main::Decho::SetTextColor()
     shopt -s extglob;
 
     # Checking first if the target partition is not fully used.
-    if [[ "${p_init_ctrl,,}" != *(-)init ]]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+    if [[ "${p_init_ctrl,,}" != *(-)no?(-)function ]]; then BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false' || { local C="$?"; shopt -u extglob; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
 
     shopt -u extglob;
 
@@ -147,7 +147,7 @@ function BU::Main::Decho::SetTextColor()
         if command -v tput &> /dev/null; then
             tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
-            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)init ]]; then shopt -u extglob; return 0;
+            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0;
 
             else shopt -u extglob;
                 # Checking if the "bgcolors.tmp" (background color) file exists.
