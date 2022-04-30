@@ -6,6 +6,9 @@
 # PyCharm (and other JetBrains IDEs) project folder.
 .idea/
 
+# Visual Studio.
+.vs/
+
 # Visual Studio Code.
 .vscode/
 
