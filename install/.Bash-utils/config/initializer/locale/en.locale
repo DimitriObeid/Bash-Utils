@@ -20,11 +20,17 @@
 
 ## REPEATED MESSAGES
 
-# Writing the file, function and the line number where an error occured.
+# Writing the file name, function name and the line number where an error occured.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING";
 
-# Writing the file, function and the line number where a fatal error occured.
+# Writing the file name and the line number where an error occured.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS WARNING";
+
+# Writing the file name, function name and the line number where a fatal error occured.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS ERROR";
+
+# Writing the file name and the line number where a fatal error occured.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS ERROR";
 
 # Writing the beginning of the text of any text that must be printed with the "BU::ModuleInit::PrintLogError" function.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
@@ -474,7 +480,7 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetTextColor() » function in order to color the text with the defined « %s » color's code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
 
 # --------
 
@@ -501,7 +507,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="the n
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="This global variable stores the maximum length in bytes of a file name according to a file system. This length is associated with the « %s » file system";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
 

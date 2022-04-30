@@ -1,7 +1,6 @@
 ﻿Add-Type -assembly System.Windows.Forms
 
-Function Get-Folder($initialDirectory="")
-
+Function Get-Folder($initialDirectory="%USERPROFILE%")
 {
     [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
 

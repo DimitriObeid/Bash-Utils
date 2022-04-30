@@ -20,11 +20,17 @@
 
 ## MESSAGES REDONDANTS
 
-# Écriture du fichier, de la fonction et du numéro de ligne où une erreur s'est produite.
+# Écriture du nom du fichier fichier, du nom de la fonction et du numéro de ligne où une erreur s'est produite.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
 
-# Écriture du fichier, de la fonction et du numéro de ligne où une erreur fatale s'est produite.
+# Écriture du nom du fichier et du numéro de ligne où une erreur s'est produite.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
+
+# Écriture du nom du fichier, du nom de la fonction et du numéro de ligne où une erreur fatale s'est produite.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS";
+
+# Écriture du nom du fichier et du numéro de ligne où une erreur fatale s'est produite.
+__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS";
 
 # Écriture du début du texte de tout texte qui doit être imprimé avec la fonction "BU::ModuleInit::PrintLogError".
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
@@ -475,7 +481,7 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # --------
 
@@ -504,7 +510,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FN
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
 
 
 # -----------------------------------------------
