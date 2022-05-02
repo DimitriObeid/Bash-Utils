@@ -397,7 +397,7 @@ BU::Main::Initializer::SourceConfig || { if BU::IsInScript; then exit 1; else re
 ## CALLING NECESSARY FUNCTIONS
 
 # Translating the main module's library messages
-BU::ModuleInit::ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU::IsInScript; then exit 1; else return 1; fi };
+# BU::ModuleInit::ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU::IsInScript; then exit 1; else return 1; fi };
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
 BU::Main::Directories::MkTmpDir;

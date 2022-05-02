@@ -53,14 +53,16 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__B
 # This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
 function BU::Main::Echo::__Debug()
 {
-    BU::Main::Echo::__EchoVoid;
+    BU::ModuleInit::CheckIsDebugging && {
+        BU::Main::Echo::__EchoVoid;
 
-    echo "----------------------------------------" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
-    echo "DEBUGGING THE FUNCTION $1" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
+        echo "----------------------------------------";
+        echo "DEBUGGING THE FUNCTION $1";
 
-    echo; echo "Waiting for the timer for the $1() function to elapse"; echo;
+        echo; echo "Waiting for the timer for the $1() function to elapse"; echo;
 
-    BU::Main::Echo::__EchoVoid;
+        BU::Main::Echo::__EchoVoid;
+    }
 }
 
 # This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
@@ -77,8 +79,7 @@ function BU::Main::Echo::DebugEnd()
 
             __BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION='false';
         fi
-
-    } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
+    }
 }
 
 # Printing the name of the processed function if the main script is launched with the "bash -x" command.

@@ -59,17 +59,12 @@ function BU::Main::Headers::DrawLine()
         "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
-	local p_lineChar=$1;   # Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-	local p_lineColor=$2;  # Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
-	local p_strlen=$3;     # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-	local p_bgColor=$4;    # Setting a background color behind the line.
+	local p_lineChar=${1:-$__BU_MAIN_TXT_CHAR_HEADER_LINE};   # Char      - Default : "$__BU_MAIN_TXT_CHAR_HEADER_LINE"    - Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
+	local p_lineColor=$2;  # CMD       - Default : NULL    - Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+	local p_strlen=$3;     # Int       - Default : NULL    - Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+	local p_bgColor=$4;    # CMD       - Default : NULL    - Setting a background color behind the line.
 
 	#**** Code ****
-    # If no character is specified for the character line.
-    if [ -z "$p_lineChar" ]; then
-        p_lineChar="$__BU_MAIN_TXT_CHAR_HEADER_LINE";
-    fi
-
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
 	if ! BU::IsAlphaNumChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}";
