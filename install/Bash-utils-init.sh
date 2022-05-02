@@ -1070,7 +1070,7 @@ function BU::ModuleInit::ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBU
 function BU::ModuleInit::ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="$1";   BU::ModuleInit::CheckSTAT_DEBUG_BASHX   "$2" "$3" || return "$?"; return 0; }
 
 # Checking if the debug mode is active.
-function BU::ModuleInit::CheckIsDebugging() { if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ]; then return 0; else return 1; fi; }
+function BU::ModuleInit::CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ] && return 0; }
 
 # Processing the "module" value's parameters.
 function BU::ModuleInit::ProcessFirstModuleParameters()

@@ -67,6 +67,9 @@ function BU::Main::Initializer::SourceLibrary()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
+
+        BU::ModuleInit::CheckIsDebugging && BU::ModuleInit::Msg "Debug mode activated";
+
 		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059

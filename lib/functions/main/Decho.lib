@@ -43,12 +43,12 @@ fi
 #### TEXT WRITING AND DECORATION (FORMATTING)
 #### DEBUG ID : decho::text-writing-and-decoration-(formatting)
 
-__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## SETTING
 ## DEBUG ID : setting
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -74,7 +74,7 @@ function BU::Main::Decho::SetBGColor()
 	# If the script is allowed to format text.
     if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
-            tput setab "$1" || { echo -ne "\e[" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
+            tput setab "$p_color_code" || { echo -ne "\e[" && echo "$p_color_code" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
             if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then return 0;
                 # Checking if the "bgcolors.tmp" (background color) file exists.
@@ -101,7 +101,7 @@ function BU::Main::Decho::SetBGColor()
                 }; fi
 
                 # Redirecting the background's color code in its dedicated temporary file.
-                echo "$1" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
+                echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
 
                 [ "$X" -ne 0 ] && {
                     echo -e >&2; echo -e "The $(BU::Main::Checkings::CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
@@ -110,7 +110,7 @@ function BU::Main::Decho::SetBGColor()
                 }
             fi
         else
-            echo -ne "\e["; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            echo -ne "\e["; echo "$p_color_code"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -145,7 +145,7 @@ function BU::Main::Decho::SetTextColor()
     # If the script is allowed to format text.
 	if BU::Main::Status::CheckStatAllowFormatting; then
         if command -v tput &> /dev/null; then
-            tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
+            tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}" && return 0; }
 
             shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0;
 
@@ -183,7 +183,7 @@ function BU::Main::Decho::SetTextColor()
                 }
             fi
         else
-            echo -ne "\e[38;5;$1m"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -195,7 +195,7 @@ function BU::Main::Decho::SetTextColor()
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 ## DEBUG ID : writing-differently-cf-text-between-text::basis
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-text::basis";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-text::basis";
 
 # Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 function BU::__Decho()
@@ -273,11 +273,13 @@ function BU::Decho()
 
         BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
     else
-        local v_oldBGColor;
-            v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")";
+        if [ -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
+            local v_oldBGColor;
+                v_oldBGColor="$(cat "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")"; fi
 
-        local v_oldTextColor;
-            v_oldTextColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")";
+        if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then
+            local v_oldTextColor;
+                v_oldTextColor="$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")"; fi
     fi
 
     # If both of the new colors are equal.
@@ -339,27 +341,9 @@ function BU::Decho()
                 'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE}";;
 
                 *)
-                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
-
-                    # The function "HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_TXT_FMT" status variable's value is set to "false", the script will not call the following function indefinitely.
-
-                    # Saving the "true" value from the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
-                    if BU::Main::Status::CheckStatAllowFormatting; then
-                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT";
-
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-                    fi
-
-                    BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
-                        "Check if the value is supported in the first value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                    printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                     BU::Main::Status::ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-
-                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable, since it's possible to do so now.
-                    if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "$v_bu_main_stat_txt_fmt_old_val" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-                    fi
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;
@@ -395,28 +379,9 @@ function BU::Decho()
                 'U') echo -ne "${__BU_MAIN_TXT_FMT_UNDERLINE_RESET}";;
 
                 *)
-                    # WARNING ! >>> DO NOT RESET <<< the "$__BU_MAIN_STAT_TXT_FMT" variable's value >>> to "true" <<<, or else the program will be stuck in an infinite loop.
+                    printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    # The function "BU::Main::Errors::HandleErrors()" will call this "Decho()" function, but thanks to the verification of the "CheckDecho()"'s function return code,
-                    # if the "$__BU_MAIN_STAT_DECHO" status variable's value is set to "false", the script will not call the following function indefinitely.
-
-                    # Saving the "true" value from the "$__BU_MAIN_STAT_TXT_FMT" global status variable.
-                    if BU::Main::Status::CheckStatAllowFormatting; then
-                        local v_bu_main_stat_txt_fmt_old_val="$__BU_MAIN_STAT_TXT_FMT";
-
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-                    fi
-
-                    # shellcheck disable=SC2034
-                    BU::Main::Status::ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-
-                    BU::Main::Errors::HandleErrors "1" "AT LEAST ONE OF THE $(BU::DechoHighlightFunction "${FUNCNAME[@]}")'S ARRAY ARGUMENT VALUE IS INCORRECT" \
-                    "Check if the value is supported in the second value checking case" "${pa_fmtArgs[@]}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-
-                    # Restoration of the "true" value in the "$__BU_MAIN_STAT_TXT_FMT" global status variable, since it's possible to do so now.
-                    if [ "$v_bu_main_stat_txt_fmt_old_val" ]; then
-                        BU::Main::Status::ChangeSTAT_TXT_FMT "$v_bu_main_stat_txt_fmt_old_val" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
-                    fi
+                    BU::Main::Status::ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;

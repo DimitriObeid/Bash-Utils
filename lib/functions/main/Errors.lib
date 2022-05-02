@@ -45,12 +45,12 @@ fi
 #### ERRORS HANDLING FUNCTIONS
 #### DEBUG ID : errors::errors-handling-functions
 
-__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-handling-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-handling-functions";
 
 ## CLASSIC ERRORS HANDLING
 ## DEBUG ID : classic-errors-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::classic-errors-handling";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::classic-errors-handling";
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
@@ -131,7 +131,7 @@ function BU::Main::Errors::HandleSmallErrors()
 ## EXIT AND RETURN CODES HANDLING
 ## DEBUG ID : exit-and-return-codes-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::exit-and-return-codes-handling";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::exit-and-return-codes-handling";
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function BU::Exit()
@@ -208,7 +208,7 @@ function BU::SetLastReturnValue()
 ## SCRIPT'S ERRORS HANDLING
 ## DEBUG ID : script-errors-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::script-errors-handling";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::script-errors-handling";
 
 # "BU::Main::Errors::HandleErrors()" function --> Handling file name presence.
 function BU::Main::Errors::HandleErrors_File()        { if [ -z "$1" ]; then BU::DechoHighlightPath "<no specified file>"; else BU::DechoHighlightPath "$1"; fi; }

@@ -43,12 +43,12 @@ fi
 #### FUNCTIONS DEFINITION
 #### DEBUG ID : headers::functions-definition
 
-__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-definition";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-definition";
 
 ## HEADERS BASIS CREATION FUNCTIONS
 ## DEBUG ID : headers-basis-creation-functions
 
-__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION::headers-basis-creation-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION::headers-basis-creation-functions";
 
 # Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
 function BU::Main::Headers::DrawLine()

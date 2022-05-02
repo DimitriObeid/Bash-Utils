@@ -43,12 +43,12 @@ fi
 #### DIRECTORIES FUNCTIONS
 #### DEBUG ID : directories::directories-functions
 
-__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::directories-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::directories-functions";
 
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : processing-functions
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::processing-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::processing-functions";
 
 # Separate processing steps displays from the rest of the main script with a line.
 
@@ -101,7 +101,7 @@ function BU::Main::Directories::ProcessingDir()
 ## FOLDER CREATION FUNCTIONS
 ## DEBUG ID : folder-creation-functions
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::folder-creation-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::folder-creation-functions";
 
 # Overwriting an existing directory's content
 
@@ -293,7 +293,7 @@ function BU::Main::Directories::MkTmpDir()
 ## PATH PROCESSING
 ## DEBUG ID : path-processing
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::path-processing";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::path-processing";
 
 # Getting the name of a target directory without its path.
 function BU::Main::Directories::GetDirectoryName()

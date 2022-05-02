@@ -43,12 +43,12 @@ fi
 #### PROCCESSING COMMANDS
 #### DEBUG ID : cmds::processing-commands
 
-__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
 
 ## GET COMMAND OUTPUTS
 ## DEBUG ID : get-command-output
 
-__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS::get-command-output";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS::get-command-output";
 
 # Get command's executable file's path.
 function BU::Main::CMDS::GetCommandPath()

@@ -44,13 +44,13 @@ fi
 #### DEBUG ID : args::argument-values-checking--utilities-functions
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
 
 ## PATH CHECKING FUNCTIONS
 ## DEBUG ID : path-checking-functions
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
 
 # -----------------------------------------------
 
@@ -58,7 +58,7 @@ __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FU
 ## DEBUG ID : quick-message-printing
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
 
 # Print a message without the need to write the whole "BU::Main::Errors::HandleErrors()" function's second argument, and according to the test option which failed :
 function BU::Main::Args::PrintBadOption()
@@ -337,7 +337,7 @@ function BU::Main::Args::PrintBadOption()
 ## DEBUG ID = argument-presence-checking
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
+BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
 function BU::Main::Args::GetFuncArgsArrayValues()
@@ -348,7 +348,8 @@ function BU::Main::Args::GetFuncArgsArrayValues()
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
-    local p_funcname=$1; shift 1;   # String    - Default : NULL    - Name of the function where the array was set.
+    local p_funcname=$1;            # String    - Default : NULL    - Name of the function where the array was set.
+    local p_decho=$2;   shift 2;    # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU::Main::Args__Decho::Decho()" sub-fonction.
 
     local pa_argsArray=("$@");      # Array     - Default : NULL    - Array of values to check and display.
 
@@ -373,6 +374,8 @@ function BU::Main::Args::GetFuncArgsArrayValues()
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
+            
+            echo "JE SUIS LÀ";
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
                 BU::Newline || { local C="$?"; v_loop_error='error'; break; };
@@ -833,44 +836,21 @@ function BU::Main::Args__Decho::Decho()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
 	#**** Code ****
+#	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
 	# If the text's color code is not an integer.
 	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
+        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newTextColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as text color code, as second argument for the « %s » function (optional argument) [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")";
 
-		# Changing the
-		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
-			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
-
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-		fi
-
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as text color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newTextColor' "$p_newTextColor" "$p_filename" "$p_funcname" "$lineno";
-
-        local C="$?";
-
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
-
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
     # If the background's color code is not an integer.
     if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
-		if [ "${__BU_MAIN_STAT_DECHO,,}" != 'forbid' ]; then
-			local __bu_main_stat_decho_backup="$__BU_MAIN_STAT_DECHO";
+        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newBGColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as background color code, as third argument for the « %s » function (optional argument) [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")";
+            "$p_newTextColor" "" "$p_funcname" "$lineno";
 
-			BU::Main::Status::ChangeSTAT_DECHO "forbid" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-		fi
-
-        BU::Main::Args::PrintBadOption '!intpos' \
-            "Please pass a positive integer as background color code, as second argument for the ${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR function (optional argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_newBGColor' "$p_newBGColor" "$p_filename" "$p_funcname" "$p_lineno";
-
-        local C="$1";
-
-		if [ -n "$__bu_main_stat_decho_backup" ]; then BU::Main::Status::ChangeSTAT_DECHO "$__bu_main_stat_decho_backup" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local D="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$D"; }; fi
-
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 
 	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
