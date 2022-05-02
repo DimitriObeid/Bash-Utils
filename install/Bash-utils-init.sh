@@ -1064,10 +1064,10 @@ function BU::ModuleInit::CheckSTAT_DEBUG_BASHX()
 }
 
 # Changing the "$__BU_MODULE_INIT_STAT_DEBUG" status variable's value.
-function BU::ModuleInit::ChangeSTAT_DEBUG       { __BU_MODULE_INIT_STAT_DEBUG="$1";         BU::ModuleInit::CheckSTAT_DEBUG         "$2" "$3" || return "$?"; return 0; }
+function BU::ModuleInit::ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="$1";         BU::ModuleInit::CheckSTAT_DEBUG         "$2" "$3" || return "$?"; return 0; }
 
 # Changing the "$__BU_MODULE_INIT_STAT_DEBUG" status variable's value.
-function BU::ModuleInit::ChangeSTAT_DEBUG_BASHX { __BU_MODULE_INIT_STAT_DEBUG_BASHX="$1";   BU::ModuleInit::CheckSTAT_DEBUG_BASHX   "$2" "$3" || return "$?"; return 0; }
+function BU::ModuleInit::ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="$1";   BU::ModuleInit::CheckSTAT_DEBUG_BASHX   "$2" "$3" || return "$?"; return 0; }
 
 # Checking if the debug mode is active.
 function BU::ModuleInit::CheckIsDebugging() { if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ]; then return 0; else return 1; fi; }
@@ -1219,13 +1219,6 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
                 if [[ "${module_args,,}" = *'--stat-'* ]]; then
-
-                    # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
-                    source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
-                        echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file";
-
-                        v_loop_error='error'; break;
-                    }; echo "Sourced the Status.conf file"; echo;
 
                     case "${module_args,,}" in
 
@@ -1438,6 +1431,10 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                     v_loop_error='error'; break;
                 fi
             done; if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
+
+            # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
+            source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
+                echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file"; return 1; };
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
             __BU_MODULE_INIT_MODULE_FIRST_ARG='true';
