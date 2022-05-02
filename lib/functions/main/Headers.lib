@@ -164,7 +164,7 @@ function BU::HeaderBase()
     # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
     local v_loop_error;
 
-    if [ -n "$p_strlen" ] && [ "$p_strlen" = 'strlen' ]; then local v_strlen; v_strlen="$("${#p_stringTxt}")"; fi
+    if [ -n "$p_strlen" ] && [ "${p_strlen,,}" = 'strlen' ]; then local v_strlen; v_strlen="${#p_stringTxt}"; fi
 
 	#**** Code ****
 	__BU_MAIN_STAT_TIME_NEWLINE="0";
