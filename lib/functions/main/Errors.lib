@@ -295,7 +295,7 @@ function BU::Main::Errors::HandleErrors()
             # Checking if the ' [/|\] ' substring exists only once, as separator from the advice and another comment.
 
             # IMPORTANT : the second argument of the "BU::Main::Text::GetSubStringOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
-            if [[ "$p_adviceString" == *" [/|\] "* ]] && [ "$(BU::Main::Text::GetSubStringOccurences "$p_advice" ' [/|\] ')" -eq 1 ]; then
+            if [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]] && [ "$(BU::Main::Text::GetSubStringOccurences "$p_advice" ' [/|\] ')" -eq 1 ]; then
 
                 local v_string_part_1; v_string_part_1="$(echo "$1" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting first sub-string.
                 local v_string_part_2; v_string_part_2="$(echo "$1" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting second sub-string.
@@ -308,7 +308,7 @@ function BU::Main::Errors::HandleErrors()
             # Checking if the ' [/|\] ' substring exists more than once, as separators from the advice and any other comments.
 
             # IMPORTANT : the second argument of the "BU::Main::Text::GetSubStringOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
-            elif [[ "$p_adviceString" == *" [/|\] "* ]] && [ "$(BU::Main::Text::GetSubStringOccurences "$p_advice" " [/|\] ")" -gt 1 ]; then
+            elif [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]] && [ "$(BU::Main::Text::GetSubStringOccurences "$p_advice" " [/|\] ")" -gt 1 ]; then
                 true;
             else
                 BU::EchoError "$(BU::__DechoHighlight "Advice" "$__BU_MAIN_COLOR_ERROR") : $p_adviceString" >&2;
