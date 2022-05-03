@@ -62,6 +62,13 @@ fi
 
 #### SECTION : BEGIN INITIALIZATION PROCESS
 
+## SUB-SECTION : DEFINING GLOBAL VARIABLES
+
+# Note: This variable is also used in the main module configuration files.
+__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : Unable to define the path to store in the « %s » global variable\n";
+
+# -----------------------------------------------
+
 ## SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
 __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING THE MODULES";

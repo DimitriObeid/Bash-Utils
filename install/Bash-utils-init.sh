@@ -824,21 +824,26 @@ function BU::ModuleInit::CheckPath()
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
 function BU::ModuleInit::FindPath()
 {
-	#	$1	--> String  - Default : NULL    - Parent directory.
-    #	$2	--> String  - Default : NULL    - Targeted directory or file.
-    find "$1" -maxdepth 1 -iname "$2" -print 2>&1 | grep -v "Permission denied" ||
+    #**** Parameters ****
+    local v_parentdir=$1;   # String    - Default : NULL    - Parent directory.
+    local v_target=$2;      # String    - Default : NULL    - Targeted directory or file.
+
+    #**** Code ****
+    find "$v_parentdir" -maxdepth 1 -iname "$v_target" -print 2>&1 | grep -v "Permission denied" || \
 	{
         if [ -z "$__BU_MODULE_INIT_MSG_ARRAY_EXISTS" ]; then
             echo >&2;
 
             # shellcheck disable=SC2059
-            printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2" >&2; echo >&2;
+            printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$v_parentdir" "$v_target" >&2; echo >&2;
 
         else
             BU::ModuleInit::Msg >&2;
 
             # shellcheck disable=SC2059
-            BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$1" "$2")" >&2; BU::ModuleInit::Msg >&2;
+            BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$v_parentdir" "$v_target")" >&2; BU::ModuleInit::Msg >&2;
+
+            return 1;
         fi
 
         if BU::IsInScript; then exit 1; else return 1; fi
@@ -1571,37 +1576,62 @@ __BU_MODULE_INIT_PROJECT_PID="$$";  __bu_module_init__project_pid__lineno="$LINE
 __BU_MODULE_INIT__ROOT_HOME="$HOME"; __bu_module_init__root_home__lineno="$LINENO";
 
 if [ -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
-    __BU_MODULE_INIT__ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" ".Bash-utils")";                                  __bu_module_init__root__lineno="$LINENO";
+    __BU_MODULE_INIT__ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" ".Bash-utils")"                                   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__ROOT'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__root__lineno="$(( LINENO - 1))";
 
     # shellcheck disable=SC2034
-    __BU_MODULE_INIT__INITIALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")";  __bu_module_init__initializer_path__lineno="$LINENO";
+    __BU_MODULE_INIT__INITIALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")"   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__INITIALIZER_PATH'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__initializer_path__lineno="$(( LINENO - 1 ))";
 
     # Configurations directories
-    __BU_MODULE_INIT__CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "config")";                      __bu_module_init__config_dir__lineno="$LINENO";
-    __BU_MODULE_INIT__CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "initializer")";      __bu_module_init__config_init_dir__lineno="$LINENO",
-    __BU_MODULE_INIT__CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "modules")";       __bu_module_init__config_modules_dir__lineno="$LINENO";
+    __BU_MODULE_INIT__CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "config")"                                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_DIR'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__config_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "locale")"; __bu_module_init__config_init_lang_dir__lineno="$LINENO";
+    __BU_MODULE_INIT__CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "initializer")"                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__config_init_dir__lineno="$(( LINENO - 1 ))";
+
+    __BU_MODULE_INIT__CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "modules")"                        || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__config_modules_dir__lineno="$(( LINENO - 1 ))";
+
+    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "locale")"                  || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__config_init_lang_dir__lineno="$(( LINENO - 1 ))";
 
     # Initializer script's configuration files
-    __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "Status.conf")"; __bu_module_init__config_init_dir__status__lineno="$LINENO";
+    __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "Status.conf")"          || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__config_init_dir__status__lineno="$(( LINENO - 1 ))";
 
     # Modules directories
-    __BU_MODULE_INIT__MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "modules")"; __bu_module_init__modules_dir__lineno="$LINENO";
+    __BU_MODULE_INIT__MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "modules")"                                     || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
+    __bu_module_init__modules_dir__lineno="$(( LINENO - 1 ))";
 
     # Files
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";                                                                       __bu_module_init__lib_root_dir__file_name__lineno="$LINENO";
-    __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";                                                                  __bu_module_init__lib_root_dir_file__parent_dir__lineno="$LINENO";
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME";    __bu_module_init__lib_root_dir__file_path__lineno="$LINENO";
+    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
+    __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";                                                                         __bu_module_init__lib_root_dir_root__file_name__lineno="$LINENO";
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";                                                                         __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$LINENO";
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME"; __bu_module_init__lib_root_dir_root__file_path__lineno="$LINENO";
+    __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
+    __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
+
+    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME";
+    __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO - 1 ))";
+
+	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
+	__bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
+
+	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
+	__bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
+
+	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME";
+# 	__bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
 
 	# Misc
-	__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';              __bu_module_init__csv_translation_file__delim__lineno="$LINENO";
-	__BU_MODULE_INIT__DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";  __bu_module_init__date_log__lineno="$LINENO";
-	__BU_MODULE_INIT__USER_LANG="$(echo "$LANG" | cut -d _ -f1)";   __bu_module_init__user_lang__lineno="$LINENO";
+	__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
+	__bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
+
+	__BU_MODULE_INIT__DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
+	__bu_module_init__date_log__lineno="$(( LINENO - 1 ))";
+
+	__BU_MODULE_INIT__USER_LANG="$(echo "$LANG" | cut -d _ -f1)";
+	__bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 else
     # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
     BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG";
@@ -1705,7 +1735,7 @@ function BU::ModuleInit::HandleErrors()
 # The "BU::ModuleInit::ParseCSVLang" function MUST be called in the current module's initialization script.
 
 # IMPORTANT : It MUST be called AFTER the "BU::Main::Initializer::SourceLibrary" and BEFORE the "BU::Main::Initializer::SourceConfig"
-# functions in the main module's initialization file, in the "STEP THREE" sub-section, in order to get the main module's functions and
+# functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
 # to translate the global variables descriptions written with the "BU::ModuleInit::DisplayInitGlobalVarsInfos" function.
 function BU::ModuleInit::ParseCSVLang()
 {

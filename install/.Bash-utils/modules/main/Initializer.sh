@@ -133,7 +133,7 @@ function BU::Main::Initializer::SourceConfig()
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")";
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; };
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; BU::IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -145,7 +145,7 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFail
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; }
+source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; BU::IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
