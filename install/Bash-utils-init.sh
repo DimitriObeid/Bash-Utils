@@ -496,7 +496,7 @@ function BU::ModuleInit::Msg()
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-display' ]; then
 
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
-        if [ -z "${#__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]}" ]; then
+        if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]}" ]; then
             __BU_MODULE_INIT_MSG_ARRAY=();
 
         fi; case "${p_option,,}" in
@@ -967,9 +967,11 @@ function BU::ModuleInit::SourcingFailure()
     #**** Code ****
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2 || return 1; return 1;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2;
 
     if [ -n "$v_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_mode_backup"; fi
+
+	BU::ModuleInit::AskPrintLog >&2 || return 1; return 1;
 }
 
 # -----------------------------------------------
