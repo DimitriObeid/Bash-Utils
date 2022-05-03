@@ -164,7 +164,7 @@ function BU::ModuleInit::GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 function BU::ModuleInit::GetModuleInitLanguage()
 {
     #**** Parameters ****
-    local p_lang_ISO_639_1=$1; # String     - Default : NULL    - Wanted language.
+    local p_lang_ISO_639_1=${1-NULL}; # String     - Default : NULL    - Wanted language.
 
     #**** Variables ****
     local v_supportedLang=('de' 'en' 'es' 'fr');
@@ -197,7 +197,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
         LANG="en_US.UTF-8";
     fi
 
-	if [ -z "$p_lang_ISO_639_1" ]; then
+	if [ "${p_lang_ISO_639_1^^}" = 'NULL' ]; then
         [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
@@ -206,7 +206,7 @@ function BU::ModuleInit::GetModuleInitLanguage()
 
 		BU::ModuleInit::GetModuleInitLanguage_RestOfLibrary || return 1;
 
-    elif [ -n "$p_lang_ISO_639_1" ] && [ ! -f "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" ]; then
+    elif [ "${p_lang_ISO_639_1^^}" != 'NULL' ] && [ ! -f "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR/$p_lang_ISO_639_1.locale" ]; then
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
@@ -350,13 +350,13 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
 
         #**** Parameters ****
-        local p_var_name=$1;	# String    - Default : NULL    - Name of the variable.
-        local p_var_val=$2;		# String    - Default : NULL    - Value stored in the variable.
-		local p_var_type=$3;	# String    - Default : NULL    - Type of variable (array, int (integer), float, path, string).
-        local p_var_desc=$4;	# String    - Default : NULL    - Description of the variable.
-        local p_file=$5;        # String    - Default : NULL    - File where the variable was declared.
-        local p_func=$6;        # String    - Default : NULL    - Function where the variable was declared.
-        local p_line=$7;        # Int       - Default : NULL    - Line where the variable was declared.
+        local p_var_name=${1-$'\0'};    # String    - Default : NULL    - Name of the variable.
+        local p_var_val=${2-$'\0'};     # String    - Default : NULL    - Value stored in the variable.
+        local p_var_type=${3-$'\0'};    # String    - Default : NULL    - Type of variable (array, int (integer), float, path, string).
+        local p_var_desc=${4-$'\0'};    # String    - Default : NULL    - Description of the variable.
+        local p_file=${5-NULL};         # String    - Default : NULL    - File where the variable was declared.
+        local p_func=${6-NULL};         # String    - Default : NULL    - Function where the variable was declared.
+        local p_line=${7-NULL};         # Int       - Default : NULL    - Line where the variable was declared.
 
         # If the variable type is an array, then the values must be passed as an array,
         # or else only the first index's value will be displayed.
@@ -364,11 +364,14 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         local pa_var_val_array=("$@")
 
         #**** Variables ****
-        local v_file; v_file="$([[ -n "$p_file" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE" "$p_file" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL")";
-        local v_func; v_func="$([[ -f "$p_func" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC" "$p_func" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL")";
-        local v_line; v_line="$([[ -n "$p_line" ]] && printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE" "$p_line" || echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL")";
+        local v_file; v_file="$(if [[ "${p_file^^}" != 'NULL' ]]; then printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE" "$p_file"; else echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL"; fi)";
+        local v_func; v_func="$(if [[ "${p_func^^}" != 'NULL' ]]; then printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC" "$p_func"; else echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL"; fi)";
+        local v_line; v_line="$(if [[ "${p_line^^}" != 'NULL' ]]; then printf "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE" "$p_line"; else echo "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL"; fi)";
 
         #**** Code ****
+		if [ "${p_var_type^^}" = 'NULL' ]; then
+            p_var_type="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN";
+		
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
 		# - array	: this variable is an array.
 		# - code	: this variable stores code in order to perform an action (either a function, a command or a condition)
@@ -378,7 +381,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		# - int		: this variable stores an integer.
 		# - path:	: this variable stores a path.
 		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
-		if [ "${p_var_type,,}" != 'array' ]	\
+		elif [ "${p_var_type,,}" != 'array' ]	\
 			&& [ "${p_var_type,,}" != 'cmd' ] \
 			&& [ "${p_var_type,,}" != 'bool' ] \
 			&& [ "${p_var_type,,}" != 'dir' ] \
@@ -388,9 +391,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 			&& [ "${p_var_type,,}" != "filepath" ] \
 			&& [ "${p_var_type,,}" != 'int' ] \
 			&& [ "${p_var_type,,}" != 'path' ] \
-			&& [ "${p_var_type,,}" != 'string' ]
+			&& [ "${p_var_type,,}" != 'string' ];
 			then
-				p_var_type="unknown type";
+				p_var_type="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN";
 		fi
 
         BU::ModuleInit::Msg;
@@ -414,6 +417,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		BU::ModuleInit::Msg "$v_func";
 		BU::ModuleInit::Msg "$v_line";
 
+		# If the variable type is an array, then each value is displayed in several blocks of five rows high, with it's index.
 		if [ "${p_var_type,,}" = 'array' ]; then
             BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE";
             BU::ModuleInit::Msg;
@@ -426,9 +430,9 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
                 for _ in "${pa_var_val_array[@]}"; do
                     BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE [$v_index] : $_";
 
-                    # Line break every five lines, in order to keep the values list readable for a human.
                     local v_value_line=$(( v_index + 1 ));
 
+                    # Writing a blank line every five lines, in order to keep the list easily readable for a human.
                     if [ $(( v_value_line % 5 )) -eq 0 ]; then
 
                         # Avoid line breaks when the end of the array is reached, if it's last index's modulo of five is equal to 0.
@@ -490,11 +494,16 @@ function BU::ModuleInit::Msg()
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
     # be printed on the screen and redirected towards the "$__BU_MODULE_INIT_MSG_ARRAY" array.
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-display' ]; then
-        case "${p_option,,}" in
+
+        # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
+        if [ -z "${#__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]}" ]; then
+            __BU_MODULE_INIT_MSG_ARRAY=();
+
+        fi; case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
                 if [ -z "$p_str" ]; then
-                    __BU_MODULE_INIT_MSG_ARRAY+=''; echo -ne '';
+                    __BU_MODULE_INIT_MSG_ARRAY+=(''); echo -ne '';
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen, without carriage returns.
                 else
@@ -776,16 +785,16 @@ function BU::ModuleInit::CheckBashMinimalVersion()
 function BU::ModuleInit::CheckPath()
 {
     #**** Parameters ****
-    local p_path=$1;    # String  - Default : NULL    - Path of the target file or directory.
-    local p_target=$2;  # String  - Default : NULL    - Specify if the target is a directory or a file.
+    local p_path=${1-NULL};     # String  - Default : NULL    - Path of the target file or directory.
+    local p_target=${2-NULL};   # String  - Default : NULL    - Specify if the target is a directory or a file.
 
     #**** Code ****
-    if [ -z "$p_path" ]; then
+    if [ "${p_path^^}" = 'NULL' ]; then
         # shellcheck disable=SC2059
         printf "« $__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH »" >&2; return 0;
 
     else
-        if [ -z "$p_target" ]; then
+        if [ "${p_target,,}" = 'NULL' ]; then
             echo  >&2;
 
             # shellcheck disable=SC2059
@@ -952,11 +961,15 @@ function BU::ModuleInit::ListInstalledModules()
 function BU::ModuleInit::SourcingFailure()
 {
     #**** Parameters ****
-    local p_path=$1;    # String    - Default : NULL    - Path of the file that cannot be sourced.
-    local p_module=$2;  # String    - Default : NULL    - Name of the module.
+    local p_path=${1-NULL};     # String    - Default : NULL    - Path of the file that cannot be sourced.
+    local p_module=${2-NULL};   # String    - Default : NULL    - Name of the module.
 
     #**** Code ****
+    if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+
     BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2; BU::ModuleInit::AskPrintLog >&2 || return 1; return 1;
+
+    if [ -n "$v_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_mode_backup"; fi
 }
 
 # -----------------------------------------------
@@ -989,10 +1002,10 @@ function BU::ModuleInit::Usage()
 function BU::ModuleInit::DisplayStatError()
 {
     #**** Parameters ****
-    local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_lineno=$2;      # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_bad_value=$3;   # String    - Default : NULL    - Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
-    local p_var_name=$4     # String    - Default : NULL    - Name of the variable that stores the bad value.
+    local p_file=${1-NULL};         # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_lineno=${2-NULL};       # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
+    local p_bad_value=${3-NULL};    # String    - Default : NULL    - Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
+    local p_var_name=${4-NULL};     # String    - Default : NULL    - Name of the variable that stores the bad value.
 
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
@@ -1007,7 +1020,7 @@ function BU::ModuleInit::DisplayStatError()
     printf "In « %s », line « %s »" "$p_file" "$p_lineno" >&2;
     echo "Error : the « %s » variable's value is incorrect." "$p_var_name" >&2;
 
-    if [ -z "$p_bad_value" ]; then
+    if [ "${p_bad_value^^}" = 'NULL' ]; then
         echo >&2; echo "Bad value : 'An empty string'" >&2;
     else
         echo >&2; EchoError "Bad value : « %s »" "$p_bad_value" >&2;
@@ -1036,8 +1049,8 @@ function BU::ModuleInit::DisplayStatError()
 function BU::ModuleInit::CheckSTAT_DEBUG()
 {
     #**** Parameters ****
-    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
-    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
+    local p_file=${1-NULL};     # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=${2-NULL};   # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("true" "false");
@@ -1054,8 +1067,8 @@ function BU::ModuleInit::CheckSTAT_DEBUG()
 function BU::ModuleInit::CheckSTAT_DEBUG_BASHX()
 {
     #**** Parameters ****
-    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
-    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
+    local p_file=${1-NULL};     # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=${2-NULL};   # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
     local va_correctValues=("file" "category" "sub-category" "subcategory");
