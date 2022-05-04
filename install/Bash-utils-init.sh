@@ -963,11 +963,14 @@ function BU::ModuleInit::SourcingFailure()
     #**** Parameters ****
     local p_path=${1-NULL};     # String    - Default : NULL    - Path of the file that cannot be sourced.
     local p_module=${2-NULL};   # String    - Default : NULL    - Name of the module.
+    local p_file=${3:-NULL};    # String    - Default : NULL    - File where the inclusion failed.
+    local p_func=${4:-NULL};    # String    - Default : NULL    - Function where the inclusion failed.
+    local p_line=${5:-NULL};    # String    - Default : NULL    - Line where the inclusion failed.
 
     #**** Code ****
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
-    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2;
+    BU::ModuleInit::Msg >&2; BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE" "$p_file" "$p_func" "$p_line" "$p_module" "$(BU::ModuleInit::CheckPath "$p_path" 'f')")" >&2; BU::ModuleInit::Msg >&2;
 
     if [ -n "$v_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_mode_backup"; fi
 
@@ -1726,12 +1729,12 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 function BU::ModuleInit::HandleErrors()
 {
     #**** Parameters ****
-	local p_errorString=$1;    # String     - Default : NULL    - String of the type of error to display.
-	local p_adviceString=$2;   # String     - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
-    local p_badValue=$3;       # String     - Default : NULL    - Incorrect value which caused the error.
-	local p_file=$4;           # String     - Default : NULL    - The name of the file where the error occured.
-	local p_function=$5;       # String     - Default : NULL    - The name of the function where the error occured.
-	local p_lineno=$6;         # String     - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
+	local p_errorString=${1:-NULL};    # String     - Default : NULL    - String of the type of error to display.
+	local p_adviceString=${2:-NLL};    # String     - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
+    local p_badValue=${3:-NULL};       # String     - Default : NULL    - Incorrect value which caused the error.
+	local p_file=${4:-NULL};           # String     - Default : NULL    - The name of the file where the error occured.
+	local p_function=${5:-NULL};       # String     - Default : NULL    - The name of the function where the error occured.
+	local p_lineno=${6:-NULL};         # String     - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #**** Code ****
     echo "IN $p_file, FUNCTION $p_function, LINE $p_lineno --> ERROR : $p_errorString" >&2;
@@ -1951,7 +1954,7 @@ function BU::ModuleInit::ParseCSVLang()
 			BU::ModuleInit::Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath")";
 			BU::ModuleInit::Msg;
 
-			source "$v_outputFile" || { BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME"; return "$?"; };
+			source "$v_outputFile" || { BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return "$?"; };
 
 			return 0;
 		else
@@ -2214,7 +2217,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name"; v_loop_error="error"; break; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.conf")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
             fi
 
             # -----------------------------------------------
@@ -2243,7 +2246,7 @@ function BashUtils_InitModules()
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
                 # shellcheck disable=SC1090
-                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"; v_loop_error="error"; break; }
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
 
                 # shellcheck disable=SC2059
                 BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";

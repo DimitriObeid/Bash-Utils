@@ -70,7 +70,7 @@ function BU::Main::Initializer::SourceLibrary()
 
         BU::ModuleInit::CheckIsDebugging && BU::ModuleInit::Msg "Debug mode activated";
 
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
@@ -103,7 +103,7 @@ function BU::Main::Initializer::SourceConfig()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
@@ -127,13 +127,13 @@ function BU::Main::Initializer::SourceConfig()
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Note : Several functions from the main module are used
+# Note : Several functions from the main module are used in the "BU::ModuleInit::()" function.
 
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")";
+__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU::ModuleInit::MsgAbort; BU::ModuleInit::AskPrintLog; BU::IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; BU::IsInScript && exit 1; return 1; };
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -145,7 +145,7 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFail
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME"; BU::IsInScript && exit 1; return 1; }
+source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
@@ -345,8 +345,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
             # Temporary situation.
             BU::Main::Initializer::Usage; v_loop_error='error'; break;
         fi
+
     done; if [ "${v_loop_error,,}" = 'error' ]; then if BU::IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
 fi
+
+# Unsetting the "$v_loop_error" variable, since this code is not written inside a function.
+unset v_loop_error;
 
 # Checking if a new default status global variable's value was modified (passed as one of the « main » module's « --stat-* » arguments).
 for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do

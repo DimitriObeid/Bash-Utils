@@ -1427,40 +1427,34 @@ function BU::Main::Args__Files::Compress()
 	return 0;
 }
 
-# "BU::Main::Files::Uncompress()" function.
-function BU::Main::Args__Files::Uncompress()
+# "BU::Main::Files::UncompressCMD()" function.
+function BU::Main::Args__Files::UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_cmd=$1          # String    - Default : NULL    - Compression command.
-    local p_name=$2         # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_format=$1;      # String    - Default : NULL    - Archive format.
+    local p_opts=$2;        # String    - Default : NULL    - Compression command's options.
+    local p_name=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
 
-    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
-            "Please pass a(n) (un)compression command name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass a(n) (un)compression command's name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
 	# If the command line compression tool is not found.
-    if ! command -v "$p_cmd"; then
-        if  [ "${p_cmd^^}" = 'TGZ' ] \
-        || [[ "${p_cmd,,}" = tar?(.)gz ]] \
-        || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]] \
-        || [[ "${p_cmd^^}" = TBZ?(2) ]] \
-        || [ "${p_cmd^^}" = 'TXZ' ] \
-        || [[ "${p_cmd,,}" = tar?(.)xz ]]; then local lineno="$LINENO";
-
+    if ! command -v "$p_cmd"; then local lineno="$LINENO";
             BU::Main::Args::PrintBadOption '!CMDSTR' \
-                "Please pass an existing / installed (un)compression command name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+                "Please pass an existing / installed (un)compression command's name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
         fi
     fi
@@ -1468,7 +1462,40 @@ function BU::Main::Args__Files::Uncompress()
     # If no path to the archive to uncompress is given.
     if [ -z "$p_name" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass as third argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
+	return 0;
+}
+
+# "BU::Main::Files::UncompressFormat()" function.
+function BU::Main::Args__Files::UncompressFormat()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+    local p_form=$1;        # String    - Default : NULL    - Archive format.
+    local p_name=$2;        # String    - Default : NULL    - Path to the archive to uncompress.
+
+    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+
+	if [ -z "$p_form" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass an archive format name (like 7z, Gzip, Cab, etc...) as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_form' "$p_form" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+	fi
+
+    # If no path to the archive to uncompress is given.
+    if [ -z "$p_name" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass as second argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 

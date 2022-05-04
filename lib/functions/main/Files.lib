@@ -835,8 +835,10 @@ function BU::Main::Files::AddToArchive()
 
     if [ "$p_cmd" = '7z' ]; then
         true
-        
+
     elif [ "$p_cmd" = 'bzip2' ]; then true;
+
+    elif [ "$p_cmd" = '' ]; then true;
 
     elif [ "$p_cmd" = 'gzip' ]; then true;
 
@@ -847,11 +849,8 @@ function BU::Main::Files::AddToArchive()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Compressing archives according to the used compression method.
-
-# Featured functions and files from the "functions" folder :
-#   -
-function BU::Main::Files::Compress()
+# Compressing archives according to the compression command
+function BU::Main::Files::CompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -859,9 +858,25 @@ function BU::Main::Files::Compress()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
-    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;        # String    - Default : NULL    - Archive's name.
+    local p_cmd=$1;             # String    - Default : NULL    - Compression command.
+}
+
+# Compressing archives according to the used compression method.
+
+# Featured functions and files from the "functions" folder :
+#   -
+function BU::Main::Files::CompressFormat()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+
+    #**** Parameters ****
+    local p_cmd=$1;             # String    - Default : NULL    - Compression command.
+    local p_opts=$2;            # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_name=$3;            # String    - Default : NULL    - Archive's name.
+    local p_pwd=${4:-false};    # Bool      - Default : false   - Setting a password to the archive.
     shift 3;
 
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
@@ -875,7 +890,7 @@ function BU::Main::Files::Compress()
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Compress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU::Main::Args__Files::Compress "$cmd" "$opts" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::CompressFormat "$cmd" "$opts" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the 7-Zip compression format is wanted.
     if [ "$p_cmd" == '7z' ]; then
@@ -957,13 +972,13 @@ function BU::Main::Files::DeleteInArchive()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Uncompressing archives according to the used compression method.
+# Uncompressing archives according to the used compression method AND the (un)compression command's name.
 
 # Featured functions and files from the "functions" folder :
 #   - BU::Main::Errors::HandleErrors      -> Handles.lib
 #   - BU::EchoSuccess       -> Echo.lib
 #   - BU::Newline           -> Echo.lib
-function BU::Main::Files::Uncompress()
+function BU::Main::Files::UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -973,17 +988,55 @@ function BU::Main::Files::Uncompress()
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Compression command.
     local p_opts=$2;    # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;    # String    - Default : NULL    - Archive's name.
+    local p_name=$3;    # String    - Default : NULL    - Path to the archive to uncompress.
     local p_dest=$4;    # String    - Default : NULL    - Folder destination of the uncompressed data.
 
     #**** Code ****
     # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Uncompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
-    if ! BU::Main::Args__Files::Compress "$cmd" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::UncompressCMD "$cmd" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the 7-Zip compression format is wanted.
     if [ "$p_cmd" == '7z' ]; then
         7z x "" "" "" "";
+
+    # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
+    elif [ "$p_cmd" = 'cabextract' ]; then
+        cabextract "$p_opts" "$p_name";
+    fi
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Uncompressing archives according to the used compression method.
+function BU::Main::Files::UncompressFormat()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+
+    #**** Parameters ****
+    local p_form=$1;    # String    - Default : NULL    - Compression format.
+    local p_name=$2;    # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_dest=$3;    # String    - Default : NULL    - Folder destination of the uncompressed data (optional argument).
+    local p_forc=$4;    # String    - Default : NULL    - Force the execution of a command for a specific format (eg : set '7z' if you want to uncompress a specific archive format with the 7z command (within the limits of supported formats by the command)) (optional argument).
+
+    #**** Code ****
+    BU::Main::Args__Files::UncompressFormat "$p_fmt" "$p_nme" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+
+    # If the 7-Zip compression format is wanted.
+    if [[ "$p_fmt" == 7?(-)[Zz][Ii][Pp] ]] || [ "${p_fmt,,}" = '7z' ]; then
+        if [ -n "$p_forc" ] && [ "${p_forc,,}" = '7z' ] || BU::Main::CMDS::GetCommandPath 7z; then
+            7z x "$p_nme" "$p_dst" || { BU::Main::Errors::HandleSmallErrors 'W' "Unable to uncompress the $(BU::DechoHighlightPath "$p_nme") with the $(BU::DechoHighlightCMD '7z') command" 'R'; BU::Newline; return 1; };
+
+        elif [ -n "$p_forc" ] && [ "${p_forc,,}" = 'p7zip' ] || BU::Main::CMDS::GetCommandPath p7zip; then
+            p7zip 
+
+        else
+            BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R'
+        fi
+
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
