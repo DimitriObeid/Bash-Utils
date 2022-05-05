@@ -374,7 +374,8 @@ function BU::Main::Args::GetFuncArgsArrayValues()
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
-            
+
+            # Just a debug string I print during a test.
             echo "JE SUIS LÀ";
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
