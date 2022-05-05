@@ -588,11 +588,29 @@ function BU::Main::Text::ReverseStringWordsOrder()
 
 # -----------------------------------------------
 
-## SPLITTING TEXT
+## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
 ## DEBUG ID : splitting-text
 
 # shellcheck disable=SC2034
 BU::ModuleInit::CheckIsDebugging && __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
+
+# String to words array
+function BU::Main::Text::StrToWordArray()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT";
+
+    #**** Parameters ****
+    local p_string=$1;  # String to convert in a word array.
+    local p_arrnme=$2;  # Name to give to the array.    
+
+    #**** Code ****
+    
+
+    return 0;
+}
 
 # Splitting a string from a given delimiter, in order to store it in an array.
 # function BU::Main::Text::SplitStringFromDelim()
