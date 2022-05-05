@@ -1983,15 +1983,15 @@ function BU::Main::Args__Text::GetSubStringOccurences()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_string=$1       # String    - Default : NULL  - String to process.
-    local p_target=$2       # String    - Default : NULL  - Targeted sub-string
+    local p_string=$1       # String    - Default : NULL    - String to process.
+    local p_target=$2       # String    - Default : NULL    - Targeted sub-string
 
     local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
     local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+    BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
@@ -2003,6 +2003,36 @@ function BU::Main::Args__Text::GetSubStringOccurences()
         BU::Main::Args::PrintBadOption 'z' \
             "Please give any sub-string to process as second argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
+## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+
+# "BU::Main::Text::StrToWordArray()" function.
+function BU::Main::Args__Text::StrToWordArray()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+    local p_string=$1       # String    - Default : NULL    - String to convert in an array of words.
+
+    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+    BU::Main::Args::GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_string" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'Z' \
+            "Please give as first argument a string to convert in a word array (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;

@@ -594,7 +594,9 @@ function BU::Main::Text::ReverseStringWordsOrder()
 # shellcheck disable=SC2034
 BU::ModuleInit::CheckIsDebugging && __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
 
-# String to words array
+# String to words array.
+
+# Pass a string as argument, and after calling this function, copy the content of the generated array into another array, like this : your_array_name=("${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR[@]}")
 function BU::Main::Text::StrToWordArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -604,12 +606,29 @@ function BU::Main::Text::StrToWordArray()
 
     #**** Parameters ****
     local p_string=$1;  # String to convert in a word array.
-    local p_arrnme=$2;  # Name to give to the array.    
 
     #**** Code ****
-    
+    if ! BU::Main::Args__Text::StrToWordArray "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    return 0;
+    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "$p_string";
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Words array to string.
+function BU::Main::Text::WordArrayToStr()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT";
+
+    #**** Parameters ****
+    local p_array=$1;
+
+    #**** Code ****
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Splitting a string from a given delimiter, in order to store it in an array.
