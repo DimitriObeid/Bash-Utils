@@ -1379,8 +1379,8 @@ function BU::Main::Args__Files::SetLastAccess()
 ## CATEGORY : ARCHIVES PROCESSING FUNCTIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU::Main::Files::Compress()" function.
-function BU::Main::Args__Files::Compress()
+# "BU::Main::Files::CompressCMD()" function.
+function BU::Main::Args__Files::CompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
@@ -1404,23 +1404,48 @@ function BU::Main::Args__Files::Compress()
 
 	# If the command line compression tool is not found.
     if ! command -v "$p_cmd"; then
-        if  [ "${p_cmd^^}" = 'TGZ' ] \
-        || [[ "${p_cmd,,}" = tar?(.)gz ]] \
-        || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]] \
-        || [[ "${p_cmd^^}" = TBZ?(2) ]] \
-        || [ "${p_cmd^^}" = 'TXZ' ] \
-        || [[ "${p_cmd,,}" = tar?(.)xz ]]; then local lineno="$LINENO";
-
             BU::Main::Args::PrintBadOption '!CMDSTR' \
                 "Please pass an existing / installed compression command name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
-        fi
     fi
+
+    # If no name of the archive to create is given (remember that the second parameter "$p_opts" is optional here, so the "$p_name" parameter is the third parameter of the original function).
+    if [ -z "$p_name" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass as third argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
+	return 0;
+}
+
+# "BU::Main::Files::CompressFormat()" function.
+function BU::Main::Args__Files::CompressFormat()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+    local p_cmd=$1          # String    - Default : NULL    - Compression command.
+    local p_name=$2         # String    - Default : NULL    - Archive's name.
+
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+
+    #**** Code ****
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+
+	if [ -z "$p_cmd" ]; then local lineno="$LINENO";
+        BU::Main::Args::PrintBadOption 'z' \
+            "Please pass a compression command name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+	fi
 
     # If no name of the archive to create is given.
     if [ -z "$p_name" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass as second argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1434,16 +1459,15 @@ function BU::Main::Args__Files::UncompressCMD()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_format=$1;      # String    - Default : NULL    - Archive format.
-    local p_opts=$2;        # String    - Default : NULL    - Compression command's options.
-    local p_name=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_cmd=$1;         # String    - Default : NULL    - Archive format.
+    local p_name=$2;        # String    - Default : NULL    - Path to the archive to uncompress.
 
-    local p_filename=$4;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$5;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU::Main::Args::GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU::Main::Args::GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
@@ -1456,10 +1480,9 @@ function BU::Main::Args__Files::UncompressCMD()
             BU::Main::Args::PrintBadOption '!CMDSTR' \
                 "Please pass an existing / installed (un)compression command's name as first argument (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
                 'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
-        fi
     fi
 
-    # If no path to the archive to uncompress is given.
+    # If no path to the archive to uncompress is given (remember that the second parameter "$p_opts" is optional here, so the "$p_name" parameter is the third parameter of the original function).
     if [ -z "$p_name" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -1492,7 +1515,7 @@ function BU::Main::Args__Files::UncompressFormat()
             'p_form' "$p_form" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
-    # If no path to the archive to uncompress is given.
+    # If no name / path to the archive to uncompress is given.
     if [ -z "$p_name" ]; then local lineno="$LINENO";
         BU::Main::Args::PrintBadOption 'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
@@ -1827,7 +1850,8 @@ function BU::Main::Args__Text::DeleteLettersInString()
     local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
 
     #**** Code ****
-    
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------

@@ -858,7 +858,18 @@ function BU::Main::Files::CompressCMD()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-    local p_cmd=$1;             # String    - Default : NULL    - Compression command.
+    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
+    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_name=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_dest=$4;        # String    - Default : NULL    - Folder destination of the uncompressed data.
+    shift 4;
+
+    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
+
+    #**** Code ****
+    
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Compressing archives according to the used compression method.
@@ -874,12 +885,10 @@ function BU::Main::Files::CompressFormat()
 
     #**** Parameters ****
     local p_cmd=$1;             # String    - Default : NULL    - Compression command.
-    local p_opts=$2;            # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
     local p_name=$3;            # String    - Default : NULL    - Archive's name.
-    local p_pwd=${4:-false};    # Bool      - Default : false   - Setting a password to the archive.
-    shift 3;
+    shift 2;
 
-    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("$@");       # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
     if BU::IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
@@ -972,6 +981,23 @@ function BU::Main::Files::DeleteInArchive()
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# Searching for a file or a folder inside an archive.
+function BU::Main::Files::SearchInArchive()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+
+    #**** Parameters ****
+    
+
+    #**** Code ****
+
+
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
 # Uncompressing archives according to the used compression method AND the (un)compression command's name.
 
 # Featured functions and files from the "functions" folder :
@@ -1023,20 +1049,61 @@ function BU::Main::Files::UncompressFormat()
     local p_forc=$4;    # String    - Default : NULL    - Force the execution of a command for a specific format (eg : set '7z' if you want to uncompress a specific archive format with the 7z command (within the limits of supported formats by the command)) (optional argument).
 
     #**** Code ****
-    BU::Main::Args__Files::UncompressFormat "$p_fmt" "$p_nme" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::UncompressFormat "$p_form" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    # If the 7-Zip compression format is wanted.
-    if [[ "$p_fmt" == 7?(-)[Zz][Ii][Pp] ]] || [ "${p_fmt,,}" = '7z' ]; then
-        if [ -n "$p_forc" ] && [ "${p_forc,,}" = '7z' ] || BU::Main::CMDS::GetCommandPath 7z; then
-            7z x "$p_nme" "$p_dst" || { BU::Main::Errors::HandleSmallErrors 'W' "Unable to uncompress the $(BU::DechoHighlightPath "$p_nme") with the $(BU::DechoHighlightCMD '7z') command" 'R'; BU::Newline; return 1; };
+    # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
+    function BU::Main::Files::UncompressFormat::ErrorMsg()
+    {
+        #**** Parameters ****
+        local p_fmt=$1;     # Archive format.
+        local p_nme=$2;     # Name of the target archive.
+        local p_cmd=$3;     # Name of the command used to uncompress the targeted archive.
 
-        elif [ -n "$p_forc" ] && [ "${p_forc,,}" = 'p7zip' ] || BU::Main::CMDS::GetCommandPath p7zip; then
-            p7zip 
+        #**** Code ****
+        BU::Main::Errors::HandleSmallErrors 'W' "Impossible to decompress the $(BU::DechoHighlight "$p_fmt") archive named $(BU::DechoHighlightPath "$p_nme") with the $(BU::DechoHighlightCMD "$p_cmd") command" 'R';
+        BU::EchoWarning "Please check the permissions of the archive, or use another uncompression command which supports the targeted archive's format";
+        BU::Newline;
+
+        return 1;
+    }
+
+    # If the archive to be decompressed is a 7-Zip archive format.
+    if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii])?([Pp]) ]]; then
+        # If the '7z' command is forced AND the command is found in the "$PATH" environment variable, OR if no command is forced but the same command is still found.
+        if      [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]] || BU::Main::CMDS::GetCommandPath 7z; then
+                7z x "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" '7z'; return 1; };
+
+        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
+                p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" 'p7zip'; return 1; };
 
         else
-            BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R'
+            BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
         fi
 
+    # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
+    elif [[ "$p_form" == ?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
+        if      [[ ( -n "$p_forc" ) && ( "$p_forc" = 'cabextract' ) && "$(BU::Main::CMDS::GetCommandPath 'cabextract')" ]] || BU::Main::CMDS::GetCommandPath cabextract; then
+                cabextract || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" 'cabextract'; return 1; };
+
+        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
+                7z || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" '7z'; return 1; };
+
+        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
+                p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" 'p7zip'; return 1; };
+        fi
+
+    # Else, if the archive to be decompressed is a Gzip archive format.
+    elif [[ "$p_form" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
+        if      [[ ( -n "$p_forc" ) && ( "$p_forc" = 'gunzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gunzip')" ]] || BU::Main::CMDS::GetCommandPath gunzip; then
+                gunzip -v "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gunzip'; return 1; };
+
+        elif    [[ ( -n "$p_forc" ) && ( "$p_forc" = 'gzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gzip')" ]] || BU::Main::CMDS::GetCommandPath gunzip; then
+                gzip -dv "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gzip'; return 1; };
+        fi
+
+    # Else, if the archive to be decompressed is a Tar archive compressed with the Gzip compression format.
+    elif [[ "$p_form" == ?(.)[Tt]?([Aa][Rr])?(.)[Gg][Zz] ]]; then
+        true;
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
