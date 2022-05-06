@@ -496,7 +496,7 @@ function BU::ModuleInit::Msg()
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-display' ]; then
 
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
-        if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]}" ]; then
+        if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
             __BU_MODULE_INIT_MSG_ARRAY=();
 
         fi; case "${p_option,,}" in
@@ -1589,84 +1589,95 @@ fi
 
 ## DEFINING GLOBAL VARIABLES
 
-__BU_MODULE_INIT_PROJECT_PID="$$";  __bu_module_init__project_pid__lineno="$LINENO";
+# Defining a function in order to suppress every shellcheck advices about the "printf" command, in order to do so at once AND to keep the code's decoration.
 
-__BU_MODULE_INIT__ROOT_HOME="$HOME"; __bu_module_init__root_home__lineno="$LINENO";
+# shellcheck disable=SC2059,SC2016
+function BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()
+{
+    __BU_MODULE_INIT_PROJECT_PID="$$";
+    __bu_module_init__project_pid__lineno="$(( LINENO -1 ))";
 
-if [ -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
-    __BU_MODULE_INIT__ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" ".Bash-utils")"                                   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__ROOT'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__root__lineno="$(( LINENO - 1))";
+    __BU_MODULE_INIT__ROOT_HOME="$HOME";
+    __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
-    # shellcheck disable=SC2034
-    __BU_MODULE_INIT__INITIALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")"   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__INITIALIZER_PATH'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__initializer_path__lineno="$(( LINENO - 1 ))";
+    if [ -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
+        __BU_MODULE_INIT__ROOT="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" ".Bash-utils")"                                   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__ROOT'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__root__lineno="$(( LINENO - 1))";
 
-    # Configurations directories
-    __BU_MODULE_INIT__CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "config")"                                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_DIR'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__config_dir__lineno="$(( LINENO - 1 ))";
+        # shellcheck disable=SC2034
+        __BU_MODULE_INIT__INITIALIZER_PATH="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT_HOME" "$(basename "${BASH_SOURCE[0]}")")"   || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__INITIALIZER_PATH'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__initializer_path__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "initializer")"                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__config_init_dir__lineno="$(( LINENO - 1 ))";
+        # Configurations directories
+        __BU_MODULE_INIT__CONFIG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "config")"                                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_DIR'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__config_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "modules")"                        || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__config_modules_dir__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__CONFIG_INIT_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "initializer")"                       || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__config_init_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "locale")"                  || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__config_init_lang_dir__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__CONFIG_MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_DIR" "modules")"                        || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__config_modules_dir__lineno="$(( LINENO - 1 ))";
 
-    # Initializer script's configuration files
-    __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "Status.conf")"          || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__config_init_dir__status__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "locale")"                  || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__config_init_lang_dir__lineno="$(( LINENO - 1 ))";
 
-    # Modules directories
-    __BU_MODULE_INIT__MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "modules")"                                     || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
-    __bu_module_init__modules_dir__lineno="$(( LINENO - 1 ))";
+        # Initializer script's configuration files
+        __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__CONFIG_INIT_DIR" "Status.conf")"          || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__config_init_dir__status__lineno="$(( LINENO - 1 ))";
 
-    # Files
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
-    __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
+        # Modules directories
+        __BU_MODULE_INIT__MODULES_DIR="$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT__ROOT" "modules")"                                     || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MODULE_INIT__MODULES_DIR'; BU::IsInScript && exit 1; return 1; };
+        __bu_module_init__modules_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
-    __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
+        # Files
+        __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
+        __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME";
-    __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
+        __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
-	__bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME";
+        __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
-	__bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
+        __bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME";
-# 	__bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="$__BU_MODULE_INIT__ROOT";
+        __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-	# Misc
-	__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
-	__bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME";
+    # 	__bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
-	__bu_module_init__date_log__lineno="$(( LINENO - 1 ))";
+        # Misc
+        __BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
+        __bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
 
-	__BU_MODULE_INIT__USER_LANG="$(echo "$LANG" | cut -d _ -f1)";
-	__bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
-else
-    # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
-    BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG";
+        __BU_MODULE_INIT__DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
+        __bu_module_init__date_log__lineno="$(( LINENO - 1 ))";
 
-	echo >&2;
+        __BU_MODULE_INIT__USER_LANG="$(echo "$LANG" | cut -d _ -f1)";
+        __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
+    else
+        # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
+        BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG";
 
-	# shellcheck disable=SC2059
-	printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
+        echo >&2;
 
-	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER" >&2; echo >&2;
-	echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE" >&2; echo >&2;
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR\n" >&2; echo >&2;
 
-	BU::ModuleInit::MsgAbort;
+        echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER" >&2; echo >&2;
+        echo "$__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE" >&2; echo >&2;
 
-	# WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-	BU::IsInScript && exit 1; return 1;
-fi
+        BU::ModuleInit::MsgAbort;
+
+        # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+        BU::IsInScript && exit 1; return 1;
+    fi
+}
+
+# Calling the function previously defined, or else the global variables will not be declared.
+BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 
 # -----------------------------------------------
 
@@ -1729,21 +1740,33 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU::ModuleInit::Msg)");
 function BU::ModuleInit::HandleErrors()
 {
     #**** Parameters ****
-	local p_errorString=${1:-NULL};    # String     - Default : NULL    - String of the type of error to display.
-	local p_adviceString=${2:-NLL};    # String     - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
-    local p_badValue=${3:-NULL};       # String     - Default : NULL    - Incorrect value which caused the error.
-	local p_file=${4:-NULL};           # String     - Default : NULL    - The name of the file where the error occured.
-	local p_function=${5:-NULL};       # String     - Default : NULL    - The name of the function where the error occured.
-	local p_lineno=${6:-NULL};         # String     - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
+    local p_returnCode=${1:-0}
+	local p_errorString=${2:-NULL};    # String     - Default : NULL    - String of the type of error to display.
+	local p_adviceString=${3:-NLL};    # String     - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
+    local p_badValue=${4:-NULL};       # String     - Default : NULL    - Incorrect value which caused the error.
+	local p_file=${5:-NULL};           # String     - Default : NULL    - The name of the file where the error occured.
+	local p_function=${6:-NULL};       # String     - Default : NULL    - The name of the function where the error occured.
+	local p_lineno=${7:-NULL};         # String     - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "$LINENO").
 
     #**** Code ****
-    echo "IN $p_file, FUNCTION $p_function, LINE $p_lineno --> ERROR : $p_errorString" >&2;
-    echo "Advice : $p_adviceString" >&2;
-    echo >&2;
+    if [ "$p_returnCode" -eq 0 ]; then return 0; else
+        if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "$__BU_MODULE_INIT_IS_SOURCED" = 'sourced' ]; then
+            BU::Main::Errors::HandleErrors "$p_returnCode" "$p_errorString" "$p_adviceString" "$p_badValue" "$p_file" "$p_function" "$p_lineno"; return "$?";
 
-    echo "Value that caused this error : $p_badValue" >&2;
+        else
+            echo "IN $p_file, FUNCTION $p_function, LINE $p_lineno --> ERROR : $p_errorString" >&2;
+            echo "Advice : $p_adviceString" >&2;
+            echo >&2;
 
-    BU::ModuleInit::MsgAbort;
+            echo "Value that caused this error : $p_badValue" >&2;
+
+            BU::ModuleInit::MsgAbort;
+
+            BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+            return "$p_returnCode";
+        fi
+    fi
 
     return 0;
 }
@@ -1793,17 +1816,17 @@ function BU::ModuleInit::ParseCSVLang()
 		BU::ModuleInit::Msg;
 
 		source "$v_outputFile" || {
-            local lineno="$(( LINENO - 1 ))";
+            local C="$?";
+
+            local lineno="$(( LINENO - 3 ))";
 
             BU::ModuleInit::PrintLogError "UNABLE TO SOURCE THE EXISTING TRANSLATIONS OUTPUT FILE" "$lineno";
 
-            BU::ModuleInit::HandleErrors "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "$v_outputFile")" \
+            BU::ModuleInit::HandleErrors "$C" "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "$v_outputFile")" \
                 "Please check what causes the script to not source the output file, which contains the target language's translations" \
                 "$v_outputFile" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-            BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-            return 1;
+            return "$?";
         }
 
 		return 0;
@@ -1813,33 +1836,27 @@ function BU::ModuleInit::ParseCSVLang()
     if [ -z "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ]; then local lineno="$LINENO";
         BU::ModuleInit::PrintLogError "NO PATH TO THE TARGET MODULE'S TRANSLATION FILE EXISTS" "$lineno";
 
-        BU::ModuleInit::HandleErrors "$(printf "NO PATH TO THE « %s » MODULE'S TRANSLATION FILE EXISTS" "$__BU_MODULE_INIT_MODULE_NAME")" \
+        BU::ModuleInit::HandleErrors '1' "$(printf "NO PATH TO THE « %s » MODULE'S TRANSLATION FILE EXISTS" "$__BU_MODULE_INIT_MODULE_NAME")" \
             "Please give a valid path to the current module's translations CSV file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     if [ -z "$v_filename" ]; then local lineno="$LINENO";
         BU::ModuleInit::PrintLogError "NO PATH TO THE TARGET CSV TRANSLATION FILE EXISTS" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
     if [ -n "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ] && [ ! -f "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ]; then local lineno="$LINENO";
         BU::ModuleInit::PrintLogError "THE PATH TO THE TARGET TRANSLATION FILE IS NOT VALID" "$lineno";
 
-        BU::ModuleInit::HandleErrors "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "$__BU_MODULE_INIT_MODULE_NAME")" \
+        BU::ModuleInit::HandleErrors '1' "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "$__BU_MODULE_INIT_MODULE_NAME")" \
             "Please give a valid path to the current module's translations CSV file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
@@ -1849,26 +1866,22 @@ function BU::ModuleInit::ParseCSVLang()
         && [ "$(basename "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" != "$v_filename" ]; then local lineno="$LINENO";
             BU::ModuleInit::PrintLogError "THE NAME OF THE TARGET PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "$lineno";
 
-            BU::ModuleInit::HandleErrors "$(printf "THE NAME OF THE « %s » PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "$__BU_MODULE_INIT_MODULE_NAME")" \
+            BU::ModuleInit::HandleErrors '1' "$(printf "THE NAME OF THE « %s » PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "$__BU_MODULE_INIT_MODULE_NAME")" \
                 "Please give a valid name to the current module's translations CSV file. The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" \
 				"$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-            BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-            return 1;
+            return "$?";
     fi
 
     # If no delimiter is given.
     if [ -z "$p_delim" ]; then local lineno="$LINENO";
         BU::ModuleInit::PrintLogError "NO DELIMITER WAS GIVEN FOR THE TARGET CSV FILE" "$lineno";
 
-        BU::ModuleInit::HandleErrors "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
+        BU::ModuleInit::HandleErrors '1' "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
             "Please give a « single unicode character » as CSV delimiter in order to get each wanted cell" \
             "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     if [ -n "$p_delim" ] && [ "${#p_delim}" -gt 1 ]; then local lineno="$LINENO";
@@ -1878,9 +1891,7 @@ function BU::ModuleInit::ParseCSVLang()
             "Please give a « single unicode character » as valid CSV delimiter in order to get each wanted cell" \
             "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     # Begin parsing the CSV file.
@@ -1893,40 +1904,36 @@ function BU::ModuleInit::ParseCSVLang()
     if [ ! -r "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" ]; then local lineno="$lineno";
         BU::ModuleInit::PrintLogError "UNABLE TO READ THE TARGET CSV FILE" "$lineno";
 
-        BU::ModuleInit::HandleErrors "$(printf "Unable to read the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
+        BU::ModuleInit::HandleErrors '1' "$(printf "Unable to read the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "Please check the permissions of this file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     fi
 
     # Getting the first row and first column's cell.
     v_CSVFirstColRow="$(BU::Main::Text::GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" || {
-        local lineno="$LINENO";
+        local C="$?";
+
+        local lineno="$(( LINENO - 3 ))";
 
         BU::ModuleInit::PrintLogError "UNABLE TO FIND THE VALUE « VARIABLE » IN THE FIRST ROW AND FIRST COLUMN OF THE TARGET CSV FILE" "$lineno";
 
-        BU::ModuleInit::HandleErrors "$(printf "Unable to find the value « VARIABLE » in the first row and first column of the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
+        BU::ModuleInit::HandleErrors '1' "$(printf "Unable to find the value « VARIABLE » in the first row and first column of the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "$(printf "Please check if the value mentioned above is present on this EXACT cell of the « %s » file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     })" "$p_delim" '--init')";
 
     if [ "$v_CSVFirstColRow" != "VARIABLE" ]; then local lineno="$LINENO";
         BU::ModuleInit::PrintLogError "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE TARGET CSV FILE" "$lineno";
 
-        BU::ModuleInit::HandleErrors "$(printf "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE « %s »" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
+        BU::ModuleInit::HandleErrors '1' "$(printf "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE « %s »" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")" \
             "Make sure the current module's CSV translations file is correctly formatted. You can check the main module's CSV file to check how the formatting should be done" \
             "$v_CSVFirstColRow" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
+        return "$?";
     else
         BU::ModuleInit::Msg "$(printf "Parsing the « %s » translations file" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
         BU::ModuleInit::Msg;
@@ -1954,7 +1961,7 @@ function BU::ModuleInit::ParseCSVLang()
 			BU::ModuleInit::Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$p_lang_ISO_639_1" "$v_outputFilePath")";
 			BU::ModuleInit::Msg;
 
-			source "$v_outputFile" || { BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return "$?"; };
+			source "$v_outputFile" || { local C="$?"; BU::ModuleInit::SourcingFailure "$v_outputFile" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; return "$C"; };
 
 			return 0;
 		else
@@ -1962,11 +1969,9 @@ function BU::ModuleInit::ParseCSVLang()
 			if		[ "$v_perlScriptReturnCode" -eq 10022 ]; then
                 BU::ModuleInit::PrintLogError "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass as first argument the path of the translations CSV file you want to process"
                     "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -1974,11 +1979,9 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "DIRECTORY PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass as first argument the path of the translations CSV ${__BU_MAIN_TXT_FMT_ITALIC}>>> file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
                     "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -1986,11 +1989,9 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT, BUT NOT A CSV FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass as first argument the path of the translations ${__BU_MAIN_TXT_FMT_ITALIC}>>> CSV file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
                     "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -1998,10 +1999,8 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass as second argument as the index of the column you want to process" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -2009,11 +2008,9 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
                     "Please pass an integer as second argument, as the target column ID" "$v_perlScriptReturnCode" \
                     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -2021,9 +2018,8 @@ function BU::ModuleInit::ParseCSVLang()
             elif    [ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
+                BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please pass a third argument as the output file path to create" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -2031,10 +2027,8 @@ function BU::ModuleInit::ParseCSVLang()
 			elif	[ "$v_perlScriptReturnCode" -eq TODO ]; then
                 BU::ModuleInit::PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT UNABLE TO READ THE CSV TRANSLATIONS FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" "$v_perlScriptExecLineno";
 
-				BU::ModuleInit::HandleErrors "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$v_filename")" \
+				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH" "$v_filename")" \
                     "Please check the permissions of the targeted CSV file, then relaunch the script" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 
@@ -2044,8 +2038,6 @@ function BU::ModuleInit::ParseCSVLang()
 
 				BU::ModuleInit::HandleErrors "$v_perlScriptReturnCode" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE « %s » PERL TRANSLATION SCRIPT" "$v_outputFilePath" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME")" \
                     "Please check the cause of this error, then relaunch the script" "$v_perlScriptReturnCode" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$v_perlScriptExecLineno";
-
-                BU::ModuleInit::AskPrintLog >&2 || return 1;
 
 				return "$v_perlScriptReturnCode";
 

@@ -64,8 +64,12 @@ fi
 
 ## SUB-SECTION : DEFINING GLOBAL VARIABLES
 
+## FUNCTION : "BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+
 # Note: This variable is also used in the main module configuration files.
 __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : Unable to define the path to store in the « %s » global variable\n";
+
+# --------
 
 # -----------------------------------------------
 
@@ -258,6 +262,8 @@ __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="END OF THE INITIALIZATION LOG
 
 __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERROR ] DESCRIPTION : %s | LINE : %s";
 
+# --------
+
 # -----------------------------------------------
 
 ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
@@ -318,6 +324,8 @@ __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODU
 ## FUNCTION : "BU::ModuleInit::SourcingFailure()"
 
 __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
+
+# --------
 
 # -----------------------------------------------
 
@@ -421,6 +429,8 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : NO « MODULE » PARAMETER AND NO « MAIN » MODULE PASSED AS FIRST, THEN SECOND ARGUMENTS DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE="Please do so by modifying the main module's argument position in your script, and optionally adding the « module » parameter with the needed mandatory arguments";
 
+# --------
+
 # -----------------------------------------------
 
 
@@ -475,6 +485,8 @@ __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MO
 # End of the framework's initialization process.
 __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIALIZATION PROCESS ! BEGINNING PROCESSING THE %s PROJECT'S MAIN SCRIPT %s !";
 
+# --------
+
 # -----------------------------------------------
 
 
@@ -521,6 +533,8 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FN
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
+
+# --------
 
 # -----------------------------------------------
 

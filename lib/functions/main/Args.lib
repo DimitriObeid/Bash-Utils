@@ -1481,6 +1481,7 @@ function BU::Main::Args__Files::SearchInArchive()
         BU::Main::Args::PrintBadOption '!f' \
             "Please pass as first argument an existing path to find the archive to process (mandatory argument) [/|\] $(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
