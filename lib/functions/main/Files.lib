@@ -1135,7 +1135,6 @@ function BU::Main::Files::UncompressFormat()
     # Else, if the archive to be decompressed is a Tar archive compressed with the Gzip compression format.
     elif [[ "$p_form" == ?(.)[Tt]?([Aa][Rr])?(.)[Gg][Zz] ]]; then
         true;
-    fi
 
     # Else, if the archive to be decompressed is a Zip archive format.
     elif [[ "$p_form" == ?(.)[Zz][Ii][Pp] ]]; then
@@ -1144,6 +1143,7 @@ function BU::Main::Files::UncompressFormat()
         else
                 BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for Zip archives uncompression found on your system' 'R';
         fi
+    fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
