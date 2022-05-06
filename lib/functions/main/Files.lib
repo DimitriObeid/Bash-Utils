@@ -817,7 +817,7 @@ function BU::Main::Files::AddToArchive()
     #**** Parameters ****
     local p_cmd=$1;         # String    - Default : NULL    - Compression command.
     local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;        # String    - Default : NULL    - Archive's name.
+    local p_arch=$3;        # String    - Default : NULL    - Archive's name.
     shift 3;
 
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
@@ -831,7 +831,7 @@ function BU::Main::Files::AddToArchive()
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Compress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU::Main::Args__Files::Compress "$cmd" "$opts" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::Compress "$cmd" "$opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     if [ "$p_cmd" = '7z' ]; then
         true
@@ -860,7 +860,7 @@ function BU::Main::Files::CompressCMD()
     #**** Parameters ****
     local p_cmd=$1;         # String    - Default : NULL    - Compression command.
     local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_arch=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
     local p_dest=$4;        # String    - Default : NULL    - Folder destination of the uncompressed data.
     shift 4;
 
@@ -885,7 +885,7 @@ function BU::Main::Files::CompressFormat()
 
     #**** Parameters ****
     local p_cmd=$1;             # String    - Default : NULL    - Compression command.
-    local p_name=$3;            # String    - Default : NULL    - Archive's name.
+    local p_arch=$3;            # String    - Default : NULL    - Archive's name.
     shift 2;
 
     local p_paths=("$@");       # Array - Default : NULL    - Paths to the files / folders to archivate.
@@ -899,18 +899,18 @@ function BU::Main::Files::CompressFormat()
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Compress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU::Main::Args__Files::CompressFormat "$cmd" "$opts" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::CompressFormat "$cmd" "$opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the 7-Zip compression format is wanted.
     if [ "$p_cmd" == '7z' ]; then
-        7z a "$p_opts" "$p_opts" "$p_name" "${p_paths[@]}" || {
+        7z a "$p_opts" "$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format 7-Zip.
             return 1;
         }
 
     # Else, if the BinHex compression format is wanted (works on Apple operating systems).
     elif [ "$p_cmd" == 'binhex' ]; then
-        binhex "$p_opts" "${p_paths[@]}" > "$p_name"|| {
+        binhex "$p_opts" "${p_paths[@]}" > "$p_arch"|| {
             # TODO : Gérer les cas d'erreur de compression au format BinHex.
             return 1;
         }
@@ -932,21 +932,21 @@ function BU::Main::Files::CompressFormat()
 
     # Else, if the Gzip compression format is wanted for a Tar archive.
     elif [ "${p_cmd^^}" = 'TGZ' ] || [[ "${p_cmd,,}" = tar?(.)gz ]]; then
-        tar "-zcf$p_opts" "$p_name" "${p_paths[@]}" || {
+        tar "-zcf$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the LZMA compression is wanted for a Tar archive.
     elif [ "${p_cmd^^}" = 'TXZ' ] || [[ "${p_cmd,,}" = tar?(.)xz ]]; then
-        tar "JCxf$p_opts" "$p_name" "${p_paths[@]}" || {
+        tar "JCxf$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the zip compression format is wanted.
     elif [ "$p_cmd" == 'zip' ]; then
-        zip "$p_opts" "$p_name" "${p_paths[@]}" || {
+        zip "$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format zip.
             return 1;
         }
@@ -966,7 +966,7 @@ function BU::Main::Files::DeleteInArchive()
     #**** Parameters ****
     local p_cmd=$1;         # String    - Default : NULL    - Compression command.
     local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;        # String    - Default : NULL    - Archive's name.
+    local p_arch=$3;        # String    - Default : NULL    - Target archive's path.
     shift 3;
 
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
@@ -990,10 +990,10 @@ function BU::Main::Files::SearchInArchive()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-
+    local p_arch=$1;    # String    - Default : NULL    - Path to the target archive.
 
     #**** Code ****
-
+    
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1014,13 +1014,13 @@ function BU::Main::Files::UncompressCMD()
     #**** Parameters ****
     local p_cmd=$1;     # String    - Default : NULL    - Compression command.
     local p_opts=$2;    # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_name=$3;    # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_arch=$3;    # String    - Default : NULL    - Path to the archive to uncompress.
     local p_dest=$4;    # String    - Default : NULL    - Folder destination of the uncompressed data.
 
     #**** Code ****
     # There is no need to pass the "$p_opts" parameter as argument for the "BU::Main::Args__Files::Uncompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
-    if ! BU::Main::Args__Files::UncompressCMD "$cmd" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::UncompressCMD "$cmd" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
     if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]]; then
@@ -1028,7 +1028,7 @@ function BU::Main::Files::UncompressCMD()
 
     # Else, if the user wishes to decode a BinHexed file (Apple's BinHex format)
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'hexbin' ) && "$(BU::Main::Files::GetExtension ".hqx")" && "$(BU::Main::CMDS::GetCommandPath 'hexbin')" ]]; then
-            hexbin "$p_opts" "$p_name" || { return 1; };
+            hexbin "$p_opts" "$p_arch" || { return 1; };
 
     # Else, if the user wishes to use the "p7zip" command in order to uncompress ... .
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]]; then
@@ -1036,19 +1036,19 @@ function BU::Main::Files::UncompressCMD()
 
     # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'cabextract' ) && "$(BU::Main::CMDS::GetCommandPath 'cabextract')" ]]; then
-            cabextract "$p_opts" "$p_name" || { return 1; };
+            cabextract "$p_opts" "$p_arch" || { return 1; };
 
     # Else, if the user wishes to use the "gzip" command in order to uncompress
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'zip' ) && "$(BU::Main::CMDS::GetCommandPath 'zip')" ]]; then
-            gzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
+            gzip "$p_opts" "$p_arch" "$p_dest" || { return 1; };
 
     # Else, if the user wishes to use the "gunzip" command in order to uncompress
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'gunzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gunzip')" ]]; then
-            gunzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
+            gunzip "$p_opts" "$p_arch" "$p_dest" || { return 1; };
 
     # Else, if the user wishes to use the "unzip" command in order to uncompress
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'unzip' ) && "$(BU::Main::CMDS::GetCommandPath 'unzip')" ]]; then
-            unzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
+            unzip "$p_opts" "$p_arch" "$p_dest" || { return 1; };
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1064,22 +1064,22 @@ function BU::Main::Files::UncompressFormat()
 
     #**** Parameters ****
     local p_form=$1;    # String    - Default : NULL    - Compression format.
-    local p_name=$2;    # String    - Default : NULL    - Path to the archive to uncompress.
+    local p_arch=$2;    # String    - Default : NULL    - Path to the archive to uncompress.
     local p_dest=$3;    # String    - Default : NULL    - Folder destination of the uncompressed data (optional argument).
 
     #**** Code ****
-    if ! BU::Main::Args__Files::UncompressFormat "$p_form" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU::Main::Args__Files::UncompressFormat "$p_form" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
     function BU::Main::Files::UncompressFormat::ErrorMsg()
     {
         #**** Parameters ****
         local p_fmt=$1;     # Archive format.
-        local p_nme=$2;     # Name of the target archive.
+        local p_arc=$2;     # Name of the target archive.
         local p_cmd=$3;     # Name of the command used to uncompress the targeted archive.
 
         #**** Code ****
-        BU::Main::Errors::HandleSmallErrors 'W' "Impossible to decompress the $(BU::DechoHighlight "$p_fmt") archive named $(BU::DechoHighlightPath "$p_nme") with the $(BU::DechoHighlightCMD "$p_cmd") command" 'R';
+        BU::Main::Errors::HandleSmallErrors 'W' "Impossible to decompress the $(BU::DechoHighlight "$p_fmt") archive named $(BU::DechoHighlightPath "$p_arc") with the $(BU::DechoHighlightCMD "$p_cmd") command" 'R';
         BU::EchoWarning "Please check the permissions of the archive, or use another uncompression command which supports the targeted archive's format";
         BU::Newline;
 
@@ -1090,47 +1090,60 @@ function BU::Main::Files::UncompressFormat()
     if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii])?([Pp]) ]]; then
         # If the '7z' command is found in the "$PATH" environment variable.
         if      BU::Main::CMDS::GetCommandPath 7z; then
-                7z x "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" '7z'; return 1; };
+                7z x "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_arch" '7z'; return 1; };
 
         # Else, if the '7z' command is found in the "$PATH" environment variable.
         elif    BU::Main::CMDS::GetCommandPath p7zip; then
-                p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" 'p7zip'; return 1; };
+                p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_arch" 'p7zip'; return 1; };
 
         else
                 BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is an Apple's BinHex file.
-    elif        [[ "$var" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
+    elif [[ "$p_form" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
         if      BU::Main::CMDS::GetCommandPath hexbin; then
-                hexbin "$p_name" || { BU::Main::Files::UncompressFormat::ErrorMsg 'BinHex' "$p_name" 'hexbin'; return 1; };
+                hexbin "$p_arch" || { BU::Main::Files::UncompressFormat::ErrorMsg 'BinHex' "$p_arch" 'hexbin'; return 1; };
 
         else
-                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for BinHex uncompression found on your system' 'R';
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for Apple BinHex files uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
-    elif [[ "$p_form" == ?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
+    elif [[ "$p_form" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss]))?([[:space:]])?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
         if      BU::Main::CMDS::GetCommandPath cabextract; then
-                cabextract || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" 'cabextract'; return 1; };
+                cabextract || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_arch" 'cabextract'; return 1; };
 
         elif    BU::Main::CMDS::GetCommandPath 7z; then
-                7z x "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" '7z'; return 1; };
+                7z x "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_arch" '7z'; return 1; };
+
+        else
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for Microsoft Cabinet archives uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Gzip archive format.
     elif [[ "$p_form" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
         if      BU::Main::CMDS::GetCommandPath gunzip; then
-                gunzip -v "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gunzip'; return 1; };
+                gunzip -v "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_arch" 'gunzip'; return 1; };
 
         elif    BU::Main::CMDS::GetCommandPath gzip; then
-                gzip -dv "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gzip'; return 1; };
+                gzip -dv "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_arch" 'gzip'; return 1; };
+        else
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for Gzip archives uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Tar archive compressed with the Gzip compression format.
     elif [[ "$p_form" == ?(.)[Tt]?([Aa][Rr])?(.)[Gg][Zz] ]]; then
         true;
     fi
+
+    # Else, if the archive to be decompressed is a Zip archive format.
+    elif [[ "$p_form" == ?(.)[Zz][Ii][Pp] ]]; then
+        if      BU::Main::CMDS::GetCommandPath unzip; then
+                unzip "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Zip' "$p_arch" 'unzip'; return 1; };
+        else
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for Zip archives uncompression found on your system' 'R';
+        fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
