@@ -43,12 +43,12 @@ fi
 #### TEXT WRITING AND DECORATION (FORMATTING)
 #### DEBUG ID : decho::text-writing-and-decoration-(formatting)
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
+__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## SETTING
 ## DEBUG ID : setting
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -195,7 +195,7 @@ function BU::Main::Decho::SetTextColor()
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 ## DEBUG ID : writing-differently-cf-text-between-text::basis
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-text::basis";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-text::basis";
 
 # Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 function BU::__Decho()

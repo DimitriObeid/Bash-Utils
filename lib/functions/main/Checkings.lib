@@ -43,13 +43,13 @@ fi
 #### OPERATING SYSTEM CHECKINGS
 #### DEBUG ID : checkings::operating-system-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="checkings::operating-system-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="checkings::operating-system-checkings";
 
 ## OS TYPE CHECKINGS
 ## DEBUG ID : os-type-checkings
 
 # shellcheck disable=SC2034
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU::IsOSAndroidTermux()    { if [[ "$OSTYPE" == 'linux-android' ]];    then return 0; else return 1; fi }
@@ -84,12 +84,12 @@ function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          
 #### VARIABLES VALUES CHECKINGS
 #### DEBUG ID : checkings::variable-values-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
 
 ## ARRAYS CHECKINGS
 ## DEBUG ID : array-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::array-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::array-checkings";
 
 # Checking if the variable is an array.
 function BU::IsArray()
@@ -143,7 +143,7 @@ function BU::IsArrayNotEmpty()
 ## DATE FORMAT
 ## DEBUG ID : date-format
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::date-format";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::date-format";
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
@@ -205,7 +205,7 @@ function BU::IsDateYMD_HMS()
 ## NUMBER VALUES
 ## DEBUG ID : number-values
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::number-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::number-values";
 
 # Checking floating value.
 function BU::IsFloat()
@@ -290,7 +290,7 @@ function BU::IsPositiveInt()
 ## CHARACTERS AND STRING VALUES
 ## DEBUG ID : characters-and-string-values
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::characters-and-string-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU::IsAlphaChar()
@@ -385,7 +385,7 @@ function BU::IsAlphaNumStringOnly()
 ## OTHER VARIABLES CHECKINGS
 ## DEBUG ID : other-variables-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::other-variables-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::other-variables-checkings";
 
 # Checking if the variable is an array.
 function BU::IsArray()
@@ -409,12 +409,12 @@ function BU::IsArray()
 #### DIFFERENT CHECKINGS
 #### DEBUG ID : checkings::different-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
 ## DEBUG ID : checking-fort-identifiants
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::checking-fort-identifiants";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::checking-fort-identifiants";
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
@@ -440,7 +440,7 @@ function BU::Main::Checkings::CheckRootEUID()
 ## BASIC HARDWARE CHECKINGS
 ## DEBUG ID : basic-hardware-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::basic-hardware-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::basic-hardware-checkings";
 
 # Check if hard drive is full.
 function BU::Main::Checkings::CheckDiskUsedSpace()
@@ -553,12 +553,12 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 #### PATHS CHECKINGS
 #### DEBUG ID : checkings::paths-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
 
 ## DIRECTORIES PATHS CHECKINGS
 ## DEBUG ID : directories-paths-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::directories-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::directories-paths-checkings";
 
 # Checking for an existent directory path (for the "BU::Main::Errors::HandleErrors()" function mainly).
 function BU::Main::Checkings::CheckDirPathExists()
@@ -609,7 +609,7 @@ function BU::Main::Checkings::CheckDirPathWasCreated()
 ## FILES PATHS CHECKINGS
 ## DEBUG ID : files-path-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::files-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::files-paths-checkings";
 
 # Checking for an existent file path (for the "BU::Main::Errors::HandleErrors()" function mainly).
 function BU::Main::Checkings::CheckFilePathExists()
@@ -666,7 +666,7 @@ function BU::Main::Checkings::CheckProjectLogPath()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
- 
+
     # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU::CheckProjectLogStatus()" function
     # (the only one where the "BU::Main::Checkings::CheckProjectLogPath()" function can be called), it's safe to call an "BU::Echo<...>()" function, the "BU::Main::Errors::HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
     if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
@@ -737,7 +737,7 @@ function BU::CheckProjectLogStatus()
     }
 
     # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
-    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { 
+    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
         local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
@@ -1038,7 +1038,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
     local p_parent=$1;  # String    - Default : NULL    - Name of the folder to process (into its parent directory).
     local p_child=$2;   # String    - Default : NULL    - Name of the file or folder to process (into its parent directory).
     local p_type=$3;    # Char      - Default : NULL    - Type of data to create (d = directory, f = file).
-    local p_decho=$4;   # String    - Default : NULL    - 
+    local p_decho=$4;   # String    - Default : NULL    -
 
 	#**** Variables ****
     local v_path="$p_parent/$p_child";
@@ -1136,12 +1136,12 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 #### TEXT CHECKINGS
 #### DEBUG ID : checkings::text-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="checkings::text-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="checkings::text-checkings";
 
 ## FORMATTING CHECKINGS
 ## DEBUG ID : formatting-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS::formatting-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS::formatting-checkings";
 
 # Checking if the project's color code file exists or not.
 
@@ -1153,7 +1153,7 @@ function BU::Main::Checkings::CheckDecho()
     BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
- 
+
     # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text :
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" = 'forbid' ]; then
         return 1;

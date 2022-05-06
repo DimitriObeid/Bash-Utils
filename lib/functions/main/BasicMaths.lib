@@ -43,12 +43,12 @@ fi
 #### CONVERSIONS
 #### DEBUG ID : basicmaths::conversions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
+__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
 
 ## NUMERIC CONVERSIONS
 ## DEBUG ID : numeric-conversions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS::numeric-conversions";
+__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS::numeric-conversions";
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 

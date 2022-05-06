@@ -43,12 +43,12 @@ fi
 #### VARIABLES VALUES FUNCTIONS
 #### DEBUG ID : status::variables-values-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="status::variables-values-functions";
+__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="status::variables-values-functions";
 
 ## CHECKING VALUES
 ## DEBUG ID : checking-values
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checking-values";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checking-values";
 
 # Easy writing text function.
 function BU::Main::Status::ConfEcho()
@@ -128,7 +128,7 @@ function BU::Main::Status::ConfEcho()
 ## CHECKINGS
 ## DEBUG ID : checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checkings";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checkings";
 
 # Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main::Status::CheckSTAT_DECHO()
@@ -327,7 +327,7 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
     # If the status variable's value is not a float or an integer.
     if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
         BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}";
-        
+
         local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -464,7 +464,7 @@ function BU::Main::Status::CheckProjectStatusVars()
 ## CHANGING VALUES MORE EASILY
 ## DEBUG ID : changing-values-more-easily
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::changing-values-more-easily";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::changing-values-more-easily";
 
 # Positionnal parameters :
 #   $1  --> Any     : new value.
@@ -609,7 +609,7 @@ function BU::Main::Status::ChangeSTAT_TXT_FMT()         { BU::Main::Echo::Debug 
 ## EASIER BOOLEAN VALUES CHECKINGS
 ## DEBUG ID : easier-boolean-values-checkings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::easier-boolean-values-checkings";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::easier-boolean-values-checkings";
 
 # Checking if the "BU::Echo<...>()" functions can call the "BU::CheckProjectLogStatus()" function without provoking an infinite loop.
 function BU::Main::Status::CheckStatIsBackupEchoing() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }

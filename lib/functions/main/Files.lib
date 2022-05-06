@@ -43,12 +43,12 @@ fi
 #### FILES PROCESSING FUNCTIONS
 ## DEBUG ID : files::files-processing-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="files::files-processing-functions";
+__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="files::files-processing-functions";
 
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : processing-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::processing-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::processing-functions";
 
 # This function only repeats some parts of the following function.
 function BU::Main::Files::__ProcessingFile()
@@ -137,7 +137,7 @@ function BU::Main::Files::ProcessingFile()
 ## FILE CREATION FUNCTIONS
 ## DEBUG ID : file-creation-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-creation-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-creation-functions";
 
 # Overwriting a file
 
@@ -444,7 +444,7 @@ function BU::Main::Files::CreateProjectLogFile()
 ## GETTING FILE INFORMATIONS
 ## DEBUG ID : getting-file-informations
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::getting-file-informations";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::getting-file-informations";
 
 # Getting the size of a file in bytes.
 function BU::Main::Files::GetByteSize()
@@ -686,7 +686,7 @@ function BU::Main::Files::GetWordsNumber()
 ## SETTING FILE INFORMATIONS
 ## DEBUG ID : setting-file-informations
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::setting-file-informations";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::setting-file-informations";
 
 # Setting a fake last access date to a file.
 function BU::Main::File::SetFileLastAccess
@@ -711,7 +711,7 @@ function BU::Main::File::SetFileLastAccess
 ## FILE SOURCING
 ## DEBUG ID : file-sourcing
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-sourcing";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-sourcing";
 
 # Sourcing dependencies files.
 function BU::Main::Files::SourceFile()
@@ -756,7 +756,7 @@ function BU::Main::Files::SourceFile()
 ## TEXT FILE PARSING
 ## DEBUG ID : text-file-parsing
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::text-file-parsing";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::text-file-parsing";
 
 # Getting a specific line from a text file.
 function BU::Main::Files::GetLineFromTextFile()
@@ -799,12 +799,12 @@ function BU::Main::Files::GetLineFromTextFile()
 #### ARCHIVES PROCESSING FUNCTIONS
 #### DEBUG ID : files::archive-processing-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive-processing-functions";
+__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive-processing-functions";
 
 ## (UN)COMPRESSION FUNCTIONS
 ## DEBUG ID : (un)compression-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS::(un)compression-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS::(un)compression-functions";
 
 # Adding files or folders into an archive.
 function BU::Main::Files::AddToArchive()
@@ -867,7 +867,7 @@ function BU::Main::Files::CompressCMD()
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
-    
+
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -990,7 +990,7 @@ function BU::Main::Files::SearchInArchive()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
 
     #**** Parameters ****
-    
+
 
     #**** Code ****
 
@@ -1026,7 +1026,11 @@ function BU::Main::Files::UncompressCMD()
     if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]]; then
             7z x "" "" "" "" || { return 1; };
 
-    # If the user wishes to use the "p7zip" command in order to uncompress ... .
+    # Else, if the user wishes to decode a BinHexed file (Apple's BinHex format)
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'hexbin' ) && "$(BU::Main::Files::GetExtension ".hqx")" && "$(BU::Main::CMDS::GetCommandPath 'hexbin')" ]]; then
+            hexbin "$p_opts" "$p_name" || { return 1; };
+
+    # Else, if the user wishes to use the "p7zip" command in order to uncompress ... .
     elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]]; then
             p7zip "" "" || { return 1; };
 
@@ -1093,7 +1097,16 @@ function BU::Main::Files::UncompressFormat()
                 p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" 'p7zip'; return 1; };
 
         else
-            BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
+        fi
+
+    # Else, if the archive to be decompressed is an Apple's BinHex file.
+    elif        [[ "$var" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
+        if      BU::Main::CMDS::GetCommandPath hexbin; then
+                hexbin "$p_name" || { BU::Main::Files::UncompressFormat::ErrorMsg 'BinHex' "$p_name" 'hexbin'; return 1; };
+
+        else
+                BU::Main::Errors::HandleSmallErrors 'W' 'No valid command for BinHex uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).

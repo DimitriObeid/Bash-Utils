@@ -43,12 +43,12 @@ fi
 #### PRINTING FORMATTED STRINGS
 #### DEBUG ID : echo::printing-formatted-strings
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
 
 ## DEBUGGING
 ## DEBUG ID : debugging
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS::debugging";
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS::debugging";
 
 # This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
 function BU::Main::Echo::__Debug()
@@ -59,7 +59,11 @@ function BU::Main::Echo::__Debug()
         echo "----------------------------------------";
         echo "DEBUGGING THE FUNCTION $1";
 
-        echo; echo "Waiting for the timer for the $1() function to elapse"; echo;
+        echo; echo "Waiting for the two seconds timer for the $1() function to elapse"; echo;
+
+        sleep 2;
+
+        set -x;
 
         BU::Main::Echo::__EchoVoid;
     }
@@ -68,7 +72,8 @@ function BU::Main::Echo::__Debug()
 # This function only serves as text printer for the " BU::Main::Echo::Debug()" function.
 function BU::Main::Echo::DebugEnd()
 {
-    return 0;
+    set +x;
+
     BU::ModuleInit::CheckIsDebugging && {
         if [ "${__BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION,,}" = 'true' ]; then
             BU::Main::Echo::__EchoVoid;
@@ -88,7 +93,6 @@ function BU::Main::Echo::DebugEnd()
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "bash -x".
 function BU::Main::Echo::Debug()
 {
-    return 0;
     BU::ModuleInit::CheckIsDebugging && {
         #**** Parameters ****
         local p_filename=$1;    # String    - Default : NULL    - File where the function currently processed is defined.
@@ -340,12 +344,12 @@ function BU::Main::Echo::__EchoCPLS()
 #### TEXT DISPLAYING
 #### DEBUG ID : echo::text-displaying
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
 ## DEBUG ID : displaying-a-context-message
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING::displaying-a-context-message";
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING::displaying-a-context-message";
 
 # --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
@@ -963,7 +967,7 @@ function BU::EchoYellow()
 #### LINE BREAKS
 #### DEBUG ID : echo::line-breaks
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="echo::line-breaks";
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="echo::line-breaks";
 
 ## LINE BREAKS ACCORDING TO THE "$__BU_MAIN_PROJECT_LOG_FILE_PATH" VARIABLE VALUE
 ## DEBUG ID : line-breaks-according-to-the-project-log-file-var-val

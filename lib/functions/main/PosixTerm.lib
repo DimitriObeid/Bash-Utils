@@ -43,12 +43,12 @@ fi
 #### TERMINAL INTERACTION FUNCTIONS
 #### DEBUG ID : posixterm::terminal-interaction-functions
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="posixterm::terminal-interaction-functions";
+__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="posixterm::terminal-interaction-functions";
 
 ## DISPLAYING TEXT AND MORE WHILE A TASK IS ONGOING
 ## DEBUG ID : displaying-text-and-more-while-a-task-is-ongoing
 
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG="$__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS::displaying-text-and-more-while-a-task-is-ongoing";
+__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG="$__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS::displaying-text-and-more-while-a-task-is-ongoing";
 
 # Display a countdown while a task is ongoing.
 function BU::Main::PosixTerm::DisplayCountdown()

@@ -371,7 +371,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
         #**** Code ****
 		if [ "${p_var_type^^}" = 'NULL' ]; then
             p_var_type="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN";
-		
+
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
 		# - array	: this variable is an array.
 		# - code	: this variable stores code in order to perform an action (either a function, a command or a condition)

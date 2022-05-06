@@ -44,13 +44,13 @@ fi
 #### DEBUG ID : args::argument-values-checking--utilities-functions
 
 # shellcheck disable=SC2034
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
+__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
 
 ## PATH CHECKING FUNCTIONS
 ## DEBUG ID : path-checking-functions
 
 # shellcheck disable=SC2034
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
 
 # -----------------------------------------------
 
@@ -58,7 +58,7 @@ BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMEN
 ## DEBUG ID : quick-message-printing
 
 # shellcheck disable=SC2034
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
 
 # Print a message without the need to write the whole "BU::Main::Errors::HandleErrors()" function's second argument, and according to the test option which failed :
 function BU::Main::Args::PrintBadOption()
@@ -337,7 +337,7 @@ function BU::Main::Args::PrintBadOption()
 ## DEBUG ID = argument-presence-checking
 
 # shellcheck disable=SC2034
-BU::ModuleInit::CheckIsDebugging && __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
 function BU::Main::Args::GetFuncArgsArrayValues()
