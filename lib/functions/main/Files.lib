@@ -1022,13 +1022,29 @@ function BU::Main::Files::UncompressCMD()
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
     if ! BU::Main::Args__Files::UncompressCMD "$cmd" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    # If the 7-Zip compression format is wanted.
-    if [ "$p_cmd" == '7z' ]; then
-        7z x "" "" "" "";
+    # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
+    if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]]; then
+            7z x "" "" "" "" || { return 1; };
+
+    # If the user wishes to use the "p7zip" command in order to uncompress ... .
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]]; then
+            p7zip "" "" || { return 1; };
 
     # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
-    elif [ "$p_cmd" = 'cabextract' ]; then
-        cabextract "$p_opts" "$p_name";
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'cabextract' ) && "$(BU::Main::CMDS::GetCommandPath 'cabextract')" ]]; then
+            cabextract "$p_opts" "$p_name" || { return 1; };
+
+    # Else, if the user wishes to use the "gzip" command in order to uncompress
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'zip' ) && "$(BU::Main::CMDS::GetCommandPath 'zip')" ]]; then
+            gzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
+
+    # Else, if the user wishes to use the "gunzip" command in order to uncompress
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'gunzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gunzip')" ]]; then
+            gunzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
+
+    # Else, if the user wishes to use the "unzip" command in order to uncompress
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'unzip' ) && "$(BU::Main::CMDS::GetCommandPath 'unzip')" ]]; then
+            unzip "$p_opts" "$p_name" "$p_dest" || { return 1; };
     fi
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1046,7 +1062,6 @@ function BU::Main::Files::UncompressFormat()
     local p_form=$1;    # String    - Default : NULL    - Compression format.
     local p_name=$2;    # String    - Default : NULL    - Path to the archive to uncompress.
     local p_dest=$3;    # String    - Default : NULL    - Folder destination of the uncompressed data (optional argument).
-    local p_forc=$4;    # String    - Default : NULL    - Force the execution of a command for a specific format (eg : set '7z' if you want to uncompress a specific archive format with the 7z command (within the limits of supported formats by the command)) (optional argument).
 
     #**** Code ****
     if ! BU::Main::Args__Files::UncompressFormat "$p_form" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -1069,11 +1084,12 @@ function BU::Main::Files::UncompressFormat()
 
     # If the archive to be decompressed is a 7-Zip archive format.
     if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii])?([Pp]) ]]; then
-        # If the '7z' command is forced AND the command is found in the "$PATH" environment variable, OR if no command is forced but the same command is still found.
-        if      [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]] || BU::Main::CMDS::GetCommandPath 7z; then
+        # If the '7z' command is found in the "$PATH" environment variable.
+        if      BU::Main::CMDS::GetCommandPath 7z; then
                 7z x "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" '7z'; return 1; };
 
-        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
+        # Else, if the '7z' command is found in the "$PATH" environment variable.
+        elif    BU::Main::CMDS::GetCommandPath p7zip; then
                 p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_name" 'p7zip'; return 1; };
 
         else
@@ -1082,22 +1098,19 @@ function BU::Main::Files::UncompressFormat()
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
     elif [[ "$p_form" == ?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
-        if      [[ ( -n "$p_forc" ) && ( "$p_forc" = 'cabextract' ) && "$(BU::Main::CMDS::GetCommandPath 'cabextract')" ]] || BU::Main::CMDS::GetCommandPath cabextract; then
+        if      BU::Main::CMDS::GetCommandPath cabextract; then
                 cabextract || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" 'cabextract'; return 1; };
 
-        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = '7z' ) && "$(BU::Main::CMDS::GetCommandPath '7z')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
-                7z || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" '7z'; return 1; };
-
-        elif    [[ ( -n "$p_forc" ) && ( "${p_forc,,}" = 'p7zip' ) && "$(BU::Main::CMDS::GetCommandPath 'p7zip')" ]] || BU::Main::CMDS::GetCommandPath p7zip; then
-                p7zip || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" 'p7zip'; return 1; };
+        elif    BU::Main::CMDS::GetCommandPath 7z; then
+                7z x "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_name" '7z'; return 1; };
         fi
 
     # Else, if the archive to be decompressed is a Gzip archive format.
     elif [[ "$p_form" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
-        if      [[ ( -n "$p_forc" ) && ( "$p_forc" = 'gunzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gunzip')" ]] || BU::Main::CMDS::GetCommandPath gunzip; then
+        if      BU::Main::CMDS::GetCommandPath gunzip; then
                 gunzip -v "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gunzip'; return 1; };
 
-        elif    [[ ( -n "$p_forc" ) && ( "$p_forc" = 'gzip' ) && "$(BU::Main::CMDS::GetCommandPath 'gzip')" ]] || BU::Main::CMDS::GetCommandPath gunzip; then
+        elif    BU::Main::CMDS::GetCommandPath gzip; then
                 gzip -dv "$p_name" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg 'Gzip' "$p_name" 'gzip'; return 1; };
         fi
 
