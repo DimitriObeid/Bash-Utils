@@ -1087,7 +1087,7 @@ function BU::Main::Files::UncompressFormat()
     }
 
     # If the archive to be decompressed is a 7-Zip archive format.
-    if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii])?([Pp]) ]]; then
+    if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii][Pp]) ]]; then
         # If the '7z' command is found in the "$PATH" environment variable.
         if      BU::Main::CMDS::GetCommandPath 7z; then
                 7z x "$p_arch" "$p_dest" || { BU::Main::Files::UncompressFormat::ErrorMsg '7-Zip' "$p_arch" '7z'; return 1; };
@@ -1110,7 +1110,7 @@ function BU::Main::Files::UncompressFormat()
         fi
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
-    elif [[ "$p_form" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss]))?([[:space:]])?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
+    elif [[ "$p_form" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss])?([[:space:]]))?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
         if      BU::Main::CMDS::GetCommandPath cabextract; then
                 cabextract || { BU::Main::Files::UncompressFormat::ErrorMsg 'Microsoft Cab' "$p_arch" 'cabextract'; return 1; };
 
