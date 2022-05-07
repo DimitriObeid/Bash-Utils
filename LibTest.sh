@@ -13,7 +13,7 @@ fi
 
 # Calling the "BashUtils_InitModules()" function.
 if ! BashUtils_InitModules \
-    "module --log-shut --mode-log-partial --stat-debug=true --stat-debug-bashx=void" \
+    "module --log-shut --mode-log-partial --stat-debug=false --stat-debug-bashx=file" \
     "main --stat-debug=true stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true" \
     "Hardware"
 

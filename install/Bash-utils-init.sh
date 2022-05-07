@@ -1242,13 +1242,18 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
                 if [[ "${module_args,,}" = *'--stat-'* ]]; then
+					local value;
 
                     case "${module_args,,}" in
 
                         # "$__BU_MODULE_INIT_STAT_DEBUG" global status variable.
                         '--stat-debug='*)
-                            if      [ "${value[i],,}" = '--stat-debug=false' ]          || [ "${value[i],,}" = '--stat-debug=true' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG="${value#*=}";                 BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+							value="${module_args#*=}";
+							value="${value% *}";
+                            
+							if      [ "${value,,}" = '--stat-debug=false' ]          			|| [ "${value,,}" = '--stat-debug=true' ]; then
+                                    __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+									echo "VALUE = $__BU_MODULE_INIT_STAT_DEBUG";
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                             else
@@ -1259,7 +1264,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         # "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
                         '--stat-debug-bashx='*)
                             if BU::ModuleInit::CheckIsDebugging; then
-                                if      [ "${value[i],,}" = '--stat-debug-bashx=file' ]       || [ "${value[i],,}" = 'stat-debug-bashx=category' ]             || [[ "${value[i],,}" == stat-debug-bashx=sub?(-)category ]]; then
+                                if      [ "${value[i],,}" = '--stat-debug-bashx=file' ]       	|| [ "${value[i],,}" = 'stat-debug-bashx=category' ]             || [[ "${value[i],,}" == stat-debug-bashx=sub?(-)category ]]; then
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
