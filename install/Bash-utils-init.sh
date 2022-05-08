@@ -1251,9 +1251,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 							value="${module_args#*=}";
 							value="${value% *}";
                             
-							if      [ "${value,,}" = '--stat-debug=false' ]          			|| [ "${value,,}" = '--stat-debug=true' ]; then
+							if      [ "${value,,}" = 'false' ]          						|| [ "${value,,}" = 'true' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-									echo "VALUE = $__BU_MODULE_INIT_STAT_DEBUG";
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                             else
@@ -1263,13 +1262,26 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                         # "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
                         '--stat-debug-bashx='*)
+							value="${module_args#*=}";
+							value="${value% *}";
+
                             if BU::ModuleInit::CheckIsDebugging; then
-                                if      [ "${value[i],,}" = '--stat-debug-bashx=file' ]       	|| [ "${value[i],,}" = 'stat-debug-bashx=category' ]             || [[ "${value[i],,}" == stat-debug-bashx=sub?(-)category ]]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                if		[ "${value^^}"  == 'C' ] \
+									||	[[ "${value,,}" == cat?(eg?(ory)) ]] \
+									||	[[ "${value,,}" == cat?(eg?(orie))s ]] \
+									||	[ "${value^^}"  == 'F' ] \
+									||  [[ "${value,,}" == file?(s) ]] \
+									||	[[ "${value^^}" == FNCT?(S) ]] \
+									||	[[ "${value,,}" == function?(s) ]] \
+									||  [ "${value,,}"  == 'S' ] \
+									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
+									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
+
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos		'__BU_MODULE_INIT_STAT_DEBUG_BASHX'			"$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                     __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
-                                elif    [ "${value[i],,}" = '--stat-debug-void=void' ]; then
+                                elif    [ "${value,,}" = 'void' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
@@ -2093,9 +2105,9 @@ function BashUtils_InitModules()
 
 	#**** Code ****
 	# Checking if the arguments array length is equal to zero (no arguments passed).
-	if [ -z "${p_modules_list[*]}" ]; then
+	if [ -z "${p_modules_list[*]}" ]; then local lineno="$LINENO";
         # shellcheck disable=SC2059
-		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "${FUNCNAME[0]}" >&2;
+		printf "$__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME\n\n" "$(basename "${BASH_SOURCE[0]}")" "$lineno" "${FUNCNAME[0]}" >&2;
 
 		return 1;
 	fi
@@ -2297,6 +2309,32 @@ function BashUtils_InitModules()
 
     # After the 'then', call the "BashUtils_InitModules()" with it's mandatory arguments, and then your wanted arguments.
     if ! BU::IsInScript; then function IsInBUFramework() { echo "BU"; }; fi
+
+	return 0;
+}
+
+# Initializing one or more new modules after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
+function BU::ModuleInit::InitNewModules()
+{
+	#**** Parameters ****
+	local p_module_list=("$@"); # Array		- Default : NULL	- List of the new modules to init.
+
+	#**** Variables (global) ****
+
+	#**** Variables (local) ****
+    local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+
+	#**** Code ****
+	# Checking if the arguments array length is equal to zero (no arguments passed).
+	if [ -z "${p_modules_list[*]}" ]; then local lineno="$LINENO";
+        # shellcheck disable=SC2059
+		BU::Main::Errors::HandleErrors '1' "$(printf "NO MODULE NAME PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
+			"$(printf "You must pass a module name when you call the « %s » modules initialization function" "${FUNCNAME[0]}")" \
+			"No new module(s) passed as argument(s)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+
+		return 1;
+	fi
 
 	return 0;
 }

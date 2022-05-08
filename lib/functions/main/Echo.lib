@@ -103,7 +103,7 @@ function BU::Main::Echo::Debug()
         #**** Code ****
         [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ] &&
         {
-            if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = 'category' ] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'C' ]; then
+            if [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'C' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 else
@@ -135,7 +135,7 @@ function BU::Main::Echo::Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = sub?(-)category ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = sub?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 else
