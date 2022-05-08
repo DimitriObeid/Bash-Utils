@@ -1273,7 +1273,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == file?(s) ]] \
 									||	[[ "${value^^}" == FNCT?(S) ]] \
 									||	[[ "${value,,}" == function?(s) ]] \
-									||  [ "${value,,}"  == 'S' ] \
+									||  [ "${value^^}"  == 'S' ] \
 									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
 									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
 
