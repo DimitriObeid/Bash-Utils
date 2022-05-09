@@ -744,10 +744,10 @@ function BU::CheckProjectLogStatus()
     }
 
     local v_redirectionError;
-        v_redirectionError="$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> ";
+        v_redirectionError="$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> ";
 
     local v_warning_array_value;
-        v_warning_array_value="$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU::DechoHighlightPath "${BASH_SOURCE[0]}"), function $(BU::DechoHighlightFunction "${FUNCNAME[0]}()").\nValue --> $(BU::DechoHighlight "$val")\nLine -->";
+        v_warning_array_value="$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU::DechoHighlightPath "${BASH_SOURCE[0]}"), function $(BU::DechoHighlightFunction "${FUNCNAME[0]}()").\nValue --> $(BU::DechoHighlight "$val")\nLine -->";
 
     #**** Code ****
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
@@ -816,14 +816,14 @@ function BU::CheckProjectLogStatus()
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
                             else
-                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
+                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
                             fi
                             ;;
                         '' | *)
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                             else
-                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
+                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
                             fi
                             ;;
                     esac
@@ -838,17 +838,17 @@ function BU::CheckProjectLogStatus()
                                 # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU::CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
                                 BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline;
 							else
-                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
+                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
 							fi; BU::Newline;
                             ;;
                         '' | *)
                             if BU::Main::Status::CheckStatIsInitializing; then
                                 BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
+                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
 							else
-                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::__DechoHighlightVar "log")\nLine --> $(BU::__DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
+                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; v_loop_error='error'; break; };
 							fi
                             ;;
                     esac
@@ -1057,7 +1057,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 				true > "$v_path" || {
                     if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
                         BU::Main::Errors::HandleSmallErrors 'E' \
-                            "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
+                            "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
                     else
                         BU::EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
                         BU::Newline;
@@ -1075,7 +1075,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
                     if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
                         BU::Main::Errors::HandleSmallErrors 'E' \
-                            "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::Main::Checkings::CheckDirPathExists "$p_parent" 'true')" 'E';
+                            "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::Main::Checkings::CheckDirPathExists "$p_parent" 'true')" 'E';
                     else
                         BU::EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
                         BU::Newline;
@@ -1092,7 +1092,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
                 if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
                     BU::Main::Errors::HandleSmallErrors 'E' \
-                        "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
+                        "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
                 else
                     BU::EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
                     BU::Newline;
@@ -1113,7 +1113,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
                 if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
                     BU::Main::Errors::HandleSmallErrors 'E' \
-                        "$(BU::__DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::__DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU::Main::Checkings::CheckDirPathExists "$v_path" 'true')" 'E';
+                        "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU::Main::Checkings::CheckDirPathExists "$v_path" 'true')" 'E';
                 else
                     BU::EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's folder --> $v_path";
                     BU::Newline;

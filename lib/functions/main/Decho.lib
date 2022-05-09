@@ -235,17 +235,17 @@ function BU::Decho()
 
     if [ -n "$p_string" ]; then
         if [ -z "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
-            shift 1; local pa_fmtArgs; pa_fmtArgs=$("$@");
+            shift 1; local pa_fmtArgs; pa_fmtArgs=("$@");
 
             BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}";
 
-        elif [ -n "$p_newTextColor" ] && [ -z "$p_newTextColor" ] || [ -n "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
-            shift 2; local pa_fmtArgs; pa_fmtArgs=$("$@");
+        elif [ -n "$p_newBGColor" ] && [ -z "$p_newTextColor" ] || [ -n "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
+            shift 2; local pa_fmtArgs; pa_fmtArgs=("$@");
 
             BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs}";
+        else
+            shift 3; local pa_fmtArgs; pa_fmtArgs=("$@");
         fi
-   # else
-    #    BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
 	#**** Variables ****
