@@ -493,7 +493,7 @@ function BU::ModuleInit::Msg()
     #**** Code ****
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
     # be printed on the screen and redirected towards the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-display' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-display' ]; then
 
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
         if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
@@ -530,12 +530,12 @@ function BU::ModuleInit::Msg()
 
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
     # messages must be redirected towards the "/dev/null" virtual device file, and the array must be emptied.
-    elif [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-shut' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-shut' ]; then
         return 0;
 
     # Else, if the '--log-shut-display' argument is passed as a 'module' parameter, then
     # every initialization messages must be redirected to the screen only, not to the array.
-    elif [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-shut-display' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-shut-display' ]; then
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.

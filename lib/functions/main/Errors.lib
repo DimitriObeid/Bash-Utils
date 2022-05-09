@@ -249,7 +249,7 @@ function BU::Main::Errors::HandleErrors()
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         # If the framework is still initializing when an error occurs.
-        if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_HandleErrors_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+        if BU::Main::Status::CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" != '--log-shut-display' ]; then local v_HandleErrors_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
         # -------- PART 1 : MANAGING THE CALL OF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU::Main::Errors::HandleErrors()" FUNCTION
 

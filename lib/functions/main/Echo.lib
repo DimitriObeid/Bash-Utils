@@ -572,7 +572,7 @@ function BU::EchoWarning()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     # If the framework is still initializing when an error occurs.
-    if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+    if BU::Main::Status::CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
         BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
