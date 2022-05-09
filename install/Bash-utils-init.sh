@@ -1251,9 +1251,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         '--stat-debug='*)
 							value="${module_args#*=}";
 							value="${value% *}";
-                            
+
 							if      [ "${value,,}" = 'false' ]          						|| [ "${value,,}" = 'true' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_ARG_HAS_AWAITED_VAL" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                    __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
                             else
                                 BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || { v_loop_error='error'; break; };
                             fi
@@ -1276,22 +1276,22 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
 									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
 
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL"        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 elif    [ "${value,,}" = 'void' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL__VOID"  "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
                                     BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || { v_loop_error='error'; break; };
                                 fi
                             else
-                                BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_PROCESSING__STAT_DEBUG_ARG_NOT_TRUE";
+                                BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE";
                                 BU::ModuleInit::Msg;
                             fi
                         ;;
 
                         *)
-                            echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE « module » PARAMETER" >&2;
+                            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED" "${BASH_SOURCE[0]}" "$(( LINENO-1 ))" "%s" >&2;
                             echo >&2;
 
                             return 1;

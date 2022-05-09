@@ -413,12 +413,15 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_STRING="Cette variable globale de statut du framework Bash Utils enregistre une chaîne de caractères, servant à";
 
 # Traitement de la description de chaque variable globale de statut.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL activer les fonctionnalités de déboguage";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_STRING activer les fonctionnalités de déboguage avancées avec la commande « set -x » lors d'une procédure de déboguage";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL__VOID="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL. Comme la valeur « void » a été passée, ces fonctionnalités sont désactivées";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL activer les fonctionnalités de déboguage";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_STRING activer les fonctionnalités de déboguage avancées avec la commande « set -x » lors d'une procédure de déboguage";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL. Comme la valeur « void » a été passée, ces fonctionnalités sont désactivées";
 
 # Si la valeur de l'argument "--stat-debug" n'est pas égale à "true".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_PROCESSING__STAT_DEBUG_ARG_NOT_TRUE="NOTE : La valeur de la variable globale de statut « __BU_MODULE_INIT_STAT_DEBUG » doit correspondre à la valeur « true » pour pouvoir utiliser cette fonctionnalité de déboguage avancée";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : La valeur de la variable globale de statut « __BU_MODULE_INIT_STAT_DEBUG » doit correspondre à la valeur « true » pour pouvoir utiliser cette fonctionnalité de déboguage avancée";
+
+# Si l'argument "--stat-*" n'est pas une valeur supportée.
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : « %s » N'EST PAS UN ARGUMENT DE STATUT SUPPORTÉ PAR LE PARAMÈTRE « module »";
 
 # ------------------------------------------------------------
 # Fin de l'exécution de la boucle de vérification d'arguments.
