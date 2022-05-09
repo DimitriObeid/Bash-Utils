@@ -1276,7 +1276,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
 									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
 
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="$value";                 BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 elif    [ "${value,,}" = 'void' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";

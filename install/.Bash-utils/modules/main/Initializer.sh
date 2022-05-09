@@ -354,7 +354,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = '--stat-txt-fmt=true' ]; then
+                    if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="$value";            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "$__BU_MAIN_STAT_TXT_FMT" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
