@@ -1296,7 +1296,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                             value="${module_args#* }";
                             value="${value% *}";
 
-                            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED" "${BASH_SOURCE[0]}" "$lineno" "%s" >&2;
+                            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$lineno" "$value" >&2;
                             echo >&2;
 
                             return 1;
@@ -1475,10 +1475,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             done; if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
-            if ! source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS"; then
-                echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file"; return 1;
+            if ! source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS"; then echo >&2;
+                echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file" >&2; echo >&2; return 1;
             else
-                echo "SOURCED";
+                BU::ModuleInit::Msg "The « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file was successfully sourced";
+                BU::ModuleInit::Msg;
             fi
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
