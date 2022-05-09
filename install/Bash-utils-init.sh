@@ -1236,7 +1236,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                 # Creating a function to print the correct values for the current option in different languages structures.
                 function BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues()
                 {
-                    BU::ModuleInit::Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "$1" "$2")" >&2;
+                    # shellcheck disable=SC2059
+                    BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG" "$1" "$2")" >&2;
                     BU::ModuleInit::Msg >&2;
                 }
 
@@ -1252,9 +1253,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 							value="${value% *}";
                             
 							if      [ "${value,,}" = 'false' ]          						|| [ "${value,,}" = 'true' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-
-                                    __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                                    __BU_MODULE_INIT_STAT_DEBUG="$value";						BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "$__BU_MODULE_INIT_STAT_DEBUG" 'bool' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_ARG_HAS_AWAITED_VAL" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
                             else
                                 BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || { v_loop_error='error'; break; };
                             fi
@@ -1277,18 +1276,16 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
 									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
 
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos		'__BU_MODULE_INIT_STAT_DEBUG_BASHX'			"$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
-
-                                    __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value#*=}";            BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL"        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 elif    [ "${value,,}" = 'void' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DEBUG_BASHX_FNCT_" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_ARG_HAS_AWAITED_VAL__VOID"  "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                                 else
                                     BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || { v_loop_error='error'; break; };
                                 fi
                             else
-                                BU::ModuleInit::Msg "NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
+                                BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_DEBUG_BASHX_PROCESSING__STAT_DEBUG_ARG_NOT_TRUE";
                                 BU::ModuleInit::Msg;
                             fi
                         ;;
@@ -1473,8 +1470,11 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
             done; if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
-            source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS" || {
-                echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file"; return 1; };
+            if ! source "$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS"; then
+                echo "$(basename "${BASH_SOURCE[0]}"), line $LINENO --> ERROR : UNABLE TO SOURCE THE « $__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS » file"; return 1;
+            else
+                echo "SOURCED";
+            fi
 
             # Creating a global variable to store a value which proves that the 'module --*' value was passed as first argument, for the condition which checks if the 'main' module is passed as second argument.
             __BU_MODULE_INIT_MODULE_FIRST_ARG='true';
