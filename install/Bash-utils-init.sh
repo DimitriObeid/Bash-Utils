@@ -1261,7 +1261,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
                         # "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
                         '--stat-debug-bashx='*)
-							value="${module_args#*=}";
+							value="${module_args#* }";
 							value="${value% *}";
 
                             if BU::ModuleInit::CheckIsDebugging; then
@@ -1291,7 +1291,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
                         ;;
 
                         *)
-                            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED" "${BASH_SOURCE[0]}" "$(( LINENO-1 ))" "%s" >&2;
+                            local lineno="$(( LINENO - 1 ))";
+
+                            value="${module_args#* }";
+                            value="${value% *}";
+
+                            printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED" "${BASH_SOURCE[0]}" "$lineno" "%s" >&2;
                             echo >&2;
 
                             return 1;
