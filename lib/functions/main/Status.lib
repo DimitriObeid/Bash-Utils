@@ -485,9 +485,10 @@ function BU::Main::Status::ChangeSTAT_ECHO()
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
     #**** Parameters ****
-    local p_value=$1;   # String    - Default : NULL    - Value to be changed.
-    local p_file=$2;    # String    - Default : NULL    - File where the current function is called.
-    local p_lineno=$3;  # Int       - Default : NULL    - Line where the current function is called.
+    local p_value=$1;           # String    - Default : NULL    - Value to be changed.
+    local p_file=$2;            # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$3;          # Int       - Default : NULL    - Line where the current function is called.
+    local p_decho=${4:-true};   # String    - Default : true    - Authorization to call any "BU::Decho<...>()" function.
 
     #**** Variables ****
     local v_log_file_path="$__BU_MAIN_PROJECT_LOG_FILE_PATH";   # Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.

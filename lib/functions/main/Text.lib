@@ -610,6 +610,10 @@ function BU::Main::Text::StrToWordArray()
     #**** Code ****
     if ! BU::Main::Args__Text::StrToWordArray "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
+    # Since the "$__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR" array is not used in this file, it's better to ignore the returned Shellcheck warning,
+    # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.
+
+    # shellcheck disable=SC2034
     read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "$p_string";
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;

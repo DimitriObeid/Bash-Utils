@@ -348,13 +348,14 @@ function BU::Main::Args::GetFuncArgsArrayValues()
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
-    local p_funcname=$1;            # String    - Default : NULL    - Name of the function where the array was set.
-    local p_decho=$2;   shift 2;    # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU::Main::Args__Decho::Decho()" sub-fonction.
+    local p_funcname=$1;        # String    - Default : NULL    - Name of the function where the array was set.
+    local p_decho=$2;           # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU::Main::Args__Decho::Decho()" sub-fonction.
+    shift 2;
 
-    local pa_argsArray=("$@");      # Array     - Default : NULL    - Array of values to check and display.
+    local pa_argsArray=("$@");  # Array     - Default : NULL    - Array of values to check and display.
 
     #**** Variables ****
-    local v_index=0;    # Int   - Default : 0   - Initial value of the "for" loop's iterations counter.
+    local v_index=0;            # Int   - Default : 0   - Initial value of the "for" loop's iterations counter.
 
     # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
     local v_loop_error;
@@ -374,9 +375,6 @@ function BU::Main::Args::GetFuncArgsArrayValues()
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
-
-            # Just a debug string I print during a test.
-            echo "JE SUIS LÀ";
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
                 BU::Newline || { local C="$?"; v_loop_error='error'; break; };
@@ -604,14 +602,16 @@ function BU::Main::Args::PrintFFLErrorOccured()
     local p_decorate=$5;    # String    - Default : NULL    - Allow the call of any "BU::Decho<...>()" function.
 
     #**** Variables ****
+    local v_target_f;
+
     if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
-        local v_target_f="$(BU::DechoHighlightFunction "$p_target_f")";
+        v_target_f="$(BU::DechoHighlightFunction "$p_target_f")";
 
         local v_filename; v_filename="$(BU::Main::Args::GetFileName "$p_filename" '--decho')";
         local v_funcname; v_funcname="$(BU::Main::Args::GetFunctionName "$p_funcname" '--decho')";
         local v_lineno; v_lineno="$(BU::Main::Args::GetLineNumber "$p_lineno" '--decho')";
     else
-        local v_target_f="$p_target_f";
+        v_target_f="$p_target_f";
 
         local v_filename; v_filename="$(BU::Main::Args::GetFileName "$p_filename")";
         local v_funcname; v_funcname="$(BU::Main::Args::GetFunctionName "$p_funcname")";
@@ -871,14 +871,14 @@ function BU::Main::Args__Decho::Decho()
 
 	# If the text's color code is not an integer.
 	if ! BU::IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
-        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newTextColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as text color code, as second argument for the « %s » function (optional argument) [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
+        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newTextColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as text color code, as second argument for the « %s » function (optional argument)\n [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
 
 		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
     # If the background's color code is not an integer.
     if ! BU::IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
-        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newBGColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as background color code, as third argument for the « %s » function (optional argument) [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
+        printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newBGColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as background color code, as third argument for the « %s » function (optional argument)\n [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU::Main::Args::PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
             "$p_newTextColor" "" "$p_funcname" "$lineno";
 
 		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;

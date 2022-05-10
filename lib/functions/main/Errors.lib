@@ -251,7 +251,7 @@ function BU::Main::Errors::HandleErrors()
 
     #**** Variables ****
     local v_hdrString;
-        v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")";
+    local v_getSeparatorOccurencesfromAdviceStr;
 
 	# ***** Code *****
 	BU::Main::Status::CheckSTAT_ERROR "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
@@ -261,6 +261,8 @@ function BU::Main::Errors::HandleErrors()
     else
         # If the framework is still initializing when an error occurs.
         BU::ModuleInit::SetInitErrorMsg && local VHandleErrors='1';
+
+        v_hdrString="$(echo -ne "IN $(BU::Main::Errors::HandleErrors_File "$p_file") FILE, FUNCTION $(BU::Main::Errors::HandleErrors_Function "$p_function"), LINE $(BU::Main::Errors::HandleErrors_Line "$p_lineno") -->")";
 
         # -------- PART 1 : MANAGING THE CALL OF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU::Main::Errors::HandleErrors()" FUNCTION
 
@@ -323,7 +325,7 @@ function BU::Main::Errors::HandleErrors()
         if [ -z "$p_adviceString" ]; then
             BU::EchoError "No advice to give."; BU::Newline >&2;
         else
-            local v_getSeparatorOccurencesfromAdviceStr="$(BU::Main::Text::GetSubStringOccurences "$p_advice" ' [/|\] ' '--init')";
+            v_getSeparatorOccurencesfromAdviceStr="$(BU::Main::Text::GetSubStringOccurences "$p_advice" ' [/|\] ' '--init')";
 
             # Checking if the ' [/|\] ' substring exists only once, as separator from the advice and another comment.
 
