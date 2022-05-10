@@ -499,7 +499,7 @@ function BU::ModuleInit::Msg()
     #**** Code ****
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
     # be printed on the screen and redirected towards the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-dsplay' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-display' ]; then
 
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
         if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
