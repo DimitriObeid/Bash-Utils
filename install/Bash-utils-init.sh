@@ -235,7 +235,13 @@ function BU::ModuleInit::GetModuleInitLanguage()
 # Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
 function BU::ModuleInit::AskPrintLog()
 {
-	#**** Code ****
+    #**** Code ****
+    # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
+    if [ -z "$__BU_MODULE_INIT_MSG_ARRAY" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
+        echo "No logs to display";
+        echo; return 0;
+    fi
+
 	if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" == '--log-display' ]; then
         echo;
 
@@ -493,13 +499,14 @@ function BU::ModuleInit::Msg()
     #**** Code ****
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
     # be printed on the screen and redirected towards the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-display' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-dsplay' ]; then
 
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
         if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
             __BU_MODULE_INIT_MSG_ARRAY=();
 
-        fi; case "${p_option,,}" in
+        fi; 
+        case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
                 if [ -z "$p_str" ]; then
@@ -510,9 +517,11 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str");
 
-                    echo -ne "${p_str##* ] }"; fi;
+                    echo -ne "$p_str";
+                fi;
 
-					return 0;;
+                return 0;
+            ;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -523,9 +532,11 @@ function BU::ModuleInit::Msg()
                     # Printing the date before the text to log.
                     __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str\n");
 
-                    echo -e "${p_str##* ] }"; fi;
+                    echo -e "$p_str";
+                fi;
 
-					return 0;;
+                return 0;
+            ;;
         esac
 
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
@@ -544,10 +555,10 @@ function BU::ModuleInit::Msg()
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen, without carriage returns.
                 else
-                    echo -ne "$p_str"; fi
+                    echo -ne "$p_str";
+                fi
 
-					return 0;
-                ;;
+                return 0;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
@@ -556,7 +567,8 @@ function BU::ModuleInit::Msg()
                 # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns.
                 else
                     # Printing the date before the text to log.
-                    echo -e "$p_str"; fi
+                    echo -e "$p_str";
+                fi
 
                 return 0;
             ;;
@@ -575,20 +587,20 @@ function BU::ModuleInit::Msg()
                 else
                     # Printing the date before the text to log.
                     __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str");
+                fi
 
-                    echo -ne "${p_str##* ] }"; fi;
-
-					return 0;
+                    return 0;
                 ;;
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
-                    __BU_MODULE_INIT_MSG_ARRAY+=('\n'); echo -e '';
+                    __BU_MODULE_INIT_MSG_ARRAY+=('\n');
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns.
                 else
                     # Printing the date before the text to log.
-                    __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str\n"); fi
+                    __BU_MODULE_INIT_MSG_ARRAY+=("$__BU_MODULE_INIT__DATE_LOG $p_str\n");
+                fi
 
                 return 0;
             ;;
@@ -605,9 +617,9 @@ function BU::ModuleInit::Msg()
 
         BU::ModuleInit::MsgAbort;
 
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
+        BU::ModuleInit::AskPrintLog >&2 || { if BU::IsInScript; then exit 1; else return 1; fi };
 
-        return 1;
+        if BU::IsInScript; then exit 1; else return 1; fi
     fi
 
     return 0;
@@ -619,7 +631,7 @@ function BU::ModuleInit::MsgLine()
     #**** Parameters ****
     local p_str=$1;     # String  - Default : NULL  - String to display.
     local p_line=$2;    # Line character.
-    local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
+    local p_context=$3; # Context of the function's call (should the text be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
     if      [ "${p_context,,}" = 'echo' ]; then
@@ -627,8 +639,8 @@ function BU::ModuleInit::MsgLine()
         echo "$p_str";
 
     elif    [ "${p_context,,}" = 'msg' ]; then
-        BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'msg';
-        BU::ModuleInit::Msg "$p_str";
+        BU::ModuleInit::MsgLineCount "${#p_str}" "$p_line" 'msg' || return 1;
+        BU::ModuleInit::Msg "$p_str" || return 1;
 
     else
         echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; return 1;
@@ -643,14 +655,14 @@ function BU::ModuleInit::MsgLineCount()
     #**** Parameters ****
     local p_number=$1;  # Number of times the character has to be display.
     local p_line=$2;    # Line character.
-    local p_context=$3; # Context of the function's call (should it be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
+    local p_context=$3; # Context of the function's call (should the text be processed by the "BU::ModuleInit::Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
     if      [ "${p_context,,}" = 'echo' ]; then
         for ((i=0; i<p_number; i++)); do echo -n "$p_line"; done; echo;
 
     elif    [ "${p_context,,}" = 'msg' ]; then
-        for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n'; done; BU::ModuleInit::Msg;
+        for ((i=0; i<p_number; i++)); do BU::ModuleInit::Msg "$p_line" '-n' || return 1; done; BU::ModuleInit::Msg || return 1;
 
     else
         echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; return 1;
@@ -687,6 +699,12 @@ function BU::ModuleInit::PrintLog()
 
     BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__PRINTLOG__HERE" '#' 'echo'; echo
 
+    # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
+    if [ -z "$__BU_MODULE_INIT_MSG_ARRAY" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
+        echo "No logs to display";
+        echo; return 0;
+    fi
+
     if [ "$__BU_MODULE_INIT_MSG_ARRAY_MODE" = '--mode-log-full' ]; then
         echo "$__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE"; echo;
 
@@ -696,16 +714,16 @@ function BU::ModuleInit::PrintLog()
 
     BU::ModuleInit::MsgLine "$v_init_logs_str" '-' 'echo';
     BU::ModuleInit::MsgLineCount "${#v_init_logs_str}" '-' 'echo';
-    BU::ModuleInit::Msg;
+    echo '';
 
-    BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE";
-    BU::ModuleInit::Msg;
+    echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE";
+    echo '';
 
-	BU::ModuleInit::Msg "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED";
-	BU::ModuleInit::Msg;
+	echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED";
+	echo '';
 
     BU::ModuleInit::PressAnyKey "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT";
-    BU::ModuleInit::Msg;
+    echo '';
 
     touch "$v_tmp_file" || { echo >&2; echo "$__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE" >&2; echo >&2; return 1; };
 
@@ -846,8 +864,10 @@ function BU::ModuleInit::FindPath()
             # shellcheck disable=SC2059
             printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$v_parentdir" "$v_target" >&2; echo >&2;
 
-        else
+        else local lineno="$LINENO";
             BU::ModuleInit::Msg >&2;
+
+            BU::ModuleInit::PrintLogError "$(printf "")" "$lineno";
 
             # shellcheck disable=SC2059
             BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" "$v_parentdir" "$v_target")" >&2; BU::ModuleInit::Msg >&2;
@@ -862,8 +882,10 @@ function BU::ModuleInit::FindPath()
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
 function BU::ModuleInit::GetModuleName()
 {
-    v_module="$(cd "$(dirname "$1")" || {
+    v_module="$(cd "$(dirname "$1")" || { local lineno="$LINENO";
         echo >&2;
+
+        BU::ModuleInit::PrintLogError "$(printf "" "")" "$lineno";
 
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO" >&2; echo >&2;
@@ -1740,6 +1762,9 @@ declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial'
 # By default, it stores no value, so that the messages are redirected to the "$__BU_MODULE_INIT_MSG_ARRAY" only,
 # without being redirected to the screen too (these instructions are processed in the "BU::ModuleInit::Msg" function).
 declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
+
+# If an error occurs during the initialization process, every text MUST be displayed on the screen, when the alue stored is the 'true' string.
+declare __BU_MODULE_INIT_MSG_ERROR='false';
 
 # -----------------------------------------------
 
