@@ -78,6 +78,12 @@ printf "
 # Checking if the function and / or sourced code currently executed is a part of a script file or running in an interactive shell.
 function BU::IsInScript() { if [ "${0:0:2}" = './' ]; then return 0; elif [ "$0" == 'bash' ]; then return 1; fi }
 
+# Checking if the framework is still initializing, and if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value is '--log-shut', in order to display every error messages.
+function BU::ModuleInit::SetInitErrorMsg() { if BU::Main::Status::CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then v_msg_arr_permission_global_backup=""; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; return 0; else return 1; fi }
+
+# Unsetting the former function's result.
+function BU::ModuleInit::UnsetInitErrorMsg() { if BU::Main::Status::CheckStatIsInitializing && [ -n "$v_msg_arr_permission_global_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_permission_global_backup"; unset v_msg_arr_permission_global_backup; fi }
+
 # -----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
@@ -499,13 +505,13 @@ function BU::ModuleInit::Msg()
     #**** Code ****
     # If the '--log-display' argument is passed as a 'module' parameter, then every messages must
     # be printed on the screen and redirected towards the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-display' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-display' ]; then
 
-        # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array;
+        # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array yet;
         if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
             __BU_MODULE_INIT_MSG_ARRAY=();
-
         fi; 
+
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
@@ -541,12 +547,13 @@ function BU::ModuleInit::Msg()
 
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
     # messages must be redirected towards the "/dev/null" virtual device file, and the array must be emptied.
-    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-shut' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then
         return 0;
 
     # Else, if the '--log-shut-display' argument is passed as a 'module' parameter, then
     # every initialization messages must be redirected to the screen only, not to the array.
-    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" = '--log-shut-display' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut-display' ]; then
+        echo LOL
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
@@ -562,7 +569,7 @@ function BU::ModuleInit::Msg()
             '' | *)
                 # If no value is stored in the string parameter, it must be interpreted as a newline.
                 if [ -z "$p_str" ]; then
-                    echo -e '';
+                    echo -e '\n';
 
                 # Else, if a value is stored in the string parameter, it must be printed on the screen with carriage returns.
                 else

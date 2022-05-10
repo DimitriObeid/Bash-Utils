@@ -379,24 +379,24 @@ function BU::EchoError()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     # If the framework is still initializing when an error occurs.
-    if [ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+    BU::ModuleInit::SetInitErrorMsg && local VEchoError='1';
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-    if [ -n "$v_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_mode_backup"; fi
+    [ -n "$VEchoError" ] && BU::ModuleInit::UnsetInitErrorMsg;
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -572,24 +572,24 @@ function BU::EchoWarning()
     BU::Main::Args::GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
     # If the framework is still initializing when an error occurs.
-    if BU::Main::Status::CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+    BU::ModuleInit::SetInitErrorMsg && local VEchoWarning='1';
 
     if ! BU::Main::Status::CheckStatIsBackupEchoing; then
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU::CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     # Failsafe if any "BU::Echo<...>()" function has to be called in the "BU::CheckProjectLogStatus()" function.
     else
-        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU::Main::Echo::__EchoCPLS "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU::Main::Echo::__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-    if [ -n "$v_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_msg_arr_mode_backup"; fi
+    [ -n "$VEchoWarning" ] && BU::ModuleInit::UnsetInitErrorMsg;
 
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }

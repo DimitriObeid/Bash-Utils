@@ -79,6 +79,8 @@ function BU::Main::Errors::HandleSmallErrors()
     #**** Code ****
     BU::Newline >&2;
 
+    BU::ModuleInit::SetInitErrorMsg && local VHandleSmallErrors='1';
+
     if      [ "${p_type^^}" = 'E' ];    then BU::EchoError      "$p_string" '' '';
     elif    [ "${p_type^^}" = 'W' ];    then BU::EchoWarning    "$p_string" '' '';
 
@@ -98,26 +100,35 @@ function BU::Main::Errors::HandleSmallErrors()
     # As the "BU::EchoWarning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_MAIN_STAT_ECHO" status variable condition per condition.
     if [ "${p_return^^}" = 'R' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
         BU::SetLastReturnValue 1;
+
+        # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
+        [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg;
 
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
         return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     elif [ "${p_return^^}" = 'E' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU::Main::Status::ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+
+        # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
+        [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg;
 
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
         BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     else
-        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+        BU::EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
+
+    # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
+    [ -n "$VHandleSmallErrors" ] && BU::ModuleInit::UnsetInitErrorMsg;
 
     BU::SetLastReturnValue 0;
 
@@ -187,7 +198,7 @@ function BU::SetLastReturnValue()
         "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
 
 	#**** Parameters ****
-	local p_code=${1:-1};		# Int	- Default : 1	- Return value.
+	local p_code=${1:-1};  # Int	- Default : 1	- Return value.
 
 	#**** Code ****
 	if ! BU::Main::Args__Errors::SetLastReturnValue "$p_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then
@@ -249,7 +260,7 @@ function BU::Main::Errors::HandleErrors()
         BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         # If the framework is still initializing when an error occurs.
-        if BU::Main::Status::CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" != '--log-shut-display' ]; then local v_HandleErrors_msg_arr_mode_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+        BU::ModuleInit::SetInitErrorMsg && local VHandleErrors='1';
 
         # -------- PART 1 : MANAGING THE CALL OF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IF THIS "BU::Main::Errors::HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU::Main::Errors::HandleErrors()" FUNCTION
 
@@ -291,7 +302,8 @@ function BU::Main::Errors::HandleErrors()
             local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU::Main::Status::CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
                 local C="$?";
 
-                if [ -n "$v_HandleErrors_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_HandleErrors_msg_arr_mode_backup"; fi
+                # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
+                [ "$VHandleErrors" = '1' ] && BU::ModuleInit::UnsetInitErrorMsg;
 
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
@@ -354,7 +366,7 @@ function BU::Main::Errors::HandleErrors()
             BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
 
             # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-            if [ -n "$v_HandleErrors_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_HandleErrors_msg_arr_mode_backup"; fi
+            [ "$VHandleErrors" = '1' ] && BU::ModuleInit::UnsetInitErrorMsg;
 
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
@@ -383,12 +395,12 @@ function BU::Main::Errors::HandleErrors()
             BU::SetLastReturnValue "$p_returnCode"
 
             # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-            if [ -n "$v_HandleErrors_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_HandleErrors_msg_arr_mode_backup"; fi
+            [ "$VHandleErrors" = '1' ] && BU::ModuleInit::UnsetInitErrorMsg;
 
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$p_returnCode";
         else
             # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-            if [ -n "$v_HandleErrors_msg_arr_mode_backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$v_HandleErrors_msg_arr_mode_backup"; fi
+            [ "$VHandleErrors" = '1' ] && BU::ModuleInit::UnsetInitErrorMsg;
 
             BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
 
