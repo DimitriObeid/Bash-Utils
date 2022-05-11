@@ -135,7 +135,7 @@ function BU::Main::Echo::Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = sub?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)?(c?(at?(eg?(orie))))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU::Main::Echo::__Debug "$p_funcname"; return 0;
                 else

@@ -130,6 +130,44 @@ function BU::Main::Status::ConfEcho()
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checkings";
 
+# Check the "$__BU_MAIN_STAT_DEBUG" status variable's value.
+function BU::Main::Status::CheckSTAT_DEBUG()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
+        "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
+
+    #**** Parameters ****
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
+
+    #**** Variables ****
+    local va_correctValues=('true' 'false');
+
+    #**** Code ****
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Check the "$__BU_MAIN_STAT_DEBUG_BASHX" status variable's value.
+function BU::Main::Status::CheckSTAT_DEBUG_BASHX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
+        "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
+
+    #**** Parameters ****
+    local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
+
+    #**** Variables ****
+    local va_correctValues=('C' '' '' '' '' '' '' '' '');
+
+    #**** Code ****
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
 # Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
 function BU::Main::Status::CheckSTAT_DECHO()
 {
@@ -443,7 +481,6 @@ function BU::Main::Status::CheckProjectStatusVars()
     #**** Code ****
     # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
     BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::ModuleInit::CheckSTAT_DEBUG             "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_DECHO           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_ECHO            "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_ERROR           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };

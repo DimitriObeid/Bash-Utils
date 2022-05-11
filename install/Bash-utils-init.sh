@@ -243,7 +243,7 @@ function BU::ModuleInit::AskPrintLog()
 {
     #**** Code ****
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
-    if [ -z "$__BU_MODULE_INIT_MSG_ARRAY" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
+    if [ -z "$__BU_MODULE_INIT_MSG_ARRAY" ]; then
         echo "No logs to display";
         echo; return 0;
     fi
@@ -321,6 +321,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
     BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM'          "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM"        'Char'      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init__csv_translation_file__delim__lineno";
     BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__DATE_LOG'                             "$__BU_MODULE_INIT__DATE_LOG"                           'CMD'       "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG"                  "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init__date_log__lineno";
     BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__USER_LANG'                            "$__BU_MODULE_INIT__USER_LANG"                          'CMD'       "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG"                 "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init__user_lang__lineno";
+    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY'               "$__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY"             'Array'     "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY"    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__bu_module_init__bashx_debug_vals_array__lineno";
 
     # Unsetting every string variables in order to free up some memory.
 
@@ -332,7 +333,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
     # Unsetting the line number values.
 
     # shellcheck disable=SC2046
-	unset $(compgen -v "__bu_module_init__");
+	unset $(compgen -v __bu_module_init__*__lineno);
     unset __bu_module_init__project_pid__lineno \
         __bu_module_init__root_home__lineno \
         __bu_module_init__root__lineno \
@@ -351,7 +352,8 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVar
         __bu_module_init__lib_root_dir_root__file_path__lineno \
         __bu_module_init__csv_translation_file__delim__lineno \
         __bu_module_init__date_log__lineno \
-        __bu_module_init__user_lang__lineno
+        __bu_module_init__user_lang__lineno \
+        __bu_module_init__bashx_debug_vals_array__lineno
 }
 
 # Displaying the information on the initialized global variables.
@@ -393,7 +395,7 @@ function BU::ModuleInit::DisplayInitGlobalVarsInfos()
 		# - int		: this variable stores an integer.
 		# - path:	: this variable stores a path.
 		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
-		elif [ "${p_var_type,,}" != 'array' ]	\
+		elif [[ "${p_var_type,,}" != arr?(ay) ]] \
 			&& [ "${p_var_type,,}" != 'cmd' ] \
 			&& [ "${p_var_type,,}" != 'bool' ] \
 			&& [ "${p_var_type,,}" != 'dir' ] \
@@ -707,7 +709,7 @@ function BU::ModuleInit::PrintLog()
     BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__PRINTLOG__HERE" '#' 'echo'; echo
 
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
-    if [ -z "$__BU_MODULE_INIT_MSG_ARRAY" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
+    if [ -z "${__BU_MODULE_INIT_MSG_ARRAY[*]}" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
         echo "No logs to display";
         echo; return 0;
     fi
@@ -892,6 +894,7 @@ function BU::ModuleInit::GetModuleName()
     v_module="$(cd "$(dirname "$1")" || { local lineno="$LINENO";
         echo >&2;
 
+        # shellcheck disable=SC2059
         BU::ModuleInit::PrintLogError "$(printf "" "")" "$lineno";
 
         # shellcheck disable=SC2059
@@ -1302,8 +1305,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 									||	[[ "${value^^}" == FNCT?(S) ]] \
 									||	[[ "${value,,}" == function?(s) ]] \
 									||  [ "${value^^}"  == 'S' ] \
-									||  [[ "${value,,}" == sub?(-)cat?(eg?(ory)) ]] \
-									||	[[ "${value,,}" = s?(ub)?(-)cat?(eg?(orie))s ]]; then
+									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
+									||	[[ "${value,,}" = s?(ub)?(-)?(c?(at?(eg?(orie))))s ]]; then
 
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="$value";                 BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" 'String' "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL"          "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
@@ -1709,6 +1712,9 @@ function BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModu
 
         __BU_MODULE_INIT__USER_LANG="$(echo "$LANG" | cut -d _ -f1)";
         __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
+
+        __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cat' 'cats' 'categ' 'categs' 'category' 'categories' 'F' 'file' 'files' 'FNCT' 'FNCTS' 'function' 'functions' 'S' 'sub-category' '' '' '' '');
+        __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO - 1 ))";
     else
         # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
         BU::ModuleInit::GetModuleInitLanguage "$__BU_MODULE_INIT__USER_LANG";
@@ -1769,9 +1775,6 @@ declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial'
 # By default, it stores no value, so that the messages are redirected to the "$__BU_MODULE_INIT_MSG_ARRAY" only,
 # without being redirected to the screen too (these instructions are processed in the "BU::ModuleInit::Msg" function).
 declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
-
-# If an error occurs during the initialization process, every text MUST be displayed on the screen, when the alue stored is the 'true' string.
-declare __BU_MODULE_INIT_MSG_ERROR='false';
 
 # -----------------------------------------------
 
