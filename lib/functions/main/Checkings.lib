@@ -72,8 +72,29 @@ function BU::IsOSLinuxWSL()         { if [[ "$(< /proc/sys/kernel/osrelease)" ==
 # Checking if current OS is NetBSD.
 function BU::IsOSNetBSD()           { if [[ "$OSTYPE" == 'netbsd' ]];           then return 0; else return 1; fi }
 
+# Same as "BU::IsOSLinuxWSL()" function, it's just a less confusing name.
+function BU::IsOSWindows()          { if BU::IsOSLinuxWSL; then return 0; else return 1; fi }
+
+# Checking if the currently used version of Windows is the 10th.
+function BU::IsOSWindows10()        { if BU::Main::Checkings::CheckOSWindowsVersion '10'; then return true; else return false; fi }
+
+# Checking if the currently used version of Windows is the 11th.
+function BU::IsOSWindows11()        { if BU::Main::Checkings::CheckOSWindowsVersion '11'; then return true; else return false; fi }
+
 # Checking if current OS is OSx.
 function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          then return 0; else return 1; fi }
+
+# Checking the Microsoft Windows version.
+function BU::Main::Checkings::CheckOSWindowsVersion()
+{
+    #**** Parameters ****
+    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Version.
+
+    #**** Code ****
+    
+
+    return 0;
+}
 
 # -----------------------------------------------
 

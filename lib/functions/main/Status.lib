@@ -503,7 +503,7 @@ function BU::Main::Status::CheckProjectStatusVars()
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Code ****
-    # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
+    # Processing first the "$__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
     BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_DEBUG           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_DEBUG_BASHX     "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };

@@ -3,7 +3,7 @@
 # ----------------------
 ## SCRIPT'S INFORMATIONS
 
-# Name          : WordProcessor.sh
+# Name          : WordProcessors.sh
 # Description   : 
 # Author(s)     : Dimitri Obeid
 # Version       : beta
@@ -46,3 +46,7 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
 fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+####
+
+##

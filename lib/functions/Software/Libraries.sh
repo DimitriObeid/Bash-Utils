@@ -54,8 +54,11 @@ fi
 # Installing DirectX on Linux (Wine required).
 function BU::Software::Libraries::InstallDirectX::Linux()
 {
+    #**** Code ****
+    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     # Checking if wine is installed on the system.
-    BU::Main::CMDS::
+    BU::Main::CMDS::GetCommandPath 'wine' || return 1;
 
     return 0;
 }
@@ -63,6 +66,9 @@ function BU::Software::Libraries::InstallDirectX::Linux()
 # Installing OpenGL on Linux.
 function BU::Software::Libraries::InstallOpenGL::Linux()
 {
+    #**** Code ****
+    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     return 0;
 }
 
@@ -71,12 +77,18 @@ function BU::Software::Libraries::InstallOpenGL::Linux()
 ## MAC OS LIBRARIES
 
 # Installing Metal on OSX.
-function BU::Software::Libraries::
+function BU::Software::Libraries::InstallMetal::OSX()
+{
+    #**** Code ****
+    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+    return 0;
+}
 
 # Installing OpenGL on MacOS.
 function BU::Software::Libraries::InstallOpenGL::OSX()
 {
-    # Checking if the current system type is OSX.
+    #**** Code ****
     BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
 
     return 0;
@@ -89,11 +101,15 @@ function BU::Software::Libraries::InstallOpenGL::OSX()
 # Installing DirectX.
 function BU::Software::Libraries::InstallDirectX::Windows()
 {
+    #**** Code ****
+    BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     return 0;
 }
 
 # Installing OpenGL on Microsoft Windows.
 function BU::Software::Libraries::InstallOpenGL::Windows()
 {
+    #**** Code ****
     return 0;
 }
