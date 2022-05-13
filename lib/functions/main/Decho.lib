@@ -233,6 +233,9 @@ function BU::Decho()
     local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
     local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
 
+    if [ "${p_newTextColor^^}"  = 'NULL' ]; then p_newTextColor=$'\0';  fi
+    if [ "${p_newBGColor^^}"    = 'NULL' ]; then p_newBGColor=$'\0';    fi
+
     if [ -n "$p_string" ]; then
         if [ -z "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
             shift 1; local pa_fmtArgs; pa_fmtArgs=("$@");

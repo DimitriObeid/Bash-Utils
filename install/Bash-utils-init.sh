@@ -700,7 +700,7 @@ function BU::ModuleInit::PrintLog()
     shopt -s extglob;
 
     local v_tmp_file;
-         v_tmp_file="${v_tmp_file_original%%+( - )}";   # Removing the extra whitespace with the dash.
+         v_tmp_file="${v_tmp_file_original%%+( )+(-)+( )}";   # Removing the extra whitespace with the dash.
     shopt -u extglob;
 
     #**** Code ****
@@ -1108,12 +1108,16 @@ function BU::ModuleInit::CheckSTAT_DEBUG_BASHX()
     local p_lineno=${2-NULL};   # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Variables ****
-    local va_correctValues=("file" "category" "sub-category" "subcategory");
+    local va_correctValues=("${__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY[@]}");
+    local v_ArrayValueFound;
 
     #**** Code ****
-    if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" != "file" ] && [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" != "category" ] && [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" != sub?(-)category ]]; then
-        BU::ModuleInit::DisplayStatError "$p_file" "$p_lineno" "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" "__BU_MODULE_INIT_STAT_DEBUG_BASHX" "${va_correctValues[@]}"; return "$?";
-    fi
+    for i in "$va_correctValues"; do
+        if [ "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" = "$i" ]; then v_ArrayValueFound='true'; return 0; fi
+    done
+
+    if [ "${v_ArrayValueFound,,}" != 'true' ]; then BU::ModuleInit::DisplayStatError "$p_file" "$p_lineno" \
+            "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" "__BU_MODULE_INIT_STAT_DEBUG_BASHX" "${va_correctValues[@]}"; return "$?"; fi
 
     return 0;
 }

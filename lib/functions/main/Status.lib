@@ -146,6 +146,12 @@ function BU::Main::Status::CheckSTAT_DEBUG()
     local va_correctValues=('true' 'false');
 
     #**** Code ****
+    if [ "${__BU_MAIN_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MAIN_STAT_DEBUG,,}" != "false" ]; then
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${va_correctValues[@]}";
+
+        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
+
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
@@ -161,10 +167,28 @@ function BU::Main::Status::CheckSTAT_DEBUG_BASHX()
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
+    # Calling the function defined in the initialization script, if the framework is initializing.
+    if BU::Main::Status::CheckStatIsInitializing; then BU::ModuleInit::CheckSTAT_DEBUG_BASHX "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+
     #**** Variables ****
-    local va_correctValues=('C' '' '' '' '' '' '' '' '');
+    local va_correctValues=("${__BU_MAIN_PROJECT_DEBUG_BASHX_ARRAY[@]}");
+    local v_ArrayValueFound;
 
     #**** Code ****
+    for i in "${va_correctValues[@]}"; do
+        if [ "$__BU_MAIN_STAT_DEBUG_BASHX" == "$i" ]; then v_ArrayValueFound='true'; return 0; fi
+    done
+
+    if [ "$v_ArrayValueFound" != 'true' ]; then {
+        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG_BASHX" "__BU_MAIN_STAT_DEBUG_BASHX" "${va_correctValues[@]}";
+
+        local C="$?";
+
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+        return "$C";
+    }; fi
+
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
@@ -481,6 +505,8 @@ function BU::Main::Status::CheckProjectStatusVars()
     #**** Code ****
     # Processing first the "__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
     BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU::Main::Status::CheckSTAT_DEBUG           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU::Main::Status::CheckSTAT_DEBUG_BASHX     "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_DECHO           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_ECHO            "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     BU::Main::Status::CheckSTAT_ERROR           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
