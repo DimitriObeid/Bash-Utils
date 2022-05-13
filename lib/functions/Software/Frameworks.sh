@@ -45,7 +45,9 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1;
 fi
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PHP FRAMEWORKS
 
@@ -98,11 +100,17 @@ function BU::Software::Frameworks::InstallSymfony::OSX()
 # Installing laravel on Windows.
 function BU::Software::Frameworks::InstallLaravel::Windows()
 {
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     return 0;
 }
 
 # Installing Symfony on Windows.
 function BU::Software::Frameworks::InstallSymfony::Windows()
 {
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     return 0;
 }

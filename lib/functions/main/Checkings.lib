@@ -88,10 +88,12 @@ function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          
 function BU::Main::Checkings::CheckOSWindowsVersion()
 {
     #**** Parameters ****
-    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Version.
+    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
 
     #**** Code ****
-    
+    if [ -z "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER" ]; then __BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER="$(powershell.exe systeminfo | awk 'FNR==3 {print $7}')"; fi
+
+	if [ "$p_versionNumber" -eq "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER" ]; then return 0; else return 1; fi
 
     return 0;
 }

@@ -45,7 +45,9 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1;
 fi
 
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### GRAPHICAL PROGRAMMING LIBRARIES
 
@@ -111,5 +113,7 @@ function BU::Software::Libraries::InstallDirectX::Windows()
 function BU::Software::Libraries::InstallOpenGL::Windows()
 {
     #**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
     return 0;
 }
