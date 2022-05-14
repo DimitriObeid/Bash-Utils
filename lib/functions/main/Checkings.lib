@@ -91,9 +91,9 @@ function BU::Main::Checkings::CheckOSWindowsVersion()
     local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
 
     #**** Code ****
-    if [ -z "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER" ]; then __BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER="$(powershell.exe systeminfo | awk 'FNR==3 {print $7}')"; fi
+    if [ -z "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then __BU_MAIN_CHECKINGS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(powershell.exe [System.Environment]::OSVersion.Version | awk 'FNR == 4 {print $1}')"; fi
 
-	if [ "$p_versionNumber" -eq "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_VERSION_NUMBER" ]; then return 0; else return 1; fi
+	if [ "$p_versionNumber" -eq "$__BU_MAIN_CHECKINGS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
 
     return 0;
 }
