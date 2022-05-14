@@ -45,8 +45,75 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1;
 fi
 
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### LINUX PACKAGE MANAGERS
+
+## PACKAGE MANAGERS INSTALLATION
+
+# Installing the Node package manager for Linux.
+function BU::Software::PackageManagers::InstallNPM::Linux()
+{
+	#**** Code ****
+	BU::IsOSLinux || {  BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing the "Snap" package manager.
+function BU::Software::PackageManagers::InstallSnap()
+{
+	#**** Code ****
+	BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-####
+#### WINDOWS PACKAGE MANAGERS
 
-##
+## PACKAGE MANAGERS INSTALLATION
+
+# Installing the Node package manager for Windows.
+function BU::Software::PackageManagers::InstallNPM::Linux()
+{
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing Chocolatey
+function BU::Software::PackageManagers::InstallChocolatey()
+{
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS UPDATE
+
+
+# -----------------------------------------------
+
+## PACKAGE AVAILABLE CHECKING (ON THE MANAGER'S DATABASE)
+
+
+# -----------------------------------------------
+
+## PACKAGE INSTALLATION
+
+
+# -----------------------------------------------
+
+## PACKAGE UPDATE
