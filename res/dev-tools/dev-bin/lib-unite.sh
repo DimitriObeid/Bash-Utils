@@ -255,10 +255,28 @@ fi
 # Deleting the generated file if the awaited value is passed as script's first argument.
 if [ "${__BU_ARG_RM,,}" = 'rm' ]; then
     if rm "$__BU_MAIN_FULL_FILE_PATH"; then
-        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH » file was successfully deleted";
+        echo ; echo "The generated « $__BU_MAIN_FULL_FILE_PATH » file was successfully deleted";
     else
-        echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH » file"; exit 1;
+        echo >&2; echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH » file" >&2; exit 1;
     fi
+
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" ]; then if rm "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES"; then
+        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES » file was successfully deleted";
+    else
+        echo >&2; echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES » file" >&2; exit 1;
+    fi; fi
+
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE" ]; then if rm "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE"; then
+        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE » file was successfully deleted";
+    else
+        echo >&2; echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE » file" >&2; exit 1;
+    fi; fi
+
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES" ]; then if rm "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES"; then
+        echo; echo "The generated « $__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES » file was successfully deleted";
+    else
+        echo >&2; echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES » file" >&2; exit 1;
+    fi; fi
 fi
 
 exit 0;
