@@ -63,13 +63,100 @@ function BU::Software::PackageManagers::InstallNPM::Linux()
 }
 
 # Installing the "Snap" package manager.
-function BU::Software::PackageManagers::InstallSnap()
+function BU::Software::PackageManagers::InstallSnap::Linux()
 {
 	#**** Code ****
 	BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
 
 	return 0;
 }
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS UPDATE
+
+# Updating the Node package manager for Linux.
+function BU::Software::PackageManagers::UpdateNPM::Linux()
+{
+	#**** Code ****
+	BU::IsOSLinux || {  BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the "Snap" package manager.
+function BU::Software::PackageManagers::UpdateSnap::Linux()
+{
+	#**** Code ****
+	BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+## PACKAGE AVAILABLE CHECKING (ON THE MANAGER'S DATABASE)
+
+
+# -----------------------------------------------
+
+## PACKAGE INSTALLATION
+
+
+# -----------------------------------------------
+
+## PACKAGE UPDATE
+
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MAC OS PACKAGE MANAGERS
+
+## PACKAGE MANAGERS INSTALLATION
+
+# Install Homebrew on OSX.
+function BU::Software::PackageManagers::InstallHomebrew::OSX()
+{
+    #**** Code ****
+    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS UPDATE
+
+# Update Homebrew.
+function BU::Software::PackageManagers::UpdateHomebrew::OSX()
+{
+    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## PACKAGE AVAILABLE CHECKING (ON THE MANAGER'S DATABASE)
+
+
+# -----------------------------------------------
+
+## PACKAGE INSTALLATION
+
+
+# -----------------------------------------------
+
+## PACKAGE UPDATE
+
+
+# -----------------------------------------------
+
+
 
 # -----------------------------------------------
 
@@ -90,8 +177,8 @@ function BU::Software::PackageManagers::InstallNPM::Linux()
 	return 0;
 }
 
-# Installing Chocolatey
-function BU::Software::PackageManagers::InstallChocolatey()
+# Installing Chocolatey for Windows.
+function BU::Software::PackageManagers::InstallChocolatey::Windows()
 {
 	#**** Code ****
 	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
@@ -103,6 +190,23 @@ function BU::Software::PackageManagers::InstallChocolatey()
 
 ## PACKAGE MANAGERS UPDATE
 
+# Updating the Node package manager for Windows.
+function BU::Software::PackageManagers::InstallNPM::Linux()
+{
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating Chocolatey for Windows.
+function BU::Software::PackageManagers::InstallChocolatey::Windows()
+{
+	#**** Code ****
+	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+	return 0;
+}
 
 # -----------------------------------------------
 

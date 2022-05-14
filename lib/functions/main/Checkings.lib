@@ -52,37 +52,106 @@ __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="checkings::op
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU::IsOSAndroidTermux()    { if [[ "$OSTYPE" == 'linux-android' ]];    then return 0; else return 1; fi }
+function BU::IsOSAndroidTermux()    { if [[ "$OSTYPE" == 'linux-android' ]];                            then return 0; else return 1; fi }
 
 # Checking if current OS is FreeBSD.
-function BU::IsOSFreeBSD()          { if [[ "$OSTYPE" == 'FreeBSD' ]];          then return 0; else return 1; fi }
+function BU::IsOSFreeBSD()          { if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then return 0; else return 1; fi }
 
 # Checking if current OS is Haiku OS.
-function BU::IsOSHaiku()            { if [[ "$OSTYPE" == 'haiku' ]];            then return 0; else return 1; fi }
+function BU::IsOSHaiku()            { if [[ "$OSTYPE" == 'haiku' ]];                                    then return 0; else return 1; fi }
 
 # Checking if current OS is OpenBSD.
-function BU::IsOSOpenBSD()          { if [[ "$OSTYPE" == 'openbsd'* ]];         then return 0; else return 1; fi }
+function BU::IsOSOpenBSD()          { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then return 0; else return 1; fi }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU::IsOSLinux()            { if [[ "$OSTYPE" == 'linux'* ]];           then return 0; else return 1; fi }
+function BU::IsOSLinux()            { if [[ "$OSTYPE" == 'linux'* ]];                                   then return 0; else return 1; fi }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux.
-function BU::IsOSLinuxWSL()         { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]]; then return 0; else return 1; fi }
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
+function BU::IsOSLinuxWSL()         { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then return 0; else return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on Windows 10;
+function BU::IsOSLinuxWSLWin10      { if BU::IsOSLinuxWSL && BU::IsOSWindows10;                         then return 0; else return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on Windows 11;
+function BU::IsOSLinuxWSLWin11      { if BU::IsOSLinuxWSL && BU::IsOSWindows11;                         then return 0; else return 1; fi }
 
 # Checking if current OS is NetBSD.
-function BU::IsOSNetBSD()           { if [[ "$OSTYPE" == 'netbsd' ]];           then return 0; else return 1; fi }
+function BU::IsOSNetBSD()           { if [[ "$OSTYPE" == 'netbsd' ]];                                   then return 0; else return 1; fi }
 
 # Same as "BU::IsOSLinuxWSL()" function, it's just a less confusing name.
-function BU::IsOSWindows()          { if BU::IsOSLinuxWSL; then return 0; else return 1; fi }
+function BU::IsOSWindows()          { if BU::IsOSWindows10 || BU::IsOSWindows11;                        then return 0; else return 1; fi }
 
 # Checking if the currently used version of Windows is the 10th.
-function BU::IsOSWindows10()        { if BU::Main::Checkings::CheckOSWindowsVersion '10'; then return true; else return false; fi }
+function BU::IsOSWindows10()        { if BU::Main::Checkings::CheckOSWindowsVersion '10';               then return true; else return false; fi }
 
 # Checking if the currently used version of Windows is the 11th.
-function BU::IsOSWindows11()        { if BU::Main::Checkings::CheckOSWindowsVersion '11'; then return true; else return false; fi }
+function BU::IsOSWindows11()        { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then return true; else return false; fi }
 
 # Checking if current OS is OSx.
-function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];          then return 0; else return 1; fi }
+function BU::IsOSx()                { if [[ "$OSTYPE" == 'darwin'* ]];                                  then return 0; else return 1; fi }
+
+
+# Checking if current Linux distribution is Arch Linux.
+function BU::IsLinuxDistroArchLinux()       { if BU::IsOSLinux && cat /proc/version | grep -q ; then return 0; else return 1; fi }
+
+# Checking if current Linux distribution is Debian.
+function BU::IsLinuxDistroDebian()          { if BU::IsOSLinux && cat /proc/version | grep -q [Dd]ebian; then return 0; else return 1; fi }
+
+# Checking if current Linux distribution is Fedora.
+function BU::IsLinuxDistroFedora()          { if BU::IsOSLinux && cat /proc/version | grep -q [Ff]edora; then return 0; else return 1; fi }
+
+# Checking if current Linux distribution is Linux Mint.
+function BU::IsLinuxDistroLinuxMint()       { if BU::IsOSLinux && cat /proc/version | grep -q ; then return 0; else return 1; fi }
+
+# Checking if current Linux distribution is Manjaro.
+function BU::IsLinuxDistroManjaro()         { if BU::IsOSLinux && cat /proc/version | grep -q [Mm]anjaro; then return 0; else return 1; fi }
+
+# Checking if current Linux distribution is Ubuntu.
+function BU::IsLinuxDistroUbuntu()          { if BU::IsOSLinux && cat /proc/version | grep -q [Uu]buntu; then return 0; else return 1; fi }
+
+# Checking the current Linux distribution.
+function BU::Main::Checkings::CheckLinuxDistro()
+{
+    BU::IsOSLinux && {
+        BU::IsLinuxDistroArchLinux      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU::IsLinuxDistroDebian         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU::IsLinuxDistroFedora         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU::IsLinuxDistroLinuxMint      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU::IsLinuxDistroManjaro        && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU::IsLinuxDistroUbuntu         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+
+        # Return an error code if the distribution is not found.
+        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    }
+}
+
+# Checking the current operating system, by using the functions declared above.
+function BU::Main::Checkings::CheckCurrentOS()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS";
+
+    #**** Code ****
+    BU::IsOSAndroidTermux       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSFreeBSD             && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSHaiku               && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSOpenBSD             && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSLinux               && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSLinuxWSLWin10       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSLinuxWSLWin11       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSLinuxWSL            && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSNetBSD              && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSWindows10           && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSWindows11           && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSx                   && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+
+    # Return an error code if the OS is not supported.
+    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+    return 1;
+}
 
 # Checking the Microsoft Windows version.
 function BU::Main::Checkings::CheckOSWindowsVersion()
