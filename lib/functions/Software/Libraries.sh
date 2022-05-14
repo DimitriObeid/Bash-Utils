@@ -4,6 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : Lbraries.sh
+# Module        : Software
 # Description   : Library installation script.
 # Author(s)     : Dimitri Obeid
 # Version       : beta

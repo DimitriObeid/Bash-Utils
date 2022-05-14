@@ -4,6 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : Frameworks.sh
+# Module        : Software
 # Description   : Frameworks installation script.
 # Author(s)     : Dimitri Obeid
 # Version       : beta

@@ -4,6 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : Games.sh
+# Module        : Software
 # Description   : Installation script for video games and related programs.
 # Author(s)     : Dimitri Obeid
 # Version       : beta

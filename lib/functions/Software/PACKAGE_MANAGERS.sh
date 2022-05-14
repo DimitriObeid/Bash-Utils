@@ -4,6 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : PACKAGE_MANAGERS.SH
+# Module        : Software
 # Description   : Package manager functions for each operating system.
 # Author(s)     : Dimitri Obeid
 # Version       : beta
@@ -132,7 +133,7 @@ function BU::Software::PackageManagers::InstallHomebrew::OSX()
 ## PACKAGE MANAGERS UPDATE
 
 # Update Homebrew.
-function BU::Software::PackageManagers::UpdateHomebrew::OSX()
+function BU::Software::PackageManagers::UpdateHomebrew::OSX()l
 {
     BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
 

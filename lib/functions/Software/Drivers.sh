@@ -4,6 +4,7 @@
 ## SCRIPT'S INFORMATIONS
 
 # Name          : Drivers.sh
+# Module        : Software
 # Description   : Library management script.
 # Author(s)     : Dimitri Obeid
 # Version       : beta
