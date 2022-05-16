@@ -64,12 +64,12 @@ function BU::Main::OS::CheckLinuxDistro()
         if [ -n "$v_distro" ]; then         if BU::Main::OS::GetLinuxDistro "$v_distro"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
-            BU::IsLinuxDistroArchLinux      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU::IsLinuxDistroDebian         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU::IsLinuxDistroFedora         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU::IsLinuxDistroLinuxMint      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU::IsLinuxDistroManjaro        && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU::IsLinuxDistroUbuntu         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroArchLinux      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroDebian         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroFedora         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroLinuxMint      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroManjaro        && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroUbuntu         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
             # Returning an error code if the distribution is not found.
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
@@ -83,23 +83,24 @@ function BU::Main::OS::CheckLinuxDistro()
 function BU::Main::OS::CheckLinuxDistroVersion()
 {
     #**** Parameters ****
-    local p_version=${1:-NULL}; # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+	local p_distro=$1;	# String    - Default : NULL    - Name of the Linux distribution.
+    local p_version=$2;	# String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
     BU::IsOSLinux && {
-        if [ -n "$p_version" ]; then            if BU::Main::OS::GetLinuxDistroVersion "$p_version"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
+        if [ -n "$p_distro" ] && [ -n "$p_version" ]; then            if BU::Main::OS::CheckLinuxDistro && BU::Main::OS::GetLinuxDistroVersion "$p_version"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
-            BU::IsLinuxDistroFedora && {
-                BU::IsLinuxDistroFedora28       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora29       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora30       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora31       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora32       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora33       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora34       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora35       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroFedora36       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroFedora && {
+                BU::IsOSLinuxDistroFedora28       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora29       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora30       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora31       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora32       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora33       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora34       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora35       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroFedora36       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 # Returning an error code if the specific version is not found.
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
@@ -107,16 +108,16 @@ function BU::Main::OS::CheckLinuxDistroVersion()
                 return 1;
             }
 
-            BU::IsLinuxDistroUbuntu && {
-                BU::IsLinuxDistroUbuntu1804     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu1810     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu1904     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu1910     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu2004     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu2010     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu2104     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu2110     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU::IsLinuxDistroUbuntu2204     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU::IsOSLinuxDistroUbuntu && {
+                BU::IsOSLinuxDistroUbuntu1804     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu1810     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu1904     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu1910     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu2004     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu2010     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu2104     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu2110     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsOSLinuxDistroUbuntu2204     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 # Returning an error code if the specific version is not found.
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
@@ -166,7 +167,7 @@ function BU::Main::OS::GetCurrentOS()
     BU::IsOSNetBSD              && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
     BU::IsOSWindows10           && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
     BU::IsOSWindows11           && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU::IsOSx                   && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU::IsOSX                   && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Return an error code if the OS is not supported.
     BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
@@ -215,25 +216,28 @@ function BU::IsOSLinux()                    { if [[ "$OSTYPE" == 'linux'* ]];   
 function BU::IsOSLinuxWSL()                 { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
 
 # Checking if current OS is OSx.
-function BU::IsOSx()                        { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
+function BU::IsOSX()                        { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
 
 # Checking if current Linux distribution is Arch Linux.
-function BU::IsLinuxDistroArchLinux()       { BU::Main::OS::GetLinuxDistro ARCH                                 &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroArchLinux()     { BU::Main::OS::GetLinuxDistro ARCH                                 &&      return 0;       return 1; }
 
 # Checking if current Linux distribution is Debian.
-function BU::IsLinuxDistroDebian()          { BU::Main::OS::GetLinuxDistro debian                               &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian()        { BU::Main::OS::GetLinuxDistro debian                               &&      return 0;       return 1; }
 
 # Checking if current Linux distribution is Fedora.
-function BU::IsLinuxDistroFedora()          { BU::Main::OS::GetLinuxDistro Fedora                               &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora()        { BU::Main::OS::GetLinuxDistro Fedora                               &&      return 0;       return 1; }
 
 # Checking if current Linux distribution is Linux Mint.
-function BU::IsLinuxDistroLinuxMint()       { BU::Main::OS::GetLinuxDistro ''                                   &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroLinuxMint()     { BU::Main::OS::GetLinuxDistro ''                                   &&      return 0;       return 1; }
 
 # Checking if current Linux distribution is Manjaro.
-function BU::IsLinuxDistroManjaro()         { BU::Main::OS::GetLinuxDistro Manjaro                              &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroManjaro()       { BU::Main::OS::GetLinuxDistro Manjaro                              &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is SUSE.
+function BU::IsOSLinuxDistroSUSE()			{ BU::Main::OS::GetLinuxDistro ''									&&		return 0;		return 1; }
 
 # Checking if current Linux distribution is Ubuntu.
-function BU::IsLinuxDistroUbuntu()          { BU::Main::OS::GetLinuxDistro Ubuntu                               &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu()        { BU::Main::OS::GetLinuxDistro Ubuntu                               &&      return 0;       return 1; }
 
 # -----------------------------------------------
 
@@ -243,27 +247,51 @@ function BU::IsLinuxDistroUbuntu()          { BU::Main::OS::GetLinuxDistro Ubunt
 # shellcheck disable=SC2034
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-linux";
 
+# Checking debian versions.
+function BU::IsOSLinuxDistroDebian6()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '6'            &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian7()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '7'            &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian8()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '8'            &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian9()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '9'            &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian10()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '10'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroDebian11()			{ BU::Main::OS::CheckLinuxDistroVersion 'Debian' '11'           &&      return 0;       return 1; }
+
 # Checking Fedora versions.
-function BU::IsLinuxDistroFedora28()        { true; }
-function BU::IsLinuxDistroFedora29()        { true; }
-function BU::IsLinuxDistroFedora30()        { true; }
-function BU::IsLinuxDistroFedora31()        { true; }
-function BU::IsLinuxDistroFedora32()        { true; }
-function BU::IsLinuxDistroFedora33()        { true; }
-function BU::IsLinuxDistroFedora34()        { true; }
-function BU::IsLinuxDistroFedora35()        { true; }
-function BU::IsLinuxDistroFedora36()        { true; }
+function BU::IsOSLinuxDistroFedora28()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '28'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora29()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '29'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora30()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '30'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora31()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '31'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora32()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '32'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora33()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '33'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora34()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '34'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora35()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '35'           &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroFedora36()        	{ BU::Main::OS::CheckLinuxDistroVersion 'Fedora' '36'           &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
-function BU::IsLinuxDistroUbuntu1804()      { true; }
-function BU::IsLinuxDistroUbuntu1810()      { true; }
-function BU::IsLinuxDistroUbuntu1904()      { true; }
-function BU::IsLinuxDistroUbuntu1910()      { true; }
-function BU::IsLinuxDistroUbuntu2004()      { true; }
-function BU::IsLinuxDistroUbuntu2010()      { true; }
-function BU::IsLinuxDistroUbuntu2104()      { true; }
-function BU::IsLinuxDistroUbuntu2110()      { true; }
-function BU::IsLinuxDistroUbuntu2204()      { true; }
+function BU::IsOSLinuxDistroUbuntu1804()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '18.04'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu1810()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '18.10'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu1904()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '19.04'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu1910()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '19.10'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu2004()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '20.04'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu2010()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '20.10'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu2104()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '21.04'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu2110()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '21.10'        &&      return 0;       return 1; }
+function BU::IsOSLinuxDistroUbuntu2204()      	{ BU::Main::OS::CheckLinuxDistroVersion 'Ubuntu' '22.04'        &&      return 0;       return 1; }
+
+# -----------------------------------------------
+
+## SPECIFIC OS VERSIONS CHECKINGS (OSX)
+## DEBUG ID : specific-os-versions-checkings-osx
+
+# shellcheck disable=SC2034
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_OSX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-osx";
+
+# Checking OSX versions.
+function BU::IsOSXYosemite()				{ true; }
+function BU::IsOSXElCapitan()				{ true; }
+function BU::IsOSXSierra()					{ true; }
+function BU::IsOSXHighSierra()				{ true; }
+function BU::IsOSXMojave()					{ true; }
+function BU::IsOSXCatalina()				{ true; }
 
 # -----------------------------------------------
 
@@ -279,11 +307,11 @@ function BU::IsOSWindows10()                { if BU::Main::Checkings::CheckOSWin
 # Checking if the currently used version of Windows is the 11th.
 function BU::IsOSWindows11()                { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then    return 0; else  return 1; fi }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
-function BU::IsOSLinuxWSL1()                { true; }
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
+function BU::IsOSLinuxWSL1()                { uname -r | grep Microsoft											&&		return 0;		return 1; }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
-function BU::IsOSLinuxWSL2()                { true; }
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
+function BU::IsOSLinuxWSL2()                { uname -r | grep microsoft											&&		return 0;		return 1; }
 
 # -----------------------------------------------
 

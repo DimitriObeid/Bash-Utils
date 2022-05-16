@@ -104,7 +104,7 @@ function BU::Main::Filesystem::IsPartitionFull()
         true;
 	}
 
-	BU::IsOSx && {
+	BU::IsOSX && {
 		true;
 	}
 }
