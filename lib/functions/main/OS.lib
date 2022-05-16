@@ -117,13 +117,13 @@ function BU::Main::OS::CheckLinuxDistroVersion()
                 BU::IsLinuxDistroUbuntu2104     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
                 BU::IsLinuxDistroUbuntu2110     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
                 BU::IsLinuxDistroUbuntu2204     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
-                
+
                 # Returning an error code if the specific version is not found.
                 BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
                 return 1;
             }
-        
+
             # Returning an error code if the distribution is not found.
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
@@ -214,18 +214,6 @@ function BU::IsOSLinux()                    { if [[ "$OSTYPE" == 'linux'* ]];   
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
 function BU::IsOSLinuxWSL()                 { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
-function BU::IsOSLinuxWSL1()                { true; }
-
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
-function BU::IsOSLinuxWSL2()                { true; }
-
-# Checking if the currently used version of Windows is the 10th.
-function BU::IsOSWindows10()                { if BU::Main::Checkings::CheckOSWindowsVersion '10';               then    return 0; else  return 1; fi }
-
-# Checking if the currently used version of Windows is the 11th.
-function BU::IsOSWindows11()                { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then    return 0; else  return 1; fi }
-
 # Checking if current OS is OSx.
 function BU::IsOSx()                        { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
 
@@ -249,11 +237,53 @@ function BU::IsLinuxDistroUbuntu()          { BU::Main::OS::GetLinuxDistro Ubunt
 
 # -----------------------------------------------
 
-## SPECIFIC OS VERSIONS CHECKINGS
-## DEBUG ID : specific-os-versions-checkings
+## SPECIFIC OS VERSIONS CHECKINGS (LINUX)
+## DEBUG ID : specific-os-versions-checkings-linux
 
 # shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-linux";
+
+# Checking Fedora versions.
+function BU::IsLinuxDistroFedora28()        { true; }
+function BU::IsLinuxDistroFedora29()        { true; }
+function BU::IsLinuxDistroFedora30()        { true; }
+function BU::IsLinuxDistroFedora31()        { true; }
+function BU::IsLinuxDistroFedora32()        { true; }
+function BU::IsLinuxDistroFedora33()        { true; }
+function BU::IsLinuxDistroFedora34()        { true; }
+function BU::IsLinuxDistroFedora35()        { true; }
+function BU::IsLinuxDistroFedora36()        { true; }
+
+# Checking Ubuntu versions.
+function BU::IsLinuxDistroUbuntu1804()      { true; }
+function BU::IsLinuxDistroUbuntu1810()      { true; }
+function BU::IsLinuxDistroUbuntu1904()      { true; }
+function BU::IsLinuxDistroUbuntu1910()      { true; }
+function BU::IsLinuxDistroUbuntu2004()      { true; }
+function BU::IsLinuxDistroUbuntu2010()      { true; }
+function BU::IsLinuxDistroUbuntu2104()      { true; }
+function BU::IsLinuxDistroUbuntu2110()      { true; }
+function BU::IsLinuxDistroUbuntu2204()      { true; }
+
+# -----------------------------------------------
+
+## SPECIFIC OS VERSIONS CHECKINGS (WINDOWS)
+## DEBUG ID : specific-os-versions-checkings-windows
+
+# shellcheck disable=SC2034
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_WINDOWS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-windows";
+
+# Checking if the currently used version of Windows is the 10th.
+function BU::IsOSWindows10()                { if BU::Main::Checkings::CheckOSWindowsVersion '10';               then    return 0; else  return 1; fi }
+
+# Checking if the currently used version of Windows is the 11th.
+function BU::IsOSWindows11()                { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then    return 0; else  return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
+function BU::IsOSLinuxWSL1()                { true; }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
+function BU::IsOSLinuxWSL2()                { true; }
 
 # -----------------------------------------------
 
