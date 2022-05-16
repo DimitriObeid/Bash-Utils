@@ -345,7 +345,7 @@ function BU::Main::Errors::HandleErrors()
                 # Checking if the ' [/|\] ' substring exists only once, as separator from the advice and another comment.
 
                 # IMPORTANT : the second argument of the "BU::Main::Text::GetSubStringOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
-                if [ -n "$p_adviceString" ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]])* ]] && [ "$v_getSeparatorOccurencesfromAdviceStr" -eq 1 ]; then
+                if [ -n "$p_adviceString" ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]] && [ "$v_getSeparatorOccurencesfromAdviceStr" -eq 1 ]; then
 
                     local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting the first sub-string.
                     local v_string_part_2; v_string_part_2="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting the second sub-string.

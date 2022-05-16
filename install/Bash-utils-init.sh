@@ -515,7 +515,7 @@ function BU::ModuleInit::Msg()
         # If no messages are stored in the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" array yet;
         if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[*]}" ]; then
             __BU_MODULE_INIT_MSG_ARRAY=();
-        fi; 
+        fi;
 
         case "${p_option,,}" in
             '-n' | 'n')
@@ -558,7 +558,6 @@ function BU::ModuleInit::Msg()
     # Else, if the '--log-shut-display' argument is passed as a 'module' parameter, then
     # every initialization messages must be redirected to the screen only, not to the array.
     elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut-display' ]; then
-        echo LOL
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
@@ -707,8 +706,6 @@ function BU::ModuleInit::PrintLog()
     shopt -u extglob;
 
     #**** Code ****
-    echo;
-
     BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__PRINTLOG__HERE" '#' 'echo'; echo
 
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
