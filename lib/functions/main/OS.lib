@@ -45,83 +45,15 @@ fi
 
 __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="os:operating-system-checkings";
 
-## OS TYPE CHECKINGS
-## DEBUG ID : os-type-checkings
+## SPECIFIC OS VERSIONS CHECKINGS FUNCTIONS
+## DEBUG ID : specific-os-versions-checkings
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings";
 
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::os-type-checkings";
-
-# Reading the content of the "/proc/version" file on Linux.
-function BU::Main::OS::ReadProcVersionFile()
-{
-    #**** Parameters ****
-    local v_distro=${1:-NULL};  # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
-
-    #**** Code ****
-    if BU::IsOSLinux; then [ -r /proc/version ] && cat /proc/version | grep -qi "$v_distro" || return 1; return 0; else return 1; fi
-}
-
-# Checking if current OS is Android, running with the Termux terminal emulator.
-function BU::IsOSAndroidTermux()            { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
-
-# Checking if current OS is FreeBSD.
-function BU::IsOSFreeBSD()                  { if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
-
-# Checking if current OS is Haiku OS.
-function BU::IsOSHaiku()                    { if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
-
-# Checking if current OS is OpenBSD.
-function BU::IsOSOpenBSD()                  { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
-
-# Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU::IsOSLinux()                    { if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
-
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
-function BU::IsOSLinuxWSL()                 { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
-
-# Checking if the currently used version of Windows is the 10th.
-function BU::IsOSWindows10()                { if BU::Main::Checkings::CheckOSWindowsVersion '10';               then    return 0; else  return 1; fi }
-
-# Checking if the currently used version of Windows is the 11th.
-function BU::IsOSWindows11()                { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then    return 0; else  return 1; fi }
-
-# Checking if current OS is OSx.
-function BU::IsOSx()                        { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
-
-
-# Checking if current Linux distribution is Arch Linux.
-function BU::IsLinuxDistroArchLinux()       { BU::Main::OS::ReadProcVersionFile ARCH                            &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Debian.
-function BU::IsLinuxDistroDebian()          { BU::Main::OS::ReadProcVersionFile debian                          &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Fedora.
-function BU::IsLinuxDistroFedora()          { BU::Main::OS::ReadProcVersionFile Fedora                          &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Linux Mint.
-function BU::IsLinuxDistroLinuxMint()       { BU::Main::OS::ReadProcVersionFile ''                              &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Manjaro.
-function BU::IsLinuxDistroManjaro()         { BU::Main::OS::ReadProcVersionFile Manjaro                         &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Ubuntu.
-function BU::IsLinuxDistroUbuntu()          { BU::Main::OS::ReadProcVersionFile Ubuntu                          &&      return 0;       return 1; }
-
-# Checking the current Linux distribution version.
-function BU::Main::Checkings::CheckLinuxDistroVersion()
-{
-    #**** Parameters ****
-    local p_version=${1:-NULL}; # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
-
-    #**** Code ****
-    [ -n "$p_version" ] && BU::Main::OS::ReadProcVersionFile "$p_version" || return 1; return 0;
-}
-
-# Checking the current Linux distribution.
+# Checking the name of the currently used Linux distribution.
 function BU::Main::OS::CheckLinuxDistro()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS";
 
     #**** Parameters ****
     local v_distro=$1;  # String    - Default : NULL    - Name of the Linux distribution.
@@ -129,7 +61,7 @@ function BU::Main::OS::CheckLinuxDistro()
     #**** Code ****
 
     BU::IsOSLinux && {
-        if [ -n "$v_distro" ]; then         if BU::Main::OS::ReadProcVersionFile "$v_distro"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
+        if [ -n "$v_distro" ]; then         if BU::Main::OS::GetLinuxDistro "$v_distro"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
             BU::IsLinuxDistroArchLinux      && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -139,7 +71,7 @@ function BU::Main::OS::CheckLinuxDistro()
             BU::IsLinuxDistroManjaro        && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
             BU::IsLinuxDistroUbuntu         && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
 
-            # Return an error code if the distribution is not found.
+            # Returning an error code if the distribution is not found.
             BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
 
             return 1;
@@ -147,11 +79,80 @@ function BU::Main::OS::CheckLinuxDistro()
     }
 }
 
+# Checking the version of the currently used Linux distribution.
+function BU::Main::OS::CheckLinuxDistroVersion()
+{
+    #**** Parameters ****
+    local p_version=${1:-NULL}; # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+
+    #**** Code ****
+    BU::IsOSLinux && {
+        if [ -n "$p_version" ]; then            if BU::Main::OS::GetLinuxDistroVersion "$p_version"; then return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi
+
+        else
+            BU::IsLinuxDistroFedora && {
+                BU::IsLinuxDistroFedora28       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora29       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora30       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora31       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora32       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora33       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora34       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora35       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroFedora36       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+
+                # Returning an error code if the specific version is not found.
+                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+
+            BU::IsLinuxDistroUbuntu && {
+                BU::IsLinuxDistroUbuntu1804     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu1810     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu1904     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu1910     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu2004     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu2010     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu2104     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu2110     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU::IsLinuxDistroUbuntu2204     && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                
+                # Returning an error code if the specific version is not found.
+                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        
+            # Returning an error code if the distribution is not found.
+            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
+        fi
+    }
+}
+
+# Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
+function BU::Main::OS::GetLinuxDistro()
+{
+    #**** Parameters ****
+    local v_distro=${1:-NULL};  # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+
+    #**** Code ****
+    if BU::IsOSLinux; then [ -r /proc/version ] && cat /proc/version | grep -qi "$v_distro" || return 1; return 0; else return 1; fi
+}
+
+# Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
+function BU::Main::OS::GetLinuxDistroVersion()
+{
+    BU::Main::OS::GetLinuxDistro "$1" || return 1; return 0;
+}
+
 # Checking the current operating system, by using the functions declared above.
 function BU::Main::OS::GetCurrentOS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__OS_TYPE_CHECKINGS";
+    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS";
 
     #**** Code ****
     BU::IsOSAndroidTermux       && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -182,10 +183,77 @@ function BU::Main::Checkings::CheckOSWindowsVersion()
     #**** Code ****
     if [ -z "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(powershell.exe '[System.Environment]::OSVersion.Version' | awk 'FNR == 4 {print $1}')"; fi
 
-	if [ "$p_versionNumber" -eq "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
+    if [ "$p_versionNumber" -eq "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
 
     return 0;
 }
+
+# -----------------------------------------------
+
+## GENERAL OS VERSIONS CHECKINGS
+## DEBUG ID : general-os-versions-checkings
+
+# shellcheck disable=SC2034
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__GENERAL_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::general-os-versions-checkings";
+
+# Checking if current OS is Android, running with the Termux terminal emulator.
+function BU::IsOSAndroidTermux()            { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+
+# Checking if current OS is FreeBSD.
+function BU::IsOSFreeBSD()                  { if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
+
+# Checking if current OS is Haiku OS.
+function BU::IsOSHaiku()                    { if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
+
+# Checking if current OS is OpenBSD.
+function BU::IsOSOpenBSD()                  { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
+
+# Checking if current OS is Linux (or Android without the Termux terminal emulator).
+function BU::IsOSLinux()                    { if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
+function BU::IsOSLinuxWSL()                 { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
+function BU::IsOSLinuxWSL1()                { true; }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version.
+function BU::IsOSLinuxWSL2()                { true; }
+
+# Checking if the currently used version of Windows is the 10th.
+function BU::IsOSWindows10()                { if BU::Main::Checkings::CheckOSWindowsVersion '10';               then    return 0; else  return 1; fi }
+
+# Checking if the currently used version of Windows is the 11th.
+function BU::IsOSWindows11()                { if BU::Main::Checkings::CheckOSWindowsVersion '11';               then    return 0; else  return 1; fi }
+
+# Checking if current OS is OSx.
+function BU::IsOSx()                        { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
+
+# Checking if current Linux distribution is Arch Linux.
+function BU::IsLinuxDistroArchLinux()       { BU::Main::OS::GetLinuxDistro ARCH                                 &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is Debian.
+function BU::IsLinuxDistroDebian()          { BU::Main::OS::GetLinuxDistro debian                               &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is Fedora.
+function BU::IsLinuxDistroFedora()          { BU::Main::OS::GetLinuxDistro Fedora                               &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is Linux Mint.
+function BU::IsLinuxDistroLinuxMint()       { BU::Main::OS::GetLinuxDistro ''                                   &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is Manjaro.
+function BU::IsLinuxDistroManjaro()         { BU::Main::OS::GetLinuxDistro Manjaro                              &&      return 0;       return 1; }
+
+# Checking if current Linux distribution is Ubuntu.
+function BU::IsLinuxDistroUbuntu()          { BU::Main::OS::GetLinuxDistro Ubuntu                               &&      return 0;       return 1; }
+
+# -----------------------------------------------
+
+## SPECIFIC OS VERSIONS CHECKINGS
+## DEBUG ID : specific-os-versions-checkings
+
+# shellcheck disable=SC2034
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings";
 
 # -----------------------------------------------
 
