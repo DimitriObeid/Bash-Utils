@@ -60,12 +60,25 @@ function BU::Main::Filesystem::IsPartitionFull()
 
     #**** Parameters ****
     local p_fileFS=$1;  # String    - Default : NULL    - Target file's file system.
+    local p_dirfile=$2; # String    - Default : NULL    - Create the file with the directory if not exists, then erase it, in order to get the target file system.
 
     #**** Code ****
     if [ -z "$p_fileFS" ]; then return "$__BU_MAIN_EXIT_INVALID_ARGUMENT";
 
     elif    [ ! -d "$p_fileFS" ] || \
-            [ ! -f "$p_fileFS" ]; then return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+            [ ! -f "$p_fileFS" ]; then if [ "${p_dirfile,,}" = 'create' ]; then
+
+                local v_parentdir="$(cd "$(dirname "$p_path")" > /dev/null 2>&1 || { return 1; }; pwd -p)";
+
+                if [ ! -d "$v_parentdir" ]; then mkdir -p "$v_parentdir" || return "$?"; fi
+
+                touch "$p_fileFS" || return "$?";
+
+                rm "$p_fileFS" || return "$?";
+
+                rm -rf "$v_parentdir" || return "$?";
+
+            else return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; fi
     fi
 
 	BU::IsOSAndroidTermux && {

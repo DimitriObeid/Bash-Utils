@@ -411,17 +411,18 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 
 	#**** Parameters ****
     local p_fileFS=$1;          # String    - Default : NULL    - Target file's file system.
-    local p_authorization=$2;   # String    - Default : NULL    - Authorization to call the "BU::Main::Errors::HandleErrors()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and that "BU::__/Decho()" functions are called in the "BU::Main::Errors::HandleErrors()" function). Set this value to "false" to forbid this call.
+    local p_dirfile=$2;         # String    - Default : NULL    - Create the file with the directory if not exists, then erase it, in order to get the target file system.
+    local p_authorization=$3;   # String    - Default : NULL    - Authorization to call the "BU::Main::Errors::HandleErrors()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and that "BU::__/Decho()" functions are called in the "BU::Main::Errors::HandleErrors()" function). Set this value to "false" to forbid this call.
 
-	#**** Code ****
+    #**** Code ****
 
-	# The function "BU::Main::Checkings::CheckProjectLogStatus()" function is called in each "Echo<...>()" functions if the "$__BU_MAIN_STAT_ECHO" status global
-	# variable's value is set to 'false', and the current function is called at the beginning of the "BU::Main::Checkings::CheckProjectLogStatus()" function.
+    # The function "BU::Main::Checkings::CheckProjectLogStatus()" function is called in each "Echo<...>()" functions if the "$__BU_MAIN_STAT_ECHO" status global
+    # variable's value is set to 'false', and the current function is called at the beginning of the "BU::Main::Checkings::CheckProjectLogStatus()" function.
 
-	# Changing the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in order to avoid an infinite
-	# loop during the call of any function from the "Filesystem.lib" file, which call an "Echo<...>()" function.
+    # Changing the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in order to avoid an infinite
+    # loop during the call of any function from the "Filesystem.lib" file, which call an "Echo<...>()" function.
 
-	if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
+    if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
         local v_echoBackup="$__BU_MAIN_STAT_ECHO";
 
         # There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
@@ -431,7 +432,7 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
     # If the framework is still initializing when an error occurs.
     BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
-    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; local IsPartitionFullReturnCode="$?";
+    BU::Main::Filesystem::IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
 
     if [ "$IsPartitionFullReturnCode" -eq 0 ]; then
     
