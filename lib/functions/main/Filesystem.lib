@@ -68,7 +68,7 @@ function BU::Main::Filesystem::IsPartitionFull()
     elif    [ ! -d "$p_fileFS" ] || \
             [ ! -f "$p_fileFS" ]; then if [ "${p_dirfile,,}" = 'create' ]; then
 
-                local v_parentdir="$(cd "$(dirname "$p_path")" > /dev/null 2>&1 || { return 1; }; pwd -p)";
+                local v_parentdir="$(cd "$(dirname "$p_path")" > /dev/null 2>&1 || { return 1; }; pwd -P)";
 
                 if [ ! -d "$v_parentdir" ]; then mkdir -p "$v_parentdir" || return "$?"; fi
 
