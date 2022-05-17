@@ -650,7 +650,7 @@ unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT
 
 # Création du fichier de code couleur du texte.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="IMPOSIBLE DE CRÉER LE FICHIER DE CODE COULEUR DU TEXTE %s DANS LE DOSSIER %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s an été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s a été créé avec succès dans le dossier %s";
 
 # Création du fichier de code de couleur de fond.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Impossible de créer le fichier de code de couleur de fond %s dans le dossier %s";
