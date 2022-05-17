@@ -1733,6 +1733,8 @@ function BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModu
 
         BU::ModuleInit::MsgAbort;
 
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
+
         # WARNING : Do not call the "BU::ModuleInit::AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
         BU::IsInScript && exit 1; return 1;
     fi
@@ -2272,25 +2274,30 @@ function BashUtils_InitModules()
                 # shellcheck disable=SC2059
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU::ModuleInit::Msg;
 
-                if      [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name."[Mm][Oo][Dd][Uu][Ll][Ee]'.'[Cc][Oo][Nn][Ff] ]];                   then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_name.module.conf")"                 || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name.module.conf"                    "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                if      [ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name.Module.conf" ];                 then local v_module_config_file_name="$v_module_name.Module.conf";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/"[Mm][Oo][Dd][Uu][Ll][Ee]".$v_module_name."[Cc][Oo][Nn][Ff] ]];                   then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "module.$v_module_name.conf")"                 || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.$v_module_name.conf"                    "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/Module.$v_module_name.conf" ];                 then local v_module_config_file_name="Module.$v_module_name.conf";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name."[Mm][Oo][Dd][Uu][Ll][Ee]".$v_module_name."[Cc][Oo][Nn][Ff] ]];    then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_name.module.$v_module_name.conf")"  || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name.module.$v_module_name.conf"     "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_name.Module.$v_module_name.conf" ];  then local v_module_config_file_name="$v_module_name.Module.$v_module_name.conf";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/"[Mm][Oo][Dd][Uu][Ll][Ee]'.'[Cc][Oo][Nn][Ff] ]];                                  then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" 'module.conf')"                                || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/module.conf"                                   "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/Module.conf" ];                                then local v_module_config_file_name="Module.conf";
 
                 else
                     BU::ModuleInit::PrintLogError "" "$(( LINENO - 1 ))";
 
-                    printf "\n\n" "" >&2;
-
-                    printf "" "" >&2;
-                    printf '\n\n' >&2;
+#                     printf "\n\n" "" >&2;
+# 
+#                     printf "" "" >&2;
+#                     printf '\n\n' >&2;
 
                     BU::ModuleInit::MsgAbort;
 
+                    BU::ModuleInit::AskPrintLog >&2 || v_loop_error="error"; break;
+
                     v_loop_error="error"; break;
+                fi
+
+                BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_config_file_name" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_config_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
             fi
 
             # -----------------------------------------------
@@ -2318,26 +2325,28 @@ function BashUtils_InitModules()
                 # shellcheck disable=SC2059
                 BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE" "$v_module_name")" '-' 'msg';
 
-                if      [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_name."[Ii][Nn][Ii][Tt][Ii][Aa][Ll][Ii][Zz][Ee][Rr]'.'[Ss][Hh] ]];                   then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_name.Initializer.sh")"                  || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_name.Initializer.sh" "$v_module_name"                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                if      [ -f "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.$v_module_name.sh")" ];                  then local v_module_init_file_name="$v_module_name.Initializer.sh";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/"[Ii][Nn][Ii][Tt][Ii][Aa][Ll][Ii][Zz][Ee][Rr]".$v_module_name."[Ss][Hh] ]];                   then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.$v_module_name.sh")"                  || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.$v_module_name.sh" "$v_module_name"                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_name.Initializer.sh")" ];                  then local v_module_init_file_name="Initializer.$v_module_name.sh";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_name."[Ii][Nn][Ii][Tt][Ii][Aa][Ll][Ii][Zz][Ee][Rr]".$v_module_name."[Ss][Hh] ]];    then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_name.Initializer.$v_module_name.sh")"   || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_name.Initializer.$v_module_name.sh" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_name.Initializer.$v_module_name.sh")" ];   then local v_module_init_file_name="$v_module_name.Initializer.$v_module_name.sh";
 
-                elif    [[ -f "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/"[Ii][Nn][Ii][Tt][Ii][Aa][Ll][Ii][Zz][Ee][Rr]'.'[Ss][Hh] ]];                                  then source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" 'Initializer.sh')"                                 || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/Initializer.sh" "$v_module_name"                               "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                elif    [ -f "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "Initializer.sh")" ];                                 then local v_module_init_file_name="Initializer.sh";
 
                 else
                     BU::ModuleInit::PrintLogError "" "$(( LINENO - 1 ))";
 
-                    printf "\n\n" "" >&2;
-
-                    printf "" "" >&2;
-                    printf '\n\n' >&2;
+#                     printf "\n\n" "" >&2;
+# 
+#                     printf "" "" >&2;
+#                     printf '\n\n' >&2;
 
                     BU::ModuleInit::MsgAbort;
 
                     v_loop_error="error"; break;
                 fi
+
+                source "$(BU::ModuleInit::FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_init_file_name")" || { BU::ModuleInit::SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_init_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
 
                 # shellcheck disable=SC2059
                 BU::HeaderGreen "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU::DechoHighlight "$v_module_name")")";
