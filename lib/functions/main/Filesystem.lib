@@ -74,9 +74,9 @@ function BU::Main::Filesystem::IsPartitionFull()
 
                 touch "$p_fileFS" || return "$?";
 
-                rm "$p_fileFS" || return "$?";
+                # rm "$p_fileFS" || return "$?";
 
-                rm -rf "$v_parentdir" || return "$?";
+               # rm -rf "$v_parentdir" || return "$?";
 
             else return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; fi
     fi

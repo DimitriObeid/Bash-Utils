@@ -432,10 +432,12 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
     # If the framework is still initializing when an error occurs.
     BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
-    BU::Main::Filesystem::IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
+    if [ "${p_dirfile,,}" = 'create' ]; then
+            BU::Main::Filesystem::IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
+    else    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; fi
 
     if [ "$IsPartitionFullReturnCode" -eq 0 ]; then
-    
+
         # Resetting the former "$__BU_MAIN_STAT_ECHO" global status variable's value.
         if [ "${v_echoBackup,,}" = 'false' ]; then
             __BU_MAIN_STAT_ECHO="$v_echoBackup";
@@ -698,7 +700,7 @@ function BU::CheckProjectLogStatus()
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
+	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
 
     #**** Parameters ****
     local p_string=$1;      # Any       - Text to display.
@@ -849,7 +851,7 @@ function BU::CheckProjectLogStatus()
 							fi
                         ;;
                     esac
-                    
+
                     [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg;
                 fi
             done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -1046,7 +1048,7 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
+	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
 	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
         if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
