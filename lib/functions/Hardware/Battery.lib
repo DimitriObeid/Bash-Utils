@@ -52,8 +52,11 @@ function BU::Hardware::Battery::GetPercentage()
 {
     #**** Variables ****
     if command -v "upower"; then
-        local v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)";
-        local v_command_output="$(upower --show-info "${v_batteries:-}" | grep percentage | grep -o '[0-9]\+' | head -1)";
+        local v_batteries;
+        local v_command_output;
+
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)";
+        v_command_output="$(upower --show-info "${v_batteries:-}" | grep percentage | grep -o '[0-9]\+' | head -1)";
     fi
 
     #**** Code ****

@@ -3,9 +3,9 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : CPU.lib
+# Name          : Memory.lib
 # Module        : Hardware
-# Description   : Functions used to process information about the CPU.
+# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
 
@@ -40,15 +40,32 @@ fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### PROCCESSING THE CPU INFORMATIONS
+####
 
-## GET CPU INFORMATIONS
+##
 
-# Getting the number of cores.
-function BU::Hardware::CPU::GetCoresNumber()    { if BU::Main::CMDS::GetCommandPath 'nproc'; then BU::EchoMsg "$(nproc)" '-n'; return 0; else return 1; fi; }
+# Get the number of RAM slots in use.
+function BU::Hardware::Memory::GetUsedRAMSlotsNumber()
+{
+    if BU::Main::CMDS::GetCommandPath 'dmidecode'; then if BU::Main::Checkings::CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
+}
 
-# Getting the CPU architecture.
-function BU::Hardware::CPU::GetArch()           { if BU::Main::CMDS::GetCommandPath 'uname'; then BU::EchoMsg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+# Getting the number of RAM slots available.
+function BU::Hardware::Memory::GetAvailableRamSlotsNumber()
+{
+    return 0;
+}
 
-# Getting the CPU vendor
-function BU::Hardware::CPU::GetVendor()         { if BU::Main::CMDS::GetCommandPath 'lshw'; then BU::EchoMsg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+# Getting memory max capacity.
+function BU::Hardware::Memory::GetMaxMemoryCapacity()
+{
+    if BU::Main::CMDS::GetCommandPath 'dmidecode'; then if BU::Main::Checkings::CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
+}
+
+# Get Memory type.
+function BU::Hardware::Memory::GetMemoryType()
+{
+    if BU::Main::CMDS::GetCommandPath 'dmidecode'; then if BU::Main::Checkings::CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
+}
+
+function BU::Hardware::Memory::CheckIfMemoryDDR4() { BU::Hardware::Memory::GetMemoryType 'DDR4' || return 1; }
