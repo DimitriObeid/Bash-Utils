@@ -128,6 +128,15 @@ function BU::Software::PackageManagers::InstallHomebrew::OSX()
     return 0;
 }
 
+# Install NPM on OSX.
+function BU::Software::PackageManagers::InstallNPM::OSX()
+{
+    #**** Code ****
+    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+
+    return 0;
+}
+
 # -----------------------------------------------
 
 ## PACKAGE MANAGERS UPDATE
@@ -170,7 +179,7 @@ function BU::Software::PackageManagers::UpdateHomebrew::OSX()l
 ## PACKAGE MANAGERS INSTALLATION
 
 # Installing the Node package manager for Windows.
-function BU::Software::PackageManagers::InstallNPM::Linux()
+function BU::Software::PackageManagers::InstallNPM::Windows()
 {
 	#**** Code ****
 	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
@@ -222,3 +231,56 @@ function BU::Software::PackageManagers::InstallChocolatey::Windows()
 # -----------------------------------------------
 
 ## PACKAGE UPDATE
+
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### QUICK PACKAGE INSTALLATION, UPDATE AND PROCESSING FOR MULTIPLE OPERATING SYSTEMS 
+
+## RESOURCES FUNCTIONS.
+
+# Quick writing if the target operating system is not found.
+function BU::Software::PackageManagers::SoftwareNotAvailableForThisOS()
+{
+    BU::EchoError ""; BU::Newline;
+}
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS INSTALLATION
+
+# Install NPM on several platforms.
+function BU::Software::PackageManagers::InstallNPM()
+{
+    BU::IsOSLinux   && BU::Software::PackageManagers::InstallNPM::Linux     &&  return 0;
+    BU::IsOSX       && BU::Software::PackageManagers::InstallNPM::OSX       &&  return 0;
+    BU::IsOSWindows && BU::Software::PackageManagers::InstallNPM::Windows   &&  return 0;
+
+    BU::Software::PackageManagers::SoftwareNotAvailableForThisOS;               return 1;
+}
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS UPDATE
+
+
+# -----------------------------------------------
+
+## PACKAGE AVAILABLE CHECKING (ON THE MANAGER'S DATABASE)
+
+
+# -----------------------------------------------
+
+## PACKAGE INSTALLATION
+
+
+# -----------------------------------------------
+
+## PACKAGE UPDATE
+
+
+# -----------------------------------------------
