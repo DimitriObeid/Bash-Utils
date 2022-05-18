@@ -55,22 +55,22 @@ fi
 ## LINUX LIBRARIES
 
 # Installing DirectX on Linux (Wine required).
-function BU::Software::Libraries::InstallDirectX::Linux()
+function BU.SoftwareLibrariesInstallDirectXLinux()
 {
     #**** Code ****
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     # Checking if wine is installed on the system.
-    BU::Main::CMDS::GetCommandPath 'wine' || return 1;
+    BU.Main.CMDSGetCommandPath 'wine' || return 1;
 
     return 0;
 }
 
 # Installing OpenGL on Linux.
-function BU::Software::Libraries::InstallOpenGL::Linux()
+function BU.SoftwareLibrariesInstallOpenGLLinux()
 {
     #**** Code ****
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -80,19 +80,19 @@ function BU::Software::Libraries::InstallOpenGL::Linux()
 ## MAC OS LIBRARIES
 
 # Installing Metal on OSX.
-function BU::Software::Libraries::InstallMetal::OSX()
+function BU.SoftwareLibrariesInstallMetalOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing OpenGL on MacOS.
-function BU::Software::Libraries::InstallOpenGL::OSX()
+function BU.SoftwareLibrariesInstallOpenGLOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -102,19 +102,19 @@ function BU::Software::Libraries::InstallOpenGL::OSX()
 ## WINDOWS LIBRARIES
 
 # Installing DirectX.
-function BU::Software::Libraries::InstallDirectX::Windows()
+function BU.SoftwareLibrariesInstallDirectXWindows()
 {
     #**** Code ****
-    BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing OpenGL on Microsoft Windows.
-function BU::Software::Libraries::InstallOpenGL::Windows()
+function BU.SoftwareLibrariesInstallOpenGLWindows()
 {
     #**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }

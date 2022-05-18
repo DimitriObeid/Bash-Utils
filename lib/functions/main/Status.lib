@@ -41,27 +41,27 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES FUNCTIONS
-#### DEBUG ID : status::variables-values-functions
+#### DEBUG ID : Status.variables-values-functions
 
-__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="status::variables-values-functions";
+__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="Status.variables-values-functions";
 
 ## CHECKING VALUES
 ## DEBUG ID : checking-values
 
-__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checking-values";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONSchecking-values";
 
 # Easy writing text function.
-function BU::Main::Status::ConfEcho()
+function BU.Main.Status.ConfEcho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES";
 
     #**** Parameters ****
-    local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_lineno=$2;      # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU::Main::StatusCheckSTAT<...>()" functions).
-    local p_bad_value=$3;   # String    - Default : NULL    - Bad value passed as "BU::Main::StatusCheckSTAT<...>()" function's argument.
+    local p_file=$1;        # String    - Default : NULL    - File where the current function is called (mainly from the "BU.Main.StatusCheckSTAT<...>()" functions).
+    local p_lineno=$2;      # Int       - Default : NULL    - Line where the current function is called (mainly from the "BU.Main.StatusCheckSTAT<...>()" functions).
+    local p_bad_value=$3;   # String    - Default : NULL    - Bad value passed as "BU.Main.StatusCheckSTAT<...>()" function's argument.
     local p_var_name=$4     # String    - Default : NULL    - Name of the variable that stores the bad value.
 
     # Shifting the same number of time as the former arguments number
@@ -74,7 +74,7 @@ function BU::Main::Status::ConfEcho()
 
     #**** Code ****
     # Sourcing the "Status.conf" file to reset every status global variables values
-    BU::Main::Files::SourceFile "$__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH";
+    BU.Main.FilesSourceFile "$__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH";
 
     # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
     __BU_MAIN_STAT_DECHO='allow';
@@ -82,31 +82,31 @@ function BU::Main::Status::ConfEcho()
     # Since the "$__BU_MAIN_STAT_ECHO" status global variable is reset to "true", it's totally safe to call an "Echo<...>()" function here.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         {
-			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+			BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-			BU::EchoError "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
+			BU.EchoError "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
 
-			BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+			BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
     else
-        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-        BU::EchoError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
+        BU.EchoError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
 
-        BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU::EchoError "In $(BU::DechoHighlightPath "$p_file"), line $(BU::DechoHighlight "$p_lineno") --> " '-n' >&2;
-    BU::EchoError "Error : the $(BU::DechoHighlightVar "$p_var_name") variable's value is incorrect." >&2;
+    BU.EchoError "In $(BU.DechoHighlightPath "$p_file"), line $(BU.DechoHighlight "$p_lineno") --> " '-n' >&2;
+    BU.EchoError "Error : the $(BU.DechoHighlightVar "$p_var_name") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; BU::EchoError "Bad value : $(BU::DechoYellow 'An empty string')." >&2;
+        echo >&2; BU.EchoError "Bad value : $(BU.DechoYellow 'An empty string')." >&2;
     else
-        echo >&2; BU::EchoError "Bad value : $(BU::DechoHighlightVar "$p_bad_value")." >&2;
+        echo >&2; BU.EchoError "Bad value : $(BU.DechoHighlightVar "$p_bad_value")." >&2;
     fi
 
-    echo >&2; BU::EchoError "The allowed values are :" >&2;
+    echo >&2; BU.EchoError "The allowed values are :" >&2;
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
@@ -114,13 +114,13 @@ function BU::Main::Status::ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            BU::EchoError "$i/${#pa_correctValues[@]}   --> $(BU::DechoHighlightVar 'An empty argument')" >&2;
+            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.DechoHighlightVar 'An empty argument')" >&2;
         else
-            BU::EchoError "$i/${#pa_correctValues[@]}   --> $(BU::DechoHighlight "$val")" >&2;
+            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.DechoHighlight "$val")" >&2;
         fi
     done
 
-    echo >&2; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit 1;
+    echo >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit 1;
 }
 
 # -----------------------------------------------
@@ -128,13 +128,13 @@ function BU::Main::Status::ConfEcho()
 ## CHECKINGS
 ## DEBUG ID : checkings
 
-__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::checkings";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONScheckings";
 
 # Check the "$__BU_MAIN_STAT_DEBUG" status variable's value.
-function BU::Main::Status::CheckSTAT_DEBUG()
+function BU.Main.Status.CheckSTAT_DEBUG()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -147,19 +147,19 @@ function BU::Main::Status::CheckSTAT_DEBUG()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MAIN_STAT_DEBUG,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG" "__BU_MAIN_STAT_DEBUG" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Check the "$__BU_MAIN_STAT_DEBUG_BASHX" status variable's value.
-function BU::Main::Status::CheckSTAT_DEBUG_BASHX()
+function BU.Main.Status.CheckSTAT_DEBUG_BASHX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -168,7 +168,7 @@ function BU::Main::Status::CheckSTAT_DEBUG_BASHX()
     local p_lineno=$2;  # Int       - Default : NULL    - Line where the current function is called.
 
     # Calling the function defined in the initialization script, if the framework is initializing.
-    if BU::Main::Status::CheckStatIsInitializing; then BU::ModuleInit::CheckSTAT_DEBUG_BASHX "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if BU.Main.Status.CheckStatIsInitializing; then BU.ModuleInit.CheckSTAT_DEBUG_BASHX "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     #**** Variables ****
     local va_correctValues=("${__BU_MAIN_PROJECT_DEBUG_BASHX_ARRAY[@]}");
@@ -180,23 +180,23 @@ function BU::Main::Status::CheckSTAT_DEBUG_BASHX()
     done
 
     if [ "$v_ArrayValueFound" != 'true' ]; then {
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG_BASHX" "__BU_MAIN_STAT_DEBUG_BASHX" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DEBUG_BASHX" "__BU_MAIN_STAT_DEBUG_BASHX" "${va_correctValues[@]}";
 
         local C="$?";
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
     }; fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Check the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function BU::Main::Status::CheckSTAT_DECHO()
+function BU.Main.Status.CheckSTAT_DECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -209,19 +209,19 @@ function BU::Main::Status::CheckSTAT_DECHO()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_DECHO,,}" != "authorize" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "forbid" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "restrict" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Check the "$__BU_MAIN_STAT_ECHO" status variable's value.
-function BU::Main::Status::CheckSTAT_ECHO()
+function BU.Main.Status.CheckSTAT_ECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -234,19 +234,19 @@ function BU::Main::Status::CheckSTAT_ECHO()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_ECHO,,}" != "true" ] && [ "${__BU_MAIN_STAT_ECHO,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function BU::Main::Status::CheckSTAT_ERROR()
+function BU.Main.Status.CheckSTAT_ERROR()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -259,19 +259,19 @@ function BU::Main::Status::CheckSTAT_ERROR()
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "warning" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
-function BU::Main::Status::CheckSTAT_INITIALIZING()
+function BU.Main.Status.CheckSTAT_INITIALIZING()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -284,19 +284,19 @@ function BU::Main::Status::CheckSTAT_INITIALIZING()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "true" ] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_LOG" status variable's value.
-function BU::Main::Status::CheckSTAT_LOG()
+function BU.Main.Status.CheckSTAT_LOG()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -309,22 +309,22 @@ function BU::Main::Status::CheckSTAT_LOG()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 
     elif [ "${__BU_MAIN_STAT_LOG,,}" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-        BU::Main::Files::CreateProjectLogFile || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.FilesCreateProjectLogFile || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 	fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
+function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -337,19 +337,19 @@ function BU::Main::Status::CheckSTAT_LOG_REDIRECT()
 
     #**** Code ****
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
+function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -362,19 +362,19 @@ function BU::Main::Status::CheckSTAT_OPERATE_ROOT()
 
 	#**** Code ****
 	if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "authorized" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "forbidden" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "restricted" ]; then
-		BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${va_correctValues[@]}";
+		BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${va_correctValues[@]}";
 
-		local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+		local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
-function BU::Main::Status::CheckSTAT_TIME_HEADER()
+function BU.Main.Status.CheckSTAT_TIME_HEADER()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -387,20 +387,20 @@ function BU::Main::Status::CheckSTAT_TIME_HEADER()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}";
+    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
-function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
+function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -413,20 +413,20 @@ function BU::Main::Status::CheckSTAT_TIME_NEWLINE()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${va_correctValues[@]}";
+    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function BU::Main::Status::CheckSTAT_TIME_TXT()
+function BU.Main.Status.CheckSTAT_TIME_TXT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -439,20 +439,20 @@ function BU::Main::Status::CheckSTAT_TIME_TXT()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU::IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
-        BU::Main::Status::ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${va_correctValues[@]}";
+    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
+        BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function BU::Main::Status::CheckSTAT_TXT_FMT()
+function BU.Main.Status.CheckSTAT_TXT_FMT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -467,15 +467,15 @@ function BU::Main::Status::CheckSTAT_TXT_FMT()
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
         ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${va_correctValues[@]}";
 
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking the "$__BU_MAIN_STAT_USER_OS" status variable's value.
 # This function is empty now, as the OS handling is still in work.
-function BU::Main::Status::CheckSTAT_USER_OS()
+function BU.Main.Status.CheckSTAT_USER_OS()
 {
     #**** Parameters ****
     local p_file=$1;    # String    - Default : NULL    - File where the current function is called.
@@ -491,10 +491,10 @@ function BU::Main::Status::CheckSTAT_USER_OS()
 }
 
 # Checking all the project's status variables values if multiple values had been modified.
-function BU::Main::Status::CheckProjectStatusVars()
+function BU.Main.Status.CheckProjectStatusVars()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
@@ -504,22 +504,22 @@ function BU::Main::Status::CheckProjectStatusVars()
 
     #**** Code ****
     # Processing first the "$__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
-    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_DEBUG           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_DEBUG_BASHX     "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_DECHO           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_ECHO            "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_ERROR           "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_INITIALIZING    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_LOG             "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_OPERATE_ROOT    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_TIME_HEADER     "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_TIME_NEWLINE    "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_TIME_TXT        "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_TXT_FMT         "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU::Main::Status::CheckSTAT_USER_OS         "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT    "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_DEBUG           "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_DEBUG_BASHX     "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_DECHO           "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_ECHO            "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_ERROR           "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_INITIALIZING    "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_LOG             "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_OPERATE_ROOT    "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_TIME_HEADER     "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_TIME_NEWLINE    "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_TIME_TXT        "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_TXT_FMT         "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_USER_OS         "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -527,7 +527,7 @@ function BU::Main::Status::CheckProjectStatusVars()
 ## CHANGING VALUES MORE EASILY
 ## DEBUG ID : changing-values-more-easily
 
-__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::changing-values-more-easily";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONSchanging-values-more-easily";
 
 # Positionnal parameters :
 #   $1  --> Any     : new value.
@@ -535,15 +535,15 @@ __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALU
 #   $3  --> Int     : line where the change was made.
 
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function BU::Main::Status::ChangeSTAT_DECHO() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU::Main::Status::CheckSTAT_DECHO "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU.Main.Status.CheckSTAT_DECHO "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
 
-## VERY IMPORTANT : DO NOT CALL ANY "BU::Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
-function BU::Main::Status::ChangeSTAT_ECHO()
+## VERY IMPORTANT : DO NOT CALL ANY "BU.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
+function BU.Main.Status.ChangeSTAT_ECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" \
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
@@ -551,7 +551,7 @@ function BU::Main::Status::ChangeSTAT_ECHO()
     local p_value=$1;           # String    - Default : NULL    - Value to be changed.
     local p_file=$2;            # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$3;          # Int       - Default : NULL    - Line where the current function is called.
-    local p_decho=${4:-true};   # String    - Default : true    - Authorization to call any "BU::Decho<...>()" function.
+    local p_decho=${4:-true};   # String    - Default : true    - Authorization to call any "BU.Decho<...>()" function.
 
     #**** Variables ****
     local v_log_file_path="$__BU_MAIN_PROJECT_LOG_FILE_PATH";   # Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
@@ -560,25 +560,25 @@ function BU::Main::Status::ChangeSTAT_ECHO()
     local v_loop_error;
 
     #*** Code ****
-    if [ "true" = "${p_value,,}" ] && BU::IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
+    if [ "true" = "${p_value,,}" ] && BU.IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
 
         # Declare an array of strings, which will store the messages
-        if BU::Main::Status::CheckStatIsLogging; then
+        if BU.Main.Status.CheckStatIsLogging; then
             declare __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
 
             # Modifying and checking the global variable's value first, before
             __BU_MAIN_STAT_ECHO="$p_value";
 
-            BU::Main::Status::CheckSTAT_ECHO "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.CheckSTAT_ECHO "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU::EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
-            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU::Newline;
+            BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Newline;
         fi
 
     elif [ 'false' = "${p_value,,}" ]; then
-        if BU::IsArrayNotEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}" && BU::Main::Status::CheckStatIsLogging; then
+        if BU.IsArrayNotEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}" && BU.Main.Status.CheckStatIsLogging; then
 
             for i in "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; do
                 echo "$i" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || \
@@ -587,24 +587,24 @@ function BU::Main::Status::ChangeSTAT_ECHO()
 
                     echo >&2;
 
-                    BU::EchoError "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
-                    BU::EchoError "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
+                    BU.EchoError "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
+                    BU.EchoError "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
                     echo >&2;
 
-                    BU::EchoError "Please check the cause of this bug" >&2;
-                    BU::EchoError "The cause may be a problem of read and / or write permission" >&2;
+                    BU.EchoError "Please check the cause of this bug" >&2;
+                    BU.EchoError "The cause may be a problem of read and / or write permission" >&2;
                     echo >&2;
 
                     __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 }
-            done; if [ "${v_loop_error,,}" = 'error' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU::EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
-            BU::Main::Headers::DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU::Newline;
+            BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
+            BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Newline;
 
             # Emptying the array of strings.
             __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
@@ -613,79 +613,79 @@ function BU::Main::Status::ChangeSTAT_ECHO()
 
     __BU_MAIN_STAT_ECHO="$p_value";
 
-    BU::Main::Status::CheckSTAT_ECHO "$p_file" "$p_lineno" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_ECHO "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Changing the "$__BU_MAIN_STAT_ERROR" status variable's value.
-function BU::Main::Status::ChangeSTAT_ERROR()
+function BU.Main.Status.ChangeSTAT_ERROR()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
     __BU_MAIN_STAT_ERROR="$1";
 
-    BU::Main::Status::CheckSTAT_ERROR "$2" "$3" || {
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+    BU.Main.Status.CheckSTAT_ERROR "$2" "$3" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
     }
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Changing the "$__BU_MAIN_STAT_INITIALIZING" status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
-function BU::Main::Status::ChangeSTAT_INITIALIZING()    {
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
+function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
-		BU::EchoWarning "WARNING : It's strongly discouraged to change the $(BU::DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU::DechoHighlightVar 'false') to $(BU::DechoHighlightVar 'true')"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.EchoWarning "WARNING : It's strongly discouraged to change the $(BU.DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.DechoHighlightVar 'false') to $(BU.DechoHighlightVar 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
-		__BU_MAIN_STAT_INITIALIZING="$1";     BU::Main::Status::CheckSTAT_INITIALIZING      "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-	fi; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function BU::Main::Status::ChangeSTAT_LOG()             { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU::Main::Status::CheckSTAT_LOG           "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU.Main.Status.CheckSTAT_LOG           "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function BU::Main::Status::ChangeSTAT_LOG_REDIRECT()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU::Main::Status::CheckSTAT_LOG_REDIRECT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU.Main.Status.CheckSTAT_LOG_REDIRECT  "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function BU::Main::Status::ChangeSTAT_OPERATE_ROOT()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU::Main::Status::CheckSTAT_OPERATE_ROOT  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU.Main.Status.CheckSTAT_OPERATE_ROOT  "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_HEADER()     { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU::Main::Status::CheckSTAT_TIME_HEADER   "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU.Main.Status.CheckSTAT_TIME_HEADER   "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_NEWLINE()    { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU::Main::Status::CheckSTAT_TIME_NEWLINE  "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU.Main.Status.CheckSTAT_TIME_NEWLINE  "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function BU::Main::Status::ChangeSTAT_TIME_TXT()        { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU::Main::Status::CheckSTAT_TIME_TXT      "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU.Main.Status.CheckSTAT_TIME_TXT      "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function BU::Main::Status::ChangeSTAT_TXT_FMT()         { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU::Main::Status::CheckSTAT_TXT_FMT       "$2" "$3" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU.Main.Status.CheckSTAT_TXT_FMT       "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # -----------------------------------------------
 
 ## EASIER BOOLEAN VALUES CHECKINGS
 ## DEBUG ID : easier-boolean-values-checkings
 
-__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::easier-boolean-values-checkings";
+__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONSeasier-boolean-values-checkings";
 
-# Checking if the "BU::Echo<...>()" functions can call the "BU::CheckProjectLogStatus()" function without provoking an infinite loop.
-function BU::Main::Status::CheckStatIsBackupEchoing() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+# Checking if the "BU.Echo<...>()" functions can call the "BU.CheckProjectLogStatus()" function without provoking an infinite loop.
+function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
-function BU::Main::Status::CheckStatIsInitializing()  { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsInitializing()  { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the log redirection mode is active.
-function BU::Main::Status::CheckStatIsLogging()       { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_LOG,,}"            = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsLogging()       { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_LOG,,}"            = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the initialization logs can be printed on the terminal.
-function BU::Main::Status::CheckStatIsPrintingInit()  { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the text formatting is allowed.
-function BU::Main::Status::CheckStatAllowFormatting() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        = 'true' ]; then BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0; else BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }

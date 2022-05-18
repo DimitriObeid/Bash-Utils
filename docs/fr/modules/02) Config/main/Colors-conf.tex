@@ -122,7 +122,7 @@
         \hline
         \textbf{Fonction} & \textbf{Fichier de définition}\\
         \hline
-        \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} & \textbf{\color{path}Status.lib}\\
+        \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -167,10 +167,10 @@
 \subsection{Fonctions d'encodage}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Decho::SetBGColor}\color{text}
+\subsubsection{BU.Main.decho.SetBGColor}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::Decho::SetBGColor}
+    \textbf{Fonction : \color{func}BU.Main.decho.SetBGColor}
 \end{justify}
 
 \setlength{\parskip}{1em}
@@ -200,7 +200,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    \textbf{\color{cond}Si} la fonction \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{true}, \textbf{\color{cond}alors} :
+    \textbf{\color{cond}Si} la fonction \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{true}, \textbf{\color{cond}alors} :
 \end{justify}
 
 \begin{itemize}
@@ -225,7 +225,7 @@
                     \setlength{\parskip}{2em}
 
                     \begin{justify}
-                        \textbf{\color{cond}Si} le \textbf{\color{path}fichier temporaire dédié au stockage du code couleur pour la couleur de fond} n'existe pas \textbf{ET} ne peut pas être créé (via la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile}), \textbf{\color{cond}alors} un message d'erreur est affiché à l'écran.
+                        \textbf{\color{cond}Si} le \textbf{\color{path}fichier temporaire dédié au stockage du code couleur pour la couleur de fond} n'existe pas \textbf{ET} ne peut pas être créé (via la fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectRelatedFile}), \textbf{\color{cond}alors} un message d'erreur est affiché à l'écran.
                     \end{justify}
 
                     \setlength{\parskip}{1em}
@@ -248,7 +248,7 @@
 \end{itemize}
 
 \begin{justify}
-    \textbf{\color{cond}Sinon, si} la fonction \textbf{\color{func}BU::Main::Status::CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{false}, \textbf{\color{cond}alors} l'exécution de la fonction est interrompue.
+    \textbf{\color{cond}Sinon, si} la fonction \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{false}, \textbf{\color{cond}alors} l'exécution de la fonction est interrompue.
 \end{justify}
 
 \begin{justify}
@@ -277,10 +277,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Decho::SetTextColor}\color{text}
+\subsubsection{BU.Main.decho.SetTextColor}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::Decho::SetTextColor}
+    \textbf{Fonction : \color{func}BU.Main.decho.SetTextColor}
 \end{justify}
 
 \begin{justify}
@@ -308,7 +308,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor}, à quelques différences près :
+    La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU.Main.decho.SetBGColor}, à quelques différences près :
     \begin{enumerate}
         \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground),
         \item le code couleur est enregistré dans un autre fichier temporaire,
@@ -344,14 +344,14 @@
 \subsection{Fonctions d'affichage de texte}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}\color{text}
+\subsubsection{BU.Main.ModConfig.Colors.PrintColorBGVarsNameSubsCmd}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}
+    \textbf{Fonction : \color{func}BU.Main.ModConfig.Colors.PrintColorBGVarsNameSubsCmd}
 \end{justify}
 
 \begin{justify}
-    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos}.
+    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos}.
 \end{justify}
 
 \begin{justify}
@@ -385,7 +385,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :} Appelez cette fonction en quatrième argument de la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos} lorsque vous créez une nouvelle variable globale de couleur, ici pour une variable globale enregistrant une substitution de commande permettant la coloration du fond.
+    \textbf{Utilisation :} Appelez cette fonction en quatrième argument de la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos} lorsque vous créez une nouvelle variable globale de couleur, ici pour une variable globale enregistrant une substitution de commande permettant la coloration du fond.
 \end{justify}
 
 % ------------
@@ -395,10 +395,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::ModConfig::Colors::PrintColorTextVarsNameSubsCmd}\color{text}
+\subsubsection{BU.Main.ModConfig.Colors.PrintColorTextVarsNameSubsCmd}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::ModConfig::Colors::PrintColorTextVarsNameSubsCmd}
+    \textbf{Fonction : \color{func}BU.Main.ModConfig.Colors.PrintColorTextVarsNameSubsCmd}
 \end{justify}
 
 % ------------
@@ -406,7 +406,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU::ModuleInit::DisplayInitGlobalVarsInfos}.
+    \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos}.
 \end{justify}
 
 \begin{justify}
@@ -432,7 +432,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Fonctionnement :} Le fonctionnement est identique à la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}, mais le message varie.
+    \textbf{Fonctionnement :} Le fonctionnement est identique à la fonction \textbf{\color{func}BU.Main.ModConfig.Colors.PrintColorBGVarsNameSubsCmd}, mais le message varie.
 \end{justify}
 
 % ------------
@@ -440,7 +440,7 @@
 \par\noindent\rule{\textwidth}{0.4pt}
 
 \begin{justify}
-    \textbf{Utilisation :} Même cas d'utilisation que pour la fonction \textbf{\color{func}BU::Main::ModConfig::Colors::PrintColorBGVarsNameSubsCmd}, mais la coloration du texte lui-même.
+    \textbf{Utilisation :} Même cas d'utilisation que pour la fonction \textbf{\color{func}BU.Main.ModConfig.Colors.PrintColorBGVarsNameSubsCmd}, mais la coloration du texte lui-même.
 \end{justify}
 
 
@@ -563,7 +563,7 @@
 \end{justify}
 
 \begin{justify}
-    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.decho.SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \begin{justify}
@@ -581,7 +581,7 @@
 \end{justify}
 
 \begin{justify}
-    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.decho.SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \end{document}

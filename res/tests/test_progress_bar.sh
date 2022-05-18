@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Display a progress bar while a task is ongoing.
-function BU::Main::PosixTerm::DisplayProgressBarOld()
+function BU.Main.PosixTermDisplayProgressBarOld()
 {
         v_cols="$(tput cols)"
 
@@ -22,7 +22,7 @@ function BU::Main::PosixTerm::DisplayProgressBarOld()
 
 
 # Display a progress bar while a task is ongoing.
-function BU::Main::PosixTerm::DisplayProgressBar()
+function BU.Main.PosixTermDisplayProgressBar()
 {
 	v_cols="$(tput cols)"
 
@@ -47,7 +47,7 @@ __end="$(tput cols)"
 
 for number in $(seq "${__start}" "${__end}"); do
 	sleep "0.1"
-	BU::Main::PosixTerm::DisplayProgressBar "${number}" "${__end}"
+	BU.Main.PosixTermDisplayProgressBar "${number}" "${__end}"
 done
 
 printf "\nDONE\n"

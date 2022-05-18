@@ -45,26 +45,26 @@ fi
 ##
 
 # Get kernel type.
-function BU::System::Kernel::GetKernelType() { uname -s; }
+function BU.SystemKernelGetKernelType() { uname -s; }
 }
 
 # Get Windows kernel type, if the script is running on WSL.
-function BU::System::Kernel::GetWindowsKernelType()
+function BU.SystemKernelGetWindowsKernelType()
 {
     return 0;
 }
 
 # Get kernel release.
-function BU::System::Kernel::GetKernelRelease() { uname -r; }
+function BU.SystemKernelGetKernelRelease() { uname -r; }
 
 # Get kernel version.
-function BU::System::Kernel::GetKernelVersion() { uname -v; }
+function BU.SystemKernelGetKernelVersion() { uname -v; }
 {
     return 0;
 }
 
 # Get Windows kernel version, if the script is running on WSL.
-function BU::System::Kernel::GetWindowsKernelVersion()
+function BU.SystemKernelGetWindowsKernelVersion()
 {
     return 0;
 }

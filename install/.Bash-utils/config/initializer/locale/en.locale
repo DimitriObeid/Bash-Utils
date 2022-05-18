@@ -32,7 +32,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s », FUNCTION « %s
 # Writing the file name and the line number where a fatal error occured.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS ERROR";
 
-# Writing the beginning of the text of any text that must be printed with the "BU::ModuleInit::PrintLogError" function.
+# Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError" function.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # -----------------------------------------------
@@ -64,7 +64,7 @@ fi
 
 ## SUB-SECTION : DEFINING GLOBAL VARIABLES
 
-## FUNCTION : "BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+## FUNCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
 # Note: This variable is also used in the main module configuration files.
 __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : Unable to define the path to store in the « %s » global variable\n";
@@ -87,7 +87,7 @@ __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING TH
 
 ## SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-## FUNCTION : "BU::ModuleInit::AskPrintLog()"
+## FUNCTION : "BU.ModuleInit.AskPrintLog()"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array) ? (yes / no)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array, please type « yes » ou « Y » (no case sensibility)";
@@ -96,7 +96,7 @@ __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="The initializer script's log file
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::DisplayInitializedGlobalVarsInfos()"
+## FUNCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
 # Initialization message.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALIZING THE GLOBAL VARIABLES";
@@ -147,7 +147,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="T
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::DisplayInitGlobalVarsInfos()"
+## FUNCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
 # List of different messages, used to better measure the space between the text and the colon.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="File  : %s";
@@ -217,26 +217,26 @@ unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::Msg()"
+## FUNCTION : "BU.ModuleInit.Msg()"
 
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : THE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE « %s » IS NOT SUPPORTED\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by « --log-display », « --log-shut », « --log-shut-display » or an empty value where you (re)defined the value.";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::MsgAbort()"
+## FUNCTION : "BU.ModuleInit.MsgAbort()"
 
 __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Aborting the module initialization script's execution";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::MsgAbort()"
+## FUNCTION : "BU.ModuleInit.MsgAbort()"
 
 __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Press any key to";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::PrintLog"
+## FUNCTION : "BU.ModuleInit.PrintLog"
 
 # Title.
 __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
@@ -259,7 +259,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="END OF THE INITIALIZATION LOG
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::PrintLogError"
+## FUNCTION : "BU.ModuleInit.PrintLogError"
 
 __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERROR ] DESCRIPTION : %s | LINE : %s";
 
@@ -269,7 +269,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERROR ] DESCRIPTION : %s | 
 
 ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
-## FUNCTION : "BU::ModuleInit::CheckPath()"
+## FUNCTION : "BU.ModuleInit.CheckPath()"
 
 # Missing file path.
 __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="No file path";
@@ -287,19 +287,19 @@ __BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="$__BU_MODULE_INIT_MSG__CURRENT_
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::FindPath()"
+## FUNCTION : "BU.ModuleInit.FindPath()"
 
 __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : WARNING : UNABLE TO FIND THIS PATH";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::GetModuleName()"
+## FUNCTION : "BU.ModuleInit.GetModuleName()"
 
 __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Unable to get the module's name from the parent directory name";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::ListInstalledModules()"
+## FUNCTION : "BU.ModuleInit.ListInstalledModules()"
 
 # Unable to create the temporary directory.
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
@@ -322,7 +322,7 @@ __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODU
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::SourcingFailure()"
+## FUNCTION : "BU.ModuleInit.SourcingFailure()"
 
 __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
 
@@ -332,7 +332,7 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-## FUNCTION : "BU::ModuleInit::Usage()"
+## FUNCTION : "BU.ModuleInit.Usage()"
 
 # List of different messages, used to better measure the space between the text and the colon.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
@@ -375,7 +375,7 @@ unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize()"
+## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
 # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : « module » value's argument « %s » passed twice when calling the « BashUtils_InitModules » function";
@@ -393,13 +393,13 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 
 # --------
 
-## FONCTION : "BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues()"
+## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Warning : the supported values for the « %s » option are : %s";
 
 # --------
 
-## FUNCTION : "BU::ModuleInit::ProcessFirstModuleParameters()"
+## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
 # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
@@ -529,8 +529,8 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 
 ## FILE : "Colors.conf"
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU::Main::Decho::SetTextColor() » function in order to color the text with the defined « %s » color's code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.decho.SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.decho.SetTextColor() » function in order to color the text with the defined « %s » color's code";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
 
 # --------

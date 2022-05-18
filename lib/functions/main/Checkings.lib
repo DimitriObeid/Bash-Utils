@@ -41,59 +41,59 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES CHECKINGS
-#### DEBUG ID : checkings::variable-values-checkings
+#### DEBUG ID : Checkings.variable-values-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="Checkings.variable-values-checkings";
 
 ## ARRAYS CHECKINGS
 ## DEBUG ID : array-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::array-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.array-checkings";
 
 # Checking if the variable is an array.
-function BU::IsArray()
+function BU.IsArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
 
     if [[ -n ${1} ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking if an array in empty.
-function BU::IsArrayEmpty()
+function BU.IsArrayEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
 
     #**** Parameters ****
     local arr=("$@")
 
     #**** Code ****
     if [ ${#arr[@]} -eq 0 ]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking if an array is not empty.
-function BU::IsArrayNotEmpty()
+function BU.IsArrayNotEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS";
 
     #**** Parameters ****
     local arr=("$@")
 
     #**** Code ****
     if [ ${#arr[@]} -gt 0 ]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
@@ -102,11 +102,11 @@ function BU::IsArrayNotEmpty()
 ## DATE FORMAT
 ## DEBUG ID : date-format
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::date-format";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.date-format";
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
-function BU::IsDateHMS() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
+function BU.IsDateHMS() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats :
 #   - YYYY-MM-DD
@@ -115,7 +115,7 @@ function BU::IsDateHMS() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}"
 #   - DD/MM/YYYY
 #   - YYYYMMDD
 #   - DDMMYYYY
-function BU::IsDateYMD() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || return 1; return 0; }
+function BU.IsDateYMD() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT"; [[ $(date "+%d-%m-%Y" -d "$1" > /dev/null) ]] || return 1; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats.
 #   - YYYY-MM-DD hh:mm:ss
@@ -124,39 +124,39 @@ function BU::IsDateYMD() { BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}"
 #   - DD/MM/YYYY hh:mm:ss
 #   - YYYYMMDD hh:mm:ss
 #   - DDMMYYYY hh:mm:ss
-function BU::IsDateYMD_HMS()
+function BU.IsDateYMD_HMS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT";
 
     #**** Variables ****
     local v_date; v_date="$(echo "$1" | rev | cut -d ' ' -f2- | rev)"; # Getting the year, the month and the day.
     local v_hour; v_hour="$(echo "$1" | rev | cut -d ' ' -f 1 | rev)"; # Getting the hour.
 
     #**** Code ****
-    [[ $(BU::IsDateYMD "$v_date" > /dev/null) ]] || \
+    [[ $(BU.IsDateYMD "$v_date" > /dev/null) ]] || \
     {
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
-        BU::EchoWarning "Please use one of these formats :";
-        BU::EchoWarning "YYYY-MM-DD";
-        BU::EchoWarning "DD-MM-YYYY";
-        BU::EchoWarning "YYYY/MM/DD";
-        BU::EchoWarning "DD/MM/YYYY";
-        BU::Newline;
+        BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
+        BU.EchoWarning "Please use one of these formats :";
+        BU.EchoWarning "YYYY-MM-DD";
+        BU.EchoWarning "DD-MM-YYYY";
+        BU.EchoWarning "YYYY/MM/DD";
+        BU.EchoWarning "DD/MM/YYYY";
+        BU.Newline;
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     };
 
     date "+%H:%M:%S" -d "$v_hour" || \
     {
-        BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the hour is not formatted in a correct timestamp";
-        BU::EchoWarning "Please use only this format : hh:mm:ss";
-        BU::Newline;
+        BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}")() --> Warning : the hour is not formatted in a correct timestamp";
+        BU.EchoWarning "Please use only this format : hh:mm:ss";
+        BU.Newline;
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     };
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -164,83 +164,83 @@ function BU::IsDateYMD_HMS()
 ## NUMBER VALUES
 ## DEBUG ID : number-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::number-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.number-values";
 
 # Checking floating value.
-function BU::IsFloat()
+function BU.IsFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
     if [[ "$1" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking negative only floating value.
-function BU::IsNegativeFloat()
+function BU.IsNegativeFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-    if BU::IsFloat "$1" && (( 1 < 0 )); then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    if BU.IsFloat "$1" && (( 1 < 0 )); then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking positive only floating value.
-function BU::IsPositiveFloat()
+function BU.IsPositiveFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-    if BU::IsFloat "$1" && (( 1 >= 0 )); then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    if BU.IsFloat "$1" && (( 1 >= 0 )); then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking integer value.
-function BU::IsInt()
+function BU.IsInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
     if [[ "$1" =~ ^[\-0-9]+$ ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking negative only integer value.
-function BU::IsNegativeInt()
+function BU.IsNegativeInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-	if BU::IsInt "$1" && (( 1 < 0 )); then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+	if BU.IsInt "$1" && (( 1 < 0 )); then
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
 # Checking positive only integer value.
-function BU::IsPositiveInt()
+function BU.IsPositiveInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-	if BU::IsInt "$1" && (( 1 >= 0 )); then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+	if BU.IsInt "$1" && (( 1 >= 0 )); then
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
@@ -249,92 +249,92 @@ function BU::IsPositiveInt()
 ## CHARACTERS AND STRING VALUES
 ## DEBUG ID : characters-and-string-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::characters-and-string-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
-function BU::IsAlphaChar()
+function BU.IsAlphaChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
 	if [[ "$1" = [a-zA-Z] ]]; then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
 # Checking if the value is an alphabetic string (not any number allowed)
-function BU::IsAlphaString()
+function BU.IsAlphaString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
     if [[ "$1" = [^a-zA-Z\ ] ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
-function BU::IsAlphaStringOnly()
+function BU.IsAlphaStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
 	if [ "${#1}" -lt 2 ]; then
     	echo "Not a string"; return 1;
 
 	else
 		if [[ "$1" = [^a-zA-Z\ ] ]]; then
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
-    		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 		fi
 	fi
 }
 
 # Checking if the value is a character.
-function BU::IsAlphaNumChar()
+function BU.IsAlphaNumChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
 	if [[ "$1" = [a-zA-Z0-9] ]]; then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
 # Checking if the value is an alphanumeric string.
-function BU::IsAlphaNumString()
+function BU.IsAlphaNumString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
     if [[ "$1" =~ [^a-zA-Z0-9\ ] ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters).
-function BU::IsAlphaNumStringOnly()
+function BU.IsAlphaNumStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
 	if [ "${#1}" -lt 2 ]; then
     	echo "Not a string"; return 1;
 
 	else
 		if [[ "$1" = [^a-zA-Z0-9\ ] ]]; then
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
-    		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 		fi
 	fi
 }
@@ -344,18 +344,18 @@ function BU::IsAlphaNumStringOnly()
 ## OTHER VARIABLES CHECKINGS
 ## DEBUG ID : other-variables-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::other-variables-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.other-variables-checkings";
 
 # Checking if the variable is an array.
-function BU::IsArray()
+function BU.IsArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS";
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS";
 
     if [[ -n ${1} ]]; then
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
@@ -366,31 +366,31 @@ function BU::IsArray()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### DIFFERENT CHECKINGS
-#### DEBUG ID : checkings::different-checkings
+#### DEBUG ID : Checkings.different-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="Checkings.different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
 ## DEBUG ID : checking-fort-identifiants
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::checking-fort-identifiants";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_Checkings.checking-fort-identifiants";
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
 # Required functions and files :
-#   - BU::Main::Errors::HandleErrors      --> From this file.
-function BU::Main::Checkings::CheckRootEUID()
+#   - BU.Main.Errors.HandleErrors      --> From this file.
+function BU.Main.Checkings.CheckRootEUID()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";
 
     if [ "$EUID" -ne 0 ]; then
-        BU::Main::Errors::HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
+        BU.Main.Errors.HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
             "EUID = 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 
@@ -399,25 +399,25 @@ function BU::Main::Checkings::CheckRootEUID()
 ## BASIC HARDWARE CHECKINGS
 ## DEBUG ID : basic-hardware-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::basic-hardware-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_Checkings.basic-hardware-checkings";
 
 # Check if hard drive is full.
-function BU::Main::Checkings::CheckDiskUsedSpace()
+function BU.Main.Checkings.CheckDiskUsedSpace()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS";
 
 	#**** Parameters ****
     local p_fileFS=$1;          # String    - Default : NULL    - Target file's file system.
     local p_dirfile=$2;         # String    - Default : NULL    - Create the file with the directory if not exists, then erase it, in order to get the target file system.
-    local p_authorization=$3;   # String    - Default : NULL    - Authorization to call the "BU::Main::Errors::HandleErrors()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and that "BU::__/Decho()" functions are called in the "BU::Main::Errors::HandleErrors()" function). Set this value to "false" to forbid this call.
+    local p_authorization=$3;   # String    - Default : NULL    - Authorization to call the "BU.Main.Errors.HandleErrors()" function (since this function is called in the "BU.Main.decho.SetBG/TextColor()" functions, and that "BU.__/Decho()" functions are called in the "BU.Main.Errors.HandleErrors()" function). Set this value to "false" to forbid this call.
 
     #**** Code ****
 
-    # The function "BU::Main::Checkings::CheckProjectLogStatus()" function is called in each "Echo<...>()" functions if the "$__BU_MAIN_STAT_ECHO" status global
-    # variable's value is set to 'false', and the current function is called at the beginning of the "BU::Main::Checkings::CheckProjectLogStatus()" function.
+    # The function "BU.Main.Checkings.CheckProjectLogStatus()" function is called in each "Echo<...>()" functions if the "$__BU_MAIN_STAT_ECHO" status global
+    # variable's value is set to 'false', and the current function is called at the beginning of the "BU.Main.Checkings.CheckProjectLogStatus()" function.
 
     # Changing the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in order to avoid an infinite
     # loop during the call of any function from the "Filesystem.lib" file, which call an "Echo<...>()" function.
@@ -425,16 +425,16 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
     if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
         local v_echoBackup="$__BU_MAIN_STAT_ECHO";
 
-        # There is no need to call the associated function "BU::Main::Status::ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
+        # There is no need to call the associated function "BU.Main.Status.ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
         __BU_MAIN_STAT_ECHO="true";
     fi
 
     # If the framework is still initializing when an error occurs.
-    BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
+    BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
     if [ "${p_dirfile,,}" = 'create' ]; then
-            BU::Main::Filesystem::IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
-    else    BU::Main::Filesystem::IsPartitionFull "$p_fileFS"; fi
+            BU.Main.Filesystem.IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
+    else    BU.Main.Filesystem.IsPartitionFull "$p_fileFS"; fi
 
     if [ "$IsPartitionFullReturnCode" -eq 0 ]; then
 
@@ -443,26 +443,26 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
             __BU_MAIN_STAT_ECHO="$v_echoBackup";
         fi
 
-        [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+        [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     elif [ "$IsPartitionFullReturnCode" = "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
-        BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
+        BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
-            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+            BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a filepath in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
-                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a path in order to check if the target file system is full or not" >&2;
@@ -471,27 +471,27 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
             echo "Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" >&2;
             echo >&2;
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
     elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
-        BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
+        BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
-            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+            BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a valid path in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
-                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a valid path in order to check if the target file system is full or not" >&2;
@@ -500,38 +500,38 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
             echo "Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" >&2;
             echo >&2;
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
     elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
-        BU::ModuleInit::SetInitErrorMsg && local VCheckDiskUsedSpace='1';
+        BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU::Main::Status::ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
-            BU::Main::Errors::HandleErrors "$IsPartitionFullReturnCode" \
+            BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file [/|\] Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file [/|\] Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
         elif [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" >&2;
-            echo "Please empty this file system (mounted on the « $(BU::Main::Filesystem::GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file" >&2;
+            echo "Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file" >&2;
             echo >&2;
 
             echo "Since the file system's disk space is full, the script has to be exited" >&2;
             echo >&2;
 
-            [ -n "$VCheckDiskUsedSpace" ] && BU::ModuleInit::UnsetInitErrorMsg;
+            [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; BU::IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
     fi
 }
@@ -543,45 +543,45 @@ function BU::Main::Checkings::CheckDiskUsedSpace()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PATHS CHECKINGS
-#### DEBUG ID : checkings::paths-checkings
+#### DEBUG ID : Checkings.paths-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="Checkings.paths-checkings";
 
 ## DIRECTORIES PATHS CHECKINGS
 ## DEBUG ID : directories-paths-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::directories-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_Checkings.directories-paths-checkings";
 
-# Checking for an existent directory path (for the "BU::Main::Errors::HandleErrors()" function mainly).
-function BU::Main::Checkings::CheckDirPathExists()
+# Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
+function BU.Main.Checkings.CheckDirPathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS";
 
     #**** Parameters ****
     local p_path=$1;                    # String    - Default : NULL    - Path of the (in)existent directory.
-    local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU::DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::Decho<...>()" functions). Set this value to "false" to forbid this call.
+    local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.DechoHighlightPath()" function (since this function is called in the "BU.Main.decho.SetBG/TextColor()" functions, and they are called in the "BU.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
     if [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
-        BU::DechoHighlightPath "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
+        BU.DechoHighlightPath "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
     elif [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
-        printf "<missing directory path>"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        printf "<missing directory path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Checking if a directory was successfully created.
-function BU::Main::Checkings::CheckDirPathWasCreated()
+function BU.Main.Checkings.CheckDirPathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS";
 
@@ -590,9 +590,9 @@ function BU::Main::Checkings::CheckDirPathWasCreated()
 
 	#**** Code ****
 	if [ -d "$p_path" ]; then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
@@ -601,40 +601,40 @@ function BU::Main::Checkings::CheckDirPathWasCreated()
 ## FILES PATHS CHECKINGS
 ## DEBUG ID : files-path-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::files-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_Checkings.files-paths-checkings";
 
-# Checking for an existent file path (for the "BU::Main::Errors::HandleErrors()" function mainly).
-function BU::Main::Checkings::CheckFilePathExists()
+# Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
+function BU.Main.Checkings.CheckFilePathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
     #**** Parameters ****
     local p_path=$1;                    # String    - Default : NULL    - Path of the (in)existent file.
-    local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU::DechoHighlightPath()" function (since this function is called in the "BU::Main::Decho::SetBG/TextColor()" functions, and they are called in the "BU::Decho<...>()" functions). Set this value to "false" to forbid this call.
+    local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.DechoHighlightPath()" function (since this function is called in the "BU.Main.decho.SetBG/TextColor()" functions, and they are called in the "BU.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
     if [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
-        BU::DechoHighlightPath "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
+        BU.DechoHighlightPath "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
     elif [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
-        printf "<missing file path>"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+        printf "<missing file path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
     return 0;
 }
 
 # Checking if a file was successfully created.
-function BU::Main::Checkings::CheckFilePathWasCreated()
+function BU.Main.Checkings.CheckFilePathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
@@ -643,64 +643,64 @@ function BU::Main::Checkings::CheckFilePathWasCreated()
 
 	#**** Code ****
 	if [ -f "$p_path" ]; then
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	fi
 }
 
 # Checking for "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
 # Required functions and files :
-function BU::Main::Checkings::CheckProjectLogPath()
+function BU.Main.Checkings.CheckProjectLogPath()
 {
     # If the framework is still initializing when an error occurs.
-    BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogPath='1';
+    BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogPath='1';
 
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
-    # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU::CheckProjectLogStatus()" function
-    # (the only one where the "BU::Main::Checkings::CheckProjectLogPath()" function can be called), it's safe to call an "BU::Echo<...>()" function, the "BU::Main::Errors::HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
+    # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.CheckProjectLogStatus()" function
+    # (the only one where the "BU.Main.Checkings.CheckProjectLogPath()" function can be called), it's safe to call an "BU.Echo<...>()" function, the "BU.Main.Errors.HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
     if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-		BU::EchoWarning "$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : no existing log file";
-		BU::EchoNewstep "Creating a log file for the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project";
+		BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : no existing log file";
+		BU.EchoNewstep "Creating a log file for the $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") project";
 
-		if ! BU::Main::Files::CreateProjectLogFile; then
-			[ -n "$VCheckProjectLogPath" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		if ! BU.Main.Files.CreateProjectLogFile; then
+			[ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 		else
-			[ -n "$VCheckProjectLogPath" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			[ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 
-    # Remember : since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU::CheckProjectLogStatus()" function
-    # (the only one where the "BU::Main::Checkings::CheckProjectLogPath()" function can be called), it's safe to call an "BU::Echo<...>()" function, the "BU::Main::Errors::HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
+    # Remember : since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.CheckProjectLogStatus()" function
+    # (the only one where the "BU.Main.Checkings.CheckProjectLogPath()" function can be called), it's safe to call an "BU.Echo<...>()" function, the "BU.Main.Errors.HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
      elif [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
          echo "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
-         BU::Main::Errors::HandleErrors "1" "BAD PATH PROVIDED INTO THE $(BU::DechoHighlightPath "__BU_MAIN_PROJECT_LOG_FILE_PATH") VARIABLE" \
+         BU.Main.Errors.HandleErrors "1" "BAD PATH PROVIDED INTO THE $(BU.DechoHighlightPath "__BU_MAIN_PROJECT_LOG_FILE_PATH") VARIABLE" \
              "Please correct the path passed as argument, or redefine the variable if its value was modified somewhere" \
              "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
- 		[ -n "$VCheckProjectLogPath" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+ 		[ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     else
-        [ -n "$VCheckProjectLogPath" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        [ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 
 # Accepted arguments : 'nodate', '<an empty string>'
-function BU::CheckProjectLogStatus()
+function BU.CheckProjectLogStatus()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
 
     #**** Parameters ****
     local p_string=$1;      # Any       - Text to display.
@@ -711,12 +711,12 @@ function BU::CheckProjectLogStatus()
 
     #**** Variables ****
 
-	# WARNING : DO NOT call any "BU::Echo<...>()" function from the "main/Echo.lib" file, as they all call the "BU::CheckProjectLogStatus()" function.
+	# WARNING : DO NOT call any "BU.Echo<...>()" function from the "main/Echo.lib" file, as they all call the "BU.CheckProjectLogStatus()" function.
 
-	# Also, DO NOT call any "Decho<...>()" function, as they call the "BU::Main::Errors::HandleErrors()" function in case of a bad value passed as array of argument,
-	# which also calls this same "BU::CheckProjectLogStatus()" function.
+	# Also, DO NOT call any "Decho<...>()" function, as they call the "BU.Main.Errors.HandleErrors()" function in case of a bad value passed as array of argument,
+	# which also calls this same "BU.CheckProjectLogStatus()" function.
 
-    # If you need to call a function here, please verify if it doesn't calls the "BU::CheckProjectLogStatus()" function,
+    # If you need to call a function here, please verify if it doesn't calls the "BU.CheckProjectLogStatus()" function,
     # nor any function called by the function you want to add, or else set the "$__BU_MAIN_STAT_ECHO" status variable value to "true" BEFORE calling the wanted function.
 
     # -------------------------------------------
@@ -726,45 +726,45 @@ function BU::CheckProjectLogStatus()
     # Also disabling a shellcheck warning, which is a false positive (saying that "$__BU_MAIN_STAT_DECHO" may not be assigned, but "$__BU_MAIN_STAT_ECHO" is (both of them are valid and working differently)).
 
     # shellcheck disable=SC2153
-    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU::Main::Status::ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU.Main.Status.ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
     }
 
-    # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU::CheckProjectLogStatus()" function or any other function that calls it might be called.
-    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU::Main::Status::ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-        local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+    # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.CheckProjectLogStatus()" function or any other function that calls it might be called.
+    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
     }
 
     local v_redirectionError;
-        v_redirectionError="$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> ";
+        v_redirectionError="$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.\nRedirection option --> ";
 
     local v_warning_array_value;
-        v_warning_array_value="$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU::DechoHighlightPath "${BASH_SOURCE[0]}"), function $(BU::DechoHighlightFunction "${FUNCNAME[0]}()").\nValue --> $(BU::DechoHighlight "$val")\nLine -->";
+        v_warning_array_value="$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU.DechoHighlightPath "${BASH_SOURCE[0]}"), function $(BU.DechoHighlightFunction "${FUNCNAME[0]}()").\nValue --> $(BU.DechoHighlight "$val")\nLine -->";
 
     #**** Code ****
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
     if [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
-        BU::Main::Checkings::CheckProjectLogPath || \
+        BU.Main.Checkings.CheckProjectLogPath || \
         {
             local returnCode="$?";
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is stopped.
-            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is stopped.
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is stopped.
-            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is stopped.
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
             return "$returnCode";
         };
     fi
 
-    BU::Main::Status::CheckSTAT_LOG             "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU::Main::Status::CheckSTAT_LOG_REDIRECT    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU::Main::Status::CheckSTAT_TIME_TXT        "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_LOG             "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_TIME_TXT        "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
@@ -773,13 +773,13 @@ function BU::CheckProjectLogStatus()
         if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
 
             # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU::Main::Status::ChangeSTAT_TIME_HEADER "0"    || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU.Main.Status.ChangeSTAT_TIME_HEADER "0"    || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Setting the "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU::Main::Status::ChangeSTAT_TIME_NEWLINE "0"      || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU.Main.Status.ChangeSTAT_TIME_NEWLINE "0"      || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Setting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU::Main::Status::ChangeSTAT_TIME_TXT "0"             || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU.Main.Status.ChangeSTAT_TIME_TXT "0"             || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -790,17 +790,17 @@ function BU::CheckProjectLogStatus()
                 if [ "${val,,}" = 'nodate' ]; then
                     case "${p_option,,}" in
                         '-n' | 'n')
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "${p_string#* ] }" 'n';
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "${p_string#* ] }" 'n';
                             else
-                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?";  BU::Newline >&2; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?";  BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "${p_string#* ] }";
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "${p_string#* ] }";
                             else
-                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -809,17 +809,17 @@ function BU::CheckProjectLogStatus()
                 elif [ -z "$val" ]; then
                     case "${p_option,,}" in
                         '-n' | 'n')
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
                             else
-                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                             else
-                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -827,49 +827,49 @@ function BU::CheckProjectLogStatus()
                 # "for" loop (for val in "${pa_extraArgs[@]}"; do) is still running (for the "log" option)).
                 else
                     # If the framework is still initializing when an error occurs.
-                    BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1';
+                    BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1';
 
                     case "${p_option,,}" in
                         '-n' | 'n')
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
 
-                                # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU::CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline;
+                                # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU.CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline;
 							else
-                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-							fi; BU::Newline;
+                                echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+							fi; BU.Newline;
                         ;;
                         '' | *)
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "log")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "log")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
 
-                    [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg;
+                    [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-
-            # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_HEADER    "$v_stat_time_header"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+
+            # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
+            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-            BU::Main::Status::ChangeSTAT_TIME_TXT       "$v_stat_time_txt"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -885,17 +885,17 @@ function BU::CheckProjectLogStatus()
                 if [ "${val,,}" = 'nodate' ]; then
                     case "${p_option,,}" in
                         '-n' | 'n')
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "${p_string#* ] }" 'n';
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "${p_string#* ] }" 'n';
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "${p_string#* ] }";
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "${p_string#* ] }";
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -904,19 +904,19 @@ function BU::CheckProjectLogStatus()
                 elif [ -z "$val" ]; then
                     case "${p_option,,}" in
                     '-n' | 'n')
-                        if BU::Main::Status::CheckStatIsInitializing; then
-                            BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
+                        if BU.Main.Status.CheckStatIsInitializing; then
+                            BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
                         else
                             echo -ne "$p_string";
-                            echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                            echo -ne "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     '' | *)
-                        if BU::Main::Status::CheckStatIsInitializing; then
-                            BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
+                        if BU.Main.Status.CheckStatIsInitializing; then
+                            BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                         else
                             echo -e "$p_string";
-                            echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::ModuleInit::SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                            echo -e "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     esac
@@ -926,36 +926,36 @@ function BU::CheckProjectLogStatus()
                 else
                     case "${p_option,,}" in
                         '-n' | 'n')
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n'
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
 							else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
-							fi; BU::Newline;
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+							fi; BU.Newline;
                         ;;
                         '' | *)
-                            if BU::Main::Status::CheckStatIsInitializing; then
-                                BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                            if BU.Main.Status.CheckStatIsInitializing; then
+                                BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string"
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
-                                BU::EchoWarning "$v_warning_array_value $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU::Newline >&2; BU::EchoError "$v_redirectionError $(BU::DechoHighlightVar "tee")\nLine --> $(BU::DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU::Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.EchoWarning "$v_warning_array_value $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.DechoHighlightVar "tee")\nLine --> $(BU.DechoHighlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
 
-                    [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg;
+                    [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU::ModuleInit::UnsetInitErrorMsg; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-			BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			return 0;
 
@@ -963,15 +963,15 @@ function BU::CheckProjectLogStatus()
         else
             case "${p_option,,}" in
                 '-n' | 'n')
-                    if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string";
+                    if BU.Main.Status.CheckStatIsInitializing; then
+                        BU.ModuleInit.Msg "$p_string";
                     else
                         echo -ne "$p_string";
                     fi
                 ;;
                 '' | *)
-                    if BU::Main::Status::CheckStatIsInitializing; then
-                        BU::ModuleInit::Msg "$p_string";
+                    if BU.Main.Status.CheckStatIsInitializing; then
+                        BU.ModuleInit.Msg "$p_string";
                     else
                         echo -e "$p_string";
                     fi
@@ -980,11 +980,11 @@ function BU::CheckProjectLogStatus()
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-            BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -994,15 +994,15 @@ function BU::CheckProjectLogStatus()
     else
         case "${p_option,,}" in
             '-n' | 'n')
-                if BU::Main::Status::CheckStatIsInitializing; then
-                    BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
+                if BU.Main.Status.CheckStatIsInitializing; then
+                    BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string" 'n';
                 else
                     echo -ne "$p_string";
                 fi
                 ;;
             '' | *)
-                if BU::Main::Status::CheckStatIsInitializing; then
-                    BU::ModuleInit::Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
+                if BU.Main.Status.CheckStatIsInitializing; then
+                    BU.ModuleInit.Msg "$__BU_MAIN_TIME_DATE_DISPLAY $p_string";
                 else
                     echo -e "$p_string";
                 fi
@@ -1011,29 +1011,29 @@ function BU::CheckProjectLogStatus()
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-        # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU::CheckProjectLogStatus()" function's execution is over.
-        BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+        BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-		BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		return 0;
 	fi
 
-	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main::Status::ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU::CheckProjectLogStatus()" function's execution is over.
-	BU::Main::Status::ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-	BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Check project related file presence, or create this file.
-function BU::Main::Checkings::CheckProjectRelatedFile()
+function BU.Main.Checkings.CheckProjectRelatedFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
@@ -1048,10 +1048,10 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU::Main::Checkings::CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
 	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-        if ! BU::Main::Args__Checkings::CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
     fi
 
 	if [ "$p_type" = 'f' ]; then
@@ -1059,73 +1059,73 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 			if [ -s "$v_path" ]; then
 				true > "$v_path" || {
                     if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-                        BU::Main::Errors::HandleSmallErrors 'E' \
-                            "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
+                        BU.Main.Errors.HandleSmallErrors 'E' \
+                            "$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                     else
-                        BU::EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
-                        BU::Newline;
+                        BU.EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
+                        BU.Newline;
                     fi
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 }
 			fi
 
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
 			if [ ! -d "$p_parent" ]; then
                 mkdir -p "$p_parent" || {
                     local returnCode="$?";
 
                     if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-                        BU::Main::Errors::HandleSmallErrors 'E' \
-                            "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU::Main::Checkings::CheckDirPathExists "$p_parent" 'true')" 'E';
+                        BU.Main.Errors.HandleSmallErrors 'E' \
+                            "$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU.Main.Checkings.CheckDirPathExists "$p_parent" 'true')" 'E';
                     else
-                        BU::EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
-                        BU::Newline;
+                        BU.EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
+                        BU.Newline;
                     fi
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
                 }
 
-				BU::Main::Checkings::CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+				BU.Main.Checkings.CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
 			touch "$v_path" || {
                 local returnCode="$?";
 
                 if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-                    BU::Main::Errors::HandleSmallErrors 'E' \
-                        "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU::Main::Checkings::CheckFilePathExists "$v_path" 'true')" 'E';
+                    BU.Main.Errors.HandleSmallErrors 'E' \
+                        "$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                 else
-                    BU::EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
-                    BU::Newline;
+                    BU.EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
+                    BU.Newline;
                 fi
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
 
-			BU::Main::Checkings::CheckFilePathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; return 0;
+			BU.Main.Checkings.CheckFilePathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; return 0;
 		fi
 
     elif [ "$p_type" = 'd' ]; then
 		if [ -d "$v_path" ]; then
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
 			mkdir -p "$v_path" || {
                 local returnCode="$?";
 
                 if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-                    BU::Main::Errors::HandleSmallErrors 'E' \
-                        "$(BU::DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU::Main::Checkings::CheckDirPathExists "$v_path" 'true')" 'E';
+                    BU.Main.Errors.HandleSmallErrors 'E' \
+                        "$(BU.DechoHighlightFunction "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU.Main.Checkings.CheckDirPathExists "$v_path" 'true')" 'E';
                 else
-                    BU::EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's folder --> $v_path";
-                    BU::Newline;
+                    BU.EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's folder --> $v_path";
+                    BU.Newline;
                 fi
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
 
-			BU::Main::Checkings::CheckDirPathWasCreated "$v_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Checkings.CheckDirPathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
     fi
 }
@@ -1137,23 +1137,23 @@ function BU::Main::Checkings::CheckProjectRelatedFile()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT CHECKINGS
-#### DEBUG ID : checkings::text-checkings
+#### DEBUG ID : Checkings.text-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="checkings::text-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings.text-checkings";
 
 ## FORMATTING CHECKINGS
 ## DEBUG ID : formatting-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS::formatting-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_Checkings.formatting-checkings";
 
 # Checking if the project's color code file exists or not.
 
 # WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER !!!
-function BU::Main::Checkings::CheckDecho()
+function BU.Main.Checkings.CheckDecho()
 {
     #**** Code ****
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
 
@@ -1163,37 +1163,37 @@ function BU::Main::Checkings::CheckDecho()
     else
         # Creating the "fgcolors.tmp" (text color) file in case it doesn't exists.
         if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then
-            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" 'f'; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") file" 'E' 'CPLS'; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+            if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" 'f'; then
+                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH") file" 'E' 'CPLS'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
         fi
 
         # Creating the "bgcolors.tmp" (background color) file in case it doesn't exists.
         if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
-            if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
-                BU::Main::Errors::HandleSmallErrors 'E' "Unable to create the $(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH") file" 'E' 'CPLS'; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+            if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
+                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH") file" 'E' 'CPLS'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
         fi
 
         if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" = '' ]; then
             echo "$__BU_MAIN_COLOR_TXT_RESET" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || \
             {
-                # It's better to call the "BU::EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
-                # It's also better to not call the "BU::Main::Errors::HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
-                BU::EchoMsg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' '';
+                # It's better to call the "BU.EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
+                # It's also better to not call the "BU.Main.Errors.HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
+                BU.EchoMsg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' '';
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             }
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 	fi
 }
 
 # Checking if the "$__BU_MAIN_STAT_TXT_FMT" status value is set to "true".
-function BU::Main::Checkings::CheckTextFormat()
+function BU.Main.Checkings.CheckTextFormat()
 {
     #**** Parameters ****
     #   $1  -> "tput" command's text formatting option.
@@ -1201,7 +1201,7 @@ function BU::Main::Checkings::CheckTextFormat()
 
     #**** Code ****
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
 
@@ -1212,20 +1212,20 @@ function BU::Main::Checkings::CheckTextFormat()
 				# Formatting text with the tput command or directly with the backslash escapes.
 				tput "$1" || echo -ne "\e[$2m";	# If the "tput" command fails, then the text is encoded with ANSI control sequences.
 
-				BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
-				echo -ne "\e[$2m"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+				echo -ne "\e[$2m"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
         # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence.
         else
             echo -ne "\e[$2m";
 
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 
     else
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 

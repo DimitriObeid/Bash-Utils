@@ -41,23 +41,23 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CONVERSIONS
-#### DEBUG ID : basicmaths::conversions
+#### DEBUG ID : basicmathsconversions
 
-__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
+__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmathsconversions";
 
 ## NUMERIC CONVERSIONS
 ## DEBUG ID : numeric-conversions
 
-__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS::numeric-conversions";
+__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONSnumeric-conversions";
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
 # Initial source of this AWK script (since it's not mine and I added more informations as comments) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
-function BU::Main::BasicMaths::BytesToHuman()
+function BU.Main.BasicMathsBytesToHuman()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS" \
         "$__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS";
 
@@ -91,15 +91,15 @@ function BU::Main::BasicMaths::BytesToHuman()
       }
       BEGIN{print human(bytes, pad, base)}')
 
-    BU::EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
+    BU.EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
     return 0;
 }
 
 # Negative number (float or int) to positive number (float or int).
-function BU::Main::BasicMaths::NegativeToPositive()
+function BU.Main.BasicMathsNegativeToPositive()
 {
     #**** Parameters ****
     local x=$1;         # Number    - Default : NULL    - Value to convert.
@@ -111,7 +111,7 @@ function BU::Main::BasicMaths::NegativeToPositive()
 }
 
 # Positive number (float or int) to negative number (float or int).
-function BU::Main::BasicMaths::PositiveToNegative()
+function BU.Main.BasicMathsPositiveToNegative()
 {
     #**** Parameters ****
     local x=$1;         # Number    - Default : NULL    - Value to convert.

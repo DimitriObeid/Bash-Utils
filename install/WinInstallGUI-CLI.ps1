@@ -5,7 +5,7 @@ Function Get-FixedDisk {
     [CmdletBinding()]
     # This param() block indicates the start of parameters declaration
     param (
-        <# 
+        <#
             This parameter accepts the name of the target computer.
             It is also set to mandatory so that the function does not execute without specifying the value.
         #>

@@ -73,7 +73,7 @@ __LATEX_CREATE_DOC__RES_DIR="$__BU_MAIN_MODULE_DEVTOOLS_SRC/$__BU_MAIN_PROJECT_N
 # Listing the supported languages.
 function LatexCreateDoc_ListLanguages()
 {
-    BU::EchoNewstep "Currently supported languages --> English (en), French (fr)";
+    BU.EchoNewstep "Currently supported languages --> English (en), French (fr)";
 
     for i in "${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[@]}"; do
         echo "  - $i"
@@ -88,13 +88,13 @@ function LatexCreateDoc_ListLanguages()
 
 ######################################################### CODE ########################################################
 
-BU::EchoNewstep "In which language do you want to write your LaTeX document ?";
+BU.EchoNewstep "In which language do you want to write your LaTeX document ?";
 LatexCreateDoc_ListLanguages;
-BU::Newline;
+BU.Newline;
 
 read -rp "Please type the wanted language's code from one of the above parenthesis : " __read_lang;
-BU::EchoRead "$__read_lang";
-BU::Newline;
+BU.EchoRead "$__read_lang";
+BU.Newline;
 
 # ----------------------------------------------
 
@@ -102,12 +102,12 @@ BU::Newline;
 
 if [[ "$__read_lang" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 	# shellcheck disable=SC2016
-	BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightError '$__read_doc_name')'S VARIABLE'S VALUE $(DechoHighlightError "$__read_lang") IS INCORRECT" \
+	BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightError '$__read_doc_name')'S VARIABLE'S VALUE $(DechoHighlightError "$__read_lang") IS INCORRECT" \
         "$(LatexCreateDoc_ListLanguages)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
 elif [[ "$__ARG_LANG" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 # shellcheck disable=SC2016
-	BU::Main::Errors::HandleErrors "1" "THE FIRST LANGUAGE'S ARGUMENT VALUE IS INCORRECT ($(BU::DechoHighlightError "$__ARG_LANG"))" \
+	BU.Main.Errors.HandleErrors "1" "THE FIRST LANGUAGE'S ARGUMENT VALUE IS INCORRECT ($(BU.DechoHighlightError "$__ARG_LANG"))" \
         "$(LatexCreateDoc_ListLanguages)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
 else
@@ -130,20 +130,20 @@ else
 	# If no type of document is passed as second argument
     if [ -z "$__ARG_TYPE" ]; then
         #***** Asking for the new document's path.
-        BU::EchoNewstep "What kind of document do you want to write ?";
-        BU::EchoMsg "1 - Master documentation                       $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_master")";
-        BU::EchoMsg "2 - Module general documentation               $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_module")";
-        BU::EchoMsg "3 - Module initializer script's documentation  $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_initscript")";
-        BU::EchoMsg "4 - Module configuration documentation         $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_config")";
-        BU::EchoMsg "5 - Module initializer documentation           $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_init")";
-        BU::EchoMsg "6 - Main functions documentation               $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_main_functions")";
-        BU::Newline;
+        BU.EchoNewstep "What kind of document do you want to write ?";
+        BU.EchoMsg "1 - Master documentation                       $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_master")";
+        BU.EchoMsg "2 - Module general documentation               $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_module")";
+        BU.EchoMsg "3 - Module initializer script's documentation  $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_initscript")";
+        BU.EchoMsg "4 - Module configuration documentation         $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_config")";
+        BU.EchoMsg "5 - Module initializer documentation           $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_init")";
+        BU.EchoMsg "6 - Main functions documentation               $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_main_functions")";
+        BU.Newline;
 
-        BU::EchoMsg "7 - Tutorials documentation                    $(BU::DechoGreen "Targeted folder") --> $(BU::DechoHighlightPath "$__target_path_tutos")";
+        BU.EchoMsg "7 - Tutorials documentation                    $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_tutos")";
 
     	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code;
-        BU::EchoRead "$__read_folder_code";
-        BU::Newline;
+        BU.EchoRead "$__read_folder_code";
+        BU.Newline;
 
     elif [ -n "$__ARG_TYPE" ]; then
         __read_folder_code="$__ARG_TYPE";
@@ -153,27 +153,27 @@ else
     if [ ! -d "$__read_folder_code" ]; then
 
         EchoMsg "[ INFO ] The chosen folder doesn't exists yet";
-        EchoNewstep "Creating the $(BU::DechoHighlight "$__read_folder_code") target folder";
+        EchoNewstep "Creating the $(BU.DechoHighlight "$__read_folder_code") target folder";
 
         #***** Verifying if the given code is valid.
         lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
-            1) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_master";;
-            2) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_module";;
-            3) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_initscript" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_initscript";;
+            1) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_master";;
+            2) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_master" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_module";;
+            3) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_initscript" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_initscript";;
 
-            4) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_config" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_config";;
-            5) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_init" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_init";;
-            6) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_main_functions" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_main_functions";;
+            4) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_config" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_config";;
+            5) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_init" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_init";;
+            6) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_main_functions" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_main_functions";;
 
-            7) BU::Main::Directories::Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_tutos" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_tutos";;
+            7) BU.Main.Directories.Make "$__BU_MAIN_MODULE_DOCS_DIR_PATH" "$__target_path_tutos" && __folder_path="$__BU_MAIN_MODULE_DOCS_DIR_PATH/$__target_path_tutos";;
             *)
                 if [ -n "$__ARG_TYPE" ]; then
-                    BU::Main::Errors::HandleErrors "1" "THE SECOND ARGUMENT'S VALUE ($__ARG_TYPE) IS INVALID" \
+                    BU.Main.Errors.HandleErrors "1" "THE SECOND ARGUMENT'S VALUE ($__ARG_TYPE) IS INVALID" \
                         "Please type an integer value ranging from 1 to 7" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
 
                 else
                     # shellcheck disable=SC2016
-                    BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightError "$__read_doc_name")'s ENTERED VALUE IS INVALID" \
+                    BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightError "$__read_doc_name")'s ENTERED VALUE IS INVALID" \
                         "Please type an integer value ranging from 1 to 7" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
                 fi
                 ;;
@@ -187,14 +187,14 @@ else
     ## PROCESSING THE NEW FILE
 
 	if [ -z "$__ARG_FILENAME" ]; then
-        BU::EchoNewstep "How do you want to name your document ?";
+        BU.EchoNewstep "How do you want to name your document ?";
         read -rp "Enter the file's name (don't add a ''.tek'' extension, this script will complete it) : " __read_doc_name;
 
-        BU::EchoRead "$__read_doc_name";
+        BU.EchoRead "$__read_doc_name";
 
         if [ -z "$__read_doc_name" ]; then
             # shellcheck disable=SC2016
-            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoE '$__read_doc_name')'s VARIABLE IS EMPTY" \
+            BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoE '$__read_doc_name')'s VARIABLE IS EMPTY" \
                 "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
         fi
 
@@ -203,22 +203,22 @@ else
         __tex_full_path="$__folder_path/$__ARG_FILENAME";
     fi
 
-    BU::EchoNewstep "Creating the $(BU::DechoHighlightPath "$__tex_full_path") file";
-    Bu::Newline;
+    BU.EchoNewstep "Creating the $(BU.DechoHighlightPath "$__tex_full_path") file";
+    BU.Newline;
 
     __
 
-	# BU::Main::Files::Make "$__folder_path" "$__read_doc_name.tex" && BU::EchoSuccess "Your LaTeX file ($(BU::DechoHighlightPath "$__tex_full_path")) was successfully created."
+	# BU.Main.Files.Make "$__folder_path" "$__read_doc_name.tex" && BU.EchoSuccess "Your LaTeX file ($(BU.DechoHighlightPath "$__tex_full_path")) was successfully created."
     lineno_case_copy_file="$LINENO"; case "$__read_folder_code" in
-        1) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/master.txt" >> "$__tex_full_path";;
-        2) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-general.txt" >> "$__tex_full_path";;
-        3) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-init-main.txt" >> "$__tex_full_path";;
+        1) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/master.txt" >> "$__tex_full_path";;
+        2) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-general.txt" >> "$__tex_full_path";;
+        3) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-init-main.txt" >> "$__tex_full_path";;
 
-        4) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-config.txt" >> "$__tex_full_path";;
-        5) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-init-each.txt" >> "$__tex_full_path";;
-        6) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-functions.txt" >> "$__tex_full_path";;
+        4) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-config.txt" >> "$__tex_full_path";;
+        5) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-init-each.txt" >> "$__tex_full_path";;
+        6) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-functions.txt" >> "$__tex_full_path";;
 
-        7) BU::Main::Files::MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/tutorials-general.txt" >> "$__tex_full_path";;
+        7) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/tutorials-general.txt" >> "$__tex_full_path";;
     esac
 
 	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
@@ -226,11 +226,11 @@ else
     # ----------------------------------------------
 
     ## PROCESSING THE DOCUMENT'S TITLE
-    
+
     if [ -z "$__ARG_AUTHOR" ]; then
         read -rp "$(EchoNewstep Please enter your full name : )" __read_author_name;
 
-        BU::EchoRead "$__read_author_name";
+        BU.EchoRead "$__read_author_name";
 
         __tex_author="$__read_author_name";
     else
@@ -238,12 +238,12 @@ else
     fi
 
     # Writing the author's name in the created file.
-    
-    
-    
+
+
+
     # ----------------------------------------------
 
-    ## PROCESSING THE 
+    ## PROCESSING THE
 
 	exit 0;
 fi

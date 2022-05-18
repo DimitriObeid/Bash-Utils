@@ -107,9 +107,9 @@
 
         \item Le message de succès de recherche du chemin du fichier CSV, dans la langue que vous\ souhaitez définir.\\
 
-        \item Le message d'erreur du header de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors}\\
+        \item Le message d'erreur du header de la fonction \textbf{\color{mauve}BU.Main.Errors.HandleErrors}\\
 
-        \item Le message de conseil de la fonction \textbf{\color{mauve}BU::Main::Errors::HandleErrors}
+        \item Le message de conseil de la fonction \textbf{\color{mauve}BU.Main.Errors.HandleErrors}
     \end{itemize}
 \end{justify}
 
@@ -230,7 +230,7 @@
     Une fois le code couleur ajouté, repérez, dans le même fichier, la section :
 
     \begin{itemize}
-        \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU::Main::Decho::SetTextColor" FUNCTIONS}
+        \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU.Main.decho.SetTextColor" FUNCTIONS}
     \end{itemize}
 \end{justify}
 
@@ -244,11 +244,11 @@
 
 
 \begin{justify}
-    Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}BU::Main::Decho::SetTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR TEXT ENCODING}.
+    Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{orange}\_CODE}, puis appelez la fonction \textbf{\color{mauve}BU.Main.decho.SetTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR TEXT ENCODING}.
 \end{justify}
 
 \begin{justify}
-    Regardez la manière dont la fonction \textbf{\color{mauve}BU::Main::Decho::SetTextColor} est appelée, pour vous aider.\\[1\baselineskip]
+    Regardez la manière dont la fonction \textbf{\color{mauve}BU.Main.decho.SetTextColor} est appelée, pour vous aider.\\[1\baselineskip]
 \end{justify}
 
 \begin{justify}
@@ -288,7 +288,7 @@
 \end{justify}
 
 \begin{justify}
-	Vous y trouvrerez des fonctions nommées \textbf{\color{mauve}BU::Echo<\$\_nom\_couleur\_en\_anglais>}.
+	Vous y trouvrerez des fonctions nommées \textbf{\color{mauve}BU.Echo<\$\_nom\_couleur\_en\_anglais>}.
 \end{justify}
 
 \begin{justify}
@@ -313,12 +313,12 @@ Copiez-collez simplement l'une de ces fonctions, et remplacez y le nom de la cou
 
 \begin{justify}
 	Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>},
-et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}BU::HeaderBase}, en les
+et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}BU.HeaderBase}, en les
 remplaçant par le nom de la variable globale de noms de couleurs souhaitée.
 \end{justify}
 
 \begin{justify}
-	Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis renomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}BU::HeaderBase}.
+	Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis renomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}BU.HeaderBase}.
 \end{justify}
 
 \begin{justify}
@@ -450,7 +450,7 @@ avant chaque liste).
 \end{justify}
 
 \begin{justify}
-    Dans cette condition, appelez la fonction \textbf{\color{mauve}BU::Main::Status::ConfEcho}, puis passez en arguments :
+    Dans cette condition, appelez la fonction \textbf{\color{mauve}BU.Main.Status.ConfEcho}, puis passez en arguments :
 
     \begin{itemize}
         \item Le paramètre \textbf{\color{orange}\$p\_file}\\
@@ -479,7 +479,7 @@ avant chaque liste).
 
 
 \begin{justify}
-    Maintenant, rendez vous dans la sous-section \textbf{CHANGING VALUES MORE EASILY}. Créez une nouvelle fonction, dont le nom commence par \textbf{\color{mauve}BU::Main::Status::ChangeSTAT\_}, suivie du nom de votre variable de statut, sans le \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT}.
+    Maintenant, rendez vous dans la sous-section \textbf{CHANGING VALUES MORE EASILY}. Créez une nouvelle fonction, dont le nom commence par \textbf{\color{mauve}BU.Main.Status.ChangeSTAT\_}, suivie du nom de votre variable de statut, sans le \textbf{\color{orange}\$\_\_BU\_MAIN\_STAT}.
 \end{justify}
 
 \begin{justify}

@@ -110,7 +110,7 @@ function BytesToHuman()
     return 0;
 }
 
-# function BU::Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
+# function BU.Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
 function CatBU { cat "$1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO DISPLAY THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 function EchoBU { echo -e "# $1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO WRITE THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 
@@ -132,50 +132,50 @@ fi
 
 # Path of the modules initialization script's configuration files.
 for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
-    # BU::Newline '2';
+    # BU.Newline '2';
     EchoBU "${i^^}";
 
-    #BU::Newline "1"';
+    #BU.Newline "1"';
     CatBU "$i";
 done
 
 # Path of the modules initialization script's translations files.
 for i in "$__BU_MODULE_INIT_TRANSLATIONS_PATH/"*.locale; do
-    # BU::Newline '2';
+    # BU.Newline '2';
     EchoBU "${i^^}";
 
-    #BU::Newline "1"';
+    #BU.Newline "1"';
     CatBU "$i";
 done
 
 # Processing the modules initializer file.
-EchoBU "$HOME/Bash-utils-init.sh"; # BU::Newline '1';
+EchoBU "$HOME/Bash-utils-init.sh"; # BU.Newline '1';
 CatBU "$HOME/Bash-utils-init.sh";
 
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
-	# BU::Newline '2';
+	# BU.Newline '2';
     EchoBU "${i^^}";
 
-    # BU::Newline "1"'
+    # BU.Newline "1"'
     CatBU "$i";
 done
 
 # Processing the modules files.
 for i in "$HOME/.Bash-utils/modules/main/"*; do
-	# BU::Newline '2';
+	# BU.Newline '2';
     EchoBU "${i^^}";
 
-    # BU::Newline "1"';
+    # BU.Newline "1"';
     CatBU "$i";
 done
 
 # Processing the function files.
 for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-	# BU::Newline '2';
+	# BU.Newline '2';
     EchoBU "${i^^}";
 
-    #BU::Newline "1"';
+    #BU.Newline "1"';
     CatBU "$i";
 done
 

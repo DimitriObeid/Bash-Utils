@@ -55,19 +55,19 @@ fi
 ## PACKAGE MANAGERS INSTALLATION
 
 # Installing the Node package manager for Linux.
-function BU::Software::PackageManagers::InstallNPM::Linux()
+function BU.SoftwarePackageManagersInstallNPMLinux()
 {
 	#**** Code ****
-	BU::IsOSLinux || {  BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSLinux || {  BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
 
 # Installing the "Snap" package manager.
-function BU::Software::PackageManagers::InstallSnap::Linux()
+function BU.SoftwarePackageManagersInstallSnapLinux()
 {
 	#**** Code ****
-	BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -77,19 +77,19 @@ function BU::Software::PackageManagers::InstallSnap::Linux()
 ## PACKAGE MANAGERS UPDATE
 
 # Updating the Node package manager for Linux.
-function BU::Software::PackageManagers::UpdateNPM::Linux()
+function BU.SoftwarePackageManagersUpdateNPMLinux()
 {
 	#**** Code ****
-	BU::IsOSLinux || {  BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSLinux || {  BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
 
 # Updating the "Snap" package manager.
-function BU::Software::PackageManagers::UpdateSnap::Linux()
+function BU.SoftwarePackageManagersUpdateSnapLinux()
 {
 	#**** Code ****
-	BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -120,19 +120,19 @@ function BU::Software::PackageManagers::UpdateSnap::Linux()
 ## PACKAGE MANAGERS INSTALLATION
 
 # Install Homebrew on OSX.
-function BU::Software::PackageManagers::InstallHomebrew::OSX()
+function BU.SoftwarePackageManagersInstallHomebrewOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install NPM on OSX.
-function BU::Software::PackageManagers::InstallNPM::OSX()
+function BU.SoftwarePackageManagersInstallNPMOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -142,9 +142,9 @@ function BU::Software::PackageManagers::InstallNPM::OSX()
 ## PACKAGE MANAGERS UPDATE
 
 # Update Homebrew.
-function BU::Software::PackageManagers::UpdateHomebrew::OSX()l
+function BU.SoftwarePackageManagersUpdateHomebrewOSX()l
 {
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -179,19 +179,19 @@ function BU::Software::PackageManagers::UpdateHomebrew::OSX()l
 ## PACKAGE MANAGERS INSTALLATION
 
 # Installing the Node package manager for Windows.
-function BU::Software::PackageManagers::InstallNPM::Windows()
+function BU.SoftwarePackageManagersInstallNPMWindows()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
 
 # Installing Chocolatey for Windows.
-function BU::Software::PackageManagers::InstallChocolatey::Windows()
+function BU.SoftwarePackageManagersInstallChocolateyWindows()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -201,19 +201,19 @@ function BU::Software::PackageManagers::InstallChocolatey::Windows()
 ## PACKAGE MANAGERS UPDATE
 
 # Updating the Node package manager for Windows.
-function BU::Software::PackageManagers::InstallNPM::Linux()
+function BU.SoftwarePackageManagersInstallNPMLinux()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
 
 # Updating Chocolatey for Windows.
-function BU::Software::PackageManagers::InstallChocolatey::Windows()
+function BU.SoftwarePackageManagersInstallChocolateyWindows()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -239,14 +239,14 @@ function BU::Software::PackageManagers::InstallChocolatey::Windows()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### QUICK PACKAGE INSTALLATION, UPDATE AND PROCESSING FOR MULTIPLE OPERATING SYSTEMS 
+#### QUICK PACKAGE INSTALLATION, UPDATE AND PROCESSING FOR MULTIPLE OPERATING SYSTEMS
 
 ## RESOURCES FUNCTIONS.
 
 # Quick writing if the target operating system is not found.
-function BU::Software::PackageManagers::SoftwareNotAvailableForThisOS()
+function BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS()
 {
-    BU::EchoError ""; BU::Newline;
+    BU.EchoError ""; BU.Newline;
 }
 
 # -----------------------------------------------
@@ -254,13 +254,13 @@ function BU::Software::PackageManagers::SoftwareNotAvailableForThisOS()
 ## PACKAGE MANAGERS INSTALLATION
 
 # Install NPM on several platforms.
-function BU::Software::PackageManagers::InstallNPM()
+function BU.SoftwarePackageManagersInstallNPM()
 {
-    BU::IsOSLinux   && BU::Software::PackageManagers::InstallNPM::Linux     &&  return 0;
-    BU::IsOSX       && BU::Software::PackageManagers::InstallNPM::OSX       &&  return 0;
-    BU::IsOSWindows && BU::Software::PackageManagers::InstallNPM::Windows   &&  return 0;
+    BU.IsOSLinux   && BU.SoftwarePackageManagersInstallNPMLinux     &&  return 0;
+    BU.IsOSX       && BU.SoftwarePackageManagersInstallNPMOSX       &&  return 0;
+    BU.IsOSWindows && BU.SoftwarePackageManagersInstallNPMWindows   &&  return 0;
 
-    BU::Software::PackageManagers::SoftwareNotAvailableForThisOS;               return 1;
+    BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;               return 1;
 }
 
 # -----------------------------------------------

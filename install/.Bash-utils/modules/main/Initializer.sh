@@ -55,7 +55,7 @@ fi
 ## FUNCTIONS
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-function BU::Main::Initializer::SourceLibrary()
+function BU.Main.Initializer.SourceLibrary()
 {
     #**** Variables ****
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
@@ -63,29 +63,29 @@ function BU::Main::Initializer::SourceLibrary()
     #**** Code ****
 
 	# Leaving a newline for a better text display in the log file and the terminal.
-	BU::ModuleInit::Msg;
+	BU.ModuleInit.Msg;
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
 
-        BU::ModuleInit::CheckIsDebugging && BU::ModuleInit::Msg "Debug mode activated";
+        BU.ModuleInit.CheckIsDebugging && BU.ModuleInit.Msg "Debug mode activated";
 
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
-		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
+		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
 
 	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
-	BU::ModuleInit::Msg;
+	BU.ModuleInit.Msg;
 
 	return 0;
 }
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-function BU::Main::Initializer::SourceConfig()
+function BU.Main.Initializer.SourceConfig()
 {
     #**** Variables ****
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
@@ -103,16 +103,16 @@ function BU::Main::Initializer::SourceConfig()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU::ModuleInit::SourcingFailure "$f" "$(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
-		BU::ModuleInit::Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
+		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
 	done;
 
 	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
-	BU::ModuleInit::Msg;
+	BU.ModuleInit.Msg;
 
 	return 0;
 }
@@ -127,13 +127,13 @@ function BU::Main::Initializer::SourceConfig()
 
 ## SOURCING LIBRARY FILES FIRST
 
-# Note : Several functions from the main module are used in the "BU::ModuleInit::()" function.
+# Note : Several functions from the main module are used in the "BU.ModuleInit.()" function.
 
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU::ModuleInit::FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU::ModuleInit::MsgAbort; BU::ModuleInit::AskPrintLog; BU::IsInScript && exit 1; return 1; };
+__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::IsInScript && exit 1; return 1; };
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -145,7 +145,7 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU::ModuleInit::SourcingFail
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU::IsInScript && exit 1; return 1; }
+source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
@@ -156,7 +156,7 @@ source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU::ModuleInit::SourcingFail
 #### STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
 
 # Usage function.
-function BU::Main::Initializer::Usage()
+function BU.Main.Initializer.Usage()
 {
     echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS" >&2;
     sleep 2;
@@ -186,10 +186,10 @@ function BU::Main::Initializer::Usage()
 }
 
 # Creating a function to print the correct values for the current option in different languages structures.
-function BU::Main::Initializer::ProcessBadStatusOptionValues()
+function BU.Main.Initializer.ProcessBadStatusOptionValues()
 {
-    BU::ModuleInit::Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "$1" "$2")" >&2;
-    BU::ModuleInit::Msg >&2;
+    BU.ModuleInit.Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "$1" "$2")" >&2;
+    BU.ModuleInit.Msg >&2;
 }
 
 # If arguments were given in the same double quotes as the "main" module's value.
@@ -228,11 +228,11 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'authorize' ]              || [ "${value,,}" = 'forbid' ]              || [ "${value,,}" = 'restrict' ]; then
-                            __BU_MAIN_STAT_DECHO="$value";              BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_DECHO' "$__BU_MAIN_STAT_DECHO" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_DECHO="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_DECHO' "$__BU_MAIN_STAT_DECHO" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-decho" "« --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-decho" "« --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_ECHO" global status variable.
@@ -241,11 +241,11 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
-                            __BU_MAIN_STAT_ECHO="$value";               BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ECHO' "$__BU_MAIN_STAT_ECHO" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_ECHO="$value";               BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ECHO' "$__BU_MAIN_STAT_ECHO" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-echo" "« --stat-echo=false », « stat-echo=true »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-echo" "« --stat-echo=false », « stat-echo=true »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_ERROR" global status variable.
@@ -254,16 +254,16 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'fatal' ]; then
-                            __BU_MAIN_STAT_ERROR="$value";              BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_ERROR="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value,,}" = 'void' ]; then
-                            __BU_MAIN_STAT_ERROR='';                    BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_ERROR='';                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-error" "« --stat-error=fatal », « stat-error=void »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-error" "« --stat-error=fatal », « stat-error=void »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_LOG" global status variable.
@@ -272,11 +272,11 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
-                            __BU_MAIN_STAT_LOG="$value";                BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG' "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_LOG="$value";                BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG' "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-log" "« --stat-log=false », « stat-log=true »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-log" "« --stat-log=false », « stat-log=true »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_LOG_REDIRECT" global status variable.
@@ -285,16 +285,16 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'log' ]                    || [ "${value,,}" = 'tee' ]; then
-                            __BU_MAIN_STAT_LOG_REDIRECT="$value";       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_LOG_REDIRECT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
 
                     elif    [ "${value,,}" = 'void' ]; then
-                            __BU_MAIN_STAT_LOG_REDIRECT='';             BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_Rs" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_LOG_REDIRECT='';             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_Rs" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-log-r" "« --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-log-r" "« --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_OPERATE_ROOT" global status variable.
@@ -303,11 +303,11 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'authorized' ]             || [ "${value,,}" = 'forbidden' ]           || [ "${value,,}" = 'restricted' ]; then
-                            __BU_MAIN_STAT_OPERATE_ROOT="$value";       BU::ModuleInit::DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_OPERATE_ROOT' "$__BU_MAIN_STAT_OPERATE_ROOT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_OPERATE_ROOT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_OPERATE_ROOT' "$__BU_MAIN_STAT_OPERATE_ROOT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-op-root" "« --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-op-root" "« --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_HEADER" global status variable.
@@ -315,12 +315,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU::IsPositiveFloat "$value"; then
-                            __BU_MAIN_STAT_TIME_HEADER="$value";        BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_HEADER' "$__BU_MAIN_STAT_TIME_HEADER" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                    if      BU.IsPositiveFloat "$value"; then
+                            __BU_MAIN_STAT_TIME_HEADER="$value";        BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_HEADER' "$__BU_MAIN_STAT_TIME_HEADER" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-header" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-header" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable.
@@ -328,12 +328,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU::IsPositiveFloat "$value"; then
-                            __BU_MAIN_STAT_TIME_NEWLINE="$value";       BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_NEWLINE' "$__BU_MAIN_STAT_TIME_NEWLINE" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                    if      BU.IsPositiveFloat "$value"; then
+                            __BU_MAIN_STAT_TIME_NEWLINE="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_NEWLINE' "$__BU_MAIN_STAT_TIME_NEWLINE" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
@@ -341,12 +341,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU::IsPositiveFloat "$value"; then
-                            __BU_MAIN_STAT_TIME_TXT="$value";           BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_TXT' "$__BU_MAIN_STAT_TIME_TXT" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                    if      BU.IsPositiveFloat "$value"; then
+                            __BU_MAIN_STAT_TIME_TXT="$value";           BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_TXT' "$__BU_MAIN_STAT_TIME_TXT" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU::Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
@@ -355,22 +355,22 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${value% *}";
 
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
-                            __BU_MAIN_STAT_TXT_FMT="$value";            BU::ModuleInit::DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "$__BU_MAIN_STAT_TXT_FMT" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_TXT_FMT="$value";            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "$__BU_MAIN_STAT_TXT_FMT" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
-                            
+
                             # Debug : testing if the checking of the arguments works.
                             echo "--stat-txt-time value : $value";
                     else
-                            BU::Main::Initializer::ProcessBadStatusOptionValues "--stat-txt-fmt" "« --stat-txt-fmt=false », « --stat-txt-fmt=true »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-txt-fmt" "« --stat-txt-fmt=false », « --stat-txt-fmt=true »";
                     fi;;
 
                 # Any unsupported global status variable.
                 *)
-                            echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU::ModuleInit::GetModuleName "${BASH_SOURCE[0]}")" >&2;
+                            echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" >&2;
                             echo >&2;
 
-                            BU::Main::Initializer::Usage; v_loop_error='error'; break;
+                            BU.Main.Initializer.Usage; v_loop_error='error'; break;
             esac
 
             if [ -z "$__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS" ]; then __BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS='true'; fi
@@ -378,10 +378,10 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
         # Else, if an unsupported value is passed as « main » module's argument.
         else
             # Temporary situation.
-            BU::Main::Initializer::Usage; v_loop_error='error'; break;
+            BU.Main.Initializer.Usage; v_loop_error='error'; break;
         fi
 
-    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU::IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
+    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU.IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
 fi
 
 # Unsetting the "$v_loop_error" variable, since this code is not written inside a function.
@@ -391,22 +391,22 @@ unset v_loop_error;
 for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
 
     if [ "${value,,}" != '--stat-decho=authorize' ] && [ "${value,,}" != '--stat-decho-forbid' ] && [ "${value,,}" != '--stat-decho-restrict' ]; then
-        BU::Main::Status::ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_DECHO        "authorize" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     if [ "${value,,}" != '--stat-echo=false' ]      && [ "${value,,}" != '--stat-echo=true' ]; then
-        BU::Main::Status::ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO         "false"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     # Don't forget to set the "$__BU_MAIN_STAT_LOG_REDIRECT" value BEFORE calling a function which checks the value of the "$__BU_MAIN_STAT_LOG" value, since this function calls a function which creates the logs file.
     if [ "${value,,}" != '--stat-log-r=log' ]       && [ "${value,,}" != '--stat-log-r=tee' ]   && [ "${value,,}" != '--stat-log-r=void' ]; then
-        BU::Main::Status::ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_LOG_REDIRECT "tee"       "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 
     if [ "${value,,}" != '--stat-log=false' ]       && [ "${value,,}" != '--stat-true' ]; then
 
         # The function "CheckSTAT_LOG()" creates the log file and its path if the "$__BU_MAIN_STAT_LOG" variable's value is equal to "true".
-        BU::Main::Status::ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_LOG          "true"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     fi
 done
 
@@ -419,14 +419,14 @@ done
 #### STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceLibrary || { if BU::IsInScript; then exit 1; else return 1; fi };
+BU.Main.Initializer.SourceLibrary || { if BU.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU::Main::Initializer::SourceConfig || { if BU::IsInScript; then exit 1; else return 1; fi };
+BU.Main.Initializer.SourceConfig || { if BU.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
@@ -439,49 +439,49 @@ BU::Main::Initializer::SourceConfig || { if BU::IsInScript; then exit 1; else re
 ## CALLING NECESSARY FUNCTIONS
 
 # Translating the main module's library messages
-# BU::ModuleInit::ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU::IsInScript; then exit 1; else return 1; fi };
+# BU.ModuleInit.ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU.IsInScript; then exit 1; else return 1; fi };
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
-BU::Main::Directories::MkTmpDir;
+BU.Main.Directories.MkTmpDir;
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
 # Creating the text and background color code file if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
-if BU::Main::Status::CheckStatAllowFormatting; then
+if BU.Main.Status.CheckStatAllowFormatting; then
 
     # Creating the text color code file
-    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
+    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-        BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU::DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+        BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU::Newline;
+        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Newline;
     fi
 
     # Creating the background color code file
-    if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
+    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
         # shellcheck disable=SC2059
-        BU::Main::Errors::HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU::Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+        BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU::Newline;
+        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Newline;
     fi
 fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
-if BU::Main::Status::CheckStatIsLogging; then
-	if ! BU::Main::Checkings::CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+if BU.Main.Status.CheckStatIsLogging; then
+	if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-		BU::Main::Errors::HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
+		BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
 		return 1;
 	else
         # shellcheck disable=SC2059
-		BU::EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU::DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU::Newline;
+		BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Newline;
 	fi
 fi
 

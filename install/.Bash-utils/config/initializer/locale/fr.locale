@@ -32,7 +32,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="DANS LE FICHIER « %s », �
 # Écriture du nom du fichier et du numéro de ligne où une erreur fatale s'est produite.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS";
 
-# Écriture du début du texte de tout texte qui doit être imprimé avec la fonction "BU::ModuleInit::PrintLogError".
+# Écriture du début du texte de tout texte qui doit être imprimé avec la fonction "BU.ModuleInit.PrintLogError".
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # -----------------------------------------------
@@ -64,7 +64,7 @@ fi
 
 ## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] DEFINING GLOBAL VARIABLES
 
-## FONCTION : "BU::ModuleInit::DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+## FONCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
 # Note : Cette variable est également utilisée dans les fichiers de configuration du module principal.
 __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : Impossible de définir le chemin à enregistrer dans la variable globale « %s »\n";
@@ -87,7 +87,7 @@ __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION 
 
 ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION [-----] FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-## FONCTION : "BU::ModuleInit::AskPrintLog()"
+## FONCTION : "BU.ModuleInit.AskPrintLog()"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » ) ?";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le contenu du tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION », veuillez entrer « yes » ou « Y » (aucune sensibilité à la casse)";
@@ -96,7 +96,7 @@ __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Le contenu du fichier de logs du 
 
 # --------
 
-## FONCTION : "BU::ModuleInit::DisplayInitializedGlobalVarsInfos()"
+## FONCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
 # Message d'initialisation.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
@@ -147,7 +147,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="C
 
 # --------
 
-## FONCTION : "BU::ModuleInit::DisplayInitGlobalVarsInfos()"
+## FONCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
 # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Fichier     : %s";
@@ -217,26 +217,26 @@ unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
 
 # --------
 
-## FONCTION : "BU::ModuleInit::Msg()"
+## FONCTION : "BU.ModuleInit.Msg()"
 
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par « --log-display », « --log-shut », « --log-shut-display » ou une valeur vide où vous avez (re)défini la valeur.";
 
 # --------
 
-## FONCTION : "BU::ModuleInit::MsgAbort()"
+## FONCTION : "BU.ModuleInit.MsgAbort()"
 
 __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
 
 ## -------
 
-# FONCTION : "BU::ModuleInit::MsgAbort()"
+# FONCTION : "BU.ModuleInit.MsgAbort()"
 
 __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche pour";
 
 # --------
 
-## FONCTION : "BU::ModuleInit::PrintLog()"
+## FONCTION : "BU.ModuleInit.PrintLog()"
 
 # Titre
 __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="ENTRÉE DU JOURNAL D'INITIALISATION";
@@ -259,7 +259,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="FIN DE L'AFFICHAGE DES JOURNA
 
 # --------
 
-## FONCTION : "BU::ModuleInit::PrintLogError()"
+## FONCTION : "BU.ModuleInit.PrintLogError()"
 
 __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERREUR ] DESCRIPTION : %s | LIGNE : %s";
 
@@ -269,7 +269,7 @@ __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERREUR ] DESCRIPTION : %s |
 
 ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
-## FONCTION : "BU::ModuleInit::CheckPath()"
+## FONCTION : "BU.ModuleInit.CheckPath()"
 
 # Chemin de fichier manquant.
 __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="Aucun chemin de fichier";
@@ -287,19 +287,19 @@ __BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="$__BU_MODULE_INIT_MSG__CURRENT_
 
 # --------
 
-## FONCTION : "BU::ModuleInit::FindPath"
+## FONCTION : "BU.ModuleInit.FindPath"
 
 __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE TROUVER CE CHEMIN";
 
 # --------
 
-## FONCTION : "BU::ModuleInit::GetModuleName"
+## FONCTION : "BU.ModuleInit.GetModuleName"
 
 __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Impossible d'obtenir le nom du module depuis le nom de son dossier parent";
 
 # --------
 
-## FONCTION : "BU::ModuleInit::ListInstalledModules()"
+## FONCTION : "BU.ModuleInit.ListInstalledModules()"
 
 # Impossible de créer le dossier temporaire.
 __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Impossible de créer le dossier temporaire « tmp » de stockage des journaux d'initialisation dans le dossier « %s/ »";
@@ -322,7 +322,7 @@ __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODU
 
 # --------
 
-## FONCTION : "BU::ModuleInit::SourcingFailure"
+## FONCTION : "BU.ModuleInit.SourcingFailure"
 
 __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE SOURCER CE FICHIER DU MODULE « %s » --> %s";
 
@@ -332,7 +332,7 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG_
 
 ## SOUS-SECTION : FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-## FONCTION : "BU::ModuleInit::Usage()"
+## FONCTION : "BU.ModuleInit.Usage()"
 
 # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
@@ -375,7 +375,7 @@ unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
 
 # --------
 
-## FONCTION : "BU::ModuleInit::ProcessFirstModuleParameters::LogPermissionWarningOptimize()"
+## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
 # La même valeur pour l'option "--log-*" a été passée deux fois ou plus comme argument lors de l'appel de la fonction "BashUtils_InitModules".
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : la valeur « %s » de l'option « module » a été repassé en argument lors de l'appel de la fonction « BashUtils_InitModules »";
@@ -393,13 +393,13 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PAS
 
 # --------
 
-## FONCTION : "BU::ModuleInit::ProcessFirstModuleParameters::ProcessBadStatusOptionValues()"
+## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Attention : les valeurs supportées pour l'option « %s » sont : %s";
 
 # --------
 
-## FONCTION : "BU::ModuleInit::ProcessFirstModuleParameters()"
+## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
 # Aucun argument n'a été passé en tant que valeur(s) du paramètre "module", dans le cas où ce paramètre a été invoqué en tant que premier argument lors de l'appel de la fonction "BashUtils_InitModules".
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : LE PARAMÈTRE « module » A ÉTÉ PASSÉE SANS VALEUR(S)";
@@ -530,8 +530,8 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 ## FICHIER : "Colors.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU::Main::Decho::SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.decho.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.decho.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # --------

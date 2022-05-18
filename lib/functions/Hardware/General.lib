@@ -45,13 +45,13 @@ fi
 ##
 
 # Get computer's chassis.
-function BU::Hardware::General::GetChassis()        { if BU::Main::CMDS::GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
+function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
 
 # Get computer's chassis type.
-function BU::Hardware::General::GetChassisType()
+function BU.Hardware.General.GetChassisType()
 {
-    if BU::Main::CMDS::GetCommandPath 'dmidecode'; then
-        if BU::Main::Checkings::CheckRootEUID; then
+    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
+        if BU.Main.Checkings.CheckRootEUID; then
             dmidecode -s chassis-type;
 
             return 0;
@@ -62,7 +62,7 @@ function BU::Hardware::General::GetChassisType()
 }
 
 # Get machine's ID.
-function BU::Hardware::General::GetMachineID()      { if BU::Main::CMDS::GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
+function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
 
 # Get boot ID.
-function BU::Hardware::General::GetBootID()         { if BU::Main::CMDS::GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }
+function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }

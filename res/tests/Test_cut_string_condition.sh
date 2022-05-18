@@ -4,7 +4,7 @@ source "$HOME/Projets/Bash-utils/lib/functions/main/Text.lib" || { echo "Fail so
 
 function test_condition()
 {
-	if [ "$1" = "$(BU::Main::Text::CutDashFromOption "$1")" ]; then
+	if [ "$1" = "$(BU.Main.Text.CutDashFromOption "$1")" ]; then
 		echo "$1"
 	else
 		echo "Fail : $1"
@@ -12,4 +12,3 @@ function test_condition()
 }
 
 test_condition "-n"
-

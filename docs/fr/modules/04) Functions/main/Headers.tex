@@ -130,21 +130,21 @@
         \hline
         \textbf{Fonction} & \textbf{Fichier de définition}\\
         \hline
-        \textbf{\color{func}BU::IsAlphaNumChar}    & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.IsAlphaNumChar}    & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::IsInt}             & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.IsInt}             & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::IsIntpos}          & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.IsIntpos}          & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::DechoBGColor}              & \textbf{\color{path}Decho.lib}\\
+        \textbf{\color{func}BU.DechoBGColor}              & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{func}BU::DechoHighlightFunction}    & \textbf{\color{path}Decho.lib}\\
+        \textbf{\color{func}BU.DechoHighlightFunction}    & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{func}BU::EchoMsg}           & \textbf{\color{path}Echo.lib}\\
+        \textbf{\color{func}BU.EchoMsg}           & \textbf{\color{path}Echo.lib}\\
         \hline
-        \textbf{\color{func}BU::Newline}           & \textbf{\color{path}Echo.lib}\\
+        \textbf{\color{func}BU.Newline}           & \textbf{\color{path}Echo.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Errors::HandleSmallErrors}   & \textbf{\color{path}Errors.lib}\\
+        \textbf{\color{func}BU.Main.Errors.HandleSmallErrors}   & \textbf{\color{path}Errors.lib}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -165,7 +165,7 @@
 \textbf{Description :}
 
 \begin{justify}
-    Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
+    Chacune des variables globales de couleur de fond commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.decho.SetBGColor} lors de l'appel d'une de ces variables, pour colorer l'arrière plan du texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
@@ -184,7 +184,7 @@
 \textbf{Description :}
 
 \begin{justify}
-    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    Chacune des variables globales de couleur de texte commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.decho.SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
 \end{justify}
 
 \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
@@ -238,9 +238,9 @@
 \subsection{Création de base d'un header}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Headers::DrawLine}\color{text}
+\subsubsection{BU.Main.Headers.DrawLine}\color{text}
 
-\textbf{Fonction : \color{func}BU::Main::Headers::DrawLine}\setlength{\parskip}{1em}
+\textbf{Fonction : \color{func}BU.Main.Headers.DrawLine}\setlength{\parskip}{1em}
 
 % ------------
 
@@ -281,11 +281,11 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{func}BU::Main::Headers::DrawLine} vérifie tout d'abord que la valeur du second paramètre \textbf{\color{vars}p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{func}IsChar}, définie dans le fichier \textbf{\color{path}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
+    La fonction \textbf{\color{func}BU.Main.Headers.DrawLine} vérifie tout d'abord que la valeur du second paramètre \textbf{\color{vars}p\_lineChar} soit bien un simple caractère (alphabétique ou numérique) via la fonction \textbf{\color{func}IsChar}, définie dans le fichier \textbf{\color{path}Checkings.lib}. Si ce n'est pas le cas, ce paramètre est redéfini, et seul le premier caractère de la chaîne est récupéré pour l'affichage de la ligne.
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Si} une substitution de commande est passée au paramètre \textbf{\color{vars}p\_lineColor}, \textbf{\color{cond}alors} la fonction actuelle l'exécute. Cette substitution \textbf{DOIT} être un appel de la fonction \textbf{\color{func}BU::Main::Decho::SetTextColor}.
+    \textbf{\color{cond}Si} une substitution de commande est passée au paramètre \textbf{\color{vars}p\_lineColor}, \textbf{\color{cond}alors} la fonction actuelle l'exécute. Cette substitution \textbf{DOIT} être un appel de la fonction \textbf{\color{func}BU.Main.decho.SetTextColor}.
 \end{justify}
 
 \begin{justify}
@@ -300,7 +300,7 @@
 
 
 \begin{justify}
-    Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{cond}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{vars}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{func}BU::Main::Decho::SetBGColor}.
+    Une fois la vérification de coloration de la ligne effectuée, la fonction \textbf{\color{cond}en fait de même avec la couleur de fond}, dont la valeur a été passée au paramètre \textbf{\color{vars}p\_bgColor} via une substitution de commande, qui \textbf{DOIT} être un appel de la la fonction \textbf{\color{func}BU.Main.decho.SetBGColor}.
 \end{justify}\setlength{\parskip}{1em}
 
 \begin{justify}
@@ -337,7 +337,7 @@
         \end{itemize}
 
         \begin{justify}
-            \textbf{\color{cond}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{func}BU::Main::Errors::HandleSmallErrors}.
+            \textbf{\color{cond}Sinon, si} cette valeur n'est pas un nombre entier, alors un message d'avertissement est affiché via un appel de la fonction \textbf{\color{func}BU.Main.Errors.HandleSmallErrors}.
         \end{justify}
 
         \setlength{\parskip}{1em}
@@ -393,9 +393,9 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::HeaderBase}\color{text}
+\subsubsection{BU.HeaderBase}\color{text}
 
-\textbf{Fonction : \color{func}BU::HeaderBase}\\
+\textbf{Fonction : \color{func}BU.HeaderBase}\\
 
 \par\noindent\rule{\textwidth}{0.4pt}
 
@@ -460,7 +460,7 @@
 
 
 \begin{justify}
-    Dans un soucis de temps de pause cohérent, la fonction \textbf{\color{func}BU::HeaderBase} change la valeur des variables globales de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} et \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}, mettant ainsi le temps de pause du script de ces variable à 0 secondes.\par
+    Dans un soucis de temps de pause cohérent, la fonction \textbf{\color{func}BU.HeaderBase} change la valeur des variables globales de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE} et \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}, mettant ainsi le temps de pause du script de ces variable à 0 secondes.\par
 \end{justify}
 
 \begin{justify}
@@ -470,7 +470,7 @@
 \setlength{\parskip}{1em}
 
 \begin{justify}
-    \textbf{\color{cond}Si} aucune valeur n'est passée au paramètre \textbf{\color{vars}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{cond}alors} cette dernière appelle la fonction \textbf{\color{func}BU::Main::Headers::DrawLine} en y passant en arguments la valeur des paramètres et variables \textbf{\color{vars}p\_lineChar}, \textbf{\color{vars}p\_lineColor}, \textbf{\color{vars}v\_strlen} et \textbf{\color{vars}p\_bgColor} (ces deux derniers arguments seront traités par la fonction appelée s'ils contiennent une valeur).
+    \textbf{\color{cond}Si} aucune valeur n'est passée au paramètre \textbf{\color{vars}p\_bgColorPos} lors de l'appel de la fonction, \textbf{\color{cond}alors} cette dernière appelle la fonction \textbf{\color{func}BU.Main.Headers.DrawLine} en y passant en arguments la valeur des paramètres et variables \textbf{\color{vars}p\_lineChar}, \textbf{\color{vars}p\_lineColor}, \textbf{\color{vars}v\_strlen} et \textbf{\color{vars}p\_bgColor} (ces deux derniers arguments seront traités par la fonction appelée s'ils contiennent une valeur).
 \end{justify}
 
 \setlength{\parskip}{1em}
@@ -503,15 +503,15 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
+                            \textbf{\color{cond}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.DechoBGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
                         \end{justify}\setlength{\parskip}{1em}
 
                         \begin{justify}
-                            \textbf{\color{cond}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::DechoBGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
+                            \textbf{\color{cond}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.DechoBGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
                         \end{justify}\setlength{\parskip}{1em}
 
                         \begin{justify}
-                            \textbf{\color{cond}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{3}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::DechoBGColor} est appelée pour coloriee le fond de la zone de texte où la seconde ligne de caractères est affichée.
+                            \textbf{\color{cond}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{3}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.DechoBGColor} est appelée pour coloriee le fond de la zone de texte où la seconde ligne de caractères est affichée.
                         \end{justify}\setlength{\parskip}{1em}
 
                         \begin{justify}
@@ -592,7 +592,7 @@
 
 \begin{justify}
     \textbf{Description :}
-    Chacune de ces fonctions appelle la fonction \textbf{\color{func}BU::HeaderBase}, en lui passant ses trois premiers arguments prédéfinis.
+    Chacune de ces fonctions appelle la fonction \textbf{\color{func}BU.HeaderBase}, en lui passant ses trois premiers arguments prédéfinis.
 \end{justify}
 
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -617,7 +617,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{func}BU::HeaderBase}, en lui passant en premier et troisième arguments une même substitution de commande (\textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR...}), puis un caractère défini par la variable \textbf{\color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument.
+    Chacune des fonctions de cette catégorie appelle la fonction \textbf{\color{func}BU.HeaderBase}, en lui passant en premier et troisième arguments une même substitution de commande (\textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR...}), puis un caractère défini par la variable \textbf{\color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE} en deuxième argument.
 \end{justify}
 
 \begin{justify}
@@ -700,7 +700,7 @@
 \end{justify}
 
 \begin{justify}
-    Il faudra donc se contenter d'appeler la fonction \textbf{\color{func}BU::HeaderBase}, suivie de ses 4 arguments, dont chaque valeur sera différente des autres.
+    Il faudra donc se contenter d'appeler la fonction \textbf{\color{func}BU.HeaderBase}, suivie de ses 4 arguments, dont chaque valeur sera différente des autres.
 \end{justify}
 
 \end{document}

@@ -66,5 +66,5 @@ fi
 # This command pauses the script, in order to see how much memory it uses.
 sleep 30
 
-# Testing a BU::Decho_FMT function
-# BU::Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_TXT_ORANGE"
+# Testing a BU.Decho_FMT function
+# BU.Decho_FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_TXT_ORANGE"

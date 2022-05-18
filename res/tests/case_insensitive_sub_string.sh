@@ -2,7 +2,7 @@
 
 __ARG=$1
 
-function BU::ModuleInit::CaseInsensitiveSubString()
+function BU.ModuleInit.CaseInsensitiveSubString()
 {
     #**** Parameters ****
     local p_string=$1;
@@ -17,4 +17,4 @@ function BU::ModuleInit::CaseInsensitiveSubString()
     return 0;
 }
 
-BU::ModuleInit::CaseInsensitiveSubString "$__ARG"
+BU.ModuleInit.CaseInsensitiveSubString "$__ARG"

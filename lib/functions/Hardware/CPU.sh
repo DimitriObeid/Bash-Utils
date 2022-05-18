@@ -45,10 +45,10 @@ fi
 ## GET CPU INFORMATIONS
 
 # Getting the number of cores.
-function BU::Hardware::CPU::GetCoresNumber()    { if BU::Main::CMDS::GetCommandPath 'nproc'; then BU::EchoMsg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetCoresNumber()    { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.EchoMsg "$(nproc)" '-n'; return 0; else return 1; fi; }
 
 # Getting the CPU architecture.
-function BU::Hardware::CPU::GetArch()           { if BU::Main::CMDS::GetCommandPath 'uname'; then BU::EchoMsg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetArch()           { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.EchoMsg "$(uname -m)" '-n'; return 0; else return 1; fi; }
 
 # Getting the CPU vendor
-function BU::Hardware::CPU::GetVendor()         { if BU::Main::CMDS::GetCommandPath 'lshw'; then BU::EchoMsg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetVendor()         { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.EchoMsg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }

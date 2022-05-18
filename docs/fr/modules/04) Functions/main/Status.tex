@@ -119,7 +119,7 @@
 \color{sec3}
 \subsubsection{Fonctions externes appelées}\color{text}
 
-\textbf{Fonction : \color{func}BU::Main::Headers::DrawLine}\\[1\baselineskip]
+\textbf{Fonction : \color{func}BU.Main.Headers.DrawLine}\\[1\baselineskip]
 
 \textbf{Fichier de définition : \color{lime}Checkings.lib}\\[1\baselineskip]
 
@@ -195,7 +195,7 @@
 \subsection{Sous-section « CHECKING VALUES »}
 
 \color{sec3}
-\subsubsection{BU::Main::Status::ConfEcho}\color{text}
+\subsubsection{BU.Main.Status.ConfEcho}\color{text}
 
 \begin{justify}
 \textbf{Description de la fonction :}\\[1\baselineskip]
@@ -295,7 +295,7 @@
         \item
         {
             \begin{justify}
-                La fonction \textbf{\color{func}BU::Main::Headers::DrawLine} est appelée pour afficher une ligne complète sur le terminal, avant d'afficher un message d'erreur concernant le fait qu'une mauvaise valeur a été enregistrée dans la variable globale de statut traitée, affichant également le nom de cette variable, et sa valeur. La même fonction est rappelée pour dessiner la deuxième ligne.
+                La fonction \textbf{\color{func}BU.Main.Headers.DrawLine} est appelée pour afficher une ligne complète sur le terminal, avant d'afficher un message d'erreur concernant le fait qu'une mauvaise valeur a été enregistrée dans la variable globale de statut traitée, affichant également le nom de cette variable, et sa valeur. La même fonction est rappelée pour dessiner la deuxième ligne.
             \end{justify}
 
             \setlength{\parskip}{1em}
@@ -321,7 +321,7 @@
 
 
 \begin{justify}
-    Sachant qu'il est désormais sûr d'appeler une fonction du fichier \textbf{\color{path}Echo.lib}, car la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, un message d'erreur est affiché par le biais de la fonction \textbf{\color{func}BU::EchoError}.
+    Sachant qu'il est désormais sûr d'appeler une fonction du fichier \textbf{\color{path}Echo.lib}, car la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, un message d'erreur est affiché par le biais de la fonction \textbf{\color{func}BU.EchoError}.
 \end{justify}
 
 \setlength{\parskip}{1em}
@@ -429,7 +429,7 @@
 \end{justify}
 
 \color{sec3}
-\subsubsection{BU::Main::Status::CheckSTAT\_*}\color{text}
+\subsubsection{BU.Main.Status.CheckSTAT\_*}\color{text}
 
 \begin{justify}
     \textbf{Description :}\\[1\baselineskip]
@@ -482,7 +482,7 @@
 \end{justify}
 
 \begin{justify}
-    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{func}BU::Main::Status::ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
+    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{func}BU.Main.Status.ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
 
     \begin{enumerate}
         \item Le fichier dans lequel la valeur de cette variable a été vérifiée,
@@ -508,7 +508,7 @@
             ère exception :
 
             \begin{justify}
-                La fonction \textbf{\color{func}BU::Main::Status::CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
+                La fonction \textbf{\color{func}BU.Main.Status.CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
             \end{justify}
 
             \begin{justify}
@@ -516,7 +516,7 @@
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{cond} alors} la fonction \textbf{\color{func}BU::Main::Files::CreateProjectLogFile} est appelée pour créer le fichier de logs.
+                \textbf{\color{cond} alors} la fonction \textbf{\color{func}BU.Main.Files.CreateProjectLogFile} est appelée pour créer le fichier de logs.
             \end{justify}
 
             \begin{justify}
@@ -546,7 +546,7 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Status::CheckProjectStatusVars}\color{text}
+\subsubsection{BU.Main.Status.CheckProjectStatusVars}\color{text}
 
 \begin{justify}
     \textbf{Description de la fonction :}\\[1\baselineskip]

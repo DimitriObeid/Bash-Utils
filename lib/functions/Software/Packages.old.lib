@@ -17,7 +17,7 @@
 # Getting the user's operating system main package manager.
 function GetMainPackageManager
 {
-	BU::HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
+	BU.HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
 
 	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
 	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
@@ -30,16 +30,16 @@ function GetMainPackageManager
         command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
         command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
     else
-        BU::EchoError "Your operating system is not (yet) supported !"; BU::Newline;
+        BU.EchoError "Your operating system is not (yet) supported !"; BU.Newline;
         exit 1
     fi
 
 	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
 	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
-        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "Args" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU::Main::Errors::HandleErrors" sans que le moindre bug ne se produise.
-		BU::Main::Errors::HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU::DechoE "APT"), $(BU::DechoE "DNF") et $(BU::DechoE "Pacman")." "$LINENO"
+        # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "Args" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU.Main.Errors.HandleErrors" sans que le moindre bug ne se produise.
+		BU.Main.Errors.HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU.DechoE "APT"), $(BU.DechoE "DNF") et $(BU.DechoE "Pacman")." "$LINENO"
 	else
-		BU::EchoSuccess "Gestionnaire de paquets principal trouvé : $(BU::DechoS "$PACK_MAIN_PACKAGE_MANAGER")"
+		BU.EchoSuccess "Gestionnaire de paquets principal trouvé : $(BU.DechoS "$PACK_MAIN_PACKAGE_MANAGER")"
 	fi
 }
 
@@ -95,7 +95,7 @@ function PackInstall
     package=$2  # Package's name
 
     #**** Code ****
-    BU::Main::Checkings::CheckRootEUID
+    BU.Main.Checkings.CheckRootEUID
 
     if [ "$OSTYPE" = "linux-gnu" ]; then
         if [ "$manager" = "apt" ]; then APTInstall
@@ -139,28 +139,28 @@ function SoftwareInstall
 	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
 
 	#**** Code ****
-	BU::Main::Checkings::CheckRootEUID
+	BU.Main.Checkings.CheckRootEUID
 
-	BU::EchoNewstep "Téléchargement du logiciel $(BU::DechoN "$name")."
+	BU.EchoNewstep "Téléchargement du logiciel $(BU.DechoN "$name")."
 
 	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.
 	if test ! -d "$inst_path"; then
-        BU::Main::Directories::Make "$DIR_SOFTWARE_NAME" "$name" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+        BU.Main.DirectoriesMake "$DIR_SOFTWARE_NAME" "$name" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
     fi
 
 	if test wget -v "$software_dl_link" -O "$inst_path" >> "$FILE_LOG_PATH"; then
-		BU::EchoSuccess "L'archive du logiciel $(BU::DechoS "$name") a été téléchargé avec succès."
-		BU::Newline;
+		BU.EchoSuccess "L'archive du logiciel $(BU.DechoS "$name") a été téléchargé avec succès."
+		BU.Newline;
 
 	else
-		BU::EchoError "Échec du téléchargement de l'archive du logiciel $(BU::DechoE "$name")."
-		BU::Newline;
+		BU.EchoError "Échec du téléchargement de l'archive du logiciel $(BU.DechoE "$name")."
+		BU.Newline;
 
 		return
 	fi
 
 	# On décompresse l'archive téléchargée selon le format de compression tout en redirigeant toutes les sorties vers le terminal et le fichier de logs.
-	BU::EchoNewstepTee "Décompression de l'archive $(BU::DechoN "$archive")."
+	BU.EchoNewstepTee "Décompression de l'archive $(BU.DechoN "$archive")."
 	{
 		case "$archive" in
 			"*.zip")
@@ -179,8 +179,8 @@ function SoftwareInstall
 				UncompressArchive "tar" "-jxvf" "$inst_path/$archive" "$archive"
 				;;
 			*)
-				BU::EchoError "Le format de fichier de l'archive $(BU::DechoE "$archive") n'est pas supporté."
-				BU::Newline;
+				BU.EchoError "Le format de fichier de l'archive $(BU.DechoE "$archive") n'est pas supporté."
+				BU.Newline;
 
 				return
 				;;
@@ -190,27 +190,27 @@ function SoftwareInstall
 	# On vérifie que le dossier contenant les fichiers desktop (servant de raccourci) existe, pour ne pas encombrer le bureau de l'utilisateur.
 	# S'il n'existe pas, alors le script le crée
 	if test ! -d "$shortcut_dir"; then
-		BU::EchoNewstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau)."
-		BU::Newline;
+		BU.EchoNewstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau)."
+		BU.Newline;
 
-		BU::Main::Directories::Make "$DIR_HOMEDIR/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+		BU.Main.DirectoriesMake "$DIR_HOMEDIR/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
 
-		BU::EchoSuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier."
+		BU.EchoSuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier."
 	fi
 
-	BU::EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU::DechoN "$name")."
+	BU.EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU.DechoN "$name")."
 	ln -s "$exec" "$name"
 
 	if test "$?" == "0"; then
-		BU::EchoSuccess "Le lien symbolique a été créé avec succès."
-		BU::Newline;
+		BU.EchoSuccess "Le lien symbolique a été créé avec succès."
+		BU.Newline;
 	else
-        BU::EchoError "Impossible de créer un lien symbolique pointant vers $(BU::DechoE "$exec")."
-        BU::Newline;
+        BU.EchoError "Impossible de créer un lien symbolique pointant vers $(BU.DechoE "$exec")."
+        BU.Newline;
 	fi
 
-	BU::EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(BU::DechoN "$name")."
-	BU::Newline;
+	BU.EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(BU.DechoN "$name")."
+	BU.Newline;
 
 	cat <<-EOF > "$shortcut_dir/$name.desktop"
 	[Desktop Entry]
@@ -222,18 +222,18 @@ function SoftwareInstall
 	Categories="$category";
 	EOF
 
-	BU::EchoSuccess "Le fichier $(BU::DechoS "$name.desktop") a été créé avec succès dans le dossier $(BU::DechoS "$shortcut_dir")."
-	BU::Newline;
+	BU.EchoSuccess "Le fichier $(BU.DechoS "$name.desktop") a été créé avec succès dans le dossier $(BU.DechoS "$shortcut_dir")."
+	BU.Newline;
 
-	BU::EchoNewstep "Suppression de l'archive $(BU::DechoN "$archive")."
-	BU::Newline;
+	BU.EchoNewstep "Suppression de l'archive $(BU.DechoN "$archive")."
+	BU.Newline;
 
 	# On vérifie que l'archive a bien été supprimée.
 	if test rm -f "$inst_path/$archive"; then
-        BU::EchoSuccess "L'archive $(BU::DechoS "$archive") a été correctement supprimée."
-		BU::Newline;
+        BU.EchoSuccess "L'archive $(BU.DechoS "$archive") a été correctement supprimée."
+		BU.Newline;
     else
-		BU::EchoError "La suppression de l'archive $(BU::DechoE "$archive") a échouée."
-		BU::Newline;
+		BU.EchoError "La suppression de l'archive $(BU.DechoE "$archive") a échouée."
+		BU.Newline;
 	fi
 }

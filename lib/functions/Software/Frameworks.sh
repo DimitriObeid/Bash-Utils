@@ -55,19 +55,19 @@ fi
 ## LINUX VERSIONS (PHP)
 
 # Installing Laravel on Linux.
-function BU::Software::Frameworks::InstallLaravel::Linux()
+function BU.SoftwareFrameworksInstallLaravelLinux()
 {
     # Checking if the current system type is Linux.
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing Symfony on Linux.
-function BU::Software::Frameworks::InstallSymfony::Linux()
+function BU.SoftwareFrameworksInstallSymfonyLinux()
 {
     # Checking if the current system type is Linux.
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -77,19 +77,19 @@ function BU::Software::Frameworks::InstallSymfony::Linux()
 ## MAC OS VERSIONS (PHP)
 
 # Installing laravel on Mac OS.
-function BU::Software::Frameworks::InstallLaravel::OSX()
+function BU.SoftwareFrameworksInstallLaravelOSX()
 {
     # Checking if the current system type is OSX.
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing Symfony on Mac OS.
-function BU::Software::Frameworks::InstallSymfony::OSX()
+function BU.SoftwareFrameworksInstallSymfonyOSX()
 {
     # Checking if the current system type is OSX.
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -99,19 +99,19 @@ function BU::Software::Frameworks::InstallSymfony::OSX()
 ## WINDOWS VERSIONS (PHP)
 
 # Installing laravel on Windows.
-function BU::Software::Frameworks::InstallLaravel::Windows()
+function BU.SoftwareFrameworksInstallLaravelWindows()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing Symfony on Windows.
-function BU::Software::Frameworks::InstallSymfony::Windows()
+function BU.SoftwareFrameworksInstallSymfonyWindows()
 {
 	#**** Code ****
-	BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }

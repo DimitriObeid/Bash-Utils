@@ -103,7 +103,7 @@ function ChangeDirOwnership()
 	#**** Code ****
 	PrintLog "Changing recursively the ownership of the « $__F_LIBRARY_PATH_NEW_PARENT_PATH » directory, from « root » to « ${user##*/} »"
 	if chown -Rv "${p_user##*/}" "$p_file"; then PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"; return 0;
-    else BU::Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; BU::NewlineF; PrintRoot; exit 1; fi
+    else BU.Newline; PrintLog "UNABLE TO RECURSIVELY CHANGE THE OWNERSHIP OF THE « $p_dir » DIRECTORY TO « ${user##*/} »"; BU.NewlineF; PrintRoot; exit 1; fi
 
 }
 
@@ -127,20 +127,20 @@ function ChangeOwnership()
 
 	#**** Code ****
 	if [ "$user" != '/root' ]; then
-        if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; BU::Newline; return 0; fi
+        if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; BU.Newline; return 0; fi
 
         PrintLog "Changing recursively the ownership of the newly installed « $__D_MODULE_MANAGER_NEW_PATH » folder, from 'root' to « ${user##*/} »"
         ChangeDirOwnership "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH"
 
-        BU::Newline;
+        BU.Newline;
         PrintLog "The « $__D_MODULE_MANAGER_NEW_PATH » folder ownership was successfully changed"
 
-        BU::Newline; PrintLine; BU::Newline; sleep 0.5
+        BU.Newline; PrintLine; BU.Newline; sleep 0.5
 
         PrintLog "Changing the ownership of the newly « $__F_MODULE_INITIALIZER_NEW_PATH » file, from root to « ${user##*/} »"
         ChangeFileOwnership "${user##*/}" "$__F_MODULE_INITIALIZER_NEW_PATH"
 
-        BU::Newline;
+        BU.Newline;
         PrintLog "The « $__F_MODULE_INITIALIZER_NEW_PATH » file ownership was successfully changed"
 
         return 0;
@@ -160,7 +160,7 @@ function CopyModulesInitializer()
         PrintLog "Copying the « $__F_MODULE_INITIALIZER_OLD_PATH » file in the « $user » directory"
         cp -v "$__F_MODULE_INITIALIZER_OLD_PATH" "$__F_MODULE_INITIALIZER_NEW_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_MODULE_INITIALIZER_OLD_PATH » FILE IN THE « $user » DIRECTORY"; PrintRoot; exit 1; }
 
-	BU::Newline;
+	BU.Newline;
 
 	else
         PrintLog "Overwriting the « $__F_MODULE_INITIALIZER_NEW_PATH » file in the « $user » directory"
@@ -188,17 +188,17 @@ function CopyModulesManagerDirectory()
 
         # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
         rm -rfv "${__D_MODULE_MANAGER_NEW_PATH/:?}/"* || { PrintLog "UNABLE TO OVERWRITE THE HIDDEN « $__D_MODULE_MANAGER_NEW_PATH » MODULES MANAGER'S DIRECTORY !"; PrintRoot; exit 1; }
-        BU::Newline;
+        BU.Newline;
 
         PrintLog "Copying the « $__D_MODULE_MANAGER_NEW_PATH » modules manager directory into the « $user » directory"
 		cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { PrintLog "UNABLE TO COPY THE « $__D_MODULE_MANAGER_OLD_PATH » DIRECTORY INTO THE « $user » DIRECTORY !"; PrintRoot; exit 1; }
 
-		BU::Newline;
+		BU.Newline;
     else
         PrintLog "Copying the « $__D_MODULE_MANAGER_NEW_PATH » modules manager directory into the « $user » directory"
         cp -rv "$__D_MODULE_MANAGER_OLD_PATH" "$user" || { printf "UNABLE TO COPY THE %s  DIRECTORY INTO THE « $user » DIRECTORY !" "$__D_MODULE_MANAGER_OLD_PATH"; PrintRoot; exit 1; }
 
-		BU::Newline;
+		BU.Newline;
 	fi
 }
 
@@ -220,7 +220,7 @@ function Log()
 }
 
 # New line function for the functions called into the following "for" loop.
-function BU::Newline()
+function BU.Newline()
 {
     #**** Parameters ****
     local p_line_breaks=$1
@@ -236,7 +236,7 @@ function BU::Newline()
 }
 
 # New line function called into the the following "for" loop, and after each PrintLog functions, if a linebreak should be displayed.
-function BU::NewlineF() { local p_line_breaks=$1; if [[ "$p_line_breaks" =~ ^[\-0-9]+$ ]]; then PrintLog "$(BU::Newline "$p_line_breaks")"; else PrintLog "$(BU::Newline)"; fi; return 0; }
+function BU.NewlineF() { local p_line_breaks=$1; if [[ "$p_line_breaks" =~ ^[\-0-9]+$ ]]; then PrintLog "$(BU.Newline "$p_line_breaks")"; else PrintLog "$(BU.Newline)"; fi; return 0; }
 
 # Printing a line according to the terminal's columns number.
 function PrintLine()
@@ -249,7 +249,7 @@ function PrintLine()
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-'
-    done; PrintLog "$(BU::Newline)"; return 0;
+    done; PrintLog "$(BU.Newline)"; return 0;
 }
 
 # Checking if the
@@ -257,9 +257,9 @@ function PrintLog()
 {
     if [ "$__NOLOG" = 'nolog' ]; then
         if [ -n "$2" ] && [ "$2" = 'log' ]; then
-            echo -e "$1"; BU::Newline; return 0 # >> "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0;
+            echo -e "$1"; BU.Newline; return 0 # >> "$__F_INSTALL_LOG_FILE_PATH"; BU.Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0;
         else
-            echo -e "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; BU::Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0;
+            echo -e "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; BU.Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0;
         fi
     else
         echo -e "$1"; return 0;
@@ -300,26 +300,26 @@ fi
 
 # Checking if the library is being installed on a computer without the "su" command or an authorization to access to root privileges (like an unrooted Android device).
 if [ "$EUID" -ne 0 ]; then
-    PrintLog "Are you sure you want to install this library without super-user privileges ?"; BU::NewlineF; sleep .3;
+    PrintLog "Are you sure you want to install this library without super-user privileges ?"; BU.NewlineF; sleep .3;
 
-    PrintLog "If it was a mistake, please relaunch this script with the « sudo » command, or else you will not be able to use any function that require these privileges."; BU::Newline; sleep .3;
+    PrintLog "If it was a mistake, please relaunch this script with the « sudo » command, or else you will not be able to use any function that require these privileges."; BU.Newline; sleep .3;
 
-    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges, or if you can't install or use the « su » or « sudo » command, or if you're using an unrooted Android device."; BU::NewlineF
+    PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges, or if you can't install or use the « su » or « sudo » command, or if you're using an unrooted Android device."; BU.NewlineF
 
-    PrintLog "Do you want to continue the installation ? Answer '« es » (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."; BU::NewlineF
+    PrintLog "Do you want to continue the installation ? Answer '« es » (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."; BU.NewlineF
 
 
     read -rp "Please type your answer : " __ans
 
     if [ -f "$__F_INSTALL_LOG_FILE_PATH" ]; then
         PrintLog "Please type your answer" 'log'
-        PrintLog "Answer : $__ans" 'log'; BU::NewlineF
+        PrintLog "Answer : $__ans" 'log'; BU.NewlineF
     fi
 
     if [ "${__ans,,}" != 'yes' ]; then
-        PrintLog "Aborting installation"; BU::NewlineF
+        PrintLog "Aborting installation"; BU.NewlineF
 
-        PrintLog "Please check the « $__F_INSTALL_LOG_FILE_PATH » log file"; BU::NewlineF
+        PrintLog "Please check the « $__F_INSTALL_LOG_FILE_PATH » log file"; BU.NewlineF
 
         exit 1
     fi
@@ -392,7 +392,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         ## CODE
 
-		BU::NewlineF; PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; BU::NewlineF; sleep 1
+		BU.NewlineF; PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; BU.NewlineF; sleep 1
 
 		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
 
@@ -400,7 +400,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 			PrintLog "$(CopyModulesInitializer "$user")"; sleep 0.5
 
-			BU::NewlineF; PrintLog "$(PrintLine)"; BU::NewlineF; sleep 0.5
+			BU.NewlineF; PrintLog "$(PrintLine)"; BU.NewlineF; sleep 0.5
 
 			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
 
@@ -413,12 +413,12 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				PrintLog "Copying the $__F_LIBRARY_PATH_OLD_PARENT_PATH » file in the $__D_MODULE_MANAGER_NEW_PATH » directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_LIBRARY_PATH_OLD_PARENT_PATH » FILE IN THE « $__F_LIBRARY_PATH_NEW_PARENT_PATH » DIRECTORY"; PrintRoot; exit 1; }
 
-				BU::Newline;
+				BU.Newline;
 			else
 				PrintLog "Copying the « $__F_LIBRARY_PATH_OLD_PARENT_PATH file in the « $__D_MODULE_MANAGER_NEW_PATH » directory"
 				cp -v "$__F_LIBRARY_PATH_OLD_PARENT_PATH" "$__F_LIBRARY_PATH_NEW_PARENT_PATH" || { PrintLog "UNABLE TO COPY THE « $__F_LIBRARY_PATH_OLD_PARENT_PATH » FILE IN THE « $__F_LIBRARY_PATH_NEW_PARENT_PATH » DIRECTORY"; PrintRoot; exit 1; }
 
-				BU::Newline;
+				BU.Newline;
 			fi
 
 			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
@@ -432,7 +432,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
     fi
 done
 
-PrintLog "$(PrintLine)"; BU::NewlineF
+PrintLog "$(PrintLine)"; BU.NewlineF
 
 PrintLog "THE INSTALLATION / UPDATE OF THE MODULES MANAGER IS DONE FOR EVERY LISTED USERS :"
 

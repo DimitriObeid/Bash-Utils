@@ -139,35 +139,35 @@
         \hline
         \textbf{Fonction} & \textbf{Fichier de définition}\\
         \hline
-        \textbf{\color{func}BU::ModuleInit::Msg}                           & \textbf{\color{path}Bash-utils-init.sh}\\
+        \textbf{\color{func}BU.ModuleInit.Msg}                           & \textbf{\color{path}Bash-utils-init.sh}\\
         \hline
-        \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile}  & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.Main.Checkings.CheckProjectRelatedFile}  & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::IsInt}                                     & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.IsInt}                                     & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Status::CheckStatIsBackupEchoing}                & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.Main.Status.CheckStatIsBackupEchoing}                & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::CheckProjectLogStatus}                     & \textbf{\color{path}Checkings.lib}\\
+        \textbf{\color{func}BU.CheckProjectLogStatus}                     & \textbf{\color{path}Checkings.lib}\\
         \hline
-        \textbf{\color{func}BU::DechoHighlightFunction}                    & \textbf{\color{path}Decho.lib}\\
+        \textbf{\color{func}BU.DechoHighlightFunction}                    & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{func}BU::DechoHighlightVar}                         & \textbf{\color{path}Decho.lib}\\
+        \textbf{\color{func}BU.DechoHighlightVar}                         & \textbf{\color{path}Decho.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Errors::HandleSmallErrors}           & \textbf{\color{path}Errors.lib}\\
+        \textbf{\color{func}BU.Main.Errors.HandleSmallErrors}           & \textbf{\color{path}Errors.lib}\\
         \hline
-        \textbf{\color{func}BU::HeaderError}                               & \textbf{\color{path}Headers.lib}\\
+        \textbf{\color{func}BU.HeaderError}                               & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{func}BU::HeaderNewstep}                             & \textbf{\color{path}Headers.lib}\\
+        \textbf{\color{func}BU.HeaderNewstep}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{func}BU::HeaderSuccess}                             & \textbf{\color{path}Headers.lib}\\
+        \textbf{\color{func}BU.HeaderSuccess}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{func}BU::HeaderWarning}                             & \textbf{\color{path}Headers.lib}\\
+        \textbf{\color{func}BU.HeaderWarning}                             & \textbf{\color{path}Headers.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}     & \textbf{\color{path}Status.lib}\\
+        \textbf{\color{func}BU.Main.Status.CheckStatIsInitializing}     & \textbf{\color{path}Status.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Status::CheckStatIsBackupEchoing}    & \textbf{\color{path}Status.lib}\\
+        \textbf{\color{func}BU.Main.Status.CheckStatIsBackupEchoing}    & \textbf{\color{path}Status.lib}\\
         \hline
-        \textbf{\color{func}BU::Main::Status::ChangeSTAT\_ECHO}            & \textbf{\color{path}Status.lib}\\
+        \textbf{\color{func}BU.Main.Status.ChangeSTAT\_ECHO}            & \textbf{\color{path}Status.lib}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -232,9 +232,9 @@
 \subsection{Sous-section « DEBUGGING »}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Echo::\_\_EchoVoid}\color{text}
+\subsubsection{BU.Main.Echo.\_\_EchoVoid}\color{text}
 
-\textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoVoid}\setlength{\parskip}{1em}
+\textbf{Fonction : \color{func}BU.Main.Echo.\_\_EchoVoid}\setlength{\parskip}{1em}
 
 % ------------
 
@@ -260,7 +260,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
+    La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
 
 % ------------
@@ -269,7 +269,7 @@
 
 \begin{justify}
     \textbf{Utilisation :}\\[1\baselineskip]
-    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} définie à la suite.
+    Il est recommandé de n'appeler cette fonction que dans la fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} définie à la suite.
 \end{justify}
 
 % ------------
@@ -279,10 +279,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
 \color{sec3}
-\subsubsection{BU::Main::Echo::\_\_EchoOutput}\color{text}
+\subsubsection{BU.Main.Echo.\_\_EchoOutput}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoOutput}
+    \textbf{Fonction : \color{func}BU.Main.Echo.\_\_EchoOutput}
 \end{justify}
 
 % ------------
@@ -292,7 +292,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes.
+    Selon les étapes des fonctions \textbf{\color{func}Echo<...>} définies dans ce fichier de librairie, cette fonction appelle la fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} définie précédemment pour créer un espace vide sur 10 lignes.
 
     Cet espace est ensuite redirigé vers le même \textbf{\color{path}fichier temporaire}, pour mieux observer le début et la fin de la sortie d'une des fonctions \textbf{\color{func}Echo<...>} lors d'un déboguage avec la commande \textbf{\color{cmds}bash -x}, à la condition de fixer la valeur de la variable globale dde statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG} à \textbf{true}.
 \end{justify}
@@ -324,7 +324,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} vérifie en premier la valeur de l'argument \textbf{\color{vars}p\_type}.
+    La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} vérifie en premier la valeur de l'argument \textbf{\color{vars}p\_type}.
 \end{justify}
 
 \begin{justify}
@@ -363,7 +363,7 @@
     }
 
     \begin{justify}\setlength{\parskip}{2em}
-        La fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectRelatedFile} est appelée pour vérifier la présence du \textbf{\color{path}fichier temporaire} où la sortie de la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} doit être redirigée, ou le créer le cas échéant. En cas d'échec, un message d'erreur est affiché sur le terminal.
+        La fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectRelatedFile} est appelée pour vérifier la présence du \textbf{\color{path}fichier temporaire} où la sortie de la fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} doit être redirigée, ou le créer le cas échéant. En cas d'échec, un message d'erreur est affiché sur le terminal.
     \end{justify}
 
     \item
@@ -380,7 +380,7 @@
             \item
             {
                 \begin{justify}
-                    La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{cmds}bash -x} sur le terminal.
+                    La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} est appelée pour afficher l'espace vide parmi la masse d'informations retournées par la commande \textbf{\color{cmds}bash -x} sur le terminal.
                 \end{justify}
             }
 
@@ -441,7 +441,7 @@
                     \begin{enumerate}
                         \item Le mot \textbf{« BEGIN »} de la chaîne de caractères passée en argument de la fonction d'affichage de headers est remplacé par le mot \textbf{« END »}.
 
-                        \item La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier.
+                        \item La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} est appelée en tant que toute dernière instruction, au lieu d'être appelée en tout premier.
                     \end{enumerate}
                 \end{justify}\setlength{\parskip}{1em}
 
@@ -468,7 +468,7 @@
 \begin{justify}
     \textbf{Utilisation :}
 
-    Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU::EchoMsg}.
+    Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU.EchoMsg}.
 \end{justify}
 
 % ------------
@@ -478,10 +478,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Main::Echo::\_\_EchoCPLS}\color{text}
+\subsubsection{BU.Main.Echo.\_\_EchoCPLS}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::Main::Echo::\_\_EchoCPLS}
+    \textbf{Fonction : \color{func}BU.Main.Echo.\_\_EchoCPLS}
 \end{justify}
 
 % ------------
@@ -491,7 +491,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Cette fonction remplit le même rôle que la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus}, à la différence qu'elle ne sert que de fonction de secours lorsque la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, dans les situations où le rappel de cette même fonction pour gérer l'affichage du texte crée une boucle infinie.
+    Cette fonction remplit le même rôle que la fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectLogStatus}, à la différence qu'elle ne sert que de fonction de secours lorsque la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, dans les situations où le rappel de cette même fonction pour gérer l'affichage du texte crée une boucle infinie.
 \end{justify}
 
 % ------------
@@ -548,7 +548,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU::Main::Status::CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne.
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU.Main.Status.CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.ModuleInit.Msg} est appelée en passant la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en second argument pour ne pas sauter de ligne.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -578,7 +578,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU::ModuleInit::Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne.
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.ModuleInit.Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -662,16 +662,16 @@
 \subsection{Sous-section « DISPLAYING A CONTEXT MESSAGE »}\color{text}
 
 \color{sec3}
-\subsubsection{BU::EchoError | Msg | Newstep | Success | Warning}\color{text}
+\subsubsection{BU.EchoError | Msg | Newstep | Success | Warning}\color{text}
 
 \begin{justify}
     \textbf{Fonctions :}
     \begin{enumerate}
-        \item \textbf{\color{red}BU::EchoError}
-        \item \textbf{\color{text}BU::EchoMsg}
-        \item \textbf{\color{orange}BU::EchoNewstep}
-        \item \textbf{\color{green}BU::EchoSuccess}
-        \item \textbf{\color{yellow}BU::EchoWarning}
+        \item \textbf{\color{red}BU.EchoError}
+        \item \textbf{\color{text}BU.EchoMsg}
+        \item \textbf{\color{orange}BU.EchoNewstep}
+        \item \textbf{\color{green}BU.EchoSuccess}
+        \item \textbf{\color{yellow}BU.EchoWarning}
     \end{enumerate}
 \end{justify}
 
@@ -682,7 +682,7 @@
 \begin{justify}
     \textbf{Description :}
 
-    Chacune de ces fonctions gère le texte à afficher et / ou rediriger vers un fichier de logs selon la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, tout en appelant la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} (voir la description de cette fonction).
+    Chacune de ces fonctions gère le texte à afficher et / ou rediriger vers un fichier de logs selon la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, tout en appelant la fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} (voir la description de cette fonction).
 \end{justify}
 
 % ------------
@@ -720,13 +720,13 @@
         \item
         {
             \begin{justify}
-                La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} est appelée (voir la description de cette fonction).
+                La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} est appelée (voir la description de cette fonction).
             \end{justify}
 
             \setlength{\parskip}{1em}
 
             \begin{justify}
-                La fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus} est appelée en lui passant en arguments :
+                La fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectLogStatus} est appelée en lui passant en arguments :
                 \begin{enumerate}
                     \item La chaîne de caractères à traiter (paramètre \textbf{\color{vars}p\_string}), avec la substitution de commande pour encoder la couleur associée au contexte, une séparation pour mieux distinguer ce texte et une dernière substitution de commande pour réinitialiser la couleur du texte.
                     \item L'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
@@ -737,7 +737,7 @@
             \setlength{\parskip}{1em}
 
             \begin{justify}
-                La fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoOutput} est rappelée (voir la description de cette fonction).
+                La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoOutput} est rappelée (voir la description de cette fonction).
             \end{justify}
         }
     \end{itemize}
@@ -752,7 +752,7 @@
         \item
         {
             \begin{justify}
-                Le code à exécuter est sensiblement le même que dans la vérification précédente, à l'exception que la fonction \textbf{\color{func}BU::Main::Echo::\_\_EchoCPLS} est appelée pour gérer l'affichage de texte à la place de la fonction \textbf{\color{func}BU::Main::Checkings::CheckProjectLogStatus}.
+                Le code à exécuter est sensiblement le même que dans la vérification précédente, à l'exception que la fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoCPLS} est appelée pour gérer l'affichage de texte à la place de la fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectLogStatus}.
             \end{justify}
         }
     \end{itemize}
@@ -779,10 +779,10 @@
 \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
 \color{sec3}
-\subsubsection{BU::EchoRead}\color{text}
+\subsubsection{BU.EchoRead}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \color{func}BU::EchoRead}
+    \textbf{Fonction : \color{func}BU.EchoRead}
 \end{justify}
 
 % ------------
@@ -854,55 +854,55 @@
 \subsection{Sous-section « DISPLAYING A COLORED MESSAGE »}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Echo<\$nom de la couleur en anglais>}\color{text}
+\subsubsection{BU.Echo<\$nom de la couleur en anglais>}\color{text}
 
 \begin{justify}
     \textbf{Fonctions :}
     \begin{enumerate}
-        \item \textbf{\color{Aqua}BU::EchoAqua}\setlength{\parskip}{0em}
-        \item \textbf{\color{text}BU::EchoBlack}
-        \item \textbf{\color{Blue}BU::EchoBlue}
+        \item \textbf{\color{Aqua}BU.EchoAqua}\setlength{\parskip}{0em}
+        \item \textbf{\color{text}BU.EchoBlack}
+        \item \textbf{\color{Blue}BU.EchoBlue}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Cyan}BU::EchoCyan}\setlength{\parskip}{0em}
-        \item \textbf{\color{Fuchsia}BU::EchoFuchsia}
-        \item \textbf{\color{Gray}BU::EchoGray}
+        \item \textbf{\color{Cyan}BU.EchoCyan}\setlength{\parskip}{0em}
+        \item \textbf{\color{Fuchsia}BU.EchoFuchsia}
+        \item \textbf{\color{Gray}BU.EchoGray}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Green}BU::EchoGreen}\setlength{\parskip}{0em}
-        \item \textbf{\color{Lime}BU::EchoLime}
-        \item \textbf{\color{Maroon}BU::EchoMaroon}
+        \item \textbf{\color{Green}BU.EchoGreen}\setlength{\parskip}{0em}
+        \item \textbf{\color{Lime}BU.EchoLime}
+        \item \textbf{\color{Maroon}BU.EchoMaroon}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Navy}BU::EchoNavy}\setlength{\parskip}{0em}
-        \item \textbf{\color{Olive}BU::EchoOlive}
-        \item \textbf{\color{Orange}BU::EchoOrange}
+        \item \textbf{\color{Navy}BU.EchoNavy}\setlength{\parskip}{0em}
+        \item \textbf{\color{Olive}BU.EchoOlive}
+        \item \textbf{\color{Orange}BU.EchoOrange}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Pink}BU::EchoPink}\setlength{\parskip}{0em}
-        \item \textbf{\color{Purple}BU::EchoPurple}
-        \item \textbf{\color{Red}BU::EchoRed}
+        \item \textbf{\color{Pink}BU.EchoPink}\setlength{\parskip}{0em}
+        \item \textbf{\color{Purple}BU.EchoPurple}
+        \item \textbf{\color{Red}BU.EchoRed}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Salmon}BU::EchoSalmon}\setlength{\parskip}{0em}
-        \item \textbf{\color{Silver}BU::EchoSilver}
-        \item \textbf{\color{Tan}BU::EchoTan}
+        \item \textbf{\color{Salmon}BU.EchoSalmon}\setlength{\parskip}{0em}
+        \item \textbf{\color{Silver}BU.EchoSilver}
+        \item \textbf{\color{Tan}BU.EchoTan}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Teal}BU::EchoTeal}\setlength{\parskip}{0em}
-        \item \textbf{\color{Turquoise}BU::EchoTurquoise}
-        \item \textbf{\color{Violet}BU::EchoViolet}
+        \item \textbf{\color{Teal}BU.EchoTeal}\setlength{\parskip}{0em}
+        \item \textbf{\color{Turquoise}BU.EchoTurquoise}
+        \item \textbf{\color{Violet}BU.EchoViolet}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{text}BU::EchoWhite}\setlength{\parskip}{0em}
-        \item \textbf{\color{Yellow}BU::EchoYellow}
+        \item \textbf{\color{text}BU.EchoWhite}\setlength{\parskip}{0em}
+        \item \textbf{\color{Yellow}BU.EchoYellow}
     \end{enumerate}
 \end{justify}
 
@@ -941,7 +941,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    Pour ne pas avoir à réécrire le même code que dans les fonctions de la sous-section \textbf{\color{sec2}DISPLAYING A CONTEXT MESSAGE}, chacune de ces fonctions appellent simplement la fonction d'affichage de message \textbf{\color{func}BU::EchoMsg}, en passant respectivement en argument :
+    Pour ne pas avoir à réécrire le même code que dans les fonctions de la sous-section \textbf{\color{sec2}DISPLAYING A CONTEXT MESSAGE}, chacune de ces fonctions appellent simplement la fonction d'affichage de message \textbf{\color{func}BU.EchoMsg}, en passant respectivement en argument :
     \begin{enumerate}
         \item la substitution de commande servant à colorer le texte selon la couleur souhaitée, puis la chaîne de caractères à afficher, puis la substitution de commande pour réinitialiser la couleur du texte,
         \item l'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
@@ -971,10 +971,10 @@
 \subsection{Sous-section « LINE BREAKS »}\color{text}
 
 \color{sec3}
-\subsubsection{BU::Newline}\color{text}
+\subsubsection{BU.Newline}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \textbf{\color{func}BU::Newline}}
+    \textbf{Fonction : \textbf{\color{func}BU.Newline}}
 \end{justify}
 
 % ------------
@@ -1014,7 +1014,7 @@
         \item
         {
             \begin{justify}
-                \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU::EchoMsg}, puis la fonction \textbf{\color{func}BU::Main::Errors::HandleSmallErrors} est appelée pour afficher un message d'avertissement, avant que la fonction \textbf{\color{func}BU::EchoMsg} ne soit rappelée pour effectuer un dernier saut de ligne.
+                \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU.EchoMsg}, puis la fonction \textbf{\color{func}BU.Main.Errors.HandleSmallErrors} est appelée pour afficher un message d'avertissement, avant que la fonction \textbf{\color{func}BU.EchoMsg} ne soit rappelée pour effectuer un dernier saut de ligne.
             \end{justify}
 
             \setlength{\parskip}{1em}
@@ -1026,7 +1026,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{loop}Pour} un nombre \textbf{\color{vars}i} inférieur à la valeur du paramètre \textbf{\color{vars}p\_number}, et incrémenté à chaque itération, la fonction \textbf{\color{func}BU::EchoMsg} est appelée.
+                            \textbf{\color{loop}Pour} un nombre \textbf{\color{vars}i} inférieur à la valeur du paramètre \textbf{\color{vars}p\_number}, et incrémenté à chaque itération, la fonction \textbf{\color{func}BU.EchoMsg} est appelée.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -1046,7 +1046,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU::EchoMsg} est effectué.
+    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU.EchoMsg} est effectué.
 \end{justify}
 
 \begin{justify}

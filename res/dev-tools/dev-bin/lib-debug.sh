@@ -15,7 +15,7 @@ fi
 
 bash -x LibTest.sh 2>&1 | tee -a "$debug_tmp_f"
 
-function BU::EchoDbg()
+function BU.EchoDbg()
 {
 	echo -e "$1" >> "$debug_log"
 }
@@ -33,8 +33,8 @@ if [ -s "$debug_tmp_f" ]; then
 		if line='++++ for _ in $(eval echo -e "{1..$__BU_MAIN_TXT_COLS}")\n++++ echo -n -'; then
 			for i in ${#line}; do
 				line="$(echo -e "$line\b")"
-				BU::EchoDbg "$line"
-			done; BU::EchoDbg "\b"
+				BU.EchoDbg "$line"
+			done; BU.EchoDbg "\b"
 		fi
 
 		echo "$line" >> "$debug_log"

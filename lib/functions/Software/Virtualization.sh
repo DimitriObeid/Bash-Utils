@@ -55,28 +55,28 @@ fi
 ## INSTALLATION OF QEMU
 
 # Install Qemu on Linux.
-function BU::Software::Virtualization::InstallQemu::Linux()
+function BU.SoftwareVirtualizationInstallQemuLinux()
 {
     #**** Code ****
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install Qemu on OSX.
-function BU::Software::Virtualization::InstallQemu::OSX()
+function BU.SoftwareVirtualizationInstallQemuOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install Qemu on Windows.
-function BU::Software::Virtualization::InstallQemu::Windows()
+function BU.SoftwareVirtualizationInstallQemuWindows()
 {
     #**** Code ****
-    BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -86,28 +86,28 @@ function BU::Software::Virtualization::InstallQemu::Windows()
 ## INSTALLATION OF VIRTUALBOX
 
 # Install Virtualbox on Linux.
-function BU::Software::Virtualization::InstallVirtualbox::Linux()
+function BU.SoftwareVirtualizationInstallVirtualboxLinux()
 {
     #**** Code ****
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install Virtualbox on OSX.
-function BU::Software::Virtualization::InstallVirtualbox::OSX()
+function BU.SoftwareVirtualizationInstallVirtualboxOSX()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install Virtualbox on Windows.
-function BU::Software::Virtualization::InstallVirtualbox::Windows()
+function BU.SoftwareVirtualizationInstallVirtualboxWindows()
 {
     #**** Code ****
-    BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -117,28 +117,28 @@ function BU::Software::Virtualization::InstallVirtualbox::Windows()
 ## INSTALLATION OF VMWARE
 
 # Installing VMware Workstation for Linux.
-function BU::Software::Virtualization::InstallVMwareWorkstation::Linux()
+function BU.SoftwareVirtualizationInstallVMwareWorkstationLinux()
 {
     #**** Code ****
-    BU::IsOSLinux || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Install VMware Fusion (OSX software only).
-function BU::Software::Virtualization::InstallVMwareFusion()
+function BU.SoftwareVirtualizationInstallVMwareFusion()
 {
     #**** Code ****
-    BU::IsOSX || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
 
 # Installing VMware Workstation for Linux.
-function BU::Software::Virtualization::InstallVMwareWorkstation::Windows()
+function BU.SoftwareVirtualizationInstallVMwareWorkstationWindows()
 {
     #**** Code ****
-    BU::IsOSWindows || { BU::EchoWarning ""; BU::Newline >&2; return 1; };
+    BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
 
     return 0;
 }
@@ -148,30 +148,30 @@ function BU::Software::Virtualization::InstallVMwareWorkstation::Windows()
 ## MULTI-PLATFORM INSTALLATION
 
 # Installation of Qemu.
-function BU::Software::Virtualization::InstallQemu()
+function BU.SoftwareVirtualizationInstallQemu()
 {
-    BU::IsOSLinux       && BU::Software::Virtualization::InstallQemu::Linux                     &&  return 0;
-    BU::IsOSX           && BU::Software::Virtualization::InstallQemu::OSX                       &&  return 0;
-    BU::IsOSWindows     && BU::Software::Virtualization::InstallQemu::Windows                   &&  return 0;
+    BU.IsOSLinux       && BU.SoftwareVirtualizationInstallQemuLinux                     &&  return 0;
+    BU.IsOSX           && BU.SoftwareVirtualizationInstallQemuOSX                       &&  return 0;
+    BU.IsOSWindows     && BU.SoftwareVirtualizationInstallQemuWindows                   &&  return 0;
 
-    BU::Software::PackageManagers::SoftwareNotAvailableForThisOS;                                   return 1;
+    BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }
 
 # Installation of Virtualbox.
-function BU::Software::Virtualization::InstallVirtualbox()
+function BU.SoftwareVirtualizationInstallVirtualbox()
 {
-    BU::IsOSLinux       && BU::Software::Virtualization::InstallVirtualbox::Linux               &&  return 0;
-    BU::IsOSX           && BU::Software::Virtualization::InstallVirtualbox::OSX                 &&  return 0;
-    BU::IsOSWindows     && BU::Software::Virtualization::InstallVirtualbox::Windows             &&  return 0;
+    BU.IsOSLinux       && BU.SoftwareVirtualizationInstallVirtualboxLinux               &&  return 0;
+    BU.IsOSX           && BU.SoftwareVirtualizationInstallVirtualboxOSX                 &&  return 0;
+    BU.IsOSWindows     && BU.SoftwareVirtualizationInstallVirtualboxWindows             &&  return 0;
 
-    BU::Software::PackageManagers::SoftwareNotAvailableForThisOS;                                   return 1;
+    BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }
 
-function BU::Software::Virtualization::InstallVMware()
+function BU.SoftwareVirtualizationInstallVMware()
 {
-    BU::IsOSLinux       && BU::Software::Virtualization::InstallVMwareWorkstation::Linux        &&  return 0;
-    BU::IsOSX           && BU::Software::Virtualization::InstallVMwareFusion                    &&  return 0;
-    BU::IsOSWindows     && BU::Software::Virtualization::InstallVMwareWorkstation::Windows      &&  return 0;
+    BU.IsOSLinux       && BU.SoftwareVirtualizationInstallVMwareWorkstationLinux        &&  return 0;
+    BU.IsOSX           && BU.SoftwareVirtualizationInstallVMwareFusion                    &&  return 0;
+    BU.IsOSWindows     && BU.SoftwareVirtualizationInstallVMwareWorkstationWindows      &&  return 0;
 
-    BU::Software::PackageManagers::SoftwareNotAvailableForThisOS;                                   return 1;
+    BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }

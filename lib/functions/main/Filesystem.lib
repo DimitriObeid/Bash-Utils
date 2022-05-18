@@ -41,20 +41,20 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### HARD DRIVE'S FILE SYSTEM PROCESSING
-#### DEBUG ID : filesystem::hard-drive-file-system-processing
+#### DEBUG ID : filesystemhard-drive-file-system-processing
 
-__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystem::hard-drive-file-system-processing";
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystemhard-drive-file-system-processing";
 
 ## CHECKING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : checking-filesystem-informations
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::checking-filesystem-informations";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSINGchecking-filesystem-informations";
 
 # Checking if the current partition is full.
-function BU::Main::Filesystem::IsPartitionFull()
+function BU.Main.FilesystemIsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING";
 
@@ -81,43 +81,43 @@ function BU::Main::Filesystem::IsPartitionFull()
             else return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; fi
     fi
 
-	BU::IsOSAndroidTermux && {
+	BU.IsOSAndroidTermux && {
         if [[ "$(df -aH "$p_fileFS")" == 100% ]]; then
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
-	BU::IsOSFreeBSD && {
+	BU.IsOSFreeBSD && {
         true;
 	}
 
-	BU::IsOSHaiku && {
+	BU.IsOSHaiku && {
 		if [[ "$(df -th "$p_fileFS | awk 'FNR==10 {print $3}'")" == 0 ]]; then
             return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
-	BU::IsOSLinux && {
+	BU.IsOSLinux && {
 		if [[ "$(df -Th "$p_fileFS" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
-            BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
-	BU::IsOSNetBSD && {
+	BU.IsOSNetBSD && {
         true;
 	}
 
-	BU::IsOSOpenBSD && {
+	BU.IsOSOpenBSD && {
         true;
 	}
 
-	BU::IsOSX && {
+	BU.IsOSX && {
 		true;
 	}
 }
@@ -127,13 +127,13 @@ function BU::Main::Filesystem::IsPartitionFull()
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : getting-filesystem-informations
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::getting-filesystem-informations";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSINGgetting-filesystem-informations";
 
 # Getting the file system path.
-function BU::Main::Filesystem::GetFSDevice()
+function BU.Main.FilesystemGetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -143,26 +143,26 @@ function BU::Main::Filesystem::GetFSDevice()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's device";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's device";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 5 {print \$2}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 5 {print \$2}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the total size in bytes allocated to a given file system.
-function BU::Main::Filesystem::GetFSTotalSize()
+function BU.Main.FilesystemGetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -172,26 +172,26 @@ function BU::Main::Filesystem::GetFSTotalSize()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's total size in bytes";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's total size in bytes";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the mounted partition of a given file system.
-function BU::Main::Filesystem::GetFSMountPoint()
+function BU.Main.FilesystemGetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -201,26 +201,26 @@ function BU::Main::Filesystem::GetFSMountPoint()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's mount point";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's mount point";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the used size in bytes of a given file system.
-function BU::Main::Filesystem::GetFSUsedSizeBytes()
+function BU.Main.FilesystemGetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -230,41 +230,41 @@ function BU::Main::Filesystem::GetFSUsedSizeBytes()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's used size in bytes";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's used size in bytes";
 
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
-    BU::IsOSHaiku && {
+    BU.IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.FilesystemGetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.FilesystemGetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used size by substracting the available size from the total size.
         local v_usedSize; v_usedSize="$(( v_totalSize - v_availableSize ))";
 
-        BU::EchoMsg "$v_usedSize" '-n' 'nodate';
+        BU.EchoMsg "$v_usedSize" '-n' 'nodate';
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
     }
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the percentage of the used space of a given file system.
-function BU::Main::Filesystem::GetFSUsedSizePercent()
+function BU.Main.FilesystemGetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -274,42 +274,42 @@ function BU::Main::Filesystem::GetFSUsedSizePercent()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's used size percentage";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's used size percentage";
 
-    BU::IsOSAndroidTermux   && local v_cmd="df -aH \"$p_path\"  | awk 'FNR == 2 {print \$5}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux           && local v_cmd="df -Th \"$p_path\"  | awk 'FNR == 2 {print \$6}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSAndroidTermux   && local v_cmd="df -aH \"$p_path\"  | awk 'FNR == 2 {print \$5}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux           && local v_cmd="df -Th \"$p_path\"  | awk 'FNR == 2 {print \$6}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
-    BU::IsOSHaiku && {
+    BU.IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU::Main::Filesystem::GetFSTotalSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.FilesystemGetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU::Main::Filesystem::GetFSAvailableSize "$p_path" || { local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.FilesystemGetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used percentage.
         local v_usedSize; v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
 
-        BU::EchoMsg "$v_usedSize%" '-n' 'nodate';
+        BU.EchoMsg "$v_usedSize%" '-n' 'nodate';
 
-        BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
     }
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the available size in bytes of a given file system.
-function BU::Main::Filesystem::GetFSAvailableSize()
+function BU.Main.FilesystemGetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -319,26 +319,26 @@ function BU::Main::Filesystem::GetFSAvailableSize()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's available size in bytes";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's available size in bytes";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 10 {print \$3}'       || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 10 {print \$3}'       || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # Getting the type of the file system of a directory or a file.
-function BU::Main::Filesystem::GetFSType()
+function BU.Main.FilesystemGetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
 
@@ -348,19 +348,19 @@ function BU::Main::Filesystem::GetFSType()
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
 
-    local v_warn; v_warn="$(BU::DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU::DechoHighlightPath "$p_path") file system's type";
+    local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's type";
 
-    BU::IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 4 {print \$3}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU::IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU::EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 4 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU::Main::CMDS::GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
-    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
 }
 
 # -----------------------------------------------
@@ -370,28 +370,28 @@ function BU::Main::Filesystem::GetFSType()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PERMISSION AND OWNERSHIP PROCESSING
-#### DEBUG ID : filesystem::permission-and-ownership-processing
+#### DEBUG ID : filesystempermission-and-ownership-processing
 
-__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystem::permission-and-ownership-processing";
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystempermission-and-ownership-processing";
 
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : non-recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::non-recursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSINGnon-recursive";
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#   - BU::Main::Checkings::CheckRootEUID -> Checkings.lib
-#   - BU::EchoError     -> Echo.lib
-#   - BU::EchoNewstep   -> Echo.lib
-#   - BU::EchoSuccess   -> Echo.lib
-#   - BU::Main::Headers::DrawLine      -> Headers.lib
-#   - BU::Main::Errors::HandleErrors  -> Headers.lib
-function BU::Main::Filesystem::Chown()
+#   - BU.Main.Checkings.CheckRootEUID -> Checkings.lib
+#   - BU.EchoError     -> Echo.lib
+#   - BU.EchoNewstep   -> Echo.lib
+#   - BU.EchoSuccess   -> Echo.lib
+#   - BU.Main.HeadersDrawLine      -> Headers.lib
+#   - BU.Main.Errors.HandleErrors  -> Headers.lib
+function BU.Main.FilesystemChown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE";
 
@@ -402,53 +402,53 @@ function BU::Main::Filesystem::Chown()
     p_option=$4;        # Chown command option(s).
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemChown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then BU::SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Checkings.CheckRootEUID; then BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
-        BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlightPath "$p_path/") folder from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
-        BU::Newline;
+        BU.EchoNewstep "Changing the ownership rights of the  $(BU.DechoHighlightPath "$p_path/") folder from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner").";
+        BU.Newline;
 
         # Changing ownership recursively.
         case "$p_option" in
             'R')
                 if chown -Rv "$p_newOwner" "$p_path"; then
-                    BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
-                    BU::Newline;
+                    BU.EchoSuccess "The rights of the $(BU.DechoHighlightPath "$p_path") folder have been successfully changed from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner")";
+                    BU.Newline;
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
                 else
-                    BU::Main::Errors::HandleErrors "1" "Unable to change the rights of the $(BU::DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))";
-                    BU::Newline;
+                    BU.Main.Errors.HandleErrors "1" "Unable to change the rights of the $(BU.DechoHighlight "$p_path/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))";
+                    BU.Newline;
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
                 ;;
             '')
                 # Changing ownership non-recursively.
                 if chown -v "$p_newOwner" "$p_path"; then
-                    BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
-                    BU::Newline;
+                    BU.EchoSuccess "The rights of the $(BU.DechoHighlightPath "$p_path") folder have been successfully changed from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner")";
+                    BU.Newline;
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
-                    BU::Main::Errors::HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU::DechoHighlightPath "$p_path/") FOLDER" \
-                        "Please run the script with the command $(BU::DechoHighlight "bash -x $PROJECT_NAME") to check what happened" \
+                    BU.Main.Errors.HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU.DechoHighlightPath "$p_path/") FOLDER" \
+                        "Please run the script with the command $(BU.DechoHighlight "bash -x $PROJECT_NAME") to check what happened" \
                         "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))";
-                    BU::Newline;
+                    BU.Newline;
 
-                    BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
                 ;;
             *)
-                BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightFunction "${FUNCNAME[0]}")'S FUNCTION $(BU::DechoHighlightPath "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
+                BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightFunction "${FUNCNAME[0]}")'S FUNCTION $(BU.DechoHighlightPath "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0
             ;;
         esac
 
@@ -456,23 +456,23 @@ function BU::Main::Filesystem::Chown()
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "$p_path" ]; then
-            BU::EchoNewstep "Changing the ownership rights of the  $(BU::DechoHighlightPath "$p_path/") file from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
-            BU::Newline;
+            BU.EchoNewstep "Changing the ownership rights of the  $(BU.DechoHighlightPath "$p_path/") file from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner").";
+            BU.Newline;
 
             # Changing ownership
             if chown -v "$p_newOwner" "$p_path"; then
-                BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path") file have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner").";
-                BU::Newline;
+                BU.EchoSuccess "The rights of the $(BU.DechoHighlightPath "$p_path") file have been successfully changed from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner").";
+                BU.Newline;
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
             else
-                BU::Main::Errors::HandleErrors "$?" "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path") file !";
-                BU::Newline;
+                BU.Main.Errors.HandleErrors "$?" "Unable to change the rights of the $(BU.DechoHighlightPath "$p_path") file !";
+                BU.Newline;
 
-                BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
         else
-            BU::Main::Errors::HandleErrors "1" "THE $(BU::DechoHighlightPath "$p_path") FILE DOESN'T EXISTS" && BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+            BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightPath "$p_path") FILE DOESN'T EXISTS" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
     fi
 }
@@ -482,21 +482,21 @@ function BU::Main::Filesystem::Chown()
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::recursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSINGrecursive";
 
 # Calling the "chown" command to change recursively directory ownership
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#	- BU::Main::Checkings::CheckRootEUID		-> Checkings.lib
-#	- BU::EchoError			-> Echo.lib
-#	- BU::EchoNewstep		-> Echo.lib
-#	- BU::EchoSuccess		-> Echo.lib
-#	- BU::Newline			-> Echo.lib
-#	- BU::Main::Errors::HandleErrors		-> Headers.lib
-function BU::Main::Filesystem::ChownRec()
+#	- BU.Main.Checkings.CheckRootEUID		-> Checkings.lib
+#	- BU.EchoError			-> Echo.lib
+#	- BU.EchoNewstep		-> Echo.lib
+#	- BU.EchoSuccess		-> Echo.lib
+#	- BU.Newline			-> Echo.lib
+#	- BU.Main.Errors.HandleErrors		-> Headers.lib
+function BU.Main.FilesystemChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
         "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE";
 
@@ -506,18 +506,18 @@ function BU::Main::Filesystem::ChownRec()
     local p_path=$3;
 
     #**** Code ****
-    if ! BU::Main::Args__Filesystem::ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesystemChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU::Main::Checkings::CheckRootEUID; then local C="$?"; BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Checkings.CheckRootEUID; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$p_path" ]; then
-        BU::Main::Errors::HandleErrors "1" "" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+        BU.Main.Errors.HandleErrors "1" "" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
     fi
 
-    BU::EchoNewstep "Recursive change of the ownership rights of the new folder $(BU::DechoHighlightPath "$p_path/") from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
-	BU::Newline;
+    BU.EchoNewstep "Recursive change of the ownership rights of the new folder $(BU.DechoHighlightPath "$p_path/") from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner")";
+	BU.Newline;
 
     # On change les droits du fichier créé par le script.
 	# Comme il est exécuté en mode super-utilisateur, tout dossier ou fichier créé appartient à l'utilisateur root.
@@ -526,15 +526,15 @@ function BU::Main::Filesystem::ChownRec()
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
 	if chown -Rv "$p_newOwner" "$p_path"; then
-		BU::EchoSuccess "The rights of the $(BU::DechoHighlightPath "$p_path/") folder have been successfully changed from $(BU::DechoHighlight "$p_currentOwner") to $(BU::DechoHighlight "$p_newOwner")";
-		BU::Newline;
+		BU.EchoSuccess "The rights of the $(BU.DechoHighlightPath "$p_path/") folder have been successfully changed from $(BU.DechoHighlight "$p_currentOwner") to $(BU.DechoHighlight "$p_newOwner")";
+		BU.Newline;
 
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
-        BU::EchoError "Unable to change the rights of the $(BU::DechoHighlightPath "$p_path/") folder";
-		BU::Newline;
+        BU.EchoError "Unable to change the rights of the $(BU.DechoHighlightPath "$p_path/") folder";
+		BU.Newline;
 
-		BU::Main::Echo::DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 }
 

@@ -44,15 +44,15 @@ fi
 
 ## VARIABLES
 
-# __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU::DechoHighlight 'yes') or ($(BU::DechoHighlight 'no')) !";
+# __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU.DechoHighlight 'yes') or ($(BU.DechoHighlight 'no')) !";
 #
 # __BU_MAIN_CASE_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)";
 #
 # __BU_MAIN_CASE_ANSWER_PROMPT="Enter your answer : ";
 #
-# __BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME") script.";
+# __BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") script.";
 #
-# __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU::DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution.";
+# __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution.";
 
 # -----------------------------------------------
 
@@ -61,20 +61,20 @@ fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING CASE STATEMENTS BY FUNCTIONS
-#### DEBUG ID : case::reading-case-statements-by-functions
+#### DEBUG ID : casereading-case-statements-by-functions
 
-__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="case::reading-case-statements-by-functions";
+__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="casereading-case-statements-by-functions";
 
 ## "Directories.lib" FILE
 ## DEBUG ID : directories.lib-file
 
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::directories.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONSdirectories.lib-file";
 
-# "BU::Main::Directories::TriggerRootDirWarning" function.
-function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
+# "BU.Main.DirectoriesTriggerRootDirWarning" function.
+function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS" \
         "$__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE";
 
@@ -82,37 +82,37 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
     local __read_TriggerRootDirWarning;
 
     #**** Code ****
-    BU::ModuleInit::SetInitErrorMsg && VTriggerRootDirWarning='1';
+    BU.ModuleInit.SetInitErrorMsg && VTriggerRootDirWarning='1';
 
-    BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
+    BU.EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning;
-	BU::EchoRead "$__read_TriggerRootDirWarning";
-	BU::Newline;
+	BU.EchoRead "$__read_TriggerRootDirWarning";
+	BU.Newline;
 
 	# shellcheck disable=SC2154
 	case "${__read_TriggerRootDirWarning,,}" in
 		"yes")
-            BU::EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC";
+            BU.EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC";
 
-			[ -n "$VTriggerRootDirWarning" ] && BU::ModuleInit::UnsetInitErrorMsg;
+			[ -n "$VTriggerRootDirWarning" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 			return 0;
 			;;
 		"no")
-            BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
+            BU.EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
 
-			[ -n "$VTriggerRootDirWarning" ] && BU::ModuleInit::UnsetInitErrorMsg;
+			[ -n "$VTriggerRootDirWarning" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			;;
 		*)
-			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER";
-			BU::Main::Case::Read_Directories::TriggerRootDirWarning;
+			BU.EchoError "$__BU_MAIN_CASE_INVALID_ANSWER";
+			BU.Main.CaseRead_DirectoriesTriggerRootDirWarning;
 			;;
 	esac
 }
@@ -122,13 +122,13 @@ function BU::Main::Case::Read_Directories::TriggerRootDirWarning()
 ## "Errors.lib" FILE
 ## DEBUG ID : errors.lib-file
 
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::errors.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONSerrors.lib-file";
 
-# "BU::Main::Errors::HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
-function BU::Main::Case::Read_Errors::HandleErrors()
+# "BU.Main.Errors.HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
+function BU.Main.CaseRead_Errors.HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU::Main::Echo::Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS" \
         "$__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE";
 
@@ -136,37 +136,37 @@ function BU::Main::Case::Read_Errors::HandleErrors()
     local __read_HandleErrors;
 
     #**** Code ****
-    BU::ModuleInit::SetInitErrorMsg && VReadHandleErrors='1';
+    BU.ModuleInit.SetInitErrorMsg && VReadHandleErrors='1';
 
-	BU::EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
+	BU.EchoNewstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_HandleErrors;
-	BU::EchoRead "$__read_HandleErrors";
-    BU::Newline;
+	BU.EchoRead "$__read_HandleErrors";
+    BU.Newline;
 
 	# shellcheck disable=SC2154
 	case "${__read_HandleErrors,,}" in
 		"yes")
-			BU::EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC";
+			BU.EchoNewstep "$__BU_MAIN_CASE_RESUME_EXEC";
 
-			[ -n "$VReadHandleErrors" ] && BU::ModuleInit::UnsetInitErrorMsg;
+			[ -n "$VReadHandleErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 			return 0;
 			;;
 		"no")
-			BU::EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
+			BU.EchoError "$__BU_MAIN_CASE_CANCEL_EXEC";
 
-			[ -n "$VReadHandleErrors" ] && BU::ModuleInit::UnsetInitErrorMsg;
+			[ -n "$VReadHandleErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-			BU::Main::Echo::DebugEnd "${FUNCNAME[0]}";
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-			BU::Exit "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+			BU.Exit "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			;;
 		*)
-			BU::EchoError "$__BU_MAIN_CASE_INVALID_ANSWER";
-			BU::Main::Case::Read_Errors::HandleErrors;
+			BU.EchoError "$__BU_MAIN_CASE_INVALID_ANSWER";
+			BU.Main.CaseRead_Errors.HandleErrors;
 			;;
 	esac
 }
