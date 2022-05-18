@@ -1534,7 +1534,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" != 'main' ]] || [[ "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
+    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ ( "${p_module,,}" != 'main' ) || ( "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
         # shellcheck disable=SC2059
         BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
 
