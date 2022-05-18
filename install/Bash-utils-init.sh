@@ -1529,35 +1529,12 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
     # -----------------------------------------------
 
-    ## MISSING 'main' MODULE AFTER THE 'module' VALUE
-
-    # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
-
-    # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [[ ( -n "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ) && ( -z "$__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED" ) ]] && [[ ( "${p_module,,}" != 'main' ) || ( "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
-        # shellcheck disable=SC2059
-        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 2 ))"; echo >&2;
-
-        # shellcheck disable=SC2059
-        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
-
-        # shellcheck disable=SC2059
-        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
-
-        BU::ModuleInit::MsgAbort;
-
-        BU::ModuleInit::AskPrintLog >&2 || return 1;
-
-        return 1;
-
-    # -----------------------------------------------
-
     ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
 
     # Else, if the "main" module is passed as second argument, after the "module" value.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
+    elif [ "$p_count" -eq 1 ] && [ -n "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
         __BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED='true';
 
@@ -1579,6 +1556,29 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
+
+    # -----------------------------------------------
+
+    ## MISSING 'main' MODULE AFTER THE 'module' VALUE
+
+    # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
+
+    # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
+    elif [ "$p_count" -ge 1 ] && [[ ( -n "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ) && ( -z "$__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED" ) ]] && [[ ( "${p_module,,}" != 'main' ) || ( "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
+        # shellcheck disable=SC2059
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 2 ))"; echo >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+
+        # shellcheck disable=SC2059
+        printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE\n" "$v_module_name" "${FUNCNAME[0]}" >&2;
+
+        BU::ModuleInit::MsgAbort;
+
+        BU::ModuleInit::AskPrintLog >&2 || return 1;
+
+        return 1;
 
 	# -----------------------------------------------
 
