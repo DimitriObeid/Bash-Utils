@@ -1534,9 +1534,9 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
 
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
-    elif [ "$p_count" -eq 1 ] && [ -z "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ] && [[ ( "${p_module,,}" != 'main' ) || ( "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
+    elif [ "$p_count" -eq 1 ] && [[ ( -n "$__BU_MODULE_INIT_MODULE_FIRST_ARG" ) && ( -z "$__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED" ) ]] && [[ ( "${p_module,,}" != 'main' ) || ( "${p_module,,}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
         # shellcheck disable=SC2059
-        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
+        BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE" "${FUNCNAME[0]}")" "$(( LINENO - 2 ))"; echo >&2;
 
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
@@ -1559,6 +1559,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 1 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
+        __BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED='true';
+
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
@@ -1573,6 +1575,8 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -eq 0 ] && [[ "${p_module,,}" == 'main' ]] || [[ "$p_module" == [Mm][Aa][Ii][Nn][[:space:]]--* ]]; then
 
+        __BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED='true';
+
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
@@ -1582,7 +1586,7 @@ function BU::ModuleInit::ProcessFirstModuleParameters()
 
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 
-	elif [ "$p_count" -ge 1 ] && [[ "${p_module,,}" == "module --"* ]]; then
+	elif [ "$p_count" -ge 1 ] && [ -n "$__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED" ] && [[ "${p_module,,}" == "module --"* ]]; then
         # shellcheck disable=SC2059
 		BU::ModuleInit::PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE" "${FUNCNAME[0]}")" "$LINENO"; echo >&2;
 
