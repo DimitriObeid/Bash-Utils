@@ -698,13 +698,10 @@ function BU::ModuleInit::PrintLog()
     local v_init_logs_str="$__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS";
     local v_tmp_file;
 
-    v_tmp_file_original="$(echo "$RANDOM" | md5sum)";
+    v_tmp_file_original="$(echo "$RANDOM" | md5sum)";   shopt -s extglob;
 
-    shopt -s extglob;
-
-    v_tmp_file="${v_tmp_file_original%%+( -)}.tmp"; # Removing the extra whitespace with the dash.
-
-    shopt -u extglob;
+    # Removing the extra whitespace with the dash.
+    v_tmp_file="${v_tmp_file_original%%+( -)}.tmp";     shopt -u extglob;
 
     #**** Code ****
     BU::ModuleInit::MsgLine "$__BU_MODULE_INIT_MSG__PRINTLOG__HERE" '#' 'echo'; echo
@@ -764,24 +761,17 @@ function BU::ModuleInit::PrintLog()
 function BU::ModuleInit::PrintLogError()
 {
     #**** Parameters ****
-    local p_desc=$1;    # Description of the error.
-    local p_lineno=$2;  # Line where the error happened.
+    local p_desc=$1;    # String    - Default : NULL    - Description of the error.
+    local p_lineno=$2;  # Int       - Default : NULL    - Line where the error happened.
+    local p_errcode=$3; # String    - Default : NULL    - Error code, in order to find the 
 
     #**** Code ****
-    if [[ "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" = '--log-shut'* ]]; then
-        local backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION";
-
-        __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-display';
-    fi
-
     BU::ModuleInit::Msg >&2;
 
     # shellcheck disable=SC2059
-    BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR" "$p_desc" "$p_lineno")" '-' 'msg' >&2;
+    BU::ModuleInit::MsgLine "$(printf "$__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR" "$p_desc" "$p_lineno" "CODE : $p_errcode")" '-' 'msg' >&2;
 
     BU::ModuleInit::Msg >&2;
-
-    if [ -n "$backup" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="$backup"; fi
 
     return 0;
 }
