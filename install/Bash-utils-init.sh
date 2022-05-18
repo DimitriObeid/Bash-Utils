@@ -697,12 +697,13 @@ function BU::ModuleInit::PrintLog()
     #**** Variables ****
     local v_init_logs_str="$__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS";
     local v_tmp_file;
-        v_tmp_file_original="$(echo "$RANDOM" | md5sum).tmp";
+
+    v_tmp_file_original="$(echo "$RANDOM" | md5sum)";
 
     shopt -s extglob;
 
-    local v_tmp_file;
-         v_tmp_file="${v_tmp_file_original%%+( )+(-)+( )}";   # Removing the extra whitespace with the dash.
+    v_tmp_file="${v_tmp_file_original%%+( -)}.tmp"; # Removing the extra whitespace with the dash.
+
     shopt -u extglob;
 
     #**** Code ****
