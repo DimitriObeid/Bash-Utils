@@ -213,7 +213,7 @@ function ScriptInit
 	GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur,
 
 	# On écrit dans le fichier de logs que l'on passe à la première étape "visible dans le terminal", à savoir l'étape d'initialisation du script.
-    BU.HeaderBase "$COL_BLUE" "-" "$COL_BLUE" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
+    BU.HeaderBase "-" "$COL_BLUE" "$COL_BLUE" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
 
 	# On demande à l'utilisateur de bien confirmer son nom d'utilisateur, au cas où son compte utilisateur cohabite avec d'autres comptes et qu'il n'a pas passé le bon compte en argument.
 	BU.Newline;
@@ -692,7 +692,7 @@ BU.EchoSuccess "Les commandes importantes d'installation ont été installées a
 BU.Newline;
 
 # DÉBUT DE LA PARTIE D'INSTALLATION
-BU.Main.HeadersDrawLine ";" "$COL_GREEN"
+BU.Main.Headers.DrawLine ";" "$COL_GREEN"
 BU.Newline;
 
 BU.EchoSuccess "Vous pouvez désormais quitter votre ordinateur pour chercher un café,"

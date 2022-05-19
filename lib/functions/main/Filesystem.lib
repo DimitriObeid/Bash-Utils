@@ -145,8 +145,8 @@ function BU.Main.FilesystemGetFSDevice()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's device";
 
-    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 5 {print \$2}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$1}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 5 {print \$2}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$1}' || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -174,8 +174,8 @@ function BU.Main.FilesystemGetFSTotalSize()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's total size in bytes";
 
-    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$3}'            || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$3}'            || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -203,8 +203,8 @@ function BU.Main.FilesystemGetFSMountPoint()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's mount point";
 
-    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 2 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$7}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 2 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$7}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -232,7 +232,7 @@ function BU.Main.FilesystemGetFSUsedSizeBytes()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's used size in bytes";
 
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$4}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -276,8 +276,8 @@ function BU.Main.FilesystemGetFSUsedSizePercent()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's used size percentage";
 
-    BU.IsOSAndroidTermux   && local v_cmd="df -aH \"$p_path\"  | awk 'FNR == 2 {print \$5}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux           && local v_cmd="df -Th \"$p_path\"  | awk 'FNR == 2 {print \$6}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSAndroidTermux   && local v_cmd="df -aH \"$p_path\"   | awk 'FNR == 2 {print \$5}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux           && local v_cmd="df -Th \"$p_path\"   | awk 'FNR == 2 {print \$6}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -321,8 +321,8 @@ function BU.Main.FilesystemGetFSAvailableSize()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's available size in bytes";
 
-    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 10 {print \$3}'       || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$5}'        || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 10 {print \$3}'       || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$5}'        || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -350,8 +350,8 @@ function BU.Main.FilesystemGetFSType()
 
     local v_warn; v_warn="$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.DechoHighlightPath "$p_path") file system's type";
 
-    BU.IsOSHaiku && local v_cmd="df \"$p_path\"        | awk 'FNR == 4 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"    | awk 'FNR == 2 {print \$2}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 4 {print \$3}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$2}'    || { BU.EchoWarning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__FilesystemGetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -386,7 +386,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 #   - BU.EchoError     -> Echo.lib
 #   - BU.EchoNewstep   -> Echo.lib
 #   - BU.EchoSuccess   -> Echo.lib
-#   - BU.Main.HeadersDrawLine      -> Headers.lib
+#   - BU.Main.Headers.DrawLine      -> Headers.lib
 #   - BU.Main.Errors.HandleErrors  -> Headers.lib
 function BU.Main.FilesystemChown()
 {

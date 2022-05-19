@@ -53,7 +53,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FU
 # Separate processing steps displays from the rest of the main script with a line.
 
 # Featured functions and files from the "functions" folder :
-#   - BU.Main.HeadersDrawLine      -> Headers.lib
+#   - BU.Main.Headers.DrawLine      -> Headers.lib
 #   - BU.Main.Errors.HandleErrors  -> Headers.lib
 function BU.Main.DirectoriesProcessingDir()
 {
@@ -77,18 +77,18 @@ function BU.Main.DirectoriesProcessingDir()
 
 	sleep "$PROJECT_STATUS_SLEEP_LINE";
 
-    BU.EchoMsg "$(BU.Main.HeadersDrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+    BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
     BU.EchoNewstep "Processing the $(BU.DechoHighlightPath "$p_name") folder in the parent folder $(BU.DechoHighlightPath "$p_parent").";
     BU.Newline;
 
     if "$p_function"; then
         BU.EchoSuccess "End of processing the $(BU.DechoHighlightPath "$p_name/") folder.";
-		BU.EchoMsg "$(BU.Main.HeadersDrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+		BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
 		sleep "$PROJECT_STATUS_SLEEP_LINE";
 		BU.Newline;
     else
         BU.EchoError "End of processing the $(BU.DechoHighlightPath "$p_name/") folder.";
-		BU.EchoMsg "$(BU.Main.HeadersDrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+		BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
 		sleep "$PROJECT_STATUS_SLEEP_LINE";
 		BU.Newline;
     fi
@@ -167,7 +167,7 @@ function BU.Main.DirectoriesOverwriteDir()
 #   - BU.Main.DirectoriesOverwriteDir           -> Main -> Directories.lib (this file)
 #   - BU.Main.DirectoriesTriggerRootDirWarning  -> Main -> Directories.lib (this file)
 #   - BU.Main.Errors.HandleErrors                -> Main -> Errors.lib
-#   - BU.Main.HeadersDrawLine                   -> Main -> Headers.lib
+#   - BU.Main.Headers.DrawLine                   -> Main -> Headers.lib
 
 #   - BU.DechoHighlightPath            -> Main -> Decho.lib
 #   - BU.EchoError                     -> Main -> Echo.lib

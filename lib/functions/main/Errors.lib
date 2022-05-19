@@ -290,23 +290,23 @@ function BU.Main.Errors.HandleErrors()
 
                 if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.DechoHighlightFunction "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.EchoError "A FATAL ERROR OCCURED DURING THE $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     fi
                 else
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU.DechoHighlightFunction "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.EchoError "AN ERROR OCCURED DURING THE $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
-                        BU.Main.HeadersDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
+                        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     fi
                 fi
             fi
@@ -329,9 +329,9 @@ function BU.Main.Errors.HandleErrors()
             fi
 
             if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
-                BU.HeaderRed "$v_hdrString FATAL ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
+                BU.Header.Red "$v_hdrString FATAL ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
             else
-                BU.HeaderRed "$v_hdrString ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
+                BU.Header.Red "$v_hdrString ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
             fi
 
 

@@ -66,14 +66,14 @@ function BU.Main.Files__ProcessingFile()
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
         BU.EchoError "End of processing the $(BU.DechoHighlightPath "$p_name") file";
-        BU.EchoMsg "$(BU.Main.HeadersDrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+        BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
     elif [ "$p_output" = 'S' ]; then
         BU.EchoSuccess "End of processing the $(BU.DechoHighlightPath "$p_name") file";
-        BU.EchoMsg "$(BU.Main.HeadersDrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
+        BU.EchoMsg "$(BU.Main.Headers.DrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
@@ -87,7 +87,7 @@ function BU.Main.Files__ProcessingFile()
 # Separate processing steps displays from the rest of the main script between two horizontal lines.
 
 # Featured functions and files from the "functions" folder :
-#   - BU.Main.HeadersDrawLine      -> Headers.lib
+#   - BU.Main.Headers.DrawLine      -> Headers.lib
 #   - BU.Main.Errors.HandleErrors  -> Headers.lib
 function BU.Main.FilesProcessingFile()
 {
@@ -110,7 +110,7 @@ function BU.Main.FilesProcessingFile()
     if ! BU.Main.Args__FilesProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
-    BU.EchoMsg "$(BU.Main.HeadersDrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+    BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
     BU.EchoNewstep "Processing the $(BU.DechoHighlightPath "$p_name") file in the $(BU.DechoHighlightPath "$p_parent") parent directory.";
     BU.Newline;
 
@@ -189,7 +189,7 @@ function BU.Main.FilesOverwriteFile()
 #   - BU.Main.DirectoriesTriggerRootDirWarning  -> Main -> Directories.lib
 #   - BU.Main.Errors.HandleErrors                -> Main -> Errors.lib
 #   - BU.Main.FilesOverwriteFile                -> Main -> Files.lib (this file)
-#   - BU.Main.HeadersDrawLine                   -> Main -> Headers.lib
+#   - BU.Main.Headers.DrawLine                   -> Main -> Headers.lib
 
 #   - BU.DechoHighlightPath            -> Main -> Decho.lib
 #   - BU.EchoError                     -> Main -> Echo.lib
@@ -325,7 +325,7 @@ function BU.Main.FilesCreateProjectLogFile()
     if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
-    BU.HeaderBlue "INITIALIZATION PROCESS LOG OUTPUT";
+    BU.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
 
     BU.EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU.EchoMsg "$val"; done; BU.Newline;
     BU.EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU.EchoMsg "$val"; done; BU.Newline;
@@ -339,7 +339,7 @@ function BU.Main.FilesCreateProjectLogFile()
     fi
 
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
-    BU.HeaderBlue "GETTING INFORMATIONS ABOUT USER'S SYSTEM";
+    BU.Header.Blue "GETTING INFORMATIONS ABOUT USER'S SYSTEM";
 
     # Getting operating system family.
     BU.EchoNewstep "Operating system family : $(BU.DechoHighlight "$OSTYPE")";

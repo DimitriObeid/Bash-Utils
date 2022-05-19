@@ -17,7 +17,7 @@
 # Getting the user's operating system main package manager.
 function GetMainPackageManager
 {
-	BU.HeaderBase "$(ColorChar "setaf" "$COL_BLUE")" "-" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
+	BU.Header.Base "-" "$(ColorChar "setaf" "$COL_BLUE")" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
 
 	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
 	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.

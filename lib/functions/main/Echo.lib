@@ -204,7 +204,7 @@ function BU.Main.Echo.__EchoOutput()
 
 		BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") --> Unable to create the $(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
 
-		BU.Main.HeaderDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
+		BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
         if [ "${p_context,,}" = "begin" ]; then
             BU.Main.Echo.__EchoVoid;
@@ -221,7 +221,7 @@ function BU.Main.Echo.__EchoOutput()
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.ArgsPrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
-            BU.Main.HeaderDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
+            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
             if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then
@@ -243,7 +243,7 @@ function BU.Main.Echo.__EchoOutput()
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.ArgsPrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Decho "END DEBUGGING TEXT") debug test in the $(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
-            BU.Main.HeaderDrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
+            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
             # Reassigning the "$__BU_MAIN_STAT_ECHO" global status variable's former value.
             if [ -n "$v_BU_MAIN_STAT_ECHO_val" ]; then

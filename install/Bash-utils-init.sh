@@ -1961,7 +1961,7 @@ function BU.ModuleInit.ParseCSVLang()
     fi
 
     # Begin parsing the CSV file.
-    BU.HeaderBlue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
+    BU.Header.Blue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
 
     BU.ModuleInit.Msg "Finding the variables list column";
     BU.ModuleInit.Msg;
