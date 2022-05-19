@@ -17,7 +17,7 @@
 # Getting the user's operating system main package manager.
 function GetMainPackageManager
 {
-	BU.Header.Base "-" "$(ColorChar "setaf" "$COL_BLUE")" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
+	BU.Main.Headers.Header.Base "-" "$(ColorChar "setaf" "$COL_BLUE")" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
 
 	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
 	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
@@ -37,9 +37,9 @@ function GetMainPackageManager
 	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
 	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
         # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "Args" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU.Main.Errors.HandleErrors" sans que le moindre bug ne se produise.
-		BU.Main.Errors.HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU.DechoE "APT"), $(BU.DechoE "DNF") et $(BU.DechoE "Pacman")." "$LINENO"
+		BU.Main.Errors.HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU.Main.Decho.E "APT"), $(BU.Main.Decho.E "DNF") et $(BU.Main.Decho.E "Pacman")." "$LINENO"
 	else
-		BU.EchoSuccess "Gestionnaire de paquets principal trouvé : $(BU.DechoS "$PACK_MAIN_PACKAGE_MANAGER")"
+		BU.EchoSuccess "Gestionnaire de paquets principal trouvé : $(BU.Main.Decho.S "$PACK_MAIN_PACKAGE_MANAGER")"
 	fi
 }
 
@@ -141,7 +141,7 @@ function SoftwareInstall
 	#**** Code ****
 	BU.Main.Checkings.CheckRootEUID
 
-	BU.EchoNewstep "Téléchargement du logiciel $(BU.DechoN "$name")."
+	BU.EchoNewstep "Téléchargement du logiciel $(BU.Main.Decho.N "$name")."
 
 	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.
 	if test ! -d "$inst_path"; then
@@ -149,18 +149,18 @@ function SoftwareInstall
     fi
 
 	if test wget -v "$software_dl_link" -O "$inst_path" >> "$FILE_LOG_PATH"; then
-		BU.EchoSuccess "L'archive du logiciel $(BU.DechoS "$name") a été téléchargé avec succès."
+		BU.EchoSuccess "L'archive du logiciel $(BU.Main.Decho.S "$name") a été téléchargé avec succès."
 		BU.Newline;
 
 	else
-		BU.EchoError "Échec du téléchargement de l'archive du logiciel $(BU.DechoE "$name")."
+		BU.EchoError "Échec du téléchargement de l'archive du logiciel $(BU.Main.Decho.E "$name")."
 		BU.Newline;
 
 		return
 	fi
 
 	# On décompresse l'archive téléchargée selon le format de compression tout en redirigeant toutes les sorties vers le terminal et le fichier de logs.
-	BU.EchoNewstepTee "Décompression de l'archive $(BU.DechoN "$archive")."
+	BU.EchoNewstepTee "Décompression de l'archive $(BU.Main.Decho.N "$archive")."
 	{
 		case "$archive" in
 			"*.zip")
@@ -179,7 +179,7 @@ function SoftwareInstall
 				UncompressArchive "tar" "-jxvf" "$inst_path/$archive" "$archive"
 				;;
 			*)
-				BU.EchoError "Le format de fichier de l'archive $(BU.DechoE "$archive") n'est pas supporté."
+				BU.EchoError "Le format de fichier de l'archive $(BU.Main.Decho.E "$archive") n'est pas supporté."
 				BU.Newline;
 
 				return
@@ -198,18 +198,18 @@ function SoftwareInstall
 		BU.EchoSuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier."
 	fi
 
-	BU.EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU.DechoN "$name")."
+	BU.EchoNewstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU.Main.Decho.N "$name")."
 	ln -s "$exec" "$name"
 
 	if test "$?" == "0"; then
 		BU.EchoSuccess "Le lien symbolique a été créé avec succès."
 		BU.Newline;
 	else
-        BU.EchoError "Impossible de créer un lien symbolique pointant vers $(BU.DechoE "$exec")."
+        BU.EchoError "Impossible de créer un lien symbolique pointant vers $(BU.Main.Decho.E "$exec")."
         BU.Newline;
 	fi
 
-	BU.EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(BU.DechoN "$name")."
+	BU.EchoNewstep "Création du raccourci vers le fichier exécutable du logiciel $(BU.Main.Decho.N "$name")."
 	BU.Newline;
 
 	cat <<-EOF > "$shortcut_dir/$name.desktop"
@@ -222,18 +222,18 @@ function SoftwareInstall
 	Categories="$category";
 	EOF
 
-	BU.EchoSuccess "Le fichier $(BU.DechoS "$name.desktop") a été créé avec succès dans le dossier $(BU.DechoS "$shortcut_dir")."
+	BU.EchoSuccess "Le fichier $(BU.Main.Decho.S "$name.desktop") a été créé avec succès dans le dossier $(BU.Main.Decho.S "$shortcut_dir")."
 	BU.Newline;
 
-	BU.EchoNewstep "Suppression de l'archive $(BU.DechoN "$archive")."
+	BU.EchoNewstep "Suppression de l'archive $(BU.Main.Decho.N "$archive")."
 	BU.Newline;
 
 	# On vérifie que l'archive a bien été supprimée.
 	if test rm -f "$inst_path/$archive"; then
-        BU.EchoSuccess "L'archive $(BU.DechoS "$archive") a été correctement supprimée."
+        BU.EchoSuccess "L'archive $(BU.Main.Decho.S "$archive") a été correctement supprimée."
 		BU.Newline;
     else
-		BU.EchoError "La suppression de l'archive $(BU.DechoE "$archive") a échouée."
+		BU.EchoError "La suppression de l'archive $(BU.Main.Decho.E "$archive") a échouée."
 		BU.Newline;
 	fi
 }

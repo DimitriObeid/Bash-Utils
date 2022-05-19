@@ -44,15 +44,15 @@ fi
 
 ## VARIABLES
 
-# __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU.DechoHighlight 'yes') or ($(BU.DechoHighlight 'no')) !";
+# __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU.Main.Decho.Decho.Highlight 'yes') or ($(BU.Main.Decho.Decho.Highlight 'no')) !";
 #
 # __BU_MAIN_CASE_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)";
 #
 # __BU_MAIN_CASE_ANSWER_PROMPT="Enter your answer : ";
 #
-# __BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME") script.";
+# __BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") script.";
 #
-# __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")'s execution.";
+# __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'s execution.";
 
 # -----------------------------------------------
 

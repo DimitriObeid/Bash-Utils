@@ -102,12 +102,12 @@ BU.Newline;
 
 if [[ "$__read_lang" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 	# shellcheck disable=SC2016
-	BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightError '$__read_doc_name')'S VARIABLE'S VALUE $(DechoHighlightError "$__read_lang") IS INCORRECT" \
+	BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Error '$__read_doc_name')'S VARIABLE'S VALUE $(DechoHighlightError "$__read_lang") IS INCORRECT" \
         "$(LatexCreateDoc_ListLanguages)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
 elif [[ "$__ARG_LANG" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 # shellcheck disable=SC2016
-	BU.Main.Errors.HandleErrors "1" "THE FIRST LANGUAGE'S ARGUMENT VALUE IS INCORRECT ($(BU.DechoHighlightError "$__ARG_LANG"))" \
+	BU.Main.Errors.HandleErrors "1" "THE FIRST LANGUAGE'S ARGUMENT VALUE IS INCORRECT ($(BU.Main.Decho.Decho.Error "$__ARG_LANG"))" \
         "$(LatexCreateDoc_ListLanguages)" "$__read_lang" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
 else
@@ -131,15 +131,15 @@ else
     if [ -z "$__ARG_TYPE" ]; then
         #***** Asking for the new document's path.
         BU.EchoNewstep "What kind of document do you want to write ?";
-        BU.EchoMsg "1 - Master documentation                       $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_master")";
-        BU.EchoMsg "2 - Module general documentation               $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_module")";
-        BU.EchoMsg "3 - Module initializer script's documentation  $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_initscript")";
-        BU.EchoMsg "4 - Module configuration documentation         $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_config")";
-        BU.EchoMsg "5 - Module initializer documentation           $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_init")";
-        BU.EchoMsg "6 - Main functions documentation               $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_main_functions")";
+        BU.EchoMsg "1 - Master documentation                       $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_master")";
+        BU.EchoMsg "2 - Module general documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_module")";
+        BU.EchoMsg "3 - Module initializer script's documentation  $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_initscript")";
+        BU.EchoMsg "4 - Module configuration documentation         $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_config")";
+        BU.EchoMsg "5 - Module initializer documentation           $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_init")";
+        BU.EchoMsg "6 - Main functions documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_main_functions")";
         BU.Newline;
 
-        BU.EchoMsg "7 - Tutorials documentation                    $(BU.DechoGreen "Targeted folder") --> $(BU.DechoHighlightPath "$__target_path_tutos")";
+        BU.EchoMsg "7 - Tutorials documentation                    $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_tutos")";
 
     	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code;
         BU.EchoRead "$__read_folder_code";
@@ -153,7 +153,7 @@ else
     if [ ! -d "$__read_folder_code" ]; then
 
         EchoMsg "[ INFO ] The chosen folder doesn't exists yet";
-        EchoNewstep "Creating the $(BU.DechoHighlight "$__read_folder_code") target folder";
+        EchoNewstep "Creating the $(BU.Main.Decho.Decho.Highlight "$__read_folder_code") target folder";
 
         #***** Verifying if the given code is valid.
         lineno_case_read_folder_is_valid="$LINENO"; case "$__read_folder_code" in
@@ -173,7 +173,7 @@ else
 
                 else
                     # shellcheck disable=SC2016
-                    BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoHighlightError "$__read_doc_name")'s ENTERED VALUE IS INVALID" \
+                    BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Error "$__read_doc_name")'s ENTERED VALUE IS INVALID" \
                         "Please type an integer value ranging from 1 to 7" "$__read_folder_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno_case_read_folder_is_valid";
                 fi
                 ;;
@@ -194,7 +194,7 @@ else
 
         if [ -z "$__read_doc_name" ]; then
             # shellcheck disable=SC2016
-            BU.Main.Errors.HandleErrors "1" "THE $(BU.DechoE '$__read_doc_name')'s VARIABLE IS EMPTY" \
+            BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.E '$__read_doc_name')'s VARIABLE IS EMPTY" \
                 "Please type a valid name according to your filesystem accepted values" "$__read_doc_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
         fi
 
@@ -203,12 +203,12 @@ else
         __tex_full_path="$__folder_path/$__ARG_FILENAME";
     fi
 
-    BU.EchoNewstep "Creating the $(BU.DechoHighlightPath "$__tex_full_path") file";
+    BU.EchoNewstep "Creating the $(BU.Main.Decho.Decho.Path "$__tex_full_path") file";
     BU.Newline;
 
     __
 
-	# BU.Main.Files.Make "$__folder_path" "$__read_doc_name.tex" && BU.EchoSuccess "Your LaTeX file ($(BU.DechoHighlightPath "$__tex_full_path")) was successfully created."
+	# BU.Main.Files.Make "$__folder_path" "$__read_doc_name.tex" && BU.EchoSuccess "Your LaTeX file ($(BU.Main.Decho.Decho.Path "$__tex_full_path")) was successfully created."
     lineno_case_copy_file="$LINENO"; case "$__read_folder_code" in
         1) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/master.txt" >> "$__tex_full_path";;
         2) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-general.txt" >> "$__tex_full_path";;

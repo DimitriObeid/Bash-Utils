@@ -119,7 +119,7 @@ function BU.Main.ArgsPrintBadOption()
 	# If no value is passed as argument.
     if [[ "$p_option" = [Z-z] ]]; then
 		BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER HAS NO VALUE" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER HAS NO VALUE" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -131,7 +131,7 @@ function BU.Main.ArgsPrintBadOption()
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "${p_option,,}" = '!alphachar' ]; then
         BU.Main.Errors.HandleErrors '1' \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -143,7 +143,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" = '!alphastr' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -155,7 +155,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an alphabetic string OR character.
     elif [ "${p_option,,}" = '!alphastrchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -167,7 +167,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" = '!alphanumchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -179,7 +179,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" = '!alphanumstr' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -191,7 +191,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an alphanumeric string OR character.
     elif [ "${p_option,,}" = '!alphanumstrchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -203,7 +203,7 @@ function BU.Main.ArgsPrintBadOption()
     # Else, if the value passed as argument is not a string, which is precisely the name of a command or any other executable file.
     elif [ "${p_option^^}" = '!CMDSTR' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A COMMAND OR EXECUTABLE FILE NAME" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A COMMAND OR EXECUTABLE FILE NAME" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -215,7 +215,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
     elif [ "${p_option,,}" = '!d' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_DIR";
@@ -227,7 +227,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
     elif [ "${p_option,,}" = '!df' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
@@ -239,7 +239,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
     elif [ "${p_option,,}" = '!f' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -251,7 +251,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a floating number.
     elif [ "${p_option,,}" = '!float' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A FLOAT" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -263,7 +263,7 @@ function BU.Main.ArgsPrintBadOption()
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "${p_option,,}" = '!floatneg' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -273,7 +273,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a positive floating number.
     elif [ "${p_option,,}" = '!floatpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -285,7 +285,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not an integer.
     elif [ "${p_option,,}" = '!int' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN INTEGER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -298,7 +298,7 @@ function BU.Main.ArgsPrintBadOption()
     elif [ "${p_option,,}" = '!intneg' ]; then
 
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -310,7 +310,7 @@ function BU.Main.ArgsPrintBadOption()
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "${p_option,,}" = '!intpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.DechoHighlightFunction "$v_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
             "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
 
         BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED";
@@ -340,7 +340,7 @@ function BU.Main.ArgsPrintBadOption()
 __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_Checkings.argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
-function BU.Main.ArgsGetFuncArgsArrayValues()
+function BU.Main.Args.GetFuncArgsArrayValues()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -403,12 +403,12 @@ function BU.Main.ArgsGetFileName()
 
     #**** Parameters ****
     local p_filename=$1;    # String    - Default : NULL    - Name of the file to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Decho<...>()" function.
+    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
     if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
         # Checking if the file's name was specified, in order to print it.
-        if [ -z "$p_filename" ]; then printf "%s" "$(BU.DechoHighlightPath 'no file identified')"; else printf "%s" "$(BU.DechoHighlightPath "$p_filename")"; fi;
+        if [ -z "$p_filename" ]; then printf "%s" "$(BU.Main.Decho.Decho.Path 'no file identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Path "$p_filename")"; fi;
     else
         if [ -z "$p_filename" ]; then printf "« no file identified »"; else printf "« %s »" "$p_filename"; fi
     fi
@@ -426,12 +426,12 @@ function BU.Main.ArgsGetFunctionName()
 
     #**** Parameters ****
     local p_funcname=$1;    # String    - Default : NULL    - Name of the function to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Decho<...>()" function.
+    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
     if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
         # Checking if the function's name was specified, in order to print it.
-        if [ -z "$p_funcname" ]; then printf "%s" "$(BU.DechoHighlightFunction 'no function identified')"; else printf "%s" "$(BU.DechoHighlightFunction "$p_funcname()")"; fi;
+        if [ -z "$p_funcname" ]; then printf "%s" "$(BU.Main.Decho.Decho.Function 'no function identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Function "$p_funcname()")"; fi;
     else
         if [ -z "$p_funcname" ]; then printf "« no line identified »"; else printf "« %s »" "$p_funcname"; fi
     fi
@@ -449,11 +449,11 @@ function BU.Main.ArgsGetLineNumber()
 
     #**** Parameters ****
     local p_lineno=$1;      # Int       - Default : NULL    - Line number to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Decho<...>()" function.
+    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
     if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
-        if [ -z "$p_lineno" ]; then printf "%s" "$(BU.DechoHighlight 'no line identified')"; else printf "%s" "$(BU.DechoHighlight "$p_lineno")"; fi;
+        if [ -z "$p_lineno" ]; then printf "%s" "$(BU.Main.Decho.Decho.Highlight 'no line identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Highlight "$p_lineno")"; fi;
     else
         # Checking if the file's name was specified, in order to print it.
         if [ -z "$p_lineno" ]; then printf "« no line identified »"; else printf "« %s »" "$p_lineno"; fi
@@ -599,13 +599,13 @@ function BU.Main.ArgsPrintFFLErrorOccured()
     local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
 
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
-    local p_decorate=$5;    # String    - Default : NULL    - Allow the call of any "BU.Decho<...>()" function.
+    local p_decorate=$5;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Variables ****
     local v_target_f;
 
     if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
-        v_target_f="$(BU.DechoHighlightFunction "$p_target_f")";
+        v_target_f="$(BU.Main.Decho.Decho.Function "$p_target_f")";
 
         local v_filename; v_filename="$(BU.Main.ArgsGetFileName "$p_filename" '--decho')";
         local v_funcname; v_funcname="$(BU.Main.ArgsGetFunctionName "$p_funcname" '--decho')";
@@ -643,7 +643,7 @@ function BU.Main.ArgsArgc()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Variables ****
-    local v_funcname; v_funcname="$(BU.DechoHighlight "$(BU.Main.ArgsGetFunctionName "$p_funcname")")";
+    local v_funcname; v_funcname="$(BU.Main.Decho.Decho.Highlight "$(BU.Main.ArgsGetFunctionName "$p_funcname")")";
 
     #**** Code ****
     # If both "$p_argcount" and "$p_argawait" arguments contain a value.
@@ -660,32 +660,32 @@ function BU.Main.ArgsArgc()
             else
                 # If the function awaits only one argument AND no argument is given to the function.
                 if [ "$p_argawait" -eq 1 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.DechoHighlightFunction "$v_funcname") NEEDS AN ARGUMENT" \
-                        "Please pass only one argument to the $(BU.DechoHighlightFunction "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") NEEDS AN ARGUMENT" \
+                        "Please pass only one argument to the $(BU.Main.Decho.Decho.Function "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if the function awaits more than one argument AND less arguments are passed to the function.
                 elif [ "$p_argawait" -ge 1 ] && [ "$p_argcount" -eq 0 ]; then
                     local total="";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.DechoHighlightFunction "$v_funcname") NEEDS $(BU.DechoHighlight "$p_argawait") ARGUMENTS" \
-                        "Please pass $(BU.DechoHighlight "$p_argawait") argument$(if [ "$p_argawait" -gt 1 ]; then printf 's'; fi) to the $(BU.DechoHighlightFunction "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") NEEDS $(BU.Main.Decho.Decho.Highlight "$p_argawait") ARGUMENTS" \
+                        "Please pass $(BU.Main.Decho.Decho.Highlight "$p_argawait") argument$(if [ "$p_argawait" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if the function awaits more than one argument AND not enough arguments are passed to the function.
                 elif [ "$p_argcount" -gt 0 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
                     local total="$(( p_argawait-p_argcount ))";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.DechoHighlightFunction "$v_funcname") HAS NOT ENOUGH ARGUMENTS" \
-                        "Please pass $(BU.DechoHighlight "$total") more argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.DechoHighlightFunction "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") HAS NOT ENOUGH ARGUMENTS" \
+                        "Please pass $(BU.Main.Decho.Decho.Highlight "$total") more argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if more arguments than expected are given to the function.
                 elif [ "$p_argcount" -gt "$p_argawait" ]; then
                     local total="$(( p_argcount-p_argawait ))";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.DechoHighlightFunction "$v_funcname") HAS TOO MUCH ARGUMENTS" \
-                        "Please remove $(BU.DechoHighlight "$total") argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.DechoHighlightFunction "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") HAS TOO MUCH ARGUMENTS" \
+                        "Please remove $(BU.Main.Decho.Decho.Highlight "$total") argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
             fi
@@ -694,15 +694,15 @@ function BU.Main.ArgsArgc()
         else
             if ! BU.IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
                 BU.Main.Errors.HandleErrors '1' \
-                    "THE $(BU.DechoHighlightFunction "$p_funcname") FUNCTION'S ARGUMENT COUNTER $(BU.DechoHighlightVar "$(echo -n '$')p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-                    "The function $(BU.DechoHighlightFunction "$p_funcname") first argument $(BU.DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S ARGUMENT COUNTER $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "The function $(BU.Main.Decho.Decho.Function "$p_funcname") first argument $(BU.Main.Decho.Decho.Var 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
 
             if ! BU.IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
                 BU.Main.ArgsPrintBadOption '1' \
-                    "THE $(BU.DechoHighlightFunction "$p_funcname") FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU.DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-                    "The function $(BU.DechoHighlightFunction "$p_funcname") second argument $(BU.DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+                    "The function $(BU.Main.Decho.Decho.Function "$p_funcname") second argument $(BU.Main.Decho.Decho.Var 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
         fi
@@ -711,15 +711,15 @@ function BU.Main.ArgsArgc()
     else
         if [ -z "$p_argcount" ]; then local lineno="$LINENO";
             BU.Main.Errors.HandleErrors '1' \
-                "THE $(BU.DechoHighlightFunction "$p_funcname") FUNCTION'S $(BU.DechoHighlight "$(echo -n '$')p_argcount") PARAMETER HAS NO VALUE" \
-                "The function $(BU.DechoHighlightFunction "$p_funcname") first argument $(BU.DechoHighlightVar 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Highlight "$(echo -n '$')p_argcount") PARAMETER HAS NO VALUE" \
+                "The function $(BU.Main.Decho.Decho.Function "$p_funcname") first argument $(BU.Main.Decho.Decho.Var 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                 "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
 
         if [ -z "$p_argawait" ]; then local lineno="$LINENO";
             BU.Main.Errors.HandleErrors '1' \
-                "THE $(BU.DechoHighlightFunction "$p_funcname") FUNCTION'S $(BU.DechoHighlightVar "$(echo -n '$')p_argawait") PARAMETER HAS NO VALUE" \
-                "The function $(BU.DechoHighlightFunction "$p_funcname") second argument $(BU.DechoHighlightVar 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argawait") PARAMETER HAS NO VALUE" \
+                "The function $(BU.Main.Decho.Decho.Function "$p_funcname") second argument $(BU.Main.Decho.Decho.Var 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                 "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
     fi
@@ -779,19 +779,19 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 
 	if [ -z "$p_parent" ]; then local lineno="$LINENO";
 		 BU.Main.ArgsPrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.DechoHighlightFunction "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
     if [ -z "$p_child" ]; then local lineno="$LINENO";
 		 BU.Main.ArgsPrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.DechoHighlightFunction "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
 	if [ -z "$p_type" ]; then local lineno="$LINENO";
 		 BU.Main.ArgsPrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.DechoHighlightFunction "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -851,7 +851,7 @@ function BU.Main.Args__CMDSGetCommandPath()
 ## CATEGORY : TEXT WRITING AND DECORATION (FORMATTING)
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Decho()" function.
+# "BU.Main.Decho.Decho()" function.
 function BU.Main.Args__decho.Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1044,7 +1044,7 @@ function BU.Main.Args__DirectoriesMakePath()
 
 	if [ -n "$p_overwrite" ] && [ "$p_overwrite" != "--rmdir" ]; then local lineno="$LINENO";
 		BU.Main.ArgsPrintBadOption '' \
-			"Please pass the valid string $(BU.DechoHighlightVar "--rmdir") that allows overwriting the $(BU.DechoHighlightFunction "$p_path") directory (optional argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+			"Please pass the valid string $(BU.Main.Decho.Decho.Var "--rmdir") that allows overwriting the $(BU.Main.Decho.Decho.Function "$p_path") directory (optional argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_overwrite' "$p_overwrite" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
@@ -1074,7 +1074,7 @@ function BU.Main.Args__DirectoriesGetDirectoryName()
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.ArgsPrintBadOption 'z' \
-            "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1099,7 +1099,7 @@ function BU.Main.Args__DirectoriesGetDirectoryPath()
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.ArgsPrintBadOption 'z' \
-            "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.DechoHighlightFunction "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1196,14 +1196,14 @@ BU.Main.Args__Errors.SetLastReturnValue()
 	# If no return value is passed to as 1st argument.
 	if [ -z "$p_code" ]; then local lineno="$LINENO";
 		BU.Main.ArgsPrintBadOption 'z' \
-			"Please pass a valid integer value, from $(BU.DechoHighlight '0') to $(BU.DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+			"Please pass a valid integer value, from $(BU.Main.Decho.Decho.Highlight '0') to $(BU.Main.Decho.Decho.Highlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
 	# If the return value is not an integer.
 	if [ -n "$p_code" ] && ! BU.IsPositiveInt "$p_code"; then local lineno="$LINENO";
 		BU.Main.ArgsPrintBadOption '!intpos' \
-			"Please pass a valid integer value, from $(BU.DechoHighlight '0') to $(BU.DechoHighlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+			"Please pass a valid integer value, from $(BU.Main.Decho.Decho.Highlight '0') to $(BU.Main.Decho.Decho.Highlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
@@ -1329,7 +1329,7 @@ function BU.Main.Args__FilesMake()
     if [ "$(echo "$p_name" | wc --bytes)" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then local lineno="$LINENO";
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" \
             "THE FILE NAME IS TOO LONG FOR THIS FILESYSTEM" \
-            "Please give a name length smaller than $(BU.DechoHighlight "$__BU_MAIN_FS_MAX_FILENAME_LENGTH") bytes [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "Please give a name length smaller than $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_MAX_FILENAME_LENGTH") bytes [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1398,7 +1398,7 @@ function BU.Main.Args__FilesSetLastAccess()
 
     if [ -z "$p_fakedate" ]; then local lineno="$LINENO";
          BU.Main.ArgsPrintBadOption 'z' \
-            "Please pass a date in $(BU.DechoHighlight "[[CC]YY]MMDDhhmm[.ss]") format as second argument (like 20220221212020.22 | 2022 02 21 21h 20m 20s and 22 ms) (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "Please pass a date in $(BU.Main.Decho.Decho.Highlight "[[CC]YY]MMDDhhmm[.ss]") format as second argument (like 20220221212020.22 | 2022 02 21 21h 20m 20s and 22 ms) (mandatory argument) [/|\] $(BU.Main.ArgsPrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_fakedate' "$p_fakedate" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1672,7 +1672,7 @@ function BU.Main.Args__FilesystemGetFSInfos()
 ## CATEGORY : NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Main.FilesystemChown()" function.
+# "BU.Main.Filesystem.Chown()" function.
 function BU.Main.Args__FilesystemChown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1722,8 +1722,8 @@ function BU.Main.Args__FilesystemChown()
 ## CATEGORY : RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Main.FilesystemChownRec()" function.
-function BU.Main.Args__FilesystemChownRec()
+# "BU.Main.Filesystem.ChownRec()" function.
+function BU.Main.Args__Filesystem.ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";

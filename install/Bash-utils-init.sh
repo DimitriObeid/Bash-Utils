@@ -1961,7 +1961,7 @@ function BU.ModuleInit.ParseCSVLang()
     fi
 
     # Begin parsing the CSV file.
-    BU.Header.Blue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
+    BU.Main.Headers.Header.Blue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "$__BU_MAIN_PROJECT_NAME" "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH")";
 
     BU.ModuleInit.Msg "Finding the variables list column";
     BU.ModuleInit.Msg;
@@ -2142,7 +2142,7 @@ function BashUtils_InitModules()
 {
     if [ -n "$__BU_MODULE_INIT_IS_SOURCED" ] && [ "sourced" = "$__BU_MODULE_INIT_IS_SOURCED" ]; then
         # shellcheck disable=SC2059
-        BU.Header.Warning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU.DechoHighlightFunction "${FUNCNAME[0]}")")"; return 1;
+        BU.Main.Headers.Header.Warning "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED\n" "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")")"; return 1;
     fi
 
     #**** Parameters ****
@@ -2351,7 +2351,7 @@ function BashUtils_InitModules()
                 source "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_init_file_name")" || { BU.ModuleInit.SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_init_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
 
                 # shellcheck disable=SC2059
-                BU.Header.Green "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU.DechoHighlight "$v_module_name")")";
+                BU.Main.Headers.Header.Green "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU.Main.Decho.Decho.Highlight "$v_module_name")")";
             fi
         fi
 
@@ -2368,7 +2368,7 @@ function BashUtils_InitModules()
 	#### ENDING THE WHOLE INITIALIZATION PROCESS
 
 	# shellcheck disable=SC2059
-	BU.Header.Green "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_TXT_PATH")")";
+	BU.Main.Headers.Header.Green "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_FILE_PATH" "$__BU_MAIN_COLOR_TXT_PATH")")";
 
 	# This is the ONLY line where the "$__BU_MAIN_STAT_INITIALIZING" global status variable's value can be modified.
 	# DO NOT set it anymore to "true", or else your script can be prone to bugs.

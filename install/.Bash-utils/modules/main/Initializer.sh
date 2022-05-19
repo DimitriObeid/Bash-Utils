@@ -320,7 +320,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-header" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-header" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable.
@@ -333,7 +333,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TIME_TXT" global status variable.
@@ -346,7 +346,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
                     else
-                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU.Decho_FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
+                            BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
 
                 # "$__BU_MAIN_STAT_TXT_FMT" global status variable.
@@ -454,21 +454,21 @@ if BU.Main.Status.CheckStatAllowFormatting; then
     # Creating the text color code file
     if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-        BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.DechoPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+        BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.Main.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Newline;
+        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Newline;
     fi
 
     # Creating the background color code file
     if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
         # shellcheck disable=SC2059
-        BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+        BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Main.Decho.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
 
     else
         # shellcheck disable=SC2059
-        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Newline;
+        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Newline;
     fi
 fi
 
@@ -476,12 +476,12 @@ fi
 if BU.Main.Status.CheckStatIsLogging; then
 	if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
         # shellcheck disable=SC2059
-		BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
+		BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
 		return 1;
 	else
         # shellcheck disable=SC2059
-		BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Newline;
+		BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Newline;
 	fi
 fi
 

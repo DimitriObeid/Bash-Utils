@@ -97,13 +97,13 @@ function BU.Main.Status.ConfEcho()
         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU.EchoError "In $(BU.DechoHighlightPath "$p_file"), line $(BU.DechoHighlight "$p_lineno") --> " '-n' >&2;
-    BU.EchoError "Error : the $(BU.DechoHighlightVar "$p_var_name") variable's value is incorrect." >&2;
+    BU.EchoError "In $(BU.Main.Decho.Decho.Path "$p_file"), line $(BU.Main.Decho.Decho.Highlight "$p_lineno") --> " '-n' >&2;
+    BU.EchoError "Error : the $(BU.Main.Decho.Decho.Var "$p_var_name") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; BU.EchoError "Bad value : $(BU.DechoYellow 'An empty string')." >&2;
+        echo >&2; BU.EchoError "Bad value : $(BU.Main.Decho.Yellow 'An empty string')." >&2;
     else
-        echo >&2; BU.EchoError "Bad value : $(BU.DechoHighlightVar "$p_bad_value")." >&2;
+        echo >&2; BU.EchoError "Bad value : $(BU.Main.Decho.Decho.Var "$p_bad_value")." >&2;
     fi
 
     echo >&2; BU.EchoError "The allowed values are :" >&2;
@@ -114,9 +114,9 @@ function BU.Main.Status.ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.DechoHighlightVar 'An empty argument')" >&2;
+            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Var 'An empty argument')" >&2;
         else
-            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.DechoHighlight "$val")" >&2;
+            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Highlight "$val")" >&2;
         fi
     done
 
@@ -539,7 +539,7 @@ function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "$(basename "${B
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
 
-## VERY IMPORTANT : DO NOT CALL ANY "BU.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
+## VERY IMPORTANT : DO NOT CALL ANY "BU.Main.Decho.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
 function BU.Main.Status.ChangeSTAT_ECHO()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -551,7 +551,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
     local p_value=$1;           # String    - Default : NULL    - Value to be changed.
     local p_file=$2;            # String    - Default : NULL    - File where the current function is called.
     local p_lineno=$3;          # Int       - Default : NULL    - Line where the current function is called.
-    local p_decho=${4:-true};   # String    - Default : true    - Authorization to call any "BU.Decho<...>()" function.
+    local p_decho=${4:-true};   # String    - Default : true    - Authorization to call any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Variables ****
     local v_log_file_path="$__BU_MAIN_PROJECT_LOG_FILE_PATH";   # Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
@@ -641,7 +641,7 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
-		BU.EchoWarning "WARNING : It's strongly discouraged to change the $(BU.DechoHighlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.DechoHighlightVar 'false') to $(BU.DechoHighlightVar 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.EchoWarning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

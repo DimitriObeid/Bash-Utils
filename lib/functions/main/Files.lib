@@ -65,14 +65,14 @@ function BU.Main.Files__ProcessingFile()
 
     #**** Code ****
     if [ "$p_output" = 'E' ]; then
-        BU.EchoError "End of processing the $(BU.DechoHighlightPath "$p_name") file";
+        BU.EchoError "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
         BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
     elif [ "$p_output" = 'S' ]; then
-        BU.EchoSuccess "End of processing the $(BU.DechoHighlightPath "$p_name") file";
+        BU.EchoSuccess "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
         BU.EchoMsg "$(BU.Main.Headers.DrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Newline;
 
@@ -111,7 +111,7 @@ function BU.Main.FilesProcessingFile()
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU.EchoMsg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
-    BU.EchoNewstep "Processing the $(BU.DechoHighlightPath "$p_name") file in the $(BU.DechoHighlightPath "$p_parent") parent directory.";
+    BU.EchoNewstep "Processing the $(BU.Main.Decho.Decho.Path "$p_name") file in the $(BU.Main.Decho.Decho.Path "$p_parent") parent directory.";
     BU.Newline;
 
     case "$p_function" in
@@ -165,14 +165,14 @@ function BU.Main.FilesOverwriteFile()
     BU.Main.DirectoriesTriggerRootDirWarning "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     if [ "$p_authorization" = "true" ]; then
-		BU.EchoNewstep "The $(BU.DechoHighlightPath "$p_path/") file already exists and is not empty.";
-		BU.EchoNewstep "Overwriting data from file $(BU.DechoHighlightPath "$p_path/")";
+		BU.EchoNewstep "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists and is not empty.";
+		BU.EchoNewstep "Overwriting data from file $(BU.Main.Decho.Decho.Path "$p_path/")";
 		BU.Newline;
 
 		true > "$p_path";
-		BU.Main.Errors.HandleErrors "$?" "THE CONTENT OF THE $(BU.DechoHighlightPath "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		BU.Main.Errors.HandleErrors "$?" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-		BU.EchoSuccess "The content of the $(BU.DechoS "$p_path/") file has been successfully overwritten";
+		BU.EchoSuccess "The content of the $(BU.Main.Decho.S "$p_path/") file has been successfully overwritten";
 		BU.Newline;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -191,7 +191,7 @@ function BU.Main.FilesOverwriteFile()
 #   - BU.Main.FilesOverwriteFile                -> Main -> Files.lib (this file)
 #   - BU.Main.Headers.DrawLine                   -> Main -> Headers.lib
 
-#   - BU.DechoHighlightPath            -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Path            -> Main -> Decho.lib
 #   - BU.EchoError                     -> Main -> Echo.lib
 #   - BU.EchoNewstep                   -> Main -> Echo.lib
 #   - BU.EchoSuccess                   -> Main -> Echo.lib
@@ -225,7 +225,7 @@ function BU.Main.FilesMake()
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
 	if [ ! -f "$v_path" ]; then
-        BU.EchoNewstep "Creating the $(BU.DechoHighlightPath "$p_name") file in the parent folder $(BU.DechoHighlightPath "$p_parent/").";
+        BU.EchoNewstep "Creating the $(BU.Main.Decho.Decho.Path "$p_name") file in the parent folder $(BU.Main.Decho.Decho.Path "$p_parent/").";
 
 		touch "$v_path"; BU.Main.Checkings.CheckFilePathWasCreated "$v_path";
 
@@ -233,10 +233,10 @@ function BU.Main.FilesMake()
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		BU.Main.Errors.HandleErrors "$?" "THE $(BU.DechoHighlightPath "$p_name") FILE CANNOT BE CREATED IN THE $(BU.DechoHighlightPath "$p_parent/") PARENT FOLDER." \
+		BU.Main.Errors.HandleErrors "$?" "THE $(BU.Main.Decho.Decho.Path "$p_name") FILE CANNOT BE CREATED IN THE $(BU.Main.Decho.Decho.Path "$p_parent/") PARENT FOLDER." \
             "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
 
-		BU.EchoSuccess "The $(BU.DechoHighlightPath "$p_name") file was successfully created in the $(BU.DechoHighlightPath "$p_parent") folder.";
+		BU.EchoSuccess "The $(BU.Main.Decho.Decho.Path "$p_name") file was successfully created in the $(BU.Main.Decho.Decho.Path "$p_parent") folder.";
         BU.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -251,7 +251,7 @@ function BU.Main.FilesMake()
 
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
-		BU.EchoSuccess "The $(BU.DechoHighlightPath "$p_path/") file already exists in the $(BU.DechoHighlightPath "$p_parent/") folder and is empty.";
+		BU.EchoSuccess "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder and is empty.";
 		BU.Newline;
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -317,15 +317,15 @@ function BU.Main.FilesCreateProjectLogFile()
     local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)";
 
     #**** Code ****
-    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU.EchoError "UNABLE TO CREATE THE $(BU.DechoHighlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU.Exit '1'; fi
+    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU.EchoError "UNABLE TO CREATE THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU.Exit '1'; fi
 
-    BU.EchoSuccess "Successfully created the $(BU.DechoHighlightPath "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
+    BU.EchoSuccess "Successfully created the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
     if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
     if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
-    BU.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
+    BU.Main.Headers.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
 
     BU.EchoNewstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU.EchoMsg "$val"; done; BU.Newline;
     BU.EchoNewstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU.EchoMsg "$val"; done; BU.Newline;
@@ -339,10 +339,10 @@ function BU.Main.FilesCreateProjectLogFile()
     fi
 
     # Gathering informations about the user's operating system, allowing me to correct any bug that could occur on a precise Unix-like operating system.
-    BU.Header.Blue "GETTING INFORMATIONS ABOUT USER'S SYSTEM";
+    BU.Main.Headers.Header.Blue "GETTING INFORMATIONS ABOUT USER'S SYSTEM";
 
     # Getting operating system family.
-    BU.EchoNewstep "Operating system family : $(BU.DechoHighlight "$OSTYPE")";
+    BU.EchoNewstep "Operating system family : $(BU.Main.Decho.Decho.Highlight "$OSTYPE")";
     BU.Newline;
 
     # Getting operating system's informations (Android's Termux terminal emulator) :
@@ -375,7 +375,7 @@ function BU.Main.FilesCreateProjectLogFile()
             BU.EchoMsg "$(cat '/etc/os-release')" "" "nodate";
             BU.Newline;
         else
-            BU.EchoWarning "No available informations ($(BU.DechoHighlight '/etc/os-release') file not found)";
+            BU.EchoWarning "No available informations ($(BU.Main.Decho.Decho.Highlight '/etc/os-release') file not found)";
             BU.Newline;
         fi
 
@@ -423,12 +423,12 @@ function BU.Main.FilesCreateProjectLogFile()
     }
 
 	# Getting Bash language's version.
-    BU.EchoNewstep "Bash version : $(BU.DechoHighlight "$BASH_VERSION")";
+    BU.EchoNewstep "Bash version : $(BU.Main.Decho.Decho.Highlight "$BASH_VERSION")";
     BU.Newline;
 
 	# Getting terminal emulator's name and version.
 	# shellcheck disable=SC2016
-    BU.EchoNewstep "Terminal (emulator) version : $(BU.DechoHighlight "$v_terminfo_v")" || BU.EchoWarning "$(BU.DechoHighlight '$v_terminfo_v') : bad command call.";
+    BU.EchoNewstep "Terminal (emulator) version : $(BU.Main.Decho.Decho.Highlight "$v_terminfo_v")" || BU.EchoWarning "$(BU.Main.Decho.Decho.Highlight '$v_terminfo_v') : bad command call.";
     BU.Newline;
 
     BU.EchoSuccess "Successfully got the user's system's informations.";
@@ -462,7 +462,7 @@ function BU.Main.FilesGetByteSize()
 
     if [ -z "$p_base" ]; then
         wc --bytes < "$p_filepath" || \
-            { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.DechoHighlightPath "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+            { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
     # Else, if a value is passed to the "base" parameter AND this value is an integer.
     elif [ -n "$p_base" ] && BU.IsInt "$b_base"; then
@@ -470,15 +470,15 @@ function BU.Main.FilesGetByteSize()
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then
             BU.Main.BasicMathsBytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
-                { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.DechoHighlightPath "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+                { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
             BU.Main.BasicMathsBytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
-                { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.DechoHighlightPath "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+                { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
-        BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : The byte measure unit byte $(BU.DechoHighlight "$p_base") is not an integer"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : The byte measure unit byte $(BU.Main.Decho.Decho.Highlight "$p_base") is not an integer"; BU.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -499,10 +499,10 @@ function BU.Main.FilesGetCreationDate()
 
     #**** Code ****
     if ! stat -c %W "$p_filepath"; then
-        BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU.DechoHighlightPath "$p_filepath") file's creation date"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's creation date"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
 
     elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : This filesystem ($(BU.DechoHighlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
 
     else
         echo -ne "$(stat -c %W "$p_filepath")";
@@ -523,7 +523,7 @@ function BU.Main.FilesGetCharactersNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --chars < "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --chars < "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -540,7 +540,7 @@ function BU.Main.FilesGetExtension()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    BU.Main.Text.CutLastFieldAfterDelim "$p_filepath" '.' || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the $(BU.DechoHighlightPath "$p_filepath") file's extension";  }
+    BU.Main.Text.CutLastFieldAfterDelim "$p_filepath" '.' || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's extension";  }
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -557,7 +557,7 @@ function BU.Main.FilesGetLastAccess()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -574,7 +574,7 @@ function BU.Main.FilesGetLastModification()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    date -r "$p_filename" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    date -r "$p_filename" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -591,7 +591,7 @@ function BU.Main.FilesGetMIMEType()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    file --mime-type "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.DechoHighlightPath "$p_filepath") file";  };
+    file --mime-type "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "$p_filepath") file";  };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -608,7 +608,7 @@ function BU.Main.FilesGetLinesNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --lines < "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --lines < "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -625,7 +625,7 @@ function BU.Main.FilesGetMaxLineLength()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****last access date
-    wc --max-line-length < "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --max-line-length < "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -642,7 +642,7 @@ function BU.Main.FilesGetOwnerName()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat -c "%U" "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%U" "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -659,7 +659,7 @@ function BU.Main.FilesGetOwnerGroup()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat -c "%G" "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%G" "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -676,7 +676,7 @@ function BU.Main.FilesGetWordsNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --words < "$p_filepath" || { BU.EchoWarning "$(BU.DechoHighlightFunction "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.DechoHighlightPath "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --words < "$p_filepath" || { BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.EchoWarning "Please check the permissions of this file"; BU.Newline; BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -726,26 +726,26 @@ function BU.Main.FilesSourceFile()
 
     #**** Code ****
     if [ -f "$p_path" ]; then
-		BU.EchoNewstep "Sourcing the $(BU.DechoHighlightPath "$p_path") file";
+		BU.EchoNewstep "Sourcing the $(BU.Main.Decho.Decho.Path "$p_path") file";
 		BU.Newline
 
         # shellcheck disable=SC1090
         if source "$p_path"; then
-            BU.EchoSuccess "Sourced file : $(BU.DechoHighlightPath "$p_path")";
+            BU.EchoSuccess "Sourced file : $(BU.Main.Decho.Decho.Path "$p_path")";
 			BU.Newline;
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
             local C="$?";
 
-            BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO SOURCE THIS FILE : $(BU.DechoHighlightPath "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+            BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
         fi
     else
         local C="$?";
 
-        BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO FIND THIS FILE : $(BU.DechoHighlightPath "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
+        BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
 
 		return "$C";
     fi
@@ -1079,7 +1079,7 @@ function BU.Main.FilesUncompressFormat()
         local p_cmd=$3;     # Name of the command used to uncompress the targeted archive.
 
         #**** Code ****
-        BU.Main.Errors.HandleSmallErrors 'W' "Impossible to decompress the $(BU.DechoHighlight "$p_fmt") archive named $(BU.DechoHighlightPath "$p_arc") with the $(BU.DechoHighlightCMD "$p_cmd") command" 'R';
+        BU.Main.Errors.HandleSmallErrors 'W' "Impossible to decompress the $(BU.Main.Decho.Decho.Highlight "$p_fmt") archive named $(BU.Main.Decho.Decho.Path "$p_arc") with the $(BU.Main.Decho.Decho.CMD "$p_cmd") command" 'R';
         BU.EchoWarning "Please check the permissions of the archive, or use another uncompression command which supports the targeted archive's format";
         BU.Newline;
 
