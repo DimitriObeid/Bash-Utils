@@ -486,7 +486,7 @@ function BU.Main.DirectoriesTriggerRootDirWarning()
 	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
 	if [ "$(pwd "$p_path")" = "/" ] || [ "$(BU.Main.DirectoriesGetParentDirectoryPath "$p_path")" = '/' ]; then
 		if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" = "forbidden" ]; then
-			BU.HeaderError "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!" 'strlen';
+			BU.Header.Error "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!" 'strlen';
 
 			BU.EchoError "The script was trying to operate at the root directory (or one of its sub directories) without authorization";
 			BU.EchoError "Given path : $(BU.DechoHighlightPath "$p_path")";
@@ -500,7 +500,7 @@ function BU.Main.DirectoriesTriggerRootDirWarning()
 			return "$__BU_MAIN_EXIT_CURRENT_CODE";
 
 		elif [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" = "restricted" ]; then
-            BU.HeaderWarning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
+            BU.Header.Warning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
 
             BU.EchoWarning "You are about to operate at the root directory or one of its present sub-folders !";
 			BU.EchoWarning "Given path : $(BU.DechoHighlightPath "$p_path")";

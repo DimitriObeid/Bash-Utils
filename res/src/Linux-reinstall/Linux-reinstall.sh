@@ -52,7 +52,7 @@ BU.EchoNewstep "All the needed directories are found !"
 # BU.Newline #; BU.Newline;
 
 # Ending the initialization process.
-HeaderGreen "END OF THE $(BU.DechoGreen "${__BU_MAIN_PROJECT_NAME^^}")'S INITIALIZATION"
+Header.Green "END OF THE $(BU.DechoGreen "${__BU_MAIN_PROJECT_NAME^^}")'S INITIALIZATION"
 
 # -----------------------------------------------
 
