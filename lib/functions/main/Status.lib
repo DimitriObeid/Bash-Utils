@@ -387,7 +387,7 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
+    if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
         BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}";
 
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -413,7 +413,7 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
+    if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
         BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${va_correctValues[@]}";
 
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -439,7 +439,7 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
 
     #**** Code ****
     # If the status variable's value is not a float or an integer.
-    if ! BU.IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
+    if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
         BU.Main.Status.ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${va_correctValues[@]}";
 
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -675,7 +675,7 @@ function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "$(bas
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONSeasier-boolean-values-checkings";
 
-# Checking if the "BU.Echo<...>()" functions can call the "BU.CheckProjectLogStatus()" function without provoking an infinite loop.
+# Checking if the "BU.Echo<...>()" functions can call the "BU.Main.Status.CheckProjectLogStatus()" function without provoking an infinite loop.
 function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).

@@ -157,7 +157,7 @@ function BU.Exit()
     local p_behavior=$2;    # Char  : Use "exit" or "return" keywords.
 
     #**** Code ****
-    if BU.IsPositiveInt "$p_exitcode"; then
+    if BU.Main.Checkings.IsPositiveInt "$p_exitcode"; then
 
         if [ "${p_behavior^^}" = 'E' ] || [ -z "$p_behavior" ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$p_exitcode" || kill "$$";
@@ -281,7 +281,7 @@ function BU.Main.Errors.HandleErrors()
 
             # -------- PART 1 : MANAGING THE CALL OF THIS "BU.Main.Errors.HandleErrors()" FUNCTION IF THIS "BU.Main.Errors.HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU.Main.Errors.HandleErrors()" FUNCTION
 
-            # If the function needs to be called in the "BU.CheckProjectLogStatus()" function, then
+            # If the function needs to be called in the "BU.Main.Status.CheckProjectLogStatus()" function, then
             # this status variable's value MUST be set at "true", or else the script will loop forever.
 
             # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
@@ -291,7 +291,7 @@ function BU.Main.Errors.HandleErrors()
                 if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.Main.Echo.Error "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
+                        BU.Main.Echo.Error "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.Main.Status.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
@@ -301,7 +301,7 @@ function BU.Main.Errors.HandleErrors()
                 else
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.Main.Echo.Error "AN ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
+                        BU.Main.Echo.Error "AN ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.Main.Status.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
@@ -402,7 +402,7 @@ function BU.Main.Errors.HandleErrors()
                 fi
             fi
 
-            # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU.CheckProjectLogStatus()" FUNCTION).
+            # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU.Main.Status.CheckProjectLogStatus()" FUNCTION).
 
             if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
                 BU.Main.Echo.Warning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
@@ -415,7 +415,7 @@ function BU.Main.Errors.HandleErrors()
                 __BU_MAIN_STAT_LOG_REDIRECT="log"; BU.Main.Status.CheckSTAT_LOG_REDIRECT "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
             fi
 
-            if BU.IsInt "$p_returnCode"; then
+            if BU.Main.Checkings.IsInt "$p_returnCode"; then
                 BU.SetLastReturnValue "$p_returnCode"
 
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.

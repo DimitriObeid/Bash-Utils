@@ -41,14 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT WRITING AND DECORATION (FORMATTING)
-#### DEBUG ID : decho.text-writing-and-decoration-(formatting)
+#### DEBUG ID : decho::text-writing-and-decoration-(formatting)
 
-__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho.text-writing-and-decoration-(formatting)";
+__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## SETTING
 ## DEBUG ID : setting
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTINGsetting";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__SETTING="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::setting";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -86,7 +86,7 @@ function BU.Main.Decho.SetBGColor()
                     echo "Aborting the script's execution" >&2;
                     echo >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }; fi
 
                 if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
@@ -97,7 +97,7 @@ function BU.Main.Decho.SetBGColor()
                     echo "Aborting the script's execution" >&2;
                     echo >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }; fi
 
                 # Redirecting the background's color code in its dedicated temporary file.
@@ -106,7 +106,7 @@ function BU.Main.Decho.SetBGColor()
                 [ "$X" -ne 0 ] && {
                     echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }
             fi
         else
@@ -159,7 +159,7 @@ function BU.Main.Decho.SetTextColor()
                     echo "Aborting the script's execution" >&2;
                     echo >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }; fi
 
                 if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
@@ -170,7 +170,7 @@ function BU.Main.Decho.SetTextColor()
                     echo "Aborting the script's execution" >&2;
                     echo >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }; fi
 
                 # Redirecting the text's color code in its dedicated temporary file.
@@ -179,7 +179,7 @@ function BU.Main.Decho.SetTextColor()
                 [ "$X" -ne 0 ] && {
                     echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
-                    if BU.IsInScript; then exit 1; else return 1; fi
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
                 }
             fi
         else
@@ -195,7 +195,7 @@ function BU.Main.Decho.SetTextColor()
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 ## DEBUG ID : writing-differently-cf-text-between-Text.basis
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTINGwriting-differently-cf-text-between-Text.basis";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="$__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING::writing-differently-cf-text-between-Text.basis";
 
 # Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 function BU.Main.Decho.__Decho()
@@ -329,7 +329,7 @@ function BU.Main.Decho.Decho()
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
-                "$(BU.IsInt "${#val}")") return;;
+                "$(BU.Main.Checkings.IsInt "${#val}")") return;;
 
                 'BLINK') echo -ne "${__BU_MAIN_TXT_FMT_BLINK}";;
 
@@ -367,7 +367,7 @@ function BU.Main.Decho.Decho()
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
             case "${val^^}" in
-                "$(BU.IsInt "${#val}")") return;;
+                "$(BU.Main.Checkings.IsInt "${#val}")") return;;
 
                 'BLINK') echo -ne "${__BU_MAIN_TXT_FMT_BLINK_RESET}";;
 

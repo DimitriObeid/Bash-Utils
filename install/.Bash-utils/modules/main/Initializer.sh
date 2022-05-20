@@ -130,10 +130,10 @@ function BU.Main.Initializer.SourceConfig()
 # Note : Several functions from the main module are used in the "BU.ModuleInit.()" function.
 
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.IsInScript && exit 1; return 1; };
+__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.IsInScript && exit 1; return 1; };
+source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -145,7 +145,7 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailur
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.IsInScript && exit 1; return 1; }
+source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
@@ -315,7 +315,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU.IsPositiveFloat "$value"; then
+                    if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_HEADER="$value";        BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_HEADER' "$__BU_MAIN_STAT_TIME_HEADER" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
@@ -328,7 +328,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU.IsPositiveFloat "$value"; then
+                    if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_NEWLINE="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_NEWLINE' "$__BU_MAIN_STAT_TIME_NEWLINE" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
@@ -341,7 +341,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      BU.IsPositiveFloat "$value"; then
+                    if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_TXT="$value";           BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_TXT' "$__BU_MAIN_STAT_TIME_TXT" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
@@ -381,7 +381,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
             BU.Main.Initializer.Usage; v_loop_error='error'; break;
         fi
 
-    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU.IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
+    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
 fi
 
 # Unsetting the "$v_loop_error" variable, since this code is not written inside a function.
@@ -419,14 +419,14 @@ done
 #### STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
 # Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU.Main.Initializer.SourceLibrary || { if BU.IsInScript; then exit 1; else return 1; fi };
+BU.Main.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU.Main.Initializer.SourceConfig || { if BU.IsInScript; then exit 1; else return 1; fi };
+BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
@@ -439,7 +439,7 @@ BU.Main.Initializer.SourceConfig || { if BU.IsInScript; then exit 1; else return
 ## CALLING NECESSARY FUNCTIONS
 
 # Translating the main module's library messages
-# BU.ModuleInit.ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU.IsInScript; then exit 1; else return 1; fi };
+# BU.ModuleInit.ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
 BU.Main.Directories.MkTmpDir;

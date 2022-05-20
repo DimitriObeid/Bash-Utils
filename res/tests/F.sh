@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function BU.Main.FilesystemGetFSDevice()
+function BU.Main.Filesystem.GetFSDevice()
 {
     #**** Parameters ****
     local p_path=$1     # String    - Path of the file or the folder to process.
@@ -12,7 +12,7 @@ function BU.Main.FilesystemGetFSDevice()
     BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\" | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; return 1; }";
 
     #**** Code ****
-    if ! BU.Main.CMDSGetCommandReturnOutputValue 'df "$path"'; then return 1; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue 'df "$path"'; then return 1; fi
 
     eval "$v_cmd";
 

@@ -334,7 +334,7 @@ function BU.Main.Files.CreateProjectLogFile()
 		BU.Main.Echo.Newstep "Initialization log output :"; BU.Main.Echo.Newline;
 
         for val in "${__BU_MODULE_INIT_MSG_ARRAY[@]}"; do
-            BU.CheckProjectLogStatus "$val";
+            BU.Main.Status.CheckProjectLogStatus "$val";
         done
     fi
 
@@ -494,7 +494,7 @@ function BU.Main.Files.GetByteSize()
             { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
     # Else, if a value is passed to the "base" parameter AND this value is an integer.
-    elif [ -n "$p_base" ] && BU.IsInt "$b_base"; then
+    elif [ -n "$p_base" ] && BU.Main.Checkings.IsInt "$b_base"; then
 
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then

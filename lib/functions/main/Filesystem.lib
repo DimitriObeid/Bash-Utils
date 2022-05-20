@@ -41,9 +41,9 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### HARD DRIVE'S FILE SYSTEM PROCESSING
-#### DEBUG ID : filesystemhard-drive-file-system-processing
+#### DEBUG ID : filesystem::hard-drive-file-system-processing
 
-__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystemhard-drive-file-system-processing";
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystem::hard-drive-file-system-processing";
 
 ## CHECKING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : checking-filesystem-informations
@@ -127,10 +127,10 @@ function BU.Main.Filesystem.IsPartitionFull()
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : getting-filesystem-informations
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSINGgetting-filesystem-informations";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::getting-filesystem-informations";
 
 # Getting the file system path.
-function BU.Main.FilesystemGetFSDevice()
+function BU.Main.Filesystem.GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -151,7 +151,7 @@ function BU.Main.FilesystemGetFSDevice()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -159,7 +159,7 @@ function BU.Main.FilesystemGetFSDevice()
 }
 
 # Getting the total size in bytes allocated to a given file system.
-function BU.Main.FilesystemGetFSTotalSize()
+function BU.Main.Filesystem.GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -180,7 +180,7 @@ function BU.Main.FilesystemGetFSTotalSize()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -188,7 +188,7 @@ function BU.Main.FilesystemGetFSTotalSize()
 }
 
 # Getting the mounted partition of a given file system.
-function BU.Main.FilesystemGetFSMountPoint()
+function BU.Main.Filesystem.GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -209,7 +209,7 @@ function BU.Main.FilesystemGetFSMountPoint()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -217,7 +217,7 @@ function BU.Main.FilesystemGetFSMountPoint()
 }
 
 # Getting the used size in bytes of a given file system.
-function BU.Main.FilesystemGetFSUsedSizeBytes()
+function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -237,15 +237,15 @@ function BU.Main.FilesystemGetFSUsedSizeBytes()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.FilesystemGetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.FilesystemGetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used size by substracting the available size from the total size.
         local v_usedSize; v_usedSize="$(( v_totalSize - v_availableSize ))";
@@ -261,7 +261,7 @@ function BU.Main.FilesystemGetFSUsedSizeBytes()
 }
 
 # Getting the percentage of the used space of a given file system.
-function BU.Main.FilesystemGetFSUsedSizePercent()
+function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -282,15 +282,15 @@ function BU.Main.FilesystemGetFSUsedSizePercent()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsOSHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.FilesystemGetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.FilesystemGetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
         # Getting the used percentage.
         local v_usedSize; v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
@@ -306,7 +306,7 @@ function BU.Main.FilesystemGetFSUsedSizePercent()
 }
 
 # Getting the available size in bytes of a given file system.
-function BU.Main.FilesystemGetFSAvailableSize()
+function BU.Main.Filesystem.GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -327,7 +327,7 @@ function BU.Main.FilesystemGetFSAvailableSize()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -335,7 +335,7 @@ function BU.Main.FilesystemGetFSAvailableSize()
 }
 
 # Getting the type of the file system of a directory or a file.
-function BU.Main.FilesystemGetFSType()
+function BU.Main.Filesystem.GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -356,7 +356,7 @@ function BU.Main.FilesystemGetFSType()
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if ! BU.Main.CMDSGetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     eval "$v_cmd";
 
@@ -370,14 +370,14 @@ function BU.Main.FilesystemGetFSType()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PERMISSION AND OWNERSHIP PROCESSING
-#### DEBUG ID : filesystempermission-and-ownership-processing
+#### DEBUG ID : filesystem::permission-and-ownership-processing
 
-__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystempermission-and-ownership-processing";
+__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystem::permission-and-ownership-processing";
 
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : non-recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSINGnon-recursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::non-recursive";
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
@@ -482,7 +482,7 @@ function BU.Main.Filesystem.Chown()
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSINGrecursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::recursive";
 
 # Calling the "chown" command to change recursively directory ownership
 

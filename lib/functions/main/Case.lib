@@ -61,14 +61,14 @@ fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING CASE STATEMENTS BY FUNCTIONS
-#### DEBUG ID : casereading-case-statements-by-functions
+#### DEBUG ID : case::reading-case-statements-by-functions
 
-__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="casereading-case-statements-by-functions";
+__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="case::reading-case-statements-by-functions";
 
 ## "Directories.lib" FILE
 ## DEBUG ID : directories.lib-file
 
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONSdirectories.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::directories.lib-file";
 
 # "BU.Main.Directories.TriggerRootDirWarning" function.
 function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
@@ -87,7 +87,7 @@ function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
     BU.Main.Echo.Newstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_TriggerRootDirWarning;
-	BU.EchoRead "$__read_TriggerRootDirWarning";
+	BU.Main.Echo.Read "$__read_TriggerRootDirWarning";
 	BU.Main.Echo.Newline;
 
 	# shellcheck disable=SC2154
@@ -122,7 +122,7 @@ function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
 ## "Errors.lib" FILE
 ## DEBUG ID : errors.lib-file
 
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONSerrors.lib-file";
+__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::errors.lib-file";
 
 # "BU.Main.Errors.HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
 function BU.Main.CaseRead_Errors.HandleErrors()
@@ -141,7 +141,7 @@ function BU.Main.CaseRead_Errors.HandleErrors()
 	BU.Main.Echo.Newstep "$__BU_MAIN_CASE_ASK_CONTINUE_EXEC";
 
 	read -rp "$__BU_MAIN_CASE_ANSWER_PROMPT" __read_HandleErrors;
-	BU.EchoRead "$__read_HandleErrors";
+	BU.Main.Echo.Read "$__read_HandleErrors";
     BU.Main.Echo.Newline;
 
 	# shellcheck disable=SC2154

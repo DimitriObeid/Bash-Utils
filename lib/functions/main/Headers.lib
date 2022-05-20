@@ -66,7 +66,7 @@ function BU.Main.Headers.DrawLine()
 
 	#**** Code ****
 	# Checking if the "$p_lineChar" parameter's value is a string instead of a single character, and getting the first character only.
-	if ! BU.IsAlphaNumChar "$p_lineChar"; then
+	if ! BU.Main.Checkings.IsAlphaNumChar "$p_lineChar"; then
         p_lineChar="${p_lineChar:0:1}";
 	fi
 
@@ -100,7 +100,7 @@ function BU.Main.Headers.DrawLine()
 
 	# Checking if the line must be adapted to the string's lenght.
 	if [ -n "$p_strlen" ]; then
-        if BU.IsInt "$p_strlen"; then
+        if BU.Main.Checkings.IsInt "$p_strlen"; then
             for _ in $(eval echo -e "{1..$__p_strlen}"); do
                 echo -n "$p_lineChar";
             done
@@ -181,7 +181,7 @@ function BU.HeaderBase()
     # Else, if a value is passed via the background color's position's parameter.
     else
         # This value MUST be an integer.
-        if BU.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
+        if BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
 
             # Transforming the "$p_bgColorPos" variable in an array of integers.
             read -ra int_array <<< "$p_bgColorPos";
@@ -205,7 +205,7 @@ function BU.HeaderBase()
                 fi
             done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-        elif BU.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
+        elif BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
             BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the lenght of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") argument is too big" 'R';
 
         elif [ "${#p_bgColorPos}" -lt 1 ]; then

@@ -41,14 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PRINTING FORMATTED STRINGS
-#### DEBUG ID : Echo.printing-formatted-strings
+#### DEBUG ID : echo::printing-formatted-strings
 
-__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="Echo.printing-formatted-strings";
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
 
 ## DEBUGGING
 ## DEBUG ID : debugging
 
-__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGSdebugging";
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS::debugging";
 
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 function BU.Main.Echo.__Debug()
@@ -188,7 +188,7 @@ function BU.Main.Echo.__EchoOutput()
 
 	#**** Code ****
 	# If the "$p_type" argument is a string, then the first character is extracted.
-	if ! BU.IsAlphaChar "$p_type"; then
+	if ! BU.Main.Checkings.IsAlphaChar "$p_type"; then
         local v_type=${p_type1};
 
         p_type="$v_type";
@@ -255,7 +255,7 @@ function BU.Main.Echo.__EchoOutput()
     fi
 }
 
-# Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+# Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
 function BU.Main.Echo.__EchoCPLS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -342,24 +342,24 @@ function BU.Main.Echo.__EchoCPLS()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT DISPLAYING
-#### DEBUG ID : Echo.text-displaying
+#### DEBUG ID : echo::text-displaying
 
-__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="Echo.text-displaying";
+__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
 ## DEBUG ID : displaying-a-context-message
 
-__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYINGdisplaying-a-context-message";
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING::displaying-a-context-message";
 
 # --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "$__BU_MAIN_STAT_TIME_TXT" STATUS VARIABLE.
 
 # Error message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus                      --> Checkings.lib
 function BU.Main.Echo.Error()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -383,11 +383,11 @@ function BU.Main.Echo.Error()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-        BU.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         BU.Main.Echo.__EchoOutput "$p_string" 'end' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'E' || { local C="$?"; [ -n "$VEchoError" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -404,10 +404,10 @@ function BU.Main.Echo.Error()
 # Normal message (without any extra color), with redirection checking.
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Msg()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -427,11 +427,11 @@ function BU.Main.Echo.Msg()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'm' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-        BU.CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.CheckProjectLogStatus "$p_string" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         BU.Main.Echo.__EchoOutput "$p_string" 'end' 'm' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'm' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU.Main.Echo.__EchoCPLS "$p_string" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -445,10 +445,10 @@ function BU.Main.Echo.Msg()
 # New sub-step message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Newstep()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -468,11 +468,11 @@ function BU.Main.Echo.Newstep()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'N' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-        BU.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         BU.Main.Echo.__EchoOutput "$p_string" 'end' 'N' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'N' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_NEWSTEP}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -486,11 +486,11 @@ function BU.Main.Echo.Newstep()
 # Read input values
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#	- BU.CheckProjectLogStatus		--> Checkings.lib
-function BU.EchoRead()
+#	- BU.Main.Status.CheckProjectLogStatus		--> Checkings.lib
+function BU.Main.Echo.Read()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -509,10 +509,10 @@ function BU.EchoRead()
 # Success message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Success()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -532,11 +532,11 @@ function BU.Main.Echo.Success()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'S' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-        BU.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         BU.Main.Echo.__EchoOutput "$p_string" 'end' 'S' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'S' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_SUCCESS}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -550,10 +550,10 @@ function BU.Main.Echo.Success()
 # Warning message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Warning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -576,11 +576,11 @@ function BU.Main.Echo.Warning()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-        BU.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
         BU.Main.Echo.__EchoOutput "$p_string" 'end' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.CheckProjectLogStatus()" function.
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "$p_string" 'begin' 'W' || { local C="$?"; [ -n "$VEchoWarning" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_WARNING}$__BU_MAIN_TXT_PRINT_TAB$__BU_MAIN_TXT_PRINT_TAB $p_string${__BU_MAIN_COLOR_TXT_RESET}" "$p_option" "${pa_extraArgs[@]}" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -603,7 +603,7 @@ function BU.Main.Echo.Warning()
 # Note : These function call the "BU.Main.Echo.Msg()" function in order to avoid rewriting tons of lines that would do the same thing.
 
 # Aqua blue colored message.
-function BU.EchoAqua()
+function BU.Main.Echo.Aqua()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -619,7 +619,7 @@ function BU.EchoAqua()
 }
 
 # Black colored message.
-function BU.EchoBlack()
+function BU.Main.Echo.Black()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -635,7 +635,7 @@ function BU.EchoBlack()
 }
 
 # Blue colored message.
-function BU.EchoBlue()
+function BU.Main.Echo.Blue()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -651,7 +651,7 @@ function BU.EchoBlue()
 }
 
 # Cyan colored message.
-function BU.EchoCyan()
+function BU.Main.Echo.Cyan()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -667,7 +667,7 @@ function BU.EchoCyan()
 }
 
 # Fuchsia colored message.
-function BU.EchoFuchsia()
+function BU.Main.Echo.Fuchsia()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -683,7 +683,7 @@ function BU.EchoFuchsia()
 }
 
 # Gray colored message.
-function BU.EchoGray()
+function BU.Main.Echo.Gray()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -699,7 +699,7 @@ function BU.EchoGray()
 }
 
 # Green colored message.
-function BU.EchoGreen()
+function BU.Main.Echo.Green()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -715,7 +715,7 @@ function BU.EchoGreen()
 }
 
 # Lime green colored message.
-function BU.EchoLime()
+function BU.Main.Echo.Lime()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -731,7 +731,7 @@ function BU.EchoLime()
 }
 
 # Maroon colored message.
-function BU.EchoMaroon()
+function BU.Main.Echo.Maroon()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -747,7 +747,7 @@ function BU.EchoMaroon()
 }
 
 # Navy blue colored message.
-function BU.EchoNavy()
+function BU.Main.Echo.Navy()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -763,7 +763,7 @@ function BU.EchoNavy()
 }
 
 # Olive green colored message.
-function BU.EchoOlive()
+function BU.Main.Echo.Olive()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -779,7 +779,7 @@ function BU.EchoOlive()
 }
 
 # Orange colored message.
-function BU.EchoOrange()
+function BU.Main.Echo.Orange()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -795,7 +795,7 @@ function BU.EchoOrange()
 }
 
 # Pink colored message.
-function BU.EchoPink()
+function BU.Main.Echo.Pink()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -811,7 +811,7 @@ function BU.EchoPink()
 }
 
 # Purple colored message.
-function BU.EchoPurple()
+function BU.Main.Echo.Purple()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -827,7 +827,7 @@ function BU.EchoPurple()
 }
 
 # Red colored message.
-function BU.EchoRed()
+function BU.Main.Echo.Red()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -843,7 +843,7 @@ function BU.EchoRed()
 }
 
 # Salmon colored message.
-function BU.EchoSalmon()
+function BU.Main.Echo.Salmon()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -859,7 +859,7 @@ function BU.EchoSalmon()
 }
 
 # Silver colored message.
-function BU.EchoSilver()
+function BU.Main.Echo.Silver()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -875,7 +875,7 @@ function BU.EchoSilver()
 }
 
 # Tan colored message.
-function BU.EchoTan()
+function BU.Main.Echo.Tan()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -891,7 +891,7 @@ function BU.EchoTan()
 }
 
 # Teal colored message.
-function BU.EchoTeal()
+function BU.Main.Echo.Teal()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -907,7 +907,7 @@ function BU.EchoTeal()
 }
 
 # Turquoise colored message.
-function BU.EchoTurquoise()
+function BU.Main.Echo.Turquoise()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -923,7 +923,7 @@ function BU.EchoTurquoise()
 }
 
 # Violet colored message.
-function BU.EchoViolet()
+function BU.Main.Echo.Violet()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -939,7 +939,7 @@ function BU.EchoViolet()
 }
 
 # White colored message.
-function BU.EchoWhite()
+function BU.Main.Echo.White()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -955,7 +955,7 @@ function BU.EchoWhite()
 }
 
 # Yellow colored message.
-function BU.EchoYellow()
+function BU.Main.Echo.Yellow()
 {
     #**** Parameters ****
     p_string=$1;        # Any       - String to display.
@@ -989,7 +989,7 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_P
 # Redirecting the output of the "echo" command
 
 # Featured functions and files from the "functions" folder :
-#   - BU.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 #	- BU.Main.Errors.HandleErrors				--> Checkings.lib
 function BU.Main.Echo.Newline()
 {
@@ -1003,18 +1003,18 @@ function BU.Main.Echo.Newline()
 
     #**** Code ****
     if [ -n "$p_number" ]; then
-        if ! BU.IsPositiveInt "$p_number"; then
-            BU.Main.Echo.Msg "" "" "nodate";
+        if ! BU.Main.Checkings.IsPositiveInt "$p_number"; then
+            BU.Main.Echo.Msg '' '' 'nodate';
             BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : the number of line breaks must be an integer" 'R';
-            BU.Main.Echo.Msg "" "" "nodate";
+            BU.Main.Echo.Msg '' '' 'nodate';
         else
             # Doing X line breaks according to the number passed as argument.
             for ((i=0; i<p_number; i++)); do
-                BU.Main.Echo.Msg "" "" "nodate";
+                BU.Main.Echo.Msg '' '' 'nodate';
             done
         fi
     else
-        BU.Main.Echo.Msg "" "" "nodate";
+        BU.Main.Echo.Msg '' '' 'nodate';
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

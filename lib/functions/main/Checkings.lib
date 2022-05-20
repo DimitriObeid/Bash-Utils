@@ -41,14 +41,14 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES CHECKINGS
-#### DEBUG ID : Checkings.variable-values-checkings
+#### DEBUG ID : checkings::variable-values-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="Checkings.variable-values-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
 
 ## ARRAYS CHECKINGS
 ## DEBUG ID : array-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.array-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::array-checkings";
 
 # Checking if the variable is an array.
 function BU.IsArray()
@@ -167,7 +167,7 @@ function BU.IsDateYMD_HMS()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.number-values";
 
 # Checking floating value.
-function BU.IsFloat()
+function BU.Main.Checkings.IsFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
@@ -180,12 +180,12 @@ function BU.IsFloat()
 }
 
 # Checking negative only floating value.
-function BU.IsNegativeFloat()
+function BU.Main.Checkings.IsNegativeFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-    if BU.IsFloat "$1" && (( 1 < 0 )); then
+    if BU.Main.Checkings.IsFloat "$1" && (( 1 < 0 )); then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -193,12 +193,12 @@ function BU.IsNegativeFloat()
 }
 
 # Checking positive only floating value.
-function BU.IsPositiveFloat()
+function BU.Main.Checkings.IsPositiveFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-    if BU.IsFloat "$1" && (( 1 >= 0 )); then
+    if BU.Main.Checkings.IsFloat "$1" && (( 1 >= 0 )); then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -206,7 +206,7 @@ function BU.IsPositiveFloat()
 }
 
 # Checking integer value.
-function BU.IsInt()
+function BU.Main.Checkings.IsInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
@@ -219,12 +219,12 @@ function BU.IsInt()
 }
 
 # Checking negative only integer value.
-function BU.IsNegativeInt()
+function BU.Main.Checkings.IsNegativeInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-	if BU.IsInt "$1" && (( 1 < 0 )); then
+	if BU.Main.Checkings.IsInt "$1" && (( 1 < 0 )); then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -232,12 +232,12 @@ function BU.IsNegativeInt()
 }
 
 # Checking positive only integer value.
-function BU.IsPositiveInt()
+function BU.Main.Checkings.IsPositiveInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES";
 
-	if BU.IsInt "$1" && (( 1 >= 0 )); then
+	if BU.Main.Checkings.IsInt "$1" && (( 1 >= 0 )); then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -252,7 +252,7 @@ function BU.IsPositiveInt()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
-function BU.IsAlphaChar()
+function BU.Main.Checkings.IsAlphaChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -265,7 +265,7 @@ function BU.IsAlphaChar()
 }
 
 # Checking if the value is an alphabetic string (not any number allowed)
-function BU.IsAlphaString()
+function BU.Main.Checkings.IsAlphaString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -278,7 +278,7 @@ function BU.IsAlphaString()
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
-function BU.IsAlphaStringOnly()
+function BU.Main.Checkings.IsAlphaStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -296,7 +296,7 @@ function BU.IsAlphaStringOnly()
 }
 
 # Checking if the value is a character.
-function BU.IsAlphaNumChar()
+function BU.Main.Checkings.IsAlphaNumChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -309,7 +309,7 @@ function BU.IsAlphaNumChar()
 }
 
 # Checking if the value is an alphanumeric string.
-function BU.IsAlphaNumString()
+function BU.Main.Checkings.IsAlphaNumString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -322,7 +322,7 @@ function BU.IsAlphaNumString()
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters).
-function BU.IsAlphaNumStringOnly()
+function BU.Main.Checkings.IsAlphaNumStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
@@ -344,20 +344,7 @@ function BU.IsAlphaNumStringOnly()
 ## OTHER VARIABLES CHECKINGS
 ## DEBUG ID : other-variables-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.other-variables-checkings";
-
-# Checking if the variable is an array.
-function BU.IsArray()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS";
-
-    if [[ -n ${1} ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
-    fi
-}
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::other-variables-checkings";
 
 # -----------------------------------------------
 
@@ -366,14 +353,14 @@ function BU.IsArray()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### DIFFERENT CHECKINGS
-#### DEBUG ID : Checkings.different-checkings
+#### DEBUG ID : checkings::different-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="Checkings.different-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
-## DEBUG ID : checking-fort-identifiants
+## DEBUG ID : checking-for-identifiants
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_Checkings.checking-fort-identifiants";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::checking-for-identifiants";
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
@@ -462,7 +449,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a path in order to check if the target file system is full or not" >&2;
@@ -473,7 +460,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
     elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="$LINENO";
@@ -491,7 +478,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a valid path in order to check if the target file system is full or not" >&2;
@@ -502,7 +489,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
     elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then local lineno="$LINENO";
@@ -517,7 +504,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
 				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file [/|\] Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -531,7 +518,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
     fi
 }
@@ -545,12 +532,12 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 #### PATHS CHECKINGS
 #### DEBUG ID : Checkings.paths-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="Checkings.paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
 
 ## DIRECTORIES PATHS CHECKINGS
 ## DEBUG ID : directories-paths-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_Checkings.directories-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::directories-paths-checkings";
 
 # Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 function BU.Main.Checkings.CheckDirPathExists()
@@ -601,7 +588,7 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 ## FILES PATHS CHECKINGS
 ## DEBUG ID : files-path-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_Checkings.files-paths-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS::files-paths-checkings";
 
 # Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 function BU.Main.Checkings.CheckFilePathExists()
@@ -662,7 +649,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
-    # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.CheckProjectLogStatus()" function
+    # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.Main.Status.CheckProjectLogStatus()" function
     # (the only one where the "BU.Main.Checkings.CheckProjectLogPath()" function can be called), it's safe to call an "BU.Echo<...>()" function, the "BU.Main.Errors.HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
     if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
 		BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : no existing log file";
@@ -674,7 +661,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 			[ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 
-    # Remember : since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.CheckProjectLogStatus()" function
+    # Remember : since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.Main.Status.CheckProjectLogStatus()" function
     # (the only one where the "BU.Main.Checkings.CheckProjectLogPath()" function can be called), it's safe to call an "BU.Echo<...>()" function, the "BU.Main.Errors.HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
      elif [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
          echo "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -692,7 +679,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 
 # Accepted arguments : 'nodate', '<an empty string>'
-function BU.CheckProjectLogStatus()
+function BU.Main.Status.CheckProjectLogStatus()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -711,12 +698,12 @@ function BU.CheckProjectLogStatus()
 
     #**** Variables ****
 
-	# WARNING : DO NOT call any "BU.Echo<...>()" function from the "main/Echo.lib" file, as they all call the "BU.CheckProjectLogStatus()" function.
+	# WARNING : DO NOT call any "BU.Echo<...>()" function from the "main/Echo.lib" file, as they all call the "BU.Main.Status.CheckProjectLogStatus()" function.
 
 	# Also, DO NOT call any "Decho<...>()" function, as they call the "BU.Main.Errors.HandleErrors()" function in case of a bad value passed as array of argument,
-	# which also calls this same "BU.CheckProjectLogStatus()" function.
+	# which also calls this same "BU.Main.Status.CheckProjectLogStatus()" function.
 
-    # If you need to call a function here, please verify if it doesn't calls the "BU.CheckProjectLogStatus()" function,
+    # If you need to call a function here, please verify if it doesn't calls the "BU.Main.Status.CheckProjectLogStatus()" function,
     # nor any function called by the function you want to add, or else set the "$__BU_MAIN_STAT_ECHO" status variable value to "true" BEFORE calling the wanted function.
 
     # -------------------------------------------
@@ -732,7 +719,7 @@ function BU.CheckProjectLogStatus()
         return "$C";
     }
 
-    # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.CheckProjectLogStatus()" function or any other function that calls it might be called.
+    # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.Main.Status.CheckProjectLogStatus()" function or any other function that calls it might be called.
     local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -752,10 +739,10 @@ function BU.CheckProjectLogStatus()
         {
             local returnCode="$?";
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is stopped.
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
             BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is stopped.
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
             BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
             return "$returnCode";
@@ -834,7 +821,7 @@ function BU.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n';
 
-                                # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU.CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
+                                # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU.Main.Status.CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
                                 BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline;
 							else
                                 echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
@@ -856,20 +843,20 @@ function BU.CheckProjectLogStatus()
                 fi
             done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-
-            # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"                "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+
+            # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
+            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -951,10 +938,10 @@ function BU.CheckProjectLogStatus()
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
 			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
 			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			return 0;
@@ -980,10 +967,10 @@ function BU.CheckProjectLogStatus()
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+            # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
             BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+            # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
             BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
@@ -1011,19 +998,19 @@ function BU.CheckProjectLogStatus()
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-        # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.CheckProjectLogStatus()" function's execution is over.
+        # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
         BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
 		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		return 0;
 	fi
 
-	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
 	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.CheckProjectLogStatus()" function's execution is over.
+	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
 	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

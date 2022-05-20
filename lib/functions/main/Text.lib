@@ -86,7 +86,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     #**** Code ****
     if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
@@ -133,7 +133,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     #**** Code ****
     if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
@@ -412,7 +412,7 @@ BU.Main.Text.GetSubStringBeforeDelim()
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
         if ! BU.Main.Args__Text.GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-        if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
+        if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
             BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
         fi
     fi

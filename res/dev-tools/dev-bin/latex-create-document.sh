@@ -93,7 +93,7 @@ LatexCreateDoc_ListLanguages;
 BU.Main.Echo.Newline;
 
 read -rp "Please type the wanted language's code from one of the above parenthesis : " __read_lang;
-BU.EchoRead "$__read_lang";
+BU.Main.Echo.Read "$__read_lang";
 BU.Main.Echo.Newline;
 
 # ----------------------------------------------
@@ -142,7 +142,7 @@ else
         BU.Main.Echo.Msg "7 - Tutorials documentation                    $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_tutos")";
 
     	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code;
-        BU.EchoRead "$__read_folder_code";
+        BU.Main.Echo.Read "$__read_folder_code";
         BU.Main.Echo.Newline;
 
     elif [ -n "$__ARG_TYPE" ]; then
@@ -190,7 +190,7 @@ else
         BU.Main.Echo.Newstep "How do you want to name your document ?";
         read -rp "Enter the file's name (don't add a ''.tek'' extension, this script will complete it) : " __read_doc_name;
 
-        BU.EchoRead "$__read_doc_name";
+        BU.Main.Echo.Read "$__read_doc_name";
 
         if [ -z "$__read_doc_name" ]; then
             # shellcheck disable=SC2016
@@ -230,7 +230,7 @@ else
     if [ -z "$__ARG_AUTHOR" ]; then
         read -rp "$(EchoNewstep Please enter your full name : )" __read_author_name;
 
-        BU.EchoRead "$__read_author_name";
+        BU.Main.Echo.Read "$__read_author_name";
 
         __tex_author="$__read_author_name";
     else

@@ -50,7 +50,7 @@ __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="";
 ## DEBUG ID : path-checking-functions
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_Checkings.path-checking-functions";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
 
 # -----------------------------------------------
 
@@ -58,7 +58,7 @@ __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FU
 ## DEBUG ID : quick-message-printing
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_Checkings.quick-message-printing";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
 
 # Print a message without the need to write the whole "BU.Main.Errors.HandleErrors()" function's second argument, and according to the test option which failed :
 function BU.Main.Args.PrintBadOption()
@@ -301,7 +301,7 @@ function BU.Main.Args.PrintBadOption()
 ## DEBUG ID = argument-presence-checking
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_Checkings.argument-presence-checking";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
 function BU.Main.Args.GetFuncArgsArrayValues()
@@ -440,7 +440,7 @@ function BU.Main.Args.GetFFL()
     local p_lineno=$3;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    if [ -n "$p_filename" ] && [ -n "$p_funcname" ] && [ -n "$p_lineno" ] && BU.IsPositiveInt "$p_lineno"; then
+    if [ -n "$p_filename" ] && [ -n "$p_funcname" ] && [ -n "$p_lineno" ] && BU.Main.Checkings.IsPositiveInt "$p_lineno"; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     else
@@ -509,7 +509,7 @@ function BU.Main.Args.GetFFL()
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
-            elif [ -n "$p_lineno" ] && ! BU.IsPositiveInt "$p_lineno"; then
+            elif [ -n "$p_lineno" ] && ! BU.Main.Checkings.IsPositiveInt "$p_lineno"; then
                 BU.Main.Errors.HandleErrors '1' \
                     "" \
                     "  [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
@@ -614,7 +614,7 @@ function BU.Main.Args.Argc()
     if [ -n "$p_argcount" ] && [ -n "$p_argawait" ]; then
 
         # If both "$p_argcount" and "$p_argawait" argument values are integer.
-        if BU.IsPositiveInt "$p_argcount" && BU.IsPositiveInt "$p_argawait"; then
+        if BU.Main.Checkings.IsPositiveInt "$p_argcount" && BU.Main.Checkings.IsPositiveInt "$p_argawait"; then
 
             # If the correct number of arguments is given to the processed function.
             if [ "$p_argcount" -eq "$p_argawait" ] || [ "$p_argawait" -eq 0 ]; then
@@ -656,14 +656,14 @@ function BU.Main.Args.Argc()
 
         # Else, if "$p_argcount" AND / OR "$p_argawait" argument values are not integer.
         else
-            if ! BU.IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
+            if ! BU.Main.Checkings.IsPositiveInt "$p_argcount"; then local lineno="$LINENO";
                 BU.Main.Errors.HandleErrors '1' \
                     "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S ARGUMENT COUNTER $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argcount") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU.Main.Decho.Decho.Function "$p_funcname") first argument $(BU.Main.Decho.Decho.Var 'p_argcount')'s value needs to be an integer, since it is an argument counter [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                     "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
 
-            if ! BU.IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
+            if ! BU.Main.Checkings.IsPositiveInt "$p_argawait"; then local lineno="$LINENO";
                 BU.Main.Args.PrintBadOption '1' \
                     "THE $(BU.Main.Decho.Decho.Function "$p_funcname") FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU.Main.Decho.Decho.Function "$p_funcname") second argument $(BU.Main.Decho.Decho.Var 'p_argawait')'s value needs to be an integer, since it is an argument limit [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
@@ -834,14 +834,14 @@ function BU.Main.Args__Decho.Decho()
 #	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	# If the text's color code is not an integer.
-	if ! BU.IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
+	if ! BU.Main.Checkings.IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
         printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newTextColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as text color code, as second argument for the « %s » function (optional argument)\n [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
     # If the background's color code is not an integer.
-    if ! BU.IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
+    if ! BU.Main.Checkings.IsPositiveInt "$p_newBGColor"; then local lineno="$LINENO";
         printf "IN « %s », FUNCTION « %s », LINE « %s » : WARNING : THE « p_newBGColor » PARAMETER VALUE IS NOT AN INTEGER\n\nPlease pass a positive integer as background color code, as third argument for the « %s » function (optional argument)\n [/|\] %s" "$p_filename" "$p_funcname" "$p_lineno" "${__BU_MAIN_COLOR_FUNCTION}$p_funcname$__BU_MAIN_COLOR_ERROR" "$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')";
             "$p_newTextColor" "" "$p_funcname" "$lineno";
 
@@ -1121,7 +1121,7 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    if [ -n "$p_iterations" ] ! BU.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as number of iterations (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')"
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1165,7 +1165,7 @@ BU.Main.Args__Errors.SetLastReturnValue()
 	fi
 
 	# If the return value is not an integer.
-	if [ -n "$p_code" ] && ! BU.IsPositiveInt "$p_code"; then local lineno="$LINENO";
+	if [ -n "$p_code" ] && ! BU.Main.Checkings.IsPositiveInt "$p_code"; then local lineno="$LINENO";
 		BU.Main.Args.PrintBadOption '!intpos' \
 			"Please pass a valid integer value, from $(BU.Main.Decho.Decho.Highlight '0') to $(BU.Main.Decho.Decho.Highlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
@@ -1600,7 +1600,7 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 ## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Main.FilesystemGetFS<...>()" functions.
+# "BU.Main.Filesystem.GetFS<...>()" functions.
 function BU.Main.Args__Filesystem.GetFSInfos()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1813,7 +1813,7 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
             'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1852,7 +1852,7 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
             'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1955,7 +1955,7 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
             'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1994,7 +1994,7 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
             'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 	fi
 
-    if [ -n "$p_iterations" ] && ! BU.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";

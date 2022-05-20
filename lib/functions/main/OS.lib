@@ -207,38 +207,34 @@ function BU.Main.OS.IsOSFreeBSD()                   { if [[ "$OSTYPE" == 'FreeBS
 # Checking if current OS is Haiku OS.
 function BU.Main.OS.IsOSHaiku()                     { if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
 
-# Checking if current OS is OpenBSD.
-function BU.Main.OS.IsOSOpenBSD()                   { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
-
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
 function BU.Main.OS.IsOSLinux()                     { if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
 function BU.Main.OS.IsOSLinuxWSL()                  { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
 
+# Checking if current OS is NetBSD.
+function BU.Main.OS.IsOSNetBSD()                    { if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
+
+# Checking if current OS is OpenBSD.
+function BU.Main.OS.IsOSOpenBSD()                   { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
+
 # Checking if current OS is OSx.
 function BU.Main.OS.IsOSX()                         { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
 
-# Checking if current Linux distribution is Arch Linux.
-function BU.Main.OS.IsOSLinuxDistroArchLinux()      { BU.Main.OS.GetLinuxDistro ARCH                                     &&      return 0;       return 1; }
+# -----------------------------------------------
 
-# Checking if current Linux distribution is Debian.
-function BU.Main.OS.IsOSLinuxDistroDebian()         { BU.Main.OS.GetLinuxDistro debian                                   &&      return 0;       return 1; }
+## SPECIFIC OS VERSIONS CHECKINGS (FREE BSD)
+## DEBUG ID : specific-os-versions-checkings-freebsd
 
-# Checking if current Linux distribution is Fedora.
-function BU.Main.OS.IsOSLinuxDistroFedora()         { BU.Main.OS.GetLinuxDistro Fedora                                   &&      return 0;       return 1; }
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FREEBSD="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-freebsd";
 
-# Checking if current Linux distribution is Linux Mint.
-function BU.Main.OS.IsOSLinuxDistroLinuxMint()      { BU.Main.OS.GetLinuxDistro ''                                       &&      return 0;       return 1; }
+# -----------------------------------------------
 
-# Checking if current Linux distribution is Manjaro.
-function BU.Main.OS.IsOSLinuxDistroManjaro()        { BU.Main.OS.GetLinuxDistro Manjaro                                  &&      return 0;       return 1; }
+## SPECIFIC OS VERSIONS CHECKINGS (HAIKU)
+## DEBUG ID : specific-os-versions-checkings-haiku
 
-# Checking if current Linux distribution is SUSE.
-function BU.Main.OS.IsOSLinuxDistroSUSE()           { BU.Main.OS.GetLinuxDistro ''                                       &&      return 0;       return 1; }
-
-# Checking if current Linux distribution is Ubuntu.
-function BU.Main.OS.IsOSLinuxDistroUbuntu()         { BU.Main.OS.GetLinuxDistro Ubuntu                                   &&      return 0;       return 1; }
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_HAIKU="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-haiku";
 
 # -----------------------------------------------
 
@@ -246,7 +242,14 @@ function BU.Main.OS.IsOSLinuxDistroUbuntu()         { BU.Main.OS.GetLinuxDistro 
 ## DEBUG ID : specific-os-versions-checkings-linux
 
 # shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.specific-os-versions-checkings-linux";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-linux";
+
+# Checking if current Linux distribution is Arch Linux.
+function BU.Main.OS.IsOSLinuxDistroArchLinux()          { BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is Debian.
+function BU.Main.OS.IsOSLinuxDistroDebian()             { BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # Checking debian versions.
 function BU.Main.OS.IsOSLinuxDistroDebian6()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
@@ -255,6 +258,10 @@ function BU.Main.OS.IsOSLinuxDistroDebian8()            { BU.Main.OS.CheckLinuxD
 function BU.Main.OS.IsOSLinuxDistroDebian9()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '9'           &&      return 0;       return 1; }
 function BU.Main.OS.IsOSLinuxDistroDebian10()           { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '10'          &&      return 0;       return 1; }
 function BU.Main.OS.IsOSLinuxDistroDebian11()           { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '11'          &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is Fedora.
+function BU.Main.OS.IsOSLinuxDistroFedora()             { BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
 
 # Checking Fedora versions.
 function BU.Main.OS.IsOSLinuxDistroFedora28()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
@@ -266,6 +273,22 @@ function BU.Main.OS.IsOSLinuxDistroFedora33()           { BU.Main.OS.CheckLinuxD
 function BU.Main.OS.IsOSLinuxDistroFedora34()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
 function BU.Main.OS.IsOSLinuxDistroFedora35()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
 function BU.Main.OS.IsOSLinuxDistroFedora36()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is Manjaro.
+function BU.Main.OS.IsOSLinuxDistroManjaro()            { BU.Main.OS.GetLinuxDistro Manjaro                         &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is Linux Mint.
+function BU.Main.OS.IsOSLinuxDistroLinuxMint()          { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is SUSE.
+function BU.Main.OS.IsOSLinuxDistroSUSE()               { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+
+
+# Checking if current Linux distribution is Ubuntu.
+function BU.Main.OS.IsOSLinuxDistroUbuntu()             { BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
 function BU.Main.OS.IsOSLinuxDistroUbuntu1804()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
