@@ -35,21 +35,21 @@ fi
 ## DEFINING RESOURCE FILES AND FOLDERS
 
 # Linux-reinstall's sub-folders paths
-__LINUX_REINSTALL_INST="$(BU.Main.DirectoriesGetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/install/categories"
-__LINUX_REINSTALL_LANG="$(BU.Main.DirectoriesGetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/lang"
-__LINUX_REINSTALL_VARS="$(BU.Main.DirectoriesGetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/variables"
+__LINUX_REINSTALL_INST="$(BU.Main.Directories.GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/install/categories"
+__LINUX_REINSTALL_LANG="$(BU.Main.Directories.GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/lang"
+__LINUX_REINSTALL_VARS="$(BU.Main.Directories.GetParentDirectoryPath "$__BU_MAIN_PROJECT_NAME")/variables"
 
 # Calling the "GetDirectory" function from the "Directories.lib" file and passing targeted directories paths as argument.
-BU.EchoNewstep "IN $(BU.Main.Decho.N "$__BU_MAIN_PROJECT_FILE"), LINE $(BU.Main.Decho.N "$LINENO") : CHECKING FOR ${__BU_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
-BU.Main.DirectoriesGetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && BU.EchoSuccess "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"
-BU.Main.DirectoriesGetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && BU.EchoSuccess "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"
-BU.Main.DirectoriesGetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && BU.EchoSuccess "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"; BU.Newline;
-BU.EchoNewstep "All the needed directories are found !"
+BU.Main.Echo.Newstep "IN $(BU.Main.Decho.N "$__BU_MAIN_PROJECT_FILE"), LINE $(BU.Main.Decho.N "$LINENO") : CHECKING FOR ${__BU_MAIN_PROJECT_NAME^^}'S SUB-FOLDERS"
+BU.Main.Directories.GetDirectoryPath "$__LINUX_REINSTALL_INST" > /dev/null && BU.Main.Echo.Success "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"
+BU.Main.Directories.GetDirectoryPath "$__LINUX_REINSTALL_LANG" > /dev/null && BU.Main.Echo.Success "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"
+BU.Main.Directories.GetDirectoryPath "$__LINUX_REINSTALL_VARS" > /dev/null && BU.Main.Echo.Success "Got this $PROJECT_NAME's directory : $(BU.Main.Decho.S "$__LINUX_REINSTALL_INST")"; BU.Main.Echo.Newline;
+BU.Main.Echo.Newstep "All the needed directories are found !"
 
 # Sourcing the Linux-reinstall language files.
 # BU.EchoInit "In $PROJECT_FILE, line $LINENO : DEFINING ${PROJECT_NAME^^}'S LIBRARY FOLDER"
-# BU.Main.FilesSourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
-# BU.Newline #; BU.Newline;
+# BU.Main.Files.SourceFile "$LINUX_REINSTALL_LANG/SetMainLang.sh" "" "$LINENO"
+# BU.Main.Echo.Newline #; BU.Main.Echo.Newline;
 
 # Ending the initialization process.
 Header.Green "END OF THE $(BU.Main.Decho.Green "${__BU_MAIN_PROJECT_NAME^^}")'S INITIALIZATION"
@@ -105,15 +105,15 @@ function Args
     #**** Code ****
 	# If the script is not run as super-user (root)
         local lineno=$LINENO; if [ "$EUID" -ne 0 ]; then
-            BU.EchoError "Ce script doit être exécuté en tant que super-utilisateur (root)."
-            BU.EchoError "Exécutez ce script en plaçant la commande $(BU.Main.Decho.E "sudo") devant votre commande :"
+            BU.Main.Echo.Error "Ce script doit être exécuté en tant que super-utilisateur (root)."
+            BU.Main.Echo.Error "Exécutez ce script en plaçant la commande $(BU.Main.Decho.E "sudo") devant votre commande :"
 
             # La variable "$0" ci-dessous est le nom du fichier shell en question avec le "./" placé devant (argument 0).
             # Si ce fichier est exécuté en dehors de son dossier, le chemin vers le script depuis le dossier actuel sera affiché.
             echo -e "    sudo $0 \$installation" >&2
-            BU.Newline >&2
+            BU.Main.Echo.Newline >&2
 
-            BU.EchoError "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande."
+            BU.Main.Echo.Error "Ou connectez vous directement en tant que super-utilisateur, puis tapez cette commande."
             echo -e "    $0 \$installation" >&2
 
             BU.Main.Errors.HandleErrors "1" "SCRIPT LANCÉ EN TANT QU'UTILISATEUR NORMAL !" \
@@ -123,18 +123,18 @@ function Args
 
     # If the mandatory username argument is not passed.
     local lineno=$LINENO; if [ -z "$__ARG_USERNAME" ]; then
-        BU.EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
+        BU.Main.Echo.Error "Veuillez exécuter ce script en précisant le type d'installation :"
         echo -e "    sudo $0 \$username" >&2
-        BU.Newline >&2
+        BU.Main.Echo.Newline >&2
 
         exit 1
     fi
 
 	# If the mandatory installation type argument is not passed.
 	local lineno=$LINENO; if [ -z "$__ARG_INSTALL" ]; then
-        BU.EchoError "Veuillez exécuter ce script en précisant le type d'installation :"
+        BU.Main.Echo.Error "Veuillez exécuter ce script en précisant le type d'installation :"
         echo -e "    sudo $0 \$username" >&2
-        BU.Newline >&2
+        BU.Main.Echo.Newline >&2
 
         BU.Main.Errors.HandleErrors "1" "VOUS N'AVEZ PAS PASSÉ LE TYPE D'INSTALLATION EN PREMIER ARGUMENT !" \
             "Les valeurs attendues sont : $(BU.Main.Decho.E "perso") ou $(BU.Main.Decho.E "sio")." \
@@ -153,7 +153,7 @@ function Args
                 __VER_INSTALL="$__ARG_INSTALL"
                 ;;
             *)
-                BU.Newline; BU.Main.Errors.HandleErrors "1" \
+                BU.Main.Echo.Newline; BU.Main.Errors.HandleErrors "1" \
                     "LA VALEUR DE L'ARGUMENT $(BU.Main.Decho.E "$__ARG_INSTALL_INDEX") NE CORRESPOND PAS À L'UNE DES VALEURS ATTENDUES !" \
                     "Les valeurs attendues sont : $(BU.Main.Decho.E "perso") ou $(BU.Main.Decho.E "sio")." \
                     "$__ARG_INSTALL" "$(basename "$0")" "${FUNCNAME[0]}" "$lineno"
@@ -167,8 +167,8 @@ function Args
 	# I use this function to test features on my script without waiting for it to reach their step. Its content is likely to change a lot.
 	# Checking if the user passed a string named "debug" as last argument.
 	if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = "true" ]; then
-		BU.EchoMsg "PROJECT_STATUS_DEBUG status : $(BU.Main.Decho.Decho "true")"
-		BU.Newline;
+		BU.Main.Echo.Msg "PROJECT_STATUS_DEBUG status : $(BU.Main.Decho.Decho "true")"
+		BU.Main.Echo.Newline;
 
 		# The name of the log file is redefined, THEN we redefine the path,
 		# EVEN if the initial value of the variable "$PROJECT_LOG_PATH" is the same as the new value.
@@ -182,14 +182,14 @@ function Args
 		__BU_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MAIN_PROJECT_LOG_DIR_PATH/$__BU_MAIN_PROJECT_LOG_FILE_NAME"
 
 		# Changing the name of the log file.
-        if [ "$(BU.EchoMsg "$(mv -v "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD" "$__BU_MAIN_PROJECT_LOG_FILE_NAME")")" ]; then
+        if [ "$(BU.Main.Echo.Msg "$(mv -v "$__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD" "$__BU_MAIN_PROJECT_LOG_FILE_NAME")")" ]; then
             ## APPEL DES FONCTIONS D'INITIALISATION
             CreateLogFile			# On appelle la fonction de création du fichier de logs. À partir de maintenant, chaque sortie peut être redirigée vers un fichier de logs existant.
             GetMainPackageManager	# Puis la fonction de détection du gestionnaire de paquets principal de la distribution de l'utilisateur.
             WriteInstallScript		# Puis la fonction de création de scripts d'installation.
 
             # APPEL DES FONCTIONS À TESTER
-            BU.EchoNewstep "Test de la fonction d'installation"
+            BU.Main.Echo.Newstep "Test de la fonction d'installation"
 
             HeaderStep "TEST D'INSTALLATION DE PAQUETS"
             PackInstall "apt" "nano"
@@ -216,9 +216,9 @@ function ScriptInit
     BU.HeaderBase "-" "$COL_BLUE" "$COL_BLUE" "VÉRIFICATION DES INFORMATIONS PASSÉES EN ARGUMENT"
 
 	# On demande à l'utilisateur de bien confirmer son nom d'utilisateur, au cas où son compte utilisateur cohabite avec d'autres comptes et qu'il n'a pas passé le bon compte en argument.
-	BU.Newline;
+	BU.Main.Echo.Newline;
 
-	KbInputYesNo "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}.$(BU.Newline)Est-ce correct ? (oui/non)" \
+	KbInputYesNo "Nom d'utilisateur entré :$COL_RESET ${ARG_USERNAME}.$(BU.Main.Echo.Newline)Est-ce correct ? (oui/non)" \
         "$(return)" "Abandon $(exit 0)"
 }
 
@@ -227,12 +227,12 @@ function LaunchScript
 {
     # Affichage du header de bienvenue
     HeaderCyan "BIENVENUE DANS L'INSTALLATEUR DE PROGRAMMES POUR ${OSTYPE^^} : VERSION $MAIN_SCRIPT_VERSION"
-    BU.EchoNewstep "Début de l'installation."
-	BU.Newline;
+    BU.Main.Echo.Newstep "Début de l'installation."
+	BU.Main.Echo.Newline;
 
-	KbInputYesNo "Assurez-vous d'avoir lu au moins le mode d'emploi $(BU.Main.Decho.N "(Mode d'emploi.odt)") avant de lancer l'installation.$(BU.Newline)Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)." \
-        "Vous avez confirmé vouloir exécuter ce script.$(BU.Newline)Début de l'exécution. $(return)" \
-        "Le script ne sera pas exécuté.$(BU.Newline)Abandon.$(exit 0)"
+	KbInputYesNo "Assurez-vous d'avoir lu au moins le mode d'emploi $(BU.Main.Decho.N "(Mode d'emploi.odt)") avant de lancer l'installation.$(BU.Main.Echo.Newline)Êtes-vous sûr de bien vouloir lancer l'installation ? (oui/non)." \
+        "Vous avez confirmé vouloir exécuter ce script.$(BU.Main.Echo.Newline)Début de l'exécution. $(return)" \
+        "Le script ne sera pas exécuté.$(BU.Main.Echo.Newline)Abandon.$(exit 0)"
 }
 
 # -----------------------------------------------
@@ -247,7 +247,7 @@ function CheckInternetConnection
 	local lineno=$LINENO; ping -q -c 1 -W 1 opendns.com 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
     BU.Main.Errors.HandleErrors "$?" "AUCUNE CONNEXION À INTERNET" "Vérifiez que vous êtes bien connecté à Internet, puis relancez le script." "$lineno"
-    BU.EchoSuccess "Votre ordinateur est connecté à Internet."
+    BU.Main.Echo.Success "Votre ordinateur est connecté à Internet."
 
     return
 }
@@ -274,7 +274,7 @@ function DistUpgrade
 
 	# On crée le dossier contenant les commandes de mise à jour.
 	if test ! -d "$update_d_path"; then
-		BU.Main.DirectoriesMake "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+		BU.Main.Directories.Make "$DIR_TMP_PATH" "$update_d_name" "0" "0" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 	fi
 
 	# On récupère la commande de mise à jour du gestionnaire de paquets principal enregistée dans la variable "$PACK_MAIN_PACKAGE_MANAGER".
@@ -291,25 +291,25 @@ function DistUpgrade
 	esac
 
 	# On met à jour les paquets
-	BU.EchoNewstep "Mise à jour des paquets"
-	BU.Newline;
+	BU.Main.Echo.Newstep "Mise à jour des paquets"
+	BU.Main.Echo.Newline;
 
 	bash "$pack_upg_f_path" # | tee -a "$PROJECT_LOG_PATH"
 
 	if test "$?" -eq 0; then
 		packs_updated="1"
-		BU.EchoSuccess "Tous les paquets ont été mis à jour."
-		BU.Newline;
+		BU.Main.Echo.Success "Tous les paquets ont été mis à jour."
+		BU.Main.Echo.Newline;
 	else
-		BU.EchoError "Une ou plusieurs erreurs ont eu lieu lors de la mise à jour des paquets."
-		BU.Newline;
+		BU.Main.Echo.Error "Une ou plusieurs erreurs ont eu lieu lors de la mise à jour des paquets."
+		BU.Main.Echo.Newline;
 	fi
 
 	# On vérifie maintenant si les paquets ont bien été mis à jour.
 	if test $packs_updated = "1"; then
-		BU.EchoSuccess "Les paquets ont été mis à jour avec succès."
+		BU.Main.Echo.Success "Les paquets ont été mis à jour avec succès."
 	else
-		BU.EchoError "La mise à jour des paquets a échouée."
+		BU.Main.Echo.Error "La mise à jour des paquets a échouée."
 	fi
 
 	return
@@ -325,122 +325,122 @@ function SetSudo
 	# On crée une backup du fichier de configuration "sudoers" au cas où l'utilisateur souhaite revenir à son ancienne configuration.
 	local sudoers_old="/etc/sudoers - $__TIME_DATE.old"
 
-    BU.EchoNewstep "Détection de la commande sudo $__COL_RESET."
-    BU.Newline;
+    BU.Main.Echo.Newstep "Détection de la commande sudo $__COL_RESET."
+    BU.Main.Echo.Newline;
 
 	# On vérifie si la commande "sudo" est installée sur le système de l'utilisateur.
 	command -v sudo 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
 	if test "$?" -eq 0; then
-        BU.Newline;
+        BU.Main.Echo.Newline;
 
-        BU.EchoSuccess "La commande $(BU.Main.Decho.S "sudo") est déjà installée sur votre système."
-		BU.Newline;
+        BU.Main.Echo.Success "La commande $(BU.Main.Decho.S "sudo") est déjà installée sur votre système."
+		BU.Main.Echo.Newline;
 	else
-		BU.Newline;
-		BU.EchoNewstep "La commande $(BU.Main.Decho.N "sudo") n'est pas installé sur votre système."
-		BU.Newline;
+		BU.Main.Echo.Newline;
+		BU.Main.Echo.Newstep "La commande $(BU.Main.Decho.N "sudo") n'est pas installé sur votre système."
+		BU.Main.Echo.Newline;
 
 		PackInstall "$PACK_MAIN_PACKAGE_MANAGER" "sudo"
 	fi
 
-	BU.EchoNewstep "Le script va tenter de télécharger un fichier $(BU.Main.Decho.N "sudoers") déjà configuré"
-	BU.EchoNewstep "depuis le dossier des fichiers ressources de mon dépôt Git :"
+	BU.Main.Echo.Newstep "Le script va tenter de télécharger un fichier $(BU.Main.Decho.N "sudoers") déjà configuré"
+	BU.Main.Echo.Newstep "depuis le dossier des fichiers ressources de mon dépôt Git :"
 	echo -e ">>>> https://github.com/DimitriObeid/Linux-reinstall/tree/Beta/Ressources"
-	BU.Newline;
+	BU.Main.Echo.Newline;
 
-	BU.EchoNewstep "Souhaitez vous le télécharger PUIS l'installer maintenant dans le dossier $(BU.Main.Decho.N "/etc/") ? (oui/non)"
-	BU.Newline;
+	BU.Main.Echo.Newstep "Souhaitez vous le télécharger PUIS l'installer maintenant dans le dossier $(BU.Main.Decho.N "/etc/") ? (oui/non)"
+	BU.Main.Echo.Newline;
 
 	echo -e ">>>> REMARQUE : Si vous disposez déjà des droits de super-utilisateur, ce n'est pas la peine de le faire !"
 	echo -e ">>>> Si vous avez déjà un fichier sudoers modifié, une sauvegarde du fichier actuel sera effectuée dans le même dossier,"
 	echo -e "	tout en arborant sa date de sauvegarde dans son nom (par exemple :$COL_CYAN sudoers - $TIME_DATE.old $COL_RESET)."
-	BU.Newline;
+	BU.Main.Echo.Newline;
 
 	function ReadSetSudo
 	{
 		read -rp "Entrez votre réponse : " rep_set_sudo
 		echo -e "$rep_set_sudo" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-		BU.Newline;
+		BU.Main.Echo.Newline;
 
 		# Cette condition case permer de tester les cas où l'utilisateur répond par "oui", "non" ou autre chose que "oui" ou "non".
 		case ${rep_set_sudo,,} in
 			"oui" | "yes")
 				# Sauvegarde du fichier "/etc/sudoers" existant en "/etc/sudoers $date_et_heure.old"
-				BU.EchoNewstep "Création d'une sauvegarde de votre fichier $(BU.Main.Decho.N "sudoers") existant nommée $(BU.Main.Decho.N "sudoers $TIME_DATE.old")."
-				BU.Newline;
+				BU.Main.Echo.Newstep "Création d'une sauvegarde de votre fichier $(BU.Main.Decho.N "sudoers") existant nommée $(BU.Main.Decho.N "sudoers $TIME_DATE.old")."
+				BU.Main.Echo.Newline;
 
 				cat "/etc/sudoers" > "$sudoers_old"
 
 				if test "$?" -eq 0; then
-					BU.EchoSuccess "Le fichier de sauvegarde $(BU.Main.Decho.S "$sudoers_old") a été créé avec succès."
-					BU.Newline;
+					BU.Main.Echo.Success "Le fichier de sauvegarde $(BU.Main.Decho.S "$sudoers_old") a été créé avec succès."
+					BU.Main.Echo.Newline;
 				else
-                    BU.EchoError "Impossible de créer une sauvegarde du fichier $(BU.Main.Decho.E "sudoers")."
-					BU.Newline;
+                    BU.Main.Echo.Error "Impossible de créer une sauvegarde du fichier $(BU.Main.Decho.E "sudoers")."
+					BU.Main.Echo.Newline;
 
 					return
 				fi
 
 				# Téléchargement du fichier sudoers configuré.
-				BU.EchoNewstep "Téléchargement du fichier sudoers depuis le dépôt Git $SCRIPT_REPO."
-				BU.Newline;
+				BU.Main.Echo.Newstep "Téléchargement du fichier sudoers depuis le dépôt Git $SCRIPT_REPO."
+				BU.Main.Echo.Newline;
 
 				sleep 1
 
 				wget https://raw.githubusercontent.com/DimitriObeid/Linux-reinstall/Beta/Ressources/sudoers -O "$DIR_TMP_PATH/sudoers"
 
 				if test "$?" -eq "0"; then
-                    BU.EchoSuccess "Le nouveau fichier $(BU.Main.Decho.S "sudoers") a été téléchargé avec succès."
-					BU.Newline;
+                    BU.Main.Echo.Success "Le nouveau fichier $(BU.Main.Decho.S "sudoers") a été téléchargé avec succès."
+					BU.Main.Echo.Newline;
 				else
-                    BU.EchoError "Impossible de télécharger le nouveau fichier $(BU.Main.Decho.E "sudoers")."
+                    BU.Main.Echo.Error "Impossible de télécharger le nouveau fichier $(BU.Main.Decho.E "sudoers")."
 
 					return
 				fi
 
 				# Déplacement du fichier "sudoers" fraîchement téléchargé vers le dossier "/etc/".
-				BU.EchoNewstep "Déplacement du fichier $(BU.Main.Decho.N "sudoers") vers le dossier $(BU.Main.Decho.N "/etc")."
-				BU.Newline;
+				BU.Main.Echo.Newstep "Déplacement du fichier $(BU.Main.Decho.N "sudoers") vers le dossier $(BU.Main.Decho.N "/etc")."
+				BU.Main.Echo.Newline;
 
 				mv "$DIR_TMP_PATH/sudoers" /etc/sudoers
 
 				if test "$?" -eq 0; then
-					BU.EchoSuccess "Fichier $(BU.Main.Decho.S "sudoers") déplacé avec succès vers le dossier $(BU.Main.Decho.S "/etc/")."
-					BU.Newline;
+					BU.Main.Echo.Success "Fichier $(BU.Main.Decho.S "sudoers") déplacé avec succès vers le dossier $(BU.Main.Decho.S "/etc/")."
+					BU.Main.Echo.Newline;
 				else
-                    BU.EchoError "Impossible de déplacer le fichier $(BU.Main.Decho.E "sudoers") vers le dossier $(BU.Main.Decho.E "/etc/")."
-					BU.Newline;
+                    BU.Main.Echo.Error "Impossible de déplacer le fichier $(BU.Main.Decho.E "sudoers") vers le dossier $(BU.Main.Decho.E "/etc/")."
+					BU.Main.Echo.Newline;
 
 					return
 				fi
 
 				# Ajout de l'utilisateur au groupe "sudo".
-				BU.EchoNewstep "Ajout de l'utilisateur $(BU.Main.Decho.N "${ARG_USERNAME}") au groupe sudo."
-				BU.Newline;
+				BU.Main.Echo.Newstep "Ajout de l'utilisateur $(BU.Main.Decho.N "${ARG_USERNAME}") au groupe sudo."
+				BU.Main.Echo.Newline;
 
 				usermod -aG root "${ARG_USERNAME}" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 
 				if test "$?" == "0"; then
-                    BU.EchoSuccess "L'utilisateur $(BU.Main.Decho.S "${ARG_USERNAME}") a été ajouté au groupe sudo avec succès."
-                    BU.Newline;
+                    BU.Main.Echo.Success "L'utilisateur $(BU.Main.Decho.S "${ARG_USERNAME}") a été ajouté au groupe sudo avec succès."
+                    BU.Main.Echo.Newline;
 
 					return
 				else
-					BU.EchoError "Impossible d'ajouter l'utilisateur $(BU.Main.Decho.E "${ARG_USERNAME}") à la liste des sudoers."
-                    BU.Newline;
+					BU.Main.Echo.Error "Impossible d'ajouter l'utilisateur $(BU.Main.Decho.E "${ARG_USERNAME}") à la liste des sudoers."
+                    BU.Main.Echo.Newline;
 
 					return
 
 				fi
 				;;
 			"non" | "no")
-				BU.EchoSuccess "Le fichier $(BU.Main.Decho.S "/etc/sudoers") ne sera pas modifié."
+				BU.Main.Echo.Success "Le fichier $(BU.Main.Decho.S "/etc/sudoers") ne sera pas modifié."
 
 				return
 				;;
 			*)
-				BU.EchoNewstep "Veuillez répondre EXACTEMENT par $(BU.Main.Decho.N "oui") ou par $(BU.Main.Decho.N "non")."
+				BU.Main.Echo.Newstep "Veuillez répondre EXACTEMENT par $(BU.Main.Decho.N "oui") ou par $(BU.Main.Decho.N "non")."
 				ReadSetSudo
 				;;
 		esac
@@ -515,10 +515,10 @@ EOF
 
     BU.Main.Errors.HandleErrors "$?" "LA VARIABLE D'ENVIRONNEMENT $(BU.Main.Decho.E "\$PATH") N'A PAS ÉTÉ MODIFÉE" \
         "Échec de l'installation de Laravel." "$lineno"
-    BU.EchoSuccess "La variable d'environnement $(BU.Main.Decho.S "\$PATH") a été modifiée avec succès."
-    BU.Newline;
+    BU.Main.Echo.Success "La variable d'environnement $(BU.Main.Decho.S "\$PATH") a été modifiée avec succès."
+    BU.Main.Echo.Newline;
 
-    BU.EchoSuccess "Le framework Laravel a été installé avec succès sur votre système"
+    BU.Main.Echo.Success "Le framework Laravel a été installé avec succès sur votre système"
 }
 
 
@@ -527,8 +527,8 @@ function InstallAndConfig
 {
     HeaderStep "INSTALLATIONS ET CONFIGURATIONS"
 
-    BU.EchoNewstep "Installation des programmes et configurations"
-    BU.Newline;
+    BU.Main.Echo.Newstep "Installation des programmes et configurations"
+    BU.Main.Echo.Newline;
 
     # Installation de sudo (pour les distributions livrées sans la commande) et configuration du fichier "sudoers" ("/etc/sudoers").
     SetSudo
@@ -559,20 +559,20 @@ function Autoremove
 {
 	HeaderStep "AUTO-SUPPRESSION DES PAQUETS OBSOLÈTES"
 
-	BU.EchoNewstep "Souhaitez vous supprimer les paquets obsolètes ? (oui/non)"
-	BU.Newline;
+	BU.Main.Echo.Newstep "Souhaitez vous supprimer les paquets obsolètes ? (oui/non)"
+	BU.Main.Echo.Newline;
 
 	# Fonction d'entrée de réponse sécurisée et optimisée demandant à l'utilisateur s'il souhaite supprimer les paquets obsolètes.
 	function ReadAutoremove
 	{
 		read -rp "Entrez votre réponse : " rep_autoremove
 		echo -e "$rep_autoremove" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-		BU.Newline;
+		BU.Main.Echo.Newline;
 
 		case ${rep_autoremove,,} in
 			"oui" | "yes")
-				BU.EchoNewstep "Suppression des paquets."
-				BU.Newline;
+				BU.Main.Echo.Newstep "Suppression des paquets."
+				BU.Main.Echo.Newline;
 
 	    		case "$PACK_MAIN_PACKAGE_MANAGER" in
 					"apt")
@@ -586,20 +586,20 @@ function Autoremove
 	            		;;
 				esac
 
-				BU.Newline;
+				BU.Main.Echo.Newline;
 
-				BU.EchoSuccess "Auto-suppression des paquets obsolètes effectuée avec succès."
+				BU.Main.Echo.Success "Auto-suppression des paquets obsolètes effectuée avec succès."
 
 				return
 				;;
 			"non" | "no")
-				BU.EchoSuccess "Les paquets obsolètes ne seront pas supprimés."
-				BU.EchoSuccess "Si vous voulez supprimer les paquets obsolète plus tard, tapez la commande de suppression de paquets obsolètes adaptée à votre getionnaire de paquets."
+				BU.Main.Echo.Success "Les paquets obsolètes ne seront pas supprimés."
+				BU.Main.Echo.Success "Si vous voulez supprimer les paquets obsolète plus tard, tapez la commande de suppression de paquets obsolètes adaptée à votre getionnaire de paquets."
 
 				return
 				;;
 			*)
-				BU.EchoNewstep "Veuillez répondre EXACTEMENT par $(BU.Main.Decho.N "oui") ou par $(BU.Main.Decho.N "non")."
+				BU.Main.Echo.Newstep "Veuillez répondre EXACTEMENT par $(BU.Main.Decho.N "oui") ou par $(BU.Main.Decho.N "non")."
 				ReadAutoremove
 				;;
 		esac
@@ -614,45 +614,45 @@ function IsInstallationDone
 {
 	HeaderStep "INSTALLATION TERMINÉE"
 
-	BU.EchoNewstep "Souhaitez-vous supprimer le dossier temporaire $(BU.Main.Decho.N "$DIR_TMP_PATH") ? (oui/non)"
-	BU.Newline;
+	BU.Main.Echo.Newstep "Souhaitez-vous supprimer le dossier temporaire $(BU.Main.Decho.N "$DIR_TMP_PATH") ? (oui/non)"
+	BU.Main.Echo.Newline;
 
 	read -rp "Entrez votre réponse : " rep_erase_tmp
 	echo -e "$rep_erase_tmp" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-    BU.Newline;
+    BU.Main.Echo.Newline;
 
 	case ${rep_erase_tmp,,} in
 		"oui")
-			BU.EchoNewstep "Déplacement du fichier de logs dans votre dossier personnel."
-			BU.Newline;
+			BU.Main.Echo.Newstep "Déplacement du fichier de logs dans votre dossier personnel."
+			BU.Main.Echo.Newline;
 
 			mv -v "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$DIR_HOMEDIR" 2>&1 | tee -a "$DIR_HOMEDIR/$__BU_MAIN_PROJECT_LOG_FILE_NAME" && __BU_MAIN_PROJECT_LOG_FILE_PATH=$"$DIR_HOMEDIR" \
-				&& BU.EchoSuccess "Le fichier de logs a bien été deplacé dans votre dossier personnel."
+				&& BU.Main.Echo.Success "Le fichier de logs a bien été deplacé dans votre dossier personnel."
 
-			BU.EchoNewstep "Suppression du dossier temporaire $DIR_TMP_PATH."
-			BU.Newline;
+			BU.Main.Echo.Newstep "Suppression du dossier temporaire $DIR_TMP_PATH."
+			BU.Main.Echo.Newline;
 
 			if test rm -rfv "$DIR_TMP_PATH" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH"; then
-				BU.EchoSuccess "Le dossier temporaire $(BU.Main.Decho.S "$DIR_TMP_PATH") a été supprimé avec succès."
-				BU.Newline;
+				BU.Main.Echo.Success "Le dossier temporaire $(BU.Main.Decho.S "$DIR_TMP_PATH") a été supprimé avec succès."
+				BU.Main.Echo.Newline;
 			else
-				BU.EchoError "Suppression du dossier temporaire impossible. Essayez de le supprimer manuellement."
-                BU.Newline;
+				BU.Main.Echo.Error "Suppression du dossier temporaire impossible. Essayez de le supprimer manuellement."
+                BU.Main.Echo.Newline;
 			fi
 			;;
 		*)
-			BU.EchoSuccess "Le dossier temporaire $(BU.Main.Decho.S "$DIR_TMP_PATH") ne sera pas supprimé."
-            BU.Newline;
+			BU.Main.Echo.Success "Le dossier temporaire $(BU.Main.Decho.S "$DIR_TMP_PATH") ne sera pas supprimé."
+            BU.Main.Echo.Newline;
 			;;
 	esac
 
-    BU.EchoSuccess "Installation terminée. Votre distribution Linux est prête à l'emploi."
-	BU.Newline;
+    BU.Main.Echo.Success "Installation terminée. Votre distribution Linux est prête à l'emploi."
+	BU.Main.Echo.Newline;
 
 	echo -e "$(BU.Main.Decho.Decho "Note :") Si vous avez constaté un bug ou tout autre problème lors de l'exécution du script,"
 	echo -e "vous pouvez m'envoyer le fichier de logs situé dans votre dossier personnel."
 	echo -e "Il porte le nom de $(BU.Main.Decho.Decho "$__BU_MAIN_PROJECT_LOG_FILE_NAME")."
-	BU.Newline;
+	BU.Main.Echo.Newline;
 
     # On tue le processus de connexion en mode super-utilisateur.
 	sudo -k
@@ -683,24 +683,24 @@ PackInstall "$main" curl
 PackInstall "$main" snapd
 PackInstall "$main" wget
 
-BU.EchoNewstep "Vérification de l'installation des commandes $(BU.Main.Decho.N "curl"), $(BU.Main.Decho.N "snapd") et $(BU.Main.Decho.N "wget")."
-BU.Newline;
+BU.Main.Echo.Newstep "Vérification de l'installation des commandes $(BU.Main.Decho.N "curl"), $(BU.Main.Decho.N "snapd") et $(BU.Main.Decho.N "wget")."
+BU.Main.Echo.Newline;
 
 lineno=$LINENO; command -v curl snap wget | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
 BU.Main.Errors.HandleErrors "$?" "AU MOINS UNE DES COMMANDES D'INSTALLATION MANQUE À L'APPEL" "Essayez de  télécharger manuellement ces paquets : $(BU.Main.Decho.E "curl"), $(BU.Main.Decho.E "snapd") et $(BU.Main.Decho.E "wget")." "$lineno"
-BU.EchoSuccess "Les commandes importantes d'installation ont été installées avec succès."
-BU.Newline;
+BU.Main.Echo.Success "Les commandes importantes d'installation ont été installées avec succès."
+BU.Main.Echo.Newline;
 
 # DÉBUT DE LA PARTIE D'INSTALLATION
 BU.Main.Headers.DrawLine ";" "$COL_GREEN"
-BU.Newline;
+BU.Main.Echo.Newline;
 
-BU.EchoSuccess "Vous pouvez désormais quitter votre ordinateur pour chercher un café,"
-BU.EchoSuccess "La partie d'installation de vos programmes commence véritablement."
+BU.Main.Echo.Success "Vous pouvez désormais quitter votre ordinateur pour chercher un café,"
+BU.Main.Echo.Success "La partie d'installation de vos programmes commence véritablement."
 sleep 1
 
-BU.Newline;
-BU.Newline;
+BU.Main.Echo.Newline;
+BU.Main.Echo.Newline;
 
 sleep 3
 
@@ -708,17 +708,17 @@ sleep 3
 ## INSTALLATION DES LOGICIELS ABSENTS DES GESTIONNAIRES DE PAQUETS
 HeaderStep "INSTALLATION DES LOGICIELS INDISPONIBLES DANS LES BASES DE DONNÉES DES GESTIONNAIRES DE PAQUETS"
 
-BU.EchoNewstep "Les logiciels téléchargés via la commande $(BU.Main.Decho.N "wget") sont déplacés vers le nouveau dossier $(BU.Main.Decho.N "$DIR_SOFTWARE_NAME"), localisé dans votre dossier personnel"
-BU.Newline;
+BU.Main.Echo.Newstep "Les logiciels téléchargés via la commande $(BU.Main.Decho.N "wget") sont déplacés vers le nouveau dossier $(BU.Main.Decho.N "$DIR_SOFTWARE_NAME"), localisé dans votre dossier personnel"
+BU.Main.Echo.Newline;
 
 sleep 1
 
 # Création du dossier contenant les fichiers de logiciels téléchargés via la commande "wget" dans le dossier personnel de l'utilisateur.
-BU.EchoNewstep "Création du dossier d'installation des logiciels."
-BU.Newline;
+BU.Main.Echo.Newstep "Création du dossier d'installation des logiciels."
+BU.Main.Echo.Newline;
 
-BU.Main.DirectoriesMake "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
-BU.Newline;
+BU.Main.Directories.Make "$DIR_HOMEDIR" "$DIR_SOFTWARE_NAME" "2" "1" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH"
+BU.Main.Echo.Newline;
 
 # Installation de JMerise
 SoftwareInstall "http://www.jfreesoft.com" \

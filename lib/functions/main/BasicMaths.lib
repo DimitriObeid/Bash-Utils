@@ -54,7 +54,7 @@ __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__
 
 # Initial source of this AWK script (since it's not mine and I added more informations as comments) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
-function BU.Main.BasicMathsBytesToHuman()
+function BU.Main.BasicMaths.BytesToHuman()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -91,7 +91,7 @@ function BU.Main.BasicMathsBytesToHuman()
       }
       BEGIN{print human(bytes, pad, base)}')
 
-    BU.EchoMsg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
+    BU.Main.Echo.Msg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -99,7 +99,7 @@ function BU.Main.BasicMathsBytesToHuman()
 }
 
 # Negative number (float or int) to positive number (float or int).
-function BU.Main.BasicMathsNegativeToPositive()
+function BU.Main.BasicMaths.NegativeToPositive()
 {
     #**** Parameters ****
     local x=$1;         # Number    - Default : NULL    - Value to convert.

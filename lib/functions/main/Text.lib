@@ -87,7 +87,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
-        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
 	# Getting the number of occurences of the character / string targeted as delimiter.
@@ -134,7 +134,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
-        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
     fi
 
     for ((i=0; i<p_iterations; i++)); do
@@ -202,7 +202,7 @@ function BU.Main.Text.DeleteLettersInString()
     local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
 
     #**** Code ****
-    if ! BU.ArrayIsNotEmpty; then BU.EchoError "No string passed as first argument"; BU.Newline; return 1; fi
+    if ! BU.ArrayIsNotEmpty; then BU.Main.Echo.Error "No string passed as first argument"; BU.Main.Echo.Newline; return 1; fi
 
     if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
@@ -413,7 +413,7 @@ BU.Main.Text.GetSubStringBeforeDelim()
         if ! BU.Main.Args__Text.GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         if [ -n "$p_iterations" ] && ! BU.IsInt "$p_iterations"; then
-            BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+            BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
         fi
     fi
 

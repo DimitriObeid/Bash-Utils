@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Display a spinner while a task is ongoing.
-function BU.Main.PosixTermDisplaySpinner()
+function BU.Main.PosixTerm.DisplaySpinner()
 {
     #**** Parameters ****
     p_string=$1
@@ -22,4 +22,4 @@ function BU.Main.PosixTermDisplaySpinner()
     done
 }
 
-BU.Main.PosixTermDisplaySpinner "Chaîne de caractères de test" "2" "$!"
+BU.Main.PosixTerm.DisplaySpinner "Chaîne de caractères de test" "2" "$!"

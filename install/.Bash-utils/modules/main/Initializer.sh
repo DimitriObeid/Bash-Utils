@@ -458,7 +458,7 @@ if BU.Main.Status.CheckStatAllowFormatting; then
 
     else
         # shellcheck disable=SC2059
-        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Newline;
+        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
     fi
 
     # Creating the background color code file
@@ -468,7 +468,7 @@ if BU.Main.Status.CheckStatAllowFormatting; then
 
     else
         # shellcheck disable=SC2059
-        BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Newline;
+        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
     fi
 fi
 
@@ -481,7 +481,7 @@ if BU.Main.Status.CheckStatIsLogging; then
 		return 1;
 	else
         # shellcheck disable=SC2059
-		BU.EchoSuccess "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Newline;
+		BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Main.Echo.Newline;
 	fi
 fi
 

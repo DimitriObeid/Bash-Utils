@@ -58,7 +58,7 @@ fi
 function BU.SoftwareLibrariesInstallDirectXLinux()
 {
     #**** Code ****
-    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     # Checking if wine is installed on the system.
     BU.Main.CMDSGetCommandPath 'wine' || return 1;
@@ -70,7 +70,7 @@ function BU.SoftwareLibrariesInstallDirectXLinux()
 function BU.SoftwareLibrariesInstallOpenGLLinux()
 {
     #**** Code ****
-    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -83,7 +83,7 @@ function BU.SoftwareLibrariesInstallOpenGLLinux()
 function BU.SoftwareLibrariesInstallMetalOSX()
 {
     #**** Code ****
-    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -92,7 +92,7 @@ function BU.SoftwareLibrariesInstallMetalOSX()
 function BU.SoftwareLibrariesInstallOpenGLOSX()
 {
     #**** Code ****
-    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -105,7 +105,7 @@ function BU.SoftwareLibrariesInstallOpenGLOSX()
 function BU.SoftwareLibrariesInstallDirectXWindows()
 {
     #**** Code ****
-    BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -114,7 +114,7 @@ function BU.SoftwareLibrariesInstallDirectXWindows()
 function BU.SoftwareLibrariesInstallOpenGLWindows()
 {
     #**** Code ****
-	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }

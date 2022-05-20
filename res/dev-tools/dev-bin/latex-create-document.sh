@@ -73,7 +73,7 @@ __LATEX_CREATE_DOC__RES_DIR="$__BU_MAIN_MODULE_DEVTOOLS_SRC/$__BU_MAIN_PROJECT_N
 # Listing the supported languages.
 function LatexCreateDoc_ListLanguages()
 {
-    BU.EchoNewstep "Currently supported languages --> English (en), French (fr)";
+    BU.Main.Echo.Newstep "Currently supported languages --> English (en), French (fr)";
 
     for i in "${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[@]}"; do
         echo "  - $i"
@@ -88,13 +88,13 @@ function LatexCreateDoc_ListLanguages()
 
 ######################################################### CODE ########################################################
 
-BU.EchoNewstep "In which language do you want to write your LaTeX document ?";
+BU.Main.Echo.Newstep "In which language do you want to write your LaTeX document ?";
 LatexCreateDoc_ListLanguages;
-BU.Newline;
+BU.Main.Echo.Newline;
 
 read -rp "Please type the wanted language's code from one of the above parenthesis : " __read_lang;
 BU.EchoRead "$__read_lang";
-BU.Newline;
+BU.Main.Echo.Newline;
 
 # ----------------------------------------------
 
@@ -130,20 +130,20 @@ else
 	# If no type of document is passed as second argument
     if [ -z "$__ARG_TYPE" ]; then
         #***** Asking for the new document's path.
-        BU.EchoNewstep "What kind of document do you want to write ?";
-        BU.EchoMsg "1 - Master documentation                       $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_master")";
-        BU.EchoMsg "2 - Module general documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_module")";
-        BU.EchoMsg "3 - Module initializer script's documentation  $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_initscript")";
-        BU.EchoMsg "4 - Module configuration documentation         $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_config")";
-        BU.EchoMsg "5 - Module initializer documentation           $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_init")";
-        BU.EchoMsg "6 - Main functions documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_main_functions")";
-        BU.Newline;
+        BU.Main.Echo.Newstep "What kind of document do you want to write ?";
+        BU.Main.Echo.Msg "1 - Master documentation                       $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_master")";
+        BU.Main.Echo.Msg "2 - Module general documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_module")";
+        BU.Main.Echo.Msg "3 - Module initializer script's documentation  $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_initscript")";
+        BU.Main.Echo.Msg "4 - Module configuration documentation         $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_config")";
+        BU.Main.Echo.Msg "5 - Module initializer documentation           $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_init")";
+        BU.Main.Echo.Msg "6 - Main functions documentation               $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_main_functions")";
+        BU.Main.Echo.Newline;
 
-        BU.EchoMsg "7 - Tutorials documentation                    $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_tutos")";
+        BU.Main.Echo.Msg "7 - Tutorials documentation                    $(BU.Main.Decho.Green "Targeted folder") --> $(BU.Main.Decho.Decho.Path "$__target_path_tutos")";
 
     	read -rp "Please type the number corresponding to the wanted document category : " __read_folder_code;
         BU.EchoRead "$__read_folder_code";
-        BU.Newline;
+        BU.Main.Echo.Newline;
 
     elif [ -n "$__ARG_TYPE" ]; then
         __read_folder_code="$__ARG_TYPE";
@@ -187,7 +187,7 @@ else
     ## PROCESSING THE NEW FILE
 
 	if [ -z "$__ARG_FILENAME" ]; then
-        BU.EchoNewstep "How do you want to name your document ?";
+        BU.Main.Echo.Newstep "How do you want to name your document ?";
         read -rp "Enter the file's name (don't add a ''.tek'' extension, this script will complete it) : " __read_doc_name;
 
         BU.EchoRead "$__read_doc_name";
@@ -203,12 +203,12 @@ else
         __tex_full_path="$__folder_path/$__ARG_FILENAME";
     fi
 
-    BU.EchoNewstep "Creating the $(BU.Main.Decho.Decho.Path "$__tex_full_path") file";
-    BU.Newline;
+    BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "$__tex_full_path") file";
+    BU.Main.Echo.Newline;
 
     __
 
-	# BU.Main.Files.Make "$__folder_path" "$__read_doc_name.tex" && BU.EchoSuccess "Your LaTeX file ($(BU.Main.Decho.Decho.Path "$__tex_full_path")) was successfully created."
+	# BU.Main.Files.Make "$__folder_path" "$__read_doc_name.tex" && BU.Main.Echo.Success "Your LaTeX file ($(BU.Main.Decho.Decho.Path "$__tex_full_path")) was successfully created."
     lineno_case_copy_file="$LINENO"; case "$__read_folder_code" in
         1) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/master.txt" >> "$__tex_full_path";;
         2) BU.Main.Files.MakePath "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/packages.txt" > "$__tex_full_path"; cat "$__LATEX_CREATE_DOC__RES_DIR/$__read_lang/module-general.txt" >> "$__tex_full_path";;

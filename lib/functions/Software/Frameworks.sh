@@ -58,7 +58,7 @@ fi
 function BU.SoftwareFrameworksInstallLaravelLinux()
 {
     # Checking if the current system type is Linux.
-    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -67,7 +67,7 @@ function BU.SoftwareFrameworksInstallLaravelLinux()
 function BU.SoftwareFrameworksInstallSymfonyLinux()
 {
     # Checking if the current system type is Linux.
-    BU.IsOSLinux || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -80,7 +80,7 @@ function BU.SoftwareFrameworksInstallSymfonyLinux()
 function BU.SoftwareFrameworksInstallLaravelOSX()
 {
     # Checking if the current system type is OSX.
-    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -89,7 +89,7 @@ function BU.SoftwareFrameworksInstallLaravelOSX()
 function BU.SoftwareFrameworksInstallSymfonyOSX()
 {
     # Checking if the current system type is OSX.
-    BU.IsOSX || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.SoftwareFrameworksInstallSymfonyOSX()
 function BU.SoftwareFrameworksInstallLaravelWindows()
 {
 	#**** Code ****
-	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -111,7 +111,7 @@ function BU.SoftwareFrameworksInstallLaravelWindows()
 function BU.SoftwareFrameworksInstallSymfonyWindows()
 {
 	#**** Code ****
-	BU.IsOSWindows || { BU.EchoWarning ""; BU.Newline >&2; return 1; };
+	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }

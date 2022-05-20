@@ -136,22 +136,22 @@ function BU.IsDateYMD_HMS()
     #**** Code ****
     [[ $(BU.IsDateYMD "$v_date" > /dev/null) ]] || \
     {
-        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
-        BU.EchoWarning "Please use one of these formats :";
-        BU.EchoWarning "YYYY-MM-DD";
-        BU.EchoWarning "DD-MM-YYYY";
-        BU.EchoWarning "YYYY/MM/DD";
-        BU.EchoWarning "DD/MM/YYYY";
-        BU.Newline;
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")() --> Warning : the date is not formatted in a correct timestamp";
+        BU.Main.Echo.Warning "Please use one of these formats :";
+        BU.Main.Echo.Warning "YYYY-MM-DD";
+        BU.Main.Echo.Warning "DD-MM-YYYY";
+        BU.Main.Echo.Warning "YYYY/MM/DD";
+        BU.Main.Echo.Warning "DD/MM/YYYY";
+        BU.Main.Echo.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     };
 
     date "+%H:%M:%S" -d "$v_hour" || \
     {
-        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")() --> Warning : the hour is not formatted in a correct timestamp";
-        BU.EchoWarning "Please use only this format : hh:mm:ss";
-        BU.Newline;
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")() --> Warning : the hour is not formatted in a correct timestamp";
+        BU.Main.Echo.Warning "Please use only this format : hh:mm:ss";
+        BU.Main.Echo.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     };
@@ -665,8 +665,8 @@ function BU.Main.Checkings.CheckProjectLogPath()
     # Since the "$__BU_MAIN_STAT_DECHO" and the "$__BU_MAIN_STAT_ECHO" status variables values are set to their safe mode in the "BU.CheckProjectLogStatus()" function
     # (the only one where the "BU.Main.Checkings.CheckProjectLogPath()" function can be called), it's safe to call an "BU.Echo<...>()" function, the "BU.Main.Errors.HandleErrors()" or the "DechoHighlight" functions without risking an infinite loop.
     if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-		BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : no existing log file";
-		BU.EchoNewstep "Creating a log file for the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project";
+		BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : no existing log file";
+		BU.Main.Echo.Newstep "Creating a log file for the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project";
 
 		if ! BU.Main.Files.CreateProjectLogFile; then
 			[ -n "$VCheckProjectLogPath" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -793,14 +793,14 @@ function BU.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n';
                             else
-                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?";  BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?";  BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
                             else
-                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -812,14 +812,14 @@ function BU.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n';
                             else
-                                echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
                             else
-                                echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -835,19 +835,19 @@ function BU.CheckProjectLogStatus()
                                 BU.ModuleInit.Msg "$p_string" 'n';
 
                                 # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU.CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline;
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline;
 							else
-                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
-							fi; BU.Newline;
+                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+							fi; BU.Main.Echo.Newline;
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Newline >&2; v_loop_error='error'; break; };
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
@@ -888,14 +888,14 @@ function BU.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "${p_string#* ] }" 'n';
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "${p_string#* ] }";
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -908,7 +908,7 @@ function BU.CheckProjectLogStatus()
                             BU.ModuleInit.Msg "$p_string" 'n';
                         else
                             echo -ne "$p_string";
-                            echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                            echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     '' | *)
@@ -916,7 +916,7 @@ function BU.CheckProjectLogStatus()
                             BU.ModuleInit.Msg "$p_string";
                         else
                             echo -e "$p_string";
-                            echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                            echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     esac
@@ -928,19 +928,19 @@ function BU.CheckProjectLogStatus()
                         '-n' | 'n')
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n'
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
 							else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
-							fi; BU.Newline;
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+							fi; BU.Main.Echo.Newline;
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY") $p_string"
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
-                                BU.EchoWarning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Newline >&2; BU.EchoError "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
@@ -1062,8 +1062,8 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                         BU.Main.Errors.HandleSmallErrors 'E' \
                             "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                     else
-                        BU.EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
-                        BU.Newline;
+                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
+                        BU.Main.Echo.Newline;
                     fi
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -1080,8 +1080,8 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                         BU.Main.Errors.HandleSmallErrors 'E' \
                             "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU.Main.Checkings.CheckDirPathExists "$p_parent" 'true')" 'E';
                     else
-                        BU.EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
-                        BU.Newline;
+                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
+                        BU.Main.Echo.Newline;
                     fi
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
@@ -1097,8 +1097,8 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                     BU.Main.Errors.HandleSmallErrors 'E' \
                         "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                 else
-                    BU.EchoError "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
-                    BU.Newline;
+                    BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
+                    BU.Main.Echo.Newline;
                 fi
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
@@ -1118,8 +1118,8 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                     BU.Main.Errors.HandleSmallErrors 'E' \
                         "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU.Main.Checkings.CheckDirPathExists "$v_path" 'true')" 'E';
                 else
-                    BU.EchoError "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's folder --> $v_path";
-                    BU.Newline;
+                    BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's folder --> $v_path";
+                    BU.Main.Echo.Newline;
                 fi
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
@@ -1178,9 +1178,9 @@ function BU.Main.Checkings.CheckDecho()
         if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" = '' ]; then
             echo "$__BU_MAIN_COLOR_TXT_RESET" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || \
             {
-                # It's better to call the "BU.EchoMsg()" function, so that its redirection and debug process wil not have to be reprogrammed.
+                # It's better to call the "BU.Main.Echo.Msg()" function, so that its redirection and debug process wil not have to be reprogrammed.
                 # It's also better to not call the "BU.Main.Errors.HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
-                BU.EchoMsg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' '';
+                BU.Main.Echo.Msg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' '';
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             }

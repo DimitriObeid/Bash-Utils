@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source of this AWK script : https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
-function BU.Main.BasicMathsBytesToHuman()
+function BU.Main.BasicMaths.BytesToHuman()
 {
     #**** Parameters ****
     local L_BYTES="${1:-0}"
@@ -37,6 +37,6 @@ function BU.Main.BasicMathsBytesToHuman()
     return $?
 }
 
-BU.Main.BasicMathsBytesToHuman "$1" "$2" "$3"
+BU.Main.BasicMaths.BytesToHuman "$1" "$2" "$3"
 
 echo "$BYTESTOHUMAN_RESULT"

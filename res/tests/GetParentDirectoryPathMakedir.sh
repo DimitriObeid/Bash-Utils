@@ -12,7 +12,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
 }
 
-function BU.Main.DirectoriesGetParentDirectoryPathMkdir()
+function BU.Main.Directories.GetParentDirectoryPathMkdir()
 {
 	local p_path=$1
 	local p_iterations=$2
@@ -45,4 +45,4 @@ function BU.Main.DirectoriesGetParentDirectoryPathMkdir()
 	echo "$v_print_path"
 }
 
-BU.Main.DirectoriesGetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "5"
+BU.Main.Directories.GetParentDirectoryPathMkdir "$HOME/Projets/Bash-utils/res/tests/test_s1/test_s2/3/4/5" "5"

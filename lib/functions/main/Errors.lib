@@ -64,7 +64,7 @@ function BU.Main.Errors.HandleSmallErrors()
         "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
 
     #**** Parameters ****
-    local p_type=$1;        # Type of message to display ('E' = BU.EchoError; 'W' = BU.EchoWarning)
+    local p_type=$1;        # Type of message to display ('E' = BU.Main.Echo.Error; 'W' = BU.Main.Echo.Warning)
     local p_string=$2;      # String to display.
     local p_return=$3;      # Exit or return status ('E' = exit; 'R' = return).
     local p_cpls=$4;        # Enable the safe text printing mode.
@@ -77,27 +77,27 @@ function BU.Main.Errors.HandleSmallErrors()
     fi
 
     #**** Code ****
-    BU.Newline >&2;
+    BU.Main.Echo.Newline >&2;
 
     BU.ModuleInit.SetInitErrorMsg && local VHandleSmallErrors='1';
 
-    if      [ "${p_type^^}" = 'E' ];    then BU.EchoError      "$p_string" '' '';
-    elif    [ "${p_type^^}" = 'W' ];    then BU.EchoWarning    "$p_string" '' '';
+    if      [ "${p_type^^}" = 'E' ];    then BU.Main.Echo.Error      "$p_string" '' '';
+    elif    [ "${p_type^^}" = 'W' ];    then BU.Main.Echo.Warning    "$p_string" '' '';
 
     # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
     else
-		local v_advice="Please don't forget to pass a type of message to display as first argument ('E' = BU.EchoError; 'W' = BU.EchoWarning)";
+		local v_advice="Please don't forget to pass a type of message to display as first argument ('E' = BU.Main.Echo.Error; 'W' = BU.Main.Echo.Warning)";
 
         if [ "$(( RANDOM%2 ))" = "0" ]; then
-            BU.EchoError "$p_string    | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
+            BU.Main.Echo.Error "$p_string    | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
         else
-            BU.EchoWarning "$p_string  | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
+            BU.Main.Echo.Warning "$p_string  | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
         fi
     fi
 
-    BU.Newline >&2
+    BU.Main.Echo.Newline >&2
 
-    # As the "BU.EchoWarning()" function will be called in case of a missing return or exit code (normally passed as second argument),
+    # As the "BU.Main.Echo.Warning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_MAIN_STAT_ECHO" status variable condition per condition.
     if [ "${p_return^^}" = 'R' ]; then
         if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
@@ -122,7 +122,7 @@ function BU.Main.Errors.HandleSmallErrors()
         BU.Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
 
     else
-        BU.EchoWarning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+        BU.Main.Echo.Warning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
@@ -172,15 +172,15 @@ function BU.Exit()
             # shellcheck disable=SC2034
             __BU_MAIN_STAT_ECHO='true';
 
-            BU.Newline 2 >&2;
+            BU.Main.Echo.Newline 2 >&2;
 
-            BU.EchoError "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
-            BU.Newline >&2;
+            BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
+            BU.Main.Echo.Newline >&2;
 
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$p_exitcode"; kill "$__BU_MODULE_INIT_PROJECT_PID";
         fi
     else
-        BU.EchoWarning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit 1; kill "$__BU_MODULE_INIT_PROJECT_PID";
     fi
@@ -291,21 +291,21 @@ function BU.Main.Errors.HandleErrors()
                 if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.EchoError "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
+                        BU.Main.Echo.Error "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.EchoError "A FATAL ERROR OCCURED DURING THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
+                        BU.Main.Echo.Error "A FATAL ERROR OCCURED DURING THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     fi
                 else
                     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.EchoError "AN ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
+                        BU.Main.Echo.Error "AN ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     else
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
-                        BU.EchoError "AN ERROR OCCURED DURING THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
+                        BU.Main.Echo.Error "AN ERROR OCCURED DURING THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S PROJECT INITIALIZATION" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     fi
                 fi
@@ -338,7 +338,7 @@ function BU.Main.Errors.HandleErrors()
             # -------- PART 3 : GIVING AN ADVICE ABOUT THE ORIGIN OF THE ERROR TO THE USER/DEVELOPPER
 
             if [ -z "$p_adviceString" ]; then
-                BU.EchoError "No advice to give."; BU.Newline >&2;
+                BU.Main.Echo.Error "No advice to give."; BU.Main.Echo.Newline >&2;
             else
                 v_getSeparatorOccurencesfromAdviceStr="$(BU.Main.Text.GetSubStringOccurences "$p_advice" ' [/|\] ' '--init')";
 
@@ -350,10 +350,10 @@ function BU.Main.Errors.HandleErrors()
                     local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting the first sub-string.
                     local v_string_part_2; v_string_part_2="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting the second sub-string.
 
-                    BU.EchoError "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
-                    BU.Newline >&2;
+                    BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
+                    BU.Main.Echo.Newline >&2;
 
-                    BU.EchoError "$(BU.Main.Decho.Decho.Highlight "Other comments") : $v_string_part_2";
+                    BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Other comments") : $v_string_part_2";
 
                 # Checking if the ' [/|\] ' substring exists more than once, as separators from the advice and any other comments.
 
@@ -362,30 +362,30 @@ function BU.Main.Errors.HandleErrors()
 
                     local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting the first sub-string.
 
-                    BU.EchoError "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
-                    BU.Newline >&2;
+                    BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
+                    BU.Main.Echo.Newline >&2;
 
                     for ((i=1; i>v_getSeparatorOccurencesfromAdviceStr; i++)); do
                         p_adviceString="$(BU.Main.Text.CutSubStringBeforeNthDelim "$p_adviceString" ' [/|\] ' 1)";
 
-                        BU.EchoError "$(BU.Main.Decho.Decho.Highlight "Advice [$(( i + 1 ))]") : $p_adviceString";
-                        BU.Newline 2 >&2;
+                        BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice [$(( i + 1 ))]") : $p_adviceString";
+                        BU.Main.Echo.Newline 2 >&2;
                     done
                 else
-                    BU.EchoError "$(BU.Main.Decho.Decho.Highlight "Advice") : $p_adviceString";
+                    BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice") : $p_adviceString";
                 fi
             fi
 
-            BU.Newline >&2;
+            BU.Main.Echo.Newline >&2;
 
             if [ -z "$p_badValue" ]; then
-                BU.EchoError "Value(s) that caused this error : $(BU.Main.Decho.Orange 'no value') OR $(BU.Main.Decho.Orange 'an unknown error')"; BU.Newline >&2;
+                BU.Main.Echo.Error "Value(s) that caused this error : $(BU.Main.Decho.Orange 'no value') OR $(BU.Main.Decho.Orange 'an unknown error')"; BU.Main.Echo.Newline >&2;
             else
-                BU.EchoError "Value(s) that caused this error : $(BU.Main.Decho.Decho.Var "$p_badValue")"; BU.Newline >&2;
+                BU.Main.Echo.Error "Value(s) that caused this error : $(BU.Main.Decho.Decho.Var "$p_badValue")"; BU.Main.Echo.Newline >&2;
             fi
 
             if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
-                BU.EchoError "Stopping the execution of $(BU.Main.Decho.Decho.Highlight "$(basename "$0")")."; BU.Newline >&2;
+                BU.Main.Echo.Error "Stopping the execution of $(BU.Main.Decho.Decho.Highlight "$(basename "$0")")."; BU.Main.Echo.Newline >&2;
 
                 BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
 
@@ -405,7 +405,7 @@ function BU.Main.Errors.HandleErrors()
             # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU.CheckProjectLogStatus()" FUNCTION).
 
             if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-                BU.EchoWarning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
+                BU.Main.Echo.Warning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
                 {
                     BU.Main.Errors.HandleSmallErrors "Unable to write in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") function" 'R' 'CPLS';
                 }

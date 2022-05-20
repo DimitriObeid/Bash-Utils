@@ -51,7 +51,7 @@ __BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="posixterm
 __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG="$__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONSdisplaying-text-and-more-while-a-task-is-ongoing";
 
 # Display a countdown while a task is ongoing.
-function BU.Main.PosixTermDisplayCountdown()
+function BU.Main.PosixTerm.DisplayCountdown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -62,7 +62,7 @@ function BU.Main.PosixTermDisplayCountdown()
 }
 
 # Display a progress bar while a task is ongoing.
-function BU.Main.PosixTermDisplayProgressBar()
+function BU.Main.PosixTerm.DisplayProgressBar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -73,7 +73,7 @@ function BU.Main.PosixTermDisplayProgressBar()
 }
 
 # Display a spinner while a task is ongoing.
-function BU.Main.PosixTermDisplaySpinner()
+function BU.Main.PosixTerm.DisplaySpinner()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -81,21 +81,21 @@ function BU.Main.PosixTermDisplaySpinner()
         "$__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG";
 
     #**** Parameters ****
-    p_string=$1
-#    p_countdown=$2
-    p_pid=$3
+    p_string=$1;
+#    p_countdown=$2;
+    p_pid=$3;
 
     #**** Variables ****
-    i=1
-    sp="/-\|"
+    i=1;
+    sp="/-\|";
 
     #**** Code ****
-    echo -n ' '
+    echo -n ' ';
 
-    BU.EchoMsg "$__BU_MAIN_TXT_TAB $p_string"
+    BU.Main.Echo.Msg "$__BU_MAIN_TXT_TAB $p_string";
 
     while [ -d "/proc/$p_pid" ]; do
-        printf "%s" "\b${sp:i++%${#sp}:1}"
+        printf "%s" "\b${sp:i++%${#sp}:1}";
     done
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

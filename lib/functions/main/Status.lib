@@ -74,7 +74,7 @@ function BU.Main.Status.ConfEcho()
 
     #**** Code ****
     # Sourcing the "Status.conf" file to reset every status global variables values
-    BU.Main.FilesSourceFile "$__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH";
+    BU.Main.Files.SourceFile "$__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH";
 
     # Setting the "$__BU_MAIN_STAT_DECHO" status global variable to "allow" in order to display correctly the formatted text.
     __BU_MAIN_STAT_DECHO='allow';
@@ -84,7 +84,7 @@ function BU.Main.Status.ConfEcho()
         {
 			BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-			BU.EchoError "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
+			BU.Main.Echo.Error "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
 
 			BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -92,21 +92,21 @@ function BU.Main.Status.ConfEcho()
     else
         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
 
-        BU.EchoError "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
+        BU.Main.Echo.Error "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
 
         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
     fi
 
-    BU.EchoError "In $(BU.Main.Decho.Decho.Path "$p_file"), line $(BU.Main.Decho.Decho.Highlight "$p_lineno") --> " '-n' >&2;
-    BU.EchoError "Error : the $(BU.Main.Decho.Decho.Var "$p_var_name") variable's value is incorrect." >&2;
+    BU.Main.Echo.Error "In $(BU.Main.Decho.Decho.Path "$p_file"), line $(BU.Main.Decho.Decho.Highlight "$p_lineno") --> " '-n' >&2;
+    BU.Main.Echo.Error "Error : the $(BU.Main.Decho.Decho.Var "$p_var_name") variable's value is incorrect." >&2;
 
     if [ -z "$p_bad_value" ]; then
-        echo >&2; BU.EchoError "Bad value : $(BU.Main.Decho.Yellow 'An empty string')." >&2;
+        echo >&2; BU.Main.Echo.Error "Bad value : $(BU.Main.Decho.Yellow 'An empty string')." >&2;
     else
-        echo >&2; BU.EchoError "Bad value : $(BU.Main.Decho.Decho.Var "$p_bad_value")." >&2;
+        echo >&2; BU.Main.Echo.Error "Bad value : $(BU.Main.Decho.Decho.Var "$p_bad_value")." >&2;
     fi
 
-    echo >&2; BU.EchoError "The allowed values are :" >&2;
+    echo >&2; BU.Main.Echo.Error "The allowed values are :" >&2;
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
@@ -114,9 +114,9 @@ function BU.Main.Status.ConfEcho()
 
         # If an empty argument is allowed.
         if [ -z "$val" ]; then
-            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Var 'An empty argument')" >&2;
+            BU.Main.Echo.Error "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Var 'An empty argument')" >&2;
         else
-            BU.EchoError "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Highlight "$val")" >&2;
+            BU.Main.Echo.Error "$i/${#pa_correctValues[@]}   --> $(BU.Main.Decho.Decho.Highlight "$val")" >&2;
         fi
     done
 
@@ -314,7 +314,7 @@ function BU.Main.Status.CheckSTAT_LOG()
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 
     elif [ "${__BU_MAIN_STAT_LOG,,}" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-        BU.Main.FilesCreateProjectLogFile || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Files.CreateProjectLogFile || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -574,7 +574,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU.Newline;
+            BU.Main.Echo.Newline;
         fi
 
     elif [ 'false' = "${p_value,,}" ]; then
@@ -587,12 +587,12 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 
                     echo >&2;
 
-                    BU.EchoError "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
-                    BU.EchoError "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
+                    BU.Main.Echo.Error "In $__BU_MAIN_COLOR_PATH$(basename "${BASH_SOURCE[0]}")$__BU_MAIN_COLOR_ERROR file, function $__BU_MAIN_COLOR_FUNCTION${FUNCNAME[0]}$__BU_MAIN_COLOR_ERROR, line $__BU_MAIN_COLOR_HIGHLIGHT$LINENO$__BU_MAIN_COLOR_ERROR --> Error :" >&2;
+                    BU.Main.Echo.Error "Unable to write in the $__BU_MAIN_COLOR_PATH$__BU_MAIN_PROJECT_LOG_FILE_PATH$__BU_MAIN_COLOR_ERROR log file" >&2;
                     echo >&2;
 
-                    BU.EchoError "Please check the cause of this bug" >&2;
-                    BU.EchoError "The cause may be a problem of read and / or write permission" >&2;
+                    BU.Main.Echo.Error "Please check the cause of this bug" >&2;
+                    BU.Main.Echo.Error "The cause may be a problem of read and / or write permission" >&2;
                     echo >&2;
 
                     __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
@@ -604,7 +604,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.EchoGreen "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
-            BU.Newline;
+            BU.Main.Echo.Newline;
 
             # Emptying the array of strings.
             __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
@@ -641,7 +641,7 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
-		BU.EchoWarning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.Warning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

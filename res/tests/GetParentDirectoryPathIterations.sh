@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Getting parent folder's path from the root directory, then printing it
-function BU.Main.DirectoriesGetParentDirectoryPath()
+function BU.Main.Directories.GetParentDirectoryPath()
 {
     #**** Parameters ****
     local p_path=$1         # Path of the child file or folder.
@@ -27,4 +27,4 @@ function BU.Main.DirectoriesGetParentDirectoryPath()
     echo -e "$result"
 }
 
-BU.Main.DirectoriesGetParentDirectoryPath "$0" "4"
+BU.Main.Directories.GetParentDirectoryPath "$0" "4"

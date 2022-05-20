@@ -468,7 +468,7 @@
 \begin{justify}
     \textbf{Utilisation :}
 
-    Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU.EchoMsg}.
+    Appelez cette fonction dans toute fonction d'affichage de texte que vous souhaitez créer. Inspirez-vous de fonctions existantes, comme la fonction \textbf{\color{func}BU.Main.Echo.Msg}.
 \end{justify}
 
 % ------------
@@ -662,16 +662,16 @@
 \subsection{Sous-section « DISPLAYING A CONTEXT MESSAGE »}\color{text}
 
 \color{sec3}
-\subsubsection{BU.EchoError | Msg | Newstep | Success | Warning}\color{text}
+\subsubsection{BU.Main.Echo.Error | Msg | Newstep | Success | Warning}\color{text}
 
 \begin{justify}
     \textbf{Fonctions :}
     \begin{enumerate}
-        \item \textbf{\color{red}BU.EchoError}
-        \item \textbf{\color{text}BU.EchoMsg}
-        \item \textbf{\color{orange}BU.EchoNewstep}
-        \item \textbf{\color{green}BU.EchoSuccess}
-        \item \textbf{\color{yellow}BU.EchoWarning}
+        \item \textbf{\color{red}BU.Main.Echo.Error}
+        \item \textbf{\color{text}BU.Main.Echo.Msg}
+        \item \textbf{\color{orange}BU.Main.Echo.Newstep}
+        \item \textbf{\color{green}BU.Main.Echo.Success}
+        \item \textbf{\color{yellow}BU.Main.Echo.Warning}
     \end{enumerate}
 \end{justify}
 
@@ -941,7 +941,7 @@
 \begin{justify}
     \textbf{Fonctionnement :}
 
-    Pour ne pas avoir à réécrire le même code que dans les fonctions de la sous-section \textbf{\color{sec2}DISPLAYING A CONTEXT MESSAGE}, chacune de ces fonctions appellent simplement la fonction d'affichage de message \textbf{\color{func}BU.EchoMsg}, en passant respectivement en argument :
+    Pour ne pas avoir à réécrire le même code que dans les fonctions de la sous-section \textbf{\color{sec2}DISPLAYING A CONTEXT MESSAGE}, chacune de ces fonctions appellent simplement la fonction d'affichage de message \textbf{\color{func}BU.Main.Echo.Msg}, en passant respectivement en argument :
     \begin{enumerate}
         \item la substitution de commande servant à colorer le texte selon la couleur souhaitée, puis la chaîne de caractères à afficher, puis la substitution de commande pour réinitialiser la couleur du texte,
         \item l'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
@@ -971,10 +971,10 @@
 \subsection{Sous-section « LINE BREAKS »}\color{text}
 
 \color{sec3}
-\subsubsection{BU.Newline}\color{text}
+\subsubsection{BU.Main.Echo.Newline}\color{text}
 
 \begin{justify}
-    \textbf{Fonction : \textbf{\color{func}BU.Newline}}
+    \textbf{Fonction : \textbf{\color{func}BU.Main.Echo.Newline}}
 \end{justify}
 
 % ------------
@@ -1014,7 +1014,7 @@
         \item
         {
             \begin{justify}
-                \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU.EchoMsg}, puis la fonction \textbf{\color{func}BU.Main.Errors.HandleSmallErrors} est appelée pour afficher un message d'avertissement, avant que la fonction \textbf{\color{func}BU.EchoMsg} ne soit rappelée pour effectuer un dernier saut de ligne.
+                \textbf{\color{cond}Si} la valeur passée n'est pas un nombre entier positif, \textbf{\color{cond}alors} un saut de ligne est effectué en appelant la fonction \textbf{\color{func}BU.Main.Echo.Msg}, puis la fonction \textbf{\color{func}BU.Main.Errors.HandleSmallErrors} est appelée pour afficher un message d'avertissement, avant que la fonction \textbf{\color{func}BU.Main.Echo.Msg} ne soit rappelée pour effectuer un dernier saut de ligne.
             \end{justify}
 
             \setlength{\parskip}{1em}
@@ -1026,7 +1026,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{loop}Pour} un nombre \textbf{\color{vars}i} inférieur à la valeur du paramètre \textbf{\color{vars}p\_number}, et incrémenté à chaque itération, la fonction \textbf{\color{func}BU.EchoMsg} est appelée.
+                            \textbf{\color{loop}Pour} un nombre \textbf{\color{vars}i} inférieur à la valeur du paramètre \textbf{\color{vars}p\_number}, et incrémenté à chaque itération, la fonction \textbf{\color{func}BU.Main.Echo.Msg} est appelée.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -1046,7 +1046,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU.EchoMsg} est effectué.
+    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU.Main.Echo.Msg} est effectué.
 \end{justify}
 
 \begin{justify}
