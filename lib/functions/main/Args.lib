@@ -312,8 +312,8 @@ function BU.Main.Args.GetFuncArgsArrayValues()
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
-    local p_funcname=$1;        # String    - Default : NULL    - Name of the function where the array was set.
-    local p_decho=$2;           # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU.Main.Args__Decho.Decho()" sub-fonction.
+    local p_funcname=$1;            # String    - Default : NULL    - Name of the function where the array was set.
+    local p_decorate=${2:-NULL};    # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU.Main.Args__Decho.Decho()" sub-fonction.
     shift 2;
 
     local pa_argsArray=("$@");  # Array     - Default : NULL    - Array of values to check and display.
@@ -332,7 +332,7 @@ function BU.Main.Args.GetFuncArgsArrayValues()
     }
 
     BU.ModuleInit.CheckIsDebugging && {
-        BU.Main.Echo.Newstep "Values stored in the $v_funcname function's array of arguments :";
+        BU.Main.Echo.Newstep "Values stored in the $(if [[ "${p_decorate,,}" == ?(-)?(-)d?(ec?(h)o) ]]; then BU.Main.Decho.Decho.Function "$v_funcname"; else echo "« $v_funcname »"; fi) function's array of arguments :";
 
         for i in "${pa_argsArray[@]}"; do
             BU.Main.Echo.Msg "Value [$v_index] : $i" || { local C="$?"; v_loop_error='error'; break; }
@@ -1844,9 +1844,14 @@ function BU.Main.Args__Text.DeleteLettersInString()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
     shift;
 
-    local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
-
     #**** Code ****
+    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+
+    if [ -z "$p_string" ]; then local lineno="$LINENO";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give a string to process as first argument (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+    fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }

@@ -68,7 +68,9 @@ function BU.Main.Filesystem.IsPartitionFull()
     elif    [ ! -d "$p_fileFS" ] || \
             [ ! -f "$p_fileFS" ]; then if [ "${p_dirfile,,}" = 'create' ]; then
 
-                local v_parentdir="$(cd "$(dirname "$p_path")" > /dev/null 2>&1 || { return 1; }; pwd -P)";
+                local v_parentdir;
+
+                v_parentdir="$(cd "$(dirname "$p_path")" > /dev/null 2>&1 || { return 1; }; pwd -P)";
 
                 if [ ! -d "$v_parentdir" ]; then mkdir -p "$v_parentdir" || return "$?"; fi
 
@@ -347,8 +349,12 @@ function BU.Main.Filesystem.GetFSType()
 
     #**** Variables ****
     local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
+    local v_warn;
 
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's type";
+    # Disabling a false positive, as the "$v_warn" variable is not directly intepreted.
+
+    # shellcheck disable=SC2034
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's type";
 
     BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 4 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
     BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";

@@ -111,7 +111,7 @@ function BU.Main.BasicMaths.NegativeToPositive()
 }
 
 # Positive number (float or int) to negative number (float or int).
-function BU.Main.BasicMathsPositiveToNegative()
+function BU.Main.BasicMaths.PositiveToNegative()
 {
     #**** Parameters ****
     local x=$1;         # Number    - Default : NULL    - Value to convert.

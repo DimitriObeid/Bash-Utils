@@ -203,12 +203,13 @@ function BU.Main.Files.Make()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
-    local p_parent=$1;  # String    : Emplacement of the currently processed file's parent folder from the root directory.
-    local p_name=$2;    # String    : Name of the file to process (into its parent directory).
+    local p_parent=$1;      # String    - Default : NULL    - Emplacement of the currently processed file's parent folder from the root directory.
+    local p_name=$2;        # String    - Default : NULL    - Name of the file to process (into its parent directory).
 
     shift 2;
 
-    pa_touchVals=("$@");
+    # shellcheck disable=SC2034
+    pa_touchVals=("$@");    # Array     - Default : NULL    - "touch" command's options.
 
 	#**** Variables ****
 	local v_path="$p_parent/$p_name";	# Path of the file to process.
@@ -852,7 +853,7 @@ function BU.Main.Files.AddToArchive()
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
 
     #**** Code ****
-    if BU.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -920,7 +921,7 @@ function BU.Main.Files.CompressFormat()
     local p_paths=("$@");       # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
-    if BU.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1001,7 +1002,7 @@ function BU.Main.Files.DeleteInArchive()
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
 
     #**** Code ****
-    if BU.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";

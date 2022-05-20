@@ -227,6 +227,7 @@ function BU.Main.OS.IsOSX()                         { if [[ "$OSTYPE" == 'darwin
 ## SPECIFIC OS VERSIONS CHECKINGS (FREE BSD)
 ## DEBUG ID : specific-os-versions-checkings-freebsd
 
+# shellcheck disable=SC2034
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FREEBSD="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-freebsd";
 
 # -----------------------------------------------
@@ -234,6 +235,7 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSI
 ## SPECIFIC OS VERSIONS CHECKINGS (HAIKU)
 ## DEBUG ID : specific-os-versions-checkings-haiku
 
+# shellcheck disable=SC2034
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_HAIKU="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-haiku";
 
 # -----------------------------------------------
