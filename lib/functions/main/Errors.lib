@@ -43,14 +43,14 @@ fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### ERRORS HANDLING FUNCTIONS
-#### DEBUG ID : Errors.errors-handling-functions
+#### DEBUG ID : errors::errors-handling-functions
 
-__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="Errors.errors-handling-functions";
+__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-handling-functions";
 
 ## CLASSIC ERRORS HANDLING
 ## DEBUG ID : classic-errors-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONSclassic-errors-handling";
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::classic-errors-handling";
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
@@ -102,14 +102,12 @@ function BU.Main.Errors.HandleSmallErrors()
     if [ "${p_return^^}" = 'R' ]; then
         if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
-        BU.SetLastReturnValue 1;
-
         # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
         [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$__BU_MAIN_EXIT_CURRENT_CODE";
+        return 1;
 
     elif [ "${p_return^^}" = 'E' ]; then
         if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
@@ -119,10 +117,10 @@ function BU.Main.Errors.HandleSmallErrors()
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        BU.Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+        BU.Main.Errors.Exit 1;
 
     else
-        BU.Main.Echo.Warning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+        BU.Main.Echo.Warning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit 1;
     fi
 
     if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
@@ -130,11 +128,9 @@ function BU.Main.Errors.HandleSmallErrors()
     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
     [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-    BU.SetLastReturnValue 0;
-
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-    return "$__BU_MAIN_EXIT_CURRENT_CODE";
+    return 0;
 }
 
 # -----------------------------------------------
@@ -142,10 +138,10 @@ function BU.Main.Errors.HandleSmallErrors()
 ## EXIT AND RETURN CODES HANDLING
 ## DEBUG ID : exit-and-return-codes-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONSexit-and-return-codes-handling";
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::exit-and-return-codes-handling";
 
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
-function BU.Exit()
+function BU.Main.Errors.Exit()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -160,7 +156,7 @@ function BU.Exit()
     if BU.Main.Checkings.IsPositiveInt "$p_exitcode"; then
 
         if [ "${p_behavior^^}" = 'E' ] || [ -z "$p_behavior" ]; then
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$p_exitcode" || kill "$$";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "$p_exitcode" || kill "$__BU_MODULE_INIT_PROJECT_PID"; else return "$p_exitcode"; fi
 
         elif [ "${p_behavior^^}" = 'W' ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$p_exitcode";
@@ -177,41 +173,13 @@ function BU.Exit()
             BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
             BU.Main.Echo.Newline >&2;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$p_exitcode"; kill "$__BU_MODULE_INIT_PROJECT_PID";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "$p_exitcode" || kill "$__BU_MODULE_INIT_PROJECT_PID"; else return "$p_exitcode"; fi
         fi
     else
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit 1; kill "$__BU_MODULE_INIT_PROJECT_PID";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "$p_exitcode" || kill "$__BU_MODULE_INIT_PROJECT_PID"; else return "$p_exitcode"; fi
     fi
-}
-
-# Unsetting the last return value's variable value.
-function BU.DeleteLastReturnValue() { unset __BU_MAIN_EXIT_CURRENT_CODE && return 0; }
-
-# Setting the last function's return value in order to process it in another function.
-function BU.SetLastReturnValue()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS" \
-        "$__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING";
-
-	#**** Parameters ****
-	local p_code=${1:-1};  # Int	- Default : 1	- Return value.
-
-	#**** Code ****
-	if ! BU.Main.Args__Errors.SetLastReturnValue "$p_code" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then
-        __BU_MAIN_EXIT_CURRENT_CODE="$__BU_MAIN_EXIT_NOT_PERMITTED";
-
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
-    fi
-
-	__BU_MAIN_EXIT_CURRENT_CODE="$p_code";
-
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-	return 0;
 }
 
 # -----------------------------------------------
@@ -387,14 +355,12 @@ function BU.Main.Errors.HandleErrors()
             if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
                 BU.Main.Echo.Error "Stopping the execution of $(BU.Main.Decho.Decho.Highlight "$(basename "$0")")."; BU.Main.Echo.Newline >&2;
 
-                BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
-
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
                 [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-                exit "$__BU_MAIN_EXIT_CURRENT_CODE";
+                exit "$__BU_MAIN_EXIT_NOT_PERMITTED";
             else
                 if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
                     # Calling the function that processes the given answer.
@@ -416,7 +382,6 @@ function BU.Main.Errors.HandleErrors()
             fi
 
             if BU.Main.Checkings.IsInt "$p_returnCode"; then
-                BU.SetLastReturnValue "$p_returnCode"
 
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
                 [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -426,9 +391,7 @@ function BU.Main.Errors.HandleErrors()
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
                 [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-                BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"
-
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
             fi
         fi
     fi

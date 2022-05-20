@@ -162,7 +162,7 @@ function BU.Main.CaseRead_Errors.HandleErrors()
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-			BU.Exit "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+			BU.Main.Errors.Exit "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			;;
 		*)
 			BU.Main.Echo.Error "$__BU_MAIN_CASE_INVALID_ANSWER";

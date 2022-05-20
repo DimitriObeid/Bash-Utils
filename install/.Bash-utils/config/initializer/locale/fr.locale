@@ -540,7 +540,6 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitia
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="Cette variable globale stocke la valeur de retour de la dernière commande dans cette situation : « %s »";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__CURRENT_CODE__VAR_DESC="Cette variable globale stocke la valeur de retour actuelle de la dernière commande, afin d'être traitée par une autre fonction.";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="l'opération n'est pas permise";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="le dossier ou fichier cible n'a pas été trouvé";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="vous n'avez pas la permission d'effectuer cette action";

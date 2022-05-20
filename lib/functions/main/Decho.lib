@@ -274,7 +274,7 @@ function BU.Main.Decho.Decho()
             echo -ne "« $p_string »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 
-        BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED" && return "$__BU_MAIN_EXIT_CURRENT_CODE";
+        return "$__BU_MAIN_EXIT_NOT_PERMITTED";
     else
         if [ -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
             local v_oldBGColor;

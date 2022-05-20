@@ -405,7 +405,7 @@ function BU.Main.Filesystem.Chown()
     if ! BU.Main.Args__Filesystem.Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU.Main.Checkings.CheckRootEUID; then BU.SetLastReturnValue "$__BU_MAIN_EXIT_NOT_PERMITTED"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Checkings.CheckRootEUID; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then

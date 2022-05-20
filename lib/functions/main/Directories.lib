@@ -422,7 +422,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
                 }; pwd -P )";
 
             p_path="$v_parent";
@@ -446,7 +446,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
                 || {
                     BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.SetLastReturnValue "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
                 }; pwd -P )"
 
             local v_path_cut; v_path_cut="${v_parent##*/}";
@@ -491,11 +491,9 @@ function BU.Main.Directories.TriggerRootDirWarning()
 			BU.Main.Echo.Error "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU.Main.Echo.Newline;
 
-			BU.SetLastReturnValue "$__BU_MAIN_EXIT_PERMISSION_DENIED";
-
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-			return "$__BU_MAIN_EXIT_CURRENT_CODE";
+			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 
 		elif [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" = "restricted" ]; then
             BU.Main.Headers.Header.Warning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
@@ -507,9 +505,9 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 			# Calling the function that processes the given answer.
 			if BU.Main.CaseRead_DirectoriesTriggerRootDirWarning; then
-				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
-				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_CURRENT_CODE";
+				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 			fi
 		fi
 	fi

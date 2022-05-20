@@ -720,7 +720,7 @@ function BU.Main.Args.GetArgc-FFL()
 
 #### "Checkings.lib" FILE'S FUNCTIONS
 
-## CATEGORY : FILES PATHS CHECKING
+## CATEGORY : "FILES PATHS CHECKING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Checkings.CheckProjectRelatedFile()" function.
@@ -776,7 +776,7 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 
 #### "CMDS.lib" FILE'S FUNCTIONS
 
-## CATEGORY : GET COMMAND OUTPUTS
+## CATEGORY : "GET COMMAND OUTPUTS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.CMDSGetCommandPath()" function.
@@ -812,7 +812,7 @@ function BU.Main.Args__CMDS.GetCommandPath()
 
 #### MAIN MODULE'S "Decho.lib" FILE'S FUNCTIONS
 
-## CATEGORY : TEXT WRITING AND DECORATION (FORMATTING)
+## CATEGORY : "TEXT WRITING AND DECORATION (FORMATTING)"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Decho.Decho()" function.
@@ -859,7 +859,7 @@ function BU.Main.Args__Decho.Decho()
 
 #### "Directories.lib" FILE'S FUNCTION
 
-## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PROCESSING FUNCTIONS
+## CATEGORY : "MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PROCESSING FUNCTIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.ProcessingDir()" function.
@@ -905,7 +905,7 @@ function BU.Main.Args__Directories.ProcessingDir()
 
 # -----------------------------------------------
 
-## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - FOLDER CREATION FUNCTIONS
+## CATEGORY : "MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - FOLDER CREATION FUNCTIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Directories.OverwriteDir()" function.
@@ -1017,7 +1017,7 @@ function BU.Main.Args__Directories.MakePath()
 
 # -----------------------------------------------
 
-## CATEGORY : MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING
+## CATEGORY : "MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Directories.GetDirectoryName()" function.
@@ -1138,41 +1138,10 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 
 #### MAIN MODULE'S "Errors.lib" FILE'S FUNCTIONS
 
-## CATEGORY : EXIT AND RETURN CODES HANDLING
+## CATEGORY : ""
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Main.Errors.SetLastReturnValue()" function.
-BU.Main.Args__Errors.SetLastReturnValue()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
-
-	#**** Parameters ****
-	local p_code=$1;	# Int	- Default : 1	- Return value
-
-    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
-
-	#**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
-
-	# If no return value is passed to as 1st argument.
-	if [ -z "$p_code" ]; then local lineno="$LINENO";
-		BU.Main.Args.PrintBadOption 'z' \
-			"Please pass a valid integer value, from $(BU.Main.Decho.Decho.Highlight '0') to $(BU.Main.Decho.Decho.Highlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
-	fi
-
-	# If the return value is not an integer.
-	if [ -n "$p_code" ] && ! BU.Main.Checkings.IsPositiveInt "$p_code"; then local lineno="$LINENO";
-		BU.Main.Args.PrintBadOption '!intpos' \
-			"Please pass a valid integer value, from $(BU.Main.Decho.Decho.Highlight '0') to $(BU.Main.Decho.Decho.Highlight '255'), as function return code (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_code' "$p_code" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
-	fi
-
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
+#
 
 # -----------------------------------------------
 
@@ -1182,7 +1151,7 @@ BU.Main.Args__Errors.SetLastReturnValue()
 
 #### MAIN MODULE'S "Files.lib" FILE'S FUNCTIONS
 
-## CATEGORY : TEXT FILE PROCESSING
+## CATEGORY : "TEXT FILE PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Files.ProcessingFile()" function.
@@ -1328,7 +1297,7 @@ function BU.Main.Args__Files.MakePath()
 
 # -----------------------------------------------
 
-## CATEGORY : SETTING FILE INFORMATIONS
+## CATEGORY : "SETTING FILE INFORMATIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.FilesSetLastAccess()" function.
@@ -1371,7 +1340,7 @@ function BU.Main.Args__Files.SetLastAccess()
 
 # -----------------------------------------------
 
-## CATEGORY : ARCHIVES PROCESSING FUNCTIONS
+## CATEGORY : "ARCHIVES PROCESSING FUNCTIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Files.CompressCMD()" function.
@@ -1561,7 +1530,7 @@ function BU.Main.Args__Files.UncompressFormat()
 
 #### MAIN MODULE'S "Filesystem.lib" FILE'S FUNCTIONS
 
-## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
+## CATEGORY : "GETTING FILE SYSTEM'S INFORMATIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.IsPartitionFull()" function.
@@ -1597,7 +1566,7 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 
 # -----------------------------------------------
 
-## CATEGORY : GETTING FILE SYSTEM'S INFORMATIONS
+## CATEGORY : "GETTING FILE SYSTEM'S INFORMATIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.GetFS<...>()" functions.
@@ -1633,7 +1602,7 @@ function BU.Main.Args__Filesystem.GetFSInfos()
 
 # -----------------------------------------------
 
-## CATEGORY : NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+## CATEGORY : "NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.Chown()" function.
@@ -1683,7 +1652,7 @@ function BU.Main.Args__Filesystem.Chown()
 
 # -----------------------------------------------
 
-## CATEGORY : RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
+## CATEGORY : "RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.ChownRec()" function.
@@ -1780,7 +1749,7 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 
 # -----------------------------------------------
 
-## CATEGORY : CUTTING TEXT
+## CATEGORY : "CUTTING TEXT"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Text.CutSubStringAfterNthDelim()" function.
@@ -1884,7 +1853,7 @@ function BU.Main.Args__Text.DeleteLettersInString()
 
 # -----------------------------------------------
 
-## CATEGORY : GETTING TEXT
+## CATEGORY : "GETTING TEXT"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Text.GetCharacterOccurences()" function.
@@ -2037,7 +2006,7 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 
 # -----------------------------------------------
 
-## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
+## CATEGORY : "SPLITTING TEXT AND SPLITTED TEXT PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
 # "BU.Main.Text.StrToWordArray()" function.
