@@ -286,26 +286,26 @@ function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistr
 
 
 # Checking if current Linux distribution is Linux Mint.
-function BU.Main.OS.IsLinuxDistroLinuxMint()          { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is SUSE.
-function BU.Main.OS.IsLinuxDistroSUSE()               { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Ubuntu.
-function BU.Main.OS.IsLinuxDistroUbuntu()             { BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
-function BU.Main.OS.IsLinuxDistroUbuntu1804()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1810()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1904()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1910()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2004()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2010()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2104()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2110()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2204()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1804()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1810()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1904()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1910()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2004()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2010()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2104()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2110()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2204()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
 
 # -----------------------------------------------
 
@@ -316,7 +316,7 @@ function BU.Main.OS.IsLinuxDistroUbuntu2204()         { BU.Main.OS.CheckLinuxDis
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_OSX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.specific-os-versions-checkings-osx";
 
 # Checking OSX versions.
-function BU.Main.OS.IsOSXYosemite()                     { true; }
+function BU.Main.OS.IsOSXYosemite()                    	{ true; }
 function BU.Main.OS.IsOSXElCapitan()                    { true; }
 function BU.Main.OS.IsOSXSierra()                       { true; }
 function BU.Main.OS.IsOSXHighSierra()                   { true; }
@@ -332,16 +332,16 @@ function BU.Main.OS.IsOSXCatalina()                     { true; }
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_WINDOWS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.specific-os-versions-checkings-windows";
 
 # Checking if the currently used version of Windows is the 10th.
-function BU.Main.OS.IsWindows10()                     { if BU.Main.Checkings.CheckOSWindowsVersion '10';          then    return 0; else  return 1; fi }
+function BU.Main.OS.IsWindows10()                    	{ if BU.Main.Checkings.CheckOSWindowsVersion '10';          then    return 0; else  return 1; fi }
 
 # Checking if the currently used version of Windows is the 11th.
-function BU.Main.OS.IsWindows11()                     { if BU.Main.Checkings.CheckOSWindowsVersion '11';          then    return 0; else  return 1; fi }
+function BU.Main.OS.IsWindows11()                     	{ if BU.Main.Checkings.CheckOSWindowsVersion '11';          then    return 0; else  return 1; fi }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
-function BU.Main.OS.IsLinuxWSL1()                     { uname -r | grep Microsoft                                 &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microsoft                                 &&      return 0;       return 1; }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
-function BU.Main.OS.IsLinuxWSL2()                     { uname -r | grep microsoft                                 &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      return 0;       return 1; }
 
 # -----------------------------------------------
 
