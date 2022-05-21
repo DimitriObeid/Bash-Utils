@@ -58,7 +58,7 @@ fi
 function BU.SoftwareLibrariesInstallDirectXLinux()
 {
     #**** Code ****
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     # Checking if wine is installed on the system.
     BU.Main.CMDSGetCommandPath 'wine' || return 1;
@@ -70,7 +70,7 @@ function BU.SoftwareLibrariesInstallDirectXLinux()
 function BU.SoftwareLibrariesInstallOpenGLLinux()
 {
     #**** Code ****
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -105,7 +105,7 @@ function BU.SoftwareLibrariesInstallOpenGLOSX()
 function BU.SoftwareLibrariesInstallDirectXWindows()
 {
     #**** Code ****
-    BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -114,7 +114,7 @@ function BU.SoftwareLibrariesInstallDirectXWindows()
 function BU.SoftwareLibrariesInstallOpenGLWindows()
 {
     #**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }

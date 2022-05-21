@@ -58,7 +58,7 @@ fi
 function BU.SoftwareFrameworksInstallLaravelLinux()
 {
     # Checking if the current system type is Linux.
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -67,7 +67,7 @@ function BU.SoftwareFrameworksInstallLaravelLinux()
 function BU.SoftwareFrameworksInstallSymfonyLinux()
 {
     # Checking if the current system type is Linux.
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.SoftwareFrameworksInstallSymfonyOSX()
 function BU.SoftwareFrameworksInstallLaravelWindows()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -111,7 +111,7 @@ function BU.SoftwareFrameworksInstallLaravelWindows()
 function BU.SoftwareFrameworksInstallSymfonyWindows()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }

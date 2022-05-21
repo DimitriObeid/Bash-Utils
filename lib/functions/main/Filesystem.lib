@@ -83,7 +83,7 @@ function BU.Main.Filesystem.IsPartitionFull()
             else return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; fi
     fi
 
-	BU.Main.OS.IsOSAndroidTermux && {
+	BU.Main.OS.IsAndroidTermux && {
         if [[ "$(df -aH "$p_fileFS")" == 100% ]]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
@@ -91,11 +91,11 @@ function BU.Main.Filesystem.IsPartitionFull()
 		fi
 	}
 
-	BU.Main.OS.IsOSFreeBSD && {
+	BU.Main.OS.IsFreeBSD && {
         true;
 	}
 
-	BU.Main.OS.IsOSHaiku && {
+	BU.Main.OS.IsHaiku && {
 		if [[ "$(df -th "$p_fileFS | awk 'FNR==10 {print $3}'")" == 0 ]]; then
             return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
@@ -103,7 +103,7 @@ function BU.Main.Filesystem.IsPartitionFull()
 		fi
 	}
 
-	BU.Main.OS.IsOSLinux && {
+	BU.Main.OS.IsLinux && {
 		if [[ "$(df -Th "$p_fileFS" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
 		else
@@ -111,11 +111,11 @@ function BU.Main.Filesystem.IsPartitionFull()
 		fi
 	}
 
-	BU.Main.OS.IsOSNetBSD && {
+	BU.Main.OS.IsNetBSD && {
         true;
 	}
 
-	BU.Main.OS.IsOSOpenBSD && {
+	BU.Main.OS.IsOpenBSD && {
         true;
 	}
 
@@ -147,8 +147,8 @@ function BU.Main.Filesystem.GetFSDevice()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's device";
 
-    BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 5 {print \$2}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 5 {print \$2}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -176,8 +176,8 @@ function BU.Main.Filesystem.GetFSTotalSize()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's total size in bytes";
 
-    BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$3}'            || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$3}'            || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -205,8 +205,8 @@ function BU.Main.Filesystem.GetFSMountPoint()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's mount point";
 
-    BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 2 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$7}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 2 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$7}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -234,7 +234,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's used size in bytes";
 
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -242,7 +242,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
     if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
-    BU.Main.OS.IsOSHaiku && {
+    BU.Main.OS.IsHaiku && {
         # Getting the file system's total size in bytes.
         local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
@@ -278,8 +278,8 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's used size percentage";
 
-    BU.Main.OS.IsOSAndroidTermux   && local v_cmd="df -aH \"$p_path\"   | awk 'FNR == 2 {print \$5}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux           && local v_cmd="df -Th \"$p_path\"   | awk 'FNR == 2 {print \$6}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsAndroidTermux   && local v_cmd="df -aH \"$p_path\"   | awk 'FNR == 2 {print \$5}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux           && local v_cmd="df -Th \"$p_path\"   | awk 'FNR == 2 {print \$6}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -287,7 +287,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
     if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
-    BU.Main.OS.IsOSHaiku && {
+    BU.Main.OS.IsHaiku && {
         # Getting the file system's total size in bytes.
         local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
 
@@ -323,8 +323,8 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 
     local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's available size in bytes";
 
-    BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 10 {print \$3}'       || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$5}'        || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 10 {print \$3}'       || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$5}'        || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -356,8 +356,8 @@ function BU.Main.Filesystem.GetFSType()
     # shellcheck disable=SC2034
     v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "$p_path") file system's type";
 
-    BU.Main.OS.IsOSHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 4 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsOSLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && local v_cmd="df \"$p_path\"         | awk 'FNR == 4 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
     if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi

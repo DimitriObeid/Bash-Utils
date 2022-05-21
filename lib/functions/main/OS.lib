@@ -60,16 +60,16 @@ function BU.Main.OS.CheckLinuxDistro()
 
     #**** Code ****
 
-    BU.Main.OS.IsOSLinux && {
-        if [ -n "$v_distro" ]; then                         if BU.Main.OS.GetLinuxDistro "$v_distro"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+    BU.Main.OS.IsLinux && {
+        if [ -n "$v_distro" ]; then                      	if BU.Main.OS.GetLinuxDistro "$v_distro"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
-            BU.Main.OS.IsOSLinuxDistroArchLinux             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsOSLinuxDistroDebian                && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsOSLinuxDistroFedora                && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsOSLinuxDistroLinuxMint             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsOSLinuxDistroManjaro               && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsOSLinuxDistroUbuntu                && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroArchLinux             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroDebian                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroFedora                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroLinuxMint             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroManjaro               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroUbuntu                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
             # Returning an error code if the distribution is not found.
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -87,21 +87,21 @@ function BU.Main.OS.CheckLinuxDistroVersion()
     local p_version=$2;	# String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
-    BU.Main.OS.IsOSLinux && {
+    BU.Main.OS.IsLinux && {
         if [ -n "$p_distro" ] && [ -n "$p_version" ]; then
-            if BU.Main.OS.GetLinuxDistro "$p_distro"         && BU.Main.OS.GetLinuxDistroVersion "$p_version"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+            if BU.Main.OS.GetLinuxDistro "$p_distro"      	&& BU.Main.OS.GetLinuxDistroVersion "$p_version"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
-            BU.Main.OS.IsOSLinuxDistroFedora && {
-                BU.Main.OS.IsOSLinuxDistroFedora28          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora29          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora30          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora31          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora32          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora33          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora34          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora35          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroFedora36          && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroFedora && {
+                BU.Main.OS.IsLinuxDistroFedora28          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora29          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora30          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora31          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora32          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora33          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora34          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora35          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora36          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 # Returning an error code if the specific version is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -109,16 +109,16 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             }
 
-            BU.Main.OS.IsOSLinuxDistroUbuntu && {
-                BU.Main.OS.IsOSLinuxDistroUbuntu1804        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu1810        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu1904        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu1910        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu2004        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu2010        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu2104        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu2110        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsOSLinuxDistroUbuntu2204        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroUbuntu && {
+                BU.Main.OS.IsLinuxDistroUbuntu1804        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu1810        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu1904        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu1910        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu2004        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu2010        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu2104        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu2110        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu2204       	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 # Returning an error code if the specific version is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -141,7 +141,7 @@ function BU.Main.OS.GetLinuxDistro()
     local v_distro=${1:-NULL};  # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
-    if BU.Main.OS.IsOSLinux; then [ -r /proc/version ] && cat /proc/version | grep -qi "$v_distro" || return 1; return 0; else return 1; fi
+    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && cat /proc/version | grep -qi "$v_distro" || return 1; return 0; else return 1; fi
 }
 
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
@@ -157,17 +157,18 @@ function BU.Main.OS.GetCurrentOS()
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS";
 
     #**** Code ****
-    BU.Main.OS.IsOSAndroidTermux        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSFreeBSD              && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSHaiku                && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSOpenBSD              && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSLinux                && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSLinuxWSLWin10        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSLinuxWSLWin11        && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSLinuxWSL             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSNetBSD               && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSWindows10            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSWindows11            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsAndroidTermux        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.OS.IsChromeOS				&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsFreeBSD              	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsHaiku                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsOpenBSD             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinux                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSLWin10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSLWin11        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSL             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsNetBSD               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsWindows10            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsWindows11            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     BU.Main.OS.IsOSX                    && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Return an error code if the OS is not supported.
@@ -199,25 +200,28 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__GENERAL_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.general-os-versions-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU.Main.OS.IsOSAndroidTermux()             { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+function BU.Main.OS.IsAndroidTermux()             	{ if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+
+# Checking if current OS is Chrome OS.
+function BU.Main.OS.IsChromeOS()					{ true; }
 
 # Checking if current OS is FreeBSD.
-function BU.Main.OS.IsOSFreeBSD()                   { if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
+function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
 
 # Checking if current OS is Haiku OS.
-function BU.Main.OS.IsOSHaiku()                     { if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
+function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU.Main.OS.IsOSLinux()                     { if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
+function BU.Main.OS.IsLinux()                     	{ if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
-function BU.Main.OS.IsOSLinuxWSL()                  { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
+function BU.Main.OS.IsLinuxWSL()                  	{ if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
 
 # Checking if current OS is NetBSD.
-function BU.Main.OS.IsOSNetBSD()                    { if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
+function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
 
 # Checking if current OS is OpenBSD.
-function BU.Main.OS.IsOSOpenBSD()                   { if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
+function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
 
 # Checking if current OS is OSx.
 function BU.Main.OS.IsOSX()                         { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
@@ -247,61 +251,61 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSI
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-linux";
 
 # Checking if current Linux distribution is Arch Linux.
-function BU.Main.OS.IsOSLinuxDistroArchLinux()          { BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Debian.
-function BU.Main.OS.IsOSLinuxDistroDebian()             { BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # Checking debian versions.
-function BU.Main.OS.IsOSLinuxDistroDebian6()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroDebian7()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroDebian8()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '8'           &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroDebian9()            { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '9'           &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroDebian10()           { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '10'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroDebian11()           { BU.Main.OS.CheckLinuxDistroVersion 'Debian' '11'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian7()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian8()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '8'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian9()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '9'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian10()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '10'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian11()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '11'          &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Fedora.
-function BU.Main.OS.IsOSLinuxDistroFedora()             { BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
 
 # Checking Fedora versions.
-function BU.Main.OS.IsOSLinuxDistroFedora28()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora29()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '29'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora30()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '30'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora31()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '31'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora32()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '32'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora33()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '33'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora34()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora35()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroFedora36()           { BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora28()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora29()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '29'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora30()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '30'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora31()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '31'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora32()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '32'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora33()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '33'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora34()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora35()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Manjaro.
-function BU.Main.OS.IsOSLinuxDistroManjaro()            { BU.Main.OS.GetLinuxDistro Manjaro                         &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Linux Mint.
-function BU.Main.OS.IsOSLinuxDistroLinuxMint()          { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint()          { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is SUSE.
-function BU.Main.OS.IsOSLinuxDistroSUSE()               { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroSUSE()               { BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 
 # Checking if current Linux distribution is Ubuntu.
-function BU.Main.OS.IsOSLinuxDistroUbuntu()             { BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu()             { BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
-function BU.Main.OS.IsOSLinuxDistroUbuntu1804()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu1810()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu1904()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu1910()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu2004()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu2010()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu2104()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu2110()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsOSLinuxDistroUbuntu2204()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1804()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1810()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1904()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1910()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2004()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2010()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2104()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2110()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu2204()         { BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
 
 # -----------------------------------------------
 
@@ -328,16 +332,16 @@ function BU.Main.OS.IsOSXCatalina()                     { true; }
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_WINDOWS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.specific-os-versions-checkings-windows";
 
 # Checking if the currently used version of Windows is the 10th.
-function BU.Main.OS.IsOSWindows10()                     { if BU.Main.Checkings.CheckOSWindowsVersion '10';          then    return 0; else  return 1; fi }
+function BU.Main.OS.IsWindows10()                     { if BU.Main.Checkings.CheckOSWindowsVersion '10';          then    return 0; else  return 1; fi }
 
 # Checking if the currently used version of Windows is the 11th.
-function BU.Main.OS.IsOSWindows11()                     { if BU.Main.Checkings.CheckOSWindowsVersion '11';          then    return 0; else  return 1; fi }
+function BU.Main.OS.IsWindows11()                     { if BU.Main.Checkings.CheckOSWindowsVersion '11';          then    return 0; else  return 1; fi }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
-function BU.Main.OS.IsOSLinuxWSL1()                     { uname -r | grep Microsoft                                 &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxWSL1()                     { uname -r | grep Microsoft                                 &&      return 0;       return 1; }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
-function BU.Main.OS.IsOSLinuxWSL2()                     { uname -r | grep microsoft                                 &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxWSL2()                     { uname -r | grep microsoft                                 &&      return 0;       return 1; }
 
 # -----------------------------------------------
 
