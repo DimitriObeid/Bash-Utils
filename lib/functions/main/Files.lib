@@ -347,7 +347,7 @@ function BU.Main.Files.CreateProjectLogFile()
     BU.Main.Echo.Newline;
 
     # Getting operating system's informations (Android's Termux terminal emulator) :
-    BU.Main.OS.IsOSAndroidTermux && {
+    BU.Main.OS.IsAndroidTermux && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 
@@ -356,7 +356,7 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
     # Getting operating system's informations (FreeBSD) :
-    BU.Main.OS.IsOSFreeBSD && {
+    BU.Main.OS.IsFreeBSD && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 
@@ -365,7 +365,7 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
     # Getting operating system's informations (Linux platforms or Android without the Termux terminal emulator) :
-    BU.Main.OS.IsOSLinux && {
+    BU.Main.OS.IsLinux && {
         if [ -f "/etc/os-release" ]; then
             # Getting operating pretty system name.
             BU.Main.Echo.Newstep "Operating system pretty name : $(awk -F= '/PRETTY/ {print $2}' '/etc/os-release')";
@@ -387,7 +387,7 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
     # Getting operating system's informations (Haiku OS) :
-    BU.Main.OS.IsOSHaiku && {
+    BU.Main.OS.IsHaiku && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : Haiku OS";
         BU.Main.Echo.Newline;
@@ -397,7 +397,7 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
     # Getting operating system's informations (OpenBSD) :
-    BU.Main.OS.IsOSOpenBSD && {
+    BU.Main.OS.IsOpenBSD && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 
@@ -406,7 +406,7 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
     # Getting operating system's informations (NetBSD) :
-    BU.Main.OS.IsOSNetBSD && {
+    BU.Main.OS.IsNetBSD && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 

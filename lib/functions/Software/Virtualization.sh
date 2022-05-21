@@ -58,7 +58,7 @@ fi
 function BU.SoftwareVirtualizationInstallQemuLinux()
 {
     #**** Code ****
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -76,7 +76,7 @@ function BU.SoftwareVirtualizationInstallQemuOSX()
 function BU.SoftwareVirtualizationInstallQemuWindows()
 {
     #**** Code ****
-    BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -89,7 +89,7 @@ function BU.SoftwareVirtualizationInstallQemuWindows()
 function BU.SoftwareVirtualizationInstallVirtualboxLinux()
 {
     #**** Code ****
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -107,7 +107,7 @@ function BU.SoftwareVirtualizationInstallVirtualboxOSX()
 function BU.SoftwareVirtualizationInstallVirtualboxWindows()
 {
     #**** Code ****
-    BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -120,7 +120,7 @@ function BU.SoftwareVirtualizationInstallVirtualboxWindows()
 function BU.SoftwareVirtualizationInstallVMwareWorkstationLinux()
 {
     #**** Code ****
-    BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -138,7 +138,7 @@ function BU.SoftwareVirtualizationInstallVMwareFusion()
 function BU.SoftwareVirtualizationInstallVMwareWorkstationWindows()
 {
     #**** Code ****
-    BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
@@ -150,9 +150,9 @@ function BU.SoftwareVirtualizationInstallVMwareWorkstationWindows()
 # Installation of Qemu.
 function BU.SoftwareVirtualizationInstallQemu()
 {
-    BU.Main.OS.IsOSLinux       && BU.SoftwareVirtualizationInstallQemuLinux                     &&  return 0;
+    BU.Main.OS.IsLinux       && BU.SoftwareVirtualizationInstallQemuLinux                     &&  return 0;
     BU.Main.OS.IsOSX           && BU.SoftwareVirtualizationInstallQemuOSX                       &&  return 0;
-    BU.Main.OS.IsOSWindows     && BU.SoftwareVirtualizationInstallQemuWindows                   &&  return 0;
+    BU.Main.OS.IsWindows     && BU.SoftwareVirtualizationInstallQemuWindows                   &&  return 0;
 
     BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }
@@ -160,18 +160,18 @@ function BU.SoftwareVirtualizationInstallQemu()
 # Installation of Virtualbox.
 function BU.SoftwareVirtualizationInstallVirtualbox()
 {
-    BU.Main.OS.IsOSLinux       && BU.SoftwareVirtualizationInstallVirtualboxLinux               &&  return 0;
+    BU.Main.OS.IsLinux       && BU.SoftwareVirtualizationInstallVirtualboxLinux               &&  return 0;
     BU.Main.OS.IsOSX           && BU.SoftwareVirtualizationInstallVirtualboxOSX                 &&  return 0;
-    BU.Main.OS.IsOSWindows     && BU.SoftwareVirtualizationInstallVirtualboxWindows             &&  return 0;
+    BU.Main.OS.IsWindows     && BU.SoftwareVirtualizationInstallVirtualboxWindows             &&  return 0;
 
     BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }
 
 function BU.SoftwareVirtualizationInstallVMware()
 {
-    BU.Main.OS.IsOSLinux       && BU.SoftwareVirtualizationInstallVMwareWorkstationLinux        &&  return 0;
+    BU.Main.OS.IsLinux       && BU.SoftwareVirtualizationInstallVMwareWorkstationLinux        &&  return 0;
     BU.Main.OS.IsOSX           && BU.SoftwareVirtualizationInstallVMwareFusion                    &&  return 0;
-    BU.Main.OS.IsOSWindows     && BU.SoftwareVirtualizationInstallVMwareWorkstationWindows      &&  return 0;
+    BU.Main.OS.IsWindows     && BU.SoftwareVirtualizationInstallVMwareWorkstationWindows      &&  return 0;
 
     BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;                                   return 1;
 }

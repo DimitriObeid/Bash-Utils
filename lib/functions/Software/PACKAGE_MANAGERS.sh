@@ -58,7 +58,7 @@ fi
 function BU.SoftwarePackageManagersInstallNPMLinux()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -67,7 +67,7 @@ function BU.SoftwarePackageManagersInstallNPMLinux()
 function BU.SoftwarePackageManagersInstallSnapLinux()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -80,7 +80,7 @@ function BU.SoftwarePackageManagersInstallSnapLinux()
 function BU.SoftwarePackageManagersUpdateNPMLinux()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -89,7 +89,7 @@ function BU.SoftwarePackageManagersUpdateNPMLinux()
 function BU.SoftwarePackageManagersUpdateSnapLinux()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -182,7 +182,7 @@ function BU.SoftwarePackageManagersUpdateHomebrewOSX()l
 function BU.SoftwarePackageManagersInstallNPMWindows()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -191,7 +191,7 @@ function BU.SoftwarePackageManagersInstallNPMWindows()
 function BU.SoftwarePackageManagersInstallChocolateyWindows()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -204,7 +204,7 @@ function BU.SoftwarePackageManagersInstallChocolateyWindows()
 function BU.SoftwarePackageManagersInstallNPMLinux()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -213,7 +213,7 @@ function BU.SoftwarePackageManagersInstallNPMLinux()
 function BU.SoftwarePackageManagersInstallChocolateyWindows()
 {
 	#**** Code ****
-	BU.Main.OS.IsOSWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
@@ -256,9 +256,9 @@ function BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS()
 # Install NPM on several platforms.
 function BU.SoftwarePackageManagersInstallNPM()
 {
-    BU.Main.OS.IsOSLinux   && BU.SoftwarePackageManagersInstallNPMLinux     &&  return 0;
+    BU.Main.OS.IsLinux   && BU.SoftwarePackageManagersInstallNPMLinux     &&  return 0;
     BU.Main.OS.IsOSX       && BU.SoftwarePackageManagersInstallNPMOSX       &&  return 0;
-    BU.Main.OS.IsOSWindows && BU.SoftwarePackageManagersInstallNPMWindows   &&  return 0;
+    BU.Main.OS.IsWindows && BU.SoftwarePackageManagersInstallNPMWindows   &&  return 0;
 
     BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;               return 1;
 }
