@@ -2273,6 +2273,28 @@ function BashUtils_InitModules()
             else
                 BU.ModuleInit.Msg;
 
+                # ---------------------------------------------------------------------------------------------------------------
+                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+
+                if      [ -f "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_name.Aliases.conf" 'shut')" ];                       then local v_module_aliases_file_name="$v_module_name.Aliases.conf";
+
+                elif    [ -f "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "Aliases.$v_module_name.conf" 'shut')" ];                       then local v_module_aliases_file_name="Aliases.$v_module_name.conf";
+
+                elif    [ -f "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_name.Aliases.$v_module_name.conf" 'shut')" ];        then local v_module_aliases_file_name="$v_module_name.Aliases.$v_module_name.conf";
+
+                elif    [ -f "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "Aliases.conf" 'shut')" ];                                      then local v_module_aliases_file_name="Aliases.conf";
+
+                fi
+
+                if [ -n "$v_module_aliases_file_name" ]; then
+                    source "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_aliases_file_name")" || { BU.ModuleInit.SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_aliases_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+                fi
+
+                unset v_module_aliases_file_name;
+
+                # ----------------------------------------------------
+                # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
+
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE" "$v_module_name")" '#' 'msg'; BU.ModuleInit.Msg;
 
@@ -2300,6 +2322,8 @@ function BashUtils_InitModules()
                 fi
 
                 source "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH" "$v_module_config_file_name")" || { BU.ModuleInit.SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH/$v_module_config_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+
+                unset v_module_config_file_name;
             fi
 
             # -----------------------------------------------
@@ -2349,6 +2373,8 @@ function BashUtils_InitModules()
                 fi
 
                 source "$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH" "$v_module_init_file_name")" || { BU.ModuleInit.SourcingFailure "$__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH/$v_module_init_file_name" "$v_module_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; v_loop_error="error"; break; }
+
+                unset v_module_init_file_name;
 
                 # shellcheck disable=SC2059
                 BU.Main.Headers.Header.Green "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT" "$(BU.Main.Decho.Decho.Highlight "$v_module_name")")";
