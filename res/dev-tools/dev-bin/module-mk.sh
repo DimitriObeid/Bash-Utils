@@ -79,8 +79,10 @@ for module_name in "${__ARG_LIST[@]}"; do
     # Checking if the module's library path exists, or else creating its directory.
     if [ -d "$__D_BU_LIB_MODULE_FUNCTS_PATH" ]; then
 	    echo "The $module_name module's library directory already exists : $__D_BU_LIB_MODULE_FUNCTS_PATH"
+        check_mandatory_file_exists "$__D_BU_LIB_MODULE_FUNCTS_PATH/$module_name.lib"
     else
 	    mkdir -pv "$__D_BU_LIB_MODULE_FUNCTS_PATH" || { echo "Unable to create the $__D_BU_LIB_MODULE_FUNCTS_PATH directory"; exit 1; }
+        check_mandatory_file_exists "$__D_BU_LIB_MODULE_FUNCTS_PATH/$module_name.lib"
     fi
 
     echo
