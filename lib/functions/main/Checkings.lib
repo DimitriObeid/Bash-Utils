@@ -386,7 +386,7 @@ function BU.Main.Checkings.CheckRootEUID()
                 "EUID != 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
         fi
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
     fi
 }
 
