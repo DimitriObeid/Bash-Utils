@@ -45,10 +45,45 @@ fi
 ## GET CPU INFORMATIONS
 
 # Getting the number of cores.
-function BU.Hardware.CPU.GetCoresNumber()    { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
 
 # Getting the CPU architecture.
-function BU.Hardware.CPU.GetArch()           { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetArch()                  { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
 
 # Getting the CPU vendor
-function BU.Hardware.CPU.GetVendor()         { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+
+# Getting the clock frequency.
+function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+
+# -----------------------------------------------
+
+## CHECK CPU INFORMATIONS
+
+# Checking if the CPU architecture is 32 bits.
+function BU.Hardware.CPU.Is32bits()
+{
+    if BU.Main.CMDS.GetCommandPath 'lshw'; then
+        if BU.Main.Checkings.IsRoot; then
+            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
+        else
+            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
+        fi;
+    else
+        return 1;
+    fi
+}
+
+# Checking if the CPU architecture is 64 bits.
+function BU.Hardware.CPU.Is64bits()
+{
+    if BU.Main.CMDS.GetCommandPath 'lshw'; then
+        if BU.Main.Checkings.IsRoot; then
+            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
+        else
+            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
+        fi;
+    else
+        return 1;
+    fi
+}

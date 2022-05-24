@@ -52,10 +52,12 @@ function BU.Hardware.General.GetChassisType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
         if BU.Main.Checkings.CheckRootEUID; then
-            dmidecode -s chassis-type;
+            BU.Main.Echo.msg "$(dmidecode -s chassis-type)" 'n';
 
             return 0;
         else
+            BU.Main.Echo.Msg "$(sudo dmidecode -s chassis-type)" 'n';
+
             return 1;
         fi
     fi
