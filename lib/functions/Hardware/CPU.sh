@@ -87,3 +87,21 @@ function BU.Hardware.CPU.Is64bits()
         return 1;
     fi
 }
+
+# Checking if the CPU architecture is ARM.
+function BU.Main.CPU.IsArchARM()                { true; }
+
+# Checking if the CPU architecture is AMD64.
+function BU.Main.CPU.IsArchAMD64()              { true; }
+
+# Checking if the CPU architecture is i386.
+function BU.Main.CPU.IsArchi386()               { true; }
+
+# Checking if the CPU architecture is PowerPC.
+function BU.Main.CPU.IsArchPPC()                { true; }
+
+# Checking if the CPU architecture is MIPS.
+function BU.Main.CPU.IsArchMIPS()               { true; }
+
+# Checking if the CPU architecture is RISC-V.
+function BU.Main.CPU.IsArchRISCV()              { true; }
