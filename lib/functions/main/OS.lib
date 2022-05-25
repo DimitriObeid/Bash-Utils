@@ -191,6 +191,18 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
     return 0;
 }
 
+# Checking if the system is running in Qemu()
+function BU.Main.OS.IsRunningInQemu()               { true; }
+
+# Checking if the system is running in VMware.
+function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
+
+# Checking if the system is running in VirtualBox.
+function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
+
+# Checking if the system is running in a virtual machine.
+function BU.Main.OS.IsVirtualized()                 { true; }
+
 # -----------------------------------------------
 
 ## GENERAL OS VERSIONS CHECKINGS
@@ -200,7 +212,7 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__GENERAL_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.general-os-versions-checkings";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU.Main.OS.IsAndroidTermux()             	{ if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
 
 # Checking if current OS is Chrome OS.
 function BU.Main.OS.IsChromeOS()					{ true; }
