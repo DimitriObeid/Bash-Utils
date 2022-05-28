@@ -143,8 +143,8 @@ function BU.Main.OS.CheckOSXVersion()
 	#**** Code ****
 	BU.Main.OS.IsOSX && {
 		# TODO : Manage the dots between the major and the minor versions.
-		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; fi; fi
-		
+		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; fi;
+
 		else
 			BU.Main.OS.IsOSXMavericks					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			BU.Main.OS.IsOSXYosemite					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
