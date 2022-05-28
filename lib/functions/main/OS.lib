@@ -181,12 +181,12 @@ function BU.Main.OS.GetLinuxDistro()
             return 0;
         };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
         BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
         return 1;
     else

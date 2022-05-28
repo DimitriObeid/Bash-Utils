@@ -322,8 +322,8 @@ function BU.Main.Files.CreateProjectLogFile()
 
     BU.Main.Echo.Success "Successfully created the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
-    if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
-    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
     BU.Main.Headers.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";

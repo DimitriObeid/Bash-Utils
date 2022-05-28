@@ -451,7 +451,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
@@ -480,7 +480,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
@@ -509,7 +509,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
-        BU.Main.Status.ChangeSTAT_ERROR 'fatal' "${FUNCNAME[0]}" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
@@ -724,14 +724,14 @@ function BU.Main.Status.CheckProjectLogStatus()
     # Also disabling a shellcheck warning, which is a false positive (saying that "$__BU_MAIN_STAT_DECHO" may not be assigned, but "$__BU_MAIN_STAT_ECHO" is (both of them are valid and working differently)).
 
     # shellcheck disable=SC2153
-    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU.Main.Status.ChangeSTAT_DECHO "restrict" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
+    local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU.Main.Status.ChangeSTAT_DECHO "restrict" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
     }
 
     # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.Main.Status.CheckProjectLogStatus()" function or any other function that calls it might be called.
-    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
+    local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "$C";
@@ -751,18 +751,18 @@ function BU.Main.Status.CheckProjectLogStatus()
             local returnCode="$?";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
             return "$returnCode";
         };
     fi
 
-    BU.Main.Status.CheckSTAT_LOG             "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU.Main.Status.CheckSTAT_LOG_REDIRECT    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU.Main.Status.CheckSTAT_TIME_TXT        "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_LOG             'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_TIME_TXT        'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
@@ -855,19 +855,19 @@ function BU.Main.Status.CheckProjectLogStatus()
             done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"                "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"                'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"     "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"         "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"         'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -950,10 +950,10 @@ function BU.Main.Status.CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
 			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 			return 0;
 
@@ -979,10 +979,10 @@ function BU.Main.Status.CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
             return 0;
 
@@ -1010,19 +1010,19 @@ function BU.Main.Status.CheckProjectLogStatus()
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
         # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-        BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 		return 0;
 	fi
 
 	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }

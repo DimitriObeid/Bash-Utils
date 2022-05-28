@@ -84,7 +84,7 @@ function BU.Main.Args.PrintBadOption()
 	if [ "${__BU_MAIN_STAT_ECHO,,}" = "false" ]; then
 		local v_STAT_ECHO_was_false="true";
 
-		BU.Main.Status.ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
+		BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
             local C="$?";
 
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -287,7 +287,7 @@ function BU.Main.Args.PrintBadOption()
     fi
 
 	if [ "$v_STAT_ECHO_was_false" = "true" ]; then
-		BU.Main.Status.ChangeSTAT_ECHO "false" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+		BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -328,7 +328,7 @@ function BU.Main.Args.GetFuncArgsArrayValues()
     BU.Main.Status.CheckStatIsBackupEchoing || {
         local v_echo="$__BU_MAIN_STAT_ECHO";
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
     }
 
     BU.ModuleInit.CheckIsDebugging && {
@@ -349,7 +349,7 @@ function BU.Main.Args.GetFuncArgsArrayValues()
     }
 
     if [ -n "$v_echo" ] && [ "${v_echo,,}" = 'false' ]; then
-        BU.Main.Status.ChangeSTAT_ECHO "$v_echo" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO-1 ))" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.ChangeSTAT_ECHO "$v_echo" 'main' "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO-1 ))" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";

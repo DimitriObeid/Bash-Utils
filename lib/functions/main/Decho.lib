@@ -346,7 +346,7 @@ function BU.Main.Decho.Decho()
                 *)
                     printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;
@@ -384,7 +384,7 @@ function BU.Main.Decho.Decho()
                 *)
                     printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;

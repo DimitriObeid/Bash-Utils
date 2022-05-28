@@ -199,7 +199,7 @@ function BU.Main.Echo.__EchoOutput()
 	elif [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = "true" ]; then
 	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true" "${BASH_SOURCE[0]}" "$LINENO";
+            local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "${BASH_SOURCE[0]}" "$LINENO";
         fi
 
 		BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Unable to create the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME") debug log file" 'E' "CPLS"; exit 1; }
