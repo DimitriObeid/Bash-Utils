@@ -100,3 +100,47 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsdisc()
 
     return 0;
 }
+
+# Checking if an SD card port is mounted.
+function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
+{
+    return 0;
+}
+
+# Checking if a VGA port exists.
+function BU.Hardware.Ports.CheckIfVGAPortExists()
+{
+    return 0;
+}
+
+# Checking if the existing VGA port is available.
+function BU.Hardware.Ports.CheckIfVGAPortAvailable()
+{
+    return 0;
+}
+
+# Checking if an HDMI port exists.
+function BU.Hardware.Ports.CheckIfHDMIPortExists()
+{
+    return 0;
+}
+
+# Checking if the existing HDMI port is available.
+function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
+{
+    return 0;
+}
+
+# Checking if a joystick is plugged.
+function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
+{
+    #**** Variables ****
+    local JS="$(
+        if      BU.Main.OS.IsLinux;         then    dmesg | grep Joystick;
+        elif    BU.Main.OS.IsHaiku;         then    true;
+        fi
+    )";
+
+    #**** Code ****
+    if [ -n "$JS" ]; then return 0; else return 1; fi
+}

@@ -41,10 +41,10 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT PROCESSING FUNCTIONS
-#### DEBUG ID : Text.text-processing-functions
+#### DEBUG ID : text::text-processing-functions
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="Text.text-processing-functions";
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
 ## DEBUG ID : cutting-text
@@ -212,10 +212,10 @@ function BU.Main.Text.DeleteLettersInString()
 # -----------------------------------------------
 
 ## FORMATTING TEXT
-## DEBUG ID : Text.text-processing-functionsformatting-text
+## DEBUG ID : formatting-text
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONSformatting-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::formatting-text";
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Echo.ToLowercase()" OR "BU.Main.Echo.ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
@@ -348,7 +348,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 }
 
 # Getting substring after a delimiter, which can be both a single character or a string.
-BU.Main.Text.GetSubStringAfterDelim()
+function BU.Main.Text.GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -383,7 +383,7 @@ BU.Main.Text.GetSubStringAfterDelim()
 }
 
 # Getting substring before a delimiter, which can be both a single character or a string.
-BU.Main.Text.GetSubStringBeforeDelim()
+function BU.Main.Text.GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -442,7 +442,7 @@ BU.Main.Text.GetSubStringBeforeDelim()
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
 	    v_newString="$(BU.Main.Text.ReverseStringWordsOrder "$v_newString" "$p_delim")";
     else
-        v_newString="$(BU.Main.Text.ReverseStringWordsOrder "$v_newString" "$p_delim" '--init')";
+        v_newString="$(BU.Main.Text.ReverseStringWordsOrder "$v_newString" "$p_delim" 'rm --first+last' '--init')";
     fi
 
 	if [ "${p_count,,}" != 'count' ]; then echo -e "$v_newString"; else echo "$p_count"; fi
@@ -541,7 +541,7 @@ function BU.Main.Text.GetStringWordsNumber()
 ## DEBUG ID : reversing-text
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONSreversing-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
 
 # Reverse words of a string according to a delimiter.
 
@@ -558,7 +558,8 @@ function BU.Main.Text.ReverseStringWordsOrder()
     #**** Parameters ****
     local p_string=$1;	# String    - Default : NULL    - String to process.
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
-    local p_init=$3;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
+    local p_keepd=$3;   # String    - default : NULL    - Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
+    local p_init=$4;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
 
 
 	#**** Variables ****
@@ -592,7 +593,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
 ## DEBUG ID : splitting-text
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONSsplitting-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";
 
 # String to words array.
 

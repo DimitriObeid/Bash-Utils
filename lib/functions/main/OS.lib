@@ -41,13 +41,13 @@ fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### OPERATING SYSTEM CHECKINGS
-#### DEBUG ID : Checkings.operating-system-checkings
+#### DEBUG ID : os::operating-system-checkings
 
-__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="osoperating-system-checkings";
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="os::operating-system-checkings";
 
 ## SPECIFIC OS VERSIONS CHECKINGS FUNCTIONS
 ## DEBUG ID : specific-os-versions-checkings
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings.specific-os-versions-checkings";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_Checkings::specific-os-versions-checkings";
 
 # Checking the name of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistro()
