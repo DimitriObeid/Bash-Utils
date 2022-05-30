@@ -128,6 +128,12 @@ function BU.Hardware.Drive.GetPartitionsNumber()
     return 0;
 }
 
+# Getting the number of existing partitions by size (more or less than a defined size).
+function BU.Hardware.Drive.GetPartitionsNumberBySize()
+{
+    return 0;
+}
+
 # Getting the number of existing partitions according to their file system.
 function BU.Hardware.Drive.GetPartitionsNumberByFS()
 {
