@@ -562,27 +562,29 @@ function BU.Main.Text.ReverseStringWordsOrder()
     local p_init=$4;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
 
 
-	#**** Variables ****
-	# Leave this variable empty, it will store the reversed string.
-	local reversed="";
+    #**** Variables ****
+    # Leave this variable empty, it will store the reversed string.
+    local reversed="";
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
         if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
     fi
 
-	IFS="$p_delim" read -ra line <<< "$p_string";
+    # shellcheck disable=SC2219
+    let x="${#line[@]}-1";
 
-	# shellcheck disable=SC2219
-	let x="${#line[@]}-1";
+    while [ "$x" -ge 0 ]; do
+        if [ "$x" -gt 1 ]; then reversed="$reversed${line[x]}$p_delim"; else reversed="$reversed${line[x]}"; fi
 
-	while [ "$x" -ge 0 ]; do
-		if [ "$x" -gt 0 ]; then reversed="$reversed${line[x]}$delim"; else reversed="$reversed${line[x]}"; fi
+        (( x-- ));
+    done
 
-		(( x-- ));
-	done
+    if     [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst) ]];              then reversed="$p_delim$reversed";
+    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))l?(ast) ]];               then reversed="$reversed$p_delim";
+    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst)?(-)l?(ast) ]];   then reversed="$p_delim$reversed$p_delim"; fi
 
-	echo -e "$reversed";
+    echo -e "$reversed";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
