@@ -44,8 +44,17 @@ fi
 
 ##
 
-# Checking if the battery
+# Checking if the computer is not AC powered.
+function BU.Hardware.Battery.IsNotOnAC()
+{
+    return 0;
+}
 
+# Checking if the computer is AC powered.
+function BU.Hardware.Battery.IsOnAC()
+{
+    return 0;
+}
 
 # Getting the battery percentage.
 function BU.Hardware.Battery.GetPercentage()
@@ -60,7 +69,25 @@ function BU.Hardware.Battery.GetPercentage()
     fi
 
     #**** Code ****
-    EchoMsg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Getting the battery vendor.
+function BU.Hardware.Battery.GetVendor()
+{
+    #**** Variables ****
+    if command -v "upower"; then
+        local v_batteries;
+        local v_command_output;
+
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)";
+        v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 2 {print $2}')";
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output";
 
     return 0;
 }

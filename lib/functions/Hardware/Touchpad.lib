@@ -43,3 +43,9 @@ fi
 ####
 
 ##
+
+# Getting the vendor of the touchpad.
+function BU.Hardware.Touchpad.GetVendor()
+{
+    return 0;
+}
