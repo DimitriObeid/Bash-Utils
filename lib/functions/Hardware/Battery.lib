@@ -56,6 +56,85 @@ function BU.Hardware.Battery.IsOnAC()
     return 0;
 }
 
+# Checking if the battery has history.
+function BU.Hardware.Battery.HasHistory()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 7 {print $3}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Checking if the computer has power supply.
+function BU.Hardware.Battery.HasPowerSupply()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 5 {print $3}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Checking if the battery has statistics.
+function BU.Hardware.Battery.HasStatistics()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 8 {print $3}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Checking if the computer is present.
+function BU.Hardware.Battery.IsPresent()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 10 {print $2}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Checking if the computer is rechargeable.
+function BU.Hardware.Battery.IsRechargeable()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 11 {print $2}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is rechargeable"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
 
 # Getting the battery serial number.
 function BU.Hardware.Battery.GetCapacity()
@@ -173,6 +252,21 @@ function BU.Hardware.Battery.GetModel()
     return 0;
 }
 
+# Getting the battery
+function BU.Hardware.Battery.GetNativePath()
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 21 {print $2}')";
+    else
+        BU.Main.Echo.Msg "Unable to get the battery's capacity"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
 # Getting the battery percentage.
 function BU.Hardware.Battery.GetPercentage()
 {
@@ -229,6 +323,22 @@ function BU.Hardware.Battery.GetTechnology()
         v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 22 {print $2}')";
     else
         BU.Main.Echo.Msg "Unable to get the battery's technology"; return 1;
+    fi
+
+    #**** Code ****
+    BU.Main.Echo.Msg "$v_command_output" '-n';
+
+    return 0;
+}
+
+# Getting the time remaining until the full charge.
+function BU.Hardware.Battery.GetTimeBeforeFullCharge()
+{
+    #**** Variables ****
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 20 {print $4}')";
+    else
+        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
     fi
 
     #**** Code ****
