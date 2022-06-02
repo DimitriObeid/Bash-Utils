@@ -94,6 +94,16 @@ function BU.ModuleInit.UnsetInitErrorMsg()  { if BU.Main.Status.CheckStatIsIniti
 
 ## FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
+# Printing that the script's execution was interrupted by the user.
+function BU.ModuleInit.SIGINT()
+{
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "The script's execution was interrupted by the user" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "La ejecución del script fue interrumpida por el usuario" >&2 && echo >&2;
+
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && echo >&2;
+}
+
 # Defining the framework's traps.
 function BU.ModuleInit.DefineTraps()
 {
@@ -103,7 +113,7 @@ function BU.ModuleInit.DefineTraps()
     # Defining traps.
     trap "echo 'Exiting script'" 0;
 
-    trap "echo -e '\nInterruption'; BU.ModuleInit.Exit ''" SIGINT;
+    trap "BU.ModuleInit.SIGINT'; BU.ModuleInit.Exit ''" SIGINT;
 }
 
 # -----------------------------------------------
