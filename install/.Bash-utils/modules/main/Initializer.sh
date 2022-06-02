@@ -70,7 +70,7 @@ function BU.Main.Initializer.SourceLibrary()
 
         BU.ModuleInit.CheckIsDebugging && BU.ModuleInit.Msg "Debug mode activated";
 
-		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
@@ -103,7 +103,7 @@ function BU.Main.Initializer.SourceConfig()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
@@ -133,7 +133,7 @@ function BU.Main.Initializer.SourceConfig()
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; };
+BU.ModuleInit.IsFrameworkWrapped || source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -145,7 +145,7 @@ source "$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH" || { BU.ModuleInit.SourcingFailur
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; }
+BU.ModuleInit.IsFrameworkWrapped || source "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" || { BU.ModuleInit.SourcingFailure "$__BU_MAIN_MODULE_CONF_FILE_INIT_PATH" "$__BU_MODULE_INIT_MODULE_NAME" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.ModuleInit.IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
