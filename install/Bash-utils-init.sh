@@ -113,7 +113,7 @@ function BU.ModuleInit.DefineTraps()
     # Defining traps.
     trap "echo 'Exiting script'" 0;
 
-    trap "BU.ModuleInit.SIGINT'; BU.ModuleInit.Exit ''" SIGINT;
+    trap "BU.ModuleInit.SIGINT; BU.ModuleInit.Exit 2" SIGINT;
 }
 
 # -----------------------------------------------
