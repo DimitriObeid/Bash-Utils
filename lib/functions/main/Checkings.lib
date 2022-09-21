@@ -434,6 +434,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
             BU.Main.Filesystem.IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
     else    BU.Main.Filesystem.IsPartitionFull "$p_fileFS"; fi
 
+    # If the execution of the "BU.Main.Filesystem.IsPartitionFull()" function was successful.
     if [ "$IsPartitionFullReturnCode" -eq 0 ]; then
 
         # Resetting the former "$__BU_MAIN_STAT_ECHO" global status variable's value.
@@ -445,6 +446,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
+    # Else, if no directory or file is passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
     elif [ "$IsPartitionFullReturnCode" = "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
@@ -474,6 +476,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
+    # Else, if an invalid directory or file was passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
     elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
