@@ -2526,6 +2526,9 @@ function BashUtils_InitModules()
 	return 0;
 }
 
+
+## NOTE : At this point, the "$__BU_MODULE_INIT_MSG__" variables values are deleted. Do not add message variables related to the following functions in the initializer file's languages files.
+
 # Initializing a single new module after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
 function BU.ModuleInit.InitNewModule()
 {
