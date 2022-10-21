@@ -498,7 +498,7 @@ function BU.Main.Decho.__Decho.Error                { BU.Main.Decho.__Decho "$1"
 
 function BU.Main.Decho.__Decho.Function             { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_FUNCTION"  "$2"; }
 function BU.Main.Decho.__Decho.Newstep              { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_NEWSTEP"   "$2"; }
-function BU.Main.Decho.__Decho.ath                  { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_PATH"      "$2"; }
+function BU.Main.Decho.__Decho.Path                 { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_PATH"      "$2"; }
 
 function BU.Main.Decho.__Decho.Success              { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_SUCCESS"   "$2"; }
 function BU.Main.Decho.__Decho.Var                  { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_VAR"       "$2"; }

@@ -1937,6 +1937,19 @@ function BU.ModuleInit.ParseCSVLang()
     # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
     local v_CSVFirstColRowAfterNthDelim;
 
+    # Perl script's return codes.
+    local v_perlScriptNoCSVFileGivenAsArgErrorCode="10022";             # Do not change this return code.
+    local v_perlScriptPathIsDirErrorCode="1";
+    local v_perlScriptFileIsNotCSVFormatErrorCode="2";
+
+    local v_perlScriptIndexColNotPassedAsSecondArgErrorCode="3"
+    local v_perlScriptIndexColIsNotIntErrorCode="4";
+    local v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode="5";
+
+    local v_perlScriptCSVFileCannotBeReadErrorCode="6";
+    local v_perlScriptOutputFileCannotBeCreatedErrorCode="7";
+    local v_perlScriptNotEnoughDiskSpaceAvailableErrorCode="14";        # Do not change this return code.
+
     #**** Code ****
     # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
     # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
@@ -2099,7 +2112,7 @@ function BU.ModuleInit.ParseCSVLang()
 			return 0;
 		else
 			# The CSV file was not passed as first argument.
-			if		[ "${v_perlScriptReturnCode}" -eq 10022 ]; then
+			if		[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptNoCSVFileGivenAsArgErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2109,7 +2122,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# A path was passed as first argument, but it's a directory path.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptPathIsDirErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "DIRECTORY PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2119,7 +2132,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# A path was passed as first argument. It's a file, but not in CSV format.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptFileIsNotCSVFormatErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT, BUT NOT A CSV FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2129,7 +2142,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# The column's index was not passed as second argument.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptIndexColNotPassedAsSecondArgErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2138,7 +2151,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# The column's index passed as second argument was not an integer.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptIndexColIsNotIntErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
@@ -2148,7 +2161,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
             # The language file's output path was not passed as third argument.
-            elif    [ "${v_perlScriptReturnCode}" -eq TODO ]; then
+            elif    [ "${v_perlScriptReturnCode}" -eq "$v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
                 BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2157,7 +2170,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# The CSV file cannot be read by the Perl script.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptCSVFileCannotBeReadErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "« %s » PERL TRANSLATION SCRIPT UNABLE TO READ THE CSV TRANSLATIONS FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}")" \
@@ -2166,7 +2179,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
 			# The output file cannot be created by the Perl script.
-			elif	[ "${v_perlScriptReturnCode}" -eq TODO ]; then
+			elif	[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptOutputFileCannotBeCreatedErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "UNABLE TO CREATE THE LANGUAGE'S OUTPUT FILE" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE « %s » PERL TRANSLATION SCRIPT" "${v_outputFilePath}" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
@@ -2175,7 +2188,7 @@ function BU.ModuleInit.ParseCSVLang()
 				return "${v_perlScriptReturnCode}";
 
             # Not enough storage is available to complete this operation.
-            elif    [ "${v_perlScriptReturnCode}" -eq 14 ]; then
+            elif    [ "${v_perlScriptReturnCode}" -eq "$v_perlScriptNotEnoughDiskSpaceAvailableErrorCode" ]; then
                 BU.ModuleInit.PrintLogError "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "${v_outputFilePath}")" "${v_perlScriptExecLineno}";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "${v_outputFilePath}")" \
@@ -2513,11 +2526,33 @@ function BashUtils_InitModules()
 	return 0;
 }
 
-# Initializing one or more new modules after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
+# Initializing a single new module after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
+function BU.ModuleInit.InitNewModule()
+{
+    #**** Parameters ****
+    local p_newmodule=$1;   # String    - Default : NULL    - Name of the module to include.
+
+    #**** Code ****
+    # If no module name is passed as argument.
+    if [ -z "$p_newmodule" ]; then local lineno="$LINENO";
+		BU.Main.Errors.HandleErrors '1' "$(printf "NO MODULE NAME PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
+			"$(printf "You must pass a module name when you call the « %s » module initialization function" "${FUNCNAME[0]}")" \
+			"No new module name passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return 1;
+    else
+        return 0;
+    fi
+
+    return 0;
+}
+
+
+# Initializing more than one new modules after the successful initialization of the main module, in case other modules must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
 function BU.ModuleInit.InitNewModules()
 {
 	#**** Parameters ****
-	local p_module_list=("$@"); # Array		- Default : NULL	- List of the new modules to init.
+	local p_module_list=("$@"); # Array    - Default : NULL    - List of the new modules to init.
 
 	#**** Variables (global) ****
 
@@ -2529,12 +2564,82 @@ function BU.ModuleInit.InitNewModules()
 	# Checking if the arguments array length is equal to zero (no arguments passed).
 	if [ -z "${p_modules_list[*]}" ]; then local lineno="${LINENO}";
         # shellcheck disable=SC2059
-		BU.Main.Errors.HandleErrors '1' "$(printf "NO MODULE NAME PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
-			"$(printf "You must pass a module name when you call the « %s » modules initialization function" "${FUNCNAME[0]}")" \
-			"No new module(s) passed as argument(s)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+		BU.Main.Errors.HandleErrors '1' "$(printf "NO MODULES NAMES PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
+			"$(printf "You must pass one or more modules names when you call the « %s » modules initialization function" "${FUNCNAME[0]}")" \
+			"No new module(s) name(s) passed as argument(s)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
 		return 1;
+    else
+        # At this point, the main module is initialized, so its functions can be safely called.
+        BU.Main.Headers.Header.Aqua.Turquoise ""
+
+        for i in "${p_module_list[@]}"; do
+            BU.ModuleInit.InitNewModule "${i}" || { v_loop_error='error'; break; };
+        done
+
+        if [ "$v_loop_error" = 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+
+        return 0;
 	fi
 
 	return 0;
+}
+
+# Unsource a single module.
+function BU.ModuleInit.UnsourceModule()
+{
+    #**** Parameters ****
+    local p_module=$1;  # String    - Default : NULL    - Name of the module to unsource.
+
+    #**** Code ****
+    # If no module name is passed as argument.
+    if [ -z "$p_module" ]; then local lineno="$LINENO";
+		BU.Main.Errors.HandleErrors '1' "$(printf "NO MODULE NAME PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
+			"$(printf "You must pass a module name when you call the « %s » module unsourcing function" "${FUNCNAME[0]}")" \
+			"No module name passed as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return 1;
+    else
+        # Checking if the main module is passed as argument, to prevent its unsourcing.
+        if [[ "$p_module" == [Mm][Aa][Ii][Nn] ]]; then
+            BU.Main.Errors.HandleErrors '1' "$(printf "%s YOU TRIED TO UNSOURCE THE MAIN MODULE" "$(BU.Main.Decho.__Decho.Yellow "WARNING :")")" \
+                "Calling the main module as argument would unsource every files related to the main module, thus making the main functions of the framework unusable" \
+                "$(printf "Main module passed as argument to the %s function" "${FUNCNAME[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+        fi
+
+        return 0;
+    fi
+
+    return 0;
+}
+
+# Unsource multiple modules at once from the.
+function BU.ModuleInit.UnsourceModules()
+{
+    #**** Parameters ****
+    local p_modules_list=("$@");    # Array     - Default : NULL    - List of the modules to unsource.
+
+    #**** Code ****
+	# Checking if the arguments array length is equal to zero (no arguments passed).
+	if [ -z "${p_modules_list[*]}" ]; then local lineno="${LINENO}";
+        # shellcheck disable=SC2059
+		BU.Main.Errors.HandleErrors '1' "$(printf "NO MODULES NAMES PASSED AS « %s() » FUNCTION ARGUMENT" "${FUNCNAME[0]}")" \
+			"$(printf "You must pass one or more module name when you call the « %s » modules unsourcing function" "${FUNCNAME[0]}")" \
+			"No module(s) name(s) passed as argument(s)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+		return 1;
+    else
+        # At this point, the main module is initialized, so its functions can be safely called.
+        BU.Main.Headers.Header.Aqua.Turquoise ""
+
+        for i in "${p_module_list[@]}"; do
+            BU.ModuleInit.UnsourceModule "${i}" || { v_loop_error='error'; break; };
+        done
+
+        if [ "$v_loop_error" = 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+
+        return 0;
+	fi
+
+    return 0;
 }
