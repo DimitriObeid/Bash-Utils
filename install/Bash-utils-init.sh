@@ -37,13 +37,18 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
 
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script only en l'incluant dans votre projet." >&2; echo >&2;
+
     exit 1;
-fi
+fi; fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -83,6 +88,9 @@ function BU.ModuleInit.IsFrameworkWrapped() { if [ -n "${__BASHUTILS_FRAMEWORK_I
 
 # Checking if the function and / or sourced code currently executed is a part of a script file or running in an interactive shell.
 function BU.ModuleInit.IsInScript()         { if [ "${0:0:2}" = './' ]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
+
+# Checking if the framework is translated.
+function BU.ModuleInit.IsTranslated()       { if [ "${__BASH_UTILS_FRAMEWORK_IS_TRANSLATED,,}" == 'true' ]; then return 0; else return 1; fi }
 
 # Checking if the framework is still initializing, and if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value is '--log-shut', in order to display every error messages.
 function BU.ModuleInit.SetInitErrorMsg()    { if BU.Main.Status.CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then v_msg_arr_permission_global_backup=""; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; return 0; else return 1; fi }
@@ -138,14 +146,17 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 
 function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
+    # Backupping the former language chosen.
+    local v_lang_backup="${__BU_MODULE_INIT__USER_LANG}";
+
     # Changing the current language to English.
-    LANG="en_US.UTF-8";
+    LANG="en_US.UTF-8"; __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
 
     BU.ModuleInit.IsFrameworkWrapped || source "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/en.locale" || {
         echo >&2;
 
         # Deutch | German
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && {
+        [ "${v_lang_backup,,}" = 'de' ] && {
             echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
             echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
@@ -158,7 +169,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # English
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && {
+        [ "${v_lang_backup,,}" = 'en' ] && {
             echo '-----------------------------------------------------------' >&2 && echo >&2;
             echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
@@ -171,7 +182,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Español | Spanish
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && {
+        [ "${v_lang_backup,,}" = 'es' ] && {
             echo '-----------------------------------------------------------------' >&2 && echo >&2;
             echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
 
@@ -184,7 +195,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Français | French
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && {
+        [ "${v_lang_backup,,}" = 'fr' ] && {
             echo '----------------------------------------------------------------------' >&2 && echo >&2;
             echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS ANGLAIS" >&2 && echo >&2;
 
@@ -1696,6 +1707,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__ROOT_HOME="$HOME";
     __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
+    __BASH_UTILS_FRAMEWORK_IS_TRANSLATED="false";
+
     if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
         __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils")"                                       || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__ROOT'; BU.ModuleInit.IsInScript && exit 1; return 1; };
         __bu_module_init__root__lineno="$(( LINENO - 1))";
@@ -2062,6 +2075,8 @@ function BU.ModuleInit.ParseCSVLang()
 		if [ "${v_perlScriptReturnCode}" -eq 0 ]; then
 			BU.ModuleInit.Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${p_lang_ISO_639_1}" "${v_outputFilePath}")";
 			BU.ModuleInit.Msg;
+
+			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
 
 			source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; };
 
