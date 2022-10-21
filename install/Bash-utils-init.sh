@@ -2344,14 +2344,18 @@ function BashUtils_InitModules()
                 # ---------------------------------------------------------------------------------------------------------------
                 # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
 
-                if      [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.conf" 'shut')" ]];                       then local v_module_aliases_file_name="${v_module_name}.Aliases.conf";
+                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.conf" 'shut' 'modaliasfile')" ]] || \
 
-                elif    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut')" ]];                       then local v_module_aliases_file_name="Aliases.${v_module_name}.conf";
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'modaliasfile')" ]] || \
 
-                elif    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.${v_module_name}.conf" 'shut')" ]];      then local v_module_aliases_file_name="${v_module_name}.Aliases.${v_module_name}.conf";
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.${v_module_name}.conf" 'shut' 'modaliasfile')" ]] \
 
-                elif    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.conf" 'shut')" ]];                                        then local v_module_aliases_file_name="Aliases.conf";
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.conf" 'shut' 'modaliasfile')" ]]; then
 
+                        local v_module_aliases_file_name;
+
+                        v_module_aliases_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modaliasfile.tmp")")";
                 fi
 
                 if [ -n "$v_module_aliases_file_name" ]; then
@@ -2366,6 +2370,7 @@ function BashUtils_InitModules()
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE}" "${v_module_name}")" '#' 'msg'; BU.ModuleInit.Msg;
 
+                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
                 if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Module.conf" 'shut' 'modconffile')" ]] || \
 
                     [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.conf" 'shut' 'modconffile')" ]] || \
@@ -2423,14 +2428,20 @@ function BashUtils_InitModules()
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
 
-                if      [ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.sh" 'shut')" ];                     then local v_module_init_file_name="${v_module_name}.Initializer.sh";
+                # -----------------------------------------------------
+                # MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
 
-                elif    [ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.sh" 'shut')" ];                     then local v_module_init_file_name="Initializer.${v_module_name}.sh";
+                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.sh" 'shut' 'modinitfile')" ]] || \
 
-                elif    [ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.${v_module_name}.sh" 'shut')" ];    then local v_module_init_file_name="${v_module_name}.Initializer.${v_module_name}.sh";
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.sh" 'shut' 'modinitfile')" ]] || \
 
-                elif    [ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'shut')" ];                                      then local v_module_init_file_name="Initializer.sh";
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.${v_module_name}.sh" 'shut' 'modinitfile')" ]] || \
 
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'shut' 'modinitfile')" ]]; then
+                        local v_module_init_file_name;
+
+                        v_module_init_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modinitfile.tmp")")";
                 else
                     BU.ModuleInit.PrintLogError "" "$(( LINENO - 1 ))";
 
