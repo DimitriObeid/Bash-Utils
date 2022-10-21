@@ -363,8 +363,9 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
         "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS";
 
 	#**** Parameters ****
-	local p_file=$1;   # String    - Default : NULL    - File where the current function is called.
-	local p_lineno=$2; # Int       - Default : NULL    - Line where the current function is called.
+	local p_module=$1; # String    - Default : NULL    - Module where the current function is called.
+	local p_file=$2;   # String    - Default : NULL    - File where the current function is called.
+	local p_lineno=$3; # Int       - Default : NULL    - Line where the current function is called.
 
 	#**** Variables ****
 	local va_correctValues=("authorized" "forbidden" "restricted");
@@ -478,7 +479,7 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
 
     #**** Code ****
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
-        ConfEcho "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${va_correctValues[@]}";
+        BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${va_correctValues[@]}";
 
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
