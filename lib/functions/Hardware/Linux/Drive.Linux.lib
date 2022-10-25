@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Drive.Linux.lib
+# Module        : Hardware
+# Description   :
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script only en l'incluant dans votre projet." >&2; echo >&2;
+
+    exit 1;
+fi; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+
+##
+
+# Check if targeted hard drive is a HDD.
+function BU.Hardware.Drive.IsHDD()
+{
+    return 0;
+}
+
+# Check if targeted hard drive is a SDD.
+function BU.Hardware.Drive.IsSSD()
+{
+    return 0;
+}
+
+# Check how many hard drives are plugged.
+function BU.Hardware.Drive.CountPluggedDrives()
+{
+    return 0;
+}
+
+# Count the number of HDDs among the plugged hard drives.
+function BU.Hardware.Drive.CountHDD()
+{
+    return 0;
+}
+
+# Count the number of SSDs among the plugged hard drives.
+function BU.Hardware.Drive.CountSSD()
+{
+    return 0;
+}
+
+# Count the number of HDDs and SSDs among the plugged hard drives.
+function BU.Hardware.Drive.CountHDD+SSD()
+{
+    return 0;
+}
+
+# Getting the size of a hard drive.
+function BU.Hardware.Drive.GetDriveSize()
+{
+    return 0;
+}
+
+# Getting the total size by adding up several or every hard drives size.
+function BU.Hardware.Drive.AddUpDrivesSizes()
+{
+    return 0;
+}
+
+# Getting the rotation speed of a HDD.
+function BU.Hardware.Drive.GetRotationSpeed()
+{
+    return 0;
+}
+
+# Getting the vendor of the hard drive.
+function BU.Hardware.Drive.GetVendor()
+{
+    return 0;
+}
+
+# Getting the firmware version.
+function BU.Hardware.Drive.GetFirmwareVersion()
+{
+    return 0;
+}
+
+# Create a new partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
+function BU.Hardware.Drive.CreateNewPartition()
+{
+    return 0;
+}
+
+# Delete a partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
+function BU.Hardware.Drive.DeletePartition()
+{
+    return 0;
+}
+
+# Getting the number of existing partitions.
+function BU.Hardware.Drive.GetPartitionsNumber()
+{
+    return 0;
+}
+
+# Getting the number of existing partitions by size (more or less than a defined size).
+function BU.Hardware.Drive.GetPartitionsNumberBySize()
+{
+    return 0;
+}
+
+# Getting the number of existing partitions according to their file system.
+function BU.Hardware.Drive.GetPartitionsNumberByFS()
+{
+    return 0;
+}
+
+# Getting the size of a partition.
+function BU.Hardware.Drive.GetPartitionSize()
+{
+    return 0;
+}

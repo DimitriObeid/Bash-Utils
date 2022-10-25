@@ -3,7 +3,7 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : CPU.lib
+# Name          : CPU.Linux.lib
 # Module        : Hardware
 # Description   : Functions used to process information about the CPU.
 # Author(s)     : Dimitri Obeid

@@ -3,7 +3,7 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : Memory.lib
+# Name          : Drive.BSD.lib
 # Module        : Hardware
 # Description   :
 # Author(s)     : Dimitri Obeid
@@ -48,29 +48,3 @@ fi; fi
 ####
 
 ##
-
-# Get the number of RAM slots in use.
-function BU.Hardware.Memory.GetUsedRAMSlotsNumber()
-{
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
-}
-
-# Getting the number of RAM slots available.
-function BU.Hardware.Memory.GetAvailableRamSlotsNumber()
-{
-    return 0;
-}
-
-# Getting memory max capacity.
-function BU.Hardware.Memory.GetMaxMemoryCapacity()
-{
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
-}
-
-# Get Memory type.
-function BU.Hardware.Memory.GetMemoryType()
-{
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
-}
-
-function BU.Hardware.Memory.CheckIfMemoryDDR4() { BU.Hardware.Memory.GetMemoryType 'DDR4' || return 1; }

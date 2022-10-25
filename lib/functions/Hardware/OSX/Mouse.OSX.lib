@@ -3,7 +3,7 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : Touchpad.lib
+# Name          : Mouse.OSX.lib
 # Module        : Hardware
 # Description   :
 # Author(s)     : Dimitri Obeid
@@ -48,9 +48,3 @@ fi; fi
 ####
 
 ##
-
-# Getting the vendor of the touchpad.
-function BU.Hardware.Touchpad.GetVendor()
-{
-    return 0;
-}

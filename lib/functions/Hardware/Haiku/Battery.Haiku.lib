@@ -3,7 +3,7 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : Motherboard.lib
+# Name          : Battery.Haiku.lib
 # Module        : Hardware
 # Description   :
 # Author(s)     : Dimitri Obeid
@@ -45,8 +45,6 @@ fi; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### GET INFORMATIONS
+####
 
-## GET BIOS INFORMATIONS
-
-# Getting the
+##

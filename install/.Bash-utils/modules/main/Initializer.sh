@@ -59,7 +59,7 @@ fi; fi
 
 ## FUNCTIONS
 
-# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+# Sourcing each library file stored into the "function/main" directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
 function BU.Main.Initializer.SourceLibrary()
 {
     #**** Variables ****
@@ -89,7 +89,7 @@ function BU.Main.Initializer.SourceLibrary()
 	return 0;
 }
 
-# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
 function BU.Main.Initializer.SourceConfig()
 {
     #**** Variables ****
