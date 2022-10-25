@@ -108,7 +108,7 @@ function BU.Main.Initializer.SourceConfig()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";

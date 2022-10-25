@@ -60,7 +60,7 @@ fi; fi
 ## FUNCTIONS
 
 # Sourcing each library file stored into the "function/Hardware" directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
-function BU.Main.Initializer.SourceLibrary()
+function BU.Hardware.Initializer.SourceLibrary()
 {
     #**** Variables ****
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
@@ -71,11 +71,11 @@ function BU.Main.Initializer.SourceLibrary()
 	BU.ModuleInit.Msg;
 
 	# shellcheck disable=SC1090
-	for f in "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
+	for f in "${__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY[@]}"; do
 
         BU.ModuleInit.CheckIsDebugging && BU.ModuleInit.Msg "Debug mode activated";
 
-		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
@@ -89,26 +89,16 @@ function BU.Main.Initializer.SourceLibrary()
 	return 0;
 }
 
-# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
-function BU.Main.Initializer.SourceConfig()
+# Sourcing each file listed into the "$__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
+function BU.Hardware.Initializer.SourceConfig()
 {
     #**** Variables ****
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
-    if [ "${__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS,,}" = 'true' ]; then
-        # Deleting the index 1 of the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]" array,
-        # which contains the path to the "Status.conf" configuration file, which was included just
-        # before the processing of the status global variables vaues given as main module's arguments.
-        unset '__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[1]';
-
-        # Shifting each array's indexes which followed the deleted index.
-        __BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY=( "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}" );
-    fi
-
 	# shellcheck disable=SC1090
-	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		BU.ModuleInit.IsFrameworkWrapped || source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+	for f in "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
+		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; __BU_HARDWARE_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
@@ -132,20 +122,20 @@ function BU.Hardware.Initializer.Usage()
     echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS" >&2;
     sleep 2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
     echo >&2;
 
     echo >&2;
@@ -158,16 +148,16 @@ function BU.Hardware.Initializer.Usage()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### STEP THREE : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
+#### STEP THREE : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES FROM THE "HARDWARE" MODULE
 
-# Sourcing each library file stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
-BU.Main.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+# Sourcing each library file stored into the "function/Hardware" directory, from the "$__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
-# Sourcing each file listed into the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
-BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+# Sourcing each file listed into the "$__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+BU.Hardware.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
