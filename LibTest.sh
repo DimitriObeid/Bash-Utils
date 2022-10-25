@@ -63,6 +63,9 @@ fi
 
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
 
+# Testing functions
+BU.Hardware.CPU.GetArch || echo FALSE
+
 # This command pauses the script, in order to see how much memory it uses.
 sleep 30
 
