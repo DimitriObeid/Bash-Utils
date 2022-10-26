@@ -161,3 +161,5 @@ BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exi
 BU.Hardware.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
+
+## END OF THE INITIALIZATION PROCESS OF THE "HARDWARE" MODULE.
