@@ -152,15 +152,15 @@ function BU.Main.Headers.HeaderBase()
         "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
-	local p_lineChar=$1;       # Defining the wanted character to display when calling the "BU.Main.Headers.DrawLine()" function.
-	local p_lineColor=$2;      # Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU.Main.Headers.DrawLine".
-	local p_stringColor=$3;    # Defining the color of the header's string
+	local p_lineChar=$1;       # Char      - Default : NULL    - Defining the wanted character to display when calling the "BU.Main.Headers.DrawLine()" function.
+	local p_lineColor=$2;      # CMD       - Default : NULL    - Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU.Main.Headers.DrawLine".
+	local p_stringColor=$3;    # CMD       - Default : NULL    - Defining the color of the header's string
 
-	local p_stringTxt=$4;      # String displayed between the two lines.
-	local p_strlen=$5;         # Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-	local p_bgColorCol=$6;     # Defining the background color.
+	local p_stringTxt=$4;      # String    - Default : NULL    - String displayed between the two lines.
+	local p_strlen=$5;         # String    - Default : NULL    - Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+	local p_bgColorCol=$6;     # CMD       - Default : NULL    - Defining the background color.
 
-	local p_bgColorPos=$7;     # Defining the background color's position (first line, text or second line, or a mix ?).
+	local p_bgColorPos=$7;     # CMD       - Default : NULL    - Defining the background color's position (first line, text or second line, or a mix ?).
 
 	#**** Variables ****
     local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
