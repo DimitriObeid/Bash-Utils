@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Files.lib
+# Module        : Main
+# Description   :
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script only en l'incluant dans votre projet." >&2; echo >&2;
+
+    exit 1;
+fi; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### COLORS PROCESSING FUNCTIONS
+## DEBUG ID : colors::colors-processing-functions
+
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS="colors::colors-processing-functions";
+
+## PROCESSING FUNCTIONS
+## DEBUG ID : processing-functions
+
+__BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS::colors-processing-functions";
+
+# Conversion of color name (string) to color code.
+function BU.Main.Colors.Atoi()
+{
+    #**** Parameters ****
+    local str=${1:-white}; # String - Default : NULL - Color name
+
+    #**** Code ****
+    # Basic colors
+    if      [ "${str,,}" == "aqua" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_AQUA};
+    elif    [ "${str,,}" == "black" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLACK};
+    elif    [ "${str,,}" == "blue" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLUE};
+
+    elif    [ "${str,,}" == "cyan" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CYAN};
+    elif    [ "${str,,}" == "fuchsia" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUCHSIA};
+    elif    [ "${str,,}" == "gray" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GRAY};
+
+    elif    [ "${str,,}" == "green" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GREEN};
+    elif    [ "${str,,}" == "lime" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_LIME};
+    elif    [ "${str,,}" == "maroon" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_MAROON};
+
+    elif    [ "${str,,}" == "navy" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NAVY};
+    elif    [ "${str,,}" == "olive" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_OLIVE};
+    elif    [ "${str,,}" == "orange" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ORANGE};
+
+    elif    [ "${str,,}" == "pink" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PINK};
+    elif    [ "${str,,}" == "purple" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PURPLE};
+    elif    [ "${str,,}" == "red" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RED};
+
+    elif    [ "${str,,}" == "salmon" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SALMON};
+    elif    [ "${str,,}" == "silver" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SILVER};
+    elif    [ "${str,,}" == "tan" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TAN};
+
+    elif    [ "${str,,}" == "teal" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TEAL};
+    elif    [ "${str,,}" == "turquoise" ];  then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TURQUOISE};
+    elif    [ "${str,,}" == "violet" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VIOLET};
+
+    elif    [ "${str,,}" == "white" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WHITE};
+    elif    [ "${str,,}" == "yellow" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_YELLOW};
+    elif    [ "${str,,}" == "reset" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RESET};
+
+    # Specific colors for text encoding.
+    elif    [ "${str^^}" == "CMD" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CMD};
+    elif    [ "${str^^}" == "ERROR" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ERROR};
+    elif    [ "${str^^}" == "FUNCTION" ];   then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUNCTION};
+
+    elif    [ "${str^^}" == "HIGHLIGHT" ];  then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_HIGHLIGHT};
+    elif    [ "${str^^}" == "NEWSTEP" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NEWSTEP};
+    elif    [ "${str^^}" == "PATH" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PATH};
+
+    elif    [ "${str^^}" == "SUCCESS" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SUCCESS};
+    elif    [ "${str^^}" == "VAR" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VAR};
+    elif    [ "${str^^}" == "WARNING" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WARNING};
+
+    fi
+
+    return 0;
+}

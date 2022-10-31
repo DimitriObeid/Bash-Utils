@@ -260,6 +260,10 @@ function BU.Main.Decho.Decho()
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
+    # If a string is provided as a color name, the corresponding color code is assigned to the variable.
+    if BU.Main.Checkings.IsAlphaString "$p_newTextColor";   then BU.Main.Colors.Atoi "$p_newTextColor"; p_newTextColor="$__BU_MAIN_COLORS_ATOI_COLOR";  fi
+    if BU.Main.Checkings.IsAlphaString "$p_newBGColor";     then BU.Main.Colors.Atoi "$p_newBGColor";   p_newBGColor="$__BU_MAIN_COLORS_ATOI_COLOR";    fi
+
     if ! BU.Main.Args__Decho.Decho "$p_string" "$p_newTextColor" "$p_newTextColor" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
     BU.Main.Checkings.CheckDecho;
@@ -321,6 +325,7 @@ function BU.Main.Decho.Decho()
 
     ## APPLYING THE FORMATTINGS ON THE TEXT
 
+    # If the "$__BU_MAIN_STAT_DECHO" status global variable is set to "restrict", then only basic formatting is applied.
 	if [ "${__BU_MAIN_STAT_DECHO,,}" = 'restrict' ]; then
         printf "%s" "$p_newTextColor";
         printf "%s" "$p_newBGColor";
