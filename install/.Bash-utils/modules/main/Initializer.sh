@@ -46,7 +46,7 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; th
 elif [[ "${LANG}" == fr_* ]]; then
     echo -e "ATTENTION !" >&2; echo >&2;
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script only en l'incluant dans votre projet." >&2; echo >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
     exit 1;
 fi; fi
