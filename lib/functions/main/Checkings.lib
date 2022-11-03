@@ -462,7 +462,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a filepath in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
+                "Please give a filepath in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
                 "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -492,7 +492,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a valid path in order to check if the target file system is full or not [/|\] Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
+                "Please give a valid path in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
                 "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -522,7 +522,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file [/|\] Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
+				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
                 "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;

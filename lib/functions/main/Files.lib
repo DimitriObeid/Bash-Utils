@@ -860,7 +860,7 @@ function BU.Main.Files.AddToArchive()
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -928,7 +928,7 @@ function BU.Main.Files.CompressFormat()
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
@@ -1009,7 +1009,7 @@ function BU.Main.Files.DeleteInArchive()
     #**** Code ****
     if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument) [/|\] $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
             'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 

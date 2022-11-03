@@ -321,5 +321,7 @@ function BU.Main.Colors.Itoa()
     elif    [[ "${p_fmt^^}" == UP?(PER)?([[:space:]])?(CASE) ]];    then BU.Main.Text.ToUppercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
     elif    [[ "${p_fmt,,}" == low?(er)?([[:space:]])?(case) ]];    then BU.Main.Text.ToLowercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
 
-    fi
+    fi;
+
+    return 0;
 }

@@ -59,7 +59,7 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS
 
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
-# WARNING ! DO NOT CALL ANY FUNCTION THAT CALL THIS FUNCTION DIRECTLY OR INDIRECTLY HERE,
+# WARNING ! DO NOT CALL HERE ANY FUNCTION THAT CALL THIS FUNCTION DIRECTLY OR INDIRECTLY,
 # OR THE SCRIPT WILL LOOP FOREVER IN CASE OF AN ERROR DURING THIS FUNCTION CALL !!!
 function BU.Main.Errors.HandleSmallErrors()
 {
@@ -313,33 +313,33 @@ function BU.Main.Errors.HandleErrors()
             if [ -z "$p_adviceString" ]; then
                 BU.Main.Echo.Error "No advice to give."; BU.Main.Echo.Newline >&2;
             else
-                v_getSeparatorOccurencesfromAdviceStr="$(BU.Main.Text.GetSubStringOccurences "$p_advice" ' [/|\] ' '--init')";
+                v_getSeparatorOccurencesfromAdviceStr="$(BU.Main.Text.GetSubStringOccurences "$p_advice" "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" '--init')";
 
-                # Checking if the ' [/|\] ' substring exists only once, as separator from the advice and another comment.
+                # Checking if the "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" substring composing the delimiter exists only once, as single separator from the advice substring and another comment substring.
 
                 # IMPORTANT : the second argument of the "BU.Main.Text.GetSubStringOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
-                if [ -n "$p_adviceString" ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]] && [ "$v_getSeparatorOccurencesfromAdviceStr" -eq 1 ]; then
+                if [ -n "$p_adviceString" ] && [ "$v_getSeparatorOccurencesfromAdviceStr" -eq 1 ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]]; then
 
-                    local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting the first sub-string.
-                    local v_string_part_2; v_string_part_2="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f 1 | rev)";   # Getting the second sub-string.
+                    local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" -f2- | rev)";   # Getting the first sub-string before the delimiter.
+                    local v_string_part_2; v_string_part_2="$(echo "$p_adviceString" | rev | cut -d "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" -f 1 | rev)";   # Getting the second sub-string after the delimiter.
 
                     BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
                     BU.Main.Echo.Newline >&2;
 
                     BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Other comments") : $v_string_part_2";
 
-                # Checking if the ' [/|\] ' substring exists more than once, as separators from the advice and any other comments.
+                # Checking if the "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" substring composing the delimiter exists more than once, as multiple separators from the advice and every other comments.
 
                 # IMPORTANT : the second argument of the "BU.Main.Text.GetSubStringOccurences" function MUST be SINGLE-quoted, or else the '\' will be interpreted.
-                elif [ -n "$p_adviceString" ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]] && [ "$v_getSeparatorOccurencesfromAdviceStr" -gt 1 ]; then
+                elif [ -n "$p_adviceString" ] && [ "$v_getSeparatorOccurencesfromAdviceStr" -gt 1 ] && [[ "$p_adviceString" == *[[:space:]]'[/|\]'[[:space:]]* ]]; then
 
-                    local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d ' [/|\] ' -f2- | rev)";   # Getting the first sub-string.
+                    local v_string_part_1; v_string_part_1="$(echo "$p_adviceString" | rev | cut -d "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" -f2- | rev)";   # Getting the first sub-string.
 
                     BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice") : $v_string_part_1";
                     BU.Main.Echo.Newline >&2;
 
                     for ((i=1; i>v_getSeparatorOccurencesfromAdviceStr; i++)); do
-                        p_adviceString="$(BU.Main.Text.CutSubStringBeforeNthDelim "$p_adviceString" ' [/|\] ' 1)";
+                        p_adviceString="$(BU.Main.Text.CutSubStringBeforeNthDelim "$p_adviceString" "$__BU_MAIN_TXT_ERR_SUBSTR_DELIM" 1)";
 
                         BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Highlight "Advice [$(( i + 1 ))]") : $p_adviceString";
                         BU.Main.Echo.Newline 2 >&2;
