@@ -1126,7 +1126,7 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
             'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
-    if [ -n "$p_iterations" ] ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
+    if [ -n "$p_iterations" ] || ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as number of iterations (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')"
             'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
@@ -1681,7 +1681,7 @@ function BU.Main.Args__Filesystem.ChownRec()
     if [ -z "$p_currentOwner" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the former directory's owner (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";=
+            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
     if [ -z "$p_newOwner" ]; then local lineno="$LINENO";

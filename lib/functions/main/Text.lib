@@ -101,8 +101,8 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
 
-        v_fieldtmp="${p_string%%$p_delimiter*}";
-		v_fieldtmp="${v_fieldtmp#*$p_delimiter}";
+        v_fieldtmp="${p_string%%"$p_delimiter"*}";
+		v_fieldtmp="${v_fieldtmp#*"$p_delimiter"}";
 
 		if [ -z "$p_newString" ]; then
 			p_newString="$v_fieldtmp";
@@ -171,7 +171,7 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
-    echo "${p_string%$p_delim*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    echo "${p_string%"$p_delim"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Cut the very last field of a string, in order to get everything that preceeds the last field.
@@ -189,7 +189,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
-    echo "${p_string#*$p_delim}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    echo "${p_string#*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Deleting letters in a string.
@@ -331,7 +331,7 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    echo "${p_string%%$p_delim*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    echo "${p_string%%"$p_delim"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
@@ -349,7 +349,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-	echo "${p_string##*$p_delim}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+	echo "${p_string##*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
 # Getting substring after a delimiter, which can be both a single character or a string.
@@ -377,7 +377,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
 
     # WARNING ! DO NOT put double quotes between the "$(seq "$p_iterations")", or else it will not word split, and the loop will only run once !
     for i in $(seq "$p_iterations"); do
-        p_string="${p_string#*$p_delim}";
+        p_string="${p_string#*"$p_delim"}";
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done;
@@ -432,8 +432,8 @@ function BU.Main.Text.GetSubStringBeforeDelim()
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
 
-        v_fieldtmp="${p_string##*$p_delim}";
-		v_fieldtmp="${v_fieldtmp%$p_delim*}";
+        v_fieldtmp="${p_string##*"$p_delim"}";
+		v_fieldtmp="${v_fieldtmp%"$p_delim"*}";
 
 		if [ -z "$v_newString" ]; then
 			v_newString="$v_fieldtmp";
