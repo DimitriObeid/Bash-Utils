@@ -135,6 +135,8 @@ function BU.Main.Initializer.SourceConfig()
 # Note : Several functions from the main module are used in the "BU.ModuleInit.()" function.
 
 # Sourcing each needed library files stored into the function/main directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+
+# shellcheck disable=SC2059,SC2016
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "$__BU_MAIN_MODULE_LIB_MOD_DIR_PATH" "Text.lib")" || { printf "$__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT" "$(basename "${BASH_SOURCE[0]}")" "$LINENO" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
@@ -221,7 +223,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
         # As the "Status.conf" file is sourced, the default global status variables values will be overwritten with the new values.
         if [[ "${module_arg,,}" = "--stat-"* ]]; then
 
-            local value;
+            let value;
 
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'
             # Extracting the "--stat" option's values.
@@ -453,27 +455,39 @@ BU.Main.Directories.MkTmpDir;
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 
-# Creating the text and background color code file if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
+# Creating the text and background color code files if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatAllowFormatting; then
 
-    # Creating the text color code file
-    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
-        # shellcheck disable=SC2059
-        BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.Main.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+    # If the file which contains the current foreground color code doesn't exists, then it must be created, and the file's creation message must be displayed.
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then
+        # Creating the text color code file
+        if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
+            # shellcheck disable=SC2059
+            BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.Main.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
 
+        else
+            # shellcheck disable=SC2059
+            BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
+        fi
     else
         # shellcheck disable=SC2059
-        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
+        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")")"; BU.Main.Echo.Newline;
     fi
 
-    # Creating the background color code file
-    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" 'f'; then
-        # shellcheck disable=SC2059
-        BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Main.Decho.Decho "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+    # If the file which contains the current background color file doesn't exists, then it must be created, and the file's creation message must be displayed.
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
+        # Creating the background color code file
+        if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME")" 'f'; then
+            # shellcheck disable=SC2059
+            BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
 
+        else
+            # shellcheck disable=SC2059
+            BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
+        fi
     else
         # shellcheck disable=SC2059
-        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")"; BU.Main.Echo.Newline;
+        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")")"; BU.Main.Echo.Newline;
     fi
 fi
 
@@ -486,7 +500,7 @@ if BU.Main.Status.CheckStatIsLogging; then
 		return 1;
 	else
         # shellcheck disable=SC2059
-		BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"s; BU.Main.Echo.Newline;
+		BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"; BU.Main.Echo.Newline;
 	fi
 fi
 

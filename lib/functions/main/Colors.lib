@@ -45,70 +45,281 @@ fi; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### COLORS PROCESSING FUNCTIONS
-## DEBUG ID : colors::colors-processing-functions
+#### SETTING COLORS
+#### DEBUG ID : colors::setting-colors
 
-__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS="colors::colors-processing-functions";
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
 
-## PROCESSING FUNCTIONS
-## DEBUG ID : processing-functions
+## SETTING FILES
+## DEBUG ID : setting-files
 
-__BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS::colors-processing-functions";
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::setting-files";
 
-# Conversion of color name (string) to color code.
+# Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
+
+## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU.Main.Decho.__Decho()" AND "BU.Main.Decho.Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
+#   - BU.Main.Checkings.CheckProjectRelatedFile()
+#   - BU.Main.Errors.HandleSmallErrors
+#   - BU.Main.Errors.HandleErrors
+function BU.Main.Colors.SetBGColor()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
+
+	#**** Parameters ****
+	local p_color_code=$1;     # Int       # Default : NULL    - Color code
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
+
+	#**** Code ****
+	# Checking first if the target partition is not fully used.
+	if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+
+	# If the script is allowed to format text.
+    if BU.Main.Status.CheckStatAllowFormatting; then
+        if command -v tput &> /dev/null; then
+            tput setab "$p_color_code" || { echo -ne "\e[" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }
+
+            if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then return 0;
+                # Checking if the "bgcolors.tmp" (background color) file exists.
+                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                    echo >&2;
+
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }; fi
+
+                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                    echo >&2;
+
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }; fi
+
+                # Redirecting the background's color code in its dedicated temporary file.
+                echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
+
+                [ "$X" -ne 0 ] && {
+                    echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }
+            fi
+        else
+            echo -ne "\e["; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        fi
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Writing the text's color code into a file, to be processed by any function which needs to know what is the current text color.
+
+## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU.Main.Decho.__Decho()" AND "BU.Main.Decho.Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
+#   - BU.Main.Checkings.CheckProjectRelatedFile()
+#   - BU.Main.Errors.HandleSmallErrors
+#   - BU.Main.Errors.HandleErrors
+function BU.Main.Colors.SetTextColor()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
+
+	#**** Parameters ****
+	local p_color_code=$1;     # Int       # Default : NULL    - Color code
+	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
+
+	#**** Code ****
+    shopt -s extglob;
+
+    # Checking first if the target partition is not fully used.
+    if [[ "${p_init_ctrl,,}" != *(-)no?(-)function ]]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+
+    shopt -u extglob;
+
+    # If the script is allowed to format text.
+	if BU.Main.Status.CheckStatAllowFormatting; then
+        if command -v tput &> /dev/null; then
+            tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }
+
+            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0;
+
+            else shopt -u extglob;
+                # Checking if the "bgcolors.tmp" (background color) file exists.
+                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
+                    echo >&2;
+
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }; fi
+
+                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
+                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
+                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
+                    echo >&2;
+
+                    echo "Aborting the script's execution" >&2;
+                    echo >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }; fi
+
+                # Redirecting the text's color code in its dedicated temporary file.
+                echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
+
+                [ "$X" -ne 0 ] && {
+                    echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+
+                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                }
+            fi
+        else
+            echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        fi
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# -----------------------------------------------
+
+## COLORS PROCESSING FUNCTIONS
+## DEBUG ID : colors-processing-functions
+
+__BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::colors-processing-functions";
+
+# Conversion of color name (string) to color code (int).
 function BU.Main.Colors.Atoi()
 {
     #**** Parameters ****
-    local str=${1:-white}; # String - Default : NULL - Color name
+    local p_str=${1:-white};                    # String - Default : NULL - Color name
 
     #**** Code ****
     # Basic colors
-    if      [ "${str,,}" == "aqua" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_AQUA};
-    elif    [ "${str,,}" == "black" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLACK};
-    elif    [ "${str,,}" == "blue" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLUE};
+    if      [ "${p_str,,}" == "aqua" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_AQUA};
+    elif    [ "${p_str,,}" == "black" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLACK};
+    elif    [ "${p_str,,}" == "blue" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLUE};
 
-    elif    [ "${str,,}" == "cyan" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CYAN};
-    elif    [ "${str,,}" == "fuchsia" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUCHSIA};
-    elif    [ "${str,,}" == "gray" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GRAY};
+    elif    [ "${p_str,,}" == "cyan" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CYAN};
+    elif    [ "${p_str,,}" == "fuchsia" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUCHSIA};
+    elif    [ "${p_str,,}" == "gray" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GRAY};
 
-    elif    [ "${str,,}" == "green" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GREEN};
-    elif    [ "${str,,}" == "lime" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_LIME};
-    elif    [ "${str,,}" == "maroon" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_MAROON};
+    elif    [ "${p_str,,}" == "green" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GREEN};
+    elif    [ "${p_str,,}" == "lime" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_LIME};
+    elif    [ "${p_str,,}" == "maroon" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_MAROON};
 
-    elif    [ "${str,,}" == "navy" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NAVY};
-    elif    [ "${str,,}" == "olive" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_OLIVE};
-    elif    [ "${str,,}" == "orange" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ORANGE};
+    elif    [ "${p_str,,}" == "navy" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NAVY};
+    elif    [ "${p_str,,}" == "olive" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_OLIVE};
+    elif    [ "${p_str,,}" == "orange" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ORANGE};
 
-    elif    [ "${str,,}" == "pink" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PINK};
-    elif    [ "${str,,}" == "purple" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PURPLE};
-    elif    [ "${str,,}" == "red" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RED};
+    elif    [ "${p_str,,}" == "pink" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PINK};
+    elif    [ "${p_str,,}" == "purple" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PURPLE};
+    elif    [ "${p_str,,}" == "red" ];          then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RED};
 
-    elif    [ "${str,,}" == "salmon" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SALMON};
-    elif    [ "${str,,}" == "silver" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SILVER};
-    elif    [ "${str,,}" == "tan" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TAN};
+    elif    [ "${p_str,,}" == "salmon" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SALMON};
+    elif    [ "${p_str,,}" == "silver" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SILVER};
+    elif    [ "${p_str,,}" == "tan" ];          then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TAN};
 
-    elif    [ "${str,,}" == "teal" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TEAL};
-    elif    [ "${str,,}" == "turquoise" ];  then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TURQUOISE};
-    elif    [ "${str,,}" == "violet" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VIOLET};
+    elif    [ "${p_str,,}" == "teal" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TEAL};
+    elif    [ "${p_str,,}" == "turquoise" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TURQUOISE};
+    elif    [ "${p_str,,}" == "violet" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VIOLET};
 
-    elif    [ "${str,,}" == "white" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WHITE};
-    elif    [ "${str,,}" == "yellow" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_YELLOW};
-    elif    [ "${str,,}" == "reset" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RESET};
+    elif    [ "${p_str,,}" == "white" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WHITE};
+    elif    [ "${p_str,,}" == "yellow" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_YELLOW};
+    elif    [ "${p_str,,}" == "reset" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RESET};
 
-    # Specific colors for text encoding.
-    elif    [ "${str^^}" == "CMD" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CMD};
-    elif    [ "${str^^}" == "ERROR" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ERROR};
-    elif    [ "${str^^}" == "FUNCTION" ];   then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUNCTION};
+    # Specific colors for text encoding
+    elif    [ "${p_str^^}" == "CMD" ];          then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CMD};
+    elif    [ "${p_str^^}" == "ERROR" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ERROR};
+    elif    [ "${p_str^^}" == "FUNCTION" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUNCTION};
 
-    elif    [ "${str^^}" == "HIGHLIGHT" ];  then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_HIGHLIGHT};
-    elif    [ "${str^^}" == "NEWSTEP" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NEWSTEP};
-    elif    [ "${str^^}" == "PATH" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PATH};
+    elif    [ "${p_str^^}" == "HIGHLIGHT" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_HIGHLIGHT};
+    elif    [ "${p_str^^}" == "NEWSTEP" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NEWSTEP};
+    elif    [ "${p_str^^}" == "PATH" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PATH};
 
-    elif    [ "${str^^}" == "SUCCESS" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SUCCESS};
-    elif    [ "${str^^}" == "VAR" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VAR};
-    elif    [ "${str^^}" == "WARNING" ];    then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WARNING};
+    elif    [ "${p_str^^}" == "SUCCESS" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SUCCESS};
+    elif    [ "${p_str^^}" == "VAR" ];          then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VAR};
+    elif    [ "${p_str^^}" == "WARNING" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WARNING};
 
     fi
 
     return 0;
+}
+
+# Conversion of color code (int) to color code (string).
+function BU.Main.Colors.Itoa()
+{
+    #**** Parameters ****
+    local p_code=${1:-0};   # Int       - Default : NULL            - Color code
+    local p_fmt=${2:-$'\0'} # String    - Default : NULL            - Text format
+
+    #**** Code ****
+    # Basic colors
+    if      [ "$p_code" == "$__BU_MAIN_COLOR_CODE_AQUA" ];          then __BU_MAIN_COLORS_ITOA_COLOR="aqua";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_BLACK" ];         then __BU_MAIN_COLORS_ITOA_COLOR="black";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_BLUE" ];          then __BU_MAIN_COLORS_ITOA_COLOR="blue";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CYAN" ];          then __BU_MAIN_COLORS_ITOA_COLOR="cyan";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUCHSIA" ];       then __BU_MAIN_COLORS_ITOA_COLOR="fuchsia";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_GRAY" ];          then __BU_MAIN_COLORS_ITOA_COLOR="gray";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_GREEN" ];         then __BU_MAIN_COLORS_ITOA_COLOR="green";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_LIME" ];          then __BU_MAIN_COLORS_ITOA_COLOR="lime";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_MAROON" ];        then __BU_MAIN_COLORS_ITOA_COLOR="maroon";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_NAVY" ];          then __BU_MAIN_COLORS_ITOA_COLOR="navy";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_OLIVE" ];         then __BU_MAIN_COLORS_ITOA_COLOR="olive";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_ORANGE" ];        then __BU_MAIN_COLORS_ITOA_COLOR="orange";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PINK" ];          then __BU_MAIN_COLORS_ITOA_COLOR="pink";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PURPLE" ];        then __BU_MAIN_COLORS_ITOA_COLOR="purple";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_RED" ];           then __BU_MAIN_COLORS_ITOA_COLOR="red";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SALMON" ];        then __BU_MAIN_COLORS_ITOA_COLOR="salmon";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SILVER" ];        then __BU_MAIN_COLORS_ITOA_COLOR="silver";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TAN" ];           then __BU_MAIN_COLORS_ITOA_COLOR="tan";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TEAL" ];          then __BU_MAIN_COLORS_ITOA_COLOR="teal";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TURQUOISE" ];     then __BU_MAIN_COLORS_ITOA_COLOR="turquoise";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_VIOLET" ];        then __BU_MAIN_COLORS_ITOA_COLOR="violet";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_WHITE" ];         then __BU_MAIN_COLORS_ITOA_COLOR="white";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_YELLOW" ];        then __BU_MAIN_COLORS_ITOA_COLOR="yellow";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_RESET" ];         then __BU_MAIN_COLORS_ITOA_COLOR="reset";
+
+    # Specific colors for text encoding
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CMD" ];           then __BU_MAIN_COLORS_ITOA_COLOR="CMD";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_ERROR" ];         then __BU_MAIN_COLORS_ITOA_COLOR="ERROR";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUNCTION" ];      then __BU_MAIN_COLORS_ITOA_COLOR="FUNCTION";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_HIGHLIGHT" ];     then __BU_MAIN_COLORS_ITOA_COLOR="HIGHLIGHT";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_NEWSTEP" ];       then __BU_MAIN_COLORS_ITOA_COLOR="NEWSTEP";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PATH" ];          then __BU_MAIN_COLORS_ITOA_COLOR="PATH";
+
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SUCCESS" ];       then __BU_MAIN_COLORS_ITOA_COLOR="SUCCESS";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_VAR" ];           then __BU_MAIN_COLORS_ITOA_COLOR="VAR";
+    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_WARNING" ];       then __BU_MAIN_COLORS_ITOA_COLOR="WARNING";
+
+    fi
+
+    # Formatting the text according to the user's preference.
+    if      [ -z "$p_fmt" ]; then return 0;
+    elif    [[ "${p_fmt^^}" == UP?(PER)?([[:space:]])?(CASE) ]];    then BU.Main.Text.ToUppercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
+    elif    [[ "${p_fmt,,}" == low?(er)?([[:space:]])?(case) ]];    then BU.Main.Text.ToLowercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
+
+    fi
 }

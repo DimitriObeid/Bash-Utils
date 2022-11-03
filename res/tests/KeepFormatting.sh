@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function BU.Main.Echo.KeepFormattingl
+function BU.Main.Text.KeepFormattingl
 {
     #**** Parameters ****
     p_string=$1
@@ -9,7 +9,7 @@ function BU.Main.Echo.KeepFormattingl
     echo -e "$p_string" | tr '[lower]' '[lower]'
 }
 
-function BU.Main.Echo.KeepFormattingU
+function BU.Main.Text.KeepFormattingU
 {
 	#**** Parameters ****
 	p_string=$1
@@ -18,8 +18,8 @@ function BU.Main.Echo.KeepFormattingU
 	echo -e "$p_string" | tr '[upper]' '[upper]'
 }
 
-string1="Test de la fonction $(BU.Main.Echo.KeepFormattingl "BU.Main.Echo.KeepFormattingl") en LOW"
+string1="Test de la fonction $(BU.Main.Text.KeepFormattingl "BU.Main.Text.KeepFormattingl") en LOW"
 echo -e "${string1,,}"
 
-string2="Test de la fonction $(BU.Main.Echo.KeepFormattingU "BU.Main.Echo.KeepFormattingU") EN up"
+string2="Test de la fonction $(BU.Main.Text.KeepFormattingU "BU.Main.Text.KeepFormattingU") EN up"
 echo -e "${string2^^}"

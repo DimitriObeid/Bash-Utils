@@ -544,8 +544,8 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 ## FICHIER : "Colors.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Decho.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Decho.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Colors.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Colors.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # --------
@@ -664,11 +664,13 @@ unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT
 # Création du fichier de code couleur du texte.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="IMPOSIBLE DE CRÉER LE FICHIER DE CODE COULEUR DU TEXTE %s DANS LE DOSSIER %s";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s a été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS="Le fichier contenant le code de couleur de premier plan actuel existe déjà : %s";
 
 # Création du fichier de code de couleur de fond.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Impossible de créer le fichier de code de couleur de fond %s dans le dossier %s";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="Le fichier de code couleur de fond %s a été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="Le fichier contenant le code de couleur de fond actuel existe déjà : %s";
 
 # Création du fichier de logs du projet.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="IMPOSSIBLE DE CRÉER LE FICHIER DE LOGS %s POUR LE PROJET %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS="Le fichier de logs %s a été créé avec succès dans le dossier %s";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="Le fichier de logs %s a été créé avec succès dans le dossier %s";

@@ -543,8 +543,8 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 
 ## FILE : "Colors.conf"
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.Decho.SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.Decho.SetTextColor() » function in order to color the text with the defined « %s » color's code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.Colors.SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.Colors.SetTextColor() » function in order to color the text with the defined « %s » color's code";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
 
 # --------
@@ -663,11 +663,13 @@ unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT
 # Creation of the text color code file.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="UNABLE TO CREATE THE %s TEXT COLOR CODE FILE IN THE %s DIRECTORY";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="The %s text color code file was successfully created in the %s directory";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS="The file containing the current foreground color code already exists : %s";
 
 # Creation of the background color code file.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Unable to create the %s background color file in the %s directory";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="The %s background color code file was successfully created in the %s directory";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="The file containing the current background color code already exists : %s";
 
 # Creation of the project's log file.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="UNABLE TO CREATE THE %s LOG FILE FOR THE %s PROJECT";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FOUR__CREATE_LOG_FILE__SUCCESS="The %s log file was successfully created in the %s directory";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="The %s log file was successfully created in the %s directory";
