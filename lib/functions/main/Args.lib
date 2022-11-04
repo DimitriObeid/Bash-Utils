@@ -748,19 +748,19 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 
 	if [ -z "$p_parent" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as first argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a folder path passed as first argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
     if [ -z "$p_child" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as second argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a file OR folder name passed as second argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
 	if [ -z "$p_type" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
-            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a function passed as third argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+            "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a type of data ('d' or 'f') passed as third argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
 			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
     fi
 
