@@ -211,10 +211,10 @@ function BU.Main.Headers.HeaderBase()
             done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         elif BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
-            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") argument is too big" 'R';
+            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is too big" 'R';
 
         elif [ "${#p_bgColorPos}" -lt 1 ]; then
-            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") argument is null" 'R';
+            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is null" 'R';
 
         else
             BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
