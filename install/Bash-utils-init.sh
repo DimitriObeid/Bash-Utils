@@ -2410,7 +2410,6 @@ function BashUtils_InitModules()
                         local v_module_config_file_name;
 
                         v_module_config_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modconffile.tmp")")";
-
                 else
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
@@ -2669,12 +2668,50 @@ function BU.ModuleInit.UnsourceModule()
             BU.Main.Errors.HandleErrors '1' "$(printf "%s YOU TRIED TO UNSOURCE THE MAIN MODULE" "$(BU.Main.Decho.__Decho.Yellow "WARNING :")")" \
                 "Calling the main module as argument would unsource every files related to the main module, thus making the main functions of the framework unusable" \
                 "$(printf "Main module passed as argument to the %s function" "${FUNCNAME[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+        else
+            BU.Main.Headers.Newstep "UNSOURCING THE ${p_module^^} MODULE";
+            BU.Main.Echo.Newline;
+
+            # Unsourcing functions whose names does not follow the advised Bash Utils coding style.
+            if  [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Unsource.sh"                                           'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "UnsourceExceptions.sh"                                 'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Unsource.${p_module}.sh"                               'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "UnsourceExceptions.${p_module}.sh"                     'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Unsource.${p_module}.Unsource.sh"                      'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Unsource.${p_module}.UnsourceExceptions.sh"            'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "UnsourceExceptions.${p_module}.sh"                     'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "UnsourceExceptions.${p_module}.UnsourceExceptions.sh"  'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.Unsource.sh"                               'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.UnsourceExceptions.sh"                     'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.Unsource.${p_module}.sh"                   'shut' 'unsourceexcept')" ]] || \
+                [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.UnsourceExceptions.${p_module}.sh"         'shut' 'unsourceexcept')" ]]; then
+
+                    v_module_unsourceexcept_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.unsourceexcept.tmp")")";
+
+                    # Sourcing the file to get every functions and variables names, in order to unset each of them.
+                    source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "$v_module_unsourceexcept_file_name")" || {
+                        BU.Main.Errors.HandleErrors "1" "UNABLE TO SOURCE THE ${p_module} MODULE'S UNSOURCER FILE" \
+                            "" "" "$(basename "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))")"
+                    };
+
+                    # Calling the "BU.UnsourceExceptionFunctions()" function, which calls the "unset FunctionName" command before each function name in order to unsource it.
+                    BU.UnsourceExceptionFunctions;
+
+                    # Calling the "BU.UnsourceExceptionVariables()" function, which calls the "unset $variable" command before each variable name in order to unsource it.
+                    BU.UnsourceExceptionVariables;
+
+                    return 0;
+            fi
+
+            # Unsetting every target module's functions (DO NOT QUOTE THE $(compgen -v ...) COMMAND SUBSTITUTION !!!).
+            unset $(compgen -f "BU.${p_module}.");
+
+            # Unsetting every target module's variables (DO NOT QUOTE THE $(compgen -v ...) COMMAND SUBSTITUTION !!!).
+            unset $(compgen -v "__BU_${p_module^^}_");
+
+            return 0;
         fi
-
-        return 0;
     fi
-
-    return 0;
 }
 
 # Unsource multiple modules at once from the.
