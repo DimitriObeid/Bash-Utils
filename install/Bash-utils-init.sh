@@ -2694,10 +2694,12 @@ function BU.ModuleInit.UnsourceModule()
                             "" "" "$(basename "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))")"
                     };
 
-                    # Calling the "BU.UnsourceExceptionFunctions()" function, which calls the "unset FunctionName" command before each function name in order to unsource it.
+                    # Calling the "BU.UnsourceExceptionFunctions()" function (defined in the "$v_module_unsourceexcept_file_name" file),
+                    # which calls the "unset $function" command before each function name in order to unsource it.
                     BU.UnsourceExceptionFunctions;
 
-                    # Calling the "BU.UnsourceExceptionVariables()" function, which calls the "unset $variable" command before each variable name in order to unsource it.
+                    # Calling the "BU.UnsourceExceptionVariables()" function (defined in the "$v_module_unsourceexcept_file_name" file),
+                    # which calls the "unset $variable" command before each variable name in order to unsource it.
                     BU.UnsourceExceptionVariables;
 
                     return 0;
