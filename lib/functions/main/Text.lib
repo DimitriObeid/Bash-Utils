@@ -96,7 +96,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     fi
 
 	# Getting the number of occurences of the character / string targeted as delimiter.
-	x="$(BU.Main.Text.GetSubStringOccurences "$p_string" "$p_target")";
+	x="$(BU.Main.Text.GetSubStringOccurences "$p_string" "$p_delimiter")";
 
     for ((i=0; i<x; i++)); do
 		if [ "$i" = "$p_iterations" ]; then break; fi
@@ -104,10 +104,10 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
         v_fieldtmp="${p_string%%"$p_delimiter"*}";
 		v_fieldtmp="${v_fieldtmp#*"$p_delimiter"}";
 
-		if [ -z "$p_newString" ]; then
-			p_newString="$v_fieldtmp";
+		if [ -z "$v_newString" ]; then
+			v_newString="$v_fieldtmp";
 		else
-			p_newString="$p_newString$p_delimiter$v_fieldtmp";
+			v_newString="$v_newString$p_delimiter$v_fieldtmp";
 		fi
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
@@ -548,7 +548,7 @@ function BU.Main.Text.GetStringWordsNumber()
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
 
-# Reverse words of a string according to a delimiter.
+# Reverse words order of a string according to a delimiter.
 
 # Examples with the '|' and '/' delimiter:
 # animal | big | car | donut    --> donut | car | big | animal
@@ -561,10 +561,10 @@ function BU.Main.Text.ReverseStringWordsOrder()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
-    local p_keepd=$3;   # String    - default : NULL    - Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
-    local p_init=$4;    # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};	# String	- Default : NULL	- Delimiter
+    local p_keepd=${3:-$'\0'};  # String    - default : NULL    - Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
+    local p_init=${4:-$'\0'};   # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
 
 
     #**** Variables ****
@@ -592,6 +592,18 @@ function BU.Main.Text.ReverseStringWordsOrder()
     echo -e "$reversed";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Reverse the order of characters in a string.
+function BU.Main.Text.ReverseCharactersOrder()
+{
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}  # String    - Default : NULL    - String to process.
+
+    #**** Code ****
+    echo "$p_string" | rev;
+
+    return 0;
 }
 
 # -----------------------------------------------
