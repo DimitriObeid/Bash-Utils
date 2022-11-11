@@ -47,8 +47,12 @@ elif [[ "${LANG}" == fr_* ]]; then
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
-    exit 1;
-fi; fi
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -408,7 +412,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 
         #**** Parameters ****
         local p_var_name=${1:-$'\0'};   # String    - Default : NULL    - Name of the variable.
-        local p_var_val=${2:-$'\0'};    # String    - Default : NULL    - Value stored in the variable.
+        local p_var_val=${2:-$'\0'};    # String    - Default : NULL    - Value stored in the variable (DO NOT FILL THIS FIELD IF THE VARIABLE TYPE IS AN ARRAY, INSTEAD, LEAVE IT AS AN EMPTY STRING).
         local p_var_type=${3:-$'\0'};   # String    - Default : NULL    - Type of variable (array, int (integer), float, path, string).
         local p_var_desc=${4:-$'\0'};   # String    - Default : NULL    - Description of the variable.
         local p_file=${5-NULL};         # String    - Default : NULL    - File where the variable was declared.
@@ -484,13 +488,19 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 
                 local v_index=0;
 
+                # Listing every values stored in the array.
                 for _ in "${pa_var_val_array[@]}"; do
                     BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE} [${v_index}] : ${_}";
 
+                    # Storing the following value's index, in order to check if the fifth line is reached (processed in the following condition).
                     local v_value_line=$(( v_index + 1 ));
 
                     # Writing a blank line every five lines, in order to keep the list easily readable for a human.
                     if [ $(( v_value_line % 5 )) -eq 0 ]; then
+
+                        local TEST_var_val_arr="$(echo "${pa_var_val_array[${#pa_var_val_array[@]} -1]}")";
+
+                        echo "VALUE : $TEST_var_val_arr"
 
                         # Avoid line breaks when the end of the array is reached, if it's last index's modulo of five is equal to 0.
                         if [ "${i}" -eq "${pa_var_val_array[${#pa_var_val_array[@]} -1]}" ]; then BU.ModuleInit.Msg '' '-n';

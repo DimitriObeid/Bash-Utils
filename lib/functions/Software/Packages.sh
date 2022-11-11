@@ -48,8 +48,12 @@ elif [[ "${LANG}" == fr_* ]]; then
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
-    exit 1;
-fi; fi
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 

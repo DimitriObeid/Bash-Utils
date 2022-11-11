@@ -32,7 +32,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s », FUNCTION « %s
 # Writing the file name and the line number where a fatal error occured.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS ERROR";
 
-# Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError" function.
+# Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError()" function.
 __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # -----------------------------------------------
@@ -673,3 +673,4 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="T
 # Creation of the project's log file.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="UNABLE TO CREATE THE %s LOG FILE FOR THE %s PROJECT";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="The %s log file was successfully created in the %s directory";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS="The %s log file already exists in the %s directory";

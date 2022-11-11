@@ -48,8 +48,12 @@ elif [[ "${LANG}" == fr_* ]]; then
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
-    exit 1;
-fi; fi
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -463,7 +467,7 @@ if BU.Main.Status.CheckStatAllowFormatting; then
         # Creating the text color code file
         if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" "f"; then
             # shellcheck disable=SC2059
-            BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.Main.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO"; return 1;
+            BU.Main.Errors.HandleErrors "$?" "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR" "$(BU.Main.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT")")" "" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$(( LINENO - 2 ))"; return 1;
 
         else
             # shellcheck disable=SC2059
@@ -479,7 +483,7 @@ if BU.Main.Status.CheckStatAllowFormatting; then
         # Creating the background color code file
         if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME")" 'f'; then
             # shellcheck disable=SC2059
-            BU.Main.Errors.HandleSmallErrors 'E' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" 'E' 'CPLS'; return 1;
+            BU.Main.Errors.HandleErrors "$?" "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT")")" '' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" "$(basename "${BASH_SOURCE[0]}")" "" "$(( LINENO - 2 ))"; return 1;
 
         else
             # shellcheck disable=SC2059
@@ -493,15 +497,22 @@ fi
 
 # Creating the project's log file if the "$__BU_MAIN_STAT_LOG" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatIsLogging; then
-	if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
-        # shellcheck disable=SC2059
-		BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
 
-		return 1;
-	else
+    # If the file which stores every log entry doesn't exists, then it must be created.
+    if [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+        if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" "f"; then
+            # shellcheck disable=SC2059
+            BU.Main.Errors.HandleErrors '1' "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH")" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")")" "" "$__BU_MAIN_PROJECT_LOG_FILE_PATH" "$(basename "${BASH_SOURCE[0]}")" "" "$LINENO";
+
+            return 1;
+        else
+            # shellcheck disable=SC2059
+            BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"; BU.Main.Echo.Newline;
+        fi
+    else
         # shellcheck disable=SC2059
-		BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"; BU.Main.Echo.Newline;
-	fi
+        BU.Main.Echo.Success "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_NAME")" "$(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PARENT")")"; BU.Main.Echo.Newline;
+    fi
 fi
 
 # -----------------------------------------------

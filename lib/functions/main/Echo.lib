@@ -38,8 +38,12 @@ elif [[ "${LANG}" == fr_* ]]; then
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
-    exit 1;
-fi; fi
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -68,7 +72,7 @@ function BU.Main.Echo.__Debug()
 
         sleep 2;
 
-        set -x;
+     #   set -x;
 
         BU.Main.Echo.__EchoVoid;
     }
@@ -77,7 +81,7 @@ function BU.Main.Echo.__Debug()
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 function BU.Main.Echo.DebugEnd()
 {
-    set +x;
+ #   set +x;
 
     BU.ModuleInit.CheckIsDebugging && {
         if [ "${__BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION,,}" = 'true' ]; then
