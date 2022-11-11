@@ -1576,9 +1576,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
             if ! BU.ModuleInit.IsFrameworkWrapped && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
-                echo "$(basename "${BASH_SOURCE[0]}"), line ${LINENO} --> ERROR : UNABLE TO SOURCE THE « ${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS} » file" >&2; echo >&2; return 1;
+                # shellcheck disable=SC2059
+                printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))"; echo >&2; return 1;
             else
-                BU.ModuleInit.Msg "The « ${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS} » file was successfully sourced";
+                # shellcheck disable=SC2059
+                BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__SUCCESS" "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}")";
                 BU.ModuleInit.Msg;
             fi
 
@@ -2424,11 +2426,6 @@ function BashUtils_InitModules()
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
 
-#                     printf "\n\n" "" >&2;
-#
-#                     printf "" "" >&2;
-#                     printf '\n\n' >&2;
-
                     BU.ModuleInit.MsgAbort;
 
                     BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
@@ -2507,12 +2504,9 @@ function BashUtils_InitModules()
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
 
-#                     printf "\n\n" "" >&2;
-#
-#                     printf "" "" >&2;
-#                     printf '\n\n' >&2;
-
                     BU.ModuleInit.MsgAbort;
+
+                    BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
 
                     v_loop_error="error"; break;
                 fi
