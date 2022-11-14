@@ -152,6 +152,15 @@ done
 EchoBU "$HOME/Bash-utils-init.sh"; # BU.Main.Echo.Newline '1';
 CatBU "$HOME/Bash-utils-init.sh";
 
+# Processing the function files.
+for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
+	# BU.Main.Echo.Newline '2';
+    EchoBU "${i^^}";
+
+    #BU.Main.Echo.Newline "1"';
+    CatBU "$i";
+done
+
 # Processing the modules configuration files.
 for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
 	# BU.Main.Echo.Newline '2';
@@ -167,15 +176,6 @@ for i in "$HOME/.Bash-utils/modules/main/"*; do
     EchoBU "${i^^}";
 
     # BU.Main.Echo.Newline "1"';
-    CatBU "$i";
-done
-
-# Processing the function files.
-for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-	# BU.Main.Echo.Newline '2';
-    EchoBU "${i^^}";
-
-    #BU.Main.Echo.Newline "1"';
     CatBU "$i";
 done
 
