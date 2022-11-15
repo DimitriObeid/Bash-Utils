@@ -60,22 +60,95 @@ __YELLOW=$(tput setaf 11);
 
 ## MESSAGE TRANSLATIONS
 
+# FRENCH - FRANÇAIS
 if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__SHELLCHECK_MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
-    __BU_COMPILE__SHELLCHECK_VERIFICATION="";
-    __BU_COMPILE__SHELLCHECK_FAIL="${__RED}UNE OU PLUSIEURS ERREURS DE PROGRAMMATION ONT ÉTÉ DÉTECTÉES DANS LE FICHIER ${__CYAN}%s${__RED} !${__RESET}";
-    __BU_COMPILE__SHELLCHECK_SUCCESS="";
+    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__CYAN}%s${__ORANGE}${__RESET}";
+    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__CYAN}%s${__RED} !${__RESET}";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="Le fichier ${__CYAN}%s${__GREEN} ne contient aucune erreur de programmation";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
-# Since no other languages are supported, English is set as the default language.
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's translations files content first into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="AJOUT DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="";
+
+    #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichier de librairie du module principal dans le fichier à générer [-----] Writing the main module's library files content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="AJOUT DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="";
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichiers de configuration du module principal dans le fichier à générer [-----] Writing the main module's configuration files content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="AJOUT DES FICHIERS DE ";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="";
+
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu du script d'initialisation du module principal dans le fichier à générer [-----] Writing the main module's initializer script's content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+
+    # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichiers de configuration du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's configuration files content into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="";
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's content into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+
+# SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
 else
     __BU_COMPILE__SHELLCHECK_MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
-    __BU_COMPILE__SHELLCHECK_VERIFICATION="${__ORANGE}Verifying the programming errors from the ${__CYAN}$p_path${__ORANGE} file${__RESET}";
-    __BU_COMPILE__SHELLCHECK_FAIL="${__RED}ONE OR MORE PROGRAMMING ERRORS WERE DETECTED IN THE ${__CYAN}%s${__RED} FILE!${__RESET}";
-    __BU_COMPILE__SHELLCHECK_SUCCESS="${__GREEN}The ${__CYAN}${__GREEN} file doen't contain any programming errors${__RESET}";
+    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__CYAN}%s${__ORANGE} file${__RESET}";
+    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__CYAN}%s${__RED} file!${__RESET}";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__CYAN}%s${__GREEN} file doen't contain any programming errors${__RESET}";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
+
+    # --------------------------------------------------------------------------------------------
+    # Writing the initializer script's translations files content first into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="ADDING TRANSLATION FILES FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE INTO THE ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="";
+
+    # --------------------------------------------------------------------------
+    # Writing the main module's library files content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="";
+
+    # --------------------------------------------------------------------------------
+    # Writing the main module's configuration files content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="";
+
+    # ---------------------------------------------------------------------------------
+    # Writing the main module's initializer script's content into the file to generate.
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+
+    # ---------------------------------------------------------------------------------------
+    # Writing the initializer script's configuration files content into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="";
+
+    # -------------------------------------------------------------------
+    # Writing the initializer script's content into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
 fi
 
 # -----------------------------------------------
@@ -176,7 +249,7 @@ function ShellcheckError()
     echo >&2;
 
     # shellcheck disable=SC2059
-    PrintErrorLine "$(printf "$__BU_COMPILE__SHELLCHECK_FAIL" "$p_path")"; return 1;
+    "$(printf "$__BU_COMPILE__SHELLCHECK__FAIL" "$p_path")"; echo >&2; return 0;
 }
 
 # Verifying any programming errors with the Shellcheck command.
@@ -186,11 +259,13 @@ function ShellcheckVerif()
     local p_path=${1};  # String    - Default : NULL    - Path of the file to verify.
 
     #**** Code ****
-    echo "$__BU_COMPILE__SHELLCHECK_VERIFICATION";
+    # shellcheck disable=SC2059
+    printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
 
-    shellcheck "$p_path" || { ShellcheckError "$p_path"; return 1; }
+    if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
 
-    echo "$__BU_COMPILE__SHELLCHECK_SUCCESS";
+    # shellcheck disable=SC2059
+    printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
 
     echo;
 
@@ -232,69 +307,91 @@ function CompileInSingleFile()
     # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
     if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED"; return 1; fi
 
-    # Writing the initializer script's translations files content first into the compiled file.
+    # --------------------------------------------------------------------------------------------
+    # Writing the initializer script's translations files content first into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT";
+
     if  [ ! -f "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" ]; then PrintErrorLine "" >&2; return 1;
     else
-        ShellcheckVerif "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale";
+        ShellcheckVerif "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" || local __err="error";
 
-        WriteBU "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" "$p_display";
+        WriteBU "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" "$p_display" || local ____err="error";
     fi
 
-    PrintNewstepLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR";
 
-    # Writing the main module's library files content into the compiled file.
+    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS";
+
+    # --------------------------------------------------------------------------
+    # Writing the main module's library files content into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT";
+
     for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-        ShellcheckVerif "${i}";
+        ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-        WriteBU "${i}" "$p_display";
+        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    PrintSuccessLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR"; return 1;
 
-    PrintNewstepLine "";
+    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS";
 
-    # Writing the main module's configuration files content into the compiled file.
+    # --------------------------------------------------------------------------------
+    # Writing the main module's configuration files content into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT";
+
     for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
-        ShellcheckVerif "${i}";
+        ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-        WriteBU "${i}" "$p_display";
+        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    PrintSuccessLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR";
 
-    PrintNewstepLine "";
+    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS";
 
-    # Writing the main module's initializer script's content into the compiled file.
+    # ---------------------------------------------------------------------------------
+    # Writing the main module's initializer script's content into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT";
+
     for i in "$HOME/.Bash-utils/modules/main/"*; do
-        ShellcheckVerif "${i}";
+        ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-        WriteBU "${i}" "$p_display";
+        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    PrintSuccessLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR";
 
-    PrintNewstepLine "";
+    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS";
 
-    # Writing the initializer script's configuration files content into the compiled file.
+    # ---------------------------------------------------------------------------------------
+    # Writing the initializer script's configuration files content into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT";
+
     for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
-        ShellcheckVerif "${i}";
+        ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-        WriteBU "${i}" "$p_display";
+        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    PrintSuccessLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR";
 
-    PrintNewstepLine "";
+    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS";
 
-    # Writing the initializer script's content.
+    # -------------------------------------------------------------------
+    # Writing the initializer script's content into the file to generate.
+    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT";
+
     if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then PrintErrorLine ""; return 1;
     else
-        ShellcheckVerif "$__BU_MAIN_FULL_FILE_PATH";
+        ShellcheckVerif "$__BU_MAIN_FULL_FILE_PATH" || local __err="error";
 
         WriteBU "$__BU_MAIN_FULL_FILE_PATH" "$p_display";
     fi
 
-    PrintSuccessLine "";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR";
+
+    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS";
 
     return 0;
 }
