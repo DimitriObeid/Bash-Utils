@@ -339,7 +339,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1;
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
@@ -353,7 +353,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "[ LOCALE : ${p_locale^^} ] $(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")";
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "[ LOCALE : ${p_locale^^} ] $(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
@@ -367,7 +367,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")";
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
 
@@ -381,7 +381,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")";
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
@@ -396,7 +396,7 @@ function CompileInSingleFile()
         WriteBU "$__BU_MAIN_FULL_FILE_PATH" "$p_display";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")";
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
 
