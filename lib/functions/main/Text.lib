@@ -137,6 +137,8 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
+    local p_string_tmp;
+
     if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
 
     #**** Code ****
@@ -150,7 +152,10 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 
         #shellcheck disable=SC2001
         p_string="$(sed "s/^[^$p_delimiter]*$p_delimiter//" <<< "$p_string")";
-        p_string="$p_string";
+
+        # This variable's purpose is to avoid assigning the "$p_string" variable to itself, because if so, the assignment would have done nothing.
+        p_string_tmp="$p_string";
+        p_string="$p_string_tmp";
 
         if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
     done
@@ -652,7 +657,7 @@ function BU.Main.Text.WordArrayToStr()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT";
 
     #**** Parameters ****
-    local p_array=$1;
+    # local p_array=$1;
 
     #**** Code ****
 
