@@ -46,10 +46,10 @@ __BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE="$__BU_ROOT_PATH/Bash-utils-no-l
 __BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES="$__BU_ROOT_PATH/Bash-utils-no-line-comments--no-lines.sh";
 
 # Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer"
+__BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer";
 
 # Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale"
+__BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
 
 # -----------------------------------------------
 
@@ -166,7 +166,7 @@ for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
 	# BU.Main.Echo.Newline '2';
     EchoBU "${i^^}";
 
-    # BU.Main.Echo.Newline "1"'
+    # BU.Main.Echo.Newline "1"';
     CatBU "$i";
 done
 
@@ -180,7 +180,7 @@ for i in "$HOME/.Bash-utils/modules/main/"*; do
 done
 
 # Processing the remaining files.
-# Nothing to process for now
+# Nothing to process for now.
 
 PrintLine;
 

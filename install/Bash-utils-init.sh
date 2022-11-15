@@ -1845,7 +1845,7 @@ BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
 
 # If the framework is wrapped, then you should call the "Bash-utils-$language.sh" file which corresponds to the language that you want to use.
-BU.ModuleInit.IsFrameworkWrapped || BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+BU.ModuleInit.IsFrameworkLocalizedWrapped || BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # Checking the currently used Bash language's version.
 BU.ModuleInit.CheckBashMinimalVersion || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
