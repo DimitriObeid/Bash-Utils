@@ -65,47 +65,49 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__SHELLCHECK_MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__CYAN}%s${__ORANGE}${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__CYAN}%s${__RED} !${__RESET}";
-    __BU_COMPILE__SHELLCHECK__SUCCESS="Le fichier ${__CYAN}%s${__GREEN} ne contient aucune erreur de programmation";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__CYAN}%s${__GREEN} ne contient aucune erreur de programmation";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's translations files content first into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="AJOUT DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__RED} DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__GREEN} DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichier de librairie du module principal dans le fichier à générer [-----] Writing the main module's library files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="AJOUT DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de configuration du module principal dans le fichier à générer [-----] Writing the main module's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="AJOUT DES FICHIERS DE ";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu du script d'initialisation du module principal dans le fichier à générer [-----] Writing the main module's initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de configuration du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
+# -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
+# -------------------------------------------------------------------------------
 else
     __BU_COMPILE__SHELLCHECK_MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__CYAN}%s${__ORANGE} file${__RESET}";
@@ -116,39 +118,39 @@ else
 
     # --------------------------------------------------------------------------------------------
     # Writing the initializer script's translations files content first into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="ADDING TRANSLATION FILES FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE INTO THE ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATIONS FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPYING THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # --------------------------------------------------------------------------------
     # Writing the main module's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPYING THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # ---------------------------------------------------------------------------------
     # Writing the main module's initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPYING THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # ---------------------------------------------------------------------------------------
     # Writing the initializer script's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # -------------------------------------------------------------------
     # Writing the initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 fi
 
 # -----------------------------------------------
@@ -170,13 +172,13 @@ function PrintLine()
 }
 
 # Printing an error line.
-function PrintErrorLine()   { echo >&2; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo "$1"; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo >&2; }
+function PrintErrorLine()   { echo >&2; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo "${__RED}$1${__RESET}"; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo >&2; }
 
 # Printing a newstep line.
-function PrintNewstepLine() { echo; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo "$1"; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo; }
+function PrintNewstepLine() { echo; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo "${__ORANGE}$1${__RESET}"; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo; }
 
 # Printing a success line.
-function PrintSuccessLine   { echo; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo "$1"; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo; }
+function PrintSuccessLine   { echo; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo "${__GREEN}$1${__RESET}"; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo; }
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
@@ -297,11 +299,15 @@ function WriteBU()
 if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK_MISSING" >&2; exit 1; fi
 
 # Files compilation function.
+# shellcheck disable=SC2059
 function CompileInSingleFile()
 {
     #**** Parameters ****
     local p_locale=${1:-NULL};  # String    - Default : NULL    - Language in which the file must be translated.
     local p_display=${2:-no};   # String    - Default : no      - Display the content of each file when it is read and written into the file to generate.
+
+    #**** Variables ****
+    local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale"
 
     #**** Code ****
     # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
@@ -309,22 +315,23 @@ function CompileInSingleFile()
 
     # --------------------------------------------------------------------------------------------
     # Writing the initializer script's translations files content first into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT";
 
-    if  [ ! -f "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" ]; then PrintErrorLine "" >&2; return 1;
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path")";
+
+    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path")" >&2; return 1;
     else
-        ShellcheckVerif "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" || local __err="error";
+        ShellcheckVerif "$__locale_file_path" || local __err="error";
 
-        WriteBU "$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale" "$p_display" || local ____err="error";
+        WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path")";
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path")";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT";
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__locale_file_path")";
 
     for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -332,13 +339,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR"; return 1;
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1;
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
     # --------------------------------------------------------------------------------
     # Writing the main module's configuration files content into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT";
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__locale_file_path")";
 
     for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -346,13 +353,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "[ LOCALE : ${p_locale^^} ] $(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")";
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
     # ---------------------------------------------------------------------------------
     # Writing the main module's initializer script's content into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT";
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__locale_file_path")";
 
     for i in "$HOME/.Bash-utils/modules/main/"*; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -360,13 +367,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")";
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
 
     # ---------------------------------------------------------------------------------------
     # Writing the initializer script's configuration files content into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT";
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__locale_file_path")";
 
     for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -374,13 +381,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")";
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
 
     # -------------------------------------------------------------------
     # Writing the initializer script's content into the file to generate.
-    PrintNewstepLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT";
+    PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__locale_file_path")";
 
     if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then PrintErrorLine ""; return 1;
     else
@@ -389,15 +396,15 @@ function CompileInSingleFile()
         WriteBU "$__BU_MAIN_FULL_FILE_PATH" "$p_display";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")";
 
-    PrintSuccessLine "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS";
+    PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
 
     return 0;
 }
 
 
-CompileInSingleFile "en" "yes" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
+CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
 PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
 
 CompileInSingleFile "fr" "yes" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
