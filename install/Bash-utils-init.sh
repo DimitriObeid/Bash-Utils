@@ -2479,7 +2479,7 @@ function BashUtils_InitModules()
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}"; then local lineno="${LINENO}";
                 # shellcheck disable=SC2059
-                BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" "${v_module_name}")" "${LINENO}" "ERR_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
+                BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" "${v_module_name}")" "${lineno}" "ERR_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
 
                 printf '\n' >&2;
 
