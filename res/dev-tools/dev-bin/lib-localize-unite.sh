@@ -533,8 +533,9 @@ function CompileInSingleFile()
     #**** Variables ****
     local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale"
     local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh"
-
-	local __locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
+	local __locale_print_code;
+	
+	__locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
 
     #**** Code ****
     # Deleting the existing "Bash-utils.sh" file.
