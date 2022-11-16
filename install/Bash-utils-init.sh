@@ -1368,16 +1368,18 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							value="${value% *}";
 
                             if BU.ModuleInit.CheckIsDebugging; then
-                                if		[ "${value^^}"  == 'C' ] \
-									||	[[ "${value,,}" == cat?(eg?(ory)) ]] \
-									||	[[ "${value,,}" == cat?(eg?(orie))s ]] \
-									||	[ "${value^^}"  == 'F' ] \
+                                if      [  "${value^^}" == 'C' ] \
+									||  [[ "${value,,}" == cat?(eg?(ory)) ]] \
+									||  [[ "${value,,}" == cat?(eg?(orie))s ]] \
+									||  [  "${value^^}" == 'F' ] \
 									||  [[ "${value,,}" == file?(s) ]] \
-									||	[[ "${value^^}" == FNCT?(S) ]] \
-									||	[[ "${value,,}" == function?(s) ]] \
-									||  [ "${value^^}"  == 'S' ] \
+									||  [[ "${value^^}" == FNCT?(S) ]] \
+									||  [[ "${value,,}" == function?(s) ]] \
+									||  [  "${value^^}" == 'M' ] \
+									||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
+									||  [  "${value^^}" == 'S' ] \
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
-									||	[[ "${value,,}" = s?(ub)?(-)?(c?(at?(eg?(orie))))s ]]; then
+									||  [[ "${value,,}" = s?(ub)?(-)?(c?(at?(eg?(orie))))s ]]; then
 
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
