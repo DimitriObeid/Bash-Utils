@@ -215,7 +215,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 	# Process each supported arguments in this "for" loop.
 	for module_arg in "${main_module_array[@]}"; do
 
-        stat_value_warning="Warning : the supported values for this option are :" >&2;
+        # stat_value_warning="Warning : the supported values for this option are :" >&2;
 
         # shellcheck disable=SC2059
         printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN" "$value" >&2;
@@ -227,6 +227,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
         # As the "Status.conf" file is sourced, the default global status variables values will be overwritten with the new values.
         if [[ "${module_arg,,}" = "--stat-"* ]]; then
 
+            # shellcheck disable=SC2219
             let value;
 
             # --stat option argument, with all the global status variables that can be modified : main --stat='debug=true decho=restrict'

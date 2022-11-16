@@ -8,8 +8,11 @@
 
 ## ARGUMENTS DEFINITION
 
-# Authorization to delete the generated file.
-__BU_ARG_RM="$1";
+# Language
+__BU_ARG_LANG=$1;
+
+# Display more informations about the generation of the localized wrapped script.
+__BU_ARG_DISP=$2;
 
 # -----------------------------------------------
 
@@ -27,6 +30,12 @@ if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-
 elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-utils/Bash-utils";
 
 else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
+
+fi
+
+if [ -f "$HOME/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="$HOME/Bash-utils-init.sh";
+
+else __BU_INITIALIZER_SCRIPT_PATH="$__BU_ROOT_PATH/Bash-utils-init.sh";
 
 fi
 
@@ -105,6 +114,10 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
 # -------------------------------------------------------------------------------
@@ -151,6 +164,10 @@ else
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__CYAN}%s${__ORANGE} FILE TO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__CYAN}%s${__RED} FILE TO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__CYAN}%s${__GREEN} FILE TO THE ${__CYAN}%s${__GREEN} FILE";
 fi
 
 # -----------------------------------------------
@@ -264,7 +281,7 @@ function ShellcheckVerif()
     # shellcheck disable=SC2059
     printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
 
-    if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
+    if [ "$__BU_SHELLCHECKED" == 'false' ]; then if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi; fi
 
     # shellcheck disable=SC2059
     printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
@@ -278,7 +295,7 @@ function ShellcheckVerif()
 function WriteBU()
 {
     #**** Parameters ****
-    local p_content=${1:-\$'0'} # String    - Default : NULL    -
+    local p_content=${1:-\$'0'} # String    - Default : NULL    - Content of the file to write in the "$__BU_MAIN_FULL_FILE_PATH" file.
     local p_display=${2:-no};   # String    - Default : no      - Display the content of each file when it is read and written into the file to generate.
 
     #**** Code ****
@@ -298,6 +315,9 @@ function WriteBU()
 # Checking first if Shellcheck is installed in order to check for code errors.
 if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK_MISSING" >&2; exit 1; fi
 
+# To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
+__BU_SHELLCHECKED='false';
+
 # Files compilation function.
 # shellcheck disable=SC2059
 function CompileInSingleFile()
@@ -308,8 +328,12 @@ function CompileInSingleFile()
 
     #**** Variables ****
     local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale"
+    local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh"
 
     #**** Code ****
+    # Deleting the existing "Bash-utils.sh" file.
+    if [ -f "$__BU_MAIN_FULL_FILE_PATH" ] && [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then true > "$__BU_MAIN_FULL_FILE_PATH"; fi
+
     # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
     if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED"; return 1; fi
 
@@ -389,20 +413,33 @@ function CompileInSingleFile()
     # Writing the initializer script's content into the file to generate.
     PrintNewstepLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__locale_file_path")";
 
-    if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then PrintErrorLine ""; return 1;
+    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine ""; return 1;
     else
-        ShellcheckVerif "$__BU_MAIN_FULL_FILE_PATH" || local __err="error";
+        ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
 
-        WriteBU "$__BU_MAIN_FULL_FILE_PATH" "$p_display";
+        WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
     fi
 
     [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
 
     PrintSuccessLine "$(printf "[ LOCALE : ${p_locale^^} ] $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
 
+    # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
+    if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
+
+    # -----------------------------------------------------------------------------
+    # Copying the content of the generated file into the dedicated language's file.
+    PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+
+    cp "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")"; return 1; };
+
+    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+
     return 0;
 }
 
+# Support of the arguments when this script is executed with the two awaited arguments.
+if [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__BU_ARG_DISP"; fi
 
 CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
 PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
