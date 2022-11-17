@@ -80,9 +80,9 @@ if [[ "$LANG" = fr_* ]]; then
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's translations files content first into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__RED} DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__GREEN} DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__RED} DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__GREEN} DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
 
     #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichier de librairie du module principal dans le fichier à générer [-----] Writing the main module's library files content into the file to generate.
@@ -131,9 +131,9 @@ else
 
     # --------------------------------------------------------------------------------------------
     # Writing the initializer script's translations files content first into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATIONS FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATIONS FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
@@ -251,9 +251,9 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'ae' ]; then printf "%s : Avestan | Avesta"                             				"${p_code,,}";
 	elif [ "${p_code,,}" == 'af' ]; then printf "%s : Afrikaans | Afrikaans"                        				"${p_code,,}";
 	elif [ "${p_code,,}" == 'ak' ]; then printf "%s : Akan | Akan"                                  				"${p_code,,}";
-	elif [ "${p_code,,}" == 'am' ]; then printf "%s : Amharic | አማርኛ"                       							"${p_code,,}";
+	elif [ "${p_code,,}" == 'am' ]; then printf "%s : Amharic | አማርኛ"                       						"${p_code,,}";
 	elif [ "${p_code,,}" == 'an' ]; then printf "%s : Aragonese | Aragonés"                         				"${p_code,,}";
-	elif [ "${p_code,,}" == 'ar' ]; then printf "%s : Arabic | العربية"                            					"${p_code,,}";
+	elif [ "${p_code,,}" == 'ar' ]; then printf "%s : Arabic | العربية"                                                "${p_code,,}";
 	elif [ "${p_code,,}" == 'as' ]; then printf "%s : Assamese | অসমীয়া"                           					"${p_code,,}";
 	elif [ "${p_code,,}" == 'av' ]; then printf "%s : Avaric | авар мацӀ ; магӀарул мацӀ"							"${p_code,,}";
 	elif [ "${p_code,,}" == 'ay' ]; then printf "%s : Aymara | Aymar aru" 											"${p_code,,}";
@@ -299,11 +299,11 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'gd' ]; then printf "%s : Scottish Gaelic | Gàidhlig"			 						"${p_code,,}";
 	elif [ "${p_code,,}" == 'gl' ]; then printf "%s : Galician | Galego" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'gn' ]; then printf "%s : Guarani | Avañe'ẽ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gu' ]; then printf "%s : Gujarati | ગુજરાતી" 												"${p_code,,}";
+	elif [ "${p_code,,}" == 'gu' ]; then printf "%s : Gujarati | ગુજરાતી" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'gv' ]; then printf "%s : Manx | Ghaelg"			 									"${p_code,,}";
 	elif [ "${p_code,,}" == 'ha' ]; then printf "%s : Hausa | هَوُسَ" 													"${p_code,,}";
 	elif [ "${p_code,,}" == 'he' ]; then printf "%s : Hebrew | עברית" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'hi' ]; then printf "%s : Hindi | हिन्दी ; हिंदी" 												"${p_code,,}";
+	elif [ "${p_code,,}" == 'hi' ]; then printf "%s : Hindi | हिन्दी ; हिंदी" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'ho' ]; then printf "%s : Hiri Motu | Hiri Motu" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'hr' ]; then printf "%s : Croatian | Hrvatski" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'ht' ]; then printf "%s : Haitian | Kreyòl ayisyen" 									"${p_code,,}";
@@ -342,7 +342,7 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'lg' ]; then printf "%s : Ganda | Luganda" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'li' ]; then printf "%s : Limburgish | Limburgs" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'ln' ]; then printf "%s : Lingala | Lingála" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'lo' ]; then printf "%s : Lao | ພາສາລາວ" 													"${p_code,,}";
+	elif [ "${p_code,,}" == 'lo' ]; then printf "%s : Lao | ພາສາລາວ" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'lt' ]; then printf "%s : Lithuanian | Lietuvių kalba" 									"${p_code,,}";
 	elif [ "${p_code,,}" == 'lu' ]; then printf "%s : Luba | tshiluba" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'lv' ]; then printf "%s : Latvian | Latviešu valoda" 									"${p_code,,}";
@@ -360,7 +360,7 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'na' ]; then printf "%s : Nauru | Ekakairũ Naoero" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'nb' ]; then printf "%s : Norwegian Bokmål | Norsk bokmål" 								"${p_code,,}";
 	elif [ "${p_code,,}" == 'nd' ]; then printf "%s : North Ndebele | isiNdebele" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ne' ]; then printf "%s : Nepali | नेपाली" 													"${p_code,,}";
+	elif [ "${p_code,,}" == 'ne' ]; then printf "%s : Nepali | नेपाली" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'ng' ]; then printf "%s : Ndonga | Owambo" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'nl' ]; then printf "%s : Dutch | Nederlands" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'nn' ]; then printf "%s : Norwegian Nynorsk | Norsk nynorsk" 							"${p_code,,}";
@@ -373,7 +373,7 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'om' ]; then printf "%s : Oromo | Afaan Oromoo" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'or' ]; then printf "%s : Oriya | ଓଡ଼ିଆ" 													"${p_code,,}";
 	elif [ "${p_code,,}" == 'os' ]; then printf "%s : Ossetian | Ирон ӕвзаг" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'pa' ]; then printf "%s : Panjabi | ਪੰਜਾਬੀ ; پنجابی" 											"${p_code,,}";
+	elif [ "${p_code,,}" == 'pa' ]; then printf "%s : Panjabi | ਪੰਜਾਬੀ ; پنجابی" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'pi' ]; then printf "%s : Pāli | पािऴ" 													"${p_code,,}";
 	elif [ "${p_code,,}" == 'pl' ]; then printf "%s : Polish | Polski" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'ps' ]; then printf "%s : Pashto | پښتو" 												"${p_code,,}";
@@ -385,13 +385,13 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'ro' ]; then printf "%s : Romanian | Română" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'ru' ]; then printf "%s : Russian | русский язык" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'rw' ]; then printf "%s : Kinyarwanda | Kinyarwanda" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'sa' ]; then printf "%s : Sanskrit | संस्कृतम्" 												"${p_code,,}";
+	elif [ "${p_code,,}" == 'sa' ]; then printf "%s : Sanskrit | संस्कृतम्" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'sc' ]; then printf "%s : Sardinian | sardu" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sd' ]; then printf "%s : Sindhi | सिन्धी ; سنڌي، سندھی" 										"${p_code,,}";
+	elif [ "${p_code,,}" == 'sd' ]; then printf "%s : Sindhi | सिन्धी ; سنڌي، سندھی" 									"${p_code,,}";
 	elif [ "${p_code,,}" == 'se' ]; then printf "%s : Northern Sami | Davvisámegiella" 								"${p_code,,}";
 	elif [ "${p_code,,}" == 'sg' ]; then printf "%s : Sango | Yângâ tî sängö" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'sh' ]; then printf "%s : Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик" "${p_code,,}";
-	elif [ "${p_code,,}" == 'si' ]; then printf "%s : Sinhalese| සිංහල" 												"${p_code,,}";
+	elif [ "${p_code,,}" == 'si' ]; then printf "%s : Sinhalese| සිංහල" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'sk' ]; then printf "%s : Slovak | Slovenčina" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'sl' ]; then printf "%s : Slovenian | Slovenščina" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'sm' ]; then printf "%s : Samoan | Gagana fa'a Samoa"									"${p_code,,}";
@@ -415,7 +415,7 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'to' ]; then printf "%s : Tonga | faka Tonga" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'tr' ]; then printf "%s : Turkish | Türkçe" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'ts' ]; then printf "%s : Tsonga | xiTsonga" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tt' ]; then printf "%s : Tatar | татарча ; tatarça ; تاتارچا" 							"${p_code,,}";
+	elif [ "${p_code,,}" == 'tt' ]; then printf "%s : Tatar | татарча ; tatarça ; تاتارچا"                             "${p_code,,}";
 	elif [ "${p_code,,}" == 'tw' ]; then printf "%s : Twi | Twi" 													"${p_code,,}";
 	elif [ "${p_code,,}" == 'ty' ]; then printf "%s : Tahitian | Reo Mā\`ohi" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'ug' ]; then printf "%s : Uighur | Uyƣurqə ; ئۇيغۇرچ"										"${p_code,,}";
@@ -478,14 +478,16 @@ function ShellcheckVerif()
 
     #**** Code ****
     # shellcheck disable=SC2059
-    printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
+    if [ "$__BU_SHELLCHECKED" == 'false' ]; then
+        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
 
-    if [ "$__BU_SHELLCHECKED" == 'false' ]; then if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi; fi
+        if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
 
-    # shellcheck disable=SC2059
-    printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
+        # shellcheck disable=SC2059
+        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
 
-    echo;
+        echo;
+    fi
 
     return 0;
 }
@@ -547,22 +549,22 @@ function CompileInSingleFile()
     # --------------------------------------------------------------------------------------------
     # Writing the initializer script's translations files content first into the file to generate.
 
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path")" >&2; return 1;
+    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" >&2; return 1;
     else
         ShellcheckVerif "$__locale_file_path" || local __err="error";
 
         WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path")";
+    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
     for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -570,13 +572,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # --------------------------------------------------------------------------------
     # Writing the main module's configuration files content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
     for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -584,13 +586,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$__locale_print_code $(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$__locale_print_code $(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # ---------------------------------------------------------------------------------
     # Writing the main module's initializer script's content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
     for i in "$HOME/.Bash-utils/modules/main/"*; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -598,13 +600,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # ---------------------------------------------------------------------------------------
     # Writing the initializer script's configuration files content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
     for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
@@ -612,13 +614,13 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # -------------------------------------------------------------------
     # Writing the initializer script's content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__locale_file_path")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
     if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine ""; return 1;
     else
@@ -627,20 +629,20 @@ function CompileInSingleFile()
         WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__locale_file_path")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__locale_file_path")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
     # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
     if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
     # -----------------------------------------------------------------------------
     # Copying the content of the generated file into the dedicated language's file.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
 
-    cp "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")"; return 1; };
+    cp "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file" || { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
 
     return 0;
 }
@@ -651,5 +653,5 @@ if [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__BU_ARG
 CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
 PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
 
-CompileInSingleFile "fr" "yes" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
+CompileInSingleFile "fr" "no" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
 PrintSuccessLine "CRÉATION D'UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES DANS UN SEUL FICHIER RÉUSSIE AVEC SUCCÈS";
