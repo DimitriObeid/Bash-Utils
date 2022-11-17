@@ -562,6 +562,35 @@ function CompileInSingleFile()
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
+    # ---------------------------------------------------------------------------------------
+    # Writing the initializer script's configuration files content into the file to generate.
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+    for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
+        ShellcheckVerif "${i}" || { local __err="error"; break; };
+
+        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
+    done
+
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+    # -------------------------------------------------------------------
+    # Writing the initializer script's content into the file to generate.
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine ""; return 1;
+    else
+        ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
+
+        WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
+    fi
+
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
     PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
@@ -604,35 +633,7 @@ function CompileInSingleFile()
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    # ---------------------------------------------------------------------------------------
-    # Writing the initializer script's configuration files content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
-        ShellcheckVerif "${i}" || { local __err="error"; break; };
-
-        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
-    done
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
-
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # -------------------------------------------------------------------
-    # Writing the initializer script's content into the file to generate.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine ""; return 1;
-    else
-        ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
-
-        WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
-    fi
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
-
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
+    # -------------------------------------------------------------------------------------------------------------------------
     # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
     if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
