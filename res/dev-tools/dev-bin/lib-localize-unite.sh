@@ -287,7 +287,7 @@ function PrintLanguageName()
 	elif [ "${p_code,,}" == 'eo' ]; then printf "%s : Esperanto | Esperanto" 										"${p_code,,}";
 	elif [ "${p_code,,}" == 'es' ]; then printf "%s : Spanish | Español" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'et' ]; then printf "%s : Estonian | Eesti keel" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'eu' ]; then printf "%s : Euskara | Basque" 											"${p_code,,}";
+	elif [ "${p_code,,}" == 'eu' ]; then printf "%s : Basque | Euskara" 											"${p_code,,}";
 	elif [ "${p_code,,}" == 'fa' ]; then printf "%s : Persian | فارسی" 												"${p_code,,}";
 	elif [ "${p_code,,}" == 'ff' ]; then printf "%s : Fulah | Fulfulde"				 								"${p_code,,}";
 	elif [ "${p_code,,}" == 'fi' ]; then printf "%s : Finnish | Suomen kieli" 										"${p_code,,}";
