@@ -114,9 +114,20 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
 
+    # -------------------------------------------------------------------------------------------------------------------------------------------------
+    # Copie du contenu du fichier généré dans le fichier localisé [-----] Copying the content of the generated file into the localized language's file.
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+
+    # -----------------------------------------------------------------------------------------------------------------------------------------
+    # Affichage des statistiques du fichier localisé nouvellement généré [-----] Printing the statistics of the newly generated localized file.
+    __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__CYAN}%s${__RESET} :"
+    __BU_COMPILE__LOCALIZED_FILE__BYTES="Taille en octets               : %s";
+    __BU_COMPILE__LOCALIZED_FILE__CHARS="Nombre de caractères           : %s caractères";
+    __BU_COMPILE__LOCALIZED_FILE__LINES="Nombre le lignes               : %s lignes";
+    __BU_COMPILE__LOCALIZED_FILE__WIDTH="Largeur d'affichage maximale   : %s colonnes";
+    __BU_COMPILE__LOCALIZED_FILE__WORDS="Nombre de mots                 : %s mots";
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE CRÉER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCESENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGE : $__BU_ARG_LANG !!!";
 
@@ -167,9 +178,20 @@ else
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
+    # -----------------------------------------------------------------------------
+    # Copying the content of the generated file into the dedicated language's file.
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__CYAN}%s${__ORANGE} FILE TO THE ${__CYAN}%s${__ORANGE} FILE";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__CYAN}%s${__RED} FILE TO THE ${__CYAN}%s${__RED} FILE";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__CYAN}%s${__GREEN} FILE TO THE ${__CYAN}%s${__GREEN} FILE";
+
+    # --------------------------------------------------------------
+    # Printing the statistics of the newly generated localized file.
+    __BU_COMPILE__LOCALIZED_FILE__STATS="${__CYAN}%s${__RESET} file statistics :"
+    __BU_COMPILE__LOCALIZED_FILE__BYTES="Size in bytes           : %s";
+    __BU_COMPILE__LOCALIZED_FILE__CHARS="Number of characters    : %s characters";
+    __BU_COMPILE__LOCALIZED_FILE__LINES="Number of lines         : %s lines";
+    __BU_COMPILE__LOCALIZED_FILE__WIDTH="Maximum display width   : %s columns";
+    __BU_COMPILE__LOCALIZED_FILE__WORDS="Number of words         : %s words";
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO CREATE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
 fi
@@ -212,31 +234,45 @@ function BytesToHuman()
     local L_BYTES="${1:-0}";    # Int       - Default : 0       - Raw size in bytes.
     local L_PAD="${2:-no}";     # String    - Default : "no"    - Allow result display padding.
     local L_BASE="${3:-1024}";  # Int       - Default : 1024    - Base (1000 (metric) or 1024 (binary notation))
+    local V_LANG="${4:-en}";    # String    - Default : en      - Language, for localizing the byte count.
 
     #**** Code ****
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
-    local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" 'function human(x, pad, base) {
+    local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
 
         # If the desired base format is not the binary prefix, then the base format used will be the metric one.
-         if(base!=1024)base=1000
-
-        # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
-         basesuf=(base==1024)?"iB":"B"
+        if(base!=1024)base=1000
 
         # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta.
-         s="BKMGTPEZY"
+        if (lang == "fr") {
+            # Ternary condition : si le format de base utilise le préfixe binaire, cette unité "io" ([préfixe]bioctet) est affichée après la valeur. Sinon, cette unité "o" ([préfixe]octet) est affichée après la valeur.
+            basesuf=(base==1024)?"io":"o"
+
+            s="oKMGTPEZY"
+        } else {
+            # Condition ternaire : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
+            basesuf=(base==1024)?"iB":"B"
+
+            s="BKMGTPEZY"
+        }
 
         # While the "x" ("human" function first parameter value) is superior or equal to the "base" (human function third parameter value) AND
-         while (x>=base && length(s)>1)
+        while (x>=base && length(s)>1)
                {x/=base; s=substr(s,2)}
-         s=substr(s,1,1)
+        s=substr(s,1,1)
 
-         xf=(pad=="yes") ? ((s=="B")?"%5d   ":"%8.2f") : ((s=="B")?"%d":"%.2f")
-         s=(s!="B") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="iB")?(s "  "):(s " ")))
+        if (lang == "fr") {
+            xf=(pad=="yes") ? ((s=="o")?"%5d   ":"%8.2f") : ((s=="o")?"%d":"%.2f")
+            s=(s!="o") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="io")?(s "  "):(s " ")))
+        } else {
+            xf=(pad=="yes") ? ((s=="B")?"%5d   ":"%8.2f") : ((s=="B")?"%d":"%.2f")
+            s=(s!="B") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="iB")?(s "  "):(s " ")))
+        }
 
-         return sprintf( (xf " %s\n"), x, s)
-      }
-      BEGIN{print human(bytes, pad, base)}')
+        return sprintf( (xf " %s\n"), x, s)
+    }
+
+    BEGIN{print human(bytes, pad, base, lang)}')
 
     printf "%s" "$BYTESTOHUMAN_RESULT";
 
@@ -642,20 +678,26 @@ function CompileInSingleFile()
     if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
     # -----------------------------------------------------------------------------
-    # Copying the content of the generated file into the dedicated language's file.
+    # Copying the content of the generated file into the localized language's file.
     PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
 
     cp "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file" || { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")"; return 1; };
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
 
-    echo "${__CYAN}$__locale_final_file${__RESET} statistics :"; echo;
+    # --------------------------------------------------------------
+    # Printing the statistics of the newly generated localized file.
 
-    echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__locale_final_file")" '' 1000)";
-    echo "Number of characters    : $(wc -m < "$__locale_final_file") characters";
-    echo "Number of lines         : $(wc -l < "$__locale_final_file") lines";
-    echo "Maximum display width   : $(wc -L < "$__locale_final_file") columns";
-    echo "Number of words         : $(wc -w < "$__locale_final_file") words";
+    # Getting the current system language.
+    local ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
+
+    printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__locale_final_file"; echo;
+
+    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__locale_final_file")" '' 1000 "$____sys_lang")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__locale_final_file")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__locale_final_file")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__locale_final_file")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__locale_final_file")";
 
     return 0;
 }
