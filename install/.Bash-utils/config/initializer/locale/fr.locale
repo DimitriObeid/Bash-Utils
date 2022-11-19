@@ -136,6 +136,10 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
 
+# Chemin du dossier temporaire du script d'initialisation.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initialisation du répertoire temporaire du framework";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="Cette variable globale enregistre le chemin du dossier temporaire du framework";
+
 # Chemin du répertoire racine de la librairie.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie";
