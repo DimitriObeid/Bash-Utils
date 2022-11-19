@@ -121,6 +121,10 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="Cette variable
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="Cette variable globale enregistre le chemin vers les répertoires de configuration et d'initialisation de chaque module";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="Cette variable globale enregistre le chemin vers le script d'initialisation des modules";
 
+# Chemin du dossier temporaire du script d'initialisation.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initialisation du répertoire temporaire du framework";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="Cette variable globale enregistre le chemin du dossier temporaire du framework";
+
 # Chemins des dossiers de configuration.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
@@ -135,10 +139,6 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="
 # Chemins des scripts d'initialisation de chaque module.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
-
-# Chemin du dossier temporaire du script d'initialisation.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initialisation du répertoire temporaire du framework";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="Cette variable globale enregistre le chemin du dossier temporaire du framework";
 
 # Chemin du répertoire racine de la librairie.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";

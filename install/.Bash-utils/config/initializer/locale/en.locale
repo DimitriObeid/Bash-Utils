@@ -121,6 +121,10 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="This global va
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="This global variable stores the path to the configuration and initialization directories of each module";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="This global variable stores the path of the modules initializer script";
 
+# Initializer script's temporary directory path.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initializing the framework's temporary directory";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="This global variable stores the path to the framework's temporary directory";
+
 # Configuration directories paths.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initializing the configuration directories paths";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="This global variable stores the path to the configuration directory of each module";
@@ -135,10 +139,6 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="
 # Module initializer script's paths.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initializing the modules initializers files directory";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="This global variable stores the path to the initialization files of the current module";
-
-# Initializer script's temporary directory path.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initializing the framework's temporary directory";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="This global variable stores the path to the framework's temporary directory";
 
 # Library's root directory path.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initializing the variables of the file which contains the library's root folder's path";
