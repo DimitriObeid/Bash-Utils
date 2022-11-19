@@ -14,6 +14,9 @@ __BU_ARG_LANG=$1;
 # Display more informations about the generation of the localized wrapped script.
 __BU_ARG_DISP=$2;
 
+# Do not check for programming errors in the files (not recommended, unless you know what you are doing).
+__BU_ARG_NO_SHELLCHECK=$3;
+
 # -----------------------------------------------
 
 
@@ -71,7 +74,9 @@ __YELLOW="$(tput setaf 11)";
 
 # FRENCH - FRANÇAIS
 if [[ "$LANG" = fr_* ]]; then
-    __BU_COMPILE__SHELLCHECK_MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
+    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
+    __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
+
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__CYAN}%s${__ORANGE}${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__CYAN}%s${__RED} !${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__CYAN}%s${__GREEN} ne contient aucune erreur de programmation";
@@ -122,7 +127,7 @@ if [[ "$LANG" = fr_* ]]; then
 
     # -----------------------------------------------------------------------------------------------------------------------------------------
     # Affichage des statistiques du fichier localisé nouvellement généré [-----] Printing the statistics of the newly generated localized file.
-    __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__CYAN}%s${__RESET} :"
+    __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__CYAN}%s${__RESET} :";
     __BU_COMPILE__LOCALIZED_FILE__BYTES="Taille en octets               : %s";
     __BU_COMPILE__LOCALIZED_FILE__CHARS="Nombre de caractères           : %s caractères";
     __BU_COMPILE__LOCALIZED_FILE__LINES="Nombre le lignes               : %s lignes";
@@ -135,7 +140,9 @@ if [[ "$LANG" = fr_* ]]; then
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
 # -------------------------------------------------------------------------------
 else
-    __BU_COMPILE__SHELLCHECK_MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
+    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
+    __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
+
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__CYAN}%s${__ORANGE} file${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__CYAN}%s${__RED} file!${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__CYAN}%s${__GREEN} file doen't contain any programming errors${__RESET}";
@@ -186,7 +193,7 @@ else
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
-    __BU_COMPILE__LOCALIZED_FILE__STATS="${__CYAN}%s${__RESET} file statistics :"
+    __BU_COMPILE__LOCALIZED_FILE__STATS="${__CYAN}%s${__RESET} file statistics :";
     __BU_COMPILE__LOCALIZED_FILE__BYTES="Size in bytes           : %s";
     __BU_COMPILE__LOCALIZED_FILE__CHARS="Number of characters    : %s characters";
     __BU_COMPILE__LOCALIZED_FILE__LINES="Number of lines         : %s lines";
@@ -221,7 +228,9 @@ function PrintErrorLine()   { echo >&2; printf "%s" "$__RED"; PrintLine; printf 
 function PrintNewstepLine() { echo; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo "${__ORANGE}$1${__RESET}"; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo; }
 
 # Printing a success line.
-function PrintSuccessLine   { echo; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo "${__GREEN}$1${__RESET}"; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo; }
+function PrintSuccessLine() { echo; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo "${__GREEN}$1${__RESET}"; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo; }
+
+function PrintWarningLine() { echo; printf "%s" "$__YELLOW"; PrintLine; printf "%s" "$__RESET"; echo "${__YELLOW}$1${__RESET}"; printf "%s" "$__YELLOW"; PrintLine; printf "%s" "$__RESET"; echo; }
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
@@ -561,10 +570,19 @@ function WriteBU()
 ######################################################### CODE ########################################################
 
 # Checking first if Shellcheck is installed in order to check for code errors.
-if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK_MISSING" >&2; exit 1; fi
+if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" >&2; exit 1; fi
 
-# To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
-__BU_SHELLCHECKED='false';
+# WARNING ! It's not recommended to disable the checkings of each file, unless you know what you are doing
+if [[ "${__BU_ARG_NO_SHELLCHECK,,}" == no?(-)shell?(-)check ]]; then
+    PrintWarningLine "$__BU_COMPILE__SHELLCHECK__DISABLED";
+
+    sleep 1;
+
+    __BU_SHELLCHECKED='true';
+else
+    # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
+    __BU_SHELLCHECKED='false';
+fi
 
 # Files compilation function.
 # shellcheck disable=SC2059
