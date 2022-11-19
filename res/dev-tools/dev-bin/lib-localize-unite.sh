@@ -505,7 +505,7 @@ function WriteBU()
 
 	#**** Variables ****
 	local v_content;				# Content of the "$p_filepath" file to write in the "$__BU_MAIN_FULL_FILE_PATH" file.
-	
+
 	v_content="$(cat "$p_filepath")";
 
     #**** Code ****
@@ -540,7 +540,7 @@ function CompileInSingleFile()
     local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale"
     local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh"
 	local __locale_print_code;
-	
+
 	__locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
 
     #**** Code ****
@@ -649,14 +649,23 @@ function CompileInSingleFile()
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
 
+    echo "${__CYAN}$__locale_final_file${__RESET} statistics :"; echo;
+
+    echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__locale_final_file")" '' 1000)";
+    echo "Number of characters    : $(wc -m < "$__locale_final_file") characters";
+    echo "Number of lines         : $(wc -l < "$__locale_final_file") lines";
+    echo "Maximum display width   : $(wc -L < "$__locale_final_file") columns";
+    echo "Number of words         : $(wc -w < "$__locale_final_file") words";
+
     return 0;
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__BU_ARG_DISP" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" ; exit 1; }; fi
+if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__BU_ARG_DISP" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" ; exit 1; };
+else
+    CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
+    PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
 
-CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
-PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
-
-CompileInSingleFile "fr" "no" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
-PrintSuccessLine "CRÉATION D'UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES DANS UN SEUL FICHIER RÉUSSIE AVEC SUCCÈS";
+    CompileInSingleFile "fr" "no" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
+    PrintSuccessLine "CRÉATION D'UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES DANS UN SEUL FICHIER RÉUSSIE AVEC SUCCÈS";
+fi
