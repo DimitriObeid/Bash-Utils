@@ -83,8 +83,16 @@ if [[ "$LANG" = fr_* ]]; then
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
-    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's translations files content first into the file to generate.
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="Il s'agit d'une mesure de sauvegarde au cas où les fichiers de paramètres régionaux seraient mis à jour après une mise à jour du script d'initialisation, puisque l'anglais est la principale langue prise en charge, afin qu'un message ne soit pas renvoyé sous la forme d'une chaîne vide.";
+
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+
+    # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing now the initializer script's translations files content into the file to generate.
     __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__RED} DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__GREEN} DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
@@ -149,11 +157,19 @@ else
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
 
-    # --------------------------------------------------------------------------------------------
-    # Writing the initializer script's translations files content first into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATIONS FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATIONS FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+    # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="This is a safeguard measure in case the locale files are updated after an update of the initialization script, since English is the primary supported language, so that a message is not returned as an empty string";
+
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+
+    # ------------------------------------------------------------------------------------------
+    # Writing now the initializer script's translations files content into the file to generate.
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
@@ -593,11 +609,16 @@ function CompileInSingleFile()
     local p_display=${2:-no};   # String    - Default : no      - Display the content of each file when it is read and written into the file to generate.
 
     #**** Variables ****
-    local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale"
-    local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh"
+    local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale";
+    local __locale_file_path_en="$__BU_MODULE_INIT_TRANSLATIONS_PATH/en.locale";
+    local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh";
 	local __locale_print_code;
 
+    # Getting the current system language.
+    local ____sys_lang;
+
 	__locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
+	____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     #**** Code ****
     # Deleting the existing "Bash-utils.sh" file.
@@ -606,8 +627,28 @@ function CompileInSingleFile()
     # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
     if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED"; return 1; fi
 
-    # --------------------------------------------------------------------------------------------
-    # Writing the initializer script's translations files content first into the file to generate.
+    # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+
+    if [ "${p_locale,,}" != "en" ]; then
+        PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN";
+
+        if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")"; return 1;
+        else
+            ShellcheckVerif "$__locale_file_path_en" || local __err="error";
+
+            WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
+        fi
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+
+        PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+    fi
+
+    # ------------------------------------------------------------------------------------------
+    # Writing now the initializer script's translations files content into the file to generate.
 
     PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -618,7 +659,7 @@ function CompileInSingleFile()
         WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -707,9 +748,6 @@ function CompileInSingleFile()
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
-
-    # Getting the current system language.
-    local ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__locale_final_file"; echo;
 
