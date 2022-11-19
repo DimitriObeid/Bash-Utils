@@ -231,12 +231,14 @@ function PrintSuccessLine   { echo; printf "%s" "$__GREEN"; PrintLine; printf "%
 function BytesToHuman()
 {
     #**** Parameters ****
-    local L_BYTES="${1:-0}";    # Int       - Default : 0       - Raw size in bytes.
-    local L_PAD="${2:-no}";     # String    - Default : "no"    - Allow result display padding.
-    local L_BASE="${3:-1024}";  # Int       - Default : 1024    - Base (1000 (metric) or 1024 (binary notation))
-    local V_LANG="${4:-en}";    # String    - Default : en      - Language, for localizing the byte count.
+    local L_BYTES="${1:-0}";    # Int               - Default : 0       - Raw size in bytes.
+    local L_PAD="${2:-no}";     # String            - Default : no      - Allow result display padding.
+    local L_BASE="${3:-1024}";  # Int               - Default : 1024    - Base (1000 (metric) or 1024 (binary notation))
+    local V_LANG="${4:-en}";    # ISO 639-1 code    - Default : en      - Language, for localizing the byte count (default language : English).
 
     #**** Code ****
+    if [ "${L_PAD^^}" == 'NULL' ]; then L_PAD='no';
+
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
     local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
 
@@ -693,7 +695,7 @@ function CompileInSingleFile()
 
     printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__locale_final_file"; echo;
 
-    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__locale_final_file")" '' 1000 "$____sys_lang")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__locale_final_file")" 'NULL' 1000 "$____sys_lang")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__locale_final_file")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__locale_final_file")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__locale_final_file")";

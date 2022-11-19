@@ -508,12 +508,12 @@ function BU.Main.Files.GetByteSize()
 
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
