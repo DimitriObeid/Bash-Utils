@@ -280,6 +280,64 @@ function BU.ModuleInit.GetModuleInitLanguage()
         BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     else
+        # Sourcing the English translation file before sourcing the current language's translation file, in order to
+        BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/en.locale" || {
+            echo >&2;
+
+            # Deutch | German
+            [ "${v_lang_backup,,}" = 'de' ] && {
+                echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
+                echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
+
+                echo "Da die Nachrichten in der Modulinitialisierungsdatei in Variablen gespeichert werden, stützt sich diese Datei auf diese Übersetzungsdateien, die diese Variablen definieren" >&2;
+                echo "Anhalten der Skriptausführung" >&2;
+                echo >&2;
+
+                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+                return 1;
+            }
+
+            # English
+            [ "${v_lang_backup,,}" = 'en' ] && {
+                echo '-----------------------------------------------------------' >&2 && echo >&2;
+                echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
+
+                echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
+                echo "Aborting the script's execution" >&2;
+                echo >&2;
+
+                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+                return 1;
+            }
+
+            # Español | Spanish
+            [ "${v_lang_backup,,}" = 'es' ] && {
+                echo '-----------------------------------------------------------------' >&2 && echo >&2;
+                echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
+
+                echo "Como los mensajes del fichero de inicialización del módulo se almacenan en variables, este fichero es asumido por estos ficheros de traducción, que definen estas variables" >&2;
+                echo "Detener la ejecución del script" >&2;
+                echo >&2;
+
+                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+                return 1;
+            }
+
+            # Français | French
+            [ "${v_lang_backup,,}" = 'fr' ] && {
+                echo '---------------------------------------------------------------------' >&2 && echo >&2;
+                echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION ANGLAIS" >&2 && echo >&2;
+
+                echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
+                echo "Arrêt de l'exécution du script" >&2;
+                echo >&2;
+
+                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+                return 1;
+            }
+        }
+
+        #
         BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/${p_lang_ISO_639_1}.locale" || {
             [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
             [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
