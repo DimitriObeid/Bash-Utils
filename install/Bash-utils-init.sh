@@ -958,14 +958,14 @@ function BU.ModuleInit.FindPath()
 	if [ -n "$v_specific_var" ]; then
         local v_tmpfile;
 
-        v_tmpfile="$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.$v_specific_var.tmp";
+        v_tmpfile="$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.$v_specific_var.tmp";
 
         touch "$v_tmpfile";
 
         echo "${v_parentdir}/${v_target}" > "$v_tmpfile";
     else
         # Creating a variable to store the path of the file, if this value needs to be processed externally.
-        __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "$__BU_MODULE_INIT__FIND_PATH_RETVAL" > "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.tmp"
+        __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "$__BU_MODULE_INIT__FIND_PATH_RETVAL" > "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.tmp"
     fi
 
 	return 0;
@@ -2427,7 +2427,7 @@ function BashUtils_InitModules()
 
                         local v_module_aliases_file_name;
 
-                        v_module_aliases_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modaliasfile.tmp")")";
+                        v_module_aliases_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.modaliasfile.tmp")")";
                 fi
 
                 if [ -n "$v_module_aliases_file_name" ]; then
@@ -2466,7 +2466,7 @@ function BashUtils_InitModules()
 
                         local v_module_config_file_name;
 
-                        v_module_config_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modconffile.tmp")")";
+                        v_module_config_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.modconffile.tmp")")";
                 else
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
@@ -2544,7 +2544,7 @@ function BashUtils_InitModules()
                     [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'shut' 'modinitfile')" ]]; then
                         local v_module_init_file_name;
 
-                        v_module_init_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.modinitfile.tmp")")";
+                        v_module_init_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.modinitfile.tmp")")";
                 else
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
@@ -2735,7 +2735,7 @@ function BU.ModuleInit.UnsourceModule()
                 [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.Unsource.${p_module}.sh"                   'shut' 'unsourceexcept')" ]] || \
                 [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.UnsourceExceptions.${p_module}.sh"         'shut' 'unsourceexcept')" ]]; then
 
-                    v_module_unsourceexcept_file_name="$(basename "$(cat "$__BU_MODULE_INIT__ROOT/tmp/BU_module_init__find_path.unsourceexcept.tmp")")";
+                    v_module_unsourceexcept_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.unsourceexcept.tmp")")";
 
                     # Sourcing the file to get every functions and variables names, in order to unset each of them.
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "$v_module_unsourceexcept_file_name")" || {
