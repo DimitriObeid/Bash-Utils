@@ -68,7 +68,7 @@ __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES="$__BU_MAIN_CO
 function BU.Main.Colors.SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
 
@@ -135,7 +135,7 @@ function BU.Main.Colors.SetBGColor()
 function BU.Main.Colors.SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
 

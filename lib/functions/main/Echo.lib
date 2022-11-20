@@ -104,10 +104,11 @@ function BU.Main.Echo.Debug()
 {
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
-        local p_filename=$1;    # String    - Default : NULL    - File where the function currently processed is defined.
-        local p_funcname=$2;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
-        local p_category=$3;    # String    - Default : NULL    - Get the category of the targeted function.
-        local p_subcateg=$4;    # String    - Default : NULL    - Get the sub-category of the targeted function.
+        local p_modname=$1;     # String    - Default : NULL    - Module where the function currently processed is defined.
+        local p_filename=$2;    # String    - Default : NULL    - File where the function currently processed is defined.
+        local p_funcname=$3;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
+        local p_category=$4;    # String    - Default : NULL    - Get the category of the targeted function.
+        local p_subcateg=$5;    # String    - Default : NULL    - Get the sub-category of the targeted function.
 
         #**** Code ****
         [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ] &&
@@ -141,6 +142,16 @@ function BU.Main.Echo.Debug()
                     for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
                         # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
                         [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
+                    done
+                fi
+            
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = m?(od?(ule?))?(s) ]]; then
+                if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[0],,}" == 'all' ]; then
+                    BU.Main.Echo.__Debug "$p_modname"; return 0;
+                else
+                    for targetModule in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[@]}"; do
+                        # If the "$targetModule" value is found in the array, and the function which comes from the "$p_modname" file matches with the "$targetModule" variable's value.
+                        [ "${targetModule,,}" == "${p_modname,,}" ] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -183,7 +194,7 @@ printf "
 function BU.Main.Echo.__EchoOutput()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
@@ -268,7 +279,7 @@ function BU.Main.Echo.__EchoOutput()
 function BU.Main.Echo.__EchoCPLS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
@@ -372,7 +383,7 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSA
 function BU.Main.Echo.Error()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -420,7 +431,7 @@ function BU.Main.Echo.Error()
 function BU.Main.Echo.Msg()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -461,7 +472,7 @@ function BU.Main.Echo.Msg()
 function BU.Main.Echo.Newstep()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -502,7 +513,7 @@ function BU.Main.Echo.Newstep()
 function BU.Main.Echo.Read()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -525,7 +536,7 @@ function BU.Main.Echo.Read()
 function BU.Main.Echo.Success()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -566,7 +577,7 @@ function BU.Main.Echo.Success()
 function BU.Main.Echo.Warning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
@@ -1003,7 +1014,7 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_P
 function BU.Main.Echo.Newline()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS" \
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL";
 

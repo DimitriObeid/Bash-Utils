@@ -225,6 +225,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 }
 
 # Rewriting the library's languages messages (this function is not called if the framework is wrapped in a single file).
+# shellcheck disable=SC1091
 function BU.ModuleInit.GetModuleInitLanguage()
 {
     #**** Parameters ****
@@ -1455,7 +1456,6 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == file?(s) ]] \
 									||  [[ "${value^^}" == FNCT?(S) ]] \
 									||  [[ "${value,,}" == function?(s) ]] \
-									||  [  "${value^^}" == 'M' ] \
 									||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
 									||  [  "${value^^}" == 'S' ] \
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
