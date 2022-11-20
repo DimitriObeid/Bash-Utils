@@ -185,7 +185,7 @@ printf "
 
 " > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" ||
     {
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH »" >&2; echo >&2; exit 1;
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « $LINENO » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « $__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH FILE »" >&2; echo >&2; exit 1;
     }
 }
 
