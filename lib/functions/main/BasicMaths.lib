@@ -61,7 +61,7 @@ __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since it's not mine and I added more informations as comments) :
+# Initial source of this AWK script (since it's not mine, plus I added more informations as comments, and I added the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU.Main.BasicMaths.BytesToHuman()
 {
@@ -87,12 +87,12 @@ function BU.Main.BasicMaths.BytesToHuman()
 
         # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta.
         if (lang == "fr") {
-            # Ternary condition : si le format de base utilise le préfixe binaire, cette unité "io" ([préfixe]bioctet) est affichée après la valeur. Sinon, cette unité "o" ([préfixe]octet) est affichée après la valeur.
+            # Condition ternaire : si le format de base utilise le préfixe binaire, cette unité "io" ([préfixe]bioctet) est affichée après la valeur. Sinon, cette unité "o" ([préfixe]octet) est affichée après la valeur.
             basesuf=(base==1024)?"io":"o"
 
             s="oKMGTPEZY"
         } else {
-            # Condition ternaire : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
+            # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
             basesuf=(base==1024)?"iB":"B"
 
             s="BKMGTPEZY"

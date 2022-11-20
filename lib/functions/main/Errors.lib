@@ -231,7 +231,7 @@ function BU.Main.Errors.HandleErrors()
     local v_getSeparatorOccurencesfromAdviceStr;
     local v_checkIfErrorStringIsNotNull;
 
-    v_checkIfErrorStringIsNotNull="$(BU.Main.Decho.Decho.FMT_I "No string to display as $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()" 'NULL' 'BI') function's error string")";
+    # v_checkIfErrorStringIsNotNull="$(BU.Main.Decho.Decho.FMT_I "No string to display as $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()" 'NULL' 'BI') function's error string")";
 
 	# ***** Code *****
 	BU.Main.Status.CheckSTAT_ERROR 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
