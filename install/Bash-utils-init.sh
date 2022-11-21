@@ -1259,9 +1259,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
     local v_ArrayValueFound;
 
     #**** Code ****
-    for i in "${va_correctValues[@]}"; do
-        if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" = "${i}" ]; then v_ArrayValueFound='true'; return 0; fi
-    done
+    [[ ${va_correctValues[*]} =~ ${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,} ]] && { v_ArrayValueFound='true'; return 0; };
 
     if [ "${v_ArrayValueFound,,}" != 'true' ]; then BU.ModuleInit.DisplayStatError "$p_file" "$p_lineno" \
             "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" "__BU_MODULE_INIT_STAT_DEBUG_BASHX" "${va_correctValues[@]}"; return "$?"; fi
@@ -1276,7 +1274,7 @@ function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG=
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "$?"; return 0; }
 
 # Checking if the debug mode is active.
-function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ] && return 0; }
+function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ] && return 0; return 1; }
 
 # Processing the "module" value's parameters.
 function BU.ModuleInit.ProcessFirstModuleParameters()
@@ -1934,7 +1932,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
     __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cat' 'cats' 'categ' 'categs' 'category' 'categories' 'F' 'file' 'files' 'FNCT' 'FNCTS' 'function' 'functions' 'S' 'sub-category' '' '' '' '');
+    __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cat' 'cats' 'categ' 'categs' 'category' 'categories' 'F' 'file' 'files' 'FNCT' 'FNCTS' 'function' 'functions' 'M' 'ms' 'mod' 'mods' 'module' 'modules' 'S' 'sub-category' '' '' '' '');
     __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO - 1 ))";
 }
 
