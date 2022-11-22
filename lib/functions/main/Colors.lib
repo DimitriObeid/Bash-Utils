@@ -122,7 +122,7 @@ function BU.Main.Colors.SetBGColor()
             echo -ne "\e["; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -195,7 +195,7 @@ function BU.Main.Colors.SetTextColor()
             echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 

@@ -107,6 +107,7 @@ function BU.Main.Echo.Debug()
     echo "ARRAY FILES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY}";
     echo "ARRAY FNCTS : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY}";
     echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY}";
+    echo;
 
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
@@ -125,7 +126,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetCategory" value is found in the array, and the function which comes from the "$p_category" file matches with the "$targetCategory" variable's value.
-                        [ "${targetCategory,,}" == "${p_category,,}" ] && { BU.Main.Echo__Debug "$p_funcname"; break; }
+                        [[ "${targetCategory,,}" =~ "${p_category,,}" ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -137,7 +138,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetFile in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[@]}"; do
                         # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile" variable's value.
-                        [ "${targetFile,,}" == "${v_file,,}" ] && { BU.Main.Echo.__Debug "$p_funcname"; break; };
+                        [[ "${targetFile,,}" =~ "${v_file,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; };
                     done
                 fi
 
@@ -147,7 +148,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
                         # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
-                        [ "${targetFunction,,}" == "${p_funcname,,}" ] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
+                        [[ "${targetFunction,,}" =~ "${p_funcname,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
                     done
                 fi
             
@@ -157,7 +158,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetModule in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[@]}"; do
                         # If the "$targetModule" value is found in the array, and the function which comes from the "$p_modname" file matches with the "$targetModule" variable's value.
-                        [ "${targetModule,,}" == "${p_modname,,}" ] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
+                        [[ "${targetModule,,}" =~ "${p_modname,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -167,7 +168,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetSubCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetSubCategory" value is found in the array, and the function which comes from the "$p_subcateg" file matches with the "$targetSubCategory" variable's value.
-                        [ "${targetSubCategory,,}" == "${p_subcateg,,}" ] && { BU.Main.Echo__Debug "$p_funcname"; break; }
+                        [[ "${targetSubCategory,,}" =~ "${p_subcateg,,}" ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
                     done
                 fi
             fi
