@@ -72,7 +72,7 @@ printf "
 
 -------------------------------------------------
                       DEBUG
--------------------------------------------------   
+-------------------------------------------------
 
 "
     sleep "$p_sleep";
@@ -236,15 +236,9 @@ function BU.ModuleInit.GetModuleInitLanguage()
     local v_langMatch;
 
     #**** Code ****
-    for i in "${v_supportedLang[@]}"; do
-        if [[ "${i}" == "${p_lang_ISO_639_1}" ]]; then
-            v_langMatch="match";
+    [[ ${v_supportedLang[*]} =~ ${p_lang_ISO_639_1,,} ]] && v_langMatch="match";
 
-            break;
-        fi
-    done
-
-    # If the selected language was not found.
+    # If the selected language was not found among the supported languages.
     if [ -z "$v_langMatch" ]; then
 
         if [ -n "${p_lang_ISO_639_1}" ]; then
@@ -259,7 +253,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
         echo >&2;
 
         # Changing the current language to English.
-        LANG="en_US.UTF-8";
+        __BU_MODULE_INIT__USER_LANG="en_US.UTF-8";
     fi
 
 	if [ "${p_lang_ISO_639_1^^}" = 'NULL' ]; then
@@ -1880,7 +1874,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__tmp_dir__lineno="$(( LINENO - 1 ))";
 
     unset ____BU_MODULE_INIT____FIND_PATH____TMP_DIR;
-    
+
     # CONFIGURATIONS DIRECTORIES
     __BU_MODULE_INIT__CONFIG_DIR="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "config")"                                           || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; };
     __bu_module_init__config_dir__lineno="$(( LINENO - 1 ))";
