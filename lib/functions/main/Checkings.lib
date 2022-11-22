@@ -387,15 +387,15 @@ function BU.Main.Checkings.CheckRootEUID()
     local p_error=$1;
 
     #**** Code ****
-    if  [   "$EUID"         -eq 0               ];  then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else
-    if  [[  "${p_error^^}"  ==  E?(RR?(OR))     ]]; then
+    if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else
+        if [[ "${p_error^^}" == E?(RR?(OR)) ]]; then
+            if [ "$EUID" -ne 0 ]; then
+                BU.Main.Errors.HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
+                    "EUID != 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+            fi
 
-        if [ "$EUID" -ne 0 ]; then
-            BU.Main.Errors.HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
-                "EUID != 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
-
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
     fi
 }
 

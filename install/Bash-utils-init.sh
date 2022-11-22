@@ -159,6 +159,7 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 }
 
 # Set english as default language if an unsupported language is stored in the "$__BU_MODULE_INIT__USER_LANG" global variable (this function is not called if the framework is wrapped in a single file).
+# shellcheck disable=SC1090,SC1091
 function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
     # Backupping the former language chosen.
@@ -225,7 +226,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 }
 
 # Rewriting the library's languages messages (this function is not called if the framework is wrapped in a single file).
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC1090
 function BU.ModuleInit.GetModuleInitLanguage()
 {
     #**** Parameters ****
