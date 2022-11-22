@@ -196,7 +196,7 @@ function BU.Main.Errors.Exit()
 ## SCRIPT'S ERRORS HANDLING
 ## DEBUG ID : script-errors-handling
 
-__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONSscript-errors-handling";
+__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="$__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS::script-errors-handling";
 
 # "BU.Main.Errors.HandleErrors()" function --> Handling file name presence.
 function BU.Main.Errors.HandleErrors_File()        { if [ -z "$1" ]; then BU.Main.Decho.Decho.Path "<no specified file>"; else BU.Main.Decho.Decho.Path "$1"; fi; }

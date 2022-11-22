@@ -1431,7 +1431,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             if      [ "${value,,}" = 'false' ]                                  || [ "${value,,}" = 'true' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG="${value}";                     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
                             else
-                                BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug" "« --stat-debug=false », « --stat-debug=true »" || { v_loop_error='error'; break; };
+                                BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug" "\n    --stat-debug=false\n    --stat-debug=true" || { v_loop_error='error'; break; };
                             fi
                         ;;
 
@@ -1459,7 +1459,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}"      "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
                                 else
-                                    BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug-bashx" "« --stat-debug-bashx=category », « --stat-debug-bashx=file », « --stat-debug-bashx=function », « --stat-debug-bashx=sub-category »" || { v_loop_error='error'; break; };
+                                    BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug-bashx" "\n    --stat-debug-bashx=category\n    --stat-debug-bashx=file\n    --stat-debug-bashx=function\n    --stat-debug-bashx=module\n    --stat-debug-bashx=sub-category" || { v_loop_error='error'; break; };
                                 fi
                             else
                                 BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE}";

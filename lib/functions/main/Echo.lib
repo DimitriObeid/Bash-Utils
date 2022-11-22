@@ -102,11 +102,11 @@ function BU.Main.Echo.DebugEnd()
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "bash -x".
 function BU.Main.Echo.Debug()
 {
-    echo "DEBUG BASHX : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX}";
-    echo "ARRAY CATEG : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY}";
-    echo "ARRAY FILES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY}";
-    echo "ARRAY FNCTS : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY}";
-    echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY}";
+    echo "DEBUG BASHX : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX[*]}";
+    echo "ARRAY CATEG : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";
+    echo "ARRAY FILES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}";
+    echo "ARRAY FNCTS : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";
+    echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}";
     echo;
 
     BU.ModuleInit.CheckIsDebugging && {
@@ -126,7 +126,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetCategory" value is found in the array, and the function which comes from the "$p_category" file matches with the "$targetCategory" variable's value.
-                        [[ "${targetCategory,,}" =~ "${p_category,,}" ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
+                        [[ ${targetCategory,,} =~ ${p_category,,} ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -138,7 +138,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetFile in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[@]}"; do
                         # If the "$targetFile" value is found in the array, and the function which comes from the "$v_file" file matches with the "$targetFile" variable's value.
-                        [[ "${targetFile,,}" =~ "${v_file,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; };
+                        [[ ${targetFile,,} =~ ${v_file,,} ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; };
                     done
                 fi
 
@@ -148,17 +148,17 @@ function BU.Main.Echo.Debug()
                 else
                     for targetFunction in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[@]}"; do
                         # If the "$targetFunction" value is found in the array, and the function which comes from the "$p_funcname" file matches with the "$targetFunction" variable's value.
-                        [[ "${targetFunction,,}" =~ "${p_funcname,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
+                        [[ ${targetFunction,,} =~ ${p_funcname,,} ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
                     done
                 fi
-            
+
             elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = m?(od?(ule?))?(s) ]]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_modname"; return 0;
                 else
                     for targetModule in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[@]}"; do
                         # If the "$targetModule" value is found in the array, and the function which comes from the "$p_modname" file matches with the "$targetModule" variable's value.
-                        [[ "${targetModule,,}" =~ "${p_modname,,}" ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
+                        [[ ${targetModule,,} =~ ${p_modname,,} ]] && { BU.Main.Echo.__Debug "$p_funcname"; break; }
                     done
                 fi
 
@@ -168,7 +168,7 @@ function BU.Main.Echo.Debug()
                 else
                     for targetSubCategory in "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[@]}"; do
                         # If the "$targetSubCategory" value is found in the array, and the function which comes from the "$p_subcateg" file matches with the "$targetSubCategory" variable's value.
-                        [[ "${targetSubCategory,,}" =~ "${p_subcateg,,}" ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
+                        [[ ${targetSubCategory,,} =~ ${p_subcateg,,} ]] && { BU.Main.Echo__Debug "$p_funcname"; break; }
                     done
                 fi
             fi
@@ -216,7 +216,7 @@ function BU.Main.Echo.__EchoOutput()
 	#**** Code ****
 	# If the "$p_type" argument is a string, then the first character is extracted.
 	if ! BU.Main.Checkings.IsAlphaChar "$p_type"; then
-        local v_type=${p_type1};
+        local v_type=${p_type:0:1};
 
         p_type="$v_type";
 	fi
@@ -1006,12 +1006,12 @@ function BU.Main.Echo.Yellow()
 #### LINE BREAKS
 #### DEBUG ID : Echo.line-breaks
 
-__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="Echo.line-breaks";
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="Echo::line-breaks";
 
 ## LINE BREAKS ACCORDING TO THE "$__BU_MAIN_PROJECT_LOG_FILE_PATH" VARIABLE VALUE
 ## DEBUG ID : line-breaks-according-to-the-project-log-file-var-val
 
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKSline-breaks-according-to-the-project-log-file-var-val":
+__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS::line-breaks-according-to-the-project-log-file-var-val":
 
 # Redirecting the output of the "echo" command
 
@@ -1023,7 +1023,7 @@ function BU.Main.Echo.Newline()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS" \
-        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL";
+        "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL";
 
     #**** Parameters ****
     local p_number=$1;

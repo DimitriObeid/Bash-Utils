@@ -242,7 +242,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'authorize' ]              || [ "${value,,}" = 'forbid' ]              || [ "${value,,}" = 'restrict' ]; then
                             __BU_MAIN_STAT_DECHO="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_DECHO' "$__BU_MAIN_STAT_DECHO" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-decho" "« --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
                     fi;;
@@ -255,7 +255,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
                             __BU_MAIN_STAT_ECHO="$value";               BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ECHO' "$__BU_MAIN_STAT_ECHO" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-echo" "« --stat-echo=false », « stat-echo=true »";
                     fi;;
@@ -268,12 +268,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'fatal' ]; then
                             __BU_MAIN_STAT_ERROR="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
 
                     elif    [ "${value,,}" = 'void' ]; then
                             __BU_MAIN_STAT_ERROR='';                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-error" "« --stat-error=fatal », « stat-error=void »";
                     fi;;
@@ -286,7 +286,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
                             __BU_MAIN_STAT_LOG="$value";                BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG' "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-log" "« --stat-log=false », « stat-log=true »";
                     fi;;
@@ -299,12 +299,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'log' ]                    || [ "${value,,}" = 'tee' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
 
                     elif    [ "${value,,}" = 'void' ]; then
-                            __BU_MAIN_STAT_LOG_REDIRECT='';             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_Rs" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
+                            __BU_MAIN_STAT_LOG_REDIRECT='';             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-log-r" "« --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
                     fi;;
@@ -317,7 +317,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'authorized' ]             || [ "${value,,}" = 'forbidden' ]           || [ "${value,,}" = 'restricted' ]; then
                             __BU_MAIN_STAT_OPERATE_ROOT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_OPERATE_ROOT' "$__BU_MAIN_STAT_OPERATE_ROOT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-op-root" "« --stat-op-root=authorized », « stat-op-root=forbidden », « --stat-op-root=restricted »";
                     fi;;
@@ -330,7 +330,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_HEADER="$value";        BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_HEADER' "$__BU_MAIN_STAT_TIME_HEADER" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-header" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
@@ -343,7 +343,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_NEWLINE="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_NEWLINE' "$__BU_MAIN_STAT_TIME_NEWLINE" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-newline" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
@@ -356,7 +356,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      BU.Main.Checkings.IsPositiveFloat "$value"; then
                             __BU_MAIN_STAT_TIME_TXT="$value";           BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TIME_TXT' "$__BU_MAIN_STAT_TIME_TXT" 'float' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-time-txt" "« $(BU.Main.Decho.Decho.FMT_I "a floating number" "$__BU_MAIN_COLOR_TXT_HIGHLIGHT") »";
                     fi;;
@@ -369,7 +369,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="$value";            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "$__BU_MAIN_STAT_TXT_FMT" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+="$value";
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
 
                             # Debug : testing if the checking of the arguments works.
                             echo "--stat-txt-time value : $value";

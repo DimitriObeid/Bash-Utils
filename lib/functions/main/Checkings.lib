@@ -111,7 +111,7 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 ## DATE FORMAT
 ## DEBUG ID : date-format
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.date-format";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.date-format";
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
@@ -173,7 +173,7 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 ## NUMBER VALUES
 ## DEBUG ID : number-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.number-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.number-values";
 
 # Checking floating value.
 function BU.Main.Checkings.IsFloat()
@@ -258,7 +258,7 @@ function BU.Main.Checkings.IsPositiveInt()
 ## CHARACTERS AND STRING VALUES
 ## DEBUG ID : characters-and-string-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_Checkings.characters-and-string-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU.Main.Checkings.IsAlphaChar()
@@ -406,7 +406,7 @@ alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
 ## BASIC HARDWARE CHECKINGS
 ## DEBUG ID : basic-hardware-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_Checkings.basic-hardware-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS::basic-hardware-checkings";
 
 # Check if hard drive is full.
 function BU.Main.Checkings.CheckDiskUsedSpace()
@@ -466,7 +466,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a filepath in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
+                "Please give a filepath in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
                 "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -496,7 +496,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a valid path in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
+                "Please give a valid path in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
                 "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -1154,7 +1154,7 @@ __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings.text-checkings"
 ## FORMATTING CHECKINGS
 ## DEBUG ID : formatting-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_Checkings.formatting-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS.formatting-checkings";
 
 # Checking if the project's color code file exists or not.
 
