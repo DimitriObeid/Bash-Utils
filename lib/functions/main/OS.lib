@@ -538,6 +538,7 @@ function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDist
 function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # Checking debian versions.
+function BU.Main.OS.IsLinuxDistroDebian4()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '4'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian5()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '5'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian7()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
@@ -642,7 +643,7 @@ function BU.Main.OS.CheckOSXVersion()
 	#**** Code ****
 	BU.Main.OS.IsOSX && {
 		# TODO : Manage the dots between the major and the minor versions.
-		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; fi;
+		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; return 0; fi;
 
 		else
 			BU.Main.OS.IsOSXMavericks					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
