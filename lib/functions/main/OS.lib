@@ -441,6 +441,28 @@ function BU.Main.OS.GetLinuxKernelMajorVersion()
     local v_major=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's major version.
 
     #**** Code ****
+    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
+            local X;
+
+            X="$(cat '/proc/version')";
+
+            echo "$X" | grep -qi "$v_major" || return 1;
+
+            return 0;
+        };
+
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
+        return 1;
+    else
+        return 1;
+    fi
+
     return 0;
 }
 
@@ -451,6 +473,28 @@ function BU.Main.OS.GetLinuxKernelMinorVersion()
     local v_minor=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's minor version.
 
     #**** Code ****
+    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
+            local X;
+
+            X="$(cat '/proc/version')";
+
+            echo "$X" | grep -qi "$v_minor" || return 1;
+
+            return 0;
+        };
+
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+
+        return 1;
+    else
+        return 1;
+    fi
+
     return 0;
 }
 
@@ -466,7 +510,7 @@ function BU.Main.OS.GetLinuxKernelVersion()
 
             X="$(cat '/proc/version')";
 
-            echo "$X" | grep -qi "$v_distro" || return 1;
+            echo "$X" | grep -qi "$v_kernelVer" || return 1;
 
             return 0;
         };
@@ -485,7 +529,7 @@ function BU.Main.OS.GetLinuxKernelVersion()
 }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]];                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]]                               &&      return 0;       return 1; }
 
 function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
 
@@ -633,7 +677,7 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB
 function BU.Main.OS.IsRunningInQemu()               { true; }
 
 # Checking if the system is running in VMware.
-function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware     > /dev/null; then return 0; else return 1; fi; }
 
 # Checking if the system is running in VirtualBox.
 function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
