@@ -588,6 +588,22 @@ function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDist
 function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
+function BU.Main.OS.IsLinuxDistroUbuntu1004()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1010()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1104()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1110()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1204()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1210()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1304()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1310()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1404()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1410()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1504()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1510()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1604()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1610()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1704()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu1710()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.10'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu1804()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu1810()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu1904()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
