@@ -538,6 +538,7 @@ function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDist
 function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # Checking debian versions.
+function BU.Main.OS.IsLinuxDistroDebian5()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '5'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian7()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian8()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '8'           &&      return 0;       return 1; }
@@ -550,6 +551,16 @@ function BU.Main.OS.IsLinuxDistroDebian11()           	{ BU.Main.OS.CheckLinuxDi
 function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
 
 # Checking Fedora versions.
+function BU.Main.OS.IsLinuxDistroFedora18()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '18'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora19()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '19'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora20()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '20'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora21()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '21'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora22()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '22'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora23()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '23'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora24()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '24'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora25()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '25'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora26()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '26'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora27()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '27'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora28()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora29()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '29'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora30()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '30'          &&      return 0;       return 1; }
