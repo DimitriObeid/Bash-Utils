@@ -85,6 +85,9 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
 
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD.checking-informations";
 
+# Checking if the current OS is BSD (general types).
+function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
+
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
