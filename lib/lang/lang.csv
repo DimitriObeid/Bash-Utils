@@ -284,7 +284,7 @@ __BU_MAIN_HEADERS_LIB__MSG__HeaderBase__bgColorPos_TOO_BIG,"This variable stores
 __BU_MAIN_HEADERS_LIB__MSG__HeaderBase__bgColorPos_NULL,"This variable stores the message that the value passed to the ""bgColorPos"" parameter is null",Warning : the length of the value passed as %s parameter is null,Avertissement : la longueur de la valeur passée au paramètre %s est nulle,,,
 __BU_MAIN_HEADERS_LIB__MSG__HeaderBase__bgColorPos_NOT_POS_INT,"This variable stores the message that the value passed to the ""bgColorPos"" parameter is not a positive integer",Warning : the value passed for the %s parameter is not a positive integer,Avertissement : la valeur passée au paramètre %s n'est pas un nombre entier positif,,,
 ,,,,,,
-__BU_MAIN_OS_LIB__MSG__GetLinuxDistro__PROC_FILE_UNREADABLE,"This variable stores the message that warns the user that the ""/proc/version"" file cannot be read",Unable to find or to read the %s file,Impossible de trouver ou de lire le fichier %s,,,
+__BU_MAIN_OS_LIB__MSG__GetLinuxDistro__PROC_FILE_UNREADABLE,"This variable stores the message that warns the user that the Linux specific ""/proc/version"" file cannot be read",Unable to find or to read the %s file,Impossible de trouver ou de lire le fichier %s,,,
 ,,,,,,
 __BU_MAIN_POSIXTERM_LIB__MSG__,This variable stores the message that,,,,,
 ,,,,,,

@@ -49,20 +49,253 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### OPERATING SYSTEM CHECKINGS
-#### DEBUG ID : os::operating-system-checkings
+#### ANDROID
+#### DEBUG ID : "os::android"
 
-__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS="os::operating-system-checkings";
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID="os::android";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID.checking-informations";
+
+# Checking if current OS is Android, running with the Termux terminal emulator.
+function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### BSD (GENERAL)
+#### DEBUG ID : "os::bsd"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD.checking-informations";
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### BSD (FREE BSD)
+#### DEBUG ID : "os::free-bsd"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD="os::free-bsd";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD.checking-informations";
+
+# Checking if current OS is FreeBSD.
+function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### BSD (NET BSD)
+#### DEBUG ID : "os::free-bsd"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD="os::net-bsd";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD.checking-informations";
+
+# Checking if current OS is NetBSD.
+function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### BSD (OPEN BSD)
+#### DEBUG ID : "os::open-bsd"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD="os::open-bsd";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-information
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD.checking-informations";
+
+# Checking if current OS is OpenBSD.
+function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CHROME OS
+#### DEBUG ID : "os::chrome"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS="os::chrome";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS.checking-informations";
+
+# Checking if current OS is Chrome OS.
+function BU.Main.OS.IsChromeOS()					{ true; }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### HAIKU
+#### DEBUG ID : "os::haiku"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU="os::haiku";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU.checking-informations";
+
+# Checking if current OS is Haiku OS.
+function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### GENERAL OS FUNCTIONS
+#### DEBUG ID : "os::general-os-functions"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="os::general-os-functions";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT.checking-informations";
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT.gathering-informations";
+
+# Checking the current operating system, by using the functions declared above.
+function BU.Main.OS.GetCurrentOS()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS";
+
+    #**** Code ****
+    BU.Main.OS.IsAndroidTermux        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.OS.IsChromeOS				&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsFreeBSD              	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsHaiku                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsOpenBSD             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinux                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSLWin10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSLWin11        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsLinuxWSL             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsNetBSD               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsWindows10            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsWindows11            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsOSX                    && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+    # Return an error code if the OS is not supported.
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 1;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### LINUX
+#### DEBUG ID : os::linux
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX="os::linux";
 
 ## SPECIFIC OS VERSIONS CHECKINGS FUNCTIONS
 ## DEBUG ID : specific-os-versions-checkings
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings";
+
+## CHECKING INFORMATIONS
+## DEBUG ID :
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX.checking-informations";
 
 # Checking the name of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistro()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS";
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS";
 
     #**** Parameters ****
     local v_distro=$1;  # String    - Default : NULL    - Name of the Linux distribution.
@@ -91,9 +324,12 @@ function BU.Main.OS.CheckLinuxDistro()
 # Checking the version of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistroVersion()
 {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS";
+
     #**** Parameters ****
 	local p_distro=$1;	# String    - Default : NULL    - Name of the Linux distribution.
-    local p_version=$2;	# String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+    local p_version=$2;	# String    - Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
     BU.Main.OS.IsLinux && {
@@ -143,35 +379,21 @@ function BU.Main.OS.CheckLinuxDistroVersion()
     }
 }
 
-# Checking the version of the currently used OS X operating system.
-function BU.Main.OS.CheckOSXVersion()
-{
-	#**** Parameters ****
-    local p_version=$1;	# String    # Default : NULL    - OS X version (can be an integer or a string (like 'Yosemite' for Mac OS X 10.10)).
+# Checking the major version of the Kernel of the currently used Linux distribution
+function BU.Main.OS.CheckLinuxKernelMajorVersion() { return 0; }
 
-	#**** Code ****
-	BU.Main.OS.IsOSX && {
-		# TODO : Manage the dots between the major and the minor versions.
-		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; fi;
+# Checking the minor version of the Kernel of the currently used Linux distribution
+function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 
-		else
-			BU.Main.OS.IsOSXMavericks					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXYosemite					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXElCapitan					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXSierra						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXHighSierra					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXMojave						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXCatalina					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXBigSur						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXMonterey					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+# Checking the version of the Kernel of the currently used Linux distribution.
+function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
 
-            # Returning an error code if the specific version is not found.
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+# -----------------------------------------------
 
-            return 1;
-		fi
-	}
-}
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX.gathering-informations";
 
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
 function BU.Main.OS.GetLinuxDistro()
@@ -209,119 +431,59 @@ function BU.Main.OS.GetLinuxDistroVersion()
     BU.Main.OS.GetLinuxDistro "$1" || return 1; return 0;
 }
 
-# Checking the current operating system, by using the functions declared above.
-function BU.Main.OS.GetCurrentOS()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FUNCTIONS";
-
-    #**** Code ****
-    BU.Main.OS.IsAndroidTermux        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-	BU.Main.OS.IsChromeOS				&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsFreeBSD              	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsHaiku                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOpenBSD             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinux                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSLWin10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSLWin11        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSL             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsNetBSD               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsWindows10            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsWindows11            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSX                    && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-
-    # Return an error code if the OS is not supported.
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-    return 1;
-}
-
-# Checking the Microsoft Windows version.
-function BU.Main.Checkings.CheckOSWindowsVersion()
+# Getting the major version of the Kernel of the currently used Linux distribution
+function BU.Main.OS.GetLinuxKernelMajorVersion()
 {
     #**** Parameters ****
-    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
+    local v_major=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's major version.
 
     #**** Code ****
-    if [ -z "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
-
-    if [ "$p_versionNumber" -eq "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
-
     return 0;
 }
 
-# Checking if the system is running in Qemu()
-function BU.Main.OS.IsRunningInQemu()               { true; }
+# Getting the minor version of the Kernel of the currently used Linux distribution
+function BU.Main.OS.GetLinuxKernelMinorVersion()
+{
+    #**** Parameters ****
+    local v_minor=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's minor version.
 
-# Checking if the system is running in VMware.
-function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
+    #**** Code ****
+    return 0;
+}
 
-# Checking if the system is running in VirtualBox.
-function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
+# Getting the version of the Kernel of the currently used Linux distribution by reading the content of the "/proc/version" file on Linux.
+function BU.Main.OS.GetLinuxKernelVersion()
+{
+    #**** Parameters ****
+    local v_kernelVer=${1:-NULL};   # String    - Default : NULL    - Linux kernel's version (can be passed like this : '5.15.0-53', or this : '5.15.0-53-generic').
 
-# Checking if the system is running in a virtual machine.
-function BU.Main.OS.IsVirtualized()                 { true; }
+    #**** Code ****
+    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
+            local X;
 
-# -----------------------------------------------
+            X="$(cat '/proc/version')";
 
-## GENERAL OS VERSIONS CHECKINGS
-## DEBUG ID : general-os-versions-checkings
+            echo "$X" | grep -qi "$v_distro" || return 1;
 
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__GENERAL_OS_VERSIONS_CHECKINGS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::general-os-versions-checkings";
+            return 0;
+        };
 
-# Checking if current OS is Android, running with the Termux terminal emulator.
-function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-# Checking if current OS is Chrome OS.
-function BU.Main.OS.IsChromeOS()					{ true; }
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
+        BU.Main.Echo.Newline;
 
-# Checking if current OS is FreeBSD.
-function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-# Checking if current OS is Haiku OS.
-function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
+        return 1;
+    else
+        return 1;
+    fi
+}
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU.Main.OS.IsLinux()                     	{ if [[ "$OSTYPE" == 'linux'* ]];                                   then    return 0; else  return 1; fi }
+function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]];                              &&      return 0;       return 1; }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
-function BU.Main.OS.IsLinuxWSL()                  	{ if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
-
-# Checking if current OS is NetBSD.
-function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
-
-# Checking if current OS is OpenBSD.
-function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
-
-# Checking if current OS is OSx.
-function BU.Main.OS.IsOSX()                         { if [[ "$OSTYPE" == 'darwin'* ]];                                  then    return 0; else  return 1; fi }
-
-# -----------------------------------------------
-
-## SPECIFIC OS VERSIONS CHECKINGS (FREE BSD)
-## DEBUG ID : specific-os-versions-checkings-freebsd
-
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_FREEBSD="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-freebsd";
-
-# -----------------------------------------------
-
-## SPECIFIC OS VERSIONS CHECKINGS (HAIKU)
-## DEBUG ID : specific-os-versions-checkings-haiku
-
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_HAIKU="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-haiku";
-
-# -----------------------------------------------
-
-## SPECIFIC OS VERSIONS CHECKINGS (LINUX)
-## DEBUG ID : specific-os-versions-checkings-linux
-
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_LINUX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS::specific-os-versions-checkings-linux";
-
-# Checking if current Linux distribution is Arch Linux.
 function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
 
 
@@ -380,11 +542,55 @@ function BU.Main.OS.IsLinuxDistroUbuntu2204()         	{ BU.Main.OS.CheckLinuxDi
 
 # -----------------------------------------------
 
-## SPECIFIC OS VERSIONS CHECKINGS (OSX)
-## DEBUG ID : specific-os-versions-checkings-osx
 
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_OSX="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS.specific-os-versions-checkings-osx";
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### OSX
+#### DEBUG ID : "os::osx"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX="os::osx";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX.checking-informations";
+
+# Checking the version of the currently used OS X operating system.
+function BU.Main.OS.CheckOSXVersion()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS";
+
+	#**** Parameters ****
+    local p_version=$1;	# String    # Default : NULL    - OS X version (can be an integer or a string (like 'Yosemite' for Mac OS X 10.10)).
+
+	#**** Code ****
+	BU.Main.OS.IsOSX && {
+		# TODO : Manage the dots between the major and the minor versions.
+		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; fi;
+
+		else
+			BU.Main.OS.IsOSXMavericks					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXYosemite					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXElCapitan					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXSierra						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXHighSierra					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXMojave						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXCatalina					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXBigSur						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXMonterey					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+            # Returning an error code if the specific version is not found.
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
+		fi
+	}
+}
+
+# Checking if current OS is OSx.
+function BU.Main.OS.IsOSX()                             { if [[ "$OSTYPE" == 'darwin'* ]];                                      then return 0; else return 1; fi;                    }
 
 # Checking OSX versions.
 function BU.Main.OS.IsOSXMavericks()					{ if command -v sw_vers > /dev/null; then if sw_vers | grep -q 10.9; 	then return 0; else return 1; fi; else return 1; fi; }
@@ -399,11 +605,75 @@ function BU.Main.OS.IsOSXMonterey()                     { if command -v sw_vers 
 
 # -----------------------------------------------
 
-## SPECIFIC OS VERSIONS CHECKINGS (WINDOWS)
-## DEBUG ID : specific-os-versions-checkings-windows
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
 
-# shellcheck disable=SC2034
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS__SPECIFIC_OS_VERSIONS_CHECKINGS_WINDOWS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPERATING_SYSTEM_CHECKINGS.specific-os-versions-checkings-windows";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VIRTUAL MACHINES
+#### DEBUG ID : "os::vms"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS="os::vms";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS.checking-informations";
+
+# Checking if the system is running in Qemu()
+function BU.Main.OS.IsRunningInQemu()               { true; }
+
+# Checking if the system is running in VMware.
+function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
+
+# Checking if the system is running in VirtualBox.
+function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
+
+# Checking if the system is running in a virtual machine.
+function BU.Main.OS.IsVirtualized()                 { true; }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS.gathering-informations";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### WINDOWS
+#### DEBUG ID : "os::windows"
+
+__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS="os::windows";
+
+## CHECKING INFORMATIONS
+## DEBUG ID : "checking-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS.checking-informations";
+
+# Checking the Microsoft Windows version.
+function BU.Main.Checkings.CheckOSWindowsVersion()
+{
+    #**** Parameters ****
+    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
+
+    #**** Code ****
+    if [ -z "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
+
+    if [ "$p_versionNumber" -eq "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
+
+    return 0;
+}
 
 # Checking if the current Windows' architecture is 32 bits.
 function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 32; then return 0; else return 1; fi else return 1; fi; }
@@ -444,11 +714,21 @@ function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.Checkings.CheckOSWindowsVe
 # Checking if the currently used version of Windows is the Windows 11 LTSC version.
 function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	then return 0; else return 1; fi }
 
-# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
+function BU.Main.OS.IsLinuxWSL()                        { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    then    return 0; else  return 1; fi }
+
+# Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "Microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
 function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microsoft                                 &&      return 0;       return 1; }
 
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
 function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      return 0;       return 1; }
+
+# -----------------------------------------------
+
+## GATHERING INFORMATIONS
+## DEBUG ID : "gathering-informations"
+
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS.gathering-informations";
 
 # -----------------------------------------------
 
