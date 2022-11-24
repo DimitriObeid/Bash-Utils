@@ -1452,7 +1452,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                                 if      [[ "${value,,}" == c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == c?(at?(eg?(orie)))?(s) ]] \
 									||  [[ "${value,,}" == f?(i?(l?(e))?(s)) ]] \
-									||  [[ "${value^^}" == FN?(C?(T))?(S)) ]] \
+									||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 									||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
 									||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
@@ -1935,7 +1935,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 #     if      [[ "${value,,}" == c?(at?(eg?(ory))) ]] \
 # 	||  [[ "${value,,}" == c?(at?(eg?(orie)))?(s) ]] \
 # 	||  [[ "${value,,}" == f?(i?(l?(e))?(s)) ]] \
-# 	||  [[ "${value^^}" == FN?(C?(T))?(S)) ]] \
+# 	||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 # 	||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
 # 	||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
 # 	||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
