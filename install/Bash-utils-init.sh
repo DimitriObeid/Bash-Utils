@@ -1279,6 +1279,8 @@ function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ] && return 0; return 1; }
 
 # Processing the "module" value's parameters.
+
+# shellcheck disable=SC1090
 function BU.ModuleInit.ProcessFirstModuleParameters()
 {
     #**** Parameters ****
@@ -2058,6 +2060,8 @@ function BU.ModuleInit.HandleErrors()
 # IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig"
 # functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
 # to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos" function.
+
+# shellcheck disable=SC1090
 function BU.ModuleInit.ParseCSVLang()
 {
     #**** Parameters ****
@@ -2108,7 +2112,7 @@ function BU.ModuleInit.ParseCSVLang()
 		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
 		BU.ModuleInit.Msg;
 
-		source "${v_outputFilePath}" || {
+		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && source "${v_outputFilePath}" || {
             local C="$?";
 
             local lineno="$(( LINENO - 3 ))";
@@ -2256,7 +2260,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
 
-			source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; };
+			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; };
 
 			return 0;
 		else
@@ -2830,6 +2834,8 @@ function BU.ModuleInit.UnsourceModule()
                     v_module_unsourceexcept_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.unsourceexcept.tmp")")";
 
                     # Sourcing the file to get every functions and variables names, in order to unset each of them.
+
+                    # shellcheck disable=SC1090
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "$v_module_unsourceexcept_file_name")" || {
                         BU.Main.Errors.HandleErrors "1" "UNABLE TO SOURCE THE ${p_module} MODULE'S UNSOURCER FILE" \
                             "" "" "$(basename "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))")"
