@@ -340,7 +340,27 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             if BU.Main.OS.GetLinuxDistro "$p_distro"      	&& BU.Main.OS.GetLinuxDistroVersion "$p_version"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
+            BU.Main.OS.IsLinuxDistroDebian && {
+                BU.Main.OS.IsLinuxDistroDebian5             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian6             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian7             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian8             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian9             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian10            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian11            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            }
+
             BU.Main.OS.IsLinuxDistroFedora && {
+                BU.Main.OS.IsLinuxDistroFedora18            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora19            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora20            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora21            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora22            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora23            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora24            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora25            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora26            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora27            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
                 BU.Main.OS.IsLinuxDistroFedora28          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
                 BU.Main.OS.IsLinuxDistroFedora29          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
                 BU.Main.OS.IsLinuxDistroFedora30          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -358,15 +378,32 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             }
 
             BU.Main.OS.IsLinuxDistroUbuntu && {
-                BU.Main.OS.IsLinuxDistroUbuntu1804        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu1810        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu1904        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu1910        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu2004        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu2010        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu2104        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu2110        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu2204       	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu10_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu10_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu11_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu11_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu12_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu12_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu13_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu13_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu14_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu14_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu15_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu15_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu16_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu16_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu17_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu17_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu18_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu18_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu19_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu19_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu20_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu20_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu21_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu21_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu22_04       	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu22_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 # Returning an error code if the specific version is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -589,31 +626,37 @@ function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDist
 function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # Checking Ubuntu versions.
-function BU.Main.OS.IsLinuxDistroUbuntu1004()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1010()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1104()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1110()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1204()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1210()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1304()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1310()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1404()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1410()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1504()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1510()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1604()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1610()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1704()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1710()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1804()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1810()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1904()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu1910()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2004()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2010()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2104()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2110()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu2204()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu10_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu10_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu11_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu11_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu12_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu12_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu13_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu13_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu14_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu14_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu15_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu15_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu16_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu16_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu17_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu17_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu18_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu18_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu19_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu19_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu20_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu20_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu21_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu21_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu22_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu22_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.10'       &&      return 0;       return 1; }
+
+# Checking the current major Linux kernel version.
+function BU.Main.OS.IsLinuxKernelMajor5()               { return 0; }
+function BU.Main.OS.IsLinuxKernelMajor4()               { return 0; }
+function BU.Main.OS.IsLinuxKernelMajor3()               { return 0; }
 
 # -----------------------------------------------
 
