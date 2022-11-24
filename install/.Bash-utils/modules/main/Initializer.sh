@@ -387,13 +387,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
             if [ -z "$__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS" ]; then __BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS='true'; fi
 
-        elif [ "${module_arg,,}" = '--dev-tools'* ]; then
+        elif [[ "${module_arg,,}" = '--dev-tools'* ]]; then
             if [ -n "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" ] && [ "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" = 'true' ]; then
                 BU.Main.ModConfig.Module.BUDevToolsPaths;
 
                 ____bu_main_initializer__parse_args_list__dev_tools_arg__state='true';
             fi
-        fi
 
         # Else, if an unsupported value is passed as « main » module's argument.
         else
