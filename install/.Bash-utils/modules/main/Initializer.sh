@@ -234,6 +234,8 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
             # Extracting the "--stat" option's values.
             case "${module_arg,,}" in
 
+                '--dev-tools') BU.Main.ModConfig.Module.BUDevToolsPaths;;
+
                 # "$__BU_MAIN_STAT_DECHO" global status variable.
                 '--stat-decho='*)
                     value="${module_arg#*=}";
@@ -382,7 +384,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                             echo "IN « ${BASH_SOURCE[0]} », LINE « $(( LINENO-1 )) » --> WARNING : THE « $value » IS NOT A SUPPORTED STATUS ARGUMENT FOR THE $(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" >&2;
                             echo >&2;
 
-                            BU.Main.Initializer.Usage; v_loop_error='error'; break;
+                            BU.Main.Initializer.Usage; ___bu_main_initializer__parse_args_list__loop_error='error'; break;
             esac
 
             if [ -z "$__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS" ]; then __BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS='true'; fi
@@ -390,14 +392,14 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
         # Else, if an unsupported value is passed as « main » module's argument.
         else
             # Temporary situation.
-            BU.Main.Initializer.Usage; v_loop_error='error'; break;
+            BU.Main.Initializer.Usage; ___bu_main_initializer__parse_args_list__loop_error='error'; break;
         fi
 
-    done; if [ "${v_loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else unset v_loop_error; return 1; fi; fi
+    done; if [ "${___bu_main_initializer__parse_args_list__loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else unset ___bu_main_initializer__parse_args_list__loop_error; return 1; fi; fi
 fi
 
-# Unsetting the "$v_loop_error" variable, since this code is not written inside a function.
-unset v_loop_error;
+# Unsetting the "$___bu_main_initializer__parse_args_list__loop_error" variable, since this code is not written inside a function.
+unset ___bu_main_initializer__parse_args_list__loop_error;
 
 # Checking if a new default status global variable's value was modified (passed as one of the « main » module's « --stat-* » arguments).
 for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
