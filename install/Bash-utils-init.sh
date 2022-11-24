@@ -1941,9 +1941,10 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 # 	||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 #     [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
 
-    __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
+    __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
                                               'F' 'fi' 'fil' 'fils' 'fis'  'file' 'files' \
-                                              'F' 'FN' 'FNC' 'FNCS' 'FNS' 'FNCT' 'FNCTS' 'fun' 'funs' 'func' 'funcs' 'funct' 'functs' 'function' 'functions' \
+                                              'F' 'FN' 'FNC' 'FNCS' 'FNS' 'FNCT' 'FNCTS' \
+                                              'fun' 'funs' 'func' 'funcs' 'funct' 'functs' 'function' 'functions' \
                                               'M' 'ms' 'mod' 'mods' 'module' 'modules' \
                                               'S' 'ss' 'sub' 'subs' 'subc' 'subcs' 'subcat'  'subcats' 'subcateg'  'subcategs'  'subcategory'  'subcategorie'  'subcategories' \
                                               'sc' 'scs' 'scat' 'scats' 'scateg' 'scategs' 'scategory'  'scategorie' 'scategories' \
