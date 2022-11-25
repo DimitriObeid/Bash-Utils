@@ -2112,21 +2112,23 @@ function BU.ModuleInit.ParseCSVLang()
 		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
 		BU.ModuleInit.Msg;
 
-		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && { source "${v_outputFilePath}" || {
-            local C="$?";
+		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+            source "${v_outputFilePath}" || {
+                local C="$?";
 
-            local lineno="$(( LINENO - 3 ))";
+                local lineno="$(( LINENO - 3 ))";
 
-            BU.ModuleInit.PrintLogError "UNABLE TO SOURCE THE EXISTING TRANSLATIONS OUTPUT FILE" "${lineno}" "ERR_BUINIT__PARSECSVLANG__UNABLE_TO_SOURCE_TRANSL_OUT_FILE";
+                BU.ModuleInit.PrintLogError "UNABLE TO SOURCE THE EXISTING TRANSLATIONS OUTPUT FILE" "${lineno}" "ERR_BUINIT__PARSECSVLANG__UNABLE_TO_SOURCE_TRANSL_OUT_FILE";
 
-            BU.ModuleInit.HandleErrors "$C" "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "${v_outputFilePath}")" \
-                "Please check what causes the script to not source the output file, which contains the target language's translations" \
-                "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+                BU.ModuleInit.HandleErrors "$C" "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "${v_outputFilePath}")" \
+                    "Please check what causes the script to not source the output file, which contains the target language's translations" \
+                    "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-            return "$?";
-        }};
+                return "$?";
+            }
 
-		return 0;
+            return 0;
+		};
 	fi
 
     # If no path to the module's translation CSV file is given.
@@ -2260,9 +2262,14 @@ function BU.ModuleInit.ParseCSVLang()
 
 			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
 
-			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && { source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; }};
+			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+                source "${v_outputFilePath}" || {
+                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
-			return 0;
+                    return "$C";
+                };  return    0;
+            };
+
 		else
 			# The CSV file was not passed as first argument.
 			if		[ "${v_perlScriptReturnCode}" -eq "$v_perlScriptNoCSVFileGivenAsArgErrorCode" ]; then
