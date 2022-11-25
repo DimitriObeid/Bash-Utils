@@ -2112,7 +2112,7 @@ function BU.ModuleInit.ParseCSVLang()
 		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
 		BU.ModuleInit.Msg;
 
-		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && source "${v_outputFilePath}" || {
+		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && { source "${v_outputFilePath}" || {
             local C="$?";
 
             local lineno="$(( LINENO - 3 ))";
@@ -2124,7 +2124,7 @@ function BU.ModuleInit.ParseCSVLang()
                 "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
             return "$?";
-        }
+        }};
 
 		return 0;
 	fi
@@ -2260,7 +2260,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
 
-			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; };
+			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && { source "${v_outputFilePath}" || { local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; return "$C"; }};
 
 			return 0;
 		else
