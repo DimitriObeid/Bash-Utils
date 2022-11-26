@@ -517,7 +517,6 @@ function BU.Main.Headers.Header.CMD.Black.Violet        { BU.Main.Headers.Header
 function BU.Main.Headers.Header.CMD.Black.White         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_BLACK" "$__BU_MAIN_COLOR_TXT_WHITE"            	"$1" "$2" "$3" "$4" 'true' 		|| return 1; return 0; }
 
 function BU.Main.Headers.Header.CMD.Black.Yellow        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_BLACK" "$__BU_MAIN_COLOR_TXT_YELLOW"           	"$1" "$2" "$3" "$4" 'true' 		|| return 1; return 0; }
-function BU.Main.Headers.Header.CMD.Black.Yellow        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_BLACK" "$__BU_MAIN_COLOR_TXT_YELLOW"           	"$1" "$2" "$3" "$4" 'true' 		|| return 1; return 0; }
 
 # -----------------------------------------------
 
