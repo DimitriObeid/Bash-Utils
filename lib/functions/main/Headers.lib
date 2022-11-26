@@ -985,104 +985,198 @@ function BU.Main.Headers.Header.CMD.Maroon.Yellow       { BU.Main.Headers.Header
 ## NAVY BLUE LINES, DIFFERENTLY COLORED TEXT
 
 # Strings
-function BU.Main.Headers.Header.Navy.Aqua               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_AQUA"              "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Black              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_BLACK"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Blue               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_BLUE"              "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Aqua               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_AQUA"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Black              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_BLACK"             	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Blue               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_BLUE"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Cyan               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_CYAN"              "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Fuchsia            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_FUCHSIA"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Gray               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_GRAY"              "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Cyan               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_CYAN"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Fuchsia            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_FUCHSIA"           	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Gray               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_GRAY"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Green              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_GREEN"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Lime               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_LIME"              "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Maroon             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_MAROON"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Green              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_GREEN"             	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Lime               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_LIME"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Maroon             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_MAROON"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Olive              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_OLIVE"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Orange             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_ORANGE"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Pink               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_PINK"              "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Olive              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_OLIVE"             	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Orange             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_ORANGE"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Pink               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_PINK"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Purple             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_PURPLE"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Red                { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_RED"               "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Salmon             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_SALMON"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Purple             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_PURPLE"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Red                { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_RED"               	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Salmon             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_SALMON"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Silver             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_SILVER"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Tan                { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TAN"               "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Teal               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TEAL"              "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Silver             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_SILVER"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Tan                { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_TAN"               	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Teal               { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_TEAL"              	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.Turquoise          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TURQUOISE"         "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Violet             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_VIOLET"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Turquoise          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_TURQUOISE"         	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Violet             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_VIOLET"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+function BU.Main.Headers.Header.Navy.White              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_WHITE"             	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Navy.White              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_WHITE"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Navy.Yellow             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_YELLOW"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Navy.Yellow             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_NAVY" "$__BU_MAIN_COLOR_CODE_YELLOW"            	"$1" "$2" "$3" "$4" 'false'		|| return 1; return 0; }
+
+# Command substitutions
+function BU.Main.Headers.Header.CMD.Navy.Aqua           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_AQUA"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Black          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_BLACK"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Blue           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_BLUE"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Cyan           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_CYAN"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Fuchsia        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_FUCHSIA"           	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Gray           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_GRAY"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Green          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_GREEN"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Lime           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_LIME"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Maroon         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_MAROON"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Olive          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_OLIVE"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Orange         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_ORANGE"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Pink           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_PINK"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Purple         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_PURPLE"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Red            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_RED"               	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Salmon         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_SALMON"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Silver         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_SILVER"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Tan            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TAN"               	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Teal           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TEAL"              	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Turquoise      { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_TURQUOISE"         	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.Violet         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_VIOLET"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Navy.White          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_WHITE"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Navy.Yellow         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_NAVY" "$__BU_MAIN_COLOR_TXT_YELLOW"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
 
 # -----------------------------------------------
 
 ## OLIVE GREEN LINES, DIFFERENTLY COLORED TEXT
 
 # Strings
-function BU.Main.Headers.Header.Olive..Aqua             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_AQUA"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Black            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_BLACK"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Blue             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_BLUE"             "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Aqua             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_AQUA"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Black            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_BLACK"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Blue             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_BLUE"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Cyan             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_CYAN"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Fuchsia          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_FUCHSIA"          "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Gray             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_GRAY"             "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Cyan             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_CYAN"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Fuchsia          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_FUCHSIA"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Gray             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_GRAY"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Green            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_GREEN"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Lime             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_LIME"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Maroon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_MAROON"           "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Green            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_GREEN"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Lime             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_LIME"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Maroon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_MAROON"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Navy             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_NAVY"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Orange           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_ORANGE"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Pink             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_PINK"             "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Navy             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_NAVY"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Orange           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_ORANGE"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Pink             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_PINK"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Purple           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_PURPLE"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Red              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_RED"              "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Salmon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_SALMON"           "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Purple           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_PURPLE"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Red              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_RED"              	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Salmon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_SALMON"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Silver           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_SILVER"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Tan              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TAN"              "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Teal             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TEAL"             "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Silver           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_SILVER"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Tan              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_TAN"              	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Teal             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_TEAL"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Turquoise        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TURQUOISE"        "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..Violet           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_VIOLET"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Olive..White            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_WHITE"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Turquoise        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_TURQUOISE"        	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Violet           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_VIOLET"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Olive.White            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_WHITE"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Olive..Yellow           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_YELLOW"           "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Olive.Yellow           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_OLIVE" "$__BU_MAIN_COLOR_CODE_YELLOW"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+
+# Command substitutions
+function BU.Main.Headers.Header.CMD.Olive.Aqua         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_AQUA"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Black        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_BLACK"            		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Blue         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_BLUE"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Cyan         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_CYAN"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Fuchsia      { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_FUCHSIA"          		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Gray         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_GRAY"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Green        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_GREEN"            		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Lime         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_LIME"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Maroon       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_MAROON"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Navy         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_NAVY"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Orange       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_ORANGE"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Pink         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_PINK"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Purple       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_PURPLE"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Red          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_RED"              		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Salmon       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_SALMON"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Silver       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_SILVER"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Tan          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TAN"              		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Teal         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TEAL"             		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Turquoise    { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_TURQUOISE"        		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.Violet       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_VIOLET"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Olive.White        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_WHITE"            		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Olive.Yellow       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_OLIVE" "$__BU_MAIN_COLOR_TXT_YELLOW"           		"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
 
 # -----------------------------------------------
 
 ## ORANGE LINES, DIFFERENTLY COLORED TEXT
 
-function BU.Main.Headers.Header.Orange.Aqua             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_AQUA"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Black            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_BLACK"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Blue             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_BLUE"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+# Strings
+function BU.Main.Headers.Header.Orange.Aqua             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_AQUA"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Black            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_BLACK"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Blue             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_BLUE"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Cyan             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_CYAN"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Fuchsia          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_FUCHSIA"         "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Gray             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_GRAY"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Cyan             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_CYAN"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Fuchsia          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_FUCHSIA"         	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Gray             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_GRAY"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Green            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_GREEN"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Lime             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_LIME"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Maroon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_MAROON"          "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Green            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_GREEN"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Lime             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_LIME"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Maroon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_MAROON"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Navy             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_NAVY"            "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Olive            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_OLIVE"           "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Pink             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_PINK"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Navy             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_NAVY"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Olive            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_OLIVE"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Pink             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_PINK"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Purple           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_PURPLE"          "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Red              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_RED"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Salmon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_SALMON"          "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Purple           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_PURPLE"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Red              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_RED"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Salmon           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_SALMON"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Silver           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_SILVER"          "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Tan              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TAN"             "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Teal             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TEAL"            "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Silver           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_SILVER"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Tan              { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_TAN"             	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Teal             { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_TEAL"            	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Turquoise        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TURQUOISE"       "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.Violet           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_VIOLET"          "$1" "$2" "$3" "$4" || return 1; return 0; }
-function BU.Main.Headers.Header.Orange.White            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_WHITE"           "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Turquoise        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_TURQUOISE"       	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Violet           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_VIOLET"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+function BU.Main.Headers.Header.Orange.White            { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_WHITE"           	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
 
-function BU.Main.Headers.Header.Orange.Yellow           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_YELLOW"          "$1" "$2" "$3" "$4" || return 1; return 0; }
+function BU.Main.Headers.Header.Orange.Yellow           { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_CODE_ORANGE" "$__BU_MAIN_COLOR_CODE_YELLOW"          	"$1" "$2" "$3" "$4" 'false' 	|| return 1; return 0; }
+
+# Command substitutions
+function BU.Main.Headers.Header.CMD.Orange.Aqua         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_AQUA"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Black        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_BLACK"           	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Blue         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_BLUE"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Cyan         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_CYAN"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Fuchsia      { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_FUCHSIA"         	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Gray         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_GRAY"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Green        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_GREEN"           	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Lime         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_LIME"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Maroon       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_MAROON"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Navy         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_NAVY"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Olive        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_OLIVE"           	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Pink         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_PINK"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Purple       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_PURPLE"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Red          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_RED"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Salmon       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_SALMON"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Silver       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_SILVER"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Tan          { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TAN"             	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Teal         { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TEAL"            	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Turquoise    { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_TURQUOISE"       	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.Violet       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_VIOLET"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+function BU.Main.Headers.Header.CMD.Orange.White        { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_WHITE"           	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
+
+function BU.Main.Headers.Header.CMD.Orange.Yellow       { BU.Main.Headers.HeaderBase "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ORANGE" "$__BU_MAIN_COLOR_TXT_YELLOW"          	"$1" "$2" "$3" "$4" 'true' "$@" || return 1; return 0; }
 
 # -----------------------------------------------
 
