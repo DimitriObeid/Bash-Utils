@@ -57,7 +57,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID="os::android";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::checking-informations";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
@@ -67,7 +67,7 @@ function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::gathering-informations";
 
 # -----------------------------------------------
 
@@ -83,7 +83,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD::checking-informations";
 
 # Checking if the current OS is BSD (general types).
 function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
@@ -93,7 +93,7 @@ function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD ||
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD::gathering-informations";
 
 # -----------------------------------------------
 
@@ -109,7 +109,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD="os::free-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD::checking-informations";
 
 # Checking if current OS is FreeBSD.
 function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
@@ -119,7 +119,7 @@ function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD::gathering-informations";
 
 # -----------------------------------------------
 
@@ -135,7 +135,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD="os::net-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD::checking-informations";
 
 # Checking if current OS is NetBSD.
 function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
@@ -145,7 +145,7 @@ function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];  
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD::gathering-informations";
 
 # -----------------------------------------------
 
@@ -161,7 +161,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD="os::open-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-information
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD::checking-informations";
 
 # Checking if current OS is OpenBSD.
 function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
@@ -171,7 +171,7 @@ function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD::gathering-informations";
 
 # -----------------------------------------------
 
@@ -187,7 +187,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS="os::chrome";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS::checking-informations";
 
 # Checking if current OS is Chrome OS.
 function BU.Main.OS.IsChromeOS()					{ true; }
@@ -197,7 +197,7 @@ function BU.Main.OS.IsChromeOS()					{ true; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS::gathering-informations";
 
 # -----------------------------------------------
 
@@ -213,7 +213,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU="os::haiku";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU::checking-informations";
 
 # Checking if current OS is Haiku OS.
 function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
@@ -223,7 +223,7 @@ function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU::gathering-informations";
 
 # -----------------------------------------------
 
@@ -239,14 +239,14 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="os::general-os-functions";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT::checking-informations";
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT::gathering-informations";
 
 # Checking the current operating system, by using the functions declared above.
 function BU.Main.OS.GetCurrentOS()
@@ -292,7 +292,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX="os::linux";
 ## CHECKING INFORMATIONS
 ## DEBUG ID :
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX::checking-informations";
 
 # Checking the name of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistro()
@@ -433,7 +433,7 @@ function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX::gathering-informations";
 
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
 function BU.Main.OS.GetLinuxDistro()
@@ -672,7 +672,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX="os::osx";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX::checking-informations";
 
 # Checking the version of the currently used OS X operating system.
 function BU.Main.OS.CheckOSXVersion()
@@ -726,7 +726,7 @@ function BU.Main.OS.IsOSXMonterey()                     { if command -v sw_vers 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX::gathering-informations";
 
 # -----------------------------------------------
 
@@ -742,7 +742,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS="os::vms";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS::checking-informations";
 
 # Checking if the system is running in Qemu()
 function BU.Main.OS.IsRunningInQemu()               { true; }
@@ -761,7 +761,7 @@ function BU.Main.OS.IsVirtualized()                 { true; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS::gathering-informations";
 
 # -----------------------------------------------
 
@@ -777,7 +777,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS="os::windows";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS.checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS::checking-informations";
 
 # Checking the Microsoft Windows version.
 function BU.Main.Checkings.CheckOSWindowsVersion()
@@ -846,7 +846,7 @@ function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microso
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS.gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS::gathering-informations";
 
 # -----------------------------------------------
 

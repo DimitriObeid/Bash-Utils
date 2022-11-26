@@ -50,13 +50,13 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT PROCESSING FUNCTIONS
-#### DEBUG ID : text::text-processing-functions
+#### DEBUG ID : "text::text-processing-functions"
 
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
-## DEBUG ID : cutting-text
+## DEBUG ID : "cutting-text"
 
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::cutting-text";
@@ -226,10 +226,10 @@ function BU.Main.Text.DeleteLettersInString()
 # -----------------------------------------------
 
 ## FORMATTING TEXT
-## DEBUG ID : formatting-text
+## DEBUG ID : "formatting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::formatting-text";
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS.formatting-text";
 
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Text.ToLowercase()" OR "BU.Main.Text.ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
@@ -297,7 +297,7 @@ function BU.Main.Text.ToUppercase()
 # -----------------------------------------------
 
 ## GETTING TEXT
-## DEBUG ID : getting-text
+## DEBUG ID : "getting-text"
 
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::getting-text"
@@ -551,8 +551,15 @@ function BU.Main.Text.GetStringWordsNumber()
 
 # -----------------------------------------------
 
+## PRINTING TEXT
+## DEBUG ID : "printing-text"
+
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::printing-text";
+
+# -----------------------------------------------
+
 ## REVERSING TEXT
-## DEBUG ID : reversing-text
+## DEBUG ID : "reversing-text"
 
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::reversing-text";
@@ -618,7 +625,7 @@ function BU.Main.Text.ReverseCharactersOrder()
 # -----------------------------------------------
 
 ## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
-## DEBUG ID : splitting-text
+## DEBUG ID : "splitting-text"
 
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS::splitting-text";

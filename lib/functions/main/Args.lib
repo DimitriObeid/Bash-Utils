@@ -715,8 +715,8 @@ function BU.Main.Args.GetArgc-FFL()
     #   $4  -> BU.Main.Args.Argc && BU.Main.Args.GetFFL "$p_funcname" parameter.
     #   $5  -> BU.Main.Args.Argc && BU.Main.Args.GetFFL "$p_lineno" parameter.
 
-    BU.Main.Args.Argc "$1" "$2" "$3" "$4" "$5"   || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Args.GetFFL "$3" "$4" "$5"           || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+#    BU.Main.Args.Argc "$1" "$2" "$3" "$4" "$5"   || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+#    BU.Main.Args.GetFFL "$3" "$4" "$5"           || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
