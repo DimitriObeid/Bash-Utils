@@ -1447,18 +1447,20 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                         # "${__BU_MODULE_INIT_STAT_DEBUG_BASHX" global status variable.
                         '--stat-debug-bashx='*)
-							value="${module_args#* }";
+							value="${module_args#*=}";
 							value="${value% *}";
 
                             if BU.ModuleInit.CheckIsDebugging; then
                                 if      [[ "${value,,}" == c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == c?(at?(eg?(orie)))?(s) ]] \
-									||  [[ "${value,,}" == f?(i?(l?(e))?(s)) ]] \
+									||  [[ "${value,,}" == fi?(l?(e))?(s) ]] \
 									||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 									||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
 									||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
+
+                                        echo "VALUE : ${value,,}"
 
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
@@ -1936,7 +1938,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
 #     if      [[ "${value,,}" == c?(at?(eg?(ory))) ]] \
 # 	||  [[ "${value,,}" == c?(at?(eg?(orie)))?(s) ]] \
-# 	||  [[ "${value,,}" == f?(i?(l?(e))?(s)) ]] \
+# 	||  [[ "${value,,}" == fi?(l?(e))?(s)) ]] \
 # 	||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 # 	||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
 # 	||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
@@ -1944,8 +1946,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 #     [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
 
     __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
-                                              'F' 'fi' 'fil' 'fils' 'fis'  'file' 'files' \
-                                              'F' 'FN' 'FNC' 'FNCS' 'FNS' 'FNCT' 'FNCTS' \
+                                              'fi' 'fil' 'fils' 'fis'  'file' 'files' \
+                                              'FN' 'FNC' 'FNCS' 'FNS' 'FNCT' 'FNCTS' \
                                               'fun' 'funs' 'func' 'funcs' 'funct' 'functs' 'function' 'functions' \
                                               'M' 'ms' 'mod' 'mods' 'module' 'modules' \
                                               'S' 'ss' 'sub' 'subs' 'subc' 'subcs' 'subcat'  'subcats' 'subcateg'  'subcategs'  'subcategory'  'subcategorie'  'subcategories' \
