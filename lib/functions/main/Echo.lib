@@ -395,8 +395,8 @@ function BU.Main.Echo.Error()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
 
     shift 2;
 
@@ -443,8 +443,8 @@ function BU.Main.Echo.Msg()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -484,8 +484,8 @@ function BU.Main.Echo.Newstep()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -548,8 +548,8 @@ function BU.Main.Echo.Success()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -589,8 +589,8 @@ function BU.Main.Echo.Warning()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;
-    local p_option=$2;
+    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.

@@ -111,7 +111,7 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 ## DATE FORMAT
 ## DEBUG ID : date-format
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.date-format";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::date-format";
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
@@ -173,7 +173,7 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 ## NUMBER VALUES
 ## DEBUG ID : number-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.number-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::number-values";
 
 # Checking floating value.
 function BU.Main.Checkings.IsFloat()
@@ -258,7 +258,7 @@ function BU.Main.Checkings.IsPositiveInt()
 ## CHARACTERS AND STRING VALUES
 ## DEBUG ID : characters-and-string-values
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS.characters-and-string-values";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU.Main.Checkings.IsAlphaChar()
@@ -1149,12 +1149,12 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 #### TEXT CHECKINGS
 #### DEBUG ID : Checkings.text-checkings
 
-__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings.text-checkings";
+__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings::text-checkings";
 
 ## FORMATTING CHECKINGS
 ## DEBUG ID : formatting-checkings
 
-__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS.formatting-checkings";
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS::formatting-checkings";
 
 # Checking if the project's color code file exists or not.
 
