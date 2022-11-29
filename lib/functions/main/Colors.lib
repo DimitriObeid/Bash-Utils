@@ -77,18 +77,15 @@ function BU.Main.Colors.SetBGColor()
 	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
 
 	#**** Code ****
-	# Checking first if the target partition is not fully used.
-	if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+	# Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
+	if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
 	# If the script is allowed to format text.
     if BU.Main.Status.CheckStatAllowFormatting; then
-        if command -v tput &> /dev/null; then
-            tput setab "$p_color_code" || { echo -ne "\e[" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }
+        shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
 
-            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
-
-                # Checking if the "bgcolors.tmp" (background color) file exists.
-                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
+            # Checking the existence of the "bgcolors.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
+            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
                     echo >&2;
@@ -97,9 +94,11 @@ function BU.Main.Colors.SetBGColor()
                     echo >&2;
 
                     if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }; fi
+                };
+            fi
 
-                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
+            # Checking the existence of the "bgcolors.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
+            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
                     echo >&2;
@@ -108,22 +107,26 @@ function BU.Main.Colors.SetBGColor()
                     echo >&2;
 
                     if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }; fi
-
-                # Redirecting the background's color code in its dedicated temporary file.
-                echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
-
-                [ "$X" -ne 0 ] && {
-                    echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
-
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }
+                };
             fi
-        else
-            echo -ne "\e["; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+            # Redirecting the background's color code in its dedicated temporary file.
+            echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
+
+            [ "$X" -ne 0 ] && {
+                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+
+                if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+            }
+
+            echo -n "TEST COULEUR";
+
+            # Finally, the background color is displayed on the terminal.
+            if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+
         fi
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e["; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -147,20 +150,17 @@ function BU.Main.Colors.SetTextColor()
 	#**** Code ****
     shopt -s extglob;
 
-    # Checking first if the target partition is not fully used.
-    if [[ "${p_init_ctrl,,}" != *(-)no?(-)function ]]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+    # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
+    if [[ "${p_init_ctrl,,}" != *(-)no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
 
     shopt -u extglob;
 
     # If the script is allowed to format text.
 	if BU.Main.Status.CheckStatAllowFormatting; then
-        if command -v tput &> /dev/null; then
-            tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }
+        shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
 
-            shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
-
-                # Checking if the "bgcolors.tmp" (background color) file exists.
-                if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
+            # Checking the existence of the "fgcolors.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
+            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
                     echo >&2;
@@ -169,9 +169,11 @@ function BU.Main.Colors.SetTextColor()
                     echo >&2;
 
                     if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }; fi
+                };
+            fi
 
-                if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
+            # Checking the existence of the "fgcolors.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
+            if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
                     echo >&2;
@@ -179,23 +181,23 @@ function BU.Main.Colors.SetTextColor()
                     echo "Aborting the script's execution" >&2;
                     echo >&2;
 
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }; fi
+                if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+            }; fi
 
-                # Redirecting the text's color code in its dedicated temporary file.
-                echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
+            # Redirecting the text's color code in its dedicated temporary file.
+            echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
 
-                [ "$X" -ne 0 ] && {
-                    echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+            [ "$X" -ne 0 ] && {
+                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
 
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-                }
-            fi
-        else
-            echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+            }
+
+            # Finally, the foreground color is displayed on the terminal.
+            if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
         fi
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
