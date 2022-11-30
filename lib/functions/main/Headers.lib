@@ -160,7 +160,7 @@ function BU.Main.Headers.DrawLine()
 # Since this function can be called in the "BU.Main.Echo.__EchoOutput()" function,
 # even if the "$__BU_MAIN_STAT_ECHO" status variable's value is set to "true",
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
-function BU.Main.Headers.BaseWIP () {
+function BU.Main.Headers.Base () {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION" \
@@ -196,23 +196,23 @@ function BU.Main.Headers.BaseWIP () {
 
     BU.Main.Echo.Newline;
 
-    # Getting the line color code stored in the background color code's file.
-    BU.Main.Checkings.IsCMD "$p_lineColor" && p_lineColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_lineColor")";
-
-    # Getting the string color code stored in the background color code's file.
-    BU.Main.Checkings.IsCMD "$p_stringColor" && p_stringColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_stringColor")";
-
-    # Getting the background color code stored in the background color code's file.
-    BU.Main.Checkings.IsCMD "$p_bgColorCol" && p_bgColorCol="$(BU.Main.Colors.GetBGColorFromCMD "$p_bgColorCol")";
-
     # If no value is passed via the background color's position's parameter.
     if [ -z "$p_bgColorPos" ]; then
+        # Converting the "$p_stringColor" integer into a command substitution, since this command is directly used in this function's condition.
+        if BU.Main.Checkings.IsNotCMD "$p_stringColor"; then p_stringColor="$(BU.Main.Colors.SetTextColor "$p_stringColor")"; fi
+
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" '' "nodate";
-        BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}";
+        BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}${__BU_MAIN_COLOR_BG_RESET}";
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" '' "nodate";
 
     # Else, if a value is passed via the background color's position's parameter.
     else
+        # Getting the line color code stored in the background color code's file, since this integer is needed for the execution of the "" function.
+        BU.Main.Checkings.IsCMD "$p_stringColor" && p_lineColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_lineColor")";
+
+        # Getting the background color code stored in the background color code's file, since this integer is needed for the execution of the "" function.
+        BU.Main.Checkings.IsCMD "$p_bgColorCol" && p_bgColorCol="$(BU.Main.Colors.GetBGColorFromCMD "$p_bgColorCol")";
+
         # This value MUST be an integer.
         if BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
 
@@ -263,127 +263,6 @@ function BU.Main.Headers.BaseWIP () {
 function BU.Main.Headers.Base.CMD()
 {
     BU.Main.Headers.Base "$@";
-}
-
-
-function BU.Main.Headers.Base()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION" \
-        "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
-
-    #**** Parameters ****
-    local p_lineChar=$1;            # Alphanumeric char - Default : NULL    - Defining the wanted character to display when calling the "BU.Main.Headers.DrawLine()" function.
-    local p_lineColor=$2;           # CMD   | String    - Default : NULL    - Defining the wanted character's color to display  servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction "BU.Main.Headers.DrawLine".
-    local p_stringColor=$3;         # CMD   | String    - Default : NULL    - Defining the color of the header's string
-
-    local p_stringTxt=$4;           # String            - Default : NULL    - String displayed between the two lines.
-    local p_strlen=$5;              # String            - Default : NULL    - Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-    local p_bgColorCol=$6;          # CMD   | String    - Default : NULL    - Defining the background color.
-
-    local p_bgColorPos=$7;          # Int               - Default : NULL    - Defining the background color's position (first line, text or second line, or a mix ?).
-    local p_isCmd=${8:-false};      # Bool              - Default : false	- Determination by the user if the "$p_lineColor", "$p_stringColor", "$p_bgColorCol" and "$p_bgColorPos" parameters values are command substitutions (true) OR strings (false).
-
-    [ "${p_isCmd,,}" == 'true' ] && {
-        shift 8;
-
-        local pa_isCmd=("$@");      # Array             - Default : NULL	- If the "$p_isCmd" parameter value is "true", this array allows the user to determine which of the four color parameters are storing a string or calling a command substitution.
-    }
-
-    #**** Variables ****
-    # Sleep command processing
-    local v_stat_time_newline="$__BU_MAIN_STAT_TIME_NEWLINE";   # Setting the new lines display time's global status variable to 0 seconds, because the header's pause time is already set.
-    local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT";           # Setting the normal text display time's global status variable to 0 seconds, because the header's pause time is already set.
-
-    # ----------
-    # Loop error processing (this variable stores the 'error' string if a command or a function call failed during the execution of a loop).
-    local v_loop_error;
-
-    # ----------
-    # Line's length processing
-    if [ -n "$p_strlen" ] && [ "${p_strlen,,}" = 'strlen' ]; then local v_strlen; v_strlen="${#p_stringTxt}"; fi
-
-    # ---------
-	# List of the accepted values for the "$pa_isCmd" array.
-
-	# 1st row : "$p_lineColor" 		parameter variations.
-	# 2nd row : "$p_stringColor" 	parameter variations.
-	# 3rd row : "$p_bgColorCol" 	parameter variations.
-	[ "${p_isCmd,,}" == 'true' ] && {
-        if [[ ${pa_isCmd[*],,} =~ 'p_lineColor' ]]      || [[ ${pa_isCmd[*],,} =~ 'linecolor' ]]    || [[ ${pa_isCmd[*],,} =~ 'p_lc' ]]     || [[ ${pa_isCmd[*],,} =~ 'lc' ]];  then local v_lineColorIsCmd='true'; fi;
-        if [[ ${pa_isCmd[*],,} =~ 'p_stringColor' ]]    || [[ ${pa_isCmd[*],,} =~ 'stringColor' ]]  || [[ ${pa_isCmd[*],,} =~ 'p_str' ]]    || [[ ${pa_isCmd[*],,} =~ 'str' ]]; then local v_stringColorIsCmd='true'; fi
-        if [[ ${pa_isCmd[*],,} =~ 'p_bgColorCol' ]]     || [[ ${pa_isCmd[*],,} =~ 'bgColorCol' ]]   || [[ ${pa_isCmd[*],,} =~ 'p_col' ]]    || [[ ${pa_isCmd[*],,} =~ 'col' ]]; then local v_bgColorColIsCmd='true'; fi
-	};
-
-	# ----------
-	# Color code processing
-	local v_echo_pLineColor;
-	local v_echo_pStringColor;
-	local v_echo_pBgColorCol;
-
-    v_echo_pLineColor="$(if [ "${p_isCmd,,}" == 'true' ]        && [[ ( -n "$v_lineColorIsCmd" )    && ("${v_lineColorIsCmd,,}" == 'true') ]];      then echo -ne "$p_lineColor";   else echo -ne "$(BU.Main.Colors.SetTextColor    "$p_lineColor")";     fi)";
-    v_echo_pStringColor="$(if [ "${p_isCmd,,}" == 'true' ]      && [[ ( -n "$v_stringColorIsCmd" )  && ("${v_stringColorIsCmd,,}" == 'true') ]];    then echo -ne "$p_stringColor"; else echo -ne "$(BU.Main.Colors.SetTextColor    "$p_stringColor")";   fi)";
-    v_echo_pBgColorCol="$(if [ "${p_isCmd,,}" == 'true' ]       && [[ ( -n "$v_bgColorColIsCmd" )   && ("${v_bgColorColIsCmd,,}" == 'true') ]];     then echo -ne "$p_bgColorCol";  else echo -ne "$(BU.Main.Colors.SetBGColor      "$p_bgColorCol")";    fi)";
-
-	#**** Code ****
-	__BU_MAIN_STAT_TIME_NEWLINE="0";
-	__BU_MAIN_STAT_TIME_TXT="0";
-
-    BU.Main.Echo.Newline;
-
-    # If no value is passed via the background color's position's parameter.
-    if [ -z "$p_bgColorPos" ]; then
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$v_echo_pLineColor" "$v_strlen" "$v_echo_pBgColorCol" "$p_isCmd")" '' "nodate";
-        BU.Main.Echo.Msg "$v_echo_pStringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}";
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$v_echo_pLineColor" "$v_strlen" "$v_echo_pBgColorCol" "$p_isCmd")" '' "nodate";
-
-    # Else, if a value is passed via the background color's position's parameter.
-    else
-        # This value MUST be an integer.
-        if BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
-
-            # Transforming the "$p_bgColorPos" variable in an array of integers.
-            read -ra int_array <<< "$p_bgColorPos";
-
-            for i in "${int_array[@]}"; do
-
-                if [[ "$i" == '1'* ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$v_echo_pLineColor" "$v_strlen" "$v_echo_pBgColorCol" "$p_isCmd" "$@")" "nodate")" "$v_echo_pStringColor" "$v_echo_pBgColorCol" || { local C="$?"; v_loop_error='error'; break; };
-
-                elif [[ "$i" == *'2'* ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$v_echo_pStringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$v_echo_pStringColor" "" "$v_echo_pBgColorCol" || { local C="$?"; v_loop_error='error'; break; };
-
-                elif [[ "$i" == *'3' ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$v_echo_pLineColor" "$v_strlen" "$v_echo_pBgColorCol" "$p_isCmd" "$@")" "nodate")" "$v_echo_pStringColor" "$v_echo_pBgColorCol" || { local C="$?"; v_loop_error='error'; break; };
-
-                elif [[ "$i" == *'1'* ]] || [[ "$i" == *'3'* ]]; then
-                    BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the values were not arranged in ascending order, like 123, 12, 13 or 23" 'R';
-
-                else
-                    BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported), " 'R';
-                fi
-            done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
-
-        elif BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
-            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is too big" 'R';
-
-        elif [ "${#p_bgColorPos}" -lt 1 ]; then
-            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is null" 'R';
-
-        else
-            BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is not a positive integer" 'R';
-        fi
-    fi
-
-    BU.Main.Echo.Newline;
-
-    sleep "$__BU_MAIN_STAT_TIME_HEADER";
-
-    __BU_MAIN_STAT_TIME_NEWLINE="$v_stat_time_newline";     # Resetting the new lines display time's global status variable to its original value.
-    __BU_MAIN_STAT_TIME_TXT="$v_stat_time_txt";             # Resetting the normal text display time's global status variable to its original value.
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
