@@ -153,6 +153,8 @@ function BU.Main.Colors.GetTextColorFromCMD()
     return 0;
 }
 
+# -----------------------------------------------
+
 ## SETTING COLOR CODES IN FILES
 ## DEBUG ID : setting-color-codes-in-files
 
