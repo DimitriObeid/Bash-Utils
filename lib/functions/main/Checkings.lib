@@ -108,6 +108,39 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 
 # -----------------------------------------------
 
+## COMMAND SUBSTITUTIONS
+## DEBUG ID : command-substitutions
+
+__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS="$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS::command-substitutions";
+
+# Checking if the value is a command substitution.
+function BU.Main.Checkings.IsCMD()
+{
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS";
+
+    if  ! BU.Main.Checkings.IsAlphaNumChar "$1" && \
+        ! BU.Main.Checkings.IsAlphaNumString "$1" && \
+        ! BU.Main.Checkings.IsInt "$1" && \
+        ! BU.Main.Checkings.IsFloat "$1"; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    fi
+}
+
+# Checking if the value is not a command substitution.
+function BU.Main.Checkings.IsNotCMD()
+{
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS";
+
+    if BU.Main.Checkings.IsCMD "$1"; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# -----------------------------------------------
+
 ## DATE FORMAT
 ## DEBUG ID : date-format
 
@@ -384,7 +417,7 @@ function BU.Main.Checkings.CheckRootEUID()
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";
 
     #**** Parameters ****
-    local p_error=$1;
+    local p_error=${1:-NULL};   # String    - Default : NULL    -
 
     #**** Code ****
     if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else

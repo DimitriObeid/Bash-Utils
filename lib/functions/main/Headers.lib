@@ -196,7 +196,14 @@ function BU.Main.Headers.BaseWIP () {
 
     BU.Main.Echo.Newline;
 
-    # Getting the color code stored in the background color code's file.
+    # Getting the line color code stored in the background color code's file.
+    BU.Main.Checkings.IsCMD "$p_lineColor" && p_lineColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_lineColor")";
+
+    # Getting the string color code stored in the background color code's file.
+    BU.Main.Checkings.IsCMD "$p_stringColor" && p_stringColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_stringColor")";
+
+    # Getting the background color code stored in the background color code's file.
+    BU.Main.Checkings.IsCMD "$p_bgColorCol" && p_bgColorCol="$(BU.Main.Colors.GetBGColorFromCMD "$p_bgColorCol")";
 
     # If no value is passed via the background color's position's parameter.
     if [ -z "$p_bgColorPos" ]; then

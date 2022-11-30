@@ -59,10 +59,60 @@ __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
 
 __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::getting-color-codes-from-files";
 
+# Writing the error messages in a single location.
+function BU.Main.Colors.CannotCreateRessource()
+{
+    #**** Parameters ****
+    local p_file=$1;
+    local p_fnct=$2;
+    local p_line=$3;
+
+    local p_path=$4;
+    local p_type=$5;
+
+    #**** Code ****
+    echo "IN $p_file, FUNCTION $p_fnct, LINE $p_line --> ERROR : THE $p_path $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
+    echo "Please check what is preventing this $( [[ "${p_type,,}" == 'dir' ]] && printf 'directory' || printf 'file' ) directory from being created. It may be a directory permission issue." >&2;
+    echo >&2;
+
+    echo "Aborting the script's execution" >&2;
+    echo >&2;
+
+    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+}
+
 # Getting the current background color from a command substitution.
 function BU.Main.Colors.GetBGColorFromCMD()
 {
+    #**** Parameters ****
+    local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's background.
+
+    #**** Variables ****
+    local v_code;       # This variable stores the content of the file which contains the ANSi raw escape sequence.
+
     #**** Code ****
+    if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" || {
+            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'dir';
+
+            return 1;
+        };
+    fi
+
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" || {
+            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'file';
+
+            return 1;
+        }
+    fi
+
+    # Storing the background color's ANSI escape sequence in the file.
+    echo "$p_cmd" > "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH";
+
+    # Getting the ANSI color code from the "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" file.
+    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH")" ";" 2)";
+
+    # Printing the code.
+    echo "${v_code:0:1}";
 
     return 0;
 }
@@ -70,7 +120,35 @@ function BU.Main.Colors.GetBGColorFromCMD()
 # Getting the current text color from a command substitution.
 function BU.Main.Colors.GetTextColorFromCMD()
 {
+    #**** Parameters ****
+    local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's text.
+
+    #**** Variables ****
+    local v_code;       # This variable stores the content of the file which contains the ANSi raw escape sequence.
+
     #**** Code ****
+    if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" ]; then mkdir -p  "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" || {
+            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" 'dir';
+
+            return 1;
+        }
+    fi
+
+    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" || {
+            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
+
+            return 1;
+        }
+    fi
+
+    # Storing the text color's ANSI escape sequence in the file.
+    echo "$p_cmd" > "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH";
+
+    # Getting the ANSI color code from the "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" file.
+    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH")" ";" 2)";
+
+    # Printing the code.
+    echo "${v_code:0:1}";
 
     return 0;
 }
@@ -107,27 +185,17 @@ function BU.Main.Colors.SetBGColor()
 
             # Checking the existence of the "bgcolor.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
-                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
-                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
-                    echo >&2;
+                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'dir';
 
-                    echo "Aborting the script's execution" >&2;
-                    echo >&2;
-
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                    return 1;
                 };
             fi
 
             # Checking the existence of the "bgcolor.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
-                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
-                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
-                    echo >&2;
+                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
 
-                    echo "Aborting the script's execution" >&2;
-                    echo >&2;
-
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                    return 1;
                 };
             fi
 
@@ -180,28 +248,19 @@ function BU.Main.Colors.SetTextColor()
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
-                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
-                    echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
-                    echo >&2;
+                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" 'dir';
 
-                    echo "Aborting the script's execution" >&2;
-                    echo >&2;
-
-                    if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
+                    return 1;
                 };
             fi
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
-                    echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
-                    echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
-                    echo >&2;
+                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'file';
 
-                    echo "Aborting the script's execution" >&2;
-                    echo >&2;
-
-                if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
-            }; fi
+                    return 1;
+                };
+            fi
 
             # Redirecting the text's color code in its dedicated temporary file.
             echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
