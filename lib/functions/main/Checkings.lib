@@ -118,7 +118,8 @@ function BU.Main.Checkings.IsCMD()
 {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS";
 
-    if  ! BU.Main.Checkings.IsAlphaNumChar "$1" && \
+    if  [ -n "$1" ] && \
+        ! BU.Main.Checkings.IsAlphaNumChar "$1" && \
         ! BU.Main.Checkings.IsAlphaNumString "$1" && \
         ! BU.Main.Checkings.IsInt "$1" && \
         ! BU.Main.Checkings.IsFloat "$1"; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
