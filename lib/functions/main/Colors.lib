@@ -54,10 +54,31 @@ fi; exit 1; fi
 
 __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
 
-## SETTING FILES
-## DEBUG ID : setting-files
+## GETTING COLOR CODES FROM FILES
+## DEBUG ID : getting-color-codes-from-files
 
-__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::setting-files";
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::getting-color-codes-from-files";
+
+# Getting the current background color from a command substitution.
+function BU.Main.Colors.GetBGColorFromCMD()
+{
+    #**** Code ****
+
+    return 0;
+}
+
+# Getting the current text color from a command substitution.
+function BU.Main.Colors.GetTextColorFromCMD()
+{
+    #**** Code ****
+
+    return 0;
+}
+
+## SETTING COLOR CODES IN FILES
+## DEBUG ID : setting-color-codes-in-files
+
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_COLOR_CODES_IN_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::setting-color-codes-in-files";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -70,7 +91,7 @@ function BU.Main.Colors.SetBGColor()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
-        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_COLOR_CODES_IN_FILES";
 
 	#**** Parameters ****
 	local p_color_code=$1;     # Int       # Default : NULL    - Color code
@@ -84,7 +105,7 @@ function BU.Main.Colors.SetBGColor()
     if BU.Main.Status.CheckStatAllowFormatting; then
         shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
 
-            # Checking the existence of the "bgcolors.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
+            # Checking the existence of the "bgcolor.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
@@ -97,7 +118,7 @@ function BU.Main.Colors.SetBGColor()
                 };
             fi
 
-            # Checking the existence of the "bgcolors.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
+            # Checking the existence of the "bgcolor.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
@@ -114,19 +135,17 @@ function BU.Main.Colors.SetBGColor()
             echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
 
             [ "$X" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
 
                 if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
             }
 
-            echo -n "TEST COULEUR";
-
             # Finally, the background color is displayed on the terminal.
-            if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+            if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
 
         fi
     else
-        echo -ne "\e["; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[48;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -141,7 +160,7 @@ function BU.Main.Colors.SetTextColor()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS" \
-        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_FILES";
+        "$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_COLOR_CODES_IN_FILES";
 
 	#**** Parameters ****
 	local p_color_code=$1;     # Int       # Default : NULL    - Color code
@@ -159,7 +178,7 @@ function BU.Main.Colors.SetTextColor()
 	if BU.Main.Status.CheckStatAllowFormatting; then
         shopt -s extglob; if [[ "${p_init_ctrl,,}" == *(-)no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
 
-            # Checking the existence of the "fgcolors.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
+            # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT FOLDER CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this directory from being created. It may be a directory permission issue." >&2;
@@ -172,7 +191,7 @@ function BU.Main.Colors.SetTextColor()
                 };
             fi
 
-            # Checking the existence of the "fgcolors.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
+            # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
                     echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : THE $__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH FILE CANNOT BE CREATED" >&2;
                     echo "Please check what is preventing this file from being created. It may be a directory permission issue" >&2;
@@ -188,7 +207,7 @@ function BU.Main.Colors.SetTextColor()
             echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
 
             [ "$X" -ne 0 ] && {
-                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolors.tmp) file doesn't exists" >&2; echo -e >&2;
+                echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
 
                 if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
             }
@@ -197,16 +216,16 @@ function BU.Main.Colors.SetTextColor()
             if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
         fi
     else
-        echo -ne "\e[38;5;$1m"; echo "$p_color_code" BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
 # -----------------------------------------------
 
-## COLORS PROCESSING FUNCTIONS
-## DEBUG ID : colors-processing-functions
+## COLORS STRINGS PROCESSING FUNCTIONS
+## DEBUG ID : colors-strings-processing-functions
 
-__BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::colors-processing-functions";
+__BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::colors-strings-processing-functions";
 
 # Conversion of color name (string) to color code (int).
 function BU.Main.Colors.Atoi()
