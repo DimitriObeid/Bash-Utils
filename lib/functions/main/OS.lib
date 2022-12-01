@@ -428,6 +428,108 @@ function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 # Checking the version of the Kernel of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
 
+# Checking if current OS is Linux (or Android without the Termux terminal emulator).
+function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]]                               &&      return 0;       return 1; }
+
+# Checking if current Linux distribuion is Arch Linux.
+function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is Debian.
+function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
+
+# Checking debian versions.
+function BU.Main.OS.IsLinuxDistroDebian4()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '4'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian5()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '5'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian7()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian8()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '8'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian9()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '9'           &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian10()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '10'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroDebian11()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '11'          &&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is Fedora.
+function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
+
+# Checking Fedora versions.
+function BU.Main.OS.IsLinuxDistroFedora18()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '18'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora19()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '19'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora20()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '20'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora21()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '21'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora22()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '22'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora23()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '23'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora24()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '24'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora25()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '25'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora26()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '26'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora27()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '27'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora28()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora29()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '29'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora30()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '30'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora31()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '31'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora32()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '32'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora33()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '33'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora34()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora35()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is Manjaro.
+function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is Linux Mint.
+function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is SUSE.
+function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+
+
+# --------------------
+# Checking if current Linux distribution is Ubuntu.
+function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
+
+# Checking Ubuntu versions.
+function BU.Main.OS.IsLinuxDistroUbuntu10_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu10_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu11_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu11_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu12_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu12_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu13_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu13_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu14_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu14_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu15_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu15_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu16_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu16_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu17_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu17_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu18_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu18_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu19_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu19_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu20_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu20_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu21_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu21_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu22_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu22_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.10'       &&      return 0;       return 1; }
+
+# --------------------
+
+# Checking the current major Linux kernel version.
+function BU.Main.OS.IsLinuxKernelMajor3()               { return 0; }
+function BU.Main.OS.IsLinuxKernelMajor4()               { return 0; }
+function BU.Main.OS.IsLinuxKernelMajor5()               { return 0; }
+
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
@@ -564,99 +666,6 @@ function BU.Main.OS.GetLinuxKernelVersion()
         return 1;
     fi
 }
-
-# Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]]                               &&      return 0;       return 1; }
-
-function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is Debian.
-function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
-
-# Checking debian versions.
-function BU.Main.OS.IsLinuxDistroDebian4()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '4'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian5()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '5'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian7()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '7'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian8()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '8'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian9()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '9'           &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian10()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '10'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroDebian11()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '11'          &&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is Fedora.
-function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
-
-# Checking Fedora versions.
-function BU.Main.OS.IsLinuxDistroFedora18()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '18'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora19()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '19'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora20()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '20'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora21()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '21'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora22()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '22'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora23()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '23'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora24()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '24'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora25()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '25'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora26()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '26'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora27()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '27'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora28()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '28'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora29()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '29'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora30()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '30'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora31()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '31'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora32()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '32'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora33()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '33'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora34()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora35()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is Manjaro.
-function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is Linux Mint.
-function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is SUSE.
-function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
-
-
-# Checking if current Linux distribution is Ubuntu.
-function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
-
-# Checking Ubuntu versions.
-function BU.Main.OS.IsLinuxDistroUbuntu10_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu10_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu11_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu11_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu12_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu12_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '12.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu13_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu13_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '13.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu14_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu14_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '14.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu15_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu15_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '15.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu16_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu16_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '16.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu17_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu17_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '17.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu18_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu18_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '18.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu19_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu19_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '19.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu20_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu20_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '20.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu21_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu21_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu22_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroUbuntu22_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.10'       &&      return 0;       return 1; }
-
-# Checking the current major Linux kernel version.
-function BU.Main.OS.IsLinuxKernelMajor5()               { return 0; }
-function BU.Main.OS.IsLinuxKernelMajor4()               { return 0; }
-function BU.Main.OS.IsLinuxKernelMajor3()               { return 0; }
 
 # -----------------------------------------------
 
@@ -800,13 +809,13 @@ function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/
 function BU.Main.OS.IsWindows64bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 64; then return 0; else return 1; fi else return 1; fi; }
 
 # Checking if the current Windows licence is the Family licence.
-function BU.Main.OS.IsWindowsFamily()					{ true; }
+function BU.Main.OS.IsWindowsFamily()					{ if BU.Main.OS.IsWindows10Family   || BU.Main.OS.IsWindows11Family;                        then    return 0; else  return 1; fi; }
 
 # Checking if the current Windows licence is the Professionnal licence.
-function BU.Main.OS.IsWindowsPro()						{ true; }
+function BU.Main.OS.IsWindowsPro()						{ if BU.Main.OS.IsWindows10Pro      || BU.Main.OS.IsWindows11Pro;                           then    return 0; else  return 1; fi; }
 
 # Checking if the current Windows licence is the Enterprise licence.
-function BU.Main.OS.IsWindowsLTSC() 					{ true; }
+function BU.Main.OS.IsWindowsLTSC() 					{ if BU.Main.OS.IsWindows10LTSC     || BU.Main.OS.IsWindows11LTSC;                          then    return 0; else  return 1; fi; }
 
 # Checking if the currently used version of Windows is the 10th version.
 function BU.Main.OS.IsWindows10()                    	{ if BU.Main.Checkings.CheckOSWindowsVersion '10';          								then    return 0; else  return 1; fi; }
