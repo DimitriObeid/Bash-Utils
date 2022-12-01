@@ -1021,7 +1021,7 @@ function BU.Main.Files.DeleteInArchive()
 }
 
 # Searching for a file or a folder inside an archive.
-function BU.Main.FilesSearchInArchive()
+function BU.Main.Files.SearchInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -1043,7 +1043,7 @@ function BU.Main.FilesSearchInArchive()
 #   - BU.Main.Errors.HandleErrors       -> Handles.lib
 #   - BU.Main.Echo.Success              -> Echo.lib
 #   - BU.Main.Echo.Newline              -> Echo.lib
-function BU.Main.FilesUncompressCMD()
+function BU.Main.Files.UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -1095,7 +1095,7 @@ function BU.Main.FilesUncompressCMD()
 }
 
 # Uncompressing archives according to the used compression method.
-function BU.Main.FilesUncompressFormat()
+function BU.Main.Files.UncompressFormat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -1111,7 +1111,7 @@ function BU.Main.FilesUncompressFormat()
     if ! BU.Main.Args__Files.UncompressFormat "$p_form" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
-    function BU.Main.FilesUncompressFormatErrorMsg()
+    function BU.Main.Files.UncompressFormat.ErrorMsg()
     {
         #**** Parameters ****
         local p_fmt=$1;     # Archive format.
@@ -1130,11 +1130,11 @@ function BU.Main.FilesUncompressFormat()
     if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii][Pp]) ]]; then
         # If the '7z' command is found in the "$PATH" environment variable.
         if      BU.Main.CMDSGetCommandPath 7z; then
-                7z x "$p_arch" "$p_dest" || { BU.Main.FilesUncompressFormatErrorMsg '7-Zip' "$p_arch" '7z'; return 1; };
+                7z x "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "$p_arch" '7z'; return 1; };
 
         # Else, if the '7z' command is found in the "$PATH" environment variable.
         elif    BU.Main.CMDSGetCommandPath p7zip; then
-                p7zip || { BU.Main.FilesUncompressFormatErrorMsg '7-Zip' "$p_arch" 'p7zip'; return 1; };
+                p7zip || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "$p_arch" 'p7zip'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
@@ -1143,7 +1143,7 @@ function BU.Main.FilesUncompressFormat()
     # Else, if the archive to be decompressed is an Apple's BinHex file.
     elif [[ "$p_form" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
         if      BU.Main.CMDSGetCommandPath hexbin; then
-                hexbin "$p_arch" || { BU.Main.FilesUncompressFormatErrorMsg 'BinHex' "$p_arch" 'hexbin'; return 1; };
+                hexbin "$p_arch" || { BU.Main.Files.UncompressFormat.ErrorMsg 'BinHex' "$p_arch" 'hexbin'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Apple BinHex files uncompression found on your system' 'R';
@@ -1152,10 +1152,10 @@ function BU.Main.FilesUncompressFormat()
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
     elif [[ "$p_form" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss])?([[:space:]]))?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
         if      BU.Main.CMDSGetCommandPath cabextract; then
-                cabextract || { BU.Main.FilesUncompressFormatErrorMsg 'Microsoft Cab' "$p_arch" 'cabextract'; return 1; };
+                cabextract || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$p_arch" 'cabextract'; return 1; };
 
         elif    BU.Main.CMDSGetCommandPath 7z; then
-                7z x "$p_arch" "$p_dest" || { BU.Main.FilesUncompressFormatErrorMsg 'Microsoft Cab' "$p_arch" '7z'; return 1; };
+                7z x "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$p_arch" '7z'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Microsoft Cabinet archives uncompression found on your system' 'R';
@@ -1164,10 +1164,10 @@ function BU.Main.FilesUncompressFormat()
     # Else, if the archive to be decompressed is a Gzip archive format.
     elif [[ "$p_form" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
         if      BU.Main.CMDSGetCommandPath gunzip; then
-                gunzip -v "$p_arch" "$p_dest" || { BU.Main.FilesUncompressFormatErrorMsg 'Gzip' "$p_arch" 'gunzip'; return 1; };
+                gunzip -v "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "$p_arch" 'gunzip'; return 1; };
 
         elif    BU.Main.CMDSGetCommandPath gzip; then
-                gzip -dv "$p_arch" "$p_dest" || { BU.Main.FilesUncompressFormatErrorMsg 'Gzip' "$p_arch" 'gzip'; return 1; };
+                gzip -dv "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "$p_arch" 'gzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Gzip archives uncompression found on your system' 'R';
         fi
@@ -1179,7 +1179,7 @@ function BU.Main.FilesUncompressFormat()
     # Else, if the archive to be decompressed is a Zip archive format.
     elif [[ "$p_form" == ?(.)[Zz][Ii][Pp] ]]; then
         if      BU.Main.CMDSGetCommandPath unzip; then
-                unzip "$p_arch" "$p_dest" || { BU.Main.FilesUncompressFormatErrorMsg 'Zip' "$p_arch" 'unzip'; return 1; };
+                unzip "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Zip' "$p_arch" 'unzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Zip archives uncompression found on your system' 'R';
         fi

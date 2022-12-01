@@ -80,7 +80,7 @@ __BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="case::re
 __BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::directories.lib-file";
 
 # "BU.Main.Directories.TriggerRootDirWarning" function.
-function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
+function BU.Main.Case.Read_DirectoriesTriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -121,7 +121,7 @@ function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
 			;;
 		*)
 			BU.Main.Echo.Error "$__BU_MAIN_CASE_INVALID_ANSWER";
-			BU.Main.CaseRead_DirectoriesTriggerRootDirWarning;
+			BU.Main.Case.Read_DirectoriesTriggerRootDirWarning;
 			;;
 	esac
 }
@@ -134,7 +134,7 @@ function BU.Main.CaseRead_DirectoriesTriggerRootDirWarning()
 __BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="$__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS::errors.lib-file";
 
 # "BU.Main.Errors.HandleErrors" function, with the "$__BU_MAIN_STAT_ECHO" variable set to "false".
-function BU.Main.CaseRead_Errors.HandleErrors()
+function BU.Main.Case.Read_Errors.HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -175,7 +175,7 @@ function BU.Main.CaseRead_Errors.HandleErrors()
 			;;
 		*)
 			BU.Main.Echo.Error "$__BU_MAIN_CASE_INVALID_ANSWER";
-			BU.Main.CaseRead_Errors.HandleErrors;
+			BU.Main.Case.Read_Errors.HandleErrors;
 			;;
 	esac
 }

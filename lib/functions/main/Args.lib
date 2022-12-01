@@ -1425,7 +1425,7 @@ function BU.Main.Args__Files.CompressFormat()
 	return 0;
 }
 
-# "BU.Main.FilesSearchInArchive()" function.
+# "BU.Main.Files.SearchInArchive()" function.
 function BU.Main.Args__Files.SearchInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1458,7 +1458,7 @@ function BU.Main.Args__Files.SearchInArchive()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU.Main.FilesUncompressCMD()" function.
+# "BU.Main.Files.UncompressCMD()" function.
 function BU.Main.Args__Files.UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -1498,7 +1498,7 @@ function BU.Main.Args__Files.UncompressCMD()
 	return 0;
 }
 
-# "BU.Main.FilesUncompressFormat()" function.
+# "BU.Main.Files.UncompressFormat()" function.
 function BU.Main.Args__Files.UncompressFormat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
