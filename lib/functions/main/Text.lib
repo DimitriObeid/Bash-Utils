@@ -563,15 +563,15 @@ function BU.Main.Text.PrintCharXTimes()
 	local p_str=${1:-$'\0'};	# String	- Default : NULL	- Character(s) to print.
 	local p_nb=${2:-1};			# Int		- Default : 1		- Number of characters to print.
 	local p_newline=${3:-false}	# Bool		- Default : false	- If true, prints a line break.
-	
+
 	#**** Variables ****
 	local i;					# Int		- Iterations
-	
+
 	#**** Code ****
 	for((i=0; i<p_nb; i++)); do
 		printf "%s" "$p_str";
 	done
-	
+
 	if [ "${p_newline,,}" == 'true' ]; then echo; fi
 
 	return 0;
