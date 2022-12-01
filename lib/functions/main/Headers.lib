@@ -201,9 +201,9 @@ function BU.Main.Headers.Base () {
         # Converting the "$p_stringColor" integer into a command substitution, since this command is directly used in this function's condition.
         if BU.Main.Checkings.IsNotCMD "$p_stringColor"; then p_stringColor="$(BU.Main.Colors.SetTextColor "$p_stringColor")"; fi
 
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" '' "nodate";
+        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate";
         BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}${__BU_MAIN_COLOR_BG_RESET}";
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" '' "nodate";
+        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate";
 
     # Else, if a value is passed via the background color's position's parameter.
     else
@@ -222,13 +222,13 @@ function BU.Main.Headers.Base () {
             for i in "${int_array[@]}"; do
 
                 if [[ "$i" == '1'* ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'2'* ]]; then
                     BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'3' ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol" "$p_isCmd")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'1'* ]] || [[ "$i" == *'3'* ]]; then
                     BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the values were not arranged in ascending order, like 123, 12, 13 or 23" 'R';
