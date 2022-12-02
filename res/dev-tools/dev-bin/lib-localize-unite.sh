@@ -17,6 +17,9 @@ __BU_ARG_DISP=$2;
 # Do not check for programming errors in the files (not recommended, unless you know what you are doing).
 __BU_ARG_NO_SHELLCHECK=$3;
 
+# BETA : Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together.
+# __BU_ARG_ARRAY=();
+
 # -----------------------------------------------
 
 
@@ -587,6 +590,14 @@ function WriteBU()
 
 # Checking first if Shellcheck is installed in order to check for code errors.
 if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" >&2; exit 1; fi
+
+# BETA :
+# for arg in "${__BU_ARG_ARRAY[@]}"; do
+#   if [[ "" == no?(-)shell?(?(-)check) ]] && [ "" == 'compile-stable' ]; then
+#       echo "WARNING : THE 'compile-stable' and 'no-shell-check' MUST NOT be used together";
+#       echo "In order to have a stable file, the 'shellcheck' command MUST be executed, in order to check for any programming error";
+#   fi
+# done
 
 # WARNING ! It's not recommended to disable the checkings of each file, unless you know what you are doing
 if [[ "${__BU_ARG_NO_SHELLCHECK,,}" == no?(-)shell?(-)check ]]; then
