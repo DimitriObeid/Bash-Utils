@@ -1,11 +1,11 @@
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[utf8]{inputenc}     % Encodage du texte (caractères accentués).
-\usepackage[french]{babel}      % Langue du document.
-\usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
-\usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur).
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
-\usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage[utf8]{inputenc}     	% Encodage du texte (caractères accentués).
+\usepackage[french]{babel}      	% Langue du document.
+\usepackage[sfdefault]{roboto}  	% Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}			% Règle de césure pour les caractères accentués (pour le compilateur).
+\usepackage{fancyhdr}           	% Ajout de headers et footers à chaque page du document.
+\usepackage{hyperref}           	% Création de liens cliquables pointant vers d'autres parties du document.
 
 \usepackage[usenames,dvipsnames]{xcolor}	% Coloration du texte.
 \usepackage{verbatim}						% Mise en page des paragraphes.
@@ -75,7 +75,7 @@
 \subsection{Utilisation}\color{white}
 
 \begin{justify}
-    Pour utiliser cette librairie, il vous suffira de sourcer un seul fichier :
+    Pour utiliser cette librairie, il vous suffira de sourcer un seul fichier, qui est installé par défaut dans votre dossier personnel :
 
     \begin{itemize}
         \item \textbf{\color{orange}\$HOME\color{lime}/.Bash-utils-init.sh}
@@ -309,7 +309,7 @@
 \subsubsection{Version de Bash}\color{white}
 
 \begin{justify}
-    En second lieu, le script vérifie que la version de Bash utilisée soit la version 4.0.0 ou une version supérieure.
+    En second lieu, le script vérifie que la version minimale de Bash utilisée soit la version 4.0.0.
 \end{justify}
 
 % ------------
@@ -394,7 +394,7 @@
 
 
 \begin{justify}
-    La première variable est définie dans le fichier \textbf{\color{lime}\$HOME/Bash-utils-init.sh}, tandis que la seconde variable est définie dans le fichier \textbf{\color{lime}\$HOME/.Bash-utils/config/modules/main/module.conf}.
+    La première variable est définie dans le fichier \textbf{\color{orange}\$HOME\color{lime}/Bash-utils-init.sh}, tandis que la seconde variable est définie dans le fichier \textbf{\color{orange}\$HOME\color{lime}/.Bash-utils/config/modules/main/module.conf}.
 \end{justify}
 
 % ------------
