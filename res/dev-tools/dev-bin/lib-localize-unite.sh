@@ -622,7 +622,7 @@ function CompileInSingleFile()
     #**** Variables ****
     local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale";
     local __locale_file_path_en="$__BU_MODULE_INIT_TRANSLATIONS_PATH/en.locale";
-    local __locale_final_file="$__BU_ROOT_PATH/Bash-utils-${p_locale}.sh";
+    local __locale_final_file="$__BU_ROOT_PATH/res/wrapped/unstable/Bash-utils-${p_locale}.sh";
 	local __locale_print_code;
 
     # Getting the current system language.
