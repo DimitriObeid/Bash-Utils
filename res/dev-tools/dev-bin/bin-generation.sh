@@ -24,7 +24,7 @@ __ARG_PATH=$1;
 
 ## MESSAGES
 
-__ABORTING="Aborting the $0 script exection";
+__ABORTING="Aborting the $0 script execution";
 
 # -----------------------------------------------
 
@@ -94,3 +94,5 @@ cat "$__new_file_path" > "$__ARG_PATH" || {
 
     exit 1;
 };
+
+echo "The $__ARG_PATH FILE WAS SUCCESSFULLY CREATED"; echo; exit 0;
