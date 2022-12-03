@@ -8,17 +8,14 @@
 
 ## ARGUMENTS DEFINITION
 
-# Language
+# Language (mandatory argument)
 __BU_ARG_LANG=$1;
 
-# Display more informations about the generation of the localized wrapped script.
-__BU_ARG_DISP=$2;
-
 # Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-__BU_ARG_NO_SHELLCHECK=$3;
+# __BU_ARG_NO_SHELLCHECK=$3;
 
-# BETA : Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together.
-# __BU_ARG_ARRAY=();
+# BETA : Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
+__BU_ARG_ARRAY=("$@");
 
 # -----------------------------------------------
 
@@ -28,31 +25,9 @@ __BU_ARG_NO_SHELLCHECK=$3;
 
 #### VARIABLES DEFINITION
 
-## PATHS
+## ARRAYS
 
-# Getting the path of the library's root path from the path file.
-if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
-
-elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-utils/Bash-utils";
-
-else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
-
-fi
-
-if [ -f "$HOME/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="$HOME/Bash-utils-init.sh";
-
-else __BU_INITIALIZER_SCRIPT_PATH="$__BU_ROOT_PATH/Bash-utils-init.sh";
-
-fi
-
-# Path of the modules initializer file.
-__BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
-
-# Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer";
-
-# Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
+# Storing each stable file that cannot be
 
 # -----------------------------------------------
 
@@ -77,6 +52,13 @@ __YELLOW="$(tput setaf 11)";
 
 # FRENCH - FRANÇAIS
 if [[ "$LANG" = fr_* ]]; then
+    # ----------------------------------------------------------------------------------------------------
+    # Si le dossier "$__BU_ROOT_PATH" n'existe pas [-----] If the "$__BU_ROOT_PATH" folder doesn't exists.
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__CYAN}%s${__RED} N'EXISTE PAS !!!${__RESET}";
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Veuillez vérifier l'existence du répertoire racine de la librairie Bash Utils.";
+
+    # ----------
+    # Shellcheck
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
 
@@ -151,6 +133,13 @@ if [[ "$LANG" = fr_* ]]; then
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
 # -------------------------------------------------------------------------------
 else
+    # -----------------------------------------------
+    # If the "$__BU_ROOT_PATH" folder doesn't exists.
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__CYAN}%s${__RED} FOLDER DOESN'T EXISTS !!!${__RESET}";
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Please check the existence of the root directory of the Bash Utils library.";
+
+    # ----------
+    # Shellcheck
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
 
@@ -221,6 +210,41 @@ else
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO CREATE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
 fi
+
+# -----------------------------------------------
+
+## PATHS
+
+# Getting the path to the library's root directory from the path file.
+if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
+
+elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-utils/Bash-utils";
+
+else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"; if [ ! -d "$__BU_ROOT_PATH" ]; then
+        # shellcheck disable=SC2059
+        PrintErrorLine "$(printf "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS" "$__BU_ROOT_PATH")";
+        echo "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN";
+        echo >&2;
+
+        exit 1;
+    fi
+fi
+
+# Informations of the file which temporary stores each file's data.
+if [ -f "$HOME/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="$HOME/Bash-utils-init.sh";
+
+else __BU_INITIALIZER_SCRIPT_PATH="$__BU_ROOT_PATH/Bash-utils-init.sh";
+
+fi
+
+# Path of the modules initializer file.
+__BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
+
+# Path of the modules initialization script's translations files.
+__BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer";
+
+# Path of the modules initialization script's translations files.
+__BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
 
 # -----------------------------------------------
 
@@ -544,11 +568,12 @@ function ShellcheckError()
 function ShellcheckVerif()
 {
     #**** Parameters ****
-    local p_path=${1};  # String    - Default : NULL    - Path of the file to verify.
+    local p_path=${1:-\$'0'};   # String    - Default : NULL    - Path of the file to verify.
+    local p_stable=${2:-NULL};  # String    - Default : NULL    - If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
 
     #**** Code ****
     # shellcheck disable=SC2059
-    if [ "$__BU_SHELLCHECKED" == 'false' ]; then
+    if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
         printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
 
         if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
@@ -588,25 +613,55 @@ function WriteBU()
 
 ######################################################### CODE ########################################################
 
-# Checking first if Shellcheck is installed in order to check for code errors.
-if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" >&2; exit 1; fi
+# Parsing the array of optional arguments given by the user.
+for arg in "${__BU_ARG_ARRAY[@]}"; do
+    # If the user decides to display the content of each compiled file.
+    if [ "$arg" == display ]; then
+        __vArrayVal_display='display';
 
-# BETA :
-# for arg in "${__BU_ARG_ARRAY[@]}"; do
-#   if [[ "" == no?(-)shell?(?(-)check) ]] && [ "" == 'compile-stable' ]; then
-#       echo "WARNING : THE 'compile-stable' and 'no-shell-check' MUST NOT be used together";
-#       echo "In order to have a stable file, the 'shellcheck' command MUST be executed, in order to check for any programming error";
-#   fi
-# done
+    # Else, if the user decided to create a stable version of the wrapped framework.
+    elif [[ "$arg" == ?(compile?(-))stable ]]; then
+        # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
+        __vArrayVal_compile_stable='compile-stable';
 
-# WARNING ! It's not recommended to disable the checkings of each file, unless you know what you are doing
-if [[ "${__BU_ARG_NO_SHELLCHECK,,}" == no?(-)shell?(-)check ]]; then
+    # Else, if
+    elif [[ "$arg" == no?(?(-)shell)?(-)check ]]; then
+        __vArrayVal_no_shellcheck='no-shellcheck';
+
+    # -------------------------------------------
+    # Else, if an unsupported argument is passed.
+    else
+        echo "" >&2;
+        echo "" >&2:
+        echo >&2;
+
+        exit 1;
+    fi
+done
+
+# Verifying any incompatible values.
+
+# Verifying if the "no-shell-check" and "compile-stable" values were passed together.
+if [[ (-n "$__vArrayVal_no_shellcheck") && ("$__vArrayVal_no_shellcheck" == 'no-shellcheck') ]] && [[ (-n "$__vArrayVal_compile_stable") && ("$__vArrayVal_compile_stable" == 'compile-stable') ]]; then
+    echo "WARNING : THE '$__vArrayVal_compile_stable' and '$__vArrayVal_no_shellcheck' arguments MUST NOT be used together";
+    echo "In order to have a stable file, the 'shellcheck' command MUST be executed, in order to check for any programming error in every files to be included";
+
+    exit 1;
+fi
+
+# WARNING ! It's not recommended to disable the checkings of each file, unless you know what you are doing.
+
+# At this point, declaring this condition is safe, since the presence of the 'compile-stable' argument value was done before.
+if [[ (-n "$__vArrayVal_no_shellcheck") && ("$__vArrayVal_no_shellcheck" == 'no-shellcheck') ]]; then
     PrintWarningLine "$__BU_COMPILE__SHELLCHECK__DISABLED";
 
     sleep 1;
 
     __BU_SHELLCHECKED='true';
 else
+    # Checking first if Shellcheck is installed in order to check for code errors.
+    if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" >&2; exit 1; fi
+
     # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
     __BU_SHELLCHECKED='false';
 fi
@@ -622,7 +677,11 @@ function CompileInSingleFile()
     #**** Variables ****
     local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale";
     local __locale_file_path_en="$__BU_MODULE_INIT_TRANSLATIONS_PATH/en.locale";
-    local __locale_final_file="$__BU_ROOT_PATH/res/wrapped/unstable/Bash-utils-${p_locale}.sh";
+
+    # Compiled file's informations.
+    local __compiled_file_path_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/unstable";
+    local __compiled_file_path="$__compiled_file_path_parent_dir/Bash-utils-${p_locale}.sh";
+
 	local __locale_print_code;
 
     # Getting the current system language.
@@ -630,6 +689,19 @@ function CompileInSingleFile()
 
 	__locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
 	____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
+
+    # If the 'compile-stable' argument was passed.
+    if [ -n "$__vArrayVal_compile_stable" ]; then
+        local __compile_stable="$__vArrayVal_compile_stable";
+        local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
+        local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${p_locale}.sh";
+
+        unset __vArrayVal_compile_stable;
+    fi
+
+    # If the 'no-shellcheck' argument was passed.
+    if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; unset __vArrayVal_no_shellcheck; fi
+
 
     #**** Code ****
     # Deleting the existing "Bash-utils.sh" file.
@@ -648,7 +720,7 @@ function CompileInSingleFile()
 
         if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")"; return 1;
         else
-            ShellcheckVerif "$__locale_file_path_en" || local __err="error";
+            ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
 
             WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
         fi
@@ -692,7 +764,8 @@ function CompileInSingleFile()
     # Writing the initializer script's content into the file to generate.
     PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine ""; return 1;
+    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1;
+
     else
         ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
 
@@ -747,32 +820,62 @@ function CompileInSingleFile()
 
     # -------------------------------------------------------------------------------------------------------------------------
     # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
+    # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "ShellcheckVerif()" function.
     if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
+
 
     # -----------------------------------------------------------------------------
     # Copying the content of the generated file into the localized language's file.
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
-    cp "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file" || { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")"; return 1; };
+    cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")"; return 1; };
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__locale_final_file")";
+    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
+
+    # --------------------------------------------------------------------------------------------
+    # If the 'compile-stable' argument is passed, the compiled file is copied into another folder.
+
+    if [ -n "$__compile_stable" ]; then
+        # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
+        PrintNewstepLine "$(printf "CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED %s FILE" "$__compiled_file_path")";
+
+        printf "Checking for programming errors in the compiled %s file" "$__compiled_file_path";
+
+        if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then PrintErrorLine "$(printf "THE %s FILE CONTAINS PROGRAMMING ERRORS" "$__compiled_file_path")"; exit 1; fi
+
+        printf "The %s file does not contains any programming error\n\n" "$__compiled_file_path";
+
+        printf "Copying the %s file to the %s directory" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+
+        cp "$__compiled_file_path" "$__compiled_stable_file_path" || { exit 1; };
+
+        printf "Setting the compiled %s file in read-only mode for safety reasons" "$__compiled_file_path";
+
+        chmod "$__compiled_file_path" || {
+            echo "WARNING : The $__compiled_file_path cannot be set in read only mode" >&2;
+
+            echo "Do you want to quit the script's execution ? If not, please execute the 'chmod $__compiled_stable_file_path' command after the"
+        };
+
+
+    fi
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
 
-    printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__locale_final_file"; echo;
+    printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__compiled_file_path"; echo;
 
-    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__locale_final_file")" 'NULL' 1000 "$____sys_lang")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__locale_final_file")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__locale_final_file")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__locale_final_file")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__locale_final_file")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__compiled_file_path")" 'NULL' 1000 "$____sys_lang")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__compiled_file_path")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__compiled_file_path")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
+    printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
 
     return 0;
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__BU_ARG_DISP" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" ; exit 1; };
+if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" ; exit 1; };
 else
     CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
     PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE";
