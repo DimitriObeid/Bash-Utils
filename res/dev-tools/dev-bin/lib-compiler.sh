@@ -68,6 +68,10 @@ if [[ "$LANG" = fr_* ]]; then
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
+    # -----------------------------------------------------------------------------------------
+    # Message de début de compilation du framework [-----] Framework compilation start message.
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__CYAN}%s${__RESET}"
+
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
@@ -148,6 +152,10 @@ else
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__CYAN}%s${__GREEN} file doen't contain any programming errors${__RESET}";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
+
+    # ------------------------------------
+    # Framework compilation start message.
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__CYAN}%s${__RESET} FILE"
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
@@ -264,16 +272,34 @@ function PrintLine()
     done; printf "\n";
 }
 
+function PrintBaseLine()
+{
+    #**** Parameters ****
+    local p_color=$1;       # CMD       - Default : NULL    - Color of the line AND the text.
+    local p_msg=$2;         # String    - Default : NULL    - Message to print.
+    local p_pos=${3:-NULL}; # String    - Default : NULL    - Position of the line to print.
+
+    #**** Code ****
+    echo >&2;
+
+    [[ ("$p_pos" == 'NULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+    echo "$p_color$p_msg${__RESET}";
+    [[ ("$p_pos" == 'NULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+
+    return 0;
+}
+
 # Printing an error line.
-function PrintErrorLine()   { echo >&2; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo "${__RED}$1${__RESET}"; printf "%s" "$__RED"; PrintLine; printf "%s" "$__RESET"; echo >&2; }
+function PrintErrorLine()   { PrintBaseLine "$__RED" "$1" "$2" >&2; }
 
 # Printing a newstep line.
-function PrintNewstepLine() { echo; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo "${__ORANGE}$1${__RESET}"; printf "%s" "$__ORANGE"; PrintLine; printf "%s" "$__RESET"; echo; }
+function PrintNewstepLine() { PrintBaseLine "$__ORANGE" "$1" "$2"; }
 
 # Printing a success line.
-function PrintSuccessLine() { echo; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo "${__GREEN}$1${__RESET}"; printf "%s" "$__GREEN"; PrintLine; printf "%s" "$__RESET"; echo; }
+function PrintSuccessLine() { PrintBaseLine "$__GREEN" "$1" "$2"; }
 
-function PrintWarningLine() { echo; printf "%s" "$__YELLOW"; PrintLine; printf "%s" "$__RESET"; echo "${__YELLOW}$1${__RESET}"; printf "%s" "$__YELLOW"; PrintLine; printf "%s" "$__RESET"; echo; }
+# Printing a warning line.
+function PrintWarningLine() { PrintBaseLine "$__YELLOW" "$1" "$2"; }
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
