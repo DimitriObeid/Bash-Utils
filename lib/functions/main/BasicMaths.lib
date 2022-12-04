@@ -61,7 +61,7 @@ __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since it's not mine, plus I added more informations as comments, and I added the localization) :
+# Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU.Main.BasicMaths.BytesToHuman()
 {
@@ -77,7 +77,7 @@ function BU.Main.BasicMaths.BytesToHuman()
     local V_LANG="${4:-en}";    # ISO 639-1 code    - Default : en      - Language, for localizing the byte count (default language : English).
 
     #**** Code ****
-    if [ "${L_PAD^^}" == 'NULL' ]; then L_PAD='no'; fi
+    if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
 
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
     local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {

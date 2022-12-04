@@ -4,6 +4,19 @@
 
 ############################################# GLOBAL VARIABLES DEFINITION #############################################
 
+#### SOURCING DEPENDENCES
+
+## BASH DEPENDENCES
+
+# Temporary solution, as in the future, every dev-tools scripts will use the stable compiled version.
+# source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### ARGUMENTS DEFINITION
 
 ## ARGUMENTS DEFINITION
@@ -27,7 +40,8 @@ __BU_ARG_ARRAY=("$@");
 
 ## ARRAYS
 
-# Storing each stable file that cannot be
+# Storing each stable file that cannot be set into read-only mode.
+__BU_ARRAY__READ_ONLY_FAILED_FILES=();
 
 # -----------------------------------------------
 
@@ -122,6 +136,16 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
 
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Si l'argument '' est passé, alors le fichier compilé est copié dans un autre dossier [-----] If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+
     # -----------------------------------------------------------------------------------------------------------------------------------------
     # Affichage des statistiques du fichier localisé nouvellement généré [-----] Printing the statistics of the newly generated localized file.
     __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__CYAN}%s${__RESET} :";
@@ -203,10 +227,20 @@ else
     __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
 
     # -----------------------------------------------------------------------------
-    # Copying the content of the generated file into the dedicated language's file.
+    # Copying the content of the generated file into the localized language's file.
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+
+    # -------------------------------------------------------------------------------------------------
+    # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
@@ -241,7 +275,7 @@ else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"; if [ 
 fi
 
 # Informations of the file which temporary stores each file's data.
-if [ -f "$HOME/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="$HOME/Bash-utils-init.sh";
+if [ -f "$__BU_ROOT_PATH/install/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="$__BU_ROOT_PATH/install/Bash-utils-init.sh";
 
 else __BU_INITIALIZER_SCRIPT_PATH="$__BU_ROOT_PATH/Bash-utils-init.sh";
 
@@ -255,6 +289,9 @@ __BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initia
 
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
+
+# Sourcing the "Licale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
+source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
 
 # -----------------------------------------------
 
@@ -287,6 +324,9 @@ function PrintBaseLine()
     # FULL              : both lines are printed
 
     #**** Code ****
+    # Error handling for the value of the "$p_pos" argument.
+    if [ "${p_pos^^}" != 'NULL' ]; then if [[ ("${p_pos^^}" != 'UPPER') && ("${p_pos^^}" != 'LOWER') && ("${p_pos^^}" != 'FULL') ]]; then p_pos='NULL'; fi; fi
+
     echo;
 
     [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
@@ -313,7 +353,7 @@ function PrintWarningLine() { PrintBaseLine "$__YELLOW" "$1" "$2"; }
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since it's not mine, plus I added more informations as comments, and I added the localization) :
+# Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BytesToHuman()
 {
@@ -324,7 +364,7 @@ function BytesToHuman()
     local V_LANG="${4:-en}";    # ISO 639-1 code    - Default : en      - Language, for localizing the byte count (default language : English).
 
     #**** Code ****
-    if [ "${L_PAD^^}" == 'NULL' ]; then L_PAD='no'; fi
+    if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
 
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
     local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
@@ -366,205 +406,6 @@ function BytesToHuman()
     printf "%s" "$BYTESTOHUMAN_RESULT";
 
     return 0;
-}
-
-# Printing the language name in English and in its own language.
-function PrintLanguageName()
-{
-	#**** Parameters ****
-	local p_code=${1:-NULL};    # String    - Default : NULL    - Language in which the file must be translated.
-
-	#**** Code ****
-	  if [ "${p_code,,}" == 'aa' ]; then printf "%s : Afar | Afaraf"                                				"${p_code,,}";
-	elif [ "${p_code,,}" == 'ab' ]; then printf "%s : Abkhazian | Аҧсуа"                            				"${p_code,,}";
-	elif [ "${p_code,,}" == 'ae' ]; then printf "%s : Avestan | Avesta"                             				"${p_code,,}";
-	elif [ "${p_code,,}" == 'af' ]; then printf "%s : Afrikaans | Afrikaans"                        				"${p_code,,}";
-	elif [ "${p_code,,}" == 'ak' ]; then printf "%s : Akan | Akan"                                  				"${p_code,,}";
-	elif [ "${p_code,,}" == 'am' ]; then printf "%s : Amharic | አማርኛ"                       						"${p_code,,}";
-	elif [ "${p_code,,}" == 'an' ]; then printf "%s : Aragonese | Aragonés"                         				"${p_code,,}";
-	elif [ "${p_code,,}" == 'ar' ]; then printf "%s : Arabic | العربية"                                                "${p_code,,}";
-	elif [ "${p_code,,}" == 'as' ]; then printf "%s : Assamese | অসমীয়া"                           					"${p_code,,}";
-	elif [ "${p_code,,}" == 'av' ]; then printf "%s : Avaric | авар мацӀ ; магӀарул мацӀ"							"${p_code,,}";
-	elif [ "${p_code,,}" == 'ay' ]; then printf "%s : Aymara | Aymar aru" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'az' ]; then printf "%s : Azerbaijani | Azərbaycan dili" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ba' ]; then printf "%s : Bashkir | башҡорт теле" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'be' ]; then printf "%s : Belarusian | Беларуская" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'bg' ]; then printf "%s : Bulgarian | български език" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'bh' ]; then printf "%s : Bihari | भोजपुरी" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'bi' ]; then printf "%s : Bislama | Bislama" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'bm' ]; then printf "%s : Bambara | Bamanankan" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'bn' ]; then printf "%s : Bengali | বাংলা" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'bo' ]; then printf "%s : Tibetan | བོད་ཡིག" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'br' ]; then printf "%s : Breton | Brezhoneg" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'bs' ]; then printf "%s : Bosnian | Bosanski jezik" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ca' ]; then printf "%s : Catalan | Català" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ce' ]; then printf "%s : Chechen | нохчийн мотт" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ch' ]; then printf "%s : Chamorro | Chamoru" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'co' ]; then printf "%s : Corsican | Corsu ; lingua corsa" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'cr' ]; then printf "%s : cree | ᓀᐦᐃᔭᐍᐏᐣ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'cs' ]; then printf "%s : Czech | Česky ; čeština" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'cu' ]; then printf "%s : Old Church Slavonic | Словѣньскъ" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'cv' ]; then printf "%s : Chuvash | чӑваш чӗлхи"										"${p_code,,}";
-	elif [ "${p_code,,}" == 'cy' ]; then printf "%s : Welsh | Cymraeg" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'da' ]; then printf "%s : Danish | Dansk" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'de' ]; then printf "%s : German | Deutsch" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'dv' ]; then printf "%s : Divehi | ދިވެހި" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'dz' ]; then printf "%s : Dzongkha | རྫོང་ཁ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ee' ]; then printf "%s : Ewe | Ɛʋɛgbɛ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'el' ]; then printf "%s : Greek | Ελληνικά" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'en' ]; then printf "%s : English | English" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'eo' ]; then printf "%s : Esperanto | Esperanto" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'es' ]; then printf "%s : Spanish | Español" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'et' ]; then printf "%s : Estonian | Eesti keel" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'eu' ]; then printf "%s : Basque | Euskara" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'fa' ]; then printf "%s : Persian | فارسی" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ff' ]; then printf "%s : Fulah | Fulfulde"				 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'fi' ]; then printf "%s : Finnish | Suomen kieli" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'fj' ]; then printf "%s : Fijian | Vosa Vakaviti" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'fo' ]; then printf "%s : Faroese | Føroyskt" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'fr' ]; then printf "%s : French | Français"			 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'fy' ]; then printf "%s : Western Frisian | Frysk" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ga' ]; then printf "%s : Irish | Gaeilge" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'gd' ]; then printf "%s : Scottish Gaelic | Gàidhlig"			 						"${p_code,,}";
-	elif [ "${p_code,,}" == 'gl' ]; then printf "%s : Galician | Galego" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gn' ]; then printf "%s : Guarani | Avañe'ẽ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gu' ]; then printf "%s : Gujarati | ગુજરાતી" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gv' ]; then printf "%s : Manx | Ghaelg"			 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ha' ]; then printf "%s : Hausa | هَوُسَ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'he' ]; then printf "%s : Hebrew | עברית" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'hi' ]; then printf "%s : Hindi | हिन्दी ; हिंदी" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ho' ]; then printf "%s : Hiri Motu | Hiri Motu" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'hr' ]; then printf "%s : Croatian | Hrvatski" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ht' ]; then printf "%s : Haitian | Kreyòl ayisyen" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'hu' ]; then printf "%s : Hungarian | magyar " 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'hy' ]; then printf "%s : Armenian | Հայերեն" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'hz' ]; then printf "%s : Herero | Otjiherero" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ia' ]; then printf "%s : Interlingue | Interlingua" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'id' ]; then printf "%s : Indonesian | Bahasa Indonesia" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ie' ]; then printf "%s : Interlingue | Interlingue" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ig' ]; then printf "%s : Igbo | Igbo" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'ii' ]; then printf "%s : Sichuan Yi | ꆇꉙ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ik' ]; then printf "%s : Inupiaq | Iñupiaq ; Iñupiatun" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'io' ]; then printf "%s : Ido | Ido" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'is' ]; then printf "%s : Icelandic | Íslenska" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'it' ]; then printf "%s : Italian | Italiano" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'iu' ]; then printf "%s : Inuktitut | ᐃᓄᒃᑎᑐᑦ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ja' ]; then printf "%s : Japanese | 日本語 (にほんご)" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'jv' ]; then printf "%s : Javanese | Basa Jawa" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ka' ]; then printf "%s : Georgian | ქართული" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kg' ]; then printf "%s : Kongo | KiKongo" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ki' ]; then printf "%s : Kikuyu | Gĩkũyũ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kj' ]; then printf "%s : Kwanyama | Kuanyama" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kk' ]; then printf "%s : Kazakh | Қазақ тілі" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kl' ]; then printf "%s : Greenlandic | Kalaallisut ; kalaallit oqaasii" 				"${p_code,,}";
-	elif [ "${p_code,,}" == 'km' ]; then printf "%s : Khmer | ភាសាខ្មែរ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kn' ]; then printf "%s : Kannada | ಕನ್ನಡ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ko' ]; then printf "%s : Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)" 						"${p_code,,}";
-	elif [ "${p_code,,}" == 'kr' ]; then printf "%s : Kanuri | Kanuri"												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ks' ]; then printf "%s : Kashmiri | कश्मीरी ; كشميري" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ku' ]; then printf "%s : Kurdish | Kurdî ; كوردی" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'kv' ]; then printf "%s : Komi | коми кыв" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kw' ]; then printf "%s : Cornish | Kernewek" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ky' ]; then printf "%s : Kirghiz | кыргыз тили" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'la' ]; then printf "%s : Latin | Latine ; lingua latina" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'lb' ]; then printf "%s : Luxembourgish | Lëtzebuergesch" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'lg' ]; then printf "%s : Ganda | Luganda" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'li' ]; then printf "%s : Limburgish | Limburgs" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ln' ]; then printf "%s : Lingala | Lingála" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'lo' ]; then printf "%s : Lao | ພາສາລາວ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'lt' ]; then printf "%s : Lithuanian | Lietuvių kalba" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'lu' ]; then printf "%s : Luba | tshiluba" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'lv' ]; then printf "%s : Latvian | Latviešu valoda" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mg' ]; then printf "%s : Malagasy | Fiteny malagasy" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mh' ]; then printf "%s : Marshallese | Kajin M̧ajeļ" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mi' ]; then printf "%s : Māori | Te reo Māori" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'mk' ]; then printf "%s : Macedonian | македонски јазик" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ml' ]; then printf "%s : Malayalam | മലയാളം" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'mn' ]; then printf "%s : Mongolian | Монгол" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'mo' ]; then printf "%s : Moldavian | лимба молдовеняскэ" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'mr' ]; then printf "%s : Marathi | मराठी" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ms' ]; then printf "%s : Malay | Bahasa Melayu ; بهاس ملايو" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'mt' ]; then printf "%s : Maltese | Malti" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'my' ]; then printf "%s : Burmese | ဗမာစာ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'na' ]; then printf "%s : Nauru | Ekakairũ Naoero" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'nb' ]; then printf "%s : Norwegian Bokmål | Norsk bokmål" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'nd' ]; then printf "%s : North Ndebele | isiNdebele" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ne' ]; then printf "%s : Nepali | नेपाली" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ng' ]; then printf "%s : Ndonga | Owambo" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'nl' ]; then printf "%s : Dutch | Nederlands" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'nn' ]; then printf "%s : Norwegian Nynorsk | Norsk nynorsk" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'no' ]; then printf "%s : Norwegian | Norsk" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'nr' ]; then printf "%s : South Ndebele | Ndébélé" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'nv' ]; then printf "%s : Navajo | Diné bizaad ; Dinékʼehǰí" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'ny' ]; then printf "%s : Chichewa | ChiCheŵa ; chinyanja" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'oc' ]; then printf "%s : Occitan | Occitan" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'oj' ]; then printf "%s : Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'om' ]; then printf "%s : Oromo | Afaan Oromoo" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'or' ]; then printf "%s : Oriya | ଓଡ଼ିଆ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'os' ]; then printf "%s : Ossetian | Ирон ӕвзаг" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'pa' ]; then printf "%s : Panjabi | ਪੰਜਾਬੀ ; پنجابی" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'pi' ]; then printf "%s : Pāli | पािऴ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'pl' ]; then printf "%s : Polish | Polski" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ps' ]; then printf "%s : Pashto | پښتو" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'pt' ]; then printf "%s : Portuguese | Português" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'qu' ]; then printf "%s : Quechua | Runa Simi ; Kichwa" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'rc' ]; then printf "%s : Reunionese | Kréol Rénioné" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'rm' ]; then printf "%s : Romansh | Rumantsch grischun" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'rn' ]; then printf "%s : Kirundi | kiRundi" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ro' ]; then printf "%s : Romanian | Română" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ru' ]; then printf "%s : Russian | русский язык" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'rw' ]; then printf "%s : Kinyarwanda | Kinyarwanda" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'sa' ]; then printf "%s : Sanskrit | संस्कृतम्" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sc' ]; then printf "%s : Sardinian | sardu" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sd' ]; then printf "%s : Sindhi | सिन्धी ; سنڌي، سندھی" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'se' ]; then printf "%s : Northern Sami | Davvisámegiella" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'sg' ]; then printf "%s : Sango | Yângâ tî sängö" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sh' ]; then printf "%s : Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик" "${p_code,,}";
-	elif [ "${p_code,,}" == 'si' ]; then printf "%s : Sinhalese| සිංහල" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sk' ]; then printf "%s : Slovak | Slovenčina" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sl' ]; then printf "%s : Slovenian | Slovenščina" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sm' ]; then printf "%s : Samoan | Gagana fa'a Samoa"									"${p_code,,}";
-	elif [ "${p_code,,}" == 'sn' ]; then printf "%s : Shona | chiShona" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'so' ]; then printf "%s : Somali | Soomaaliga ; af Soomaali"							"${p_code,,}";
-	elif [ "${p_code,,}" == 'sq' ]; then printf "%s : Albanian | Shqip " 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sr' ]; then printf "%s : Serbian | српски језик" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ss' ]; then printf "%s : Swati| SiSwati" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'st' ]; then printf "%s : Sotho | seSotho" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'su' ]; then printf "%s : Sundanese | Basa Sunda" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sv' ]; then printf "%s : Swedish | Svenska" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sw' ]; then printf "%s : Swahili | Kiswahili" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ta' ]; then printf "%s : Tamil | தமிழ்"													"${p_code,,}";
-	elif [ "${p_code,,}" == 'te' ]; then printf "%s : Telugu | తెలుగు" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'tg' ]; then printf "%s : Tajik | тоҷикӣ ; toğikī ; تاجیکی" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'th' ]; then printf "%s : Thai | ไทย" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'ti' ]; then printf "%s : Tigrinya | ትግርኛ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'tk' ]; then printf "%s : Turkmen | Türkmen ; Түркмен" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'tl' ]; then printf "%s : Tagalog | Tagalog" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tn' ]; then printf "%s : Tswana | seTswana" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'to' ]; then printf "%s : Tonga | faka Tonga" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tr' ]; then printf "%s : Turkish | Türkçe" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ts' ]; then printf "%s : Tsonga | xiTsonga" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tt' ]; then printf "%s : Tatar | татарча ; tatarça ; تاتارچا"                             "${p_code,,}";
-	elif [ "${p_code,,}" == 'tw' ]; then printf "%s : Twi | Twi" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'ty' ]; then printf "%s : Tahitian | Reo Mā\`ohi" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ug' ]; then printf "%s : Uighur | Uyƣurqə ; ئۇيغۇرچ"										"${p_code,,}";
-	elif [ "${p_code,,}" == 'uk' ]; then printf "%s : Ukrainian | українська мова" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ur' ]; then printf "%s : Urdu | اردو" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'uz' ]; then printf "%s : Uzbek | O'zbek ; Ўзбек ; أۇزبېك"								"${p_code,,}";
-	elif [ "${p_code,,}" == 've' ]; then printf "%s : Venda | tshiVenḓa" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'vi' ]; then printf "%s : Vietnamese | Tiếng Việt" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'vo' ]; then printf "%s : Volapük | Volapük" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'wa' ]; then printf "%s : Walon | Walloon" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'wo' ]; then printf "%s : Wolof | Wollof" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'xh' ]; then printf "%s : Xhosa | isiXhosa" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'yi' ]; then printf "%s : Yiddish | ייִדיש" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'yo' ]; then printf "%s : Yoruba | Yorùbá" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'za' ]; then printf "%s : Zhuang | Saɯ cueŋƅ ; Saw cuengh" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'zh' ]; then printf "%s : Chinese | 中文, 汉语, 漢語" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'zu' ]; then printf "%s : Zulu | isiZulu"												"${p_code,,}";
-	  fi;
-
-	return 0;
 }
 
 # Verifying the list of every ISO 639-1 language codes.
@@ -722,7 +563,7 @@ function CompileInSingleFile()
     # Getting the current system language.
     local ____sys_lang;
 
-	__locale_print_code="[ LOCALE : $(PrintLanguageName "${p_locale^^}") ]";
+	__locale_print_code="[ LOCALE : $(BU.Main.Locale.PrintLanguageName "${p_locale^^}") ]";
 	____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     # If the 'compile-stable' argument was passed.
@@ -831,7 +672,7 @@ function CompileInSingleFile()
     # Writing the main module's configuration files content into the file to generate.
     PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    for i in "$HOME/.Bash-utils/config/modules/main/"*.conf; do
+    for i in "$__BU_ROOT_PATH/install/.Bash-utils/config/modules/main/"*.conf; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
 
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
@@ -845,7 +686,7 @@ function CompileInSingleFile()
     # Writing the main module's initializer script's content into the file to generate.
     PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    for i in "$HOME/.Bash-utils/modules/main/"*; do
+    for i in "$__BU_ROOT_PATH/install/.Bash-utils/modules/main/"*; do
         ShellcheckVerif "${i}" || { local __err="error"; break; };
 
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
@@ -870,33 +711,6 @@ function CompileInSingleFile()
     PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
     PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")"
-    # --------------------------------------------------------------------------------------------
-    # If the 'compile-stable' argument is passed, the compiled file is copied into another folder.
-
-    if [ -n "$__compile_stable" ]; then
-        # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
-        PrintNewstepLine "$(printf "CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED %s FILE" "$__compiled_file_path")";
-
-        printf "Checking for programming errors in the compiled %s file" "$__compiled_file_path";
-
-        if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then PrintErrorLine "$(printf "THE %s FILE CONTAINS PROGRAMMING ERRORS" "$__compiled_file_path")"; exit 1; fi
-
-        printf "The %s file does not contains any programming error\n\n" "$__compiled_file_path";
-
-        printf "Copying the %s file to the %s directory" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
-
-        cp "$__compiled_file_path" "$__compiled_stable_file_path" || { exit 1; };
-
-        printf "Setting the compiled %s file in read-only mode for safety reasons" "$__compiled_file_path";
-
-        chmod "$__compiled_file_path" || {
-            echo "WARNING : The $__compiled_file_path cannot be set in read only mode" >&2;
-
-            echo "Do you want to quit the script's execution ? If not, please execute the 'chmod $__compiled_stable_file_path' command after the"
-        };
-
-
-    fi
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
@@ -908,6 +722,86 @@ function CompileInSingleFile()
     printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__compiled_file_path")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
+
+    # -------------------------------------------------------------------------------------------------
+    # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__CYAN}%s${__ORANGE} FILE";
+
+    # --------------------------------------------------------
+    # Checking for any programming error in the compiled file.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__CYAN}%s${__RED} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__CYAN}%s${__GREEN} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
+
+    # ----------------------------------------------------
+    # Copying the compiled file into the stable directory.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__CYAN}%s${__ORANGE} FILE TO THE ${__CYAN}%s${__ORANGE} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__CYAN}%s${__RED} FILE TO THE ${__CYAN}%s${__RED} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE="Please check the ";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__CYAN}%s${__GREEN} FILE TO THE ${__CYAN}%s${__GREEN} DIRECTORY";
+
+    # -----------------------------------------------------------------------
+    # Setting the compiled file into read-only mode with the "cmhod" command.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__CYAN}%s${__ORANGE} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__CYAN}%s${__YELLOW} CANNOT BE SET IN READ ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__CYAN}%s${__ORANGE} FILE IN READ-ONLY MODE";
+
+    if [ -n "$__compile_stable" ]; then
+        # --------------------------------------------------------
+        # Checking for any programming error in the compiled file.
+        PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG" "$__compiled_file_path")" 'UP';
+
+        PrintNewstepLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS" "$__compiled_file_path";
+
+        # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
+        if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
+            PrintErrorLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")";
+
+            return 1;
+        fi
+
+        PrintSuccessLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS\n\n" "$__compiled_file_path";
+
+        # ----------------------------------------------------
+        # Copying the compiled file into the stable directory.
+        PrintNewstepLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+
+        if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
+            PrintErrorLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE"
+
+            return 1;
+        else
+            PrintSuccessLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+        fi
+
+        # -----------------------------------------------------------------------
+        # Setting the compiled file into read-only mode with the "cmhod" command.
+        PrintNewstepLine "" "$__compiled_file_path";
+
+        if ! chmod --verbose "$__compiled_file_path"; then
+            PrintWarningLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_file_path";
+
+            printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2:
+            read -rp "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER" __answer_copy_compiled_file_in_stable_dir;
+            echo;
+
+            case "${__answer_copy_compiled_file_in_stable_dir,,}" in
+                '1') ;;
+                '2' | *) echo "" >&2; echo >&2; return 1;;
+            esac
+
+            # Adding the failed file into the array of .
+            __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
+        else
+            PrintSuccessLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path";
+        fi
+    fi
 
     return 0;
 }
