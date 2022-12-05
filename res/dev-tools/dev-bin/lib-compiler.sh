@@ -24,8 +24,7 @@
 # Language (mandatory argument)
 __BU_ARG_LANG=$1;
 
-# Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-# __BU_ARG_NO_SHELLCHECK=$3;
+shift 1;
 
 # BETA : Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
 __BU_ARG_ARRAY=("$@");
@@ -60,6 +59,17 @@ __RESET="$(tput sgr0)";
 
 __YELLOW="$(tput setaf 11)";
 
+# Defining ome colors for specific text decoration.
+__ERROR="${__RED}";
+
+__HIGHLIGHT="${__CYAN}";
+
+__NEWSTEP="${__ORANGE}";
+
+__SUCCESS="${__GREEN}";
+
+__WARNING="${__YELLOW}";
+
 # -----------------------------------------------
 
 ## MESSAGE TRANSLATIONS
@@ -68,7 +78,7 @@ __YELLOW="$(tput setaf 11)";
 if [[ "$LANG" = fr_* ]]; then
     # ----------------------------------------------------------------------------------------------------
     # Si le dossier "$__BU_ROOT_PATH" n'existe pas [-----] If the "$__BU_ROOT_PATH" folder doesn't exists.
-    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__CYAN}%s${__RED} N'EXISTE PAS !!!${__RESET}";
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__HIGHLIGHT}%s${__ERROR} N'EXISTE PAS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Veuillez vérifier l'existence du répertoire racine de la librairie Bash Utils.";
 
     # ----------
@@ -76,65 +86,65 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
 
-    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__CYAN}%s${__ORANGE}${__RESET}";
-    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__CYAN}%s${__RED} !${__RESET}";
-    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__CYAN}%s${__GREEN} ne contient aucune erreur de programmation";
+    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
+    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
     # -----------------------------------------------------------------------------------------
     # Message de début de compilation du framework [-----] Framework compilation start message.
-    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__CYAN}%s${__RESET}"
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}"
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="Il s'agit d'une mesure de sauvegarde au cas où les fichiers de paramètres régionaux seraient mis à jour après une mise à jour du script d'initialisation, puisque l'anglais est la principale langue prise en charge, afin qu'un message ne soit pas renvoyé sous la forme d'une chaîne vide.";
 
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing now the initializer script's translations files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__ORANGE} DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__RED} DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__CYAN}%s${__GREEN} DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__HIGHLIGHT}%s${__NEWSTEP} DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__HIGHLIGHT}%s${__ERROR} DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ${__HIGHLIGHT}%s${__SUCCESS} DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichier de librairie du module principal dans le fichier à générer [-----] Writing the main module's library files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE LIBRAIRIE DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de configuration du module principal dans le fichier à générer [-----] Writing the main module's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu du script d'initialisation du module principal dans le fichier à générer [-----] Writing the main module's initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL DANS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de configuration du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE CONFIGURATION DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU SCRIPT D'INITIALISATION DANS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # -------------------------------------------------------------------------------------------------------------------------------------------------
     # Copie du contenu du fichier généré dans le fichier localisé [-----] Copying the content of the generated file into the localized language's file.
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__ORANGE} VERS LE FICHIER ${__CYAN}%s${__ORANGE}";
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__RED} VERS LE FICHIER ${__CYAN}%s${__RED}";
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__CYAN}%s${__GREEN} VERS LE FICHIER ${__CYAN}%s${__GREEN}";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPIE DU CONTENU DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Si l'argument '' est passé, alors le fichier compilé est copié dans un autre dossier [-----] If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
@@ -148,7 +158,7 @@ if [[ "$LANG" = fr_* ]]; then
 
     # -----------------------------------------------------------------------------------------------------------------------------------------
     # Affichage des statistiques du fichier localisé nouvellement généré [-----] Printing the statistics of the newly generated localized file.
-    __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__CYAN}%s${__RESET} :";
+    __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__HIGHLIGHT}%s${__RESET} :";
     __BU_COMPILE__LOCALIZED_FILE__BYTES="Taille en octets               : %s";
     __BU_COMPILE__LOCALIZED_FILE__CHARS="Nombre de caractères           : %s caractères";
     __BU_COMPILE__LOCALIZED_FILE__LINES="Nombre le lignes               : %s lignes";
@@ -156,7 +166,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Nombre de mots                 : %s mots";
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGE : $__BU_ARG_LANG !!!";
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="LE FRAMEWORK BASH UTILS A ÉTÉ COMPILÉ AVEC SUCCÈS VERS CETTE LANGUE : ${__CYAN}%s${__RESET}";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="LE FRAMEWORK BASH UTILS A ÉTÉ COMPILÉ AVEC SUCCÈS VERS CETTE LANGUE : ${__HIGHLIGHT}%s${__RESET}";
 
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
@@ -164,7 +174,7 @@ if [[ "$LANG" = fr_* ]]; then
 else
     # -----------------------------------------------
     # If the "$__BU_ROOT_PATH" folder doesn't exists.
-    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__CYAN}%s${__RED} FOLDER DOESN'T EXISTS !!!${__RESET}";
+    __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Please check the existence of the root directory of the Bash Utils library.";
 
     # ----------
@@ -172,65 +182,65 @@ else
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
 
-    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__CYAN}%s${__ORANGE} file${__RESET}";
-    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__CYAN}%s${__RED} file!${__RESET}";
-    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__CYAN}%s${__GREEN} file doen't contain any programming errors${__RESET}";
+    __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
+    __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file doen't contain any programming errors${__RESET}";
 
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
 
     # ------------------------------------
     # Framework compilation start message.
-    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__CYAN}%s${__RESET} FILE"
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__RESET} FILE"
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES CONTENT FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="This is a safeguard measure in case the locale files are updated after an update of the initialization script, since English is the primary supported language, so that a message is not returned as an empty string";
 
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # ------------------------------------------------------------------------------------------
     # Writing now the initializer script's translations files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT FROM THE ${__CYAN}%s${__ORANGE} LANGUAGE FROM THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__CYAN}%s${__RED} LANGUAGE FROM THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__CYAN}%s${__GREEN} LANGUAGE FROM THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPYING THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPYING THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # --------------------------------------------------------------------------------
     # Writing the main module's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPYING THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPYING THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # ---------------------------------------------------------------------------------
     # Writing the main module's initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPYING THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPYING THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # ---------------------------------------------------------------------------------------
     # Writing the initializer script's configuration files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # -------------------------------------------------------------------
     # Writing the initializer script's content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # -----------------------------------------------------------------------------
     # Copying the content of the generated file into the localized language's file.
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__CYAN}%s${__ORANGE} FILE INTO THE ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__CYAN}%s${__RED} FILE INTO THE ${__CYAN}%s${__RED} FILE";
-    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__CYAN}%s${__GREEN} FILE INTO THE ${__CYAN}%s${__GREEN} FILE";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # -------------------------------------------------------------------------------------------------
     # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
@@ -244,7 +254,7 @@ else
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
-    __BU_COMPILE__LOCALIZED_FILE__STATS="${__CYAN}%s${__RESET} file statistics :";
+    __BU_COMPILE__LOCALIZED_FILE__STATS="${__HIGHLIGHT}%s${__RESET} file statistics :";
     __BU_COMPILE__LOCALIZED_FILE__BYTES="Size in bytes           : %s";
     __BU_COMPILE__LOCALIZED_FILE__CHARS="Number of characters    : %s characters";
     __BU_COMPILE__LOCALIZED_FILE__LINES="Number of lines         : %s lines";
@@ -252,7 +262,7 @@ else
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Number of words         : %s words";
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__CYAN}%s${__RESET}";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__HIGHLIGHT}%s${__RESET}";
 fi
 
 # -----------------------------------------------
@@ -266,8 +276,8 @@ elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-uti
 
 else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"; if [ ! -d "$__BU_ROOT_PATH" ]; then
         # shellcheck disable=SC2059
-        PrintErrorLine "$(printf "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS" "$__BU_ROOT_PATH")";
-        echo "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN";
+        printf "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS\n" "$__BU_ROOT_PATH" >&2;
+        echo "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN" >&2;
         echo >&2;
 
         exit 1;
@@ -290,7 +300,7 @@ __BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initia
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
 
-# Sourcing the "Licale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
+# Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
 source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
 
 # -----------------------------------------------
@@ -476,8 +486,8 @@ function WriteBU()
 	v_content="$(cat "$p_filepath")";
 
     #**** Code ****
-    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists."; return 1; };
-    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists."; return 1; };
+    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists." 'FULL'; return 1; };
+    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists." 'FULL'; return 1; };
     fi
 }
 
@@ -500,7 +510,9 @@ for arg in "${__BU_ARG_ARRAY[@]}"; do
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
         __vArrayVal_compile_stable='compile-stable';
 
-    # Else, if
+    # Else, if the user decides to prevent the execution of the 'shellcheck' command.
+
+    # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
     elif [[ "$arg" == no?(?(-)shell)?(-)check ]]; then
         __vArrayVal_no_shellcheck='no-shellcheck';
 
@@ -536,7 +548,7 @@ if [[ (-n "$__vArrayVal_no_shellcheck") && ("$__vArrayVal_no_shellcheck" == 'no-
     __BU_SHELLCHECKED='true';
 else
     # Checking first if Shellcheck is installed in order to check for code errors.
-    if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" >&2; exit 1; fi
+    if ! command -v shellcheck; then PrintErrorLine "$__BU_COMPILE__SHELLCHECK__MISSING" 'FULL'; exit 1; fi
 
     # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
     __BU_SHELLCHECKED='false';
@@ -584,7 +596,7 @@ function CompileInSingleFile()
     if [ -f "$__BU_MAIN_FULL_FILE_PATH" ] && [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then true > "$__BU_MAIN_FULL_FILE_PATH"; fi
 
     # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
-    if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED"; return 1; fi
+    if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; return 1; fi
 
     PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" "FULL";
 
@@ -594,16 +606,16 @@ function CompileInSingleFile()
     if [ "${p_locale,,}" != "en" ]; then
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
 
-        echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN";
+        echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
 
-        if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")"; return 1;
+        if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
         else
             ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
 
             WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
     fi
@@ -613,14 +625,14 @@ function CompileInSingleFile()
 
     PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" >&2; return 1;
+    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
     else
         ShellcheckVerif "$__locale_file_path" || local __err="error";
 
         WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -634,7 +646,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -642,7 +654,7 @@ function CompileInSingleFile()
     # Writing the initializer script's content into the file to generate.
     PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1;
+    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
 
     else
         ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
@@ -650,7 +662,7 @@ function CompileInSingleFile()
         WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
     fi
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -664,7 +676,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -678,7 +690,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -692,7 +704,7 @@ function CompileInSingleFile()
         WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
     done
 
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")"; return 1; };
+    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -706,7 +718,7 @@ function CompileInSingleFile()
     # Copying the content of the generated file into the localized language's file.
     PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
-    cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")"; return 1; };
+    cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; return 1; };
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
@@ -726,30 +738,30 @@ function CompileInSingleFile()
     # -------------------------------------------------------------------------------------------------
     # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__CYAN}%s${__ORANGE} FILE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 
     # --------------------------------------------------------
     # Checking for any programming error in the compiled file.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__CYAN}%s${__ORANGE} FILE";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__CYAN}%s${__RED} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__CYAN}%s${__GREEN} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
 
     # ----------------------------------------------------
     # Copying the compiled file into the stable directory.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__CYAN}%s${__ORANGE} FILE TO THE ${__CYAN}%s${__ORANGE} DIRECTORY";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__CYAN}%s${__RED} FILE TO THE ${__CYAN}%s${__RED} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE="Please check the ";
 
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__CYAN}%s${__GREEN} FILE TO THE ${__CYAN}%s${__GREEN} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
 
     # -----------------------------------------------------------------------
     # Setting the compiled file into read-only mode with the "cmhod" command.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__CYAN}%s${__ORANGE} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__CYAN}%s${__YELLOW} CANNOT BE SET IN READ ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__HIGHLIGHT}%s${__WARNING} CANNOT BE SET IN READ ONLY MODE";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__CYAN}%s${__ORANGE} FILE IN READ-ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE";
 
     if [ -n "$__compile_stable" ]; then
         # --------------------------------------------------------
@@ -760,7 +772,7 @@ function CompileInSingleFile()
 
         # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
         if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
-            PrintErrorLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")";
+            PrintErrorLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
 
             return 1;
         fi
@@ -772,7 +784,8 @@ function CompileInSingleFile()
         PrintNewstepLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
 
         if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
-            PrintErrorLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+            PrintErrorLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
+
             echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE"
 
             return 1;
@@ -807,11 +820,11 @@ function CompileInSingleFile()
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" ; exit 1; };
+if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" 'FULL' ; exit 1; };
 else
-    CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!"; exit 1; };
+    CompileInSingleFile "en" "no" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!" 'FULL'; exit 1; };
     PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE" "FULL";
 
-    CompileInSingleFile "fr" "no" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!"; exit 1; };
+    CompileInSingleFile "fr" "no" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!" 'FULL'; exit 1; };
     PrintSuccessLine "CRÉATION D'UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES DANS UN SEUL FICHIER RÉUSSIE AVEC SUCCÈS" "FULL";
 fi
