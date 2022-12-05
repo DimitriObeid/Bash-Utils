@@ -62,12 +62,34 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
 
+# Checking if the Android device is rooted.
+function BU.Main.OS.IsAndroidRooted()               { return 0; }
+
+# Checking the current Android version.
+function BU.Main.OS.IsAndroid7()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid8()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid9()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid10()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid11()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::gathering-informations";
+
+# Getting the Android device model.
+function BU.Main.OS.GetAndroidDevice()
+{
+    return 0;
+}
+
+# Getting the Android operating system version.
+function BU.Main.OS.GetAndroidVersion()
+{
+    return 0;
+}
 
 # -----------------------------------------------
 

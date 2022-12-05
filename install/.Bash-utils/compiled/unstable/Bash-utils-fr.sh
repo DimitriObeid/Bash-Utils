@@ -1429,7 +1429,7 @@ elif [ "$__BU_MODULE_INIT_STAT_DEBUG" = 'true' ]; then
     # ---------------------------------------------
     # __BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY
     # ---------------------------------------------
-    
+
     elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == file?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'F' ]; then
 
         # The accepted values are the name of every ".lib" files from the Bash-utils/lib/functions/main/ directory.
@@ -7374,7 +7374,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
+				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
                 "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;

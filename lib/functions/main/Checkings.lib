@@ -415,22 +415,9 @@ function BU.Main.Checkings.CheckRootEUID()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
-        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";-
 
-    #**** Parameters ****
-    local p_error=${1:-NULL};   # String    - Default : NULL    -
-
-    #**** Code ****
-    if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else
-        if [[ "${p_error^^}" == E?(RR?(OR)) ]]; then
-            if [ "$EUID" -ne 0 ]; then
-                BU.Main.Errors.HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
-                    "EUID != 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
-            fi
-
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
-        fi
-    fi
+    if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else return 1; fi
 }
 
 alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
@@ -560,7 +547,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         if [ "${p_authorization,,}" = 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIMSince the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
+				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
                 "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
