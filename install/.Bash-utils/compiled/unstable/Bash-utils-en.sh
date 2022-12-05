@@ -6546,20 +6546,7 @@ function BU.Main.Checkings.CheckRootEUID()
         "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS" \
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS";
 
-    #**** Parameters ****
-    local p_error=${1:-NULL};   # String    - Default : NULL    -
-
-    #**** Code ****
-    if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else
-        if [[ "${p_error^^}" == E?(RR?(OR)) ]]; then
-            if [ "$EUID" -ne 0 ]; then
-                BU.Main.Errors.HandleErrors "1" "YOU NEED ROOT USER'S PRIVILEGES TO PERFORM THIS ACTION !" "Please launch your script with super-user privileges." \
-                    "EUID != 0" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
-            fi
-
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
-        fi
-    fi
+    if [ "$EUID" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else return 1; fi
 }
 
 alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
@@ -10826,6 +10813,81 @@ function BU.Main.Files.DeleteFile()
 
 # -----------------------------------------------
 
+## CHECKING FILE INFORMATIONS
+## DEBUG ID : checking-file-informations
+
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::checking-file-informations";
+
+# Checking if a file is in read-only mode.
+function BU.Main.Files.IsReadOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Checking if a file is writable only.
+function BU.Main.Files.IsWriteOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Checking if a file is in executable only.
+function BU.Main.Files.IsExecutableOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Checking if a file is readable, writable and executable.
+function BU.Main.Files.IsRWX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
 ## GETTING FILE INFORMATIONS
 ## DEBUG ID : getting-file-informations
 
@@ -10840,11 +10902,10 @@ function BU.Main.Files.GetByteSize()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
-    local p_base=$2;        # Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_base=$2;        # Int       - Default : NULL    - Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
 
     #**** Code ****
-
     if [ -z "$p_base" ]; then
         wc --bytes < "$p_filepath" || \
             { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
@@ -10854,12 +10915,12 @@ function BU.Main.Files.GetByteSize()
 
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
@@ -11083,7 +11144,7 @@ function BU.Main.File.SetFileLastAccess()
 
     #**** Parameters ****
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
-    local p_fakedate=$2;
+    local p_fakedate=$2;    # Date      - Default : NULL    -
 
     #**** Code ****
     if ! BU.Main.Args__FilesSetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -11152,26 +11213,26 @@ function BU.Main.Files.GetLineFromTextFile()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING";
 
     #**** Parameters ****
-    local p_source=$1;          # String    - Default : NULL    - Path of the file to parse.
-    local p_wanted_line=$2;     # Int       - Default : NULL    - Line to get in the file
+#    local p_source=$1;          # String    - Default : NULL    - Path of the file to parse.
+#    local p_wanted_line=$2;     # Int       - Default : NULL    - Line to get in the file
 
     #**** Variables ****
-    local i=0;                  # Line incrementer
+#    local i=0;                  # Line incrementer
 
     #**** Code ****
 	# shellcheck disable=SC2002
-    cat "$p_source" | while read -r line; do
-
-        # Incrementing the line incrementer variable's value...
-        i=$(( i+1 ));
+#    cat "$p_source" | while read -r line; do
+#
+#        # Incrementing the line incrementer variable's value...
+#        i=$(( i+1 ));
 
         # ... until it reaches the wanted line.
-        if [ "$i" -eq "$p_wanted_line" ]; then
+#        if [ "$i" -eq "$p_wanted_line" ]; then
 
 			# shellcheck disable=SC2034
-            __BU_MAIN_TXT_STORE_LINE="$line";
-        fi
-    done
+#            __BU_MAIN_TXT_STORE_LINE="$line";
+#        fi
+#    done
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -14256,12 +14317,34 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
 
+# Checking if the Android device is rooted.
+function BU.Main.OS.IsAndroidRooted()               { return 0; }
+
+# Checking the current Android version.
+function BU.Main.OS.IsAndroid7()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid8()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid9()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid10()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid11()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::gathering-informations";
+
+# Getting the Android device model.
+function BU.Main.OS.GetAndroidDevice()
+{
+    return 0;
+}
+
+# Getting the Android operating system version.
+function BU.Main.OS.GetAndroidVersion()
+{
+    return 0;
+}
 
 # -----------------------------------------------
 
@@ -16492,6 +16575,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
     #**** Variables ****
     # Leave this variable empty, it will store the reversed string.
     local reversed="";
+    local line;
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then

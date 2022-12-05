@@ -607,6 +607,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
     #**** Variables ****
     # Leave this variable empty, it will store the reversed string.
     local reversed="";
+    local line;
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
