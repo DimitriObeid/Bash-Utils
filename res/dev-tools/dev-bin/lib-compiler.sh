@@ -59,7 +59,7 @@ __RESET="$(tput sgr0)";
 
 __YELLOW="$(tput setaf 11)";
 
-# Defining ome colors for specific text decoration.
+# Defining some colors for specific text decoration.
 __ERROR="${__RED}";
 
 __HIGHLIGHT="${__CYAN}";
@@ -276,7 +276,7 @@ elif [ -d "$HOME/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="$HOME/.Bash-uti
 
 else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"; if [ ! -d "$__BU_ROOT_PATH" ]; then
         # shellcheck disable=SC2059
-        printf "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS\n" "$__BU_ROOT_PATH" >&2;
+        printf "${__ERROR}$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS${__RESET}\n" "$__BU_ROOT_PATH" >&2;
         echo "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN" >&2;
         echo >&2;
 
