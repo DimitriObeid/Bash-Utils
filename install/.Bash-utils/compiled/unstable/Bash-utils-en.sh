@@ -14001,193 +14001,193 @@ function BU.Main.Locale.PrintLanguageName()
 	local p_code=${1:-NULL};    # String    - Default : NULL    - Language in which the file must be translated.
 
 	#**** Code ****
-      if [ "${p_code,,}" == 'aa' ]; then printf "%s : Afar | Afaraf"                                                "${p_code,,}";
-    elif [ "${p_code,,}" == 'ab' ]; then printf "%s : Abkhazian | Аҧсуа"                                            "${p_code,,}";
-    elif [ "${p_code,,}" == 'ae' ]; then printf "%s : Avestan | Avesta"                             				"${p_code,,}";
-    elif [ "${p_code,,}" == 'af' ]; then printf "%s : Afrikaans | Afrikaans"                        				"${p_code,,}";
-    elif [ "${p_code,,}" == 'ak' ]; then printf "%s : Akan | Akan"                                  				"${p_code,,}";
-    elif [ "${p_code,,}" == 'am' ]; then printf "%s : Amharic | አማርኛ"                                               "${p_code,,}";
-    elif [ "${p_code,,}" == 'an' ]; then printf "%s : Aragonese | Aragonés"                                         "${p_code,,}";
-    elif [ "${p_code,,}" == 'ar' ]; then printf "%s : Arabic | العربية"                                                 "${p_code,,}";
-	elif [ "${p_code,,}" == 'as' ]; then printf "%s : Assamese | অসমীয়া"                                              "${p_code,,}";
-	elif [ "${p_code,,}" == 'av' ]; then printf "%s : Avaric | авар мацӀ ; магӀарул мацӀ"							"${p_code,,}";
-	elif [ "${p_code,,}" == 'ay' ]; then printf "%s : Aymara | Aymar aru" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'az' ]; then printf "%s : Azerbaijani | Azərbaycan dili" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ba' ]; then printf "%s : Bashkir | башҡорт теле" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'be' ]; then printf "%s : Belarusian | Беларуская" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'bg' ]; then printf "%s : Bulgarian | български език" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'bh' ]; then printf "%s : Bihari | भोजपुरी" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'bi' ]; then printf "%s : Bislama | Bislama" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'bm' ]; then printf "%s : Bambara | Bamanankan" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'bn' ]; then printf "%s : Bengali | বাংলা" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'bo' ]; then printf "%s : Tibetan | བོད་ཡིག" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'br' ]; then printf "%s : Breton | Brezhoneg" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'bs' ]; then printf "%s : Bosnian | Bosanski jezik" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ca' ]; then printf "%s : Catalan | Català" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ce' ]; then printf "%s : Chechen | нохчийн мотт" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ch' ]; then printf "%s : Chamorro | Chamoru" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'co' ]; then printf "%s : Corsican | Corsu ; lingua corsa" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'cr' ]; then printf "%s : cree | ᓀᐦᐃᔭᐍᐏᐣ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'cs' ]; then printf "%s : Czech | Česky ; čeština" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'cu' ]; then printf "%s : Old Church Slavonic | Словѣньскъ" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'cv' ]; then printf "%s : Chuvash | чӑваш чӗлхи"										"${p_code,,}";
-	elif [ "${p_code,,}" == 'cy' ]; then printf "%s : Welsh | Cymraeg" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'da' ]; then printf "%s : Danish | Dansk" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'de' ]; then printf "%s : German | Deutsch" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'dv' ]; then printf "%s : Divehi | ދިވެހި" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'dz' ]; then printf "%s : Dzongkha | རྫོང་ཁ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ee' ]; then printf "%s : Ewe | Ɛʋɛgbɛ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'el' ]; then printf "%s : Greek | Ελληνικά" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'en' ]; then printf "%s : English | English" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'eo' ]; then printf "%s : Esperanto | Esperanto" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'es' ]; then printf "%s : Spanish | Español" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'et' ]; then printf "%s : Estonian | Eesti keel" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'eu' ]; then printf "%s : Basque | Euskara" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'fa' ]; then printf "%s : Persian | فارسی" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ff' ]; then printf "%s : Fulah | Fulfulde"				 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'fi' ]; then printf "%s : Finnish | Suomen kieli" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'fj' ]; then printf "%s : Fijian | Vosa Vakaviti" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'fo' ]; then printf "%s : Faroese | Føroyskt" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'fr' ]; then printf "%s : French | Français"			 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'fy' ]; then printf "%s : Western Frisian | Frysk" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ga' ]; then printf "%s : Irish | Gaeilge" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'gd' ]; then printf "%s : Scottish Gaelic | Gàidhlig"			 						"${p_code,,}";
-	elif [ "${p_code,,}" == 'gl' ]; then printf "%s : Galician | Galego" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gn' ]; then printf "%s : Guarani | Avañe'ẽ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gu' ]; then printf "%s : Gujarati | ગુજરાતી" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'gv' ]; then printf "%s : Manx | Ghaelg"			 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ha' ]; then printf "%s : Hausa | هَوُسَ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'he' ]; then printf "%s : Hebrew | עברית" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'hi' ]; then printf "%s : Hindi | हिन्दी ; हिंदी" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ho' ]; then printf "%s : Hiri Motu | Hiri Motu" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'hr' ]; then printf "%s : Croatian | Hrvatski" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ht' ]; then printf "%s : Haitian | Kreyòl ayisyen" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'hu' ]; then printf "%s : Hungarian | magyar " 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'hy' ]; then printf "%s : Armenian | Հայերեն" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'hz' ]; then printf "%s : Herero | Otjiherero" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ia' ]; then printf "%s : Interlingue | Interlingua" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'id' ]; then printf "%s : Indonesian | Bahasa Indonesia" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ie' ]; then printf "%s : Interlingue | Interlingue" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ig' ]; then printf "%s : Igbo | Igbo" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'ii' ]; then printf "%s : Sichuan Yi | ꆇꉙ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ik' ]; then printf "%s : Inupiaq | Iñupiaq ; Iñupiatun" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'io' ]; then printf "%s : Ido | Ido" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'is' ]; then printf "%s : Icelandic | Íslenska" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'it' ]; then printf "%s : Italian | Italiano" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'iu' ]; then printf "%s : Inuktitut | ᐃᓄᒃᑎᑐᑦ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ja' ]; then printf "%s : Japanese | 日本語 (にほんご)" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'jv' ]; then printf "%s : Javanese | Basa Jawa" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ka' ]; then printf "%s : Georgian | ქართული" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kg' ]; then printf "%s : Kongo | KiKongo" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ki' ]; then printf "%s : Kikuyu | Gĩkũyũ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kj' ]; then printf "%s : Kwanyama | Kuanyama" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kk' ]; then printf "%s : Kazakh | Қазақ тілі" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'kl' ]; then printf "%s : Greenlandic | Kalaallisut ; kalaallit oqaasii" 				"${p_code,,}";
-	elif [ "${p_code,,}" == 'km' ]; then printf "%s : Khmer | ភាសាខ្មែរ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kn' ]; then printf "%s : Kannada | ಕನ್ನಡ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ko' ]; then printf "%s : Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)" 						"${p_code,,}";
-	elif [ "${p_code,,}" == 'kr' ]; then printf "%s : Kanuri | Kanuri"												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ks' ]; then printf "%s : Kashmiri | कश्मीरी ; كشميري" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ku' ]; then printf "%s : Kurdish | Kurdî ; كوردی" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'kv' ]; then printf "%s : Komi | коми кыв" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'kw' ]; then printf "%s : Cornish | Kernewek" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ky' ]; then printf "%s : Kirghiz | кыргыз тили" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'la' ]; then printf "%s : Latin | Latine ; lingua latina" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'lb' ]; then printf "%s : Luxembourgish | Lëtzebuergesch" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'lg' ]; then printf "%s : Ganda | Luganda" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'li' ]; then printf "%s : Limburgish | Limburgs" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ln' ]; then printf "%s : Lingala | Lingála" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'lo' ]; then printf "%s : Lao | ພາສາລາວ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'lt' ]; then printf "%s : Lithuanian | Lietuvių kalba" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'lu' ]; then printf "%s : Luba | tshiluba" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'lv' ]; then printf "%s : Latvian | Latviešu valoda" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mg' ]; then printf "%s : Malagasy | Fiteny malagasy" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mh' ]; then printf "%s : Marshallese | Kajin M̧ajeļ" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'mi' ]; then printf "%s : Māori | Te reo Māori" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'mk' ]; then printf "%s : Macedonian | македонски јазик" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'ml' ]; then printf "%s : Malayalam | മലയാളം" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'mn' ]; then printf "%s : Mongolian | Монгол" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'mo' ]; then printf "%s : Moldavian | лимба молдовеняскэ" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'mr' ]; then printf "%s : Marathi | मराठी" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ms' ]; then printf "%s : Malay | Bahasa Melayu ; بهاس ملايو" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'mt' ]; then printf "%s : Maltese | Malti" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'my' ]; then printf "%s : Burmese | ဗမာစာ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'na' ]; then printf "%s : Nauru | Ekakairũ Naoero" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'nb' ]; then printf "%s : Norwegian Bokmål | Norsk bokmål" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'nd' ]; then printf "%s : North Ndebele | isiNdebele" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ne' ]; then printf "%s : Nepali | नेपाली" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ng' ]; then printf "%s : Ndonga | Owambo" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'nl' ]; then printf "%s : Dutch | Nederlands" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'nn' ]; then printf "%s : Norwegian Nynorsk | Norsk nynorsk" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'no' ]; then printf "%s : Norwegian | Norsk" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'nr' ]; then printf "%s : South Ndebele | Ndébélé" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'nv' ]; then printf "%s : Navajo | Diné bizaad ; Dinékʼehǰí" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'ny' ]; then printf "%s : Chichewa | ChiCheŵa ; chinyanja" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'oc' ]; then printf "%s : Occitan | Occitan" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'oj' ]; then printf "%s : Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'om' ]; then printf "%s : Oromo | Afaan Oromoo" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'or' ]; then printf "%s : Oriya | ଓଡ଼ିଆ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'os' ]; then printf "%s : Ossetian | Ирон ӕвзаг" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'pa' ]; then printf "%s : Panjabi | ਪੰਜਾਬੀ ; پنجابی" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'pi' ]; then printf "%s : Pāli | पािऴ" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'pl' ]; then printf "%s : Polish | Polski" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'ps' ]; then printf "%s : Pashto | پښتو" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'pt' ]; then printf "%s : Portuguese | Português" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'qu' ]; then printf "%s : Quechua | Runa Simi ; Kichwa" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'rc' ]; then printf "%s : Reunionese | Kréol Rénioné" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'rm' ]; then printf "%s : Romansh | Rumantsch grischun" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'rn' ]; then printf "%s : Kirundi | kiRundi" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ro' ]; then printf "%s : Romanian | Română" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ru' ]; then printf "%s : Russian | русский язык" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'rw' ]; then printf "%s : Kinyarwanda | Kinyarwanda" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'sa' ]; then printf "%s : Sanskrit | संस्कृतम्" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sc' ]; then printf "%s : Sardinian | sardu" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sd' ]; then printf "%s : Sindhi | सिन्धी ; سنڌي، سندھی" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'se' ]; then printf "%s : Northern Sami | Davvisámegiella" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'sg' ]; then printf "%s : Sango | Yângâ tî sängö" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sh' ]; then printf "%s : Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик" "${p_code,,}";
-	elif [ "${p_code,,}" == 'si' ]; then printf "%s : Sinhalese| සිංහල" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sk' ]; then printf "%s : Slovak | Slovenčina" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sl' ]; then printf "%s : Slovenian | Slovenščina" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sm' ]; then printf "%s : Samoan | Gagana fa'a Samoa"									"${p_code,,}";
-	elif [ "${p_code,,}" == 'sn' ]; then printf "%s : Shona | chiShona" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'so' ]; then printf "%s : Somali | Soomaaliga ; af Soomaali"							"${p_code,,}";
-	elif [ "${p_code,,}" == 'sq' ]; then printf "%s : Albanian | Shqip " 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sr' ]; then printf "%s : Serbian | српски језик" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ss' ]; then printf "%s : Swati| SiSwati" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'st' ]; then printf "%s : Sotho | seSotho" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'su' ]; then printf "%s : Sundanese | Basa Sunda" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'sv' ]; then printf "%s : Swedish | Svenska" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'sw' ]; then printf "%s : Swahili | Kiswahili" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ta' ]; then printf "%s : Tamil | தமிழ்"											    "${p_code,,}";
-	elif [ "${p_code,,}" == 'te' ]; then printf "%s : Telugu | తెలుగు" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'tg' ]; then printf "%s : Tajik | тоҷикӣ ; toğikī ; تاجیکی" 							"${p_code,,}";
-	elif [ "${p_code,,}" == 'th' ]; then printf "%s : Thai | ไทย" 												    "${p_code,,}";
-	elif [ "${p_code,,}" == 'ti' ]; then printf "%s : Tigrinya | ትግርኛ" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'tk' ]; then printf "%s : Turkmen | Türkmen ; Түркмен" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'tl' ]; then printf "%s : Tagalog | Tagalog" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tn' ]; then printf "%s : Tswana | seTswana" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'to' ]; then printf "%s : Tonga | faka Tonga" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tr' ]; then printf "%s : Turkish | Türkçe" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'ts' ]; then printf "%s : Tsonga | xiTsonga" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'tt' ]; then printf "%s : Tatar | татарча ; tatarça ; تاتارچا"                             "${p_code,,}";
-	elif [ "${p_code,,}" == 'tw' ]; then printf "%s : Twi | Twi" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'ty' ]; then printf "%s : Tahitian | Reo Mā\`ohi" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'ug' ]; then printf "%s : Uighur | Uyƣurqə ; ئۇيغۇرچ"										"${p_code,,}";
-	elif [ "${p_code,,}" == 'uk' ]; then printf "%s : Ukrainian | українська мова" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'ur' ]; then printf "%s : Urdu | اردو" 													"${p_code,,}";
-	elif [ "${p_code,,}" == 'uz' ]; then printf "%s : Uzbek | O'zbek ; Ўзбек ; أۇزبېك"								"${p_code,,}";
-	elif [ "${p_code,,}" == 've' ]; then printf "%s : Venda | tshiVenḓa" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'vi' ]; then printf "%s : Vietnamese | Tiếng Việt" 										"${p_code,,}";
-	elif [ "${p_code,,}" == 'vo' ]; then printf "%s : Volapük | Volapük" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'wa' ]; then printf "%s : Walon | Walloon" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'wo' ]; then printf "%s : Wolof | Wollof" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'xh' ]; then printf "%s : Xhosa | isiXhosa" 											"${p_code,,}";
-	elif [ "${p_code,,}" == 'yi' ]; then printf "%s : Yiddish | ייִדיש" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'yo' ]; then printf "%s : Yoruba | Yorùbá" 												"${p_code,,}";
-	elif [ "${p_code,,}" == 'za' ]; then printf "%s : Zhuang | Saɯ cueŋƅ ; Saw cuengh" 								"${p_code,,}";
-	elif [ "${p_code,,}" == 'zh' ]; then printf "%s : Chinese | 中文, 汉语, 漢語" 									"${p_code,,}";
-	elif [ "${p_code,,}" == 'zu' ]; then printf "%s : Zulu | isiZulu"												"${p_code,,}";
+      if [ "${p_code,,}" == 'aa' ]; then echo -n "${p_code,,} : Afar | Afaraf"
+    elif [ "${p_code,,}" == 'ab' ]; then echo -n "${p_code,,} : Abkhazian | Аҧсуа"
+    elif [ "${p_code,,}" == 'ae' ]; then echo -n "${p_code,,} : Avestan | Avesta"
+    elif [ "${p_code,,}" == 'af' ]; then echo -n "${p_code,,} : Afrikaans | Afrikaans"
+    elif [ "${p_code,,}" == 'ak' ]; then echo -n "${p_code,,} : Akan | Akan"
+    elif [ "${p_code,,}" == 'am' ]; then echo -n "${p_code,,} : Amharic | አማርኛ"
+    elif [ "${p_code,,}" == 'an' ]; then echo -n "${p_code,,} : Aragonese | Aragonés"
+    elif [ "${p_code,,}" == 'ar' ]; then echo -n "${p_code,,} : Arabic | العربية"
+	elif [ "${p_code,,}" == 'as' ]; then echo -n "${p_code,,} : Assamese | অসমীয়া"
+	elif [ "${p_code,,}" == 'av' ]; then echo -n "${p_code,,} : Avaric | авар мацӀ ; магӀарул мацӀ"
+	elif [ "${p_code,,}" == 'ay' ]; then echo -n "${p_code,,} : Aymara | Aymar aru"
+	elif [ "${p_code,,}" == 'az' ]; then echo -n "${p_code,,} : Azerbaijani | Azərbaycan dili"
+	elif [ "${p_code,,}" == 'ba' ]; then echo -n "${p_code,,} : Bashkir | башҡорт теле"
+	elif [ "${p_code,,}" == 'be' ]; then echo -n "${p_code,,} : Belarusian | Беларуская"
+	elif [ "${p_code,,}" == 'bg' ]; then echo -n "${p_code,,} : Bulgarian | български език"
+	elif [ "${p_code,,}" == 'bh' ]; then echo -n "${p_code,,} : Bihari | भोजपुरी"
+	elif [ "${p_code,,}" == 'bi' ]; then echo -n "${p_code,,} : Bislama | Bislama"
+	elif [ "${p_code,,}" == 'bm' ]; then echo -n "${p_code,,} : Bambara | Bamanankan"
+	elif [ "${p_code,,}" == 'bn' ]; then echo -n "${p_code,,} : Bengali | বাংলা"
+	elif [ "${p_code,,}" == 'bo' ]; then echo -n "${p_code,,} : Tibetan | བོད་ཡིག"
+	elif [ "${p_code,,}" == 'br' ]; then echo -n "${p_code,,} : Breton | Brezhoneg"
+	elif [ "${p_code,,}" == 'bs' ]; then echo -n "${p_code,,} : Bosnian | Bosanski jezik"
+	elif [ "${p_code,,}" == 'ca' ]; then echo -n "${p_code,,} : Catalan | Català"
+	elif [ "${p_code,,}" == 'ce' ]; then echo -n "${p_code,,} : Chechen | нохчийн мотт"
+	elif [ "${p_code,,}" == 'ch' ]; then echo -n "${p_code,,} : Chamorro | Chamoru"
+	elif [ "${p_code,,}" == 'co' ]; then echo -n "${p_code,,} : Corsican | Corsu ; lingua corsa"
+	elif [ "${p_code,,}" == 'cr' ]; then echo -n "${p_code,,} : cree | ᓀᐦᐃᔭᐍᐏᐣ"
+	elif [ "${p_code,,}" == 'cs' ]; then echo -n "${p_code,,} : Czech | Česky ; čeština"
+	elif [ "${p_code,,}" == 'cu' ]; then echo -n "${p_code,,} : Old Church Slavonic | Словѣньскъ"
+	elif [ "${p_code,,}" == 'cv' ]; then echo -n "${p_code,,} : Chuvash | чӑваш чӗлхи"
+	elif [ "${p_code,,}" == 'cy' ]; then echo -n "${p_code,,} : Welsh | Cymraeg"
+	elif [ "${p_code,,}" == 'da' ]; then echo -n "${p_code,,} : Danish | Dansk"
+	elif [ "${p_code,,}" == 'de' ]; then echo -n "${p_code,,} : German | Deutsch"
+	elif [ "${p_code,,}" == 'dv' ]; then echo -n "${p_code,,} : Divehi | ދިވެހި"
+	elif [ "${p_code,,}" == 'dz' ]; then echo -n "${p_code,,} : Dzongkha | རྫོང་ཁ"
+	elif [ "${p_code,,}" == 'ee' ]; then echo -n "${p_code,,} : Ewe | Ɛʋɛgbɛ"
+	elif [ "${p_code,,}" == 'el' ]; then echo -n "${p_code,,} : Greek | Ελληνικά"
+	elif [ "${p_code,,}" == 'en' ]; then echo -n "${p_code,,} : English | English"
+	elif [ "${p_code,,}" == 'eo' ]; then echo -n "${p_code,,} : Esperanto | Esperanto"
+	elif [ "${p_code,,}" == 'es' ]; then echo -n "${p_code,,} : Spanish | Español"
+	elif [ "${p_code,,}" == 'et' ]; then echo -n "${p_code,,} : Estonian | Eesti keel"
+	elif [ "${p_code,,}" == 'eu' ]; then echo -n "${p_code,,} : Basque | Euskara"
+	elif [ "${p_code,,}" == 'fa' ]; then echo -n "${p_code,,} : Persian | فارسی"
+	elif [ "${p_code,,}" == 'ff' ]; then echo -n "${p_code,,} : Fulah | Fulfulde"
+	elif [ "${p_code,,}" == 'fi' ]; then echo -n "${p_code,,} : Finnish | Suomen kieli"
+	elif [ "${p_code,,}" == 'fj' ]; then echo -n "${p_code,,} : Fijian | Vosa Vakaviti"
+	elif [ "${p_code,,}" == 'fo' ]; then echo -n "${p_code,,} : Faroese | Føroyskt"
+	elif [ "${p_code,,}" == 'fr' ]; then echo -n "${p_code,,} : French | Français"
+	elif [ "${p_code,,}" == 'fy' ]; then echo -n "${p_code,,} : Western Frisian | Frysk"
+	elif [ "${p_code,,}" == 'ga' ]; then echo -n "${p_code,,} : Irish | Gaeilge"
+	elif [ "${p_code,,}" == 'gd' ]; then echo -n "${p_code,,} : Scottish Gaelic | Gàidhlig"
+	elif [ "${p_code,,}" == 'gl' ]; then echo -n "${p_code,,} : Galician | Galego"
+	elif [ "${p_code,,}" == 'gn' ]; then echo -n "${p_code,,} : Guarani | Avañe'ẽ"
+	elif [ "${p_code,,}" == 'gu' ]; then echo -n "${p_code,,} : Gujarati | ગુજરાતી"
+	elif [ "${p_code,,}" == 'gv' ]; then echo -n "${p_code,,} : Manx | Ghaelg"
+	elif [ "${p_code,,}" == 'ha' ]; then echo -n "${p_code,,} : Hausa | هَوُسَ"
+	elif [ "${p_code,,}" == 'he' ]; then echo -n "${p_code,,} : Hebrew | עברית"
+	elif [ "${p_code,,}" == 'hi' ]; then echo -n "${p_code,,} : Hindi | हिन्दी ; हिंदी"
+	elif [ "${p_code,,}" == 'ho' ]; then echo -n "${p_code,,} : Hiri Motu | Hiri Motu"
+	elif [ "${p_code,,}" == 'hr' ]; then echo -n "${p_code,,} : Croatian | Hrvatski"
+	elif [ "${p_code,,}" == 'ht' ]; then echo -n "${p_code,,} : Haitian | Kreyòl ayisyen"
+	elif [ "${p_code,,}" == 'hu' ]; then echo -n "${p_code,,} : Hungarian | magyar "
+	elif [ "${p_code,,}" == 'hy' ]; then echo -n "${p_code,,} : Armenian | Հայերեն"
+	elif [ "${p_code,,}" == 'hz' ]; then echo -n "${p_code,,} : Herero | Otjiherero"
+	elif [ "${p_code,,}" == 'ia' ]; then echo -n "${p_code,,} : Interlingue | Interlingua"
+	elif [ "${p_code,,}" == 'id' ]; then echo -n "${p_code,,} : Indonesian | Bahasa Indonesia"
+	elif [ "${p_code,,}" == 'ie' ]; then echo -n "${p_code,,} : Interlingue | Interlingue"
+	elif [ "${p_code,,}" == 'ig' ]; then echo -n "${p_code,,} : Igbo | Igbo"
+	elif [ "${p_code,,}" == 'ii' ]; then echo -n "${p_code,,} : Sichuan Yi | ꆇꉙ"
+	elif [ "${p_code,,}" == 'ik' ]; then echo -n "${p_code,,} : Inupiaq | Iñupiaq ; Iñupiatun"
+	elif [ "${p_code,,}" == 'io' ]; then echo -n "${p_code,,} : Ido | Ido"
+	elif [ "${p_code,,}" == 'is' ]; then echo -n "${p_code,,} : Icelandic | Íslenska"
+	elif [ "${p_code,,}" == 'it' ]; then echo -n "${p_code,,} : Italian | Italiano"
+	elif [ "${p_code,,}" == 'iu' ]; then echo -n "${p_code,,} : Inuktitut | ᐃᓄᒃᑎᑐᑦ"
+	elif [ "${p_code,,}" == 'ja' ]; then echo -n "${p_code,,} : Japanese | 日本語 (にほんご)"
+	elif [ "${p_code,,}" == 'jv' ]; then echo -n "${p_code,,} : Javanese | Basa Jawa"
+	elif [ "${p_code,,}" == 'ka' ]; then echo -n "${p_code,,} : Georgian | ქართული"
+	elif [ "${p_code,,}" == 'kg' ]; then echo -n "${p_code,,} : Kongo | KiKongo"
+	elif [ "${p_code,,}" == 'ki' ]; then echo -n "${p_code,,} : Kikuyu | Gĩkũyũ"
+	elif [ "${p_code,,}" == 'kj' ]; then echo -n "${p_code,,} : Kwanyama | Kuanyama"
+	elif [ "${p_code,,}" == 'kk' ]; then echo -n "${p_code,,} : Kazakh | Қазақ тілі"
+	elif [ "${p_code,,}" == 'kl' ]; then echo -n "${p_code,,} : Greenlandic | Kalaallisut ; kalaallit oqaasii"
+	elif [ "${p_code,,}" == 'km' ]; then echo -n "${p_code,,} : Khmer | ភាសាខ្មែរ"
+	elif [ "${p_code,,}" == 'kn' ]; then echo -n "${p_code,,} : Kannada | ಕನ್ನಡ"
+	elif [ "${p_code,,}" == 'ko' ]; then echo -n "${p_code,,} : Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)"
+	elif [ "${p_code,,}" == 'kr' ]; then echo -n "${p_code,,} : Kanuri | Kanuri"
+	elif [ "${p_code,,}" == 'ks' ]; then echo -n "${p_code,,} : Kashmiri | कश्मीरी ; كشميري"
+	elif [ "${p_code,,}" == 'ku' ]; then echo -n "${p_code,,} : Kurdish | Kurdî ; كوردی"
+	elif [ "${p_code,,}" == 'kv' ]; then echo -n "${p_code,,} : Komi | коми кыв"
+	elif [ "${p_code,,}" == 'kw' ]; then echo -n "${p_code,,} : Cornish | Kernewek"
+	elif [ "${p_code,,}" == 'ky' ]; then echo -n "${p_code,,} : Kirghiz | кыргыз тили"
+	elif [ "${p_code,,}" == 'la' ]; then echo -n "${p_code,,} : Latin | Latine ; lingua latina"
+	elif [ "${p_code,,}" == 'lb' ]; then echo -n "${p_code,,} : Luxembourgish | Lëtzebuergesch"
+	elif [ "${p_code,,}" == 'lg' ]; then echo -n "${p_code,,} : Ganda | Luganda"
+	elif [ "${p_code,,}" == 'li' ]; then echo -n "${p_code,,} : Limburgish | Limburgs"
+	elif [ "${p_code,,}" == 'ln' ]; then echo -n "${p_code,,} : Lingala | Lingála"
+	elif [ "${p_code,,}" == 'lo' ]; then echo -n "${p_code,,} : Lao | ພາສາລາວ"
+	elif [ "${p_code,,}" == 'lt' ]; then echo -n "${p_code,,} : Lithuanian | Lietuvių kalba"
+	elif [ "${p_code,,}" == 'lu' ]; then echo -n "${p_code,,} : Luba | tshiluba"
+	elif [ "${p_code,,}" == 'lv' ]; then echo -n "${p_code,,} : Latvian | Latviešu valoda"
+	elif [ "${p_code,,}" == 'mg' ]; then echo -n "${p_code,,} : Malagasy | Fiteny malagasy"
+	elif [ "${p_code,,}" == 'mh' ]; then echo -n "${p_code,,} : Marshallese | Kajin M̧ajeļ"
+	elif [ "${p_code,,}" == 'mi' ]; then echo -n "${p_code,,} : Māori | Te reo Māori"
+	elif [ "${p_code,,}" == 'mk' ]; then echo -n "${p_code,,} : Macedonian | македонски јазик"
+	elif [ "${p_code,,}" == 'ml' ]; then echo -n "${p_code,,} : Malayalam | മലയാളം"
+	elif [ "${p_code,,}" == 'mn' ]; then echo -n "${p_code,,} : Mongolian | Монгол"
+	elif [ "${p_code,,}" == 'mo' ]; then echo -n "${p_code,,} : Moldavian | лимба молдовеняскэ"
+	elif [ "${p_code,,}" == 'mr' ]; then echo -n "${p_code,,} : Marathi | मराठी"
+	elif [ "${p_code,,}" == 'ms' ]; then echo -n "${p_code,,} : Malay | Bahasa Melayu ; بهاس ملايو"
+	elif [ "${p_code,,}" == 'mt' ]; then echo -n "${p_code,,} : Maltese | Malti"
+	elif [ "${p_code,,}" == 'my' ]; then echo -n "${p_code,,} : Burmese | ဗမာစာ"
+	elif [ "${p_code,,}" == 'na' ]; then echo -n "${p_code,,} : Nauru | Ekakairũ Naoero"
+	elif [ "${p_code,,}" == 'nb' ]; then echo -n "${p_code,,} : Norwegian Bokmål | Norsk bokmål"
+	elif [ "${p_code,,}" == 'nd' ]; then echo -n "${p_code,,} : North Ndebele | isiNdebele"
+	elif [ "${p_code,,}" == 'ne' ]; then echo -n "${p_code,,} : Nepali | नेपाली"
+	elif [ "${p_code,,}" == 'ng' ]; then echo -n "${p_code,,} : Ndonga | Owambo"
+	elif [ "${p_code,,}" == 'nl' ]; then echo -n "${p_code,,} : Dutch | Nederlands"
+	elif [ "${p_code,,}" == 'nn' ]; then echo -n "${p_code,,} : Norwegian Nynorsk | Norsk nynorsk"
+	elif [ "${p_code,,}" == 'no' ]; then echo -n "${p_code,,} : Norwegian | Norsk"
+	elif [ "${p_code,,}" == 'nr' ]; then echo -n "${p_code,,} : South Ndebele | Ndébélé"
+	elif [ "${p_code,,}" == 'nv' ]; then echo -n "${p_code,,} : Navajo | Diné bizaad ; Dinékʼehǰí"
+	elif [ "${p_code,,}" == 'ny' ]; then echo -n "${p_code,,} : Chichewa | ChiCheŵa ; chinyanja"
+	elif [ "${p_code,,}" == 'oc' ]; then echo -n "${p_code,,} : Occitan | Occitan"
+	elif [ "${p_code,,}" == 'oj' ]; then echo -n "${p_code,,} : Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ"
+	elif [ "${p_code,,}" == 'om' ]; then echo -n "${p_code,,} : Oromo | Afaan Oromoo"
+	elif [ "${p_code,,}" == 'or' ]; then echo -n "${p_code,,} : Oriya | ଓଡ଼ିଆ"
+	elif [ "${p_code,,}" == 'os' ]; then echo -n "${p_code,,} : Ossetian | Ирон ӕвзаг"
+	elif [ "${p_code,,}" == 'pa' ]; then echo -n "${p_code,,} : Panjabi | ਪੰਜਾਬੀ ; پنجابی"
+	elif [ "${p_code,,}" == 'pi' ]; then echo -n "${p_code,,} : Pāli | पािऴ"
+	elif [ "${p_code,,}" == 'pl' ]; then echo -n "${p_code,,} : Polish | Polski"
+	elif [ "${p_code,,}" == 'ps' ]; then echo -n "${p_code,,} : Pashto | پښتو"
+	elif [ "${p_code,,}" == 'pt' ]; then echo -n "${p_code,,} : Portuguese | Português"
+	elif [ "${p_code,,}" == 'qu' ]; then echo -n "${p_code,,} : Quechua | Runa Simi ; Kichwa"
+	elif [ "${p_code,,}" == 'rc' ]; then echo -n "${p_code,,} : Reunionese | Kréol Rénioné"
+	elif [ "${p_code,,}" == 'rm' ]; then echo -n "${p_code,,} : Romansh | Rumantsch grischun"
+	elif [ "${p_code,,}" == 'rn' ]; then echo -n "${p_code,,} : Kirundi | kiRundi"
+	elif [ "${p_code,,}" == 'ro' ]; then echo -n "${p_code,,} : Romanian | Română"
+	elif [ "${p_code,,}" == 'ru' ]; then echo -n "${p_code,,} : Russian | русский язык"
+	elif [ "${p_code,,}" == 'rw' ]; then echo -n "${p_code,,} : Kinyarwanda | Kinyarwanda"
+	elif [ "${p_code,,}" == 'sa' ]; then echo -n "${p_code,,} : Sanskrit | संस्कृतम्"
+	elif [ "${p_code,,}" == 'sc' ]; then echo -n "${p_code,,} : Sardinian | sardu"
+	elif [ "${p_code,,}" == 'sd' ]; then echo -n "${p_code,,} : Sindhi | सिन्धी ; سنڌي، سندھی"
+	elif [ "${p_code,,}" == 'se' ]; then echo -n "${p_code,,} : Northern Sami | Davvisámegiella"
+	elif [ "${p_code,,}" == 'sg' ]; then echo -n "${p_code,,} : Sango | Yângâ tî sängö"
+	elif [ "${p_code,,}" == 'sh' ]; then echo -n "${p_code,,} : Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик"
+	elif [ "${p_code,,}" == 'si' ]; then echo -n "${p_code,,} : Sinhalese| සිංහල"
+	elif [ "${p_code,,}" == 'sk' ]; then echo -n "${p_code,,} : Slovak | Slovenčina"
+	elif [ "${p_code,,}" == 'sl' ]; then echo -n "${p_code,,} : Slovenian | Slovenščina"
+	elif [ "${p_code,,}" == 'sm' ]; then echo -n "${p_code,,} : Samoan | Gagana fa'a Samoa"
+	elif [ "${p_code,,}" == 'sn' ]; then echo -n "${p_code,,} : Shona | chiShona"
+	elif [ "${p_code,,}" == 'so' ]; then echo -n "${p_code,,} : Somali | Soomaaliga ; af Soomaali"
+	elif [ "${p_code,,}" == 'sq' ]; then echo -n "${p_code,,} : Albanian | Shqip "
+	elif [ "${p_code,,}" == 'sr' ]; then echo -n "${p_code,,} : Serbian | српски језик"
+	elif [ "${p_code,,}" == 'ss' ]; then echo -n "${p_code,,} : Swati| SiSwati"
+	elif [ "${p_code,,}" == 'st' ]; then echo -n "${p_code,,} : Sotho | seSotho"
+	elif [ "${p_code,,}" == 'su' ]; then echo -n "${p_code,,} : Sundanese | Basa Sunda"
+	elif [ "${p_code,,}" == 'sv' ]; then echo -n "${p_code,,} : Swedish | Svenska"
+	elif [ "${p_code,,}" == 'sw' ]; then echo -n "${p_code,,} : Swahili | Kiswahili"
+	elif [ "${p_code,,}" == 'ta' ]; then echo -n "${p_code,,} : Tamil | தமிழ்"
+	elif [ "${p_code,,}" == 'te' ]; then echo -n "${p_code,,} : Telugu | తెలుగు"
+	elif [ "${p_code,,}" == 'tg' ]; then echo -n "${p_code,,} : Tajik | тоҷикӣ ; toğikī ; تاجیکی"
+	elif [ "${p_code,,}" == 'th' ]; then echo -n "${p_code,,} : Thai | ไทย"
+	elif [ "${p_code,,}" == 'ti' ]; then echo -n "${p_code,,} : Tigrinya | ትግርኛ"
+	elif [ "${p_code,,}" == 'tk' ]; then echo -n "${p_code,,} : Turkmen | Türkmen ; Түркмен"
+	elif [ "${p_code,,}" == 'tl' ]; then echo -n "${p_code,,} : Tagalog | Tagalog"
+	elif [ "${p_code,,}" == 'tn' ]; then echo -n "${p_code,,} : Tswana | seTswana"
+	elif [ "${p_code,,}" == 'to' ]; then echo -n "${p_code,,} : Tonga | faka Tonga"
+	elif [ "${p_code,,}" == 'tr' ]; then echo -n "${p_code,,} : Turkish | Türkçe"
+	elif [ "${p_code,,}" == 'ts' ]; then echo -n "${p_code,,} : Tsonga | xiTsonga"
+	elif [ "${p_code,,}" == 'tt' ]; then echo -n "${p_code,,} : Tatar | татарча ; tatarça ; تاتارچا"
+	elif [ "${p_code,,}" == 'tw' ]; then echo -n "${p_code,,} : Twi | Twi"
+	elif [ "${p_code,,}" == 'ty' ]; then echo -n "${p_code,,} : Tahitian | Reo Mā\`ohi"
+	elif [ "${p_code,,}" == 'ug' ]; then echo -n "${p_code,,} : Uighur | Uyƣurqə ; ئۇيغۇرچ"
+	elif [ "${p_code,,}" == 'uk' ]; then echo -n "${p_code,,} : Ukrainian | українська мова"
+	elif [ "${p_code,,}" == 'ur' ]; then echo -n "${p_code,,} : Urdu | اردو"
+	elif [ "${p_code,,}" == 'uz' ]; then echo -n "${p_code,,} : Uzbek | O'zbek ; Ўзбек ; أۇزبېك"
+	elif [ "${p_code,,}" == 've' ]; then echo -n "${p_code,,} : Venda | tshiVenḓa"
+	elif [ "${p_code,,}" == 'vi' ]; then echo -n "${p_code,,} : Vietnamese | Tiếng Việt"
+	elif [ "${p_code,,}" == 'vo' ]; then echo -n "${p_code,,} : Volapük | Volapük"
+	elif [ "${p_code,,}" == 'wa' ]; then echo -n "${p_code,,} : Walon | Walloon"
+	elif [ "${p_code,,}" == 'wo' ]; then echo -n "${p_code,,} : Wolof | Wollof"
+	elif [ "${p_code,,}" == 'xh' ]; then echo -n "${p_code,,} : Xhosa | isiXhosa"
+	elif [ "${p_code,,}" == 'yi' ]; then echo -n "${p_code,,} : Yiddish | ייִדיש"
+	elif [ "${p_code,,}" == 'yo' ]; then echo -n "${p_code,,} : Yoruba | Yorùbá"
+	elif [ "${p_code,,}" == 'za' ]; then echo -n "${p_code,,} : Zhuang | Saɯ cueŋƅ ; Saw cuengh"
+	elif [ "${p_code,,}" == 'zh' ]; then echo -n "${p_code,,} : Chinese | 中文, 汉语, 漢語"
+	elif [ "${p_code,,}" == 'zu' ]; then echo -n "${p_code,,} : Zulu | isiZulu"
 	  fi;
 
 	return 0;
@@ -16763,8 +16763,6 @@ fi; exit 1; fi
 
 ## SUB-CATEGORY : ""
 
-#
-
 
 
 # -----------------------------------------------
@@ -16777,11 +16775,13 @@ fi; exit 1; fi
 
 ################################## DEFINING ALIASES - BASICMATHS ##################################
 
-#### CATEGORY : ""
+#### CATEGORY : "CONVERSIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "NUMERIC CONVERSIONS"
 
-#
+alias BU.BytesToHuman='BU.Main.BasicMaths.BytesToHuman';
+alias BU.NegativeToPositive='BU.Main.BasicMaths.NegativeToPositive';
+alias BU.PositiveToNegative='BU.Main.BasicMaths.PositiveToNegative';
 
 # -----------------------------------------------
 
@@ -16793,11 +16793,17 @@ fi; exit 1; fi
 
 ##################################### DEFINING ALIASES - CASE #####################################
 
-#### CATEGORY : ""
+#### CATEGORY : "READING CASE STATEMENTS BY FUNCTIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "'Directories.lib' FILE"
 
-#
+alias BU.Read_DirectoriesTriggerRootDirWarning='BU.Main.Case.Read_DirectoriesTriggerRootDirWarning';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "'Errors.lib' FILE"
+
+alias BU.Read_Errors.HandleErrors='BU.Main.Case.Read_Errors.HandleErrors';
 
 # -----------------------------------------------
 
@@ -16859,6 +16865,58 @@ alias BU.IsAlphaNumStringOnly='BU.Main.Checkings.IsAlphaNumStringOnly';
 
 # -----------------------------------------------
 
+## OTHER VARIABLES CHECKINGS
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CATEGORY : "DIFFERENT CHECKINGS"
+
+## SUB-CATEGORY : "CHECKING FOR IDENTIFIANTS"
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "BASIC HARDWARE CHECKINGS"
+
+alias BU.CheckDiskUsedSpace='BU.Main.Checkings.CheckDiskUsedSpace';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SUB-CATEGORY : "PATHS CHECKINGS"
+
+alias BU.CheckDirPathExists='BU.Main.Checkings.CheckDirPathExists';
+alias BU.CheckDirPathWasCreated='BU.Main.Checkings.CheckDirPathWasCreated';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "FILES PATHS CHECKINGS"
+
+alias BU.CheckFilePathExists='BU.Main.Checkings.CheckFilePathExists';
+alias BU.CheckFilePathWasCreated='BU.Main.Checkings.CheckFilePathWasCreated';
+alias BU.CheckProjectLogPath='BU.Main.Checkings.CheckProjectLogPath';
+alias BU.CheckProjectLogStatus='BU.Main.Status.CheckProjectLogStatus';
+alias BU.CheckProjectRelatedFile='BU.Main.Checkings.CheckProjectRelatedFile';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SUB-CATEGORY : "TEXT CHECKINGS"
+
+alias BU.CheckDecho='BU.Main.Checkings.CheckDecho';
+alias BU.CheckTextFormat='BU.Main.Checkings.CheckTextFormat';
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -16879,11 +16937,12 @@ alias BU.CheckProjectLogStatus='BU.Main.Checkings.CheckProjectLogStatus';
 
 ##################################### DEFINING ALIASES - CMDS #####################################
 
-#### CATEGORY : ""
+#### CATEGORY : "PROCCESSING COMMANDS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "GETTING COMMAND OUTPUTS"
 
-#
+alias BU.GetCommandPath='BU.Main.CMDS.GetCommandPath';
+alias BU.GetCommandReturnOutputValue='BU.Main.CMDS.GetCommandReturnOutputValue';
 
 # -----------------------------------------------
 
@@ -17114,11 +17173,24 @@ alias BU.Decho_FMT_U='BU.Main.Decho.Decho.FMT_U';
 
 ################################## DEFINING ALIASES - DIRECTORIES #################################
 
-#### CATEGORY : ""
+#### CATEGORY : "DIRECTORIES FUNCTIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "PROCESSING FUNCTIONS"
 
-#
+alias BU.ProcessingDir='BU.Main.Directories.ProcessingDir';
+alias BU.OverwriteDir='BU.Main.Directories.OverwriteDir';
+alias BU.Make='BU.Main.Directories.Make';
+alias BU.MakePath='BU.Main.Directories.MakePath';
+alias BU.MkTmpDir='BU.Main.Directories.MkTmpDir';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "PATH PROCESSING"
+alias BU.GetDirectoryName='BU.Main.Directories.GetDirectoryName';
+alias BU.GetDirectoryPath='BU.Main.Directories.GetDirectoryPath';
+alias BU.GetParentDirectoryName='BU.Main.Directories.GetParentDirectoryName';
+alias BU.GetParentDirectoryPath='BU.Main.Directories.GetParentDirectoryPath';
+alias BU.TriggerRootDirWarning='BU.Main.Directories.TriggerRootDirWarning';
 
 # -----------------------------------------------
 
@@ -17130,11 +17202,27 @@ alias BU.Decho_FMT_U='BU.Main.Decho.Decho.FMT_U';
 
 ##################################### DEFINING ALIASES - ECHO #####################################
 
-#### CATEGORY : ""
+#### CATEGORY : "PRINTING FORMATTED STRINGS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "DEBUGGING"
 
-#
+alias BU.__Debug='BU.Main.Echo.__Debug';
+alias BU.DebugEnd='BU.Main.Echo.DebugEnd';
+alias BU.Debug='BU.Main.Echo.Debug';
+alias BU.__EchoVoid='BU.Main.Echo.__EchoVoid';
+alias BU.__EchoOutput='BU.Main.Echo.__EchoOutput';
+alias BU.__EchoCPLS='BU.Main.Echo.__EchoCPLS';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CATEGORY : "TEST DISPLAYING"
+
+## SUB-CATEGORY : "DISPLAYING A CONTEXT MESSAGE"
+
 alias BU.EchoError='BU.Main.Echo.Error';
 alias BU.EchoMsg='BU.Main.Echo.Msg';
 alias BU.EchoNewstep='BU.Main.Echo.Newstep';
@@ -17144,7 +17232,7 @@ alias BU.Newline='BU.Main.Echo.Newline';
 
 # -----------------------------------------------
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "DISPLAYING A COLORED MESSAGE"
 
 alias BU.EchoAqua='BU.Main.Echo.Aqua';
 alias BU.EchoBlack='BU.Main.Echo.Black';
@@ -17177,6 +17265,17 @@ alias BU.EchoViolet='BU.Main.Echo.Violet';
 alias BU.EchoWhite='BU.Main.Echo.White';
 alias BU.EchoYellow='BU.Main.Echo.Yellow';
 
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CATEGORY : "LINE BREAKS"
+
+## SUB-CATEGORY : "LINE BREAKS ACCORDING TO THE ''$__BU_MAIN_PROJECT_LOG_FILE_PATH'' VARIABLE VALUE"
+
+alias BU.Newline='BU.Main.Echo.Newline';
 
 # -----------------------------------------------
 
@@ -17190,9 +17289,24 @@ alias BU.EchoYellow='BU.Main.Echo.Yellow';
 
 #### CATEGORY : "ERRORS HANDLING FUNCTIONS"
 
+## SUB-CATEGORY : "CLASSIC ERRORS HANDLING"
+
+alias BU.HandleSmallErrors='BU.Main.Errors.HandleSmallErrors';
+
+# -----------------------------------------------
+
 ## SUB-CATEGORY : "EXIT AND RETURN CODES HANDLING"
 
 alias BU.Exit='BU.Main.Errors.Exit';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "SCRIPT'S ERRORS HANDLING"
+
+alias BU.HandleErrors_File='BU.Main.Errors.HandleErrors_File';
+alias BU.HandleErrors_Function='BU.Main.Errors.HandleErrors_Function';
+alias BU.HandleErrors_Line='BU.Main.Errors.HandleErrors_Line';
+alias BU.HandleErrors='BU.Main.Errors.HandleErrors';
 
 # -----------------------------------------------
 
@@ -17204,11 +17318,81 @@ alias BU.Exit='BU.Main.Errors.Exit';
 
 ##################################### DEFINING ALIASES - FILES ####################################
 
-#### CATEGORY : ""
+#### CATEGORY : "FILES PROCESSING FUNCTIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "PROCESSING FUNCTIONS"
 
-#
+alias BU.__ProcessingFile='BU.Main.Files.__ProcessingFile';
+alias BU.ProcessingFile='BU.Main.Files.ProcessingFile';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "FILE CREATION FUNCTIONS"
+
+alias BU.OverwriteFile='BU.Main.Files.OverwriteFile';
+alias BU.Make='BU.Main.Files.Make';
+alias BU.MakePath='BU.Main.Files.MakePath';
+alias BU.MakeFileInMemory='BU.Main.Files.MakeFileInMemory';
+alias BU.CreateProjectLogFile='BU.Main.Files.CreateProjectLogFile';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "FILE DELETION FUNCTIONS"
+
+alias BU.DeleteFile='BU.Main.Files.DeleteFile';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "GETTING FILE INFORMATIONS"
+
+alias BU.GetByteSize='BU.Main.Files.GetByteSize';
+alias BU.GetCreationDate='BU.Main.Files.GetCreationDate';
+alias BU.GetCharactersNumber='BU.Main.Files.GetCharactersNumber';
+alias BU.GetExtension='BU.Main.Files.GetExtension';
+alias BU.GetLastAccess='BU.Main.Files.GetLastAccess';
+alias BU.GetLastModification='BU.Main.Files.GetLastModification';
+alias BU.GetMIMEType='BU.Main.Files.GetMIMEType';
+alias BU.GetLinesNumber='BU.Main.Files.GetLinesNumber';
+alias BU.GetMaxLineLength='BU.Main.Files.GetMaxLineLength';
+alias BU.GetOwnerName='BU.Main.Files.GetOwnerName';
+alias BU.GetOwnerGroup='BU.Main.Files.GetOwnerGroup';
+alias BU.GetWordsNumber='BU.Main.Files.GetWordsNumber';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "SETTING FILE INFORMATIONS"
+
+alias BU.SetFileLastAccess='BU.Main.File.SetFileLastAccess';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "FILE SOURCING"
+
+alias BU.SourceFile='BU.Main.Files.SourceFile';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "TEXT FILE PARSING"
+
+alias BU.GetLineFromTextFile='BU.Main.Files.GetLineFromTextFile';
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CATEGORY : "ARCHIVES PROCESSING FUNCTIONS"
+
+## SUB-CATEGORY : "(UN)COMPRESSION FUNCTIONS"
+
+alias BU.AddToArchive='BU.Main.Files.AddToArchive';
+alias BU.CompressCMD='BU.Main.Files.CompressCMD';
+alias BU.CompressFormat='BU.Main.Files.CompressFormat';
+alias BU.DeleteInArchive='BU.Main.Files.DeleteInArchive';
+alias BU.SearchInArchive='BU.Main.Files.SearchInArchive';
+alias BU.UncompressCMD='BU.Main.Files.UncompressCMD';
+alias BU.UncompressFormat='BU.Main.Files.UncompressFormat';
+alias BU.UncompressFormat.ErrorMsg='BU.Main.Files.UncompressFormat.ErrorMsg';
 
 # -----------------------------------------------
 
@@ -17220,10 +17404,36 @@ alias BU.Exit='BU.Main.Errors.Exit';
 
 ################################## DEFINING ALIASES - FILESYSTEM ##################################
 
-#### CATEGORY : ""
+#### CATEGORY : "HARD DRIVE'S FILE SYSTEM PROCESSING"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "CHECKING FILE SYSTEM'S INFORMATIONS"
 
+alias BU.IsPartitionFull='BU.Main.Filesystem.IsPartitionFull';
+alias BU.GetFSDevice='BU.Main.Filesystem.GetFSDevice';
+alias BU.GetFSTotalSize='BU.Main.Filesystem.GetFSTotalSize';
+alias BU.GetFSMountPoint='BU.Main.Filesystem.GetFSMountPoint';
+alias BU.GetFSUsedSizeBytes='BU.Main.Filesystem.GetFSUsedSizeBytes';
+alias BU.GetFSUsedSizePercent='BU.Main.Filesystem.GetFSUsedSizePercent';
+alias BU.GetFSAvailableSize='BU.Main.Filesystem.GetFSAvailableSize';
+alias BU.GetFSType='BU.Main.Filesystem.GetFSType';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CATEGORY : "PERMISSION AND OWNERSHIP PROCESSING"
+
+## SUB-CATEGORY : "NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
+
+alias BU.Chown='BU.Main.Filesystem.Chown';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
+
+alias BU.ChownRec='BU.Main.Filesystem.ChownRec';
 
 # -----------------------------------------------
 
@@ -19123,13 +19333,13 @@ alias BU.IsOSLinuxWSL2='BU.Main.OS.IsLinuxWSL2';
 
 ################################### DEFINING ALIASES - POSIXTERM ##################################
 
-#### CATEGORY : ""
+#### CATEGORY : "TERMINAL INTERACTION FUNCTIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "DISPLAYING TEXT AND MORE WHILE A TASK IS ONGOING"
 
-# -----------------------------------------------
-
-# SUB-CATEGORY : ""
+alias BU.DisplayCountdown='BU.Main.PosixTerm.DisplayCountdown';
+alias BU.DisplayProgressBar='BU.Main.PosixTerm.DisplayProgressBar';
+alias BU.DisplaySpinner='BU.Main.PosixTerm.DisplaySpinner';
 
 # -----------------------------------------------
 
@@ -19281,6 +19491,20 @@ alias BU.WordArrayToStr='BU.Main.Text.WordArrayToStr';
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING ALIASES - USAGE  ####################################
+
+#### CATEGORY : ""
+
+## SUB-CATEGORY : ""
+
+#
+
+# Sub-category : ""
+
+# -----------------------------------------------
 #!/usr/bin/env bash
 #!/usr/bin/env bash
 

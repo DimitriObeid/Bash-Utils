@@ -722,7 +722,13 @@ function CompileInSingleFile()
 
     PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
-    PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")"
+    if [ -n "$__compile_stable" ]; then
+        PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")";
+    else
+        PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+    fi
+
+    echo;
 
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
@@ -812,7 +818,7 @@ function CompileInSingleFile()
             # Adding the failed file into the array of .
             __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
         else
-            PrintSuccessLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path";
+            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
         fi
     fi
 
