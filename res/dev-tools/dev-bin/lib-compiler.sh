@@ -155,16 +155,6 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
-    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Si l'argument '' est passé, alors le fichier compilé est copié dans un autre dossier [-----] If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-
     # -----------------------------------------------------------------------------------------------------------------------------------------
     # Affichage des statistiques du fichier localisé nouvellement généré [-----] Printing the statistics of the newly generated localized file.
     __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__HIGHLIGHT}%s${__RESET} :";
@@ -176,6 +166,38 @@ if [[ "$LANG" = fr_* ]]; then
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGE : $__BU_ARG_LANG !!!";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="LE FRAMEWORK BASH UTILS A ÉTÉ COMPILÉ AVEC SUCCÈS VERS CETTE LANGUE : ${__HIGHLIGHT}%s${__RESET}";
+
+    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Vérification d'ereurs de programmation dans le fichier compilé [-----] STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="VÉRIFICATION D'ERREURS DE PROGRAMMATION DANS LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
+
+    # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Copie du fichier compilé dand le dossier "stable" [-----] STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="Please check the permissions of the target directory";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="If the file you try to compile already exists AND is read-only, please delete it manually";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
+
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Mise à jour des droits du fichier compilé en mode lecture seule avec la commande "chmod" [-----] STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__HIGHLIGHT}%s${__WARNING} FILE CANNOT BE SET IN READ ONLY MODE";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Continuing the compilationn of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Ending the compilation of the ${__CYAN}Bash Utils${__ERROR} framework${__RESET}";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
+
+
+    __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HIGHLIGHT}%s${__SUCCESS} A ÉTÉ COMPILÉ AVEC SUCCÈSS ET EST PRÊT À ÊTRE UTILISÉ";
 
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
@@ -251,16 +273,6 @@ else
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
     __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
-    # -------------------------------------------------------------------------------------------------
-    # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__='';
-
     # --------------------------------------------------------------
     # Printing the statistics of the newly generated localized file.
     __BU_COMPILE__LOCALIZED_FILE__STATS="${__HIGHLIGHT}%s${__RESET} file statistics :";
@@ -272,6 +284,38 @@ else
 
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__HIGHLIGHT}%s${__RESET}";
+
+    # ---------------------------------------------------------------------------------------
+    # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
+
+    # -----------------------------------------------------------------------------------
+    # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="Please check the permissions of the target directory";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="If the file you try to compile already exists AND is read-only, please delete it manually";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
+
+    # ------------------------------------------------------------------------------------------------------
+    # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} STABLE FILE IN READ-ONLY MODE FOR SAFETY REASONS";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE CANNOT BE SET IN READ ONLY MODE";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Continuing the compilation of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Ending the compilation of the ${__CYAN}Bash Utils${__ERROR} framework${__RESET}";
+
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
+
+
+    __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY COMPILED AND IS READY TO BE USED";
 fi
 
 # -----------------------------------------------
@@ -584,7 +628,7 @@ function CompileInSingleFile()
     # Getting the current system language.
     local ____sys_lang;
 
-	__locale_print_code="[ LOCALE : $(BU.Main.Locale.PrintLanguageName "${p_locale^^}") ]";
+	__locale_print_code="[ LOCALE : $p_locale [$(BU.Main.Locale.PrintLanguageName "${p_locale^^}" 'no') ]]";
 	____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     # If the 'compile-stable' argument was passed.
@@ -592,12 +636,10 @@ function CompileInSingleFile()
         local __compile_stable="$__vArrayVal_compile_stable";
         local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
         local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${p_locale}.sh";
-
-        unset __vArrayVal_compile_stable;
     fi
 
     # If the 'no-shellcheck' argument was passed.
-    if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; unset __vArrayVal_no_shellcheck; fi
+    if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
 
 
     #**** Code ****
@@ -636,7 +678,7 @@ function CompileInSingleFile()
 
     if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
     else
-        ShellcheckVerif "$__locale_file_path" || local __err="error";
+        ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
 
         WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
     fi
@@ -750,34 +792,9 @@ function CompileInSingleFile()
     printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
 
-    # --------------------------------------------------------
-    # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
-
-    # ----------------------------------------------------
-    # STABLE FILE COMPILATION ONLY : Copying the compiled file into the stable directory.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE="Please check the ";
-
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
-
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
-
-    # -----------------------------------------------------------------------
-    # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__HIGHLIGHT}%s${__WARNING} FILE CANNOT BE SET IN READ ONLY MODE";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE";
-
     if [ -n "$__compile_stable" ]; then
         # --------------------------------------------------------
-        # Checking for any programming error in the compiled file.
-        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG" "$__compiled_file_path")";
-
+        # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS" "$__compiled_file_path")";
 
         # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
@@ -790,13 +807,18 @@ function CompileInSingleFile()
         PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS\n\n" "$__compiled_file_path")";
 
         # ----------------------------------------------------
-        # Copying the compiled file into the stable directory.
+        # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
 
         if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
             PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
+            echo >&2;
 
-            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE"
+            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1" >&2;
+            echo >&2;
+
+            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2" >&2;
+            echo >&2;
 
             return 1;
         else
@@ -804,7 +826,7 @@ function CompileInSingleFile()
         fi
 
         # -----------------------------------------------------------------------
-        # Setting the compiled file into read-only mode with the "cmhod" command.
+        # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD" "$__compiled_file_path")";
 
         if ! chmod --verbose -wx "$__compiled_stable_file_path"; then
@@ -815,19 +837,42 @@ function CompileInSingleFile()
             echo;
 
             case "${__answer_copy_compiled_file_in_stable_dir,,}" in
-                '1')
-                    echo "${__WARNING}Continuing the compilationn of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}"
-
-                    __BU_ARRAY__READ_ONLY_FAILED_FILES+=("");
-                ;;
-                '2' | *) echo "${__ERROR}Ending the compilation of the ${__CYAN}Bash Utils${__ERROR} framework${__RESET}" >&2; echo >&2; return 1;;
+                '1') echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1";;
+                '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; return 1;;
             esac
 
             # Adding the failed file into the array of .
             __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
         else
-            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+            # If one or more stable files were not successsfully "chmoded".
+            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
+                # If only one file was not "chmoded".
+                if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
+                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+
+                    echo "Here is the file which rights were not modified :";
+                    echo "    - ${__BU_ARRAY__READ_ONLY_FAILED_FILES[0]}";
+
+                # Else, if more than one file were not successfully "chmoded".
+                else
+                    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
+                        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+                    else
+                        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+                    fi
+
+                    echo "Here is the list of the files whose rights were not modified :";
+
+                    for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                        echo "    - $files"
+                    done
+                fi
+            else
+                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+            fi
         fi
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
     fi
 
     return 0;
