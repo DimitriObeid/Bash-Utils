@@ -8,8 +8,17 @@
 
 ## BASH DEPENDENCES
 
-# Temporary solution, as in the future, every dev-tools scripts will use the stable compiled version.
-# source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
+# Temporarily commented, as the feature is not yet implemented . In the future, every dev-tools scripts will use a stable compiled version.
+# source "$HOME/.Bash-utils/compiled/stable/framework-full.sh"
+
+# if ! BashUtils_InitModules \
+#    "module --log-shut --mode-log-partial" \
+#    "main stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true --stat-devtools=true" \
+
+#    then
+#            echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
+# fi
+
 
 # -----------------------------------------------
 
@@ -26,7 +35,7 @@ __BU_ARG_LANG=$1;
 
 shift 1;
 
-# BETA : Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
+# Fitting the arguments following the "$__BU_ARG_DISP" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
 __BU_ARG_ARRAY=("$@");
 
 # -----------------------------------------------
