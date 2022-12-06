@@ -10827,16 +10827,18 @@ function BU.Main.Files.IsReadOnly()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
 
     #**** Code ****
-
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
 }
 
-# Checking if a file is writable only.
-function BU.Main.Files.IsWriteOnly()
+# Checking if a file is readable AND writable.
+function BU.Main.Files.IsRW()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -10844,29 +10846,14 @@ function BU.Main.Files.IsWriteOnly()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
 
     #**** Code ****
-
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Checking if a file is in executable only.
-function BU.Main.Files.IsExecutableOnly()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
-
-    #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
-
-    #**** Code ****
-
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
 }
 
 # Checking if a file is readable, writable and executable.
@@ -10878,12 +10865,90 @@ function BU.Main.Files.IsRWX()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
 
     #**** Code ****
+    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
 
+# Checking if a file is in readable AND executable.
+function BU.Main.Files.IsRX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is writable only.
+function BU.Main.Files.IsWriteOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is writable AND executable.
+function BU.Main.Files.IsWX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is in executable only.
+function BU.Main.Files.IsExecutableOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
 }
 
 # -----------------------------------------------
@@ -14317,15 +14382,24 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
 
-# Checking if the Android device is rooted.
-function BU.Main.OS.IsAndroidRooted()               { return 0; }
-
 # Checking the current Android version.
+function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid5()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid6()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid7()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid8()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid9()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid10()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid11()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+
+# Checking if the current Android device is a smartphone.
+function BU.Main.OS.IsAndroidDeviceSmartphone()     { return 0; }
+
+# Checking if the current Android device is a Tablet.
+function BU.Main.OS.IsAndroidDeviceTablet()         { return 0; }
+
+# Checking if the Android device is rooted.
+function BU.Main.OS.IsAndroidRooted()               { return 0; }
 
 # -----------------------------------------------
 
@@ -17427,6 +17501,19 @@ alias BU.DeleteFile='BU.Main.Files.DeleteFile';
 
 # -----------------------------------------------
 
+## CHECKING FILE INFORMATIONS
+## DEBUG ID : checking-file-informations
+
+alias BU.IsFileReadOnly='BU.Main.Files.IsReadOnly';
+alias BU.IsFileRW='BU.Main.Files.IsRW';
+alias BU.IsFileRWX='BU.Main.Files.IsRWX';
+alias BU.IsFileRX='BU.Main.Files.IsRX';
+alias BU.IsFileWriteOnly='BU.Main.Files.IsWriteOnly';
+alias BU.IsFileWX='BU.Main.Files.IsWX';
+alias BU.IsFileExecutableOnly='BU.Main.Files.IsExecutableOnly';
+
+# -----------------------------------------------
+
 ## SUB-CATEGORY : "GETTING FILE INFORMATIONS"
 
 alias BU.GetByteSize='BU.Main.Files.GetByteSize';
@@ -19088,9 +19175,26 @@ alias BU.HeaderYellowWhiteCMD='BU.Main.Headers.Header.CMD.Yellow.White';
 
 alias BU.IsOSAndroidTermux='BU.Main.OS.IsAndroidTermux';
 
+alias BU.IsAndroid4='BU.Main.OS.IsAndroid4';
+alias BU.IsAndroid5='BU.Main.OS.IsAndroid5';
+alias BU.IsAndroid6='BU.Main.OS.IsAndroid6';
+alias BU.IsAndroid7='BU.Main.OS.IsAndroid7';
+alias BU.IsAndroid8='BU.Main.OS.IsAndroid8';
+alias BU.IsAndroid9='BU.Main.OS.IsAndroid9';
+alias BU.IsAndroid10='BU.Main.OS.IsAndroid10';
+alias BU.IsAndroid11='BU.Main.OS.IsAndroid11';
+
+alias BU.IsAndroidDeviceSmartphone='function BU.Main.OS.IsAndroidDeviceSmartphone';
+alias BU.IsAndroidDeviceTablet='BU.Main.OS.IsAndroidDeviceTablet';
+
+alias BU.IsAndroidRooted='BU.Main.OS.IsAndroidRooted';
+
 # -----------------------------------------------
 
 ## SUB-CATEGORY : "GATHERING INFORMATIONS"
+
+alias BU.GetAndroidDevice='BU.Main.OS.GetAndroidDevice';
+alias BU.GetAndroidVersion='BU.Main.OS.GetAndroidVersion';
 
 # -----------------------------------------------
 

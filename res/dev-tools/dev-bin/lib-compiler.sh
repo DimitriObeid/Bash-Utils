@@ -750,19 +750,14 @@ function CompileInSingleFile()
     printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
     printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
 
-    # -------------------------------------------------------------------------------------------------
-    # If the 'compile-stable' argument is passed, then the compiled file is copied into another folder.
-
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__MSG="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
-
     # --------------------------------------------------------
-    # Checking for any programming error in the compiled file.
+    # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
 
     # ----------------------------------------------------
-    # Copying the compiled file into the stable directory.
+    # STABLE FILE COMPILATION ONLY : Copying the compiled file into the stable directory.
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE="Please check the ";
@@ -772,7 +767,7 @@ function CompileInSingleFile()
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
 
     # -----------------------------------------------------------------------
-    # Setting the compiled file into read-only mode with the "cmhod" command.
+    # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE IN READ-ONLY MODE FOR SAFETY REASONS";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE ${__HIGHLIGHT}%s${__WARNING} FILE CANNOT BE SET IN READ ONLY MODE";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="Do you want to quit the script's execution ? If not, please execute the ${__CYAN}'chmod %s'${__YELLOW} command after the compilation of this file";
@@ -796,7 +791,7 @@ function CompileInSingleFile()
 
         # ----------------------------------------------------
         # Copying the compiled file into the stable directory.
-        PrintNewstepLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir";
+        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
 
         if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
             PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
@@ -812,15 +807,19 @@ function CompileInSingleFile()
         # Setting the compiled file into read-only mode with the "cmhod" command.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD" "$__compiled_file_path")";
 
-        if ! chmod --verbose -wx "$__compiled_file_path"; then
-            PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_file_path")";
+        if ! chmod --verbose -wx "$__compiled_stable_file_path"; then
+            PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_stable_file_path")";
 
             printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2:
             read -rp "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER" __answer_copy_compiled_file_in_stable_dir;
             echo;
 
             case "${__answer_copy_compiled_file_in_stable_dir,,}" in
-                '1') echo "${__WARNING}Continuing the compilationn of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}";;
+                '1')
+                    echo "${__WARNING}Continuing the compilationn of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}"
+
+                    __BU_ARRAY__READ_ONLY_FAILED_FILES+=("");
+                ;;
                 '2' | *) echo "${__ERROR}Ending the compilation of the ${__CYAN}Bash Utils${__ERROR} framework${__RESET}" >&2; echo >&2; return 1;;
             esac
 

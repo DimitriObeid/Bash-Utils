@@ -684,691 +684,6 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="The
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS="The %s log file already exists in the %s directory";
 #!/usr/bin/env bash
 
-# ----------------------
-## SCRIPT'S INFORMATIONS
-
-# Name          : fr.locale
-# Description   : Messages de traduction en français du script d'initialisation des modules.
-# Author(s)     : Dimitri Obeid
-# Version       : 1.0
-
-# ----------------------------
-
-
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-############################# DÉFINITION DES RESSOURCES DE TRADUCTION #############################
-
-#### DÉFINITION DE VARIABLES UTILES
-
-## MESSAGES REDONDANTS
-
-# Écriture du nom du fichier fichier, du nom de la fonction et du numéro de ligne où une erreur s'est produite.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
-
-# Écriture du nom du fichier et du numéro de ligne où une erreur s'est produite.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
-
-# Écriture du nom du fichier, du nom de la fonction et du numéro de ligne où une erreur fatale s'est produite.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS";
-
-# Écriture du nom du fichier et du numéro de ligne où une erreur fatale s'est produite.
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS";
-
-# Écriture du début du texte de tout texte qui doit être imprimé avec la fonction "BU.ModuleInit.PrintLogError()".
-__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################## TRAITEMENT DU SCRIPT D'INITIALISATION DES MODULES ########################
-
-#### MESSAGES HORS FONCTION
-
-## DOSSIER RACINE DES CONFIGURATIONS DE BASH UTILS MANQUANT
-
-if [ ! -d "$__BU_MODULE_INIT__ROOT_HOME/.Bash-utils" ]; then
-    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel";
-    __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « install_and_update.sh », ou vous pouvez le trouver dans le dossier « Bash-utils/install ».";
-fi
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### SECTION : DÉBUT DU PROCESSUS D'INITIALISATION [-----] BEGIN INITIALIZATION PROCESS
-
-## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] DEFINING GLOBAL VARIABLES
-
-## FONCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
-
-# Note : Cette variable est également utilisée dans les fichiers de configuration du module principal.
-__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : Impossible de définir le chemin à enregistrer dans la variable globale « %s »\n";
-
-# --------
-
-# -----------------------------------------------
-
-## SOUS-SECTION : APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION [-----] CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
-
-__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION DES MODULES";
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### SECTION : RESSOUCES D'INITIALISATION - FONCTIONS [-----] INITIALIZER RESOURCES - FUNCTIONS
-
-## SOUS-SECTION : FONCTIONS ET RESSOURCES NÉCESSAIRES POUR LE PIÉGEAGE DES SIGNAUX [-----] FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
-
-## FONCTION : "BU.ModuleInit.DefineTraps()"
-__BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Fin de l'exécution du script";
-
-# --------
-
-# -----------------------------------------------
-
-## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION [-----] FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
-
-## FONCTION : "BU.ModuleInit.AskPrintLog()"
-
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="Aucune entrée de journal à afficher";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » ) ?";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le contenu du tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION », veuillez entrer « yes » ou « Y » (aucune sensibilité à la casse)";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Entrez votre réponse : ";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Le contenu du fichier de logs du script d'initialisation ne sera pas affiché sur votre écran";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
-
-# Message d'initialisation.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
-
-# Identifiant du processus (PID).
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="Initialisation des informations du script";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="Cette variable globale enregistre l'identifiant de processus (PID) du programme actuel";
-
-# Chemins du gestionnaire de modules.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="Initialisation des variables du dossier racine du gestionnaire de modules";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="Cette variable globale enregistre le chemin d'accès au répertoire parent des répertoires de configuration et d'initialisation de chaque module";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="Cette variable globale enregistre le chemin vers les répertoires de configuration et d'initialisation de chaque module";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="Cette variable globale enregistre le chemin vers le script d'initialisation des modules";
-
-# Chemin du dossier temporaire du script d'initialisation.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initialisation du répertoire temporaire du framework";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="Cette variable globale enregistre le chemin du dossier temporaire du framework";
-
-# Chemins des dossiers de configuration.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
-
-# Fichiers de configuration du script d'initialisation.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="Initialisation des chemins des fichiers de configuration du script d'initialisation";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="Cette variable globale enregistre le chemin du fichier de configuration des variables globales de statut";
-
-# Chemins des scripts d'initialisation de chaque module.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
-
-# Chemin du répertoire racine de la librairie.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie";
-
-# Chemin du répertoire racine de la librairie (avec les privilèges du super-utilisateur).
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie (installée avec les privilèges du super-utilisateur avec le fichier d'installation).";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
-
-# Variables diverses.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="Initialisation des variables diverses";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="Cette variable globale enregistre le caractère qui est utilisé comme délimiteur du fichier de traduction CSV du module principal.";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="Cette variable globale, qui est un tableau, enregistre la liste des valeurs acceptées par la variable globale de statut « \$__BU_MODULE_INIT_STAT_DEBUG_BASHX »"
-
-# --------
-
-## FONCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
-
-# Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Fichier     : %s";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2="Fonction    : %s";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Ligne       : %s";
-
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Fichier     : Inconnu";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Fonction    : Aucune";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="Ligne       : Inconnue";
-
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Tableau global déclarée : %s";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Variable globale déclarée : %s";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9="Description :";
-
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A="Type        : tableau";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B="Type        : %s";
-
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Valeur      : La valeur de la variable globale « %s » est une substition de commande";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Valeur      : %s";
-
-# Fichiers, fonctions et numéros de ligne connus.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3";
-
-# Fichiers, fonctions et numéros de ligne inconnus.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6";
-
-# Vérification des types de variables.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN="Aucun type de variable donné";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN="Type de variable inconnu";
-
-# Vérification des tableaux.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8";
-
-# Description.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9";
-
-# Traitement des tableaux.
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="Valeur";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY="Le tableau est vide";
-
-# Traitement des autres valeurs (pas de tableaux).
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="Aucune valeur n'est enregistrée dans cette variable globale";
-
-# Effacement des valeurs enregistrées dans les variables constituant la liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point, afin de libérer de la mémoire.
-unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9 \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C \
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D
-
-# --------
-
-## FONCTION : "BU.ModuleInit.Msg()"
-
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » « %s » N'EST PAS SUPPORTÉE\n";
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par « --log-display », « --log-shut », « --log-shut-display » ou une valeur vide où vous avez (re)défini la valeur.";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.MsgAbort()"
-
-__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
-
-## -------
-
-# FONCTION : "BU.ModuleInit.MsgAbort()"
-
-__BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche pour";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.PrintLog()"
-
-# Titre
-__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="ENTRÉE DU JOURNAL D'INITIALISATION";
-
-# Informations sur l'afichage des journaux d'initialisation.
-__BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
-__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Mode de journalisation : totale (paramètre « --mode-log-full » passé lors de l'appel du module 0 « module »)";
-__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Mode de journalisation : partielle (paramètre « --mode-log-partial » passé lors de l'appel du module 0 « module »)";
-
-__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="AFFICHAGE DES JOURNAUX D'INITIALISATION AVEC LA COMMANDE « less »";
-__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="Si rien ne s'affiche à l'écran après quelques secondes, veuillez arrêter l'exécution du script en appuyant sur CTRL + C.";
-__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="afficher les journaux d'initialisation avec la commande « less »";
-__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="N'appuyez pas sur le bouton « Q », sinon vous fermerez ce fichier et vous devrez exécuter à nouveau le script.";
-
-# Impossibilité de créer le fichier temporaire.
-__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="Impossible de créer le fichier temporaire pour stocker les entrées du journal d'initialisation";
-
-# Instructions post-affichage.
-__BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="FIN DE L'AFFICHAGE DES JOURNAUX D'INITIALISATION";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.PrintLogError()"
-
-__BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERREUR ] DESCRIPTION : %s | LIGNE : %s | CODE : %s";
-
-# --------
-
-# -----------------------------------------------
-
-## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
-
-## FONCTION : "BU.ModuleInit.CheckPath()"
-
-# Chemin de fichier manquant.
-__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="Aucun chemin de fichier";
-
-# Aucune cible spécifiée.
-__BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : AUCUNE SPÉCIFICATION DONNÉE SUR LA CIBLE !!!";
-__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION="Veuillez spécifier si la cible est un fichier ou un dossier en passant la valeur 'f' (fichier) ou 'd' (dossier) en tant que second argument lors de l'appel de la fonction « %s »";
-
-# Cible spécifiée, main non-trouvée.
-__BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND="(mauvais chemin de dossier : non trouvé)";
-__BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND="(mauvais chemin de fichier : non trouvé)";
-
-# Cible spécifiée, mais le type est inconnu.
-__BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LA VALEUR ACTUELLE DU PARAMÈTRE « p_target » EST « %s », ET PAS L'UNE DES VALEURS ATTENDUES : 'D', 'd', 'F' OR 'f'";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.FindPath"
-
-__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE TROUVER CE CHEMIN";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.GetModuleName"
-
-__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Impossible d'obtenir le nom du module depuis le nom de son dossier parent";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.ListInstalledModules()"
-
-# Impossible de créer le dossier temporaire.
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Impossible de créer le dossier temporaire « tmp » de stockage des journaux d'initialisation dans le dossier « %s/ »";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : Impossible de créer le dossier temporaire « tmp » de stockage des journaux d'initialisation dans le dossier « %s/ »";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE="Si le problème persite, veuillez créer ce dossier manuellement";
-
-# Liste des modules installés.
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST="LISTE DES MODULES INSTALLÉS";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING="ATTENTION ! UN OU PLUSIEURS MODULES SONT MANQUANTS DANS LES DOSSIERS « %s » OU « %s »";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST="LISTE DES DOSSIERS DE CONFIGURATION DES MODULES INSTALLÉS";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_INITIALIZATION_FOLDER_LIST="LISTE DES DOSSIERS D'INITIALISATION DES MODULES";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW="LA DIFFÉRENCE ENTRE LES DEUX FICHIERS EST LISTÉE EN DESSOUS";
-
-# Modules manquants ou non-trouvés.
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : La commande « ls -l » a pointé vers un chemin inexistant";
-
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE DOSSIER DE CONFIGURATION DES MODULES ET LE DOSSIER D'INITIALISATION DES MODULES SONT MANQUANTS !";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE DOSSIER DE CONFIGURATION DES MODULES EST MANQUANT !";
-__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE DOSSIER D'INITIALISATION DES MODULES EST MANQUANT !";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.SourcingFailure"
-
-__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : IMPOSSIBLE DE SOURCER CE FICHIER DU MODULE « %s » --> %s";
-
-# --------
-
-# -----------------------------------------------
-
-## SOUS-SECTION : FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES PROCESSING
-
-## FONCTION : "BU.ModuleInit.Usage()"
-
-# Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut-display    : afficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
-
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false             OU --stat-debug=true";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category    OU --stat-debug-bashx=file   OU --stat-debug-bashx=function OU --stat-debug-bashx=sub-category";
-
-# Affichage des valeurs supportées par l'option "module".
-__BU_MODULE_INIT_MSG__USAGE__SUPVALS="Les valeurs supportées sont :";
-
-# Affichage des valeurs supportées pour le paramètre de redirection du journal.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="ATENTION : Les trois paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3";
-
-# Affichage des valeurs supportées pour le paramètre de journalisation.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="ATTENTION : les deux paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2";
-
-# Variables globales de statut.
-__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST="VARIABLES GLOBALES DE STATUT - VALEURS DE DÉBOGUAGE :";
-__BU_MODULE_INIT_MSG__USAGE__DEBUG="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG";
-__BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="$__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX";
-
-# Effacement des valeurs enregistrées dans les variables constituant la liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point, afin de libérer de la mémoire.
-unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2 \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3 \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1 \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2 \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG \
-        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX
-
-# --------
-
-## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
-
-# La même valeur pour l'option "--log-*" a été passée deux fois ou plus comme argument lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : la valeur « %s » de l'option « module » a été repassé en argument lors de l'appel de la fonction « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : vous avez déjà passé la valeur « %s » comme argument de la valeur « module » pour la variable globale « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION »"
-
-# Des valeurs différentes pour l'option "--log-*" ont été simultanément passées en argument lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : les valeurs de l'option « module » « %s » et « %s » ont été passées en argument ensemble";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="les valeurs acceptées du paramètre « module », qui sont '--log-display', '--log-shut' et '--log-shut-display' sont incompatible entre elles";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Veuillez ne choisir qu'une seule d'entre elles";
-
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="La nouvelle valeur sera assignée à la variable globale « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION »";
-
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL="Valeur actuellement enregistrée dans la variable de permission : %s";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL="Nouvelle valeur : %s";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
-
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Attention : les valeurs supportées pour l'option « %s » sont : %s";
-
-# --------
-
-## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
-
-# Aucun argument n'a été passé en tant que valeur(s) du paramètre "module", dans le cas où ce paramètre a été invoqué en tant que premier argument lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : LE PARAMÈTRE « module » A ÉTÉ PASSÉE SANS VALEUR(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE PARAMÈTRE « module » A ÉTÉ PASSÉE SANS VALEUR(S)";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Veuillez passer au moins un argument valide entre les guillemets où vous passez la valeur « module »";
-
-# ---------------------------------------------------------------
-# La boucle de vérification d'arguments est en cours d'exécution.
-
-# Traitement de la description de chaque variable globale de statut : écriture de phrases redondantes.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL="Cette variable globale de statut du framework Bash Utils enregistre une valeur booléenne, servant à";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_STRING="Cette variable globale de statut du framework Bash Utils enregistre une chaîne de caractères, servant à";
-
-# Traitement de la description de chaque variable globale de statut.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL activer les fonctionnalités de déboguage";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_STRING activer les fonctionnalités de déboguage avancées avec la commande « set -x » lors d'une procédure de déboguage";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID="$__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL. Comme la valeur « void » a été passée, ces fonctionnalités sont désactivées";
-
-# Si la valeur de l'argument "--stat-debug" n'est pas égale à "true".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : La valeur de la variable globale de statut « __BU_MODULE_INIT_STAT_DEBUG » doit correspondre à la valeur « true » pour pouvoir utiliser cette fonctionnalité de déboguage avancée";
-
-# Si l'argument "--stat-*" n'est pas une valeur supportée.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : « %s » N'EST PAS UN ARGUMENT DE STATUT SUPPORTÉ PAR LE PARAMÈTRE « module »";
-
-# ------------------------------------------------------------
-# Fin de l'exécution de la boucle de vérification d'arguments.
-
-# Un ou plusieurs arguments ont été passés en tant que valeur(s) paramètre "module" lors de l'appel de la fonction "BashUtils_InitModules" : option "--log-*" non supportée passée.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Mauvaise option d'autorisation de journalisation de la valeur du module : %s";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : L'OPTION DE PERMISSION DE JOURNALISATION « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉE";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s » du paramètre « module »";
-
-# Un ou plusieurs arguments ont été passés en tant que valeur(s) paramètre "module" lors de l'appel de la fonction "BashUtils_InitModules" : option "--mode-log-*" non supportée passée.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Mauvaise option de mode de la valeur du module : %s";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : L'OPTION DE JOURNALISATION « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉ";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s » du paramètre « module »";
-
-# Un ou plusieurs arguments ont été passés en tant que valeur(s) paramètre "module" lors de l'appel de la fonction "BashUtils_InitModules" : option générale non supportée passée.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Mauvaise option générale du paramètre « module »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : L'OPTION GÉNÉRALE « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉE";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE="Veuillez modifier ou supprimer cette valeur, appelée à l'index « %s » du paramètre « module »";
-
-# Inclusion du fichier de configuration "Status.conf" du script d'initialisation.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR : IMPOSIBLE DE SOURCER LE FICHIER « %s »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__SUCCESS="Le fichier « %s » a été sourcé avec succès";
-
-# Le paramètre "Module" a été passé en argument lors de l'appel de la fonction "BashUtils_InitModules", mais le module principal est manquant.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le module principal a été est passé après le paramètre « module » lors de l'appel de la fonction « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE MODULE PRINCIPAL A ÉTÉ EST PASSÉ APRÈS LE PARAMÈTRE « MODULE » LORS DE L'APPEL DE LA FONCTION « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE="Veuillez placer l'argument du module « %s » (avec ou sans ses paramètres) en deuxième position lorsque vous appelez la fonction « %s » dans votre script.";
-
-# Le paramètre "module" a été passé en argument APRÈS l'appel du module principal, lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le module principal a été passé en premier argument, mais avant le paramètre « module -- » lors de l'appel de la fonction « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE MODULE PRINCIPAL A ÉTÉ PASSÉ EN PREMIER ARGUMENT, MAIS AVANT LE PARAMÈTRE « MODULE -- » LORS DE L'APPEL DE LA FONCTION « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE="Veuillez inverser cet ordre, appelez le paramètre « module » avec ses arguments AVANT le module principal";
-
-# Pas de paramètre "module" passé en argument, ni de module principal, lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le paramètre « module » et le module principal n'ont pas été passés en premier, puis en deuxième argument lors de l'appel de la fonction « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE PARAMÈTRE « MODULE » ET LE MODULE PRINCIPAL N'ONT PAS ÉTÉ PASSÉS EN PREMIER, PUIS EN DEUXIÈME ARGUMENT LORS DE L'APPEL DE LA FONCTION « BashUtils_InitModules »";
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE="Veuillez le faire en modifiant la position des arguments du module principal dans votre script, et en ajoutant éventuellement le paramètre « module » avec les arguments obligatoires nécessaires.";
-
-# --------
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### SECTION : INCLUSION DES MODULES [-----] SOURCING THE MODULES
-
-## SOUS-SECTION : INCLUSION DES FICHIERS DE LA LIBRAIRIE SELON LE MODULE INCLUS [-----] INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
-
-## FONCTION : "BashUtils_InitModules()"
-
-# Premières vérifications.
-__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="Vous avez déjà appelé la fonction %s dans votre script";
-__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME="__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : VOUS DEVEZ PASSER UN NOM DE MODULE LORSQUE VOUS APPELEZ LA FONCTION D'INITIALISATION DE MODULES « %s »";
-
-# Liste des modules inclus.
-__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG="INITIALISATION DE CES MODULES :";
-__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM="Module %s : %s       <-- Arguments passés pour configurer le processus d'initialisation";
-__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM="Module %s : %s";
-
-# ----------------------------------------------
-# La boucle principale est en cours d'exécution.
-
-# Définition des informations sur les variables globales qui sont définies dans la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire des configurations du module actuellement traité (actuel : %s | chemin : %s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire d'initialisation du module actuellement traité (actuel : %s | chemin : %s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS="Cette variable globale enregistre la valeur courante passée en argument lors de l'appel de la fonction « %s » (current index : %s | value : %s)";
-
-# Inclusion des fichiers de configuration du module en cours de traitement : dossier des configurations non trouvé.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le répertoire des fichiers de configuration du module « %s » n'existe pas.";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE MODULE « %s » N'EST PAS INSTALLÉ, N'EXISTE PAS, OU LA COMMANDE « ls » A POINTÉ AILLEURS, VERS UN RÉPERTOIRE « config » INEXISTANT !!!";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE="Installez ce module, ou vérifiez si les fichiers de configuration du module existent dans ce dossier --> ";
-
-# Inclusion des fichiers de configuration du module en cours de traitement : dossier des configurations trouvé.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG="Inclusion du fichier de configurations principal du module « %s »";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND="Le fichier de configuration du module « %s » n'a pas été trouvé dans son répertoire (%s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY="Le fichier de configuration du module « %s », « %s/%s », est vide";
-
-# Inclusion des fichiers d'initialisation du module en cours de traitement : dossier des fichiers d'initialisation non trouvé.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE : Le répertoire des fichiers d'initialisation du module « %s » n'existe pas.";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : LE MODULE « %s » N'EST PAS INSTALLÉ, N'EXISTE PAS, OU LA COMMANDE « ls » A POINTÉ AILLEURS, VERS UN RÉPERTOIRE « config » INEXISTANT !!!";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE="Installez ce module, ou vérifiez si les fichiers d'initialisation du module existent dans ce dossier --> ";
-
-# Inclusion des fichiers d'initialisation du module en cours de traitement : dossier des fichiers d'initialisation trouvé.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE="Inclusion du fichier d'initialisation principal du module « %s »";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND="Le fichier d'initialisation du module « %s » n'a pas été trouvé dans son répertoire (%s)";
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY="Le fichier d'initialisation du module « %s », « %s/%s », est vide";
-
-# End of the current module's initialization.
-__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="FIN DE LA PROCÉDURE D'INITIALISATION DU MODULE %s!";
-
-# -------------------------------------------
-# Fin de l'exécution de la boucle principale.
-
-# Fin du processus d'initialisation du framework.
-__BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALISATION DU FRAMEWORK ! DÉBUT DU TRAITEMENT DU PROJET %s VIA LE SCRIPT PRINCIPAL %s !";
-
-# --------
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-################### INCLUSION DES FICHIERS DE CONFIGURATION DU MODULE PRINCIPAL ###################
-
-#### INITIALISATION DU MODULE PRINCIPAL - INCLUSION DES FICHIERS DE CONFIGURATION [-----] INITIALIZING THE MAIN MODULE - INCLUDING THE CONFIGURATION FILES
-
-## FICHIER : "Colors.conf"
-
-# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Colors.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.Colors.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
-
-# --------
-
-## FICHIER : "Exit.conf"
-
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="Cette variable globale stocke la valeur de retour de la dernière commande dans cette situation : « %s »";
-
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="l'opération n'est pas permise";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="le dossier ou fichier cible n'a pas été trouvé";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="vous n'avez pas la permission d'effectuer cette action";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_EXISTS__VAR_DESC="le fichier cible existe déjà";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_DIR__VAR_DESC="la cible n'est pas un dossier";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__IS_DIR__VAR_DESC="la cible est un dossier";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__INVALID_ARGUMENT__VAR_DESC="mauvaise argument fourni";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="le fichier est trop gros";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="plus de mémoire de stockage restante sur la partition cible du disque dur";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="système de fichier en lecture seule";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="le nom du fichier à créer est trop long";
-
-# --------
-
-## FILE : "Filesystem.conf"
-
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier selon le système de fichier. Cette longueur est associée au système de fichiers « %s »";
-
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="Unsupported file system (found « %s »)\n\nGeneration of basic informations, but several functionalities of this framework may be prone to bugs";
-
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : This global variable stores the maximum length in bytes of a file name. This length is not associated with any file system, but rather according to general specification";
-
-# --------
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################### TRAITEMENT DU SCRIPT D'INITIALISATION DU MODULE PRINCIPAL ####################
-
-#### INITIALISATION DU MODULE PRINCIPAL - TRAITEMENT DU FICHIER D'INITIALISATION [-----] INITIALIZING THE MAIN MODULE - PROCESSING THE INITIALIZER FILE
-
-## ÉTAPE UN : DÉFINITION DES RESSOURCES NÉCESAIRES [-----] STEP ONE : DEFINING THE NEEDED RESOURCES
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="Ce fichier de librairie a été sourcé avec succès : %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de configuration a été sourcé avec succès : %s":
-
-# -----------------------------------------------
-
-## ÉTAPE DEUX : INCLUSION MINIMALE DE FICHIERS AFIN D'UTILISER LEURS RESSOURCES PENDANT LA PARTIE DE TRADUCTION [-----] STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
-
-# Aucun texte à afficher dans cette section pour le moment.
-
-# -----------------------------------------------
-
-## ÉTAPE TROIS : TRAITEMENT DES PARAMÈTRES DU MODULE PRINCIPAL [-----] STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
-
-# Liste des valeurs acceptées.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS="Les arguments supportés pour le module principal sont :":
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="--stat-decho=authorize         OU --stat-decho=forbid          OU --stat-decho=resctrict";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE________ECHO="--stat-echo=false              OU --stat-echo=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="--stat-error=fatal             OU --stat-error=void			OU --stat-error=warning";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_________LOG="--stat-log=false               OU --stat-log=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="--stat-log-r=log               OU --stat-log-r=tee             OU --stat-log-r=void";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="--stat-op-root=authorized      OU --stat-op-root=forbidden     OU --stat-op-root=restricted";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="--stat-time-header=float,      où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="--stat-time-newline=float,     où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="--stat-time-txt=float,         où « float » est un nombre à virgule flottante";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____TXT_FMT="--stat-txt-fmt=false           OU --stat-txt-fmt=true";
-
-# Une valeur incorrecte a été donnée à l'option "--stat-*".
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING : La valeur « %s » de l'option '--stat-*' est incorrecte.";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE="Essayez une seule de ces valeurs acceptées pour cette variable globale de statut : ";
-
-# Traitement de la description de chaque variable globale de statut du module principal : écriture de phrases redondantes.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="Cette variable globale de statut du module principal enregistre une valeur booléenne, servant à";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="Cette variable globale de statut du module principal enregistre un nombre décimal, servant à";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="Cette variable globale de statut du module principal enregistre une chaîne de caractères, servant à";
-
-# Traitement de la description de chaque variable globale de statut du module principal.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING déterminer le niveau de décoration de texte";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL éviter de provoquer une boucle infinie lors de l'appel d'une fonction d'écriture de texte au cas où ces fonctions doivent être appelées pour fournir les mêmes fonctionnalités que d'habitude";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING déterminer si l'exécution du script doit être arrêtée en cas d'erreur";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL déterminer si un texte doit être redirigé vers un fichier de logs ou non";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING déterminer si le texte doit être redirigé vers le fichier de logs uniquement, vers l'écran uniquement, ou vers les deux en même temps.";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING déterminer si le script peut modifier des fichiers ou des dossiers situés directement dans le dossier racine du système, ou dans l'un de ses sous-dossiers directs.";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT déterminer le temps de pause du script après l'affichage d'un en-tête";
-
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT déterminer le temps de pause du script après l'affichage d'un saut de ligne";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT déterminer le temps de pause du script après l'affichage de tout texte";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT="$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL déterminer si le script a le droit d'afficher une décoration textuelle.";
-
-# Effacement des valeurs enregistrées pour l'écriture des phrases redondantes.
-unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL \
-    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT \
-    __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING
-
-# -----------------------------------------------
-
-# ÉTAPE QUATRE : INCLUSION DU RESTE DE LA LIBRAIRIE ET DES FICHIERS DE CONFIGURATION [-----] STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
-
-# Aucun texte à afficher dans cette section pour le moment.
-
-# -----------------------------------------------
-
-## ÉTAPE CINQ : TRAITEMENT DES RESSOURCES DU PROJET [-----] STEP FIVE : PROCESSING PROJECT'S RESOURCES
-
-# Création du fichier de code couleur du texte.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="IMPOSIBLE DE CRÉER LE FICHIER DE CODE COULEUR DU TEXTE %s DANS LE DOSSIER %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="Le fichier de code couleur du texte %s a été créé avec succès dans le dossier %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS="Le fichier contenant le code de couleur de premier plan actuel existe déjà : %s";
-
-# Création du fichier de code de couleur de fond.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Impossible de créer le fichier de code de couleur de fond %s dans le dossier %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="Le fichier de code couleur de fond %s a été créé avec succès dans le dossier %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="Le fichier contenant le code de couleur de fond actuel existe déjà : %s";
-
-# Création du fichier de logs du projet.
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="IMPOSSIBLE DE CRÉER LE FICHIER DE LOGS %s POUR LE PROJET %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="Le fichier de logs %s a été créé avec succès dans le dossier %s";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS="Le fichier de logs %s existe déjà dans le dossier %s";
-#!/usr/bin/env bash
-
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
 # shellcheck disable=SC2034
 
@@ -11498,6 +10813,146 @@ function BU.Main.Files.DeleteFile()
 
 # -----------------------------------------------
 
+## CHECKING FILE INFORMATIONS
+## DEBUG ID : checking-file-informations
+
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::checking-file-informations";
+
+# Checking if a file is in read-only mode.
+function BU.Main.Files.IsReadOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is readable AND writable.
+function BU.Main.Files.IsRW()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is readable, writable and executable.
+function BU.Main.Files.IsRWX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is in readable AND executable.
+function BU.Main.Files.IsRX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is writable only.
+function BU.Main.Files.IsWriteOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is writable AND executable.
+function BU.Main.Files.IsWX()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a file is in executable only.
+function BU.Main.Files.IsExecutableOnly()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+
+    #**** Parameters ****
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+
+    #**** Code ****
+    if [[ (! -r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# -----------------------------------------------
+
 ## GETTING FILE INFORMATIONS
 ## DEBUG ID : getting-file-informations
 
@@ -11512,11 +10967,10 @@ function BU.Main.Files.GetByteSize()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # # String    - Default : NULL    - Path to the file to process.
-    local p_base=$2;        # Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
+    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_base=$2;        # Int       - Default : NULL    - Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
 
     #**** Code ****
-
     if [ -z "$p_base" ]; then
         wc --bytes < "$p_filepath" || \
             { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
@@ -11526,12 +10980,12 @@ function BU.Main.Files.GetByteSize()
 
         # Convert the size from plain number to human readable metric prefix.
         if [ "$p_base" -ne 1024 ]; then
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" || \
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
                 { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
@@ -11755,7 +11209,7 @@ function BU.Main.File.SetFileLastAccess()
 
     #**** Parameters ****
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
-    local p_fakedate=$2;
+    local p_fakedate=$2;    # Date      - Default : NULL    -
 
     #**** Code ****
     if ! BU.Main.Args__FilesSetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -14928,15 +14382,24 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
 
-# Checking if the Android device is rooted.
-function BU.Main.OS.IsAndroidRooted()               { return 0; }
-
 # Checking the current Android version.
+function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid5()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+function BU.Main.OS.IsAndroid6()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid7()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid8()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid9()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid10()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid11()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
+
+# Checking if the current Android device is a smartphone.
+function BU.Main.OS.IsAndroidDeviceSmartphone()     { return 0; }
+
+# Checking if the current Android device is a Tablet.
+function BU.Main.OS.IsAndroidDeviceTablet()         { return 0; }
+
+# Checking if the Android device is rooted.
+function BU.Main.OS.IsAndroidRooted()               { return 0; }
 
 # -----------------------------------------------
 
@@ -18038,6 +17501,19 @@ alias BU.DeleteFile='BU.Main.Files.DeleteFile';
 
 # -----------------------------------------------
 
+## CHECKING FILE INFORMATIONS
+## DEBUG ID : checking-file-informations
+
+alias BU.IsFileReadOnly='BU.Main.Files.IsReadOnly';
+alias BU.IsFileRW='BU.Main.Files.IsRW';
+alias BU.IsFileRWX='BU.Main.Files.IsRWX';
+alias BU.IsFileRX='BU.Main.Files.IsRX';
+alias BU.IsFileWriteOnly='BU.Main.Files.IsWriteOnly';
+alias BU.IsFileWX='BU.Main.Files.IsWX';
+alias BU.IsFileExecutableOnly='BU.Main.Files.IsExecutableOnly';
+
+# -----------------------------------------------
+
 ## SUB-CATEGORY : "GETTING FILE INFORMATIONS"
 
 alias BU.GetByteSize='BU.Main.Files.GetByteSize';
@@ -19699,9 +19175,26 @@ alias BU.HeaderYellowWhiteCMD='BU.Main.Headers.Header.CMD.Yellow.White';
 
 alias BU.IsOSAndroidTermux='BU.Main.OS.IsAndroidTermux';
 
+alias BU.IsAndroid4='BU.Main.OS.IsAndroid4';
+alias BU.IsAndroid5='BU.Main.OS.IsAndroid5';
+alias BU.IsAndroid6='BU.Main.OS.IsAndroid6';
+alias BU.IsAndroid7='BU.Main.OS.IsAndroid7';
+alias BU.IsAndroid8='BU.Main.OS.IsAndroid8';
+alias BU.IsAndroid9='BU.Main.OS.IsAndroid9';
+alias BU.IsAndroid10='BU.Main.OS.IsAndroid10';
+alias BU.IsAndroid11='BU.Main.OS.IsAndroid11';
+
+alias BU.IsAndroidDeviceSmartphone='function BU.Main.OS.IsAndroidDeviceSmartphone';
+alias BU.IsAndroidDeviceTablet='BU.Main.OS.IsAndroidDeviceTablet';
+
+alias BU.IsAndroidRooted='BU.Main.OS.IsAndroidRooted';
+
 # -----------------------------------------------
 
 ## SUB-CATEGORY : "GATHERING INFORMATIONS"
+
+alias BU.GetAndroidDevice='BU.Main.OS.GetAndroidDevice';
+alias BU.GetAndroidVersion='BU.Main.OS.GetAndroidVersion';
 
 # -----------------------------------------------
 
