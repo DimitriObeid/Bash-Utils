@@ -1,2 +1,0 @@
-VARIABLE="$VALEUR"		#	Name of the variable and its value to get
-EOF						#	
