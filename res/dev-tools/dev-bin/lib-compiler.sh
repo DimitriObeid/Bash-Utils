@@ -65,6 +65,19 @@ __BU_ARG_ARRAY=("$@");
 # Storing each stable file that cannot be set into read-only mode.
 __BU_ARRAY__READ_ONLY_FAILED_FILES=();
 
+# List of every ISO 639-1 language codes.
+# In the far future, when every languages will be used in the Framework, the 'all' argument will be used to compile the Framework in a single file for each of the following languages,
+___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
+                            'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' 'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' 'fy' 'ff' 'gd' 'gl' \
+                            'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' 'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' 'iu' 'ik' 'ga' 'it' 'ja' 'jv' \
+                            'kn' 'kr' 'ks' 'kk' 'km' 'ki' 'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' 'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' \
+                            'gv' 'mi' 'mr' 'mh' 'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' 'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' \
+                            'qu' 'ro' 'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' 'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
+                            'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' 'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' 'yo' 'za' 'zu')
+
+# List of the currently supported languages in the framework (in the far future, the 'all' argument will be replaced to support the previous array).
+__BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
+
 # -----------------------------------------------
 
 ## COLORS
@@ -368,6 +381,10 @@ __BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initia
 __BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
 
 # Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
+# shellcheck disable=SC1091
+source "$__BU_ROOT_PATH/lib/functions/main/DevTools.lib"
+
+# shellcheck disable=SC1091
 source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
 
 # -----------------------------------------------
@@ -490,18 +507,9 @@ function CheckISO639_1_LangCode()
 {
     #**** Parameters ****
     local p_code=${1:-NULL};    # String    - Default : NULL    - Language in which the file must be translated.
-
-    #**** Variables ****
-    local va_langArray=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
-                        'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' 'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' 'fy' 'ff' 'gd' 'gl' \
-                        'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' 'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' 'iu' 'ik' 'ga' 'it' 'ja' 'jv' \
-                        'kn' 'kr' 'ks' 'kk' 'km' 'ki' 'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' 'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' \
-                        'gv' 'mi' 'mr' 'mh' 'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' 'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' \
-                        'qu' 'ro' 'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' 'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
-                        'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' 'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' 'yo' 'za' 'zu')
-
+    
     #**** Code ****
-    [[ ${va_langArray[*]} =~ ${p_code,,} ]] && return 0; return 1;
+    [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
 }
 
 # Writing the error message if a Shellcheck verification failed.
@@ -515,29 +523,6 @@ function ShellcheckError()
 
     # shellcheck disable=SC2059
     "$(printf "$__BU_COMPILE__SHELLCHECK__FAIL" "$p_path")"; echo >&2; return 0;
-}
-
-# Verifying any programming errors with the Shellcheck command.
-function ShellcheckVerif()
-{
-    #**** Parameters ****
-    local p_path=${1:-\$'0'};   # String    - Default : NULL    - Path of the file to verify.
-    local p_stable=${2:-NULL};  # String    - Default : NULL    - If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
-
-    #**** Code ****
-    # shellcheck disable=SC2059
-    if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
-        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
-
-        if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
-
-        # shellcheck disable=SC2059
-        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
-
-        echo;
-    fi
-
-    return 0;
 }
 
 # Writing the target file's content into the file to generate.
@@ -646,8 +631,21 @@ function CompileInSingleFile()
         v_locale_tmp="$v_locale_str";
         v_locale_str="$v_locale_tmp";
 
+        # Replacing each coma delimiter with an empty character.
+        v_locale_str="${v_locale_str//,/" "}";
+
         # String to word array.
-        __language_array=("$(echo "$v_locale_str" | tr ',' "\n")")
+        # __language_array=($(echo "$v_locale_str" | tr ',' "\n"));
+        read -ra __language_array <<< "$v_locale_str";
+
+    elif [ "${p_locale,,}" == 'all' ]; then
+        for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
+    else
+        PrintErrorLine "ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
+        echo "Please execute this script by passing the wanted ISO 639-1 codes like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic" >&2;
+        echo 'lang=en,fr,uk,sv,tk,kl' >&2;
+
+        echo "Or pass the \"all\" string only if you want to compile the framework with each of its supported languages" >&2;
     fi
 
     for language in "${__language_array[@]}"; do
@@ -680,7 +678,6 @@ function CompileInSingleFile()
         # If the 'no-shellcheck' argument was passed.
         if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
 
-
         #-------------------
         #**** Loop code ****
         # Deleting the existing "Bash-utils.sh" file.
@@ -701,7 +698,7 @@ function CompileInSingleFile()
 
             if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
             else
-                ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
+                BU.Main.DevTools.ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
 
                 WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
             fi
@@ -718,7 +715,7 @@ function CompileInSingleFile()
 
         if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
         else
-            ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
+            BU.Main.DevTools.ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
 
             WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
         fi
@@ -732,7 +729,7 @@ function CompileInSingleFile()
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
         for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
-            ShellcheckVerif "${i}" || { local __err="error"; break; };
+            BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
@@ -748,7 +745,7 @@ function CompileInSingleFile()
         if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
 
         else
-            ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
+            BU.Main.DevTools.ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
 
             WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
         fi
@@ -762,7 +759,7 @@ function CompileInSingleFile()
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
         for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-            ShellcheckVerif "${i}" || { local __err="error"; break; };
+            BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
@@ -776,7 +773,7 @@ function CompileInSingleFile()
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
         for i in "$__BU_ROOT_PATH/install/.Bash-utils/config/modules/main/"*.conf; do
-            ShellcheckVerif "${i}" || { local __err="error"; break; };
+            BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
@@ -790,7 +787,7 @@ function CompileInSingleFile()
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
         for i in "$__BU_ROOT_PATH/install/.Bash-utils/modules/main/"*; do
-            ShellcheckVerif "${i}" || { local __err="error"; break; };
+            BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
@@ -801,7 +798,7 @@ function CompileInSingleFile()
 
         # -------------------------------------------------------------------------------------------------------------------------
         # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
-        # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "ShellcheckVerif()" function.
+        # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "BU.Main.DevTools.ShellcheckVerif()" function.
         if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
 
@@ -838,7 +835,7 @@ function CompileInSingleFile()
             PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS" "$__compiled_file_path")";
 
             # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
-            if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
+            if ! BU.Main.DevTools.ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
                 PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
 
                 return 1;

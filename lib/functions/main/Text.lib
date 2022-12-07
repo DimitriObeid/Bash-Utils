@@ -236,7 +236,7 @@ function BU.Main.Text.ReplaceLettersInString()
     #**** Parameters ****
     local p_string=${1:-$'\0'};         # String    - Default : NULL    - String to process.
     local p_delim=${2:-$'\0'};          # String    - Default : NULL    - Letters and / or strings to replace.
-    local p_occurences=${3:-one}    # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_occurences=${3:-one}        # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
     local p_replacement=${4:-$'\0'};    # String    - Default : NULL    - Replacing the former character / sub-strings by another character / sub-string.
 
     #**** Code ****

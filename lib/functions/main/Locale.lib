@@ -49,6 +49,10 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+####
+
+##
+v=$[]
 # Printing the language name in English and in its own language.
 function BU.Main.Locale.PrintLanguageName()
 {
