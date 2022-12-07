@@ -30,7 +30,9 @@
 
 ## ARGUMENTS DEFINITION
 
-# Language (mandatory argument)
+# Language (mandatory argument).
+
+# Usage : this argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
 __BU_ARG_LANG=$1;
 
 shift 1;
@@ -197,7 +199,6 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
 
 
-    __BU_COMPILE__STABLE_FILE_FAILED_TO COMPILE="IMPOSSIBLE DE CONVERTIR LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__ERROR} EN UNE VERSION STABLE DANS CETTE LANGE : $__BU_ARG_LANG !!!";
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HIGHLIGHT}%s${__SUCCESS} A ÉTÉ COMPILÉ AVEC SUCCÈSS ET EST PRÊT À ÊTRE UTILISÉ";
 
 # -------------------------------------------------------------------------------
@@ -316,7 +317,6 @@ else
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
 
 
-    __BU_COMPILE__STABLE_FILE_FAILED_TO COMPILE="UNABLE TO CONVERT THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE IN A STABLE VERSION IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY COMPILED AND IS READY TO BE USED";
 fi
 
@@ -618,267 +618,295 @@ function CompileInSingleFile()
     local p_display=${2:-no};   # String    - Default : no      - Display the content of each file when it is read and written into the file to generate.
 
     #**** Variables ****
-    local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${p_locale}.locale";
-    local __locale_file_path_en="$__BU_MODULE_INIT_TRANSLATIONS_PATH/en.locale";
+    local v_locale_str;
+    local v_locale_tmp;
 
-    # Compiled file's informations.
-    local __compiled_file_path_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/unstable";
-    local __compiled_file_path="$__compiled_file_path_parent_dir/Bash-utils-${p_locale}.sh";
-
-	local __locale_print_code;
-
-    # Getting the current system language.
-    local ____sys_lang;
-
-	__locale_print_code="[ LOCALE : $p_locale [$(BU.Main.Locale.PrintLanguageName "${p_locale^^}" 'no') ]]";
-	____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
-
-    # If the 'compile-stable' argument was passed.
-    if [ -n "$__vArrayVal_compile_stable" ]; then
-        local __compile_stable="$__vArrayVal_compile_stable";
-        local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
-        local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${p_locale}.sh";
-    fi
-
-    # If the 'no-shellcheck' argument was passed.
-    if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
-
+    local __language_array;
 
     #**** Code ****
-    # Deleting the existing "Bash-utils.sh" file.
-    if [ -f "$__BU_MAIN_FULL_FILE_PATH" ] && [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then true > "$__BU_MAIN_FULL_FILE_PATH"; fi
+    # Converting the "$p_locale" string into an array of ISO 639-1 codes.
+#    if [[ "${p_locale,,}" == lang=[a-z][a-z]?(,[a-z][a-z]*) ]]; then
+    if [[ "${p_locale,,}" == lang=* ]]; then
+        # Getting each ISO 639-1 codes after the mandatory '=' sign.
+        v_locale_str="$(sed "s/^[^=]*=//" <<< "$p_locale")";
 
-    # Checking if the "$p_locale" variable is a valid ISO 639-1 language code.
-    if ! CheckISO639_1_LangCode "$p_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; return 1; fi
+        # This variable's purpose is to avoid assigning the "$v_locale_str" variable to itself, because if so, the assignment would have done nothing.
+        v_locale_tmp="$v_locale_str";
+        v_locale_str="$v_locale_tmp";
 
-    PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" "FULL";
+        # String to word array.
+        __language_array=("$(echo "$v_locale_str" | tr ',' "\n")")
+    fi
 
-    # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+    for language in "${__language_array[@]}"; do
+        #------------------------
+        #**** Loop variables ****
+        local v_curr_locale="$language";
 
-    if [ "${p_locale,,}" != "en" ]; then
-        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+        local __locale_file_path="$__BU_MODULE_INIT_TRANSLATIONS_PATH/${v_curr_locale}.locale";
+        local __locale_file_path_en="$__BU_MODULE_INIT_TRANSLATIONS_PATH/en.locale";
 
-        echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
+        # Compiled file's informations.
+        local __compiled_file_path_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/unstable";
+        local __compiled_file_path="$__compiled_file_path_parent_dir/Bash-utils-${v_curr_locale}.sh";
 
-        if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
-        else
-            ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
+        local __locale_print_code;
 
-            WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
+        # Getting the current system language.
+        local ____sys_lang;
+        ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
+
+        __locale_print_code="[ LOCALE : $v_curr_locale [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'no') ]]";
+
+        # If the 'compile-stable' argument was passed.
+        if [ -n "$__vArrayVal_compile_stable" ]; then
+            local __compile_stable="$__vArrayVal_compile_stable";
+            local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
+            local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${v_curr_locale}.sh";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
-    fi
-
-    # ------------------------------------------------------------------------------------------
-    # Writing now the initializer script's translations files content into the file to generate.
-
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
-    else
-        ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
-
-        WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
-    fi
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$p_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # ---------------------------------------------------------------------------------------
-    # Writing the initializer script's configuration files content into the file to generate.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
-        ShellcheckVerif "${i}" || { local __err="error"; break; };
-
-        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
-    done
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # -------------------------------------------------------------------
-    # Writing the initializer script's content into the file to generate.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
-
-    else
-        ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
-
-        WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
-    fi
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # --------------------------------------------------------------------------
-    # Writing the main module's library files content into the file to generate.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
-        ShellcheckVerif "${i}" || { local __err="error"; break; };
-
-        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
-    done
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # --------------------------------------------------------------------------------
-    # Writing the main module's configuration files content into the file to generate.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    for i in "$__BU_ROOT_PATH/install/.Bash-utils/config/modules/main/"*.conf; do
-        ShellcheckVerif "${i}" || { local __err="error"; break; };
-
-        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
-    done
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # ---------------------------------------------------------------------------------
-    # Writing the main module's initializer script's content into the file to generate.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    for i in "$__BU_ROOT_PATH/install/.Bash-utils/modules/main/"*; do
-        ShellcheckVerif "${i}" || { local __err="error"; break; };
-
-        WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
-    done
-
-    [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
-
-    # -------------------------------------------------------------------------------------------------------------------------
-    # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
-    # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "ShellcheckVerif()" function.
-    if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
+        # If the 'no-shellcheck' argument was passed.
+        if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
 
 
-    # -----------------------------------------------------------------------------
-    # Copying the content of the generated file into the localized language's file.
-    PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
+        #-------------------
+        #**** Loop code ****
+        # Deleting the existing "Bash-utils.sh" file.
+        if [ -f "$__BU_MAIN_FULL_FILE_PATH" ] && [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then true > "$__BU_MAIN_FULL_FILE_PATH"; fi
 
-    cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; return 1; };
+        # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
+        if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; return 1; fi
 
-    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
+        PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" "FULL";
 
-    if [ -n "$__compile_stable" ]; then
-        PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
-    else
-        PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
-    fi
+        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
-    echo;
+        if [ "${v_curr_locale,,}" != "en" ]; then
+            PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
 
-    # --------------------------------------------------------------
-    # Printing the statistics of the newly generated localized file.
+            echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
 
-    printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__compiled_file_path"; echo;
-
-    printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__compiled_file_path")" 'NULL' 1000 "$____sys_lang")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__compiled_file_path")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__compiled_file_path")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
-    printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
-
-    if [ -n "$__compile_stable" ]; then
-        # --------------------------------------------------------
-        # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
-        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS" "$__compiled_file_path")";
-
-        # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
-        if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
-            PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
-
-            return 1;
-        fi
-
-        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS\n\n" "$__compiled_file_path")";
-
-        # ----------------------------------------------------
-        # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
-        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
-
-        if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
-            PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
-            echo >&2;
-
-            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1" >&2;
-            echo >&2;
-
-            echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2" >&2;
-            echo >&2;
-
-            return 1;
-        else
-            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
-        fi
-
-        # -----------------------------------------------------------------------
-        # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
-        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD" "$__compiled_file_path")";
-
-        if ! chmod --verbose -wx "$__compiled_stable_file_path.old"; then
-            PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_stable_file_path")";
-
-            printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2:
-            read -rp "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER" __answer_copy_compiled_file_in_stable_dir;
-            echo;
-
-            case "${__answer_copy_compiled_file_in_stable_dir,,}" in
-                '1') echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1";;
-                '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; return 1;;
-            esac
-
-            # Adding the failed file into the array of .
-            __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
-        else
-            # If one or more stable files were not successsfully "chmoded".
-            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
-                # If only one file was not "chmoded".
-                if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
-                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
-
-                    echo "Here is the file which rights were not modified :";
-                    for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
-                        echo "    - $files"
-                    done
-                   # echo "    - ${__BU_ARRAY__READ_ONLY_FAILED_FILES[0]}";
-
-                # Else, if more than one file were not successfully "chmoded".
-                else
-                    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
-                        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
-                    else
-                        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
-                    fi
-
-                    echo "Here is the list of the files whose rights were not modified :";
-
-                    for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
-                        echo "    - $files"
-                    done
-                fi
+            if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
             else
-                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+                ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
+
+                WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
+            fi
+
+            [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+            PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+        fi
+
+        # ------------------------------------------------------------------------------------------
+        # Writing now the initializer script's translations files content into the file to generate.
+
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
+        else
+            ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
+
+            WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
+        fi
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # ---------------------------------------------------------------------------------------
+        # Writing the initializer script's configuration files content into the file to generate.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        for i in "$__BU_MODULE_INIT_CONFIGS_PATH/"*.conf; do
+            ShellcheckVerif "${i}" || { local __err="error"; break; };
+
+            WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
+        done
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # -------------------------------------------------------------------
+        # Writing the initializer script's content into the file to generate.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
+
+        else
+            ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
+
+            WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
+        fi
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # --------------------------------------------------------------------------
+        # Writing the main module's library files content into the file to generate.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
+            ShellcheckVerif "${i}" || { local __err="error"; break; };
+
+            WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
+        done
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # --------------------------------------------------------------------------------
+        # Writing the main module's configuration files content into the file to generate.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        for i in "$__BU_ROOT_PATH/install/.Bash-utils/config/modules/main/"*.conf; do
+            ShellcheckVerif "${i}" || { local __err="error"; break; };
+
+            WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
+        done
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # ---------------------------------------------------------------------------------
+        # Writing the main module's initializer script's content into the file to generate.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        for i in "$__BU_ROOT_PATH/install/.Bash-utils/modules/main/"*; do
+            ShellcheckVerif "${i}" || { local __err="error"; break; };
+
+            WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
+        done
+
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
+
+        # -------------------------------------------------------------------------------------------------------------------------
+        # Now that the files were checked by Shellcheck, it's necessary to set the "$__BU_SHELLCHECKED" variable's value to 'true'.
+        # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "ShellcheckVerif()" function.
+        if [ "$__BU_SHELLCHECKED" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
+
+
+        # -----------------------------------------------------------------------------
+        # Copying the content of the generated file into the localized language's file.
+        PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
+
+        cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; return 1; };
+
+        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
+
+        if [ -n "$__compile_stable" ]; then
+            PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+        else
+            PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+        fi
+
+        echo;
+
+        # --------------------------------------------------------------
+        # Printing the statistics of the newly generated localized file.
+
+        printf "$__BU_COMPILE__LOCALIZED_FILE__STATS\n" "$__compiled_file_path"; echo;
+
+        printf "$__BU_COMPILE__LOCALIZED_FILE__BYTES\n" "$(BytesToHuman "$(wc -c < "$__compiled_file_path")" 'NULL' 1000 "$____sys_lang")";
+        printf "$__BU_COMPILE__LOCALIZED_FILE__CHARS\n" "$(wc -m < "$__compiled_file_path")";
+        printf "$__BU_COMPILE__LOCALIZED_FILE__LINES\n" "$(wc -l < "$__compiled_file_path")";
+        printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
+        printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
+
+        if [ -n "$__compile_stable" ]; then
+            # --------------------------------------------------------
+            # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
+            PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS" "$__compiled_file_path")";
+
+            # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
+            if ! ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
+                PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
+
+                return 1;
+            fi
+
+            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS\n\n" "$__compiled_file_path")";
+
+            # ----------------------------------------------------
+            # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
+            PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
+
+            if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
+                PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
+                echo >&2;
+
+                echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1" >&2;
+                echo >&2;
+
+                echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2" >&2;
+                echo >&2;
+
+                return 1;
+            else
+                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
+            fi
+
+            # -----------------------------------------------------------------------
+            # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
+            PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD" "$__compiled_file_path")";
+
+            if ! chmod --verbose -helloworld "$__compiled_stable_file_path"; then
+                PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_stable_file_path")";
+
+                printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2:
+                read -rp "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER" __answer_copy_compiled_file_in_stable_dir;
+                echo;
+
+                case "${__answer_copy_compiled_file_in_stable_dir,,}" in
+                    '1') echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1";;
+                    '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; return 1;;
+                esac
+
+                # Adding the failed file into the array of .
+                __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
             fi
         fi
+   done
 
-        PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
+   # If one or more stable files were not successsfully "chmoded".
+    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
+        # If only one file was not "chmoded".
+        if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
+            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+
+            echo "Here is the file which rights were not modified :";
+
+            for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                echo "    - $files"
+            done
+
+            # echo "    - ${__BU_ARRAY__READ_ONLY_FAILED_FILES[0]}";
+
+            # Else, if more than one file were not successfully "chmoded".
+        else
+            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
+                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+            else
+                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+            fi
+
+            echo "Here is the list of the files whose rights were not modified :";
+            for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                echo "    - $files"
+            done
+        fi
+    else
+        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
     fi
+
+    PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
 
     return 0;
 }
