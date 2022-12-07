@@ -1375,48 +1375,6 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 # -----------------------------------------------
 
-                ## MODULE : USER'S LANGUAGE PROCESSING
-
-                # If the "module" value's argument is "--lang="
-#                 if [[ "${module_args}" == *'--lang='* ]]; then
-#
-#                     if [ -n "${__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
-#                         BU.ModuleInit.PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "${LINENO}";
-#
-#                         echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
-#                         echo "Please choose only one of these languages" >&2;
-#                         echo >&2;
-#
-#                         echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
-#                         echo "Chosen language : $module_args" >&2;
-#                     else
-#                         case "${module_args}" in
-#                             # Deutch | German
-#                             'de_'[A-Z][A-Z])
-#                                 # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # English
-#                             'en_'[A-Z][A-Z])
-#                                 # Creating a new variable to store the language currently used by the operating system.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Español | Spanish
-#                             'es_'[A-Z][A-Z])
-#                                 # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Français | French
-#                             'fr_'[A-Z][A-Z])
-#                                 # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#                             *)
-#                                 ;;
-#                         esac
-#                     fi
-
-                # -----------------------------------------------
-
                 ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
 
                 # Creating a function to print the correct values for the current option in different languages structures.
