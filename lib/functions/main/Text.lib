@@ -131,10 +131,10 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;              # String    - Default : NULL    - String to process.
-    local p_delimiter=$2;           # String    - Default : NULL    - Delimiter.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_delimiter=${2:-$'\0'};  # String    - Default : NULL    - Delimiter.
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations.
-    local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+    local p_count=${4:-$'\0'};      # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
     local p_string_tmp;
@@ -174,8 +174,8 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -192,8 +192,8 @@ function BU.Main.Text.CutLastFieldAfterDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -201,7 +201,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
     echo "${p_string#*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
-# Deleting letters in a string.
+# Deleting letters and sub-strings in a main string.
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -210,15 +210,41 @@ function BU.Main.Text.DeleteLettersInString()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;      # String    - Default : NULL    - String to process.
-    shift;
-
-    local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_chars=${2:-$'\0'};      # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}    # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-' '};  # String    - Default : ' '     - Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.ArrayIsNotEmpty "${p_char[@]}"; then BU.Main.Echo.Error "No string passed as first argument"; BU.Main.Echo.Newline; return 1; fi
-
     if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+
+    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "$p_string" "$p_chars" "$([ "$p_replacement" == '' ] && printf '' || printf ' ')" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Replacing letters and sub-strings in a main string.
+function BU.Main.Text.ReplaceLettersInString()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};         # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};          # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}    # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-$'\0'};    # String    - Default : NULL    - Replacing the former character / sub-strings by another character / sub-string.
+
+    #**** Code ****
+    if [ "${p_occurences,,}" == 'all' ]; then
+        echo "${p_string//$p_replacement/"$p_delim"}";
+    else
+        echo "${p_string/$p_replacement/"$p_delim"}";
+    fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -488,13 +514,13 @@ function BU.Main.Text.GetSubStringOccurences()
 
 	# https://stackoverflow.com/a/50601141
 
-	# This removes all occurrences of "$p_string" from $CommandResult and places it in tmp.
+	# This removes all occurrences of "$p_target" from "$p_string" and places it in tmp.
 	# Actually we're using substring replacement here with replacement string missing.
 
 	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
 	tmp="${p_string//$p_target}";
 
-	# This gives us the number of occurrences of "$p_string" in $CommandResult.
+	# This gives us the number of occurrences of "$p_target" in "$p_string".
 
 	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "$p_target" (remember, we removed all occurrences of "$p_target" from "$p_string" and placed the result in "$tmp").
 	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
@@ -546,7 +572,7 @@ function BU.Main.Text.GetStringWordsNumber()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc -w; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    echo -ne "$p_string" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -572,7 +598,7 @@ function BU.Main.Text.PrintCharXTimes()
 		printf "%s" "$p_str";
 	done
 
-	if [ "${p_newline,,}" == 'true' ]; then echo; fi
+	if [ "${p_newline,,}" == 'true' ]; then BU.Main.Echo.Newstep; fi
 
 	return 0;
 }
