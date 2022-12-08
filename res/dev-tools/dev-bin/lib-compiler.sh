@@ -677,16 +677,14 @@ function CompileInSingleFile()
         fi
 
         # Getting each ISO 639-1 codes after the mandatory '=' sign.
-        # v_locale_str="$(sed "s/^[^$v_locale_delim]*$v_locale_delim//" <<< "$p_locale")";
+        v_locale_str="$(sed "s/^[^=]*=//" <<< "$p_locale")";
 
         # This variable's purpose is to avoid assigning the "$v_locale_str" variable to itself, because if so, the assignment would have done nothing.
-        # v_locale_tmp="$v_locale_str";
-        # v_locale_str="$v_locale_tmp";
+        v_locale_tmp="$v_locale_str";
+        v_locale_str="$v_locale_tmp";
 
         # Replacing each delimiter with an empty character.
         v_locale_str="${v_locale_str//$v_locale_delim/" "}";
-
-        echo "LOCALE STR : $v_locale_str"
 
         # String to word array.
         read -ra __language_array <<< "$v_locale_str";
@@ -740,7 +738,7 @@ function CompileInSingleFile()
             local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
             local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${v_curr_locale}.sh";
         fi
-echo 'YO'
+
         # If the 'no-shellcheck' argument was passed.
         if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
 
