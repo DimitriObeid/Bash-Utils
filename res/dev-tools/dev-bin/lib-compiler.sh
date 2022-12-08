@@ -532,6 +532,22 @@ function CheckISO639_1_LangCode()
     [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
 }
 
+# Getting the delimiter.
+function CheckLangArgDelim()
+{
+        #**** Parameters ****
+    local p_string=$1;  # String    - Default : NULL    - String to process.
+    local p_target=$2;  # Char      - Default : NULL    - Targeted character.
+
+    #**** Variables ****
+    local v_occurences="${p_string//[^$p_target]}";
+
+    #**** Code ****
+    if [ -n "${v_occurences:0:1}" ]; then return 0; fi
+
+    return 1;
+}
+
 # Writing the error message if a Shellcheck verification failed.
 function ShellcheckError()
 {
@@ -641,32 +657,41 @@ function CompileInSingleFile()
     #**** Variables ****
     local v_locale_str;
     local v_locale_tmp;
+    local v_locale_delim;
 
     local __language_array;
 
     #**** Code ****
     # Converting the "$p_locale" string into an array of ISO 639-1 codes.
     # If the "$p_locale" has coma delimiters.
-    if [[ "${p_locale,,}" == lang=[a-z],* ]]; then
+    if [[ "${p_locale,,}" == lang=[a-z]* ]]; then
+        # Checking for the delimiter.
+        if      CheckLangArgDelim "$p_locale" ','; then v_locale_delim=',';
+        elif    CheckLangArgDelim "$p_locale" ';'; then v_locale_delim=';';
+        elif    CheckLangArgDelim "$p_locale" '|'; then v_locale_delim='|';
+        elif    CheckLangArgDelim "$p_locale" '~'; then v_locale_delim='~';
+        elif    CheckLangArgDelim "$p_locale" '.'; then v_locale_delim='.';
+        elif    CheckLangArgDelim "$p_locale" ':'; then v_locale_delim=':';
+        elif    CheckLangArgDelim "$p_locale" '!'; then v_locale_delim='!';
+        elif    CheckLangArgDelim "$p_locale" '§'; then v_locale_delim='§';
+        fi
+
         # Getting each ISO 639-1 codes after the mandatory '=' sign.
-        v_locale_str="$(sed "s/^[^=]*=//" <<< "$p_locale")";
+        # v_locale_str="$(sed "s/^[^$v_locale_delim]*$v_locale_delim//" <<< "$p_locale")";
 
         # This variable's purpose is to avoid assigning the "$v_locale_str" variable to itself, because if so, the assignment would have done nothing.
-        v_locale_tmp="$v_locale_str";
-        v_locale_str="$v_locale_tmp";
+        # v_locale_tmp="$v_locale_str";
+        # v_locale_str="$v_locale_tmp";
 
-        # Replacing each coma delimiter with an empty character.
-        v_locale_str="${v_locale_str//,/" "}";
+        # Replacing each delimiter with an empty character.
+        v_locale_str="${v_locale_str//$v_locale_delim/" "}";
+
+        echo "LOCALE STR : $v_locale_str"
 
         # String to word array.
         read -ra __language_array <<< "$v_locale_str";
 
-    # Else, if the "$p_locale" string has blank spaces delimiters.
-    elif [[ "${p_locale,,}" == lang=[a-z][[:space:]]* ]]; then
-        # String to word array.
-        read -ra __language_array <<< "$v_locale_str";
-
-    # Else, if the "all" value is passed into the
+    # Else, if the "all" value is passed as the first argument.
     elif [ "${p_locale,,}" == 'all' ] || [ "${p_locale,,}" == 'lang=all' ]; then
         for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
     else
@@ -675,7 +700,9 @@ function CompileInSingleFile()
         echo "'lang=en fr uk sv tk kl'" >&2;
         echo >&2;
 
-        echo "${__WARNING}Or use one of these delimiters between each ISO 639-1 codes instead : ${__HIGHLIGHT},;|~.:!§${__RESET}" >&2;
+        echo "'$p_locale'"
+
+        echo "${__WARNING}Or use one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}" >&2;
         echo >&2;
 
         echo "${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}" >&2;
@@ -684,6 +711,8 @@ function CompileInSingleFile()
 
         return 1;
     fi
+
+    echo "ARRAY : ${__language_array[*]}"
 
     for language in "${__language_array[@]}"; do
         #------------------------
@@ -711,7 +740,7 @@ function CompileInSingleFile()
             local __compiled_stable_file_parent_dir="$__BU_ROOT_PATH/install/.Bash-utils/compiled/stable";
             local __compiled_stable_file_path="$__compiled_stable_file_parent_dir/Bash-utils-stable-${v_curr_locale}.sh";
         fi
-
+echo 'YO'
         # If the 'no-shellcheck' argument was passed.
         if [ -n "$__vArrayVal_no_shellcheck" ]; then local __no_shellcheck="$__vArrayVal_no_shellcheck"; fi
 
@@ -722,7 +751,7 @@ function CompileInSingleFile()
 
         # -----------------------------------------------------------------------------
         # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
-        if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; return 1; fi
+        if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; ____loop_error='error'; break; fi
 
         # ------------------------------------
         # Framework compilation start message.
@@ -736,14 +765,14 @@ function CompileInSingleFile()
 
             echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
 
-            if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
+            if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
             else
                 BU.Main.DevTools.ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
 
                 WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
             fi
 
-            [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+            [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
         fi
@@ -753,14 +782,14 @@ function CompileInSingleFile()
 
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
-        if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
+        if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
         else
             BU.Main.DevTools.ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
 
             WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -774,7 +803,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -782,7 +811,7 @@ function CompileInSingleFile()
         # Writing the initializer script's content into the file to generate.
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-        if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1;
+        if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
 
         else
             BU.Main.DevTools.ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
@@ -790,7 +819,7 @@ function CompileInSingleFile()
             WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -804,7 +833,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -818,7 +847,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -832,7 +861,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; return 1; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -846,7 +875,7 @@ function CompileInSingleFile()
         # Copying the content of the generated file into the localized language's file.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
-        cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; return 1; };
+        cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
@@ -878,7 +907,7 @@ function CompileInSingleFile()
             if ! BU.Main.DevTools.ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
                 PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
 
-                return 1;
+                ____loop_error='error'; break;
             fi
 
             PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS\n\n" "$__compiled_file_path")";
@@ -897,7 +926,7 @@ function CompileInSingleFile()
                 echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2" >&2;
                 echo >&2;
 
-                return 1;
+                ____loop_error='error'; break;
             else
                 PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
             fi
@@ -915,14 +944,14 @@ function CompileInSingleFile()
 
                 case "${__answer_copy_compiled_file_in_stable_dir,,}" in
                     '1') echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1";;
-                    '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; return 1;;
+                    '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; ____loop_error='error'; break;;
                 esac
 
                 # Adding the failed file into the array of .
                 __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
             fi
         fi
-   done
+   done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then return 1; fi
 
    # If one or more stable files were not successsfully "chmoded".
     if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
