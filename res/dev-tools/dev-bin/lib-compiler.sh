@@ -201,7 +201,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__LOCALIZED_FILE__WIDTH="Largeur d'affichage maximale   : %s colonnes";
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Nombre de mots                 : %s mots";
 
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGE : $__BU_ARG_LANG !!!";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGUE : $__BU_ARG_LANG !!!";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="LE FRAMEWORK BASH UTILS A ÉTÉ COMPILÉ AVEC SUCCÈS VERS CETTE LANGUE : ${__HIGHLIGHT}%s${__RESET}";
 
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
