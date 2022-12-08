@@ -712,7 +712,13 @@ function CompileInSingleFile()
         read -ra __language_array <<< "$v_locale_str";
 
     # Else, if the "all" value is passed as the first argument.
-    elif [ "${p_locale,,}" == 'all' ] || [ "${p_locale,,}" == 'lang=all' ]; then
+    elif [[ "${p_locale,,}" == ?(lang=)all ]]; then
+        PrintWarningLine "${__HIGHLIGHT}$p_locale${__WARNING} : FEATURE NOT YET IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
+
+        for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
+
+    # Else, if the "all-supported" or "supported" value is passed as the first argument.
+    elif [[ "${p_locale,,}" == ?(lang=)all-supported ]] || [[ "${p_locale,,}" == ?(lang=)supported ]]; then
         for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
     else
         PrintErrorLine "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG" 'FULL';

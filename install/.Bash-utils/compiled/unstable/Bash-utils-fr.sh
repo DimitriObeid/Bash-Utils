@@ -2900,48 +2900,6 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 # -----------------------------------------------
 
-                ## MODULE : USER'S LANGUAGE PROCESSING
-
-                # If the "module" value's argument is "--lang="
-#                 if [[ "${module_args}" == *'--lang='* ]]; then
-#
-#                     if [ -n "${__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
-#                         BU.ModuleInit.PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "${LINENO}";
-#
-#                         echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
-#                         echo "Please choose only one of these languages" >&2;
-#                         echo >&2;
-#
-#                         echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
-#                         echo "Chosen language : $module_args" >&2;
-#                     else
-#                         case "${module_args}" in
-#                             # Deutch | German
-#                             'de_'[A-Z][A-Z])
-#                                 # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # English
-#                             'en_'[A-Z][A-Z])
-#                                 # Creating a new variable to store the language currently used by the operating system.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Español | Spanish
-#                             'es_'[A-Z][A-Z])
-#                                 # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Français | French
-#                             'fr_'[A-Z][A-Z])
-#                                 # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#                             *)
-#                                 ;;
-#                         esac
-#                     fi
-
-                # -----------------------------------------------
-
                 ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
 
                 # Creating a function to print the correct values for the current option in different languages structures.
@@ -9033,6 +8991,88 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "$1" "$2" "$3" 'S'
 # Underline formatting.
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "$1" "$2" "$3" 'U'    || return 1; return 0; }
 #!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : DevTools.lib
+# Module        : Main
+# Description   : Tools used for debugging or specific tasks for the dev-tools executable scripts.
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154,SC2016
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### DEBUG FUNCTIONS
+#### DEBUG ID : "devtools:debug-functions"
+
+__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions';
+
+## SHELLCHECK
+## DEBUG ID : "shellcheck"
+
+__BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="$__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS:shellcheck";
+
+# Verifying for any programming errors in a Bash script file with the "shellcheck" command.
+function BU.Main.DevTools.ShellcheckVerif()
+{
+    #**** Parameters ****
+    local p_path=${1:-\$'0'};   # String    - Default : NULL    - Path of the file to verify.
+    local p_stable=${2:-NULL};  # String    - Default : NULL    - If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
+
+    #**** Code ****
+    # shellcheck disable=SC2059
+    if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
+        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
+
+        if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
+
+        # shellcheck disable=SC2059
+        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
+
+        echo;
+    fi
+
+    return 0;
+}
 #!/usr/bin/env bash
 
 # ---------------------
@@ -14806,6 +14846,18 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+####
+#### DEBUG ID :
+
+##
+## DEBUG ID :
+
+# Checking if the language's code matches to a valid ISO 639-1 code.
+function BU.Main.Locale.CheckISO_639_1_ValidCode()
+{
+    [[ ${__BU_MAIN_LOCALE__ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0; return 1;
+}
+
 # Printing the language name in English and in its own language.
 function BU.Main.Locale.PrintLanguageName()
 {
@@ -16860,10 +16912,10 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;              # String    - Default : NULL    - String to process.
-    local p_delimiter=$2;           # String    - Default : NULL    - Delimiter.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_delimiter=${2:-$'\0'};  # String    - Default : NULL    - Delimiter.
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations.
-    local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+    local p_count=${4:-$'\0'};      # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
     local p_string_tmp;
@@ -16903,8 +16955,8 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -16921,8 +16973,8 @@ function BU.Main.Text.CutLastFieldAfterDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -16930,7 +16982,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
     echo "${p_string#*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
-# Deleting letters in a string.
+# Deleting letters and sub-strings in a main string.
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -16939,15 +16991,41 @@ function BU.Main.Text.DeleteLettersInString()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;      # String    - Default : NULL    - String to process.
-    shift;
-
-    local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_chars=${2:-$'\0'};      # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}    # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-' '};  # String    - Default : ' '     - Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.ArrayIsNotEmpty "${p_char[@]}"; then BU.Main.Echo.Error "No string passed as first argument"; BU.Main.Echo.Newline; return 1; fi
-
     if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+
+    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "$p_string" "$p_chars" "$([ "$p_replacement" == '' ] && printf '' || printf ' ')" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Replacing letters and sub-strings in a main string.
+function BU.Main.Text.ReplaceLettersInString()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};         # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};          # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}        # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-$'\0'};    # String    - Default : NULL    - Replacing the former character / sub-strings by another character / sub-string.
+
+    #**** Code ****
+    if [ "${p_occurences,,}" == 'all' ]; then
+        echo "${p_string//$p_replacement/"$p_delim"}";
+    else
+        echo "${p_string/$p_replacement/"$p_delim"}";
+    fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -17217,13 +17295,13 @@ function BU.Main.Text.GetSubStringOccurences()
 
 	# https://stackoverflow.com/a/50601141
 
-	# This removes all occurrences of "$p_string" from $CommandResult and places it in tmp.
+	# This removes all occurrences of "$p_target" from "$p_string" and places it in tmp.
 	# Actually we're using substring replacement here with replacement string missing.
 
 	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
 	tmp="${p_string//$p_target}";
 
-	# This gives us the number of occurrences of "$p_string" in $CommandResult.
+	# This gives us the number of occurrences of "$p_target" in "$p_string".
 
 	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "$p_target" (remember, we removed all occurrences of "$p_target" from "$p_string" and placed the result in "$tmp").
 	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
@@ -17275,7 +17353,7 @@ function BU.Main.Text.GetStringWordsNumber()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc -w; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    echo -ne "$p_string" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -17301,7 +17379,7 @@ function BU.Main.Text.PrintCharXTimes()
 		printf "%s" "$p_str";
 	done
 
-	if [ "${p_newline,,}" == 'true' ]; then echo; fi
+	if [ "${p_newline,,}" == 'true' ]; then BU.Main.Echo.Newstep; fi
 
 	return 0;
 }
@@ -21185,6 +21263,43 @@ else
         "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH" \
         "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
 fi
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# This configuration file stores every locale-related global variables.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+####
+
+##
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+####
+
+##
+
+# List of every ISO 639-1 language codes.
+__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY=(  'ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
+                                            'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' 'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' 'fy' 'ff' 'gd' 'gl' \
+                                            'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' 'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' 'iu' 'ik' 'ga' 'it' 'ja' 'jv' \
+                                            'kn' 'kr' 'ks' 'kk' 'km' 'ki' 'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' 'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' \
+                                            'gv' 'mi' 'mr' 'mh' 'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' 'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' \
+                                            'qu' 'ro' 'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' 'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
+                                            'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' 'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' 'yo' 'za' 'zu')
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
