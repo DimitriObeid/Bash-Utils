@@ -117,6 +117,10 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__HIGHLIGHT}%s${__ERROR} N'EXISTE PAS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Veuillez vérifier l'existence du répertoire racine de la librairie Bash Utils.";
 
+    # -----------------------------------------------------------------------------------------------------------------------------------------
+    # [-----] If an unsupported argument is passed into the array of optional arguments.
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY"UN ARGUMENT NON-SUPPORTÉ À ÉTÉ PASSÉ DANS LE TABLEAU DES ARGUMENT OPTIONNELS";
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE="${__ERROR}La valeur ${__HIGHLIGHT}%s${__ERROR} n'est pas supportée. Veuillez la retirer du tableau d'arguments suivant le premier argument obligatoire (lang=*)${__RESET}";
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="ARRÊT DE L'EXÉCUTION DU COMPILATEUR, AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
 
@@ -242,8 +246,14 @@ if [[ "$LANG" = fr_* ]]; then
 
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCÈS DE LA MISE À JOUR DES DROITS DU FICHIER STABLE COMPILÉ ${__HIGHLIGHT}%s${__SUCCESS} EN MODE LECTURE SEULE";
 
-
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HIGHLIGHT}%s${__SUCCESS} A ÉTÉ COMPILÉ AVEC SUCCÈSS ET EST PRÊT À ÊTRE UTILISÉ";
+
+    # ----------------------------------------------------------------------------------------------------------------
+    # Si le framework a été compilé dans une version stable [-----] If the framework was compiled in a stable version.
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici le ficher dont les droits n'ont pas été modifiés :";
+    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici la liste des fichers dont les droits n'ont pas été modifiés :";
+
+    __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="THE COMPILATION OF THE FRAMEWORK IS DONE";
 
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
@@ -254,6 +264,10 @@ else
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Please check the existence of the root directory of the Bash Utils library.";
 
+    # --------------------------------------------------------------------------
+    # If an unsupported argument is passed into the array of optional arguments.
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY"AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE="${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}";
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="STOPPING THE EXECUTION OF THE COMPILER, NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
 
@@ -278,7 +292,7 @@ else
     # Shellcheck command execution.
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
-    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file doen't contain any programming errors${__RESET}";
+    __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
 
     # -----------------------------------------------------------------------------
     # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
@@ -347,7 +361,7 @@ else
     __BU_COMPILE__LOCALIZED_FILE__WIDTH="Maximum display width   : %s columns";
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Number of words         : %s words";
 
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : ${__HIGHLIGHT}%s${__ERROR} !!!${__RESET}";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="FAILED TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : ${__HIGHLIGHT}%s${__ERROR} !!!${__RESET}";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__HIGHLIGHT}%s${__RESET}";
 
     # ---------------------------------------------------------------------------------------
@@ -379,8 +393,15 @@ else
 
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
 
-
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY COMPILED AND IS READY TO BE USED";
+
+    # --------------------------------------------------
+    # If the framework was compiled in a stable version.
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Here is the file whose rights have not been modified :";
+    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Here is the list of the files whose rights have not been modified :";
+
+
+    __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="THE COMPILATION OF THE FRAMEWORK IS DONE";
 fi
 
 # -----------------------------------------------
@@ -624,11 +645,11 @@ for arg in "${__BU_ARG_ARRAY[@]}"; do
     elif [[ "$arg" == no?(?(-)shell)?(-)check ]]; then
         __vArrayVal_no_shellcheck='no-shellcheck';
 
-    # -------------------------------------------
-    # Else, if an unsupported argument is passed.
+    # --------------------------------------------------------------------------------
+    # Else, if an unsupported argument is passed into the array of optional arguments.
     else
-        PrintErrorLine "AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
-        echo "${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}" >&2:
+        PrintErrorLine "AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT" 'FULL';
+        echo "${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}" >&2;
         echo >&2;
 
         PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
@@ -808,7 +829,7 @@ function CompileInSingleFile()
 
         if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
         else
-            BU.Main.DevTools.ShellcheckVerif "$__locale_file_path" "$__compile_stable" || local __err="error";
+            BU.Main.DevTools.ShellcheckVerif "$__locale_file_path" || local __err="error";
 
             WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
         fi
@@ -960,7 +981,7 @@ function CompileInSingleFile()
             if ! chmod --verbose -helloworld "$__compiled_stable_file_path"; then
                 PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_stable_file_path")";
 
-                printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2:
+                printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2;
                 read -rp "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER" __answer_copy_compiled_file_in_stable_dir;
                 echo;
 
@@ -971,19 +992,25 @@ function CompileInSingleFile()
 
                 # Adding the failed file into the array of .
                 __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
+
+                PrintWarningLine "THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE WAS NOT SET IN READ-ONLY MODE, PLEASE DO SO MANUALLY AFTER THE COMPILATION PROCESS";
+            else
+                PrintSuccessLine "THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY SET IN READ-ONLY MODE";
             fi
+
+            PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
         fi
     done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
     # If the framework was compiled in a stable version.
-    if [ "" ]; then
+    if [ -n "$__compile_stable" ]; then
         # If one or more stable files were not successsfully "chmoded".
         if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
             # If only one file was not "chmoded".
             if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
                 PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
 
-                echo "Here is the file which rights were not modified :";
+                echo "$__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED";
 
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                     echo "    - $files"
@@ -999,7 +1026,7 @@ function CompileInSingleFile()
                     PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
                 fi
 
-                echo "Here is the list of the files whose rights were not modified :";
+                echo "$__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED";
 
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                     echo "    - $files"
@@ -1007,10 +1034,10 @@ function CompileInSingleFile()
             fi
         else
             PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
-        fi
-    else
-        PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
+        fi       
     fi
+
+    PrintSuccessLine "THE COMPILATION OF THE FRAMEWORK IS DONE" 'FULL';
 
     return 0;
 }
