@@ -117,15 +117,25 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__HIGHLIGHT}%s${__ERROR} N'EXISTE PAS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Veuillez vérifier l'existence du répertoire racine de la librairie Bash Utils.";
 
+    # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Vérification de la présence des valeurs "no-shell-check" et "compile-stable" passées ensemble [-----] Verifying if the "no-shell-check" and "compile-stable" values were passed together.
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}ATTENTION : LES VALEURS ${__HIGHLIGHT}%s${__WARNING} ET ${__HIGHLIGHT}%s${__WARNING} NE DOIVENT PAS ÊTRE UTILISÉES ENSEMBLES${__RESET}",
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}Pour compiler un fichier stable, la commande ${__HIGHLIGHT}shellcheck${__WARNING} DOIT être exécutée, pour pouvoir vérifier toute erreur de programmation dans chaque fichier à inclure${__RESET}";
+
+
+    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
+
     # ----------
     # Shellcheck
-    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
+    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
 
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
 
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Vérification de la validité du code ISO 639-1 enregistré dans la variable "$v_curr_locale" [-----] Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
 
     # -----------------------------------------------------------------------------------------
@@ -235,15 +245,25 @@ else
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Please check the existence of the root directory of the Bash Utils library.";
 
+    # -----------------------------------------------------------------------------------
+    # Verifying if the "no-shell-check" and "compile-stable" values were passed together.
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} AND ${__HIGHLIGHT}%s${__WARNING} VALUES MUST NOT BE USED TOGETHER${__RESET}",
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to compile a stable file, the ${__HIGHLIGHT}shellcheck${__WARNING} command MUST be executed, in order to check for any programming error in every files to be included${__RESET}";
+
+
+    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
+
     # ----------
     # Shellcheck
-    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
     __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
+    __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
 
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file doen't contain any programming errors${__RESET}";
 
+    # -----------------------------------------------------------------------------
+    # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
     __BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
 
     # ------------------------------------
@@ -427,7 +447,7 @@ function PrintBaseLine()
     echo "$p_color$p_msg${__RESET}";
     [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
 
-    [ "${p_pos^^}" == 'NULL' ] && echo;
+    echo;
 
     return 0;
 }
@@ -507,7 +527,7 @@ function CheckISO639_1_LangCode()
 {
     #**** Parameters ****
     local p_code=${1:-NULL};    # String    - Default : NULL    - Language in which the file must be translated.
-    
+
     #**** Code ****
     [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
 }
@@ -583,8 +603,12 @@ done
 
 # Verifying if the "no-shell-check" and "compile-stable" values were passed together.
 if [[ (-n "$__vArrayVal_no_shellcheck") && ("$__vArrayVal_no_shellcheck" == 'no-shellcheck') ]] && [[ (-n "$__vArrayVal_compile_stable") && ("$__vArrayVal_compile_stable" == 'compile-stable') ]]; then
-    echo "WARNING : THE '$__vArrayVal_compile_stable' and '$__vArrayVal_no_shellcheck' arguments MUST NOT be used together";
-    echo "In order to have a stable file, the 'shellcheck' command MUST be executed, in order to check for any programming error in every files to be included";
+    # shellcheck disable=SC2059
+    PrintWarningLine "$(printf "$__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER\n\n" "$__vArrayVal_compile_stable" "$__vArrayVal_no_shellcheck")" 'FULL' >&2;
+    echo "$__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE" >&2;
+    echo >&2;
+
+    PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
 
     exit 1;
 fi
@@ -622,8 +646,8 @@ function CompileInSingleFile()
 
     #**** Code ****
     # Converting the "$p_locale" string into an array of ISO 639-1 codes.
-#    if [[ "${p_locale,,}" == lang=[a-z][a-z]?(,[a-z][a-z]*) ]]; then
-    if [[ "${p_locale,,}" == lang=* ]]; then
+    # If the "$p_locale" has coma delimiters.
+    if [[ "${p_locale,,}" == lang=[a-z],* ]]; then
         # Getting each ISO 639-1 codes after the mandatory '=' sign.
         v_locale_str="$(sed "s/^[^=]*=//" <<< "$p_locale")";
 
@@ -635,17 +659,30 @@ function CompileInSingleFile()
         v_locale_str="${v_locale_str//,/" "}";
 
         # String to word array.
-        # __language_array=($(echo "$v_locale_str" | tr ',' "\n"));
         read -ra __language_array <<< "$v_locale_str";
 
-    elif [ "${p_locale,,}" == 'all' ]; then
+    # Else, if the "$p_locale" string has blank spaces delimiters.
+    elif [[ "${p_locale,,}" == lang=[a-z][[:space:]]* ]]; then
+        # String to word array.
+        read -ra __language_array <<< "$v_locale_str";
+
+    # Else, if the "all" value is passed into the
+    elif [ "${p_locale,,}" == 'all' ] || [ "${p_locale,,}" == 'lang=all' ]; then
         for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
     else
-        PrintErrorLine "ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
-        echo "Please execute this script by passing the wanted ISO 639-1 codes like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic" >&2;
-        echo 'lang=en,fr,uk,sv,tk,kl' >&2;
+        PrintErrorLine "ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!" 'FULL';
+        echo "${__WARNING}Please execute this script by passing the wanted ISO 639-1 codes like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}" >&2;
+        echo "'lang=en fr uk sv tk kl'" >&2;
+        echo >&2;
 
-        echo "Or pass the \"all\" string only if you want to compile the framework with each of its supported languages" >&2;
+        echo "${__WARNING}Or use one of these delimiters between each ISO 639-1 codes instead : ${__HIGHLIGHT},;|~.:!§${__RESET}" >&2;
+        echo >&2;
+
+        echo "${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}" >&2;
+
+        PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
+
+        return 1;
     fi
 
     for language in "${__language_array[@]}"; do
@@ -683,9 +720,12 @@ function CompileInSingleFile()
         # Deleting the existing "Bash-utils.sh" file.
         if [ -f "$__BU_MAIN_FULL_FILE_PATH" ] && [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then true > "$__BU_MAIN_FULL_FILE_PATH"; fi
 
+        # -----------------------------------------------------------------------------
         # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
         if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; return 1; fi
 
+        # ------------------------------------
+        # Framework compilation start message.
         PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" "FULL";
 
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -907,6 +947,7 @@ function CompileInSingleFile()
             fi
 
             echo "Here is the list of the files whose rights were not modified :";
+
             for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                 echo "    - $files"
             done
