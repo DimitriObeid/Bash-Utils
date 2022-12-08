@@ -15,6 +15,9 @@
 # Temporary folder.
 tmp/
 
+# Compiled versions of the framework.
+install/.Bash-utils/compiled/*stable
+
 
 ## FILES
 # Backup files.
