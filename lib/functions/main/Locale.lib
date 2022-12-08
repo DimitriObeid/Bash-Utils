@@ -58,7 +58,7 @@ fi; exit 1; fi
 # Checking if the language's code matches to a valid ISO 639-1 code.
 function BU.Main.Locale.CheckISO_639_1_ValidCode()
 {
-    [[ ${__BU_MAIN_LOCALE_[*]} =~ ${1,,} ]] && return 0; return 1;
+    [[ ${__BU_MAIN_LOCALE__ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0; return 1;
 }
 
 # Printing the language name in English and in its own language.

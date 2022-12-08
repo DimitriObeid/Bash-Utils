@@ -133,9 +133,9 @@ if [[ "$LANG" = fr_* ]]; then
     # ---------------------------------------------------------------------------------------------------------
     # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : THE PREMIER ARGUMENT DU COMPILATEUR N'EST PAS CORRECTEMENT FORMATÉ !!!";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivantes, qui peut être utilisées pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivante, qui peut être utilisée pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) entre chaque code ISO 639-1 au lieu d'un espace : ${__HIGHLIGHT},;|~.:!§${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une de ces valeurs : \"${__HIGHLIGHT}all${__WARNING}\" ou \"${__HIGHLIGHT}lang=all${__WARNING}\" uniquement si vous voulez compiler le framework avec chacune de ses langes supportées${__RESET}";
 
     # -------------------------------------------------------------------------
     # Exécution de la commande Shellcheck [-----] Shellcheck command execution.
@@ -272,7 +272,7 @@ else
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIGHLIGHT}all${__WARNING}\" OR \"${__HIGHLIGHT}lang=all${__WARNING}\" strings only if you want to compile the framework with each of its supported languages${__RESET}";
 
     # -----------------------------
     # Shellcheck command execution.
