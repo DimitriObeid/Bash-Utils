@@ -117,13 +117,13 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__HIGHLIGHT}%s${__ERROR} N'EXISTE PAS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Veuillez vérifier l'existence du répertoire racine de la librairie Bash Utils.";
 
+
+    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="ARRÊT DE L'EXÉCUTION DU COMPILATEUR, AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
+
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Vérification de la présence des valeurs "no-shell-check" et "compile-stable" passées ensemble [-----] Verifying if the "no-shell-check" and "compile-stable" values were passed together.
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}ATTENTION : LES VALEURS ${__HIGHLIGHT}%s${__WARNING} ET ${__HIGHLIGHT}%s${__WARNING} NE DOIVENT PAS ÊTRE UTILISÉES ENSEMBLES${__RESET}",
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}Pour compiler un fichier stable, la commande ${__HIGHLIGHT}shellcheck${__WARNING} DOIT être exécutée, pour pouvoir vérifier toute erreur de programmation dans chaque fichier à inclure${__RESET}";
-
-
-    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
 
     # ----------------------------------------------------------------------------------
     # Vérifications avec la commande Shellcheck [-----] Shellcheck command verification.
@@ -221,15 +221,15 @@ if [[ "$LANG" = fr_* ]]; then
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Copie du fichier compilé dand le dossier "stable" [-----] STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPIE DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE DOSSIER ${__HIGHLIGHT}%s${__NEWSTEP}";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="Please check the permissions of the target directory";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="If the file you try to compile already exists AND is read-only, please delete it manually";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="ÉCHEC DE LA COPIE DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE DOSSIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="Veuillez vérifier les permissions du dossier cible";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="Si le fichier que vous essayez de compiler existe déjà EST n'est accessible qu'en lecture seule, veuillez le supprimer manuellement";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Enter your answer (1 : yes | 2 : no | other entries : no) : ";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Entrez votre réponse (1 : oui | 2 : non | autres entrées : non) : ";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCÈS DE LA COPIE DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE DOSSIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Mise à jour des droits du fichier compilé en mode lecture seule avec la commande "chmod" [-----] STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
@@ -240,7 +240,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Poursuite de la compilation du framework ${__CYAN}Bash Utils${__RESET}";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Arrêt de la compilation du framework ${__CYAN}Bash Utils${__RESET}";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCÈS DE LA MISE À JOUR DES DROITS DU FICHIER STABLE COMPILÉ ${__HIGHLIGHT}%s${__SUCCESS} EN MODE LECTURE SEULE";
 
 
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HIGHLIGHT}%s${__SUCCESS} A ÉTÉ COMPILÉ AVEC SUCCÈSS ET EST PRÊT À ÊTRE UTILISÉ";
@@ -254,13 +254,13 @@ else
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}";
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN="Please check the existence of the root directory of the Bash Utils library.";
 
+
+    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="STOPPING THE EXECUTION OF THE COMPILER, NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
+
     # -----------------------------------------------------------------------------------
     # Verifying if the "no-shell-check" and "compile-stable" values were passed together.
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} AND ${__HIGHLIGHT}%s${__WARNING} VALUES MUST NOT BE USED TOGETHER${__RESET}",
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to compile a stable file, the ${__HIGHLIGHT}shellcheck${__WARNING} command MUST be executed, in order to check for any programming error in every files to be included${__RESET}";
-
-
-    __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
 
     # --------------------------------
     # Shellcheck command verification.
@@ -360,7 +360,7 @@ else
     # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
 
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="UNABLE TO COPY THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="FAILED TO COPY THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="Please check the permissions of the target directory";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="If the file you try to compile already exists AND is read-only, please delete it manually";
 
@@ -397,6 +397,8 @@ else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")"; if [ 
         printf "${__ERROR}$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS${__RESET}\n" "$__BU_ROOT_PATH" >&2;
         echo "$__BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS__EXPLAIN" >&2;
         echo >&2;
+
+        PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG";
 
         exit 1;
     fi
@@ -625,9 +627,11 @@ for arg in "${__BU_ARG_ARRAY[@]}"; do
     # -------------------------------------------
     # Else, if an unsupported argument is passed.
     else
-        echo "" >&2;
-        echo "" >&2:
+        PrintErrorLine "AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
+        echo "${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}" >&2:
         echo >&2;
+
+        PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
 
         exit 1;
     fi
@@ -899,8 +903,6 @@ function CompileInSingleFile()
             PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
         fi
 
-        echo;
-
         # --------------------------------------------------------------
         # Printing the statistics of the newly generated localized file.
 
@@ -965,10 +967,10 @@ function CompileInSingleFile()
                 __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
             fi
         fi
-   done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
+    done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
-   # If one or more stable files were not successsfully "chmoded".
-    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
+    # If one or more stable files were not successsfully "chmoded".
+    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
         # If only one file was not "chmoded".
         if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
             PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
