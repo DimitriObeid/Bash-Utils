@@ -182,6 +182,34 @@ function BU.Main.Headers.Light()
     return 0;
 }
 
+# Printing a simple header, without any decorations.
+function BU.Main.Headers.LightDeco()
+{
+    #**** Parameters ****
+    local p_color=$1;       # String | CMD  - Default : NULL    - Color of the line AND the text.
+    local p_msg=$2;         # String        - Default : NULL    - Message to print.
+    local p_pos=${3:-NULL}; # String        - Default : NULL    - Position of the line to print.
+
+    # NULL (default)    : no lines are printed
+    # UPPER             : only the upper line is printed
+    # LOWER             : only the lower line is printed
+    # FULL              : both lines are printed
+
+    #**** Code ****
+    # Error handling for the value of the "$p_pos" argument.
+    if [ "${p_pos^^}" != 'NULL' ]; then if [[ ("${p_pos^^}" != 'UPPER') && ("${p_pos^^}" != 'LOWER') && ("${p_pos^^}" != 'FULL') ]]; then p_pos='NULL'; fi; fi
+
+    echo;
+
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+    echo "$p_color$p_msg${__RESET}";
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+
+    echo;
+
+    return 0;
+}
+
 # Basic header creation function (Background colors, lines characters and colors, and string text and color).
 
 # Since this function can be called in the "BU.Main.Echo.__EchoOutput()" function,

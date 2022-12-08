@@ -132,10 +132,10 @@ if [[ "$LANG" = fr_* ]]; then
 
     # ---------------------------------------------------------------------------------------------------------
     # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : THE PREMIER ARGUMENT DU COMPILATEUR N'EST PAS CORRECTEMENT FORMATÉ !!!";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : LE PREMIER ARGUMENT DU COMPILATEUR N'EST PAS CORRECTEMENT FORMATÉ !!!";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivante, qui peut être utilisée pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) entre chaque code ISO 639-1 au lieu d'un espace : ${__HIGHLIGHT},;|~.:!§${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une de ces valeurs : \"${__HIGHLIGHT}all${__WARNING}\" ou \"${__HIGHLIGHT}lang=all${__WARNING}\" uniquement si vous voulez compiler le framework avec chacune de ses langes supportées${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une de ces valeurs : \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OU \"${__HIGHLIGHT}lang=supported${__WARNING}\" uniquement si vous voulez compiler le framework avec chacune de ses langes supportées${__RESET}";
 
     # -------------------------------------------------------------------------
     # Exécution de la commande Shellcheck [-----] Shellcheck command execution.
@@ -272,7 +272,7 @@ else
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIGHLIGHT}all${__WARNING}\" OR \"${__HIGHLIGHT}lang=all${__WARNING}\" strings only if you want to compile the framework with each of its supported languages${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OR \"${__HIGHLIGHT}lang=supported${__WARNING}\" strings only if you want to compile the framework with each of its supported languages${__RESET}";
 
     # -----------------------------
     # Shellcheck command execution.
@@ -435,7 +435,7 @@ source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
 
 #### FUNCTIONS DEFINITION
 
-# Printing a line according to the terminal's columns number.
+# Function to create and display rows according to the number of columns in the terminal's text area.
 function PrintLine()
 {
     __cols="$(tput cols)"
@@ -473,16 +473,16 @@ function PrintBaseLine()
 }
 
 # Printing an error line.
-function PrintErrorLine()   { PrintBaseLine "$__RED" "$1" "$2" >&2; }
+function PrintErrorLine()   { PrintBaseLine "$__ERROR" "$1" "$2" >&2; }
 
 # Printing a newstep line.
-function PrintNewstepLine() { PrintBaseLine "$__ORANGE" "$1" "$2"; }
+function PrintNewstepLine() { PrintBaseLine "$__NEWSTEP" "$1" "$2"; }
 
 # Printing a success line.
-function PrintSuccessLine() { PrintBaseLine "$__GREEN" "$1" "$2"; }
+function PrintSuccessLine() { PrintBaseLine "$__SUCCESS" "$1" "$2"; }
 
 # Printing a warning line.
-function PrintWarningLine() { PrintBaseLine "$__YELLOW" "$1" "$2"; }
+function PrintWarningLine() { PrintBaseLine "$__WARNING" "$1" "$2"; }
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
@@ -975,39 +975,42 @@ function CompileInSingleFile()
         fi
     done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
-    # If one or more stable files were not successsfully "chmoded".
-    if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
-        # If only one file was not "chmoded".
-        if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
-            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
-
-            echo "Here is the file which rights were not modified :";
-
-            for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
-                echo "    - $files"
-            done
-
-            # echo "    - ${__BU_ARRAY__READ_ONLY_FAILED_FILES[0]}";
-
-            # Else, if more than one file were not successfully "chmoded".
-        else
-            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
+    # If the framework was compiled in a stable version.
+    if [ "" ]; then
+        # If one or more stable files were not successsfully "chmoded".
+        if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
+            # If only one file was not "chmoded".
+            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
                 PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+
+                echo "Here is the file which rights were not modified :";
+
+                for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                    echo "    - $files"
+                done
+
+                # echo "    - ${__BU_ARRAY__READ_ONLY_FAILED_FILES[0]}";
+
+                # Else, if more than one file were not successfully "chmoded".
             else
-                PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+                if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
+                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+                else
+                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+                fi
+
+                echo "Here is the list of the files whose rights were not modified :";
+
+                for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                    echo "    - $files"
+                done
             fi
-
-            echo "Here is the list of the files whose rights were not modified :";
-
-            for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
-                echo "    - $files"
-            done
+        else
+            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
         fi
     else
-        PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+        PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
     fi
-
-    PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
 
     return 0;
 }

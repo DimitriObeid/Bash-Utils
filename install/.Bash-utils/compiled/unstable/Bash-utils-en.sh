@@ -2215,48 +2215,6 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 # -----------------------------------------------
 
-                ## MODULE : USER'S LANGUAGE PROCESSING
-
-                # If the "module" value's argument is "--lang="
-#                 if [[ "${module_args}" == *'--lang='* ]]; then
-#
-#                     if [ -n "${__BU_MODULE_INIT_MODULE_LANG_ARG" ]; then
-#                         BU.ModuleInit.PrintLogError "${FUNCNAME[0]} : Another language added to the « module » value's arguments list (first : $__BU_MODULE_INIT_MODULE_LANG_ARG | New : $module_args)" "${LINENO}";
-#
-#                         echo >&2; echo "In « ${BASH_SOURCE[0]} », line $(( LINENO-3 )) --> Warning : you already passed a language to the « module » argument list";
-#                         echo "Please choose only one of these languages" >&2;
-#                         echo >&2;
-#
-#                         echo "Current language : $__BU_MODULE_INIT_MODULE_LANG_ARG" >&2;
-#                         echo "Chosen language : $module_args" >&2;
-#                     else
-#                         case "${module_args}" in
-#                             # Deutch | German
-#                             'de_'[A-Z][A-Z])
-#                                 # Erstellung einer neuen Variablen zur Speicherung der derzeit vom Betriebssystem verwendeten Sprache.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # English
-#                             'en_'[A-Z][A-Z])
-#                                 # Creating a new variable to store the language currently used by the operating system.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Español | Spanish
-#                             'es_'[A-Z][A-Z])
-#                                 # Creación de una nueva variable para almacenar el idioma utilizado actualmente por el sistema operativo.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#
-#                             # Français | French
-#                             'fr_'[A-Z][A-Z])
-#                                 # Création d'une nouvelle variable pour y enregistrer la langue actuellement utilisée par le système d'exploitation.
-#                                 __BU_MODULE_INIT_MODULE_LANG_ARG="${module_args}";;
-#                             *)
-#                                 ;;
-#                         esac
-#                     fi
-
-                # -----------------------------------------------
-
                 ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
 
                 # Creating a function to print the correct values for the current option in different languages structures.
@@ -5951,6 +5909,100 @@ function BU.Main.BasicMaths.PositiveToNegative()
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
+# Name          : CMDS.lib
+# Module        : Main
+# Description   : Functions used to process information about executable commands.
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### PROCCESSING COMMANDS
+#### DEBUG ID : cmds.processing-commands
+
+__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
+
+## GETTING COMMAND OUTPUTS
+## DEBUG ID : getting-command-output
+
+__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS::getting-command-output";
+
+# Get command's executable file's path.
+function BU.Main.CMDS.GetCommandPath()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
+        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
+
+    #**** Parameters ****
+    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
+
+    #**** Code ****
+    if ! BU.Main.Args__CMDS.GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+
+    command -v "$p_cmd" || { local C="$?"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "$p_cmd") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Get the command's return output.
+function BU.Main.CMDS.GetCommandReturnOutputValue()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
+        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
+
+    #**** Parameters ****
+    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
+
+    #**** Code ****
+    if eval "$p_cmd" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+}
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
 # Name          : Case.lib
 # Module        : Main
 # Description   :
@@ -7395,100 +7447,6 @@ function BU.Main.Checkings.CheckTextFormat()
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : CMDS.lib
-# Module        : Main
-# Description   : Functions used to process information about executable commands.
-# Author(s)     : Dimitri Obeid
-# Version       :
-
-# ----------------------------
-# SHELLCHECK GLOBAL DISABLER :
-
-# Add a coma after each warning code to disable multiple warnings at one go.
-
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
-
-# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
-
-# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
-
-# shellcheck disable=SC2154
-
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
-
-elif [[ "${LANG}" == fr_* ]]; then
-    echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
-
-else
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
-
-fi; exit 1; fi
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-#### PROCCESSING COMMANDS
-#### DEBUG ID : cmds.processing-commands
-
-__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
-
-## GETTING COMMAND OUTPUTS
-## DEBUG ID : getting-command-output
-
-__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS::getting-command-output";
-
-# Get command's executable file's path.
-function BU.Main.CMDS.GetCommandPath()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
-        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
-
-    #**** Parameters ****
-    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
-
-    #**** Code ****
-    if ! BU.Main.Args__CMDS.GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
-
-    command -v "$p_cmd" || { local C="$?"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "$p_cmd") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Get the command's return output.
-function BU.Main.CMDS.GetCommandReturnOutputValue()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
-        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
-
-    #**** Parameters ****
-    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
-
-    #**** Code ****
-    if eval "$p_cmd" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
-}
-#!/usr/bin/env bash
-
-# ---------------------
-# SCRIPT'S INFORMATIONS
-
 # Name          : Files.lib
 # Module        : Main
 # Description   :
@@ -8348,6 +8306,88 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "$1" "$2" "$3" 'S'
 # Underline formatting.
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "$1" "$2" "$3" 'U'    || return 1; return 0; }
 #!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : DevTools.lib
+# Module        : Main
+# Description   : Tools used for debugging or specific tasks for the dev-tools executable scripts.
+# Author(s)     : Dimitri Obeid
+# Version       :
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154,SC2016
+
+# --------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### DEBUG FUNCTIONS
+#### DEBUG ID : "devtools:debug-functions"
+
+__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions';
+
+## SHELLCHECK
+## DEBUG ID : "shellcheck"
+
+__BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="$__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS:shellcheck";
+
+# Verifying for any programming errors in a Bash script file with the "shellcheck" command.
+function BU.Main.DevTools.ShellcheckVerif()
+{
+    #**** Parameters ****
+    local p_path=${1:-\$'0'};   # String    - Default : NULL    - Path of the file to verify.
+    local p_stable=${2:-NULL};  # String    - Default : NULL    - If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
+
+    #**** Code ****
+    # shellcheck disable=SC2059
+    if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
+        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
+
+        if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
+
+        # shellcheck disable=SC2059
+        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
+
+        echo;
+    fi
+
+    return 0;
+}
 #!/usr/bin/env bash
 
 # ---------------------
@@ -12280,7 +12320,7 @@ __BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-de
 
 __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="$__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION::headers-basis-creation-functions";
 
-# Fonction de création et d'affichage de lignes selon le nombre de colonnes de la zone de texte du terminal.
+# Function to create and display rows (decorated or not) according to the number of columns in the terminal's text area.
 function BU.Main.Headers.DrawLine()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -12289,8 +12329,8 @@ function BU.Main.Headers.DrawLine()
         "$__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS";
 
 	#**** Parameters ****
-    local p_lineChar=${1:--};   # Alphanumeric char - Default : '-'     - Premier paramètre servant à définir le caractère souhaité lors de l'appel de la fonction.
-    local p_lineColor=$2;       # String            - Default : NULL    - Deuxième paramètre servant à définir la couleur souhaitée du caractère lors de l'appel de la fonction.
+    local p_lineChar=${1:--};   # Alphanumeric char - Default : '-'     - First parameter used to define the desired character when calling the function.
+    local p_lineColor=$2;       # String            - Default : NULL    - Second parameter used to define the desired color of the character when calling the function.
     local p_strlen=$3;          # Int               - Default : NULL    - Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
     local p_bgColor=$4;         # String            - Default : NULL    - Setting a background color behind the line.
 
@@ -12367,8 +12407,8 @@ function BU.Main.Headers.DrawLine()
         echo -ne "$__BU_MAIN_COLOR_BG_RESET";
     fi
 
-	# Étant donné que l'on a utilisé l'option '-n' de la commande "echo", on effectue un saut de ligne pour éviter d'avoir
-	# à le répéter après chaque appel de la commande pour laisser un espace vide entre la ligne et le prochain caractère.
+	# Since we used the '-n' option of the "echo" command, we make a line break to avoid having to repeat
+	# it after each call of the command to leave an empty space between the line and the next character.
 	echo;
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -12376,7 +12416,62 @@ function BU.Main.Headers.DrawLine()
     return 0;
 }
 
-# Fonction de création de base d'un header (Couleur et caractère de ligne, couleur et chaîne de caractères).
+# Printing a simple header, without any decorations.
+function BU.Main.Headers.Light()
+{
+    #**** Parameters ****
+    local p_msg=$1;         # String    - Default : NULL    - Message to print.
+    local p_pos=${2:-NULL}; # String    - Default : NULL    - Position of the line to print.
+
+    # NULL (default)    : no lines are printed
+    # UPPER             : only the upper line is printed
+    # LOWER             : only the lower line is printed
+    # FULL              : both lines are printed
+
+    #**** Code ****
+    # Error handling for the value of the "$p_pos" argument.
+    if [ "${p_pos^^}" != 'NULL' ]; then if [[ ("${p_pos^^}" != 'UPPER') && ("${p_pos^^}" != 'LOWER') && ("${p_pos^^}" != 'FULL') ]]; then p_pos='NULL'; fi; fi
+
+    echo;
+
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { BU.Main.Headers.BU.Main.Headers.DrawLine; };
+    echo "$p_msg";
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { BU.Main.Headers.BU.Main.Headers.DrawLine; };
+
+    echo;
+
+    return 0;
+}
+
+# Printing a simple header, without any decorations.
+function BU.Main.Headers.LightDeco()
+{
+    #**** Parameters ****
+    local p_color=$1;       # String | CMD  - Default : NULL    - Color of the line AND the text.
+    local p_msg=$2;         # String        - Default : NULL    - Message to print.
+    local p_pos=${3:-NULL}; # String        - Default : NULL    - Position of the line to print.
+
+    # NULL (default)    : no lines are printed
+    # UPPER             : only the upper line is printed
+    # LOWER             : only the lower line is printed
+    # FULL              : both lines are printed
+
+    #**** Code ****
+    # Error handling for the value of the "$p_pos" argument.
+    if [ "${p_pos^^}" != 'NULL' ]; then if [[ ("${p_pos^^}" != 'UPPER') && ("${p_pos^^}" != 'LOWER') && ("${p_pos^^}" != 'FULL') ]]; then p_pos='NULL'; fi; fi
+
+    echo;
+
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+    echo "$p_color$p_msg${__RESET}";
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+
+    echo;
+
+    return 0;
+}
+
+# Basic header creation function (Background colors, lines characters and colors, and string text and color).
 
 # Since this function can be called in the "BU.Main.Echo.__EchoOutput()" function,
 # even if the "$__BU_MAIN_STAT_ECHO" status variable's value is set to "true",
@@ -14120,6 +14215,18 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+#### DEBUG ID :
+
+##
+## DEBUG ID :
+
+# Checking if the language's code matches to a valid ISO 639-1 code.
+function BU.Main.Locale.CheckISO_639_1_ValidCode()
+{
+    [[ ${__BU_MAIN_LOCALE__ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0; return 1;
+}
 
 # Printing the language name in English and in its own language.
 function BU.Main.Locale.PrintLanguageName()
@@ -16175,10 +16282,10 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;              # String    - Default : NULL    - String to process.
-    local p_delimiter=$2;           # String    - Default : NULL    - Delimiter.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_delimiter=${2:-$'\0'};  # String    - Default : NULL    - Delimiter.
     local p_iterations=${3:-1};     # Int       - Default : 1       - Iterations.
-    local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
+    local p_count=${4:-$'\0'};      # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
     local p_string_tmp;
@@ -16218,8 +16325,8 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -16236,8 +16343,8 @@ function BU.Main.Text.CutLastFieldAfterDelim()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;	# String    - Default : NULL    - String to process.
-    local p_delim=$2;	# String	- Default : NULL	- Delimiter
+    local p_string=${1:-$'\0'}; # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
@@ -16245,7 +16352,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
     echo "${p_string#*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
-# Deleting letters in a string.
+# Deleting letters and sub-strings in a main string.
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -16254,15 +16361,41 @@ function BU.Main.Text.DeleteLettersInString()
         "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
 
     #**** Parameters ****
-    local p_string=$1;      # String    - Default : NULL    - String to process.
-    shift;
-
-    local p_char=("$@");    # String    - Default : NULL    - Letters and strings to remove.
+    local p_string=${1:-$'\0'};     # String    - Default : NULL    - String to process.
+    local p_chars=${2:-$'\0'};      # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}    # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-' '};  # String    - Default : ' '     - Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.ArrayIsNotEmpty "${p_char[@]}"; then BU.Main.Echo.Error "No string passed as first argument"; BU.Main.Echo.Newline; return 1; fi
-
     if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+
+    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "$p_string" "$p_chars" "$([ "$p_replacement" == '' ] && printf '' || printf ' ')" || {
+        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Replacing letters and sub-strings in a main string.
+function BU.Main.Text.ReplaceLettersInString()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS" \
+        "$__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};         # String    - Default : NULL    - String to process.
+    local p_delim=${2:-$'\0'};          # String    - Default : NULL    - Letters and / or strings to replace.
+    local p_occurences=${3:-one}        # String    - Default : one     - Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-$'\0'};    # String    - Default : NULL    - Replacing the former character / sub-strings by another character / sub-string.
+
+    #**** Code ****
+    if [ "${p_occurences,,}" == 'all' ]; then
+        echo "${p_string//$p_replacement/"$p_delim"}";
+    else
+        echo "${p_string/$p_replacement/"$p_delim"}";
+    fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -16532,13 +16665,13 @@ function BU.Main.Text.GetSubStringOccurences()
 
 	# https://stackoverflow.com/a/50601141
 
-	# This removes all occurrences of "$p_string" from $CommandResult and places it in tmp.
+	# This removes all occurrences of "$p_target" from "$p_string" and places it in tmp.
 	# Actually we're using substring replacement here with replacement string missing.
 
 	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
 	tmp="${p_string//$p_target}";
 
-	# This gives us the number of occurrences of "$p_string" in $CommandResult.
+	# This gives us the number of occurrences of "$p_target" in "$p_string".
 
 	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "$p_target" (remember, we removed all occurrences of "$p_target" from "$p_string" and placed the result in "$tmp").
 	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
@@ -16590,7 +16723,7 @@ function BU.Main.Text.GetStringWordsNumber()
     local p_string=$1;  # String    - Default : NULL    - String to process.
 
     #**** Code ****
-    echo -ne "$p_string" | wc -w; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    echo -ne "$p_string" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -16616,7 +16749,7 @@ function BU.Main.Text.PrintCharXTimes()
 		printf "%s" "$p_str";
 	done
 
-	if [ "${p_newline,,}" == 'true' ]; then echo; fi
+	if [ "${p_newline,,}" == 'true' ]; then BU.Main.Echo.Newstep; fi
 
 	return 0;
 }
@@ -19696,6 +19829,602 @@ alias BU.WordArrayToStr='BU.Main.Text.WordArrayToStr';
 
 # -----------------------------------------------
 #!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# This configuration file stores every exit codes used in this framework.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+#### OTHER FUNCTIONS
+
+## TEXT PRINTING
+
+# Writing the command substitution text for the return values definitions.
+function BU.Main.ModConfig.PrintReturnValue { printf "This global variable stores the return value of the last command in this situation : « %s »" "$1"; }
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Feel free to define any other needed resources (functions, etc...) here.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+#### BASH-UTILS EXIT CODES PROCESSING
+
+## EXIT CODES LIST
+
+# Operation not permitted.
+__BU_MAIN_EXIT_NOT_PERMITTED='1';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NOT_PERMITTED' "$__BU_MAIN_EXIT_NOT_PERMITTED" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the operation was not permitted')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# No such file or directory.
+__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND='2';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND' "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the target file or folder was not found')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Permission denied.
+__BU_MAIN_EXIT_PERMISSION_DENIED='13';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_PERMISSION_DENIED' "$__BU_MAIN_EXIT_PERMISSION_DENIED" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue "you don't have the permission to perform this action")" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# File exists.
+__BU_MAIN_EXIT_FILE_EXISTS='17';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILE_EXISTS' "$__BU_MAIN_EXIT_FILE_EXISTS" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the target file already exists')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Not a directory.
+__BU_MAIN_EXIT_NOT_DIR='20';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NOT_DIR' "$__BU_MAIN_EXIT_NOT_DIR" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the target is not a directory')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Target is a directory.
+__BU_MAIN_EXIT_IS_DIR='21';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_IS_DIR' "$__BU_MAIN_EXIT_IS_DIR" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the target is a directory')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Invalid argument
+__BU_MAIN_EXIT_INVALID_ARGUMENT="22";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_INVALID_ARGUMENT' "$__BU_MAIN_EXIT_INVALID_ARGUMENT" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue "bad argument provided")" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# File too large
+__BU_MAIN_EXIT_FILE_TOO_LARGE="27";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILE_TOO_LARGE' "$__BU_MAIN_EXIT_FILE_TOO_LARGE" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue "file is too large")" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Not space left on the hard drive.
+__BU_MAIN_EXIT_NO_SPACE_LEFT='28';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NO_SPACE_LEFT' "$__BU_MAIN_EXIT_NO_SPACE_LEFT" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue "no space left on the target hard drive's partition")" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# Read-only file system.
+__BU_MAIN_EXIT_RO_FS='30';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_RO_FS' "$__BU_MAIN_EXIT_RO_FS" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'read-only file system')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+
+# File name too long.
+__BU_MAIN_EXIT_FILENAME_TOO_LONG='36';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILENAME_TOO_LONG' "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" 'Int' \
+	"$(BU.Main.ModConfig.PrintReturnValue 'the name of the file to create is too long')" \
+	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# This configuration file stores every file system-related global variables.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+#### OTHER FUNCTIONS
+
+## TEXT PRINTING
+
+# Writing the command substitution text for the file systems description strings.
+function BU.Main.ModConfig.Filesystem.PrintFSLengthDescription()
+{
+    # shellcheck disable=SC2059
+    printf "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__MAX_LENGHT_STR_MSG" "$?";
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+#### PROCESSING FILE SYSTEM'S INFORMATIONS
+
+# Getting the file system's name with the "df" command, and parsing the output list according to the operating system's command version.
+BU.Main.OS.IsHaiku && __BU_MAIN_FS_NAME="$(df "$0" | awk 'FNR == 4 {print $3}')";
+BU.Main.OS.IsLinux && __BU_MAIN_FS_NAME="$(df -Th "$0" | awk 'FNR == 2 {print $2}')";
+
+## EXT2 FILE SYSTEM'S INFORMATIONS
+
+if [ "${__BU_MAIN_FS_NAME,,}" = 'apfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription "Apple's APFS")" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## BTRFS FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'btrfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'Btrfs')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## EXT2 FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext2' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT2')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## EXT3 FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext3' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT3')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## EXT4 FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext4' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT4')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## JFS FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'jfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'JFS')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## XFS FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'xfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'XFS')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+## ZFS FILE SYSTEM'S INFORMATIONS
+
+elif [ "${__BU_MAIN_FS_NAME,,}" = 'zfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'ZFS')" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+
+# -----------------------------------------------
+
+else
+    # shellcheck disable=SC2059
+    BU.Main.Errors.HandleSmallErrors 'W' "$(printf "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")")" 'R';
+
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
+        "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH" \
+        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
+fi
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# This configuration file stores every project-related global variables.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+#### PROJECT'S VARIABLES
+
+## PROJECT'S PATHS VARIABLES
+
+function BU.Main.ModConfig.Project.GetProjectFilePath()
+{
+    #**** Variables ****
+    local v_cut="${__BU_MAIN_PROJECT_FILE_NAME##*./}";
+
+    local find_path;
+        find_path="$(BU.ModuleInit.FindPath "$(cd "$(printf "%s" "$__BU_MAIN_PROJECT_FILE_PARENT")" || \
+        {
+            echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> ERROR : UNABLE TO GET THE " >&2; echo >&2; BU.Main.Errors.Exit 1;
+        }; pwd)" "$v_cut")";
+
+    #**** Code ****
+    echo "$find_path";
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Feel free to define any other needed resources (functions, etc...) here.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+#### PROJECT'S VARIABLES
+
+## PROJECT'S PATHS VARIABLES
+
+# Script file's informations
+__BU_MAIN_PROJECT_FILE_NAME=$(basename "$0");                    # Project file's name.
+__BU_MAIN_PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.');       # Name of the project (project file's name without its file extension).
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_NAME' "$__BU_MAIN_PROJECT_FILE_NAME"	'String' "This global variable stores the name of the main project's script (the one executed right now), with it's file extension" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_NAME' "$__BU_MAIN_PROJECT_NAME"			'String' "This global variable stores the name of the main project's script (the one executed right now), without it's file extension" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+
+
+
+__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="tmp";
+__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="$__BU_MAIN_ROOT_DIR_PATH/$__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME' "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME" 'Dir'	"This global variable stores the name of the project's temporary folder's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" 'Dirpath'	"This global variable stores the path to the project's temporary folder's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+
+if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" ]; then
+    mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" || { echo >&2; echo "UNABLE TO CREATE THE PROJECT'S TEMPORARY FOLDER'S PARENT DIRECTORY « $__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH » !" >&2; echo >&2; exit 1; };
+fi
+
+# Checking first if the effective user identifiant (EUID) is equal to super-user's EUID or not.
+# The folders names have to be different according to the EUID, as files and folders created by the root user belong to this user,
+# which means that a regular user won't have any write permission on these files, so nothing can be written on a log file, for example.
+
+# To remove these folders, please run the "rm -rf $folder" command with sudo if you're not logged as super-user.
+if [ "$EUID" -eq 0 ]; then
+    __BU_MAIN_PROJECT_TMP_DIR_PATH="$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME - ROOT"; # Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME - ROOT"
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'Dirpath' "This global variable stores the path to the temporary folder" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+else
+    __BU_MAIN_PROJECT_TMP_DIR_PATH="$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME";        # Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME"
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'Dirpath' "This global variable stores the path to the temporary folder (with super-user's privileges)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+fi
+
+# Project's file path.
+__BU_MAIN_PROJECT_FILE_PATH="$(BU.Main.ModConfig.Project.GetProjectFilePath "$__BU_MAIN_PROJECT_FILE_NAME")"; echo "$__BU_MAIN_PROJECT_FILE_PATH";
+
+
+# -------
+
+# Defining the informations of the aliases file of the project.
+# __BU_MAIN_PROJECT_ALIAS_FILE_PARENT   --> Default value : "$__BU_MODULE_INIT__ROOT" (~/.Bash-utils)
+# __BU_MAIN_PROJECT_ALIAS_FILE_NAME     --> Default value : "Aliases.sh"
+# __BU_MAIN_PROJECT_ALIAS_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_ALIAS_FILE_PARENT/$__BU_MAIN_PROJECT_ALIAS_FILE_NAME"
+
+__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="$__BU_MODULE_INIT__ROOT";
+__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Aliases.sh";
+__BU_MAIN_PROJECT_ALIAS_FILE_PATH="$__BU_MAIN_PROJECT_ALIAS_FILE_PARENT/$__BU_MAIN_PROJECT_ALIAS_FILE_NAME";
+
+# -------
+
+# Defining the informations of the storage file containing the background color code.
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME     --> Default value : "fgcolor.tmp"
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME"
+
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="bgcolor.tmp";
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'Dirpath'	    "This global variable stores the path to the Decho background color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME"     'File'		"This global variable stores the name of the Decho background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"     'Filepath'	"This global variable stores the path to the Decho background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+
+# -------
+
+# Defining the informations of the storage file containing the terminal background color code's raw data (generated by the color processing function which execute a command substitution to get the terminal background's color code).
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT/__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME"
+
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="bgcolor.raw";
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME";
+
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'Dirpath'           "This global variable stores the path to the terminal's raw background color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME" 'File'                  "This global variable stores the name of the terminal's raw background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'Filepath'              "This global variable stores the path to the terminal's raw background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+
+# -------
+
+# Defining the project's text color code storage file's informations.
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME   --> Default value : "fgcolor.tmp"
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME"
+
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="fgcolor.tmp";
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT"   'Dirpath'	"This global variable stores the path to the Decho color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME"       'File'		"This global variable stores the name of the Decho color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"       'Filepath'	"This global variable stores the path to the Decho color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+
+# -------
+
+# Defining the informations of the storage file containing the terminal text color code's raw data (generated by the color processing functions which execute a command substitution to get the terminal's text color code).
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT/__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME"
+
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="fgcolor.raw";
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME";
+
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT"         'Dirpath'   "This global variable stores the path to the terminal's raw text color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME"             'File'      "This global variable stores the name of the terminal's raw text color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH"             'Filepath'  "This global variable stores the path to the terminal's raw text color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+
+# -------
+
+# Defining the project's "BU.Echo<...>()" functions debug output (to have a better view during a "bash - x" debug).
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_LOG_DIR_PATH"
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME   --> Default value : "echo_output.log"
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT/$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME"
+
+__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="$__BU_MAIN_PROJECT_LOG_DIR_PATH";
+__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output.log";
+__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT/$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" 'Dirpath'	"This global variable stores the path to the echo debugging file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME"     'File'		"This global variable stores the name of the echo debugging file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"     'Filepath'	"This global variable stores the path to the echo debugging file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+# -------
+
+# Defining the project's log file's parent directory path.
+# __BU_MAIN_PROJECT_LOG_DIR_PARENT  --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
+# __BU_MAIN_PROJECT_LOG_DIR_NAME    --> Default value : "logs"
+# __BU_MAIN_PROJECT_LOG_DIR_PATH    --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH/$__BU_MAIN_PROJECT_LOG_DIR_NAME"
+
+__BU_MAIN_PROJECT_LOG_DIR_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
+__BU_MAIN_PROJECT_LOG_DIR_NAME="logs";
+__BU_MAIN_PROJECT_LOG_DIR_PATH="$__BU_MAIN_PROJECT_LOG_DIR_PARENT/$__BU_MAIN_PROJECT_LOG_DIR_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PARENT' "$__BU_MAIN_PROJECT_LOG_DIR_PARENT"   'Dirpath'	"This global variable stores the path to the parent directory of the project's log file's directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_NAME' "$__BU_MAIN_PROJECT_LOG_DIR_NAME"       'Dir'		"This global variable stores the name of the parent directory of the project's log file's directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PATH' "$__BU_MAIN_PROJECT_LOG_DIR_PATH"       'Dirpath'	"This global variable stores the path to the parent directory of the project's log file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+# -------
+
+# Defining the project's log file's path.
+# __BU_MAIN_PROJECT_LOG_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_LOG_DIR_PATH"
+# __BU_MAIN_PROJECT_LOG_FILE_NAME   --> Default value : "$__BU_MAIN_PROJECT_NAME.log"
+# __BU_MAIN_PROJECT_LOG_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_LOG_FILE_PARENT/$__BU_MAIN_PROJECT_LOG_FILE_NAME"
+
+__BU_MAIN_PROJECT_LOG_FILE_PARENT="$__BU_MAIN_PROJECT_LOG_DIR_PATH";
+__BU_MAIN_PROJECT_LOG_FILE_NAME="$__BU_MAIN_PROJECT_NAME.log";
+__BU_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MAIN_PROJECT_LOG_FILE_PARENT/$__BU_MAIN_PROJECT_LOG_FILE_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PARENT' "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" 'Dirpath'	"This global variable stores the path to the project's log file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_NAME' "$__BU_MAIN_PROJECT_LOG_FILE_NAME"     'File'		"This global variable stores the name of the project's log file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PATH' "$__BU_MAIN_PROJECT_LOG_FILE_PATH"     'FilePath'	"This global variable stores the path to the project's log path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+# -------
+
+# Defining the project's translations script's informations.
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT   --> Default value : "$__BU_MAIN_MODULE_LANG_DIR_PATH"
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME     --> Default value : "SetModuleLang.pl"
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH     --> Default value : "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT/$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME"
+
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="$__BU_MAIN_MODULE_LANG_DIR_PATH";
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="SetModuleLang.pl"
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT/$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT"	'Dirpath'	"This global variable stores the path to the CSV translations parser script's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME"		'File'		"This global variable stores the name of the CSV translations parser script" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH"		'Filepath'	"This global variable stores the path to the CSV translations parser script" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+
+# -----------------------------------------------
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# These status variable can be changed anywhere in the main script, except for the following variables :
+#   - __BU_MAIN_STATUS_INITIALIZING     -> This variable is used as (...).
+
+# Their values are checked in the "Status.lib" file, located in the "Bash-utils/lib/functions/main" directory, with the "CheckSTAT_" functions (CV = Correct Value).
+
+
+# "BU.Main.Checkings.CheckProjectLogPath()" and other low level's functions authorization to call a "Decho<...>()" function in case of need.
+
+# This variable only accepts "authorize", "forbid" or "restrict" as values.
+# Default value : "forbid" (to avoid bugs during the program's initialization)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_DECHO="forbid";
+
+
+# "BU.Main.Checkings.CheckProjectLogPath()" function's authorization to call an "BU.Echo<...>()" function in case of need.
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true" (to avoid bugs and infinite loops during the initialization processus)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_ECHO="true";
+
+
+# Project's error handling
+
+# This variable only accepts "fatal" or nothing as value.
+# Default value : "fatal" (to avoid leaving bugs during the program's initialization)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_ERROR="fatal";
+
+
+# Project's initialization status checker.
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true" (DON'T change thsi value here, since the project MUST be initialized first).
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_INITIALIZING="true";
+
+
+# Project's main log file informations
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_LOG="true";
+
+
+# Project's main log file redirections status.
+
+# This variable only accepts "log", "tee" or nothing as value.
+# Default value : "" (no value)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_LOG_REDIRECT="";
+
+
+# Project's authorization to operate at the root directory or one of its sub-folders.
+
+# This variable only accepts "authorized", "forbidden" or "restricted" as values.
+# Default value : "forbidden" (by security, and since there's no need to change its value during the initialization, you have to change this value manually or in your code with the "BU.Main.Status.ChangeSTAT_OPERATE_ROOT()" function).
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_OPERATE_ROOT="forbidden";
+
+
+# Project's headers messages display pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value : ".6"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TIME_HEADER="1";
+
+
+# Project's newlines pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value ".2"
+
+__BU_MAIN_STAT_TIME_NEWLINE=".2";
+
+
+# Project's text messages display pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value : ".4"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TIME_TXT=".4";
+
+
+# Project's text formatting handling (the "BU.Main.Decho.Decho<...>()" functions can format the text or not).
+
+# This variable only accepts "true" or "false" as value.
+# Default value : "true" (formatting accepted)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TXT_FMT="true";
+#!/usr/bin/env bash
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
@@ -20244,26 +20973,15 @@ function debug()
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
 # shellcheck disable=SC2034
 
-# This configuration file stores every exit codes used in this framework.
+# This configuration file stores every locale-related global variables.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ################################## DEFINING RESOURCES - FUNCTIONS #################################
 
-#### OTHER FUNCTIONS
+####
 
-## TEXT PRINTING
-
-# Writing the command substitution text for the return values definitions.
-function BU.Main.ModConfig.PrintReturnValue { printf "This global variable stores the return value of the last command in this situation : « %s »" "$1"; }
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Feel free to define any other needed resources (functions, etc...) here.
+##
 
 # -----------------------------------------------
 
@@ -20275,231 +20993,18 @@ function BU.Main.ModConfig.PrintReturnValue { printf "This global variable store
 
 ######################################## DEFINING VARIABLES #######################################
 
-#### BASH-UTILS EXIT CODES PROCESSING
-
-## EXIT CODES LIST
-
-# Operation not permitted.
-__BU_MAIN_EXIT_NOT_PERMITTED='1';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NOT_PERMITTED' "$__BU_MAIN_EXIT_NOT_PERMITTED" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the operation was not permitted')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# No such file or directory.
-__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND='2';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND' "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the target file or folder was not found')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Permission denied.
-__BU_MAIN_EXIT_PERMISSION_DENIED='13';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_PERMISSION_DENIED' "$__BU_MAIN_EXIT_PERMISSION_DENIED" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue "you don't have the permission to perform this action")" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# File exists.
-__BU_MAIN_EXIT_FILE_EXISTS='17';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILE_EXISTS' "$__BU_MAIN_EXIT_FILE_EXISTS" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the target file already exists')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Not a directory.
-__BU_MAIN_EXIT_NOT_DIR='20';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NOT_DIR' "$__BU_MAIN_EXIT_NOT_DIR" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the target is not a directory')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Target is a directory.
-__BU_MAIN_EXIT_IS_DIR='21';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_IS_DIR' "$__BU_MAIN_EXIT_IS_DIR" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the target is a directory')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Invalid argument
-__BU_MAIN_EXIT_INVALID_ARGUMENT="22";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_INVALID_ARGUMENT' "$__BU_MAIN_EXIT_INVALID_ARGUMENT" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue "bad argument provided")" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# File too large
-__BU_MAIN_EXIT_FILE_TOO_LARGE="27";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILE_TOO_LARGE' "$__BU_MAIN_EXIT_FILE_TOO_LARGE" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue "file is too large")" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Not space left on the hard drive.
-__BU_MAIN_EXIT_NO_SPACE_LEFT='28';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_NO_SPACE_LEFT' "$__BU_MAIN_EXIT_NO_SPACE_LEFT" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue "no space left on the target hard drive's partition")" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# Read-only file system.
-__BU_MAIN_EXIT_RO_FS='30';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_RO_FS' "$__BU_MAIN_EXIT_RO_FS" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'read-only file system')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-
-# File name too long.
-__BU_MAIN_EXIT_FILENAME_TOO_LONG='36';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_EXIT_FILENAME_TOO_LONG' "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" 'Int' \
-	"$(BU.Main.ModConfig.PrintReturnValue 'the name of the file to create is too long')" \
-	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# This configuration file stores every file system-related global variables.
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-################################## DEFINING RESOURCES - FUNCTIONS #################################
-
-#### OTHER FUNCTIONS
-
-## TEXT PRINTING
-
-# Writing the command substitution text for the file systems description strings.
-function BU.Main.ModConfig.Filesystem.PrintFSLengthDescription()
-{
-    # shellcheck disable=SC2059
-    printf "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__MAX_LENGHT_STR_MSG" "$?";
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING VARIABLES #######################################
-
-#### PROCESSING FILE SYSTEM'S INFORMATIONS
-
-# Getting the file system's name with the "df" command, and parsing the output list according to the operating system's command version.
-BU.Main.OS.IsHaiku && __BU_MAIN_FS_NAME="$(df "$0" | awk 'FNR == 4 {print $3}')";
-BU.Main.OS.IsLinux && __BU_MAIN_FS_NAME="$(df -Th "$0" | awk 'FNR == 2 {print $2}')";
-
-## EXT2 FILE SYSTEM'S INFORMATIONS
-
-if [ "${__BU_MAIN_FS_NAME,,}" = 'apfs' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription "Apple's APFS")" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## BTRFS FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'btrfs' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'Btrfs')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## EXT2 FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext2' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT2')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## EXT3 FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext3' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT3')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## EXT4 FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'ext4' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'EXT4')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## JFS FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'jfs' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'JFS')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## XFS FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'xfs' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'XFS')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-## ZFS FILE SYSTEM'S INFORMATIONS
-
-elif [ "${__BU_MAIN_FS_NAME,,}" = 'zfs' ]; then
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'ZFS')" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-
-# -----------------------------------------------
-
-else
-    # shellcheck disable=SC2059
-    BU.Main.Errors.HandleSmallErrors 'W' "$(printf "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM" "$(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")")" 'R';
-
-    # File system max filename length.
-    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "$__BU_MAIN_FS_MAX_FILENAME_LENGTH" 'Int' \
-        "$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH" \
-        "$(basename "${BASH_SOURCE[0]}")" "${FUNCAME[0]}" "$(( LINENO-2 ))";
-fi
+####
+
+##
+
+# List of every ISO 639-1 language codes.
+__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY=(  'ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
+                                            'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' 'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' 'fy' 'ff' 'gd' 'gl' \
+                                            'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' 'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' 'iu' 'ik' 'ga' 'it' 'ja' 'jv' \
+                                            'kn' 'kr' 'ks' 'kk' 'km' 'ki' 'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' 'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' \
+                                            'gv' 'mi' 'mr' 'mh' 'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' 'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' \
+                                            'qu' 'ro' 'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' 'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
+                                            'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' 'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' 'yo' 'za' 'zu')
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
@@ -20924,341 +21429,6 @@ BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_MODULE_LIST_CONFIG_FILES_PAT
 # -----------------------------------------------
 
 ## END OF THE "Bash-utils" GLOBAL VARIABLES DEFINITION
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# This configuration file stores every project-related global variables.
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-################################## DEFINING RESOURCES - FUNCTIONS #################################
-
-#### PROJECT'S VARIABLES
-
-## PROJECT'S PATHS VARIABLES
-
-function BU.Main.ModConfig.Project.GetProjectFilePath()
-{
-    #**** Variables ****
-    local v_cut="${__BU_MAIN_PROJECT_FILE_NAME##*./}";
-
-    local find_path;
-        find_path="$(BU.ModuleInit.FindPath "$(cd "$(printf "%s" "$__BU_MAIN_PROJECT_FILE_PARENT")" || \
-        {
-            echo >&2; echo "IN « ${BASH_SOURCE[0]} », FUNCTION « ${FUNCNAME[0]} », LINE « $LINENO » --> ERROR : UNABLE TO GET THE " >&2; echo >&2; BU.Main.Errors.Exit 1;
-        }; pwd)" "$v_cut")";
-
-    #**** Code ****
-    echo "$find_path";
-
-	return 0;
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Feel free to define any other needed resources (functions, etc...) here.
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING VARIABLES #######################################
-
-#### PROJECT'S VARIABLES
-
-## PROJECT'S PATHS VARIABLES
-
-# Script file's informations
-__BU_MAIN_PROJECT_FILE_NAME=$(basename "$0");                    # Project file's name.
-__BU_MAIN_PROJECT_NAME=$(basename "$0" | cut -f 1 -d '.');       # Name of the project (project file's name without its file extension).
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_NAME' "$__BU_MAIN_PROJECT_FILE_NAME"	'String' "This global variable stores the name of the main project's script (the one executed right now), with it's file extension" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_NAME' "$__BU_MAIN_PROJECT_NAME"			'String' "This global variable stores the name of the main project's script (the one executed right now), without it's file extension" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
-
-
-
-__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="tmp";
-__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="$__BU_MAIN_ROOT_DIR_PATH/$__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME' "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME" 'Dir'	"This global variable stores the name of the project's temporary folder's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" 'Dirpath'	"This global variable stores the path to the project's temporary folder's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
-
-if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" ]; then
-    mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH" || { echo >&2; echo "UNABLE TO CREATE THE PROJECT'S TEMPORARY FOLDER'S PARENT DIRECTORY « $__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH » !" >&2; echo >&2; exit 1; };
-fi
-
-# Checking first if the effective user identifiant (EUID) is equal to super-user's EUID or not.
-# The folders names have to be different according to the EUID, as files and folders created by the root user belong to this user,
-# which means that a regular user won't have any write permission on these files, so nothing can be written on a log file, for example.
-
-# To remove these folders, please run the "rm -rf $folder" command with sudo if you're not logged as super-user.
-if [ "$EUID" -eq 0 ]; then
-    __BU_MAIN_PROJECT_TMP_DIR_PATH="$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME - ROOT"; # Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME - ROOT"
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'Dirpath' "This global variable stores the path to the temporary folder" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-else
-    __BU_MAIN_PROJECT_TMP_DIR_PATH="$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME";        # Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH/$__BU_MAIN_PROJECT_NAME"
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'Dirpath' "This global variable stores the path to the temporary folder (with super-user's privileges)" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-fi
-
-# Project's file path.
-__BU_MAIN_PROJECT_FILE_PATH="$(BU.Main.ModConfig.Project.GetProjectFilePath "$__BU_MAIN_PROJECT_FILE_NAME")"; echo "$__BU_MAIN_PROJECT_FILE_PATH";
-
-
-# -------
-
-# Defining the informations of the aliases file of the project.
-# __BU_MAIN_PROJECT_ALIAS_FILE_PARENT   --> Default value : "$__BU_MODULE_INIT__ROOT" (~/.Bash-utils)
-# __BU_MAIN_PROJECT_ALIAS_FILE_NAME     --> Default value : "Aliases.sh"
-# __BU_MAIN_PROJECT_ALIAS_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_ALIAS_FILE_PARENT/$__BU_MAIN_PROJECT_ALIAS_FILE_NAME"
-
-__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="$__BU_MODULE_INIT__ROOT";
-__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Aliases.sh";
-__BU_MAIN_PROJECT_ALIAS_FILE_PATH="$__BU_MAIN_PROJECT_ALIAS_FILE_PARENT/$__BU_MAIN_PROJECT_ALIAS_FILE_NAME";
-
-# -------
-
-# Defining the informations of the storage file containing the background color code.
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME     --> Default value : "fgcolor.tmp"
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME"
-
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="bgcolor.tmp";
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'Dirpath'	    "This global variable stores the path to the Decho background color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME"     'File'		"This global variable stores the name of the Decho background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"     'Filepath'	"This global variable stores the path to the Decho background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-
-# -------
-
-# Defining the informations of the storage file containing the terminal background color code's raw data (generated by the color processing function which execute a command substitution to get the terminal background's color code).
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT/__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME"
-
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="bgcolor.raw";
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME";
-
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'Dirpath'           "This global variable stores the path to the terminal's raw background color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME" 'File'                  "This global variable stores the name of the terminal's raw background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'Filepath'              "This global variable stores the path to the terminal's raw background color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-
-# -------
-
-# Defining the project's text color code storage file's informations.
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME   --> Default value : "fgcolor.tmp"
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME"
-
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="fgcolor.tmp";
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT"   'Dirpath'	"This global variable stores the path to the Decho color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME"       'File'		"This global variable stores the name of the Decho color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"       'Filepath'	"This global variable stores the path to the Decho color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-
-# -------
-
-# Defining the informations of the storage file containing the terminal text color code's raw data (generated by the color processing functions which execute a command substitution to get the terminal's text color code).
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT   --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH     --> Default value : "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT/__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME"
-
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="fgcolor.raw";
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT/$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME";
-
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT"         'Dirpath'   "This global variable stores the path to the terminal's raw text color code file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME"             'File'      "This global variable stores the name of the terminal's raw text color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH' "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH"             'Filepath'  "This global variable stores the path to the terminal's raw text color code file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-
-# -------
-
-# Defining the project's "BU.Echo<...>()" functions debug output (to have a better view during a "bash - x" debug).
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_LOG_DIR_PATH"
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME   --> Default value : "echo_output.log"
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT/$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME"
-
-__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="$__BU_MAIN_PROJECT_LOG_DIR_PATH";
-__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output.log";
-__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT/$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT" 'Dirpath'	"This global variable stores the path to the echo debugging file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME"     'File'		"This global variable stores the name of the echo debugging file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH' "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH"     'Filepath'	"This global variable stores the path to the echo debugging file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-# -------
-
-# Defining the project's log file's parent directory path.
-# __BU_MAIN_PROJECT_LOG_DIR_PARENT  --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH"
-# __BU_MAIN_PROJECT_LOG_DIR_NAME    --> Default value : "logs"
-# __BU_MAIN_PROJECT_LOG_DIR_PATH    --> Default value : "$__BU_MAIN_PROJECT_TMP_DIR_PATH/$__BU_MAIN_PROJECT_LOG_DIR_NAME"
-
-__BU_MAIN_PROJECT_LOG_DIR_PARENT="$__BU_MAIN_PROJECT_TMP_DIR_PATH";
-__BU_MAIN_PROJECT_LOG_DIR_NAME="logs";
-__BU_MAIN_PROJECT_LOG_DIR_PATH="$__BU_MAIN_PROJECT_LOG_DIR_PARENT/$__BU_MAIN_PROJECT_LOG_DIR_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PARENT' "$__BU_MAIN_PROJECT_LOG_DIR_PARENT"   'Dirpath'	"This global variable stores the path to the parent directory of the project's log file's directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_NAME' "$__BU_MAIN_PROJECT_LOG_DIR_NAME"       'Dir'		"This global variable stores the name of the parent directory of the project's log file's directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PATH' "$__BU_MAIN_PROJECT_LOG_DIR_PATH"       'Dirpath'	"This global variable stores the path to the parent directory of the project's log file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-# -------
-
-# Defining the project's log file's path.
-# __BU_MAIN_PROJECT_LOG_FILE_PARENT --> Default value : "$__BU_MAIN_PROJECT_LOG_DIR_PATH"
-# __BU_MAIN_PROJECT_LOG_FILE_NAME   --> Default value : "$__BU_MAIN_PROJECT_NAME.log"
-# __BU_MAIN_PROJECT_LOG_FILE_PATH   --> Default value : "$__BU_MAIN_PROJECT_LOG_FILE_PARENT/$__BU_MAIN_PROJECT_LOG_FILE_NAME"
-
-__BU_MAIN_PROJECT_LOG_FILE_PARENT="$__BU_MAIN_PROJECT_LOG_DIR_PATH";
-__BU_MAIN_PROJECT_LOG_FILE_NAME="$__BU_MAIN_PROJECT_NAME.log";
-__BU_MAIN_PROJECT_LOG_FILE_PATH="$__BU_MAIN_PROJECT_LOG_FILE_PARENT/$__BU_MAIN_PROJECT_LOG_FILE_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PARENT' "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" 'Dirpath'	"This global variable stores the path to the project's log file's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_NAME' "$__BU_MAIN_PROJECT_LOG_FILE_NAME"     'File'		"This global variable stores the name of the project's log file" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PATH' "$__BU_MAIN_PROJECT_LOG_FILE_PATH"     'FilePath'	"This global variable stores the path to the project's log path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-# -------
-
-# Defining the project's translations script's informations.
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT   --> Default value : "$__BU_MAIN_MODULE_LANG_DIR_PATH"
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME     --> Default value : "SetModuleLang.pl"
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH     --> Default value : "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT/$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME"
-
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="$__BU_MAIN_MODULE_LANG_DIR_PATH";
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="SetModuleLang.pl"
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT/$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT"	'Dirpath'	"This global variable stores the path to the CSV translations parser script's parent directory" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME"		'File'		"This global variable stores the name of the CSV translations parser script" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH' "$__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH"		'Filepath'	"This global variable stores the path to the CSV translations parser script" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
-
-# -----------------------------------------------
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# These status variable can be changed anywhere in the main script, except for the following variables :
-#   - __BU_MAIN_STATUS_INITIALIZING     -> This variable is used as (...).
-
-# Their values are checked in the "Status.lib" file, located in the "Bash-utils/lib/functions/main" directory, with the "CheckSTAT_" functions (CV = Correct Value).
-
-
-# "BU.Main.Checkings.CheckProjectLogPath()" and other low level's functions authorization to call a "Decho<...>()" function in case of need.
-
-# This variable only accepts "authorize", "forbid" or "restrict" as values.
-# Default value : "forbid" (to avoid bugs during the program's initialization)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_DECHO="forbid";
-
-
-# "BU.Main.Checkings.CheckProjectLogPath()" function's authorization to call an "BU.Echo<...>()" function in case of need.
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true" (to avoid bugs and infinite loops during the initialization processus)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_ECHO="true";
-
-
-# Project's error handling
-
-# This variable only accepts "fatal" or nothing as value.
-# Default value : "fatal" (to avoid leaving bugs during the program's initialization)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_ERROR="fatal";
-
-
-# Project's initialization status checker.
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true" (DON'T change thsi value here, since the project MUST be initialized first).
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_INITIALIZING="true";
-
-
-# Project's main log file informations
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_LOG="true";
-
-
-# Project's main log file redirections status.
-
-# This variable only accepts "log", "tee" or nothing as value.
-# Default value : "" (no value)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_LOG_REDIRECT="";
-
-
-# Project's authorization to operate at the root directory or one of its sub-folders.
-
-# This variable only accepts "authorized", "forbidden" or "restricted" as values.
-# Default value : "forbidden" (by security, and since there's no need to change its value during the initialization, you have to change this value manually or in your code with the "BU.Main.Status.ChangeSTAT_OPERATE_ROOT()" function).
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_OPERATE_ROOT="forbidden";
-
-
-# Project's headers messages display pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value : ".6"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TIME_HEADER="1";
-
-
-# Project's newlines pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value ".2"
-
-__BU_MAIN_STAT_TIME_NEWLINE=".2";
-
-
-# Project's text messages display pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value : ".4"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TIME_TXT=".4";
-
-
-# Project's text formatting handling (the "BU.Main.Decho.Decho<...>()" functions can format the text or not).
-
-# This variable only accepts "true" or "false" as value.
-# Default value : "true" (formatting accepted)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TXT_FMT="true";
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
