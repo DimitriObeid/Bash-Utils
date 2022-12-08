@@ -125,11 +125,20 @@ if [[ "$LANG" = fr_* ]]; then
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
 
-    # ----------
-    # Shellcheck
+    # ----------------------------------------------------------------------------------
+    # Vérifications avec la commande Shellcheck [-----] Shellcheck command verification.
     __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
 
+    # ---------------------------------------------------------------------------------------------------------
+    # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : THE PREMIER ARGUMENT DU COMPILATEUR N'EST PAS CORRECTEMENT FORMATÉ !!!";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivantes, qui peut être utilisées pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}";
+
+    # -------------------------------------------------------------------------
+    # Exécution de la commande Shellcheck [-----] Shellcheck command execution.
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
@@ -140,7 +149,7 @@ if [[ "$LANG" = fr_* ]]; then
 
     # -----------------------------------------------------------------------------------------
     # Message de début de compilation du framework [-----] Framework compilation start message.
-    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}"
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}";
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
@@ -253,11 +262,20 @@ else
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
 
-    # ----------
-    # Shellcheck
+    # --------------------------------
+    # Shellcheck command verification.
     __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
     __BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
 
+    # -------------------------------------------
+    # If a bad value is passed as first argument.
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}";
+
+    # -----------------------------
+    # Shellcheck command execution.
     __BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
     __BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
     __BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file doen't contain any programming errors${__RESET}";
@@ -268,7 +286,7 @@ else
 
     # ------------------------------------
     # Framework compilation start message.
-    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__RESET} FILE"
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__RESET} FILE";
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
@@ -693,17 +711,15 @@ function CompileInSingleFile()
     elif [ "${p_locale,,}" == 'all' ] || [ "${p_locale,,}" == 'lang=all' ]; then
         for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
     else
-        PrintErrorLine "ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!" 'FULL';
-        echo "${__WARNING}Please execute this script by passing the wanted ISO 639-1 codes like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}" >&2;
+        PrintErrorLine "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG" 'FULL';
+        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1" >&2;
         echo "'lang=en fr uk sv tk kl'" >&2;
         echo >&2;
 
-        echo "'$p_locale'"
-
-        echo "${__WARNING}Or use one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}" >&2;
+        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2" >&2;
         echo >&2;
 
-        echo "${__WARNING}Or pass the \"all\" string only if you want to compile the framework with each of its supported languages${__RESET}" >&2;
+        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3" >&2;
 
         PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
 
