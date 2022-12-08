@@ -54,7 +54,6 @@ fi; exit 1; fi
 
 ##
 ## DEBUG ID :
-v=$[]
 
 # Checking if the language's code matches to a valid ISO 639-1 code.
 function BU.Main.Locale.CheckISO_639_1_ValidCode()

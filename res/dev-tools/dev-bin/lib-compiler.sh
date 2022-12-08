@@ -201,7 +201,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__LOCALIZED_FILE__WIDTH="Largeur d'affichage maximale   : %s colonnes";
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Nombre de mots                 : %s mots";
 
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGUE : $__BU_ARG_LANG !!!";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE DE COMPILER UNE VERSION DU FRAMEWORK CONTENANT LES PRINCIPALES RESSOURCES ENCAPSULÉES EN UN SIMPLE FICHIER DANS CETTE LANGUE : ${__HIGHLIGHT}%s${__ERROR} !!!${__RESET}";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="LE FRAMEWORK BASH UTILS A ÉTÉ COMPILÉ AVEC SUCCÈS VERS CETTE LANGUE : ${__HIGHLIGHT}%s${__RESET}";
 
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -329,7 +329,7 @@ else
     __BU_COMPILE__LOCALIZED_FILE__WIDTH="Maximum display width   : %s columns";
     __BU_COMPILE__LOCALIZED_FILE__WORDS="Number of words         : %s words";
 
-    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : $__BU_ARG_LANG !!!";
+    __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="IMPOSSIBLE TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : ${__HIGHLIGHT}%s${__ERROR} !!!${__RESET}";
     __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__HIGHLIGHT}%s${__RESET}";
 
     # ---------------------------------------------------------------------------------------
@@ -558,7 +558,7 @@ function ShellcheckError()
     echo >&2;
 
     # shellcheck disable=SC2059
-    "$(printf "$__BU_COMPILE__SHELLCHECK__FAIL" "$p_path")"; echo >&2; return 0;
+    printf "$__BU_COMPILE__SHELLCHECK__FAIL" "$p_path"; echo >&2; return 0;
 }
 
 # Writing the target file's content into the file to generate.
@@ -949,7 +949,7 @@ function CompileInSingleFile()
                 __BU_ARRAY__READ_ONLY_FAILED_FILES+=("$__compiled_stable_file_path");
             fi
         fi
-   done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then return 1; fi
+   done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
    # If one or more stable files were not successsfully "chmoded".
     if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -ge 0 ]; then
@@ -989,7 +989,7 @@ function CompileInSingleFile()
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { PrintErrorLine "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" 'FULL' ; exit 1; };
+if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { exit 1; };
 else
 #    CompileInSingleFile "en" "$@" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!" 'FULL'; exit 1; };
 #    PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE" "FULL";
