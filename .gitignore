@@ -16,7 +16,8 @@
 tmp/
 
 # Compiled versions of the framework.
-install/.Bash-utils/compiled/*stable
+install/.Bash-utils/compiled/stable
+install/.Bash-utils/compiled/unstable
 
 
 ## FILES
