@@ -119,7 +119,7 @@ if [[ "$LANG" = fr_* ]]; then
 
     # -----------------------------------------------------------------------------------------------------------------------------------------
     # [-----] If an unsupported argument is passed into the array of optional arguments.
-    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY"UN ARGUMENT NON-SUPPORTÉ À ÉTÉ PASSÉ DANS LE TABLEAU DES ARGUMENT OPTIONNELS";
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY="UN ARGUMENT NON-SUPPORTÉ À ÉTÉ PASSÉ DANS LE TABLEAU DES ARGUMENT OPTIONNELS";
     __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE="${__ERROR}La valeur ${__HIGHLIGHT}%s${__ERROR} n'est pas supportée. Veuillez la retirer du tableau d'arguments suivant le premier argument obligatoire (lang=*)${__RESET}";
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="ARRÊT DE L'EXÉCUTION DU COMPILATEUR, AUCUN FICHIER DU FRAMEWORK ${__HIGHLIGHT}BASH UTILS${__ERROR} N'A ÉTÉ COMPILÉ !!!"
@@ -157,11 +157,11 @@ if [[ "$LANG" = fr_* ]]; then
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="Il s'agit d'une mesure de sauvegarde au cas où les fichiers de paramètres régionaux seraient mis à jour après une mise à jour du script d'initialisation, puisque l'anglais est la principale langue prise en charge, afin qu'un message ne soit pas renvoyé sous la forme d'une chaîne vide.";
 
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION POUR LA LANGUE ANGLAISE DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS POUR LA LANGUE ${__HIGHLIGHT}%s${__SUCCESS} DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing now the initializer script's translations files content into the file to generate.
@@ -253,7 +253,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici le ficher dont les droits n'ont pas été modifiés :";
     __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici la liste des fichers dont les droits n'ont pas été modifiés :";
 
-    __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="THE COMPILATION OF THE FRAMEWORK IS DONE";
+    __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="LA COMPILATION DU FRAMEWORK EST TERMINÉE";
 
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
@@ -266,7 +266,7 @@ else
 
     # --------------------------------------------------------------------------
     # If an unsupported argument is passed into the array of optional arguments.
-    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY"AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
+    __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY="AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
     __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE="${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}";
 
     __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="STOPPING THE EXECUTION OF THE COMPILER, NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
@@ -300,21 +300,21 @@ else
 
     # ------------------------------------
     # Framework compilation start message.
-    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__RESET} FILE";
+    __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE${__RESET}";
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES CONTENT FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES CONTENT FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="This is a safeguard measure in case the locale files are updated after an update of the initialization script, since English is the primary supported language, so that a message is not returned as an empty string";
 
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES FOR THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE, FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES FOR THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE, FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # ------------------------------------------------------------------------------------------
     # Writing now the initializer script's translations files content into the file to generate.
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
-    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES FROM THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
+    __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
     # --------------------------------------------------------------------------
     # Writing the main module's library files content into the file to generate.
@@ -615,8 +615,8 @@ function WriteBU()
 	v_content="$(cat "$p_filepath")";
 
     #**** Code ****
-    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists." 'FULL'; return 1; };
-    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE ! Please check its path and if it exists." 'FULL'; return 1; };
+    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !"; echo "Please check its path and if it exists." >&2; return 1; };
+    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !"; echo "Please check its path and if it exists." >&2; return 1; };
     fi
 }
 
@@ -704,6 +704,9 @@ function CompileInSingleFile()
 
     local __language_array;
 
+    # Getting the current system language.
+    local ____sys_lang; ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
+
     #**** Code ****
     # Converting the "$p_locale" string into an array of ISO 639-1 codes.
     # If the "$p_locale" has coma delimiters.
@@ -757,8 +760,6 @@ function CompileInSingleFile()
         return 1;
     fi
 
-    echo "ARRAY : ${__language_array[*]}"
-
     for language in "${__language_array[@]}"; do
         #------------------------
         #**** Loop variables ****
@@ -773,11 +774,12 @@ function CompileInSingleFile()
 
         local __locale_print_code;
 
-        # Getting the current system language.
-        local ____sys_lang;
-        ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
+        __locale_print_code="${__HIGHLIGHT}[ LOCALE : $v_curr_locale [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'no') ]]";
 
-        __locale_print_code="[ LOCALE : $v_curr_locale [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'no') ]]";
+        __locale_print_code__error="$__locale_print_code${__ERROR}";
+        __locale_print_code__newstep="$__locale_print_code${__NEWSTEP}";
+        __locale_print_code__success="$__locale_print_code${__SUCCESS}";
+        __locale_print_code__warning="$__locale_print_code${__WARNING}";
 
         # If the 'compile-stable' argument was passed.
         if [ -n "$__vArrayVal_compile_stable" ]; then
@@ -796,11 +798,11 @@ function CompileInSingleFile()
 
         # -----------------------------------------------------------------------------
         # Checking if the "$v_curr_locale" variable is a valid ISO 639-1 language code.
-        if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; ____loop_error='error'; break; fi
+        if ! CheckISO639_1_LangCode "$v_curr_locale"; then PrintErrorLine "$__locale_print_code__error $__BU_COMPILE__BAD_LANGUAGE_PASSED" 'FULL'; ____loop_error='error'; break; fi
 
         # ------------------------------------
         # Framework compilation start message.
-        PrintNewstepLine "$(printf "$__locale_print_code $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" "FULL";
+        PrintNewstepLine "$(printf "$__locale_print_code__newstep $__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL';
 
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
@@ -810,14 +812,14 @@ function CompileInSingleFile()
 
             echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
 
-            if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
+            if [ ! -f "$__locale_file_path_en" ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
             else
                 BU.Main.DevTools.ShellcheckVerif "$__locale_file_path_en" "$__compile_stable" || local __err="error";
 
                 WriteBU "$__locale_file_path_en" "$p_display" || local ____err="error";
             fi
 
-            [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+            [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
         fi
@@ -827,14 +829,14 @@ function CompileInSingleFile()
 
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
-        if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
+        if  [ ! -f "$__locale_file_path" ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
         else
             BU.Main.DevTools.ShellcheckVerif "$__locale_file_path" || local __err="error";
 
             WriteBU "$__locale_file_path" "$p_display" || local ____err="error";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS" "$v_curr_locale" "$__locale_file_path" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -848,7 +850,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -856,7 +858,7 @@ function CompileInSingleFile()
         # Writing the initializer script's content into the file to generate.
         PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT" "$__BU_MAIN_FULL_FILE_PATH")";
 
-        if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
+        if [ ! -f "$__BU_INITIALIZER_SCRIPT_PATH" ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break;
 
         else
             BU.Main.DevTools.ShellcheckVerif "$__BU_INITIALIZER_SCRIPT_PATH" || local __err="error";
@@ -864,7 +866,7 @@ function CompileInSingleFile()
             WriteBU "$__BU_INITIALIZER_SCRIPT_PATH" "$p_display";
         fi
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -878,7 +880,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -892,7 +894,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -906,7 +908,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "$p_display" || { local ____err="error"; break; };
         done
 
-        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH")";
 
@@ -920,14 +922,14 @@ function CompileInSingleFile()
         # Copying the content of the generated file into the localized language's file.
         PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
-        cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; ____loop_error='error'; break; };
+        cp "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path" || { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")" 'FULL'; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
         if [ -n "$__compile_stable" ]; then
-            PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
         else
-            PrintSuccessLine "$(printf "$__locale_print_code $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
         fi
 
         # --------------------------------------------------------------
@@ -948,7 +950,7 @@ function CompileInSingleFile()
 
             # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
             if ! BU.Main.DevTools.ShellcheckVerif "$__compiled_file_path" "$__compile_stable"; then
-                PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
+                PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR" "$__compiled_file_path")" 'FULL';
 
                 ____loop_error='error'; break;
             fi
@@ -960,7 +962,7 @@ function CompileInSingleFile()
             PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")";
 
             if ! cp --verbose "$__compiled_file_path" "$__compiled_stable_file_path" ; then
-                PrintErrorLine "$(printf "$__locale_print_code $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
+                PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR" "$__compiled_file_path" "$__compiled_stable_file_parent_dir")" 'FULL';
                 echo >&2;
 
                 echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1" >&2;
@@ -998,9 +1000,9 @@ function CompileInSingleFile()
                 PrintSuccessLine "THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY SET IN READ-ONLY MODE";
             fi
 
-            PrintSuccessLine "$(printf "$__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
         fi
-    done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
+    done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
     # If the framework was compiled in a stable version.
     if [ -n "$__compile_stable" ]; then
@@ -1023,7 +1025,7 @@ function CompileInSingleFile()
                 if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
                     PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
                 else
-                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+                    PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
                 fi
 
                 echo "$__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED";
@@ -1033,23 +1035,19 @@ function CompileInSingleFile()
                 done
             fi
         else
-            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
-        fi       
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
+        fi
     fi
 
-    PrintSuccessLine "THE COMPILATION OF THE FRAMEWORK IS DONE" 'FULL';
+    PrintSuccessLine "$__BU_COMPILE__END_OF_FRAMEWORK_COMPILATION" 'FULL';
 
     return 0;
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$__vArrayVal_display" || { exit 1; };
+if      [ -n "$__BU_ARG_LANG" ]; then CompileInSingleFile "$__BU_ARG_LANG" "$@" || { exit 1; };
 else
-#    CompileInSingleFile "en" "$@" || { PrintErrorLine "IMPOSSIBLE TO CREATE AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE!!!" 'FULL'; exit 1; };
-#    PrintSuccessLine "SUCCESSFULLY CREATED AN ENGLISH VERSION CONTAINING THE MAIN RESOURCES OF THE FRAMEWORK ENCAPSULATED IN A SINGLE FILE" "FULL";
-
-#    CompileInSingleFile "fr" "$@" || { PrintErrorLine "IMPOSSIBLE DE CRÉER UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES EN UN SIMPLE FICHIER !!!" 'FULL'; exit 1; };
-#    PrintSuccessLine "CRÉATION D'UNE VERSION FRANÇAISE CONTENANT LES PRINCIPALES RESSOURCES DU FRAMEWORK ENCAPSULÉES DANS UN SEUL FICHIER RÉUSSIE AVEC SUCCÈS" "FULL";
-
-    CompileInSingleFile "lang=en,fr" "$@";
+    CompileInSingleFile "lang=en,fr" "$@" || { exit 1; };
 fi
+
+exit 0;
