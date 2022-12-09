@@ -156,7 +156,7 @@ if [[ "$LANG" = fr_* ]]; then
     __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}";
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    # (Fonction "WriteBU()") Écriture du contenu du fichier cible dans le ficher à générer [-----] "(WriteBU()" function) Writing the target file's content into the file to generate.
+    # (Fonction "WriteBU()") Écriture du contenu du fichier cible dans le fichier à générer [-----] "(WriteBU()" function) Writing the target file's content into the file to generate.
     __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="IMPOSSIBLE D'ÉCRIRE LE CONTENU DU FICHIER DANS LE FICHIER À GÉNÉRER!";
     __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Veuillez vérifier son chemin, ses droits et s'il existe.";
 
@@ -262,8 +262,10 @@ if [[ "$LANG" = fr_* ]]; then
 
     # ----------------------------------------------------------------------------------------------------------------
     # Si le framework a été compilé dans une version stable [-----] If the framework was compiled in a stable version.
-    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici le ficher compilé existant dont les droits n'ont pas été modifiés :${__RESET}";
-    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici la liste des ${__HIGHLIGHT}%s${__WARNING} fichers compilés existants dont les droits n'ont pas été modifiés :${__RESET}";
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici le fichier compilé existant dont les droits n'ont pas été modifiés :${__RESET}";
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Veuillez exécuter la commande 'chmod ${__HIGHLIGHT}%s${__WARNING}' pour rendre ce fichier accessible en lecture seule${__RESET}";
+
+    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici la liste des ${__HIGHLIGHT}%s${__WARNING} fichiers compilés existants dont les droits n'ont pas été modifiés :${__RESET}";
     __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Astuce : vous pouvez appeler la commande \"chmod -xw ${__HIGHLIGHT}%s*${__WARNING}\" pour changer d'un seul coup les droits de chaque fichier.${__RESET}";
 
 
@@ -425,6 +427,8 @@ else
     # --------------------------------------------------
     # If the framework was compiled in a stable version.
     __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the existing compiled file whose rights have not been modified :${__RESET}";
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="Please execute the 'chmod ${__HIGHLIGHT}%s${__WARNING}' command in order to set this file in read-only mode";
+
     __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the list of the ${__HIGHLIGHT}%s${__WARNING} existing compiled files whose rights have not been modified :${__RESET}";
     __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Tip, you can type the \"chmod -xw ${__HIGHLIGHT}%s*${__WARNING}\" command to change the rights of each file at once.${__RESET}";
 
@@ -1080,18 +1084,6 @@ function CompileInSingleFile()
         fi
     done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test1');
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test2');
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test3');
-
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test4');
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test5');
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test6');
-
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test7');
-    __BU_ARRAY__READ_ONLY_FAILED_FILES+=('test8');
-
-
     # If the framework was compiled in a stable version.
     if [ -n "$__compile_stable" ]; then
         # If one or more stable files were not successsfully "chmoded".
@@ -1105,6 +1097,8 @@ function CompileInSingleFile()
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                     echo "    - $files"
                 done
+
+                echo >&2; printf "$__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE\n" "$__compiled_stable_file_path" >&2;
 
                 # Else, if more than one file were not successfully "chmoded".
             else
