@@ -127,7 +127,7 @@ if [[ "$LANG" = fr_* ]]; then
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Vérification de la présence des valeurs "no-shell-check" et "compile-stable" passées ensemble [-----] Verifying if the "no-shell-check" and "compile-stable" values were passed together.
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}ATTENTION : LES VALEURS ${__HIGHLIGHT}%s${__WARNING} ET ${__HIGHLIGHT}%s${__WARNING} NE DOIVENT PAS ÊTRE UTILISÉES ENSEMBLES${__RESET}",
-    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}Pour compiler un fichier stable, la commande ${__HIGHLIGHT}shellcheck${__WARNING} DOIT être exécutée, pour pouvoir vérifier toute erreur de programmation dans chaque fichier à inclure${__RESET}";
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}Pour compiler un fichier stable, la commande ${__HIGHLIGHT}shellcheck${__WARNING} DOIT être exécutée pour pouvoir vérifier toute erreur de programmation dans chaque fichier à inclure${__RESET}";
 
     # ----------------------------------------------------------------------------------
     # Vérifications avec la commande Shellcheck [-----] Shellcheck command verification.
@@ -290,7 +290,7 @@ else
     # -----------------------------------------------------------------------------------
     # Verifying if the "no-shell-check" and "compile-stable" values were passed together.
     __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} AND ${__HIGHLIGHT}%s${__WARNING} VALUES MUST NOT BE USED TOGETHER${__RESET}",
-    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to compile a stable file, the ${__HIGHLIGHT}shellcheck${__WARNING} command MUST be executed, in order to check for any programming error in every files to be included${__RESET}";
+    __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to compile a stable file, the ${__HIGHLIGHT}shellcheck${__WARNING} command MUST be executed in order to check for any programming error in every files to be included${__RESET}";
 
     # --------------------------------
     # Shellcheck command verification.
