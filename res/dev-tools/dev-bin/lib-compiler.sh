@@ -155,6 +155,11 @@ if [[ "$LANG" = fr_* ]]; then
     # Message de début de compilation du framework [-----] Framework compilation start message.
     __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}";
 
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    # (Fonction "WriteBU()") Écriture du contenu du fichier cible dans le ficher à générer [-----] "(WriteBU()" function) Writing the target file's content into the file to generate.
+    __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="IMPOSSIBLE D'ÉCRIRE LE CONTENU DU FICHIER DANS LE FICHIER À GÉNÉRER!";
+    __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Veuillez vérifier son chemin, ses droits et s'il existe.";
+
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
     __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
@@ -301,6 +306,11 @@ else
     # ------------------------------------
     # Framework compilation start message.
     __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE${__RESET}";
+
+    # ---------------------------------------------------------------------------------
+    # ("WriteBU" function) Writing the target file's content into the file to generate.
+    __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !";
+    __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Please check its path, its rights and if it exists.";
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
@@ -615,8 +625,8 @@ function WriteBU()
 	v_content="$(cat "$p_filepath")";
 
     #**** Code ****
-    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !"; echo "Please check its path and if it exists." >&2; return 1; };
-    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !"; echo "Please check its path and if it exists." >&2; return 1; };
+    if      [ "${p_display,,}" == 'yes' ]; then echo "$v_content" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "$__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE"; echo "$__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE" >&2; return 1; };
+    else                                        echo "$v_content" >>       "$__BU_MAIN_FULL_FILE_PATH" || { PrintErrorLine "$__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE"; echo "$__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE" >&2; return 1; };
     fi
 }
 
