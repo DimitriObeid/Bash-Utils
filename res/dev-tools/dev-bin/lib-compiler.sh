@@ -250,8 +250,8 @@ if [[ "$LANG" = fr_* ]]; then
 
     # ----------------------------------------------------------------------------------------------------------------
     # Si le framework a été compilé dans une version stable [-----] If the framework was compiled in a stable version.
-    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici le ficher dont les droits n'ont pas été modifiés :";
-    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Voici la liste des fichers dont les droits n'ont pas été modifiés :";
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici le ficher compilé existant dont les droits n'ont pas été modifiés :${__RESET}";
+    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici la liste des fichers compilés existants dont les droits n'ont pas été modifiés (astuce, vous pouvez appeler la commande \"chmod -xw ${__HIGHLIGHT}%s*${__WARNING}\" pour changer d'un seul coup les droits de chaque fichier) :${__RESET}";
 
     __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="LA COMPILATION DU FRAMEWORK EST TERMINÉE";
 
@@ -397,8 +397,8 @@ else
 
     # --------------------------------------------------
     # If the framework was compiled in a stable version.
-    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Here is the file whose rights have not been modified :";
-    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="Here is the list of the files whose rights have not been modified :";
+    __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the existing compiled file whose rights have not been modified :${__RESET}";
+    __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the list of the existing compiled files whose rights have not been modified (tip, you can type the \"chmod -xw ${__HIGHLIGHT}%s*${__WARNING}\" command to change the rights of each file at once) :${__RESET}";
 
 
     __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="THE COMPILATION OF THE FRAMEWORK IS DONE";
@@ -927,9 +927,9 @@ function CompileInSingleFile()
         PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS" "$__BU_MAIN_FULL_FILE_PATH" "$__compiled_file_path")";
 
         if [ -n "$__compile_stable" ]; then
-            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL';
         else
-            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$__compiled_file_path")" 'FULL';
+            PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL';
         fi
 
         # --------------------------------------------------------------
@@ -989,7 +989,29 @@ function CompileInSingleFile()
 
                 case "${__answer_copy_compiled_file_in_stable_dir,,}" in
                     '1') echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1";;
-                    '2' | *) echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2; ____loop_error='error'; break;;
+                    '2' | *)
+                        echo "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2" >&2; echo >&2;
+
+                        # If other files were successfully compiled, but failed to be "chmoded".
+                        if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
+                            if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
+                                echo "$__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED" >&2;
+
+                                for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                                    echo "    - $files"
+                                done
+                            else
+                                printf "$__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED\n" "$__compiled_stable_file_parent_dir/" >&2;
+
+                                for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
+                                    echo "    - $files"
+                                done
+                            fi
+                        fi
+
+                        ____loop_error='error';
+
+                        break;;
                 esac
 
                 # Adding the failed file into the array of .
@@ -1028,7 +1050,7 @@ function CompileInSingleFile()
                     PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")" 'FULL';
                 fi
 
-                echo "$__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED";
+                printf "$__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED\n" "$__compiled_stable_file_parent_dir/" >&2;
 
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                     echo "    - $files"
