@@ -645,11 +645,16 @@ for arg in "${__BU_ARG_ARRAY[@]}"; do
     elif [[ "$arg" == no?(?(-)shell)?(-)check ]]; then
         __vArrayVal_no_shellcheck='no-shellcheck';
 
+    # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
+    elif [[ "$arg" == ?(compile?(-))unstable ]]; then
+        # As the unstable version is the one compiled by default AND bedore the creation of a stable one, nothing has to be done.
+        true;
+
     # --------------------------------------------------------------------------------
     # Else, if an unsupported argument is passed into the array of optional arguments.
     else
-        PrintErrorLine "AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT" 'FULL';
-        echo "${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}" >&2;
+        PrintErrorLine "$__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY" 'FULL';
+        echo "$__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE" >&2;
         echo >&2;
 
         PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
