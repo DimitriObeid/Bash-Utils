@@ -140,7 +140,7 @@ if [[ "$LANG" = fr_* ]]; then
     # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : LE PREMIER ARGUMENT DU COMPILATEUR N'EST PAS CORRECTEMENT FORMATÉ !!!";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivante, qui peut être utilisée pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) entre chaque code ISO 639-1 au lieu d'un espace : ${__HIGHLIGHT},;|~.:!§${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) entre chaque code ISO 639-1 au lieu d'un espace :";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une de ces valeurs : \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OU \"${__HIGHLIGHT}lang=supported${__WARNING}\" uniquement si vous voulez compiler le framework avec chacune de ses langes supportées${__RESET}";
 
     # -------------------------------------------------------------------------
@@ -303,7 +303,7 @@ else
     # If a bad value is passed as first argument.
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
-    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space : ${__HIGHLIGHT},;|~.:!§${__RESET}";
+    __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space :";
     __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OR \"${__HIGHLIGHT}lang=supported${__WARNING}\" strings only if you want to compile the framework with each of its supported languages${__RESET}";
 
     # -----------------------------
@@ -766,6 +766,9 @@ function CompileInSingleFile()
     local v_locale_tmp;
     local v_locale_delim;
 
+    # This variable will be used to verify if the "lang=" value is passed as first argument.
+    local v_is_check_to_do;
+
     local __language_array;
 
     # Getting the current system language.
@@ -774,12 +777,13 @@ function CompileInSingleFile()
     #**** Code ****
     # Converting the "$p_locale" string into an array of ISO 639-1 codes.
     # If the "$p_locale" has coma delimiters.
-    if [[ "${p_locale,,}" == lang=[a-z]* ]]; then
+    if [[ "${p_locale,,}" == lang=* ]]; then
         # Checking for the delimiter.
         if      CheckLangArgDelim "$p_locale" ','; then v_locale_delim=',';
         elif    CheckLangArgDelim "$p_locale" ';'; then v_locale_delim=';';
         elif    CheckLangArgDelim "$p_locale" '|'; then v_locale_delim='|';
         elif    CheckLangArgDelim "$p_locale" '~'; then v_locale_delim='~';
+        elif    CheckLangArgDelim "$p_locale" '_'; then v_locale_delim='_';
         elif    CheckLangArgDelim "$p_locale" '.'; then v_locale_delim='.';
         elif    CheckLangArgDelim "$p_locale" ':'; then v_locale_delim=':';
         elif    CheckLangArgDelim "$p_locale" '!'; then v_locale_delim='!';
@@ -793,36 +797,56 @@ function CompileInSingleFile()
         v_locale_tmp="$v_locale_str";
         v_locale_str="$v_locale_tmp";
 
-        # Replacing each delimiter with an empty character.
-        v_locale_str="${v_locale_str//$v_locale_delim/" "}";
+        if [ "${v_locale_str,,}" != 'all' ] && [[ "${v_locale_str,,}" != ?(all?(-))supported ]]; then
+            # Replacing each delimiter with an empty character.
+            v_locale_str="${v_locale_str//$v_locale_delim/" "}";
 
-        # String to word array.
-        read -ra __language_array <<< "$v_locale_str";
+            # String to word array.
+            read -ra __language_array <<< "$v_locale_str";
+        else
+            # Reassigning the new value in the "$v_locale_str" variable to the "$p_locale" original variable, so that the condition can be written only once.
+            p_locale="$v_locale_str";
+
+            # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
+            v_is_check_to_do='true';
+        fi
+    else
+        # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
+        v_is_check_to_do='true';
+    fi
 
     # Else, if the "all" value is passed as the first argument.
-    elif [[ "${p_locale,,}" == ?(lang=)all ]]; then
-        PrintWarningLine "${__HIGHLIGHT}$p_locale${__WARNING} : FEATURE NOT YET IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
+    if [ "$v_is_check_to_do" == 'true' ]; then
+        if [ "${p_locale,,}" == 'all' ]; then
+            PrintWarningLine "${__HIGHLIGHT}$p_locale${__WARNING} | ${__HIGHLIGHT}lang=all${__WARNING} : FEATURE NOT YET FULLY IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
 
-        for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
+            for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
 
-    # Else, if the "all-supported" or "supported" value is passed as the first argument.
-    elif [[ "${p_locale,,}" == ?(lang=)all-supported ]] || [[ "${p_locale,,}" == ?(lang=)supported ]]; then
-        for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
-    else
-        PrintErrorLine "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG" 'FULL';
-        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1" >&2;
-        echo "'lang=en fr uk sv tk kl'" >&2;
-        echo >&2;
+        # Else, if the "all-supported" or "supported" value is passed as the first argument.
+        elif [[ "${p_locale,,}" == ?(all?(-))supported ]]; then
+            for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
 
-        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2" >&2;
-        echo >&2;
+            echo "ARRAY : ${__language_array[*]}";
+        else
+            PrintErrorLine "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG" 'FULL';
+            echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1" >&2;
+            echo "'lang=en fr uk sv tk kl'" >&2;
+            echo >&2;
 
-        echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3" >&2;
+            echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2 ${__HIGHLIGHT},;|~_.:!§${__RESET}" >&2;
+            echo >&2;
 
-        PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
+            echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3" >&2;
 
-        return 1;
+            PrintErrorLine "$__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG" 'FULL';
+
+            return 1;
+        fi
+
+        unset v_is_check_done;
     fi
+
+    echo "ARRAY 2 : ${__language_array[*]}";
 
     for language in "${__language_array[@]}"; do
         #------------------------
