@@ -904,7 +904,7 @@ function CompileInSingleFile()
         # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
         if [ "${v_curr_locale,,}" != "en" ]; then
-            PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+            PrintNewstepLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'UPPER' 'len';
 
             echo "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN"; echo;
 
@@ -917,7 +917,7 @@ function CompileInSingleFile()
 
             [ -n "$__err" ] || [ -n "$____err" ] && { PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'FULL'; ____loop_error='error'; break; };
 
-            PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")";
+            PrintSuccessLine "$(printf "$__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS" "$v_curr_locale" "$__locale_file_path_en" "$__BU_MAIN_FULL_FILE_PATH")" 'LOWER' 'len';
         fi
 
         # ------------------------------------------------------------------------------------------
