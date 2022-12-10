@@ -493,8 +493,18 @@ source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
 # Function to create and display rows according to the number of columns in the terminal's text area.
 function PrintLine()
 {
-    __cols="$(tput cols)"
+    #**** Parameters ****
+    local p_len=${1:-NULL};             # String    - Default : NULL    - Printing a line according to the string's length.
 
+    if [ "${p_len^^}" != 'NULL' ]; then
+        local p_str=${2:-\$'0'};        # String    - Default : NULL    - String whose lenght is to be processed.
+
+        __cols="${#p_str}";
+    else
+        __cols="$(tput cols)";
+    fi
+
+    #**** Code ****
 	for _ in $(eval echo -e "{1..$__cols}"); do
             printf '-';
     done; printf "\n";
@@ -506,6 +516,7 @@ function PrintBaseLine()
     local p_color=$1;       # CMD       - Default : NULL    - Color of the line AND the text.
     local p_msg=$2;         # String    - Default : NULL    - Message to print.
     local p_pos=${3:-NULL}; # String    - Default : NULL    - Position of the line to print.
+    local p_len=${4:-NULL}; # String    - Default : NULL    - Printing a line according to the string's length.
 
     # NULL (default)    : no lines are printed
     # UPPER             : only the upper line is printed
@@ -518,9 +529,9 @@ function PrintBaseLine()
 
     echo;
 
-    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'UPPER') ]] && { printf "%s" "$p_color"; if [[ "${p_len,,}" == len?(g?(th)) ]]; then PrintLine "$p_len" "$p_msg"; else PrintLine; fi; printf "%s" "$__RESET"; };
     echo "$p_color$p_msg${__RESET}";
-    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; PrintLine; printf "%s" "$__RESET"; };
+    [[ ("${p_pos^^}" == 'FULL') || ("${p_pos^^}" == 'LOWER') ]] && { printf "%s" "$p_color"; if [[ "${p_len,,}" == len?(g?(th)) ]]; then PrintLine "$p_len" "$p_msg"; else PrintLine; fi; printf "%s" "$__RESET"; };
 
     echo;
 
@@ -528,16 +539,16 @@ function PrintBaseLine()
 }
 
 # Printing an error line.
-function PrintErrorLine()   { PrintBaseLine "$__ERROR" "$1" "$2" >&2; }
+function PrintErrorLine()   { PrintBaseLine "$__ERROR" "$1" "$2" "$3" >&2; }
 
 # Printing a newstep line.
-function PrintNewstepLine() { PrintBaseLine "$__NEWSTEP" "$1" "$2"; }
+function PrintNewstepLine() { PrintBaseLine "$__NEWSTEP" "$1" "$2" "$3"; }
 
 # Printing a success line.
-function PrintSuccessLine() { PrintBaseLine "$__SUCCESS" "$1" "$2"; }
+function PrintSuccessLine() { PrintBaseLine "$__SUCCESS" "$1" "$2" "$3"; }
 
 # Printing a warning line.
-function PrintWarningLine() { PrintBaseLine "$__WARNING" "$1" "$2"; }
+function PrintWarningLine() { PrintBaseLine "$__WARNING" "$1" "$2" "$3"; }
 
 # Printing the list the every files whose rights were not modified.
 # shellcheck disable=SC2059
@@ -826,7 +837,6 @@ function CompileInSingleFile()
         elif [[ "${p_locale,,}" == ?(all?(-))supported ]]; then
             for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("$langs"); done;
 
-            echo "ARRAY : ${__language_array[*]}";
         else
             PrintErrorLine "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG" 'FULL';
             echo "$__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1" >&2;
@@ -845,8 +855,6 @@ function CompileInSingleFile()
 
         unset v_is_check_done;
     fi
-
-    echo "ARRAY 2 : ${__language_array[*]}";
 
     for language in "${__language_array[@]}"; do
         #------------------------
@@ -1068,8 +1076,7 @@ function CompileInSingleFile()
             # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
             PrintNewstepLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD" "$__compiled_file_path")";
 
-#             if ! chmod --verbose -xw "$__compiled_stable_file_path"; then
-            if ! chmod --verbose -helloworld "$__compiled_stable_file_path"; then
+            if ! chmod --verbose -xw "$__compiled_stable_file_path"; then
                 PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING" "$__compiled_stable_file_path")";
 
                 printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK\n\n" "$__compiled_stable_file_path" >&2;
