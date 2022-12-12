@@ -1009,9 +1009,9 @@ function BU.ModuleInit.FindPath()
                 # shellcheck disable=SC2059
                 BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
 
-                BU.ModuleInit.AskPrintLog >&2 || return 1;
+                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-                return 1;
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
             fi
         fi
 
@@ -1055,9 +1055,9 @@ function BU.ModuleInit.GetModuleName()
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2;
 
-        BU.ModuleInit.AskPrintLog >&2 || return 1;
+        BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-        return 1;
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
     }; pwd -P)";
 
     echo "${v_module##*/}"; return 0;
@@ -1085,9 +1085,9 @@ function BU.ModuleInit.ListInstalledModules()
 
 			echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE}" >&2; echo >&2;
 
-			BU.ModuleInit.AskPrintLog >&2 || return 1;
+            BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-			return 1;
+            if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 		}
     fi
 
@@ -1137,9 +1137,9 @@ function BU.ModuleInit.ListInstalledModules()
 		echo >&2;
     fi
 
-	BU.ModuleInit.AskPrintLog >&2 || return 1;
+    BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-    return 1;
+    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 }
 
 # Printing an error message if a file cannot be sourced.
@@ -1161,7 +1161,9 @@ function BU.ModuleInit.SourcingFailure()
 
     if [ -n "${v_msg_arr_mode_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_mode_backup}"; fi
 
-	BU.ModuleInit.AskPrintLog >&2 || return 1; return 1;
+    BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 }
 
 # -----------------------------------------------
@@ -1324,9 +1326,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
             BU.ModuleInit.MsgAbort;
 
-            BU.ModuleInit.AskPrintLog >&2 || return 1;
+            BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-            return 1;
+            if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
         elif [[ "${p_module}" == 'module --'* ]]; then
 
@@ -1691,9 +1693,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE}\n" "${v_module_name}" "${FUNCNAME[0]}" >&2;
 
-        BU.ModuleInit.MsgAbort;
+        BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-        BU.ModuleInit.AskPrintLog >&2 || return 1;
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
         return 1;
 
@@ -1713,9 +1715,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         BU.ModuleInit.MsgAbort;
 
-        BU.ModuleInit.AskPrintLog >&2 || return 1;
+        BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-        return 1;
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
     # -----------------------------------------------
 
@@ -1740,9 +1742,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         BU.ModuleInit.MsgAbort;
 
-        echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1;
+        echo >&2; BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-        return 1;
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
     fi
 
     return 0;
@@ -1834,8 +1836,6 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         echo "${__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE}" >&2; echo >&2;
 
         BU.ModuleInit.MsgAbort;
-
-        BU.ModuleInit.AskPrintLog >&2 || return 1;
 
         # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
         BU.ModuleInit.IsInScript && exit 1; return 1;
@@ -2366,7 +2366,9 @@ function BashUtils_InitModules()
         # shellcheck disable=SC2059
 		printf "${__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${lineno}" "${FUNCNAME[0]}" >&2;
 
-		return 1;
+        BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 	fi
 
     # Writing the list of the installed modules.
@@ -2422,7 +2424,11 @@ function BashUtils_InitModules()
 		if [[ "${module}" != 'module --'* ]]; then
 
             # Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
-            __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}" "${v_module_name}" || return 1)";
+            __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}" "${v_module_name}" || {
+                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+            })";
 
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
@@ -2431,7 +2437,11 @@ function BashUtils_InitModules()
 
 
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
-            __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR}" "${v_module_name}" || return 1)";
+            __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR}" "${v_module_name}" || {
+                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+            })";
 
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
