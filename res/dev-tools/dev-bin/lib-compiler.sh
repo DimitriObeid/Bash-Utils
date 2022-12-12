@@ -65,6 +65,12 @@ __BU_ARG_ARRAY=("$@");
 # Storing each stable file that cannot be set into read-only mode.
 __BU_ARRAY__READ_ONLY_FAILED_FILES=();
 
+# Storing each compiled files path.
+__BU_ARRAY__COMPILED_FILES_LIST=();
+
+# Storing each compiled stable files path.
+__BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
+
 # List of every ISO 639-1 language codes.
 # In the far future, when every languages will be used in the Framework, the 'all' argument will be used to compile the Framework in a single file for each of the following languages,
 ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
@@ -257,8 +263,9 @@ if [[ "$LANG" = fr_* ]]; then
 
 
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED="UN FICHIER COMPILÉ N'A PAS ÉTÉ MIS EN MODE LECTURE SEULE (${__HIGHLIGHT}%s${__WARNING})";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED="${__HIGHLIGHT}%s${__WARNING} FICHIERS COMPILÉS N'ONT PAS ÉTÉ MIS EN MODE LECTURE SEULE";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCÈS DE LA MISE À JOUR DES DROITS DE CHAQUE FICHIER STABLE COMPILÉ ${__HIGHLIGHT}%s${__SUCCESS} EN MODE LECTURE SEULE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED="AUCUN DES ${__HIGHLIGHT}%s${__WARNING} FICHIERS STABLES COMPILÉS N'ONT ÉTÉ MIS EN MODE LECTURE SEULE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED="${__HIGHLIGHT}%s${__WARNING} DES ${__HIGHLIGHT}%s${__WARNING} FICHIERS COMPILÉS N'ONT PAS ÉTÉ MIS EN MODE LECTURE SEULE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCÈS DE LA MISE À JOUR DES DROITS EN MODE LECTURE SEULE DE CHAQUE FICHIER STABLE COMPILÉ";
 
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HIGHLIGHT}%s${__SUCCESS} A ÉTÉ COMPILÉ AVEC SUCCÈSS ET EST PRÊT À ÊTRE UTILISÉ";
 
@@ -420,9 +427,9 @@ else
 
 
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED="A COMPILED FILE WAS NOT SET IN READ-ONLY MODE (${__HIGHLIGHT}%s${__WARNING})";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED="${__HIGHLIGHT}%s${__WARNING} COMPILED FILES WERE NOT SET IN READ-ONLY MODE";
-
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE IN READ-ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED="NONE OF THE ${__HIGHLIGHT}%s${__WARNING} COMPILED STABLE FILES WERE SET TO READ-ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED="${__HIGHLIGHT}%s${__WARNING} OF THE ${__HIGHLIGHT}%s${__WARNING} COMPILED FILES WERE NOT SET IN READ-ONLY MODE";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS="SUCCESSFULLY SET EACH COMPILED STABLE FILES IN READ-ONLY MODE";
 
     __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY COMPILED AND IS READY TO BE USED";
 
@@ -512,7 +519,7 @@ function PrintLine()
     if [ "${p_pos^^}" == 'UPPER' ] || [ "${p_pos^^}" == 'LOWER' ]; then v_line_char='-'; else v_line_char='#'; fi
 
 	for _ in $(eval echo -e "{1..$__cols}"); do
-            printf "$v_line_char";
+            printf '%s' "$v_line_char";
     done; printf "\n";
 }
 
@@ -1045,6 +1052,9 @@ function CompileInSingleFile()
         printf "$__BU_COMPILE__LOCALIZED_FILE__WIDTH\n" "$(wc -L < "$__compiled_file_path")";
         printf "$__BU_COMPILE__LOCALIZED_FILE__WORDS\n" "$(wc -w < "$__compiled_file_path")";
 
+        # Adding the newly compiled file in the compiled files list.
+        __BU_ARRAY__COMPILED_FILES_LIST+=("$__compiled_file_path");
+
         if [ -n "$__compile_stable" ]; then
             # --------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
@@ -1121,6 +1131,9 @@ function CompileInSingleFile()
             fi
 
             PrintSuccessLine "$(printf "$__locale_print_code__success $__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED" "$__compiled_stable_file_path")" 'FULL';
+
+            # Adding the newly compiled stable file in the compiled stable files list.
+            __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("$__compiled_stable_file_path");
         fi
     done; if [ -n "$____loop_error" ] && [ "$____loop_error" = 'error' ]; then PrintErrorLine "$(printf "$__locale_print_code__error $__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED" "$v_curr_locale ($(BU.Main.Locale.PrintLanguageName "$v_curr_locale" 'no'))")" 'FULL'; return 1; fi
 
@@ -1148,15 +1161,23 @@ function CompileInSingleFile()
 
                 #**** Code ****
                 if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -lt 5 ]; then
-                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}")";
+                    if [ "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}" == "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" ]; then
+                        PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED" "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")";
+                    else
+                        PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")";
+                    fi
                 else
-                    PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}")" 'FULL';
+                    if [ "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}" == "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" ]; then
+                        PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED" "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")" 'FULL';
+                    else
+                        PrintWarningLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")" 'FULL';
+                    fi
                 fi
 
                 PrintFilesWhichWereNotChmoded "$__compiled_stable_file_parent_dir";
             fi
         else
-            PrintSuccessLine "$(printf "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS" "$__compiled_stable_file_path")";
+            PrintSuccessLine "$__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS";
         fi
     fi
 
