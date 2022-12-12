@@ -93,12 +93,12 @@ function BU.Main.Headers.DrawLine()
 
 	# Since all the columns in the row are used, the following characters will be written in the row, as if a line break has been made.
 	if test "$p_lineColor" != ""; then
-        BU.Main.Checkings.IsInt     "$p_lineColor" && echo -ne "$(BU.Main.Colors.SetTextColor "$p_lineColor")";
+        BU.Main.Checkings.IsInt     "$p_lineColor" && echo -ne "$(BU.Main.TextFormat.SetTextColor "$p_lineColor")";
         ! BU.Main.Checkings.IsInt   "$p_lineColor" && echo -ne "$p_lineColor";
 	fi
 
 	if test "$p_bgColor" != ""; then
-        BU.Main.Checkings.IsInt     "$p_bgColor" && echo -ne "$(BU.Main.Colors.SetBGColors "$p_bgColor")";
+        BU.Main.Checkings.IsInt     "$p_bgColor" && echo -ne "$(BU.Main.TextFormat.SetBGColors "$p_bgColor")";
         ! BU.Main.Checkings.IsInt   "$p_bgColor" && echo -ne "$p_bgColor";
 	fi
 
@@ -254,7 +254,7 @@ function BU.Main.Headers.Base () {
     # If no value is passed via the background color's position's parameter.
     if [ -z "$p_bgColorPos" ]; then
         # Converting the "$p_stringColor" integer into a command substitution, since this command is directly used in this function's condition.
-        if BU.Main.Checkings.IsNotCMD "$p_stringColor"; then p_stringColor="$(BU.Main.Colors.SetTextColor "$p_stringColor")"; fi
+        if BU.Main.Checkings.IsNotCMD "$p_stringColor"; then p_stringColor="$(BU.Main.TextFormat.SetTextColor "$p_stringColor")"; fi
 
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" '' "nodate";
         BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}${__BU_MAIN_COLOR_BG_RESET}";
@@ -263,10 +263,10 @@ function BU.Main.Headers.Base () {
     # Else, if a value is passed via the background color's position's parameter.
     else
         # Getting the line color code stored in the background color code's file, since this integer is needed for the execution of the "" function.
-        BU.Main.Checkings.IsCMD "$p_stringColor" && p_lineColor="$(BU.Main.Colors.GetTextColorFromCMD "$p_lineColor")";
+        BU.Main.Checkings.IsCMD "$p_stringColor" && p_lineColor="$(BU.Main.TextFormat.GetTextColorFromCMD "$p_lineColor")";
 
         # Getting the background color code stored in the background color code's file, since this integer is needed for the execution of the "" function.
-        BU.Main.Checkings.IsCMD "$p_bgColorCol" && p_bgColorCol="$(BU.Main.Colors.GetBGColorFromCMD "$p_bgColorCol")";
+        BU.Main.Checkings.IsCMD "$p_bgColorCol" && p_bgColorCol="$(BU.Main.TextFormat.GetBGColorFromCMD "$p_bgColorCol")";
 
         # This value MUST be an integer.
         if BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then

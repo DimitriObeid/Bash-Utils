@@ -118,8 +118,8 @@ function BU.Main.Decho.Decho()
 
     #**** Code ****
     # If a string is provided as a color name, the corresponding color code is assigned to the variable.
-    if BU.Main.Checkings.IsAlphaString "$p_newTextColor";   then BU.Main.Colors.Atoi "$p_newTextColor"; p_newTextColor="$__BU_MAIN_COLORS_ATOI_COLOR";  fi
-    if BU.Main.Checkings.IsAlphaString "$p_newBGColor";     then BU.Main.Colors.Atoi "$p_newBGColor";   p_newBGColor="$__BU_MAIN_COLORS_ATOI_COLOR";    fi
+    if BU.Main.Checkings.IsAlphaString "$p_newTextColor";   then BU.Main.TextFormat.Atoi "$p_newTextColor"; p_newTextColor="$__BU_MAIN_COLORS_ATOI_COLOR";  fi
+    if BU.Main.Checkings.IsAlphaString "$p_newBGColor";     then BU.Main.TextFormat.Atoi "$p_newBGColor";   p_newBGColor="$__BU_MAIN_COLORS_ATOI_COLOR";    fi
 
     if ! BU.Main.Args__Decho.Decho "$p_string" "$p_newTextColor" "$p_newTextColor" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return 1; fi
 
@@ -169,9 +169,9 @@ function BU.Main.Decho.Decho()
 	fi
 
     # Setting the new values in their color code temporary file.
-    if [ -n "$p_newTextColor" ]; then BU.Main.Colors.SetTextColor "$p_newTextColor"; fi
+    if [ -n "$p_newTextColor" ]; then BU.Main.TextFormat.SetTextColor "$p_newTextColor"; fi
 
-    if [ -n "$p_newBGColor" ]; then BU.Main.Colors.SetBGColor "$p_newBGColor"; fi
+    if [ -n "$p_newBGColor" ]; then BU.Main.TextFormat.SetBGColor "$p_newBGColor"; fi
 
     # Test code, to check the values from the command substitutes.
     echo "STRING : $p_string";
@@ -227,9 +227,9 @@ function BU.Main.Decho.Decho()
         ## APPLYING THE FORMATTINGS ON THE TEXT
 
         # Resetting the text's color.
-        if [ -n "$p_newTextColor" ]; then BU.Main.Colors.SetTextColor "$v_oldTextColor"; fi
+        if [ -n "$p_newTextColor" ]; then BU.Main.TextFormat.SetTextColor "$v_oldTextColor"; fi
 
-        if [ -n "$p_newBGColor" ]; then BU.Main.Colors.SetBGColor "$v_oldBGColor"; fi
+        if [ -n "$p_newBGColor" ]; then BU.Main.TextFormat.SetBGColor "$v_oldBGColor"; fi
 
         # Resetting every formattings.
         for val in "${pa_fmtArgs[@]}"; do
@@ -367,7 +367,7 @@ function BU.Main.Decho.__Decho.Var                  { BU.Main.Decho.__Decho "$1"
 function BU.Main.Decho.__Decho.Warning              { BU.Main.Decho.__Decho "$1" "$__BU_MAIN_COLOR_WARNING"   "$2"; }
 
 # Tip : you can also pass a second argument when you call the following functions, which is the same than the "Decho" function's second argument
-# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU.Main.Colors.SetTextColor" FUNCTIONS" sub-section).
+# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU.Main.TextFormat.SetTextColor" FUNCTIONS" sub-section).
 
 # Positionnal parameters :
 #   $1  --> String to display.

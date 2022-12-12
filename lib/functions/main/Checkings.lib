@@ -1223,41 +1223,4 @@ function BU.Main.Checkings.CheckDecho()
 	fi
 }
 
-# Checking if the "$__BU_MAIN_STAT_TXT_FMT" status value is set to "true".
-function BU.Main.Checkings.CheckTextFormat()
-{
-    #**** Parameters ****
-    #   $1  -> "tput" command's text formatting option.
-    #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
-
-    #**** Code ****
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
-        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
-
-    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "true" ]; then
-        if [ -n "$1" ]; then
-			if command -v "tput" &> /dev/null; then
-
-				# Formatting text with the tput command or directly with the backslash escapes.
-				tput "$1" || echo -ne "\e[$2m";	# If the "tput" command fails, then the text is encoded with ANSI control sequences.
-
-				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			else
-				echo -ne "\e[$2m"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			fi
-
-        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence.
-        else
-            echo -ne "\e[$2m";
-
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-        fi
-
-    else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    fi
-}
-
 # -----------------------------------------------

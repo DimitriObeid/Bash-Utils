@@ -49,7 +49,7 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### SETTING COLORS
+#### COLORS
 #### DEBUG ID : colors::setting-colors
 
 __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
@@ -60,7 +60,7 @@ __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
 __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::getting-color-codes-from-files";
 
 # Writing the error messages in a single location.
-function BU.Main.Colors.CannotCreateRessource()
+function BU.Main.TextFormat.CannotCreateRessource()
 {
     #**** Parameters ****
     local p_file=$1;
@@ -82,7 +82,7 @@ function BU.Main.Colors.CannotCreateRessource()
 }
 
 # Getting the current background color from a command substitution.
-function BU.Main.Colors.GetBGColorFromCMD()
+function BU.Main.TextFormat.GetBGColorFromCMD()
 {
     #**** Parameters ****
     local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's background.
@@ -92,14 +92,14 @@ function BU.Main.Colors.GetBGColorFromCMD()
 
     #**** Code ****
     if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" || {
-            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'dir';
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'dir';
 
             return 1;
         };
     fi
 
     if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" || {
-            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'file';
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'file';
 
             return 1;
         }
@@ -118,7 +118,7 @@ function BU.Main.Colors.GetBGColorFromCMD()
 }
 
 # Getting the current text color from a command substitution.
-function BU.Main.Colors.GetTextColorFromCMD()
+function BU.Main.TextFormat.GetTextColorFromCMD()
 {
     #**** Parameters ****
     local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's text.
@@ -128,14 +128,14 @@ function BU.Main.Colors.GetTextColorFromCMD()
 
     #**** Code ****
     if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" ]; then mkdir -p  "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" || {
-            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" 'dir';
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" 'dir';
 
             return 1;
         }
     fi
 
     if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" || {
-            BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
 
             return 1;
         }
@@ -166,7 +166,7 @@ __BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__SETTING_COLOR_CODES_IN_FILES
 #   - BU.Main.Checkings.CheckProjectRelatedFile()
 #   - BU.Main.Errors.HandleSmallErrors
 #   - BU.Main.Errors.HandleErrors
-function BU.Main.Colors.SetBGColor()
+function BU.Main.TextFormat.SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -187,7 +187,7 @@ function BU.Main.Colors.SetBGColor()
 
             # Checking the existence of the "bgcolor.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
-                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'dir';
+                    BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'dir';
 
                     return 1;
                 };
@@ -195,7 +195,7 @@ function BU.Main.Colors.SetBGColor()
 
             # Checking the existence of the "bgcolor.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
-                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
+                    BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
 
                     return 1;
                 };
@@ -225,7 +225,7 @@ function BU.Main.Colors.SetBGColor()
 #   - BU.Main.Checkings.CheckProjectRelatedFile()
 #   - BU.Main.Errors.HandleSmallErrors
 #   - BU.Main.Errors.HandleErrors
-function BU.Main.Colors.SetTextColor()
+function BU.Main.TextFormat.SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -250,7 +250,7 @@ function BU.Main.Colors.SetTextColor()
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
             if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
-                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" 'dir';
+                    BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" 'dir';
 
                     return 1;
                 };
@@ -258,7 +258,7 @@ function BU.Main.Colors.SetTextColor()
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
             if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
-                    BU.Main.Colors.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'file';
+                    BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'file';
 
                     return 1;
                 };
@@ -289,7 +289,7 @@ function BU.Main.Colors.SetTextColor()
 __BU_MAIN_COLORS_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::colors-strings-processing-functions";
 
 # Conversion of color name (string) to color code (int).
-function BU.Main.Colors.Atoi()
+function BU.Main.TextFormat.Atoi()
 {
     #**** Parameters ****
     local p_str=${1:-white};                    # String - Default : NULL - Color name
@@ -347,7 +347,7 @@ function BU.Main.Colors.Atoi()
 }
 
 # Conversion of color code (int) to color code (string).
-function BU.Main.Colors.Itoa()
+function BU.Main.TextFormat.Itoa()
 {
     #**** Parameters ****
     local p_code=${1:-0};   # Int       - Default : NULL            - Color code
@@ -410,4 +410,51 @@ function BU.Main.Colors.Itoa()
     fi;
 
     return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### TEXT
+
+## SETTING TEXT FORMAT
+
+# Checking if the "$__BU_MAIN_STAT_TXT_FMT" status value is set to "true".
+function BU.Main.TextFormat.SetTextFormat()
+{
+    #**** Parameters ****
+    #   $1  -> "tput" command's text formatting option.
+    #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
+
+    #**** Code ****
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS" \
+        "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
+
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "true" ]; then
+        if [ -n "$1" ]; then
+			if command -v "tput" &> /dev/null; then
+
+				# Formatting text with the tput command or directly with the backslash escapes.
+				tput "$1" || echo -ne "\e[$2m";	# If the "tput" command fails, then the text is encoded with ANSI control sequences.
+
+				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			else
+				echo -ne "\e[$2m"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			fi
+
+        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence.
+        else
+            echo -ne "\e[$2m";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        fi
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    fi
 }
