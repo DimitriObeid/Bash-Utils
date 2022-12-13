@@ -839,7 +839,7 @@ function BU.ModuleInit.PrintLog()
 
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
     if [ -z "${__BU_MODULE_INIT_MSG_ARRAY[*]}" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
-        echo "No logs to display";
+        echo "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY";
         echo; return 0;
     fi
 
