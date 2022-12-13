@@ -52,12 +52,12 @@ fi; exit 1; fi
 #### COLORS
 #### DEBUG ID : colors::setting-colors
 
-__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::setting-colors";
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS="colors::colors";
 
 ## GETTING COLOR CODES FROM FILES
 ## DEBUG ID : getting-color-codes-from-files
 
-__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::getting-color-codes-from-files";
+__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_COLORS_LIB__CAT_DEBUG_ID__SETTING_COLORS::color-codes-from-files";
 
 # Writing the error messages in a single location.
 function BU.Main.TextFormat.CannotCreateRessource()
