@@ -1422,11 +1422,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == fi?(l?(e))?(s) ]] \
 									||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 									||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
-									||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
+									||  [[ "${value,,}" == m?(od?(ule))?(s) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
-
-                                        echo "VALUE : ${value,,}"
 
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
@@ -1905,7 +1903,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 # 	||  [[ "${value,,}" == fi?(l?(e))?(s)) ]] \
 # 	||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
 # 	||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
-# 	||  [[ "${value,,}" == m?(od?(ule?))?(s) ]] \
+# 	||  [[ "${value,,}" == m?(od?(ule))?(s) ]] \
 # 	||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 #     [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
 
