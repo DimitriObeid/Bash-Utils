@@ -239,6 +239,8 @@ function BU.Main.TextFormat.SetTextColor()
 	#**** Code ****
     shopt -s extglob;
 
+    echo "INITCTRL : $p_init_ctrl"
+
     # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
     if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="$?"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
 
@@ -246,16 +248,14 @@ function BU.Main.TextFormat.SetTextColor()
 
     # If the script is allowed to format text.
 	if BU.Main.Status.CheckStatAllowFormatting; then
-        shopt -s extglob; if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]]; then shopt -u extglob; return 0; else shopt -u extglob;
+        shopt -s extglob; if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]]; then shopt -u extglob; echo TEST; return 0; else shopt -u extglob;
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
-            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
+            if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdirs -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
                     BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" 'dir';
 
                     return 1;
                 };
-            else
-                echo "CTRL : $p_init_ctrl"; exit 0;
             fi
 
             # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
