@@ -485,10 +485,10 @@ __BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
 
 # Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
 # shellcheck disable=SC1091
-source "$__BU_ROOT_PATH/lib/functions/main/DevTools.lib"
+source "$__BU_ROOT_PATH/lib/functions/main/DevTools.lib";
 
 # shellcheck disable=SC1091
-source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib"
+source "$__BU_ROOT_PATH/lib/functions/main/Locale.lib";
 
 # -----------------------------------------------
 

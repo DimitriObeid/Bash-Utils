@@ -84,7 +84,7 @@ printf "
     fi
 }
 
-echo $0
+echo "$0";
 
 # Stopping the execution of the framework in case an error occurs, after printing an error message.
 function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; BU.ModuleInit.IsInScript && exit "${p_code}"; return "${p_code}"; }
