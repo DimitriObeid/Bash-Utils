@@ -300,7 +300,7 @@ function BU.Main.Checkings.IsAlphaChar()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
-	if [[ "$1" = [a-zA-Z] ]]; then
+	if [[ "$1" == [a-zA-Z] ]]; then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -313,7 +313,7 @@ function BU.Main.Checkings.IsAlphaString()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
-    if [[ "$1" = [^a-zA-Z\ ] ]]; then
+    if [[ "$1" == [^a-zA-Z\ ] ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -330,7 +330,7 @@ function BU.Main.Checkings.IsAlphaStringOnly()
     	echo "Not a string"; return 1;
 
 	else
-		if [[ "$1" = [^a-zA-Z\ ] ]]; then
+		if [[ "$1" == [^a-zA-Z\ ] ]]; then
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
     		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -344,7 +344,7 @@ function BU.Main.Checkings.IsAlphaNumChar()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS" "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES";
 
-	if [[ "$1" = [a-zA-Z0-9] ]]; then
+	if [[ "$1" == [a-zA-Z0-9] ]]; then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -374,7 +374,7 @@ function BU.Main.Checkings.IsAlphaNumStringOnly()
     	echo "Not a string"; return 1;
 
 	else
-		if [[ "$1" = [^a-zA-Z0-9\ ] ]]; then
+		if [[ "$1" == [^a-zA-Z0-9\ ] ]]; then
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
     		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -450,7 +450,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
     # Changing the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in order to avoid an infinite
     # loop during the call of any function from the "Filesystem.lib" file, which call an "Echo<...>()" function.
 
-    if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
+    if [ "${__BU_MAIN_STAT_ECHO,,}" == 'false' ]; then
         local v_echoBackup="$__BU_MAIN_STAT_ECHO";
 
         # There is no need to call the associated function "BU.Main.Status.ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
@@ -460,7 +460,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
     # If the framework is still initializing when an error occurs.
     BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
 
-    if [ "${p_dirfile,,}" = 'create' ]; then
+    if [ "${p_dirfile,,}" == 'create' ]; then
             BU.Main.Filesystem.IsPartitionFull "$p_fileFS" "$p_dirfile"; local IsPartitionFullReturnCode="$?";
     else    BU.Main.Filesystem.IsPartitionFull "$p_fileFS"; fi
 
@@ -468,7 +468,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
     if [ "$IsPartitionFullReturnCode" -eq 0 ]; then
 
         # Resetting the former "$__BU_MAIN_STAT_ECHO" global status variable's value.
-        if [ "${v_echoBackup,,}" = 'false' ]; then
+        if [ "${v_echoBackup,,}" == 'false' ]; then
             __BU_MAIN_STAT_ECHO="$v_echoBackup";
         fi
 
@@ -477,7 +477,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if no directory or file is passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
-    elif [ "$IsPartitionFullReturnCode" = "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
 
         # If the framework is still initializing when an error occurs.
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
@@ -485,7 +485,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-        if [ "${p_authorization,,}" = 'true' ]; then
+        if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a filepath in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
                 "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -515,7 +515,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-        if [ "${p_authorization,,}" = 'true' ]; then
+        if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a valid path in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
                 "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -544,7 +544,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         # As mentioned in the previous comment, it is mandatory that the script's execution ends.
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-        if [ "${p_authorization,,}" = 'true' ]; then
+        if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
 				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
@@ -552,7 +552,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-        elif [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+        elif [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" >&2;
             echo "Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file" >&2;
             echo >&2;
@@ -596,12 +596,12 @@ function BU.Main.Checkings.CheckDirPathExists()
     local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.Main.Decho.Decho.Path()" function (since this function is called in the "BU.Main.Decho.SetBG/TextColor()" functions, and they are called in the "BU.Main.Decho.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
+    if [ ! -d "$p_path" ] && [ "${p_authorization,,}" == 'true' ]; then
         BU.Main.Decho.Decho.Path "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
-    elif [ ! -d "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+    elif [ ! -d "$p_path" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
         printf "<missing directory path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
@@ -647,12 +647,12 @@ function BU.Main.Checkings.CheckFilePathExists()
     local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.Main.Decho.Decho.Path()" function (since this function is called in the "BU.Main.Decho.SetBG/TextColor()" functions, and they are called in the "BU.Main.Decho.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'true' ]; then
+    if [ ! -f "$p_path" ] && [ "${p_authorization,,}" == 'true' ]; then
         BU.Main.Decho.Decho.Path "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
-    elif [ ! -f "$p_path" ] && [ "${p_authorization,,}" = 'false' ] || [ -z "$p_authorization" ]; then
+    elif [ ! -f "$p_path" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
         printf "<missing file path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
@@ -778,7 +778,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
     #**** Code ****
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
-    if [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
+    if [ "${__BU_MAIN_STAT_LOG,,}" == "true" ]; then
         BU.Main.Checkings.CheckProjectLogPath || \
         {
             local returnCode="$?";
@@ -798,10 +798,10 @@ function BU.Main.Status.CheckProjectLogStatus()
     BU.Main.Status.CheckSTAT_TIME_TXT        'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
-    if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" = "true" ]; then
+    if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" == "true" ]; then
 
         # If messages must be redirected in the log file only ("$__BU_MAIN_STAT_LOG_REDIRECT" value is equal to "log").
-        if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
+        if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "log" ]; then
 
             # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
             local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU.Main.Status.ChangeSTAT_TIME_HEADER "0"    || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -818,7 +818,7 @@ function BU.Main.Status.CheckProjectLogStatus()
                 local v_loop_error;
 
                 # If the 'nodate' value is passed as argument.
-                if [ "${val,,}" = 'nodate' ]; then
+                if [ "${val,,}" == 'nodate' ]; then
                     case "${p_option,,}" in
                         '-n' | 'n')
                             if BU.Main.Status.CheckStatIsInitializing; then
@@ -885,7 +885,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
                     [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
             BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -905,7 +905,7 @@ function BU.Main.Status.CheckProjectLogStatus()
             return 0;
 
         # Else, if messages must be redirected in the log file AND to the terminal ("$__BU_MAIN_STAT_LOG_REDIRECT" value is equal to "tee").
-        elif [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "tee" ]; then
+        elif [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "tee" ]; then
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -913,7 +913,7 @@ function BU.Main.Status.CheckProjectLogStatus()
                 local v_loop_error;
 
                 # If the 'nodate' value is passed as argument.
-                if [ "${val,,}" = 'nodate' ]; then
+                if [ "${val,,}" == 'nodate' ]; then
                     case "${p_option,,}" in
                         '-n' | 'n')
                             if BU.Main.Status.CheckStatIsInitializing; then
@@ -978,7 +978,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
                     [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" = 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
@@ -1081,15 +1081,15 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 	# Checking first if the target partition is not fully used.
 	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
-	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
+	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
         if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
     fi
 
-	if [ "$p_type" = 'f' ]; then
+	if [ "$p_type" == 'f' ]; then
 		if [ -f "$v_path" ]; then
 			if [ -s "$v_path" ]; then
 				true > "$v_path" || {
-                    if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
+                    if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
                         BU.Main.Errors.HandleSmallErrors 'E' \
                             "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                     else
@@ -1104,48 +1104,60 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
 			if [ ! -d "$p_parent" ]; then
-                mkdir -p "$p_parent" || {
+                if [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+                elif [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then echo TEST; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+                else
+                    mkdir -p "$p_parent" || {
+                        local returnCode="$?";
+
+                        if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
+                            BU.Main.Errors.HandleSmallErrors 'E' \
+                                "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU.Main.Checkings.CheckDirPathExists "$p_parent" 'true')" 'E';
+                        else
+                            BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
+                            BU.Main.Echo.Newline;
+                        fi
+
+                        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
+                    }
+                fi
+
+				BU.Main.Checkings.CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			fi
+
+            if [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+            elif [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+            else
+                touch "$v_path" || {
                     local returnCode="$?";
 
-                    if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
+                    if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
                         BU.Main.Errors.HandleSmallErrors 'E' \
-                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file's parent folder --> $(BU.Main.Checkings.CheckDirPathExists "$p_parent" 'true')" 'E';
+                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
                     else
-                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to create this « $__BU_MAIN_PROJECT_NAME » project's file parent folder --> $p_parent";
+                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
                         BU.Main.Echo.Newline;
                     fi
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
                 }
-
-				BU.Main.Checkings.CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			fi
-
-			touch "$v_path" || {
-                local returnCode="$?";
-
-                if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
-                    BU.Main.Errors.HandleSmallErrors 'E' \
-                        "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's file --> $(BU.Main.Checkings.CheckFilePathExists "$v_path" 'true')" 'E';
-                else
-                    BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « $__BU_MAIN_PROJECT_NAME » project's file --> $v_path";
-                    BU.Main.Echo.Newline;
-                fi
-
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
-            }
+            fi
 
 			BU.Main.Checkings.CheckFilePathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; return 0;
 		fi
 
-    elif [ "$p_type" = 'd' ]; then
+    elif [ "$p_type" == 'd' ]; then
 		if [ -d "$v_path" ]; then
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
-			mkdir -p "$v_path" || {
+            mkdir -p "$v_path" || {
                 local returnCode="$?";
 
-                if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" = '--decho' ]; then
+                if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
                     BU.Main.Errors.HandleSmallErrors 'E' \
                         "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to create this $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME") project's folder --> $(BU.Main.Checkings.CheckDirPathExists "$v_path" 'true')" 'E';
                 else
@@ -1155,7 +1167,6 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
-
 			BU.Main.Checkings.CheckDirPathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
     fi
@@ -1189,7 +1200,7 @@ function BU.Main.Checkings.CheckDecho()
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS";
 
     # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text :
-    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" = "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" = 'forbid' ]; then
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" == "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" == 'forbid' ]; then
         return 1;
     else
         # Creating the "fgcolor.tmp" (text color) file in case it doesn't exists.
@@ -1206,7 +1217,7 @@ function BU.Main.Checkings.CheckDecho()
             fi
         fi
 
-        if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" = '' ]; then
+        if [ -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ] && [ "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH")" == '' ]; then
             echo "$__BU_MAIN_COLOR_TXT_RESET" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || \
             {
                 # It's better to call the "BU.Main.Echo.Msg()" function, so that its redirection and debug process wil not have to be reprogrammed.
