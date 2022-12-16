@@ -471,7 +471,6 @@ BU.Main.Directories.MkTmpDir;
 
 # Creating the text and background color code files if the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatAllowFormatting; then
-
     # If the file which contains the current foreground color code doesn't exists, then it must be created, and the file's creation message must be displayed.
     if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then
         # Creating the text color code file
