@@ -70,6 +70,7 @@ function BU.Main.Initializer.SourceLibrary()
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
+    # Note : there is no need to call the "BU.ModuleInit.PrintLogError" function here, the "BU.ModuleInit.SourcingFailure()" function already does.
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -100,6 +101,8 @@ function BU.Main.Initializer.SourceConfig()
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #**** Code ****
+    # Note : there is no need to call the "BU.ModuleInit.PrintLogError" function here, the "BU.ModuleInit.SourcingFailure()" function already does.
+
     if [ "${__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS,,}" = 'true' ]; then
         # Deleting the index 1 of the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]" array,
         # which contains the path to the "Status.conf" configuration file, which was included just
@@ -463,7 +466,7 @@ BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; 
 # BU.ModuleInit.ParseCSVLang "$__BU_MODULE_INIT__USER_LANG" "$__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
-BU.Main.Directories.MkTmpDir;
+BU.Main.Directories.MkTmpDir || { BU.ModuleInit.PrintLogError "" "" "" 'ERR_BUINIT__BU_MAIN_INIT__CANNOT_MK_TMPDIR'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi }; if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
