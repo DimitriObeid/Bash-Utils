@@ -290,36 +290,36 @@ function BU.Main.TextFormat.Atoi()
     #**** Code ****
     # Basic colors
     if      [ "${p_str,,}" == "aqua" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__AQUA,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_AQUA};
-    elif    [ "${p_str,,}" == "black" ];        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__BLACK,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLACK};
-    elif    [ "${p_str,,}" == "blue" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__BLUE,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLUE};
+    elif    [ "${p_str,,}" == "black" ]         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__BLACK,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLACK};
+    elif    [ "${p_str,,}" == "blue" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__BLUE,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_BLUE};
 
-    elif    [ "${p_str,,}" == "cyan" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__CYAN,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CYAN};
-    elif    [ "${p_str,,}" == "fuchsia" ];      || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__FUCHSIA,,}" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUCHSIA};
-    elif    [ "${p_str,,}" == "gray" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__GRAY,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GRAY};
+    elif    [ "${p_str,,}" == "cyan" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__CYAN,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CYAN};
+    elif    [ "${p_str,,}" == "fuchsia" ]       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__FUCHSIA,,}" ];     then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_FUCHSIA};
+    elif    [ "${p_str,,}" == "gray" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__GRAY,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GRAY};
 
-    elif    [ "${p_str,,}" == "green" ];        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__GREEN,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GREEN};
-    elif    [ "${p_str,,}" == "lime" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__LIME,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_LIME};
-    elif    [ "${p_str,,}" == "maroon" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__MAROON,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_MAROON};
+    elif    [ "${p_str,,}" == "green" ]         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__GREEN,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_GREEN};
+    elif    [ "${p_str,,}" == "lime" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__LIME,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_LIME};
+    elif    [ "${p_str,,}" == "maroon" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__MAROON,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_MAROON};
 
-    elif    [ "${p_str,,}" == "navy" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__NAVY,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NAVY};
-    elif    [ "${p_str,,}" == "olive" ];        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__OLIVE,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_OLIVE};
-    elif    [ "${p_str,,}" == "orange" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__ORANGE,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ORANGE};
+    elif    [ "${p_str,,}" == "navy" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__NAVY,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_NAVY};
+    elif    [ "${p_str,,}" == "olive" ]         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__OLIVE,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_OLIVE};
+    elif    [ "${p_str,,}" == "orange" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__ORANGE,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_ORANGE};
 
-    elif    [ "${p_str,,}" == "pink" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__PINK,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PINK};
-    elif    [ "${p_str,,}" == "purple" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__PURPLE,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PURPLE};
-    elif    [ "${p_str,,}" == "red" ];          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__RED,,}" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RED};
+    elif    [ "${p_str,,}" == "pink" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__PINK,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PINK};
+    elif    [ "${p_str,,}" == "purple" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__PURPLE,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_PURPLE};
+    elif    [ "${p_str,,}" == "red" ]           || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__RED,,}" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RED};
 
-    elif    [ "${p_str,,}" == "salmon" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__SALMON,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SALMON};
-    elif    [ "${p_str,,}" == "silver" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__SILVER,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SILVER};
-    elif    [ "${p_str,,}" == "tan" ];          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TAN,,}" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TAN};
+    elif    [ "${p_str,,}" == "salmon" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__SALMON,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SALMON};
+    elif    [ "${p_str,,}" == "silver" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__SILVER,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_SILVER};
+    elif    [ "${p_str,,}" == "tan" ]           || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TAN,,}" ];         then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TAN};
 
-    elif    [ "${p_str,,}" == "teal" ];         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TEAL,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TEAL};
-    elif    [ "${p_str,,}" == "turquoise" ];    || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TURQUOISE,,}" ];   then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TURQUOISE};
-    elif    [ "${p_str,,}" == "violet" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__VIOLET,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VIOLET};
+    elif    [ "${p_str,,}" == "teal" ]          || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TEAL,,}" ];        then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TEAL};
+    elif    [ "${p_str,,}" == "turquoise" ]     || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__TURQUOISE,,}" ];   then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_TURQUOISE};
+    elif    [ "${p_str,,}" == "violet" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__VIOLET,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_VIOLET};
 
-    elif    [ "${p_str,,}" == "white" ];        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__WHITE,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WHITE};
-    elif    [ "${p_str,,}" == "yellow" ];       || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__YELLOW,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_YELLOW};
-    elif    [ "${p_str,,}" == "reset" ];        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__RESET,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RESET};
+    elif    [ "${p_str,,}" == "white" ]         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__WHITE,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_WHITE};
+    elif    [ "${p_str,,}" == "yellow" ]        || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__YELLOW,,}" ];      then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_YELLOW};
+    elif    [ "${p_str,,}" == "reset" ]         || [ "${p_str,,}" == "${__BU_MAIN_TEXT_FORMAT_LIB__MSG__LOCALIZED_COLOR__RESET,,}" ];       then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_RESET};
 
     # Specific colors for text encoding
     elif    [ "${p_str^^}" == "CMD" ];          then __BU_MAIN_COLORS_ATOI_COLOR=${__BU_MAIN_COLOR_CODE_CMD};
