@@ -1169,7 +1169,7 @@ function BU.ModuleInit.SourcingFailure()
     #**** Code ****
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
-    BU.ModuleInit.PrintLogError "" "" "" 'ERR_BUINIT__SOUCING_FAILURE';
+    BU.ModuleInit.PrintLogError "" "${p_file}" "${p_line}" 'ERR_BUINIT__SOUCING_FAILURE';
 
     BU.ModuleInit.Msg >&2; BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE}" "${p_file}" "${p_func}" "${p_line}" "${p_module}" "$(BU.ModuleInit.CheckPath "${p_path}" 'f')")" >&2; BU.ModuleInit.Msg >&2;
 
@@ -2242,7 +2242,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
                 source "${v_outputFilePath}" || {
-                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                     return "$C";
                 };  return    0;
@@ -2527,7 +2527,7 @@ function BashUtils_InitModules()
                         if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}")" ]; then false > /dev/null; fi
 
                         source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}")" || {
-                            BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                            BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                             v_loop_error="error";
 
@@ -2576,7 +2576,7 @@ function BashUtils_InitModules()
                         # shellcheck disable=SC2059
                         BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_CONFIG_FILE_IS_EMPTY";
 
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                         BU.ModuleInit.MsgAbort;
 
@@ -2588,7 +2588,7 @@ function BashUtils_InitModules()
                     fi
 
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}")" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
                     }
                 }
 
@@ -2654,7 +2654,7 @@ function BashUtils_InitModules()
                         # shellcheck disable=SC2059
                         BU.ModuleInit.PrintLogError "$(printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "ERR_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
 
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                         BU.ModuleInit.MsgAbort;
 
@@ -2666,7 +2666,7 @@ function BashUtils_InitModules()
                     fi
 
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}")" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
                     }
                 }
 
