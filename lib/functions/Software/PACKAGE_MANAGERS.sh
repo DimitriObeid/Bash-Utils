@@ -151,7 +151,7 @@ function BU.SoftwarePackageManagersInstallNPMOSX()
 ## PACKAGE MANAGERS UPDATE
 
 # Update Homebrew.
-function BU.SoftwarePackageManagersUpdateHomebrewOSX()l
+function BU.SoftwarePackageManagersUpdateHomebrewOSX()
 {
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 

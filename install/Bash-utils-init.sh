@@ -1167,11 +1167,11 @@ function BU.ModuleInit.SourcingFailure()
     local p_line=${5:-NULL};    # String    - Default : NULL    - Line where the inclusion failed.
 
     #**** Code ****
+    BU.ModuleInit.PrintLogError "$__BU_MODULE_INIT_MSG__SOURCING_FAILURE__PRINT_LOG_ERROR" "${p_file}" "${p_line}" 'ERR_BUINIT__SOUCING_FAILURE';
+
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
-    BU.ModuleInit.PrintLogError "" "${p_file}" "${p_line}" 'ERR_BUINIT__SOUCING_FAILURE';
-
-    BU.ModuleInit.Msg >&2; BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE}" "${p_file}" "${p_func}" "${p_line}" "${p_module}" "$(BU.ModuleInit.CheckPath "${p_path}" 'f')")" >&2; BU.ModuleInit.Msg >&2;
+    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE}" "${p_file}" "${p_func}" "${p_line}" "${p_module}" "$(BU.ModuleInit.CheckPath "${p_path}" 'f')")" >&2; BU.ModuleInit.Msg >&2;
 
     if [ -n "${v_msg_arr_mode_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_mode_backup}"; fi
 
