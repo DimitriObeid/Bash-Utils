@@ -590,13 +590,25 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="le no
 
 # --------
 
-## FILE : "Filesystem.conf"
+## FICHIER : "Filesystem.conf"
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier selon le système de fichier. Cette longueur est associée au système de fichiers « %s »";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Système de fichiers non-supporté (trouvé : %s)\n\nLes informations basiques sont générées, mais certaines fonctionnalités avancées de ce framework peuvent être sujets à des bugs";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier. Cette longueur n'est pas associée à un système de fichiers quelconque, mais plutôt à une spécification générale";
+
+# --------
+
+## FICHIER : "Text.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__TEXT_VARIABLE_FAILED_TO_BE_INITIALIZED="";
+
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="";
 
 # --------
 
