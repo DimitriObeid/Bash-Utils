@@ -686,7 +686,7 @@ function BU.ModuleInit.Msg()
 
     # Else, if the '--log-no-display' argument is passed as a 'module' parameter, then every
     # initialization messages must be redirected towards the the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-no-displa' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-no-display' ]; then
         true;
 
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
@@ -1336,7 +1336,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # If the "module" value is passed without parameters.
         if [[ "${p_module}" == "${v_module_name}" ]]; then
             # shellcheck disable=SC2059
-            BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__NO_OPTS"; echo >&2;
+            BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__NO_OPTS";
 
             # shellcheck disable=SC2059
             printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( BASH_LINENO - 5 ))" >&2; echo >&2;
@@ -1371,7 +1371,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                 # If the current value AND the new value are the same.
                 if [ "$p_value" = "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
                     # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE"; echo >&2;
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE";
 
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "${p_value}" >&2;
@@ -1379,7 +1379,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     echo >&2; return 1;
                 else
                     # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED"; echo >&2;
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED";
 
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
@@ -1550,7 +1550,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             v_unsupported_log_param="$(printf "%s" "${module_args}" | sed "s/^[^ ]* //")";
 
                             # shellcheck disable=SC2059
-							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL"; echo >&2;
+							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL";
 
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "${v_unsupported_log_param}" >&2; echo >&2;
@@ -1605,7 +1605,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             v_unsupported_log_param="$(printf "%s" "${module_args}" | sed "s/^[^ ]* //")";
 
                             # shellcheck disable=SC2059
-							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL"; echo >&2;
+							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL";
 
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_unsupported_log_param}" >&2; echo >&2;
@@ -1635,7 +1635,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         v_unsupported_log_param="$(printf "%s" "${module_args}" | sed "s/^[^ ]* //")";
 
                     # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_GEN_OPT_UNSUPPORTED_VAL"; echo >&2;
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_GEN_OPT_UNSUPPORTED_VAL";
 
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_unsupported_log_param}" >&2; echo >&2;
@@ -1707,7 +1707,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     # Note : the « main » value is made case insensitive, in order to support uppercase and lowercase arguments.
     elif [ "$p_count" -ge 1 ] && [[ ( -n "${__BU_MODULE_INIT_MODULE_FIRST_ARG}" ) && ( -z "${__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED}" ) ]] && [[ ("${p_module,,}" != 'main') || ( "${p_module}" != [Mm][Aa][Ii][Nn][[:space:]]--* ) ]]; then
         # shellcheck disable=SC2059
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING"; echo >&2;
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING";
 
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
@@ -1729,7 +1729,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 	elif [ "$p_count" -ge 1 ] && [ -n "${__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED}" ] && [[ "${p_module,,}" == "module --"* ]]; then
         # shellcheck disable=SC2059
-		BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE"; echo >&2;
+		BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE";
 
 		# shellcheck disable=SC2059
 		printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
@@ -1756,7 +1756,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
     else
         # shellcheck disable=SC2059
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_AND_MAIN_PARAMS_MISSING"; echo >&2;
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_AND_MAIN_PARAMS_MISSING";
 
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
@@ -2569,10 +2569,10 @@ function BashUtils_InitModules()
 
                         v_module_config_file_name="$(basename "$(cat "$__BU_MODULE_INIT__TMP_DIR/BU_module_init__find_path.modconffile.tmp")")";
                 else
-                    # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
 
-                    printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")"
+                    # shellcheck disable=SC2059
+                    printf "$__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
 
                     BU.ModuleInit.MsgAbort;
 
