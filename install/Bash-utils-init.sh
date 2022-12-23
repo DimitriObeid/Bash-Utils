@@ -107,8 +107,8 @@ function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; 
 # Checking if the framework is translated.
 function BU.ModuleInit.IsTranslated()                   { if [ "${__BASH_UTILS_FRAMEWORK_IS_TRANSLATED,,}" == 'true' ]; then return 0; else return 1; fi }
 
-# Checking if the framework is still initializing, and if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value is '--log-shut', in order to display every error messages.
-function BU.ModuleInit.SetInitErrorMsg()                { if BU.Main.Status.CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then v_msg_arr_permission_global_backup=""; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; return 0; else return 1; fi }
+# Checking if the framework is still initializing, and if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's value is '--log-shut', in order to display every error messages from the main module's functions.
+function BU.ModuleInit.SetInitErrorMsg()                { if BU.Main.Status.CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then v_msg_arr_permission_global_backup="$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; return 0; else return 1; fi }
 
 # Unsetting the former function's result.
 function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.CheckStatIsInitializing && [ -n "${v_msg_arr_permission_global_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_permission_global_backup}"; unset v_msg_arr_permission_global_backup; fi }
@@ -684,11 +684,6 @@ function BU.ModuleInit.Msg()
             ;;
         esac
 
-    # Else, if the '--log-no-display' argument is passed as a 'module' parameter, then every
-    # initialization messages must be redirected towards the the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-no-display' ]; then
-        true;
-
     # Else, if the '--log-shut' argument is passed as a 'module' parameter, then every initialization
     # messages must be redirected towards the "/dev/null" virtual device file, and the array must be emptied.
     elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then
@@ -724,9 +719,9 @@ function BU.ModuleInit.Msg()
             ;;
         esac
 
-    # Else, if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable stores no value (empty by default), then every
-    # initialization messages must be stored in the "$__BU_MODULE_INIT_MSG_ARRAY" array without being printed on the screen.
-    elif [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
+    # Else, if the '--log-no-display' argument is passed as a 'module' parameter OR if the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable
+    # stores no value (empty by default), then every initialization messages must be stored in the "$__BU_MODULE_INIT_MSG_ARRAY" array without being printed on the screen.
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-no-display' ] || [ -z "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
         case "${p_option,,}" in
             '-n' | 'n')
                 # If no value is stored in the string parameter, it must not be interpreted as a newline, since the '-n' echo command's parameter forbids carriage returns.
@@ -1171,7 +1166,7 @@ function BU.ModuleInit.SourcingFailure()
     local p_line=${5:-NULL};    # String    - Default : NULL    - Line where the inclusion failed.
 
     #**** Code ****
-    BU.ModuleInit.PrintLogError "${p_file}" "${p_line}" 'ERR_BUINIT__SOUCING_FAILURE';
+    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${LINENO}" 'ERR_BUINIT__SOUCING_FAILURE';
 
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
 
