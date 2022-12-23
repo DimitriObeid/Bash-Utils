@@ -555,6 +555,7 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 ## FICHIER : "Colors.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT="Cette variable globale enregistre le code couleur « %s »";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
@@ -563,8 +564,10 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitia
 
 ## FICHIER : "Exit.conf"
 
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PrintReturnValue_FNCT="Cette variable globale stocke la valeur de retour de la dernière commande dans cette situation : « %s »";
 
+# Définition des variables globales.
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_PERMITTED__VAR_DESC="l'opération n'est pas permise";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__DIR_FILE_NOT_FOUND__VAR_DESC="le dossier ou fichier cible n'a pas été trouvé";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__PERMISSION_DENIED__VAR_DESC="vous n'avez pas la permission d'effectuer cette action";
@@ -573,7 +576,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NOT_DIR__VAR_DESC="la cible n'est
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__IS_DIR__VAR_DESC="la cible est un dossier";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__INVALID_ARGUMENT__VAR_DESC="mauvaise argument fourni";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILE_TOO_LARGE__VAR_DESC="le fichier est trop gros";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="plus de mémoire de stockage restante sur la partition cible du disque dur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__NO_SPACE_LEFT__VAR_DESC="plus d'espace de stockage restant sur la partition cible du disque dur";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__RO_FS__VAR_DESC="système de fichier en lecture seule";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="le nom du fichier à créer est trop long";
 
@@ -581,11 +584,64 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__EXIT__FILENAME_TOO_LONG_VAR_DESC="le no
 
 ## FICHIER : "Filesystem.conf"
 
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier selon le système de fichier. Cette longueur est associée au système de fichiers « %s »";
 
+# Définition des variables globales.
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Système de fichiers non-supporté (trouvé : %s)\n\nLes informations basiques sont générées, mais certaines fonctionnalités avancées de ce framework peuvent être sujets à des bugs";
-
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : Cette variable globale enregistre la longueur maximale en octets d'un nom de fichier. Cette longueur n'est pas associée à un système de fichiers quelconque, mais plutôt à une spécification générale";
+
+# --------
+
+## FICHIER : "Project.conf"
+
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__GetProjectFilePath__UNABLE_TO_GET_THE_PARENT_DIR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR : IMPOSSIBLE D'OBTENIR LE DOSSIER PARENT DU SCRIPT PRINCIPAL DU PROJET ACTUEL";
+
+# Définition des variables globales.
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_NAME__VAR="Cette variable globale enregistre le nom du script principal du projet (celui en cours d'exécution), avec son extension de fichier";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_NAME__VAR="Cette variable globale enregistre le nom du script principal du projet (celui en cours d'exécution), sans son extension de fichier";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="Cette variable globale enregistre le nom du répertoire parent du dossier temporaire du projet";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="Cette variable globale enregistre      the path to the project's temporary folder's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__VAR="Cette variable globale enregistre      the path to the temporary folder";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__ROOT_VAR="Cette variable globale enregistre      the path to the temporary folder (with super-user's privileges)";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_PATH__VAR="Cette variable globale enregistre      the path to the main script of the current project";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="Cette variable globale enregistre      the path to the aliases configurations file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Cette variable globale enregistre      the name of the aliases configurations file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH="Cette variable globale enregistre      the path to the aliases configurations file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="Cette variable globale enregistre      the path to the Decho background color code file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="Cette variable globale enregistre      the name of the Decho background color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="Cette variable globale enregistre      the path to the Decho background color code file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="Cette variable globale enregistre      the path to the terminal's raw background color code file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="Cette variable globale enregistre      the name of the terminal's raw background color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="Cette variable globale enregistre      the path to the terminal's raw background color code file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="Cette variable globale enregistre      the path to the Decho color code file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="Cette variable globale enregistre      the name of the Decho color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="Cette variable globale enregistre      the path to the Decho color code file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="Cette variable globale enregistre      the path to the terminal's raw text color code file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="Cette variable globale enregistre      the name of the terminal's raw text color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="Cette variable globale enregistre      the path to the terminal's raw text color code file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="Cette variable globale enregistre      the path to the echo debugging file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="Cette variable globale enregistre      the name of the echo debugging file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="Cette variable globale enregistre      the path to the echo debugging file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="Cette variable globale enregistre      the path to the parent directory of the project's log file's directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="Cette variable globale enregistre      the name of the parent directory of the project's log file's directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="Cette variable globale enregistre      the path to the parent directory of the project's log file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT="Cette variable globale enregistre      the path to the project's log file's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="Cette variable globale enregistre      the name of the project's log file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH="Cette variable globale enregistre      the path to the project's log path";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="Cette variable globale enregistre      the path to the CSV translations parser script's parent directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="Cette variable globale enregistre      the name of the CSV translations parser script";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="Cette variable globale enregistre      the path to the CSV translations parser script";
 
 # --------
 
@@ -596,7 +652,14 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="Cette
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de formater le texte à partir de la mise en forme du texte suivante : « %s »";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte à partir de la mise en forme du texte suivante : « %s »";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte de toute mise en forme";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitialize__FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : ";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitialize__FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de texte « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
+
+# Définition des variables globales.
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_CHAR_HEADER_LINE__VAR="Cette variable globale enregistre le caractère par défaut qui compose chaque ligne dessinée par la fonction %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_PRINT_TAB__VAR="Cette variable globale enregistre la chaîne de caractères qui met mieux en valeur une chaîne de caractères";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_LINE__VAR="Cette variable globale enregistre une chaîne extraite d'une ligne dans un fichier";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="Ce tableau enregistre chaque message d'erreur affiché lorsque la valeur de la variable d'état globale %s est définie sur %s.";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="Cette variable globale enregistre une chaîne de caractères qui sert de délimiteur pour séparer une chaîne de caractères en sous-chaînes.";
 
 # --------
 

@@ -394,58 +394,58 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # PID
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_PROJECT_PID'                 "${__BU_MODULE_INIT_PROJECT_PID}"               'Int'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID}"                     "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__project_pid__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_PROJECT_PID'                 "${__BU_MODULE_INIT_PROJECT_PID}"               'Int'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID}"                     "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__project_pid__lineno}";
     BU.ModuleInit.Msg;
 
     # 1 - FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
     # 2 - Checkig if the framework is translated thanks to the CSV file parser.
     # 3 - FINDING THE ".Bash-utils" FOLDER
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT_HOME"                  "${__BU_MODULE_INIT__ROOT_HOME}"                'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME}"               "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__root_home__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT"                       "${__BU_MODULE_INIT__ROOT}"                     'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT}"                    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__root__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__INITIALIZER_PATH'           "${__BU_MODULE_INIT__INITIALIZER_PATH}"         'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH}"        "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__initializer_path__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT_HOME"                  "${__BU_MODULE_INIT__ROOT_HOME}"                'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME}"               "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__root_home__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT"                       "${__BU_MODULE_INIT__ROOT}"                     'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT}"                    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__root__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__INITIALIZER_PATH'           "${__BU_MODULE_INIT__INITIALIZER_PATH}"         'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH}"        "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__initializer_path__lineno}";
     BU.ModuleInit.Msg;
 
     # TEMPORARY DIRECTORY
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__TMP_DIR"                    "${__BU_MODULE_INIT__TMP_DIR}"                  'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR}"                 "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__tmp_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__TMP_DIR"                    "${__BU_MODULE_INIT__TMP_DIR}"                  'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR}"                 "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__tmp_dir__lineno}";
 
     # CONFIGURATION DIRECTORIES
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_DIR"                 "${__BU_MODULE_INIT__CONFIG_DIR}"               'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__config_dir__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_DIR"            "${__BU_MODULE_INIT__CONFIG_INIT_DIR}"          'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_MODULES_DIR"         "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}"       'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR}"      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_DIR"                 "${__BU_MODULE_INIT__CONFIG_DIR}"               'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_DIR"            "${__BU_MODULE_INIT__CONFIG_INIT_DIR}"          'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_MODULES_DIR"         "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}"       'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR}"      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir__lineno}";
 
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR"       "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}"     'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR}"    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__config_init_lang_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR"       "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}"     'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR}"    "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_lang_dir__lineno}";
     BU.ModuleInit.Msg;
 
     # INITIALIZER SCRIPT'S CONFIGURATION FILES.
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES}" '+' 'msg';
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS'    "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"  'Filepath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS}"  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir__status__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS'    "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"  'Filepath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS}"  "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir__status__lineno}";
 
     # MODULE DIRECTORIES
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__MODULES_DIR"                "${__BU_MODULE_INIT__MODULES_DIR}"              'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR}"             "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__modules_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__MODULES_DIR"                "${__BU_MODULE_INIT__MODULES_DIR}"              'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR}"             "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__modules_dir__lineno}";
     BU.ModuleInit.Msg;
 
     # FILES
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH}" '+' 'msg'; BU.ModuleInit.Msg
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME"                "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}"              'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir__file_name__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR"          "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}"        'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_file__parent_dir__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH"                "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}"              'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir__file_path__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME"                "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}"              'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir__file_name__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR"          "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}"        'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_file__parent_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH"                "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}"              'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir__file_path__lineno}";
     BU.ModuleInit.Msg;
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}"         'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_name__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR"     "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root_file__parent_dir__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH}"         'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_path__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}"         'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_name__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR"     "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root_file__parent_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH}"         'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_path__lineno}";
     BU.ModuleInit.Msg;
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM'            "${__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM}"          'Char'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__csv_translation_file__delim__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__DATE_LOG'                               "${__BU_MODULE_INIT__DATE_LOG}"                             'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG}"                            "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__date_log__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__USER_LANG'                              "${__BU_MODULE_INIT__USER_LANG}"                            'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG}"                           "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__user_lang__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY'                 "${__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY}"               'Array'     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__bu_module_init__bashx_debug_vals_array__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM'            "${__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM}"          'Char'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__csv_translation_file__delim__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__DATE_LOG'                               "${__BU_MODULE_INIT__DATE_LOG}"                             'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG}"                            "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__date_log__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__USER_LANG'                              "${__BU_MODULE_INIT__USER_LANG}"                            'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG}"                           "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__user_lang__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY'                 "${__BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY}"               'Array'     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY}"              "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__bashx_debug_vals_array__lineno}";
 
     # Unsetting every string variables in order to free up some memory.
 
@@ -494,17 +494,17 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
         local p_var_type=${3:-$'\0'};   # String    - Default : NULL    - Type of variable (array, int (integer), float, path, string).
         local p_var_desc=${4:-$'\0'};   # String    - Default : NULL    - Description of the variable.
         local p_modl=${5:-NULL};        # String    - Default : NULL    - Module where the variable was declared.
-        local p_file=${5:-NULL};        # String    - Default : NULL    - File where the variable was declared.
-        local p_func=${6:-NULL};        # String    - Default : NULL    - Function where the variable was declared.
-        local p_line=${7:-NULL};        # Int       - Default : NULL    - Line where the variable was declared.
+        local p_file=${6:-NULL};        # String    - Default : NULL    - File where the variable was declared.
+        local p_func=${7:-NULL};        # String    - Default : NULL    - Function where the variable was declared.
+        local p_line=${8:-NULL};        # Int       - Default : NULL    - Line where the variable was declared.
 
         # If the variable type is an array, then the values must be passed as an array,
         # or else only the first index's value will be displayed.
-        shift 7
+        shift 8
         local pa_var_val_array=("$@")
 
         #**** Variables ****
-        local v_modl; v_modl="$(if [[ "${p_modl^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL}" "${p_file}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL_NULL}"; fi)";
+        local v_modl; v_modl="$(if [[ "${p_modl^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL}" "${p_modl}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL_NULL}"; fi)";
         local v_file; v_file="$(if [[ "${p_file^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE}" "${p_file}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL}"; fi)";
         local v_func; v_func="$(if [[ "${p_func^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC}" "${p_func}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL}"; fi)";
         local v_line; v_line="$(if [[ "${p_line^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE}" "${p_line}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL}"; fi)";
@@ -515,24 +515,27 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 
 		# Checking if the "$p_var_type" argument value matches an awaited pattern.
 		# - array	: this variable is an array.
-		# - code	: this variable stores code in order to perform an action (either a function, a command or a condition)
+		# - cmd	    : this variable stores code in order to perform an action (either a function, a command or a condition)
+        # - bool    : this variable stores a boolean value ("true" or "false" only).
 		# - dir		: this variable stores the name of a directory.
 		# - file	: this variable stores the name of a file.
 		# - float	: this variable stores a floating number.
+        # - dirpath : this variable stores the path to a directory.
+        # - filepath: this variable stores the path to a file.
 		# - int		: this variable stores an integer.
-		# - path:	: this variable stores a path.
+		# - path:	: this variable stores the path to a directory or a file.
 		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
-		elif [[ "${p_var_type,,}" != arr?(ay) ]] \
+		elif  [[ "${p_var_type,,}" != arr?(ay) ]] \
 			&& [ "${p_var_type,,}" != 'cmd' ] \
+            && [ "${p_var_type,,}" != 'dir' ] \
+            && [ "${p_var_type,,}" != 'int' ] \
 			&& [ "${p_var_type,,}" != 'bool' ] \
-			&& [ "${p_var_type,,}" != 'dir' ] \
 			&& [ "${p_var_type,,}" != 'file' ] \
+            && [ "${p_var_type,,}" != 'path' ] \
 			&& [ "${p_var_type,,}" != 'float' ]	\
+            && [ "${p_var_type,,}" != 'string' ] \
 			&& [ "${p_var_type,,}" != 'dirpath' ] \
-			&& [ "${p_var_type,,}" != "filepath" ] \
-			&& [ "${p_var_type,,}" != 'int' ] \
-			&& [ "${p_var_type,,}" != 'path' ] \
-			&& [ "${p_var_type,,}" != 'string' ];
+			&& [ "${p_var_type,,}" != "filepath" ];
 			then
 				p_var_type="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN}";
 		fi
@@ -1419,7 +1422,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							value="${value% *}";
 
                             if      [ "${value,,}" = 'false' ]                                  || [ "${value,,}" = 'true' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG="${value}";                     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG="${value}";                     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
                             else
                                 BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug" "\n    --stat-debug=false\n    --stat-debug=true" || { v_loop_error='error'; break; };
                             fi
@@ -1440,10 +1443,10 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
 
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 elif    [ "${value,,}" = 'void' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}"      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}"      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 else
                                     BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug-bashx" "\n    --stat-debug-bashx=category\n    --stat-debug-bashx=file\n    --stat-debug-bashx=function\n    --stat-debug-bashx=module\n    --stat-debug-bashx=sub-category" || { v_loop_error='error'; break; };
@@ -2450,7 +2453,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
                 "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
-                "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+                "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 
 
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
@@ -2463,7 +2466,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
                 "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
-                "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+                "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
         fi
 
 		# Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
@@ -2475,7 +2478,7 @@ function BashUtils_InitModules()
 			# shellcheck disable=SC2059
 			BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" 'String' \
 				"$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
-				"$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+				"$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
 
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
