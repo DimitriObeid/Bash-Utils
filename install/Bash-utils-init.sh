@@ -1897,7 +1897,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
     __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}";
+    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR" "$__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME" || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
     __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO - 1 ))";
 
     __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
@@ -1906,7 +1906,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
     __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR/$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}";
+    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$(BU.ModuleInit.FindPath "$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR" "$__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME" || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
     __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
 
     # MISC
