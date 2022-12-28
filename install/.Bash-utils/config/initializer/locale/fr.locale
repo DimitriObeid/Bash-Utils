@@ -235,6 +235,7 @@ unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E \
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F
 
+
 # Ces variables définissent un message à afficher instead du nom d'un module, si la variable est définie dans l'un des scripts d'initialisation fournis.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE="Fichier d'initialisation principal";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF="Main (fichiers de configuration)";
@@ -614,32 +615,32 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PAR
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Cette variable globale enregistre le nom du fichier de configuration des alias";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier de configuration des alias";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier contenant le code ANSI pour la décoration de fond";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le code ANSI pour la décoration de fond";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier contenant le code ANSI pour la décoration de fond";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier sauvegardant le code couleur ANSI de la couleur de fond précédant un changement de couleur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="Cette variable globale enregistre le nom du fichier sauvegardant le code ANSI de la couleur de fond précédant un changement de couleur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier sauvegardant le code ANSI de la couleur de fond précédant un changement de couleur";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du       the terminal's raw background color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="Cette variable globale enregistre le nom du      terminal's raw background color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le       the terminal's raw background color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier contenant le code couleur ANSI brut de la coloration de fond actuelle récupéré par la fonction « BU.Main.TextFormat.GetBGColorFromCMD() »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le code couleur ANSI brut de la coloration de fond actuelle récupéré par la fonction « BU.Main.TextFormat.GetBGColorFromCMD() »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier contenant le code couleur ANSI brut de la coloration de fond actuelle récupéré par la fonction « BU.Main.TextFormat.GetBGColorFromCMD() »";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier contenant le code ANSI pour la coloration de texte";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="Cette variable globale enregistre le nom du      Decho color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le       the Decho color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier sauvegardant le code couleur ANSI de la couleur de texte précédant un changement de couleur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="Cette variable globale enregistre le nom du fichier sauvegardant le code ANSI de la couleur de texte précédant un changement de couleur";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier sauvegardant le code ANSI de la couleur de texte précédant un changement de couleur";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du       the terminal's raw text color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="Cette variable globale enregistre le nom du      terminal's raw text color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le       the terminal's raw text color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier contenant le code couleur ANSI brut de la coloration de texte actuelle récupéré par la fonction « BU.Main.TextFormat.GetTextColorFromCMD() »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le code couleur ANSI brut de la coloration de texte actuelle récupéré par la fonction « BU.Main.TextFormat.GetTextColorFromCMD() »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier contenant le code couleur ANSI brut de la coloration de texte actuelle récupéré par la fonction « BU.Main.TextFormat.GetTextColorFromCMD() »";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier de logs de la fonction « BU.Main.Echo.__EchoVoid() »";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="Cette variable globale enregistre le nom du fichier de logs de la fonction « BU.Main.Echo.__EchoVoid() »";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier de logs de la fonction « BU.Main.Echo.__EchoVoid() »";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du dossier parent du dossier contenant le fichier de log du projet";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="Cette variable globale enregistre le nom du dossier parent du dossier contenant le fichier de log du projet";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="Cette variable globale enregistre le chemin vers le dossier parent du dossier contenant le fichier de log du projet";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du dossier contenant le fichier de logs du projet";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="Cette variable globale enregistre le nom du répertoire parent du dossier contenant le fichier de logs du projet";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="Cette variable globale enregistre le chemin vers le répertoire parent du dossier contenant le fichier de logs du projet";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du fichier de logs du projet";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="Cette variable globale enregistre le nom du fichier de logs du projet  project's log file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="Cette variable globale enregistre le nom du fichier de logs du projet";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH="Cette variable globale enregistre le chemin vers le fichier de logs du projet";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="Cette variable globale enregistre le chemin vers le répertoire parent du script de parsing du fichier CSV contenant les traductions du module principal";
@@ -696,17 +697,17 @@ __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de c
 # Liste des valeurs acceptées.
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS="Les arguments supportés pour le module principal sont :":
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="--stat-decho=authorize         OU --stat-decho=forbid          OU --stat-decho=resctrict";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="--stat-decho=authorize         OU --stat-decho=forbid        OU --stat-decho=resctrict";
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE________ECHO="--stat-echo=false              OU --stat-echo=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="--stat-error=fatal             OU --stat-error=void			OU --stat-error=warning";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="--stat-error=fatal             OU --stat-error=void          OU --stat-error=warning";
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_________LOG="--stat-log=false               OU --stat-log=true";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="--stat-log-r=log               OU --stat-log-r=tee             OU --stat-log-r=void";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="--stat-op-root=authorized      OU --stat-op-root=forbidden     OU --stat-op-root=restricted";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="--stat-log-r=log               OU --stat-log-r=tee           OU --stat-log-r=void";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="--stat-op-root=authorized      OU --stat-op-root=forbidden   OU --stat-op-root=restricted";
 
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="--stat-time-header=float,      où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="--stat-time-newline=float,     où « float » est un nombre à virgule flottante";
-__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="--stat-time-txt=float,         où « float » est un nombre à virgule flottante";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="--stat-time-header=float       où « float » est un nombre à virgule";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="--stat-time-newline=float      où « float » est un nombre à virgule";
+__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="--stat-time-txt=float          où « float » est un nombre à virgule";
 
 __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____TXT_FMT="--stat-txt-fmt=false           OU --stat-txt-fmt=true";
 

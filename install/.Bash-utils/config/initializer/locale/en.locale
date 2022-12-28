@@ -615,29 +615,29 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PAR
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME="This global variable stores the name of the aliases configurations file";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH="This global variable stores the path to the aliases configurations file";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="This global variable stores the path to the Decho background color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="This global variable stores the name of the Decho background color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="This global variable stores the path to the Decho background color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file saving the ANSI color code of the background color before a color change";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="This global variable stores the name of the file saving the ANSI code of the background color before a color change";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="This global variable stores the path to the file saving the ANSI code of the background color before a color change";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="This global variable stores the path to the terminal's raw background color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="This global variable stores the name of the terminal's raw background color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="This global variable stores the path to the terminal's raw background color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="This global variable stores the name of the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="This global variable stores the path to the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="This global variable stores the path to the Decho color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="This global variable stores the name of the Decho color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="This global variable stores the path to the Decho color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file saving the ANSI color code of the text color preceding a color change";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="This global variable stores the name of the file saving the ANSI code of the text color preceding a color change";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="This global variable stores the path to the file saving the ANSI code of the text color preceding a color change";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="This global variable stores the path to the terminal's raw text color code file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="This global variable stores the name of the terminal's raw text color code file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="This global variable stores the path to the terminal's raw text color code file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="This global variable stores the name of the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="This global variable stores the path to the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="This global variable stores the path to the echo debugging file's parent directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="This global variable stores the name of the echo debugging file";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="This global variable stores the path to the echo debugging file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="This global variable stores the path to the parent directory of the log file of the « BU.Main.Echo.__EchoVoid() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="This global variable stores the name of the log file of the « BU.Main.Echo.__EchoVoid() » function";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="This global variable stores the path to the log file of the « BU.Main.Echo.__EchoVoid() » function";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="This global variable stores the path to the parent directory of the project's log file's directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="This global variable stores the name of the parent directory of the project's log file's directory";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="This global variable stores the path to the parent directory of the project's log file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="This global variable stores the path to the parent directory of the folder containing the project's log file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="This global variable stores the name of the parent directory of the folder containing the project's log file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="This global variable stores the path to the parent directory of the folder containing the project's log file";
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT="This global variable stores the path to the project's log file's parent directory";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="This global variable stores the name of the project's log file";
