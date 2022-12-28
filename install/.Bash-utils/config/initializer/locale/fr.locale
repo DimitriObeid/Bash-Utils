@@ -594,6 +594,36 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__
 
 # --------
 
+# FICHIER : "Module.conf"
+
+# Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__BIN="Cette variable globale enregistre le chemin du dossier des fichiers exécutables du framework";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__CONFIG="Cette variable globale enregistre le chemin du dossier des configurations du module principal « main »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__DOCS="Cette variable globale enregistre le chemin du dossier de documentation de tout le framework";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__LIB="Cette variable globale enregistre le chemin du dossier de librairie « lib » du framework";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__RES="Cette variable globale enregistre le chemin du dossier de ressources « res » du framework";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS="Cette variable globale enregistre le chemin du dossier racine des outils de développement (devtools)";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_BIN="Cette variable globale enregistre le chemin du dossier des fichiers exécutables des outils de développement";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_DSK="Cette variable globale enregistre le chemin du dossier des fichiers « .desktop » des outils de développement";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_IMG="Cette variable globale enregistre le chemin du dossier des icônes des outils de développement";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_SRC="Cette variable globale enregistre le chemin du dossier des fichiers source des outils de développement";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_TRA="Cette variable globale enregistre le chemin du dossier des fichiers de traduction des outils de développement";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_FUNCTS_DIR_PATH="Cette variable globale enregistre le chemin du dossier des fonctions (« functions ») de la librairie du framework";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_MOD_DIR_PATH="Cette variable globale enregistre le chemin du dossier des fonctions du module principal « main »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_LANG_DIR_PATH="Cette variable globale enregistre le chemin du dossier des fichiers de traductions des modules (« lib »)";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOptimize__FNCT="Cette variable globale enregistre le chemin du fichier de configuration « %s » du module principal « main »";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="Cette variable globale enregistre le chemin du script d'initialisation du module principal « main »";
+
+
+# Définition des variables globales.
+
+
+# --------
+
 ## FICHIER : "Project.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
