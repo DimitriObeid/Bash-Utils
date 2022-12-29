@@ -765,6 +765,13 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR
 
 # --------
 
+## FILE : "Time.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE="This command substitution executes the « date » command, and passes arguments in order to print the date at the « YYYY-MM-DD hh-mm-ss » format";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE_DISPLAY="This command substitution prints the output of the « \$__BU_MAIN_TIME_DATE » command substitution with more decoration, in order to display the date in an easily and colored readable log format : [ YYYY-MM-DD hh-mm-ss ]";
+
+# --------
+
 # -----------------------------------------------
 
 

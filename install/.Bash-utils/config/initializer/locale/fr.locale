@@ -761,7 +761,14 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_CHAR_HEADER_LINE__VAR
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_PRINT_TAB__VAR="Cette variable globale enregistre la chaîne de caractères qui met mieux en valeur une chaîne de caractères";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_LINE__VAR="Cette variable globale enregistre une chaîne extraite d'une ligne dans un fichier";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="Ce tableau enregistre chaque message d'erreur affiché lorsque la valeur de la variable d'état globale %s est définie sur %s.";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="Cette variable globale enregistre une chaîne de caractères qui sert de délimiteur pour séparer une chaîne de caractères en sous-chaînes.";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="Cette variable globale enregistre une chaîne de caractères qui sert de délimiteur pour séparer une chaîne de caractères en sous-chaînes";
+
+# --------
+
+## FICHIER : "Time.conf"
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE="Cette substitution de commande exécute la commande « date », et passe des arguments dans le but d'afficher la date au format « AAAA-MM-JH hh-mm-ss »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE_DISPLAY="Cette substitution de commande affiche le résultat de la commande de substitution « \$__BU_MAIN_TIME_DATE » avec plus de décorations, dans le but d'afficher la date dans un format de journalisation coloré et facilement lisible : [ AAAA-MM-JJ hh-mm-ss ]";
 
 # --------
 
