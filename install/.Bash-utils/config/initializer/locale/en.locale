@@ -43,7 +43,7 @@ __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-########################### PROCESSING THE MODULES INITIALISATION SCRIPT ##########################
+########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
 
 #### OUT OF FUNCTION MESSAGES
 
@@ -618,9 +618,31 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOp
 
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="This global variable stores the path to the initializer script of the « main » module";
 
-
 # Definition of the global variables.
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH="This global variable stores the path to the file which contains the path to the Bash Utils framework's library root directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH__ROOT="This global variable stores the path to the file which contains the path to the Bash Utils framework's library root directory";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH="This global variable stores the path to Bash Utils framework's library root directory, which is written in the « %s » file";
 
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ERR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : THE PATH TO THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER WRITTEN IN THE « %s » FILE WAS NOT FOUND IN YOUR HARD DRIVE";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__INFO="Path currently written in this file : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ADVICE="Please check the path recorded in this file for typos if you typed it by yourself, or verify where you've stored this root folder";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ERR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s » EXISTS, BUT IS EMPTY";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ADVICE="Please write the path to Bash Utils framework's library root directory inside this file, manually or with the installer file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ERR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : YOU DON'T HAVE THE RIGHT TO READ THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__INFO="It means that you have created this file with the super-user privileges, by hand or with the installation script (in this case, something may have be wrong)";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_1="Please execute this script with root user privilieges, or change the ownership of the « %s » file, or create a new file, and rename the file to find in the « %s » file";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_2="If you opt for the last solution, please find the line containing the string « __BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME= » in the « DEFINING GLOBAL VARIABLES » subsection";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ERR="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s » DOESN'T EXISTS";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ADVICE="Please create this file and write the path to Bash Utils framework's library root directory inside this file, manually or with the installer file";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY="This array stores the path of each « .lib » library file in the functions folder of the « Hardware » module TO SOURCE (NOT SOURCED YET)";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the global status variables values modified by the user during the inclusion of arguments for the « main » module's initialization";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the path of each SOURCED « main » module's library files";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the path of each SOURCED « main » module's configuration files";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY="This array stores the path of each « main » module's configuration files TO SOURCE (NOT SOURCED YET)";
 
 # --------
 
