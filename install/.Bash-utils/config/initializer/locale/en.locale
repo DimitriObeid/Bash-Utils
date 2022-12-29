@@ -556,10 +556,56 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 ## FILE : "Colors.conf"
 
 # Definition of the functions necessary for the direct inclusion of the file (commands are executed directly at inclusion, and not later, with the code written in the function loaded in memory).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT="This global variable stores the « %s » color code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » color's code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » color's code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » colors global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_1="This global variable stores the raw ANSI color code for this color : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_2="This global variable stores the raw ANSI color code for this action : %s";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » color code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » color code";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_2="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » action color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+
+# Definition of the global variables containing the names of the colors.
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_AQUA='aqua blue';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLACK='black';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLUE='blue';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_CYAN='cyan blue';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_FUCHSIA='fuchsia';
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GRAY='gray';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GREEN='green';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_LIME='lime green';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_MAROON='maroon';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_NAVY='navy blue';
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_OLIVE='olive green';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_ORANGE='orange';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PINK='pink';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PURPLE='purple';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_RED='red';
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SALMON='salmon';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SILVER='silver gray';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TAN='brown tan';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TEAL='teal';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TURQUOISE='turquoise';
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_VIOLET='violet';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_WHITE='white';
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_YELLOW='yellow';
+
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_CMD="command names";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_ERROR="error messages";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_FUNCTION="function names";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_HIGHLIGHT="text highlighting";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_NEWSTEP="new step messages";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_PATH="paths highlighting";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_SUCCESS="success messages";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_VAR="variables names highlighting";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_WARNING="warning messages";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_RESET="This command substitution executes the « tput sgr0 » command to reset the text mode's text color";
 
 # --------
 
