@@ -178,11 +178,33 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9="Tableau global déclarée : %
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A="Variable globale déclarée : %s";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B="Description :";
 
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Type        : tableau";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Type        : %s";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Type        : Array (tableau)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Type        : %s %s";
 
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Valeur      : La valeur de la variable globale « %s » est une substition de commande";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Valeur      : La valeur de la variable globale « %s » est une substitution de commande";
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F="Valeur      : %s";
+
+# Traduction des types de variables.
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="(caractère alphabétique)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING="(chaîne de caractères alphabétique)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL="(variable booléenne)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD="(substitution de commandes)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR="(caractère (alphanumérique))";
+
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR="(dossier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH="(chemin vers un dossier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE="(fichier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH="(chemin vers un fichier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT="(nombre décimal)";
+
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT="(nombre décimal négatif)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT="(nombre décimal positif)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT="(nombre entier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG="(nombre entier négatif)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS="(nombre entier positif)";
+
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH="(chemin vers un dossier ou un fichier)";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING="(chaîne de caractères)";
 
 # Fichiers, fonctions et numéros de ligne connus.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1";
@@ -565,7 +587,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNC
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_A="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie pour cette action : %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_C="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur d'actions « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée"
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur d'actions « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_C="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # Définition des variables globales contenant les noms des couleurs.
@@ -753,10 +775,10 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSE
 ## FICHIER : "Text.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="Cette substition de commande exécute la commande « tput %s » ou « stty size » dans le but d'obtenir le nombre total de lignes ou de colonnes sur la zone de texte du terminal";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de formater le texte à partir de la mise en forme du texte suivante : « %s »";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte à partir de la mise en forme du texte suivante : « %s »";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="Cette substition de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte de toute mise en forme";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="Cette substitution de commande exécute la commande « tput %s » ou « stty size » dans le but d'obtenir le nombre total de lignes ou de colonnes sur la zone de texte du terminal";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de formater le texte à partir de la mise en forme du texte suivante : « %s »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte à partir de la mise en forme du texte suivante : « %s »";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextFormat() » afin de réinitialiser le texte de toute mise en forme";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitialize__FNCT="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de texte « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # Définition des variables globales.

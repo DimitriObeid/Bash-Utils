@@ -37,7 +37,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -102,7 +102,7 @@ function BU.ModuleInit.IsFrameworkLocalizedWrapped()    { local v_currFile; v_cu
 function BU.ModuleInit.IsFrameworkWrapped()             { if BU.ModuleInit.IsFrameworkLocalizedWrapped || BU.ModuleInit.IsFrameworkUnlocalizedWrapped; then return 0; else return 1; fi }
 
 # Checking if the function and / or sourced code currently executed is a part of a script file or running in an interactive shell.
-function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" = './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
+function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" == './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
 
 # Checking if the framework is translated.
 function BU.ModuleInit.IsTranslated()                   { if [ "${__BASH_UTILS_FRAMEWORK_IS_TRANSLATED,,}" == 'true' ]; then return 0; else return 1; fi }
@@ -120,11 +120,11 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 # Printing that the script's execution was interrupted by the user.
 function BU.ModuleInit.SIGINT()
 {
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && echo >&2; };
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2 && echo >&2; };
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && echo >&2; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && echo >&2; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2 && echo >&2; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && echo >&2; };
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && echo >&2; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && echo >&2; };
 }
 
 # Defining the framework's traps.
@@ -149,11 +149,11 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     echo '------------------------------------------------------------------------' >&2;
     echo >&2;
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && echo >&2;
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "The rest of the library will use english as default language" >&2 && echo >&2;
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The rest of the library will use english as default language" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && echo >&2;
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && echo >&2;
 
     sleep 0.5;
 
@@ -174,7 +174,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         echo >&2;
 
         # Deutch | German
-        [ "${v_lang_backup,,}" = 'de' ] && {
+        [ "${v_lang_backup,,}" == 'de' ] && {
             echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
             echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
@@ -187,7 +187,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # English
-        [ "${v_lang_backup,,}" = 'en' ] && {
+        [ "${v_lang_backup,,}" == 'en' ] && {
             echo '-----------------------------------------------------------' >&2 && echo >&2;
             echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
@@ -200,7 +200,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Español | Spanish
-        [ "${v_lang_backup,,}" = 'es' ] && {
+        [ "${v_lang_backup,,}" == 'es' ] && {
             echo '-----------------------------------------------------------------' >&2 && echo >&2;
             echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
 
@@ -213,7 +213,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Français | French
-        [ "${v_lang_backup,,}" = 'fr' ] && {
+        [ "${v_lang_backup,,}" == 'fr' ] && {
             echo '---------------------------------------------------------------------' >&2 && echo >&2;
             echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION ANGLAIS" >&2 && echo >&2;
 
@@ -259,21 +259,21 @@ function BU.ModuleInit.GetModuleInitLanguage()
         __BU_MODULE_INIT__USER_LANG="en_US.UTF-8";
     fi
 
-	if [ "${p_lang_ISO_639_1^^}" = 'NULL' ]; then
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
+	if [ "${p_lang_ISO_639_1^^}" == 'NULL' ]; then
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
 		BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     elif [ "${p_lang_ISO_639_1^^}" != 'NULL' ] && [ ! -f "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/${p_lang_ISO_639_1}.locale" ]; then
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
 
         BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
@@ -283,7 +283,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
             echo >&2;
 
             # Deutch | German
-            [ "${v_lang_backup,,}" = 'de' ] && {
+            [ "${v_lang_backup,,}" == 'de' ] && {
                 echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
                 echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
@@ -296,7 +296,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
             }
 
             # English
-            [ "${v_lang_backup,,}" = 'en' ] && {
+            [ "${v_lang_backup,,}" == 'en' ] && {
                 echo '-----------------------------------------------------------' >&2 && echo >&2;
                 echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
@@ -309,7 +309,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
             }
 
             # Español | Spanish
-            [ "${v_lang_backup,,}" = 'es' ] && {
+            [ "${v_lang_backup,,}" == 'es' ] && {
                 echo '-----------------------------------------------------------------' >&2 && echo >&2;
                 echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
 
@@ -322,7 +322,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
             }
 
             # Français | French
-            [ "${v_lang_backup,,}" = 'fr' ] && {
+            [ "${v_lang_backup,,}" == 'fr' ] && {
                 echo '---------------------------------------------------------------------' >&2 && echo >&2;
                 echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION ANGLAIS" >&2 && echo >&2;
 
@@ -337,11 +337,11 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
         #
         BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/${p_lang_ISO_639_1}.locale" || {
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" = "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" = 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
 
             BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
         }
@@ -374,7 +374,7 @@ function BU.ModuleInit.AskPrintLog()
 
 		echo; read -rp "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS}" read_ask_print_log;
 
-		if [ "${read_ask_print_log,,}" = 'yes' ] || [ "${read_ask_print_log^^}" = 'Y' ]; then
+		if [ "${read_ask_print_log,,}" == 'yes' ] || [ "${read_ask_print_log^^}" == 'Y' ]; then
 			BU.ModuleInit.PrintLog || return 1;
 
 			return 0;
@@ -398,7 +398,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
     BU.ModuleInit.Msg;
 
     # 1 - FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
-    # 2 - Checkig if the framework is translated thanks to the CSV file parser.
+    # 2 - Checking if the framework is translated thanks to the CSV file parser.
     # 3 - FINDING THE ".Bash-utils" FOLDER
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT_HOME"                  "${__BU_MODULE_INIT__ROOT_HOME}"                'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME}"               "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__root_home__lineno}";
@@ -449,7 +449,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # Unsetting every string variables in order to free up some memory.
 
-	# Don't double quote the command substitution.
+	# DO NOT single or double quote the following command substitution.
 
 	# shellcheck disable=SC2046
 	unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");
@@ -486,7 +486,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 # shellcheck disable=SC2059
 function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 {
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" = '--mode-log-full' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-full' ]; then
 
         #**** Parameters ****
         local p_var_name=${1:-$'\0'};   # String    - Default : NULL    - Name of the variable.
@@ -500,8 +500,8 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 
         # If the variable type is an array, then the values must be passed as an array,
         # or else only the first index's value will be displayed.
-        shift 8
-        local pa_var_val_array=("$@")
+        shift 8;
+        local pa_var_val_array=("$@");
 
         #**** Variables ****
         local v_modl; v_modl="$(if [[ "${p_modl^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL}" "${p_modl}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL_NULL}"; fi)";
@@ -509,41 +509,58 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
         local v_func; v_func="$(if [[ "${p_func^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC}" "${p_func}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL}"; fi)";
         local v_line; v_line="$(if [[ "${p_line^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE}" "${p_line}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL}"; fi)";
 
-        #**** Code ****
-		if [ "${p_var_type^^}" = 'NULL' ]; then
-            p_var_type="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN}";
+        local v_type_transl;
 
-		# Checking if the "$p_var_type" argument value matches an awaited pattern.
-		# - array	: this variable is an array.
-		# - cmd	    : this variable stores code in order to perform an action (either a function, a command or a condition)
-        # - bool    : this variable stores a boolean value ("true" or "false" only).
-		# - dir		: this variable stores the name of a directory.
-		# - file	: this variable stores the name of a file.
-		# - float	: this variable stores a floating number.
-        # - dirpath : this variable stores the path to a directory.
-        # - filepath: this variable stores the path to a file.
-		# - int		: this variable stores an integer.
-		# - path:	: this variable stores the path to a directory or a file.
-		# - string	: this variable stores a string (other than the name of a directory or a file, or a path).
-		elif  [[ "${p_var_type,,}" != arr?(ay) ]] \
-			&& [ "${p_var_type,,}" != 'cmd' ] \
-            && [ "${p_var_type,,}" != 'dir' ] \
-            && [ "${p_var_type,,}" != 'int' ] \
-			&& [ "${p_var_type,,}" != 'bool' ] \
-			&& [ "${p_var_type,,}" != 'file' ] \
-            && [ "${p_var_type,,}" != 'path' ] \
-			&& [ "${p_var_type,,}" != 'float' ]	\
-            && [ "${p_var_type,,}" != 'string' ] \
-			&& [ "${p_var_type,,}" != 'dirpath' ] \
-			&& [ "${p_var_type,,}" != "filepath" ];
-			then
+        #**** Code ****
+		if [ "${p_var_type^^}" == 'NULL' ]; then
+            p_var_type="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN}";
+        else
+            # Checking if the "$p_var_type" argument value matches an awaited pattern.
+            # - array	: this variable is an array.
+            # - achar   : this variable stores an alphabetic character.
+            # - astring : this variable stores an alphabetic string.
+            # - bool    : this variable stores a boolean value ("true" or "false" only).
+            # - cmd	    : this variable stores code in order to perform an action (either a function, a command or a condition)
+            # - char    : this variable stores a single alphanumeric character (can be alphabetic or numeric).
+            # - dir		: this variable stores the name of a directory.
+            # - dirpath : this variable stores the path to a directory.
+            # - file	: this variable stores the name of a file.
+            # - filepath: this variable stores the path to a file.
+            # - float	: this variable stores a floating number.
+            # - floatneg: this variable stores a negative floating number only.
+            # - floatpos: this variable stores a positive floating number only.
+            # - int		: this variable stores an integer.
+            # - intneg  : this variable stores a negative integer only.
+            # - intpos  : this variable stores a positive integer only.
+            # - path 	: this variable stores the path to a directory or a file.
+            # - string	: this variable stores a string (other than the name of a directory or a file, or a path).
+            if      [[ "${p_var_type,,}" != arr?(ay) ]];    then true;
+            elif    [ "${p_var_type,,}" != 'cmd' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD";
+            elif    [ "${p_var_type,,}" != 'dir' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR";
+            elif    [ "${p_var_type,,}" != 'int' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT";
+            elif    [ "${p_var_type,,}" != 'bool' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL";
+            elif    [ "${p_var_type,,}" != 'char' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR";
+            elif    [ "${p_var_type,,}" != 'file' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE";
+            elif    [ "${p_var_type,,}" != 'path' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH";
+            elif    [ "${p_var_type,,}" != "achar" ];       then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR";
+            elif    [ "${p_var_type,,}" != 'float' ];       then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT";
+            elif    [ "${p_var_type,,}" != "intneg" ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG";
+            elif    [ "${p_var_type,,}" != "intpos" ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS";
+            elif    [ "${p_var_type,,}" != 'string' ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING";
+            elif    [ "${p_var_type,,}" != "astring" ];     then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING";
+            elif    [ "${p_var_type,,}" != 'dirpath' ];     then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH";
+            elif    [ "${p_var_type,,}" != "filepath" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH";
+            elif    [ "${p_var_type,,}" != "floatneg" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATNEG";
+            elif    [ "${p_var_type,,}" != "floatpos" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATPOS";
+			else
 				p_var_type="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN}";
+            fi
 		fi
 
         BU.ModuleInit.Msg;
 
 		# Checking if the variable is an array.
-		if [ "$p_var_type" = 'array' ]; then
+		if [ "$p_var_type" == 'array' ]; then
             BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY}" "${p_var_name}")" '-' 'msg';
 
 		# Checking if the variable is not an array.
@@ -563,7 +580,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 		BU.ModuleInit.Msg "${v_line}";
 
 		# If the variable type is an array, then each value is displayed in several blocks of five rows high, with it's index.
-		if [ "${p_var_type,,}" = 'array' ]; then
+		if [ "${p_var_type,,}" == 'array' ]; then
             BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE}";
             BU.ModuleInit.Msg;
 
@@ -610,13 +627,13 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 			fi
 		else
             # shellcheck disable=SC2059
-            BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE}" "${p_var_type}")";
+            BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE}" "${p_var_type}" "${v_type_transl}")";
             BU.ModuleInit.Msg;
 
 			# If a variable is stored in the processed variable.
 			if [ -n "$p_var_val" ]; then
 
-				if [ "${p_var_type,,}" = 'cmd' ]; then
+				if [ "${p_var_type,,}" == 'cmd' ]; then
                     # shellcheck disable=SC2059
 					BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD}" "${p_var_name}")";
 				else
@@ -782,11 +799,11 @@ function BU.ModuleInit.MsgLine()
     local p_context=${3:-$'\0'};    # String    - Default : NULL    - Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
-    if      [ "${p_context,,}" = 'echo' ]; then
+    if      [ "${p_context,,}" == 'echo' ]; then
         BU.ModuleInit.MsgLineCount "${#p_str}" "${p_line}" 'echo';
         echo "$p_str";
 
-    elif    [ "${p_context,,}" = 'msg' ]; then
+    elif    [ "${p_context,,}" == 'msg' ]; then
         BU.ModuleInit.MsgLineCount "${#p_str}" "${p_line}" 'msg' || return 1;
         BU.ModuleInit.Msg "${p_str}" || return 1;
 
@@ -806,10 +823,10 @@ function BU.ModuleInit.MsgLineCount()
     local p_context=${3:-$'\0'};    # Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
-    if      [ "${p_context,,}" = 'echo' ]; then
+    if      [ "${p_context,,}" == 'echo' ]; then
         for ((i=0; i<p_number; i++)); do echo -n "${p_line}"; done; echo;
 
-    elif    [ "${p_context,,}" = 'msg' ]; then
+    elif    [ "${p_context,,}" == 'msg' ]; then
         for ((i=0; i<p_number; i++)); do BU.ModuleInit.Msg "${p_line}" '-n' || return 1; done; BU.ModuleInit.Msg || return 1;
 
     else
@@ -849,10 +866,10 @@ function BU.ModuleInit.PrintLog()
         echo; return 0;
     fi
 
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" = '--mode-log-full' ]; then
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-full' ]; then
         echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE}"; echo;
 
-    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" = '--mode-log-partial' ]; then
+    elif [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-partial' ]; then
         echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}"; echo;
     fi
 
@@ -950,12 +967,12 @@ function BU.ModuleInit.CheckPath()
     local p_target=${2:-NULL};  # String  - Default : NULL    - Specify if the target is a directory or a file.
 
     #**** Code ****
-    if [ "${p_path^^}" = 'NULL' ]; then
+    if [ "${p_path^^}" == 'NULL' ]; then
         # shellcheck disable=SC2059
         printf "« ${__BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH} »" >&2; return 0;
 
     else
-        if [ "${p_target,,}" = 'NULL' ]; then
+        if [ "${p_target,,}" == 'NULL' ]; then
             echo  >&2;
 
             # shellcheck disable=SC2059
@@ -964,7 +981,7 @@ function BU.ModuleInit.CheckPath()
             # shellcheck disable=SC2059
             printf "${__BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION}" "${FUNCNAME[0]}" >&2; echo >&2; return 1;
         else
-            if [[ "${p_target}" = [D-d] ]]; then
+            if [[ "${p_target}" == [D-d] ]]; then
 
                 if [ -d "${p_path}" ]; then
                     printf "%s" "${p_path}"; return 0;
@@ -973,7 +990,7 @@ function BU.ModuleInit.CheckPath()
                     printf "%s ${__BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND}" "${p_path}" >&2; return 0;
                 fi
 
-            elif [[ "${p_target}" = [F-f] ]]; then
+            elif [[ "${p_target}" == [F-f] ]]; then
 
                 if [ -f "${p_path}" ]; then
                     printf "%s" "${p_path}"; return 0;
@@ -1032,7 +1049,7 @@ function BU.ModuleInit.FindPath()
         v_hasFailed='failed';
 	};
 
-	if [ "$v_hasFailed" = 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
+	if [ "$v_hasFailed" == 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
 
 	if [ -n "$v_specific_var" ]; then
         local v_tmpfile;
@@ -1231,7 +1248,7 @@ function BU.ModuleInit.DisplayStatError()
     printf "In « %s », line « %s »" "${p_file}" "${p_lineno}" >&2;
     echo "Error : the « %s » variable's value is incorrect." "${p_var_name}" >&2;
 
-    if [ "${p_bad_value^^}" = 'NULL' ]; then
+    if [ "${p_bad_value^^}" == 'NULL' ]; then
         echo >&2; echo "Bad value : 'An empty string'" >&2;
     else
         echo >&2; EchoError "Bad value : « %s »" "${p_bad_value}" >&2;
@@ -1301,7 +1318,7 @@ function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG=
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "$?"; return 0; }
 
 # Checking if the debug mode is active.
-function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'true' ] && return 0; return 1; }
+function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
 
 # Processing the "module" value's parameters.
 
@@ -1367,7 +1384,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 #**** Code ****
                 # If the current value AND the new value are the same.
-                if [ "$p_value" = "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
+                if [ "$p_value" == "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "ERR_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE";
 
@@ -1411,7 +1428,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                 }
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
-                if [[ "${module_args,,}" = *'--stat-'* ]]; then
+                if [[ "${module_args,,}" == *'--stat-'* ]]; then
 					local value;
 
                     case "${module_args,,}" in
@@ -1421,7 +1438,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							value="${module_args#*=}";
 							value="${value% *}";
 
-                            if      [ "${value,,}" = 'false' ]                                  || [ "${value,,}" = 'true' ]; then
+                            if      [ "${value,,}" == 'false' ]                                  || [ "${value,,}" == 'true' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG="${value}";                     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
                             else
                                 BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug" "\n    --stat-debug=false\n    --stat-debug=true" || { v_loop_error='error'; break; };
@@ -1445,7 +1462,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
-                                elif    [ "${value,,}" = 'void' ]; then
+                                elif    [ "${value,,}" == 'void' ]; then
                                     __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}"      "$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 else
@@ -1573,7 +1590,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 				# Else, if the "module" parameter's value is a logging option : "--mode-log-full" or "--mode-log-partial".
 
 				# WARNING : these arguments are incompatible with each other, adding a new value will overwrite the former one.
-                elif [[ "${module_args,,}" = '--mode-'* ]]; then
+                elif [[ "${module_args,,}" == '--mode-'* ]]; then
 
 					case "${module_args,,}" in
 
@@ -1649,7 +1666,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                     v_loop_error='error'; break;
                 fi
-            done; if [ "${v_loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
             if ! BU.ModuleInit.IsFrameworkWrapped && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
@@ -1782,11 +1799,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 # shellcheck disable=SC2009
 if ! ps -a | grep -E "$$" | grep "bash" > /dev/null; then
-    [ "$(echo "${LANG}" | cut -d _ -f1)" = 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2 && echo >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" = 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2 && echo >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" = 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »" && echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2 && echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2 && echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »" && echo >&2;
 
-    [ "$(echo "${LANG}" | cut -d _ -f1)" = 'fr' ] && echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2 echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'fr' ] && echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2 echo >&2;
 
 	# WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
     BU.ModuleInit.IsInScript && exit 1; return 1;
@@ -1807,6 +1824,11 @@ BU.ModuleInit.DefineTraps;
 # shellcheck disable=SC2059,SC2016
 function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()
 {
+    #**** Variables ****
+    local __v__BASHX_DEBUG_VALS_ARRAY__lineno;
+
+    #**** Code ****
+
     # PID
     __BU_MODULE_INIT_PROJECT_PID="${$}";
     __bu_module_init__project_pid__lineno="$(( LINENO -1 ))";
@@ -1920,14 +1942,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
     __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 
-#     if      [[ "${value,,}" == c?(at?(eg?(ory))) ]] \
-# 	||  [[ "${value,,}" == c?(at?(eg?(orie)))?(s) ]] \
-# 	||  [[ "${value,,}" == fi?(l?(e))?(s)) ]] \
-# 	||  [[ "${value^^}" == FN?(C?(T))?(S) ]] \
-# 	||  [[ "${value,,}" == fun?(c?(t?(ion))?(s)) ]] \
-# 	||  [[ "${value,,}" == m?(od?(ule))?(s) ]] \
-# 	||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
-#     [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
+    __v__BASHX_DEBUG_VALS_ARRAY__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
                                               'fi' 'fil' 'fils' 'fis'  'file' 'files' \
@@ -1939,7 +1954,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                                               's-'  's-s' 's-c' 's-cs' 's-cat' 's-cats' 's-categ' 's-categs' 's-category' 's-categorie' 's-categories' \
                                               'sub-' 'sub-s' 'sub-c' 'sub-cs' 'sub-cat' 'sub-cats' 'sub-categ' 'sub-categs' 'sub-category' 'sub-categorie' 'sub-categories');
 
-    __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO - 1 ))";
+    __bu_module_init__bashx_debug_vals_array__lineno="$__v__BASHX_DEBUG_VALS_ARRAY__lineno";
 }
 
 # Calling the function previously defined, or else the global variables will not be declared.
@@ -2018,7 +2033,7 @@ function BU.ModuleInit.HandleErrors()
 
     #**** Code ****
     if [ "$p_returnCode" -eq 0 ]; then return 0; else
-        if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "${__BU_MODULE_INIT_IS_SOURCED}" = 'sourced' ]; then
+        if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "${__BU_MODULE_INIT_IS_SOURCED}" == 'sourced' ]; then
             BU.Main.Errors.HandleErrors "${p_returnCode}" "${p_errorString}" "${p_adviceString}" "${p_badValue}" "${p_file}" "${p_function}" "${p_lineno}"; return "$?";
 
         else
@@ -2366,7 +2381,7 @@ function BU.ModuleInit.ParseCSVLang()
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
 {
-    if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "sourced" = "${__BU_MODULE_INIT_IS_SOURCED}" ]; then
+    if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "sourced" == "${__BU_MODULE_INIT_IS_SOURCED}" ]; then
         # shellcheck disable=SC2059
         BU.Main.Headers.Header.Warning "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}\n" "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")")"; return 1;
     fi
@@ -2690,7 +2705,7 @@ function BashUtils_InitModules()
         # Incrementing the modules array index variable.
         v_index="$(( v_index+1 ))";
 
-	done; if [ "${v_loop_error,,}" = 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+	done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 
 	# Sourcing the user defined aliases file if the library is directly used from a script file.
 	if ! BU.ModuleInit.IsInScript && [ -f "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" ] && [ -n "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" ]; then BU.Main.Files.SourceFile "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" || return 1; fi
@@ -2790,7 +2805,7 @@ function BU.ModuleInit.InitNewModules()
             BU.ModuleInit.InitNewModule "${i}" || { v_loop_error='error'; break; };
         done
 
-        if [ "$v_loop_error" = 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+        if [ "$v_loop_error" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 
         return 0;
 	fi
@@ -2891,7 +2906,7 @@ function BU.ModuleInit.UnsourceModules()
             BU.ModuleInit.UnsourceModule "${i}" || { v_loop_error='error'; break; };
         done
 
-        if [ "$v_loop_error" = 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+        if [ "$v_loop_error" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 
         return 0;
 	fi
