@@ -763,7 +763,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitiali
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_CHAR_HEADER_LINE__VAR="Cette variable globale enregistre le caractère par défaut qui compose chaque ligne dessinée par la fonction %s";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_PRINT_TAB__VAR="Cette variable globale enregistre la chaîne de caractères qui met mieux en valeur une chaîne de caractères";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_LINE__VAR="Cette variable globale enregistre une chaîne extraite d'une ligne dans un fichier";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="Ce tableau enregistre chaque message d'erreur affiché lorsque la valeur de la variable d'état globale %s est définie sur %s.";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="Ce tableau enregistre chaque message d'erreur affiché lorsque la valeur de la variable globale d'état %s est définie sur %s.";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="Cette variable globale enregistre une chaîne de caractères qui sert de délimiteur pour séparer une chaîne de caractères en sous-chaînes";
 
 # --------
