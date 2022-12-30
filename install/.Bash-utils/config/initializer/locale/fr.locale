@@ -556,14 +556,17 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALIS
 ## FICHIER : "Colors.conf"
 
 # Définition des fonctions nécessaires à l'inclusion directe du fichier (les commandes sont exécutées directement lors de l'inclusion, et non plus tard, avec le code écrit dans la fonction chargée en mémoire).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_1="Cette variable globale enregistre le code couleur ANSI brut pour cette couleur : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_2="Cette variable globale enregistre le code couleur ANSI brut pour cette action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_A="Cette variable globale enregistre le code couleur ANSI brut pour cette couleur d'action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_C="Cette variable globale enregistre le code couleur ANSI brut pour cette couleur : %s";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT_A="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie pour cette action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT_C="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetBGColor() » afin de colorer le fond du texte avec le code de la couleur définie : %s";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_2="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur d'actions « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée"
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_A="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie pour cette action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_C="Cette substitution de commande exécute la fonction « BU.Main.TextFormat.SetTextColor() » afin de colorer le texte avec le code de la couleur définie : %s";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur d'actions « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée"
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_C="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : La variable globale de couleur « %s » ne peut pas être initialisée en raison d'un problème survenu lors de l'appel de la substitution de commande associée";
 
 # Définition des variables globales contenant les noms des couleurs.
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_AQUA='bleu aquatique';

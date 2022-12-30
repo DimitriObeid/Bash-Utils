@@ -556,14 +556,17 @@ __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIAL
 ## FILE : "Colors.conf"
 
 # Definition of the functions necessary for the direct inclusion of the file (commands are executed directly at inclusion, and not later, with the code written in the function loaded in memory).
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_1="This global variable stores the raw ANSI color code for this color : %s";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_2="This global variable stores the raw ANSI color code for this action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_A="This global variable stores the raw ANSI color code for the color this action : %s";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_C="This global variable stores the raw ANSI color code for this color : %s";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » color code";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » color code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT_A="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » action color code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorBGVarsNameSubsCmd_FNCT_C="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » color code";
 
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_1="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_2="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » action color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_A="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » action color code";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintColorTextVarsNameSubsCmd_FNCT_C="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » color code";
+
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » action color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_C="$__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT : The « %s » color global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
 
 # Definition of the global variables containing the names of the colors.
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_AQUA='aqua blue';
@@ -605,7 +608,7 @@ __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_PATH="paths highlighting";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_SUCCESS="success messages";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_VAR="variables names highlighting";
 __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_WARNING="warning messages";
-__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_RESET="This command substitution executes the « tput sgr0 » command to reset the text mode's text color";
+__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_RESET="This command substitution executes the « tput sgr0 » command to reset the text color";
 
 # --------
 
