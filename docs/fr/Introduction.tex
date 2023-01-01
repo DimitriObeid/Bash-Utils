@@ -264,11 +264,47 @@
 \end{justify}
 
 \begin{justify}
-    Fort heureusement, un script shell s'occupe de cette partie : \textbf{\color{lime}Bash-utils-init.sh}, dans le dossier personnel.
+    Et tout ceci, sans même parler de l'ajout d'autres modules, où dans certains cas, l'utilisateur voudra que certaines fonctionnalités réagissent différemment dans des situations précises.
 \end{justify}
 
 \begin{justify}
-    La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer le fichier cité ci-dessus. Il s'occupera de réaliser toutes les étapes ci-dessous.
+    Fort heureusement, trois scripts shell au choix s'occupent de cette partie : \textbf{\color{lime}Bash-utils-init.sh}, situé dans le dossier personnel, \textbf{\color{lime}Bash-utils-lang.sh}, situé dans le dossier \textbf{\color{lime}.Bash-utils/compiled/unstable} ou \textbf{\color{lime}Bash-utils-stable-lang.sh}, situé dans le dossier \textbf{\color{lime}.Bash-utils/compiled/stable}.
+\end{justify}
+
+\begin{justify}
+    La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer l'un des deux fichiers cités ci-dessus. Chacun d'entre eux s'occupera de réaliser toutes les étapes ci-dessous :
+\end{justify}
+
+% ------------
+
+% ----------------------
+
+% -----------------------------------------------
+
+\color{green}
+\subsection{\color{lime}Bash-utils.sh}\color{white}
+
+\begin{justify}
+    Si vous choisissez d'opter pour l'inclusion de ce fichier,
+\end{justify}
+
+\begin{justify}
+    \begin{itemize}
+        \item Inclure le fichier "Aliases.conf", listant les alias de chaque fonction de librairie du module, si un tel fichier est présent dans le dossier des fichiers de configuration du module.
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    \begin{itemize}
+        \item Inclure le fichier de configuration "Module.conf", qui liste les chemins des autres fichiers de configuration, puis le fichier d'initialisation dudit module.
+    \end{itemize}
+
+\end{justify}
+
+\begin{justify}
+    \begin{itemize}
+        \item Inclure le script d'initialisation, qui inclut les fichiers de librairie associés au module, ainsi que les fichiers de configuration listés dans le fichier "Module.conf" mentionné ci-dessus.
+    \end{itemize}
 \end{justify}
 
 \begin{justify}
@@ -288,7 +324,46 @@
 
 \end{justify}
 
+% ------------
 
+% ----------------------
+
+% -----------------------------------------------
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{\color{lime}Bash-utils-(stable)-lang.sh}\color{white}
+
+\begin{justify}
+    \textbf{Note :} Rien ne différencie techniquement les fichiers \textbf{\color{lime}.Bash-utils/compiled/unstable/Bash-utils-lang.sh} et \textbf{\color{lime}.Bash-utils/compiled/stable/Bash-utils-stable-lang.sh}, si ce n'est qu'il est absolument recommandé de ne pas toucher au dernier fichier mentionné, car :
+\end{justify}
+
+\begin{justify}
+    \begin{itemize}
+        \item il est inclus dans les fichiers exécutables des devtools
+
+        \item il a été débogué avec l'outil \textbf{\color{gray}Shellcheck} qui n'a détecté aucune erreur de programmation, de style, de frappe, etc...
+
+        \item son code a été testé en profondeur pour garantir une certaine stabilité et une exécution sans bugs majeurs, avant que l'ensemble des fichiers ne soient compilé en un seul fichier
+    \end{itemize}
+\end{justify}
+
+\begin{justify}
+    \textbf{Fonctionnement} : Étant donné que le code du module principal entier et du script d'initialisation (plus leurs fichiers de configuration) est contenu dans un seul fichier, aucun fichier supplémentaire n'est inclus.
+\end{justify}
+
+\begin{justify}
+    Cependant, chaque étape d'initialisation du framework est exécutée de la même manière que lors de l'inclusion du script \textbf{\color{orange}\$HOME/\color{lime}Bash-utils-init.sh}.
+\end{justify}
+
+% ------------
+
+% ----------------------
+
+% -----------------------------------------------
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
 
 \color{green}
 \subsection{Étapes d'initialisation}\color{white}
@@ -326,7 +401,7 @@
 \end{justify}
 
 \begin{justify}
-    D'abord, il vérifie que le module existe dans le dossier \textbf{\color{lime}\~/.Bash-utils}, puis il source le fichier d'initialisation de variables associé, situé dans le dossier \textbf{\color{lime}\~/.Bash-utils/config/modules/\$nom\_du\_module} et nommé \textbf{\color{lime}module.conf}, qui doit initialiser d'autres fichiers de configurations à placer de préférence dans ce même dossier.
+    D'abord, il vérifie que le module existe dans le dossier \textbf{\color{lime}\~/.Bash-utils}, puis il source le fichier d'initialisation de variables associé, situé dans le dossier \textbf{\color{lime}\~/.Bash-utils/config/modules/\color{orange}\$nom\_du\_module} et nommé \textbf{\color{lime}module.conf}, qui doit initialiser d'autres fichiers de configurations à placer de préférence dans ce même dossier.
 \end{justify}
 
 \begin{justify}
@@ -344,6 +419,17 @@
 \begin{justify}
     En quatrième et dernier lieu, le script modifie des variables de statut, dont la valeur initialement assignée dans le fichier \textbf{\color{lime}\~/.Bash-utils/config/modules/main/Status.conf} servait à initialiser la librairie.
 \end{justify}
+
+% ------------
+
+% ----------------------
+
+% -----------------------------------------------
+
+\color{green}\par\noindent\rule{\textwidth}{0.4pt}\color{white}
+
+\color{green}
+\subsection{Que faire après avoir inclus l'un des fichiers d'initialisation}\color{white}
 
 % ------------
 
