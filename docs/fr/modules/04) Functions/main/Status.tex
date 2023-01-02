@@ -17,7 +17,6 @@
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-
 % Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
 \definecolor{back}{HTML}{000000}        % Noir          - Fond
 \definecolor{case}{HTML}{fcff00}        % Jaune clair   - Conditions case
@@ -32,11 +31,10 @@
 \definecolor{text}{HTML}{ffffff}        % Blanc         - Texte normal
 \definecolor{vars}{HTML}{FF7F00}        % Orange        - Noms des paramètres et des variables
 
-
 \fontfamily{Roboto}
 
 \pagecolor{back}
-\title{\color{sec1}Fonctions du fichier de librairie \color{lime}Status.lib}\color{text}
+\title{\color{sec1}Fonctions du fichier de librairie \color{path}Status.lib}\color{text}
 \author{Dimitri OBEID}
 \date{2021}
 \pagestyle{fancy}
@@ -90,11 +88,11 @@
         \hline
         \textbf{Dossier parent} - \textit{dossier des configurations} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Colors.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Colors.conf}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Status.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Status.conf}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{lime}/config/modules/main}    & \textbf{\color{lime}Text.conf}\\
+        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Text.conf}\\
         \hline
     \end{tabular}
 
@@ -103,7 +101,7 @@
         \hline
         \textbf{Dossier parent} - \textit{dossier de la librairie} & \textbf{Nom du fichier}\\
         \hline
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{lime}/lib/functions/main}   & \textbf{\color{lime}Checkings.lib}\\
+        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Checkings.lib}\\
         \hline
     \end{tabular}
 \end{justify}
@@ -121,7 +119,7 @@
 
 \textbf{Fonction : \color{func}BU.Main.Headers.DrawLine}\\[1\baselineskip]
 
-\textbf{Fichier de définition : \color{lime}Checkings.lib}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Checkings.lib}\\[1\baselineskip]
 
 % ------------
 
@@ -140,7 +138,7 @@
     Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Colors.conf}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
 
 % ------------
 
@@ -155,10 +153,10 @@
 \textbf{Description :}
 
 \begin{justify}
-    Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{gray}true}.
+    Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{cmds}true}.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Project.conf} \\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Project.conf} \\[1\baselineskip]
 
 % ------------
 
@@ -176,7 +174,7 @@
     Cette variable contient le caractère à afficher en tant que ligne de header.
 \end{justify}
 
-\textbf{Fichier de définition : \color{lime}Text.conf}\\[1\baselineskip]
+\textbf{Fichier de définition : \color{path}Text.conf}\\[1\baselineskip]
 
 % ------------
 
@@ -252,7 +250,7 @@
 
 \begin{justify}
     \begin{itemize}
-        \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{gray}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
+        \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{cmds}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
 
         \item \textbf{\color{vars}\$p\_lineno\color{text} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{vars}\$LINENO}).
 
@@ -437,7 +435,7 @@
 \end{justify}
 
 \begin{justify}
-     Le document \textbf{\color{lime}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
+     Le document \textbf{\color{path}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
 \end{justify}\setlength{\parskip}{1em}
 
 % ------------

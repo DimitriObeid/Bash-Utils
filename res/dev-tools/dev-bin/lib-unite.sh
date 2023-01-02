@@ -193,7 +193,7 @@ echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH") columns";
 echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH") words";
 
 # Deleting the empty lines if the awaited value is passed as script's second argument.
-if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" = 'rmlines' ]; then
+if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" == 'rmlines' ]; then
     echo;
 
     cat "$__BU_MAIN_FULL_FILE_PATH" | sed '/^[[:space:]]*$/d' > "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
@@ -210,7 +210,7 @@ if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" = 'rmlines' ]; then
 fi
 
 # Deleting the comments in the "$__BU_MAIN_FULL_FILE_PATH" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
-if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-base' ]; then
+if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
     echo;
 
     if [ -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
@@ -231,7 +231,7 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-base' ]; then
 fi
 
 # Deleting the comments in the "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
-if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-lines' ]; then
+if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
     echo;
 
     if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" ]; then
@@ -253,7 +253,7 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" = 'rmcomments-lines' ]; then
 fi
 
 # Deleting the generated file if the awaited value is passed as script's first argument.
-if [ "${__BU_ARG_RM,,}" = 'rm' ]; then
+if [ "${__BU_ARG_RM,,}" == 'rm' ]; then
     if rm "$__BU_MAIN_FULL_FILE_PATH"; then
         echo ; echo "The generated « $__BU_MAIN_FULL_FILE_PATH » file was successfully deleted";
     else

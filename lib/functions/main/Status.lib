@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -266,7 +266,7 @@ function BU.Main.Status.CheckSTAT_LOG()
 
         local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
 
-    elif [ "${__BU_MAIN_STAT_LOG,,}" = "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+    elif [ "${__BU_MAIN_STAT_LOG,,}" == "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         BU.Main.Files.CreateProjectLogFile || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 	fi
 
@@ -519,7 +519,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
     local v_loop_error;
 
     #*** Code ****
-    if [ "true" = "${p_value,,}" ] && BU.Main.Checkings.IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
+    if [ "true" == "${p_value,,}" ] && BU.Main.Checkings.IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
 
         # Declare an array of strings, which will store the messages
         if BU.Main.Status.CheckStatIsLogging; then
@@ -536,7 +536,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
             BU.Main.Echo.Newline;
         fi
 
-    elif [ 'false' = "${p_value,,}" ]; then
+    elif [ 'false' == "${p_value,,}" ]; then
         if BU.Main.Checkings.IsArrayNotEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}" && BU.Main.Status.CheckStatIsLogging; then
 
             for i in "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; do
@@ -558,7 +558,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 }
-            done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Green "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -599,7 +599,7 @@ function BU.Main.Status.ChangeSTAT_ERROR()
 function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY";
 
-	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ] && [ 'true' = "$1" ]; then
+	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ] && [ 'true' == "$1" ]; then
 		BU.Main.Echo.Warning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
 		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
@@ -635,16 +635,16 @@ function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main"
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS::easier-boolean-values-checkings";
 
 # Checking if the "BU.Echo<...>()" functions can call the "BU.Main.Status.CheckProjectLogStatus()" function without provoking an infinite loop.
-function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_ECHO,,}"           == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the library is into its initialization process ($__BU_MAIN_STAT_INITIALIZING).
-function BU.Main.Status.CheckStatIsInitializing()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsInitializing()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the log redirection mode is active.
-function BU.Main.Status.CheckStatIsLogging()       { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_LOG,,}"            = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsLogging()       { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_LOG,,}"            == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the initialization logs can be printed on the terminal.
-function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 # Checking if the text formatting is allowed.
-function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        = 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }

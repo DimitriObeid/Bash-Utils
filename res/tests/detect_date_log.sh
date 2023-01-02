@@ -18,6 +18,6 @@ __BU_MAIN_TIME_64="${__BU_MAIN_TIME_DATE_DISPLAY_STR:64}"
 
 __BU_MAIN_DATE_VARS=""
 
-if [[ "$__BU_MAIN_TIME_DATE_DISPLAY_STR" = "[ $__BU_MAIN_TIME_DATE ] "* ]]; then
+if [[ "$__BU_MAIN_TIME_DATE_DISPLAY_STR" == "[ $__BU_MAIN_TIME_DATE ] "* ]]; then
     echo true
 fi

@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -73,14 +73,14 @@ function BU.Main.Files.__ProcessingFile()
     local p_char=$3;
 
     #**** Code ****
-    if [ "$p_output" = 'E' ]; then
+    if [ "$p_output" == 'E' ]; then
         BU.Main.Echo.Error "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Main.Echo.Newline;
 
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
-    elif [ "$p_output" = 'S' ]; then
+    elif [ "$p_output" == 'S' ]; then
         BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
         BU.Main.Echo.Newline;
@@ -173,7 +173,7 @@ function BU.Main.Files.OverwriteFile()
     # Checking second if the script is operating at the root directory.
     BU.Main.Directories.TriggerRootDirWarning "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
 
-    if [ "$p_authorization" = "true" ]; then
+    if [ "$p_authorization" == "true" ]; then
 		BU.Main.Echo.Newstep "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists and is not empty.";
 		BU.Main.Echo.Newstep "Overwriting data from file $(BU.Main.Decho.Decho.Path "$p_path/")";
 		BU.Main.Echo.Newline;
@@ -331,8 +331,8 @@ function BU.Main.Files.CreateProjectLogFile()
 
     BU.Main.Echo.Success "Successfully created the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
-    if [ "${__BU_MAIN_STAT_DECHO,,}" = 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
-    if [ "${__BU_MAIN_STAT_ECHO,}"  = 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_DECHO,,}" == 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  == 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
     BU.Main.Headers.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
@@ -471,7 +471,7 @@ function BU.Main.Files.DeleteFile()
     #**** Code ****
     if ! BU.Main.Args__Files.DeleteFile "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    rm "$(if [ "${p_security,,}" = 'yes' ]; then echo '-i'; fi)" "$p_path";
+    rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "$p_path";
 
     BU.Main.Errors.HandleErrors "$?" "" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
@@ -1011,16 +1011,16 @@ function BU.Main.Files.AddToArchive()
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
     if ! BU.Main.Args__FilesCompress "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
-    if [ "$p_cmd" = '7z' ]; then
+    if [ "$p_cmd" == '7z' ]; then
         true
 
-    elif [ "$p_cmd" = 'bzip2' ]; then true;
+    elif [ "$p_cmd" == 'bzip2' ]; then true;
 
-    elif [ "$p_cmd" = '' ]; then true;
+    elif [ "$p_cmd" == '' ]; then true;
 
-    elif [ "$p_cmd" = 'gzip' ]; then true;
+    elif [ "$p_cmd" == 'gzip' ]; then true;
 
-    elif [ "$p_cmd" = 'zip' ]; then true;
+    elif [ "$p_cmd" == 'zip' ]; then true;
 
     fi
 
@@ -1094,29 +1094,29 @@ function BU.Main.Files.CompressFormat()
         }
 
     # Else, if the Bzip2 compression format is wanted.
-    elif [ "${p_cmd,,}" = 'bzip2' ]; then
+    elif [ "${p_cmd,,}" == 'bzip2' ]; then
         true;
 
     # Else, if the Bzip2 compression format is wanted for a Tar archive.
-    elif [[ "${p_cmd^^}" = TBZ?(2) ]] || [[ "${p_cmd,,}" = tar?(.)bz?(2) ]]; then
+    elif [[ "${p_cmd^^}" == TBZ?(2) ]] || [[ "${p_cmd,,}" == tar?(.)bz?(2) ]]; then
         tar "-jcf$p_opts" "" "" || {
             # TODO : Gérer les cas d'erreur de compression au format Bzip2.
             return 1;
         }
 
     # Else, if the Gzip compression format is wanted.
-    elif [ "${p_cmd,,}" = 'gzip' ]; then
+    elif [ "${p_cmd,,}" == 'gzip' ]; then
         true;
 
     # Else, if the Gzip compression format is wanted for a Tar archive.
-    elif [ "${p_cmd^^}" = 'TGZ' ] || [[ "${p_cmd,,}" = tar?(.)gz ]]; then
+    elif [ "${p_cmd^^}" == 'TGZ' ] || [[ "${p_cmd,,}" == tar?(.)gz ]]; then
         tar "-zcf$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the LZMA compression is wanted for a Tar archive.
-    elif [ "${p_cmd^^}" = 'TXZ' ] || [[ "${p_cmd,,}" = tar?(.)xz ]]; then
+    elif [ "${p_cmd^^}" == 'TXZ' ] || [[ "${p_cmd,,}" == tar?(.)xz ]]; then
         tar "JCxf$p_opts" "$p_arch" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
@@ -1202,32 +1202,32 @@ function BU.Main.Files.UncompressCMD()
     if ! BU.Main.Args__Files.UncompressCMD "$p_cmd" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
     # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
-    if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
-            7z x "" "" "" "" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
+            7z x "" "" "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to decode a BinHexed file (Apple's BinHex format)
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDSGetCommandPath 'hexbin')" ]]; then
-            hexbin "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDSGetCommandPath 'hexbin')" ]]; then
+            hexbin "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "p7zip" command in order to uncompress ... .
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'p7zip' ) && "$(BU.Main.CMDSGetCommandPath 'p7zip')" ]]; then
-            p7zip "" "" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'p7zip' ) && "$(BU.Main.CMDSGetCommandPath 'p7zip')" ]]; then
+            p7zip "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'cabextract' ) && "$(BU.Main.CMDSGetCommandPath 'cabextract')" ]]; then
-            cabextract "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'cabextract' ) && "$(BU.Main.CMDSGetCommandPath 'cabextract')" ]]; then
+            cabextract "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "gzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'zip' ) && "$(BU.Main.CMDSGetCommandPath 'zip')" ]]; then
-            gzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'zip' ) && "$(BU.Main.CMDSGetCommandPath 'zip')" ]]; then
+            gzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "gunzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'gunzip' ) && "$(BU.Main.CMDSGetCommandPath 'gunzip')" ]]; then
-            gunzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'gunzip' ) && "$(BU.Main.CMDSGetCommandPath 'gunzip')" ]]; then
+            gunzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "unzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" = 'unzip' ) && "$(BU.Main.CMDSGetCommandPath 'unzip')" ]]; then
-            unzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" = 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'unzip' ) && "$(BU.Main.CMDSGetCommandPath 'unzip')" ]]; then
+            unzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

@@ -56,7 +56,7 @@ __F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh"
 __F_MODULE_INITIALIZER_OLD_PATH="$__D_INSTALL_DIR_PATH/$__F_MODULE_INITIALIZER_FILE_NAME"
 
 # Name of the users home directories paths list file.
-if [ "$OSTYPE" = 'linux-android' ]; then
+if [ "$OSTYPE" == 'linux-android' ]; then
     __F_USERS_LIST_FILE_NAME="termux-users.list"
 else
     __F_USERS_LIST_FILE_NAME="users.list"
@@ -127,7 +127,7 @@ function ChangeOwnership()
 
 	#**** Code ****
 	if [ "$user" != '/root' ]; then
-        if [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; BU.Main.Echo.Newline; return 0; fi
+        if [ "${__ARG,,}" == 'update' ] || [ "${__ARG,,}" == 'u' ]; then ChangeFileOwnership "${user##*/}" "$__F_LIBRARY_PATH_NEW_PARENT_PATH"; BU.Main.Echo.Newline; return 0; fi
 
         PrintLog "Changing recursively the ownership of the newly installed « $__D_MODULE_MANAGER_NEW_PATH » folder, from 'root' to « ${user##*/} »"
         ChangeDirOwnership "${user##*/}" "$__D_MODULE_MANAGER_NEW_PATH"
@@ -255,8 +255,8 @@ function PrintLine()
 # Checking if the
 function PrintLog()
 {
-    if [ "$__NOLOG" = 'nolog' ]; then
-        if [ -n "$2" ] && [ "$2" = 'log' ]; then
+    if [ "$__NOLOG" == 'nolog' ]; then
+        if [ -n "$2" ] && [ "$2" == 'log' ]; then
             echo -e "$1"; BU.Main.Echo.Newline; return 0 # >> "$__F_INSTALL_LOG_FILE_PATH"; BU.Main.Echo.Newline >> "$__F_INSTALL_LOG_FILE_PATH"; return 0;
         else
             echo -e "$1" 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; BU.Main.Echo.Newline 2>&1 | tee -a "$__F_INSTALL_LOG_FILE_PATH"; return 0;
@@ -267,7 +267,7 @@ function PrintLog()
 }
 
 # Printing back the "/root" path in the normal users list file.
-function PrintRoot() { if [ "$__UNROOT" = 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; return 0; }
+function PrintRoot() { if [ "$__UNROOT" == 'true' ] && [ "$OSTYPE" != 'linux-android' ]; then printf '/root' >> "$__F_USERS_LIST_FILE_PATH"; fi; return 0; }
 
 # ------------------------------------------------
 
@@ -291,7 +291,7 @@ elif [ "$__NOLOG" != 'nolog' ]; then
 
     read -rp 'Please type your answer : ' __nolog_ans
 
-    if [ "${__nolog_ans,,}" = 'yes' ]; then
+    if [ "${__nolog_ans,,}" == 'yes' ]; then
         Log
     fi
 
@@ -330,7 +330,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # If the installation is made without super-user's privileges.
-if [ "$__UNROOT" = 'true' ]; then
+if [ "$__UNROOT" == 'true' ]; then
     # Sorting the users list to get the "/root" path at last line, so the deletion of this path will be easier.
     PrintLog "Copying and sorting the content of the « $__F_USERS_LIST_FILE_PATH » file to the « $__F_USERS_LIST_FILE_PATH.tmp » file" 'log';
 
@@ -394,7 +394,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 		BU.Main.Echo.NewlineF; PrintLog "$(PrintLine)"; PrintLog "PROCESSED USER : ${user##*/}"; PrintLog "$(PrintLine)"; BU.Main.Echo.NewlineF; sleep 1
 
-		if [ "${__ARG,,}" = 'install' ] || [ "${__ARG,,}" = 'i' ]; then
+		if [ "${__ARG,,}" == 'install' ] || [ "${__ARG,,}" == 'i' ]; then
 
 			PrintLog "$(CopyModulesManagerDirectory "$user")"; sleep 0.5
 
@@ -402,9 +402,9 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
 			BU.Main.Echo.NewlineF; PrintLog "$(PrintLine)"; BU.Main.Echo.NewlineF; sleep 0.5
 
-			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
+			if [ "$EUID" == 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
 
-		elif [ "${__ARG,,}" = 'update' ] || [ "${__ARG,,}" = 'u' ]; then
+		elif [ "${__ARG,,}" == 'update' ] || [ "${__ARG,,}" == 'u' ]; then
 
 			if [ -f "$__F_LIBRARY_PATH_NEW_PARENT_PATH" ]; then
 				PrintLog "Overwriting the « $__F_LIBRARY_PATH_FILE_NAME » file in the « $__D_MODULE_MANAGER_NEW_PATH » directory"
@@ -421,7 +421,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 				BU.Main.Echo.Newline;
 			fi
 
-			if [ "$EUID" = 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
+			if [ "$EUID" == 0 ]; then ChangeOwnership "$user"; sleep 0.5; fi
 		else
 			PrintLog "THE INSTALLATION MODE MUST BE SPECIFIED AS FIRST ARGUMENT\n\nThe accepted values are « install » or « i » for the installation of the modules manager, or « update » or « u » for the update of the Bash Utils root directory's path."; PrintRoot; exit 1
 		fi
@@ -445,9 +445,9 @@ PrintLog ""
 # Printing back the "/root" path into the users list file if the installation was done without the super-user's privileges.
 PrintRoot
 
-if [ "$__ARG" = 'install' ] || [ "$__ARG" = 'i' ]; then
+if [ "$__ARG" == 'install' ] || [ "$__ARG" == 'i' ]; then
 	PrintLog "Please check the « $__F_INSTALL_LOG_FILE_PATH » log file to verify if the installation was successful"
-elif [ "$__ARG" = 'update' ] || [ "$__ARG" = 'u' ]; then
+elif [ "$__ARG" == 'update' ] || [ "$__ARG" == 'u' ]; then
 	PrintLog "Please check the « $__F_INSTALL_LOG_FILE_PATH » log file to verify if the update was successful"
 fi
 

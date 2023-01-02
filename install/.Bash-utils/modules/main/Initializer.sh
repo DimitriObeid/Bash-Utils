@@ -38,7 +38,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -86,7 +86,7 @@ function BU.Main.Initializer.SourceLibrary()
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
 
-	if [ "${v_loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -103,7 +103,7 @@ function BU.Main.Initializer.SourceConfig()
     #**** Code ****
     # Note : there is no need to call the "BU.ModuleInit.PrintLogError" function here, the "BU.ModuleInit.SourcingFailure()" function already does.
 
-    if [ "${__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS,,}" = 'true' ]; then
+    if [ "${__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS,,}" == 'true' ]; then
         # Deleting the index 1 of the "$__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]" array,
         # which contains the path to the "Status.conf" configuration file, which was included just
         # before the processing of the status global variables vaues given as main module's arguments.
@@ -121,7 +121,7 @@ function BU.Main.Initializer.SourceConfig()
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
 	done;
 
-	if [ "${v_loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -207,7 +207,7 @@ function BU.Main.Initializer.ProcessBadStatusOptionValues()
 }
 
 # If arguments were given in the same double quotes as the "main" module's value.
-if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
+if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" == "main --*" ]; then
 
 	# Defining an array ($main_module_array) to store the module's arguments string as an array of words.
 	read -ra main_module_array <<< "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING";
@@ -228,7 +228,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
         echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE" >&2;
 
         # As the "Status.conf" file is sourced, the default global status variables values will be overwritten with the new values.
-        if [[ "${module_arg,,}" = "--stat-"* ]]; then
+        if [[ "${module_arg,,}" == "--stat-"* ]]; then
 
             # shellcheck disable=SC2219
             let value;
@@ -242,7 +242,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'authorize' ]              || [ "${value,,}" = 'forbid' ]              || [ "${value,,}" = 'restrict' ]; then
+                    if      [ "${value,,}" == 'authorize' ]              || [ "${value,,}" == 'forbid' ]              || [ "${value,,}" == 'restrict' ]; then
                             __BU_MAIN_STAT_DECHO="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_DECHO' "$__BU_MAIN_STAT_DECHO" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -255,7 +255,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
+                    if      [ "${value,,}" == 'false' ]                  || [ "${value,,}" == 'true' ]; then
                             __BU_MAIN_STAT_ECHO="$value";               BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ECHO' "$__BU_MAIN_STAT_ECHO" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -268,12 +268,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'fatal' ]; then
+                    if      [ "${value,,}" == 'fatal' ]; then
                             __BU_MAIN_STAT_ERROR="$value";              BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
 
-                    elif    [ "${value,,}" = 'void' ]; then
+                    elif    [ "${value,,}" == 'void' ]; then
                             __BU_MAIN_STAT_ERROR='';                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_ERROR' "$__BU_MAIN_STAT_ERROR" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -286,7 +286,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
+                    if      [ "${value,,}" == 'false' ]                  || [ "${value,,}" == 'true' ]; then
                             __BU_MAIN_STAT_LOG="$value";                BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG' "$__BU_MAIN_STAT_LOG" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -299,12 +299,12 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'log' ]                    || [ "${value,,}" = 'tee' ]; then
+                    if      [ "${value,,}" == 'log' ]                    || [ "${value,,}" == 'tee' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
 
-                    elif    [ "${value,,}" = 'void' ]; then
+                    elif    [ "${value,,}" == 'void' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT='';             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "$__BU_MAIN_STAT_LOG_REDIRECT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -317,7 +317,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'authorized' ]             || [ "${value,,}" = 'forbidden' ]           || [ "${value,,}" = 'restricted' ]; then
+                    if      [ "${value,,}" == 'authorized' ]             || [ "${value,,}" == 'forbidden' ]           || [ "${value,,}" == 'restricted' ]; then
                             __BU_MAIN_STAT_OPERATE_ROOT="$value";       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MAIN_STAT_OPERATE_ROOT' "$__BU_MAIN_STAT_OPERATE_ROOT" 'string' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -369,7 +369,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
                     value="${module_arg#*=}";
                     value="${value% *}";
 
-                    if      [ "${value,,}" = 'false' ]                  || [ "${value,,}" = 'true' ]; then
+                    if      [ "${value,,}" == 'false' ]                  || [ "${value,,}" == 'true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="$value";            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "$__BU_MAIN_STAT_TXT_FMT" 'bool' "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
                             __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
@@ -390,8 +390,8 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
 
             if [ -z "$__BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS" ]; then __BU_MAIN_INITIALIZER__STATUS_MODIFIED_BY_MAIN_MODULE_ARGS='true'; fi
 
-        elif [[ "${module_arg,,}" = '--dev-tools'* ]]; then
-            if [ -n "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" ] && [ "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" = 'true' ]; then
+        elif [[ "${module_arg,,}" == '--dev-tools'* ]]; then
+            if [ -n "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" ] && [ "$____bu_main_initializer__parse_args_list__dev_tools_arg__state" == 'true' ]; then
                 BU.Main.ModConfig.Module.BUDevToolsPaths;
 
                 ____bu_main_initializer__parse_args_list__dev_tools_arg__state='true';
@@ -403,7 +403,7 @@ if [ "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING" = "main --*" ]; then
             BU.Main.Initializer.Usage; ____bu_main_initializer__parse_args_list__loop_error='error'; break;
         fi
 
-    done; if [ "${____bu_main_initializer__parse_args_list__loop_error,,}" = 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else unset ____bu_main_initializer__parse_args_list__loop_error; return 1; fi; fi
+    done; if [ "${____bu_main_initializer__parse_args_list__loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else unset ____bu_main_initializer__parse_args_list__loop_error; return 1; fi; fi
 fi
 
 # Unsetting the "$____bu_main_initializer__parse_args_list__loop_error" variable, since this code is not written inside a function.

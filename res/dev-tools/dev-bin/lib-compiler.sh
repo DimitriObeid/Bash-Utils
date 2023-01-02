@@ -120,7 +120,7 @@ __WARNING="${__YELLOW}";
 ## MESSAGE TRANSLATIONS
 
 # FRENCH - FRANÇAIS
-if [[ "$LANG" = fr_* ]]; then
+if [[ "$LANG" == fr_* ]]; then
     # ----------------------------------------------------------------------------------------------------
     # Si le dossier "$__BU_ROOT_PATH" n'existe pas [-----] If the "$__BU_ROOT_PATH" folder doesn't exists.
     __BU_COMPILE__BU_ROOT_PATH_DOESNT_EXISTS="${__RED}ERREUR : LE DOSSIER ${__HIGHLIGHT}%s${__ERROR} N'EXISTE PAS !!!${__RESET}";

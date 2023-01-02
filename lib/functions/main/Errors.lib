@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -79,8 +79,8 @@ function BU.Main.Errors.HandleSmallErrors()
     local p_cpls=$4;        # Enable the safe text printing mode.
 
     #**** Variables ****
-    if [ "${p_cpls^^}" = 'CPLS' ]; then
-        if [ "${__BU_MAIN_STAT_ECHO,,}" = 'false' ]; then
+    if [ "${p_cpls^^}" == 'CPLS' ]; then
+        if [ "${__BU_MAIN_STAT_ECHO,,}" == 'false' ]; then
             local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO 'true' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
         fi
     fi
@@ -90,14 +90,14 @@ function BU.Main.Errors.HandleSmallErrors()
 
     BU.ModuleInit.SetInitErrorMsg && local VHandleSmallErrors='1';
 
-    if      [ "${p_type^^}" = 'E' ];    then BU.Main.Echo.Error      "$p_string" '' '';
-    elif    [ "${p_type^^}" = 'W' ];    then BU.Main.Echo.Warning    "$p_string" '' '';
+    if      [ "${p_type^^}" == 'E' ];    then BU.Main.Echo.Error      "$p_string" '' '';
+    elif    [ "${p_type^^}" == 'W' ];    then BU.Main.Echo.Warning    "$p_string" '' '';
 
     # If no type of message to displays is passed as first argument, the script will choose between one of the accepted types.
     else
 		local v_advice="Please don't forget to pass a type of message to display as first argument ('E' = BU.Main.Echo.Error; 'W' = BU.Main.Echo.Warning)";
 
-        if [ "$(( RANDOM%2 ))" = "0" ]; then
+        if [ "$(( RANDOM%2 ))" == "0" ]; then
             BU.Main.Echo.Error "$p_string    | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
         else
             BU.Main.Echo.Warning "$p_string  | ${__BU_MAIN_COLOR_TXT_RESET}$v_advice" '' '';
@@ -108,8 +108,8 @@ function BU.Main.Errors.HandleSmallErrors()
 
     # As the "BU.Main.Echo.Warning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_MAIN_STAT_ECHO" status variable condition per condition.
-    if [ "${p_return^^}" = 'R' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${p_return^^}" == 'R' ]; then
+        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
         # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
         [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -118,8 +118,8 @@ function BU.Main.Errors.HandleSmallErrors()
 
         return 1;
 
-    elif [ "${p_return^^}" = 'E' ]; then
-        if [ "$v_BU_STAT_ECHO_old" = "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    elif [ "${p_return^^}" == 'E' ]; then
+        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
 
         # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
         [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -132,7 +132,7 @@ function BU.Main.Errors.HandleSmallErrors()
         BU.Main.Echo.Warning "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}${__BU_MAIN_COLOR_TXT_WARNING} --> Warning : bad exit or return code given as second argument !"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit 1;
     fi
 
-    if [ "$v_BU_STAT_ECHO_old" = "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
+    if [ "$v_BU_STAT_ECHO_old" == "true" ]; then __BU_MAIN_STAT_ECHO='false'; fi
 
     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
     [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -164,10 +164,10 @@ function BU.Main.Errors.Exit()
     #**** Code ****
     if BU.Main.Checkings.IsPositiveInt "$p_exitcode"; then
 
-        if [ "${p_behavior^^}" = 'E' ] || [ -z "$p_behavior" ]; then
+        if [ "${p_behavior^^}" == 'E' ] || [ -z "$p_behavior" ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "$p_exitcode" || kill "$__BU_MODULE_INIT_PROJECT_PID"; else return "$p_exitcode"; fi
 
-        elif [ "${p_behavior^^}" = 'W' ]; then
+        elif [ "${p_behavior^^}" == 'W' ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$p_exitcode";
 
         else
@@ -263,10 +263,10 @@ function BU.Main.Errors.HandleErrors()
 
             # WARNING : DO NOT call a text formatting function to format something else than the text color, or else the script will loop forever.
 
-            if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ]; then
+            if [ "${__BU_MAIN_STAT_ECHO,,}" == "true" ]; then
 
-                if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
-                    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
+                if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" == "fatal" ]; then
+                    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.Main.Echo.Error "A FATAL ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.Main.Status.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
@@ -276,7 +276,7 @@ function BU.Main.Errors.HandleErrors()
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                     fi
                 else
-                    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" = 'false' ]; then
+                    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
                         BU.Main.Echo.Error "AN ERROR OCCURED DURING A TEST IN THE $(BU.Main.Decho.Decho.Function "BU.Main.Status.CheckProjectLogStatus") FUNCTION OR ANOTHER TEST WHERE THE MENTIONNED FUNCTION CANNOT BE CALLED !" 'strlen';
                         BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR" >&2;
@@ -292,12 +292,12 @@ function BU.Main.Errors.HandleErrors()
             # -------- PART 2 : PRINTING THE HEADER
 
             # Redirecting the log messages to the terminal, to show them to the user.
-            if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" = "log" ]; then
+            if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "log" ]; then
                 local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU.Main.Status.CheckSTAT_LOG_REDIRECT 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
                     local C="$?";
 
                     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-                    [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
+                    [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -305,7 +305,7 @@ function BU.Main.Errors.HandleErrors()
                 };
             fi
 
-            if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
+            if [ "${__BU_MAIN_STAT_ERROR,,}" == "fatal" ]; then
                 BU.Main.Headers.Header.Red "$v_hdrString FATAL ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
             else
                 BU.Main.Headers.Header.Red "$v_hdrString ERROR : $(if [ -n "$p_errorString" ]; then echo "$p_errorString"; else echo "$v_checkIfErrorStringIsNotNull"; fi)" >&2;
@@ -361,11 +361,11 @@ function BU.Main.Errors.HandleErrors()
                 BU.Main.Echo.Error "Value(s) that caused this error : $(BU.Main.Decho.Decho.Var "$p_badValue")"; BU.Main.Echo.Newline >&2;
             fi
 
-            if [ "${__BU_MAIN_STAT_ERROR,,}" = "fatal" ]; then
+            if [ "${__BU_MAIN_STAT_ERROR,,}" == "fatal" ]; then
                 BU.Main.Echo.Error "Stopping the execution of $(BU.Main.Decho.Decho.Highlight "$(basename "$0")")."; BU.Main.Echo.Newline >&2;
 
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-                [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
+                [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -379,26 +379,26 @@ function BU.Main.Errors.HandleErrors()
 
             # -------- PART 4 : WRITING THE ERROR REPORT IN THE PROJECT'S LOG FILE IN CASE THE "$__BU_MAIN_STAT_ECHO" VARIABLE IS SET TO TRUE (SAFE MODE IF THE WRITING FUNCTIONS ARE CALLED FROM THE "BU.Main.Status.CheckProjectLogStatus()" FUNCTION).
 
-            if [ "${__BU_MAIN_STAT_ECHO,,}" = "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
+            if [ "${__BU_MAIN_STAT_ECHO,,}" == "true" ] && [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
                 BU.Main.Echo.Warning "" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ||
                 {
                     BU.Main.Errors.HandleSmallErrors "Unable to write in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") projectlog file from the $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") function" 'R' 'CPLS';
                 }
             fi
 
-            if [ "$v_log_old" = "true" ]; then
+            if [ "$v_log_old" == "true" ]; then
                 __BU_MAIN_STAT_LOG_REDIRECT="log"; BU.Main.Status.CheckSTAT_LOG_REDIRECT 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
             fi
 
             if BU.Main.Checkings.IsInt "$p_returnCode"; then
 
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-                [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
+                [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$p_returnCode";
             else
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
-                [ "$VHandleErrors" = '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
+                [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
             fi

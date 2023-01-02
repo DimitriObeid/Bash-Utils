@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -243,7 +243,7 @@ function BU.Main.Headers.Base () {
 
     # ----------
     # Line's length processing
-    if [ -n "$p_strlen" ] && [ "${p_strlen,,}" = 'strlen' ]; then local v_strlen; v_strlen="${#p_stringTxt}"; fi
+    if [ -n "$p_strlen" ] && [ "${p_strlen,,}" == 'strlen' ]; then local v_strlen; v_strlen="${#p_stringTxt}"; fi
 
     #**** Code ****
 	__BU_MAIN_STAT_TIME_NEWLINE="0";
@@ -291,7 +291,7 @@ function BU.Main.Headers.Base () {
                 else
                     BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported), " 'R';
                 fi
-            done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         elif BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
             BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is too big" 'R';

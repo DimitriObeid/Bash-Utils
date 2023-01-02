@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -84,7 +84,7 @@ function BU.Main.Echo.DebugEnd()
  #   set +x;
 
     BU.ModuleInit.CheckIsDebugging && {
-        if [ "${__BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION,,}" = 'true' ]; then
+        if [ "${__BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION,,}" == 'true' ]; then
             BU.Main.Echo.__EchoVoid;
 
             echo "---------------------------------------";
@@ -120,7 +120,7 @@ function BU.Main.Echo.Debug()
         #**** Code ****
         [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ] &&
         {
-            if [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'C' ]; then
+            if [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'C' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -130,7 +130,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == file?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'F' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == file?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'F' ]; then
                 local v_file="${p_filename%%.[Ll][Ii][Bb]*}";
 
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[0],,}" == 'all' ]; then
@@ -142,7 +142,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = function?(s) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = FNCT?(S) ]]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == function?(s) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == FNCT?(S) ]]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -152,7 +152,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = m?(od?(ule?))?(s) ]]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == m?(od?(ule?))?(s) ]]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_modname"; return 0;
                 else
@@ -162,7 +162,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" = s?(ub)?(-)?(c?(at?(eg?(orie))))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" = 'S' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)?(c?(at?(eg?(orie))))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'S' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -185,6 +185,10 @@ function BU.Main.Echo.Debug()
 function BU.Main.Echo.__EchoVoid()
 {
 printf "
+
+
+
+
 
 
 
@@ -221,9 +225,9 @@ function BU.Main.Echo.__EchoOutput()
         p_type="$v_type";
 	fi
 
-	if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = 'false' ]; then return 0;
+	if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'false' ]; then return 0;
 
-	elif [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" = "true" ]; then
+	elif [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == "true" ]; then
 	    # Passing the "$__BU_MAIN_STAT_ECHO" global status variable's value from "false" to "true".
         if ! BU.Main.Status.CheckStatIsBackupEchoing; then
             local v_BU_MAIN_STAT_ECHO_val="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "${BASH_SOURCE[0]}" "$LINENO";
@@ -233,18 +237,18 @@ function BU.Main.Echo.__EchoOutput()
 
 		BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" '' "$(( 24 + v_strlen ))";
 
-        if [ "${p_context,,}" = "begin" ]; then
+        if [ "${p_context,,}" == "begin" ]; then
             BU.Main.Echo.__EchoVoid;
 
-            if [ "${p_type^^}" = "E" ]; then
+            if [ "${p_type^^}" == "E" ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type,,}" = 'm' ]; then
+            elif [ "${p_type,,}" == 'm' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'N' ]; then
+            elif [ "${p_type^^}" == 'N' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'S' ]; then
+            elif [ "${p_type^^}" == 'S' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'W' ]; then
+            elif [ "${p_type^^}" == 'W' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
@@ -257,16 +261,16 @@ function BU.Main.Echo.__EchoOutput()
 
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-        elif [ "${p_context,,}" = "end" ]; then
-            if [ "${p_type^^}" = "E" ]; then
+        elif [ "${p_context,,}" == "end" ]; then
+            if [ "${p_type^^}" == "E" ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type,,}" = 'm' ]; then
+            elif [ "${p_type,,}" == 'm' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'N' ]; then
+            elif [ "${p_type^^}" == 'N' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'S' ]; then
+            elif [ "${p_type^^}" == 'S' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" = 'W' ]; then
+            elif [ "${p_type^^}" == 'W' ]; then
                 BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : $p_string${__BU_MAIN_COLOR_TXT_RESET}" > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
             fi
 
@@ -300,7 +304,7 @@ function BU.Main.Echo.__EchoCPLS()
     # DO NOT CALL THE "BU.Main.Args.GetFuncArgsArrayValues()" FUNCTION IN THIS FUNCTION, OR ELSE AN INFINITE LOOP WILL LIKELY OCCUR !!!!!
 
     for val in "${pa_extraArgs[@]}"; do
-        if [ "$val" = 'nodate' ]; then
+        if [ "$val" == 'nodate' ]; then
             case "$p_option" in
                 '-n' | 'n')
                     if BU.Main.Status.CheckStatIsInitializing; then
@@ -528,7 +532,7 @@ function BU.Main.Echo.Read()
 	local p_string=$1;     # User's keyboard input.
 
 	#**** Code ****
-	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" = "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
+	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" == "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
 		echo -e "Keyboard input value : $(BU.Main.Decho.Decho.Var "$p_string")" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { BU.Main.Echo.__EchoCPLS "" 'R' "CPLS"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }

@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -141,7 +141,7 @@ function BU.Main.Directories.OverwriteDir()
 	BU.Main.Echo.Newstep "Deleting the contents of the $(BU.Main.Decho.Decho.Path "$v_path/") folder";
 	BU.Main.Echo.Newline;
 
-	if [ "$p_authorization" = "--rmdir" ]; then
+	if [ "$p_authorization" == "--rmdir" ]; then
         # TODO : Si la variable n'est pas initialisée.
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
@@ -221,7 +221,7 @@ function BU.Main.Directories.Make()
     # Else, if the folder to create already exists in its parent directory AND this folder already contains AT LEAST one file or folder.
 	elif [ -d "$v_path" ] && [ "$(ls -A "$v_path")" ]; then
 
-        if [ "$p_rm" = '--rmdir' ]; then
+        if [ "$p_rm" == '--rmdir' ]; then
             BU.Main.Directories.OverwriteDir "$v_path" "$p_rm";
 
 			if test "$?" -eq 0; then
@@ -490,9 +490,9 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
-	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" = "/" ] || [ "$p_path" | cut blablabla ]).
-	if [ "$(pwd "$p_path")" = "/" ] || [ "$(BU.Main.Directories.GetParentDirectoryPath "$p_path")" = '/' ]; then
-		if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" = "forbidden" ]; then
+	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" == "/" ] || [ "$p_path" | cut blablabla ]).
+	if [ "$(pwd "$p_path")" == "/" ] || [ "$(BU.Main.Directories.GetParentDirectoryPath "$p_path")" == '/' ]; then
+		if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" == "forbidden" ]; then
 			BU.Main.Headers.Header.Error "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!" 'strlen';
 
 			BU.Main.Echo.Error "The script was trying to operate at the root directory (or one of its sub directories) without authorization";
@@ -504,7 +504,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
 
-		elif [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" = "restricted" ]; then
+		elif [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" == "restricted" ]; then
             BU.Main.Headers.Header.Warning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
 
             BU.Main.Echo.Warning "You are about to operate at the root directory or one of its present sub-folders !";

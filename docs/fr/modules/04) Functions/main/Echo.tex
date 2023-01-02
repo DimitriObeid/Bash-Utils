@@ -17,7 +17,6 @@
 \usepackage[document]{ragged2e}								% Justification du texte.
 \usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
 
-
 % Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
 \definecolor{back}{HTML}{000000}        % Noir          - Fond
 \definecolor{case}{HTML}{fcff00}        % Jaune clair   - Conditions case
@@ -31,7 +30,6 @@
 \definecolor{sec3}{HTML}{0060ff}        % Bleu          - Titres de troisième niveau
 \definecolor{text}{HTML}{ffffff}        % Blanc         - Texte normal
 \definecolor{vars}{HTML}{FF7F00}        % Orange        - Noms des paramètres et des variables
-
 
 \fontfamily{Roboto}
 
@@ -260,7 +258,7 @@
 
 \begin{justify}
     \textbf{Fonctionnement :}\\[1\baselineskip]
-    La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} crée un espace vide de 10 lignes en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
+    La fonction \textbf{\color{func}BU.Main.Echo.\_\_EchoVoid} crée 10 lignes de chaînes de caractères vides en tant que qu'espace vide en appelant la commande \textbf{\color{cmds}printf} sur 10 lignes, puis le redirige vers un \textbf{\color{path}fichier temporaire} (enregistré dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_ECHO\_OUTPUT\_FILE\_PATH}) pour ne pas l'afficher sur le terminal si la commande \textbf{\color{cmds}bash -x} n'est pas utilisée pour exécuter le script principal, et affiche un message d'avertissement si le texte ne peut être redirigé.
 \end{justify}
 
 % ------------
@@ -578,7 +576,7 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.ModuleInit.Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne.
+                            \textbf{\color{cond}Si} le script est en pleine étape d'initialisation des modules (renseignement obtenu via la valeur de retour de la fonction \textbf{\color{func}BU.Main.Status.CheckStatIsInitializing}), \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.ModuleInit.Msg} est appelée en passant la date de log, puis la chaîne de caractères enregistrée dans le paramètre \textbf{\color{vars}p\_string}, et la valeur du paramètre \textbf{\color{vars}p\_option} y est passée en argument pour ne pas sauter de ligne.
                         \end{justify}
 
                         \setlength{\parskip}{1em}
@@ -726,10 +724,12 @@
             \setlength{\parskip}{1em}
 
             \begin{justify}
-                La fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectLogStatus} est appelée en lui passant en arguments :
+                La fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectLogStatus} est appelée avec ces arguments :
                 \begin{enumerate}
                     \item La chaîne de caractères à traiter (paramètre \textbf{\color{vars}p\_string}), avec la substitution de commande pour encoder la couleur associée au contexte, une séparation pour mieux distinguer ce texte et une dernière substitution de commande pour réinitialiser la couleur du texte.
+
                     \item L'option \textbf{\color{cmds}-n} de la commande \textbf{\color{cmds}echo}, si elle est passée en argument durant l'appel de la fonction actuelle (paramètre \textbf{\color{vars}p\_option}).
+
                     \item Chaque valeur du tableau \textbf{\color{vars}pa\_extraArgs}.
                 \end{enumerate}
             \end{justify}
@@ -839,7 +839,7 @@
 \begin{justify}
     \textbf{Utilisation :}
 
-    Appelez cette fonction immédiatement après avoir appelé la commande \textbf{\color{gray}read} pour mieux voir quelle valeur a été entrée au clavier.
+    Appelez cette fonction immédiatement après avoir appelé la commande \textbf{\color{cmds}read} pour mieux voir quelle valeur a été entrée au clavier.
 \end{justify}
 
 % ------------
@@ -859,50 +859,50 @@
 \begin{justify}
     \textbf{Fonctions :}
     \begin{enumerate}
-        \item \textbf{\color{Aqua}BU.EchoAqua}\setlength{\parskip}{0em}
-        \item \textbf{\color{text}BU.EchoBlack}
-        \item \textbf{\color{Blue}BU.EchoBlue}
+        \item \textbf{\color{Aqua}BU.Main.Echo.Aqua}\setlength{\parskip}{0em}
+        \item \textbf{\color{text}BU.Main.Echo.Black}
+        \item \textbf{\color{Blue}BU.Main.Echo.Blue}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Cyan}BU.EchoCyan}\setlength{\parskip}{0em}
-        \item \textbf{\color{Fuchsia}BU.EchoFuchsia}
-        \item \textbf{\color{Gray}BU.EchoGray}
+        \item \textbf{\color{Cyan}BU.Main.Echo.Cyan}\setlength{\parskip}{0em}
+        \item \textbf{\color{Fuchsia}BU.Main.Echo.Fuchsia}
+        \item \textbf{\color{Gray}BU.Main.Echo.Gray}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Green}BU.EchoGreen}\setlength{\parskip}{0em}
-        \item \textbf{\color{Lime}BU.EchoLime}
-        \item \textbf{\color{Maroon}BU.EchoMaroon}
+        \item \textbf{\color{Green}BU.Main.Echo.Green}\setlength{\parskip}{0em}
+        \item \textbf{\color{Lime}BU.Main.Echo.Lime}
+        \item \textbf{\color{Maroon}BU.Main.Echo.Maroon}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Navy}BU.EchoNavy}\setlength{\parskip}{0em}
-        \item \textbf{\color{Olive}BU.EchoOlive}
-        \item \textbf{\color{Orange}BU.EchoOrange}
+        \item \textbf{\color{Navy}BU.Main.Echo.Navy}\setlength{\parskip}{0em}
+        \item \textbf{\color{Olive}BU.Main.Echo.Olive}
+        \item \textbf{\color{Orange}BU.Main.Echo.Orange}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Pink}BU.EchoPink}\setlength{\parskip}{0em}
-        \item \textbf{\color{Purple}BU.EchoPurple}
-        \item \textbf{\color{Red}BU.EchoRed}
+        \item \textbf{\color{Pink}BU.Main.Echo.Pink}\setlength{\parskip}{0em}
+        \item \textbf{\color{Purple}BU.Main.Echo.Purple}
+        \item \textbf{\color{Red}BU.Main.Echo.Red}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Salmon}BU.EchoSalmon}\setlength{\parskip}{0em}
-        \item \textbf{\color{Silver}BU.EchoSilver}
-        \item \textbf{\color{Tan}BU.EchoTan}
+        \item \textbf{\color{Salmon}BU.Main.Echo.Salmon}\setlength{\parskip}{0em}
+        \item \textbf{\color{Silver}BU.Main.Echo.Silver}
+        \item \textbf{\color{Tan}BU.Main.Echo.Tan}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{Teal}BU.EchoTeal}\setlength{\parskip}{0em}
-        \item \textbf{\color{Turquoise}BU.EchoTurquoise}
-        \item \textbf{\color{Violet}BU.EchoViolet}
+        \item \textbf{\color{Teal}BU.Main.Echo.Teal}\setlength{\parskip}{0em}
+        \item \textbf{\color{Turquoise}BU.Main.Echo.Turquoise}
+        \item \textbf{\color{Violet}BU.Main.Echo.Violet}
 
         \setlength{\parskip}{1em}
 
-        \item \textbf{\color{text}BU.EchoWhite}\setlength{\parskip}{0em}
-        \item \textbf{\color{Yellow}BU.EchoYellow}
+        \item \textbf{\color{text}BU.Main.Echo.White}\setlength{\parskip}{0em}
+        \item \textbf{\color{Yellow}BU.Main.Echo.Yellow}
     \end{enumerate}
 \end{justify}
 
@@ -1046,7 +1046,7 @@
 \end{justify}
 
 \begin{justify}
-    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} un simple appel de la fonction \textbf{\color{func}BU.Main.Echo.Msg} est effectué.
+    \textbf{\color{cond}Sinon, si} le paramètre \textbf{\color{vars}p\_number} ne contient aucune valeur, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.Main.Echo.Msg} est appelée pour afficher une chaîne de caractères vide à la ligne.
 \end{justify}
 
 \begin{justify}

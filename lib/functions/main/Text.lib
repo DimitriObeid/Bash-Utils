@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -82,7 +82,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     local p_count=$4;               # String    - Default : NULL    - Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
-    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
+    if [ -n "$p_count" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
 	# Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
 	local v_fieldtmp="";
@@ -103,7 +103,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 	x="$(BU.Main.Text.GetSubStringOccurences "$p_string" "$p_delimiter")";
 
     for ((i=0; i<x; i++)); do
-		if [ "$i" = "$p_iterations" ]; then break; fi
+		if [ "$i" == "$p_iterations" ]; then break; fi
 
         v_fieldtmp="${p_string%%"$p_delimiter"*}";
 		v_fieldtmp="${v_fieldtmp#*"$p_delimiter"}";
@@ -139,7 +139,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     #**** Variables ****
     local p_string_tmp;
 
-    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
+    if [ -n "$p_count" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
     #**** Code ****
     if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
@@ -273,9 +273,9 @@ function BU.Main.Text.KeepFormatting()
 	#**** Code ****
 # 	echo -ne &>/dev/null; echo -ne "$p_string";
 #
-# 	if [ "${p_old_formatting,,}" = 'l' ]; then
+# 	if [ "${p_old_formatting,,}" == 'l' ]; then
 #         echo -ne "$(BU.Main.Text.ToLowercase "$p_string")";
-# 	elif [ "${p_old_formatting^^}" = 'U' ]; then
+# 	elif [ "${p_old_formatting^^}" == 'U' ]; then
 #         echo -ne "$(BU.Main.Text.ToUppercase "$p_string")";
 # 	else
 #         echo -ne "<<|| No reformatting precised in the $(BU.Main.Text.ToLowercase "${FUNCNAME[0]}()") function ||>>";
@@ -403,7 +403,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
     local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
-    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
+    if [ -n "$p_count" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
@@ -438,7 +438,7 @@ function BU.Main.Text.GetSubStringBeforeDelim()
     local p_init=$5;                # String    - Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
-    if [ -n "$p_count" ] && [ "${p_count,,}" = 'count' ]; then local v_count=0; fi
+    if [ -n "$p_count" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
 	# Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
 	local v_fieldtmp="";
@@ -465,7 +465,7 @@ function BU.Main.Text.GetSubStringBeforeDelim()
     fi
 
     for ((i=0; i<x; i++)); do
-		if [ "$i" = "$p_iterations" ]; then break; fi
+		if [ "$i" == "$p_iterations" ]; then break; fi
 
         v_fieldtmp="${p_string##*"$p_delim"}";
 		v_fieldtmp="${v_fieldtmp%"$p_delim"*}";
@@ -740,7 +740,7 @@ function BU.Main.Text.WordArrayToStr()
 #     fi
 #
 #     # If the string has to be processed from left to right.
-#     if [ "${p_order^^}" = 'L|l' ]; then
+#     if [ "${p_order^^}" == 'L|l' ]; then
 #         for ((i=0; i<p_iterations; i++)); do
 #             if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
 #                 true
@@ -752,7 +752,7 @@ function BU.Main.Text.WordArrayToStr()
 #         done
 #
 #     # Else, if the string has to be processed from right to left.
-#     elif [ "${p_order^^}" = 'R|r' ]; then
+#     elif [ "${p_order^^}" == 'R|r' ]; then
 #         for ((i=0; i<p_iterations; i++)); do
 #             if [ -z "$p_ignore_delim" ] || [ "$p_ignore_delim" -eq 0 ]; then
 #                 true

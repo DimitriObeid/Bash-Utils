@@ -107,7 +107,7 @@ function WriteIntoFIFO
 
     #**** Code ****
     if [ ! -p "$p_fifoPath" ]; then
-        if [ "$p_existingPath" = "nopath" ]; then
+        if [ "$p_existingPath" == "nopath" ]; then
             return
         else
             echo

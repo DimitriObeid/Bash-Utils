@@ -25,7 +25,7 @@ function GetMainPackageManager
 	# For more informations about the redirections in UNIX Shell, please visit this link -> https://www.tldp.org/LDP/abs/html/io-redirection.html
 
 	# Checking first the operating system type, to avoid running the script in a not (yet) suported UNIX/Linux operating system.
-	if [[ "$OSTYPE" = "linux-gnu"* ]]; then
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt"
         command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
         command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
@@ -51,7 +51,7 @@ function GetMainPackageManager
 
 #### NEW FUNCTIONS :
 
-function APTInstall
+function APTInstall()
 {
     #**** Parameters ****
     package="$1"
@@ -60,7 +60,7 @@ function APTInstall
 
 }
 
-function DNFInstall
+function DNFInstall()
 {
     #**** Parameters ****
     package="$1"
@@ -69,7 +69,7 @@ function DNFInstall
 
 }
 
-function PacmanInstall
+function PacmanInstall()
 {
     #**** Parameters ****
     package="$1"
@@ -78,17 +78,17 @@ function PacmanInstall
 
 }
 
-function PackHDCheck
+function PackHDCheck()
 {
     return
 }
 
-function PackDBCheck
+function PackDBCheck()
 {
     return
 }
 
-function PackInstall
+function PackInstall()
 {
     #**** Parameters ****
     manager=$1  # Package manager
@@ -97,10 +97,10 @@ function PackInstall
     #**** Code ****
     BU.Main.Checkings.CheckRootEUID
 
-    if [ "$OSTYPE" = "linux-gnu" ]; then
-        if [ "$manager" = "apt" ]; then APTInstall
-        elif [ "$STAT_MAIN_PACK_MANAGER" = "dnf" ]; then DNFInstall
-        elif [ "$STAT_MAIN_PACK_MANAGER" = "pacman" ]; then PacmanInstall
+    if [ "$OSTYPE" == "linux-gnu" ]; then
+        if [ "$manager" == "apt" ]; then APTInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" == "dnf" ]; then DNFInstall
+        elif [ "$STAT_MAIN_PACK_MANAGER" == "pacman" ]; then PacmanInstall
         fi
     fi
 }

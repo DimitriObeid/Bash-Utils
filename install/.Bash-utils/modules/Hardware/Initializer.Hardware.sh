@@ -38,7 +38,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -85,7 +85,7 @@ function BU.Hardware.Initializer.SourceLibrary()
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
 	done
 
-	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -108,7 +108,7 @@ function BU.Hardware.Initializer.SourceConfig()
 		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
 	done;
 
-	if [ "${v_loop_error,,}" = 'error' ]; then return 1; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then return 1; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;

@@ -28,7 +28,7 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" = en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
@@ -95,8 +95,8 @@ function BU.Main.Decho.Decho()
     local p_newTextColor=$2;    # Int       - Default : NULL	- Color to apply on each string's characters.
     local p_newBGColor=$3;      # Int       - Default : NULL	- Color to apply in the text's background.
 
-    if [ "${p_newTextColor^^}"  = 'NULL' ]; then p_newTextColor=$'\0';  fi
-    if [ "${p_newBGColor^^}"    = 'NULL' ]; then p_newBGColor=$'\0';    fi
+    if [ "${p_newTextColor^^}"  == 'NULL' ]; then p_newTextColor=$'\0'; fi
+    if [ "${p_newBGColor^^}"    == 'NULL' ]; then p_newBGColor=$'\0';   fi
 
     if [ -n "$p_string" ]; then
         if [ -z "$p_newTextColor" ] && [ -z "$p_newBGColor" ]; then
@@ -126,7 +126,7 @@ function BU.Main.Decho.Decho()
     BU.Main.Checkings.CheckDecho;
 
     if test "$?" -ne 0; then
-        if [ "${__BU_MAIN_STAT_DECHO,,}" = 'forbid' ]; then
+        if [ "${__BU_MAIN_STAT_DECHO,,}" == 'forbid' ]; then
 
             # If the text formatting is forbidden, but the "$__BU_MAIN_STAT_TXT_FMT" global status variable's value is set to "true", the text to decorate will be put between French guillemets.
             if BU.Main.Status.CheckStatAllowFormatting; then
@@ -152,19 +152,19 @@ function BU.Main.Decho.Decho()
     fi
 
     # If both of the new colors are equal.
-    if [ "$p_newBGColor" = "$p_newTextColor" ]; then
+    if [ "$p_newBGColor" == "$p_newTextColor" ]; then
         p_newBGColor="$(( p_newBGColor+34 ))"
     fi
 
     # If the text color code's value is equal to it's former value.
-    if [ "$p_newTextColor" = "$v_oldTextColor" ]; then
+    if [ "$p_newTextColor" == "$v_oldTextColor" ]; then
 
         # TODO : Développer un meilleur système de changement de couleur (P-Ê en appelant une fonction à créer, ou en utilisant une formule mathématique). Se renseigner sur la commande "tput setaf".
 		p_newTextColor="$(( p_newTextColor+38 ))";
     fi
 
     # If the background color code's value is equal to it's former value.
-    if [ "$p_newBGColor" = "$v_oldBGColor" ]; then
+    if [ "$p_newBGColor" == "$v_oldBGColor" ]; then
 		p_newBGColor="$(( p_newBGColor+38 ))";
 	fi
 
@@ -183,7 +183,7 @@ function BU.Main.Decho.Decho()
     ## APPLYING THE FORMATTINGS ON THE TEXT
 
     # If the "$__BU_MAIN_STAT_DECHO" status global variable is set to "restrict", then only basic formatting is applied.
-	if [ "${__BU_MAIN_STAT_DECHO,,}" = 'restrict' ]; then
+	if [ "${__BU_MAIN_STAT_DECHO,,}" == 'restrict' ]; then
         printf "%s" "$p_newTextColor";
         printf "%s" "$p_newBGColor";
         printf "%s" "$p_string";
@@ -218,7 +218,7 @@ function BU.Main.Decho.Decho()
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;
             esac
-        done; if [ "${v_loop_error}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        done; if [ "${v_loop_error}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
 
         echo -e "$p_string$p_newTextColor$__BU_MAIN_COLOR_CODE_RESET";
 
@@ -256,7 +256,7 @@ function BU.Main.Decho.Decho()
                     local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
                 ;;
             esac
-        done; if [ "${v_loop_error,,}" = 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+        done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
