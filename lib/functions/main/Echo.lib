@@ -109,6 +109,10 @@ function BU.Main.Echo.Debug()
 #     echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}";
 #     echo;
 
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ]; then echo "DEBUG : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'DEBUG FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ]; then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULE_ARRAY" ]; then echo "ARRAY : $__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY"; else echo 'ARRAY FALSE'; fi
+
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
         local p_modname=$1;     # String    - Default : NULL    - Module where the function currently processed is defined.
@@ -152,7 +156,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == m?(od?(ule?))?(s) ]]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == m?(od?(ule))?(s) ]]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_modname"; return 0;
                 else
