@@ -109,9 +109,15 @@ function BU.Main.Echo.Debug()
 #     echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}";
 #     echo;
 
-    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ]; then echo "DEBUG : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'DEBUG FALSE'; fi
-    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ]; then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
-    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULE_ARRAY" ]; then echo "ARRAY : $__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY"; else echo 'ARRAY FALSE'; fi
+    # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
+
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ];                     then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
+
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY" ];      then echo "CATS ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";     else echo 'CATS ARRAY FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY" ];         then echo "FILE ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}";        else echo 'FILE ARRAY FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY" ];     then echo "FUNC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";    else echo 'FUNC ARRAY FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY" ];       then echo "MODL ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}";      else echo 'MODL ARRAY FALSE'; fi
+    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY" ];  then echo "SUBC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}"; else echo 'SUBC ARRAY FALSE'; fi
 
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
@@ -124,7 +130,7 @@ function BU.Main.Echo.Debug()
         #**** Code ****
         [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ] &&
         {
-            if [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == cat?(eg?(orie))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'C' ]; then
+            if [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == c?(at?(eg?(ory))) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == c?(at?(eg?(orie)))?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'C' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -134,7 +140,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == file?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'F' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == fi?(l?(e))?(s) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'F' ]; then
                 local v_file="${p_filename%%.[Ll][Ii][Bb]*}";
 
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[0],,}" == 'all' ]; then
@@ -146,7 +152,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == function?(s) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == FNCT?(S) ]]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == fun?(c?(t?(ion))?(s)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == FN?(C?(T))?(S) ]]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -166,7 +172,7 @@ function BU.Main.Echo.Debug()
                     done
                 fi
 
-            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)cat?(eg?(ory)) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)?(c?(at?(eg?(orie))))s ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'S' ]; then
+            elif [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] || [[ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]] || [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX^^}" == 'S' ]; then
                 if [ "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[0],,}" == 'all' ]; then
                     BU.Main.Echo.__Debug "$p_funcname"; return 0;
                 else
@@ -180,7 +186,7 @@ function BU.Main.Echo.Debug()
 
         __BU_MAIN_ECHO__IS_DEBUGGING_THIS_FUNCTION='true';
 
-    } > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
+    } # > "$__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH";
 
     return 0;
 }
