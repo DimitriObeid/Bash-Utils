@@ -103,13 +103,13 @@ function BU.Main.Echo.DebugEnd()
 function BU.Main.Echo.Debug()
 {
     # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
-    if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ];                         then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
+    # if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ];                         then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
 
-    if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}" ];     then echo "CATS ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";     else echo 'CATS ARRAY FALSE'; fi
-    if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}" ];        then echo "FILE ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}";        else echo 'FILE ARRAY FALSE'; fi
-    if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}" ];    then echo "FUNC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";    else echo 'FUNC ARRAY FALSE'; fi
-    if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}" ];      then echo "MODL ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}";      else echo 'MODL ARRAY FALSE'; fi
-    if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}" ]; then echo "SUBC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}"; else echo 'SUBC ARRAY FALSE'; fi
+    # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}" ];     then echo "CATS ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";     else echo 'CATS ARRAY FALSE'; fi
+    # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}" ];        then echo "FILE ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}";        else echo 'FILE ARRAY FALSE'; fi
+    # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}" ];    then echo "FUNC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";    else echo 'FUNC ARRAY FALSE'; fi
+    # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}" ];      then echo "MODL ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}";      else echo 'MODL ARRAY FALSE'; fi
+    # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}" ]; then echo "SUBC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}"; else echo 'SUBC ARRAY FALSE'; fi
 
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
