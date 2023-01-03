@@ -209,9 +209,9 @@ function BU.Main.TextFormat.SetBGColor()
         }
 
         # Finally, the background color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[48;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[48;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -268,9 +268,9 @@ function BU.Main.TextFormat.SetTextColor()
         }
 
         # Finally, the foreground color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[38;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 

@@ -37,16 +37,16 @@ else __BU_ROOT_PATH="$(cat "$HOME/.Bash-utils/Bash-utils-root-val.path")";
 fi
 
 # Path of the modules initializer file.
-__BU_MAIN_FULL_FILE_PATH="$__BU_ROOT_PATH/Bash-utils.sh";
+__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES="$__BU_ROOT_PATH/Bash-utils-nolines.sh";
+__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES="${__BU_ROOT_PATH}/Bash-utils-nolines.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE="$__BU_ROOT_PATH/Bash-utils-no-line-comments--base.sh";
+__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE="${__BU_ROOT_PATH}/Bash-utils-no-line-comments--base.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES="$__BU_ROOT_PATH/Bash-utils-no-line-comments--no-lines.sh";
+__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES="${__BU_ROOT_PATH}/Bash-utils-no-line-comments--no-lines.sh";
 
 # Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_CONFIGS_PATH="$__BU_ROOT_PATH/install/.Bash-utils/config/initializer";
+__BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
 
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="$__BU_MODULE_INIT_CONFIGS_PATH/locale";
@@ -110,16 +110,16 @@ function BytesToHuman()
     return 0;
 }
 
-# function BU.Main.Echo.Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "$__BU_MAIN_FULL_FILE_PATH"; done; }
-function CatBU { cat "$1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO DISPLAY THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-function EchoBU { echo -e "# $1" | tee -a "$__BU_MAIN_FULL_FILE_PATH" || { echo "UNABLE TO WRITE THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+# function BU.Main.Echo.Newline { local iterations="$1"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU_MAIN_FULL_FILE_PATH}"; done; }
+function CatBU { cat "$1" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO DISPLAY THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+function EchoBU { echo -e "# $1" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO WRITE THE $1 FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 
-if [ ! -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
-	touch "$__BU_MAIN_FULL_FILE_PATH";
+if [ ! -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
+	touch "${__BU_MAIN_FULL_FILE_PATH}";
 fi
 
-if [ -s "$__BU_MAIN_FULL_FILE_PATH" ]; then
-	true > "$__BU_MAIN_FULL_FILE_PATH";
+if [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then
+	true > "${__BU_MAIN_FULL_FILE_PATH}";
 fi
 
 # ----------------------------------------------
@@ -153,7 +153,7 @@ EchoBU "$HOME/Bash-utils-init.sh"; # BU.Main.Echo.Newline '1';
 CatBU "$HOME/Bash-utils-init.sh";
 
 # Processing the function files.
-for i in "$__BU_ROOT_PATH/lib/functions/main/"*.lib; do
+for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
 	# BU.Main.Echo.Newline '2';
     EchoBU "${i^^}";
 
@@ -186,17 +186,17 @@ PrintLine;
 
 echo "Library statistics :"; echo;
 
-echo "Size in bytes           : $(BytesToHuman "$(wc -c < "$__BU_MAIN_FULL_FILE_PATH")" '' 1000)";
-echo "Number of characters    : $(wc -m < "$__BU_MAIN_FULL_FILE_PATH") characters";
-echo "Number of lines         : $(wc -l < "$__BU_MAIN_FULL_FILE_PATH") lines";
-echo "Maximum display width   : $(wc -L < "$__BU_MAIN_FULL_FILE_PATH") columns";
-echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH") words";
+echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU_MAIN_FULL_FILE_PATH}")" '' 1000)";
+echo "Number of characters    : $(wc -m < "${__BU_MAIN_FULL_FILE_PATH}") characters";
+echo "Number of lines         : $(wc -l < "${__BU_MAIN_FULL_FILE_PATH}") lines";
+echo "Maximum display width   : $(wc -L < "${__BU_MAIN_FULL_FILE_PATH}") columns";
+echo "Number of words         : $(wc -w < "${__BU_MAIN_FULL_FILE_PATH}") words";
 
 # Deleting the empty lines if the awaited value is passed as script's second argument.
 if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" == 'rmlines' ]; then
     echo;
 
-    cat "$__BU_MAIN_FULL_FILE_PATH" | sed '/^[[:space:]]*$/d' > "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
+    cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^[[:space:]]*$/d' > "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
 
     PrintLine;
 
@@ -209,12 +209,12 @@ if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" == 'rmlines' ]; then
     echo "Number of words         : $(wc -w < "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES") words";
 fi
 
-# Deleting the comments in the "$__BU_MAIN_FULL_FILE_PATH" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
+# Deleting the comments in the "${__BU_MAIN_FULL_FILE_PATH}" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
 if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
     echo;
 
-    if [ -f "$__BU_MAIN_FULL_FILE_PATH" ]; then
-        cat "$__BU_MAIN_FULL_FILE_PATH" | sed '/^#/d' < "$__BU_MAIN_FULL_FILE_PATH" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE";
+    if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
+        cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE";
 
         rm "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
 
@@ -235,9 +235,9 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
     echo;
 
     if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" ]; then
-        cat "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" | sed '/^#/d' < "$__BU_MAIN_FULL_FILE_PATH" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES";
+        cat "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES";
 
-        rm "$__BU_MAIN_FULL_FILE_PATH";
+        rm "${__BU_MAIN_FULL_FILE_PATH}";
 
         PrintLine;
 
@@ -254,7 +254,7 @@ fi
 
 # Deleting the generated file if the awaited value is passed as script's first argument.
 if [ "${__BU_ARG_RM,,}" == 'rm' ]; then
-    if rm "$__BU_MAIN_FULL_FILE_PATH"; then
+    if rm "${__BU_MAIN_FULL_FILE_PATH}"; then
         echo ; echo "The generated « $__BU_MAIN_FULL_FILE_PATH » file was successfully deleted";
     else
         echo >&2; echo "Unable to delete the generated « $__BU_MAIN_FULL_FILE_PATH » file" >&2; exit 1;

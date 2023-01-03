@@ -9746,15 +9746,7 @@ function BU.Main.Echo.DebugEnd()
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "bash -x".
 function BU.Main.Echo.Debug()
 {
-#     echo "DEBUG BASHX : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX[*]}";
-#     echo "ARRAY CATEG : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";
-#     echo "ARRAY FILES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FILES_ARRAY[*]}";
-#     echo "ARRAY FNCTS : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";
-#     echo "ARRAY SBCAT : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}";
-#     echo;
-
     # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
-
     if [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ];                         then echo "BASHX : $__BU_MODULE_INIT_STAT_DEBUG_BASHX"; else echo 'BASHX FALSE'; fi
 
     if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}" ];     then echo "CATS ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_CATEGORY_ARRAY[*]}";     else echo 'CATS ARRAY FALSE'; fi
@@ -9765,11 +9757,11 @@ function BU.Main.Echo.Debug()
 
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
-        local p_modname=$1;     # String    - Default : NULL    - Module where the function currently processed is defined.
-        local p_filename=$2;    # String    - Default : NULL    - File where the function currently processed is defined.
-        local p_funcname=$3;    # String    - Default : NULL    - Print the name of the function currently processed, during the debug procedure.
-        local p_category=$4;    # String    - Default : NULL    - Get the category of the targeted function.
-        local p_subcateg=$5;    # String    - Default : NULL    - Get the sub-category of the targeted function.
+        local p_modname=$1;     # String    - Default : NULL    - MANDATORY - Module where the function currently processed is defined.
+        local p_filename=$2;    # String    - Default : NULL    - MANDATORY - File where the function currently processed is defined.
+        local p_funcname=$3;    # String    - Default : NULL    - MANDATORY - Print the name of the function currently processed, during the debug procedure.
+        local p_category=$4;    # String    - Default : NULL    - MANDATORY - Get the category of the targeted function.
+        local p_subcateg=$5;    # String    - Default : NULL    - MANDATORY - Get the sub-category of the targeted function.
 
         #**** Code ****
         [ -n "$__BU_MODULE_INIT_STAT_DEBUG_BASHX" ] &&
@@ -9864,9 +9856,9 @@ function BU.Main.Echo.__EchoOutput()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
 	#**** Parameters ****
-	local p_string=$1;     # String    - String to display.
-	local p_context=$2;    # String    - Begin or end of the debug process.
-	local p_type=$3;       # Char      - Type of message (error 'E', Msg 'm', newstep 'N', success 'S' or warning 'W').
+	local p_string=$1;     # String    - Default : NULL     - MANDATORY     - String to display.
+	local p_context=$2;    # String    - Default : NULL     - MANDATORY     - Begin or end of the debug process.
+	local p_type=$3;       # Char      - Default : NULL     - MANDATORY     - Type of message (error 'E', Msg 'm', newstep 'N', success 'S' or warning 'W').
 
 	#**** Variables ****
 	local v_strlen="${#p_string}";
@@ -9949,8 +9941,8 @@ function BU.Main.Echo.__EchoCPLS()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING";
 
     #**** Parameters ****
-    local p_string=$1;  # Any       - Text to display.
-    local p_option=$2;  # String    - "echo" command options.
+    local p_string=$1;  # Any       - Default : NULL     - OPTIONAL     - Text to display.
+    local p_option=$2;  # String    - Default : NULL     - OPTIONAL     - "echo" command options.
 
     shift 2; pa_extraArgs=("$@");   # Array - More processing arguments (like the processing of a whole line-long string).
 
@@ -10053,9 +10045,8 @@ function BU.Main.Echo.Error()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
-    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
-
+    local p_string=$1;	# String	- Default : NULL	- OPTIONAL  - String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- OPTIONAL  - "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -10101,8 +10092,8 @@ function BU.Main.Echo.Msg()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
     #**** Parameters ****
-    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
-    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
+    local p_string=$1;	# String	- Default : NULL	- OPTIONAL  - String to print and / or redirect to the log file.
+    local p_option=$2;	# String	- Default : NULL	- OPTIONAL  - "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -10141,9 +10132,11 @@ function BU.Main.Echo.Newstep()
         "$__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING" \
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
+    echo HELLO
+
     #**** Parameters ****
-    local p_string=$1;	# String	- Default : NULL	- String to print and / or redirect to the log file.
-    local p_option=$2;	# String	- Default : NULL	- "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
+    local p_string=$1;	# ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : NULL    - DESC : String to print and / or redirect to the log file.
+    local p_option=$2;	# ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : NULL    - DESC : "echo" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
     shift 2;
 
     local pa_extraArgs=("$@");  # Array - More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus" or the "BU.Main.Echo.__EchoCPLS" functions.
@@ -10183,7 +10176,7 @@ function BU.Main.Echo.Read()
         "$__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE";
 
 	#**** Parameters ****
-	local p_string=$1;     # User's keyboard input.
+	local p_string=$1;     # TYPE : String      - DEFAULT : NULL    - MANDATORY : YES   - DESC : User's keyboard input.
 
 	#**** Code ****
 	if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "$__BU_MAIN_STAT_LOG" == "true" ] && [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ]; then
@@ -17043,9 +17036,9 @@ function BU.Main.TextFormat.SetBGColor()
         }
 
         # Finally, the background color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[48;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[48;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -17102,9 +17095,9 @@ function BU.Main.TextFormat.SetTextColor()
         }
 
         # Finally, the foreground color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;$1m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[38;5;$1m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -22951,7 +22944,7 @@ v_time_conf_date_display_color_1="$(tput setaf 78)";
 v_time_conf_date_display_color_2="$(tput setaf 111)";
 v_time_conf_date_display_color_3="$(tput setaf 78)";
 
-__BU_MAIN_TIME_DATE_DISPLAY="$(echo -ne "$v_time_conf_date_display_color_1" "[ $v_time_conf_date_display_color_2$__BU_MAIN_TIME_DATE$v_time_conf_date_display_color_3 ]")";
+__BU_MAIN_TIME_DATE_DISPLAY="$(echo -ne "$v_time_conf_date_display_color_1" "[ $v_time_conf_date_display_color_2$__BU_MAIN_TIME_DATE$v_time_conf_date_display_color_3 ]\033[0m")";
 
 BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_TIME_DATE_DISPLAY' "$__BU_MAIN_TIME_DATE_DISPLAY" 'CMD' \
 	"$__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE_DISPLAY" \
