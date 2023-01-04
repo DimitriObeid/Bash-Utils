@@ -120,11 +120,19 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 # Printing that the script's execution was interrupted by the user.
 function BU.ModuleInit.SIGINT()
 {
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && echo >&2; };
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2 && echo >&2; };
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && echo >&2; };
+    #**** Variables ****
+    local v_isPrinted; # VAR TYPE : Bool   - DESC :
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && echo >&2; };
+    #**** Code ****
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && v_isPrinted='true'; };
+
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && v_isPrinted='true'; };
+
+    [ "${v_isPrinted}" != 'true' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2; };
+
+    echo >&2;
 }
 
 # Defining the framework's traps.
@@ -134,7 +142,7 @@ function BU.ModuleInit.DefineTraps()
     __BU_MODULE_INIT_MSG__DEFINING_TRAPS__="";
 
     # Defining traps.
-    trap 'echo "$__BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT"' 0;
+    trap 'echo "${__BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT}"' 0;
 
     trap "BU.ModuleInit.SIGINT; BU.ModuleInit.Exit 2" SIGINT;
 }
@@ -146,14 +154,22 @@ function BU.ModuleInit.DefineTraps()
 # Printing the message that warns the user that the rest of the framework will use english as default language (this function is not called if the framework is wrapped in a single file).
 function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 {
+    #**** Variables ****
+    local v_isPrinted; # VAR TYPE : Bool   - DESC :
+
+    #**** Code ****
     echo '------------------------------------------------------------------------' >&2;
     echo >&2;
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && echo >&2;
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The rest of the library will use english as default language" >&2 && echo >&2;
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The rest of the library will use english as default language" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && echo >&2;
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+
+    [ "${v_isPrinted}" != 'true' ] && echo "The rest of the library will use english as default language" >&2;
+
+    echo >&2;
 
     sleep 0.5;
 
@@ -164,17 +180,29 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 # shellcheck disable=SC1090,SC1091
 function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
-    # Backupping the former language chosen.
-    local v_lang_backup="${__BU_MODULE_INIT__USER_LANG}";
+    #**** Variables ****
+    local v_lang_backup="${__BU_MODULE_INIT__USER_LANG}"; # VAR TYPE : ISO 639-1 code   - DESC : Backupping the former language chosen.
+
+    #**** Code ****
 
     # Changing the current language to English.
     LANG="en_US.UTF-8"; __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
 
+    BU.ModuleInit.SourceEnglishTranslationFiles "${v_lang_backup}";
+}
+
+# Sourcing the English translation files.
+function BU.ModuleInit.SourceEnglishTranslationFiles()
+{
+    #**** Parameters ****
+    local p_lang_backup=${1:-'en'}; # ARG TYPE : ISO 639-1 code    - MANDATORY | DEFAULT VAL : en    - DESC : language in which the  language's backup from the "BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()" function.
+
+    #**** Code ****
     BU.ModuleInit.IsFrameworkWrapped || source "$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/en.locale" || {
         echo >&2;
 
         # Deutch | German
-        [ "${v_lang_backup,,}" == 'de' ] && {
+        [ "${p_lang_backup,,}" == 'de' ] && {
             echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
             echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
 
@@ -187,7 +215,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # English
-        [ "${v_lang_backup,,}" == 'en' ] && {
+        [ "${p_lang_backup,,}" == 'en' ] && {
             echo '-----------------------------------------------------------' >&2 && echo >&2;
             echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
@@ -200,7 +228,7 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Español | Spanish
-        [ "${v_lang_backup,,}" == 'es' ] && {
+        [ "${p_lang_backup,,}" == 'es' ] && {
             echo '-----------------------------------------------------------------' >&2 && echo >&2;
             echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
 
@@ -213,12 +241,25 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
         }
 
         # Français | French
-        [ "${v_lang_backup,,}" == 'fr' ] && {
-            echo '---------------------------------------------------------------------' >&2 && echo >&2;
-            echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION ANGLAIS" >&2 && echo >&2;
+        [ "${p_lang_backup,,}" == 'fr' ] && {
+            echo '------------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION EN ANGLAIS" >&2 && echo >&2;
 
             echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
             echo "Arrêt de l'exécution du script" >&2;
+            echo >&2;
+
+            # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
+            return 1;
+        }
+
+        # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
+        [[ "${p_lang_backup}" == * ]] && {
+            echo '-----------------------------------------------------------' >&2 && echo >&2;
+            echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
+
+            echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
+            echo "Aborting the script's execution" >&2;
             echo >&2;
 
             # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
@@ -232,17 +273,19 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 function BU.ModuleInit.GetModuleInitLanguage()
 {
     #**** Parameters ****
-    local p_lang_ISO_639_1=${1:-NULL};  # String     - Default : NULL    - Wanted language.
+    local p_lang_ISO_639_1=${1:-NULL};  # String    - Default : NULL    - Wanted language.
 
     #**** Variables ****
-    local v_supportedLang=('de' 'en' 'es' 'fr');
-    local v_langMatch;
+    local v_supportedLang=('de' 'en' 'es' 'fr');    # VAR TYPE : Array  - DESC :
+    local v_langMatch;                              # VAR TYPE :
+
+    local v_isPrinted;                              # VAR TYPE : Bool   - DESC :
 
     #**** Code ****
     [[ ${v_supportedLang[*]} =~ ${p_lang_ISO_639_1,,} ]] && v_langMatch="match";
 
     # If the selected language was not found among the supported languages.
-    if [ -z "$v_langMatch" ]; then
+    if [ -z "${v_langMatch}" ]; then
 
         if [ -n "${p_lang_ISO_639_1}" ]; then
             echo "WARNING : Your selected language (${p_lang_ISO_639_1}) is not (yet) supported by the initialisation script" >&2
@@ -260,88 +303,46 @@ function BU.ModuleInit.GetModuleInitLanguage()
     fi
 
 	if [ "${p_lang_ISO_639_1^^}" == 'NULL' ]; then
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+
+        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+
+        echo >&2;
 
 		BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     elif [ "${p_lang_ISO_639_1^^}" != 'NULL' ] && [ ! -f "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/${p_lang_ISO_639_1}.locale" ]; then
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » nicht gefunden werden" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR » directory" >&2 && echo >&2;
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR} » nicht gefunden werden" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR} » directory" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR} »" >&2 && v_isPrinted='true';
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR »" >&2 && echo >&2;
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR} »" >&2 && v_isPrinted='true';
+
+        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR} » directory" >&2;
+
+        echo >&2;
 
         BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     else
-        # Sourcing the English translation file before sourcing the current language's translation file, in order to
-        BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/en.locale" || {
-            echo >&2;
+        # Sourcing the English translation files first, since these files are the most supported, so that if new variables are added, no empty strings will be displayed if the next language files are not updated yet.
+        BU.ModuleInit.SourceEnglishTranslationFiles "${__BU_MODULE_INIT__USER_LANG,,}";
 
-            # Deutch | German
-            [ "${v_lang_backup,,}" == 'de' ] && {
-                echo '------------------------------------------------------------------------------------------------' >&2 && echo >&2;
-                echo "FATALER FEHLER : DIE ENGLISCHE ÜBERSETZUNGSDATEI KONNTE NICHT VON DER QUELLE REFERENZIERT WERDEN" >&2 && echo >&2;
-
-                echo "Da die Nachrichten in der Modulinitialisierungsdatei in Variablen gespeichert werden, stützt sich diese Datei auf diese Übersetzungsdateien, die diese Variablen definieren" >&2;
-                echo "Anhalten der Skriptausführung" >&2;
-                echo >&2;
-
-                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-                return 1;
-            }
-
-            # English
-            [ "${v_lang_backup,,}" == 'en' ] && {
-                echo '-----------------------------------------------------------' >&2 && echo >&2;
-                echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
-
-                echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
-                echo "Aborting the script's execution" >&2;
-                echo >&2;
-
-                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-                return 1;
-            }
-
-            # Español | Spanish
-            [ "${v_lang_backup,,}" == 'es' ] && {
-                echo '-----------------------------------------------------------------' >&2 && echo >&2;
-                echo "ERROR FATAL: IMPOSIBLE OBTENER EL ARCHIVO DE TRADUCCIÓN AL INGLÉS" >&2 && echo >&2;
-
-                echo "Como los mensajes del fichero de inicialización del módulo se almacenan en variables, este fichero es asumido por estos ficheros de traducción, que definen estas variables" >&2;
-                echo "Detener la ejecución del script" >&2;
-                echo >&2;
-
-                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-                return 1;
-            }
-
-            # Français | French
-            [ "${v_lang_backup,,}" == 'fr' ] && {
-                echo '---------------------------------------------------------------------' >&2 && echo >&2;
-                echo "ERREUR FATALE : IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTION ANGLAIS" >&2 && echo >&2;
-
-                echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
-                echo "Arrêt de l'exécution du script" >&2;
-                echo >&2;
-
-                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "$__BU_MODULE_INIT_MSG_ARRAY" array.
-                return 1;
-            }
-        }
-
-        #
+        # Sourcing the language
         BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}/${p_lang_ISO_639_1}.locale" || {
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && echo >&2;
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && echo >&2;
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && echo >&2;
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+
+            [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+
+            echo >&2;
 
             BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
         }
@@ -358,7 +359,7 @@ function BU.ModuleInit.AskPrintLog()
     #**** Code ****
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
     if [ -z "${__BU_MODULE_INIT_MSG_ARRAY}" ]; then
-        echo "$__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY";
+        echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY}";
         echo; return 0;
     fi
 
@@ -535,23 +536,23 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
             # - path 	: this variable stores the path to a directory or a file.
             # - string	: this variable stores a string (other than the name of a directory or a file, or a path).
             if      [[ "${p_var_type,,}" != arr?(ay) ]];    then true;
-            elif    [ "${p_var_type,,}" != 'cmd' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD";
-            elif    [ "${p_var_type,,}" != 'dir' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR";
-            elif    [ "${p_var_type,,}" != 'int' ];         then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT";
-            elif    [ "${p_var_type,,}" != 'bool' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL";
-            elif    [ "${p_var_type,,}" != 'char' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR";
-            elif    [ "${p_var_type,,}" != 'file' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE";
-            elif    [ "${p_var_type,,}" != 'path' ];        then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH";
-            elif    [ "${p_var_type,,}" != "achar" ];       then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR";
-            elif    [ "${p_var_type,,}" != 'float' ];       then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT";
-            elif    [ "${p_var_type,,}" != "intneg" ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG";
-            elif    [ "${p_var_type,,}" != "intpos" ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS";
-            elif    [ "${p_var_type,,}" != 'string' ];      then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING";
-            elif    [ "${p_var_type,,}" != "astring" ];     then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING";
-            elif    [ "${p_var_type,,}" != 'dirpath' ];     then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH";
-            elif    [ "${p_var_type,,}" != "filepath" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH";
-            elif    [ "${p_var_type,,}" != "floatneg" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATNEG";
-            elif    [ "${p_var_type,,}" != "floatpos" ];    then v_type_transl="$__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATPOS";
+            elif    [ "${p_var_type,,}" != 'cmd' ];         then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD}";
+            elif    [ "${p_var_type,,}" != 'dir' ];         then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR}";
+            elif    [ "${p_var_type,,}" != 'int' ];         then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT}";
+            elif    [ "${p_var_type,,}" != 'bool' ];        then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL}";
+            elif    [ "${p_var_type,,}" != 'char' ];        then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR}";
+            elif    [ "${p_var_type,,}" != 'file' ];        then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE}";
+            elif    [ "${p_var_type,,}" != 'path' ];        then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH}";
+            elif    [ "${p_var_type,,}" != "achar" ];       then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR}";
+            elif    [ "${p_var_type,,}" != 'float' ];       then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT}";
+            elif    [ "${p_var_type,,}" != "intneg" ];      then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG}";
+            elif    [ "${p_var_type,,}" != "intpos" ];      then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS}";
+            elif    [ "${p_var_type,,}" != 'string' ];      then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING}";
+            elif    [ "${p_var_type,,}" != "astring" ];     then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING}";
+            elif    [ "${p_var_type,,}" != 'dirpath' ];     then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH}";
+            elif    [ "${p_var_type,,}" != "filepath" ];    then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH}";
+            elif    [ "${p_var_type,,}" != "floatneg" ];    then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATNEG}";
+            elif    [ "${p_var_type,,}" != "floatpos" ];    then v_type_transl="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATPOS}";
 			else
 				p_var_type="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN}";
             fi
