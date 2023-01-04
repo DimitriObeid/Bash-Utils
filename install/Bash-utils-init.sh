@@ -849,6 +849,8 @@ function BU.ModuleInit.PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "${__B
 
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
+
+# shellcheck disable=SC2129
 function BU.ModuleInit.PrintLog()
 {
     #**** Variables ****
@@ -1828,7 +1830,7 @@ BU.ModuleInit.DefineTraps;
 function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()
 {
     #**** Variables ****
-    local __v__BASHX_DEBUG_VALS_ARRAY__lineno;
+    declare -i __v__BASHX_DEBUG_VALS_ARRAY__lineno; # VAR TYPE : Int    - DESC :
 
     #**** Code ****
 
@@ -1846,7 +1848,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     ____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME="tmp";
 
     # FINDING THE ".Bash-utils" FOLDER
-    if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
+    if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ] && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
 
         __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils"                                                                 || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__ROOT'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
         __bu_module_init__root__lineno="$(( LINENO - 1))";
@@ -1962,6 +1964,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
 # Calling the function previously defined, or else the global variables will not be declared.
 BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
+
+exit 0;
 
 # -----------------------------------------------
 
