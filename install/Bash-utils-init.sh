@@ -1085,6 +1085,7 @@ function BU.ModuleInit.CheckPath()
 }
 
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
+# shellcheck disable=SC2059
 function BU.ModuleInit.FindPath()
 {
     #**** Parameters ****
@@ -1103,10 +1104,17 @@ function BU.ModuleInit.FindPath()
             if [ "${v_shut,,}" != 'shut' ]; then
                 echo >&2;
 
-                # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
+                # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
+                # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
+                if [ -z "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                    printf "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
 
-                printf "Function where the « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
+                    printf "Function where the A « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
+                else
+                    printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
+
+                    printf "Function where the B « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
+                fi
             fi
 
         else
@@ -1115,14 +1123,24 @@ function BU.ModuleInit.FindPath()
 
                 BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__FINDPATH__PATH_NOT_FOUND";
 
-                # shellcheck disable=SC2059
-                BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
+                # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
+                # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
+                if [ -z "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                    BU.ModuleInit.Msg "$(printf " --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
 
-                BU.ModuleInit.Msg "$(printf "Function where the « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
+                    BU.ModuleInit.Msg "$(printf "Function where the C « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
 
-                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+                    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
-                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+                else
+                    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
+
+                    BU.ModuleInit.Msg "$(printf "Function where the D « %s() » function was called : %s()\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
+
+                    BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+                fi
             fi
         fi
 
