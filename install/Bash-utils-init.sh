@@ -197,35 +197,35 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # Deutch | German
     [ "${v_userLang,,}" == 'de' ] && {
-        printf "\n\n";
+        printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », WARNUNG: DIESER PFAD KANN NICHT GEFUNDEN WERDEN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "" >&2; v_isPrinted='true';
+        printf "(%s) Funktion, bei der die Funktion « %s() » aufgerufen wurde: %s" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # English
     [ "${v_userLang,,}" == 'en' ] && {
-        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Español | Spanish
     [ "${v_userLang,,}" == 'es' ] && {
-        printf "\n\n";
+        printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », \n\n" "${p_file}" "${p_func0}" >&2;
 
-        printf "" >&2; v_isPrinted='true';
+        printf "(%s) %s %s" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Français | French
     [ "${v_userLang,,}" == 'fr' ] && {
-        printf "DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS : IMPOSSIBLE DE TROUVER CE CHEMIN --> %s/%s\n\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "$(BU.ModuleInit.CheckPath "${v_parentdir}/${v_target}" "${v_targetType}" 'fp')" >&2;
+        printf "DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS : IMPOSSIBLE DE TROUVER CE CHEMIN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && {
-        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2;
     };
