@@ -502,11 +502,11 @@ source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 function PrintLine()
 {
     #**** Parameters ****
-    local p_pos=${1:-NULL};         # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Printing a character according to the line's position.
-    local p_len=${2:-NULL};         # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Printing a line according to the string's length.
+    local p_pos=${1:-NULL};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Printing a character according to the line's position.
+    local p_len=${2:-NULL};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Printing a line according to the string's length.
 
     if [ "${p_len^^}" != 'NULL' ]; then
-        local p_str=${3:-\$'0'};    # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : String whose lenght is to be processed.
+        local p_str=${3:-\$'0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String whose lenght is to be processed.
 
         __cols="${#p_str}";
     else
@@ -527,10 +527,10 @@ function PrintLine()
 function PrintBaseLine()
 {
     #**** Parameters ****
-    local p_color=${1:-\$'0'};  # ARG TYPE : CMD        - MANDATORY | DEFAULT VAL : NULL    - DESC : Color of the line AND the text.
-    local p_msg=${2:-\$'0'};    # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Message to print.
-    local p_pos=${3:-NULL};     # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Position of the line to print.
-    local p_len=${4:-NULL};     # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Printing a line according to the string's length.
+    local p_color=${1:-\$'0'};  # ARG TYPE : CMD        - REQUIRED | DEFAULT VAL : NULL     - DESC : Color of the line AND the text.
+    local p_msg=${2:-\$'0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Message to print.
+    local p_pos=${3:-NULL};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Position of the line to print.
+    local p_len=${4:-NULL};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Printing a line according to the string's length.
 
     # NULL (default)    : no lines are printed
     # UPPER             : only the upper line is printed
@@ -571,7 +571,7 @@ function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}";
 function PrintFilesWhichWereNotChmoded()
 {
     #**** Parameters ****
-    local __compiled_stable_file_parent_dir=${1}; # ARG TYPE : Dirpath  - MANDATORY | DEFAULT VAL : NULL    - DESC :
+    local __compiled_stable_file_parent_dir=${1}; # ARG TYPE : Dirpath  - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
     printf "${__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}\n" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" >&2;
@@ -599,10 +599,10 @@ function PrintFilesWhichWereNotChmoded()
 function BytesToHuman()
 {
     #**** Parameters ****
-    local L_BYTES="${1:-0}";    # ARG TYPE : Int            - MANDATORY | DEFAULT VAL : 0       - DESC : Raw size in bytes.
-    local L_PAD="${2:-no}";     # ARG TYPE : String         - MANDATORY | DEFAULT VAL : no      - DESC : Allow result display padding.
-    local L_BASE="${3:-1024}";  # ARG TYPE : Int            - MANDATORY | DEFAULT VAL : 1024    - DESC : Base (1000 (metric) or 1024 (binary notation))
-    local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code - MANDATORY | DEFAULT VAL : en      - DESC : Language, for localizing the byte count (default language : English).
+    local L_BYTES="${1:-0}";    # ARG TYPE : Int            - REQUIRED | DEFAULT VAL : 0    - DESC : Raw size in bytes.
+    local L_PAD="${2:-no}";     # ARG TYPE : String         - REQUIRED | DEFAULT VAL : no   - DESC : Allow result display padding.
+    local L_BASE="${3:-1024}";  # ARG TYPE : Int            - REQUIRED | DEFAULT VAL : 1024 - DESC : Base (1000 (metric) or 1024 (binary notation))
+    local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code - REQUIRED | DEFAULT VAL : en   - DESC : Language, for localizing the byte count (default language : English).
 
     #**** Code ****
     if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
@@ -653,7 +653,7 @@ function BytesToHuman()
 function CheckISO639_1_LangCode()
 {
     #**** Parameters ****
-    local p_code=${1:-NULL}; # ARG TYPE : String    - MANDATORY | DEFAULT VAL : NULL    - DESC : Language in which the file must be translated.
+    local p_code=${1:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Language in which the file must be translated.
 
     #**** Code ****
     [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
@@ -663,8 +663,8 @@ function CheckISO639_1_LangCode()
 function CheckLangArgDelim()
 {
     #**** Parameters ****
-    local p_string=${1:-\$'0'}; # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : String to process.
-    local p_target=${2:-\$'0'}; # ARG TYPE : Char       - MANDATORY | DEFAULT VAL : NULL    - DESC : Targeted character.
+    local p_string=${1:-\$'0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_target=${2:-\$'0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
     #**** Variables ****
     local v_occurences="${p_string//[^$p_target]}"; # VAR TYPE :  - DESC :
@@ -679,7 +679,7 @@ function CheckLangArgDelim()
 function ShellcheckError()
 {
     #**** Parameters ****
-    local p_path=${1:-\$'0'};  # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Path of the file whose Shellcheck verification failed.
+    local p_path=${1:-\$'0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL  - DESC : Path of the file whose Shellcheck verification failed.
 
     #**** Code ****
     echo >&2;
@@ -692,8 +692,8 @@ function ShellcheckError()
 function WriteBU()
 {
     #**** Parameters ****
-    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Path to the file whose content should be written to the "${__BU_MAIN_FULL_FILE_PATH}" file.
-    local p_display=${2:-no};   	# ARG TYPE : String     - MANDATORY | DEFAULT VAL : no      - DESC : Display the content of each file when it is read and written into the file to generate.
+    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written to the "${__BU_MAIN_FULL_FILE_PATH}" file.
+    local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
 	#**** Variables ****
 	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write in the "${__BU_MAIN_FULL_FILE_PATH}" file.
@@ -785,8 +785,8 @@ fi
 function CompileInSingleFile()
 {
     #**** Parameters ****
-    local p_locale=${1:-NULL};  # ARG TYPE : String     - MANDATORY | DEFAULT VAL : NULL    - DESC : Language in which the file must be translated.
-    local p_display=${2:-no};   # ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : no      - DESC : Display the content of each file when it is read and written into the file to generate.
+    local p_locale=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Language in which the file must be translated.
+    local p_display=${2:-no};   # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
     #**** Variables ****
     local v_locale_str;         # VAR TYPE : String     - DESC :
