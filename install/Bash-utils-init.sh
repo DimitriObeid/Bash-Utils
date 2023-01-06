@@ -218,7 +218,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # Français | French
     [ "${v_userLang,,}" == 'fr' ] && {
-        printf "DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS : IMPOSSIBLE DE TROUVER CE CHEMIN --> %s/%s\n\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2;
+        printf "DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS : IMPOSSIBLE DE TROUVER CE CHEMIN --> %s/%s\n\n" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "$(BU.ModuleInit.CheckPath "${v_parentdir}/${v_target}" "${v_targetType}" 'fp')" >&2;
 
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
@@ -1131,7 +1131,6 @@ function BU.ModuleInit.CheckPath()
     #**** Parameters ****
     local p_path=${1:-NULL};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the target file or directory.
     local p_target=${2:-NULL};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Specify if the target is a directory or a file.
-    local p_findPath=${3:-$'\0'};   # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC
 
     #**** Code ****
     if [ "${p_path^^}" == 'NULL' ]; then
@@ -1190,8 +1189,6 @@ function BU.ModuleInit.FindPath()
     local v_hasFailed;                  # VAR TYPE : String     - DESC : Ending the execution of the current function if an error occured during the execution of the "$(find)" command when a value is passed to the "${v_specific_var}" parameter.
 
     #**** Code ****
-    echo "DIR : $__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR"
-
     find "${v_parentdir}" -maxdepth 1 -iname "${v_target}" -print 2>&1 | grep -v "Permission denied" || \
 	{
         #**** Error management variables ****
@@ -1211,7 +1208,7 @@ function BU.ModuleInit.FindPath()
                 else
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_2__PATH_NOT_FOUND';
 
-                    printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "$(BU.ModuleInit.CheckPath "${v_parentdir}/${v_target}" "${v_targetType}")" >&2; echo >&2;
+                    printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
 
                     printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
                 fi
@@ -1234,7 +1231,7 @@ function BU.ModuleInit.FindPath()
                 else
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_2__PATH_NOT_FOUND';
 
-                    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "$(BU.ModuleInit.CheckPath "${v_parentdir}/${v_target}")" >&2; BU.ModuleInit.Msg >&2;
+                    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
 
                     BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
 
