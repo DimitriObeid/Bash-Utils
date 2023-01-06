@@ -197,23 +197,23 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # Deutch | German
     [ "${v_userLang,,}" == 'de' ] && {
-        printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », WARNUNG: DIESER PFAD KANN NICHT GEFUNDEN WERDEN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », BASH-UTILS WARNUNG: DIESER PFAD KANN NICHT GEFUNDEN WERDEN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Funktion, bei der die Funktion « %s() » aufgerufen wurde: %s" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # English
     [ "${v_userLang,,}" == 'en' ] && {
-        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : NO SE ENCUENTRA ESTA RUTA DE ARCHIVO --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Español | Spanish
     [ "${v_userLang,,}" == 'es' ] && {
-        printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », \n\n" "${p_file}" "${p_func0}" >&2;
+        printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », A LA LÍNEA « %s » --> ADVERTENCIA DE BASH-UTILS : \n\n" "${p_file}" "${p_func0}" "${p_lineno}" >&2;
 
-        printf "(%s) %s %s" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Función en la que se ha llamado a la función « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Français | French
@@ -1131,6 +1131,7 @@ function BU.ModuleInit.CheckPath()
     #**** Parameters ****
     local p_path=${1:-NULL};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the target file or directory.
     local p_target=${2:-NULL};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Specify if the target is a directory or a file.
+#    local p_findPath=${3:-NULL}     # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
     if [ "${p_path^^}" == 'NULL' ]; then
@@ -1189,6 +1190,8 @@ function BU.ModuleInit.FindPath()
     local v_hasFailed;                  # VAR TYPE : String     - DESC : Ending the execution of the current function if an error occured during the execution of the "$(find)" command when a value is passed to the "${v_specific_var}" parameter.
 
     #**** Code ****
+    [ "${v_targetType,,}" != 'd' ] && [ "${v_targetType,,}" != 'f' ] && v_targetType='NULL';
+
     find "${v_parentdir}" -maxdepth 1 -iname "${v_target}" -print 2>&1 | grep -v "Permission denied" || \
 	{
         #**** Error management variables ****
