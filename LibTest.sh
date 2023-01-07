@@ -4,7 +4,13 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
+## DECLARING PRE-INITIALIZATION VARIABLES
+
+# Changing the locale of the system in the scope of the project.
 LANG='fr_FR.UTF-8';
+
+# Declaring the framework installation variable (not in module argument, as some needed instructions are processed before the arguments processor).
+__BU_MODULE_PRE_INIT__IS_FRAMEWORK_INSTALLED='true';
 
 # shellcheck disable=SC1090
 if ! source "$HOME/Bash-utils-init.sh"; then
@@ -15,7 +21,7 @@ fi
 
 # Calling the "BashUtils_InitModules()" function.
 if ! BashUtils_InitModules \
-    "module --log-display --mode-log-partial --stat-debug=true --stat-debug-bashx=file" \
+    "module --log-shut --mode-log-partial --stat-debug=true --stat-debug-bashx=file" \
     "main --stat-debug=true stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true";
 
     then
@@ -65,10 +71,10 @@ fi
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
 
 # Testing functions
-BU.Hardware.CPU.GetArch || echo FALSE
+BU.Main.Echo.Newstep "Architecture du processeur : $(BU.Hardware.CPU.GetArch || BU.Main.Echo.Error "False")";
 
 # This command pauses the script, in order to see how much memory it uses.
-sleep 30
+sleep 1
 
 # Testing a BU.Main.Decho.Decho.FMT function
 # BU.Main.Decho.Decho.FMT_BlinkBoldDISU "Hello world" "$__BU_MAIN_COLOR_TXT_ORANGE"
