@@ -2124,7 +2124,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # FILES
     # Creating a variable for storing the instruction not to stop the script if the "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" is not found, since a super-user privileged version exists.
     __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR='no-err';
-    
+
     __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
     __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
 
@@ -2210,7 +2210,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_EXISTS="$((RANDOM % 255))";
 # This global variable stores the processing mode (partial or full).
 
 # By default, it stores the '--mode-log-partial' value, in order to avoid the initialization process being too much verbose.
-declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial'
+declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial';
 
 # This global variable stores the value (given in the "BashUtils_InitModules()" function's main loop)
 # which authorizes the displaying of the logs messages on the screen.
@@ -2237,368 +2237,12 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
 ## INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
-# Remaking the "BU.Main.Errors.HandleErrors()" function in order to make it working for the initialization process.
-function BU.ModuleInit.HandleErrors()
-{
-    #**** Parameters ****
-    local p_returnCode=${1:-0}          # Int       - Default : NULL    - Return code of the last command or function called before the current function.
-    local p_errorString=${2:-NULL};     # String    - Default : NULL    - String of the type of error to display.
-    local p_adviceString=${3:-NLL};     # String    - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
-    local p_badValue=${4:-NULL};        # String    - Default : NULL    - Incorrect value which caused the error.
-    local p_file=${5:-NULL};            # String    - Default : NULL    - The name of the file where the error occured.
-    local p_function=${6:-NULL};        # String    - Default : NULL    - The name of the function where the error occured.
-    local p_lineno=${7:-NULL};          # String    - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "${LINENO}").
-
-    #**** Code ****
-    if [ "${p_returnCode}" -eq 0 ]; then return 0; else
-        if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "${__BU_MODULE_INIT_IS_SOURCED}" == 'sourced' ]; then
-            BU.Main.Errors.HandleErrors "${p_returnCode}" "${p_errorString}" "${p_adviceString}" "${p_badValue}" "${p_file}" "${p_function}" "${p_lineno}"; return "$?";
-
-        else
-            echo "IN ${p_file}, FUNCTION ${p_function}, LINE ${p_lineno} --> ERROR : ${p_errorString}" >&2;
-            echo "Advice : ${p_adviceString}" >&2;
-            echo >&2;
-
-            echo "Value that caused this error : ${p_badValue}" >&2;
-
-            BU.ModuleInit.MsgAbort;
-
-            BU.ModuleInit.AskPrintLog >&2 || return 1;
-
-            return "${p_returnCode}";
-        fi
-    fi
-
-    return 0;
-}
-
-# Parsing each module's translation CSV file.
-
-# The "BU.ModuleInit.ParseCSVLang" function MUST be called in the current module's initialization script.
-
-# IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig"
-# functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
-# to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos" function.
-
-# shellcheck disable=SC1090
-function BU.ModuleInit.ParseCSVLang()
-{
-    #**** Parameters ****
-    local p_lang_ISO_639_1=${1:-${__BU_MODULE_INIT__USER_LANG}};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : ${__BU_MODULE_INIT__USER_LANG}   - DESC : Language to fetch.
-    local p_delim=${2:-$'\0'};                                   	# ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL                             - DESC : CSV file's delimiter.
-
-    #**** Variables ****
-    local v_outputFileName="${__BU_MODULE_INIT_MODULE_NAME}.${p_lang_ISO_639_1}.translate";
-    local v_outputFileParent="${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
-    local v_outputFilePath="${v_outputFileParent}/${v_outputFileName}";
-
-    local v_filename="${__BU_MODULE_INIT_MODULE_NAME}-${p_lang_ISO_639_1}.csv";
-    local v_CSVFirstColRow;
-
-    # Getting the total number of columns.
-    local x;
-
-	# Gets the return code of the Perl script used to parse the translation file in CSV format.
-	local v_perlScriptReturnCode;
-
-	local v_perlScriptExecLineno;
-
-    # Getting the wanted column (set to 0, and the value will be taken from a new assignation of the variable with the call of the "BU.Main.Text.GetSubStringAfterDelim" function as sub-shell).
-#    local v_wantedColID=0;
-
-    # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
-#    local v_CSVFirstColRowAfterNthDelim;
-
-    # Perl script's return codes.
-    local v_perlScriptNoCSVFileGivenAsArgErrorCode="10022";             # Do not change this return code.
-    local v_perlScriptPathIsDirErrorCode="1";
-    local v_perlScriptFileIsNotCSVFormatErrorCode="2";
-
-    local v_perlScriptIndexColNotPassedAsSecondArgErrorCode="3"
-    local v_perlScriptIndexColIsNotIntErrorCode="4";
-    local v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode="5";
-
-    local v_perlScriptCSVFileCannotBeReadErrorCode="6";
-    local v_perlScriptOutputFileCannotBeCreatedErrorCode="7";
-    local v_perlScriptNotEnoughDiskSpaceAvailableErrorCode="14";        # Do not change this return code.
-
-    #**** Code ****
-    # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
-    # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
-
-    # If the output file already exists, then it's not necessary to retranslate the module.
-    if [ -f "${v_outputFilePath}" ] && [ -n "${v_outputFilePath}" ]; then
-		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
-		BU.ModuleInit.Msg;
-
-		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
-            source "${v_outputFilePath}" || {
-                local C="$?";
-
-                local lineno="$(( LINENO - 3 ))";
-
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNABLE_TO_SOURCE_TRANSL_OUT_FILE";
-
-                BU.ModuleInit.HandleErrors "${C}" "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "${v_outputFilePath}")" \
-                    "Please check what causes the script to not source the output file, which contains the target language's translations" \
-                    "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-                return "$?";
-            }
-
-            return 0;
-		};
-	fi
-
-    # If no path to the module's translation CSV file is given.
-    if [ -z "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__NO_PATH_TO_MOD_TRANSL_FILE";
-
-        BU.ModuleInit.HandleErrors '1' "$(printf "NO PATH TO THE « %s » MODULE'S TRANSLATION FILE EXISTS" "${__BU_MODULE_INIT_MODULE_NAME}")" \
-            "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    fi
-
-    if [ -z "${v_filename}" ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" 'E_BUINIT__PARSECSVLANG__';
-
-        return "$?";
-    fi
-
-    # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
-    if [ -n "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] && [ ! -f "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__INVALID_TRANSL_FILE_PATH";
-
-        BU.ModuleInit.HandleErrors '1' "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "${__BU_MODULE_INIT_MODULE_NAME}")" \
-            "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    fi
-
-    # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
-    if [ -n "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] \
-        && [ -f "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] \
-        && [ ! -f "${v_outputFilePath}" ] \
-        && [ "$(basename "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" != "${v_filename}" ]; then local lineno="${LINENO}";
-            BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__TARGET_TRANSL_FILE_DOES_NOT_MATCHES_DEFINED_PATTERN";
-
-            BU.ModuleInit.HandleErrors '1' "$(printf "THE NAME OF THE « %s » PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "${__BU_MODULE_INIT_MODULE_NAME}")" \
-                "Please give a valid name to the current module's translations CSV file. The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" \
-				"${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-            return "$?";
-    fi
-
-    # If no delimiter is given.
-    if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNDEFINED_DELIM";
-
-        BU.ModuleInit.HandleErrors '1' "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
-            "Please give a « single unicode character » as CSV delimiter in order to get each wanted cell" \
-            "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    fi
-
-    if [ -n "${p_delim}" ] && [ "${#p_delim}" -gt 1 ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__DELIM_MUST_BE_UNICODE_CHAR";
-
-        BU.ModuleInit.HandleErrors '1' "THE GIVEN DELIMITER MUST BE A SINGLE UNICODE CHARACTER" \
-            "Please give a « single unicode character » as valid CSV delimiter in order to get each wanted cell" \
-            "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    fi
-
-    # Begin parsing the CSV file.
-    BU.Main.Headers.Header.Blue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "${__BU_MAIN_PROJECT_NAME}" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
-
-    BU.ModuleInit.Msg "Finding the variables list column";
-    BU.ModuleInit.Msg;
-
-    # If the targeted CSV file cannot be read by the current user.
-    if [ ! -r "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${lineno}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNABLE_TO_READ_FILE";
-
-        BU.ModuleInit.HandleErrors '1' "$(printf "Unable to read the « %s » file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
-            "Please check the permissions of this file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
-            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    fi
-
-    # Getting the first row and first column's cell.
-    v_CSVFirstColRow="$(BU.Main.Text.GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" || {
-        local C="$?";
-
-        local lineno="$(( LINENO - 3 ))";
-
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__VARIABLE_VAL_UNABLE_TO_FIND";
-
-        BU.ModuleInit.HandleErrors '1' "$(printf "UNABLE TO FIND THE VALUE « VARIABLE » IN THE FIRST ROW AND FIRST COLUMN OF THE « %s » FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
-            "$(printf "Please check if the value mentioned above is present on this EXACT cell of the « %s » file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
-            "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    })" "${p_delim}" '--init')";
-
-    if [ "${v_CSVFirstColRow}" != "VARIABLE" ]; then local lineno="${LINENO}";
-        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__VARIABLE_VAL_NOT_FOUND";
-
-        BU.ModuleInit.HandleErrors '1' "$(printf "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE « %s »" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
-            "Make sure the current module's CSV translations file is correctly formatted. You can check the main module's CSV file to check how the formatting should be done" \
-            "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
-
-        return "$?";
-    else
-        BU.ModuleInit.Msg "$(printf "Parsing the « %s » translations file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
-        BU.ModuleInit.Msg;
-
-        BU.ModuleInit.Msg "$(printf "Getting the chosen language's row (targeted language : %s)" "${p_lang_ISO_639_1}")";
-        BU.ModuleInit.Msg;
-
-        # Getting the total number of columns.
-        x="$(awk -F, '{ print NF; exit }' "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
-
-        # Getting the langage ISO 639-1 code from the first row.
-#        v_CSVFirstColRowAfterNthDelim="$(BU.Main.Text.GetSubStringAfterDelim "${v_CSVFirstColRow}" "${p_delim}" "$(( x - 1 ))") '' '--init'";
-
-        # Getting the wanted language's column.
-        v_wantedColID="$(BU.Main.Text.GetSubStringAfterDelim "${v_CSVFirstColRow}" "${p_delim}" "$(( x - 1 ))" "count" '--init')";
-
-        # The targeted column is acquired, the Perl script's parsing program SetMouduleLang.pl can finally be called.
-		v_perlScriptExecLineno="${LINENO}"; perl "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}" "${v_wantedColID}" "${v_outputFilePath}";
-
-        # Getting the return value of the last command.
-		v_perlScriptReturnCode="$?";
-
-		# Checking the eventual errors returned by the parsing program.
-		if [ "${v_perlScriptReturnCode}" -eq 0 ]; then
-			BU.ModuleInit.Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${p_lang_ISO_639_1}" "${v_outputFilePath}")";
-			BU.ModuleInit.Msg;
-
-			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
-
-			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
-                source "${v_outputFilePath}" || {
-                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
-
-                    return "${C}";
-                };  return    0;
-            };
-
-		else
-			# The CSV file was not passed as first argument.
-			if		[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptNoCSVFileGivenAsArgErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_NOT_CSV_FILE";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass as first argument the path of the translations CSV file you want to process"
-                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# A path was passed as first argument, but it's a directory path.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptPathIsDirErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_IS_DIR";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass as first argument the path of the translations CSV ${__BU_MAIN_TXT_FMT_ITALIC}>>> file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
-                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# A path was passed as first argument. It's a file, but not in CSV format.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptFileIsNotCSVFormatErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_FILE_IS_NOT_CSV";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass as first argument the path of the translations ${__BU_MAIN_TXT_FMT_ITALIC}>>> CSV file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
-                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# The column's index was not passed as second argument.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptIndexColNotPassedAsSecondArgErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_SEC_ARG_NO_COL_INDEX";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass as second argument as the index of the column you want to process" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# The column's index passed as second argument was not an integer.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptIndexColIsNotIntErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_SEC_ARG_NOT_INT";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
-                    "Please pass an integer as second argument, as the target column ID" "${v_perlScriptReturnCode}" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-            # The language file's output path was not passed as third argument.
-            elif    [ "${v_perlScriptReturnCode}" -eq "${v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_THIRD_ARG_NO_OUT_FILEPATH";
-
-                BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass a third argument as the output file path to create" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# The CSV file cannot be read by the Perl script.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptCSVFileCannotBeReadErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_UNABLE_TO_READ_CSV_FILE";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}")" \
-                    "Please check the permissions of the targeted CSV file, then relaunch the script" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-			# The output file cannot be created by the Perl script.
-			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptOutputFileCannotBeCreatedErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_UNABLE_TO_CREATE_OUT_FILE";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE « %s » PERL TRANSLATION SCRIPT" "${v_outputFilePath}" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please check the cause of this error, then relaunch the script" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-				return "${v_perlScriptReturnCode}";
-
-            # Not enough storage is available to complete this operation.
-            elif    [ "${v_perlScriptReturnCode}" -eq "${v_perlScriptNotEnoughDiskSpaceAvailableErrorCode}" ]; then
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_NO_SPACE_LEFT_ON_DEVICE";
-
-				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "${v_outputFilePath}")" \
-                    "Please free up some disk memory before using this script to translate the current module" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
-
-                printf "Deleting the created language's output file « %s »\n" "${v_outputFilePath}" >&2;
-                echo >&2;
-
-                if rm -v "${v_outputFilePath}"; then
-                    printf "The « %s » file was successfully erased\n" "${v_outputFilePath}" >&2;
-                    echo >&2;
-
-                else
-                    printf "UNABLE TO DELETE THE LANGUAGE'S OUTPUT FILE « %s »\n" "${v_outputFilePath}" >&2;
-                    echo "Please do so before relaunching this script after freeing some space on your hard drive, in order to avoid this script to consider the translations already done" >&2;
-                    echo >&2;
-                fi
-
-                BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
-
-                if BU.ModuleInit.IsInScript; then exit "${v_perlScriptReturnCode}"; else return "${v_perlScriptReturnCode}"; fi
-            fi
-		fi
-	fi
-}
-
 # Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
 
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
 {
+    # Since the "${}" variable is declared and filled at the end of the function, it is safe to write a translated message, since the translation files are already included.
     if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "sourced" == "${__BU_MODULE_INIT_IS_SOURCED}" ]; then
         # shellcheck disable=SC2059
         BU.Main.Headers.Header.Warning "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}\n" "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")")"; return 1;
@@ -2970,6 +2614,7 @@ function BashUtils_InitModules()
 }
 
 
+
 ## NOTE : At this point, the "${__BU_MODULE_INIT_MSG__}" variables values are deleted. Do not add message variables related to the following functions in the initializer file's languages files.
 
 # Initializing a single new module after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
@@ -3130,4 +2775,375 @@ function BU.ModuleInit.UnsourceModules()
 	fi
 
     return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MODULES TRANSLATIONS
+
+## MISC FUNCTIONS DEFINITION
+
+# Remaking the "BU.Main.Errors.HandleErrors()" function in order to make it working for the initialization process.
+function BU.ModuleInit.HandleErrors()
+{
+    #**** Parameters ****
+    local p_returnCode=${1:-0}          # Int       - Default : NULL    - Return code of the last command or function called before the current function.
+    local p_errorString=${2:-NULL};     # String    - Default : NULL    - String of the type of error to display.
+    local p_adviceString=${3:-NLL};     # String    - Default : NULL    - String of characters displaying a tip to direct the user to the best solution to apply in case of a problem.
+    local p_badValue=${4:-NULL};        # String    - Default : NULL    - Incorrect value which caused the error.
+    local p_file=${5:-NULL};            # String    - Default : NULL    - The name of the file where the error occured.
+    local p_function=${6:-NULL};        # String    - Default : NULL    - The name of the function where the error occured.
+    local p_lineno=${7:-NULL};          # String    - Default : NULL    - Line on which the error message occured (obtained in a very simple way by calling the POSIX environment variable "${LINENO}").
+
+    #**** Code ****
+    if [ "${p_returnCode}" -eq 0 ]; then return 0; else
+        if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "${__BU_MODULE_INIT_IS_SOURCED}" == 'sourced' ]; then
+            BU.Main.Errors.HandleErrors "${p_returnCode}" "${p_errorString}" "${p_adviceString}" "${p_badValue}" "${p_file}" "${p_function}" "${p_lineno}"; return "$?";
+
+        else
+            echo "IN ${p_file}, FUNCTION ${p_function}, LINE ${p_lineno} --> ERROR : ${p_errorString}" >&2;
+            echo "Advice : ${p_adviceString}" >&2;
+            echo >&2;
+
+            echo "Value that caused this error : ${p_badValue}" >&2;
+
+            BU.ModuleInit.MsgAbort;
+
+            BU.ModuleInit.AskPrintLog >&2 || return 1;
+
+            return "${p_returnCode}";
+        fi
+    fi
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## PARSING THE TRANSLATION FILE OF THE CURRENTLY PROCESSED MODULE
+
+# Parsing each module's translation CSV file.
+
+# The "BU.ModuleInit.ParseCSVLang" function MUST be called in the current module's initialization script.
+
+# IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig"
+# functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
+# to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos" function.
+
+# shellcheck disable=SC1090
+function BU.ModuleInit.ParseCSVLang()
+{
+    #**** Parameters ****
+    local p_lang_ISO_639_1=${1:-${__BU_MODULE_INIT__USER_LANG}};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : ${__BU_MODULE_INIT__USER_LANG}   - DESC : Language to fetch.
+    local p_delim=${2:-$'\0'};                                   	# ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL                             - DESC : CSV file's delimiter.
+
+    #**** Variables ****
+    local v_outputFileName="${__BU_MODULE_INIT_MODULE_NAME}.${p_lang_ISO_639_1}.translate";
+    local v_outputFileParent="${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
+    local v_outputFilePath="${v_outputFileParent}/${v_outputFileName}";
+
+    local v_filename="${__BU_MODULE_INIT_MODULE_NAME}-${p_lang_ISO_639_1}.csv";
+    local v_CSVFirstColRow;
+
+    # Getting the total number of columns.
+    local x;
+
+	# Gets the return code of the Perl script used to parse the translation file in CSV format.
+	local v_perlScriptReturnCode;
+
+	local v_perlScriptExecLineno;
+
+    # Getting the wanted column (set to 0, and the value will be taken from a new assignation of the variable with the call of the "BU.Main.Text.GetSubStringAfterDelim" function as sub-shell).
+#    local v_wantedColID=0;
+
+    # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
+#    local v_CSVFirstColRowAfterNthDelim;
+
+    # Perl script's return codes.
+    local v_perlScriptNoCSVFileGivenAsArgErrorCode="10022";             # Do not change this return code.
+    local v_perlScriptPathIsDirErrorCode="1";
+    local v_perlScriptFileIsNotCSVFormatErrorCode="2";
+
+    local v_perlScriptIndexColNotPassedAsSecondArgErrorCode="3"
+    local v_perlScriptIndexColIsNotIntErrorCode="4";
+    local v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode="5";
+
+    local v_perlScriptCSVFileCannotBeReadErrorCode="6";
+    local v_perlScriptOutputFileCannotBeCreatedErrorCode="7";
+    local v_perlScriptNotEnoughDiskSpaceAvailableErrorCode="14";        # Do not change this return code.
+
+    #**** Code ****
+    # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
+    # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
+
+    # If the output file already exists, then it's not necessary to retranslate the module.
+    if [ -f "${v_outputFilePath}" ] && [ -n "${v_outputFilePath}" ]; then
+		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
+		BU.ModuleInit.Msg;
+
+		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+            source "${v_outputFilePath}" || {
+                local C="$?";
+
+                local lineno="$(( LINENO - 3 ))";
+
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNABLE_TO_SOURCE_TRANSL_OUT_FILE";
+
+                BU.ModuleInit.HandleErrors "${C}" "$(printf "UNABLE TO SOURCE THE EXISTING « %s » TRANSLATIONS FILE" "${v_outputFilePath}")" \
+                    "Please check what causes the script to not source the output file, which contains the target language's translations" \
+                    "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+                return "$?";
+            }
+
+            return 0;
+		};
+	fi
+
+    # If no path to the module's translation CSV file is given.
+    if [ -z "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__NO_PATH_TO_MOD_TRANSL_FILE";
+
+        BU.ModuleInit.HandleErrors '1' "$(printf "NO PATH TO THE « %s » MODULE'S TRANSLATION FILE EXISTS" "${__BU_MODULE_INIT_MODULE_NAME}")" \
+            "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    fi
+
+    if [ -z "${v_filename}" ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" 'E_BUINIT__PARSECSVLANG__';
+
+        return "$?";
+    fi
+
+    # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
+    if [ -n "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] && [ ! -f "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__INVALID_TRANSL_FILE_PATH";
+
+        BU.ModuleInit.HandleErrors '1' "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "${__BU_MODULE_INIT_MODULE_NAME}")" \
+            "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    fi
+
+    # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
+    if [ -n "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] \
+        && [ -f "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ] \
+        && [ ! -f "${v_outputFilePath}" ] \
+        && [ "$(basename "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" != "${v_filename}" ]; then local lineno="${LINENO}";
+            BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__TARGET_TRANSL_FILE_DOES_NOT_MATCHES_DEFINED_PATTERN";
+
+            BU.ModuleInit.HandleErrors '1' "$(printf "THE NAME OF THE « %s » PROJECT'S TRANSLATION FILE DOESN'T MATCHES WITH THE DEFINED NAME PATTERN" "${__BU_MODULE_INIT_MODULE_NAME}")" \
+                "Please give a valid name to the current module's translations CSV file. The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" \
+				"${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+            return "$?";
+    fi
+
+    # If no delimiter is given.
+    if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNDEFINED_DELIM";
+
+        BU.ModuleInit.HandleErrors '1' "NO DELIMITER WAS GIVEN FOR THE CSV FILE" \
+            "Please give a « single unicode character » as CSV delimiter in order to get each wanted cell" \
+            "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    fi
+
+    if [ -n "${p_delim}" ] && [ "${#p_delim}" -gt 1 ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__DELIM_MUST_BE_UNICODE_CHAR";
+
+        BU.ModuleInit.HandleErrors '1' "THE GIVEN DELIMITER MUST BE A SINGLE UNICODE CHARACTER" \
+            "Please give a « single unicode character » as valid CSV delimiter in order to get each wanted cell" \
+            "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    fi
+
+    # Begin parsing the CSV file.
+    BU.Main.Headers.Header.Blue "$(printf "PARSING THE « %s » PROJECT'S  « %s » TRANSLATIONS CSV FILE" "${__BU_MAIN_PROJECT_NAME}" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
+
+    BU.ModuleInit.Msg "Finding the variables list column";
+    BU.ModuleInit.Msg;
+
+    # If the targeted CSV file cannot be read by the current user.
+    if [ ! -r "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" ]; then local lineno="${lineno}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__UNABLE_TO_READ_FILE";
+
+        BU.ModuleInit.HandleErrors '1' "$(printf "Unable to read the « %s » file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
+            "Please check the permissions of this file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
+            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    fi
+
+    # Getting the first row and first column's cell.
+    v_CSVFirstColRow="$(BU.Main.Text.GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" || {
+        local C="$?";
+
+        local lineno="$(( LINENO - 3 ))";
+
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__VARIABLE_VAL_UNABLE_TO_FIND";
+
+        BU.ModuleInit.HandleErrors '1' "$(printf "UNABLE TO FIND THE VALUE « VARIABLE » IN THE FIRST ROW AND FIRST COLUMN OF THE « %s » FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
+            "$(printf "Please check if the value mentioned above is present on this EXACT cell of the « %s » file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
+            "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    })" "${p_delim}" '--init')";
+
+    if [ "${v_CSVFirstColRow}" != "VARIABLE" ]; then local lineno="${LINENO}";
+        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PARSECSVLANG__VARIABLE_VAL_NOT_FOUND";
+
+        BU.ModuleInit.HandleErrors '1' "$(printf "NO « VARIABLE » VALUE FOUND AT THE FIRST COLUMNN AND FIRST ROW OF THE « %s »" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
+            "Make sure the current module's CSV translations file is correctly formatted. You can check the main module's CSV file to check how the formatting should be done" \
+            "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
+
+        return "$?";
+    else
+        BU.ModuleInit.Msg "$(printf "Parsing the « %s » translations file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
+        BU.ModuleInit.Msg;
+
+        BU.ModuleInit.Msg "$(printf "Getting the chosen language's row (targeted language : %s)" "${p_lang_ISO_639_1}")";
+        BU.ModuleInit.Msg;
+
+        # Getting the total number of columns.
+        x="$(awk -F, '{ print NF; exit }' "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
+
+        # Getting the langage ISO 639-1 code from the first row.
+#        v_CSVFirstColRowAfterNthDelim="$(BU.Main.Text.GetSubStringAfterDelim "${v_CSVFirstColRow}" "${p_delim}" "$(( x - 1 ))") '' '--init'";
+
+        # Getting the wanted language's column.
+        v_wantedColID="$(BU.Main.Text.GetSubStringAfterDelim "${v_CSVFirstColRow}" "${p_delim}" "$(( x - 1 ))" "count" '--init')";
+
+        # The targeted column is acquired, the Perl script's parsing program SetMouduleLang.pl can finally be called.
+		v_perlScriptExecLineno="${LINENO}"; perl "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}" "${v_wantedColID}" "${v_outputFilePath}";
+
+        # Getting the return value of the last command.
+		v_perlScriptReturnCode="$?";
+
+		# Checking the eventual errors returned by the parsing program.
+		if [ "${v_perlScriptReturnCode}" -eq 0 ]; then
+			BU.ModuleInit.Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${p_lang_ISO_639_1}" "${v_outputFilePath}")";
+			BU.ModuleInit.Msg;
+
+			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
+
+			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+                source "${v_outputFilePath}" || {
+                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                    return "${C}";
+                };  return    0;
+            };
+
+		else
+			# The CSV file was not passed as first argument.
+			if		[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptNoCSVFileGivenAsArgErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_NOT_CSV_FILE";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please pass as first argument the path of the translations CSV file you want to process"
+                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# A path was passed as first argument, but it's a directory path.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptPathIsDirErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_IS_DIR";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL SCRIPT IS A DIRECTORY PATH, AND NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please pass as first argument the path of the translations CSV ${__BU_MAIN_TXT_FMT_ITALIC}>>> file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
+                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# A path was passed as first argument. It's a file, but not in CSV format.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptFileIsNotCSVFormatErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_FILE_IS_NOT_CSV";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE FILE PATH PASSED AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT IS NOT A CSV FILE PATH" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please pass as first argument the path of the translations ${__BU_MAIN_TXT_FMT_ITALIC}>>> CSV file <<<${__BU_MAIN_TXT_FMT_ITALIC_RESET} you want to process" \
+                    "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# The column's index was not passed as second argument.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptIndexColNotPassedAsSecondArgErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_SEC_ARG_NO_COL_INDEX";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO COLUMN INDEX PASSED AS SECOND ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please pass as second argument as the index of the column you want to process" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# The column's index passed as second argument was not an integer.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptIndexColIsNotIntErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_SEC_ARG_NOT_INT";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "THE PERL TRANSLATION SCRIPT'S SECOND ARGUMENT IS NOT AN INTEGER" \
+                    "Please pass an integer as second argument, as the target column ID" "${v_perlScriptReturnCode}" \
+                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+            # The language file's output path was not passed as third argument.
+            elif    [ "${v_perlScriptReturnCode}" -eq "${v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_THIRD_ARG_NO_OUT_FILEPATH";
+
+                BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO LANGUAGE FILE'S OUTPUT PATH PASSED AS THIRD ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please pass a third argument as the output file path to create" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# The CSV file cannot be read by the Perl script.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptCSVFileCannotBeReadErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_UNABLE_TO_READ_CSV_FILE";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » PERL TRANSLATION SCRIPT CANNOT READ THE TARGET « %s » CSV TRANSLATIONS FILE" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}")" \
+                    "Please check the permissions of the targeted CSV file, then relaunch the script" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+			# The output file cannot be created by the Perl script.
+			elif	[ "${v_perlScriptReturnCode}" -eq "${v_perlScriptOutputFileCannotBeCreatedErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_UNABLE_TO_CREATE_OUT_FILE";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "THE « %s » LANGUAGE'S OUTPUT FILE CANNOT BE CREATED BY THE « %s » PERL TRANSLATION SCRIPT" "${v_outputFilePath}" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
+                    "Please check the cause of this error, then relaunch the script" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+				return "${v_perlScriptReturnCode}";
+
+            # Not enough storage is available to complete this operation.
+            elif    [ "${v_perlScriptReturnCode}" -eq "${v_perlScriptNotEnoughDiskSpaceAvailableErrorCode}" ]; then
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_NO_SPACE_LEFT_ON_DEVICE";
+
+				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO SPACE LEFT ON THE DEVICE FOR THE CREATION OF THE « %s » LANGUAGE'S OUTPUT FILE" "${v_outputFilePath}")" \
+                    "Please free up some disk memory before using this script to translate the current module" "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
+
+                printf "Deleting the created language's output file « %s »\n" "${v_outputFilePath}" >&2;
+                echo >&2;
+
+                if rm -v "${v_outputFilePath}"; then
+                    printf "The « %s » file was successfully erased\n" "${v_outputFilePath}" >&2;
+                    echo >&2;
+
+                else
+                    printf "UNABLE TO DELETE THE LANGUAGE'S OUTPUT FILE « %s »\n" "${v_outputFilePath}" >&2;
+                    echo "Please do so before relaunching this script after freeing some space on your hard drive, in order to avoid this script to consider the translations already done" >&2;
+                    echo >&2;
+                fi
+
+                BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+
+                if BU.ModuleInit.IsInScript; then exit "${v_perlScriptReturnCode}"; else return "${v_perlScriptReturnCode}"; fi
+            fi
+		fi
+	fi
 }
