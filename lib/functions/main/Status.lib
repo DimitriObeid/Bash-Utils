@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -160,7 +160,7 @@ function BU.Main.Status.CheckSTAT_DECHO()
     if [ "${__BU_MAIN_STAT_DECHO,,}" != "authorize" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "forbid" ] && [ "${__BU_MAIN_STAT_DECHO,,}" != "restrict" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_DECHO" "__BU_MAIN_STAT_DECHO" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -186,7 +186,7 @@ function BU.Main.Status.CheckSTAT_ECHO()
     if [ "${__BU_MAIN_STAT_ECHO,,}" != "true" ] && [ "${__BU_MAIN_STAT_ECHO,,}" != "false" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ECHO" "__BU_MAIN_STAT_ECHO" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -212,7 +212,7 @@ function BU.Main.Status.CheckSTAT_ERROR()
     if [ -n "$__BU_MAIN_STAT_ERROR" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "fatal" ] && [ "${__BU_MAIN_STAT_ERROR,,}" != "warning" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_ERROR" "__BU_MAIN_STAT_ERROR" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -238,7 +238,7 @@ function BU.Main.Status.CheckSTAT_INITIALIZING()
     if [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "true" ] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" != "false" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_INITIALIZING" "__BU_MAIN_STAT_INITIALIZING" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -264,10 +264,10 @@ function BU.Main.Status.CheckSTAT_LOG()
     if [ "${__BU_MAIN_STAT_LOG,,}" != "true" ] && [ "${__BU_MAIN_STAT_LOG,,}" != "false" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG" "__BU_MAIN_STAT_LOG" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 
     elif [ "${__BU_MAIN_STAT_LOG,,}" == "true" ] && [ ! -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
-        BU.Main.Files.CreateProjectLogFile || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Files.CreateProjectLogFile || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -293,7 +293,7 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
     if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -319,7 +319,7 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 	if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "authorized" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "forbidden" ] && [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" != "restricted" ]; then
 		BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_OPERATE_ROOT" "__BU_MAIN_STAT_OPERATE_ROOT" "${va_correctValues[@]}";
 
-		local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+		local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -346,7 +346,7 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
     if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_HEADER" "__BU_MAIN_STAT_TIME_HEADER" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -373,7 +373,7 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
     if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_HEADER"; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_NEWLINE" "__BU_MAIN_STAT_TIME_NEWLINE" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -400,7 +400,7 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
     if ! BU.Main.Checkings.IsFloat "$__BU_MAIN_STAT_TIME_TXT"; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TIME_TXT" "__BU_MAIN_STAT_TIME_TXT" "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -426,7 +426,7 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "true" ] && [ "${__BU_MAIN_STAT_TXT_FMT,,}" != "false" ]; then
         BU.Main.Status.ConfEcho "$p_module" "$p_file" "$p_lineno" "$__BU_MAIN_STAT_TXT_FMT" '__BU_MAIN_STAT_TXT_FMT' "${va_correctValues[@]}";
 
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -465,18 +465,18 @@ function BU.Main.Status.CheckProjectStatusVars()
 
     #**** Code ****
     # Processing first the "$__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
-    BU.Main.Status.CheckSTAT_LOG_REDIRECT       'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_DECHO              'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_ECHO               'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_ERROR              'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_INITIALIZING       'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_LOG                'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_OPERATE_ROOT       'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_TIME_HEADER        'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_TIME_NEWLINE       'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_TIME_TXT           'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_TXT_FMT            'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-    BU.Main.Status.CheckSTAT_USER_OS            'main' "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT       'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_DECHO              'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_ECHO               'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_ERROR              'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_INITIALIZING       'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_LOG                'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_OPERATE_ROOT       'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_TIME_HEADER        'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_TIME_NEWLINE       'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_TIME_TXT           'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_TXT_FMT            'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Status.CheckSTAT_USER_OS            'main' "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -494,7 +494,7 @@ __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALU
 #   $3  --> Int     : line where the change was made.
 
 # Changing the "$__BU_MAIN_STAT_DECHO" status variable's value.
-function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU.Main.Status.CheckSTAT_DECHO "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS"; __BU_MAIN_STAT_DECHO="$1"; BU.Main.Status.CheckSTAT_DECHO "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_ECHO" status variable's value, and provide a log redirection support.
 
@@ -526,9 +526,9 @@ function BU.Main.Status.ChangeSTAT_ECHO()
             declare __BU_MAIN_STATVAR_ECHO_MSG_ARRAY=();
 
             # Modifying and checking the global variable's value first, before
-            __BU_MAIN_STAT_ECHO="$p_value";
+            __BU_MAIN_STAT_ECHO="${p_value}";
 
-            BU.Main.Status.CheckSTAT_ECHO "$p_module" "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.CheckSTAT_ECHO "$p_module" "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Green "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -556,9 +556,9 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 
                     __BU_MAIN_STAT_LOG_REDIRECT="$__bu_main_stat_log_redirect_backup";
 
-                    local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
+                    local C="${__BU_MAIN_EXIT_NOT_PERMITTED}"; v_loop_error='error'; break;
                 }
-            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
             BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Green "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
@@ -570,9 +570,9 @@ function BU.Main.Status.ChangeSTAT_ECHO()
         fi
     fi
 
-    __BU_MAIN_STAT_ECHO="$p_value";
+    __BU_MAIN_STAT_ECHO="${p_value}";
 
-    BU.Main.Status.CheckSTAT_ECHO "$p_module" "$p_file" "$p_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Status.CheckSTAT_ECHO "$p_module" "$p_file" "$p_lineno" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -586,9 +586,9 @@ function BU.Main.Status.ChangeSTAT_ERROR()
     __BU_MAIN_STAT_ERROR="$1";
 
     BU.Main.Status.CheckSTAT_ERROR "$2" "$3" "$4" || {
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$C";
+        return "${C}";
     }
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -602,30 +602,30 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ] && [ 'true' == "$1" ]; then
 		BU.Main.Echo.Warning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_STAT_INITIALIZING") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
-		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		__BU_MAIN_STAT_INITIALIZING="$1";     BU.Main.Status.CheckSTAT_INITIALIZING      "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
-function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU.Main.Status.CheckSTAT_LOG           "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU.Main.Status.CheckSTAT_LOG           "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
-function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU.Main.Status.CheckSTAT_LOG_REDIRECT  "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU.Main.Status.CheckSTAT_LOG_REDIRECT  "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.
-function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU.Main.Status.CheckSTAT_OPERATE_ROOT  "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_OPERATE_ROOT="$1";     BU.Main.Status.CheckSTAT_OPERATE_ROOT  "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_HEADER" status variable's value.
-function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU.Main.Status.CheckSTAT_TIME_HEADER   "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_HEADER="$1";      BU.Main.Status.CheckSTAT_TIME_HEADER   "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_NEWLINE" status variable's value.
-function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU.Main.Status.CheckSTAT_TIME_NEWLINE  "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_NEWLINE="$1";     BU.Main.Status.CheckSTAT_TIME_NEWLINE  "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TIME_TXT" status variable's value.
-function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU.Main.Status.CheckSTAT_TIME_TXT      "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TIME_TXT="$1";         BU.Main.Status.CheckSTAT_TIME_TXT      "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_TXT_FMT" status variable's value.
-function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU.Main.Status.CheckSTAT_TXT_FMT       "$2" "$3" "$4" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_TXT_FMT="$1";          BU.Main.Status.CheckSTAT_TXT_FMT       "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # -----------------------------------------------
 

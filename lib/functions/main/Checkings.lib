@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -731,7 +731,7 @@ function BU.Main.Status.CheckProjectLogStatus()
         "$__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$?"; };
 
     #**** Parameters ****
     local p_string=$1;      # Any       - Text to display.
@@ -758,16 +758,16 @@ function BU.Main.Status.CheckProjectLogStatus()
 
     # shellcheck disable=SC2153
     local v_bu_stat_decho_old="$__BU_MAIN_STAT_DECHO"; BU.Main.Status.ChangeSTAT_DECHO "restrict" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$C";
+        return "${C}";
     }
 
     # Setting the "$__BU_MAIN_STAT_ECHO" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.Main.Status.CheckProjectLogStatus()" function or any other function that calls it might be called.
     local v_bu_stat_echo_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$C";
+        return "${C}";
     }
 
     local v_redirectionError;
@@ -784,18 +784,18 @@ function BU.Main.Status.CheckProjectLogStatus()
             local returnCode="$?";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
 
             return "$returnCode";
         };
     fi
 
-    BU.Main.Status.CheckSTAT_LOG             'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU.Main.Status.CheckSTAT_LOG_REDIRECT    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
-    BU.Main.Status.CheckSTAT_TIME_TXT        'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+    BU.Main.Status.CheckSTAT_LOG             'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
+    BU.Main.Status.CheckSTAT_TIME_TXT        'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
 
     # If a log file exists AND if "$__BU_MAIN_STAT_LOG" value is "false" AND if "$__BU_MAIN_STAT_LOG_REDIRECT" has a redirection value.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ] && [ "${__BU_MAIN_STAT_LOG,,}" == "true" ]; then
@@ -804,13 +804,13 @@ function BU.Main.Status.CheckProjectLogStatus()
         if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "log" ]; then
 
             # Setting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU.Main.Status.ChangeSTAT_TIME_HEADER "0"    || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_header="$__BU_MAIN_STAT_TIME_HEADER"; BU.Main.Status.ChangeSTAT_TIME_HEADER "0"    || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Setting the "$__BU_MAIN_STAT_TIME_NEWLINE" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU.Main.Status.ChangeSTAT_TIME_NEWLINE "0"      || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_newline="$__BU_MAIN_STAT_NEWLINE"; BU.Main.Status.ChangeSTAT_TIME_NEWLINE "0"      || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Setting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU.Main.Status.ChangeSTAT_TIME_TXT "0"             || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_stat_time_txt="$__BU_MAIN_STAT_TIME_TXT"; BU.Main.Status.ChangeSTAT_TIME_TXT "0"             || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -824,14 +824,14 @@ function BU.Main.Status.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n';
                             else
-                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?";  BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}";  BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
                             else
-                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -843,14 +843,14 @@ function BU.Main.Status.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n';
                             else
-                                echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
                             else
-                                echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -868,39 +868,39 @@ function BU.Main.Status.CheckProjectLogStatus()
                                 # Since the "$__BU_MAIN_STAT_ECHO" status variable's value is set to 'true', this "BU.Main.Status.CheckProjectLogStatus()" function won't be called, only a minimalist substitute function.
                                 BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline;
 							else
-                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							fi; BU.Main.Echo.Newline;
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string";
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
 
                     [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"              'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"                'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"                'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_HEADER    "$v_stat_time_header"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_HEADER" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_NEWLINE   "$v_stat_time_newline"     'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Resetting the "$__BU_MAIN_STAT_TIME_TXT" global status variable's value to the former timer.
-            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"         'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_TIME_TXT       "$v_stat_time_txt"         'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             return 0;
 
@@ -919,14 +919,14 @@ function BU.Main.Status.CheckProjectLogStatus()
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "${p_string#* ] }" 'n';
                             else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "${p_string#* ] }";
                             else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                             fi
                         ;;
                     esac
@@ -939,7 +939,7 @@ function BU.Main.Status.CheckProjectLogStatus()
                             BU.ModuleInit.Msg "$p_string" 'n';
                         else
                             echo -ne "$p_string";
-                            echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                            echo -ne "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     '' | *)
@@ -947,7 +947,7 @@ function BU.Main.Status.CheckProjectLogStatus()
                             BU.ModuleInit.Msg "$p_string";
                         else
                             echo -e "$p_string";
-                            echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                            echo -e "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
                         fi
                     ;;
                     esac
@@ -959,34 +959,34 @@ function BU.Main.Status.CheckProjectLogStatus()
                         '-n' | 'n')
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$p_string" 'n'
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
 							else
-                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
+                                echo -ne "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; v_loop_error='error'; break; };
 							fi; BU.Main.Echo.Newline;
                         ;;
                         '' | *)
                             if BU.Main.Status.CheckStatIsInitializing; then
                                 BU.ModuleInit.Msg "$(if [ -n "$__BU_MAIN_TIME_DATE_DISPLAY" ]; then echo "$__BU_MAIN_TIME_DATE_DISPLAY"; fi) $p_string"
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							else
-                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
-                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="$?"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                echo -e "$p_string" 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                                BU.Main.Echo.Warning "$v_warning_array_value $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate' 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.Main.Echo.Error "$v_redirectionError $(BU.Main.Decho.Decho.Var "tee")\nLine --> $(BU.Main.Decho.Decho.Highlight "$LINENO")" "$p_option" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
 							fi
                         ;;
                     esac
 
                     [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg;
                 fi
-            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error}" == 'error' ]; then [ -n "$VCheckProjectLogStatus" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
 			# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"  'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 			# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+			BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 			return 0;
 
@@ -1012,10 +1012,10 @@ function BU.Main.Status.CheckProjectLogStatus()
             sleep "$__BU_MAIN_STAT_TIME_TXT";
 
             # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             return 0;
 
@@ -1043,19 +1043,19 @@ function BU.Main.Status.CheckProjectLogStatus()
         sleep "$__BU_MAIN_STAT_TIME_TXT";
 
         # Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-        BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+        BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 		# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+		BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"   'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 		return 0;
 	fi
 
 	# Resetting the "$__BU_MAIN_STAT_DECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	BU.Main.Status.ChangeSTAT_DECHO "$v_bu_stat_decho_old"    'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 	# Resetting the "$__BU_MAIN_STAT_ECHO" status variable's value to its former value if it was "false", since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is over.
-	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	BU.Main.Status.ChangeSTAT_ECHO "$v_bu_stat_echo_old"      'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1079,10 +1079,10 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
 
 	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
-        if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
     fi
 
 	if [ "$p_type" == 'f' ]; then
@@ -1104,9 +1104,9 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		else
 			if [ ! -d "$p_parent" ]; then
-                if [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                if [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-                elif [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then echo TEST; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                elif [ "$p_parent" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then echo TEST; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
                     mkdir -p "$p_parent" || {
@@ -1124,12 +1124,12 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                     }
                 fi
 
-				BU.Main.Checkings.CheckDirPathWasCreated "$p_parent" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+				BU.Main.Checkings.CheckDirPathWasCreated "$p_parent" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
-            if [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            if [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME" ]; then BU.Main.TextFormat.SetBGColor "$__BU_MAIN_COLOR_BG_RESET" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-            elif [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            elif [ "$p_child" == "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "$__BU_MAIN_COLOR_TXT_RESET" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
             else
                 touch "$v_path" || {
@@ -1147,7 +1147,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                 }
             fi
 
-			BU.Main.Checkings.CheckFilePathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; return 0;
+			BU.Main.Checkings.CheckFilePathWasCreated "$v_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; return 0;
 		fi
 
     elif [ "$p_type" == 'd' ]; then
@@ -1167,7 +1167,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$returnCode";
             }
-			BU.Main.Checkings.CheckDirPathWasCreated "$v_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Checkings.CheckDirPathWasCreated "$v_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
     fi
 }

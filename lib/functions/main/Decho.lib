@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154,SC2181
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -140,7 +140,7 @@ function BU.Main.Decho.Decho()
             echo -ne "« $p_string »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 
-        return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
     else
         if [ -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then
             local v_oldBGColor;
@@ -213,12 +213,12 @@ function BU.Main.Decho.Decho()
                 *)
                     printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; v_loop_error='error'; break; };
 
-                    local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
+                    local C="${__BU_MAIN_EXIT_NOT_PERMITTED}"; v_loop_error='error'; break;
                 ;;
             esac
-        done; if [ "${v_loop_error}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        done; if [ "${v_loop_error}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
         echo -e "$p_string$p_newTextColor$__BU_MAIN_COLOR_CODE_RESET";
 
@@ -251,9 +251,9 @@ function BU.Main.Decho.Decho()
                 *)
                     printf "IN %s, FUNCTION %s, LINE %s --> ERROR : AT LEAST ONE OF THE ${FUNCNAME[0]}()'S ARRAY ARGUMENT VALUE IS INCORRECT\n\nCheck if the value is supported in the first value checking case" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
 
-                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Status.ChangeSTAT_TXT_FMT "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; v_loop_error='error'; break; };
 
-                    local C="$__BU_MAIN_EXIT_NOT_PERMITTED"; v_loop_error='error'; break;
+                    local C="${__BU_MAIN_EXIT_NOT_PERMITTED}"; v_loop_error='error'; break;
                 ;;
             esac
         done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi

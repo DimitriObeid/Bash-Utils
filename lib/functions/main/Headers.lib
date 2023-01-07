@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -277,13 +277,13 @@ function BU.Main.Headers.Base () {
             for i in "${int_array[@]}"; do
 
                 if [[ "$i" == '1'* ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="${?}"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'2'* ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$p_stringColor##> $p_stringTxt${__BU_MAIN_COLOR_TXT_RESET}")" "$p_stringColor" "" "$p_bgColorCol" || { local C="${?}"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'3' ]]; then
-                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="$?"; v_loop_error='error'; break; };
+                    BU.Main.Decho.BGColor "$(BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_lineChar" "$p_lineColor" "$v_strlen" "$p_bgColorCol")" "nodate")" "$p_stringColor" "$p_bgColorCol" || { local C="${?}"; v_loop_error='error'; break; };
 
                 elif [[ "$i" == *'1'* ]] || [[ "$i" == *'3'* ]]; then
                     BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the values were not arranged in ascending order, like 123, 12, 13 or 23" 'R';
@@ -291,7 +291,7 @@ function BU.Main.Headers.Base () {
                 else
                     BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the value passed for the $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is a bad integer (1, 2 AND / OR 3 are supported), " 'R';
                 fi
-            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
         elif BU.Main.Checkings.IsIntPos "$p_bgColorPos" && [ "${#p_bgColorPos}" -gt 3 ]; then
             BU.Main.Errors.HandleSmallErrors 'W' "$(BU.Main.Decho.Decho.HighlightFunction "${FUNCNAME[0]}") --> Warning : the length of the value passed as $(BU.Main.Decho.Decho.HighlightVar "p_bgColorPos") parameter is too big" 'R';

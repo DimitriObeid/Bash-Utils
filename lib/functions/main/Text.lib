@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -93,7 +93,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 	local x;
 
     #**** Code ****
-    if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -142,7 +142,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     if [ -n "$p_count" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
     #**** Code ****
-    if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "$p_string" "$p_delimiter" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -178,7 +178,7 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
     local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     echo "${p_string%"$p_delim"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -196,7 +196,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
     local p_delim=${2:-$'\0'};  # String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     echo "${p_string#*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -216,10 +216,10 @@ function BU.Main.Text.DeleteLettersInString()
     local p_replacement=${4:-' '};  # String    - Default : ' '     - Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+    if ! BU.Main.Args__Text.DeleteLettersInString "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     BU.Main.Text.BU.Main.Text.ReplaceLettersInString "$p_string" "$p_chars" "$([ "$p_replacement" == '' ] && printf '' || printf ' ')" || {
-        local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?";
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?";
     };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
@@ -344,7 +344,7 @@ function BU.Main.Text.GetCharacterOccurences()
     local v_occurences="${p_string//[^$p_target]}";
 
     #**** Code ****
-    if ! BU.Main.Args__Text.GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
+    if ! BU.Main.Args__Text.GetCharacterOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$?"; fi
 
     echo -ne "${#v_occurences}";
 
@@ -364,7 +364,7 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     echo "${p_string%%"$p_delim"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -382,7 +382,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
     local p_delim=$2;	# String	- Default : NULL	- Delimiter
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
 	echo "${p_string##*"$p_delim"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
@@ -407,7 +407,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        if ! BU.Main.Args__Text.GetSubStringAfterDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     fi
 
     # WARNING ! DO NOT put double quotes between the "$(seq "$p_iterations")", or else it will not word split, and the loop will only run once !
@@ -450,7 +450,7 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        if ! BU.Main.Args__Text.GetSubStringBeforeDelim "$p_string" "$p_delim" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
         if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsInt "$p_iterations"; then
             BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
@@ -509,7 +509,7 @@ function BU.Main.Text.GetSubStringOccurences()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        if ! BU.Main.Args__Text.GetSubStringOccurences "$p_string" "$p_target" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     fi
 
 	# https://stackoverflow.com/a/50601141
@@ -637,7 +637,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
     #**** Code ****
     if [ -z "$p_init" ] || [ -n "$p_init" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "$p_string" "$p_delim" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     fi
 
     # shellcheck disable=SC2219
@@ -692,7 +692,7 @@ function BU.Main.Text.StrToWordArray()
     local p_string=$1;  # String to convert in a word array.
 
     #**** Code ****
-    if ! BU.Main.Args__Text.StrToWordArray "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Text.StrToWordArray "$p_string" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Since the "$__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR" array is not used in this file, it's better to ignore the returned Shellcheck warning,
     # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.

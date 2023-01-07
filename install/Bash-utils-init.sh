@@ -2972,7 +2972,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
             source "${v_outputFilePath}" || {
-                local C="$?";
+                local C="${?}";
 
                 local lineno="$(( LINENO - 3 ))";
 
@@ -3070,7 +3070,7 @@ function BU.ModuleInit.ParseCSVLang()
 
     # Getting the first row and first column's cell.
     v_CSVFirstColRow="$(BU.Main.Text.GetSubStringBeforeDelim "$(awk 'NR == 1 {print $1}' "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" || {
-        local C="$?";
+        local C="${?}";
 
         local lineno="$(( LINENO - 3 ))";
 
@@ -3122,7 +3122,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
                 source "${v_outputFilePath}" || {
-                    local C="$?"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                    local C="${?}"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                     return "${C}";
                 };  return    0;

@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -116,7 +116,7 @@ function BU.Main.Files.ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    if ! BU.Main.Args__Files.ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi;
+    if ! BU.Main.Args__Files.ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
@@ -168,10 +168,10 @@ function BU.Main.Files.OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Files.OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Checking second if the script is operating at the root directory.
-    BU.Main.Directories.TriggerRootDirWarning "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    BU.Main.Directories.TriggerRootDirWarning "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
     if [ "$p_authorization" == "true" ]; then
 		BU.Main.Echo.Newstep "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists and is not empty.";
@@ -225,10 +225,10 @@ function BU.Main.Files.Make()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 	# Checking if the awaited arguments are given.
-    if ! BU.Main.Args__Files.Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi;
+    if ! BU.Main.Args__Files.Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
 
     # Checking second if the script is operating at the root directory.
     BU.Main.Directories.TriggerRootDirWarning "$v_path" || return 1;
@@ -287,7 +287,7 @@ function BU.Main.Files.MakePath()
 	# Checking first if the target partition is not fully used.
 	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'true';
 
-    if ! BU.Main.Args__Files.MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     BU.Main.Files.Make "$v_parent" "$v_target" || return 1;
 
@@ -331,8 +331,8 @@ function BU.Main.Files.CreateProjectLogFile()
 
     BU.Main.Echo.Success "Successfully created the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
 
-    if [ "${__BU_MAIN_STAT_DECHO,,}" == 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
-    if [ "${__BU_MAIN_STAT_ECHO,}"  == 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+    if [ "${__BU_MAIN_STAT_DECHO,,}" == 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  == 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
     BU.Main.Headers.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
@@ -469,7 +469,7 @@ function BU.Main.Files.DeleteFile()
     local p_security=$2;    # String    - Default : no      - Preventing the file to be deleted automatically (default : "no" --> Ask the permission to the user).
 
     #**** Code ****
-    if ! BU.Main.Args__Files.DeleteFile "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.DeleteFile "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "$p_path";
 
@@ -677,10 +677,10 @@ function BU.Main.Files.GetCreationDate()
 
     #**** Code ****
     if ! stat -c %W "$p_filepath"; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's creation date"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's creation date"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     else
         echo -ne "$(stat -c %W "$p_filepath")";
@@ -701,7 +701,7 @@ function BU.Main.Files.GetCharactersNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --chars < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --chars < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -735,7 +735,7 @@ function BU.Main.Files.GetLastAccess()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -752,7 +752,7 @@ function BU.Main.Files.GetLastModification()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    date -r "$p_filename" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    date -r "$p_filename" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -786,7 +786,7 @@ function BU.Main.Files.GetLinesNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --lines < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --lines < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -803,7 +803,7 @@ function BU.Main.Files.GetMaxLineLength()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****last access date
-    wc --max-line-length < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --max-line-length < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -820,7 +820,7 @@ function BU.Main.Files.GetOwnerName()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat -c "%U" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%U" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -837,7 +837,7 @@ function BU.Main.Files.GetOwnerGroup()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    stat -c "%G" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    stat -c "%G" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -854,7 +854,7 @@ function BU.Main.Files.GetWordsNumber()
     local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    wc --words < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED"; };
+    wc --words < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -879,7 +879,7 @@ function BU.Main.File.SetFileLastAccess()
     local p_fakedate=$2;    # Date      - Default : NULL    -
 
     #**** Code ****
-    if ! BU.Main.Args__FilesSetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesSetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -914,18 +914,18 @@ function BU.Main.Files.SourceFile()
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
-            local C="$?";
+            local C="${?}";
 
-            BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
 
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
         fi
     else
-        local C="$?";
+        local C="${?}";
 
-        BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_NOT_PERMITTED" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
 
-		return "$C";
+		return "${C}";
     fi
 }
 
@@ -1004,12 +1004,12 @@ function BU.Main.Files.AddToArchive()
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU.Main.Args__FilesCompress "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__FilesCompress "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     if [ "$p_cmd" == '7z' ]; then
         true
@@ -1072,12 +1072,12 @@ function BU.Main.Files.CompressFormat()
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU.Main.Args__Files.CompressFormat "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.CompressFormat "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the 7-Zip compression format is wanted.
     if [ "$p_cmd" == '7z' ]; then
@@ -1153,7 +1153,7 @@ function BU.Main.Files.DeleteInArchive()
     if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1199,7 +1199,7 @@ function BU.Main.Files.UncompressCMD()
     #**** Code ****
     # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__Files.Uncompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
-    if ! BU.Main.Args__Files.UncompressCMD "$p_cmd" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.UncompressCMD "$p_cmd" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
     if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
@@ -1247,7 +1247,7 @@ function BU.Main.Files.UncompressFormat()
     local p_dest=$3;    # String    - Default : NULL    - Folder destination of the uncompressed data (optional argument).
 
     #**** Code ****
-    if ! BU.Main.Args__Files.UncompressFormat "$p_form" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Files.UncompressFormat "$p_form" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
     function BU.Main.Files.UncompressFormat.ErrorMsg()

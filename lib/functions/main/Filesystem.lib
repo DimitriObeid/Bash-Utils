@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154,SC2016
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -160,9 +160,9 @@ function BU.Main.Filesystem.GetFSDevice()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     eval "$v_cmd";
 
@@ -189,9 +189,9 @@ function BU.Main.Filesystem.GetFSTotalSize()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$3}'            || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     eval "$v_cmd";
 
@@ -218,9 +218,9 @@ function BU.Main.Filesystem.GetFSMountPoint()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$7}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     eval "$v_cmd";
 
@@ -246,17 +246,17 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
 
         # Getting the used size by substracting the available size from the total size.
         local v_usedSize; v_usedSize="$(( v_totalSize - v_availableSize ))";
@@ -291,17 +291,17 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
     BU.Main.OS.IsLinux           && local v_cmd="df -Th \"$p_path\"   | awk 'FNR == 2 {print \$6}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsHaiku && {
         # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
 
         # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; })";
+        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
 
         # Getting the used percentage.
         local v_usedSize; v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
@@ -336,9 +336,9 @@ function BU.Main.Filesystem.GetFSAvailableSize()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$5}'        || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     eval "$v_cmd";
 
@@ -369,9 +369,9 @@ function BU.Main.Filesystem.GetFSType()
     BU.Main.OS.IsLinux && local v_cmd="df -Th \"$p_path\"     | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     eval "$v_cmd";
 
@@ -417,10 +417,10 @@ function BU.Main.Filesystem.Chown()
     p_option=$4;        # Chown command option(s).
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.Chown "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU.Main.Checkings.CheckRootEUID; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Checkings.CheckRootEUID; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "$p_path" ]; then
@@ -521,10 +521,10 @@ function BU.Main.Filesystem.ChownRec()
     local p_path=$3;
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Args__Filesystem.ChownRec "$p_currentOwner" "$p_newOwner" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # The "chown" command has to be used with super-user privileges,
-    if ! BU.Main.Checkings.CheckRootEUID; then local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+    if ! BU.Main.Checkings.CheckRootEUID; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the path passed as argument doesn't exists.
     if [ ! -d "$p_path" ]; then

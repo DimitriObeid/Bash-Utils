@@ -5,9 +5,13 @@
 
 # Name          : Args.lib
 # Module        : Main
-# Description   : These functions act as argument checkers for several functions in the library, whose checking would make the code more difficult to read.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# These functions act as argument checkers for several functions in the library, whose checking would make the code more difficult to read.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -22,8 +26,8 @@
 
 # shellcheck disable=SC2154,SC2116
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -59,7 +63,7 @@ __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="args::argument-valu
 ## DEBUG ID : path-checking-functions
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::path-checking-functions";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::path-checking-functions";
 
 # -----------------------------------------------
 
@@ -67,187 +71,199 @@ __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FU
 ## DEBUG ID : quick-message-printing
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::quick-message-printing";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::quick-message-printing";
 
 # Print a message without the need to write the whole "BU.Main.Errors.HandleErrors()" function's second argument, and according to the test option which failed :
 function BU.Main.Args.PrintBadOption()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
-        "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING";
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
+        "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING}";
 
     #**** Parameters ****
-    local p_option=$1;      # String    - Default : NULL    - Test option.
-    local p_advice=$2;      # String    - Default : NULL    - "BU.Main.Errors.HandleErrors()"'s advice argument.
-    local p_argname=$3;     # String    - Default : NULL    - Name of the parameter that stores the argument.
+    local p_option=${1};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Test option.
+    local p_advice=${2};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : "BU.Main.Errors.HandleErrors()"'s advice argument.
+    local p_argname=${3};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the parameter that stores the argument.
 
-    local p_value=$4;       # Any       - Default : NULL    - "BU.Main.Errors.HandleErrors()"'s value argument.
-    local p_filename=$5;	# String    - Default : NULL    - Name of the file where the error occured.
-    local p_funcname=$6;    # String    - Default : NULL    - Name of the function where the test failed.
+    local p_value=${4};     # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : "BU.Main.Errors.HandleErrors()"'s value argument.
+    local p_filename=${5};  # ARG TYPE : File       - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the file where the error occured.
+    local p_funcname=${6};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the function where the test failed.
 
-    local p_lineno=$7;      # Int       - Default : NULL    - Line where the test failed.
+    local p_lineno=${7};    # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where the test failed.
 
     #**** Variables ****
 	# Changing the "$__BU_MAIN_STAT_ECHO" status variable's value to "true" in case this function is called during a .
 	if [ "${__BU_MAIN_STAT_ECHO,,}" == "false" ]; then
-		local v_STAT_ECHO_was_false="true";
+		local v_STAT_ECHO_was_false="true";     # VAR TYPE : Bool | DESC :
 
-		BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-            local C="$?";
+		BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || {
+            local C="${?}";
 
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-            return "$C";
+            return "${C}";
 		}
 	fi
 
 	# Since this function can be called from the "Lang.lib" file, and eventually in other library files, it's better to include a support for an appropriated file name.
-	if [ -n "$p_filename" ]; then
-        local v_filename="$p_filename";
+	if [ -n "${p_filename}" ]; then
+        local v_filename; # VAR TYPE : File | DESC :
+        
+        v_filename="${p_filename}";
 	else
-        local v_filename; v_filename="$(BU.Main.Args.GetFileName)";
+        local v_filename; # VAR TYPE : File | DESC :
+        
+        v_filename="$(BU.Main.Args.GetFileName)";
 	fi
 
-	if [ -n "$p_funcname" ]; then
-        local v_funcname; v_funcname="$p_funcname";
+	if [ -n "${p_funcname}" ]; then
+        local v_funcname; # VAR TYPE : String | DESC :
+
+        v_funcname="${p_funcname}";
 	else
-        local v_funcname; v_funcname="$(BU.Main.Args.GetFunctionName)";
+        local v_funcname; # VAR TYPE : String | DESC :
+
+        v_funcname="$(BU.Main.Args.GetFunctionName)";
 	fi
 
-	if [ -n "$p_lineno" ]; then
-        local v_lineno; v_lineno="$p_lineno";
+	if [ -n "${p_lineno}" ]; then
+        declare -i v_lineno; # VAR TYPE : Int | DESC :
+        
+        v_lineno="${p_lineno}";
 	else
-        local v_lineno; v_lineno="$(BU.Main.Args.GetLineNumber)";
+        declare -i v_lineno; # VAR TYPE : Int | DESC :
+        
+        v_lineno="$(BU.Main.Args.GetLineNumber)";
 	fi
 
     #**** Code ****
 	# Verifying that all the mandatory arguments are given.
-	BU.Main.Args.Argc "$#" '6' "$v_filename" "$v_funcname" "$v_lineno" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }
+	BU.Main.Args.Argc "${#}" '6' "${v_filename}" "${v_funcname}" "${v_lineno}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
 
 	# If no value is passed as argument.
-    if [[ "$p_option" == [Z-z] ]]; then
+    if [[ "${p_option}" == [Z-z] ]]; then
 		BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER HAS NO VALUE" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER HAS NO VALUE" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     # Else, if the value passed as argument is not an alphabetic character.
     elif [ "${p_option,,}" == '!alphachar' ]; then
         BU.Main.Errors.HandleErrors '1' \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string.
     elif [ "${p_option,,}" == '!alphastr' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string OR character.
     elif [ "${p_option,,}" == '!alphastrchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric character.
     elif [ "${p_option,,}" == '!alphanumchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
     elif [ "${p_option,,}" == '!alphanumstr' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string OR character.
     elif [ "${p_option,,}" == '!alphanumstrchar' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     # Else, if the value passed as argument is not a string, which is precisely the name of a command or any other executable file.
     elif [ "${p_option^^}" == '!CMDSTR' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A COMMAND OR EXECUTABLE FILE NAME" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A COMMAND OR EXECUTABLE FILE NAME" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
     elif [ "${p_option,,}" == '!d' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_DIR";
+		return "${__BU_MAIN_EXIT_NOT_DIR}";
 
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
     elif [ "${p_option,,}" == '!df' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+		return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}";
 
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
     elif [ "${p_option,,}" == '!f' ]; then
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a floating number.
     elif [ "${p_option,,}" == '!float' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A FLOAT" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A FLOAT" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     # Else, if the value passed as argument is not a negative floating number.
     elif [ "${p_option,,}" == '!floatneg' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A NEGATIVE FLOAT" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -256,43 +272,43 @@ function BU.Main.Args.PrintBadOption()
 	# Else, if the value passed as argument is not a positive floating number.
     elif [ "${p_option,,}" == '!floatpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A POSITIVE FLOAT" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an integer.
     elif [ "${p_option,,}" == '!int' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT AN INTEGER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN INTEGER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a negative integer.
     elif [ "${p_option,,}" == '!intneg' ]; then
 
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A NEGATIVE INTEGER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a positive integer.
     elif [ "${p_option,,}" == '!intpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
-            "THE $(BU.Main.Decho.Decho.Function "$v_funcname") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')$p_argname") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
-            "$p_advice" "$p_value" "$v_filename" "$v_funcname" "$v_lineno";
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-		return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
     fi
 
 	if [ "$v_STAT_ECHO_was_false" == "true" ]; then
@@ -310,55 +326,55 @@ function BU.Main.Args.PrintBadOption()
 ## DEBUG ID = argument-presence-checking
 
 # shellcheck disable=SC2034
-__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS::argument-presence-checking";
+__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
 function BU.Main.Args.GetFuncArgsArrayValues()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
-        "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
+        "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
     #**** Parameters ****
-    local p_funcname=$1;            # String    - Default : NULL    - Name of the function where the array was set.
-    local p_decorate=${2:-NULL};    # String    - Default : NULL    - Special text processing for the "Decho()" function's "BU.Main.Args__Decho.Decho()" sub-fonction.
+    local p_funcname=${1};          # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the function where the array was set.
+    local p_decorate=${2:-NULL};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Special text processing for the "Decho()" function's "BU.Main.Args__Decho.Decho()" sub-fonction.
     shift 2;
 
-    local pa_argsArray=("$@");  # Array     - Default : NULL    - Array of values to check and display.
+    local pa_argsArray=("${@}");      # ARG TYPE : Array      - | DEFAULT VAL : NULL    - Array of values to check and display.
 
     #**** Variables ****
-    local v_index=0;            # Int   - Default : 0   - Initial value of the "for" loop's iterations counter.
+    local v_index=0;                # VAR TYPE : Int        - DESC : Initial value of the "for" loop's iterations counter.
 
     # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
-    local v_loop_error;
+    local v_loop_error;             # VAR TYPE : String     - DESC :
 
     #**** Code ****
     BU.Main.Status.CheckStatIsBackupEchoing || {
-        local v_echo="$__BU_MAIN_STAT_ECHO";
+        local v_echo="${__BU_MAIN_STAT_ECHO}";
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
     }
 
     BU.ModuleInit.CheckIsDebugging && {
-        BU.Main.Echo.Newstep "Values stored in the $(if [[ "${p_decorate,,}" == ?(-)?(-)d?(ec?(h)o) ]]; then BU.Main.Decho.Decho.Function "$v_funcname"; else echo "« $v_funcname »"; fi) function's array of arguments :";
+        BU.Main.Echo.Newstep "Values stored in the $(if [[ "${p_decorate,,}" == ?(-)?(-)d?(ec?(h)o) ]]; then BU.Main.Decho.Decho.Function "${v_funcname}"; else echo "« ${v_funcname} »"; fi) function's array of arguments :";
 
         for i in "${pa_argsArray[@]}"; do
-            BU.Main.Echo.Msg "Value [$v_index] : $i" || { local C="$?"; v_loop_error='error'; break; }
+            BU.Main.Echo.Msg "Value [$v_index] : ${i}" || { local C="${?}"; v_loop_error='error'; break; }
 
             # Line break every five lines, in order to keep the values list readable for a human.
             local v_value_line=$(( v_index + 1 ));
 
             if [ $(( v_value_line % 5 )) -eq 0 ]; then
-                BU.Main.Echo.Newline || { local C="$?"; v_loop_error='error'; break; };
+                BU.Main.Echo.Newline || { local C="${?}"; v_loop_error='error'; break; };
             fi
 
             v_index=$(( v_index+1 ));
-        done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; fi
+        done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     }
 
-    if [ -n "$v_echo" ] && [ "${v_echo,,}" == 'false' ]; then
-        BU.Main.Status.ChangeSTAT_ECHO "$v_echo" 'main' "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO-1 ))" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+    if [ -n "${v_echo}" ] && [ "${v_echo,,}" == 'false' ]; then
+        BU.Main.Status.ChangeSTAT_ECHO "${v_echo}" 'main' "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO-1 ))" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -371,19 +387,19 @@ function BU.Main.Args.GetFileName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
-        "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
+        "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
     #**** Parameters ****
-    local p_filename=$1;    # String    - Default : NULL    - Name of the file to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
+    local p_filename=${1};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the file to process.
+    local p_decorate=${2};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
-    if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
+    if [[ "${p_decorate}" == ?(-?(-))d?(ec?(h)o) ]]; then
         # Checking if the file's name was specified, in order to print it.
-        if [ -z "$p_filename" ]; then printf "%s" "$(BU.Main.Decho.Decho.Path 'no file identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Path "$p_filename")"; fi;
+        if [ -z "${p_filename}" ]; then printf "%s" "$(BU.Main.Decho.Decho.Path 'no file identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Path "${p_filename}")"; fi;
     else
-        if [ -z "$p_filename" ]; then printf "« no file identified »"; else printf "« %s »" "$p_filename"; fi
+        if [ -z "${p_filename}" ]; then printf "« no file identified »"; else printf "« %s »" "${p_filename}"; fi
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -394,19 +410,19 @@ function BU.Main.Args.GetFunctionName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
-        "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
+        "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
     #**** Parameters ****
-    local p_funcname=$1;    # String    - Default : NULL    - Name of the function to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
+    local p_funcname=${1};    # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the function to process.
+    local p_decorate=${2};    # ARG TYPE : String   - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
-    if [[ "${p_decorate,,}" == ?(-)?(-)d?(ec?(h)o) ]]; then
+    if [[ "${p_decorate,,}" == ?(-?(-))d?(ec?(h)o) ]]; then
         # Checking if the function's name was specified, in order to print it.
-        if [ -z "$p_funcname" ]; then printf "%s" "$(BU.Main.Decho.Decho.Function 'no function identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Function "$p_funcname()")"; fi;
+        if [ -z "${p_funcname}" ]; then printf "%s" "$(BU.Main.Decho.Decho.Function 'no function identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Function "${p_funcname}()")"; fi;
     else
-        if [ -z "$p_funcname" ]; then printf "« no line identified »"; else printf "« %s »" "$p_funcname"; fi
+        if [ -z "${p_funcname}" ]; then printf "« no line identified »"; else printf "« %s »" "${p_funcname}"; fi
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -417,15 +433,15 @@ function BU.Main.Args.GetLineNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
-        "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
+        "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
     #**** Parameters ****
-    local p_lineno=$1;      # Int       - Default : NULL    - Line number to process.
-    local p_decorate=$2;    # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
+    local p_lineno=${1};    # Int       - Default : NULL    - Line number to process.
+    local p_decorate=${2};  # String    - Default : NULL    - Allow the call of any "BU.Main.Decho.Decho<...>()" function.
 
     #**** Code ****
-    if [[ "${p_decorate}" == ?(-)?(-)d?(ec?(h)o) ]]; then
+    if [[ "${p_decorate}" == ?(-?(-))d?(ec?(h)o) ]]; then
         if [ -z "$p_lineno" ]; then printf "%s" "$(BU.Main.Decho.Decho.Highlight 'no line identified')"; else printf "%s" "$(BU.Main.Decho.Decho.Highlight "$p_lineno")"; fi;
     else
         # Checking if the file's name was specified, in order to print it.
@@ -440,7 +456,7 @@ function BU.Main.Args.GetFFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
@@ -478,7 +494,7 @@ function BU.Main.Args.GetFFL()
 
             elif [ -z "$p_funcname" ] && [ -n "$p_lineno" ]; then
                 BU.Main.Errors.HandleErrors '1' \
-                    "$(BU.Main.Args.PrintFFL "$v_missing_filename" "$v_funcname" "$p_lineno") : " \
+                    "$(BU.Main.Args.PrintFFL "$v_missing_filename" "${v_funcname}" "$p_lineno") : " \
                     "Please give a $__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                     'p_filename' "$v_missing_filename" "$v_missing_funcname" "$p_lineno (as GetFFL arg3) | $(( LINENO-1 )) (actual file line)";
 
@@ -537,7 +553,7 @@ function BU.Main.Args.PrintFFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
@@ -551,7 +567,7 @@ function BU.Main.Args.PrintFFL()
     local v_lineno; v_lineno="$(BU.Main.Args.GetLineNumber "$p_lineno")";
 
     #**** Code ****
-    echo -n "$v_filename file, function $v_funcname, line $v_lineno";
+    echo -n "${v_filename} file, function ${v_funcname}, line ${v_lineno}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -563,7 +579,7 @@ function BU.Main.Args.PrintFFLErrorOccured()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
@@ -592,7 +608,7 @@ function BU.Main.Args.PrintFFLErrorOccured()
     fi
 
     #**** Code ****
-    echo -n "The error occured in the $v_filename file, at function $v_funcname, on line $v_lineno, during the checking of the $v_target_f() function";
+    echo -n "The error occured in the ${v_filename} file, at function ${v_funcname}, on line ${v_lineno}, during the checking of the $v_target_f() function";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -604,7 +620,7 @@ function BU.Main.Args.Argc()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
@@ -633,32 +649,32 @@ function BU.Main.Args.Argc()
             else
                 # If the function awaits only one argument AND no argument is given to the function.
                 if [ "$p_argawait" -eq 1 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") NEEDS AN ARGUMENT" \
-                        "Please pass only one argument to the $(BU.Main.Decho.Decho.Function "$v_funcname") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "${v_funcname}") NEEDS AN ARGUMENT" \
+                        "Please pass only one argument to the $(BU.Main.Decho.Decho.Function "${v_funcname}") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if the function awaits more than one argument AND no arguments are passed to the function.
                 elif [ "$p_argawait" -ge 1 ] && [ "$p_argcount" -eq 0 ]; then
                     local total="";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") NEEDS $(BU.Main.Decho.Decho.Highlight "$p_argawait") ARGUMENTS" \
-                        "Please pass $(BU.Main.Decho.Decho.Highlight "$p_argawait") argument$(if [ "$p_argawait" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "${v_funcname}") NEEDS $(BU.Main.Decho.Decho.Highlight "$p_argawait") ARGUMENTS" \
+                        "Please pass $(BU.Main.Decho.Decho.Highlight "$p_argawait") argument$(if [ "$p_argawait" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "${v_funcname}") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if the function awaits more than one argument AND not enough arguments are passed to the function.
                 elif [ "$p_argcount" -gt 0 ] && [ "$p_argcount" -lt "$p_argawait" ]; then
                     local total="$(( p_argawait-p_argcount ))";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") HAS NOT ENOUGH ARGUMENTS" \
-                        "Please pass $(BU.Main.Decho.Decho.Highlight "$total") more argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "${v_funcname}") HAS NOT ENOUGH ARGUMENTS" \
+                        "Please pass $(BU.Main.Decho.Decho.Highlight "$total") more argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "${v_funcname}") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
                 # Else, if more arguments than expected are given to the function.
                 elif [ "$p_argcount" -gt "$p_argawait" ]; then
                     local total="$(( p_argcount-p_argawait ))";
 
-                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "$v_funcname") HAS TOO MUCH ARGUMENTS" \
-                        "Please remove $(BU.Main.Decho.Decho.Highlight "$total") argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "$v_funcname") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
+                    BU.Main.Errors.HandleErrors "1" "THE FUNCTION $(BU.Main.Decho.Decho.Function "${v_funcname}") HAS TOO MUCH ARGUMENTS" \
+                        "Please remove $(BU.Main.Decho.Decho.Highlight "$total") argument$(if [ "$total" -gt 1 ]; then printf 's'; fi) to the $(BU.Main.Decho.Decho.Function "${v_funcname}") function$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
                         "$p_argcount" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
             fi
@@ -704,7 +720,7 @@ function BU.Main.Args.GetArgc-FFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS" \
+        "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "$__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING";
 
     #**** Parameters ****
@@ -715,8 +731,8 @@ function BU.Main.Args.GetArgc-FFL()
     #   $4  -> BU.Main.Args.Argc && BU.Main.Args.GetFFL "$p_funcname" parameter.
     #   $5  -> BU.Main.Args.Argc && BU.Main.Args.GetFFL "$p_lineno" parameter.
 
-#    BU.Main.Args.Argc "$1" "$2" "$3" "$4" "$5"   || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
-#    BU.Main.Args.GetFFL "$3" "$4" "$5"           || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+#    BU.Main.Args.Argc "$1" "$2" "$3" "$4" "$5"   || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+#    BU.Main.Args.GetFFL "$3" "$4" "$5"           || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -748,30 +764,30 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
 	#**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_parent" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a folder path passed as first argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+			'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_child" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a file OR folder name passed as second argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+			'p_child' "$p_child" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	if [ -z "$p_type" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "The function $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "$p_funcname")") needs a type of data ('d' or 'f') passed as third argument to work properly (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+			'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	if [ "$p_type" != 'd' ] && [ "$p_type" != 'f' ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption '!df' \
             "You need to precise if what you want to create is a directory or a file (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
+            'p_type' "$p_type" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -802,12 +818,12 @@ function BU.Main.Args__CMDS.GetCommandPath()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "You must specify the name of the command whose path you want to know (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -840,7 +856,7 @@ function BU.Main.Args__Decho.Decho()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
 	#**** Code ****
-#	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+#	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	# If the text's color code is not an integer.
 	if ! BU.Main.Checkings.IsPositiveInt "$p_newTextColor"; then local lineno="$LINENO";
@@ -887,12 +903,12 @@ function BU.Main.Args__Directories.ProcessingDir()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_function" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass a function's name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
+            'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 
 		return 1;
     fi
@@ -900,13 +916,13 @@ function BU.Main.Args__Directories.ProcessingDir()
     if [ -z "$p_parent" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass a valid parent directory path as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_name" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the name of the folder to process as third argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
+            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -931,20 +947,20 @@ function BU.Main.Args__Directories.OverwriteDir()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the given folder path is incorrect.
     if [ ! -d "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption '!d' \
             "Please pass the correct path of the directory to overwrite as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -965,27 +981,27 @@ function BU.Main.Args__Directories.Make()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
     if [ -z  "$p_parent" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the new directory's parent folder as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_parent' "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_parent' "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the parent folder's path is incorrect.
     if [ ! -d "$p_parent" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption '!d' \
             "Please pass a valid parent directory path as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the folder's name is missing (no name is given).
     if [ -z "$p_name" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "Please pass the name of the directory to create as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1006,19 +1022,19 @@ function BU.Main.Args__Directories.MakePath()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new folder's full path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass the full path of the directory to create as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	if [ -n "$p_overwrite" ] && [ "$p_overwrite" != "--rmdir" ]; then local lineno="$LINENO";
 		BU.Main.Args.PrintBadOption '' \
 			"Please pass the valid string $(BU.Main.Decho.Decho.Var "--rmdir") that allows overwriting the $(BU.Main.Decho.Decho.Function "$p_path") directory (optional argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-			'p_overwrite' "$p_overwrite" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
+			'p_overwrite' "$p_overwrite" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"
 	fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1043,12 +1059,12 @@ function BU.Main.Args__Directories.GetDirectoryName()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1068,12 +1084,12 @@ function BU.Main.Args__Directories.GetDirectoryPath()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "The $(BU.Main.Text.CutSubStringBeforeNthDelim "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")") function takes a path as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1094,13 +1110,13 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1121,19 +1137,19 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target folder path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_iterations" ] || ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as number of iterations (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')"
-            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1177,12 +1193,12 @@ function BU.Main.Args__Files.ProcessingFile()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_function" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "Please pass a valid file processing function as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_function' "$p_function" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1203,27 +1219,27 @@ function BU.Main.Args__Files.OverwriteFile()
     local p_lineno=$5;          # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the target file's path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the directory to overwrite as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the given file path is incorrect.
     if [ ! -d "$p_path" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption '!d' \
             "Please pass the correct path of the directory to overwrite as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if no authorization to overwrite the current file is given.
 	if [ -z "$p_authorization" ]; then local lineno="$LINENO";
 		 BU.Main.Args.PrintBadOption 'z' \
             "Please enter a valid value for the overwrite authorization as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_authorization' "$p_authorization" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_authorization' "$p_authorization" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1244,27 +1260,27 @@ function BU.Main.Args__Files.Make()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the parent folder's path is missing (no path is given).
     if [ -z "$p_parent" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the new file's parent folder as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the parent folder's path is incorrect.
     if [ ! -d "$p_parent" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption '!d' \
             "Please pass a valid parent directory path as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_parent' "$p_parent" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the file's name is missing (no name is given).
     if [ -z "$p_name" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the name of the file to create as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 #     # Else, if the file's name is too long (usually with a string size greater than 255 bytes).
@@ -1272,7 +1288,7 @@ function BU.Main.Args__Files.Make()
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" \
             "THE FILE NAME IS TOO LONG FOR THIS FILESYSTEM" \
             "Please give a name length smaller than $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_MAX_FILENAME_LENGTH") bytes$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_name' "$p_name" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1292,13 +1308,13 @@ function BU.Main.Args__Files.MakePath()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If the new file's full path is missing (no path is given).
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass the full path of the directory to create as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1324,24 +1340,24 @@ function BU.Main.Args__Files.SetLastAccess()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_filepath" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as first argument the path of the file whose last access date you wish to change (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ ! -f "$p_filepath" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!f' \
             "Please pass a valid file path as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_filepath' "$p_filepath" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_fakedate" ]; then local lineno="$LINENO";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass a date in $(BU.Main.Decho.Decho.Highlight "[[CC]YY]MMDDhhmm[.ss]") format as second argument (like 20220221212020.22 | 2022 02 21 21h 20m 20s and 22 ms) (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_fakedate' "$p_fakedate" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_fakedate' "$p_fakedate" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1367,26 +1383,26 @@ function BU.Main.Args__Files.CompressCMD()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a compression command name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
 	# If the command line compression tool is not found.
     if ! command -v "$p_cmd"; then
             BU.Main.Args.PrintBadOption '!CMDSTR' \
                 "Please pass an existing / installed compression command name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-                'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+                'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # If no name of the archive to create is given (remember that the second parameter "$p_opts" is optional here, so the "$p_arch" parameter is the third parameter of the original function).
     if [ -z "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	return 0;
@@ -1407,19 +1423,19 @@ function BU.Main.Args__Files.CompressFormat()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a compression command name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     # If no name of the archive to create is given.
     if [ -z "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	return 0;
@@ -1439,20 +1455,20 @@ function BU.Main.Args__Files.SearchInArchive()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     # If no archive path is provided as first argument.
     if [ -z "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as first argument the path to the archive to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # If a bad archive path is provided as first argument.
     if [ ! -f "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!f' \
             "Please pass as first argument an existing path to find the archive to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1473,26 +1489,26 @@ function BU.Main.Args__Files.UncompressCMD()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_cmd" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a(n) (un)compression command's name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
 	# If the command line compression tool is not found.
     if ! command -v "$p_cmd"; then local lineno="$LINENO";
             BU.Main.Args.PrintBadOption '!CMDSTR' \
                 "Please pass an existing / installed (un)compression command's name as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-                'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+                'p_cmd' "$p_cmd" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # If no path to the archive to uncompress is given (remember that the second parameter "$p_opts" is optional here, so the "$p_arch" parameter is the third parameter of the original function).
     if [ -z "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	return 0;
@@ -1513,19 +1529,19 @@ function BU.Main.Args__Files.UncompressFormat()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_form" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass an archive format name (like 7z, Gzip, Cab, etc...) as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_form' "$p_form" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_form' "$p_form" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     # If no name / path to the archive to uncompress is given.
     if [ -z "$p_arch" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_arch' "$p_arch" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	return 0;
@@ -1556,18 +1572,18 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_fileFS" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_fileFS" ] && [ ! -d "$p_fileFS" ] || [ ! -f "$p_fileFS" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1592,18 +1608,18 @@ function BU.Main.Args__Filesystem.GetFSInfos()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_path" ] && [ ! -d "$p_path" ] || [ ! -f "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_fileFS' "$p_fileFS" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1630,30 +1646,30 @@ function BU.Main.Args__Filesystem.Chown()
     local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_currentOwner" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the former directory's or file's owner (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_newOwner" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the new directory's or file's owner (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the path to the directory or the file to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_path" ] && [ ! -d "$p_path" ] || [ ! -f "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!df' \
             "Please give a valid path for the directory or the file to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1680,30 +1696,30 @@ function BU.Main.Args__Filesystem.ChownRec()
     local p_lineno=$6;          # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_currentOwner" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the former directory's owner (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_currentOwner' "$p_currentOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_newOwner" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the new directory's owner (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_newOwner' "$p_newOwner" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the path to the directory to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_path" ] && [ ! -d "$p_path" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!d' \
             "Please give a valid path for the directory to process (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_path' "$p_path" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1740,18 +1756,18 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_delimiter" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1778,24 +1794,24 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_delimiter" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1817,24 +1833,24 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_delimiter" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_delimiter' "$p_delimiter" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1855,12 +1871,12 @@ function BU.Main.Args__Text.DeleteLettersInString()
     shift;
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1886,24 +1902,24 @@ function BU.Main.Args__Text.GetCharacterOccurences()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_target" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character to process as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -n "$p_target" ] && [ "${#p_target}" -gt 1 ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!alphanumchar' \
             "Please give only a single character to process as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1925,24 +1941,24 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
 	if [ -z "$p_delim" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character as delimiter to process as second argument$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')"
-            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1964,24 +1980,24 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
     local p_lineno=$6;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-	BU.Main.Args.GetArgc-FFL "$#" '6' "$p_filename" "$p_funcname" "$p_lineno";
+	BU.Main.Args.GetArgc-FFL "${#}" '6' "$p_filename" "$p_funcname" "$p_lineno";
 
 	if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
 	if [ -z "$p_delim" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character as delimiter to process as second argument$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')"
-            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_delim' "$p_delim" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
     if [ -n "$p_iterations" ] && ! BU.Main.Checkings.IsPositiveInt "$p_iterations"; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_iterations' "$p_iterations" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -2002,18 +2018,18 @@ function BU.Main.Args__Text.GetSubStringOccurences()
     local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument). $(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if [ -z "$p_target" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any sub-string to process as second argument (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_target' "$p_target" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -2022,7 +2038,7 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 # -----------------------------------------------
 
 ## CATEGORY : "SPLITTING TEXT AND SPLITTED TEXT PROCESSING"
-## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU.Main.Args.GetArgc-FFL "$#" '5' "$p_filename" "$p_funcname" "$p_lineno";
+## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU.Main.Args.GetArgc-FFL "${#}" '5' "$p_filename" "$p_funcname" "$p_lineno";
 
 # "BU.Main.Text.StrToWordArray()" function.
 function BU.Main.Args__Text.StrToWordArray()
@@ -2038,12 +2054,12 @@ function BU.Main.Args__Text.StrToWordArray()
     local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "$#" '4' "$p_filename" "$p_funcname" "$p_lineno";
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "$p_filename" "$p_funcname" "$p_lineno";
 
     if [ -z "$p_string" ]; then local lineno="$LINENO";
         BU.Main.Args.PrintBadOption 'Z' \
             "Please give as first argument a string to convert in a word array (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno" '--decho')" \
-            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C";
+            'p_string' "$p_string" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

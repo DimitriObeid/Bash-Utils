@@ -22,8 +22,8 @@
 
 # shellcheck disable=SC2154
 
-# --------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "$__BU_MAIN_FUNCTIONS_FILES_PATH" array in the initializer file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -81,7 +81,7 @@ function BU.Main.Errors.HandleSmallErrors()
     #**** Variables ****
     if [ "${p_cpls^^}" == 'CPLS' ]; then
         if [ "${__BU_MAIN_STAT_ECHO,,}" == 'false' ]; then
-            local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO 'true' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; };
+            local v_BU_STAT_ECHO_old="$__BU_MAIN_STAT_ECHO"; BU.Main.Status.ChangeSTAT_ECHO 'true' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
         fi
     fi
 
@@ -109,7 +109,7 @@ function BU.Main.Errors.HandleSmallErrors()
     # As the "BU.Main.Echo.Warning()" function will be called in case of a missing return or exit code (normally passed as second argument),
     # it's better to reset the value of the "$__BU_MAIN_STAT_ECHO" status variable condition per condition.
     if [ "${p_return^^}" == 'R' ]; then
-        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
         # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
         [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -119,7 +119,7 @@ function BU.Main.Errors.HandleSmallErrors()
         return 1;
 
     elif [ "${p_return^^}" == 'E' ]; then
-        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="$?"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$C"; }; fi
+        if [ "$v_BU_STAT_ECHO_old" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
         # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
         [ -n "$VHandleSmallErrors" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -243,11 +243,11 @@ function BU.Main.Errors.HandleErrors()
         if BU.Main.Status.CheckStatIsInitializing; then
             BU.ModuleInit.HandleErrors "$p_returnCode" "$p_errorString" "$p_adviceString" "$p_badValue" "$p_file" "$p_function" "$p_lineno" || {
 
-                local C="$?";
+                local C="${?}";
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-                return "$C";
+                return "${C}";
             };
         else
 
@@ -294,14 +294,14 @@ function BU.Main.Errors.HandleErrors()
             # Redirecting the log messages to the terminal, to show them to the user.
             if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "log" ]; then
                 local v_log_old="true"; __BU_MAIN_STAT_LOG_REDIRECT="tee"; BU.Main.Status.CheckSTAT_LOG_REDIRECT 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || {
-                    local C="$?";
+                    local C="${?}";
 
                     # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
                     [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-                    return "$C";
+                    return "${C}";
                 };
             fi
 
@@ -369,7 +369,7 @@ function BU.Main.Errors.HandleErrors()
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-                exit "$__BU_MAIN_EXIT_NOT_PERMITTED";
+                exit "${__BU_MAIN_EXIT_NOT_PERMITTED}";
             else
                 if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
                     # Calling the function that processes the given answer.
@@ -400,7 +400,7 @@ function BU.Main.Errors.HandleErrors()
                 # Restoring the former value of the "$__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable.
                 [ "$VHandleErrors" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NOT_PERMITTED";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
             fi
         fi
     fi
