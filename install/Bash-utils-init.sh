@@ -2190,7 +2190,7 @@ BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 # If the framework is wrapped, then you should call the "Bash-utils-${language}.sh" file which corresponds to the language that you want to use.
 BU.ModuleInit.IsFrameworkLocalizedWrapped || BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED='true';
+declare __BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED='true';
 
 # Checking the currently used Bash language's version.
 BU.ModuleInit.CheckBashMinimalVersion || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
@@ -2242,7 +2242,8 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
 {
-    # Since the "${}" variable is declared and filled at the end of the function, it is safe to write a translated message, since the translation files are already included.
+    # Since the "${}" variable is declared and filled at the end of the function, it is safe to write a translated message,
+    # since the translation files are already included, and to call the "BU.Main.Headers.Header.Warning()" function.
     if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "sourced" == "${__BU_MODULE_INIT_IS_SOURCED}" ]; then
         # shellcheck disable=SC2059
         BU.Main.Headers.Header.Warning "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}\n" "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")")"; return 1;
@@ -2357,6 +2358,28 @@ function BashUtils_InitModules()
 				"$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
 				"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		fi
+
+        # Writing a non-empty (and translated) string.
+        function BU.ModuleInit.MsgTranslate()
+        {
+            if [ -n "${1}" ]; then
+                echo "${1}";
+            else
+                if [ "${2,,}" == 'nofail' ]; then
+                    return 0;
+                else
+                    echo "No message to translate";
+
+                    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi;
+                fi
+            fi
+        }
+
+        BU.ModuleInit.MsgTranslate "$(printf "TEST %s" "AS")";
+
+        BU.ModuleInit.Msg "$(BU.ModuleInit.MsgTranslate "TEST 2")";
+        BU.ModuleInit.Msg;
+
 
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
         if [[ "${module}" != 'module --'* ]]; then
