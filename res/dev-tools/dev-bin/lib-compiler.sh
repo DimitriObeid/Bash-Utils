@@ -4,14 +4,18 @@
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS
 
 # Name          : lib-compiler.sh
-# Description   : This script compiles the needed framework ressources and the main module in a single file.
 # Author(s)     : Dimitri Obeid
 # Version       : 2.0
 # Beta version  : NONE
 
+# ------------------
+# FILE DESCRIPTION :
+
+# This script compiles the needed framework ressources and the main module in a single file.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-################################################ DEPENDENCES INCLUSION ################################################
+########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
 #### SOURCING DEPENDENCES
 
@@ -27,7 +31,6 @@
 #    then
 #            echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
 # fi
-
 
 # -----------------------------------------------
 

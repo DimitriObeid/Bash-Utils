@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ----------------------
-## SCRIPT'S INFORMATIONS
+# ------------------------
+## SCRIPT'S INFORMATIONS :
 
 # Name          : en.locale
 # Description   : English translation messages of the module initialization script.

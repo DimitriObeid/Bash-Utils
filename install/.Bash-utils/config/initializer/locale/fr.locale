@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ----------------------
-## SCRIPT'S INFORMATIONS
+# ------------------------
+## SCRIPT'S INFORMATIONS :
 
 # Name          : fr.locale
 # Description   : Messages de traduction en français du script d'initialisation des modules.

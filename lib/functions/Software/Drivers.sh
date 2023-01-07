@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ----------------------
-## SCRIPT'S INFORMATIONS
+# ------------------------
+## SCRIPT'S INFORMATIONS :
 
 # Name          : Drivers.sh
 # Module        : Software
@@ -32,8 +32,8 @@
 # If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
 # command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
 
-# -----------------------------------------------------------------------------
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your main script file.
+# --------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 

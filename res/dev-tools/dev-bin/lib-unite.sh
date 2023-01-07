@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+# ----------------------------------------
+# DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
+
+# Name          : lib-unite.sh
+# Author(s)     : Dimitri Obeid
+# Version       : Beta 1.0
+
+# -----------------
+# FILE DESCRIPTION :
+
+# This script unites every Bash source files of the framework in a single file, in order to get the total size of the whole project in bytes, 
+# number of characters, of words, of columns and lines.
+
+# This script is different from the "lib-compiler.sh" script, because it compiles every translation files, instead of the needed ones in a localized file,
+# plus this script is older than the compiler. Actually, the new compiler was builded with many bits from this script.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ############################################# GLOBAL VARIABLES DEFINITION #############################################
@@ -214,9 +230,9 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
     echo;
 
     if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-        cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE";
+        cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}";
 
-        rm "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES";
+        rm "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}";
 
         PrintLine;
 
@@ -234,8 +250,8 @@ fi
 if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
     echo;
 
-    if [ -f "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" ]; then
-        cat "$__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES";
+    if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" ]; then
+        cat "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "$__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES";
 
         rm "${__BU_MAIN_FULL_FILE_PATH}";
 

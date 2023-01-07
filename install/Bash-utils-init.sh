@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
-# ----------------------
-## SCRIPT'S INFORMATIONS
+# ------------------------
+## SCRIPT'S INFORMATIONS :
 
 # Name          : Bash-utils-init.sh
-# Description   : Library initializer script, initializing all the modules you need for your scripts.
 # Author(s)     : Dimitri Obeid
 # Version       : 3.0
+
+# ------------------
+# FILE DESCRIPTION :
+
+# This file contains the main part of the framework initializer script.
+
+# This script declares every global variables, defines some useful functions you may use in the main module,
+# and initializes all the modules you need for your scripts, from their configuration files to their initializer file.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -21,18 +28,22 @@
 
 # shellcheck disable=SC2154,SC1090
 
-# ---------------------
-# NOTE ABOUT SHELLCHECK
+# ------------------------
+# NOTES ABOUT SHELLCHECK :
 
-# To display the content of a variable in a translated string, the use of the printf command is mandatory in order to interpret each "%s" pattern as the value of a variable.
+# To display the content of a variable in a translated string, the use of the "$(printf)" command is mandatory in order to interpret each "%s" pattern as the value of a variable.
 
 # This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
 
-# If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
-# command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
+# If you add new messages to translate, you must call the "shellcheck disable=SC2059" directive before the line where you call the
+# "$(printf)" command to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
 
-# -----------------------------------------------------------------------------
-# DO NOT EXECUTE IT DIRECTLY, instead, just source it in your main script file.
+# If the message is displayed inside a function, you can write the "shellcheck disable=SC2059" directive on the line above the declaration of the said function.
+
+# You can also write this directive at the beginning of a Bash script, but I would not recommand you to do so, since you may use the "$(printf)" command in another context, without the same purpose.
+
+# --------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
