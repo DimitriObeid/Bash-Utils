@@ -584,11 +584,13 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH"                "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}"              'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir__file_path__lineno}";
     BU.ModuleInit.Msg;
 
-    BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}"         'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_name__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR"     "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root_file__parent_dir__lineno}";
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH}"         'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_path__lineno}";
-    BU.ModuleInit.Msg;
+    if [ -z "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" ]; then
+        BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE}" '+' 'msg'; BU.ModuleInit.Msg;
+        BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}"         'File'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_name__lineno}";
+        BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR"     "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root_file__parent_dir__lineno}";
+        BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH"           "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH}"         'Filepath'  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__lib_root_dir_root__file_path__lineno}";
+        BU.ModuleInit.Msg;
+    fi
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM'            "${__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM}"          'Char'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM}"              "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__csv_translation_file__delim__lineno}";
@@ -1194,58 +1196,61 @@ function BU.ModuleInit.FindPath()
 
     find "${v_parentdir}" -maxdepth 1 -iname "${v_target}" -print 2>&1 | grep -v "Permission denied" || \
 	{
-        #**** Error management variables ****
-        declare -i v_e_lineno="$(( LINENO - 2 ))";  # VAR TYPE : Int   - DESC : Storing the line where the last command has failed to execute correctly.
+        # If the "Bash-utils-root-val.path" was not found, its error management is skipped, since there may be a super-user privileged version called "Bash-utils-root-val-ROOT.path";
+        if [ -z "${__BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR}" ]; then
+            #**** Error management variables ****
+            declare -i v_e_lineno="$(( LINENO - 2 ))";  # VAR TYPE : Int   - DESC : Storing the line where the last command has failed to execute correctly.
 
-        #**** Error management code ****
-        if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_EXISTS}" ]; then
-            if [ "${v_shut,,}" != 'shut' ]; then
-                echo >&2;
+            #**** Error management code ****
+            if [ -z "${__BU_MODULE_INIT_MSG_ARRAY_EXISTS}" ]; then
+                if [ "${v_shut,,}" != 'shut' ]; then
+                    echo >&2;
 
-                # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
-                # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
-                if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_1__PATH_NOT_FOUND';
+                    # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
+                    # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
+                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_1__PATH_NOT_FOUND';
 
-                    BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
-                else
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_2__PATH_NOT_FOUND';
+                        BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
+                    else
+                        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_2__PATH_NOT_FOUND';
 
-                    printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
+                        printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}" >&2; echo >&2;
 
-                    printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
+                        printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}" >&2;
+                    fi
+                fi
+
+            else
+                if [ "${v_shut,,}" != 'shut' ]; then local lineno="${LINENO}";
+                    BU.ModuleInit.Msg >&2;
+
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__FINDPATH__PATH_NOT_FOUND";
+
+                    # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
+                    # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
+                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_1__PATH_NOT_FOUND';
+
+                        BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
+
+                        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+                    else
+                        BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_2__PATH_NOT_FOUND';
+
+                        BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
+
+                        BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
+
+                        BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+                    fi
                 fi
             fi
 
-        else
-            if [ "${v_shut,,}" != 'shut' ]; then local lineno="${LINENO}";
-                BU.ModuleInit.Msg >&2;
-
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__FINDPATH__PATH_NOT_FOUND";
-
-                # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
-                # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
-                if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_1__PATH_NOT_FOUND';
-
-                    BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
-
-                    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-                else
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_2__PATH_NOT_FOUND';
-
-                    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND} --> %s/%s\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" "${v_parentdir}" "${v_target}")" >&2; BU.ModuleInit.Msg >&2;
-
-                    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION}\n" "${FUNCNAME[0]}" "${FUNCNAME[1]}")" >&2;
-
-                    BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
-
-                    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-                fi
-            fi
+            v_hasFailed='failed';
         fi
-
-        v_hasFailed='failed';
 	};
 
 	if [ "${v_hasFailed}" == 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
@@ -2117,6 +2122,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__modules_dir__lineno="$(( LINENO - 1 ))";
 
     # FILES
+    # Creating a variable for storing the instruction not to stop the script if the "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" is not found, since a super-user privileged version exists.
+    __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR='no-err';
+    
     __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
     __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
 
@@ -2126,14 +2134,18 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}" 'f' || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
     __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
-    __bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
+    unset __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR;
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
-    __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
+    if [ -z "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" ]; then
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
+        __bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}" 'f' || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
-    __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
+        __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
+
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}" 'f' || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
+        __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
+    fi
 
     # MISC
     __BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
@@ -2163,8 +2175,6 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
 # Calling the function previously defined, or else the global variables will not be declared.
 BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
-
-exit 0;
 
 # -----------------------------------------------
 
