@@ -17,11 +17,11 @@ function BU.Main.Directories.GetParentDirectoryPathMkdir()
 	local p_path=$1
 	local p_iterations=$2
 
-    mkdir -p "$p_path" || { echo "THE $p_path FOLDER CANNOT BE CREATED !"; exit 1; }
+    mkdir -p "${p_path}" || { echo "THE ${p_path} FOLDER CANNOT BE CREATED !"; exit 1; }
 
     local v_path_str=""
 
-	local v_current_path="$p_path"
+	local v_current_path="${p_path}"
 
     for ((i=0; i<p_iterations; i++)); do
         local v_parent

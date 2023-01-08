@@ -13,9 +13,9 @@ function BU.Main.Directories.GetParentDirectoryPath()
 	fi
 
     for (( i=0; i<p_iterations; i++)); do
-	   	parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+	   	parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
         	|| {
-       	    	BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+       	    	BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
            	    	"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO";
      		}; pwd -P )"
 		p_path="$parent"

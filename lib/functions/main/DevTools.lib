@@ -69,12 +69,12 @@ function BU.Main.DevTools.ShellcheckVerif()
     #**** Code ****
     # shellcheck disable=SC2059
     if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
-        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "$p_path"; echo;
+        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "${p_path}"; echo;
 
-        if ! shellcheck "$p_path"; then ShellcheckError "$p_path"; return 1; fi
+        if ! shellcheck "${p_path}"; then ShellcheckError "${p_path}"; return 1; fi
 
         # shellcheck disable=SC2059
-        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "$p_path"; echo;
+        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "${p_path}"; echo;
 
         echo;
     fi

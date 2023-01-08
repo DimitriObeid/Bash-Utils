@@ -168,20 +168,20 @@ function BU.Main.Files.OverwriteFile()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Files.OverwriteFile "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.OverwriteFile "${p_path}" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Checking second if the script is operating at the root directory.
-    BU.Main.Directories.TriggerRootDirWarning "$p_path" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    BU.Main.Directories.TriggerRootDirWarning "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
     if [ "$p_authorization" == "true" ]; then
-		BU.Main.Echo.Newstep "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists and is not empty.";
-		BU.Main.Echo.Newstep "Overwriting data from file $(BU.Main.Decho.Decho.Path "$p_path/")";
+		BU.Main.Echo.Newstep "The $(BU.Main.Decho.Decho.Path "${p_path}/") file already exists and is not empty.";
+		BU.Main.Echo.Newstep "Overwriting data from file $(BU.Main.Decho.Decho.Path "${p_path}/")";
 		BU.Main.Echo.Newline;
 
-		true > "$p_path";
-		BU.Main.Errors.HandleErrors "$?" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "$p_path/") FILE HAD NOT BEEN OVERWRITTEN" "" "$p_path" \
+		true > "${p_path}";
+		BU.Main.Errors.HandleErrors "$?" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "${p_path}/") FILE HAD NOT BEEN OVERWRITTEN" "" "${p_path}" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
-		BU.Main.Echo.Success "The content of the $(BU.Main.Decho.S "$p_path/") file has been successfully overwritten";
+		BU.Main.Echo.Success "The content of the $(BU.Main.Decho.S "${p_path}/") file has been successfully overwritten";
 		BU.Main.Echo.Newline;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -252,16 +252,16 @@ function BU.Main.Files.Make()
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
 	# Else, if the file to be created already exists AND it is NOT empty.
-	elif [ -f "$p_path" ] && [ -s "$p_path" ]; then
-        if BU.Main.Files.OverwriteFile "$p_path"; then
+	elif [ -f "${p_path}" ] && [ -s "${p_path}" ]; then
+        if BU.Main.Files.OverwriteFile "${p_path}"; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
         fi
 
 	# Else, if the file to be created already exists AND it is empty.
-	elif [ -f "$p_path" ] && [ ! -s "$p_path" ]; then
-		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "$p_path/") file already exists in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder and is empty.";
+	elif [ -f "${p_path}" ] && [ ! -s "${p_path}" ]; then
+		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_path}/") file already exists in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder and is empty.";
 		BU.Main.Echo.Newline;
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -280,14 +280,14 @@ function BU.Main.Files.MakePath()
     local p_path=$1;    # String : Full path of the file to create.
 
     #**** Variables ****
-    local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
-    local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
+    local v_parent; v_parent="$(echo "${p_path}" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
+    local v_target; v_target="$(echo "${p_path}" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
 
     #**** Code ****
 	# Checking first if the target partition is not fully used.
 	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'true';
 
-    if ! BU.Main.Args__Files.MakePath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.MakePath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     BU.Main.Files.Make "$v_parent" "$v_target" || return 1;
 
@@ -469,11 +469,11 @@ function BU.Main.Files.DeleteFile()
     local p_security=$2;    # String    - Default : no      - Preventing the file to be deleted automatically (default : "no" --> Ask the permission to the user).
 
     #**** Code ****
-    if ! BU.Main.Args__Files.DeleteFile "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.DeleteFile "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "$p_path";
+    rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "${p_path}";
 
-    BU.Main.Errors.HandleErrors "$?" "" "" "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+    BU.Main.Errors.HandleErrors "$?" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
     return 0;
 }
@@ -903,27 +903,27 @@ function BU.Main.Files.SourceFile()
     local p_path=$1;    # String    - Default : NULL    - Path of the file to process.
 
     #**** Code ****
-    if [ -f "$p_path" ]; then
-		BU.Main.Echo.Newstep "Sourcing the $(BU.Main.Decho.Decho.Path "$p_path") file";
+    if [ -f "${p_path}" ]; then
+		BU.Main.Echo.Newstep "Sourcing the $(BU.Main.Decho.Decho.Path "${p_path}") file";
 		BU.Main.Echo.Newline
 
         # shellcheck disable=SC1090
-        if source "$p_path"; then
-            BU.Main.Echo.Success "Sourced file : $(BU.Main.Decho.Decho.Path "$p_path")";
+        if source "${p_path}"; then
+            BU.Main.Echo.Success "Sourced file : $(BU.Main.Decho.Decho.Path "${p_path}")";
 			BU.Main.Echo.Newline;
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
             local C="${?}";
 
-            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "${p_path}")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
         fi
     else
         local C="${?}";
 
-        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "$p_path")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_path}")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
 
 		return "${C}";
     fi
@@ -1001,10 +1001,10 @@ function BU.Main.Files.AddToArchive()
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
 
     #**** Code ****
-    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
@@ -1069,10 +1069,10 @@ function BU.Main.Files.CompressFormat()
     local p_paths=("$@");       # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
-    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
@@ -1150,10 +1150,10 @@ function BU.Main.Files.DeleteInArchive()
     local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
 
     #**** Code ****
-    if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="$LINENO";
+    if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument)$__BU_MAIN_TXT_ERR_SUBSTR_DELIM$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "$p_lineno"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
+            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

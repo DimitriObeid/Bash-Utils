@@ -71,7 +71,7 @@ function BU.Main.TextFormat.CannotCreateRessource()
     local p_type=$5;
 
     #**** Code ****
-    echo "IN $p_file, FUNCTION $p_fnct, LINE $p_line --> ERROR : THE $p_path $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
+    echo "IN $p_file, FUNCTION $p_fnct, LINE $p_line --> ERROR : THE ${p_path} $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
     echo "Please check what is preventing this $( [[ "${p_type,,}" == 'dir' ]] && printf 'directory' || printf 'file' ) directory from being created. It may be a directory permission issue." >&2;
     echo >&2;
 
@@ -236,7 +236,7 @@ function BU.Main.TextFormat.SetTextColor()
     shopt -s extglob;
 
     # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; }; fi
+    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; }; fi
 
     shopt -u extglob;
 

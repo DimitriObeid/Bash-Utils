@@ -33,18 +33,18 @@ function CreateFIFO
         mkdir -pv "$__BU_MAIN_PROJECT_FIFO_DIR_PATH"
     fi
 
-    echo -e "Creating the $(tput setaf 6)$p_path$(tput sgr0) FIFO."
+    echo -e "Creating the $(tput setaf 6)${p_path}$(tput sgr0) FIFO."
     echo
 
-    if [ ! -p "$p_path" ]; then
-        if mkfifo "$p_path"; then
-            echo -e "Successfully created this FIFO --> $(tput setaf 6)$p_path$(tput sgr0)." "$(( LINENO-1 ))"
+    if [ ! -p "${p_path}" ]; then
+        if mkfifo "${p_path}"; then
+            echo -e "Successfully created this FIFO --> $(tput setaf 6)${p_path}$(tput sgr0)." "$(( LINENO-1 ))"
             echo
         else
-            echo -e "Error : Unable to create this FIFO --> $(BU.Main.Decho.Decho "$p_path")"
+            echo -e "Error : Unable to create this FIFO --> $(BU.Main.Decho.Decho "${p_path}")"
         fi
     else
-        echo -e "Existing FIFO --> $(tput setaf 6)$p_path$(tput sgr0)" "$(( LINENO-1 ))"
+        echo -e "Existing FIFO --> $(tput setaf 6)${p_path}$(tput sgr0)" "$(( LINENO-1 ))"
     fi
 }
 

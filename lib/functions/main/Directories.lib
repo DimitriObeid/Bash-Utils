@@ -132,10 +132,10 @@ function BU.Main.Directories.OverwriteDir()
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Directories.OverwriteDir "$p_path" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.OverwriteDir "${p_path}" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     # Checking second if the script is operating at the root directory.
-    BU.Main.Directories.TriggerRootDirWarning "$p_path";
+    BU.Main.Directories.TriggerRootDirWarning "${p_path}";
 
     BU.Main.Echo.Newstep "A non-empty folder with exactly the same name ($(BU.Main.Decho.Decho.Path "$p_name")) is already in the target folder $(BU.Main.Decho.Decho.Path "$p_parent/")";
 	BU.Main.Echo.Newstep "Deleting the contents of the $(BU.Main.Decho.Decho.Path "$v_path/") folder";
@@ -253,11 +253,11 @@ function BU.Main.Directories.MakePath()
     local p_overwrite=$2;	# String	- Authorization to overwrite the directory.
 
     #**** Variables ****
-    local v_parent; v_parent="$(echo "$p_path" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the folder to create.
-    local v_target; v_target="$(echo "$p_path" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
+    local v_parent; v_parent="$(echo "${p_path}" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the folder to create.
+    local v_target; v_target="$(echo "${p_path}" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.MakePath "$p_path" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.MakePath "${p_path}" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     if [ "$p_overwrite" != 'rmdir' ]; then
         BU.Main.Directories.Make "$v_parent" "$v_target" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -277,14 +277,14 @@ function BU.Main.Directories.MkTmpDir()
         "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
         "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
 
-    local lineno="$LINENO"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
+    local lineno="${LINENO}"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
         mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
 		{
 			BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
 			BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Checkings.CheckDirPathExists "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'true') CANNOT BE CREATED !" \
 				"Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
-				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno";
+				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
 			BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
@@ -319,9 +319,9 @@ function BU.Main.Directories.GetDirectoryName()
     local result;
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetDirectoryName "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetDirectoryName "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-    if [ -d "$p_path" ]; then
+    if [ -d "${p_path}" ]; then
         shopt -s extglob;           # Enable +(...) glob syntax.
 
         result=${p_path%%+(/)};     # Trim however many trailing slashes exist
@@ -334,7 +334,7 @@ function BU.Main.Directories.GetDirectoryName()
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Errors.HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Check if the provided path is correct." \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))";
+            "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-6 ))";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
@@ -352,15 +352,15 @@ function BU.Main.Directories.GetDirectoryPath()
     local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetDirectoryPath "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetDirectoryPath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-    if [ -d "$p_path" ]; then
-        echo -e "$p_path";
+    if [ -d "${p_path}" ]; then
+        echo -e "${p_path}";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Errors.HandleErrors "1" "THE PROVIDED PATH IS INCORRECT !" "Please check if the provided path is correct." \
-            "$p_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+            "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
@@ -382,12 +382,12 @@ function BU.Main.Directories.GetParentDirectoryName()
     local result;
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetParentDirectoryName "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetParentDirectoryName "${p_path}" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     for ((i=0; i<p_iterations; i++)); do
-        local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+        local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
             || {
-                BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
                     "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             }; pwd -P )";
 
@@ -420,17 +420,17 @@ function BU.Main.Directories.GetParentDirectoryPath()
     local result;
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetParentDirectoryPath "$p_path" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetParentDirectoryPath "${p_path}" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     if [ "$p_iterations" -lt 1 ]; then
         p_iterations="$(BU.Main.BasicMaths.NegativeToPositive "$p_iterations")";
     fi
 
-    if [ -d "$p_path" ]; then
+    if [ -d "${p_path}" ]; then
         for ((i=0; i<p_iterations; i++)); do
-            local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+            local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
                 || {
-                    BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                    BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
                 }; pwd -P )";
 
@@ -449,12 +449,12 @@ function BU.Main.Directories.GetParentDirectoryPath()
         echo -e "$result";
     else
         local v_path_str="";
-        local v_current_path="$p_path";
+        local v_current_path="${p_path}";
 
         for ((i=0; i<p_iterations; i++)); do
-            local v_parent; v_parent="$( cd "$(dirname "$p_path")" > /dev/null 2>&1 \
+            local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
                 || {
-                    BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "$p_path" \
+                    BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
                         "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
                 }; pwd -P )"
 
@@ -490,13 +490,13 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
-	# TODO : detecting if path points to a root sub-folder (like [ if "$p_path" == "/" ] || [ "$p_path" | cut blablabla ]).
-	if [ "$(pwd "$p_path")" == "/" ] || [ "$(BU.Main.Directories.GetParentDirectoryPath "$p_path")" == '/' ]; then
+	# TODO : detecting if path points to a root sub-folder (like [ if "${p_path}" == "/" ] || [ "${p_path}" | cut blablabla ]).
+	if [ "$(pwd "${p_path}")" == "/" ] || [ "$(BU.Main.Directories.GetParentDirectoryPath "${p_path}")" == '/' ]; then
 		if [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" == "forbidden" ]; then
 			BU.Main.Headers.Header.Error "WARNING !!!!!! READ THIS MESSAGE CAREFULLY !!!!!!" 'strlen';
 
 			BU.Main.Echo.Error "The script was trying to operate at the root directory (or one of its sub directories) without authorization";
-			BU.Main.Echo.Error "Given path : $(BU.Main.Decho.Decho.Path "$p_path")";
+			BU.Main.Echo.Error "Given path : $(BU.Main.Decho.Decho.Path "${p_path}")";
 			BU.Main.Echo.Error "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU.Main.Echo.Newline;
 
@@ -508,7 +508,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
             BU.Main.Headers.Header.Warning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
 
             BU.Main.Echo.Warning "You are about to operate at the root directory or one of its present sub-folders !";
-			BU.Main.Echo.Warning "Given path : $(BU.Main.Decho.Decho.Path "$p_path")";
+			BU.Main.Echo.Warning "Given path : $(BU.Main.Decho.Decho.Path "${p_path}")";
 			BU.Main.Echo.Warning "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
 			BU.Main.Echo.Newline;
 

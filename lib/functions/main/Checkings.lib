@@ -477,7 +477,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if no directory or file is passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
-    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="$LINENO";
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_INVALID_ARGUMENT" ]; then local lineno="${LINENO}";
 
         # If the framework is still initializing when an error occurs.
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
@@ -487,8 +487,8 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a filepath in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
-                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                "Please give a filepath in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
+                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -507,7 +507,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         fi
 
     # Else, if an invalid directory or file was passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
-    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="$LINENO";
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND" ]; then local lineno="${LINENO}";
 
         # If the framework is still initializing when an error occurs.
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
@@ -517,8 +517,8 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a valid path in order to check if the target file system is full or not$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
-                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                "Please give a valid path in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
+                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -536,7 +536,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
         fi
 
-    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then local lineno="$LINENO";
+    elif [ "$IsPartitionFullReturnCode" == "$__BU_MAIN_EXIT_NO_SPACE_LEFT" ]; then local lineno="${LINENO}";
 
         # If the framework is still initializing when an error occurs.
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
@@ -547,8 +547,8 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "$IsPartitionFullReturnCode" \
                 "NO SPACE LEFT ON THE TARGET FILE SYSTEM !!!" \
-				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file$__BU_MAIN_TXT_ERR_SUBSTR_DELIM\Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$lineno"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
+				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "$p_fileFS") » partition) before using it, or use another partition to write data in a file${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "$IsPartitionFullReturnCode"; return "$IsPartitionFullReturnCode";
 
             [ -n "$VCheckDiskUsedSpace" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -596,12 +596,12 @@ function BU.Main.Checkings.CheckDirPathExists()
     local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.Main.Decho.Decho.Path()" function (since this function is called in the "BU.Main.Decho.SetBG/TextColor()" functions, and they are called in the "BU.Main.Decho.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -d "$p_path" ] && [ "${p_authorization,,}" == 'true' ]; then
+    if [ ! -d "${p_path}" ] && [ "${p_authorization,,}" == 'true' ]; then
         BU.Main.Decho.Decho.Path "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
-    elif [ ! -d "$p_path" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
+    elif [ ! -d "${p_path}" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
         printf "<missing directory path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
@@ -620,7 +620,7 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
     local p_path=$1;    # String - Path of the newly created directory.
 
 	#**** Code ****
-	if [ -d "$p_path" ]; then
+	if [ -d "${p_path}" ]; then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -647,12 +647,12 @@ function BU.Main.Checkings.CheckFilePathExists()
     local p_authorization=${2:-true};   # String    - Default : true    - Authorization to call the "BU.Main.Decho.Decho.Path()" function (since this function is called in the "BU.Main.Decho.SetBG/TextColor()" functions, and they are called in the "BU.Main.Decho.Decho<...>()" functions). Set this value to "false" to forbid this call.
 
     #**** Code ****
-    if [ ! -f "$p_path" ] && [ "${p_authorization,,}" == 'true' ]; then
+    if [ ! -f "${p_path}" ] && [ "${p_authorization,,}" == 'true' ]; then
         BU.Main.Decho.Decho.Path "<missing file path>";       # Since this function should be called into a string, it's better to use a formatting function.
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 
-    elif [ ! -f "$p_path" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
+    elif [ ! -f "${p_path}" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "$p_authorization" ]; then
         printf "<missing file path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
@@ -673,7 +673,7 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
     local p_path=$1;    # String - Path of the newliy created file.
 
 	#**** Code ****
-	if [ -f "$p_path" ]; then
+	if [ -f "${p_path}" ]; then
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 	else
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -1079,7 +1079,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "$C"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; };
 
 	if [ -z "$p_decho" ] || [ -n "$p_decho" ] && [ "${p_decho,,}" == '--decho' ]; then
         if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "$p_parent" "$p_child" "$p_type" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
