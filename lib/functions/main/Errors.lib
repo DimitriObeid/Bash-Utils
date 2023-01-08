@@ -241,7 +241,7 @@ function BU.Main.Errors.HandleErrors()
 
     else
         if BU.Main.Status.CheckStatIsInitializing; then
-            BU.ModuleInit.HandleErrors "$p_returnCode" "$p_errorString" "$p_adviceString" "$p_badValue" "$p_file" "$p_function" "${p_lineno}" || {
+            BU.ModuleInit.HandleErrors "$p_returnCode" "$p_errorString" "$p_adviceString" "$p_badValue" "$p_file" "${p_function}" "${p_lineno}" || {
 
                 local C="${?}";
 
@@ -254,7 +254,7 @@ function BU.Main.Errors.HandleErrors()
             # If the framework is still initializing when an error occurs.
             BU.ModuleInit.SetInitErrorMsg && local VHandleErrors='1';
 
-            v_hdrString="$(echo -ne "IN $(BU.Main.Errors.HandleErrors_File "$p_file") FILE, FUNCTION $(BU.Main.Errors.HandleErrors_Function "$p_function"), LINE $(BU.Main.Errors.HandleErrors_Line "${p_lineno}") -->")";
+            v_hdrString="$(echo -ne "IN $(BU.Main.Errors.HandleErrors_File "$p_file") FILE, FUNCTION $(BU.Main.Errors.HandleErrors_Function "${p_function}"), LINE $(BU.Main.Errors.HandleErrors_Line "${p_lineno}") -->")";
 
             # -------- PART 1 : MANAGING THE CALL OF THIS "BU.Main.Errors.HandleErrors()" FUNCTION IF THIS "BU.Main.Errors.HandleErrors()" FUNCTION IS CALLED IN A FUNCTION CALLED BY THIS "BU.Main.Errors.HandleErrors()" FUNCTION
 

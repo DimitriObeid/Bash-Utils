@@ -116,14 +116,14 @@ function BU.Main.Files.ProcessingFile()
 
     #**** Code ****
     # Arguments checking.
-    if ! BU.Main.Args__Files.ProcessingFile "$p_function" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
+    if ! BU.Main.Args__Files.ProcessingFile "${p_function}" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
 
 	sleep "$__BU_MAIN_STAT_TIME_TXT";
     BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
     BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "$p_name") file in the $(BU.Main.Decho.Decho.Path "$p_parent") parent directory.";
     BU.Main.Echo.Newline;
 
-    case "$p_function" in
+    case "${p_function}" in
         'BU.Main.Files.Make')
             if BU.Main.Files.Make "${pa_arr[@]}"; then
                 BU.Main.Files.__ProcessingFile 'S' "$p_name" "$p_char";

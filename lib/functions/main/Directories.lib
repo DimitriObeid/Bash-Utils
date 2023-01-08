@@ -82,7 +82,7 @@ function BU.Main.Directories.ProcessingDir()
 
     #**** Code ****
     # Arguments checking.
-	if ! BU.Main.Args__Directories.ProcessingDir "$p_function" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+	if ! BU.Main.Args__Directories.ProcessingDir "${p_function}" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
 	sleep "$PROJECT_STATUS_SLEEP_LINE";
 
@@ -90,7 +90,7 @@ function BU.Main.Directories.ProcessingDir()
     BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "$p_name") folder in the parent folder $(BU.Main.Decho.Decho.Path "$p_parent").";
     BU.Main.Echo.Newline;
 
-    if "$p_function"; then
+    if "${p_function}"; then
         BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "$p_name/") folder.";
 		BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
 		sleep "$PROJECT_STATUS_SLEEP_LINE";

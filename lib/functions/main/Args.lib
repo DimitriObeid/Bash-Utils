@@ -1105,12 +1105,12 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
-    local p_iterations=$2;  # Int       - Default : NULL    - Number of iterations.
+    local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
+    local p_iterations=${2:-$'\0'}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of iterations.
 
-    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -1132,12 +1132,12 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_path=$1;        # String    - Default : NULL    - Path of the directory to process.
-    local p_iterations=$2;  # Int       - Default : 1       - Number of iterations.
+    local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
+    local p_iterations=${2:-$'\0'}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations.
 
-    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -1189,19 +1189,19 @@ function BU.Main.Args__Files.ProcessingFile()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_function=$1;    # Function to process.
+    local p_function=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Function to process.
 
-    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${4:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "$p_function" ]; then local lineno="${LINENO}";
+    if [ -z "${p_function}" ]; then local lineno="${LINENO}";
 		 BU.Main.Args.PrintBadOption 'z' \
             "Please pass a valid file processing function as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_function' "$p_function" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_function' "${p_function}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1214,12 +1214,12 @@ function BU.Main.Args__Files.OverwriteFile()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #***** Parameters ****
-    local p_path=$1             # String    - Default : NULL    - Path of the file to overwrite.
-    local p_authorization=$2;   # String    - Default : NULL    - Authorization to overwrite the file.
+    local p_path=${1:-$'\0'}            # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to overwrite.
+    local p_authorization=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Authorization to overwrite the file.
 
-    local p_filename=$3;        # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;        # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;          # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};         # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
