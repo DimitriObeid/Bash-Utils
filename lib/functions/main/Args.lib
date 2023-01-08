@@ -1239,10 +1239,10 @@ function BU.Main.Args__Files.OverwriteFile()
     fi
 
     # Else, if no authorization to overwrite the current file is given.
-	if [ -z "$p_authorization" ]; then local lineno="${LINENO}";
+	if [ -z "${p_authorization}" ]; then local lineno="${LINENO}";
 		 BU.Main.Args.PrintBadOption 'z' \
             "Please enter a valid value for the overwrite authorization as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_authorization' "$p_authorization" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_authorization' "${p_authorization}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1255,43 +1255,43 @@ function BU.Main.Args__Files.Make()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_parent=$1;      # String    - Parent folder path of the file to create.
-    local p_name=$2;        # String    - Name of the file to create.
+    local p_parent=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Parent folder path of the file to create.
+    local p_name=${2:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the file to create.
 
-    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     # If the parent folder's path is missing (no path is given).
-    if [ -z "$p_parent" ]; then local lineno="${LINENO}";
+    if [ -z "${p_parent}" ]; then local lineno="${LINENO}";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the path of the new file's parent folder as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_parent' "$p_parent" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_parent' "${p_parent}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the parent folder's path is incorrect.
-    if [ ! -d "$p_parent" ]; then local lineno="${LINENO}";
+    if [ ! -d "${p_parent}" ]; then local lineno="${LINENO}";
          BU.Main.Args.PrintBadOption '!d' \
             "Please pass a valid parent directory path as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_parent' "$p_parent" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_parent' "${p_parent}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     # Else, if the file's name is missing (no name is given).
-    if [ -z "$p_name" ]; then local lineno="${LINENO}";
+    if [ -z "${p_name}" ]; then local lineno="${LINENO}";
          BU.Main.Args.PrintBadOption 'z' \
             "Please pass the name of the file to create as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_name' "$p_name" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_name' "${p_name}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 #     # Else, if the file's name is too long (usually with a string size greater than 255 bytes).
-    if [ "$(echo "$p_name" | wc --bytes)" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then local lineno="${LINENO}";
+    if [ "$(echo "${p_name}" | wc --bytes)" -gt "$__BU_MAIN_FS_MAX_FILE_SIZE" ]; then local lineno="${LINENO}";
         BU.Main.Errors.HandleErrors "$__BU_MAIN_EXIT_FILENAME_TOO_LONG" \
             "THE FILE NAME IS TOO LONG FOR THIS FILESYSTEM" \
             "Please give a name length smaller than $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_MAX_FILENAME_LENGTH") bytes${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_name' "$p_name" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_name' "${p_name}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1304,11 +1304,11 @@ function BU.Main.Args__Files.MakePath()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_path=$1;        # String    - Full path of the file to create.
+    local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Full path of the file to create.
 
-    local p_filename=$2;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$3;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$4;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${4:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -1335,12 +1335,12 @@ function BU.Main.Args__Files.SetLastAccess()
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Path of the file to check its last access.
-    local p_fakedate=$2;    # Date      - Access date to replace.
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC Path of the file to check its last access.
+    local p_fakedate=${2:-$'\0'};   # Date      - Access date to replace.
 
-    local p_filename=$3;    # String    - Default : NULL    - Path of the file in which the currently processed function is located.
-    local p_funcname=$4;    # String    - Default : NULL    - Name of the currently processed function.
-    local p_lineno=$5;      # Int       - Default : NULL    - Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # String    - Default : NULL    - Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # String    - Default : NULL    - Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # Int       - Default : NULL    - Line where this argument processing function is called.
 
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
