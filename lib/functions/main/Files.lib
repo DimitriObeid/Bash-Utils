@@ -57,35 +57,35 @@ __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="files::files-proc
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : processing-functions
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::files-processing-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::files-processing-functions";
 
 # This function only repeats some parts of the following function.
 function BU.Main.Files.__ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_output=$1;
-    local p_name=$2;
-    local p_char=$3;
+    local p_output=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL    - DESC :
+    local p_name=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL    - DESC :
+    local p_char=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL    - DESC :
 
     #**** Code ****
-    if [ "$p_output" == 'E' ]; then
-        BU.Main.Echo.Error "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
+    if [ "${p_output}" == 'E' ]; then
+        BU.Main.Echo.Error "End of processing the $(BU.Main.Decho.Decho.Path "${p_name}") file";
+        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${v_char}" "${__COL_RESET}")" '-n' 'nodate';
         BU.Main.Echo.Newline;
 
-        sleep "$__BU_MAIN_STAT_TIME_TXT";
+        sleep "${__BU_MAIN_STAT_TIME_TXT}";
 
     elif [ "$p_output" == 'S' ]; then
-        BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "$p_name") file";
-        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$p_char" "$__COL_RESET")" '-n' 'nodate';
+        BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "${p_name}") file";
+        BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${p_char}" "${__COL_RESET}")" '-n' 'nodate';
         BU.Main.Echo.Newline;
 
-        sleep "$__BU_MAIN_STAT_TIME_TXT";
+        sleep "${__BU_MAIN_STAT_TIME_TXT}";
     else
         BU.Main.Echo.Warning "";
     fi
@@ -102,40 +102,40 @@ function BU.Main.Files.ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_function=$1;
-    local p_name=$2;
+    local p_function=${1:-$'\0'};   # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL    - DESC :
+    local p_name=${2:-$'\0'};       # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL    - DESC :
 
-    shift; local pa_arr; pa_arr=$("${@}");
+    shift; local pa_arr; pa_arr=$("${@}"); # ARG TYPE : String      - REQUIRED | DEFAULT VAL : NULL    - DESC :
 
     #**** Variables ****
-    local v_char="'";
+    local v_char="'";   # VAR TYPE : Char   - DESC :
 
     #**** Code ****
     # Arguments checking.
-    if ! BU.Main.Args__Files.ProcessingFile "${p_function}" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
+    if ! BU.Main.Args__Files.ProcessingFile "${p_function}" "${p_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
 
-	sleep "$__BU_MAIN_STAT_TIME_TXT";
-    BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
-    BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "$p_name") file in the $(BU.Main.Decho.Decho.Path "$p_parent") parent directory.";
+	sleep "${__BU_MAIN_STAT_TIME_TXT}";
+    BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${v_char}" "${__COL_RESET}")" '-n' 'nodate';
+    BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "${p_name}") file in the $(BU.Main.Decho.Decho.Path "${p_parent}") parent directory.";
     BU.Main.Echo.Newline;
 
     case "${p_function}" in
         'BU.Main.Files.Make')
             if BU.Main.Files.Make "${pa_arr[@]}"; then
-                BU.Main.Files.__ProcessingFile 'S' "$p_name" "$p_char";
+                BU.Main.Files.__ProcessingFile 'S' "${p_name}" "${p_char}";
             else
-                BU.Main.Files.__ProcessingFile 'E' "$p_name" "$p_char";
+                BU.Main.Files.__ProcessingFile 'E' "${p_name}" "${p_char}";
             fi
             ;;
         'OverwriteFile')
             if BU.Main.Files.OverwriteFile "${pa_arr[@]}"; then
-                BU.Main.Files.__ProcessingFile 'S' "$p_name" "$p_char";
+                BU.Main.Files.__ProcessingFile 'S' "${p_name}" "${p_char}";
             else
-                BU.Main.Files.__ProcessingFile 'E' "$p_name" "$p_char";
+                BU.Main.Files.__ProcessingFile 'E' "${p_name}" "${p_char}";
             fi
             ;;
     esac
@@ -146,34 +146,34 @@ function BU.Main.Files.ProcessingFile()
 ## FILE CREATION FUNCTIONS
 ## DEBUG ID : file-creation-functions
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-creation-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-creation-functions";
 
 # Overwriting a file
 
 # Featured functions and files from the "functions" folder :
-#	- BU.Main.Echo.Error			-> Main -> Echo.lib
-#	- BU.Main.Echo.Newstep		-> Main -> Echo.lib
-#	- BU.Main.Echo.Success		-> Main -> Echo.lib
-#	- BU.Main.Echo.Newline			-> Main -> Echo.lib
+#	- BU.Main.Echo.Error()			-> Main -> Echo.lib
+#	- BU.Main.Echo.Newstep()		-> Main -> Echo.lib
+#	- BU.Main.Echo.Success()		-> Main -> Echo.lib
+#	- BU.Main.Echo.Newline()		-> Main -> Echo.lib
 function BU.Main.Files.OverwriteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=$1;
-	local p_authorization=$2;
+    local p_path=${1:-$'\0'};           # ARG TYPE : Path   - REQUIRED | DEFAULT VAL : NULL     - DESC :
+	local p_authorization=${2:-$'\0'};  # ARG TYPE : Bool   - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Files.OverwriteFile "${p_path}" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.OverwriteFile "${p_path}" "${p_authorization}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Checking second if the script is operating at the root directory.
     BU.Main.Directories.TriggerRootDirWarning "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
-    if [ "$p_authorization" == "true" ]; then
+    if [ "${p_authorization}" == "true" ]; then
 		BU.Main.Echo.Newstep "The $(BU.Main.Decho.Decho.Path "${p_path}/") file already exists and is not empty.";
 		BU.Main.Echo.Newstep "Overwriting data from file $(BU.Main.Decho.Decho.Path "${p_path}/")";
 		BU.Main.Echo.Newline;
@@ -193,60 +193,60 @@ function BU.Main.Files.OverwriteFile()
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU.Main.Args__Files.Make                   -> Main -> Args.lib
-#   - BU.Main.Checkings.CheckFilePathWasCreated  -> Main -> Checkings.lib
-#   - BU.Main.Directories.TriggerRootDirWarning  -> Main -> Directories.lib
-#   - BU.Main.Errors.HandleErrors                -> Main -> Errors.lib
-#   - BU.Main.Files.OverwriteFile                -> Main -> Files.lib (this file)
-#   - BU.Main.Headers.DrawLine                   -> Main -> Headers.lib
+#   - BU.Main.Args__Files.Make()                    -> Main -> Args.lib
+#   - BU.Main.Checkings.CheckFilePathWasCreated()   -> Main -> Checkings.lib
+#   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib
+#   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+#   - BU.Main.Files.OverwriteFile()                 -> Main -> Files.lib (this file)
+#   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
-#   - BU.Main.Decho.Decho.Path            -> Main -> Decho.lib
-#   - BU.Main.Echo.Error                     -> Main -> Echo.lib
-#   - BU.Main.Echo.Newstep                   -> Main -> Echo.lib
-#   - BU.Main.Echo.Success                   -> Main -> Echo.lib
+#   - BU.Main.Decho.Decho.Path()                    -> Main -> Decho.lib
+#   - BU.Main.Echo.Error()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()                        -> Main -> Echo.lib
 function BU.Main.Files.Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
 	#**** Parameters ****
-    local p_parent=$1;      # String    - Default : NULL    - Emplacement of the currently processed file's parent folder from the root directory.
-    local p_name=$2;        # String    - Default : NULL    - Name of the file to process (into its parent directory).
+    local p_parent=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Emplacement of the currently processed file's parent folder from the root directory.
+    local p_name=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the file to process (into its parent directory).
 
     shift 2;
 
     # shellcheck disable=SC2034
-    pa_touchVals=("${@}");    # Array     - Default : NULL    - "touch" command's options.
+    pa_touchVals=("${@}");      # ARG TYPE : Array      - REQUIRED | DEFAULT VAL : NULL     - DESC : "$(touch)" command's options.
 
 	#**** Variables ****
-	local v_path="$p_parent/$p_name";	# Path of the file to process.
+	local v_path="${p_parent}/${p_name}";	# Path of the file to process.
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$v_path" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
 	# Checking if the awaited arguments are given.
-    if ! BU.Main.Args__Files.Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
+    if ! BU.Main.Args__Files.Make "${p_parent}" "${p_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi;
 
     # Checking second if the script is operating at the root directory.
-    BU.Main.Directories.TriggerRootDirWarning "$v_path" || return 1;
+    BU.Main.Directories.TriggerRootDirWarning "${v_path}" || return 1;
 
 	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
-	if [ ! -f "$v_path" ]; then
-        BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "$p_name") file in the parent folder $(BU.Main.Decho.Decho.Path "$p_parent/").";
+	if [ ! -f "${v_path}" ]; then
+        BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "${p_name}") file in the parent folder $(BU.Main.Decho.Decho.Path "${p_parent}/").";
 
-		touch "$v_path"; BU.Main.Checkings.CheckFilePathWasCreated "$v_path";
+		touch "${v_path}"; BU.Main.Checkings.CheckFilePathWasCreated "${v_path}";
 
 		# Testing if the file has been created by checking the return code of the "BU.Main.Checkings.CheckFilePathWasCreated" function via the "BU.Main.Errors.HandleErrors" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
-		BU.Main.Errors.HandleErrors "$?" "THE $(BU.Main.Decho.Decho.Path "$p_name") FILE CANNOT BE CREATED IN THE $(BU.Main.Decho.Decho.Path "$p_parent/") PARENT FOLDER." \
-            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))";
+		BU.Main.Errors.HandleErrors "${?}" "THE $(BU.Main.Decho.Decho.Path "${p_name}") FILE CANNOT BE CREATED IN THE $(BU.Main.Decho.Decho.Path "${p_parent}/") PARENT FOLDER." \
+            "Please check the permissions of the targeted directory" "${v_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
 
-		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "$p_name") file was successfully created in the $(BU.Main.Decho.Decho.Path "$p_parent") folder.";
+		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_name}") file was successfully created in the $(BU.Main.Decho.Decho.Path "${p_parent}") folder.";
         BU.Main.Echo.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -261,7 +261,7 @@ function BU.Main.Files.Make()
 
 	# Else, if the file to be created already exists AND it is empty.
 	elif [ -f "${p_path}" ] && [ ! -s "${p_path}" ]; then
-		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_path}/") file already exists in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder and is empty.";
+		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_path}/") file already exists in the $(BU.Main.Decho.Decho.Path "${p_parent}/") folder and is empty.";
 		BU.Main.Echo.Newline;
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -273,23 +273,26 @@ function BU.Main.Files.MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String : Full path of the file to create.
+    local p_path=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Full path of the file to create.
 
     #**** Variables ****
-    local v_parent; v_parent="$(echo "${p_path}" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
-    local v_target; v_target="$(echo "${p_path}" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
+    local v_parent;
+    local v_target;
 
     #**** Code ****
+    v_parent="$(echo "${p_path}" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the file to create.
+    v_target="$(echo "${p_path}" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the file to create.
+
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'true';
+	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'true';
 
-    if ! BU.Main.Args__Files.MakePath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.MakePath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Files.Make "$v_parent" "$v_target" || return 1;
+    BU.Main.Files.Make "${v_parent}" "${v_target}" || return 1;
 
     return 0;
 }
@@ -300,14 +303,14 @@ function BU.Main.Files.MakeFileInMemory()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_filename=$1;    # String :name of the file to create in the computer's random access memory.
+    local p_filename=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : name of the file to create in the computer's random access memory.
 
     #**** Code ****
-    echo "$p_filename";
+    echo "${p_filename}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -317,28 +320,28 @@ function BU.Main.Files.CreateProjectLogFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_LOG_FILE_PATH" 'create' 'true';
+	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true';
 
     #**** Variables ****
-    local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "$$" -o ppid=)" o args=) -v)";
+    local v_terminfo_v; v_terminfo_v="$($(ps -p "$(ps -p "${$}" -o ppid=)" o args=) -v)";
 
     #**** Code ****
-    if ! BU.Main.Checkings.CheckProjectRelatedFile "$__BU_MAIN_PROJECT_LOG_FILE_PARENT" "$__BU_MAIN_PROJECT_LOG_FILE_NAME" 'f'; then BU.Main.Echo.Error "UNABLE TO CREATE THE $(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_PROJECT_NAME")'S LOG FILE"; BU.Main.Errors.Exit '1'; fi
+    if ! BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" "${__BU_MAIN_PROJECT_LOG_FILE_NAME}" 'f'; then BU.Main.Echo.Error "UNABLE TO CREATE THE $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'S LOG FILE"; BU.Main.Errors.Exit '1'; fi
 
-    BU.Main.Echo.Success "Successfully created the $(BU.Main.Decho.Decho.Path "$__BU_MAIN_PROJECT_LOG_FILE_PATH") file.";
+    BU.Main.Echo.Success "Successfully created the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}") file.";
 
-    if [ "${__BU_MAIN_STAT_DECHO,,}" == 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
-    if [ "${__BU_MAIN_STAT_ECHO,}"  == 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if [ "${__BU_MAIN_STAT_DECHO,,}" == 'true' ];    then BU.Main.Status.ChangeSTAT_DECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if [ "${__BU_MAIN_STAT_ECHO,}"  == 'true' ];     then BU.Main.Status.ChangeSTAT_ECHO  "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     # Redirecting the initializer's log file content into the log file.
     BU.Main.Headers.Header.Blue "INITIALIZATION PROCESS LOG OUTPUT";
 
-    BU.Main.Echo.Newstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU.Main.Echo.Msg "$val"; done; BU.Main.Echo.Newline;
-    BU.Main.Echo.Newstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU.Main.Echo.Msg "$val"; done; BU.Main.Echo.Newline;
+    BU.Main.Echo.Newstep "Sourced configuration files :"; for val in "${__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY[@]}"; do BU.Main.Echo.Msg "${val}"; done; BU.Main.Echo.Newline;
+    BU.Main.Echo.Newstep "Sourced library files : "; for val in "${__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY[@]}"; do BU.Main.Echo.Msg "${val}"; done; BU.Main.Echo.Newline;
 
 	if (( "${#__BU_MODULE_INIT_MSG_ARRAY[@]}" >= 1 )); then
 		BU.Main.Echo.Newstep "Initialization log output :"; BU.Main.Echo.Newline;
@@ -352,7 +355,7 @@ function BU.Main.Files.CreateProjectLogFile()
     BU.Main.Headers.Header.Blue "GETTING INFORMATIONS ABOUT USER'S SYSTEM";
 
     # Getting operating system family.
-    BU.Main.Echo.Newstep "Operating system family : $(BU.Main.Decho.Decho.Highlight "$OSTYPE")";
+    BU.Main.Echo.Newstep "Operating system family : $(BU.Main.Decho.Decho.Highlight "${OSTYPE}")";
     BU.Main.Echo.Newline;
 
     # Getting operating system's informations (Android's Termux terminal emulator) :
@@ -433,12 +436,12 @@ function BU.Main.Files.CreateProjectLogFile()
     }
 
 	# Getting Bash language's version.
-    BU.Main.Echo.Newstep "Bash version : $(BU.Main.Decho.Decho.Highlight "$BASH_VERSION")";
+    BU.Main.Echo.Newstep "Bash version : $(BU.Main.Decho.Decho.Highlight "${BASH_VERSION}")";
     BU.Main.Echo.Newline;
 
 	# Getting terminal emulator's name and version.
 	# shellcheck disable=SC2016
-    BU.Main.Echo.Newstep "Terminal (emulator) version : $(BU.Main.Decho.Decho.Highlight "$v_terminfo_v")" || BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Highlight '$v_terminfo_v') : bad command call.";
+    BU.Main.Echo.Newstep "Terminal (emulator) version : $(BU.Main.Decho.Decho.Highlight "${v_terminfo_v}")" || BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Highlight '$v_terminfo_v') : bad command call.";
     BU.Main.Echo.Newline;
 
     BU.Main.Echo.Success "Successfully got the user's system's informations.";
@@ -454,26 +457,26 @@ function BU.Main.Files.CreateProjectLogFile()
 ## FILE DELETION FUNCTIONS
 ## DEBUG ID : file-deletion-functions
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-deletion-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-deletion-functions";
 
 # File deletion function.
 function BU.Main.Files.DeleteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=$1;        # String    - Default : NULL    - Path of the file to delete.
-    local p_security=$2;    # String    - Default : no      - Preventing the file to be deleted automatically (default : "no" --> Ask the permission to the user).
+    local p_path=${1};          # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to delete.
+    local p_security=${2:-no};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Preventing the file to be deleted automatically (default : "no" --> Ask the permission to the user).
 
     #**** Code ****
-    if ! BU.Main.Args__Files.DeleteFile "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.DeleteFile "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "${p_path}";
 
-    BU.Main.Errors.HandleErrors "$?" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+    BU.Main.Errors.HandleErrors "${?}" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
     return 0;
 }
@@ -483,18 +486,18 @@ function BU.Main.Files.DeleteFile()
 ## CHECKING FILE INFORMATIONS
 ## DEBUG ID : checking-file-informations
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::checking-file-informations";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::checking-file-informations";
 
 # Checking if a file is in read-only mode.
 function BU.Main.Files.IsReadOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (! -x "$p_filepath") ]]; then
@@ -509,14 +512,14 @@ function BU.Main.Files.IsRW()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+    if [[ (-r "${p_filepath}") && (-w "${p_filepath}") && (! -x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -528,14 +531,14 @@ function BU.Main.Files.IsRWX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (-r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+    if [[ (-r "${p_filepath}") && (-w "${p_filepath}") && (-x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -547,14 +550,14 @@ function BU.Main.Files.IsRX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+    if [[ (-r "${p_filepath}") && (! -w "${p_filepath}") && (-x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -566,14 +569,14 @@ function BU.Main.Files.IsWriteOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (! -x "$p_filepath") ]]; then
+    if [[ (! -r "${p_filepath}") && (-w "${p_filepath}") && (! -x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -585,14 +588,14 @@ function BU.Main.Files.IsWX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (! -r "$p_filepath") && (-w "$p_filepath") && (-x "$p_filepath") ]]; then
+    if [[ (! -r "${p_filepath}") && (-w "${p_filepath}") && (-x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -604,14 +607,14 @@ function BU.Main.Files.IsExecutableOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (! -r "$p_filepath") && (! -w "$p_filepath") && (-x "$p_filepath") ]]; then
+    if [[ (! -r "${p_filepath}") && (! -w "${p_filepath}") && (-x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -623,19 +626,19 @@ function BU.Main.Files.IsExecutableOnly()
 ## GETTING FILE INFORMATIONS
 ## DEBUG ID : getting-file-informations
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::getting-file-informations";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::getting-file-informations";
 
 # Getting the size of a file in bytes.
 function BU.Main.Files.GetByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
-    local p_base=$2;        # Int       - Default : NULL    - Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+    local p_base=${2:-1000};        # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1000     - DESC : Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
 
     #**** Code ****
     if [ -z "$p_base" ]; then
@@ -673,7 +676,7 @@ function BU.Main.Files.GetCreationDate()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path to the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     if ! stat -c %W "$p_filepath"; then
@@ -698,7 +701,7 @@ function BU.Main.Files.GetCharactersNumber()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     wc --chars < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -715,7 +718,7 @@ function BU.Main.Files.GetExtension()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     BU.Main.Text.CutLastFieldAfterDelim "$p_filepath" '.' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's extension";  }
@@ -732,7 +735,7 @@ function BU.Main.Files.GetLastAccess()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -749,7 +752,7 @@ function BU.Main.Files.GetLastModification()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     date -r "$p_filename" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -766,7 +769,7 @@ function BU.Main.Files.GetMIMEType()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     file --mime-type "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "$p_filepath") file";  };
@@ -783,7 +786,7 @@ function BU.Main.Files.GetLinesNumber()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     wc --lines < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -800,7 +803,7 @@ function BU.Main.Files.GetMaxLineLength()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****last access date
     wc --max-line-length < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -817,7 +820,7 @@ function BU.Main.Files.GetOwnerName()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     stat -c "%U" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -834,7 +837,7 @@ function BU.Main.Files.GetOwnerGroup()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     stat -c "%G" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -851,7 +854,7 @@ function BU.Main.Files.GetWordsNumber()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
     wc --words < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
@@ -875,7 +878,7 @@ function BU.Main.File.SetFileLastAccess()
         "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS";
 
     #**** Parameters ****
-    local p_filepath=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
     local p_fakedate=$2;    # Date      - Default : NULL    -
 
     #**** Code ****
