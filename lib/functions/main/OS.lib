@@ -5,9 +5,13 @@
 
 # Name          : OS.lib
 # Module        : Main
-# Description   : Operating systems types and versions management.
 # Author(s)     : Dimitri Obeid
 # Version       : beta
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Operating systems types and versions management.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

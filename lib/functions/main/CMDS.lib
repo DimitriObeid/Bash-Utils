@@ -5,9 +5,13 @@
 
 # Name          : CMDS.lib
 # Module        : Main
-# Description   : Functions used to process information about executable commands.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Functions used to process information about executable commands.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

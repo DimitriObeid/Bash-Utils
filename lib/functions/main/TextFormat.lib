@@ -5,9 +5,13 @@
 
 # Name          : Files.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+#
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -354,7 +358,7 @@ function BU.Main.TextFormat.Itoa()
 
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CYAN" ];          then __BU_MAIN_COLORS_ITOA_COLOR="cyan";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUCHSIA" ];       then __BU_MAIN_COLORS_ITOA_COLOR="fuchsia";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_GRAY" ];          then __BU_MAIN_COLORS_ITOA_COLOR="gray";
+    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_GRAY}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="gray";
 
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_GREEN" ];         then __BU_MAIN_COLORS_ITOA_COLOR="green";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_LIME" ];          then __BU_MAIN_COLORS_ITOA_COLOR="lime";
@@ -382,16 +386,16 @@ function BU.Main.TextFormat.Itoa()
 
     # Specific colors for text encoding
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CMD" ];           then __BU_MAIN_COLORS_ITOA_COLOR="CMD";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_ERROR" ];         then __BU_MAIN_COLORS_ITOA_COLOR="ERROR";
+    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_ERROR}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="ERROR";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUNCTION" ];      then __BU_MAIN_COLORS_ITOA_COLOR="FUNCTION";
 
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_HIGHLIGHT" ];     then __BU_MAIN_COLORS_ITOA_COLOR="HIGHLIGHT";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_NEWSTEP" ];       then __BU_MAIN_COLORS_ITOA_COLOR="NEWSTEP";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PATH" ];          then __BU_MAIN_COLORS_ITOA_COLOR="PATH";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SUCCESS" ];       then __BU_MAIN_COLORS_ITOA_COLOR="SUCCESS";
+    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_SUCCESS}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="SUCCESS";
     elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_VAR" ];           then __BU_MAIN_COLORS_ITOA_COLOR="VAR";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_WARNING" ];       then __BU_MAIN_COLORS_ITOA_COLOR="WARNING";
+    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_WARNING}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="WARNING";
 
     fi
 

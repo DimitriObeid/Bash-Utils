@@ -5,9 +5,13 @@
 
 # Name          : DevTools.lib
 # Module        : Main
-# Description   : Tools used for debugging or specific tasks for the dev-tools executable scripts.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Tools used for debugging or specific tasks for the dev-tools executable scripts.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

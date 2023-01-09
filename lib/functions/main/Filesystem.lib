@@ -5,9 +5,13 @@
 
 # Name          : Filesystem.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+#
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -57,44 +61,44 @@ __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="files
 ## CHECKING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : checking-filesystem-informations
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::checking-filesystem-informations";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}::checking-filesystem-informations";
 
 # Checking if the current partition is full.
 function BU.Main.Filesystem.IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}";
 
     #**** Parameters ****
-    local p_fileFS=$1;  # String    - Default : NULL    - Target file's file system.
-    local p_dirfile=$2; # String    - Default : NULL    - Create the file with the directory if not exists, then erase it, in order to get the target file system.
+    local p_fileFS=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Target file's file system.
+    local p_dirfile=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Create the file with the directory if not exists, then erase it, in order to get the target file system.
 
     #**** Code ****
-    if [ -z "$p_fileFS" ]; then return "$__BU_MAIN_EXIT_INVALID_ARGUMENT";
+    if [ -z "${p_fileFS}" ]; then return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
 
-    elif    [ ! -d "$p_fileFS" ] || \
-            [ ! -f "$p_fileFS" ]; then if [ "${p_dirfile,,}" == 'create' ]; then
+    elif    [ ! -d "${p_fileFS}" ] || \
+            [ ! -f "${p_fileFS}" ]; then if [ "${p_dirfile,,}" == 'create' ]; then
 
                 local v_parentdir;
 
                 v_parentdir="$(cd "$(dirname "${p_path}")" > /dev/null 2>&1 || { return 1; }; pwd -P)";
 
-                if [ ! -d "$v_parentdir" ]; then mkdir -p "$v_parentdir" || return "$?"; fi
+                if [ ! -d "${v_parentdir}" ]; then mkdir -p "${v_parentdir}" || return "${?}"; fi
 
-                touch "$p_fileFS" || return "$?";
+                touch "${p_fileFS}" || return "${?}";
 
-                # rm "$p_fileFS" || return "$?";
+                # rm "${p_fileFS}" || return "${?}";
 
-               # rm -rf "$v_parentdir" || return "$?";
+               # rm -rf "${v_parentdir}" || return "${?}";
 
-            else return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND"; fi
+            else return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}"; fi
     fi
 
 	BU.Main.OS.IsAndroidTermux && {
-        if [[ "$(df -aH "$p_fileFS")" == 100% ]]; then
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+        if [[ "$(df -aH "${p_fileFS}")" == 100% ]]; then
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NO_SPACE_LEFT}";
 		else
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
@@ -105,16 +109,16 @@ function BU.Main.Filesystem.IsPartitionFull()
 	}
 
 	BU.Main.OS.IsHaiku && {
-		if [[ "$(df -th "$p_fileFS | awk 'FNR==10 {print $3}'")" == 0 ]]; then
-            return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+		if [[ "$(df -th "${p_fileFS} | awk 'FNR==10 {print ${3}}'")" == 0 ]]; then
+            return "${__BU_MAIN_EXIT_NO_SPACE_LEFT}";
 		else
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 	}
 
 	BU.Main.OS.IsLinux && {
-		if [[ "$(df -Th "$p_fileFS" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_NO_SPACE_LEFT";
+		if [[ "$(df -Th "${p_fileFS}" | awk 'FNR==2 {print $5}')" == 0[A-Za-z] ]]; then
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NO_SPACE_LEFT}";
 		else
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
@@ -138,35 +142,37 @@ function BU.Main.Filesystem.IsPartitionFull()
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : getting-filesystem-informations
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING::getting-filesystem-informations";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}::getting-filesystem-informations";
 
 # Getting the file system path.
 function BU.Main.Filesystem.GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's device";
-
-    BU.Main.OS.IsHaiku && local v_cmd="df \"${p_path}\"         | awk 'FNR == 5 {print \$2}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's device was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's device";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsHaiku && v_cmd="df \"${p_path}\"           | awk 'FNR == 5 {print \$2}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$1}' || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    eval "$v_cmd";
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    eval "${v_cmd}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the total size in bytes allocated to a given file system.
@@ -174,28 +180,30 @@ function BU.Main.Filesystem.GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's total size in bytes";
-
-    BU.Main.OS.IsHaiku && local v_cmd="df \"${p_path}\"         | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$3}'            || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's total size in bytes was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's total size in bytes";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsHaiku && v_cmd="df \"${p_path}\"           | awk 'FNR == 9 {print \$3\" \"\$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$3}'            || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    eval "$v_cmd";
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    eval "${v_cmd}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the mounted partition of a given file system.
@@ -203,28 +211,30 @@ function BU.Main.Filesystem.GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's mount point";
-
-    BU.Main.OS.IsHaiku && local v_cmd="df \"${p_path}\"         | awk 'FNR == 2 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$7}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's mount point was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's mount point";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsHaiku && v_cmd="df \"${p_path}\"           | awk 'FNR == 2 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$7}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    eval "$v_cmd";
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    eval "${v_cmd}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the used size in bytes of a given file system.
@@ -232,43 +242,46 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
-    #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's used size in bytes";
-
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    #**** Variables *****
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's used size in bytes was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's used size in bytes";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$4}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    # Since no used size in bytes is provided by the "df" command on Haiku, it's necessary to check it manually.
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Since no used size in bytes is provided by the "$(df)" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsHaiku && {
-        # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        #**** Haiku variables ****
+        declare -i v_totalSize;     # VAR TYPE : Int    - DESC : Getting the file system's total size in bytes.
+        declare -i v_availableSize; # VAR TYPE : Int    - DESC : Getting the file system's available size in bytes.
+        declare -i v_usedSize;      # VAR TYPE : Int    - DESC : Getting the used size by substracting the available size from the total size.
 
-        # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        #**** Haiku code ****
+        v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        v_usedSize="$(( v_totalSize - v_availableSize ))";
 
-        # Getting the used size by substracting the available size from the total size.
-        local v_usedSize; v_usedSize="$(( v_totalSize - v_availableSize ))";
+        BU.Main.Echo.Msg "${v_usedSize}" '-n' 'nodate';
 
-        BU.Main.Echo.Msg "$v_usedSize" '-n' 'nodate';
-
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
     }
 
-    eval "$v_cmd";
+    eval "${v_cmd}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the percentage of the used space of a given file system.
@@ -276,44 +289,47 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Default : NULL    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's used size percentage";
-
-    BU.Main.OS.IsAndroidTermux   && local v_cmd="df -aH \"${p_path}\"   | awk 'FNR == 2 {print \$5}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux           && local v_cmd="df -Th \"${p_path}\"   | awk 'FNR == 2 {print \$6}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's used size percentage was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's used size percentage";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsAndroidTermux   && v_cmd="df -aH \"${p_path}\"     | awk 'FNR == 2 {print \$5}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux           && v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$6}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    # Since no used partition size percentage is provided by the "df" command on Haiku, it's necessary to check it manually.
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Since no used partition size percentage is provided by the "$(df)" command on Haiku, it's necessary to check it manually.
     BU.Main.OS.IsHaiku && {
-        # Getting the file system's total size in bytes.
-        local v_totalSize; v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        #**** Haiku variables ****
+        declare -i v_totalSize;     # VAR TYPE : Int    - DESC : Getting the file system's total size in bytes.
+        declare -i v_availableSize; # VAR TYPE : Int    - DESC : Getting the file system's available size in bytes.
+        declare -i v_usedSize;      # VAR TYPE : Int    - DESC : Getting the used percentage.
 
-        # Getting the file system's available size in bytes.
-        local v_availableSize; v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        #**** Haiku code ****
+        v_totalSize="$(BU.Main.Filesystem.GetFSTotalSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        v_availableSize="$(BU.Main.Filesystem.GetFSAvailableSize "${p_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; })";
+        v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
 
-        # Getting the used percentage.
-        local v_usedSize; v_usedSize="$(( v_totalSize * v_availableSize / 100 ))";
+        BU.Main.Echo.Msg "${v_usedSize}%" '-n' 'nodate';
 
-        BU.Main.Echo.Msg "$v_usedSize%" '-n' 'nodate';
-
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
     }
 
-    eval "$v_cmd";
+    eval "${v_cmd}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the available size in bytes of a given file system.
@@ -321,28 +337,30 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-
-    local v_warn; v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's available size in bytes";
-
-    BU.Main.OS.IsHaiku && local v_cmd="df \"${p_path}\"         | awk 'FNR == 10 {print \$3}'       || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$5}'        || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's available size was not found.
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's available size in bytes";
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    BU.Main.OS.IsHaiku && v_cmd="df \"${p_path}\"           | awk 'FNR == 10 {print \$3}'       || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$5}'        || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
-    eval "$v_cmd";
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    eval "${v_cmd}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # Getting the type of the file system of a directory or a file.
@@ -350,32 +368,33 @@ function BU.Main.Filesystem.GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Path of the file or the folder to process.
+    local p_path=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file or the folder to process.
 
     #**** Variables ****
-    local v_code=0;     # Int       -  Return code to modify in the "$v_cmd" string.
-    local v_warn;
+    local v_cmd;    # VAR TYPE : String     - DESC :
+    local v_code=0; # VAR TYPE : Int        - DESC : Return code to modify in the "${v_cmd}" string.
+    local v_warn;   # VAR TYPE : String     - DESC : Warning message to print if the target file system's type was not found.
 
-    # Disabling a false positive, as the "$v_warn" variable is not directly intepreted.
-
+    #**** Code ****
+    # Disabling a false positive, as the "${v_warn}" variable is not directly intepreted.
     # shellcheck disable=SC2034
     v_warn="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Warning : unable to get the target ($(BU.Main.Decho.Decho.Path "${p_path}")) file system's type";
 
-    BU.Main.OS.IsHaiku && local v_cmd="df \"${p_path}\"         | awk 'FNR == 4 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
-    BU.Main.OS.IsLinux && local v_cmd="df -Th \"${p_path}\"     | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsHaiku && v_cmd="df \"${p_path}\"           | awk 'FNR == 4 {print \$3}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
+    BU.Main.OS.IsLinux && v_cmd="df -Th \"${p_path}\"       | awk 'FNR == 2 {print \$2}'    || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; v_code='1'; return \"\$v_code\"; }";
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Filesystem.GetFSInfos "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue "$v_cmd"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue "${v_cmd}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    eval "$v_cmd";
+    eval "${v_cmd}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$v_code";
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
 # -----------------------------------------------
@@ -392,51 +411,51 @@ __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="fil
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : non-recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::non-recursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}::non-recursive";
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#   - BU.Main.Checkings.CheckRootEUID -> Checkings.lib
-#   - BU.Main.Echo.Error     -> Echo.lib
-#   - BU.Main.Echo.Newstep   -> Echo.lib
-#   - BU.Main.Echo.Success   -> Echo.lib
-#   - BU.Main.Headers.DrawLine      -> Headers.lib
-#   - BU.Main.Errors.HandleErrors  -> Headers.lib
+#   - BU.Main.Checkings.CheckRootEUID() -> Checkings.lib
+#   - BU.Main.Echo.Error()              -> Echo.lib
+#   - BU.Main.Echo.Newstep()            -> Echo.lib
+#   - BU.Main.Echo.Success()            -> Echo.lib
+#   - BU.Main.Headers.DrawLine()        -> Headers.lib
+#   - BU.Main.Errors.HandleErrors()     -> Headers.lib
 function BU.Main.Filesystem.Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE}";
 
     #**** Parameters ****
-    p_currentOwner=$1;  # This parameter is used in the translated messages, stored into their own variables.
-    p_newOwner=$2;      # New owner of the directory / file.
-    p_path=$3;          # Path of the directory / file to process.
-    p_option=$4;        # Chown command option(s).
+    p_currentOwner=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC: This parameter is used in the translated messages, stored into their own variables.
+    p_newOwner=${2:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : New owner of the directory / file.
+    p_path=${3:-$'\0'};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory / file to process.
+    p_option=${4:-$'\0'};       # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Chown command option(s).
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.Chown "$p_currentOwner" "$p_newOwner" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Filesystem.Chown "${p_currentOwner}" "${p_newOwner}" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # The "chown" command has to be used with super-user privileges,
     if ! BU.Main.Checkings.CheckRootEUID; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the path passed as argument doesn't exists.
     if [ -d "${p_path}" ]; then
-        BU.Main.Echo.Newstep "Changing the ownership rights of the  $(BU.Main.Decho.Decho.Path "${p_path}/") folder from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner").";
+        BU.Main.Echo.Newstep "Changing the ownership rights of the  $(BU.Main.Decho.Decho.Path "${p_path}/") folder from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}").";
         BU.Main.Echo.Newline;
 
         # Changing ownership recursively.
-        case "$p_option" in
+        case "${p_option}" in
             'R')
-                if chown -Rv "$p_newOwner" "${p_path}"; then
-                    BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner")";
+                if chown -Rv "${p_newOwner}" "${p_path}"; then
+                    BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}")";
                     BU.Main.Echo.Newline;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
                 else
-                    BU.Main.Errors.HandleErrors "1" "Unable to change the rights of the $(BU.Main.Decho.Decho.Highlight "${p_path}/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-7 ))";
+                    BU.Main.Errors.HandleErrors "1" "Unable to change the rights of the $(BU.Main.Decho.Decho.Highlight "${p_path}/") folder" "" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 7 ))";
                     BU.Main.Echo.Newline;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -444,24 +463,24 @@ function BU.Main.Filesystem.Chown()
                 ;;
             '')
                 # Changing ownership non-recursively.
-                if chown -v "$p_newOwner" "${p_path}"; then
-                    BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner")";
+                if chown -v "${p_newOwner}" "${p_path}"; then
+                    BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}")";
                     BU.Main.Echo.Newline;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
                     BU.Main.Errors.HandleErrors "1" "UNABLE TO CHANGE THE RIGHTS OF THE $(BU.Main.Decho.Decho.Path "${p_path}/") FOLDER" \
-                        "Please run the script with the command $(BU.Main.Decho.Decho.Highlight "bash -x $PROJECT_NAME") to check what happened" \
-                        "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-11 ))";
+                        "Please run the script with the command $(BU.Main.Decho.Decho.Highlight "bash -x ${PROJECT_NAME}") to check what happened" \
+                        "${p_option}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 11 ))";
                     BU.Main.Echo.Newline;
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
                 fi
                 ;;
             *)
-                BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")'S FUNCTION $(BU.Main.Decho.Decho.Path "$p_option") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
-                    "The supported options for directory processing are :" "$p_option" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+                BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")'S FUNCTION $(BU.Main.Decho.Decho.Path "${p_option}") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
+                    "The supported options for directory processing are :" "${p_option}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0
             ;;
@@ -471,17 +490,17 @@ function BU.Main.Filesystem.Chown()
     else
         # Checking first if the path is a filepath. If not, then no correct path is passed as argument.
         if [ -f "${p_path}" ]; then
-            BU.Main.Echo.Newstep "Changing the ownership rights of the  $(BU.Main.Decho.Decho.Path "${p_path}/") file from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner").";
+            BU.Main.Echo.Newstep "Changing the ownership rights of the $(BU.Main.Decho.Decho.Path "${p_path}/") file from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}").";
             BU.Main.Echo.Newline;
 
             # Changing ownership
-            if chown -v "$p_newOwner" "${p_path}"; then
-                BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") file have been successfully changed from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner").";
+            if chown -v "${p_newOwner}" "${p_path}"; then
+                BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}") file have been successfully changed from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}").";
                 BU.Main.Echo.Newline;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
             else
-                BU.Main.Errors.HandleErrors "$?" "Unable to change the rights of the $(BU.Main.Decho.Decho.Path "${p_path}") file !";
+                BU.Main.Errors.HandleErrors "${?}" "Unable to change the rights of the $(BU.Main.Decho.Decho.Path "${p_path}") file !";
                 BU.Main.Echo.Newline;
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -497,31 +516,31 @@ function BU.Main.Filesystem.Chown()
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : recursive
 
-__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING::recursive";
+__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}::recursive";
 
 # Calling the "chown" command to change recursively directory ownership
 
 # Required functions and files into the "Bash-Utils/src/functions" folder :
-#	- BU.Main.Checkings.CheckRootEUID		-> Checkings.lib
-#	- BU.Main.Echo.Error			-> Echo.lib
-#	- BU.Main.Echo.Newstep		-> Echo.lib
-#	- BU.Main.Echo.Success		-> Echo.lib
-#	- BU.Main.Echo.Newline			-> Echo.lib
-#	- BU.Main.Errors.HandleErrors		-> Headers.lib
+#	- BU.Main.Checkings.CheckRootEUID()     -> Checkings.lib
+#	- BU.Main.Echo.Error()			        -> Echo.lib
+#	- BU.Main.Echo.Newstep()		        -> Echo.lib
+#	- BU.Main.Echo.Success()		        -> Echo.lib
+#	- BU.Main.Echo.Newline()			    -> Echo.lib
+#	- BU.Main.Errors.HandleErrors()		    -> Headers.lib
 function BU.Main.Filesystem.ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING" \
-        "$__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE";
+        "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}" \
+        "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE}";
 
     #**** Paramètres ****
-    local p_currentOwner=$1;   # This parameter is used in the messages.
-    local p_newOwner=$2;
-    local p_path=$3;
+    local p_currentOwner=${1:-$'\0'};   # ARG TYPE :    - REQUIRED | DEFAULT VAL : NULL     - DESC : This parameter is used in the messages.
+    local p_newOwner=${2:-$'\0'};       # ARG TYPE :    - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_path=${3:-$'\0'};           # ARG TYPE :    - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
-    if ! BU.Main.Args__Filesystem.ChownRec "$p_currentOwner" "$p_newOwner" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Filesystem.ChownRec "${p_currentOwner}" "${p_newOwner}" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # The "chown" command has to be used with super-user privileges,
     if ! BU.Main.Checkings.CheckRootEUID; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
@@ -531,7 +550,7 @@ function BU.Main.Filesystem.ChownRec()
         BU.Main.Errors.HandleErrors "1" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
     fi
 
-    BU.Main.Echo.Newstep "Recursive change of the ownership rights of the new folder $(BU.Main.Decho.Decho.Path "${p_path}/") from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner")";
+    BU.Main.Echo.Newstep "Recursive change of the ownership rights of the new folder $(BU.Main.Decho.Decho.Path "${p_path}/") from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}")";
 	BU.Main.Echo.Newline;
 
     # On change les droits du fichier créé par le script.
@@ -540,8 +559,8 @@ function BU.Main.Filesystem.ChownRec()
 	# la commande chown avec pour arguments :
 	#		- Le nom de l'utilisateur à qui donner les droits.
 	#		- Le chemin du dossier cible.
-	if chown -Rv "$p_newOwner" "${p_path}"; then
-		BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}/") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "$p_currentOwner") to $(BU.Main.Decho.Decho.Highlight "$p_newOwner")";
+	if chown -Rv "${p_newOwner}" "${p_path}"; then
+		BU.Main.Echo.Success "The rights of the $(BU.Main.Decho.Decho.Path "${p_path}/") folder have been successfully changed from $(BU.Main.Decho.Decho.Highlight "${p_currentOwner}") to $(BU.Main.Decho.Decho.Highlight "${p_newOwner}")";
 		BU.Main.Echo.Newline;
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

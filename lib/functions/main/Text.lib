@@ -5,9 +5,13 @@
 
 # Name          : Text.lib
 # Module        : Main
-# Description   : Functions specially made for text processing (cutting fields / characters, ).
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Functions specially made for text processing (cutting fields / characters, ).
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

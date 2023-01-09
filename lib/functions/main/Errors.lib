@@ -5,9 +5,13 @@
 
 # Name          : Errors.lib
 # Module        : Main
-# Description   : Errors handling functions.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Errors handling functions.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

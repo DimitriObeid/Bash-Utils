@@ -5,9 +5,13 @@
 
 # Name          : CheckSTAT.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+#
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -92,19 +96,19 @@ function BU.Main.Status.ConfEcho()
     # Since the "$__BU_MAIN_STAT_ECHO" status global variable is reset to "true", it's totally safe to call an "Echo<...>()" function here.
     if [ -f "$__BU_MAIN_PROJECT_LOG_FILE_PATH" ]; then
         {
-			BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+			BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}";
 
 			BU.Main.Echo.Error "AN ERROR OCCURED DURING THIS STATUS VARIABLE CHECKING --> $p_var_name    |    VALUE : $p_bad_value !!!";
 
-			BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+			BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}";
 		} 2>&1 | tee -a "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
 
     else
-        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+        BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}";
 
         BU.Main.Echo.Error "AN ERROR OCCURED DURING A STATUS VARIABLE CHECKING !!!";
 
-        BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_ERROR";
+        BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}";
     fi
 
     BU.Main.Echo.Error "In $(BU.Main.Decho.Decho.Highlight "$p_module") module, $(BU.Main.Decho.Decho.Path "$p_file") file, line $(BU.Main.Decho.Decho.Highlight "${p_lineno}") --> " '-n' >&2;
@@ -273,7 +277,7 @@ function BU.Main.Status.CheckSTAT_LOG()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
+# Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" status variable's value.
 function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -290,8 +294,8 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
     local va_correctValues=("" "log" "tee");
 
     #**** Code ****
-    if [ -n "$__BU_MAIN_STAT_LOG_REDIRECT" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
-        BU.Main.Status.ConfEcho "$p_module" "$p_file" "${p_lineno}" "$__BU_MAIN_STAT_LOG_REDIRECT" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}";
+    if [ -n "${__BU_MAIN_STAT_LOG_REDIRECT}" ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'log' ] && [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" != 'tee' ]; then
+        BU.Main.Status.ConfEcho "$p_module" "$p_file" "${p_lineno}" "${__BU_MAIN_STAT_LOG_REDIRECT}" "__BU_MAIN_STAT_LOG_REDIRECT" "${va_correctValues[@]}";
 
         local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
@@ -464,7 +468,7 @@ function BU.Main.Status.CheckProjectStatusVars()
     local p_lineno=$3;  # Int       - Default : NULL    - Line where the current function is called.
 
     #**** Code ****
-    # Processing first the "$__BU_MAIN_STAT_LOG_REDIRECT" variable, to make sure the following error messages will be correctly displayed if another error happened.
+    # Processing first the "${__BU_MAIN_STAT_LOG_REDIRECT}" variable, to make sure the following error messages will be correctly displayed if another error happened.
     BU.Main.Status.CheckSTAT_LOG_REDIRECT       'main' "$p_file" "${p_lineno}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     BU.Main.Status.CheckSTAT_DECHO              'main' "$p_file" "${p_lineno}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     BU.Main.Status.CheckSTAT_ECHO               'main' "$p_file" "${p_lineno}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -530,9 +534,9 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 
             BU.Main.Status.CheckSTAT_ECHO "$p_module" "$p_file" "${p_lineno}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
-            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Green "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> BEGINNING REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
-            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Newline;
         fi
 
@@ -542,7 +546,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
             for i in "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; do
                 echo "$i" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH" || \
                 {
-                    local __bu_main_stat_log_redirect_backup="$__BU_MAIN_STAT_LOG_REDIRECT"; __BU_MAIN_STAT_LOG_REDIRECT="";
+                    local __bu_main_stat_log_redirect_backup="${__BU_MAIN_STAT_LOG_REDIRECT}"; __BU_MAIN_STAT_LOG_REDIRECT="";
 
                     echo >&2;
 
@@ -560,9 +564,9 @@ function BU.Main.Status.ChangeSTAT_ECHO()
                 }
             done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Green "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}'__BU_MAIN_STAT_ECHO : true'${__BU_MAIN_COLOR_TXT_GREEN} --> ENDED REDIRECTING TEXT TO THE $__BU_MAIN_COLOR_PATH$v_log_file_path$__BU_MAIN_COLOR_GREEN LOG FILE" >> "$__BU_MAIN_PROJECT_LOG_FILE_PATH";
-            BU.Main.Headers.DrawLine "$__BU_MAIN_TXT_CHAR_HEADER_LINE" "$__BU_MAIN_COLOR_TXT_AQUA";
+            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "$__BU_MAIN_COLOR_TXT_AQUA";
             BU.Main.Echo.Newline;
 
             # Emptying the array of strings.
@@ -609,7 +613,7 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 # Changing the "$__BU_MAIN_STAT_LOG" status variable's value.
 function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG="$1";              BU.Main.Status.CheckSTAT_LOG           "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "$__BU_MAIN_STAT_LOG_REDIRECT" status variable's value.
+# Changing the "${__BU_MAIN_STAT_LOG_REDIRECT}" status variable's value.
 function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS" "$__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY"; __BU_MAIN_STAT_LOG_REDIRECT="$1";     BU.Main.Status.CheckSTAT_LOG_REDIRECT  "$2" "$3" "$4" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Changing the "$__BU_MAIN_STAT_OPERATE_ROOT" status variable's value.

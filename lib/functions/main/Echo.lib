@@ -5,9 +5,13 @@
 
 # Name          : Echo.lib
 # Module        : Main
-# Description   : (Colored) text display functions.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# (Colored) text display functions.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

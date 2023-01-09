@@ -5,9 +5,13 @@
 
 # Name          : Terminal.lib
 # Module        : Main
-# Description   : Functions specially made for terminal interaction.
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Functions specially made for POSIX terminal interaction.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

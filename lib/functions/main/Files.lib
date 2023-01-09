@@ -5,9 +5,11 @@
 
 # Name          : Files.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -80,7 +82,7 @@ function BU.Main.Files.__ProcessingFile()
 
         sleep "${__BU_MAIN_STAT_TIME_TXT}";
 
-    elif [ "$p_output" == 'S' ]; then
+    elif [ "${p_output}" == 'S' ]; then
         BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "${p_name}") file";
         BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${p_char}" "${__COL_RESET}")" '-n' 'nodate';
         BU.Main.Echo.Newline;
@@ -179,7 +181,7 @@ function BU.Main.Files.OverwriteFile()
 		BU.Main.Echo.Newline;
 
 		true > "${p_path}";
-		BU.Main.Errors.HandleErrors "$?" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "${p_path}/") FILE HAD NOT BEEN OVERWRITTEN" "" "${p_path}" \
+		BU.Main.Errors.HandleErrors "${?}" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "${p_path}/") FILE HAD NOT BEEN OVERWRITTEN" "" "${p_path}" \
 			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
 		BU.Main.Echo.Success "The content of the $(BU.Main.Decho.S "${p_path}/") file has been successfully overwritten";
 		BU.Main.Echo.Newline;
@@ -347,7 +349,7 @@ function BU.Main.Files.CreateProjectLogFile()
 		BU.Main.Echo.Newstep "Initialization log output :"; BU.Main.Echo.Newline;
 
         for val in "${__BU_MODULE_INIT_MSG_ARRAY[@]}"; do
-            BU.Main.Status.CheckProjectLogStatus "$val";
+            BU.Main.Status.CheckProjectLogStatus "${val}";
         done
     fi
 
@@ -446,7 +448,7 @@ function BU.Main.Files.CreateProjectLogFile()
 
     BU.Main.Echo.Success "Successfully got the user's system's informations.";
 
-    # Purging the "$__BU_MODULE_INIT_MSG_ARRAY" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
+    # Purging the "${__BU_MODULE_INIT_MSG_ARRAY}" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
     __BU_MODULE_INIT_MSG_ARRAY=('');
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -500,7 +502,7 @@ function BU.Main.Files.IsReadOnly()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [[ (-r "$p_filepath") && (! -w "$p_filepath") && (! -x "$p_filepath") ]]; then
+    if [[ (-r "${p_filepath}") && (! -w "${p_filepath}") && (! -x "${p_filepath}") ]]; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
@@ -641,25 +643,25 @@ function BU.Main.Files.GetByteSize()
     local p_base=${2:-1000};        # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1000     - DESC : Byte measure unit base (binary prefix (eg : MiB) or metric prefix (eg : MB)).
 
     #**** Code ****
-    if [ -z "$p_base" ]; then
-        wc --bytes < "$p_filepath" || \
-            { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+    if [ -z "${p_base}" ]; then
+        wc --bytes < "${p_filepath}" || \
+            { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
     # Else, if a value is passed to the "base" parameter AND this value is an integer.
-    elif [ -n "$p_base" ] && BU.Main.Checkings.IsInt "$p_base"; then
+    elif [ -n "${p_base}" ] && BU.Main.Checkings.IsInt "${p_base}"; then
 
         # Convert the size from plain number to human readable metric prefix.
-        if [ "$p_base" -ne 1024 ]; then
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
-                { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+        if [ "${p_base}" -ne 1024 ]; then
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "${p_filepath}")" "NULL" "${p_base}" "" || \
+                { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
 
         # Convert the size from plain number to human readable binary prefix.
         else
-            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "$p_filepath")" "NULL" "$p_base" "" || \
-                { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
+            BU.Main.BasicMaths.BytesToHuman "$(wc --bytes < "${p_filepath}")" "NULL" "${p_base}" "" || \
+                { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the size in bytes of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; };
         fi
     else
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : The byte measure unit byte $(BU.Main.Decho.Decho.Highlight "$p_base") is not an integer"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : The byte measure unit byte $(BU.Main.Decho.Decho.Highlight "${p_base}") is not an integer"; BU.Main.Echo.Newline >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -672,21 +674,21 @@ function BU.Main.Files.GetCreationDate()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if ! stat -c %W "$p_filepath"; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's creation date"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    if ! stat -c %W "${p_filepath}"; then
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's creation date"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
-    elif [ "$(stat -c %W "$p_filepath")" -eq 0 ]; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "$__BU_MAIN_FS_NAME")) does not stores the files creation dates"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    elif [ "$(stat -c %W "${p_filepath}")" -eq 0 ]; then
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_FS_NAME}")) does not stores the files creation dates"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     else
-        echo -ne "$(stat -c %W "$p_filepath")";
+        echo -ne "$(stat -c %W "${p_filepath}")";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -697,14 +699,14 @@ function BU.Main.Files.GetCharactersNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --chars < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --chars < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -714,14 +716,14 @@ function BU.Main.Files.GetExtension()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    BU.Main.Text.CutLastFieldAfterDelim "$p_filepath" '.' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "$p_filepath") file's extension";  }
+    BU.Main.Text.CutLastFieldAfterDelim "${p_filepath}" '.' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's extension";  }
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -731,14 +733,14 @@ function BU.Main.Files.GetLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat "$p_filename" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat "${p_filename}" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -748,14 +750,14 @@ function BU.Main.Files.GetLastModification()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    date -r "$p_filename" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    date -r "${p_filename}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -765,14 +767,14 @@ function BU.Main.Files.GetMIMEType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    file --mime-type "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "$p_filepath") file";  };
+    file --mime-type "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";  };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -782,14 +784,14 @@ function BU.Main.Files.GetLinesNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --lines < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --lines < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -799,14 +801,14 @@ function BU.Main.Files.GetMaxLineLength()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****last access date
-    wc --max-line-length < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --max-line-length < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -816,14 +818,14 @@ function BU.Main.Files.GetOwnerName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat -c "%U" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat -c "%U" "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -833,14 +835,14 @@ function BU.Main.Files.GetOwnerGroup()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat -c "%G" "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat -c "%G" "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -850,14 +852,14 @@ function BU.Main.Files.GetWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --words < "$p_filepath" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "$p_filepath") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --words < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -867,22 +869,22 @@ function BU.Main.Files.GetWordsNumber()
 ## SETTING FILE INFORMATIONS
 ## DEBUG ID : setting-file-informations
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::setting-file-informations";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::setting-file-informations";
 
 # Setting a fake last access date to a file.
 function BU.Main.File.SetFileLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS}";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
-    local p_fakedate=$2;    # Date      - Default : NULL    -
+    local p_fakedate=${2:-$'\0'}; # ARG TYPE : Date     - REQUIRED | DEFAULT VAL : NULL     - DESC : New date to set as last access date.
 
     #**** Code ****
-    if ! BU.Main.Args__FilesSetFileLastAccess "$p_filepath" "$p_fakedate" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__FilesSetFileLastAccess "${p_filepath}" "${p_fakedate}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -892,41 +894,41 @@ function BU.Main.File.SetFileLastAccess()
 ## FILE SOURCING
 ## DEBUG ID : file-sourcing
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::file-sourcing";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-sourcing";
 
 # Sourcing dependencies files.
 function BU.Main.Files.SourceFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Default : NULL    - Path of the file to process.
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    if [ -f "${p_path}" ]; then
-		BU.Main.Echo.Newstep "Sourcing the $(BU.Main.Decho.Decho.Path "${p_path}") file";
+    if [ -f "${p_filepath}" ]; then
+		BU.Main.Echo.Newstep "Sourcing the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
 		BU.Main.Echo.Newline
 
         # shellcheck disable=SC1090
-        if source "${p_path}"; then
-            BU.Main.Echo.Success "Sourced file : $(BU.Main.Decho.Decho.Path "${p_path}")";
+        if source "${p_filepath}"; then
+            BU.Main.Echo.Success "Sourced file : $(BU.Main.Decho.Decho.Path "${p_filepath}")";
 			BU.Main.Echo.Newline;
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         else
             local C="${?}";
 
-            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "${p_path}")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-5 ))";
+            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "${p_filepath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))";
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
         fi
     else
         local C="${?}";
 
-        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_path}")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-8 ))";
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
 
 		return "${C}";
     fi
@@ -937,35 +939,35 @@ function BU.Main.Files.SourceFile()
 ## TEXT FILE PARSING
 ## DEBUG ID : text-file-parsing
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS::text-file-parsing";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::text-file-parsing";
 
 # Getting a specific line from a text file.
 function BU.Main.Files.GetLineFromTextFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING}";
 
     #**** Parameters ****
-#    local p_source=$1;          # String    - Default : NULL    - Path of the file to parse.
-#    local p_wanted_line=$2;     # Int       - Default : NULL    - Line to get in the file
+#    local p_source=${1:-$'\0'};        # String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to parse.
+#    local p_wanted_line=${2:-$'\0'};   # Int       - REQUIRED | DEFAULT VAL : NULL     - DESC : Line to get in the file
 
     #**** Variables ****
-#    local i=0;                  # Line incrementer
+#    local i=0;     # VAR TYPE : Int    # DESC : Line incrementer
 
     #**** Code ****
 	# shellcheck disable=SC2002
-#    cat "$p_source" | while read -r line; do
+#    cat "${p_source}" | while read -r line; do
 #
 #        # Incrementing the line incrementer variable's value...
-#        i=$(( i+1 ));
+#        i=$(( i + 1 ));
 
         # ... until it reaches the wanted line.
-#        if [ "$i" -eq "$p_wanted_line" ]; then
+#        if [ "${i}" -eq "${p_wanted_line}" ]; then
 
 			# shellcheck disable=SC2034
-#            __BU_MAIN_TXT_STORE_LINE="$line";
+#            __BU_MAIN_TXT_STORE_LINE="${p_wanted_line}";
 #        fi
 #    done
 
@@ -985,45 +987,45 @@ __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive
 ## (UN)COMPRESSION FUNCTIONS
 ## DEBUG ID : (un)compression-functions
 
-__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS::(un)compression-functions";
+__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}::(un)compression-functions";
 
 # Adding files or folders into an archive.
 function BU.Main.Files.AddToArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
-    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_arch=$3;        # String    - Default : NULL    - Archive's name.
+    local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
+    local p_opts=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive's name.
     shift 3;
 
-    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
+    local p_paths=("${@}");     # Array - Default : NULL    - Paths to the files / folders to add in the archive.
 
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to add in the targeted archive (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
+            'p_path' "${p_paths[@]}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
-    # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
+    # There is no need to pass the "${p_opts}" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU.Main.Args__FilesCompress "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__FilesCompress "${p_cmd}" "${p_opts}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    if [ "$p_cmd" == '7z' ]; then
-        true
+    if [ "${p_cmd}" == '7z' ]; then
+        true;
 
-    elif [ "$p_cmd" == 'bzip2' ]; then true;
+    elif [ "${p_cmd}" == 'bzip2' ]; then true;
 
-    elif [ "$p_cmd" == '' ]; then true;
+    elif [ "${p_cmd}" == '' ]; then true;
 
-    elif [ "$p_cmd" == 'gzip' ]; then true;
+    elif [ "${p_cmd}" == 'gzip' ]; then true;
 
-    elif [ "$p_cmd" == 'zip' ]; then true;
+    elif [ "${p_cmd}" == 'zip' ]; then true;
 
     fi
 
@@ -1035,17 +1037,17 @@ function BU.Main.Files.CompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
-    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_arch=$3;        # String    - Default : NULL    - Path to the archive to uncompress.
-    local p_dest=$4;        # String    - Default : NULL    - Folder destination of the uncompressed data.
+    local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
+    local p_opts=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the archive to uncompress.
+    local p_dest=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Folder destination of the uncompressed data.
     shift 4;
 
-    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("${@}");     # ARG TYPE : Array      - REQUIRED | DEFAULT VAL : NULL     - DESC : Paths to the files / folders to archivate.
 
     #**** Code ****
 
@@ -1061,37 +1063,37 @@ function BU.Main.Files.CompressFormat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_cmd=$1;             # String    - Default : NULL    - Compression command.
-    local p_arch=$3;            # String    - Default : NULL    - Archive's name.
+    local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
+    local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive's name.
     shift 2;
 
-    local p_paths=("${@}");       # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("${@}");     # ARG TYPE : Array      - REQUIRED | DEFAULT VAL : NULL     - DESC : Paths to the files / folders to archivate.
 
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "$p_funcname" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            "Please pass as fourth argument the path of the directory/ies or the file(s) to compress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
+            'p_path' "${p_paths[@]}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
-    # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
+    # There is no need to pass the "${p_opts}" parameter as argument for the "BU.Main.Args__FilesCompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!
-    if ! BU.Main.Args__Files.CompressFormat "$p_cmd" "$p_opts" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.CompressFormat "${p_cmd}" "${p_opts}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the 7-Zip compression format is wanted.
-    if [ "$p_cmd" == '7z' ]; then
-        7z a "$p_opts" "$p_opts" "$p_arch" "${p_paths[@]}" || {
+    if [ "${p_cmd}" == '7z' ]; then
+        7z a "${p_opts}" "${p_opts}" "${p_arch}" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format 7-Zip.
             return 1;
         }
 
     # Else, if the BinHex compression format is wanted (works on Apple operating systems).
-    elif [ "$p_cmd" == 'binhex' ]; then
-        binhex "$p_opts" "${p_paths[@]}" > "$p_arch"|| {
+    elif [ "${p_cmd}" == 'binhex' ]; then
+        binhex "${p_opts}" "${p_paths[@]}" > "${p_arch}"|| {
             # TODO : Gérer les cas d'erreur de compression au format BinHex.
             return 1;
         }
@@ -1102,7 +1104,7 @@ function BU.Main.Files.CompressFormat()
 
     # Else, if the Bzip2 compression format is wanted for a Tar archive.
     elif [[ "${p_cmd^^}" == TBZ?(2) ]] || [[ "${p_cmd,,}" == tar?(.)bz?(2) ]]; then
-        tar "-jcf$p_opts" "" "" || {
+        tar "-jcf${p_opts}" "" "" || {
             # TODO : Gérer les cas d'erreur de compression au format Bzip2.
             return 1;
         }
@@ -1113,21 +1115,21 @@ function BU.Main.Files.CompressFormat()
 
     # Else, if the Gzip compression format is wanted for a Tar archive.
     elif [ "${p_cmd^^}" == 'TGZ' ] || [[ "${p_cmd,,}" == tar?(.)gz ]]; then
-        tar "-zcf$p_opts" "$p_arch" "${p_paths[@]}" || {
+        tar "-zcf${p_opts}" "${p_arch}" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the LZMA compression is wanted for a Tar archive.
     elif [ "${p_cmd^^}" == 'TXZ' ] || [[ "${p_cmd,,}" == tar?(.)xz ]]; then
-        tar "JCxf$p_opts" "$p_arch" "${p_paths[@]}" || {
+        tar "JCxf${p_opts}" "${p_arch}" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format Gzip.
             return 1;
         }
 
     # Else, if the zip compression format is wanted.
-    elif [ "$p_cmd" == 'zip' ]; then
-        zip "$p_opts" "$p_arch" "${p_paths[@]}" || {
+    elif [ "${p_cmd,,}" == 'zip' ]; then
+        zip "${p_opts}" "${p_arch}" "${p_paths[@]}" || {
             # TODO : Gérer les cas d'erreur de compression au format zip.
             return 1;
         }
@@ -1141,22 +1143,22 @@ function BU.Main.Files.DeleteInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_cmd=$1;         # String    - Default : NULL    - Compression command.
-    local p_opts=$2;        # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_arch=$3;        # String    - Default : NULL    - Target archive's path.
+    local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
+    local p_opts=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Target archive's path.
     shift 3;
 
-    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
+    local p_paths=("${@}");     # ARG TYPE : Array      - REQUIRED | DEFAULT VAL : NULL     - DESC : Paths to the files / folders to delete in the archive.
 
     #**** Code ****
     if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as fourth argument the path of the directory/ies or the file(s) to delete from the target archive (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}")" \
-            'p_path' "${p_paths[@]}" "$p_filename" "$p_funcname" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+            'p_path' "${p_paths[@]}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1167,11 +1169,11 @@ function BU.Main.Files.SearchInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_arch=$1;    # String    - Default : NULL    - Path to the target archive.
+    local p_arch=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - Path to the target archive.
 
     #**** Code ****
 
@@ -1182,55 +1184,55 @@ function BU.Main.Files.SearchInArchive()
 # Uncompressing archives according to the used compression method AND the (un)compression command's name.
 
 # Featured functions and files from the "functions" folder :
-#   - BU.Main.Errors.HandleErrors       -> Handles.lib
-#   - BU.Main.Echo.Success              -> Echo.lib
-#   - BU.Main.Echo.Newline              -> Echo.lib
+#   - BU.Main.Errors.HandleErrors()     -> Errors.lib
+#   - BU.Main.Echo.Success()            -> Echo.lib
+#   - BU.Main.Echo.Newline()            -> Echo.lib
 function BU.Main.Files.UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_cmd=$1;     # String    - Default : NULL    - Compression command.
-    local p_opts=$2;    # String    - Default : NULL    - Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
-    local p_arch=$3;    # String    - Default : NULL    - Path to the archive to uncompress.
-    local p_dest=$4;    # String    - Default : NULL    - Folder destination of the uncompressed data.
-    local p_del=$5;     # String    - Default : false   - Delete the archive after extracting successfully its content.
+    local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
+    local p_opts=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Options of the compression command (in case a command call is not mandatory, please leave an empty string as second argument while calling this function).
+    local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the archive to uncompress.
+    local p_dest=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Folder destination of the uncompressed data.
+    local p_del=${5:-false};    # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : false    - DESC : Delete the archive after extracting successfully its content.
 
     #**** Code ****
-    # There is no need to pass the "$p_opts" parameter as argument for the "BU.Main.Args__Files.Uncompress()", as this is an optional current function's parameter.
+    # There is no need to pass the "${p_opts}" parameter as argument for the "BU.Main.Args__Files.Uncompress()", as this is an optional current function's parameter.
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
-    if ! BU.Main.Args__Files.UncompressCMD "$p_cmd" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.UncompressCMD "${p_cmd}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
-    if      [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
-            7z x "" "" "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    if      [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
+            7z x "" "" "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to decode a BinHexed file (Apple's BinHex format)
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDSGetCommandPath 'hexbin')" ]]; then
-            hexbin "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDSGetCommandPath 'hexbin')" ]]; then
+            hexbin "${p_opts}" "${p_arch}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "p7zip" command in order to uncompress ... .
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'p7zip' ) && "$(BU.Main.CMDSGetCommandPath 'p7zip')" ]]; then
-            p7zip "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'p7zip' ) && "$(BU.Main.CMDSGetCommandPath 'p7zip')" ]]; then
+            p7zip "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'cabextract' ) && "$(BU.Main.CMDSGetCommandPath 'cabextract')" ]]; then
-            cabextract "$p_opts" "$p_arch" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'cabextract' ) && "$(BU.Main.CMDSGetCommandPath 'cabextract')" ]]; then
+            cabextract "${p_opts}" "${p_arch}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "gzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'zip' ) && "$(BU.Main.CMDSGetCommandPath 'zip')" ]]; then
-            gzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'zip' ) && "$(BU.Main.CMDSGetCommandPath 'zip')" ]]; then
+            gzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "gunzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'gunzip' ) && "$(BU.Main.CMDSGetCommandPath 'gunzip')" ]]; then
-            gunzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'gunzip' ) && "$(BU.Main.CMDSGetCommandPath 'gunzip')" ]]; then
+            gunzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to use the "unzip" command in order to uncompress
-    elif    [[ ( -n "$p_cmd" ) && ( "${p_cmd,,}" == 'unzip' ) && "$(BU.Main.CMDSGetCommandPath 'unzip')" ]]; then
-            unzip "$p_opts" "$p_arch" "$p_dest" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "$p_arch"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'unzip' ) && "$(BU.Main.CMDSGetCommandPath 'unzip')" ]]; then
+            unzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -1241,27 +1243,27 @@ function BU.Main.Files.UncompressFormat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS" \
-        "$__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS";
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_form=$1;    # String    - Default : NULL    - Compression format.
-    local p_arch=$2;    # String    - Default : NULL    - Path to the archive to uncompress.
-    local p_dest=$3;    # String    - Default : NULL    - Folder destination of the uncompressed data (optional argument).
+    local p_form=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression format.
+    local p_arch=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the archive to uncompress.
+    local p_dest=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Folder destination of the uncompressed data (optional argument).
 
     #**** Code ****
-    if ! BU.Main.Args__Files.UncompressFormat "$p_form" "$p_arch" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Files.UncompressFormat "${p_form}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
     function BU.Main.Files.UncompressFormat.ErrorMsg()
     {
         #**** Parameters ****
-        local p_fmt=$1;     # Archive format.
-        local p_arc=$2;     # Name of the target archive.
-        local p_cmd=$3;     # Name of the command used to uncompress the targeted archive.
+        local p_fmt=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive format.
+        local p_arc=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the target archive.
+        local p_cmd=${3:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command used to uncompress the targeted archive.
 
         #**** Code ****
-        BU.Main.Errors.HandleSmallErrors 'W' "Impossible to decompress the $(BU.Main.Decho.Decho.Highlight "$p_fmt") archive named $(BU.Main.Decho.Decho.Path "$p_arc") with the $(BU.Main.Decho.Decho.CMD "$p_cmd") command" 'R';
+        BU.Main.Errors.HandleSmallErrors 'W' "Impossible to decompress the $(BU.Main.Decho.Decho.Highlight "${p_fmt}") archive named $(BU.Main.Decho.Decho.Path "${p_arc}") with the $(BU.Main.Decho.Decho.CMD "${p_cmd}") command" 'R';
         BU.Main.Echo.Warning "Please check the permissions of the archive, or use another uncompression command which supports the targeted archive's format";
         BU.Main.Echo.Newline;
 
@@ -1269,59 +1271,59 @@ function BU.Main.Files.UncompressFormat()
     }
 
     # If the archive to be decompressed is a 7-Zip archive format.
-    if [[ "$p_form" == ?(.)7?(-)[Zz]?([Ii][Pp]) ]]; then
-        # If the '7z' command is found in the "$PATH" environment variable.
+    if [[ "${p_form}" == ?(.)7?(-)[Zz]?([Ii][Pp]) ]]; then
+        # If the '7z' command is found in the "${PATH}" environment variable.
         if      BU.Main.CMDSGetCommandPath 7z; then
-                7z x "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "$p_arch" '7z'; return 1; };
+                7z x "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "${p_arch}" '7z'; return 1; };
 
-        # Else, if the '7z' command is found in the "$PATH" environment variable.
+        # Else, if the '7z' command is found in the "${PATH}" environment variable.
         elif    BU.Main.CMDSGetCommandPath p7zip; then
-                p7zip || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "$p_arch" 'p7zip'; return 1; };
+                p7zip || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "${p_arch}" 'p7zip'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for 7z uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is an Apple's BinHex file.
-    elif [[ "$p_form" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
+    elif [[ "${p_form}" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
         if      BU.Main.CMDSGetCommandPath hexbin; then
-                hexbin "$p_arch" || { BU.Main.Files.UncompressFormat.ErrorMsg 'BinHex' "$p_arch" 'hexbin'; return 1; };
+                hexbin "${p_arch}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'BinHex' "${p_arch}" 'hexbin'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Apple BinHex files uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
-    elif [[ "$p_form" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss])?([[:space:]]))?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
+    elif [[ "${p_form}" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss])?([[:space:]]))?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
         if      BU.Main.CMDSGetCommandPath cabextract; then
-                cabextract || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$p_arch" 'cabextract'; return 1; };
+                cabextract || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$'p_arch'" 'cabextract'; return 1; };
 
         elif    BU.Main.CMDSGetCommandPath 7z; then
-                7z x "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$p_arch" '7z'; return 1; };
+                7z x "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "${p_arch}" '7z'; return 1; };
 
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Microsoft Cabinet archives uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Gzip archive format.
-    elif [[ "$p_form" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
+    elif [[ "${p_form}" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
         if      BU.Main.CMDSGetCommandPath gunzip; then
-                gunzip -v "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "$p_arch" 'gunzip'; return 1; };
+                gunzip -v "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "${p_arch}" 'gunzip'; return 1; };
 
         elif    BU.Main.CMDSGetCommandPath gzip; then
-                gzip -dv "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "$p_arch" 'gzip'; return 1; };
+                gzip -dv "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "${p_arch}" 'gzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Gzip archives uncompression found on your system' 'R';
         fi
 
     # Else, if the archive to be decompressed is a Tar archive compressed with the Gzip compression format.
-    elif [[ "$p_form" == ?(.)[Tt]?([Aa][Rr])?(.)[Gg][Zz] ]]; then
+    elif [[ "${p_form}" == ?(.)[Tt]?([Aa][Rr])?(.)[Gg][Zz] ]]; then
         true;
 
     # Else, if the archive to be decompressed is a Zip archive format.
-    elif [[ "$p_form" == ?(.)[Zz][Ii][Pp] ]]; then
+    elif [[ "${p_form}" == ?(.)[Zz][Ii][Pp] ]]; then
         if      BU.Main.CMDSGetCommandPath unzip; then
-                unzip "$p_arch" "$p_dest" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Zip' "$p_arch" 'unzip'; return 1; };
+                unzip "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Zip' "${p_arch}" 'unzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Zip archives uncompression found on your system' 'R';
         fi

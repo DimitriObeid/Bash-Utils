@@ -5,9 +5,13 @@
 
 # Name          : Checkings.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+#
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

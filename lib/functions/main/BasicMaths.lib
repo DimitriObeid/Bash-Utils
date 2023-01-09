@@ -5,9 +5,13 @@
 
 # Name          : BasicMaths.lib
 # Module        : Main
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       :
+
+# -----------------
+# FILE DSCRIPTION :
+
+#
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
