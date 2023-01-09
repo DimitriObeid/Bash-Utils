@@ -57,23 +57,23 @@ __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands
 ## GETTING COMMAND OUTPUTS
 ## DEBUG ID : getting-command-output
 
-__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS::getting-command-output";
+__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
 
 # Get command's executable file's path.
 function BU.Main.CMDS.GetCommandPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
-        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
+        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
+        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
 
     #**** Parameters ****
-    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
+    local p_cmd=${1:-$'\0'}; #ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
 
     #**** Code ****
-    if ! BU.Main.Args__CMDS.GetCommandPath "$p_cmd" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__CMDS.GetCommandPath "${p_cmd}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-    command -v "$p_cmd" || { local C="${?}"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "$p_cmd") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    command -v "${p_cmd}" || { local C="${?}"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "${p_cmd}") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -83,12 +83,12 @@ function BU.Main.CMDS.GetCommandReturnOutputValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS" \
-        "$__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS";
+        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
+        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
 
     #**** Parameters ****
-    local p_cmd=$1;     # String    - Default : NULL    - Name of the command to process, with it's options.
+    local p_cmd=${1:-$'\0'}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
 
     #**** Code ****
-    if eval "$p_cmd" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+    if eval "${p_cmd}" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 }

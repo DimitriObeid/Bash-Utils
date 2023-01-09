@@ -57,7 +57,7 @@ __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
 ## NUMERIC CONVERSIONS
 ## DEBUG ID : numeric-conversions
 
-__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS::numeric-conversions";
+__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}::numeric-conversions";
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
@@ -67,17 +67,17 @@ function BU.Main.BasicMaths.BytesToHuman()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS" \
-        "$__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS";
+        "${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}" \
+        "${__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS}";
 
     #**** Parameters ****
-    local L_BYTES="${1:-0}"     # Int               - Default : 0       - Raw size in bytes.
-    local L_PAD="${2:-no}"      # String            - Default : no      - Allow result display padding.
-    local L_BASE="${3:-1024}"   # Int               - Default : 1024    - Base (1000 (metric) or 1024 (binary notation))
-    local V_LANG="${4:-en}";    # ISO 639-1 code    - Default : en      - Language, for localizing the byte count (default language : English).
+    local L_BYTES="${1:-0}"     # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : 0        - DESC : Raw size in bytes.
+    local L_PAD="${2:-no}"      # ARG TYPE : String             - REQUIRED | DEFAULT VAL : no       - DESC : Allow result display padding.
+    local L_BASE="${3:-1024}"   # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : 1024     - DESC : Base (1000 (metric) or 1024 (binary notation))
+    local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : en       - DESC : Language, for localizing the byte count (default language : English).
 
     #**** Code ****
-    if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
+    if [[ "${L_PAD^^}" == N?(I|U)L?(L) ]]; then L_PAD='no'; fi
 
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
     local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
@@ -116,7 +116,7 @@ function BU.Main.BasicMaths.BytesToHuman()
 
     BEGIN{print human(bytes, pad, base, lang)}')
 
-    BU.Main.Echo.Msg "$BYTESTOHUMAN_RESULT" '-n' 'nodate';
+    BU.Main.Echo.Msg "${BYTESTOHUMAN_RESULT}" '-n' 'nodate';
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
@@ -127,7 +127,7 @@ function BU.Main.BasicMaths.BytesToHuman()
 function BU.Main.BasicMaths.NegativeToPositive()
 {
     #**** Parameters ****
-    local x=$1;         # Number    - Default : NULL    - Value to convert.
+    local x=${1:-$'\0'}; # ARG TYPE : Number    - REQUIRED | DEFAULT VAL : NULL     - Value to convert.
 
     #**** Code ****
     echo "$(( x = x < 0 ? x * -1 : x ))";
@@ -139,7 +139,7 @@ function BU.Main.BasicMaths.NegativeToPositive()
 function BU.Main.BasicMaths.PositiveToNegative()
 {
     #**** Parameters ****
-    local x=$1;         # Number    - Default : NULL    - Value to convert.
+    local x=${1:-$'\0'}; # ARG TYPE  : Number   - REQUIRED | DEFAULT VAL : NULL     - Value to convert.
 
     #**** Code ****
     echo "$(( x = x > 0 ? x * -1 : x ))";

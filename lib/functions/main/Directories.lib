@@ -57,7 +57,7 @@ __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::dir
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : processing-functions
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::processing-functions";
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::processing-functions";
 
 # Separate processing steps displays from the rest of the main script with a line.
 
@@ -68,37 +68,37 @@ function BU.Main.Directories.ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_function=$1
-    local p_parent=$2
-    local p_name=$3
+    local p_function=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_parent=${2:-$'\0'};     # ARG TYPE : Dir        - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_name=${3:-$'\0'};       # ARG TYPE : Dir        - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Variables ****
-    local v_char='"'
-    local v_path="$p_parent/$p_name"
+    local v_char='"';                       # VAR TYPE : Char       - DESC :
+    local v_path="${p_parent}/${p_name}";   # VAR TYPE : Dirpath    - DESC :
 
     #**** Code ****
     # Arguments checking.
-	if ! BU.Main.Args__Directories.ProcessingDir "${p_function}" "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+	if ! BU.Main.Args__Directories.ProcessingDir "${p_function}" "${p_parent}" "${p_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-	sleep "$PROJECT_STATUS_SLEEP_LINE";
+	sleep "${PROJECT_STATUS_SLEEP_LINE}";
 
-    BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
-    BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "$p_name") folder in the parent folder $(BU.Main.Decho.Decho.Path "$p_parent").";
+    BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${v_char}" "${__COL_RESET}")" '-n' 'nodate';
+    BU.Main.Echo.Newstep "Processing the $(BU.Main.Decho.Decho.Path "${p_name}") folder in the parent folder $(BU.Main.Decho.Decho.Path "${p_parent}").";
     BU.Main.Echo.Newline;
 
     if "${p_function}"; then
-        BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "$p_name/") folder.";
-		BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
-		sleep "$PROJECT_STATUS_SLEEP_LINE";
+        BU.Main.Echo.Success "End of processing the $(BU.Main.Decho.Decho.Path "${p_name}/") folder.";
+		BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${v_char}" "${__COL_RESET}")" '-n' 'nodate';
+		sleep "${PROJECT_STATUS_SLEEP_LINE}";
 		BU.Main.Echo.Newline;
     else
-        BU.Main.Echo.Error "End of processing the $(BU.Main.Decho.Decho.Path "$p_name/") folder.";
-		BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "$v_char" "$__COL_RESET")" '-n' 'nodate';
-		sleep "$PROJECT_STATUS_SLEEP_LINE";
+        BU.Main.Echo.Error "End of processing the $(BU.Main.Decho.Decho.Path "${p_name}/") folder.";
+		BU.Main.Echo.Msg "$(BU.Main.Headers.DrawLine "${v_char}" "${__COL_RESET}")" '-n' 'nodate';
+		sleep "${PROJECT_STATUS_SLEEP_LINE}";
 		BU.Main.Echo.Newline;
     fi
 
@@ -110,38 +110,38 @@ function BU.Main.Directories.ProcessingDir()
 ## FOLDER CREATION FUNCTIONS
 ## DEBUG ID : folder-creation-functions
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::folder-creation-functions";
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::folder-creation-functions";
 
 # Overwriting an existing directory's content
 
 # Featured functions and files from the "functions" folder :
-#	- BU.Main.Echo.Error			-> Echo.lib
-#	- BU.Main.Echo.Newstep		-> Echo.lib
-#	- BU.Main.Echo.Success		-> Echo.lib
-#	- BU.Main.Echo.Newline			-> Echo.lib
+#	- BU.Main.Echo.Error()			-> Echo.lib
+#	- BU.Main.Echo.Newstep()		-> Echo.lib
+#	- BU.Main.Echo.Success()		-> Echo.lib
+#	- BU.Main.Echo.Newline()        -> Echo.lib
 function BU.Main.Directories.OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=$1;
-	local p_authorization=$2;
+    local p_path=${1:-$'\0'};           # ARG TYPE : Path       - REQUIRED | DEFAULT VAL : NULL     - DESC :
+	local p_authorization=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
     # Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Directories.OverwriteDir "${p_path}" "$p_authorization" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.OverwriteDir "${p_path}" "${p_authorization}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     # Checking second if the script is operating at the root directory.
     BU.Main.Directories.TriggerRootDirWarning "${p_path}";
 
-    BU.Main.Echo.Newstep "A non-empty folder with exactly the same name ($(BU.Main.Decho.Decho.Path "$p_name")) is already in the target folder $(BU.Main.Decho.Decho.Path "$p_parent/")";
-	BU.Main.Echo.Newstep "Deleting the contents of the $(BU.Main.Decho.Decho.Path "$v_path/") folder";
+    BU.Main.Echo.Newstep "A non-empty folder with exactly the same name ($(BU.Main.Decho.Decho.Path "${p_name}")) is already in the target folder $(BU.Main.Decho.Decho.Path "${p_parent}/")";
+	BU.Main.Echo.Newstep "Deleting the contents of the $(BU.Main.Decho.Decho.Path "${v_path}/") folder";
 	BU.Main.Echo.Newline;
 
-	if [ "$p_authorization" == "--rmdir" ]; then
+	if [ "${p_authorization}" == "--rmdir" ]; then
         # TODO : Si la variable n'est pas initialisée.
         if [ -n "${p_path+x}" ]; then
             # WARNING ! DO NOT MODIFY THE FOLLOWING COMMAND, UNLESS YOU KNOW >>> EXACTLY <<< WHAT YOU DO !!!
@@ -150,11 +150,12 @@ function BU.Main.Directories.OverwriteDir()
 
             # Check this link for more informations about this command --> https://github.com/koalaman/shellcheck/wiki/SC2115
             rm -rfv "${v_path/:?}/"*;
-            BU.Main.Errors.HandleErrors "$?" "UNABLE TO DELETE THE CONTENT OF THE $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "$v_path/")") FOLDER." \
-                "Please check the permissions of the targeted directory" "$v_path" "$v_path" \
-                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
 
-            BU.Main.Echo.Success "Deletion of the contents of the folder $(BU.Main.Decho.Decho.Path "$v_path/") performed successfully";
+            BU.Main.Errors.HandleErrors "${?}" "UNABLE TO DELETE THE CONTENT OF THE $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "${v_path}/")") FOLDER." \
+                "Please check the permissions of the targeted directory" "${v_path}" "${v_path}" \
+                "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+            BU.Main.Echo.Success "Deletion of the contents of the folder $(BU.Main.Decho.Decho.Path "${v_path}/") performed successfully";
             BU.Main.Echo.Newline;
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -171,60 +172,60 @@ function BU.Main.Directories.OverwriteDir()
 # folder creation function, with the parent folder's path and the new folder's name as separated arguments.
 
 # Featured functions and files from the "functions" folder :
-#   - BU.Main.Args__Directories.Make        -> Main -> Args.lib
-#   - BU.Main.Checkings.CheckFilePathWasCreated  -> Main -> Checkings.lib
-#   - BU.Main.Directories.OverwriteDir           -> Main -> Directories.lib (this file)
-#   - BU.Main.Directories.TriggerRootDirWarning  -> Main -> Directories.lib (this file)
-#   - BU.Main.Errors.HandleErrors                -> Main -> Errors.lib
-#   - BU.Main.Headers.DrawLine                   -> Main -> Headers.lib
+#   - BU.Main.Args__Directories.Make()              -> Main -> Args.lib
+#   - BU.Main.Checkings.CheckFilePathWasCreated()   -> Main -> Checkings.lib
+#   - BU.Main.Directories.OverwriteDir()            -> Main -> Directories.lib (this file)
+#   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib (this file)
+#   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+#   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
-#   - BU.Main.Decho.Decho.Path            -> Main -> Decho.lib
-#   - BU.Main.Echo.Error                     -> Main -> Echo.lib
-#   - BU.Main.Echo.Newstep                   -> Main -> Echo.lib
-#   - BU.Main.Echo.Success                   -> Main -> Echo.lib
+#   - BU.Main.Decho.Decho.Path()                    -> Main -> Decho.lib
+#   - BU.Main.Echo.Error()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()                        -> Main -> Echo.lib
 function BU.Main.Directories.Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
 	#**** Parameters ****
-	local p_parent=$1;	# String	- Emplacement of the currently processed directory's parent folder from the root directory.
-	local p_name=$2;    # String	- Name of the folder to process (into its parent directory).
-	local p_rm=$3;      # String	- Authorization to overwrite the targeted directory.
+	local p_parent=${1:-$'\0'}; # ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULL     - DESC : Emplacement of the currently processed directory's parent folder from the root directory.
+	local p_name=${2:-$'\0'};   # ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULl     - DESC : Name of the folder to process (into its parent directory).
+	local p_rm=${3:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Authorization to overwrite the targeted directory.
 
 	#**** Variables ****
-	local v_path="$p_parent/$p_name";	# String	- Path of the file to process.
+	local v_path="${p_parent}/${p_name}";   # VAR TYPE : String     - DESC : Path of the file to process.
 
 	#**** Code ****
 	# Checking first if the awaited arguments are given
-    if ! BU.Main.Args__Directories.Make "$p_parent" "$p_name" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then return "$?"; fi
+    if ! BU.Main.Args__Directories.Make "${p_parent}" "${p_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then return "${?}"; fi
 
     # Checking second if the script is operating at the root directory.
-    if ! BU.Main.Directories.TriggerRootDirWarning "$v_path"; then return 1; fi
+    if ! BU.Main.Directories.TriggerRootDirWarning "${v_path}"; then return 1; fi
 
 	# If the folder to create doesn't exists, ths script creates it with the help of the "mkdir" command.
-	if [ ! -d "$v_path" ]; then
-		BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "$p_name") folder in the parent folder $(BU.Main.Decho.Decho.Path "$p_parent/").";
+	if [ ! -d "${v_path}" ]; then
+		BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "${p_name}") folder in the parent folder $(BU.Main.Decho.Decho.Path "${p_parent}/").";
 		BU.Main.Echo.Newline;
 
-        mkdir -pv "$v_path"
-        BU.Main.Errors.HandleErrors "$?" \
-            "THE $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "$p_name/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "$p_parent/")") !" \
-            "Please check the permissions of the targeted directory" "$v_path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
-        BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "$p_name") folder was successfully created in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder.";
+        mkdir -pv "${v_path}"
+        BU.Main.Errors.HandleErrors "${?}" \
+            "THE $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "${p_name}/")") FOLDER CANNOT BE CREATED IN THE PARENT FOLDER $(BU.Main.Text.KeepFormatting "$(BU.Main.Decho.Decho.Path "${p_parent}/")") !" \
+            "Please check the permissions of the targeted directory" "${v_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+        BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_name}") folder was successfully created in the $(BU.Main.Decho.Decho.Path "${p_parent}/") folder.";
         BU.Main.Echo.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the folder to create already exists in its parent directory AND this folder already contains AT LEAST one file or folder.
-	elif [ -d "$v_path" ] && [ "$(ls -A "$v_path")" ]; then
+	elif [ -d "${v_path}" ] && [ "$(ls -A "${v_path}")" ]; then
 
-        if [ "$p_rm" == '--rmdir' ]; then
-            BU.Main.Directories.OverwriteDir "$v_path" "$p_rm";
+        if [ "${p_rm}" == '--rmdir' ]; then
+            BU.Main.Directories.OverwriteDir "${v_path}" "${p_rm}";
 
-			if test "$?" -eq 0; then
+			if test "${?}" -eq 0; then
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
             else
                 return 1;
@@ -232,8 +233,8 @@ function BU.Main.Directories.Make()
         fi
 
 	# Else, if the folder to create already exists in its parent directory AND this folder is empty.
-	elif [ -d "$v_path" ] && [ ! "$(ls -A "$v_path")" ]; then
-		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "$p_name/") folder already exists in the $(BU.Main.Decho.Decho.Path "$p_parent/") folder and is empty.";
+	elif [ -d "${v_path}" ] && [ ! "$(ls -A "${v_path}")" ]; then
+		BU.Main.Echo.Success "The $(BU.Main.Decho.Decho.Path "${p_name}/") folder already exists in the $(BU.Main.Decho.Decho.Path "${p_parent}/") folder and is empty.";
 		BU.Main.Echo.Newline;
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -245,24 +246,24 @@ function BU.Main.Directories.MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=$1;		# String	- Full path of the directory to create.
-    local p_overwrite=$2;	# String	- Authorization to overwrite the directory.
+    local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Full path of the directory to create.
+    local p_overwrite=${2:-$'\0'};	# ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULL     - DESC : Authorization to overwrite the directory.
 
     #**** Variables ****
     local v_parent; v_parent="$(echo "${p_path}" | rev | cut -d '/' -f2- | rev)"; # Getting the parent directory of the folder to create.
     local v_target; v_target="$(echo "${p_path}" | rev | cut -d '/' -f 1 | rev)"; # Getting the name of the folder to create.
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.MakePath "${p_path}" "$p_overwrite" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.MakePath "${p_path}" "${p_overwrite}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-    if [ "$p_overwrite" != 'rmdir' ]; then
-        BU.Main.Directories.Make "$v_parent" "$v_target" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    if [ "${p_overwrite}" != 'rmdir' ]; then
+        BU.Main.Directories.Make "${v_parent}" "${v_target}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     else
-        BU.Main.Directories.Make "$v_parent" "$v_target" '--rmdir' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Directories.Make "${v_parent}" "${v_target}" '--rmdir' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     fi
 
     return 0;
@@ -274,16 +275,16 @@ function BU.Main.Directories.MkTmpDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
-    local lineno="${LINENO}"; if [ ! -d "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ]; then
-        mkdir -p "$__BU_MAIN_PROJECT_TMP_DIR_PATH" ||
+    if [ ! -d "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" ]; then declare -i lineno="${LINENO}";
+        mkdir -p "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" ||
 		{
 			BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
 
-			BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Checkings.CheckDirPathExists "$__BU_MAIN_PROJECT_TMP_DIR_PATH" 'true') CANNOT BE CREATED !" \
-				"Please check at the mentionned line in the mentionned file." "$__BU_MAIN_PROJECT_TMP_DIR_PATH" \
+			BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Checkings.CheckDirPathExists "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" 'true') CANNOT BE CREATED !" \
+				"Please check at the mentionned line in the mentionned file." "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" \
 				"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
 			BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
@@ -302,24 +303,24 @@ function BU.Main.Directories.MkTmpDir()
 ## PATH PROCESSING
 ## DEBUG ID : path-processing
 
-__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS::path-processing";
+__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::path-processing";
 
 # Getting the name of a target directory without its path.
 function BU.Main.Directories.GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
     #**** Parameters ****
-    local p_path=$1;	# String	- Default : NULL	- Full path of the directory.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL  - DESC : Full path of the directory.
 
     #**** Variables ****
-    local result;
+    local result;   # VAR TYPE : String     - DESC :
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetDirectoryName "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetDirectoryName "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     if [ -d "${p_path}" ]; then
         shopt -s extglob;           # Enable +(...) glob syntax.
@@ -329,7 +330,7 @@ function BU.Main.Directories.GetDirectoryName()
 
         shopt -u extglob;           # Disable +(...) glob syntax.
 
-        echo -e "$result";
+        echo -e "${result}";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     else
@@ -345,14 +346,14 @@ function BU.Main.Directories.GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
     #**** Parameters ****
-    local p_path=$1;    # String    - Default : NULL    - Path of the folder to get.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the folder to get.
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetDirectoryPath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetDirectoryPath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     if [ -d "${p_path}" ]; then
         echo -e "${p_path}";
@@ -371,27 +372,27 @@ function BU.Main.Directories.GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
     #**** Parameters ****
-    local p_path=$1;            # String	- Default : NULL    - Path of the child file or folder.
-    local p_iterations=${2-1};  # Int   	- Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the child file or folder.
+    local p_iterations=${2-1};  # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
-    local result;
+    local result;   # VAR TYPE : String     - DESC :
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetParentDirectoryName "${p_path}" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetParentDirectoryName "${p_path}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
     for ((i=0; i<p_iterations; i++)); do
         local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
             || {
                 BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                    "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             }; pwd -P )";
 
-        p_path="$v_parent";
+        p_path="${v_parent}";
     done
 
     shopt -s extglob;       # Enable +(...) glob syntax.
@@ -401,7 +402,7 @@ function BU.Main.Directories.GetParentDirectoryName()
 
     shopt -u extglob;       # Disable +(...) glob syntax.
 
-    echo -e "$result";
+    echo -e "${result}";
 }
 
 # Getting parent folder's path from the root directory, then printing it
@@ -409,21 +410,21 @@ function BU.Main.Directories.GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
     #**** Parameters ****
-    local p_path=$1;            # String    - Default : NULL    - Path of the child file or folder.
-    local p_iterations=${2-1};  # Int       - Default : 1       - Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the child file or folder.
+    local p_iterations=${2-1};  # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
-    local result;
+    local result;   # VAR TYPE : String     - DESC :
 
     #**** Code ****
-    if ! BU.Main.Args__Directories.GetParentDirectoryPath "${p_path}" "$p_iterations" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+    if ! BU.Main.Args__Directories.GetParentDirectoryPath "${p_path}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
-    if [ "$p_iterations" -lt 1 ]; then
-        p_iterations="$(BU.Main.BasicMaths.NegativeToPositive "$p_iterations")";
+    if [ "${p_iterations}" -lt 1 ]; then
+        p_iterations="$(BU.Main.BasicMaths.NegativeToPositive "${p_iterations}")";
     fi
 
     if [ -d "${p_path}" ]; then
@@ -431,10 +432,10 @@ function BU.Main.Directories.GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
                 || {
                     BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}";
                 }; pwd -P )";
 
-            p_path="$v_parent";
+            p_path="${v_parent}";
         done
 
         # Enable +(...) glob syntax.
@@ -446,7 +447,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
         # Disable +(...) glob syntax.
         shopt -u extglob;
 
-        echo -e "$result";
+        echo -e "${result}";
     else
         local v_path_str="";
         local v_current_path="${p_path}";
@@ -455,21 +456,21 @@ function BU.Main.Directories.GetParentDirectoryPath()
             local v_parent; v_parent="$( cd "$(dirname "${p_path}")" > /dev/null 2>&1 \
                 || {
                     BU.Main.Errors.HandleErrors "1" "UNABLE TO GET THE PARENT DIRECTORY'S NAME" "Please check if the provided path is correct." "${p_path}" \
-                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$LINENO"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND";
+                        "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}";
                 }; pwd -P )"
 
             local v_path_cut; v_path_cut="${v_parent##*/}";
-            local v_path_str+="$v_path_cut/";
+            local v_path_str+="${v_path_cut}/";
 
             # Removing the unnecessary folders.
             # WARNING !!!! USE THE "rmdir" COMMAND ONLY !!!!
             # DO NOT USE THE "rm -rf" COMMAND AT ALL, OR FILES AND FOLDERS COULD BE UNINTENTIONNALY ERASED !!!!
-            rmdir "$v_current_path"; BU.Main.Errors.HandleErrors "$?" "UNABLE TO ERASE THE $(BU.Main.Decho.Decho.Path "$v_current_path") NEWLY CREATED FOLDER !";
+            rmdir "${v_current_path}"; BU.Main.Errors.HandleErrors "${?}" "UNABLE TO ERASE THE $(BU.Main.Decho.Decho.Path "${v_current_path}") NEWLY CREATED FOLDER !";
 
-            local v_current_path="$v_parent";
+            local v_current_path="${v_parent}";
         done
 
-        BU.Main.Text.ReverseStringWordsOrder "$v_path_str" '/';
+        BU.Main.Text.ReverseStringWordsOrder "${v_path_str}" '/';
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -482,11 +483,11 @@ function BU.Main.Directories.TriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS" \
-        "$__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING";
+        "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
+        "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
 	#**** Parameters ****
-	local p_path=$1;	# String	- Default : NULL	- Path of the folder to check.
+	local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the folder to check.
 
 	#**** Code ****
 	# Checking if the given path points towards the root directory or one of its subfolders
@@ -497,26 +498,26 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 			BU.Main.Echo.Error "The script was trying to operate at the root directory (or one of its sub directories) without authorization";
 			BU.Main.Echo.Error "Given path : $(BU.Main.Decho.Decho.Path "${p_path}")";
-			BU.Main.Echo.Error "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
+			BU.Main.Echo.Error "Authorization : ${__BU_MAIN_STAT_OPERATE_ROOT}";
 			BU.Main.Echo.Newline;
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-			return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+			return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
 
 		elif [ "${__BU_MAIN_STAT_OPERATE_ROOT,,}" == "restricted" ]; then
             BU.Main.Headers.Header.Warning "WARNING !!!!!!! DO NOT SKIP THIS MESSAGE BEFORE READING IT CAREFULLY !!!!!!" 'strlen';
 
             BU.Main.Echo.Warning "You are about to operate at the root directory or one of its present sub-folders !";
 			BU.Main.Echo.Warning "Given path : $(BU.Main.Decho.Decho.Path "${p_path}")";
-			BU.Main.Echo.Warning "Authorization : $__BU_MAIN_STAT_OPERATE_ROOT";
+			BU.Main.Echo.Warning "Authorization : ${__BU_MAIN_STAT_OPERATE_ROOT}";
 			BU.Main.Echo.Newline;
 
 			# Calling the function that processes the given answer.
 			if BU.Main.Case.Read_DirectoriesTriggerRootDirWarning; then
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
-				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "$__BU_MAIN_EXIT_PERMISSION_DENIED";
+				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
 			fi
 		fi
 	fi

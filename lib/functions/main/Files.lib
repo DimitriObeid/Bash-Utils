@@ -109,7 +109,7 @@ function BU.Main.Files.ProcessingFile()
     local p_function=$1;
     local p_name=$2;
 
-    shift; local pa_arr; pa_arr=$("$@");
+    shift; local pa_arr; pa_arr=$("${@}");
 
     #**** Variables ****
     local v_char="'";
@@ -218,7 +218,7 @@ function BU.Main.Files.Make()
     shift 2;
 
     # shellcheck disable=SC2034
-    pa_touchVals=("$@");    # Array     - Default : NULL    - "touch" command's options.
+    pa_touchVals=("${@}");    # Array     - Default : NULL    - "touch" command's options.
 
 	#**** Variables ****
 	local v_path="$p_parent/$p_name";	# Path of the file to process.
@@ -998,7 +998,7 @@ function BU.Main.Files.AddToArchive()
     local p_arch=$3;        # String    - Default : NULL    - Archive's name.
     shift 3;
 
-    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
+    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to add in the archive.
 
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
@@ -1042,7 +1042,7 @@ function BU.Main.Files.CompressCMD()
     local p_dest=$4;        # String    - Default : NULL    - Folder destination of the uncompressed data.
     shift 4;
 
-    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
 
@@ -1066,7 +1066,7 @@ function BU.Main.Files.CompressFormat()
     local p_arch=$3;            # String    - Default : NULL    - Archive's name.
     shift 2;
 
-    local p_paths=("$@");       # Array - Default : NULL    - Paths to the files / folders to archivate.
+    local p_paths=("${@}");       # Array - Default : NULL    - Paths to the files / folders to archivate.
 
     #**** Code ****
     if BU.Main.Checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";
@@ -1147,7 +1147,7 @@ function BU.Main.Files.DeleteInArchive()
     local p_arch=$3;        # String    - Default : NULL    - Target archive's path.
     shift 3;
 
-    local p_paths=("$@");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
+    local p_paths=("${@}");   # Array - Default : NULL    - Paths to the files / folders to delete in the archive.
 
     #**** Code ****
     if BU.Main.checkings.IsArrayEmpty "${p_paths[@]}"; then local lineno="${LINENO}";

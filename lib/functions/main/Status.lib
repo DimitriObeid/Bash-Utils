@@ -77,7 +77,7 @@ function BU.Main.Status.ConfEcho()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4;
-    local pa_correctValues=("$@");
+    local pa_correctValues=("${@}");
 
     #**** Variables ****
     local i=0;      # Values counter.
@@ -442,7 +442,7 @@ function BU.Main.Status.CheckSTAT_USER_OS()
     local p_lineno=$3;  # Int       - Default : NULL    - Line where the current function is called.
     shift 2;
 
-    # local pa_supported_os=("$@")    # Array storing the list of the operating systems which support a feature to be deployed.
+    # local pa_supported_os=("${@}")    # Array storing the list of the operating systems which support a feature to be deployed.
 
     #**** Variables ****
 

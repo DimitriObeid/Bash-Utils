@@ -57,24 +57,24 @@ __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions'
 ## SHELLCHECK
 ## DEBUG ID : "shellcheck"
 
-__BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="$__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS:shellcheck";
+__BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
 
 # Verifying for any programming errors in a Bash script file with the "shellcheck" command.
 function BU.Main.DevTools.ShellcheckVerif()
 {
     #**** Parameters ****
-    local p_path=${1:-\$'0'};   # String    - Default : NULL    - Path of the file to verify.
-    local p_stable=${2:-NULL};  # String    - Default : NULL    - If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
+    local p_path=${1:-\$'0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to verify.
+    local p_stable=${2:-NULL};  # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "$__BU_SHELLCHECKED" variable's value.
 
     #**** Code ****
     # shellcheck disable=SC2059
-    if [ "$__BU_SHELLCHECKED" == 'false' ] || [ "$p_stable" == 'compile-stable' ]; then
-        printf "$__BU_COMPILE__SHELLCHECK__VERIFICATION" "${p_path}"; echo;
+    if [ "${__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
+        printf "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" "${p_path}"; echo;
 
         if ! shellcheck "${p_path}"; then ShellcheckError "${p_path}"; return 1; fi
 
         # shellcheck disable=SC2059
-        printf "$__BU_COMPILE__SHELLCHECK__SUCCESS" "${p_path}"; echo;
+        printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}" "${p_path}"; echo;
 
         echo;
     fi
