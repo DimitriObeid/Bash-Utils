@@ -33,10 +33,10 @@ function BU.Main.BasicMaths.BytesToHuman()
       }
       BEGIN{print human(bytes, pad, base)}')
 
-      echo "$BYTESTOHUMAN_RESULT"
-    return $?
+      echo "${BYTESTOHUMAN_RESULT}";
+    return ${?};
 }
 
-BU.Main.BasicMaths.BytesToHuman "$1" "$2" "$3"
+BU.Main.BasicMaths.BytesToHuman "${1}" "${2}" "${3}"
 
-echo "$BYTESTOHUMAN_RESULT"
+echo "${BYTESTOHUMAN_RESULT}"

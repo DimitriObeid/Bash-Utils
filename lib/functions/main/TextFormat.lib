@@ -67,15 +67,15 @@ __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_F
 function BU.Main.TextFormat.CannotCreateRessource()
 {
     #**** Parameters ****
-    local p_file=${1};
-    local p_fnct=${2};
-    local p_line=${3};
+    local p_file=${1:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_fnct=${2:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_line=${3:-NULL}; # ARG TYPE : Int       - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
-    local p_path=${4};
-    local p_type=${5};
+    local p_path=${4:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_type=${5:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
-    echo "IN $p_file, FUNCTION $p_fnct, LINE $p_line --> ERROR : THE ${p_path} $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
+    echo "IN ${p_file}, FUNCTION ${p_fnct}, LINE ${p_line} --> ERROR : THE ${p_path} $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
     echo "Please check what is preventing this $( [[ "${p_type,,}" == 'dir' ]] && printf 'directory' || printf 'file' ) directory from being created. It may be a directory permission issue." >&2;
     echo >&2;
 
@@ -89,31 +89,31 @@ function BU.Main.TextFormat.CannotCreateRessource()
 function BU.Main.TextFormat.GetBGColorFromCMD()
 {
     #**** Parameters ****
-    local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's background.
+    local p_cmd=${1:-$'\0'}; # ARG TYPE : CMD   - REQUIRED | DEFAULT VAL : NULL     - DESC : The command which executes the code which colors the terminal's background.
 
     #**** Variables ****
-    local v_code;       # This variable stores the content of the file which contains the ANSi raw escape sequence.
+    local v_code;   # VAR TYPE : CMD    - DESC : This variable stores the content of the file which contains the ANSi raw escape sequence.
 
     #**** Code ****
-    if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT" 'dir';
+    if [ ! -d "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" || {
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" 'dir';
 
             return 1;
         };
     fi
 
-    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" 'file';
+    if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" || {
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" 'file';
 
             return 1;
         }
     fi
 
     # Storing the background color's ANSI escape sequence in the file.
-    echo "$p_cmd" > "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH";
+    echo "${p_cmd}" > "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}";
 
-    # Getting the ANSI color code from the "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH" file.
-    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "$__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH")" ";" 2)";
+    # Getting the ANSI color code from the "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" file.
+    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}")" ";" 2)";
 
     # Printing the code.
     echo "${v_code:0:1}";
@@ -125,31 +125,31 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 function BU.Main.TextFormat.GetTextColorFromCMD()
 {
     #**** Parameters ****
-    local p_cmd=$1:     # CMD   - Default : NULL    - The command which executes the code which colors the terminal's text.
+    local p_cmd=${1:-$'\0'}; # ARG TYPE : CMD    - REQUIRED | DEFAULT VAL : NULL     - DESC : The command which executes the code which colors the terminal's text.
 
     #**** Variables ****
-    local v_code;       # This variable stores the content of the file which contains the ANSi raw escape sequence.
+    local v_code;   # VAR TYPE : CMD    - DESC : This variable stores the content of the file which contains the ANSi raw escape sequence.
 
     #**** Code ****
-    if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" ]; then mkdir -p  "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT" 'dir';
+    if [ ! -d "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}" ]; then mkdir -p  "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}" || {
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}" 'dir';
 
             return 1;
         }
     fi
 
-    if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
+    if [ ! -f "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" || {
+            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" 'file';
 
             return 1;
         }
     fi
 
     # Storing the text color's ANSI escape sequence in the file.
-    echo "$p_cmd" > "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH";
+    echo "${p_cmd}" > "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}";
 
-    # Getting the ANSI color code from the "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" file.
-    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH")" ";" 2)";
+    # Getting the ANSI color code from the "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" file.
+    v_code="$(BU.Main.Text.CutSubStringBeforeNthDelim "$(cat "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}")" ";" 2)";
 
     # Printing the code.
     echo "${v_code:0:1}";
@@ -162,60 +162,60 @@ function BU.Main.TextFormat.GetTextColorFromCMD()
 ## SETTING COLOR CODES IN FILES
 ## DEBUG ID : setting-color-codes-in-files
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS::setting-color-codes-in-files";
+__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::setting-color-codes-in-files";
 
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
 ## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU.Main.Decho.__Decho()" AND "BU.Main.Decho.Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
 #   - BU.Main.Checkings.CheckProjectRelatedFile()
-#   - BU.Main.Errors.HandleSmallErrors
-#   - BU.Main.Errors.HandleErrors
+#   - BU.Main.Errors.HandleSmallErrors()
+#   - BU.Main.Errors.HandleErrors()
 function BU.Main.TextFormat.SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES";
+        "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}" \
+        "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES}";
 
 	#**** Parameters ****
-	local p_color_code=$1;     # Int       # Default : NULL    - Color code
-	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
+	local p_color_code=${1:-$'\0'};     # ARG TYPE : Int        # REQUIRED | DEFAULT VAL : NULL     - DESC : Color code
+	local p_init_ctrl=${2:-$'\0'};      # ARG TYPE : String     # CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-	if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'create' 'false' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+	if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 
 	# If the script is allowed to format text.
     if BU.Main.Status.CheckStatAllowFormatting; then
         # Checking the existence of the "bgcolor.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
-        if [ ! -d "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT" 'dir';
+        if [ ! -d "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" || {
+                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" 'dir';
 
                 return 1;
             };
         fi
 
         # Checking the existence of the "bgcolor.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
-        if [ ! -f "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH" 'file';
+        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" || {
+                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" 'file';
 
                 return 1;
             };
         fi
 
         # Redirecting the background's color code in its dedicated temporary file.
-        echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH"; local X="$?";
+        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"; local X="${?}";
 
-        [ "$X" -ne 0 ] && {
-            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH" 'false') (bgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
+        [ "${X}" -ne 0 ] && {
+            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'false') (bgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
 
             if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
         }
 
         # Finally, the background color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setab "$p_color_code" || { echo -ne "\e[48;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setab "${p_color_code}" || { echo -ne "\e[48;5;${1}m" && echo "${p_color_code}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[48;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[48;5;${1}m"; echo "${p_color_code}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -229,52 +229,52 @@ function BU.Main.TextFormat.SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES";
+        "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}" \
+        "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES}";
 
 	#**** Parameters ****
-	local p_color_code=$1;     # Int       # Default : NULL    - Color code
-	local p_init_ctrl=$2;      # String    # Default : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
+	local p_color_code=${1:-$'\0'};     # ARG TYPE : Int        # REQUIRED | DEFAULT VAL : NULL     - DESC : Color code
+	local p_init_ctrl=${2:-$'\0'};      # ARG TYPE : String     # CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
 
 	#**** Code ****
     shopt -s extglob;
 
     # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; }; fi
+    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; }; fi
 
     shopt -u extglob;
 
     # If the script is allowed to format text.
 	if BU.Main.Status.CheckStatAllowFormatting; then
         # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
-        if [ ! -d "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" ]; then mkdir -p "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT" 'dir';
+        if [ ! -d "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" || {
+                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" 'dir';
 
                 return 1;
             };
         fi
 
         # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
-        if [ ! -f "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" ]; then touch "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'file';
+        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" || {
+                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'file';
 
                 return 1;
             };
         fi
 
         # Redirecting the text's color code in its dedicated temporary file.
-        echo "$p_color_code" > "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH"; local X="$?";
+        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"; local X="${?}";
 
-        [ "$X" -ne 0 ] && {
-            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "$__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH" 'false') (fgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
+        [ "${X}" -ne 0 ] && {
+            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'false') (fgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
 
             if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
         }
 
         # Finally, the foreground color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setaf "$p_color_code" || { echo -ne "\e[38;5;${1}m" && echo "$p_color_code" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then tput setaf "${p_color_code}" || { echo -ne "\e[38;5;${1}m" && echo "${p_color_code}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
     else
-        echo -ne "\e[38;5;${1}m"; echo "$p_color_code"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;${1}m"; echo "${p_color_code}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
 
@@ -283,7 +283,7 @@ function BU.Main.TextFormat.SetTextColor()
 ## COLORS STRINGS PROCESSING FUNCTIONS
 ## DEBUG ID : colors-strings-processing-functions
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS::colors-strings-processing-functions";
+__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::colors-strings-processing-functions";
 
 # Conversion of color name (string) to color code (int).
 function BU.Main.TextFormat.Atoi()
@@ -352,57 +352,57 @@ function BU.Main.TextFormat.Itoa()
 
     #**** Code ****
     # Basic colors
-    if      [ "$p_code" == "$__BU_MAIN_COLOR_CODE_AQUA" ];          then __BU_MAIN_COLORS_ITOA_COLOR="aqua";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_BLACK" ];         then __BU_MAIN_COLORS_ITOA_COLOR="black";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_BLUE" ];          then __BU_MAIN_COLORS_ITOA_COLOR="blue";
+    if      [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_AQUA}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="aqua";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_BLACK}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="black";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_BLUE}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="blue";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CYAN" ];          then __BU_MAIN_COLORS_ITOA_COLOR="cyan";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUCHSIA" ];       then __BU_MAIN_COLORS_ITOA_COLOR="fuchsia";
-    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_GRAY}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="gray";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_CYAN}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="cyan";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_FUCHSIA}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="fuchsia";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_GRAY}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="gray";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_GREEN" ];         then __BU_MAIN_COLORS_ITOA_COLOR="green";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_LIME" ];          then __BU_MAIN_COLORS_ITOA_COLOR="lime";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_MAROON" ];        then __BU_MAIN_COLORS_ITOA_COLOR="maroon";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_GREEN}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="green";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_LIME}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="lime";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_MAROON}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="maroon";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_NAVY" ];          then __BU_MAIN_COLORS_ITOA_COLOR="navy";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_OLIVE" ];         then __BU_MAIN_COLORS_ITOA_COLOR="olive";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_ORANGE" ];        then __BU_MAIN_COLORS_ITOA_COLOR="orange";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_NAVY}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="navy";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_OLIVE}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="olive";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_ORANGE}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="orange";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PINK" ];          then __BU_MAIN_COLORS_ITOA_COLOR="pink";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PURPLE" ];        then __BU_MAIN_COLORS_ITOA_COLOR="purple";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_RED" ];           then __BU_MAIN_COLORS_ITOA_COLOR="red";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_PINK}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="pink";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_PURPLE}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="purple";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_RED}" ];           then __BU_MAIN_COLORS_ITOA_COLOR="red";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SALMON" ];        then __BU_MAIN_COLORS_ITOA_COLOR="salmon";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_SILVER" ];        then __BU_MAIN_COLORS_ITOA_COLOR="silver";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TAN" ];           then __BU_MAIN_COLORS_ITOA_COLOR="tan";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_SALMON}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="salmon";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_SILVER}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="silver";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_TAN}" ];           then __BU_MAIN_COLORS_ITOA_COLOR="tan";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TEAL" ];          then __BU_MAIN_COLORS_ITOA_COLOR="teal";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_TURQUOISE" ];     then __BU_MAIN_COLORS_ITOA_COLOR="turquoise";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_VIOLET" ];        then __BU_MAIN_COLORS_ITOA_COLOR="violet";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_TEAL}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="teal";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_TURQUOISE}" ];     then __BU_MAIN_COLORS_ITOA_COLOR="turquoise";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_VIOLET}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="violet";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_WHITE" ];         then __BU_MAIN_COLORS_ITOA_COLOR="white";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_YELLOW" ];        then __BU_MAIN_COLORS_ITOA_COLOR="yellow";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_RESET" ];         then __BU_MAIN_COLORS_ITOA_COLOR="reset";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_WHITE}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="white";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_YELLOW}" ];        then __BU_MAIN_COLORS_ITOA_COLOR="yellow";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_RESET}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="reset";
 
     # Specific colors for text encoding
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_CMD" ];           then __BU_MAIN_COLORS_ITOA_COLOR="CMD";
-    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_ERROR}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="ERROR";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_FUNCTION" ];      then __BU_MAIN_COLORS_ITOA_COLOR="FUNCTION";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_CMD}" ];           then __BU_MAIN_COLORS_ITOA_COLOR="CMD";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_ERROR}" ];         then __BU_MAIN_COLORS_ITOA_COLOR="ERROR";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_FUNCTION}" ];      then __BU_MAIN_COLORS_ITOA_COLOR="FUNCTION";
 
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_HIGHLIGHT" ];     then __BU_MAIN_COLORS_ITOA_COLOR="HIGHLIGHT";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_NEWSTEP" ];       then __BU_MAIN_COLORS_ITOA_COLOR="NEWSTEP";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_PATH" ];          then __BU_MAIN_COLORS_ITOA_COLOR="PATH";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_HIGHLIGHT}" ];     then __BU_MAIN_COLORS_ITOA_COLOR="HIGHLIGHT";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_NEWSTEP}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="NEWSTEP";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_PATH}" ];          then __BU_MAIN_COLORS_ITOA_COLOR="PATH";
 
-    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_SUCCESS}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="SUCCESS";
-    elif    [ "$p_code" == "$__BU_MAIN_COLOR_CODE_VAR" ];           then __BU_MAIN_COLORS_ITOA_COLOR="VAR";
-    elif    [ "$p_code" == "${__BU_MAIN_COLOR_CODE_WARNING}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="WARNING";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_SUCCESS}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="SUCCESS";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_VAR}" ];           then __BU_MAIN_COLORS_ITOA_COLOR="VAR";
+    elif    [ "${p_code}" == "${__BU_MAIN_COLOR_CODE_WARNING}" ];       then __BU_MAIN_COLORS_ITOA_COLOR="WARNING";
 
     fi
 
     # Formatting the text according to the user's preference.
-    if      [ -z "$p_fmt" ]; then return 0;
-    elif    [[ "${p_fmt^^}" == UP?(PER)?([[:space:]])?(CASE) ]];    then BU.Main.Text.ToUppercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
-    elif    [[ "${p_fmt,,}" == low?(er)?([[:space:]])?(case) ]];    then BU.Main.Text.ToLowercase "$__BU_MAIN_COLORS_ITOA_COLOR"; return 0;
+    if      [ -z "${p_fmt}" ]; then return 0;
+    elif    [[ "${p_fmt^^}" == UP?(PER)?([[:space:]])?(CASE) ]];    then BU.Main.Text.ToUppercase "${__BU_MAIN_COLORS_ITOA_COLOR}"; return 0;
+    elif    [[ "${p_fmt,,}" == low?(er)?([[:space:]])?(case) ]];    then BU.Main.Text.ToLowercase "${__BU_MAIN_COLORS_ITOA_COLOR}"; return 0;
 
     fi;
 
@@ -423,36 +423,36 @@ __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text'
 ## SETTING TEXT FORMAT
 ## DEBUG ID : setting-text-format
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT:setting-text-format":
+__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}:setting-text-format":
 
-# Checking if the "$__BU_MAIN_STAT_TXT_FMT" status value is set to "true".
+# Checking if the "${__BU_MAIN_STAT_TXT_FMT}" status value is set to "true".
 function BU.Main.TextFormat.SetTextFormat()
 {
     #**** Parameters ****
-    #   $1  -> "tput" command's text formatting option.
-    #   $2  -> Corresponding ANSI escape sequence (useful if the "tput" command is not detected or unavailable).
+    #   ${1}    -> "$(tput)" command's text formatting option.
+    #   ${2}    -> Corresponding ANSI escape sequence (useful if the "$(tput)" command is not detected or unavailable).
 
     #**** Code ****
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "$(bash -x)".
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT" \
-        "$__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT";
+        "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}" \
+        "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT}";
 
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" == "true" ]; then
-        if [ -n "$1" ]; then
+        if [ -n "${1}" ]; then
 			if command -v "tput" &> /dev/null; then
 
 				# Formatting text with the tput command or directly with the backslash escapes.
-				tput "$1" || echo -ne "\e[$2m";	# If the "tput" command fails, then the text is encoded with ANSI control sequences.
+				tput "${1}" || echo -ne "\e[${2}m";	# If the "$(tput)" command fails, then the text is encoded with ANSI control sequences.
 
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
-				echo -ne "\e[$2m"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+				echo -ne "\e[${2}m"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
-        # In case there's no value passed as first argument (like if the wanted tput option is unknown), the script only echoes its ANSI escape sequence.
+        # In case there's no value passed as first argument (like if the wanted "$(tput)" command's option is unknown), the script only echoes its ANSI escape sequence.
         else
-            echo -ne "\e[$2m";
+            echo -ne "\e[${2}m";
 
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi

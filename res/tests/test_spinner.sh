@@ -4,22 +4,22 @@
 function BU.Main.PosixTerm.DisplaySpinner()
 {
     #**** Parameters ****
-    p_string=$1
-    p_countdown=$2
-    p_pid=$3
+    p_string=${1:-$'\0'};
+    p_countdown=${2:-$'\0'};
+    p_pid=${3:-$'\0'};
 
     #**** Variables ****
-    i=1
-    sp="/-\|"
+    i=1;
+    sp="/-\|";
 
     #**** Code ****
-    echo -n ' '
+    echo -n ' ';
 
-    echo ">>>> $p_string"
+    echo ">>>> ${p_string}";
 
     while true; do
-        printf "\b${sp:i++%${#sp}:1}"
+        printf "\b${sp:i++%${#sp}:1}";
     done
 }
 
-BU.Main.PosixTerm.DisplaySpinner "Chaîne de caractères de test" "2" "$!"
+BU.Main.PosixTerm.DisplaySpinner "Chaîne de caractères de test" "2" "${!}";

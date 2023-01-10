@@ -49,12 +49,12 @@
 # Language (mandatory argument).
 
 # Usage : this argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
-__BU_ARG_LANG=$1;
+__BU_ARG_LANG=${1};
 
 shift 1;
 
 # Fitting the arguments following the "${__BU_ARG_DISP}" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
-__BU_ARG_ARRAY=("$@");
+__BU_ARG_ARRAY=("${@}");
 
 # -----------------------------------------------
 

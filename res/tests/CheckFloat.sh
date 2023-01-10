@@ -3,31 +3,32 @@
 function Check
 {
 	# Supports '+' and '-' signs
-	if [[ ! "$1" =~ ^[+-]?([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-    	echo -e "Test 1 : NaN"; exit 1
+	if [[ ! "${1}" =~ ^[+-]?([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+    	echo -e "Test 1 : NaN"; exit 1;
 	else
-		echo -e "Test 1 : Number"
+		echo -e "Test 1 : Number";
 	fi
 
-	if [[ ! "$1" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
-		echo -e "Test 2 : NaN"
+	if [[ ! "${1}" =~ ^([0-9]+\.?|[0-9]*\.[0-9]+)$ ]]; then
+		echo -e "Test 2 : NaN";
 	else
-		echo -e "Test 2 : Number"
+		echo -e "Test 2 : Number";
 	fi
-	echo
+
+	echo;
 }
 
-Check 1
-Check +1
-Check -1
-echo
+Check 1;
+Check +1;
+Check -1;
+echo;
 
-Check .1
-Check +.1
-Check -.1
-echo
+Check .1;
+Check +.1;
+Check -.1;
+echo;
 
-Check 1.1
-Check +1.1
-Check -1.1
-echo
+Check 1.1;
+Check +1.1;
+Check -1.1;
+echo;

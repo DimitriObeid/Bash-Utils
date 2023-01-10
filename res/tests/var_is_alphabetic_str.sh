@@ -2,11 +2,11 @@
 
 function char__()
 {
-	if [[ "$1" =~ [^a-zA-Z\ ] ]]; then
-    		echo "Not a valid input"
+	if [[ "${1}" =~ [^a-zA-Z\ ] ]]; then
+    		echo "Not a valid input";
 	else
-    		echo "Its a valid input"
+    		echo "It is a valid input";
 	fi
 }
 
-char__ "$1"
+char__ "${1}"

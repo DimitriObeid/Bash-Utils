@@ -3,23 +3,23 @@
 function BU.Main.Text.KeepFormattingl
 {
     #**** Parameters ****
-    p_string=$1
+    p_string=${1:-$'\0'};
 
     #**** Code ****
-    echo -e "$p_string" | tr '[lower]' '[lower]'
+    echo -e "${p_string}" | tr '[lower]' '[lower]';
 }
 
 function BU.Main.Text.KeepFormattingU
 {
 	#**** Parameters ****
-	p_string=$1
+	p_string=${1:-$'\0'};
 
 	#**** Code ****
-	echo -e "$p_string" | tr '[upper]' '[upper]'
+	echo -e "${p_string}" | tr '[upper]' '[upper]';
 }
 
-string1="Test de la fonction $(BU.Main.Text.KeepFormattingl "BU.Main.Text.KeepFormattingl") en LOW"
-echo -e "${string1,,}"
+string1="Test de la fonction $(BU.Main.Text.KeepFormattingl "BU.Main.Text.KeepFormattingl") en LOW";
+echo -e "${string1,,}";
 
-string2="Test de la fonction $(BU.Main.Text.KeepFormattingU "BU.Main.Text.KeepFormattingU") EN up"
-echo -e "${string2^^}"
+string2="Test de la fonction $(BU.Main.Text.KeepFormattingU "BU.Main.Text.KeepFormattingU") EN up";
+echo -e "${string2^^}";

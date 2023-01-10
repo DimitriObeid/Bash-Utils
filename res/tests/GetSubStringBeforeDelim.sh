@@ -3,51 +3,51 @@
 # Rewriting the "ReverseStringWordsOrder.sh" file's content in order to write the new string in the correct order.
 function ReverseStringOrder()
 {
-	local string=$1;
-	local delim=$2;
+	local string=${1:-$'\0'};
+	local delim=${2:-$'\0'};
 
 	local reversed="";
 
-	IFS="$delim" read -ra line <<< "$string";
+	IFS="${delim}" read -ra line <<< "$string";
 
 	let x=${#line[@]}-1;
 
-	while [ "$x" -ge 0 ]; do
-        	if [ "$x" -gt 0 ]; then
-                	reversed="$reversed${line[x]}$delim";
+	while [ "${x}" -ge 0 ]; do
+        	if [ "${x}" -gt 0 ]; then
+                	reversed="${reversed}${line[x]}${delim}";
         	else
-            		reversed="$reversed${line[x]}";
+            		reversed="${reversed}${line[x]}";
         	fi
 
       		let x--;
 	done
 
-	echo "$reversed";
+	echo "${reversed}";
 }
 
 function CutSubStringBeforeNthDelim()
 {
-        string=$1;
-        delim=$2;
+        string=${1:-$'\0'};
+        delim=${2:-$'\0'};
 
-        remainder="$string";
+        remainder="${string}";
         newstr="";
 
         for ((i=0; i<3; i++)); do
-                first="${remainder##*$delim}";
-                remainder="${remainder%$delim*}";
+                first="${remainder##*${delim}}";
+                remainder="${remainder%${delim}*}";
 
-                if [ -z "$newstr" ]; then
-                        newstr="$first"
+                if [ -z "${newstr}" ]; then
+                        newstr="${first}"
                 else
-                        newstr="$newstr$delim$first";
+                        newstr="${newstr}${delim}${first}";
                 fi
         done
 
-	newstr="$(ReverseStringOrder "$newstr" "$delim")";
+	newstr="$(ReverseStringOrder "${newstr}" "${delim}")";
 }
 
 CutSubStringBeforeNthDelim "one_two_three_four_five" "_";
 
-echo "Rem : $remainder";
-echo "New : $newstr";
+echo "Rem : ${remainder}";
+echo "New : ${newstr}";
