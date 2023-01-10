@@ -470,7 +470,7 @@ function BU.Main.Files.DeleteFile()
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
 
     #**** Parameters ****
-    local p_path=${1};          # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to delete.
+    local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to delete.
     local p_security=${2:-no};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Preventing the file to be deleted automatically (default : "no" --> Ask the permission to the user).
 
     #**** Code ****

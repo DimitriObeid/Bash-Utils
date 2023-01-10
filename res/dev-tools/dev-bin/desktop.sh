@@ -37,7 +37,7 @@ fi
 ## ARGUMENTS DEFINITION
 
 # Path of the file to create, including its name.
-__P_DESKTOP_PATH=${1};
+__P_DESKTOP_PATH=${1:-$'\0'};
 
 # -----------------------------------------------
 

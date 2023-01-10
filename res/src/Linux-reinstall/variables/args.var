@@ -14,11 +14,11 @@ ARGV=("${@}");
 ## ARGUMENT VALUES
 
 # Arguments à placer après la commande d'exécution du script pour qu'il s'exécute.
-ARG_USERNAME=${1};      # First argument : username's account.
-ARG_USERNAME_INDEX='1'; # Username argument's index.
+ARG_USERNAME=${1:-$'\0'};   # First argument : username's account.
+ARG_USERNAME_INDEX='1';     # Username argument's index.
 
-ARG_INSTALL=${2};       # Second argument : Le type de paquets à installer (version SIO (travail) ou personnelle (travail + logiciels pour un usage presonnel)).
-ARG_INSTALL_INDEX='2';  # Installation kind argument's index.
+ARG_INSTALL=${2:-$'\0'};    # Second argument : Le type de paquets à installer (version SIO (travail) ou personnelle (travail + logiciels pour un usage presonnel)).
+ARG_INSTALL_INDEX='2';      # Installation kind argument's index.
 
 # -----------------------------------------------
 
@@ -26,10 +26,10 @@ ARG_INSTALL_INDEX='2';  # Installation kind argument's index.
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### OPTIONAL ARGUMENTS
-ARG_DEBUG=${3};         # Argument servant d'utilitaire de déboguage.
-ARG_DEBUG_INDEX='3';    # Debug argument's index.
+ARG_DEBUG=${:-$'\0'3};      # Argument servant d'utilitaire de déboguage.
+ARG_DEBUG_INDEX='3';        # Debug argument's index.
 
-ARG_DEBUG_VAL="debug";  # Valeur de l'agument de déboguage.
+ARG_DEBUG_VAL="debug";      # Valeur de l'agument de déboguage.
 
 # -----------------------------------------------
 

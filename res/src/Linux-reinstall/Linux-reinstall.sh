@@ -73,7 +73,7 @@ __ARGV=("${@}");
 ## MANDATORY ARGUMENTS
 
 # Arguments to call after the script's execution command to make it running correctly.
-__ARG_INSTALL=${1};         # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
+__ARG_INSTALL=${1:-$'\0'};  # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
 __ARG_INSTALL_INDEX='1';    # Packages installation argument's index.
 
 # -----------------------------------------------

@@ -49,7 +49,7 @@
 # Language (mandatory argument).
 
 # Usage : this argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
-__BU_ARG_LANG=${1};
+__BU_ARG_LANG=${1:-$'\0'};
 
 shift 1;
 
@@ -574,7 +574,7 @@ function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}";
 function PrintFilesWhichWereNotChmoded()
 {
     #**** Parameters ****
-    local __compiled_stable_file_parent_dir=${1}; # ARG TYPE : Dirpath  - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local __compiled_stable_file_parent_dir=${1:-$'\0'}; # ARG TYPE : Dirpath   - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
     printf "${__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}\n" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" >&2;

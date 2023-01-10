@@ -72,10 +72,10 @@ function BU.Main.Headers.DrawLine()
         "${__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS}";
 
 	#**** Parameters ****
-    local p_lineChar=${1:--};   # Alphanumeric char - Default : '-'     - First parameter used to define the desired character when calling the function.
-    local p_lineColor=${2};       # String            - Default : NULL    - Second parameter used to define the desired color of the character when calling the function.
-    local p_strlen=${3};          # Int               - Default : NULL    - Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
-    local p_bgColor=${4};         # String            - Default : NULL    - Setting a background color behind the line.
+    local p_lineChar=${1:--};       # Alphanumeric char     - REQUIRED | DEFAULT : '-'      - DESC : First parameter used to define the desired character when calling the function.
+    local p_lineColor=${2:-$'\0'};  # String                - OPTIONAL | DEFAULT : NULL     - DESC : Second parameter used to define the desired color of the character when calling the function.
+    local p_strlen=${3:-$'\0'};     # Int                   - OPTIONAL | DEFAULT : NULL     - DESC : Getting the lenght of the string, in order to adapt the line's lenght to the string's lenght.
+    local p_bgColor=${4:-$'\0'};    # String                - OPTIONAL : NULL               - DESC : Setting a background color behind the line.
 
     #**** Code ****
 	# Checking if the "${p_lineChar}" parameter's value is a string instead of a single character, and getting the first character only.
@@ -315,7 +315,7 @@ function BU.Main.Headers.Base () {
     __BU_MAIN_STAT_TIME_NEWLINE="${v_stat_time_newline}";   # Resetting the new lines display time's global status variable to its original value.
     __BU_MAIN_STAT_TIME_TXT="${v_stat_time_txt}";           # Resetting the normal text display time's global status variable to its original value.
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; 
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
     return 0;
 }

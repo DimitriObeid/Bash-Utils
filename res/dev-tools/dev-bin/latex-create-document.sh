@@ -45,16 +45,16 @@ fi
 ## ARGUMENTS DEFINITION
 
 # Targeted language
-__ARG_LANG=${1};
+__ARG_LANG=${1:-$'\0'};
 
 # Type of document (master documentation, configurations, module initializer resources or library functions).
-__ARG_TYPE=${2};
+__ARG_TYPE=${2:-$'\0'};
 
 # Name of the file to create.
-__ARG_FILENAME=${3};
+__ARG_FILENAME=${3:-$'\0'};
 
 # Author's name
-__ARG_AUTHOR=${4};
+__ARG_AUTHOR=${4:-$'\0'};
 
 # -----------------------------------------------
 

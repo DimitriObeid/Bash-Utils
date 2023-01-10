@@ -21,10 +21,10 @@
 ## ARGUMENTS DEFINITION
 
 # Path to the script file to create (mandatory).
-__ARG_PATH=${1};
+__ARG_PATH=${1:-$'\0'};
 
  # Path to the resources file (optional).
- __ARG_SRC=${2};
+ __ARG_SRC=${2:-$'\0'};
 
 # -----------------------------------------------
 
