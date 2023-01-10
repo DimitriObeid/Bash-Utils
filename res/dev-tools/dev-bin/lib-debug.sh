@@ -33,7 +33,7 @@ if [ -s "${debug_tmp_f}" ]; then
 	cat "${debug_tmp_f}" | while read -r line; do
 
         # shellcheck disable=SC2016
-		if line='++++ for _ in $(eval echo -e "{1..$__BU_MAIN_TXT_COLS}")\n++++ echo -n -'; then
+		if line='++++ for _ in $(eval echo -e "{1..${__BU_MAIN_TXT_COLS}}")\n++++ echo -n -'; then
 			for _ in ${#line}; do
 				line="$(echo -e "${line}\b")";
 				BU.EchoDbg "${line}";

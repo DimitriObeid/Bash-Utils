@@ -10,20 +10,20 @@ function RMNewline()
     echo "Input file :";
     echo;
 
-    cat "$__INPUT" > "$__OUTPUT";
+    cat "${__INPUT}" > "${__OUTPUT}";
 
-    tr --delete '\n' < "$__OUTPUT";
+    tr --delete '\n' < "${__OUTPUT}";
 
-    tr -d '\n' < "$__OUTPUT";
+    tr -d '\n' < "${__OUTPUT}";
 
-    cat "$__INPUT" > "$__OUTPUT";
+    cat "${__INPUT}" > "${__OUTPUT}";
 
     echo; echo; echo;
 
     echo "Output file :";
     echo;
 
-    cat "$__OUTPUT"
+    cat "${__OUTPUT}"
 }
 
 RMNewline;

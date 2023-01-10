@@ -63,7 +63,7 @@ fi; exit 1; fi
 
 ## FUNCTIONS
 
-# Sourcing each library file stored into the "function/Hardware" directory, from the "$__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
+# Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
 function BU.Hardware.Initializer.SourceLibrary()
 {
     #**** Variables ****
@@ -79,10 +79,10 @@ function BU.Hardware.Initializer.SourceLibrary()
 
         BU.ModuleInit.CheckIsDebugging && BU.ModuleInit.Msg "Debug mode activated";
 
-		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; }
+		source "${f}" || { BU.ModuleInit.SourcingFailure "${f}" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
-		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY" "$f")";
+		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY}" "${f}")";
 	done
 
 	if [ "${v_loop_error,,}" == 'error' ]; then return 1; fi
@@ -93,7 +93,7 @@ function BU.Hardware.Initializer.SourceLibrary()
 	return 0;
 }
 
-# Sourcing each file listed into the "$__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
+# Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
 function BU.Hardware.Initializer.SourceConfig()
 {
     #**** Variables ****
@@ -102,10 +102,10 @@ function BU.Hardware.Initializer.SourceConfig()
     #**** Code ****
 	# shellcheck disable=SC1090
 	for f in "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		source "$f" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$LINENO"; __BU_HARDWARE_MODULE_LIB_FILES_PATH_ARRAY+=("$f"); v_loop_error='error'; break; };
+		source "${f}" || { BU.ModuleInit.SourcingFailure "$f" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; __BU_HARDWARE_MODULE_LIB_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
-		BU.ModuleInit.Msg "$(printf "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG" "$f")";
+		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG}" "${f}")";
 	done;
 
 	if [ "${v_loop_error,,}" == 'error' ]; then return 1; fi
@@ -123,23 +123,23 @@ function BU.Hardware.Initializer.SourceConfig()
 # Usage function.
 function BU.Hardware.Initializer.Usage()
 {
-    echo >&2; echo "$__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS" >&2;
+    echo >&2; echo "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS}" >&2;
     sleep 2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
     echo >&2;
 
-    echo "$__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____" >&2;
+    echo "${__BU_MODULE_INIT_MSG__INIT_HARDWARE_MODULE__STEP_TWO__USAGE_____}" >&2;
     echo >&2;
 
     echo >&2;
@@ -154,14 +154,14 @@ function BU.Hardware.Initializer.Usage()
 
 #### STEP THREE : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES FROM THE "HARDWARE" MODULE
 
-# Sourcing each library file stored into the "function/Hardware" directory, from the "$__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY" array.
+# Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array.
 BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
-# Sourcing each file listed into the "$__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY" array.
+# Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array.
 BU.Hardware.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # -----------------------------------------------

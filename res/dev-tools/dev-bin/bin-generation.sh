@@ -66,8 +66,8 @@ if [ -z "${__ARG_PATH}" ]; then
 
     exit 1;
 
-elif [ -f "$__ARG_PATH" ]; then
-    echo "WARNING !! THE $__ARG_PATH FILE ALREADY EXISTS !!!" >&2; echo >&2;
+elif [ -f "${__ARG_PATH}" ]; then
+    echo "WARNING !! THE ${__ARG_PATH} FILE ALREADY EXISTS !!!" >&2; echo >&2;
     echo "The file will not be overwritten" >&2;
     echo >&2;
 
