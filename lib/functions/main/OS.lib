@@ -61,10 +61,10 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID="os::android";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID}::checking-informations";
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU.Main.OS.IsAndroidTermux()               { if [[ "$OSTYPE" == 'linux-android' ]];                            then    return 0; else  return 1; fi }
+function BU.Main.OS.IsAndroidTermux()               { if [[ "${OSTYPE}" == 'linux-android' ]];                          then    return 0; else  return 1; fi }
 
 # Checking the current Android version.
 function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
@@ -90,7 +90,7 @@ function BU.Main.OS.IsAndroidRooted()               { return 0; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID}::gathering-informations";
 
 # Getting the Android device model.
 function BU.Main.OS.GetAndroidDevice()
@@ -118,7 +118,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD}::checking-informations";
 
 # Checking if the current OS is BSD (general types).
 function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
@@ -128,7 +128,7 @@ function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD ||
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -144,17 +144,17 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD="os::free-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD}::checking-informations";
 
 # Checking if current OS is FreeBSD.
-function BU.Main.OS.IsFreeBSD()                   	{ if [[ "$OSTYPE" == 'FreeBSD' ]];                                  then    return 0; else  return 1; fi }
+function BU.Main.OS.IsFreeBSD()                   	{ if [[ "${OSTYPE}" == 'FreeBSD' ]];                                then    return 0; else  return 1; fi }
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -170,17 +170,17 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD="os::net-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD}::checking-informations";
 
 # Checking if current OS is NetBSD.
-function BU.Main.OS.IsNetBSD()                    	{ if [[ "$OSTYPE" == '' ]];                                         then    return 0; else  return 1; fi }
+function BU.Main.OS.IsNetBSD()                    	{ if [[ "${OSTYPE}" == '' ]];                                       then    return 0; else  return 1; fi }
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -196,17 +196,17 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD="os::open-bsd";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-information
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD}::checking-informations";
 
 # Checking if current OS is OpenBSD.
-function BU.Main.OS.IsOpenBSD()                   	{ if [[ "$OSTYPE" == 'openbsd'* ]];                                 then    return 0; else  return 1; fi }
+function BU.Main.OS.IsOpenBSD()                   	{ if [[ "${OSTYPE}" == 'openbsd'* ]];                               then    return 0; else  return 1; fi }
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -222,7 +222,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS="os::chrome";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS}::checking-informations";
 
 # Checking if current OS is Chrome OS.
 function BU.Main.OS.IsChromeOS()					{ true; }
@@ -232,7 +232,7 @@ function BU.Main.OS.IsChromeOS()					{ true; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -248,17 +248,17 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU="os::haiku";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU}::checking-informations";
 
 # Checking if current OS is Haiku OS.
-function BU.Main.OS.IsHaiku()                     	{ if [[ "$OSTYPE" == 'haiku' ]];                                    then    return 0; else  return 1; fi }
+function BU.Main.OS.IsHaiku()                     	{ if [[ "${OSTYPE}" == 'haiku' ]];                                  then    return 0; else  return 1; fi }
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -274,35 +274,35 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="os::general-os-functions";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}::checking-informations";
 
 # -----------------------------------------------
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}::gathering-informations";
 
 # Checking the current operating system, by using the functions declared above.
 function BU.Main.OS.GetCurrentOS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS";
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****
-    BU.Main.OS.IsAndroidTermux        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-	BU.Main.OS.IsChromeOS				&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsFreeBSD              	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsHaiku                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOpenBSD             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinux                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSLWin10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSLWin11        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsLinuxWSL             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsNetBSD               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsWindows10            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsWindows11            	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-    BU.Main.OS.IsOSX                    && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.OS.IsAndroidTermux        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+	BU.Main.OS.IsChromeOS				&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsFreeBSD              	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsHaiku                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsOpenBSD             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsLinux                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsLinuxWSLWin10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsLinuxWSLWin11        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsLinuxWSL             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsNetBSD               	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsOSX                    && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsWindows10            	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsWindows11            	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
     # Return an error code if the OS is not supported.
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -327,29 +327,29 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX="os::linux";
 ## CHECKING INFORMATIONS
 ## DEBUG ID :
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}::checking-informations";
 
 # Checking the name of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistro()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS";
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS}";
 
     #**** Parameters ****
-    local v_distro=$1;  # String    - Default : NULL    - Name of the Linux distribution.
+    local v_distro=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the Linux distribution.
 
     #**** Code ****
 
     BU.Main.OS.IsLinux && {
-        if [ -n "$v_distro" ]; then                      	if BU.Main.OS.GetLinuxDistro "$v_distro"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+        if [ -n "${v_distro}" ]; then                      	if BU.Main.OS.GetLinuxDistro "${v_distro}"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
-            BU.Main.OS.IsLinuxDistroArchLinux             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsLinuxDistroDebian                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsLinuxDistroFedora                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsLinuxDistroLinuxMint             	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsLinuxDistroManjaro               	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-            BU.Main.OS.IsLinuxDistroUbuntu                	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.OS.IsLinuxDistroArchLinux             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            BU.Main.OS.IsLinuxDistroDebian                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            BU.Main.OS.IsLinuxDistroFedora                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            BU.Main.OS.IsLinuxDistroLinuxMint             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            BU.Main.OS.IsLinuxDistroManjaro               	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            BU.Main.OS.IsLinuxDistroUbuntu                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
             # Returning an error code if the distribution is not found.
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -363,48 +363,48 @@ function BU.Main.OS.CheckLinuxDistro()
 function BU.Main.OS.CheckLinuxDistroVersion()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS";
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS}";
 
     #**** Parameters ****
-	local p_distro=$1;	# String    - Default : NULL    - Name of the Linux distribution.
-    local p_version=$2;	# String    - Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+	local p_distro=${1:-$'\0'};     # ARG TYPE : String         - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the Linux distribution.
+    local p_version=${2:-$'\0'};    # ARG TYPE : Int | String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
     BU.Main.OS.IsLinux && {
-        if [ -n "$p_distro" ] && [ -n "$p_version" ]; then
-            if BU.Main.OS.GetLinuxDistro "$p_distro"      	&& BU.Main.OS.GetLinuxDistroVersion "$p_version"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
+        if [ -n "${p_distro}" ] && [ -n "${p_version}" ]; then
+            if BU.Main.OS.GetLinuxDistro "${p_distro}"      	&& BU.Main.OS.GetLinuxDistroVersion "${p_version}"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
             BU.Main.OS.IsLinuxDistroDebian && {
-                BU.Main.OS.IsLinuxDistroDebian5             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian6             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian7             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian8             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian9             && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian10            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroDebian11            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroDebian5             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian6             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian7             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian8             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian9             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian10            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian11            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
             }
 
             BU.Main.OS.IsLinuxDistroFedora && {
-                BU.Main.OS.IsLinuxDistroFedora18            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora19            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora20            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora21            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora22            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora23            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora24            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora25            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora26            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora27            && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora28          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora29          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora30          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora31          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora32          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora33          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora34          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora35          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroFedora36          	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroFedora18            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora19            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora20            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora21            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora22            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora23            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora24            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora25            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora26            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora27            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora28          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora29          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora30          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora31          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora32          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora33          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora34          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora35          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora36          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -413,32 +413,32 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             }
 
             BU.Main.OS.IsLinuxDistroUbuntu && {
-                BU.Main.OS.IsLinuxDistroUbuntu10_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu10_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu11_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu11_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu12_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu12_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu13_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu13_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu14_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu14_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu15_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu15_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu16_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu16_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu17_04         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu17_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu18_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu18_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu19_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu19_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu20_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu20_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu21_04        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu21_10        	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu22_04       	&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-                BU.Main.OS.IsLinuxDistroUbuntu22_10         && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.OS.IsLinuxDistroUbuntu10_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu10_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu11_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu11_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu12_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu12_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu13_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu13_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu14_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu14_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu15_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu15_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu16_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu16_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu17_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu17_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu18_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu18_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu19_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu19_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu20_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu20_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu21_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu21_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu22_04       	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu22_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -464,7 +464,7 @@ function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
 
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
-function BU.Main.OS.IsLinux()                           { [[ "$OSTYPE" == 'linux'* ]]                               &&      return 0;       return 1; }
+function BU.Main.OS.IsLinux()                           { [[ "${OSTYPE}" == 'linux'* ]]                             &&      return 0;       return 1; }
 
 # Checking if current Linux distribuion is Arch Linux.
 function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
@@ -578,13 +578,13 @@ function BU.Main.OS.IsLinuxKernelMajor5()               { return 0; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}::gathering-informations";
 
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
 function BU.Main.OS.GetLinuxDistro()
 {
     #**** Parameters ****
-    local v_distro=${1:-NULL};  # String    # Default : NULL    - Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+    local v_distro=${1:-NULL}; # ARG TYPE : String      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
@@ -592,17 +592,17 @@ function BU.Main.OS.GetLinuxDistro()
 
             X="$(cat '/proc/version')";
 
-            echo "$X" | grep -qi "$v_distro" || return 1;
+            echo "${X}" | grep -qi "${v_distro}" || return 1;
 
             return 0;
         };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
         BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         return 1;
     else
@@ -613,14 +613,14 @@ function BU.Main.OS.GetLinuxDistro()
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
 function BU.Main.OS.GetLinuxDistroVersion()
 {
-    BU.Main.OS.GetLinuxDistro "$1" || return 1; return 0;
+    BU.Main.OS.GetLinuxDistro "${1}" || return 1; return 0;
 }
 
 # Getting the major version of the Kernel of the currently used Linux distribution
 function BU.Main.OS.GetLinuxKernelMajorVersion()
 {
     #**** Parameters ****
-    local v_major=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's major version.
+    local v_major=${1:-NULL}; # ARG TYPE : Int   - REQUIRED | DEFAULT VAL : NULL    - DESC : Linux kernel's major version.
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
@@ -628,31 +628,29 @@ function BU.Main.OS.GetLinuxKernelMajorVersion()
 
             X="$(cat '/proc/version')";
 
-            echo "$X" | grep -qi "$v_major" || return 1;
+            echo "${X}" | grep -qi "${v_major}" || return 1;
 
             return 0;
         };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
         BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         return 1;
     else
         return 1;
     fi
-
-    return 0;
 }
 
 # Getting the minor version of the Kernel of the currently used Linux distribution
 function BU.Main.OS.GetLinuxKernelMinorVersion()
 {
     #**** Parameters ****
-    local v_minor=${1:-NULL};   # Int   - Default : NULL    - Linux kernel's minor version.
+    local v_minor=${1:-NULL}; # ARG TYPE : Int      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux kernel's minor version.
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
@@ -660,31 +658,29 @@ function BU.Main.OS.GetLinuxKernelMinorVersion()
 
             X="$(cat '/proc/version')";
 
-            echo "$X" | grep -qi "$v_minor" || return 1;
+            echo "${X}" | grep -qi "${v_minor}" || return 1;
 
             return 0;
         };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
         BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         return 1;
     else
         return 1;
     fi
-
-    return 0;
 }
 
 # Getting the version of the Kernel of the currently used Linux distribution by reading the content of the "/proc/version" file on Linux.
 function BU.Main.OS.GetLinuxKernelVersion()
 {
     #**** Parameters ****
-    local v_kernelVer=${1:-NULL};   # String    - Default : NULL    - Linux kernel's version (can be passed like this : '5.15.0-53', or this : '5.15.0-53-generic').
+    local v_kernelVer=${1:-NULL}; # ARG TYPE : Int | String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux kernel's version (can be passed like this : '5.15.0-53', or this : '5.15.0-53-generic').
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
@@ -692,17 +688,17 @@ function BU.Main.OS.GetLinuxKernelVersion()
 
             X="$(cat '/proc/version')";
 
-            echo "$X" | grep -qi "$v_kernelVer" || return 1;
+            echo "${X}" | grep -qi "${v_kernelVer}" || return 1;
 
             return 0;
         };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
         BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "$LINENO";
+        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         return 1;
     else
@@ -724,32 +720,32 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX="os::osx";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}::checking-informations";
 
 # Checking the version of the currently used OS X operating system.
 function BU.Main.OS.CheckOSXVersion()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX" "$__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS";
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS}";
 
 	#**** Parameters ****
-    local p_version=$1;	# String    # Default : NULL    - OS X version (can be an integer or a string (like 'Yosemite' for Mac OS X 10.10)).
+    local p_version=${1:-$'\0'}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : OS X version (can be an integer or a string (like 'Yosemite' for Mac OS X 10.10)).
 
 	#**** Code ****
 	BU.Main.OS.IsOSX && {
 		# TODO : Manage the dots between the major and the minor versions.
-		if [ -n "$p_version" ]; then if BU.Main.Checkings.IsInt "$p_version"; then sw_vers | grep -q "$p_version"; return 0; fi;
+		if [ -n "${p_version}" ]; then if BU.Main.Checkings.IsInt "${p_version}"; then sw_vers | grep -q "${p_version}"; return 0; fi;
 
 		else
-			BU.Main.OS.IsOSXMavericks					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXYosemite					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXElCapitan					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXSierra						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXHighSierra					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXMojave						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXCatalina					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXBigSur						&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-			BU.Main.OS.IsOSXMonterey					&& BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.OS.IsOSXMavericks					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXYosemite					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXElCapitan					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXSierra						&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXHighSierra					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXMojave						&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXCatalina					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXBigSur						&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+			BU.Main.OS.IsOSXMonterey					&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
             # Returning an error code if the specific version is not found.
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -760,7 +756,7 @@ function BU.Main.OS.CheckOSXVersion()
 }
 
 # Checking if current OS is OSx.
-function BU.Main.OS.IsOSX()                             { if [[ "$OSTYPE" == 'darwin'* ]];                                      then return 0; else return 1; fi;                    }
+function BU.Main.OS.IsOSX()                             { if [[ "${OSTYPE}" == 'darwin'* ]];                                    then return 0; else return 1; fi;                    }
 
 # Checking OSX versions.
 function BU.Main.OS.IsOSXMavericks()					{ if command -v sw_vers > /dev/null; then if sw_vers | grep -q 10.9; 	then return 0; else return 1; fi; else return 1; fi; }
@@ -778,7 +774,7 @@ function BU.Main.OS.IsOSXMonterey()                     { if command -v sw_vers 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -794,7 +790,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS="os::vms";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS}::checking-informations";
 
 # Checking if the system is running in Qemu()
 function BU.Main.OS.IsRunningInQemu()               { true; }
@@ -813,7 +809,7 @@ function BU.Main.OS.IsVirtualized()                 { true; }
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS}::gathering-informations";
 
 # -----------------------------------------------
 
@@ -829,7 +825,7 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS="os::windows";
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS::checking-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS}::checking-informations";
 
 # Checking the Microsoft Windows version.
 function BU.Main.Checkings.CheckOSWindowsVersion()
@@ -838,11 +834,9 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
     local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
 
     #**** Code ****
-    if [ -z "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
+    if [ -z "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
 
-    if [ "$p_versionNumber" -eq "$__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER" ]; then return 0; else return 1; fi
-
-    return 0;
+    if [ "${p_versionNumber}" -eq "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then return 0; else return 1; fi
 }
 
 # Checking if the current Windows' architecture is 32 bits.
@@ -898,7 +892,7 @@ function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microso
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
-__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="$__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS::gathering-informations";
+__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS}::gathering-informations";
 
 # -----------------------------------------------
 

@@ -61,18 +61,18 @@ __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS="textformat::colors";
 ## GETTING COLOR CODES FROM FILES
 ## DEBUG ID : getting-color-codes-from-files
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="$__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS::getting-color-codes-from-files";
+__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::getting-color-codes-from-files";
 
 # Writing the error messages in a single location.
 function BU.Main.TextFormat.CannotCreateRessource()
 {
     #**** Parameters ****
-    local p_file=$1;
-    local p_fnct=$2;
-    local p_line=$3;
+    local p_file=${1};
+    local p_fnct=${2};
+    local p_line=${3};
 
-    local p_path=$4;
-    local p_type=$5;
+    local p_path=${4};
+    local p_type=${5};
 
     #**** Code ****
     echo "IN $p_file, FUNCTION $p_fnct, LINE $p_line --> ERROR : THE ${p_path} $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
