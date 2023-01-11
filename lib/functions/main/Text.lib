@@ -351,6 +351,23 @@ function BU.Main.Text.GetCharacterOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# Get the very first character of a string, and cut everything that follows this character.
+function BU.Main.Text.GetFirstCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    echo "${p_string:0:1}"; return 0;
+}
+
 # Get the very first field of a string, and cut everything that follows the first delimiter.
 function BU.Main.Text.GetFirstFieldBeforeDelim()
 {
@@ -367,6 +384,30 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     echo "${p_string%%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Get the very last character of a string, and cut the preceding characters.
+function BU.Main.Text.GetLastCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Variables ****
+    declare -i v_length;        # VAR TYPE : Int        - DESC : Storing the length of the character.
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Getting the number of characters from this string.
+    v_length="${#p_string}";
+
+    # Printing the wanted character.
+    echo "${p_string:$(( v_length - 1 )):1}"; return 0;
 }
 
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.

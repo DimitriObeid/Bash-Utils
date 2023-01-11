@@ -1928,6 +1928,31 @@ function BU.Main.Args__Text.GetCharacterOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# "BU.Main.Text.GetFirstCharacter()" and "BU.Main.Text.GetLastCharacter()" functions.
+function BU.Main.Args__Text.GetFirstLastCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    local p_filename=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${4:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
+
+    #**** Code ****
+    BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
+
+    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
 # "BU.Main.Args__Text.GetSubStringAfterDelim()" function.
 function BU.Main.Args__Text.GetSubStringAfterDelim()
 {
