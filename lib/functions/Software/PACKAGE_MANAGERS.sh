@@ -64,29 +64,57 @@ fi; exit 1; fi
 ## PACKAGE MANAGERS INSTALLATION
 
 # Installing the Node package manager for Linux.
-function BU.SoftwarePackageManagersInstallNPMLinux()
-{
-	#**** Code ****
-	BU.Main.OS.IsLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
-	return 0;
-}
-
-# Installing the "Snap" package manager.
-function BU.SoftwarePackageManagersInstallSnapLinux()
+function BU.Software.PackageManagers.InstallNPM.Linux()
 {
 	#**** Code ****
 	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
+
+# Installing the "Snap" package manager (Linux only).
+function BU.Software.PackageManagers.InstallSnap.Linux()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Defining an alias, if the user does not want to type the ".Linux" at the end of the name of the function.
+alias BU.Software.PackageManagers.InstallSnap="Software.PackageManagers.InstallSnap.Linux";
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS INSTALL CHECKING
+
+# Checking if NPM is installed on a Linux computer.
+function BU.Software.PackageManagers.IsNPMInstalled.Linux()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the "Snap" package manager is installed on a Linux computer.
+function BU.Software.PackageManagers.IsSnapInstalled.Linux()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Defining an alias, if the user does not want to type the ".Linux" at the end of the name of the function.
+alias BU.Software.PackageManagers.IsSnapInstalled="Software.PackageManagers.IsSnapInstalled.Linux";
 
 # -----------------------------------------------
 
 ## PACKAGE MANAGERS UPDATE
 
 # Updating the Node package manager for Linux.
-function BU.SoftwarePackageManagersUpdateNPMLinux()
+function BU.Software.PackageManagers.UpdateNPM.Linux()
 {
 	#**** Code ****
 	BU.Main.OS.IsLinux || {  BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -94,14 +122,17 @@ function BU.SoftwarePackageManagersUpdateNPMLinux()
 	return 0;
 }
 
-# Updating the "Snap" package manager.
-function BU.SoftwarePackageManagersUpdateSnapLinux()
+# Updating the "Snap" package manager (Linux only).
+function BU.Software.PackageManagers.UpdateSnap.Linux()
 {
 	#**** Code ****
 	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
 	return 0;
 }
+
+# Defining an alias, if the user does not want to type the ".Linux" at the end of the name of the function.
+alias BU.Software.PackageManagers.UpdateSnap="Software.PackageManagers.UpdateSnap.Linux";
 
 # -----------------------------------------------
 
@@ -128,8 +159,8 @@ function BU.SoftwarePackageManagersUpdateSnapLinux()
 
 ## PACKAGE MANAGERS INSTALLATION
 
-# Install Homebrew on OSX.
-function BU.SoftwarePackageManagersInstallHomebrewOSX()
+# Installing Homebrew on OSX.
+function BU.Software.PackageManagers.InstallHomebrew.OSX()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -137,8 +168,8 @@ function BU.SoftwarePackageManagersInstallHomebrewOSX()
     return 0;
 }
 
-# Install NPM on OSX.
-function BU.SoftwarePackageManagersInstallNPMOSX()
+# Installing NPM on OSX.
+function BU.Software.PackageManagers.InstallNPM.OSX()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -148,10 +179,23 @@ function BU.SoftwarePackageManagersInstallNPMOSX()
 
 # -----------------------------------------------
 
+## PACKAGE MANAGERS INSTALL CHECKING
+
+# Checking if NPM is installed on a Mac.
+function BU.Software.PackageManagers.IsNPMInstalled.OSX()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
 ## PACKAGE MANAGERS UPDATE
 
 # Update Homebrew.
-function BU.SoftwarePackageManagersUpdateHomebrewOSX()
+function BU.Software.PackageManagers.UpdateHomebrew.OSX()
 {
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
@@ -188,7 +232,7 @@ function BU.SoftwarePackageManagersUpdateHomebrewOSX()
 ## PACKAGE MANAGERS INSTALLATION
 
 # Installing the Node package manager for Windows.
-function BU.SoftwarePackageManagersInstallNPMWindows()
+function BU.Software.PackageManagers.InstallNPM.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -197,7 +241,29 @@ function BU.SoftwarePackageManagersInstallNPMWindows()
 }
 
 # Installing Chocolatey for Windows.
-function BU.SoftwarePackageManagersInstallChocolateyWindows()
+function BU.Software.PackageManagers.InstallChocolatey.Windows()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+## PACKAGE MANAGERS INSTALL CHECKING
+
+# Checking if NPM is installed on a Windows PC.
+function BU.Software.PackageManagers.IsNPMInstalled.Windows()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if Chocolatey is installed on a Windows PC.
+function BU.Software.PackageManagers.IsChocolateyInstalled.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -210,7 +276,7 @@ function BU.SoftwarePackageManagersInstallChocolateyWindows()
 ## PACKAGE MANAGERS UPDATE
 
 # Updating the Node package manager for Windows.
-function BU.SoftwarePackageManagersInstallNPMLinux()
+function BU.Software.PackageManagers.UpdateNPM.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -219,7 +285,7 @@ function BU.SoftwarePackageManagersInstallNPMLinux()
 }
 
 # Updating Chocolatey for Windows.
-function BU.SoftwarePackageManagersInstallChocolateyWindows()
+function BU.Software.PackageManagers.UpdateChocolatey.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -236,11 +302,27 @@ function BU.SoftwarePackageManagersInstallChocolateyWindows()
 
 ## PACKAGE INSTALLATION
 
+# Installing a Node package in the user's project "" and "" files.
+function BU.Software.PackageManagers.InstallWithNPM.Windows()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
 
 # -----------------------------------------------
 
 ## PACKAGE UPDATE
 
+# Updating a Node package in the user's project "" and "" files.
+function BU.Software.PackageManagers.UpdateWithNPM.Windows()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
 
 # -----------------------------------------------
 
@@ -253,7 +335,7 @@ function BU.SoftwarePackageManagersInstallChocolateyWindows()
 ## RESOURCES FUNCTIONS.
 
 # Quick writing if the target operating system is not found.
-function BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS()
+function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 {
     BU.Main.Echo.Error ""; BU.Main.Echo.Newline;
 }
@@ -263,19 +345,28 @@ function BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS()
 ## PACKAGE MANAGERS INSTALLATION
 
 # Install NPM on several platforms.
-function BU.SoftwarePackageManagersInstallNPM()
+function BU.Software.PackageManagers.InstallNPM()
 {
-    BU.Main.OS.IsLinux   && BU.SoftwarePackageManagersInstallNPMLinux     &&  return 0;
-    BU.Main.OS.IsOSX       && BU.SoftwarePackageManagersInstallNPMOSX       &&  return 0;
-    BU.Main.OS.IsWindows && BU.SoftwarePackageManagersInstallNPMWindows   &&  return 0;
+    BU.Main.OS.IsLinux      && BU.Software.PackageManagers.InstallNPM.Linux     &&  return 0;
+    BU.Main.OS.IsOSX        && BU.Software.PackageManagers.InstallNPM.OSX       &&  return 0;
+    BU.Main.OS.IsWindows    && BU.Software.PackageManagers.InstallNPM.Windows   &&  return 0;
 
-    BU.SoftwarePackageManagersSoftwareNotAvailableForThisOS;               return 1;
+    BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
 
 # -----------------------------------------------
 
 ## PACKAGE MANAGERS UPDATE
 
+# Updating NPM on several platforms.
+function BU.Software.PackageManagers.UpdateNPM()
+{
+    BU.Main.OS.IsLinux      && BU.Software.PackageManagers.UpdateNPM.Linux     &&  return 0;
+    BU.Main.OS.IsOSX        && BU.Software.PackageManagers.UpdateNPM.OSX       &&  return 0;
+    BU.Main.OS.IsWindows    && BU.Software.PackageManagers.UpdateNPM.Windows   &&  return 0;
+
+    BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
+}
 
 # -----------------------------------------------
 

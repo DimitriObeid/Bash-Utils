@@ -61,7 +61,7 @@ function BU.Hardware.Ports.GetUSBPortsNumber()
 
 # Getting the number of available USB ports.
 function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
-{²
+{
     return 0;
 }
 

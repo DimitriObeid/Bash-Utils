@@ -59,12 +59,12 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### PHP FRAMEWORKS
+#### JAVASCRIPT FRAMEWORKS
 
-## LINUX VERSIONS (PHP)
+## LINUX VERSIONS (JAVASCRIPT)
 
-# Installing Laravel on Linux.
-function BU.SoftwareFrameworksInstallLaravelLinux()
+# Installation of AnglarJS on Linux.
+function BU.Software.Frameworks.installAngularJS.Linux()
 {
     # Checking if the current system type is Linux.
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -72,8 +72,89 @@ function BU.SoftwareFrameworksInstallLaravelLinux()
     return 0;
 }
 
-# Installing Symfony on Linux.
-function BU.SoftwareFrameworksInstallSymfonyLinux()
+# Installation of React JS on Linux.
+function BU.Software.Frameworks.installReactJS.Linux()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## MAC OS VERSIONS (JAVASCRIPT)
+
+# Installation of AnglarJS on Mac OS.
+function BU.Software.Frameworks.installAngularJS.OSX()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installation of React JS on Mac OS.
+function BU.Software.Frameworks.installReactJS.OSX()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## WINDOWS VERSIONS (JAVASCRIPT)
+
+# Installation of AnglarJS on Windows.
+function BU.Software.Frameworks.installAngularJS.Windows()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installation of React JS on Windows.
+function BU.Software.Frameworks.installReactJS.Windows()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PHP FRAMEWORKS
+
+## LINUX VERSIONS (PHP)
+
+# Installation of CakePHP on Linux.
+function BU.Software.Frameworks.InstallCakePHP.Linux()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installatiohn of Laravel on Linux.
+function BU.Software.Frameworks.InstallLaravel.Linux()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installation of Symfony on Linux.
+function BU.Software.Frameworks.InstallSymfony.Linux()
 {
     # Checking if the current system type is Linux.
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -85,8 +166,8 @@ function BU.SoftwareFrameworksInstallSymfonyLinux()
 
 ## MAC OS VERSIONS (PHP)
 
-# Installing laravel on Mac OS.
-function BU.SoftwareFrameworksInstallLaravelOSX()
+# Installation of CakePHP on Mac OS.
+function BU.Software.Frameworks.InstallCakePHP.OSX()
 {
     # Checking if the current system type is OSX.
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -94,8 +175,17 @@ function BU.SoftwareFrameworksInstallLaravelOSX()
     return 0;
 }
 
-# Installing Symfony on Mac OS.
-function BU.SoftwareFrameworksInstallSymfonyOSX()
+# Installation of Laravel on Mac OS.
+function BU.Software.Frameworks.InstallLaravel.OSX()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installation Symfony on Mac OS.
+function BU.Software.Frameworks.InstallSymfony.OSX()
 {
     # Checking if the current system type is OSX.
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -107,8 +197,17 @@ function BU.SoftwareFrameworksInstallSymfonyOSX()
 
 ## WINDOWS VERSIONS (PHP)
 
-# Installing laravel on Windows.
-function BU.SoftwareFrameworksInstallLaravelWindows()
+# Installation of CakePHP on Windows.
+function BU.Software.Frameworks.InstallCakePHP.Windows()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installation of Laravel on Windows.
+function BU.Software.Frameworks.InstallLaravel.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -116,11 +215,19 @@ function BU.SoftwareFrameworksInstallLaravelWindows()
     return 0;
 }
 
-# Installing Symfony on Windows.
-function BU.SoftwareFrameworksInstallSymfonyWindows()
+# Installation of Symfony on Windows.
+function BU.Software.Frameworks.InstallSymfony.Windows()
 {
 	#**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
+
+# -----------------------------------------------
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### RUBY FRAMEWORKS
+
+##

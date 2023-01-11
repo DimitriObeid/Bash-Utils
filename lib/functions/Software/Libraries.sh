@@ -64,7 +64,7 @@ fi; exit 1; fi
 ## LINUX LIBRARIES
 
 # Installing DirectX on Linux (Wine required).
-function BU.SoftwareLibrariesInstallDirectXLinux()
+function BU.Software.Libraries.InstallDirectX.Linux()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -76,7 +76,7 @@ function BU.SoftwareLibrariesInstallDirectXLinux()
 }
 
 # Installing OpenGL on Linux.
-function BU.SoftwareLibrariesInstallOpenGLLinux()
+function BU.Software.Libraries.InstallOpenGL.Linux()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -89,7 +89,7 @@ function BU.SoftwareLibrariesInstallOpenGLLinux()
 ## MAC OS LIBRARIES
 
 # Installing Metal on OSX.
-function BU.SoftwareLibrariesInstallMetalOSX()
+function BU.Software.Libraries.InstallMetal.OSX()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -98,7 +98,7 @@ function BU.SoftwareLibrariesInstallMetalOSX()
 }
 
 # Installing OpenGL on MacOS.
-function BU.SoftwareLibrariesInstallOpenGLOSX()
+function BU.Software.Libraries.InstallOpenGL.OSX()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -111,7 +111,7 @@ function BU.SoftwareLibrariesInstallOpenGLOSX()
 ## WINDOWS LIBRARIES
 
 # Installing DirectX.
-function BU.SoftwareLibrariesInstallDirectXWindows()
+function BU.Software.Libraries.InstallDirectX.Windows()
 {
     #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -120,7 +120,7 @@ function BU.SoftwareLibrariesInstallDirectXWindows()
 }
 
 # Installing OpenGL on Microsoft Windows.
-function BU.SoftwareLibrariesInstallOpenGLWindows()
+function BU.Software.Libraries.InstallOpenGL.Windows()
 {
     #**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
