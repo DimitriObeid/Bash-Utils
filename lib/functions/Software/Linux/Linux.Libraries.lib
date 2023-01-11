@@ -3,15 +3,16 @@
 # ------------------------
 ## SCRIPT'S INFORMATIONS :
 
-# Name          : Packages.sh
+# Name          : Lbraries.sh
 # Module        : Software
+# Description   : 
 # Author(s)     : Dimitri Obeid
 # Version       : beta
 
 # ------------------
 # FILE DESCRIPTION :
 
-# Installation of a specific package according to its package manager (in case the software's package name is not the same on multiple platforms or versions of an OS).
+# Installation script for libraries designed to run on Linux-based operating systems.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -63,6 +64,71 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### GRAPHICAL PROGRAMMING LIBRARIES
 
-##
+## LINUX LIBRARIES
+
+# Installing DirectX on Linux (Wine required).
+function BU.Software.Libraries.InstallDirectX.Linux()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    # Checking if wine is installed on the system.
+    BU.Main.CMDSGetCommandPath 'wine' || return 1;
+
+    return 0;
+}
+
+# Installing OpenGL on Linux.
+function BU.Software.Libraries.InstallOpenGL.Linux()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## MAC OS LIBRARIES
+
+# Installing Metal on OSX.
+function BU.Software.Libraries.InstallMetal.OSX()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installing OpenGL on MacOS.
+function BU.Software.Libraries.InstallOpenGL.OSX()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## WINDOWS LIBRARIES
+
+# Installing DirectX.
+function BU.Software.Libraries.InstallDirectX.Windows()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Installing OpenGL on Microsoft Windows.
+function BU.Software.Libraries.InstallOpenGL.Windows()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}

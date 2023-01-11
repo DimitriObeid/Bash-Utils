@@ -3,7 +3,7 @@
 # ------------------------
 ## SCRIPT'S INFORMATIONS :
 
-# Name          : Packages.sh
+# Name          : PACKAGE_MANAGERS.lib
 # Module        : Software
 # Author(s)     : Dimitri Obeid
 # Version       : beta
@@ -11,7 +11,7 @@
 # ------------------
 # FILE DESCRIPTION :
 
-# Installation of a specific package according to its package manager (in case the software's package name is not the same on multiple platforms or versions of an OS).
+# Package manager functions for the Haiku operating system.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -62,7 +62,3 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-####
-
-##

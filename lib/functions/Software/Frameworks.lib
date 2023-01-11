@@ -5,9 +5,13 @@
 
 # Name          : Frameworks.sh
 # Module        : Software
-# Description   : Frameworks installation script.
 # Author(s)     : Dimitri Obeid
 # Version       : beta
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Frameworks installation functions for each supported operating systems.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

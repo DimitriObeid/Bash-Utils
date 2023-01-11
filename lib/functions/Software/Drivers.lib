@@ -5,9 +5,13 @@
 
 # Name          : Drivers.sh
 # Module        : Software
-# Description   : Library management script.
 # Author(s)     : Dimitri Obeid
 # Version       : beta
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Drivers management script for each supported operating systems.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

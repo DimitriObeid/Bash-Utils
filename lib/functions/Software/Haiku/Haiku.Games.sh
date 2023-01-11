@@ -3,7 +3,7 @@
 # ------------------------
 ## SCRIPT'S INFORMATIONS :
 
-# Name          : Packages.sh
+# Name          : Games.sh
 # Module        : Software
 # Author(s)     : Dimitri Obeid
 # Version       : beta
@@ -11,7 +11,7 @@
 # ------------------
 # FILE DESCRIPTION :
 
-# Installation of a specific package according to its package manager (in case the software's package name is not the same on multiple platforms or versions of an OS).
+# Installation script for video games and related programs designed to run on the Haiku operating system.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
