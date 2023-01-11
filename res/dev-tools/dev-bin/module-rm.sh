@@ -23,7 +23,7 @@
 ## ARGUMENTS DEFINITION
 
 # List of modules to delete from the user's hard drive.
-__ARG_LIST=( "$@" );
+__ARG_LIST=( "${@}" );
 
 # Checking if the module's name was passed as argument when this script was executed.
 if (( ${#__ARG_LIST[@]} == 0 )); then

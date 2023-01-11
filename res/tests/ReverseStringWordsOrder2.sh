@@ -4,8 +4,8 @@ function BU.Main.Text.ReverseStringWordsOrder()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
-    local p_keepd=$3;   # String    - default : NULL    - Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
+    local p_delim=${2:-$'\0'};  # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+    local p_keepd=${3:-$'\0'};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
 
 	#**** Variables ****
 	# Leave this variable empty, it will store the reversed string.
@@ -13,13 +13,13 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
     #**** Code ****
     #
-	IFS="${p_delim}" read -ra line <<< "$p_string";
+	IFS="${p_delim}" read -ra line <<< "${p_string}";
 
 	# shellcheck disable=SC2219
 	let x="${#line[@]}-1";
 
 	while [ "${x}" -ge 0 ]; do
-		if [ "${x}" -gt 1 ]; then reversed="$reversed${line[x]}$p_delim"; else reversed="${reversed}${line[x]}"; fi
+		if [ "${x}" -gt 1 ]; then reversed="${reversed}${line[x]}${p_delim}"; else reversed="${reversed}${line[x]}"; fi
 
 		(( x-- ));
 	done

@@ -9,8 +9,8 @@ function CutSubStringAfterNthDelim()
 	newstr="";
 
 	for ((i=0; i<3; i++)); do
-		first="${remainder%%$delim*}";
-		remainder="${remainder#*$delim}";
+		first="${remainder%%${delim}*}";
+		remainder="${remainder#*${delim}}";
 
 		if [ -z "${newstr}" ]; then
 			newstr="${first}"

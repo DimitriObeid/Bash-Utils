@@ -12,7 +12,7 @@ function SetMainLang
 
     #**** Code ****
     # Don't double quote what follows the path variable, or else, the loop will only run once.
-    BU.EchoInit "In ${BASH_SOURCE[0]}, line $lineno"; for f in $parent_dir/$file; do
+    BU.EchoInit "In ${BASH_SOURCE[0]}, line ${lineno}"; for f in ${parent_dir}/${file}; do
         if source "${f}"; then
             BU.EchoInit "${success_msg} : ${f}";
         else
@@ -23,7 +23,7 @@ function SetMainLang
     done; BU.EchoInit
 }
 
-# Detecting user's language with the "$LANG" environment variable.
+# Detecting user's language with the "${LANG}" environment variable.
 case "${LANG}" in
     en_*)
         # English

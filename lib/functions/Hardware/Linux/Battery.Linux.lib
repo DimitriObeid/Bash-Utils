@@ -76,7 +76,7 @@ function BU.Hardware.Battery.HasHistory()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -92,7 +92,7 @@ function BU.Hardware.Battery.HasPowerSupply()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -108,7 +108,7 @@ function BU.Hardware.Battery.HasStatistics()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Battery.IsPresent()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -140,7 +140,7 @@ function BU.Hardware.Battery.IsRechargeable()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -156,7 +156,7 @@ function BU.Hardware.Battery.GetCapacity()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -172,7 +172,7 @@ function BU.Hardware.Battery.GetEnergy()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -189,7 +189,7 @@ function BU.Hardware.Battery.GetEnergyEmpty()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -206,7 +206,7 @@ function BU.Hardware.Battery.GetEnergyFull()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -223,7 +223,7 @@ function BU.Hardware.Battery.GetEnergyFullDesign()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -240,7 +240,7 @@ function BU.Hardware.Battery.GetEnergyRate()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -256,22 +256,23 @@ function BU.Hardware.Battery.GetModel()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
 
 # Getting the battery
 function BU.Hardware.Battery.GetNativePath()
+{
     #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
+    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
         v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 21 {print $2}')";
     else
         BU.Main.Echo.Msg "Unable to get the battery's capacity"; return 1;
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -287,7 +288,7 @@ function BU.Hardware.Battery.GetPercentage()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -303,7 +304,7 @@ function BU.Hardware.Battery.GetSerialNumber()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -319,7 +320,7 @@ function BU.Hardware.Battery.GetState()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -335,7 +336,7 @@ function BU.Hardware.Battery.GetTechnology()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -351,7 +352,7 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -367,7 +368,7 @@ function BU.Hardware.Battery.GetVendor()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output";
+    BU.Main.Echo.Msg "${v_command_output}";
 
     return 0;
 }
@@ -382,7 +383,7 @@ function BU.Hardware.Battery.GetVoltage()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }
@@ -396,7 +397,7 @@ function BU.Hardware.Battery.GetWarningLevel()
     fi
 
     #**** Code ****
-    BU.Main.Echo.Msg "$v_command_output" '-n';
+    BU.Main.Echo.Msg "${v_command_output}" '-n';
 
     return 0;
 }

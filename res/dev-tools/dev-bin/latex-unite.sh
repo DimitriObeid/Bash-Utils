@@ -24,7 +24,7 @@
 ## ARGUMENTS DEFINITION
 
 # Languages processing with argument
-__BU_ARGS=("$@")
+__BU_ARGS=("${@}");
 
 # -----------------------------------------------
 

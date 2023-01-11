@@ -151,7 +151,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     for ((i=0; i<p_iterations; i++)); do
 
         #shellcheck disable=SC2001
-        p_string="$(sed "s/^[^${p_delimiter}]*${p_delimiter}//" <<< "$p_string")";
+        p_string="$(sed "s/^[^${p_delimiter}]*${p_delimiter}//" <<< "${p_string}")";
 
         # This variable's purpose is to avoid assigning the "${p_string}" variable to itself, because if so, the assignment would have done nothing.
         p_string_tmp="${p_string}";
@@ -735,7 +735,7 @@ function BU.Main.Text.StrToWordArray()
     # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.
 
     # shellcheck disable=SC2034
-    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "$p_string";
+    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "${p_string}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }

@@ -17,7 +17,7 @@ function BU.Main.Filesystem.GetFSDevice()
     BU.Main.OS.IsLinux v_cmd="df -Th \"${p_path}\" | awk 'FNR == 2 {print \$1}'     || { BU.Main.Echo.Warning \"\$v_warn\" '-n' 'nodate'; return 1; }";
 
     # shellcheck disable=SC2016
-    if ! BU.Main.CMDS.GetCommandReturnOutputValue 'df "$path"'; then return 1; fi
+    if ! BU.Main.CMDS.GetCommandReturnOutputValue 'df "${path}"'; then return 1; fi
 
     eval "${v_cmd}";
 

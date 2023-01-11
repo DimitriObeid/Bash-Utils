@@ -8,7 +8,7 @@ function BU.ModuleInit.CaseInsensitiveSubString()
     local p_string=${1:-$'\0'};
 
     #**** Code ****
-    read -ra substring_char_array <<< "$p_string";
+    read -ra substring_char_array <<< "${p_string}";
 
     for _ in "${substring_char_array[@]}"; do
         shopt -s nocaseglob;

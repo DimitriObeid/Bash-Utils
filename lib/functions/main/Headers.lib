@@ -276,7 +276,7 @@ function BU.Main.Headers.Base () {
         if BU.Main.Checkings.IsIntPos "${p_bgColorPos}" && [ "${#p_bgColorPos}" -ge 1 ] && [ "${#p_bgColorPos}" -le 3 ]; then
 
             # Transforming the "${p_bgColorPos}" variable in an array of integers.
-            read -ra int_array <<< "$p_bgColorPos";
+            read -ra int_array <<< "${p_bgColorPos}";
 
             for i in "${int_array[@]}"; do
 

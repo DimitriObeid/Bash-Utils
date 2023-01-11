@@ -17,29 +17,29 @@
 # Getting the user's operating system main package manager.
 function GetMainPackageManager
 {
-	BU.Main.Headers.Header.Base "-" "$(ColorChar "setaf" "$COL_BLUE")" "$(ColorChar "setaf" "$COL_BLUE")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0"
+	BU.Main.Headers.Header.Base "-" "$(ColorChar "setaf" "${COL_BLUE}")" "$(ColorChar "setaf" "${COL_BLUE}")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0";
 
-	# Searching, in these statements, the main package manager's command (located in the "$PATH" environment variable's supported paths) by executing it.
+	# Searching, in these statements, the main package manager's command (located in the "${PATH}" environment variable's supported paths) by executing it.
 	# Each command's standard output is redirected towards "/dev/null" (the null device) to avoid displaying uselessly the standard output.
 
 	# For more informations about the redirections in UNIX Shell, please visit this link -> https://www.tldp.org/LDP/abs/html/io-redirection.html
 
 	# Checking first the operating system type, to avoid running the script in a not (yet) suported UNIX/Linux operating system.
-	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt"
-        command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf"
-        command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman"
+	if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
+        command -v apt-get &> /dev/null && command -v apt &> /dev/null && command -v apt-cache &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="apt";
+        command -v dnf &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="dnf";
+        command -v pacman &> /dev/null && PACK_MAIN_PACKAGE_MANAGER="pacman";
     else
         BU.Main.Echo.Error "Your operating system is not (yet) supported !"; BU.Main.Echo.Newline;
-        exit 1
+        exit 1;
     fi
 
-	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable $PACK_MAIN_PACKAGE_MANAGER est toujours nulle (aucune commande trouvée).
-	if test -z "$PACK_MAIN_PACKAGE_MANAGER"; then
+	# Si, après la recherche de la commande, la chaîne de caractères contenue dans la variable ${PACK_MAIN_PACKAGE_MANAGER} est toujours nulle (aucune commande trouvée).
+	if test -z "${PACK_MAIN_PACKAGE_MANAGER}"; then
         # Étant donné que la fonction "Mktmpdir" est appelée après la fonction de création du fichier de logs (CreateLogFile) dans les fonctions "Args" (dans le cas où le deuxième argument de débug est passé) et "CreateLogFile" dans la fonction "ScriptInit, il est possible d'appeler la fonction "BU.Main.Errors.HandleErrors" sans que le moindre bug ne se produise.
-		BU.Main.Errors.HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU.Main.Decho.E "APT"), $(BU.Main.Decho.E "DNF") et $(BU.Main.Decho.E "Pacman")." "$LINENO"
+		BU.Main.Errors.HandleErrors "1" "AUCUN GESTIONNAIRE DE PAQUETS PRINCIPAL SUPPORTÉ TROUVÉ" "Les gestionnaires de paquets supportés sont : $(BU.Main.Decho.E "APT"), $(BU.Main.Decho.E "DNF") et $(BU.Main.Decho.E "Pacman")." "${LINENO}";
 	else
-		BU.Main.Echo.Success "Gestionnaire de paquets principal trouvé : $(BU.Main.Decho.S "$PACK_MAIN_PACKAGE_MANAGER")"
+		BU.Main.Echo.Success "Gestionnaire de paquets principal trouvé : $(BU.Main.Decho.S "${PACK_MAIN_PACKAGE_MANAGER}")";
 	fi
 }
 
@@ -54,7 +54,7 @@ function GetMainPackageManager
 function APTInstall()
 {
     #**** Parameters ****
-    package="$1"
+    package="${1:-$'\0'}";
 
     #**** Code ****
 
@@ -63,7 +63,7 @@ function APTInstall()
 function DNFInstall()
 {
     #**** Parameters ****
-    package="$1"
+    package="${1:-$'\0'}";
 
     #**** Code ****
 
@@ -72,7 +72,7 @@ function DNFInstall()
 function PacmanInstall()
 {
     #**** Parameters ****
-    package="$1"
+    package="${1:-$'\0'}";
 
     #**** Code ****
 
@@ -80,27 +80,27 @@ function PacmanInstall()
 
 function PackHDCheck()
 {
-    return
+    return;
 }
 
 function PackDBCheck()
 {
-    return
+    return;
 }
 
 function PackInstall()
 {
     #**** Parameters ****
-    manager=$1  # Package manager
-    package=$2  # Package's name
+    manager=${1:-$'\0'}; # Package manager
+    package=${2:-$'\0'}; # Package's name
 
     #**** Code ****
     BU.Main.Checkings.CheckRootEUID
 
-    if [ "$OSTYPE" == "linux-gnu" ]; then
-        if [ "$manager" == "apt" ]; then APTInstall
-        elif [ "$STAT_MAIN_PACK_MANAGER" == "dnf" ]; then DNFInstall
-        elif [ "$STAT_MAIN_PACK_MANAGER" == "pacman" ]; then PacmanInstall
+    if [ "${OSTYPE}" == "linux-gnu" ]; then
+        if [ "${manager}" == "apt" ]; then APTInstall "${package}";
+        elif [ "${STAT_MAIN_PACK_MANAGER}" == "dnf" ]; then DNFInstall "${package}";
+        elif [ "${STAT_MAIN_PACK_MANAGER}" == "pacman" ]; then PacmanInstall "${package}";
         fi
     fi
 }
@@ -121,119 +121,119 @@ function PackInstall()
 function SoftwareInstall
 {
 	#**** Parameters ****
-	local weblink=$1		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
-	local archive=$2		# Nom de l'archive contenant les fichiers du logiciel.
-	local name=$3			# Nom du logiciel.
-	local comment=$4		# Affichage d'un commentaire descriptif du logiciel lorsque l'utilisateur passe le curseur de sa souris pas dessus le fichier ".desktop".
-	local exec=$5			# Adresse du fichier exécutable du logiciel.
-	local icon=$6			# Emplacement du fichier image de l'icône du logiciel.
-	local type=$7			# Détermine si le fichier ".desktop" pointe vers une application, un lien ou un dossier.
-	local category=$8		# Catégorie(s) du logiciel (jeu, développement, bureautique, etc...).
+	local weblink=${1:-$'\0'};		# Adresse de téléchargement du logiciel (téléchargement via la commande "wget"), SANS LE NOM DE L'ARCHIVE.
+	local archive=${2:-$'\0'};		# Nom de l'archive contenant les fichiers du logiciel.
+	local name=${3:-$'\0'};			# Nom du logiciel.
+	local comment=${4:-$'\0'};      # Affichage d'un commentaire descriptif du logiciel lorsque l'utilisateur passe le curseur de sa souris pas dessus le fichier ".desktop".
+	local exec=${5:-$'\0'};			# Adresse du fichier exécutable du logiciel.
+	local icon=${6:-$'\0'};			# Emplacement du fichier image de l'icône du logiciel.
+	local type=${7:-$'\0'};			# Détermine si le fichier ".desktop" pointe vers une application, un lien ou un dossier.
+	local category=${8:-$'\0'};		# Catégorie(s) du logiciel (jeu, développement, bureautique, etc...).
 
 	#**** Variables ****
 	# Dossiers
- 	local inst_path="$DIR_SOFTWARE_PATH/$name"	   # Dossier d'installation du logiciel.
-	local shortcut_dir="$DIR_HOMEDIR/Bureau/Linux-reinstall.links"	   # Dossier de stockage des raccourcis vers les fichiers exécutables des logiciels téléchargés.
+ 	local inst_path="${DIR_SOFTWARE_PATH}/${name}";	   # Dossier d'installation du logiciel.
+	local shortcut_dir="${DIR_HOMEDIR}/Bureau/Linux-reinstall.links";	   # Dossier de stockage des raccourcis vers les fichiers exécutables des logiciels téléchargés.
 
 	# Fichiers
-	local software_dl_link="$weblink/$archive"		# Lien de téléchargement de l'archive.
+	local software_dl_link="${weblink}/${archive}";		# Lien de téléchargement de l'archive.
 
 	#**** Code ****
-	BU.Main.Checkings.CheckRootEUID
+	BU.Main.Checkings.CheckRootEUID;
 
-	BU.Main.Echo.Newstep "Téléchargement du logiciel $(BU.Main.Decho.N "$name")."
+	BU.Main.Echo.Newstep "Téléchargement du logiciel $(BU.Main.Decho.N "${name}").";
 
 	# S'il n'existe pas, on crée le dossier dédié aux logiciels dans le dossier d'installation de logiciels.
-	if test ! -d "$inst_path"; then
-        BU.Main.Directories.Make "$DIR_SOFTWARE_NAME" "$name" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+	if test ! -d "${inst_path}"; then
+        BU.Main.Directories.Make "${DIR_SOFTWARE_NAME}" "${name}" "2" "1" 2>&1 | tee -a "${FILE_LOG_PATH}";
     fi
 
-	if test wget -v "$software_dl_link" -O "$inst_path" >> "$FILE_LOG_PATH"; then
-		BU.Main.Echo.Success "L'archive du logiciel $(BU.Main.Decho.S "$name") a été téléchargé avec succès."
+	if test wget -v "${software_dl_link}" -O "${inst_path}" >> "${FILE_LOG_PATH}"; then
+		BU.Main.Echo.Success "L'archive du logiciel $(BU.Main.Decho.S "${name}") a été téléchargé avec succès.";
 		BU.Main.Echo.Newline;
 
 	else
-		BU.Main.Echo.Error "Échec du téléchargement de l'archive du logiciel $(BU.Main.Decho.E "$name")."
+		BU.Main.Echo.Error "Échec du téléchargement de l'archive du logiciel $(BU.Main.Decho.E "${name}").";
 		BU.Main.Echo.Newline;
 
 		return
 	fi
 
 	# On décompresse l'archive téléchargée selon le format de compression tout en redirigeant toutes les sorties vers le terminal et le fichier de logs.
-	BU.Main.Echo.NewstepTee "Décompression de l'archive $(BU.Main.Decho.N "$archive")."
+	BU.Main.Echo.NewstepTee "Décompression de l'archive $(BU.Main.Decho.N "${archive}").";
 	{
-		case "$archive" in
+		case "${archive}" in
 			"*.zip")
-				UncompressArchive "unzip" "" "$inst_path/$archive" "$archive"
+				UncompressArchive "unzip" "" "${inst_path}/${archive}" "${archive}";
 				;;
 			"*.7z")
-				UncompressArchive "7z" "e" "$inst_path/$archive" "$archive"
+				UncompressArchive "7z" "e" "${inst_path}/${archive}" "${archive}";
 				;;
 			"*.rar")
-				UncompressArchive "unrar" "e" "$inst_path/$archive" "$archive"
+				UncompressArchive "unrar" "e" "${inst_path}/${archive}" "${archive}";
 				;;
 			"*.tar.gz")
-				UncompressArchive "tar" "-zxvf" "$inst_path/$archive" "$archive"
+				UncompressArchive "tar" "-zxvf" "${inst_path}/${archive}" "${archive}";
 				;;
 			"*.tar.bz2")
-				UncompressArchive "tar" "-jxvf" "$inst_path/$archive" "$archive"
+				UncompressArchive "tar" "-jxvf" "${inst_path}/${archive}" "${archive}";
 				;;
 			*)
-				BU.Main.Echo.Error "Le format de fichier de l'archive $(BU.Main.Decho.E "$archive") n'est pas supporté."
+				BU.Main.Echo.Error "Le format de fichier de l'archive $(BU.Main.Decho.E "${archive}") n'est pas supporté.";
 				BU.Main.Echo.Newline;
 
-				return
+				return;
 				;;
 		esac
-	} 2>&1 | tee -a "$FILE_LOG_PATH"
+	} 2>&1 | tee -a "${FILE_LOG_PATH}";
 
 	# On vérifie que le dossier contenant les fichiers desktop (servant de raccourci) existe, pour ne pas encombrer le bureau de l'utilisateur.
 	# S'il n'existe pas, alors le script le crée
-	if test ! -d "$shortcut_dir"; then
-		BU.Main.Echo.Newstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau)."
+	if test ! -d "${shortcut_dir}"; then
+		BU.Main.Echo.Newstep "Création d'un dossier contenant les raccourcis vers les logiciels téléchargés via la commande wget (pour ne pas encombrer votre bureau).";
 		BU.Main.Echo.Newline;
 
-		BU.Main.Directories.Make "$DIR_HOMEDIR/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "$FILE_LOG_PATH"
+		BU.Main.Directories.Make "${DIR_HOMEDIR}/Bureau/" "Linux-reinstall.link" "2" "1" 2>&1 | tee -a "${FILE_LOG_PATH}";
 
-		BU.Main.Echo.SuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier."
+		BU.Main.Echo.SuccessTee "Le dossier  vous pourrez déplacer les raccourcis sur votre bureau sans avoir à les modifier.";
 	fi
 
-	BU.Main.Echo.Newstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU.Main.Decho.N "$name")."
-	ln -s "$exec" "$name"
+	BU.Main.Echo.Newstep "Création d'un lien symbolique pointant vers le fichier exécutable du logiciel $(BU.Main.Decho.N "$[name]").";
+	ln -s "${exec}" "${name}";
 
-	if test "$?" == "0"; then
-		BU.Main.Echo.Success "Le lien symbolique a été créé avec succès."
+	if test "${?}" == "0"; then
+		BU.Main.Echo.Success "Le lien symbolique a été créé avec succès.";
 		BU.Main.Echo.Newline;
 	else
-        BU.Main.Echo.Error "Impossible de créer un lien symbolique pointant vers $(BU.Main.Decho.E "$exec")."
+        BU.Main.Echo.Error "Impossible de créer un lien symbolique pointant vers $(BU.Main.Decho.E "${exec}").";
         BU.Main.Echo.Newline;
 	fi
 
-	BU.Main.Echo.Newstep "Création du raccourci vers le fichier exécutable du logiciel $(BU.Main.Decho.N "$name")."
+	BU.Main.Echo.Newstep "Création du raccourci vers le fichier exécutable du logiciel $(BU.Main.Decho.N "${name}").";
 	BU.Main.Echo.Newline;
 
-	cat <<-EOF > "$shortcut_dir/$name.desktop"
+	cat <<-EOF > "${shortcut_dir}/${name}.desktop"
 	[Desktop Entry]
-	Name="$name"
-	Comment="$comment"
-	Exec="$inst_path/$exec"
-	Icon="$icon"
-	Type="$type"
-	Categories="$category";
+	Name="${name}"
+	Comment="${comment}"
+	Exec="${inst_path}/${exec}"
+	Icon="${icon}"
+	Type="${type}"
+	Categories="${category}";
 	EOF
 
-	BU.Main.Echo.Success "Le fichier $(BU.Main.Decho.S "$name.desktop") a été créé avec succès dans le dossier $(BU.Main.Decho.S "$shortcut_dir")."
+	BU.Main.Echo.Success "Le fichier $(BU.Main.Decho.S "${name}.desktop") a été créé avec succès dans le dossier $(BU.Main.Decho.S "${shortcut_dir}").";
 	BU.Main.Echo.Newline;
 
-	BU.Main.Echo.Newstep "Suppression de l'archive $(BU.Main.Decho.N "$archive")."
+	BU.Main.Echo.Newstep "Suppression de l'archive $(BU.Main.Decho.N "${archive}").";
 	BU.Main.Echo.Newline;
 
 	# On vérifie que l'archive a bien été supprimée.
-	if test rm -f "$inst_path/$archive"; then
-        BU.Main.Echo.Success "L'archive $(BU.Main.Decho.S "$archive") a été correctement supprimée."
+	if test rm -f "${inst_path}/${archive}"; then
+        BU.Main.Echo.Success "L'archive $(BU.Main.Decho.S "${archive}") a été correctement supprimée.";
 		BU.Main.Echo.Newline;
     else
-		BU.Main.Echo.Error "La suppression de l'archive $(BU.Main.Decho.E "$archive") a échouée."
+		BU.Main.Echo.Error "La suppression de l'archive $(BU.Main.Decho.E "${archive}") a échouée.";
 		BU.Main.Echo.Newline;
 	fi
 }

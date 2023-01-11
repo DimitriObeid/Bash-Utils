@@ -151,5 +151,5 @@ function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
     )";
 
     #**** Code ****
-    if [ -n "$JS" ]; then return 0; else return 1; fi
+    if [ -n "${JS}" ]; then return 0; else return 1; fi
 }

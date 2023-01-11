@@ -130,14 +130,14 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 ## FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
 # NOTE : In the functions with embedded translations, only the languages spoken by more than 100 million people in
-# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/) 
+# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/)
 # will be embedded, in order to avoid bloating the initializer script with thousands of lines of messages.
 
 # Printing that the script's execution was interrupted by the user.
 function BU.ModuleInit.SIGINT()
 {
     #**** Variables ****
-    local v_isPrinted; # VAR TYPE : Bool   - DESC : 
+    local v_isPrinted; # VAR TYPE : Bool   - DESC :
 
     #**** Code ****
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && v_isPrinted='true'; };
@@ -168,7 +168,7 @@ function BU.ModuleInit.DefineTraps()
 ## FUNCTIONS NEEDED FOR THE TRANSLATIONS OF MESSAGES BEFORE THE INCLUSION OF THE TRANSLATION FILES.
 
 # NOTE : In the functions with embedded translations, only the languages spoken by more than 100 million people in
-# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/) 
+# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/)
 # will be embedded, in order to avoid bloating the initializer script with thousands of lines of messages.
 
 function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
@@ -255,7 +255,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 ## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
 
 # NOTE : In the functions with embedded translations, only the languages spoken by more than 100 million people in
-# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/) 
+# the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/)
 # will be embedded, in order to avoid bloating the initializer script with thousands of lines of messages.
 
 # Printing the message that warns the user that the rest of the framework will use english as default language (this function is not called if the framework is wrapped in a single file).
@@ -663,19 +663,19 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-full' ]; then
 
         #**** Parameters ****
-        local p_var_name=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the variable.
-        local p_var_val=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Value stored in the variable (DO NOT FILL THIS FIELD IF THE VARIABLE TYPE IS AN ARRAY, INSTEAD, LEAVE IT AS AN EMPTY STRING).
-        local p_var_type=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Type of variable (array, int (integer), float, path, string).
-        local p_var_desc=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Description of the variable.
-        local p_modl=${5:-NULL};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Module where the variable was declared.
-        local p_file=${6:-NULL};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : File where the variable was declared.
-        local p_func=${7:-NULL};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Function where the variable was declared.
-        local p_line=${8:-NULL};        # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where the variable was declared.
+        local p_var_name=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the variable.
+        local p_var_val=${2:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Value stored in the variable (DO NOT FILL THIS FIELD IF THE VARIABLE TYPE IS AN ARRAY, INSTEAD, LEAVE IT AS AN EMPTY STRING).
+        local p_var_type=${3:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Type of variable (array, int (integer), float, path, string).
+        local p_var_desc=${4:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Description of the variable.
+        local p_modl=${5:-NULL};            # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Module where the variable was declared.
+        local p_file=${6:-NULL};            # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : File where the variable was declared.
+        local p_func=${7:-NULL};            # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Function where the variable was declared.
+        local p_line=${8:-NULL};            # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where the variable was declared.
 
         # If the variable type is an array, then the values must be passed as an array,
         # or else only the first index's value will be displayed.
         shift 8;
-        local pa_var_val_array=("$@");  # ARG TYPE : Array      - OPTIONAL  | DEFAULT VAL : NULL    - DESC :
+        local pa_var_val_array=("${@}");    # ARG TYPE : Array      - OPTIONAL  | DEFAULT VAL : NULL    - DESC :
 
         #**** Variables ****
         local v_modl; # VAR TYPE : String   - DESC :
@@ -1473,7 +1473,7 @@ function BU.ModuleInit.DisplayStatError()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4;
-    local pa_correctValues=("$@");
+    local pa_correctValues=("${@}");
 
     #**** Variables ****
     local i=0;
@@ -1520,7 +1520,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG()
 
     #**** Code ****
     if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" != "true" ] && [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" != "false" ]; then
-        BU.ModuleInit.DisplayStatError "${p_file}" "${p_lineno}" "${__BU_MODULE_INIT_STAT_DEBUG}" "__BU_MODULE_INIT_STAT_DEBUG" "${va_correctValues[@]}"; return "$?";
+        BU.ModuleInit.DisplayStatError "${p_file}" "${p_lineno}" "${__BU_MODULE_INIT_STAT_DEBUG}" "__BU_MODULE_INIT_STAT_DEBUG" "${va_correctValues[@]}"; return "${?}";
     fi
 
     return 0;
@@ -1541,16 +1541,16 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
     [[ ${va_correctValues[*]} =~ ${__BU_MODULE_INIT_STAT_DEBUG_BASHX,,} ]] && { v_ArrayValueFound='true'; return 0; };
 
     if [ "${v_ArrayValueFound,,}" != 'true' ]; then BU.ModuleInit.DisplayStatError "${p_file}" "${p_lineno}" \
-            "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" "__BU_MODULE_INIT_STAT_DEBUG_BASHX" "${va_correctValues[@]}"; return "$?"; fi
+            "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" "__BU_MODULE_INIT_STAT_DEBUG_BASHX" "${va_correctValues[@]}"; return "${?}"; fi
 
     return 0;
 }
 
 # Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" status variable's value.
-function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "$?"; return 0; }
+function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "${?}"; return 0; }
 
 # Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" status variable's value.
-function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "$?"; return 0; }
+function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "${?}"; return 0; }
 
 # Checking if the debug mode is active.
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
@@ -2041,7 +2041,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
 # shellcheck disable=SC2009
-if ! ps -a | grep -E "$$" | grep "bash" > /dev/null; then
+if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »" && echo >&2;
@@ -2103,8 +2103,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" 'd' || {
             printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
                 "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
-            
-            BU.ModuleInit.IsInScript && exit 1; return 1; 
+
+            BU.ModuleInit.IsInScript && exit 1; return 1;
         })";
 
         # If the base code of the framework is not wrapped in a single file.
@@ -2116,7 +2116,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                 printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" \
                     "${__bu_module_init__initializer_path__lineno}" '$__BU_MODULE_INIT__INITIALIZER_PATH';
 
-                BU.ModuleInit.IsInScript && exit 1; return 1; 
+                BU.ModuleInit.IsInScript && exit 1; return 1;
             })";
         fi
 
@@ -2132,11 +2132,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
         BU.ModuleInit.FindPath "/tmp" ".Bash-utils" && {
             __bu_module_init__root__lineno="$(( LINENO + 2 ))";
-            
+
             __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "/tmp/.Bash-utils" "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" 'd' || {
                 printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT'; 
-                    
+                    "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
+
                 BU.ModuleInit.IsInScript && exit 1; return 1;
             })";
         }
@@ -2312,7 +2312,7 @@ function BashUtils_InitModules()
     fi
 
     #**** Parameters ****
-    local p_modules_list=("$@");    # List of all the modules to include passed as arguments
+    local p_modules_list=("${@}");    # List of all the modules to include passed as arguments
 
 	#**** Variables (global) ****
 
@@ -2728,7 +2728,7 @@ function BU.ModuleInit.InitNewModule()
 function BU.ModuleInit.InitNewModules()
 {
 	#**** Parameters ****
-	local p_module_list=("$@"); # Array    - Default : NULL    - List of the new modules to init.
+	local p_module_list=("${@}"); # Array    - Default : NULL    - List of the new modules to init.
 
 	#**** Variables (global) ****
 
@@ -2810,11 +2810,11 @@ function BU.ModuleInit.UnsourceModule()
                     };
 
                     # Calling the "BU.UnsourceExceptionFunctions()" function (defined in the "${v_module_unsourceexcept_file_name}" file),
-                    # which calls the "unset $function" command before each function name in order to unsource it.
+                    # which calls the "$(unset ${function})" command before each function name in order to unsource it.
                     BU.UnsourceExceptionFunctions;
 
                     # Calling the "BU.UnsourceExceptionVariables()" function (defined in the "${v_module_unsourceexcept_file_name}" file),
-                    # which calls the "unset ${variable}" command before each variable name in order to unsource it.
+                    # which calls the "$(unset ${variable})" command before each variable name in order to unsource it.
                     BU.UnsourceExceptionVariables;
 
                     return 0;
@@ -2835,7 +2835,7 @@ function BU.ModuleInit.UnsourceModule()
 function BU.ModuleInit.UnsourceModules()
 {
     #**** Parameters ****
-    local p_modules_list=("$@");    # Array     - Default : NULL    - List of the modules to unsource.
+    local p_modules_list=("${@}");  # Array     - Default : NULL    - List of the modules to unsource.
 
     #**** Code ****
 	# Checking if the arguments array length is equal to zero (no arguments passed).
@@ -2887,7 +2887,7 @@ function BU.ModuleInit.HandleErrors()
     #**** Code ****
     if [ "${p_returnCode}" -eq 0 ]; then return 0; else
         if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "${__BU_MODULE_INIT_IS_SOURCED}" == 'sourced' ]; then
-            BU.Main.Errors.HandleErrors "${p_returnCode}" "${p_errorString}" "${p_adviceString}" "${p_badValue}" "${p_file}" "${p_function}" "${p_lineno}"; return "$?";
+            BU.Main.Errors.HandleErrors "${p_returnCode}" "${p_errorString}" "${p_adviceString}" "${p_badValue}" "${p_file}" "${p_function}" "${p_lineno}"; return "${?}";
 
         else
             echo "IN ${p_file}, FUNCTION ${p_function}, LINE ${p_lineno} --> ERROR : ${p_errorString}" >&2;
@@ -2982,7 +2982,7 @@ function BU.ModuleInit.ParseCSVLang()
                     "Please check what causes the script to not source the output file, which contains the target language's translations" \
                     "${v_outputFilePath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-                return "$?";
+                return "${?}";
             }
 
             return 0;
@@ -2997,13 +2997,13 @@ function BU.ModuleInit.ParseCSVLang()
             "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     fi
 
     if [ -z "${v_filename}" ]; then local lineno="${LINENO}";
         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" 'E_BUINIT__PARSECSVLANG__';
 
-        return "$?";
+        return "${?}";
     fi
 
     # if a path to the module's translation CSV was given, but doesn't matches to a valid file path (the given path doesn't exists).
@@ -3013,7 +3013,7 @@ function BU.ModuleInit.ParseCSVLang()
         BU.ModuleInit.HandleErrors '1' "$(printf "THE PATH TO THE « %s » TRANSLATION FILE IS NOT VALID" "${__BU_MODULE_INIT_MODULE_NAME}")" \
             "Please give a valid path to the current module's translations CSV file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     fi
 
     # If a path to the module's translation CSV was given AND the path exists AND the output file doesn't exists, but the exact file name doesn't matches with the defined name pattern.
@@ -3027,7 +3027,7 @@ function BU.ModuleInit.ParseCSVLang()
                 "Please give a valid name to the current module's translations CSV file. The pattern is (without single quotes) : '\$module_name'-'\$ISO_639-1_language_code'" \
 				"${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-            return "$?";
+            return "${?}";
     fi
 
     # If no delimiter is given.
@@ -3038,7 +3038,7 @@ function BU.ModuleInit.ParseCSVLang()
             "Please give a « single unicode character » as CSV delimiter in order to get each wanted cell" \
             "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     fi
 
     if [ -n "${p_delim}" ] && [ "${#p_delim}" -gt 1 ]; then local lineno="${LINENO}";
@@ -3048,7 +3048,7 @@ function BU.ModuleInit.ParseCSVLang()
             "Please give a « single unicode character » as valid CSV delimiter in order to get each wanted cell" \
             "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     fi
 
     # Begin parsing the CSV file.
@@ -3065,7 +3065,7 @@ function BU.ModuleInit.ParseCSVLang()
             "Please check the permissions of this file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" \
             "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     fi
 
     # Getting the first row and first column's cell.
@@ -3080,7 +3080,7 @@ function BU.ModuleInit.ParseCSVLang()
             "$(printf "Please check if the value mentioned above is present on this EXACT cell of the « %s » file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")" \
             "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     })" "${p_delim}" '--init')";
 
     if [ "${v_CSVFirstColRow}" != "VARIABLE" ]; then local lineno="${LINENO}";
@@ -3090,7 +3090,7 @@ function BU.ModuleInit.ParseCSVLang()
             "Make sure the current module's CSV translations file is correctly formatted. You can check the main module's CSV file to check how the formatting should be done" \
             "${v_CSVFirstColRow}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}";
 
-        return "$?";
+        return "${?}";
     else
         BU.ModuleInit.Msg "$(printf "Parsing the « %s » translations file" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}")";
         BU.ModuleInit.Msg;
@@ -3111,7 +3111,7 @@ function BU.ModuleInit.ParseCSVLang()
 		v_perlScriptExecLineno="${LINENO}"; perl "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${v_filename}" "${v_wantedColID}" "${v_outputFilePath}";
 
         # Getting the return value of the last command.
-		v_perlScriptReturnCode="$?";
+		v_perlScriptReturnCode="${?}";
 
 		# Checking the eventual errors returned by the parsing program.
 		if [ "${v_perlScriptReturnCode}" -eq 0 ]; then

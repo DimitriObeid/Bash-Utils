@@ -61,7 +61,7 @@ function BU.Hardware.Ports.GetUSBPortsNumber()
 
 # Getting the number of available USB ports.
 function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
-{²
+{
     return 0;
 }
 
@@ -151,5 +151,5 @@ function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
     )";
 
     #**** Code ****
-    if [ -n "$JS" ]; then return 0; else return 1; fi
+    if [ -n "${JS}" ]; then return 0; else return 1; fi
 }

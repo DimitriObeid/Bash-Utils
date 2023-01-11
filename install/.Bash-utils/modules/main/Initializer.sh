@@ -210,7 +210,7 @@ function BU.Main.Initializer.ProcessBadStatusOptionValues()
 if [ "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" == "main --*" ]; then
 
 	# Defining an array (${main_module_array}) to store the module's arguments string as an array of words.
-	read -ra main_module_array <<< "$__BU_MODULE_INIT_MODULE_AND_ARGS_STRING";
+	read -ra main_module_array <<< "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}";
 
 	# Unsetting the "main" value from the newly created array, in order to avoid an "unsupported argument" error.
 	unset "main_module_array[0]";
@@ -221,7 +221,7 @@ if [ "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" == "main --*" ]; then
         # stat_value_warning="Warning : the supported values for this option are :" >&2;
 
         # shellcheck disable=SC2059
-        printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN}" "$value" >&2;
+        printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN}" "${value}" >&2;
 
         echo -ne "${__BU_MAIN_COLOR_TXT_RESET}" >&2; echo >&2;
 
@@ -245,7 +245,7 @@ if [ "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" == "main --*" ]; then
                     if      [ "${value,,}" == 'authorize' ]             || [ "${value,,}" == 'forbid' ]             || [ "${value,,}" == 'restrict' ]; then
                             __BU_MAIN_STAT_DECHO="${value}";            BU.ModuleInit.DisplayInitGlobalVarsInfos    '__BU_MAIN_STAT_DECHO' "${__BU_MAIN_STAT_DECHO}" 'string' "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("${value}");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-decho" "« --stat-decho=authorize », « --stat-decho=forbid », « --stat-decho=restrict »";
                     fi;;
@@ -307,7 +307,7 @@ if [ "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" == "main --*" ]; then
                     elif    [ "${value,,}" == 'void' ]; then
                             __BU_MAIN_STAT_LOG_REDIRECT='';             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_LOG_REDIRECT' "${__BU_MAIN_STAT_LOG_REDIRECT}" 'string' "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("${value}");
                     else
                             BU.Main.Initializer.ProcessBadStatusOptionValues "--stat-log-r" "« --stat-log-r=log », « stat-log-r=tee », « --stat-log-r=void »";
                     fi;;
@@ -372,7 +372,7 @@ if [ "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" == "main --*" ]; then
                     if      [ "${value,,}" == 'false' ]                 || [ "${value,,}" == 'true' ]; then
                             __BU_MAIN_STAT_TXT_FMT="${value}";          BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_STAT_TXT_FMT' "${__BU_MAIN_STAT_TXT_FMT}" 'bool' "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}";
 
-                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("$value");
+                            __BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY+=("${value}");
 
                             # Debug : testing if the checking of the arguments works.
                             echo "--stat-txt-time value : ${value}";

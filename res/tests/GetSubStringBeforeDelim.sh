@@ -8,7 +8,7 @@ function ReverseStringOrder()
 
 	local reversed="";
 
-	IFS="${delim}" read -ra line <<< "$string";
+	IFS="${delim}" read -ra line <<< "${string}";
 
 	let x=${#line[@]}-1;
 

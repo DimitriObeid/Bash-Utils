@@ -173,7 +173,7 @@ function Args
 		# The name of the log file is redefined, THEN we redefine the path,
 		# EVEN if the initial value of the variable "${PROJECT_LOG_PATH}" is the same as the new value.
 		# In this case, if the value of the variable "${PROJECT_LOG_PATH}" is not redefined, its former value is called,
-		# because the "${PROJECT_LOG_NAME}" stored in the former "$${PROJECT_LOG_PATH}" is the former one (its value was not updated).
+		# because the "${PROJECT_LOG_NAME}" stored in the former "${PROJECT_LOG_PATH}" is the former one (its value was not updated).
 		__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD="${__BU_MAIN_PROJECT_LOG_FILE_NAME}";
 		echo -e "${__BU_MAIN_PROJECT_LOG_FILE_NAME_OLD}";
 

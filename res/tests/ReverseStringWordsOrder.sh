@@ -5,18 +5,18 @@ delim=".";
 
 reversed="";
 
-IFS="$delim" read -ra line <<< "$string";
+IFS="${delim}" read -ra line <<< "${string}";
 
 let x=${#line[@]}-1;
 
-while [ "$x" -ge 0 ]; do
-	if [ "$x" -gt 0 ]; then
-		reversed="$reversed${line[x]}$delim";
+while [ "${x}" -ge 0 ]; do
+	if [ "${x}" -gt 0 ]; then
+		reversed="${reversed}${line[x]}${delim}";
 	else
-		reversed="$reversed${line[x]}";
+		reversed="${reversed}${line[x]}";
 	fi
 
       let x--;
 done
 
-echo "$reversed";
+echo "${reversed}";

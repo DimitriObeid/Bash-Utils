@@ -394,7 +394,7 @@ function BU.Main.Errors.HandleErrors()
                 __BU_MAIN_STAT_LOG_REDIRECT="log"; BU.Main.Status.CheckSTAT_LOG_REDIRECT 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
             fi
 
-            if BU.Main.Checkings.IsInt "$p_returnCode"; then
+            if BU.Main.Checkings.IsInt "${p_returnCode}"; then
 
                 # Restoring the former value of the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable.
                 [ "${VHandleErrors}" == '1' ] && BU.ModuleInit.UnsetInitErrorMsg;

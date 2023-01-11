@@ -670,7 +670,7 @@ function CheckLangArgDelim()
     local p_target=${2:-\$'0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
     #**** Variables ****
-    local v_occurences="${p_string//[^$p_target]}"; # VAR TYPE :  - DESC :
+    local v_occurences="${p_string//[^${p_target}]}"; # VAR TYPE :  - DESC :
 
     #**** Code ****
     if [ -n "${v_occurences:0:1}" ]; then return 0; fi
@@ -831,10 +831,10 @@ function CompileInSingleFile()
 
         if [ "${v_locale_str,,}" != 'all' ] && [[ "${v_locale_str,,}" != ?(all?(-))supported ]]; then
             # Replacing each delimiter with an empty character.
-            v_locale_str="${v_locale_str//$v_locale_delim/" "}";
+            v_locale_str="${v_locale_str//${v_locale_delim}/" "}";
 
             # String to word array.
-            read -ra __language_array <<< "$v_locale_str";
+            read -ra __language_array <<< "${v_locale_str}";
         else
             # Reassigning the new value in the "${v_locale_str}" variable to the "${p_locale}" original variable, so that the condition can be written only once.
             p_locale="${v_locale_str}";
@@ -1213,7 +1213,7 @@ function CompileInSingleFile()
 }
 
 # Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "${__BU_ARG_LANG}" ]; then CompileInSingleFile "${__BU_ARG_LANG}" "$@" || { exit 1; };
+if      [ -n "${__BU_ARG_LANG}" ]; then CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
 else
     CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
 fi
