@@ -5,9 +5,13 @@
 
 # Name          : WordProcessors.sh
 # Module        : Software
-# Description   :
 # Author(s)     : Dimitri Obeid
 # Version       : beta
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Installing a word processor software on each supported operating systems.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

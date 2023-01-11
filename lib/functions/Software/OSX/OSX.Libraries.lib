@@ -66,10 +66,10 @@ fi; exit 1; fi
 
 #### GRAPHICAL PROGRAMMING LIBRARIES
 
-## MAC OS LIBRARIES
+## METAL
 
 # Installing Metal on OSX.
-function BU.Software.Libraries.InstallMetal.OSX()
+function BU.Software.OSX.Libraries.Metal.Install()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -77,8 +77,17 @@ function BU.Software.Libraries.InstallMetal.OSX()
     return 0;
 }
 
-# Installing OpenGL on MacOS.
-function BU.Software.Libraries.InstallOpenGL.OSX()
+# Updating Metal on OSX.
+function BU.Software.OSX.Libraries.Metal.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Metal on OSX.
+function BU.Software.OSX.Libraries.Metal.Uninstall()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -88,22 +97,31 @@ function BU.Software.Libraries.InstallOpenGL.OSX()
 
 # -----------------------------------------------
 
-## WINDOWS LIBRARIES
+## OPENGL
 
-# Installing DirectX.
-function BU.Software.Libraries.InstallDirectX.Windows()
+# Installing OpenGL on MacOS.
+function BU.Software.OSX.Libraries.OpenGL.Install()
 {
     #**** Code ****
-    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }
 
-# Installing OpenGL on Microsoft Windows.
-function BU.Software.Libraries.InstallOpenGL.Windows()
+# Updating OpenGL on MacOS.
+function BU.Software.OSX.Libraries.OpenGL.Update()
 {
     #**** Code ****
-	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling OpenGL on MacOS.
+function BU.Software.OSX.Libraries.OpenGL.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
 }

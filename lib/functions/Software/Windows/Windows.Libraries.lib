@@ -12,7 +12,7 @@
 # ------------------
 # FILE DESCRIPTION :
 
-# Installation script for libraries designed to run on Windows.
+# Installation script for libraries designed to run on Microsoft Windows.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -66,10 +66,10 @@ fi; exit 1; fi
 
 #### GRAPHICAL PROGRAMMING LIBRARIES
 
-## WINDOWS LIBRARIES
+## DIRECTX
 
-# Installing DirectX.
-function BU.Software.Libraries.InstallDirectX.Windows()
+# Installing DirectX on Microsoft Windows.
+function BU.Software.Windows.Libraries.DirectX.Install()
 {
     #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -77,8 +77,48 @@ function BU.Software.Libraries.InstallDirectX.Windows()
     return 0;
 }
 
+# Updating DirectX on Microsoft Windows.
+function BU.Software.Windows.Libraries.DirectX.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling DirectX on Microsoft Windows.
+function BU.Software.Windows.Libraries.DirectX.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## OPENGL
+
 # Installing OpenGL on Microsoft Windows.
-function BU.Software.Libraries.InstallOpenGL.Windows()
+function BU.Software.Windows.Libraries.OpenGL.Install()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating OpenGL on Microsoft Windows.
+function BU.Software.Windows.Libraries.OpenGL.Update()
+{
+    #**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling OpenGL on Microsoft Windows.
+function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****
 	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };

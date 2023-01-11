@@ -11,7 +11,7 @@
 # ------------------
 # FILE DESCRIPTION :
 
-# Installation script for frameworks designed to run on Windows.
+# Installation script for frameworks designed to run on Microsoft Windows.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -62,3 +62,205 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT FRAMEWORKS
+
+## ANGULAR
+
+# Installing Anglar on Microsoft Windows.
+function BU.Software.Windows.Frameworks.AngularJS.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating AngularJS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.AngularJS.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling AngularJS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## REACT JS
+
+# Installing React JS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.ReactJS.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating React JS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.ReactJS.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling React JS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## VUE.JS
+
+# Installing Vue.JS on Microsoft Windows.
+function BU.Software.OSX.Frameworks.VueJS.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Vue.JS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.VueJS.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Vue.JS on Microsoft Windows.
+function BU.Software.Windows.Frameworks.VueJS.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PHP FRAMEWORKS
+
+## CAKE PHP
+
+# Installing CakePHP on Microsoft Windows.
+function BU.Software.Windows.Frameworks.CakePHP.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating CakePHP on Microsoft Windows.
+function BU.Software.Windows.Frameworks.CakePHP.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling CakePHP on Microsoft Windows.
+function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## LARAVEL
+
+# Installing Laravel on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Laravel.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Laravel on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Laravel.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling of Laravel on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Laravel.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## SYMFONY
+
+# Installation Symfony on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Symfony.Install()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Symfony on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Symfony.Update()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Symfony on Microsoft Windows.
+function BU.Software.Windows.Frameworks.Symfony.Uninstall()
+{
+    # Checking if the current system type is Windows.
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### RUBY FRAMEWORKS
+
+##

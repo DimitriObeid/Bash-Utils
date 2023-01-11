@@ -62,3 +62,205 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT FRAMEWORKS
+
+## ANGULAR
+
+# Installing Anglar on Mac OS.
+function BU.Software.OSX.Frameworks.AngularJS.Install()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating AngularJS on Mac OS.
+function BU.Software.OSX.Frameworks.AngularJS.Update()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling AngularJS on Mac OS.
+function BU.Software.OSX.Frameworks.AngularJS.Uninstall()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## REACT JS
+
+# Installing React JS on Mac OS.
+function BU.Software.OSX.Frameworks.ReactJS.Install()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating React JS on Mac OS.
+function BU.Software.OSX.Frameworks.ReactJS.Update()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling React JS on Mac OS.
+function BU.Software.OSX.Frameworks.ReactJS.Uninstall()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## VUE.JS
+
+# Installing Vue.JS on Mac OS.
+function BU.Software.OSX.Frameworks.VueJS.Install()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Vue.JS on Mac OS.
+function BU.Software.OSX.Frameworks.VueJS.Update()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Vue.JS on Mac OS.
+function BU.Software.OSX.Frameworks.VueJS.Uninstall()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PHP FRAMEWORKS
+
+## CAKE PHP
+
+# Installing CakePHP on Mac OS.
+function BU.Software.OSX.Frameworks.CakePHP.Install()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Cake PHP on Mac OS.
+function BU.Software.OSX.Frameworks.CakePHP.Update()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Cake PHP on Mac OS.
+function BU.Software.OSX.Frameworks.CakePHP.Uninstall()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## LARAVEL
+
+# Installing Laravel on Mac OS.
+function BU.Software.OSX.Frameworks.Laravel.Install()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Laravel on Mac OS.
+function BU.Software.OSX.Frameworks.Laravel.Update()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling of Laravel on Mac OS.
+function BU.Software.OSX.Frameworks.Laravel.Uninstall()
+{
+    # Checking if the current system type is Mac OS.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## SYMFONY
+
+# Installation Symfony on Mac OS.
+function BU.Software.OSX.Frameworks.Symfony.Install()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Symfony on Mac OS.
+function BU.Software.OSX.Frameworks.Symfony.Update()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Symfony on Mac OS.
+function BU.Software.OSX.Frameworks.Symfony.Uninstall()
+{
+    # Checking if the current system type is OSX.
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### RUBY FRAMEWORKS
+
+##

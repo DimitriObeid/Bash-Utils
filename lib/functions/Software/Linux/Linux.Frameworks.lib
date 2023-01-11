@@ -62,3 +62,205 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT FRAMEWORKS
+
+## ANGULAR
+
+# Installing Anglar on Linux.
+function BU.Software.Linux.Frameworks.AngularJS.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating AngularJS on Linux.
+function BU.Software.Linux.Frameworks.AngularJS.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling AngularJS on Linux.
+function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## REACT JS
+
+# Installing React JS on Linux.
+function BU.Software.Linux.Frameworks.ReactJS.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating React JS on Linux.
+function BU.Software.Linux.Frameworks.ReactJS.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling React JS on Linux.
+function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## VUE.JS
+
+# Installing Vue.JS on Linux.
+function BU.Software.Linux.Frameworks.VueJS.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Vue.JS on Linux.
+function BU.Software.Linux.Frameworks.VueJS.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Vue.JS on Linux.
+function BU.Software.Linux.Frameworks.VueJS.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### PHP FRAMEWORKS
+
+## CAKE PHP
+
+# Installing CakePHP on Linux.
+function BU.Software.Linux.Frameworks.CakePHP.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating CakePHP on Linux.
+function BU.Software.Linux.Frameworks.CakePHP.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling CakePHP on Linux.
+function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## LARAVEL
+
+# Installing Laravel on Linux.
+function BU.Software.Linux.Frameworks.Laravel.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Laravel on Linux.
+function BU.Software.Linux.Frameworks.Laravel.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling of Laravel on Linux.
+function BU.Software.Linux.Frameworks.Laravel.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## SYMFONY
+
+# Installation Symfony on Linux.
+function BU.Software.Linux.Frameworks.Symfony.Install()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Symfony on Linux.
+function BU.Software.Linux.Frameworks.Symfony.Update()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Symfony on Linux.
+function BU.Software.Linux.Frameworks.Symfony.Uninstall()
+{
+    # Checking if the current system type is Linux.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### RUBY FRAMEWORKS
+
+##
