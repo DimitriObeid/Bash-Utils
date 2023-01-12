@@ -67,7 +67,7 @@ fi; exit 1; fi
 
 ## LINUX VIRTUALIZATION SOFTWARES
 
-# Installing Qemu for Linux.
+# Installing Qemu.
 function BU.Software.Virtualization.InstallQemu.Linux()
 {
     #**** Code ****
@@ -76,7 +76,7 @@ function BU.Software.Virtualization.InstallQemu.Linux()
     return 0;
 }
 
-# Installing VMware Workstation for Linux.
+# Installing VMware Workstation.
 function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
 {
     #**** Code ****
@@ -86,7 +86,7 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
 }
 
 
-# Installing Virtualbox for Linux.
+# Installing Virtualbox.
 function BU.Software.Virtualization.InstallVirtualbox.Linux()
 {
     #**** Code ****

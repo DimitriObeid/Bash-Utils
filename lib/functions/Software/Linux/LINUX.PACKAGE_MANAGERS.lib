@@ -62,3 +62,255 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT PACKAGES MANAGERS
+
+## NODE JS
+
+# Installing the Node JS packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Node JS packages manager is installed on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Node JS packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Node JS packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Node JS packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Node JS packages manager from a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.NPM.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Node JS package manager's database.
+function BU.Software.Linux.PackageManagers.NPM.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Linux-based operating system with the Node JS package manager.
+function BU.Software.Linux.PackageManagers.NPM.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SYSTEM PACKAGES MANAGERS
+
+## SNAP
+
+# Installing the Snap packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Snap packages manager is installed on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Snap packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Snap packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Snap packages manager on a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Snap packages manager from a Linux-based operating system.
+function BU.Software.Linux.PackageManagers.Snap.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Snap package manager's database.
+function BU.Software.Linux.PackageManagers.Snap.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Linux-based operating system with the Snap package manager.
+function BU.Software.Linux.PackageManagers.Snap.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}

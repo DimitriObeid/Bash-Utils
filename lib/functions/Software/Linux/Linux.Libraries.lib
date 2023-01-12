@@ -108,7 +108,7 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
 
 ## OPENGL
 
-# Installing OpenGL on Linux.
+# Installing OpenGL.
 function BU.Software.Linux.Libraries.OpenGL.Install()
 {
     #**** Code ****

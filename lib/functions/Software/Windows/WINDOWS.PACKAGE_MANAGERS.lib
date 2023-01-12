@@ -62,3 +62,255 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT PACKAGES MANAGERS
+
+## NODE JS
+
+# Installing the Node JS packages manager on Microsoft Windows.
+function BU.Software.Windows.PackageManagers.NPM.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Node JS packages manager is installed on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.NPM.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Node JS packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.NPM.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Node JS packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.NPM.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Node JS packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.NPM.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Node JS packages manager from a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.NPM.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Node JS package manager's database.
+function BU.Software.Windows.PackageManagers.NPM.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Microsoft Windows PC with the Node JS package manager.
+function BU.Software.Windows.PackageManagers.NPM.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SYSTEM PACKAGES MANAGERS
+
+## CHOCOLATEY
+
+# Installing the Chocolatey packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Chocolatey packages manager is installed on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Chocolatey packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Chocolatey packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Chocolatey packages manager on a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Chocolatey packages manager from a Microsoft Windows PC.
+function BU.Software.Windows.PackageManagers.Chocolatey.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Chocolatey package manager's database.
+function BU.Software.Windows.PackageManagers.Chocolatey.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Microsoft Windows PC with the Chocolatey package manager.
+function BU.Software.Windows.PackageManagers.Chocolatey.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}

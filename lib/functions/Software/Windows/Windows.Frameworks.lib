@@ -67,10 +67,10 @@ fi; exit 1; fi
 
 ## ANGULAR
 
-# Installing Anglar on Microsoft Windows.
+# Installing Angular on Microsoft Windows.
 function BU.Software.Windows.Frameworks.AngularJS.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -79,7 +79,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Install()
 # Updating AngularJS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.AngularJS.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -88,7 +88,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Update()
 # Uninstalling AngularJS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -101,7 +101,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
 # Installing React JS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.ReactJS.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -110,7 +110,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Install()
 # Updating React JS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.ReactJS.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -119,7 +119,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Update()
 # Uninstalling React JS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -132,7 +132,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
 # Installing Vue.JS on Microsoft Windows.
 function BU.Software.OSX.Frameworks.VueJS.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -141,7 +141,7 @@ function BU.Software.OSX.Frameworks.VueJS.Install()
 # Updating Vue.JS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.VueJS.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -150,7 +150,7 @@ function BU.Software.Windows.Frameworks.VueJS.Update()
 # Uninstalling Vue.JS on Microsoft Windows.
 function BU.Software.Windows.Frameworks.VueJS.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -169,7 +169,7 @@ function BU.Software.Windows.Frameworks.VueJS.Uninstall()
 # Installing CakePHP on Microsoft Windows.
 function BU.Software.Windows.Frameworks.CakePHP.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -178,7 +178,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Install()
 # Updating CakePHP on Microsoft Windows.
 function BU.Software.Windows.Frameworks.CakePHP.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -187,7 +187,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Update()
 # Uninstalling CakePHP on Microsoft Windows.
 function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -200,7 +200,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
 # Installing Laravel on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Laravel.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -209,7 +209,7 @@ function BU.Software.Windows.Frameworks.Laravel.Install()
 # Updating Laravel on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Laravel.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -218,7 +218,7 @@ function BU.Software.Windows.Frameworks.Laravel.Update()
 # Uninstalling of Laravel on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Laravel.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -231,7 +231,7 @@ function BU.Software.Windows.Frameworks.Laravel.Uninstall()
 # Installation Symfony on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Symfony.Install()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -240,7 +240,7 @@ function BU.Software.Windows.Frameworks.Symfony.Install()
 # Updating Symfony on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Symfony.Update()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -249,7 +249,7 @@ function BU.Software.Windows.Frameworks.Symfony.Update()
 # Uninstalling Symfony on Microsoft Windows.
 function BU.Software.Windows.Frameworks.Symfony.Uninstall()
 {
-    # Checking if the current system type is Windows.
+    #**** Code ****.
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;

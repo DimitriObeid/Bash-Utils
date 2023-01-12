@@ -62,3 +62,255 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### JAVASCRIPT PACKAGES MANAGERS
+
+## NODE JS
+
+# Installing the Node JS packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Node JS packages manager is installed on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Node JS packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Node JS packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Node JS packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Node JS packages manager from a Mac OS computer.
+function BU.Software.OSX.PackageManagers.NPM.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Node JS package manager's database.
+function BU.Software.OSX.PackageManagers.NPM.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Mac OS computer with the Node JS package manager.
+function BU.Software.OSX.PackageManagers.NPM.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### SYSTEM PACKAGES MANAGERS
+
+## HOMEBREW
+
+# Installing the Homebrew packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.Install()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Checking if the Homebrew packages manager is installed on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.IsInstalled()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the Homebrew packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.Update()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating the cache of the Homebrew packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.UpdateCache()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading the Homebrew packages manager on a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.Downgrade()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling the Homebrew packages manager from a Mac OS computer.
+function BU.Software.OSX.PackageManagers.Homebrew.Uninstall()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# -------
+
+# Checking the availability of a package in the Homebrew package manager's database.
+function BU.Software.OSX.PackageManagers.Homebrew.CheckPackageFromDatabase()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Installing a package on a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.DownloadPackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating a specific package on a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Updating every packages on a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackages()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Downgrading a specific package on a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.DowngradePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling a package from a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.RemovePackage()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}
+
+# Uninstalling leftover packages from a Mac OS computer with the Homebrew package manager.
+function BU.Software.OSX.PackageManagers.Homebrew.Autoremove()
+{
+	#**** Code ****
+	BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+	return 0;
+}

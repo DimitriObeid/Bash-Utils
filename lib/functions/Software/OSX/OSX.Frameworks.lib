@@ -67,10 +67,10 @@ fi; exit 1; fi
 
 ## ANGULAR
 
-# Installing Anglar on Mac OS.
+# Installing Angular on Mac OS.
 function BU.Software.OSX.Frameworks.AngularJS.Install()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -79,7 +79,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Install()
 # Updating AngularJS on Mac OS.
 function BU.Software.OSX.Frameworks.AngularJS.Update()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -88,7 +88,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Update()
 # Uninstalling AngularJS on Mac OS.
 function BU.Software.OSX.Frameworks.AngularJS.Uninstall()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -101,7 +101,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Uninstall()
 # Installing React JS on Mac OS.
 function BU.Software.OSX.Frameworks.ReactJS.Install()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -110,7 +110,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Install()
 # Updating React JS on Mac OS.
 function BU.Software.OSX.Frameworks.ReactJS.Update()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -119,7 +119,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Update()
 # Uninstalling React JS on Mac OS.
 function BU.Software.OSX.Frameworks.ReactJS.Uninstall()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -132,7 +132,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Uninstall()
 # Installing Vue.JS on Mac OS.
 function BU.Software.OSX.Frameworks.VueJS.Install()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -141,7 +141,7 @@ function BU.Software.OSX.Frameworks.VueJS.Install()
 # Updating Vue.JS on Mac OS.
 function BU.Software.OSX.Frameworks.VueJS.Update()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -150,7 +150,7 @@ function BU.Software.OSX.Frameworks.VueJS.Update()
 # Uninstalling Vue.JS on Mac OS.
 function BU.Software.OSX.Frameworks.VueJS.Uninstall()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -200,7 +200,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Uninstall()
 # Installing Laravel on Mac OS.
 function BU.Software.OSX.Frameworks.Laravel.Install()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -209,7 +209,7 @@ function BU.Software.OSX.Frameworks.Laravel.Install()
 # Updating Laravel on Mac OS.
 function BU.Software.OSX.Frameworks.Laravel.Update()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -218,7 +218,7 @@ function BU.Software.OSX.Frameworks.Laravel.Update()
 # Uninstalling of Laravel on Mac OS.
 function BU.Software.OSX.Frameworks.Laravel.Uninstall()
 {
-    # Checking if the current system type is Mac OS.
+    #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
