@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 
-# ------------------------
-## SCRIPT'S INFORMATIONS :
+# ---------------------
+# SCRIPT'S INFORMATIONS
 
-# Name          : BSD.Packages.lib
-# Module        : Software
+# Name          : General.Linux.lib
+# Module        : Hardware
+# Description   :
 # Author(s)     : Dimitri Obeid
-# Version       : beta
-
-# ------------------
-# FILE DESCRIPTION :
-
-# Installation of a specific package according to its package manager (in case the software's package name is not the same on multiple platforms or versions of an OS).
+# Version       :
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -24,20 +20,10 @@
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
-# shellcheck disable=SC2154,SC1090
+# shellcheck disable=SC2154
 
-# ---------------------
-# NOTE ABOUT SHELLCHECK
-
-# To display the content of a variable in a translated string, the use of the printf command is mandatory in order to interpret each "%s" pattern as the value of a variable.
-
-# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
-
-# If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
-# command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
-
-# --------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -66,3 +52,28 @@ fi; exit 1; fi
 ####
 
 ##
+
+# Get computer's chassis.
+function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
+
+# Get computer's chassis type.
+function BU.Hardware.General.GetChassisType()
+{
+    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
+        if BU.Main.Checkings.CheckRootEUID; then
+            BU.Main.Echo.msg "$(dmidecode -s chassis-type)" 'n';
+
+            return 0;
+        else
+            BU.Main.Echo.Msg "$(sudo dmidecode -s chassis-type)" 'n';
+
+            return 1;
+        fi
+    fi
+}
+
+# Get machine's ID.
+function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
+
+# Get boot ID.
+function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }

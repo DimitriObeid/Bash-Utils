@@ -3,7 +3,7 @@
 # ------------------------
 ## SCRIPT'S INFORMATIONS :
 
-# Name          : Lbraries.sh
+# Name          : Lbraries.lib
 # Module        : Software
 # Description   : Library installation script.
 # Author(s)     : Dimitri Obeid
@@ -60,4 +60,3 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### GRAPHICAL PROGRAMMING LIBRARIES
-
