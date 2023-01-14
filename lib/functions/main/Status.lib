@@ -124,7 +124,7 @@ function BU.Main.Status.ConfEcho()
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
-        i=$(( i+1 ));
+        i=$(( i + 1 ));
 
         # If an empty argument is allowed.
         if [ -z "${val}" ]; then

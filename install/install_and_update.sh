@@ -47,7 +47,7 @@ __F_INSTALL_LOG_FILE_PATH="${__D_INSTALL_DIR_PATH}/${__F_INSTALL_LOG_FILE_NAME}"
 __F_LIBRARY_PATH_FILE_NAME="Bash-utils-root-val.path";
 
 # Path of the aforementionned file in the installation directory.
-__F_LIBRARY_PATH_OLD_PARENT_PATH="${__D_MODULE_MANAGER_OLD_PATH}/${__F_LIBRARY_PATH_FILE_NAME}"
+__F_LIBRARY_PATH_OLD_PARENT_PATH="${__D_MODULE_MANAGER_OLD_PATH}/${__F_LIBRARY_PATH_FILE_NAME}";
 
 # Name of the modules inititialization file.
 __F_MODULE_INITIALIZER_FILE_NAME="Bash-utils-init.sh";
@@ -453,7 +453,7 @@ fi
 
 # if [ "${EUID}" -eq 0 ]; then
 #     # TODO : Get the current home directory.
-#     ChangeFileOwnership ""
+#     ChangeFileOwnership "";
 # fi
 
 printf "";

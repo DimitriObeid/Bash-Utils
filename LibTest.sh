@@ -87,4 +87,4 @@ BU.Main.Echo.Newstep "Architecture du processeur : $(BU.Hardware.CPU.GetArch || 
 sleep 1
 
 # Testing a BU.Main.Decho.Decho.FMT function
-# BU.Main.Decho.Decho.FMT_BlinkBoldDISU "Hello world" "${__BU_MAIN_COLOR_TXT_ORANGE}"
+# BU.Main.Decho.Decho.FMT_BlinkBoldDISU "Hello world" "${__BU_MAIN_COLOR_TXT_ORANGE}";

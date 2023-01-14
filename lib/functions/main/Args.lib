@@ -369,12 +369,12 @@ function BU.Main.Args.GetFuncArgsArrayValues()
                 BU.Main.Echo.Newline || { local C="${?}"; v_loop_error='error'; break; };
             fi
 
-            v_index=$(( v_index+1 ));
+            v_index=$(( v_index + 1 ));
         done; if [ "${v_loop_error,,}" == 'error' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     }
 
     if [ -n "${v_echo}" ] && [ "${v_echo,,}" == 'false' ]; then
-        BU.Main.Status.ChangeSTAT_ECHO "${v_echo}" 'main' "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO-1 ))" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Status.ChangeSTAT_ECHO "${v_echo}" 'main' "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -538,7 +538,7 @@ function BU.Main.Args.GetFFL()
                 BU.Main.Errors.HandleErrors '1' \
                     "" \
                     " ${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-                    'p_lineno' "${p_filename}" "${p_funcname}" "${p_lineno} (as GetFFL arg3) | $(( LINENO-1 )) (actual file line)";
+                    'p_lineno' "${p_filename}" "${p_funcname}" "${p_lineno} (as GetFFL arg3) | $(( LINENO - 1 )) (actual file line)";
 
                     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
             fi
@@ -1151,7 +1151,7 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 
     if [ -n "${p_iterations}" ] || ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption '!intpos' \
-            "Please pass a positive integer as number of iterations (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')"
+            "Please pass a positive integer as number of iterations (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
@@ -1979,7 +1979,7 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 
 	if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')"
+            "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 
@@ -2018,7 +2018,7 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 
 	if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')"
+            "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
 	fi
 

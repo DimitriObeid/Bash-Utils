@@ -326,7 +326,7 @@ function BU.Main.Text.ToUppercase()
 ## DEBUG ID : "getting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text"
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text";
 
 # Getting the occurences of a character in a main string.
 function BU.Main.Text.GetCharacterOccurences()

@@ -783,7 +783,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
                         # shellcheck disable=SC2116
                         TEST_var_val_arr="$(echo "${pa_var_val_array[${#pa_var_val_array[@]} -1]}")";
 
-                        echo "VALUE : ${TEST_var_val_arr}"
+                        echo "VALUE : ${TEST_var_val_arr}";
 
                         # Avoid line breaks when the end of the array is reached, if it's last index's modulo of five is equal to 0.
                         if [ "${i}" -eq "${pa_var_val_array[${#pa_var_val_array[@]} -1]}" ]; then BU.ModuleInit.Msg '' '-n';
@@ -793,7 +793,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
                         fi
                     fi
 
-                    v_index=$(( v_index+1 ));
+                    v_index=$(( v_index + 1 ));
                 done;
 
                 BU.ModuleInit.Msg;
@@ -1075,7 +1075,7 @@ function BU.ModuleInit.PrintLog()
     echo "${__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE}" >> "${v_tmp_file}";
     echo >> "${v_tmp_file}";
 
-    echo "${__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q}" >> "${v_tmp_file}"
+    echo "${__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q}" >> "${v_tmp_file}";
     echo >> "${v_tmp_file}";
     echo >> "${v_tmp_file}";
 
@@ -1135,7 +1135,7 @@ function BU.ModuleInit.PrintLogError()
 function BU.ModuleInit.CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-		printf "BASH-UTILS MODULES INITIALIZATION ERROR : In \n\t%s,\n\tline $(( LINENO-1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2;
+		printf "BASH-UTILS MODULES INITIALIZATION ERROR : In \n\t%s,\n\tline $(( LINENO - 1 ))\n\n", "$(basename "${BASH_SOURCE[0]}")" >&2;
 		echo -e "This Bash library requires at least the Bash language's version 4.0.0" >&2;
 		echo >&2;
 
@@ -1293,7 +1293,7 @@ function BU.ModuleInit.FindPath()
             # This function is called when the "${__BU_MODULE_INIT__TMP_DIR}" is created, but at this point, the temporary directory doesn't exists yet, so this feature MUST be disabled UNTIL this directory is created.
             if [ -z "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" ]; then
                 # Creating a variable to store the path of the file, if this value needs to be processed externally.
-                __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "${__BU_MODULE_INIT__FIND_PATH_RETVAL}" > "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.tmp"
+                __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "${__BU_MODULE_INIT__FIND_PATH_RETVAL}" > "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.tmp";
 
                 return 0;
             fi
@@ -1347,7 +1347,7 @@ function BU.ModuleInit.ListInstalledModules()
 		{
             BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMPDIR";
 
-			printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-4 ))" "${__BU_MODULE_INIT__ROOT}" >&2; echo >&2;
+			printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 4 ))" "${__BU_MODULE_INIT__ROOT}" >&2; echo >&2;
 
 			echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE}" >&2; echo >&2;
 
@@ -1391,13 +1391,13 @@ function BU.ModuleInit.ListInstalledModules()
         fi
     else
         if [ ! -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}" ] && [ ! -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
 
         elif [ -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
 
         elif [ -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))" >&2;
+            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
         fi
 
 		echo >&2;
@@ -1493,7 +1493,7 @@ function BU.ModuleInit.DisplayStatError()
 
     # Displaying the list of every allowed arguments.
     for val in "${pa_correctValues[@]}"; do
-        i=$(( i+1 ));
+        i=$(( i + 1 ));
 
         # If an empty argument is allowed.
         if [ -z "${val}" ]; then
@@ -1621,15 +1621,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" "${p_value}" >&2;
+                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" "${p_value}" >&2;
 
                     echo >&2; return 1;
                 else
                     # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED";
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2; echo >&2;
                     echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2}" >&2; echo >&2
 
                     echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO}" >&2; echo >&2;
@@ -1968,7 +1968,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING";
 
         # shellcheck disable=SC2059
-        printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))" >&2; echo >&2;
+        printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2; echo >&2;
 
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE}\n" "${v_module_name}" "${FUNCNAME[0]}" >&2;
@@ -1987,7 +1987,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 	elif [ "${p_count}" -ge 1 ] && [ -n "${__BU_MODULE_INIT_IS_MAIN_MODULE_INITIALIZED}" ] && [[ "${p_module,,}" == "module --"* ]]; then
         # shellcheck disable=SC2059
-		BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$((LINENO - 2))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE";
+		BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE";
 
 		# shellcheck disable=SC2059
 		printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
@@ -2081,7 +2081,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # PID
     __BU_MODULE_INIT_PROJECT_PID="${$}";
-    __bu_module_init__project_pid__lineno="$(( LINENO -1 ))";
+    __bu_module_init__project_pid__lineno="$(( LINENO - 1 ))";
 
     # FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
     __BU_MODULE_INIT__ROOT_HOME="${HOME}";
@@ -2094,7 +2094,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # FINDING THE ".Bash-utils" FOLDER
 
-    echo "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils"
+    echo "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils";
 
     # If the ".Bash-utils" folder exists in its defined parent directory AND the framework base is not being installed on the user's hard drive,
     # then the ".Bash-utils" default parent folder is defined as the user's home directory.
@@ -2124,7 +2124,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # Else, if the ".Bash-utils" folder doesn't exists in its defined parent directory AND the framework base is being installed on the user's hard drive,
     # then the ".Bash-utils" default parent folder is defined as the "/tmp" folder in the system root directory.
-    elif [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ] && BU.ModuleInit.IsFrameworkBeingInstalled; then
+    elif [[ ( ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ) || ( -d "${HOME}/.Bash-utils" ) ]] && BU.ModuleInit.IsFrameworkBeingInstalled; then
 
         # Redefining the
         __BU_MODULE_INIT__ROOT_HOME='/tmp';
@@ -2349,7 +2349,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2059
             __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM}" "${i}" "${module_args}")")");
         else
-            i="$(( i+1 ))" # Incrementing the module's array index
+            i="$(( i + 1 ))" # Incrementing the module's array index
 
             # Name and arguments of the module stored as the nth index of the module list array.
 
@@ -2399,7 +2399,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
                 "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
 
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
@@ -2412,7 +2412,7 @@ function BashUtils_InitModules()
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
                 "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
         fi
 
 		# Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
@@ -2424,7 +2424,7 @@ function BashUtils_InitModules()
 			# shellcheck disable=SC2059
 			BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" 'String' \
 				"$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
-				"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+				"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 		fi
 
         # Writing a non-empty (and translated) string.
@@ -2656,7 +2656,7 @@ function BashUtils_InitModules()
         fi
 
         # Incrementing the modules array index variable.
-        v_index="$(( v_index+1 ))";
+        v_index="$(( v_index + 1 ))";
 
 	done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 
@@ -2696,7 +2696,7 @@ function BashUtils_InitModules()
 
     # Defining a function which is to be used to check if the framework is already sourced, in order to avoid too many checkings in the very beginning of any script that uses this framework, and a new inclusion of the framework's files.
 
-    # Just write this line at the beginning of your script : "x="$(IsInBUFramework)"; if [ "${x^^}" != 'BU' ]; then"
+    # Just write this line at the beginning of your script : "x="$(IsInBUFramework)"; if [ "${x^^}" != 'BU' ]; then".
 
     # After the 'then', call the "BashUtils_InitModules()" with it's mandatory arguments, and then your wanted arguments.
     if ! BU.ModuleInit.IsInScript; then function IsInBUFramework() { echo "BU"; }; fi
@@ -2725,8 +2725,6 @@ function BU.ModuleInit.InitNewModule()
     else
         return 0;
     fi
-
-    return 0;
 }
 
 
@@ -2753,7 +2751,7 @@ function BU.ModuleInit.InitNewModules()
 		return 1;
     else
         # At this point, the main module is initialized, so its functions can be safely called.
-        BU.Main.Headers.Header.Aqua.Turquoise ""
+        BU.Main.Headers.Header.Aqua.Turquoise "";
 
         for i in "${p_module_list[@]}"; do
             BU.ModuleInit.InitNewModule "${i}" || { v_loop_error='error'; break; };
@@ -2763,8 +2761,6 @@ function BU.ModuleInit.InitNewModules()
 
         return 0;
 	fi
-
-	return 0;
 }
 
 # Unsource a single module.
@@ -2812,7 +2808,7 @@ function BU.ModuleInit.UnsourceModule()
                     # shellcheck disable=SC1090
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_unsourceexcept_file_name}" 'f')" || {
                         BU.Main.Errors.HandleErrors "1" "UNABLE TO SOURCE THE ${p_module} MODULE'S UNSOURCER FILE" \
-                            "" "" "$(basename "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))")"
+                            "" "" "$(basename "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))")";
                     };
 
                     # Calling the "BU.UnsourceExceptionFunctions()" function (defined in the "${v_module_unsourceexcept_file_name}" file),
@@ -2854,7 +2850,7 @@ function BU.ModuleInit.UnsourceModules()
 		return 1;
     else
         # At this point, the main module is initialized, so its functions can be safely called.
-        BU.Main.Headers.Header.Aqua.Turquoise ""
+        BU.Main.Headers.Header.Aqua.Turquoise "";
 
         for i in "${p_module_list[@]}"; do
             BU.ModuleInit.UnsourceModule "${i}" || { v_loop_error='error'; break; };
@@ -2921,7 +2917,7 @@ function BU.ModuleInit.HandleErrors()
 
 # The "BU.ModuleInit.ParseCSVLang" function MUST be called in the current module's initialization script.
 
-# IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig"
+# IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig()"
 # functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
 # to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos" function.
 
@@ -2930,7 +2926,7 @@ function BU.ModuleInit.ParseCSVLang()
 {
     #**** Parameters ****
     local p_lang_ISO_639_1=${1:-${__BU_MODULE_INIT__USER_LANG}};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : ${__BU_MODULE_INIT__USER_LANG}   - DESC : Language to fetch.
-    local p_delim=${2:-$'\0'};                                   	# ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL                             - DESC : CSV file's delimiter.
+    local p_delim=${2:-$'\0'};                                   	# ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL                             - DESC : CSV file delimiter.
 
     #**** Variables ****
     local v_outputFileName="${__BU_MODULE_INIT_MODULE_NAME}.${p_lang_ISO_639_1}.translate";
@@ -2951,15 +2947,15 @@ function BU.ModuleInit.ParseCSVLang()
     # Getting the wanted column (set to 0, and the value will be taken from a new assignation of the variable with the call of the "BU.Main.Text.GetSubStringAfterDelim" function as sub-shell).
 #    local v_wantedColID=0;
 
-    # Getting the string of values (gathered from the CSV file's first row) after the nth delimiter.
+    # Getting the string of values (gathered from the first row of the CSV file) after the nth delimiter.
 #    local v_CSVFirstColRowAfterNthDelim;
 
-    # Perl script's return codes.
+    # Perl script return codes.
     local v_perlScriptNoCSVFileGivenAsArgErrorCode="10022";             # Do not change this return code.
     local v_perlScriptPathIsDirErrorCode="1";
     local v_perlScriptFileIsNotCSVFormatErrorCode="2";
 
-    local v_perlScriptIndexColNotPassedAsSecondArgErrorCode="3"
+    local v_perlScriptIndexColNotPassedAsSecondArgErrorCode="3";
     local v_perlScriptIndexColIsNotIntErrorCode="4";
     local v_perlScriptLangFileOutputNotPassedAsThirdArgErrorCode="5";
 
@@ -2969,7 +2965,7 @@ function BU.ModuleInit.ParseCSVLang()
 
     #**** Code ****
     # Note : if the file cannot be obtained, or if there is another error during the parsing of the current module's translations CSV file,
-    # then the script's execution MUST be stopped, or else no messages will be printed on the screen while the script is executed.
+    # then the execution of the script MUST be stopped, or else no messages will be printed on the screen while the script is executed.
 
     # If the output file already exists, then it's not necessary to retranslate the module.
     if [ -f "${v_outputFilePath}" ] && [ -n "${v_outputFilePath}" ]; then
@@ -3140,7 +3136,7 @@ function BU.ModuleInit.ParseCSVLang()
                 BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_perlScriptExecLineno}" "E_BUINIT__PARSECSVLANG__PERL_SCRIPT_FIRST_ARG_NOT_CSV_FILE";
 
 				BU.ModuleInit.HandleErrors "${v_perlScriptReturnCode}" "$(printf "NO CSV FILE GIVEN AS FIRST ARGUMENT FOR THE « %s » PERL TRANSLATION SCRIPT" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}")" \
-                    "Please pass as first argument the path of the translations CSV file you want to process"
+                    "Please pass as first argument the path of the translations CSV file you want to process" \
                     "${v_perlScriptReturnCode}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${v_perlScriptExecLineno}";
 
 				return "${v_perlScriptReturnCode}";

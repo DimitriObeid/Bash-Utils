@@ -121,12 +121,12 @@ BU.Main.Echo.Newline;
 if [[ "${__read_lang}" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 	# shellcheck disable=SC2016
 	BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Error '$__read_doc_name')'S VARIABLE'S VALUE $(DechoHighlightError "${__read_lang}") IS INCORRECT" \
-        "$(LatexCreateDoc_ListLanguages)" "${__read_lang}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+        "$(LatexCreateDoc_ListLanguages)" "${__read_lang}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
 elif [[ "${__ARG_LANG}" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; then
 # shellcheck disable=SC2016
 	BU.Main.Errors.HandleErrors "1" "THE FIRST LANGUAGE'S ARGUMENT VALUE IS INCORRECT ($(BU.Main.Decho.Decho.Error "${__ARG_LANG}"))" \
-        "$(LatexCreateDoc_ListLanguages)" "${__read_lang}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-1 ))";
+        "$(LatexCreateDoc_ListLanguages)" "${__read_lang}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
 else
 
@@ -213,7 +213,7 @@ else
         if [ -z "${__read_doc_name}" ]; then
             # shellcheck disable=SC2016
             BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.E '$__read_doc_name')'s VARIABLE IS EMPTY" \
-                "Please type a valid name according to your filesystem accepted values" "${__read_doc_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-3 ))";
+                "Please type a valid name according to your filesystem accepted values" "${__read_doc_name}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
         fi
 
         __tex_full_path="${__folder_path}/${__read_doc_name}";

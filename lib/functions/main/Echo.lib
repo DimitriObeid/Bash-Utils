@@ -393,7 +393,7 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSA
 # Error message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus()                    --> Checkings.lib
@@ -440,7 +440,7 @@ function BU.Main.Echo.Error()
 # Normal message (without any extra color), with redirection checking.
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus()    --> Checkings.lib
@@ -481,7 +481,7 @@ function BU.Main.Echo.Msg()
 # New sub-step message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
@@ -524,7 +524,7 @@ function BU.Main.Echo.Newstep()
 # Read input values
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #	- BU.Main.Status.CheckProjectLogStatus		--> Checkings.lib
@@ -547,7 +547,7 @@ function BU.Main.Echo.Read()
 # Success message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
@@ -588,7 +588,7 @@ function BU.Main.Echo.Success()
 # Warning message
 
 # Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>"
+#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib

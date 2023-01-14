@@ -494,7 +494,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         if [ "${p_authorization,,}" == 'true' ]; then
             BU.Main.Errors.HandleErrors "${IsPartitionFullReturnCode}" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
-                "Please give a filepath in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs"
+                "Please give a filepath in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
                 "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
@@ -687,7 +687,7 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 	fi
 }
 
-# Checking for "${__BU_MAIN_PROJECT_LOG_FILE_PATH}"
+# Checking for "${__BU_MAIN_PROJECT_LOG_FILE_PATH}".
 
 # Required functions and files :
 function BU.Main.Checkings.CheckProjectLogPath()

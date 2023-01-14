@@ -182,7 +182,7 @@ function BU.Main.Files.OverwriteFile()
 
 		true > "${p_path}";
 		BU.Main.Errors.HandleErrors "${?}" "THE CONTENT OF THE $(BU.Main.Decho.Decho.Path "${p_path}/") FILE HAD NOT BEEN OVERWRITTEN" "" "${p_path}" \
-			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO-2 ))";
+			"$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 		BU.Main.Echo.Success "The content of the $(BU.Main.Decho.S "${p_path}/") file has been successfully overwritten";
 		BU.Main.Echo.Newline;
 	else

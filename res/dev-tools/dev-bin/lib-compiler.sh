@@ -29,7 +29,7 @@
 #    "main stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true --stat-devtools=true" \
 
 #    then
-#            echo >&2; echo "In $(basename "$0"), line $(( LINENO-1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
+#            echo >&2; echo "In $(basename "$0"), line $(( LINENO - 1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
 # fi
 
 # -----------------------------------------------
@@ -588,7 +588,7 @@ function PrintFilesWhichWereNotChmoded()
             echo >&2;
         fi
 
-        v_index=$(( v_index+1 ));
+        v_index=$(( v_index + 1 ));
     done
 
     echo >&2; printf "${__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP}\n" "${__compiled_stable_file_parent_dir}/" >&2;

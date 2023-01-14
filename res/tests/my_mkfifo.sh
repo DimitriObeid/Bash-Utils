@@ -15,7 +15,7 @@ function __CreateFIFO
 
     #**** Code ****
     for val in "${arr[@]}"; do
-        i=$(( i+1 ));
+        i=$(( i + 1 ));
 
         echo -e "$(tput setaf 166)${i}$(tput setaf 196)/$(tput setaf 166)${#arr[@]}$(tput sgr0) : ${val}$(tput sgr0)";
     done
