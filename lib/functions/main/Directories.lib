@@ -387,7 +387,7 @@ function BU.Main.Directories.GetParentDirectoryName()
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the child file or folder.
-    local p_iterations=${2-1};  # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_iterations=${2:-1}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
     local result;   # VAR TYPE : String     - DESC :
@@ -425,7 +425,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the child file or folder.
-    local p_iterations=${2-1};  # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
+    local p_iterations=${2:-1}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
     local result;   # VAR TYPE : String     - DESC :
