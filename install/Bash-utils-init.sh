@@ -1045,17 +1045,26 @@ function BU.ModuleInit.PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "${__B
 function BU.ModuleInit.PrintLog()
 {
     #**** Variables ****
-    local v_init_logs_str;  # VAR TYPE : String     - DESC :
-    local v_tmp_file;       # VAR TYPE : File       - DESC :
+    declare -i v_int_randomizer;    # VAR TYPE : Int        - DESC : This variable stores a random number between 3 and 6 included.
 
+    local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
+    local v_tmp_file;               # VAR TYPE : Filepath   - DESC : Path to the file which stores the content of the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
 
     #**** Code ****
-    v_init_logs_str="${__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}";
+    v_str_randomizer="$(echo "${RANDOM}" | md5sum)";
+    v_str_randomizer="${v_str_randomizer%%+( -)}";
 
-    v_tmp_file_original="$(echo "${RANDOM}" | md5sum)"; shopt -s extglob;
+    # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
+    v_int_randomizer="$(shuf -i 3-6 -n 1)";
+
+    for ((i=0; i<v_int_randomizer; i++)); do
+        v_str_randomizer+="${v_str_randomizer%%+( -)}";
+    done
+  
+    shopt -s extglob;
 
     # Removing the extra whitespace with the dash.
-    v_tmp_file="$(printf "%s" "${__BU_MODULE_INIT__ROOT}/$(date +"%Y-%m-%d %H:%M:%S")")___${v_tmp_file_original%%+( -)}.tmp"; shopt -u extglob;
+    v_tmp_file="$(printf "%s" "${__BU_MODULE_INIT__ROOT}/$(date +"%Y-%m-%d %H:%M:%S")")___${v_str_randomizer}.tmp"; shopt -u extglob;
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__HERE}" '#' 'echo'; echo
 
@@ -1072,8 +1081,8 @@ function BU.ModuleInit.PrintLog()
         echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}"; echo;
     fi
 
-    BU.ModuleInit.MsgLine "${v_init_logs_str}" '-' 'echo';
-    BU.ModuleInit.MsgLineCount "${#v_init_logs_str}" '-' 'echo';
+    BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
+    BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
     echo '';
 
     echo "${__BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE}";
@@ -1751,8 +1760,8 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 					case "${module_args,,}" in
 
 						# Log value : --log-display (printing the initialization messages on the screen while they are appened to the "${__BU_MODULE_INIT_MSG_ARRAY" array).
-						'--log-display')
-							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+						'--log-display' | '--log-no-display')
+							# Handling the incompatibility with each other '--log-display', '--log-no-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
 							if [ -n "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
 								BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize "${module_args}";
@@ -1761,24 +1770,12 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
                             # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
                             __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${module_args}";
-                        ;;
-
-						# Log value : --log-no-display (don't print the initialization messages on the screen, but appened them in the "${__BU_MODULE_INIT_MSG_ARRAY" array).
-						'--log-no-display')
-							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
-							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
-							if [ -n "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
-								BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize "${module_args}";
-							fi
-
-                            # By default, the initialization process doesn't prints the log messages, unless there's an error (this printing cannot be avoided).
-                            # To print the initialization logs on the screen, you have to pass the '--log-display' argument when you pass the "module" value as first argument
-                            __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${module_args}";
+                            echo "INDEX LIST : ${#__BU_MODULE_INIT_MSG_ARRAY[*]}";
                         ;;
 
 						# Log value : --log-shut (don't print the initialization messages on the screen, nor append them into the "${__BU_MODULE_INIT_MSG_ARRAY" array).
 						'--log-shut')
-                            # Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+                            # Handling the incompatibility with each other '--log-display', '--log-no-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
 							if [ -n "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
                                 BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize "${module_args}";
@@ -1790,13 +1787,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                             # Erasing the content of the "${__BU_MODULE_INIT_MSG_ARRAY" variable, since it's no more useful.
                             unset __BU_MODULE_INIT_MSG_ARRAY;
-
-                            echo "INDEX LIST : ${#__BU_MODULE_INIT_MSG_ARRAY[*]}";
                         ;;
 
 						# Log value : --log-shut-display (print the initialization messages on the screen without appening them into the "${__BU_MODULE_INIT_MSG_ARRAY" array).
 						'--log-shut-display')
-							# Handling the incompatibility with each other '--log-display', '--log-shut' and '--log-shut-display' arguments
+							# Handling the incompatibility with each other '--log-display', '--log-no-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
 							if [ -n "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" ]; then
                                 BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize "${module_args}";
@@ -1810,7 +1805,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 						# An unsupported log argument is passed.
 						*)
                             #**** Error management variables ****
-                            declare -i lineno="$(( LINENO - 1 ))"   # VAR TYPE : Int     - DESC :
+                            declare -i lineno="$(( LINENO - 1 ))"   # VAR TYPE : Int    - DESC :
 
                             local v_unsupported_log_param;          # VAR TYPE : String | DESC :
 
