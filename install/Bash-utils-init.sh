@@ -2114,13 +2114,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # -------------------------------------------
 
     ## STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
+
     __BU_MODULE_INIT__TMP_DIR_NAME="tmp";
     __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
-
-    # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
-    # function if the framework's main module is translated thanks to the CSV file parser.
-    __BU_MODULE_INIT__BU_BASE_IS_TRANSLATED="false";
-    __bu_module_init__bu_base_is_translated__lineno="$(( LINENO - 1 ))";
 
     # -------------------------------------------
     
@@ -2338,6 +2334,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # -------------------------------------------
     
     ## MISC
+
+    # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
+    # function if the framework's main module is translated thanks to the CSV file parser.
+    __BU_MODULE_INIT__BU_BASE_IS_TRANSLATED="false";
+    __bu_module_init__bu_base_is_translated__lineno="$(( LINENO - 1 ))";
 
     __BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
     __bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
