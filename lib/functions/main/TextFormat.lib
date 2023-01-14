@@ -32,10 +32,15 @@
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == en_* ]]; then
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
+elif [[ "${LANG}" == en_* ]]; then
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
 
 elif [[ "${LANG}" == fr_* ]]; then
     echo -e "ATTENTION !" >&2; echo >&2;
@@ -45,7 +50,7 @@ elif [[ "${LANG}" == fr_* ]]; then
 else
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use this script only by sourcing it in your project script." >&2; echo >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
 
 fi; exit 1; fi
 
