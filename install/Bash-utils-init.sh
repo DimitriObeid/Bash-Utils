@@ -117,7 +117,7 @@ function BU.ModuleInit.IsFrameworkWrapped()             { if BU.ModuleInit.IsFra
 function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" == './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
 
 # Checking if the framework is translated.
-function BU.ModuleInit.IsTranslated()                   { if [ "${__BASH_UTILS_FRAMEWORK_IS_TRANSLATED,,}" == 'true' ]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsTranslated()                   { if [ "${__BU_MODULE_INIT__FRAMEWORK_BASE_IS_TRANSLATED,,}" == 'true' ]; then return 0; else return 1; fi }
 
 # Checking if the framework is still initializing, and if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable's value is '--log-shut', in order to display every error messages from the main module's functions.
 function BU.ModuleInit.SetInitErrorMsg()                { if BU.Main.Status.CheckStatIsInitializing && [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION,,}" == '--log-shut' ]; then v_msg_arr_permission_global_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; return 0; else return 1; fi }
@@ -566,7 +566,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # PID
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_PROJECT_PID'                 "${__BU_MODULE_INIT_PROJECT_PID}"               'Int'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID}"                     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__project_pid__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__PROJECT_PID'                 "${__BU_MODULE_INIT__PROJECT_PID}"               'Int'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID}"                     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__project_pid__lineno}";
     BU.ModuleInit.Msg;
 
     # 1 - FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
@@ -580,7 +580,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # TEMPORARY DIRECTORY
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR}" '+' 'msg'; BU.ModuleInit.Msg;
-    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__TMP_DIR"                    "${__BU_MODULE_INIT__TMP_DIR}"                  'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR}"                 "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__tmp_dir__lineno}";
+    BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__TMP_DIR_PATH"               "${__BU_MODULE_INIT__TMP_DIR_PATH}"             'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR_PATH}"            "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__tmp_dir_path__lineno}";
 
     # CONFIGURATION DIRECTORIES
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS}" '+' 'msg'; BU.ModuleInit.Msg;
@@ -642,7 +642,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         __bu_module_init__config_init_lang_dir__lineno \
         __bu_module_init__config_init_dir__status__lineno \
         __bu_module_init__modules_dir__lineno \
-        __bu_module_init__tmp_dir__lineno \
+        __bu_module_init__tmp_dir_path__lineno \
         __bu_module_init__lib_root_dir__file_name__lineno \
         __bu_module_init__lib_root_dir_file__parent_dir__lineno \
         __bu_module_init__lib_root_dir__file_path__lineno \
@@ -1279,10 +1279,10 @@ function BU.ModuleInit.FindPath()
 	if [ "${v_hasFailed}" == 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
 
 	if [ -n "${v_specific_var}" ]; then
-        if [ -n "${__BU_MODULE_INIT__TMP_DIR}" ]; then
+        if [ -n "${__BU_MODULE_INIT__TMP_DIR_PATH}" ]; then
             local v_tmpfile;
 
-            v_tmpfile="${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.${v_specific_var}.tmp";
+            v_tmpfile="${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.${v_specific_var}.tmp";
 
             if [ ! -f "${v_tmpfile}" ]; then touch "${v_tmpfile}"; fi
 
@@ -1290,10 +1290,10 @@ function BU.ModuleInit.FindPath()
 
             return 0;
         else
-            # This function is called when the "${__BU_MODULE_INIT__TMP_DIR}" is created, but at this point, the temporary directory doesn't exists yet, so this feature MUST be disabled UNTIL this directory is created.
-            if [ -z "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" ]; then
+            # This function is called when the "${__BU_MODULE_INIT__TMP_DIR_PATH}" is created, but at this point, the temporary directory doesn't exists yet, so this feature MUST be disabled UNTIL this directory is created.
+            if [ -z "${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" ]; then
                 # Creating a variable to store the path of the file, if this value needs to be processed externally.
-                __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "${__BU_MODULE_INIT__FIND_PATH_RETVAL}" > "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.tmp";
+                __BU_MODULE_INIT__FIND_PATH_RETVAL="${v_parentdir}/${v_target}"; echo "${__BU_MODULE_INIT__FIND_PATH_RETVAL}" > "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.tmp";
 
                 return 0;
             fi
@@ -1336,7 +1336,7 @@ function BU.ModuleInit.ListInstalledModules()
     local v_module_init_f;  # VAR TYPE : Filepath   - DESC :
 
     #**** Code ****
-    v_module_tmp_d="${__BU_MODULE_INIT__ROOT}/${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}";
+    v_module_tmp_d="${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}";
 
     v_module_conf_f="${v_module_tmp_d}/BU_modules_config_dir.out";
     v_module_diff_f="${v_module_tmp_d}/BU_modules_init_diff.out";
@@ -2080,97 +2080,101 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #**** Code ****
 
     # PID
-    __BU_MODULE_INIT_PROJECT_PID="${$}";
+    __BU_MODULE_INIT__PROJECT_PID="${$}";
     __bu_module_init__project_pid__lineno="$(( LINENO - 1 ))";
 
     # FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
     __BU_MODULE_INIT__ROOT_HOME="${HOME}";
     __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
-    # Checking if the framework is translated thanks to the CSV file parser.
-    __BASH_UTILS_FRAMEWORK_IS_TRANSLATED="false";
+    __BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME="tmp";
+    __bu_module_init__find_path__tmp_dir_name__lineno="$(( LINENO - 1 ))";
 
-    ____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME="tmp";
+    # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
+    # function if the framework's main module is translated thanks to the CSV file parser.
+    __BU_MODULE_INIT__FRAMEWORK_BASE_IS_TRANSLATED="false";
+    __bu_module_init__framework_base_is_translated__lineno="$(( LINENO - 1 ))";
 
     # FINDING THE ".Bash-utils" FOLDER
+    # If the framework base is not being installed on the user's hard drive.
+    if ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+        # If the ".Bash-utils" folder exists in its defined parent directory,
+        # then the ".Bash-utils" default parent folder is defined as the user's home directory.
+        if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
+            __bu_module_init__root__lineno="$(( LINENO + 2 ))";
 
-    echo "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils";
-
-    # If the ".Bash-utils" folder exists in its defined parent directory AND the framework base is not being installed on the user's hard drive,
-    # then the ".Bash-utils" default parent folder is defined as the user's home directory.
-    if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ] && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
-
-        __bu_module_init__root__lineno="$(( LINENO + 2 ))";
-
-        __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" 'd' || {
-            printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-                "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
-
-            BU.ModuleInit.IsInScript && exit 1; return 1;
-        })";
-
-        # If the base code of the framework is not wrapped in a single file.
-        if ! BU.ModuleInit.IsFrameworkWrapped; then
-            # shellcheck disable=SC2034
-            __bu_module_init__initializer_path__lineno="$(( LINENO + 2 ))";
-
-            __BU_MODULE_INIT__INITIALIZER_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" "$(basename "${BASH_SOURCE[0]}")" 'f' || {
-                printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" \
-                    "${__bu_module_init__initializer_path__lineno}" '$__BU_MODULE_INIT__INITIALIZER_PATH';
+            __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" 'd' || {
+                printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
+                    "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
 
                 BU.ModuleInit.IsInScript && exit 1; return 1;
             })";
+
+            # If the base code of the framework is not wrapped in a single file.
+            if ! BU.ModuleInit.IsFrameworkWrapped; then
+                # shellcheck disable=SC2034
+                __bu_module_init__initializer_path__lineno="$(( LINENO + 2 ))";
+
+                __BU_MODULE_INIT__INITIALIZER_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" "$(basename "${BASH_SOURCE[0]}")" 'f' || {
+                    printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" \
+                        "${__bu_module_init__initializer_path__lineno}" '$__BU_MODULE_INIT__INITIALIZER_PATH';
+
+                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                })";
+            fi
+        # Else, if the ".Bash-utils" folder does not exists in its defined parent directory.
+        else
+            BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
+
+            # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
+            BU.ModuleInit.IsInScript && exit 1; return 1;
         fi
 
     # Else, if the ".Bash-utils" folder doesn't exists in its defined parent directory AND the framework base is being installed on the user's hard drive,
-    # then the ".Bash-utils" default parent folder is defined as the "/tmp" folder in the system root directory.
-    elif [[ ( ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ) || ( -d "${HOME}/.Bash-utils" ) ]] && BU.ModuleInit.IsFrameworkBeingInstalled; then
-
-        # Redefining the
-        __BU_MODULE_INIT__ROOT_HOME='/tmp';
-        __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
-
-        # Creating the framework's temporary folder to store the temporary files generated by the initializer script.
-        mkdir -p "/${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils/${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" > /dev/null || \
-            mkdir -p "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils/${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" || {
-                echo "ERROR : PLEASE LAUNCH THIS SCRIPT WITH SUPER-USER PRIVILEGES, OR CHECK YOUR PERMISSIONS ON THE « ${__BU_MODULE_INIT__ROOT_HOME} » DIRECTORY";
-            }
-
-        BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
-            __bu_module_init__root__lineno="$(( LINENO + 2 ))";
-
-            __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "/${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" 'd' || {
-                printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
-
-                BU.ModuleInit.IsInScript && exit 1; return 1;
-            })";
-        }
-
-        BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
-            __bu_module_init__root__lineno="$(( LINENO + 2 ))";
-
-            __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" 'd' || {
-                printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-                    "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
-
-                BU.ModuleInit.IsInScript && exit 1; return 1;
-            })";
-        };
+    # then the ".Bash-utils" default parent folder is defined as the "/tmp" folder in the system root directory. This redefinition is important for the next path variables' values.
     else
-        BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
+        # Checking if the ".Bash-utils" folder exists in the user's home directory.
+        if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}" ]; then
+            # Redefining the "${__BU_MODULE_INIT__ROOT_HOME}" global variable.
+            __BU_MODULE_INIT__ROOT_HOME='/tmp';
+            __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
-        # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+            # Creating the framework's temporary folder to store the temporary files generated by the initializer script.
+            mkdir -p "/${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils/${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" > /dev/null || \
+                mkdir -p "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils/${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" || {
+                    echo "ERROR : PLEASE LAUNCH THIS SCRIPT WITH SUPER-USER PRIVILEGES, OR CHECK YOUR PERMISSIONS ON THE « ${__BU_MODULE_INIT__ROOT_HOME} » DIRECTORY";
+                }
+
+            BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
+                __bu_module_init__root__lineno="$(( LINENO + 2 ))";
+
+                __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "/${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" "${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" 'd' || {
+                    printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
+                        "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
+
+                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                })";
+            };
+
+        else
+            BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
+                __bu_module_init__root__lineno="$(( LINENO + 2 ))";
+
+                __BU_MODULE_INIT__ROOT="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" "${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" 'd' || {
+                    printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
+                        "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
+
+                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                })";
+            };
+        fi
     fi
 
     # TEMPORARY DIRECTORY
-    if [ ! -d "${__BU_MODULE_INIT__ROOT}/${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" ]; then mkdir -p "${__BU_MODULE_INIT__ROOT}/${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}"; fi
+    if [ ! -d "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" ]; then mkdir -p "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}"; fi
 
-    __BU_MODULE_INIT__TMP_DIR="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "${____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME}" 'd'    || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__TMP_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
-    __bu_module_init__tmp_dir__lineno="$(( LINENO - 1 ))";
-
-    unset ____BU_MODULE_INIT____FIND_PATH____TMP_DIR_NAME;
+    __BU_MODULE_INIT__TMP_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "${__BU_MODULE_INIT__FIND_PATH__TMP_DIR_NAME}" 'd'    || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__TMP_DIR_PATH'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
+    __bu_module_init__tmp_dir_path__lineno="$(( LINENO - 1 ))";
 
     # CONFIGURATIONS DIRECTORIES
     __BU_MODULE_INIT__CONFIG_DIR="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "config" 'd'                                             || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
@@ -2494,7 +2498,7 @@ function BashUtils_InitModules()
 
                         local v_module_aliases_file_name;
 
-                        v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.modaliasfile.tmp")")";
+                        v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
                 fi
 
                 if [ -n "${v_module_aliases_file_name}" ]; then
@@ -2533,7 +2537,7 @@ function BashUtils_InitModules()
 
                         local v_module_config_file_name;
 
-                        v_module_config_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.modconffile.tmp")")";
+                        v_module_config_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modconffile.tmp")")";
                 else
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
 
@@ -2613,7 +2617,7 @@ function BashUtils_InitModules()
                     [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'f' 'shut' 'modinitfile')" ]]; then
                         local v_module_init_file_name;
 
-                        v_module_init_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.modinitfile.tmp")")";
+                        v_module_init_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modinitfile.tmp")")";
                 else
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
@@ -2801,7 +2805,7 @@ function BU.ModuleInit.UnsourceModule()
                 [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.Unsource.${p_module}.sh"                   'f' 'shut' 'unsourceexcept')" ]] || \
                 [[ "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${p_module}.UnsourceExceptions.${p_module}.sh"         'f' 'shut' 'unsourceexcept')" ]]; then
 
-                    v_module_unsourceexcept_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR}/BU_module_init__find_path.unsourceexcept.tmp")")";
+                    v_module_unsourceexcept_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.unsourceexcept.tmp")")";
 
                     # Sourcing the file to get every functions and variables names, in order to unset each of them.
 
@@ -3120,7 +3124,7 @@ function BU.ModuleInit.ParseCSVLang()
 			BU.ModuleInit.Msg "$(printf "The « %s » translations CSV file was successfully parsed, and the « %s » language's translations output file « %s » was successfully created" "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}" "${p_lang_ISO_639_1}" "${v_outputFilePath}")";
 			BU.ModuleInit.Msg;
 
-			__BASH_UTILS_FRAMEWORK_IS_TRANSLATED='true';
+			__BU_MODULE_INIT__FRAMEWORK_BASE_IS_TRANSLATED='true';
 
 			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
                 source "${v_outputFilePath}" || {

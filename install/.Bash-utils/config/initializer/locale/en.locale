@@ -127,7 +127,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="This gl
 
 # Initializer script's temporary directory path.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initializing the framework's temporary directory";
-__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR="This global variable stores the path to the framework's temporary directory";
+__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR_PATH="This global variable stores the path to the framework's temporary directory";
 
 # Configuration directories paths.
 __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initializing the configuration directories paths";

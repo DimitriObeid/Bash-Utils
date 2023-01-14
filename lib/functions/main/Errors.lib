@@ -169,7 +169,7 @@ function BU.Main.Errors.Exit()
     if BU.Main.Checkings.IsPositiveInt "${p_exitcode}"; then
 
         if [ "${p_behavior^^}" == 'E' ] || [ -z "${p_behavior}" ]; then
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT_PROJECT_PID}"; else return "${p_exitcode}"; fi
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
 
         elif [ "${p_behavior^^}" == 'W' ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${p_exitcode}";
@@ -186,12 +186,12 @@ function BU.Main.Errors.Exit()
             BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
             BU.Main.Echo.Newline >&2;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT_PROJECT_PID}"; else return "${p_exitcode}"; fi
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
         fi
     else
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT_PROJECT_PID}"; else return "${p_exitcode}"; fi
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
     fi
 }
 
