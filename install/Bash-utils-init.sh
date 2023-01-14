@@ -975,7 +975,7 @@ function BU.ModuleInit.MsgLine()
     #**** Parameters ****
     local p_str=${1:-$'\0'};        # ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : NULL    - DESC : String to write.
     local p_line=${2:-$'\0'};       # ARG TYPE : Char       - OPTIONAL  | DEFAULT VAL : NULL    - DESC : Line character.
-    local p_context=${3:-$'\0'};    # ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : NULL    - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
+    local p_context=${3:-'echo'};   # ARG TYPE : String     - OPTIONAL  | DEFAULT VAL : NULL    - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
     if      [ "${p_context,,}" == 'echo' ]; then
@@ -985,9 +985,6 @@ function BU.ModuleInit.MsgLine()
     elif    [ "${p_context,,}" == 'msg' ]; then
         BU.ModuleInit.MsgLineCount "${#p_str}" "${p_line}" 'msg' || return 1;
         BU.ModuleInit.Msg "${p_str}" || return 1;
-
-    else
-        echo >&2; echo "TEST-MSGLINE" >&2; echo >&2; return 1;
     fi
 
     return 0;
@@ -999,7 +996,7 @@ function BU.ModuleInit.MsgLineCount()
     #**** Parameters ****
     local p_number=${1:-$'\0'};     # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of times the character has to be display.
     local p_line=${2:-$'\0'};       # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Line character.
-    local p_context=${3:-$'\0'};    # ARG TYPE : NULL   - REQUIRED | DEFAULT VAL : NULl     - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
+    local p_context=${3:-'echo'};   # ARG TYPE : NULL   - REQUIRED | DEFAULT VAL : NULl     - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
 
     #**** Code ****
     if      [ "${p_context,,}" == 'echo' ]; then
@@ -1007,9 +1004,6 @@ function BU.ModuleInit.MsgLineCount()
 
     elif    [ "${p_context,,}" == 'msg' ]; then
         for ((i=0; i<p_number; i++)); do BU.ModuleInit.Msg "${p_line}" '-n' || return 1; done; BU.ModuleInit.Msg || return 1;
-
-    else
-        echo >&2; echo "TEST-MSGLINECOUNT" >&2; echo >&2; return 1;
     fi
 
     return 0;
