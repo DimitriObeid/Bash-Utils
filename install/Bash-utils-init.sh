@@ -576,10 +576,6 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT_HOME"                  "${__BU_MODULE_INIT__ROOT_HOME}"                'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME}"               "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__root_home__lineno}";
-
-    # Checking if the framework is translated thanks to the CSV file parser.
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__BU_BASE_IS_TRANSLATED'      "${__BU_MODULE_INIT__BU_BASE_IS_TRANSLATED}"    'Bool'      "" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__bu_base_is_translated__lineno}";
-
     # FINDING THE ".Bash-utils" FOLDER
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__ROOT"                       "${__BU_MODULE_INIT__ROOT}"                     'Dirpath'   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT}"                    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__root__lineno}";
@@ -625,6 +621,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
     fi
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS}" '+' 'msg'; BU.ModuleInit.Msg;
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__BU_BASE_IS_TRANSLATED'                  "${__BU_MODULE_INIT__BU_BASE_IS_TRANSLATED}"                'Bool'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BU_BASE_IS_TRANSLATED}"               "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__bu_base_is_translated__lineno}";
     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM'            "${__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM}"          'Char'      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM}"              "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__csv_translation_file__delim__lineno}";
     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__DATE_LOG'                               "${__BU_MODULE_INIT__DATE_LOG}"                             'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG}"                            "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__date_log__lineno}";
     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT__USER_LANG'                              "${__BU_MODULE_INIT__USER_LANG}"                            'CMD'       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG}"                           "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__user_lang__lineno}";
