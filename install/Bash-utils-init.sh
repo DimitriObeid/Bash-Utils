@@ -156,6 +156,7 @@ function BU.ModuleInit.SIGINT()
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && v_isPrinted='true'; };
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && { echo >&2; echo "A execução do guião foi interrompida pelo utilizador" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && { echo >&2; echo "Выполнение сценария было прервано пользователем" >&2 && v_isPrinted='true'; };
 
     [ "${v_isPrinted}" != 'true' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2; };
 
@@ -200,6 +201,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
 
     [ "${v_userLang,,}" == 'fr' ] && BU.ModuleInit.MsgLine "$(printf "[ ERREUR ] FICHER : %s | LIGNE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'pt' ] && BU.ModuleInit.MsgLine "$(printf "[ERRO] FICHEIRO : %s | LINHA : %s | CÓDIGO : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'ru' ] && BU.ModuleInit.MsgLine "$(printf "[ОШИБКА] ФАЙЛ : %s | ЛИНИЯ : %s | КОД : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && BU.ModuleInit.MsgLine "$(printf "[ERROR] FILE : %s | LINE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2;
@@ -260,6 +262,13 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
         printf "(%s) Função onde a função « %s() » foi chamada : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
+
+    # Русский | Russian
+    [ "${v_userLang,,}" == 'pt' ] && {
+        printf "";
+
+        printf "";
+    }
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && {
