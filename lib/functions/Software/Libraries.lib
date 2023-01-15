@@ -58,6 +58,11 @@ elif [[ "${LANG}" == pt_* ]]; then
     echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
     echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
 
+elif [[ "${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
 else
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
