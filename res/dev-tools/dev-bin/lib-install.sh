@@ -4,7 +4,7 @@
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS
 
 # Name          : lib-install.sh
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : 2.0
 
 # ------------------

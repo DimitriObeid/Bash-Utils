@@ -4,7 +4,7 @@
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : latex-clean.sh
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
 # ------------------

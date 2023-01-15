@@ -6,7 +6,7 @@
 # Name          : Initializer.sh
 # Module        : Main
 # Description   : Module initializer file, initializing all the module's functions and variables you need for your scripts.
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
 # ----------------------------

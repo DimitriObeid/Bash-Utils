@@ -4,7 +4,7 @@
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : install-dev-env.sh
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : Beta 0.1
 
 # ------------------

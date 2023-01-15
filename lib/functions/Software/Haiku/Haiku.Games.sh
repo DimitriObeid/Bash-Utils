@@ -5,7 +5,7 @@
 
 # Name          : Haiku.Games.lib
 # Module        : Software
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : beta
 
 # ------------------

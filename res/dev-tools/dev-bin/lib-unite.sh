@@ -4,7 +4,7 @@
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : lib-unite.sh
-# Author(s)     : Dimitri Obeid
+# Author(s)     : Dimitri OBEID
 # Version       : Beta 1.0
 
 # -----------------
