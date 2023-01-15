@@ -150,6 +150,7 @@ function BU.ModuleInit.SIGINT()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && v_isPrinted='true'; };
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && { echo >&2; echo "A execução do guião foi interrompida pelo utilizador" >&2 && v_isPrinted='true'; };
 
     [ "${v_isPrinted}" != 'true' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2; };
 
@@ -193,6 +194,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     [ "${v_userLang,,}" == 'es' ] && BU.ModuleInit.MsgLine "$(printf "[ERROR] FICHERO : %s | LÍNEA : %s | CÓDIGO : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     [ "${v_userLang,,}" == 'fr' ] && BU.ModuleInit.MsgLine "$(printf "[ ERREUR ] FICHER : %s | LIGNE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'pt' ] && BU.ModuleInit.MsgLine "$(printf "[ERRO] FICHEIRO : %s | LINHA : %s | CÓDIGO : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && BU.ModuleInit.MsgLine "$(printf "[ERROR] FILE : %s | LINE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2;
@@ -247,6 +249,13 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
+    # Português | Portuguese
+    [ "${v_userLang,,}" == 'pt' ] && {
+        printf "EM « %s » FICHEIRO, NA FUNÇÃO « %s() », EM LINHA « %s » --> BASH-UTILS --> AVISO DE BASH-UTILS : IMPOSSÍVEL DE ENCONTRAR ESTE CAMINHO --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+
+        printf "(%s) Função onde a função « %s() » foi chamada : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+    };
+
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && {
         printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
@@ -278,6 +287,7 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O resto da biblioteca utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && echo "The rest of the library will use english as default language" >&2;
@@ -368,6 +378,19 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
             return 1;
         }
 
+        # Português | Portuguese
+        [ "${p_lang_backup,,}" == 'pt' ] && {
+            echo '-----------------------------------------------------------------------' >&2 && echo >&2;
+            echo "ERRO FATAL: IMPOSSIBILIDADE DE INCLUIR O FICHEIRO DE TRADUÇÃO EM INGLÊS" >&2 && echo >&2;
+
+            echo "Como as mensagens no ficheiro de inicialização do módulo são armazenadas em variáveis, este ficheiro baseia-se nestes ficheiros de tradução, que definem estas variáveis" >&2;
+            echo "Interrupção da execução do guião" >&2;
+            echo >&2;
+
+            # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY}" array.
+            return 1;
+        }
+
         # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
         [[ "${p_lang_backup}" == * ]] && {
             echo '-----------------------------------------------------------' >&2 && echo >&2;
@@ -403,6 +426,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 
     echo >&2;
 
+    # Deutch | German
     [ "${__bu_module_init__user_lang,,}" == 'de' ] && {
         printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », BASH-UTILS WARNUNG :\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
@@ -412,13 +436,15 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     };
 
+    # English
     [ "${__bu_module_init__user_lang,,}" == 'en' ] && {
         printf "IN « %s », FUNCTION « %s() », LINE « %s » --> BASH-UTILS ERROR\n" "${v_file}" "${v_func}" "${v_line}">&2; echo >&2;
 
-        echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory" >&2; echo >&2;
+        echo "The Bash Utils framework's configurations root folder « .Bash-utils » doesn't exists in your home directory" >&2; echo >&2;
         echo "Please copy this folder in your home directory. You can install it by executing the « ${v_installFile} » file, or you can find it in the « Bash-utils/install » directory" >&2;
     };
 
+    # Español | Spanish
     [ "${__bu_module_init__user_lang,,}" == 'es' ] && {
         printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », A LA LÍNEA « %s » --> ADVERTENCIA DE BASH-UTILS :\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
@@ -428,11 +454,22 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     };
 
+    # Français | French
     [ "${__bu_module_init__user_lang,,}" == 'fr' ] && {
         printf "DANS LE FICHIER « %s », À LA FONCTION « %s() », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel" >&2; echo >&2;
+        echo "Le dossier racine des configurations du framework Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel" >&2; echo >&2;
         echo "Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « ${v_installFile} », ou vous pouvez le trouver dans le dossier « Bash-utils/install »" >&2;
+
+        v_isPrinted='true';
+    };
+
+    # Português | Portuguese
+    [ "${__bu_module_init__user_lang,,}" == 'pt' ] && {
+        printf "EM « %s » FICHEIRO, NA FUNÇÃO « %s() », EM LINHA « %s » --> BASH-UTILS ERRO FATAL\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
+
+        echo "A pasta de configuração da raiz da estrutura Bash Utils « .Bash-utils » não existe no seu directório home" >&2; echo >&2;
+        echo "Por favor copie esta pasta para o seu directório pessoal. Pode instalá-lo executando o ficheiro « ${v_installFile} », ou pode encontrá-lo na pasta « Bash-utils/install »" >&2;
 
         v_isPrinted='true';
     };
@@ -454,12 +491,14 @@ function BU.ModuleInit.GetModuleInitLanguage()
     local p_lang_ISO_639_1=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Wanted language.
 
     #**** Variables ****
-    local v_supportedLang=('de' 'en' 'es' 'fr');    # VAR TYPE : Array  - DESC :
-    local v_langMatch;                              # VAR TYPE :
+    local v_supportedLang;  # VAR TYPE : Array  - DESC :
+    local v_langMatch;      # VAR TYPE :
 
-    local v_isPrinted;                              # VAR TYPE : Bool   - DESC :
+    local v_isPrinted;      # VAR TYPE : Bool   - DESC :
 
     #**** Code ****
+    v_supportedLang=('de' 'en' 'es' 'fr' 'pt');
+
     [[ ${v_supportedLang[*]} =~ ${p_lang_ISO_639_1,,} ]] && v_langMatch="match";
 
     # If the selected language was not found among the supported languages.
@@ -485,7 +524,8 @@ function BU.ModuleInit.GetModuleInitLanguage()
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Attention : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Nenhuma língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
         [ "${v_isPrinted}" != 'true' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
 
@@ -499,6 +539,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
 
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : O ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} » não foi encontrado na pasta « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
 
         [ "${v_isPrinted}" != 'true' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2;
 
@@ -516,7 +557,8 @@ function BU.ModuleInit.GetModuleInitLanguage()
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "FR | ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Não foi possível obter o ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
 
             # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
             [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
@@ -2070,7 +2112,8 @@ if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »" && echo >&2;
 
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'fr' ] && echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2 echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'fr' ] && echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2 && echo >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'pt' ] && echo "BASH-UTILS ERRO : O seu intérprete shell actual não é o intérprete « Bash », mas o intérprete" >&2 && echo >&2;
 
 	# WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
     BU.ModuleInit.IsInScript && exit 1; return 1;
