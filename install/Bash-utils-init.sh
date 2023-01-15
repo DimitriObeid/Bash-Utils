@@ -392,19 +392,22 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
     local v_line=${3:-${LINENO}};           # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : "${LINENO}"          - DESC :
 
     #**** Variables ****
-    local __bu_module_init__user_lang;  # VAR TYPE : ISO 639-1 Code     - DESC : Getting the language used / chosen by the user.
-    local v_isPrinted;                  # VAR TYPE : Bool               - DESC :
+    local __bu_module_init__user_lang;      # VAR TYPE : ISO 639-1 Code     - DESC : Getting the language used / chosen by the user.
+    local v_installFile;                    # VAR TYPE : File               - DESC : Name of the framework installation program.
+    local v_isPrinted;                      # VAR TYPE : Bool               - DESC :
 
     #**** Code ****
     __bu_module_init__user_lang="$(echo "${LANG}" | cut -d _ -f1)";
+
+    v_installFile='install_and_update.sh';
 
     echo >&2;
 
     [ "${__bu_module_init__user_lang,,}" == 'de' ] && {
         printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », BASH-UTILS WARNUNG :\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "" >&2; echo >&2;
-        echo "" >&2;
+        echo "Der Stammordner des Bash-Utils-Konfigurationsverzeichnisses « .Bash-utils » existiert nicht in Ihrem Heimatverzeichnis" >&2; echo >&2;
+        echo "Bitte kopieren Sie diesen Ordner in Ihr Home-Verzeichnis. Sie können es installieren, indem Sie die Datei « ${v_installFile} » ausführen, oder Sie können es im Verzeichnis « Bash-utils/install » finden" >&2;
 
         v_isPrinted='true';
     };
@@ -413,14 +416,14 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         printf "IN « %s », FUNCTION « %s() », LINE « %s » --> BASH-UTILS ERROR\n" "${v_file}" "${v_func}" "${v_line}">&2; echo >&2;
 
         echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory" >&2; echo >&2;
-        echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory" >&2;
+        echo "Please copy this folder in your home directory. You can install it by executing the « ${v_installFile} » file, or you can find it in the « Bash-utils/install » directory" >&2;
     };
 
     [ "${__bu_module_init__user_lang,,}" == 'es' ] && {
         printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », A LA LÍNEA « %s » --> ADVERTENCIA DE BASH-UTILS :\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "" >&2; echo >&2;
-        echo "" >&2;
+        echo "La carpeta raíz para las configuraciones de Bash Utils « .Bash-utils » no existe en su directorio personal." >&2; echo >&2;
+        echo "Por favor, copie este archivo en su directorio personal. Puede instalarlo ejecutando el archivo « ${v_installFile} », o puede encontrarlo en la carpeta « Bash-utils/install »" >&2;
 
         v_isPrinted='true';
     };
@@ -429,7 +432,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         printf "DANS LE FICHIER « %s », À LA FONCTION « %s() », À LA LIGNE « %s » --> ERREUR FATALE DE BASH-UTILS\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
         echo "Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel" >&2; echo >&2;
-        echo "Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « install_and_update.sh », ou vous pouvez le trouver dans le dossier « Bash-utils/install »." >&2;
+        echo "Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « ${v_installFile} », ou vous pouvez le trouver dans le dossier « Bash-utils/install »" >&2;
 
         v_isPrinted='true';
     };
@@ -439,7 +442,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         printf "IN « %s », FUNCTION « %s() », LINE « %s » --> BASH-UTILS ERROR\n" "${v_file}" "${v_func}" "${v_line}">&2; echo >&2;
 
         echo "The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory" >&2; echo >&2;
-        echo "Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory" >&2;
+        echo "Please copy this folder in your home directory. You can install it by executing the « ${v_installFile} » file, or you can find it in the « Bash-utils/install » directory" >&2;
     };
 }
 
@@ -2095,9 +2098,6 @@ BU.ModuleInit.DefineTraps;
 # shellcheck disable=SC2059,SC2016
 function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()
 {
-    #**** Variables ****
-    declare -i __v__BASHX_DEBUG_VALS_ARRAY__lineno; # VAR TYPE : Int    - DESC :
-
     #**** Code ****
 
     # PID
@@ -2350,7 +2350,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
     __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 
-    __v__BASHX_DEBUG_VALS_ARRAY__lineno="$(( LINENO + 2 ))";
+    # --------------------------------------------------------------------------------------
+    # Array of allowed values for the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global variable
+    # --------------------------------------------------------------------------------------
+
+    __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
                                               'fi' 'fil' 'fils' 'fis'  'file' 'files' \
@@ -2361,8 +2365,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                                               'sc' 'scs' 'scat' 'scats' 'scateg' 'scategs' 'scategory'  'scategorie' 'scategories' \
                                               's-'  's-s' 's-c' 's-cs' 's-cat' 's-cats' 's-categ' 's-categs' 's-category' 's-categorie' 's-categories' \
                                               'sub-' 'sub-s' 'sub-c' 'sub-cs' 'sub-cat' 'sub-cats' 'sub-categ' 'sub-categs' 'sub-category' 'sub-categorie' 'sub-categories');
-
-    __bu_module_init__bashx_debug_vals_array__lineno="${__v__BASHX_DEBUG_VALS_ARRAY__lineno}";
+    return 0;
 }
 
 # Calling the function previously defined, or else the global variables will not be declared.
