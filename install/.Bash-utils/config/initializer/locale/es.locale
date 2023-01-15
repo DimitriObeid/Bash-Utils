@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -----------------------------
+## INFORMACIÓN SOBRE EL GUIÓN :
+
+# Nombre        : es.locale
+# Autor(es)     : Dimitri Obeid
+# Versión       : 1.0
+
+# -------------------------
+# DESCRIPCIÓN DEL ARCHIVO :
+
+# Mensajes de traducción al español del script de inicialización del módulo.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+############################# DEFINICIÓN DE LOS RECURSOS DE TRADUCCIÓN ############################

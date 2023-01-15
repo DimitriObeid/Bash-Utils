@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# --------------------------------
+## INFORMATIONEN ÜBER DAS SKRIPT :
+
+# Name          : de.locale
+# Autor(en)     : Dimitri Obeid
+# Version       : 1.0
+
+# -------------------
+# DATEIBESCHREIBUNG :
+
+# Meldungen zur deutschen Übersetzung des Skripts zur Initialisierung von Modulen.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+############################## DEFINITION VON ÜBERSETZUNGSRESSOURCEN ##############################
