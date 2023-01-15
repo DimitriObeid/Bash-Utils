@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# --------------------------
+## INFORMĀCIJA PAR SKRIPTU :
+
+# Nosaukums     : lv.locale
+# Autors(-i)    : Dimitri OBEID
+# Versija       : 1.0
+
+# ----------------
+# FAILA APRAKSTS :
+
+# Moduļa inicializācijas skripta ziņojumi latviešu valodā.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## TULKOŠANAS RESURSU DEFINĪCIJA ##################################

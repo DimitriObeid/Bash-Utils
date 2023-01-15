@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -----------------------------
+## INFORMATIE OVER HET SCRIPT :
+
+# Naam          : nl.locale
+# Auteur(s)     : Dimitri OBEID
+# Versie        : 1.0
+
+# ----------------------
+# BESTANDSBESCHRIJVING :
+
+# Nederlandse vertaalberichten van het module-initialisatiescript.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################# DEFINITIE VAN VERTAALHULPBRONNEN ################################

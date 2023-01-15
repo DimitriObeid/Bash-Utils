@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# ----------------------
+## INFORMACE O SKRIPTU :
+
+# Název         : cs.locale
+# Autor(i)      : Dimitri OBEID
+# Verze         : 1.0
+
+# ---------------
+# POPIS SOUBORU :
+
+# České překladové zprávy z inicializačního skriptu modulu.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################# DEFINICE PŘEKLADATELSKÝCH ZDROJŮ ################################

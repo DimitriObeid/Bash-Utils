@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# ----------------------------
+## OPLYSNINGER OM PROGRAMMET :
+
+# Navn          : da.locale
+# Forfatter(e)  : Dimitri OBEID
+# Version       : 1.0
+
+# ----------------
+# FILBESKRIVELSE :
+
+# Danske oversættelsesmeddelelser fra modulets initialiseringsskript.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+############################## DEFINITION AF OVERSÆTTELSESRESSOURCER ##############################

@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -------------------------
+## INFORMACIJE O PROGRAMU :
+
+# Ime           : sl.locale
+# Avtor(i)      : Dimitri OBEID
+# Različica     : 1.0
+
+# ---------------
+# OPIS DATOTEKE :
+
+# Sporočila slovenskega prevoda scenarija za inicializacijo modula.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## OPREDELITEV PREVAJALSKIH VIROV #################################

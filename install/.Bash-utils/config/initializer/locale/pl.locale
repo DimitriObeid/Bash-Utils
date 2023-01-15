@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# ------------------------
+## INFORMACJE O SKRYPCIE :
+
+# Nazwa         : pl.locale
+# Autor(ka)     : Dimitri OBEID
+# Wersja        : 1.0
+
+# ------------
+# OPIS PLIKU :
+
+# Polskie komunikaty tłumaczące skrypt inicjalizacji modułu.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################ DEFINICJA ZASOBÓW TŁUMACZENIOWYCH ################################

@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -----------------------
+## INFORMÁCIE O SKRIPTE :
+
+# Názov         : sk.locale
+# Autor(i)      : Dimitri OBEID
+# Verzia        : 1.0
+
+# --------------
+# POPIS SÚBORU :
+
+# Slovenský preklad správ inicializačného skriptu modulu.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################ DEFINÍCIA PREKLADATEĽSKÝCH ZDROJOV ###############################

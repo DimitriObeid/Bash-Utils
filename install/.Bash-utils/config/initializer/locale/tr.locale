@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -------------------------
+## PROGRAM HAKKINDA BILGI :
+
+# İsim          : tr.locale
+# Yazar(lar)    : Dimitri OBEID
+# Sürüm         : 1.0
+
+# ------------------
+# DOSYA AÇIKLAMASI :
+
+# Modül başlatma betiğinin Türkçe çeviri mesajları.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################### ÇEVIRI KAYNAKLARININ TANIMI ###################################

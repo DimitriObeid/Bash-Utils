@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+
+# -------------------------------
+## INFORMAȚII PRIVIND PROGRAMUL :
+
+# Nume          : ro.locale
+# Autor(i)      : Dimitri OBEID
+# Versiunea     : 1.0
+
+# ------------------------
+# DESCRIEREA FIȘIERULUI :
+
+# Mesaje de traducere în limba română a scriptului de inițializare a modulului.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################ DEFINIȚIA RESURSELOR DE TRADUCERE ################################
