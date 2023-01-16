@@ -472,3 +472,8 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 
 # Underline formatting.
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'U'  || return 1; return 0; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

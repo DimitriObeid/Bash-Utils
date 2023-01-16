@@ -665,3 +665,8 @@ function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "
 
 # Checking if the text formatting is allowed.
 function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

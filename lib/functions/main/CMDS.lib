@@ -111,3 +111,8 @@ function BU.Main.CMDS.GetCommandReturnOutputValue()
     #**** Code ****
     if eval "${p_cmd}" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

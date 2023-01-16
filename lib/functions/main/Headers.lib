@@ -1924,3 +1924,8 @@ function BU.Main.Headers.Header.CMD.Yellow.Turquoise    { BU.Main.Headers.Base "
 function BU.Main.Headers.Header.CMD.Yellow.Violet       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_VIOLET}"              "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
 function BU.Main.Headers.Header.CMD.Yellow.White        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_WHITE}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
