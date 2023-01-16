@@ -18,19 +18,49 @@
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-############################################# GLOBAL VARIABLES DEFINITION #############################################
+########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
-#### ARGUMENTS DEFINITION
+#### BASH DEPENDENCIES
 
-## ARGUMENTS DEFINITION
+## BASH UTILS
 
-# Authorization to delete the generated file.
+# Feel free to source any dependencies here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+############################################# GLOBAL RESOURCES DEFINITION #############################################
+
+########################################### PROJECT'S ARGUMENTS DEFINITIONS ###########################################
+
+#### POSITIONAL ARGUMENTS
+
+## DELETION AUTHORIZATIONS
+
+# ARG TYPE : String
+# OPTIONAL
+# DEFAULT VAL : NULL
+
+# DESC : Authorization to delete the generated file.
 __BU_ARG_RM="${1:-$'\0'}";
 
-# Delete empty lines.
+# ARG TYPE : String
+# OPTIONAL
+# DEFAULT VAL : NULL
+
+# DESC : Delete empty lines.
 __BU_ARG_DEL_EMPTY_LINES="${2:-$'\0'}";
 
-# Delete comments that are not on the same line as a piece of code.
+# ARG TYPE : String
+# OPTIONAL
+# DEFAULT VAL : NULL
+
+# DESC : Delete comments that are not on the same line as a piece of code.
 __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # -----------------------------------------------
@@ -39,7 +69,35 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### VARIABLES DEFINITION
+#### ARRAY OF ARGUMENTS
+
+## SUB-CATEGORY NAME
+
+# Feel free to define an array of arguments here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## PROJECT'S GLOBAL VARIABLES DEFINITIONS #######################################
+
+#### ARRAYS DEFINITIONS
+
+## SUB-CATEGORY NAME
+
+# Feel free to define arrays here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VARIABLES DEFINITIONS
 
 ## PATHS
 
@@ -73,7 +131,13 @@ __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### FUNCTIONS DEFINITION
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
+
+#### WRITING TEXT
+
+## WRITING LINES
 
 # Printing a line according to the terminal's columns number.
 function PrintLine()
@@ -84,6 +148,16 @@ function PrintLine()
             printf '-';
     done; printf "\n";
 }
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MATHS
+
+## RAW BYTE SIZE TO HUMAN-READABLE BYTE SIZE
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
@@ -126,17 +200,19 @@ function BytesToHuman()
     return 0;
 }
 
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### FILES PROCESSING
+
+## PRINTING FILE'S CONTENT
+
 # function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU_MAIN_FULL_FILE_PATH}"; done; }
 function CatBU { cat "${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 function EchoBU { echo -e "# ${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-
-if [ ! -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-	touch "${__BU_MAIN_FULL_FILE_PATH}";
-fi
-
-if [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-	true > "${__BU_MAIN_FULL_FILE_PATH}";
-fi
 
 # ----------------------------------------------
 
@@ -145,6 +221,16 @@ fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+# Checking if the "${__BU_MAIN_FULL_FILE_PATH}" file exists or not. The file is created if not.
+if [ ! -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
+	touch "${__BU_MAIN_FULL_FILE_PATH}";
+fi
+
+# Checking if the "${__BU_MAIN_FULL_FILE_PATH}" file is empty or not. The file is emptied if not.
+if [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then
+	true > "${__BU_MAIN_FULL_FILE_PATH}";
+fi
 
 # Path of the modules initialization script's configuration files.
 for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do

@@ -17,6 +17,10 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
+#### BASH DEPENDENCIES
+
+## BASH UTILS
+
 # shellcheck disable=SC1090,SC1091
 if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
     echo; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the initialization file."; echo; exit 1;
@@ -30,16 +34,78 @@ fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-########################################### GLOBAL VARIABLES (RE)DEFINITION ###########################################
+############################################# GLOBAL RESOURCES DEFINITION #############################################
 
-#### ARGUMENTS DEFINITION
+########################################### PROJECT'S ARGUMENTS DEFINITIONS ###########################################
 
-## ARGUMENTS DEFINITION
+#### POSITIONAL ARGUMENTS
 
-# Path of the file to create, including its name.
+## PATHS
+
+# ARG TYPË : Filepath
+# REQUIRED
+# DEFAULT VAL : NULL
+
+# DESC : Path of the file to create, including its name.
 __P_DESKTOP_PATH=${1:-$'\0'};
 
 # -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### ARRAY OF ARGUMENTS
+
+##
+
+# Feel free to define an array of arguments here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## PROJECT'S GLOBAL VARIABLES DEFINITIONS #######################################
+
+#### ARRAYS DEFINITIONS
+
+##
+
+# Feel free to define arrays here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VARIABLES DEFINITIONS
+
+##
+
+# Feel free to define variables here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
+
+#### FUNCTIONS DEFINITION
+
+##
+
+# Feel free to define functions here if needed.
+
+# ----------------------------------------------
 
 
 

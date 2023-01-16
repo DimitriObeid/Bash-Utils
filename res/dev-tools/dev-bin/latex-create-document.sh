@@ -16,6 +16,10 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
+#### BASH DEPENDENCIES
+
+## BASH UTILS
+
 # shellcheck disable=SC1090,SC1091
 if ! source "${HOME}/Bash-utils-init.sh"; then
     echo >&2; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1;
@@ -38,22 +42,48 @@ fi
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-########################################### GLOBAL VARIABLES (RE)DEFINITION ###########################################
+############################################# GLOBAL RESOURCES DEFINITION #############################################
 
-#### ARGUMENTS DEFINITION
+########################################### PROJECT'S ARGUMENTS DEFINITIONS ###########################################
 
-## ARGUMENTS DEFINITION
+#### POSITIONAL ARGUMENTS
 
-# Targeted language
+## LANGUAGE
+
+# ARG TYPE : ISO 639-1 Code
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Targeted language
 __ARG_LANG=${1:-$'\0'};
 
-# Type of document (master documentation, configurations, module initializer resources or library functions).
+# -----------------------------------------------
+
+## DOCUMENT TYPE
+
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Type of document (master documentation, configurations, module initializer resources or library functions).
 __ARG_TYPE=${2:-$'\0'};
 
-# Name of the file to create.
+# -----------------------------------------------
+
+## FILE NAME
+
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Name of the file to create.
 __ARG_FILENAME=${3:-$'\0'};
 
-# Author's name
+# -----------------------------------------------
+
+## AUTHOR'S NAME
+
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Author's name
 __ARG_AUTHOR=${4:-$'\0'};
 
 # -----------------------------------------------
@@ -62,14 +92,36 @@ __ARG_AUTHOR=${4:-$'\0'};
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### VARIABLES DEFINITION
+#### ARRAY OF ARGUMENTS
 
-## LANGUAGES
+## SUB-CATEGORY NAME
+
+# Feel free to define an array of arguments here if needed.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## PROJECT'S GLOBAL VARIABLES DEFINITIONS #######################################
+
+#### ARRAYS DEFINITIONS
+
+## LANGUAGES ARRAYS
 
 # Supported languages array.
 __LATEX_CREATE_DOC__SUPPORTED_LANGUAGES=('en (English)' 'fr (French | Français)');
 
 # -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VARIABLES DEFINITIONS
 
 ## PATHS
 
@@ -82,7 +134,11 @@ __LATEX_CREATE_DOC__RES_DIR="${__BU_MAIN_MODULE_DEVTOOLS_SRC}/${__BU_MAIN_PROJEC
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### FUNCTIONS DEFINITION
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
+
+#### FUNCTIONS DEFINITIONS
 
 ## LANGUAGES PROCESSING
 

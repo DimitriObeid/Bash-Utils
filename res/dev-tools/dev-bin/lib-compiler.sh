@@ -17,9 +17,9 @@
 
 ########################################### SOURCING PROJECT'S DEPENDENCIES ###########################################
 
-#### SOURCING DEPENDENCES
+#### BASH DEPENDENCIES
 
-## BASH DEPENDENCES
+## BASH UTILS
 
 # Temporarily commented, as the feature is not yet implemented . In the future, every dev-tools scripts will use a stable compiled version.
 # source "${HOME}/.Bash-utils/compiled/stable/framework-full.sh"
@@ -40,21 +40,23 @@
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-############################################# GLOBAL VARIABLES DEFINITION #############################################
+############################################# GLOBAL RESOURCES DEFINITION #############################################
 
-#### ARGUMENTS DEFINITION
+########################################### PROJECT'S ARGUMENTS DEFINITIONS ###########################################
 
-## ARGUMENTS DEFINITION
+#### POSITIONAL ARGUMENTS
 
-# Language (mandatory argument).
+## LANGUAGE
 
-# Usage : this argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+
+# DESC 1 : String containing the list of languages to select as translation for each compiled scripts.
+# DESC 2 : This argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
 __BU_ARG_LANG=${1:-$'\0'};
 
 shift 1;
-
-# Fitting the arguments following the "${__BU_ARG_DISP}" in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
-__BU_ARG_ARRAY=("${@}");
 
 # -----------------------------------------------
 
@@ -62,9 +64,28 @@ __BU_ARG_ARRAY=("${@}");
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### VARIABLES DEFINITION
+#### ARRAY OF ARGUMENTS
 
-## ARRAYS
+# COMPILER'S EXTRA ARGUMENTS
+# OPTIONAL
+# DEFAULT VAL : NULL
+
+# DESC : Fitting the arguments following the "${__BU_ARG_LANG}" parameter in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
+__BU_ARGS_ARRAY=("${@}");
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################################### PROJECT'S VARIABLES DEFINITIONS ###########################################
+
+#### ARRAYS DEFINITION
+
+## FILES ARRAYS
 
 # Storing each stable file that cannot be set into read-only mode.
 __BU_ARRAY__READ_ONLY_FAILED_FILES=();
@@ -74,6 +95,10 @@ __BU_ARRAY__COMPILED_FILES_LIST=();
 
 # Storing each compiled stable files path.
 __BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
+
+# -----------------------------------------------
+
+## LANGUAGES ARRAYS
 
 # List of every ISO 639-1 language codes.
 # In the far future, when every languages will be used in the Framework, the 'all' argument will be used to compile the Framework in a single file for each of the following languages,
@@ -89,6 +114,12 @@ ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'a
 __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 
 # -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### VARIABLES DEFINITIONS
 
 ## COLORS
 
@@ -499,7 +530,13 @@ source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### FUNCTIONS DEFINITION
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
+
+#### WRITING TEXT
+
+## WRITING LINES
 
 # Function to create and display rows according to the number of columns in the terminal's text area.
 function PrintLine()
@@ -569,6 +606,16 @@ function PrintSuccessLine() { PrintBaseLine "${__SUCCESS}" "${1}" "${2}" "${3}";
 # Printing a warning line.
 function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}"; }
 
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### FILES PROCESSING
+
+## RIGHTS PROCESSING
+
 # Printing the list the every files whose rights were not modified.
 # shellcheck disable=SC2059
 function PrintFilesWhichWereNotChmoded()
@@ -593,6 +640,38 @@ function PrintFilesWhichWereNotChmoded()
 
     echo >&2; printf "${__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP}\n" "${__compiled_stable_file_parent_dir}/" >&2;
 }
+
+# -----------------------------------------------
+
+## FILES EDITION
+
+# Writing the target file's content into the file to generate.
+function WriteBU()
+{
+    #**** Parameters ****
+    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written to the "${__BU_MAIN_FULL_FILE_PATH}" file.
+    local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
+
+	#**** Variables ****
+	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write in the "${__BU_MAIN_FULL_FILE_PATH}" file.
+
+	v_content="$(cat "${p_filepath}")";
+
+    #**** Code ****
+    if      [ "${p_display,,}" == 'yes' ]; then echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    else                                        echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    fi
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### MATHS
+
+## RAW BYTE SIZE TO HUMAN-READABLE BYTE SIZE
 
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
@@ -652,6 +731,16 @@ function BytesToHuman()
     return 0;
 }
 
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### LANGUAGES
+
+## CHECKINGS
+
 # Verifying the list of every ISO 639-1 language codes.
 function CheckISO639_1_LangCode()
 {
@@ -661,6 +750,10 @@ function CheckISO639_1_LangCode()
     #**** Code ****
     [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
 }
+
+# -----------------------------------------------
+
+## VALUES GETTER
 
 # Getting the delimiter.
 function CheckLangArgDelim()
@@ -678,47 +771,18 @@ function CheckLangArgDelim()
     return 1;
 }
 
-# Writing the error message if a Shellcheck verification failed.
-function ShellcheckError()
-{
-    #**** Parameters ****
-    local p_path=${1:-\$'0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL  - DESC : Path of the file whose Shellcheck verification failed.
-
-    #**** Code ****
-    echo >&2;
-
-    # shellcheck disable=SC2059
-    printf "${__BU_COMPILE__SHELLCHECK__FAIL}" "${p_path}"; echo >&2; return 0;
-}
-
-# Writing the target file's content into the file to generate.
-function WriteBU()
-{
-    #**** Parameters ****
-    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written to the "${__BU_MAIN_FULL_FILE_PATH}" file.
-    local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
-
-	#**** Variables ****
-	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write in the "${__BU_MAIN_FULL_FILE_PATH}" file.
-
-	v_content="$(cat "${p_filepath}")";
-
-    #**** Code ****
-    if      [ "${p_display,,}" == 'yes' ]; then echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    else                                        echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    fi
-}
-
 # ----------------------------------------------
 
 
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
 
 # Parsing the array of optional arguments given by the user.
-for arg in "${__BU_ARG_ARRAY[@]}"; do
+for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # If the user decides to display the content of each compiled file.
     if [ "${arg}" == display ]; then
         __vArrayVal_display='display';
