@@ -231,6 +231,32 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::number-values";
 
+# Checking if a number is even.
+function BU.Main.BasicMaths.IsEven()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
+
+    if [ "$(( ${1:-$'\0'} % 2 ))" -eq 0 ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a number is uneven.
+function BU.Main.BasicMaths.IsUneven()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
+
+    if [ "$(( ${1:-$'\0'} % 2 ))" -ne 0 ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
 # Checking floating value.
 function BU.Main.Checkings.IsFloat()
 {

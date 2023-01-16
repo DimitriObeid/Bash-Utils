@@ -638,7 +638,7 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="$
 function BU.Main.Text.PrintCharXTimes()
 {
 	#**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String or single character to process.
 	local p_nb=${2:-1};			    # ARG TYPE : Int		- REQUIRED | DEFAULT VAL : 1		- DESC : Number of characters to print.
 	local p_newline=${3:-false}	    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
 
