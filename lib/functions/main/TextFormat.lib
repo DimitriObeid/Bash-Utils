@@ -433,7 +433,7 @@ function BU.Main.TextFormat.Itoa()
 #### TEXT
 #### DEBUG ID : text
 
-__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text'
+__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
 
 ## SETTING TEXT FORMAT
 ## DEBUG ID : setting-text-format

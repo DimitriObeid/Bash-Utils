@@ -497,7 +497,7 @@ function BU.Main.Filesystem.Chown()
                 BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")'S FUNCTION $(BU.Main.Decho.Decho.Path "${p_option}") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "${p_option}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
             ;;
         esac
 
