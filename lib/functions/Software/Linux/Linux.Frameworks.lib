@@ -78,6 +78,43 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### HTML / CSS
+
+## BOOTSTRAP
+
+# Installing Bootstrap on Linux.
+function BU.Software.Linux.Frameworks.Bootstrap.Install()
+{
+    #**** Code ****.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Bootstrap on Linux.
+function BU.Software.Linux.Frameworks.Bootstrap.Update()
+{
+    #**** Code ****.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Bootstrap on Linux.
+function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
+{
+    #**** Code ****.
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### JAVASCRIPT FRAMEWORKS
 
 ## ANGULAR

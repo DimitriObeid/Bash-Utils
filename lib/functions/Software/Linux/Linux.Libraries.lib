@@ -123,8 +123,57 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
 
 ## OPENGL
 
-# Installing OpenGL.
+# Installing OpenGL on Linux.
 function BU.Software.Linux.Libraries.OpenGL.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating OpenGL on Linux.
+function BU.Software.Linux.Libraries.OpenGL.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling OpenGL on Linux.
+function BU.Software.Linux.Libraries.OpenGL.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## SDL (Simple DirectMedia Layer)
+
+# Installing SDL on Linux.
+function BU.Software.Linux.Libraries.SDL.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating SDL on Linux.
+function BU.Software.Linux.Libraries.SDL.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling SDL on Linux.
+function BU.Software.Linux.Libraries.SDL.Uninstall()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };

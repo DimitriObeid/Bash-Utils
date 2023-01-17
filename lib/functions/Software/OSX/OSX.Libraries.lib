@@ -140,3 +140,34 @@ function BU.Software.OSX.Libraries.OpenGL.Uninstall()
 
     return 0;
 }
+
+# -----------------------------------------------
+
+## SDL (Simple DirectMedia Layer)
+
+# Installing SDL on MacOS.
+function BU.Software.OSX.Libraries.SDL.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating SDL on MacOS.
+function BU.Software.OSX.Libraries.SDL.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling SDL on MacOS.
+function BU.Software.OSX.Libraries.SDL.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
