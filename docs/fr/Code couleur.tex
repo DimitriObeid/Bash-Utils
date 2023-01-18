@@ -1,0 +1,163 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}     % Encodage du texte (caractères accentués).
+\usepackage[french]{babel}      % Langue du document.
+\usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
+
+\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
+
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour l'affichage numérique)
+% en option "dvipsnames" (basé sur le modèle de couleur CJMB (CMYK), meilleur pour l'impression) via le script de conversion
+% en format imprimable.
+\usepackage[usenames,svgnames]{xcolor}      % Coloration du texte.
+\usepackage{verbatim}						% Mise en page des paragraphes.
+
+\usepackage[document]{ragged2e}								% Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Mise en page du document.
+
+% ------------------------------------------------------------------------------------------------------------------------
+% Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
+
+% Définition de la couleur              % Normal | Imprimable   - Description
+
+\definecolor{back}{HTML}{000000}        % Noir | Blanc  - Couleur de fond du document.
+\definecolor{case}{HTML}{fcff00}        % Jaune         - Couleur des conditions "case".
+\definecolor{cmds}{HTML}{909090}        % Gris          - Couleur des noms de commandes du système et de leurs arguments.
+\definecolor{cond}{HTML}{be480a}        % Brique        - Couleur des conditions "if".
+\definecolor{func}{HTML}{800080}        % Mauve         - Couleur des fonctions définies dans chaque module du framework Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff}        % Cyan          - Couleur des boucles.
+\definecolor{main}{HTML}{8F00FF}        % Violet        - Couleur des fonctions du script principal.
+\definecolor{path}{HTML}{bfff00}        % Citron vert   - Couleur des chemins de dossiers et de fichiers.
+\definecolor{sec1}{HTML}{ff0000}        % Rouge         - Couleur des titres principaux et de premier niveau.
+\definecolor{sec2}{HTML}{00ff00}        % Vert          - Couleur des titres de deuxième niveau.
+
+\definecolor{sec3}{HTML}{0060ff}        % Bleu          - Couleur des titres de troisième niveau.
+\definecolor{text}{HTML}{ffffff}        % Blanc | Noir  - Couleur du texte normal.
+\definecolor{vars}{HTML}{FF7F00}        % Orange        - Couleur des noms des paramètres et des variables.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+\title{\color{sec1}Code couleur de la documentation officielle \\du framework Bash Utils}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Code couleur de la documentation officielle du framework Bash Utils)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Code couleur de la documentation officielle du framework Bash Utils)
+  /Keywords ()
+}
+
+% Mise en page des paragraphes.
+\setlength{\parskip}{1em}
+
+\begin{document}
+\maketitle
+
+\color{sec1}
+\section{Couleurs de la documentation au format "normal"}\color{text}
+
+\begin{justify}
+  \textbf{\color{case}ATTENTION :} Il n'est pas conseillé d'imprimer un document dans ce format, pour le toner de votre imprimante et pour une meilleure qualité d'impression avec le modèle de couleur CJMB (CYMK) proposé par le format imprimable.
+
+  Pour passer au format imprimable, exécutez le script \textbf{\color{cmds}latex-convert-to-printable.sh}. Il se situe dans le dossier des fichiers exécutables, mais son code n'a pas encore été écrit.
+\end{justify}
+
+\begin{justify}
+  La liste des codes de couleurs pour la version imprimable se situe en dessous de la liste suivante, à la page suivante.
+\end{justify}
+
+\begin{justify}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Code couleur} & \textbf{Couleur}    & \textbf{Description}\\
+        \hline
+        \color{text}back  & \color{text}Noir        & \color{text}Couleur de fond du document\\
+        \hline
+        \color{case}case  & \color{case}Jaune       & \color{case}Couleur des conditions \textbf{"case"}\\
+        \hline
+        \color{cmds}cmds  & \color{cmds}Gris        & \color{cmds}Couleur des noms de commandes du système et de leurs arguments\\
+        \hline
+        \color{cond}cond  & \color{cond}Brique      & \color{cond}Couleur des conditions \textbf{"if"}\\
+        \hline
+        \color{func}func  & \color{func}Mauve       & \color{func}Couleur des fonctions définies dans chaque module du framework\\
+        \hline
+        \color{loop}loop  & \color{loop}Cyan        & \color{loop}Couleur des boucles\\
+        \hline
+        \color{main}main  & \color{main}Violet      & \color{main}Couleur des fonctions du script principal\\
+        \hline
+        \color{path}path  & \color{path}Citron vert & \color{path}Couleur des chemins de dossiers et de fichiers\\
+        \hline
+        \color{sec1}sec1  & \color{sec1}Rouge       & \color{sec1}Couleur des titres principaux et de premier niveau\\
+        \hline
+        \color{sec2}sec2  & \color{sec2}Vert        & \color{sec2}Couleur des titres de deuxième niveau\\
+        \hline
+        \color{sec3}sec3  & \color{sec3}Bleu        & \color{sec3}Couleur des titres de troisième niveau\\
+        \hline
+        \color{text}text  & \color{text}Blanc       & \color{text}Couleur du texte normal\\
+        \hline
+        \color{vars}vars  & \color{vars}Orange      & \color{vars}Couleur des noms des paramètres et des variables\\
+        \hline
+
+    \end{tabular}
+\end{justify}
+
+\newpage
+
+% ------------
+
+% ----------------------
+
+% -----------------------------------------------
+
+% /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{red}
+\section{Couleurs de la documentation au format imprimable}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Code couleur} & \textbf{Couleur}    & \textbf{Description}\\
+        \hline
+        \color{text}back  & \color{text}Blanc       & \color{text}Couleur de fond du document\\
+        \hline
+        \color{case}case  & \color{case}Jaune       & \color{case}Couleur des conditions \textbf{"case"}\\
+        \hline
+        \color{cmds}cmds  & \color{cmds}Gris        & \color{cmds}Couleur des noms de commandes du système et de leurs arguments\\
+        \hline
+        \color{cond}cond  & \color{cond}Brique      & \color{cond}Couleur des conditions \textbf{"if"}\\
+        \hline
+        \color{func}func  & \color{func}Mauve       & \color{func}Couleur des fonctions définies dans chaque module du framework\\
+        \hline
+        \color{loop}loop  & \color{loop}Cyan        & \color{loop}Couleur des boucles\\
+        \hline
+        \color{main}main  & \color{main}Violet      & \color{main}Couleur des fonctions du script principal\\
+        \hline
+        \color{path}path  & \color{path}Citron vert & \color{path}Couleur des chemins de dossiers et de fichiers\\
+        \hline
+        \color{sec1}sec1  & \color{sec1}Rouge       & \color{sec1}Couleur des titres principaux et de premier niveau\\
+        \hline
+        \color{sec2}sec2  & \color{sec2}Vert        & \color{sec2}Couleur des titres de deuxième niveau\\
+        \hline
+        \color{sec3}sec3  & \color{sec3}Bleu        & \color{sec3}Couleur des titres de troisième niveau\\
+        \hline
+        \color{text}text  & \color{text}Noir        & \color{text}Couleur du texte normal\\
+        \hline
+        \color{vars}vars  & \color{vars}Orange      & \color{vars}Couleur des noms des paramètres et des variables\\
+        \hline
+
+    \end{tabular}
+\end{justify}
+
+
+\end{document}

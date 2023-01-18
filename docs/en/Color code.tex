@@ -1,0 +1,163 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}     % Text encoding (accented characters).
+\usepackage[english]{babel}     % Document language.
+\usepackage[sfdefault]{roboto}  % Font used in the document.
+\usepackage[T1]{fontenc}		% Hyphenation rule for accented characters (for the LaTeX compiler).
+
+\usepackage{fancyhdr}           % Adding headers and footers to each page of the document.
+\usepackage{hyperref}           % Creation of clickable links pointing to other parts of the document.
+\usepackage{parskip}            % Definable line breaks between each paragraph.
+
+% Don't forget to change the "svgnames" option (colors defined on the RGB model, better for digital display)
+% into "dvipsnames" option (based on the CMYK model, better for printing) in the script which converts each
+% LaTeX document to printable format.
+\usepackage[usenames,svgnames]{xcolor}      % Text colouring.
+\usepackage{verbatim}						% Paragraph layout.
+
+\usepackage[document]{ragged2e}								% Text justification.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Document layout.
+
+% --------------------------------------------------------------------------------------------------
+% List of defined colors (for the layout and for changing the theme for printing the documentation).
+
+% Color definition                      % Normal | Printable    - Description
+
+\definecolor{back}{HTML}{000000}        % Black | White - Color of the document background.
+\definecolor{case}{HTML}{fcff00}        % Yellow        - Color of the "case" conditions.
+\definecolor{cmds}{HTML}{909090}        % Gray          - Color of the names of the system commands with their arguments.
+\definecolor{cond}{HTML}{be480a}        % Brick         - Color of the "if" conditions.
+\definecolor{func}{HTML}{800080}        % Mauve         - Color of the functions defined in each module of the Bash Utils framework.
+
+\definecolor{loop}{HTML}{00ffff}        % Cyan          - Color of the loops.
+\definecolor{main}{HTML}{8F00FF}        % Violet        - Color of the functions from the main script.
+\definecolor{path}{HTML}{bfff00}        % Citron vert   - Color of the files and folders paths.
+\definecolor{sec1}{HTML}{ff0000}        % Rouge         - Color of the main and first level titles.
+\definecolor{sec2}{HTML}{00ff00}        % Vert          - Color of the second level titles.
+
+\definecolor{sec3}{HTML}{0060ff}        % Bleu          - Color of the third level titles.
+\definecolor{text}{HTML}{ffffff}        % Blanc | Noir  - Color of the normal text.
+\definecolor{vars}{HTML}{FF7F00}        % Orange        - Color of the names of the parameters and the variables.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+\title{\color{sec1}Color code of the official Bash Utils \\framework documentation}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Color code of the official Bash Utils framework documentation)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Color code of the official Bash Utils framework documentation)
+  /Keywords ()
+}
+
+% Paragraph layout.
+\setlength{\parskip}{1em}
+
+\begin{document}
+\maketitle
+
+\color{sec1}
+\section{Colors of the documentation into "normal" format}\color{text}
+
+\begin{justify}
+  \textbf{\color{case}WARNING :} It is not recommended to print a document in this format, for the toner of your printer and for a better printing quality with the color model CJMB (CYMK) proposed by the printable format.
+
+  To switch to printable format, please run the \textbf{\color{cmds}latex-convert-to-printable.sh} script. It is located in the folder of executable files, but its code has not been written yet.
+\end{justify}
+
+\begin{justify}
+  The list of color codes for the printable version is located below the following list on the next page.
+\end{justify}
+
+\begin{justify}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Color code} & \textbf{color}        & \textbf{Description}\\
+        \hline
+        \color{text}back    & \color{text}Black     & \color{text}Color of the document background\\
+        \hline
+        \color{case}case    & \color{case}Yellow    & \color{case}Color of the \textbf{"case"} conditions\\
+        \hline
+        \color{cmds}cmds    & \color{cmds}Gray      & \color{cmds}Color of the names of the system commands with their arguments\\
+        \hline
+        \color{cond}cond    & \color{cond}Brick     & \color{cond}Color of the \textbf{"if"} conditions\\
+        \hline
+        \color{func}func    & \color{func}Mauve     & \color{func}Color of the functions defined in each module of the Bash Utils framework\\
+        \hline
+        \color{loop}loop    & \color{loop}Cyan      & \color{loop}Color of the loops\\
+        \hline
+        \color{main}main    & \color{main}Violet    & \color{main}Color of the functions from the main script\\
+        \hline
+        \color{path}path    & \color{path}Lime      & \color{path}Color of the files and folders paths\\
+        \hline
+        \color{sec1}sec1    & \color{sec1}Red       & \color{sec1}Color of the main and first level titles\\
+        \hline
+        \color{sec2}sec2    & \color{sec2}Green     & \color{sec2}Color of the second level titles\\
+        \hline
+        \color{sec3}sec3    & \color{sec3}Blue      & \color{sec3}Color of the third level titles\\
+        \hline
+        \color{text}text    & \color{text}White     & \color{text}Color of the normal text\\
+        \hline
+        \color{vars}vars    & \color{vars}Orange    & \color{vars}Color of the names of the parameters and the variables\\
+        \hline
+
+    \end{tabular}
+\end{justify}
+
+\newpage
+
+% ------------
+
+% ----------------------
+
+% -----------------------------------------------
+
+% /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+\color{red}
+\section{Colors of the documentation into the printable format}\color{text}
+
+\begin{justify}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Color code} & \textbf{Color}        & \textbf{Description}\\
+        \hline
+        \color{text}back    & \color{text}White     & \color{text}Color of the document background\\
+        \hline
+        \color{case}case    & \color{case}Yellow    & \color{case}Color of the \textbf{"case"} conditions\\
+        \hline
+        \color{cmds}cmds    & \color{cmds}Gray      & \color{cmds}Color of the names of the system commands with their arguments\\
+        \hline
+        \color{cond}cond    & \color{cond}Brick     & \color{cond}Color of the \textbf{"if"} conditions\\
+        \hline
+        \color{func}func    & \color{func}Mauve     & \color{func}Color of the functions defined in each module of the Bash Utils framework\\
+        \hline
+        \color{loop}loop    & \color{loop}Cyan      & \color{loop}Color of the loops\\
+        \hline
+        \color{main}main    & \color{main}Violet    & \color{main}Color of the functions from the main script\\
+        \hline
+        \color{path}path    & \color{path}Lime      & \color{path}Color of the files and folders paths\\
+        \hline
+        \color{sec1}sec1    & \color{sec1}Red       & \color{sec1}Color of the main and first level titles\\
+        \hline
+        \color{sec2}sec2    & \color{sec2}Green     & \color{sec2}Color of the second level titles\\
+        \hline
+        \color{sec3}sec3    & \color{sec3}Blue      & \color{sec3}Color of the third level titles\\
+        \hline
+        \color{text}text    & \color{text}Black     & \color{text}Color of the normal text\\
+        \hline
+        \color{vars}vars    & \color{vars}Orange    & \color{vars}Color of the names of the parameters and the variables\\
+        \hline
+
+    \end{tabular}
+\end{justify}
+
+
+\end{document}
