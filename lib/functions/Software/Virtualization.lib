@@ -181,6 +181,7 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Windows()
 # Installing Qemu.
 function BU.Software.Virtualization.InstallQemu()
 {
+    #**** Code ****
     BU.Main.OS.IsLinux          && BU.Software.Virtualization.InstallQemu.Linux                 &&  return 0;
     BU.Main.OS.IsOSX            && BU.Software.Virtualization.InstallQemu.OSX                   &&  return 0;
     BU.Main.OS.IsWindows        && BU.Software.Virtualization.InstallQemuW.indows               &&  return 0;
@@ -191,6 +192,7 @@ function BU.Software.Virtualization.InstallQemu()
 # Installing Virtualbox.
 function BU.Software.Virtualization.InstallVirtualbox()
 {
+    #**** Code ****
     BU.Main.OS.IsLinux          && BU.Software.Virtualization.InstallVirtualbox.Linux           &&  return 0;
     BU.Main.OS.IsOSX            && BU.Software.Virtualization.InstallVirtualbox.OSX             &&  return 0;
     BU.Main.OS.IsWindows        && BU.Software.Virtualization.InstallVirtualbox.Windows         &&  return 0;
@@ -201,6 +203,7 @@ function BU.Software.Virtualization.InstallVirtualbox()
 # Installing VMware.
 function BU.Software.Virtualization.InstallVMware()
 {
+    #**** Code ****
     BU.Main.OS.IsLinux          && BU.Software.Virtualization.InstallVMwareWorkstation.Linux    &&  return 0;
     BU.Main.OS.IsOSX            && BU.Software.Virtualization.InstallVMwareFusion               &&  return 0;
     BU.Main.OS.IsWindows        && BU.Software.Virtualization.InstallVMwareWorkstation.Windows  &&  return 0;

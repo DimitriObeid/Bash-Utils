@@ -95,6 +95,7 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 # Install NPM on several platforms.
 function BU.Software.PackageManagers.InstallNPM()
 {
+    #**** Code ****
     BU.Main.OS.IsLinux      && BU.Software.PackageManagers.InstallNPM.Linux     &&  return 0;
     BU.Main.OS.IsOSX        && BU.Software.PackageManagers.InstallNPM.OSX       &&  return 0;
     BU.Main.OS.IsWindows    && BU.Software.PackageManagers.InstallNPM.Windows   &&  return 0;
@@ -109,6 +110,7 @@ function BU.Software.PackageManagers.InstallNPM()
 # Updating NPM on several platforms.
 function BU.Software.PackageManagers.UpdateNPM()
 {
+    #**** Code ****
     BU.Main.OS.IsLinux      && BU.Software.PackageManagers.UpdateNPM.Linux     &&  return 0;
     BU.Main.OS.IsOSX        && BU.Software.PackageManagers.UpdateNPM.OSX       &&  return 0;
     BU.Main.OS.IsWindows    && BU.Software.PackageManagers.UpdateNPM.Windows   &&  return 0;

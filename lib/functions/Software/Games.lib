@@ -79,6 +79,35 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### STEAM GAMES
 
-##
+## STEAMCMD : LOGIN
+
+# Installing SteamCMD on each supported operating systems.
+function BU.Software.Games.SteamCMD.Install()
+{
+    #**** Code ****
+    BU.Software."${__BU_SOFTWARE_CURRENT_OS}".Games.SteamCMD.Install || return 1;
+
+    return 0;
+}
+
+# Checking if SteamCMD is installed.
+function BU.Software.Games.SteamCMD.IsInstalled()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows && return 0;
+
+    return 0;
+}
+
+# Login to your Steam account.
+function BU.Software.Games.SteamCMDLogin()
+{
+    #**** Code ****
+    if ! BU.Software.Games.SteamCMD.IsInstalled; then
+        return 1;
+    fi
+
+    return 0;
+}

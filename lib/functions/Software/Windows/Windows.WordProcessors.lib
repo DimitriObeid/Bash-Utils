@@ -80,4 +80,13 @@ fi; exit 1; fi
 
 ####
 
-##
+## WORD
+
+# Installing Microsoft Word on a Windows PC.
+function BU.Software.Windows.WordProcessors.Word.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}

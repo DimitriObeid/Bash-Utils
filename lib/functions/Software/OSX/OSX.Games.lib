@@ -78,6 +78,35 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### STEAM GAMES
 
-##
+## CLI DEPENDENCES
+
+# Installing SteamCMD on Mac OS.
+function BU.Software.OSX.Games.SteamCMD.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating SteamCMD on Mac OS.
+function BU.Software.OSX.Games.SteamCMD.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling SteamCMD on Mac OS.
+function BU.Software.OSX.Games.SteamCMD.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------

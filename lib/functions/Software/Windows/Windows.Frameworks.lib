@@ -320,6 +320,7 @@ function BU.Software.Windows.Frameworks.Symfony.Uninstall()
 # Installing Django on Windows.
 function BU.Software.Windows.Frameworks.Django.Install()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -328,6 +329,7 @@ function BU.Software.Windows.Frameworks.Django.Install()
 # Updating Django on Windows.
 function BU.Software.Windows.Frameworks.Django.Update()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -336,6 +338,7 @@ function BU.Software.Windows.Frameworks.Django.Update()
 # Uninstalling Django on Windows.
 function BU.Software.Windows.Frameworks.Django.Uninstall()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -348,6 +351,7 @@ function BU.Software.Windows.Frameworks.Django.Uninstall()
 # Installing Flask on Windows.
 function BU.Software.Windows.Frameworks.Flask.Install()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -356,6 +360,7 @@ function BU.Software.Windows.Frameworks.Flask.Install()
 # Updating Flask on Windows.
 function BU.Software.Windows.Frameworks.Flask.Update()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -364,6 +369,7 @@ function BU.Software.Windows.Frameworks.Flask.Update()
 # Uninstalling Flask on Windows.
 function BU.Software.Windows.Frameworks.Flask.Uninstall()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -376,6 +382,7 @@ function BU.Software.Windows.Frameworks.Flask.Uninstall()
 # Installing Web2py on Windows.
 function BU.Software.Windows.Frameworks.Web2py.Install()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -384,6 +391,7 @@ function BU.Software.Windows.Frameworks.Web2py.Install()
 # Updating Web2py on Windows.
 function BU.Software.Windows.Frameworks.Web2py.Update()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -392,6 +400,7 @@ function BU.Software.Windows.Frameworks.Web2py.Update()
 # Uninstalling Web2py on Windows.
 function BU.Software.Windows.Frameworks.Web2py.Uninstall()
 {
+    #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -405,4 +414,31 @@ function BU.Software.Windows.Frameworks.Web2py.Uninstall()
 
 #### RUBY FRAMEWORKS
 
-##
+## RUBY ON RAILS
+
+# Installing Ruby on Rails on Windows.
+function BU.Software.Windows.Frameworks.RubyOnRails.Install()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Ruby on Rails on Windows.
+function BU.Software.Windows.Frameworks.RubyOnRails.Update()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Ruby on Rails on Windows.
+function BU.Software.Windows.Frameworks.RubyOnRails.Uninstall()
+{
+    #**** Code ****
+    BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}

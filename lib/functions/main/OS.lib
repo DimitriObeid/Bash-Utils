@@ -81,6 +81,8 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="${__BU_MAIN_O
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "${OSTYPE}" == 'linux-android' ]];                          then    return 0; else  return 1; fi }
 
+alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
+
 # Checking the current Android version.
 function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid5()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
