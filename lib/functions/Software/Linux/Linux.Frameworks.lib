@@ -371,6 +371,34 @@ function BU.Software.Linux.Frameworks.Flask.Uninstall()
 
 # -----------------------------------------------
 
+## WEB2PY
+
+# Installing Web2py on Linux.
+function BU.Software.Linux.Frameworks.Web2py.Install()
+{
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Web2py on Linux.
+function BU.Software.Linux.Frameworks.Web2py.Update()
+{
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Web2py on Linux.
+function BU.Software.Linux.Frameworks.Web2py.Uninstall()
+{
+    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
