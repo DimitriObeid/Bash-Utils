@@ -337,6 +337,34 @@ function BU.Software.OSX.Frameworks.Django.Uninstall()
 
 # -----------------------------------------------
 
+## FLASK
+
+# Installing Flask on Mac OS.
+function BU.Software.OSX.Frameworks.Flask.Install()
+{
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Updating Flask on Mac OS.
+function BU.Software.OSX.Frameworks.Flask.Update()
+{
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# Uninstalling Flask on Mac OS.
+function BU.Software.OSX.Frameworks.Flask.Uninstall()
+{
+    BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+
+    return 0;
+}
+
+# -----------------------------------------------
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
