@@ -134,8 +134,8 @@ function BU.Software.Games.SteamCMD.ValidateFiles()
     return 0;
 }
 
-# Adding a game key.
-function BU.Software.Games.SteamCMD.AddKey()
+# Adding a product key to a game.
+function BU.Software.Games.SteamCMD.AddProductKey()
 {
     #**** Code ****
     if ! BU.Software.Games.SteamCMD.IsInstalled; then
