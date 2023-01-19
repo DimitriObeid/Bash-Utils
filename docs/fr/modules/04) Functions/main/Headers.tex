@@ -63,9 +63,11 @@
   /Keywords ()
 }
 
-% -----------------------------
-% Mise en page des paragraphes.
+% ------------------------------------------------------------
+% Mise en page des paragraphes et des en-têtes de chaque page.
 \setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
 
 % ------------------
 % Début du document.
@@ -500,7 +502,7 @@
     \item
     {
         \begin{justify}
-            Pour connaitre la valeur de chaque chiffre enregistré dans ce paramètre, Un tableau est créé et prend en valeurs chacun des chiffres.
+            Pour connaitre la valeur de chaque chiffre enregistré dans ce paramètre, Un tableau est créé et prend en valeurs chacun des chiffres.\mbox{}
         \end{justify}
 
         \begin{justify}
@@ -520,11 +522,11 @@
                     \item
                     {
                         \begin{justify}
-                            \textbf{\color{cond}Si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{1}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.Main.Decho.BGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
+                            \textbf{\color{cond}Si} l'un des trois chiffres de ce nombre est égal à \textbf{1}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.Main.Decho.BGColor} est appelée pour colorier le fond de la zone de texte où la première ligne de caractères est affichée.
                         \end{justify}\setlength{\parskip}{1em}
 
                         \begin{justify}
-                            \textbf{\color{cond}Sinon, si} l'un des chiffres de ce nombre à trois chiffres est égal à \textbf{2}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.Main.Decho.BGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
+                            \textbf{\color{cond}Sinon, si} l'un des trois chiffres est égal à \textbf{2}, \textbf{\color{cond}alors} la fonction \textbf{\color{func}BU.Main.Decho.BGColor} est appelée pour colorier le fond de la zone de texte où la chaîne de caractères principale est affichée.
                         \end{justify}\setlength{\parskip}{1em}
 
                         \begin{justify}

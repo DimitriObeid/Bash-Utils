@@ -63,9 +63,11 @@
   /Keywords ()
 }
 
-% -----------------------------
-% Mise en page des paragraphes.
+% ------------------------------------------------------------
+% Mise en page des paragraphes et des en-têtes de chaque page.
 \setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
 
 % ------------------
 % Début du document.
@@ -116,7 +118,7 @@
 \color{sec3}
 \subsubsection{Fonctions}\color{text}
 
-\textbf{Fonction : \color{mauve}}\\[1\baselineskip]
+\textbf{Fonction : \color{func}}\\[1\baselineskip]
 
 \textbf{Fichier de définition :} \textbf{\color{path}}\\[1\baselineskip]
 % ------------
@@ -166,7 +168,7 @@
 
 \begin{justify}
     \textbf{Description :}\\
-    Cette fonction affiche un simple message d'avertissement ou d'erreur, selon le contexte choisi, contrairement à la fonction \textbf{\color{mauve}BU.Main.Errors.HandleErrors}, qui fait un rapport complet de l'erreur, et qui est à priviliégier pour de plus grosses erreurs.
+    Cette fonction affiche un simple message d'avertissement ou d'erreur, selon le contexte choisi, contrairement à la fonction \textbf{\color{func}BU.Main.Errors.HandleErrors}, qui fait un rapport complet de l'erreur, et qui est à priviliégier pour de plus grosses erreurs.
 \end{justify}
 
 \begin{justify}
@@ -181,7 +183,7 @@
 
         \item \textbf{\color{vars}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\\mbox{}
 
-        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{mauve}BU.Main.Status.CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{mauve}BU.Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
+        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{func}BU.Main.Status.CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{func}BU.Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
     \end{itemize}
 \end{justify}
 
@@ -191,11 +193,11 @@
 \end{justify}
 
 \begin{justify}
-    Passer cette valeur à ce paramètre est absolument nécessaire dans les situations où l'appel des fonctions \textbf{\color{mauve}BU.Echo<...>()} peut provoquer une boucle infinie.
+    Passer cette valeur à ce paramètre est absolument nécessaire dans les situations où l'appel des fonctions \textbf{\color{func}BU.Echo<...>()} peut provoquer une boucle infinie.
 \end{justify}
 
 \begin{justify}
-    Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{mauve}BU.Main.Echo.Warning}, et E = error, donc appel de la fonction \textbf{\color{mauve}BU.Main.Echo.Error}).
+    Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Warning}, et E = error, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Error}).
 \end{justify}
 
 \begin{justify}
