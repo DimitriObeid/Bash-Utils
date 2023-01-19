@@ -102,7 +102,51 @@ function BU.Software.Games.SteamCMD.IsInstalled()
 }
 
 # Login to your Steam account.
-function BU.Software.Games.SteamCMDLogin()
+function BU.Software.Games.SteamCMD.Login()
+{
+    #**** Code ****
+    if ! BU.Software.Games.SteamCMD.IsInstalled; then
+        return 1;
+    fi
+
+    return 0;
+}
+
+# Downloading a game.
+function BU.Software.Games.SteamCMD.DownloadGame()
+{
+    #**** Code ****
+    if ! BU.Software.Games.SteamCMD.IsInstalled; then
+        return 1;
+    fi
+
+    return 0;
+}
+
+# Validating the downloaded files, in order to check their integrity, in case a file is corrupted, was modified or is missing.
+function BU.Software.Games.SteamCMD.ValidateFiles()
+{
+    #**** Code ****
+    if ! BU.Software.Games.SteamCMD.IsInstalled; then
+        return 1;
+    fi
+
+    return 0;
+}
+
+# Adding a game key.
+function BU.Software.Games.SteamCMD.AddKey()
+{
+    #**** Code ****
+    if ! BU.Software.Games.SteamCMD.IsInstalled; then
+        return 1;
+    fi
+
+    return 0;
+}
+
+# Uninstalling a game.
+function BU.Software.Games.SteamCMD.UninstallGame()
 {
     #**** Code ****
     if ! BU.Software.Games.SteamCMD.IsInstalled; then
