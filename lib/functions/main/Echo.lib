@@ -507,8 +507,6 @@ function BU.Main.Echo.Newstep()
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
 
-    echo HELLO
-
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL    - DESC : String to print and / or redirect to the log file.
     local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL    - DESC : "$(echo)" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
