@@ -3141,7 +3141,7 @@ function BU.ModuleInit.PrintLog()
     for ((i=0; i<v_int_randomizer; i++)); do
         v_str_randomizer+="${v_str_randomizer%%+( -)}";
     done
-
+  
     shopt -s extglob;
 
     # Removing the extra whitespace with the dash.
@@ -4192,9 +4192,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
 
     # -------------------------------------------
-
+    
     ## FINDING THE ".Bash-utils" FOLDER
-
+    
     # If the framework base is not being installed on the user's hard drive.
     if ! BU.ModuleInit.IsFrameworkBeingInstalled; then
         # If the ".Bash-utils" folder exists in its defined parent directory,
@@ -4279,9 +4279,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __BU_MODULE_INIT__TMP_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "${__BU_MODULE_INIT__TMP_DIR_NAME}" 'd')" || {
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-            "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__TMP_DIR_PATH';
+            "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__TMP_DIR_PATH'; 
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && exit 1; return 1; 
     };
 
     # -------------------------------------------
@@ -4294,11 +4294,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__config_dir_path__lineno="$(( LINENO - + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "config" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "config" 'd')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
-        "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR_PATH';
-
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR_PATH'; 
+        
+        BU.ModuleInit.IsInScript && exit 1; return 1; 
     };
 
     # ------------------------------------------
@@ -4307,11 +4307,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__config_init_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "initializer" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_INIT_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "initializer" 'd')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH';
-
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+            
+        BU.ModuleInit.IsInScript && exit 1; return 1; 
     };
 
     # --------------------------------
@@ -4320,10 +4320,10 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__config_modules_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "modules" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "modules" 'd')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH';
-
+        
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
@@ -4333,7 +4333,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__config_init_lang_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}" "locale" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}" "locale" 'd')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH';
 
@@ -4346,11 +4346,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__config_init_dir__status__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}" "Status.conf" 'f')" || {
+    __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}" "Status.conf" 'f')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && exit 1; return 1; 
     };
 
     # -------------------------------------------
@@ -4384,7 +4384,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}" 'f')" || {
+    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}" 'f')" || { 
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR';
 
@@ -4405,7 +4405,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     fi
 
     # -------------------------------------------
-
+    
     ## MISC
 
     # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
@@ -7690,6 +7690,11 @@ function BU.Main.BasicMaths.PositiveToNegative()
 
     return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -7890,6 +7895,11 @@ function BU.Main.Case.Read_Errors.HandleErrors()
 			;;
 	esac
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -8122,6 +8132,32 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 ## DEBUG ID : number-values
 
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::number-values";
+
+# Checking if a number is even.
+function BU.Main.BasicMaths.IsEven()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
+
+    if [ "$(( ${1:-$'\0'} % 2 ))" -eq 0 ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
+
+# Checking if a number is uneven.
+function BU.Main.BasicMaths.IsUneven()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
+
+    if [ "$(( ${1:-$'\0'} % 2 ))" -ne 0 ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    fi
+}
 
 # Checking floating value.
 function BU.Main.Checkings.IsFloat()
@@ -9141,6 +9177,9 @@ function BU.Main.Checkings.CheckDecho()
 }
 
 # -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -9254,6 +9293,11 @@ function BU.Main.CMDS.GetCommandReturnOutputValue()
     #**** Code ****
     if eval "${p_cmd}" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -9728,6 +9772,11 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 
 # Underline formatting.
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'U'  || return 1; return 0; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -9843,6 +9892,11 @@ function BU.Main.DevTools.ShellcheckVerif()
 
     return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -10391,6 +10445,11 @@ function BU.Main.Directories.TriggerRootDirWarning()
 
 	return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -11465,6 +11524,11 @@ function BU.Main.Echo.Newline()
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -11893,6 +11957,9 @@ function BU.Main.Errors.HandleErrors()
 }
 
 # -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -13241,6 +13308,11 @@ function BU.Main.Files.UncompressFormat()
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -13740,7 +13812,7 @@ function BU.Main.Filesystem.Chown()
                 BU.Main.Errors.HandleErrors "1" "THE $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}")'S FUNCTION $(BU.Main.Decho.Decho.Path "${p_option}") OPTION PASSED AS 4TH ARGUMENT IS NOT SUPPORTED" \
                     "The supported options for directory processing are :" "${p_option}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
             ;;
         esac
 
@@ -15760,6 +15832,11 @@ function BU.Main.Headers.Header.CMD.Yellow.Turquoise    { BU.Main.Headers.Base "
 function BU.Main.Headers.Header.CMD.Yellow.Violet       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_VIOLET}"              "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
 function BU.Main.Headers.Header.CMD.Yellow.White        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_WHITE}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -16041,6 +16118,11 @@ function BU.Main.Locale.PrintLanguageName()
 
 	return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -16123,6 +16205,8 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="${__BU_MAIN_O
 
 # Checking if current OS is Android, running with the Termux terminal emulator.
 function BU.Main.OS.IsAndroidTermux()               { if [[ "${OSTYPE}" == 'linux-android' ]];                          then    return 0; else  return 1; fi }
+
+alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
 # Checking the current Android version.
 function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
@@ -17087,6 +17171,11 @@ function BU.Main.PosixTerm.DisplaySpinner()
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -17754,6 +17843,11 @@ function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "
 
 # Checking if the text formatting is allowed.
 function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -18189,7 +18283,7 @@ function BU.Main.TextFormat.Itoa()
 #### TEXT
 #### DEBUG ID : text
 
-__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text'
+__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
 
 ## SETTING TEXT FORMAT
 ## DEBUG ID : setting-text-format
@@ -18232,6 +18326,11 @@ function BU.Main.TextFormat.SetTextFormat()
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -18872,7 +18971,7 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="$
 function BU.Main.Text.PrintCharXTimes()
 {
 	#**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String or single character to process.
 	local p_nb=${2:-1};			    # ARG TYPE : Int		- REQUIRED | DEFAULT VAL : 1		- DESC : Number of characters to print.
 	local p_newline=${3:-false}	    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
 
@@ -19060,6 +19159,11 @@ function BU.Main.Text.WordArrayToStr()
 #
 #     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 # }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -19129,6 +19233,15 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+
+##
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # ---------------------
@@ -19198,6 +19311,15 @@ fi; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+
+##
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
@@ -19225,11 +19347,29 @@ fi; exit 1; fi
 
 ##################################### DEFINING ALIASES - ARGS #####################################
 
-#### CATEGORY : ""
+#### CATEGORY : "ARGUMENT VALUES CHECKING : UTILITES FUNCTIONS"
 
-## SUB-CATEGORY : ""
+## SUB-CATEGORY : "PATH CHECKING FUNCTIONS"
 
+# -----------------------------------------------
 
+## SUB-CATEGORY : "QUICK MESSAGE PRINTING"
+
+alias BU.PrintBadOption='BU.Main.Args.PrintBadOption';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "ARGUMENT PRESENCE CHECKING"
+
+alias BU.GetFuncArgsArrayValues='BU.Main.Args.GetFuncArgsArrayValues';
+alias BU.GetFileName='BU.Main.Args.GetFileName';
+alias BU.GetFunctionName='BU.Main.Args.GetFunctionName';
+alias BU.GetLineNumber='BU.Main.Args.GetLineNumber';
+alias BU.GetFFL='BU.Main.Args.GetFFL';
+alias BU.PrintFFL='BU.Main.Args.PrintFFL';
+alias BU.PrintFFLErrorOccured='BU.Main.Args.PrintFFLErrorOccured';
+alias BU.Argc='BU.Main.Args.Argc';
+alias BU.GetArgc-FFL='BU.Main.Args.GetArgc-FFL';
 
 # -----------------------------------------------
 
@@ -19311,6 +19451,8 @@ alias BU.IsDateYMD_HMS='BU.Main.Checkings.IsDateYMD_HMS';
 
 ## SUB-CATEGORY : "NUMBER VALUES"
 
+alias BU.IsEven='BU.Main.Checkings.IsEven';
+alias BU.IsUneven='BU.Main.Checkings.IsUneven';
 alias BU.IsFloat='BU.Main.Checkings.IsFloat';
 alias BU.IsNegativeFloat='BU.Main.Checkings.IsNegativeFloat';
 alias BU.IsPositiveFloat='BU.Main.Checkings.IsPositiveFloat';
@@ -19408,38 +19550,6 @@ alias BU.CheckProjectLogStatus='BU.Main.Checkings.CheckProjectLogStatus';
 
 alias BU.GetCommandPath='BU.Main.CMDS.GetCommandPath';
 alias BU.GetCommandReturnOutputValue='BU.Main.CMDS.GetCommandReturnOutputValue';
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### DEFINING ALIASES - COLORS ####################################
-
-#### CATEGORY : "COLORS"
-
-## SUB-CATEGORY : "GETTING COLOR CODES FROM FILES"
-
-alias BU.Col.CannotCreateRessource='BU.Main.TextFormat.CannotCreateRessource';
-alias BU.GetBGColorCMD='BU.Main.TextFormat.GetBGColorFromCMD';
-alias BU.GetTextColorFromCMD='BU.Main.TextFormat.GetTextColorFromCMD';
-
-# -----------------------------------------------
-
-## SUB-CATEGORY : "SETTING COLOR CODES IN FILES"
-
-alias BU.SetBGColor='BU.Main.TextFormat.SetBGColor';
-alias BU.SetTextColor='BU.Main.TextFormat.SetTextColor';
-
-# -----------------------------------------------
-
-## SUB-CATEGORY : "COLORS STRINGS PROCESSING FUNCTIONS"
-
-alias BU.ColAtoi='BU.Main.TextFormat.Atoi';
-alias BU.ColItoa='BU.Main.TextFormat.Itoa';
 
 # -----------------------------------------------
 
@@ -21930,6 +22040,7 @@ alias BU.CutSubStringBeforeNthDelim='BU.Main.Text.CutSubStringBeforeNthDelim';
 alias BU.CutFirstFieldBeforeDelim='BU.Main.Text.CutFirstFieldBeforeDelim';
 alias BU.CutLastFieldAfterDelim='BU.Main.Text.CutLastFieldAfterDelim';
 alias BU.DeleteLettersInString='BU.Main.Text.DeleteLettersInString';
+alias BU.ReplaceLettersInString='BU.Main.text.ReplaceLettersInString';
 
 # -----------------------------------------------
 
@@ -21944,7 +22055,9 @@ alias BU.ToUppercase='BU.Main.Text.ToUppercase';
 ## SUB-CATEGORY : "GETTING TEXT"
 
 alias BU.GetCharacterOccurences='BU.Main.Text.GetCharacterOccurences';
+alias BU.GetFirstCharacter='BU.Main.Text.GetFirstCharacter';
 alias BU.GetFirstFieldBeforeDelim='BU.Main.Text.GetFirstFieldBeforeDelim';
+alias BU.GetLastCharacter='BU.Main.Text.GetLastCharacter';
 alias BU.GetLastFieldAfterDelim='BU.Main.Text.GetLastFieldAfterDelim';
 alias BU.GetSubStringAfterDelim='BU.Main.Text.GetSubStringAfterDelim';
 alias BU.GetSubStringBeforeDelim='BU.Main.Text.GetSubStringBeforeDelim';
@@ -21972,6 +22085,38 @@ alias BU.ReverseCharactersOrder='BU.Main.Text.ReverseCharactersOrder';
 
 alias BU.StrToWordArray='BU.Main.Text.StrToWordArray';
 alias BU.WordArrayToStr='BU.Main.Text.WordArrayToStr';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING ALIASES - TEXTFORMAT ##################################
+
+#### CATEGORY : "COLORS"
+
+## SUB-CATEGORY : "GETTING COLOR CODES FROM FILES"
+
+alias BU.Col.CannotCreateRessource='BU.Main.TextFormat.CannotCreateRessource';
+alias BU.GetBGColorCMD='BU.Main.TextFormat.GetBGColorFromCMD';
+alias BU.GetTextColorFromCMD='BU.Main.TextFormat.GetTextColorFromCMD';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "SETTING COLOR CODES IN FILES"
+
+alias BU.SetBGColor='BU.Main.TextFormat.SetBGColor';
+alias BU.SetTextColor='BU.Main.TextFormat.SetTextColor';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "COLORS STRINGS PROCESSING FUNCTIONS"
+
+alias BU.ColAtoi='BU.Main.TextFormat.Atoi';
+alias BU.ColItoa='BU.Main.TextFormat.Itoa';
 
 # -----------------------------------------------
 
