@@ -10,7 +10,7 @@
 # ------------------
 # FILE DESCRIPTION :
 
-#
+# This script generates a library file with the framework's executable script's design.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 

@@ -3,15 +3,15 @@
 # ------------------------
 ## SCRIPT'S INFORMATIONS :
 
-# Name          : $__arg_file
-# Module        : $__arg_modl
-# Author(s)     : $__arg_auth
-# Version       : $__arg_vers
+# Name          : $____FILE
+# Module        : $____MODL
+# Author(s)     : $____AUTH
+# Version       : $____VERS
 
 # ------------------
 # FILE DESCRIPTION :
 
-# $__arg_desc
+# $____DESC
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
