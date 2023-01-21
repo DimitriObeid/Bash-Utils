@@ -19452,7 +19452,8 @@ alias BU.IsDateYMD_HMS='BU.Main.Checkings.IsDateYMD_HMS';
 ## SUB-CATEGORY : "NUMBER VALUES"
 
 alias BU.IsEven='BU.Main.Checkings.IsEven';
-alias BU.IsUneven='BU.Main.Checkings.IsUneven';
+alias BU.isOdd='BU.Main.Checkings.isOdd';
+alias BU.IsUneven='BU.Main.Checkings.isOdd';
 alias BU.IsFloat='BU.Main.Checkings.IsFloat';
 alias BU.IsNegativeFloat='BU.Main.Checkings.IsNegativeFloat';
 alias BU.IsPositiveFloat='BU.Main.Checkings.IsPositiveFloat';
