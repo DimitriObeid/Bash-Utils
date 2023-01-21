@@ -88,194 +88,267 @@ function BU.Main.Locale.PrintLanguageName()
     local p_print_code=${2:-yes}    # String    - Default : yes     - Authorization to print the ISO 639-1 code before the language name.
 
 	#**** Code ****
-      if [ "${p_code,,}" == 'aa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afar | Afaraf";
-    elif [ "${p_code,,}" == 'ab' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Abkhazian | Аҧсуа";
-    elif [ "${p_code,,}" == 'ae' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avestan | Avesta";
-    elif [ "${p_code,,}" == 'af' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afrikaans | Afrikaans";
-    elif [ "${p_code,,}" == 'ak' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Akan | Akan";
-    elif [ "${p_code,,}" == 'am' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Amharic | አማርኛ";
-    elif [ "${p_code,,}" == 'an' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aragonese | Aragonés";
-    elif [ "${p_code,,}" == 'ar' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Arabic | العربية";
-	elif [ "${p_code,,}" == 'as' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Assamese | অসমীয়া";
-	elif [ "${p_code,,}" == 'av' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avaric | авар мацӀ ; магӀарул мацӀ";
-	elif [ "${p_code,,}" == 'ay' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aymara | Aymar aru";
-	elif [ "${p_code,,}" == 'az' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Azerbaijani | Azərbaycan dili";
-	elif [ "${p_code,,}" == 'ba' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bashkir | башҡорт теле";
-	elif [ "${p_code,,}" == 'be' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Belarusian | Беларуская";
-	elif [ "${p_code,,}" == 'bg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bulgarian | български език";
-	elif [ "${p_code,,}" == 'bh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bihari | भोजपुरी";
-	elif [ "${p_code,,}" == 'bi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bislama | Bislama";
-	elif [ "${p_code,,}" == 'bm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bambara | Bamanankan";
-	elif [ "${p_code,,}" == 'bn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bengali | বাংলা";
-	elif [ "${p_code,,}" == 'bo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tibetan | བོད་ཡིག";
-	elif [ "${p_code,,}" == 'br' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Breton | Brezhoneg";
-	elif [ "${p_code,,}" == 'bs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bosnian | Bosanski jezik";
-	elif [ "${p_code,,}" == 'ca' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Catalan | Català";
-	elif [ "${p_code,,}" == 'ce' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chechen | нохчийн мотт";
-	elif [ "${p_code,,}" == 'ch' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chamorro | Chamoru";
-	elif [ "${p_code,,}" == 'co' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Corsican | Corsu ; lingua corsa";
-	elif [ "${p_code,,}" == 'cr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cree | ᓀᐦᐃᔭᐍᐏᐣ";
-	elif [ "${p_code,,}" == 'cs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Czech | Česky ; čeština";
-	elif [ "${p_code,,}" == 'cu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Old Church Slavonic | Словѣньскъ";
-	elif [ "${p_code,,}" == 'cv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chuvash | чӑваш чӗлхи";
-	elif [ "${p_code,,}" == 'cy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Welsh | Cymraeg";
-	elif [ "${p_code,,}" == 'da' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Danish | Dansk";
-	elif [ "${p_code,,}" == 'de' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') German | Deutsch";
-	elif [ "${p_code,,}" == 'dv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Divehi | ދިވެހި";
-	elif [ "${p_code,,}" == 'dz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dzongkha | རྫོང་ཁ";
-	elif [ "${p_code,,}" == 'ee' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ewe | Ɛʋɛgbɛ";
-	elif [ "${p_code,,}" == 'el' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greek | Ελληνικά";
-	elif [ "${p_code,,}" == 'en' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') English | English";
-	elif [ "${p_code,,}" == 'eo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Esperanto | Esperanto";
-	elif [ "${p_code,,}" == 'es' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Spanish | Español";
-	elif [ "${p_code,,}" == 'et' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Estonian | Eesti keel";
-	elif [ "${p_code,,}" == 'eu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Basque | Euskara";
-	elif [ "${p_code,,}" == 'fa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Persian | فارسی";
-	elif [ "${p_code,,}" == 'ff' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fulah | Fulfulde";
-	elif [ "${p_code,,}" == 'fi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Finnish | Suomen kieli";
-	elif [ "${p_code,,}" == 'fj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fijian | Vosa Vakaviti";
-	elif [ "${p_code,,}" == 'fo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Faroese | Føroyskt";
-	elif [ "${p_code,,}" == 'fr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') French | Français";
-	elif [ "${p_code,,}" == 'fy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Western Frisian | Frysk";
-	elif [ "${p_code,,}" == 'ga' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Irish | Gaeilge";
-	elif [ "${p_code,,}" == 'gd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Scottish Gaelic | Gàidhlig";
-	elif [ "${p_code,,}" == 'gl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Galician | Galego";
-	elif [ "${p_code,,}" == 'gn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Guarani | Avañe'ẽ";
-	elif [ "${p_code,,}" == 'gu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Gujarati | ગુજરાતી";
-	elif [ "${p_code,,}" == 'gv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Manx | Ghaelg";
-	elif [ "${p_code,,}" == 'ha' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hausa | هَوُسَ";
-	elif [ "${p_code,,}" == 'he' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hebrew | עברית";
-	elif [ "${p_code,,}" == 'hi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hindi | हिन्दी ; हिंदी";
-	elif [ "${p_code,,}" == 'ho' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hiri Motu | Hiri Motu";
-	elif [ "${p_code,,}" == 'hr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Croatian | Hrvatski";
-	elif [ "${p_code,,}" == 'ht' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Haitian | Kreyòl ayisyen";
-	elif [ "${p_code,,}" == 'hu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hungarian | magyar ";
-	elif [ "${p_code,,}" == 'hy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Armenian | Հայերեն";
-	elif [ "${p_code,,}" == 'hz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Herero | Otjiherero";
-	elif [ "${p_code,,}" == 'ia' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingua | Interlingua";
-	elif [ "${p_code,,}" == 'id' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Indonesian | Bahasa Indonesia";
-	elif [ "${p_code,,}" == 'ie' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingue | Interlingue";
-	elif [ "${p_code,,}" == 'ig' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Igbo | Igbo";
-	elif [ "${p_code,,}" == 'ii' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sichuan Yi | ꆇꉙ";
-	elif [ "${p_code,,}" == 'ik' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inupiaq | Iñupiaq ; Iñupiatun";
-	elif [ "${p_code,,}" == 'io' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ido | Ido";
-	elif [ "${p_code,,}" == 'is' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Icelandic | Íslenska";
-	elif [ "${p_code,,}" == 'it' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Italian | Italiano";
-	elif [ "${p_code,,}" == 'iu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inuktitut | ᐃᓄᒃᑎᑐᑦ";
-	elif [ "${p_code,,}" == 'ja' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Japanese | 日本語 (にほんご)";
-	elif [ "${p_code,,}" == 'jv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Javanese | Basa Jawa";
-	elif [ "${p_code,,}" == 'ka' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Georgian | ქართული";
-	elif [ "${p_code,,}" == 'kg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kongo | KiKongo";
-	elif [ "${p_code,,}" == 'ki' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kikuyu | Gĩkũyũ";
-	elif [ "${p_code,,}" == 'kj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kwanyama | Kuanyama";
-	elif [ "${p_code,,}" == 'kk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kazakh | Қазақ тілі";
-	elif [ "${p_code,,}" == 'kl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greenlandic | Kalaallisut ; kalaallit oqaasii";
-	elif [ "${p_code,,}" == 'km' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Khmer | ភាសាខ្មែរ";
-	elif [ "${p_code,,}" == 'kn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kannada | ಕನ್ನಡ";
-	elif [ "${p_code,,}" == 'ko' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)";
-	elif [ "${p_code,,}" == 'kr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kanuri | Kanuri";
-	elif [ "${p_code,,}" == 'ks' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kashmiri | कश्मीरी ; كشميري";
-	elif [ "${p_code,,}" == 'ku' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kurdish | Kurdî ; كوردی";
-	elif [ "${p_code,,}" == 'kv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Komi | коми кыв";
-	elif [ "${p_code,,}" == 'kw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cornish | Kernewek";
-	elif [ "${p_code,,}" == 'ky' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirghiz | кыргыз тили";
-	elif [ "${p_code,,}" == 'la' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latin | Latine ; lingua latina";
-	elif [ "${p_code,,}" == 'lb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luxembourgish | Lëtzebuergesch";
-	elif [ "${p_code,,}" == 'lg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ganda | Luganda";
-	elif [ "${p_code,,}" == 'li' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Limburgish | Limburgs";
-	elif [ "${p_code,,}" == 'ln' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lingala | Lingála";
-	elif [ "${p_code,,}" == 'lo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lao | ພາສາລາວ";
-	elif [ "${p_code,,}" == 'lt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lithuanian | Lietuvių kalba";
-	elif [ "${p_code,,}" == 'lu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luba | tshiluba";
-	elif [ "${p_code,,}" == 'lv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latvian | Latviešu valoda";
-	elif [ "${p_code,,}" == 'mg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malagasy | Fiteny malagasy";
-	elif [ "${p_code,,}" == 'mh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marshallese | Kajin M̧ajeļ";
-	elif [ "${p_code,,}" == 'mi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Māori | Te reo Māori";
-	elif [ "${p_code,,}" == 'mk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Macedonian | македонски јазик";
-	elif [ "${p_code,,}" == 'ml' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malayalam | മലയാളം";
-	elif [ "${p_code,,}" == 'mn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Mongolian | Монгол";
-	elif [ "${p_code,,}" == 'mo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Moldavian | лимба молдовеняскэ";
-	elif [ "${p_code,,}" == 'mr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marathi | मराठी";
-	elif [ "${p_code,,}" == 'ms' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malay | Bahasa Melayu ; بهاس ملايو";
-	elif [ "${p_code,,}" == 'mt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Maltese | Malti";
-	elif [ "${p_code,,}" == 'my' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Burmese | ဗမာစာ";
-	elif [ "${p_code,,}" == 'na' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nauru | Ekakairũ Naoero";
-	elif [ "${p_code,,}" == 'nb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Bokmål | Norsk bokmål";
-	elif [ "${p_code,,}" == 'nd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') North Ndebele | isiNdebele";
-	elif [ "${p_code,,}" == 'ne' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nepali | नेपाली";
-	elif [ "${p_code,,}" == 'ng' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ndonga | Owambo";
-	elif [ "${p_code,,}" == 'nl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dutch | Nederlands";
-	elif [ "${p_code,,}" == 'nn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Nynorsk | Norsk nynorsk";
-	elif [ "${p_code,,}" == 'no' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian | Norsk";
-	elif [ "${p_code,,}" == 'nr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') South Ndebele | Ndébélé";
-	elif [ "${p_code,,}" == 'nv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Navajo | Diné bizaad ; Dinékʼehǰí";
-	elif [ "${p_code,,}" == 'ny' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chichewa | ChiCheŵa ; chinyanja";
-	elif [ "${p_code,,}" == 'oc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Occitan | Occitan";
-	elif [ "${p_code,,}" == 'oj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ";
-	elif [ "${p_code,,}" == 'om' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oromo | Afaan Oromoo";
-	elif [ "${p_code,,}" == 'or' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oriya | ଓଡ଼ିଆ";
-	elif [ "${p_code,,}" == 'os' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ossetian | Ирон ӕвзаг";
-	elif [ "${p_code,,}" == 'pa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Panjabi | ਪੰਜਾਬੀ ; پنجابی";
-	elif [ "${p_code,,}" == 'pi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pāli | पािऴ";
-	elif [ "${p_code,,}" == 'pl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Polish | Polski";
-	elif [ "${p_code,,}" == 'ps' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pashto | پښتو";
-	elif [ "${p_code,,}" == 'pt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Portuguese | Português";
-	elif [ "${p_code,,}" == 'qu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Quechua | Runa Simi ; Kichwa";
-	elif [ "${p_code,,}" == 'rc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Reunionese | Kréol Rénioné";
-	elif [ "${p_code,,}" == 'rm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romansh | Rumantsch grischun";
-	elif [ "${p_code,,}" == 'rn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirundi | kiRundi";
-	elif [ "${p_code,,}" == 'ro' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romanian | Română";
-	elif [ "${p_code,,}" == 'ru' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Russian | русский язык";
-	elif [ "${p_code,,}" == 'rw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kinyarwanda | Kinyarwanda";
-	elif [ "${p_code,,}" == 'sa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sanskrit | संस्कृतम्";
-	elif [ "${p_code,,}" == 'sc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sardinian | sardu";
-	elif [ "${p_code,,}" == 'sd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sindhi | सिन्धी ; سنڌي، سندھی";
-	elif [ "${p_code,,}" == 'se' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Northern Sami | Davvisámegiella";
-	elif [ "${p_code,,}" == 'sg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sango | Yângâ tî sängö";
-	elif [ "${p_code,,}" == 'sh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик";
-	elif [ "${p_code,,}" == 'si' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sinhalese| සිංහල";
-	elif [ "${p_code,,}" == 'sk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovak | Slovenčina";
-	elif [ "${p_code,,}" == 'sl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovenian | Slovenščina";
-	elif [ "${p_code,,}" == 'sm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Samoan | Gagana fa'a Samoa";
-	elif [ "${p_code,,}" == 'sn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Shona | chiShona";
-	elif [ "${p_code,,}" == 'so' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Somali | Soomaaliga ; af Soomaali";
-	elif [ "${p_code,,}" == 'sq' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Albanian | Shqip ";
-	elif [ "${p_code,,}" == 'sr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbian | српски језик";
-	elif [ "${p_code,,}" == 'ss' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swati| SiSwati";
-	elif [ "${p_code,,}" == 'st' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sotho | seSotho";
-	elif [ "${p_code,,}" == 'su' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sundanese | Basa Sunda";
-	elif [ "${p_code,,}" == 'sv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swedish | Svenska";
-	elif [ "${p_code,,}" == 'sw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swahili | Kiswahili";
-	elif [ "${p_code,,}" == 'ta' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tamil | தமிழ்";
-	elif [ "${p_code,,}" == 'te' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Telugu | తెలుగు";
-	elif [ "${p_code,,}" == 'tg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tajik | тоҷикӣ ; toğikī ; تاجیکی";
-	elif [ "${p_code,,}" == 'th' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Thai | ไทย";
-	elif [ "${p_code,,}" == 'ti' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tigrinya | ትግርኛ";
-	elif [ "${p_code,,}" == 'tk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkmen | Türkmen ; Түркмен";
-	elif [ "${p_code,,}" == 'tl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tagalog | Tagalog";
-	elif [ "${p_code,,}" == 'tn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tswana | seTswana";
-	elif [ "${p_code,,}" == 'to' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tonga | faka Tonga";
-	elif [ "${p_code,,}" == 'tr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkish | Türkçe";
-	elif [ "${p_code,,}" == 'ts' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tsonga | xiTsonga";
-	elif [ "${p_code,,}" == 'tt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tatar | татарча ; tatarça ; تاتارچا";
-	elif [ "${p_code,,}" == 'tw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Twi | Twi";
-	elif [ "${p_code,,}" == 'ty' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tahitian | Reo Mā\`ohi";
-	elif [ "${p_code,,}" == 'ug' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uighur | Uyƣurqə ; ئۇيغۇرچ";
-	elif [ "${p_code,,}" == 'uk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ukrainian | українська мова";
-	elif [ "${p_code,,}" == 'ur' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Urdu | اردو";
-	elif [ "${p_code,,}" == 'uz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uzbek | O'zbek ; Ўзбек ; أۇزبېك";
-	elif [ "${p_code,,}" == 've' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Venda | tshiVenḓa";
-	elif [ "${p_code,,}" == 'vi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Vietnamese | Tiếng Việt";
-	elif [ "${p_code,,}" == 'vo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Volapük | Volapük";
-	elif [ "${p_code,,}" == 'wa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Walloon | Walon";
-	elif [ "${p_code,,}" == 'wo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Wolof | Wollof";
-	elif [ "${p_code,,}" == 'xh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Xhosa | isiXhosa";
-	elif [ "${p_code,,}" == 'yi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yiddish | ייִדיש";
-	elif [ "${p_code,,}" == 'yo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yoruba | Yorùbá";
-	elif [ "${p_code,,}" == 'za' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zhuang | Saɯ cueŋƅ ; Saw cuengh";
-	elif [ "${p_code,,}" == 'zh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chinese | 中文, 汉语, 漢語";
-	elif [ "${p_code,,}" == 'zu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zulu | isiZulu";
-	  fi;
+
+	# Checking if a code begins with a certain letter, in order to optimize the verification process.
+	if [[ "${p_code}" == a* ]]; then
+		  if [ "${p_code,,}" == 'aa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afar | Afaraf";
+		elif [ "${p_code,,}" == 'ab' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Abkhazian | Аҧсуа";
+		elif [ "${p_code,,}" == 'ae' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avestan | Avesta";
+		elif [ "${p_code,,}" == 'af' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afrikaans | Afrikaans";
+		elif [ "${p_code,,}" == 'ak' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Akan | Akan";
+		elif [ "${p_code,,}" == 'am' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Amharic | አማርኛ";
+		elif [ "${p_code,,}" == 'an' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aragonese | Aragonés";
+		elif [ "${p_code,,}" == 'ar' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Arabic | العربية";
+		elif [ "${p_code,,}" == 'as' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Assamese | অসমীয়া";
+		elif [ "${p_code,,}" == 'av' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avaric | авар мацӀ ; магӀарул мацӀ";
+		elif [ "${p_code,,}" == 'ay' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aymara | Aymar aru";
+		elif [ "${p_code,,}" == 'az' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Azerbaijani | Azərbaycan dili";
+		  fi
+	
+	elif [[ "${p_code}" == b* ]]; then
+	  	  if [ "${p_code,,}" == 'ba' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bashkir | башҡорт теле";
+		elif [ "${p_code,,}" == 'be' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Belarusian | Беларуская";
+		elif [ "${p_code,,}" == 'bg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bulgarian | български език";
+		elif [ "${p_code,,}" == 'bh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bihari | भोजपुरी";
+		elif [ "${p_code,,}" == 'bi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bislama | Bislama";
+		elif [ "${p_code,,}" == 'bm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bambara | Bamanankan";
+		elif [ "${p_code,,}" == 'bn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bengali | বাংলা";
+		elif [ "${p_code,,}" == 'bo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tibetan | བོད་ཡིག";
+		elif [ "${p_code,,}" == 'br' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Breton | Brezhoneg";
+		elif [ "${p_code,,}" == 'bs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bosnian | Bosanski jezik";
+		  fi
+
+	elif [[ "${p_code}" == c* ]]; then
+		  if [ "${p_code,,}" == 'ca' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Catalan | Català";
+		elif [ "${p_code,,}" == 'ce' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chechen | нохчийн мотт";
+		elif [ "${p_code,,}" == 'ch' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chamorro | Chamoru";
+		elif [ "${p_code,,}" == 'co' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Corsican | Corsu ; lingua corsa";
+		elif [ "${p_code,,}" == 'cr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cree | ᓀᐦᐃᔭᐍᐏᐣ";
+		elif [ "${p_code,,}" == 'cs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Czech | Česky ; čeština";
+		elif [ "${p_code,,}" == 'cu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Old Church Slavonic | Словѣньскъ";
+		elif [ "${p_code,,}" == 'cv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chuvash | чӑваш чӗлхи";
+		elif [ "${p_code,,}" == 'cy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Welsh | Cymraeg";
+		  fi
+
+	elif [[ "${p_code}" == d* ]]; then
+		  if [ "${p_code,,}" == 'da' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Danish | Dansk";
+		elif [ "${p_code,,}" == 'de' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') German | Deutsch";
+		elif [ "${p_code,,}" == 'dv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Divehi | ދިވެހި";
+		elif [ "${p_code,,}" == 'dz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dzongkha | རྫོང་ཁ";
+		  fi
+
+	elif [[ "${p_code}" == e* ]]; then
+		  if [ "${p_code,,}" == 'ee' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ewe | Ɛʋɛgbɛ";
+		elif [ "${p_code,,}" == 'el' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greek | Ελληνικά";
+		elif [ "${p_code,,}" == 'en' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') English | English";
+		elif [ "${p_code,,}" == 'eo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Esperanto | Esperanto";
+		elif [ "${p_code,,}" == 'es' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Spanish | Español";
+		elif [ "${p_code,,}" == 'et' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Estonian | Eesti keel";
+		elif [ "${p_code,,}" == 'eu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Basque | Euskara";
+		  fi
+
+	elif [[ "${p_code}" == f* ]]; then
+		  if [ "${p_code,,}" == 'fa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Persian | فارسی";
+		elif [ "${p_code,,}" == 'ff' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fulah | Fulfulde";
+		elif [ "${p_code,,}" == 'fi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Finnish | Suomen kieli";
+		elif [ "${p_code,,}" == 'fj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fijian | Vosa Vakaviti";
+		elif [ "${p_code,,}" == 'fo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Faroese | Føroyskt";
+		elif [ "${p_code,,}" == 'fr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') French | Français";
+		elif [ "${p_code,,}" == 'fy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Western Frisian | Frysk";
+		  fi
+
+	elif [[ "${p_code}" == g* ]]; then
+		  if [ "${p_code,,}" == 'ga' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Irish | Gaeilge";
+		elif [ "${p_code,,}" == 'gd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Scottish Gaelic | Gàidhlig";
+		elif [ "${p_code,,}" == 'gl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Galician | Galego";
+		elif [ "${p_code,,}" == 'gn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Guarani | Avañe'ẽ";
+		elif [ "${p_code,,}" == 'gu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Gujarati | ગુજરાતી";
+		elif [ "${p_code,,}" == 'gv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Manx | Ghaelg";
+		  fi
+
+	elif [[ "${p_code}" == h* ]]; then
+		  if [ "${p_code,,}" == 'ha' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hausa | هَوُسَ";
+		elif [ "${p_code,,}" == 'he' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hebrew | עברית";
+		elif [ "${p_code,,}" == 'hi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hindi | हिन्दी ; हिंदी";
+		elif [ "${p_code,,}" == 'ho' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hiri Motu | Hiri Motu";
+		elif [ "${p_code,,}" == 'hr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Croatian | Hrvatski";
+		elif [ "${p_code,,}" == 'ht' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Haitian | Kreyòl ayisyen";
+		elif [ "${p_code,,}" == 'hu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hungarian | magyar ";
+		elif [ "${p_code,,}" == 'hy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Armenian | Հայերեն";
+		elif [ "${p_code,,}" == 'hz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Herero | Otjiherero";
+		  fi
+
+	elif [[ "${p_code}" == i* ]]; then
+		  if [ "${p_code,,}" == 'ia' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingua | Interlingua";
+		elif [ "${p_code,,}" == 'id' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Indonesian | Bahasa Indonesia";
+		elif [ "${p_code,,}" == 'ie' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingue | Interlingue";
+		elif [ "${p_code,,}" == 'ig' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Igbo | Igbo";
+		elif [ "${p_code,,}" == 'ii' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sichuan Yi | ꆇꉙ";
+		elif [ "${p_code,,}" == 'ik' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inupiaq | Iñupiaq ; Iñupiatun";
+		elif [ "${p_code,,}" == 'io' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ido | Ido";
+		elif [ "${p_code,,}" == 'is' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Icelandic | Íslenska";
+		elif [ "${p_code,,}" == 'it' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Italian | Italiano";
+		elif [ "${p_code,,}" == 'iu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inuktitut | ᐃᓄᒃᑎᑐᑦ";
+		  fi
+
+	elif [[ "${p_code}" == j* ]]; then
+		  if [ "${p_code,,}" == 'ja' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Japanese | 日本語 (にほんご)";
+		elif [ "${p_code,,}" == 'jv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Javanese | Basa Jawa";
+		  fi
+
+	elif [[ "${p_code}" == k* ]]; then
+		  if [ "${p_code,,}" == 'ka' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Georgian | ქართული";
+		elif [ "${p_code,,}" == 'kg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kongo | KiKongo";
+		elif [ "${p_code,,}" == 'ki' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kikuyu | Gĩkũyũ";
+		elif [ "${p_code,,}" == 'kj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kwanyama | Kuanyama";
+		elif [ "${p_code,,}" == 'kk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kazakh | Қазақ тілі";
+		elif [ "${p_code,,}" == 'kl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greenlandic | Kalaallisut ; kalaallit oqaasii";
+		elif [ "${p_code,,}" == 'km' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Khmer | ភាសាខ្មែរ";
+		elif [ "${p_code,,}" == 'kn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kannada | ಕನ್ನಡ";
+		elif [ "${p_code,,}" == 'ko' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)";
+		elif [ "${p_code,,}" == 'kr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kanuri | Kanuri";
+		elif [ "${p_code,,}" == 'ks' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kashmiri | कश्मीरी ; كشميري";
+		elif [ "${p_code,,}" == 'ku' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kurdish | Kurdî ; كوردی";
+		elif [ "${p_code,,}" == 'kv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Komi | коми кыв";
+		elif [ "${p_code,,}" == 'kw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cornish | Kernewek";
+		elif [ "${p_code,,}" == 'ky' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirghiz | кыргыз тили";
+		fi
+
+	elif [[ "${p_code}" == l* ]]; then
+		  if [ "${p_code,,}" == 'la' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latin | Latine ; lingua latina";
+		elif [ "${p_code,,}" == 'lb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luxembourgish | Lëtzebuergesch";
+		elif [ "${p_code,,}" == 'lg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ganda | Luganda";
+		elif [ "${p_code,,}" == 'li' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Limburgish | Limburgs";
+		elif [ "${p_code,,}" == 'ln' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lingala | Lingála";
+		elif [ "${p_code,,}" == 'lo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lao | ພາສາລາວ";
+		elif [ "${p_code,,}" == 'lt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lithuanian | Lietuvių kalba";
+		elif [ "${p_code,,}" == 'lu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luba | tshiluba";
+		elif [ "${p_code,,}" == 'lv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latvian | Latviešu valoda";
+		  fi
+
+	elif [[ "${p_code}" == m* ]]; then
+		  if [ "${p_code,,}" == 'mg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malagasy | Fiteny malagasy";
+		elif [ "${p_code,,}" == 'mh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marshallese | Kajin M̧ajeļ";
+		elif [ "${p_code,,}" == 'mi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Māori | Te reo Māori";
+		elif [ "${p_code,,}" == 'mk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Macedonian | македонски јазик";
+		elif [ "${p_code,,}" == 'ml' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malayalam | മലയാളം";
+		elif [ "${p_code,,}" == 'mn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Mongolian | Монгол";
+		elif [ "${p_code,,}" == 'mo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Moldavian | лимба молдовеняскэ";
+		elif [ "${p_code,,}" == 'mr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marathi | मराठी";
+		elif [ "${p_code,,}" == 'ms' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malay | Bahasa Melayu ; بهاس ملايو";
+		elif [ "${p_code,,}" == 'mt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Maltese | Malti";
+		elif [ "${p_code,,}" == 'my' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Burmese | ဗမာစာ";
+		  fi
+
+	elif [[ "${p_code}" == n* ]]; then
+		  if [ "${p_code,,}" == 'na' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nauru | Ekakairũ Naoero";
+		elif [ "${p_code,,}" == 'nb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Bokmål | Norsk bokmål";
+		elif [ "${p_code,,}" == 'nd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') North Ndebele | isiNdebele";
+		elif [ "${p_code,,}" == 'ne' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nepali | नेपाली";
+		elif [ "${p_code,,}" == 'ng' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ndonga | Owambo";
+		elif [ "${p_code,,}" == 'nl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dutch | Nederlands";
+		elif [ "${p_code,,}" == 'nn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Nynorsk | Norsk nynorsk";
+		elif [ "${p_code,,}" == 'no' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian | Norsk";
+		elif [ "${p_code,,}" == 'nr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') South Ndebele | Ndébélé";
+		elif [ "${p_code,,}" == 'nv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Navajo | Diné bizaad ; Dinékʼehǰí";
+		elif [ "${p_code,,}" == 'ny' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chichewa | ChiCheŵa ; chinyanja";
+		  fi
+
+	elif [[ "${p_code}" == o* ]]; then
+		  if [ "${p_code,,}" == 'oc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Occitan | Occitan";
+		elif [ "${p_code,,}" == 'oj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ";
+		elif [ "${p_code,,}" == 'om' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oromo | Afaan Oromoo";
+		elif [ "${p_code,,}" == 'or' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oriya | ଓଡ଼ିଆ";
+		elif [ "${p_code,,}" == 'os' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ossetian | Ирон ӕвзаг";
+		  fi
+
+	elif [[ "${p_code}" == p* ]] || [[ "${p_code}" == q* ]]; then
+		  if [ "${p_code,,}" == 'pa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Panjabi | ਪੰਜਾਬੀ ; پنجابی";
+		elif [ "${p_code,,}" == 'pi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pāli | पािऴ";
+		elif [ "${p_code,,}" == 'pl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Polish | Polski";
+		elif [ "${p_code,,}" == 'ps' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pashto | پښتو";
+		elif [ "${p_code,,}" == 'pt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Portuguese | Português";
+		elif [ "${p_code,,}" == 'qu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Quechua | Runa Simi ; Kichwa";
+		  fi
+
+	elif [[ "${p_code}" == r* ]]; then
+		  if [ "${p_code,,}" == 'rc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Reunionese | Kréol Rénioné";
+		elif [ "${p_code,,}" == 'rm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romansh | Rumantsch grischun";
+		elif [ "${p_code,,}" == 'rn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirundi | kiRundi";
+		elif [ "${p_code,,}" == 'ro' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romanian | Română";
+		elif [ "${p_code,,}" == 'ru' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Russian | русский язык";
+		elif [ "${p_code,,}" == 'rw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kinyarwanda | Kinyarwanda";
+		  fi
+
+	elif [[ "${p_code}" == s* ]]; then
+		  if [ "${p_code,,}" == 'sa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sanskrit | संस्कृतम्";
+		elif [ "${p_code,,}" == 'sc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sardinian | sardu";
+		elif [ "${p_code,,}" == 'sd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sindhi | सिन्धी ; سنڌي، سندھی";
+		elif [ "${p_code,,}" == 'se' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Northern Sami | Davvisámegiella";
+		elif [ "${p_code,,}" == 'sg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sango | Yângâ tî sängö";
+		elif [ "${p_code,,}" == 'sh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик";
+		elif [ "${p_code,,}" == 'si' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sinhalese| සිංහල";
+		elif [ "${p_code,,}" == 'sk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovak | Slovenčina";
+		elif [ "${p_code,,}" == 'sl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovenian | Slovenščina";
+		elif [ "${p_code,,}" == 'sm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Samoan | Gagana fa'a Samoa";
+		elif [ "${p_code,,}" == 'sn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Shona | chiShona";
+		elif [ "${p_code,,}" == 'so' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Somali | Soomaaliga ; af Soomaali";
+		elif [ "${p_code,,}" == 'sq' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Albanian | Shqip ";
+		elif [ "${p_code,,}" == 'sr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbian | српски језик";
+		elif [ "${p_code,,}" == 'ss' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swati| SiSwati";
+		elif [ "${p_code,,}" == 'st' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sotho | seSotho";
+		elif [ "${p_code,,}" == 'su' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sundanese | Basa Sunda";
+		elif [ "${p_code,,}" == 'sv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swedish | Svenska";
+		elif [ "${p_code,,}" == 'sw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swahili | Kiswahili";
+		  fi
+
+	elif [[ "${p_code}" == t* ]]; then
+		  if [ "${p_code,,}" == 'ta' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tamil | தமிழ்";
+		elif [ "${p_code,,}" == 'te' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Telugu | తెలుగు";
+		elif [ "${p_code,,}" == 'tg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tajik | тоҷикӣ ; toğikī ; تاجیکی";
+		elif [ "${p_code,,}" == 'th' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Thai | ไทย";
+		elif [ "${p_code,,}" == 'ti' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tigrinya | ትግርኛ";
+		elif [ "${p_code,,}" == 'tk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkmen | Türkmen ; Түркмен";
+		elif [ "${p_code,,}" == 'tl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tagalog | Tagalog";
+		elif [ "${p_code,,}" == 'tn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tswana | seTswana";
+		elif [ "${p_code,,}" == 'to' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tonga | faka Tonga";
+		elif [ "${p_code,,}" == 'tr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkish | Türkçe";
+		elif [ "${p_code,,}" == 'ts' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tsonga | xiTsonga";
+		elif [ "${p_code,,}" == 'tt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tatar | татарча ; tatarça ; تاتارچا";
+		elif [ "${p_code,,}" == 'tw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Twi | Twi";
+		elif [ "${p_code,,}" == 'ty' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tahitian | Reo Mā\`ohi";
+		  fi
+
+	elif [[ "${p_code}" == u* ]]; then
+		  if [ "${p_code,,}" == 'ug' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uighur | Uyƣurqə ; ئۇيغۇرچ";
+		elif [ "${p_code,,}" == 'uk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ukrainian | українська мова";
+		elif [ "${p_code,,}" == 'ur' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Urdu | اردو";
+		elif [ "${p_code,,}" == 'uz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uzbek | O'zbek ; Ўзбек ; أۇزبېك";
+		  fi
+
+	elif [[ "${p_code}" == v* ]]; then
+		  if [ "${p_code,,}" == 've' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Venda | tshiVenḓa";
+		elif [ "${p_code,,}" == 'vi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Vietnamese | Tiếng Việt";
+		elif [ "${p_code,,}" == 'vo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Volapük | Volapük";
+		  fi
+
+	elif [[ "${p_code}" == w* ]]; then
+		  if [ "${p_code,,}" == 'wa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Walloon | Walon";
+		elif [ "${p_code,,}" == 'wo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Wolof | Wollof";
+		  fi
+
+	elif [[ "${p_code}" == x* ]] || [[ "${p_code}" == y* ]]; then
+		  if [ "${p_code,,}" == 'xh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Xhosa | isiXhosa";
+		elif [ "${p_code,,}" == 'yi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yiddish | ייִדיש";
+		elif [ "${p_code,,}" == 'yo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yoruba | Yorùbá";
+		  fi
+
+	elif [[ "${p_code}" == z* ]]; then
+		  if [ "${p_code,,}" == 'za' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zhuang | Saɯ cueŋƅ ; Saw cuengh";
+		elif [ "${p_code,,}" == 'zh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chinese | 中文, 汉语, 漢語";
+		elif [ "${p_code,,}" == 'zu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zulu | isiZulu";
+		  fi
+	fi;
 
 	return 0;
 }
