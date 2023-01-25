@@ -366,6 +366,20 @@ function BU.Main.Text.GetCharacterOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# Getting every characters present in a file.
+function BU.Main.Text.GetCharactersFromFile() {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}"
+
+    #*** Parameters ****
+
+    #**** Code ****
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"
+    return 0
+}
+
 # Get the very first character of a string, and cut everything that follows this character.
 function BU.Main.Text.GetFirstCharacter()
 {
@@ -629,6 +643,59 @@ function BU.Main.Text.GetStringWordsNumber()
 
 # -----------------------------------------------
 
+## LISTING TEXT
+## DEBUG ID : "listing-text"
+
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::listing-text";
+
+# Getting every characters present in a file.
+function BU.Main.Text.ListCharactersFromFile() {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT}";
+
+    #*** Parameters ****
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : File to process.
+#    local p_layout=${2:-$'\0'};     # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC :
+
+    #**** Code ****
+    fold -w1 "${p_filepath}" | sort -u || {
+        local C="${?}"; BU.Main.Echo.Warning "Failed to get the list of each character from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting every words present in a file.
+function BU.Main.Text.ListWordsFromFile()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : File to process.
+
+    #**** Code ****
+    grep -o -E "(\w|')+" "${p_filepath}" | sed -e "s/'.*\$//" | sort -u -f || {
+        local C="${?}"; BU.Main.Echo.Warning "Failed to get the list of each words from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
 ## PRINTING TEXT
 ## DEBUG ID : "printing-text"
 
@@ -637,13 +704,13 @@ __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="$
 # Printing a single character or a string X times.
 function BU.Main.Text.PrintCharXTimes()
 {
-	#**** Parameters ****
+    #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String or single character to process.
-	local p_nb=${2:-1};			    # ARG TYPE : Int		- REQUIRED | DEFAULT VAL : 1		- DESC : Number of characters to print.
-	local p_newline=${3:-false}	    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
+    local p_nb=${2:-1};             # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of characters to print.
+    local p_newline=${3:-false};    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
 
 	#**** Variables ****
-	local i;	    # VAR TYPE : Int    - DESC : Iterations
+    local i;                        # VAR TYPE : Int    - DESC : Number of iterations.
 
 	#**** Code ****
 	for((i=0; i<p_nb; i++)); do

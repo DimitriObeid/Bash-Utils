@@ -7703,124 +7703,6 @@ function BU.Main.BasicMaths.PositiveToNegative()
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : CMDS.lib
-# Module        : Main
-# Author(s)     : Dimitri OBEID
-# Version       :
-
-# ------------------
-# FILE DESCRIPTION :
-
-# Functions used to process information about executable commands.
-
-# ----------------------------
-# SHELLCHECK GLOBAL DISABLER :
-
-# Add a coma after each warning code to disable multiple warnings at one go.
-
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
-
-# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
-
-# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
-
-# shellcheck disable=SC2154
-
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
-    echo -e "ACHTUNG !" >&2; echo >&2;
-    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
-    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
-
-elif [[ "${LANG}" == es_* ]]; then
-    echo -e "ATENCIÓN !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
-    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == fr_* ]]; then
-    echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
-
-elif [[ "${LANG}" == pt_* ]]; then
-    echo -e "ATENÇÃO !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
-    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == ru_* ]]; then
-    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
-    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
-    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
-
-else
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
-
-fi; exit 1; fi
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-#### PROCCESSING COMMANDS
-#### DEBUG ID : cmds.processing-commands
-
-__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
-
-## GETTING COMMAND OUTPUTS
-## DEBUG ID : getting-command-output
-
-__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
-
-# Get command's executable file's path.
-function BU.Main.CMDS.GetCommandPath()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
-        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
-
-    #**** Parameters ****
-    local p_cmd=${1:-$'\0'}; #ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
-
-    #**** Code ****
-    if ! BU.Main.Args__CMDS.GetCommandPath "${p_cmd}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
-
-    command -v "${p_cmd}" || { local C="${?}"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "${p_cmd}") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Get the command's return output.
-function BU.Main.CMDS.GetCommandReturnOutputValue()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
-        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
-
-    #**** Parameters ****
-    local p_cmd=${1:-$'\0'}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
-
-    #**** Code ****
-    if eval "${p_cmd}" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
-}
-
-# -----------------------------------------------
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-#!/usr/bin/env bash
-
-# ---------------------
-# SCRIPT'S INFORMATIONS
-
 # Name          : Case.lib
 # Module        : Main
 # Author(s)     : Dimitri OBEID
@@ -9297,6 +9179,124 @@ function BU.Main.Checkings.CheckDecho()
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
         fi
 	fi
+}
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : CMDS.lib
+# Module        : Main
+# Author(s)     : Dimitri OBEID
+# Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Functions used to process information about executable commands.
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
+elif [[ "${LANG}" == es_* ]]; then
+    echo -e "ATENCIÓN !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
+    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+elif [[ "${LANG}" == pt_* ]]; then
+    echo -e "ATENÇÃO !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
+    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### PROCCESSING COMMANDS
+#### DEBUG ID : cmds.processing-commands
+
+__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
+
+## GETTING COMMAND OUTPUTS
+## DEBUG ID : getting-command-output
+
+__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
+
+# Get command's executable file's path.
+function BU.Main.CMDS.GetCommandPath()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
+        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
+
+    #**** Parameters ****
+    local p_cmd=${1:-$'\0'}; #ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
+
+    #**** Code ****
+    if ! BU.Main.Args__CMDS.GetCommandPath "${p_cmd}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+
+    command -v "${p_cmd}" || { local C="${?}"; BU.Main.Errors.HandleSmallErrors 'E' "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : The $(BU.Main.Decho.Decho.Highlight "${p_cmd}") command was not found on your system" 'E'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Get the command's return output.
+function BU.Main.CMDS.GetCommandReturnOutputValue()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}" \
+        "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
+
+    #**** Parameters ****
+    local p_cmd=${1:-$'\0'}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
+
+    #**** Code ****
+    if eval "${p_cmd}" > /dev/null; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 }
 
 # -----------------------------------------------
@@ -17929,839 +17929,6 @@ function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : Text.lib
-# Module        : Main
-# Author(s)     : Dimitri OBEID
-# Version       :
-
-# ------------------
-# FILE DESCRIPTION :
-
-# Functions specially made for text processing (cutting fields / characters, ).
-
-# ----------------------------
-# SHELLCHECK GLOBAL DISABLER :
-
-# Add a coma after each warning code to disable multiple warnings at one go.
-
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
-
-# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
-
-# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
-
-# shellcheck disable=SC2154
-
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
-    echo -e "ACHTUNG !" >&2; echo >&2;
-    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
-    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
-
-elif [[ "${LANG}" == es_* ]]; then
-    echo -e "ATENCIÓN !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
-    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == fr_* ]]; then
-    echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
-
-elif [[ "${LANG}" == pt_* ]]; then
-    echo -e "ATENÇÃO !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
-    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == ru_* ]]; then
-    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
-    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
-    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
-
-else
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
-
-fi; exit 1; fi
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-#### TEXT PROCESSING FUNCTIONS
-#### DEBUG ID : "text::text-processing-functions"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
-
-## CUTTING TEXT
-## DEBUG ID : "cutting-text"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::cutting-text";
-
-# Cut the date displayed before a string.
-function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-
-# Cut the dash written before a command option call (to be improved).
-function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-
-# Cut every part of a string after and with the delimiter, which can be both a single character or a string.
-function BU.Main.Text.CutSubStringAfterNthDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delimiter=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
-    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations.
-    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
-
-    #**** Variables ****
-    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
-
-	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
-	local v_newString="";           # VAR TYPE : String     - DESC : Let this variable empty, it is used to store the new string with every fields cut from the original string.
-	local x;                        # VAR TYPE : Int        - DESC :
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "${p_string}" "${p_delimiter}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
-    fi
-
-	# Getting the number of occurences of the character / string targeted as delimiter.
-	x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_delimiter}")";
-
-    for ((i=0; i<x; i++)); do
-		if [ "${i}" == "${p_iterations}" ]; then break; fi
-
-        v_fieldtmp="${p_string%%"${p_delimiter}"*}";
-		v_fieldtmp="${v_fieldtmp#*"${p_delimiter}"}";
-
-		if [ -z "${v_newString}" ]; then
-			v_newString="${v_fieldtmp}";
-		else
-			v_newString="${v_newString}${p_delimiter}${v_fieldtmp}";
-		fi
-
-        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
-    done
-
-	if [ "${p_count,,}" != 'count' ]; then echo -ne "${v_newString}"; else echo -ne "${v_count}"; fi
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Cut every part of a string before and with the delimiter, which can be both a single character or a string.
-function BU.Main.Text.CutSubStringBeforeNthDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delimiter=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
-    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations.
-    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
-
-    #**** Variables ****
-    local p_string_tmp;             # VAR TYPE : String     - DESC :
-
-    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "${p_string}" "${p_delimiter}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
-    fi
-
-    for ((i=0; i<p_iterations; i++)); do
-
-        #shellcheck disable=SC2001
-        p_string="$(sed "s/^[^${p_delimiter}]*${p_delimiter}//" <<< "${p_string}")";
-
-        # This variable's purpose is to avoid assigning the "${p_string}" variable to itself, because if so, the assignment would have done nothing.
-        p_string_tmp="${p_string}";
-        p_string="${p_string_tmp}";
-
-        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
-    done
-
-    if [ "${p_count,,}" != 'count' ]; then echo -ne "${p_string}"; else echo -ne "${v_count}"; fi
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Cut the very first field of a string, before the delimiter, in order to get everything that follows the first field.
-function BU.Main.Text.CutFirstFieldBeforeDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
-
-    #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
-
-    echo "${p_string%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Cut the very last field of a string, in order to get everything that preceeds the last field.
-function BU.Main.Text.CutLastFieldAfterDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
-
-    #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
-
-    echo "${p_string#*"${p_delim}"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Deleting letters and sub-strings in a main string.
-function BU.Main.Text.DeleteLettersInString()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_chars=${2:-$'\0'};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Letters and / or strings to replace.
-    local p_occurences=${3:-one}    # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : one      - DESC : Replace one occurence (default) or every occurences (value : all)
-    local p_replacement=${4:-' '};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : ' '      - DESC : Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
-
-    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
-        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}";
-    };
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Replacing letters and sub-strings in a main string.
-function BU.Main.Text.ReplaceLettersInString()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};          # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Letters and / or strings to replace.
-    local p_occurences=${3:-one}        # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : one      - DESC : Replace one occurence (default) or every occurences (value : all)
-    local p_replacement=${4:-$'\0'};    # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Replacing the former character / sub-strings by another character / sub-string.
-
-    #**** Code ****
-    if [ "${p_occurences,,}" == 'all' ]; then
-        echo "${p_string//${p_replacement}/"${p_delim}"}";
-    else
-        echo "${p_string/${p_replacement}/"${p_delim}"}";
-    fi
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# -----------------------------------------------
-
-## FORMATTING TEXT
-## DEBUG ID : "formatting-text"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}.formatting-text";
-
-# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Text.ToLowercase()" OR "BU.Main.Text.ToUppercase()") or a parameter expansion.
-# This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
-function BU.Main.Text.KeepFormatting()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
-
-	#**** Parameters ****
-#	p_string=${1:-$'\0'};           # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to display.
-#	p_old_formatting=${2:-$'\0'};   # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Former text formatting.
-
-	#**** Code ****
-# 	echo -ne &>/dev/null; echo -ne "${p_string}";
-#
-# 	if [ "${p_old_formatting,,}" == 'l' ]; then
-#         echo -ne "$(BU.Main.Text.ToLowercase "${p_string}")";
-# 	elif [ "${p_old_formatting^^}" == 'U' ]; then
-#         echo -ne "$(BU.Main.Text.ToUppercase "${p_string}")";
-# 	else
-#         echo -ne "<<|| No reformatting precised in the $(BU.Main.Text.ToLowercase "${FUNCNAME[0]}()") function ||>>";
-# 	fi
-
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Print a lowercased text.
-
-# Usage :
-#	BU.Main.Text.ToLowercase "<Text to write>"
-function BU.Main.Text.ToLowercase()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
-
-	#**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-	#**** Code ****
-	echo "${p_string}" | tr '[:upper:]' '[:lower:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Print an uppercased text.
-
-# Usage :
-#	BU.Main.Text.ToUppercase "<Text to write>"
-function BU.Main.Text.ToUppercase()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
-
-	#**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-	#**** Code ****
-	echo "${p_string}" | tr '[:lower:]' '[:upper:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# -----------------------------------------------
-
-## GETTING TEXT
-## DEBUG ID : "getting-text"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text";
-
-# Getting the occurences of a character in a main string.
-function BU.Main.Text.GetCharacterOccurences()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
-
-    #**** Variables ****
-    local v_occurences="${p_string//[^${p_target}]}";
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.GetCharacterOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
-
-    echo -ne "${#v_occurences}";
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Get the very first character of a string, and cut everything that follows this character.
-function BU.Main.Text.GetFirstCharacter()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    echo "${p_string:0:1}"; return 0;
-}
-
-# Get the very first field of a string, and cut everything that follows the first delimiter.
-function BU.Main.Text.GetFirstFieldBeforeDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
-
-    #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    echo "${p_string%%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Get the very last character of a string, and cut the preceding characters.
-function BU.Main.Text.GetLastCharacter()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Variables ****
-    declare -i v_length;        # VAR TYPE : Int        - DESC : Storing the length of the character.
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    # Getting the number of characters from this string.
-    v_length="${#p_string}";
-
-    # Printing the wanted character.
-    echo "${p_string:$(( v_length - 1 )):1}"; return 0;
-}
-
-# Get the very last field of a string, and cut everything that preceeds the last delimiter.
-function BU.Main.Text.GetLastFieldAfterDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
-
-    #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-	echo "${p_string##*"${p_delim}"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Getting substring after a delimiter, which can be both a single character or a string.
-function BU.Main.Text.GetSubStringAfterDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL    - Delimiter
-    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1       - Iterations
-    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL    - Allow to set a counter of skipped delimiters.
-    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
-
-    #**** Variables ****
-    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
-
-    #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringAfterDelim "${p_string}" "${p_delim}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-    fi
-
-    # WARNING ! DO NOT put double quotes between the "$(seq "${p_iterations}")", or else it will not word split, and the loop will only run once !
-    for i in $(seq "${p_iterations}"); do
-        p_string="${p_string#*"${p_delim}"}";
-
-        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
-    done;
-
-    if [ "${p_count,,}" != 'count' ]; then echo -ne "${p_string}"; else echo -ne "${v_count}"; fi
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
-}
-
-# Getting substring before a delimiter, which can be both a single character or a string.
-function BU.Main.Text.GetSubStringBeforeDelim()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
-    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations
-    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
-    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
-
-    #**** Variables ****
-    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
-
-	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
-	local v_newString="";           # VAR TYPE : String     - DESC : Let this variable empty, it is used to store the new string with every fields cut from the original string.
-	local x;                        # VAR TYPE : INT        - DESC :
-
-    #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringBeforeDelim "${p_string}" "${p_delim}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-        if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
-            BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
-        fi
-    fi
-
-	# Getting the number of occurences of the character / string targeted as delimiter.
-    if [ "${p_init,,}" == '--init' ]; then
-        x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_target}" "--init")";
-	else
-        x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_target}")";
-    fi
-
-    for ((i=0; i<x; i++)); do
-		if [ "${i}" == "${p_iterations}" ]; then break; fi
-
-        v_fieldtmp="${p_string##*"${p_delim}"}";
-		v_fieldtmp="${v_fieldtmp%"${p_delim}"*}";
-
-		if [ -z "${v_newString}" ]; then
-			v_newString="${v_fieldtmp}";
-		else
-			v_newString="${v_newString}${p_delim}${v_fieldtmp}";
-		fi
-
-        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
-    done
-
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-	    v_newString="$(BU.Main.Text.ReverseStringWordsOrder "${v_newString}" "${p_delim}")";
-    else
-        v_newString="$(BU.Main.Text.ReverseStringWordsOrder "${v_newString}" "${p_delim}" 'rm --first+last' '--init')";
-    fi
-
-	if [ "${p_count,,}" != 'count' ]; then echo -e "${v_newString}"; else echo "${p_count}"; fi
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Getting the occurences of a sub-string in a main string (it also works with a single character).
-function BU.Main.Text.GetSubStringOccurences()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};  # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'};  # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted sub-string.
-    local p_init=${3:-$'\0'};    # ARG TYPE : String    - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringBeforeDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
-
-	#**** Variables ****
-	local tmp;      # VAR TYPE :
-	local count;    # VAR TYPE :
-
-    #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.GetSubStringOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-    fi
-
-	# https://stackoverflow.com/a/50601141
-
-	# This removes all occurrences of "${p_target}" from "${p_string}" and places it in tmp.
-	# Actually we're using substring replacement here with replacement string missing.
-
-	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
-	tmp="${p_string//${p_target}}";
-
-	# This gives us the number of occurrences of "${p_target}" in "${p_string}".
-
-	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "${p_target}" (remember, we removed all occurrences of "${p_target}" from "${p_string}" and placed the result in "${tmp}").
-	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
-
-	echo -e "${count}";
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Getting the size of a string in byte.
-function BU.Main.Text.GetStringByteSize()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};  # ARG : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Code ****
-    echo -ne "${p_string}" | wc --bytes; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Getting the size of a string in characters.
-function BU.Main.Text.GetStringCharactersNumber()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};  # VAR TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Code ****
-    echo -ne "${p_string}" | wc --chars; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Getting the number of words in a string.
-function BU.Main.Text.GetStringWordsNumber()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};  # ARG : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Code ****
-    echo -ne "${p_string}" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# -----------------------------------------------
-
-## PRINTING TEXT
-## DEBUG ID : "printing-text"
-
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::printing-text";
-
-# Printing a single character or a string X times.
-function BU.Main.Text.PrintCharXTimes()
-{
-	#**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String or single character to process.
-	local p_nb=${2:-1};			    # ARG TYPE : Int		- REQUIRED | DEFAULT VAL : 1		- DESC : Number of characters to print.
-	local p_newline=${3:-false}	    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
-
-	#**** Variables ****
-	local i;	    # VAR TYPE : Int    - DESC : Iterations
-
-	#**** Code ****
-	for((i=0; i<p_nb; i++)); do
-		printf "%s" "${p_str}";
-	done
-
-	if [ "${p_newline,,}" == 'true' ]; then BU.Main.Echo.Newstep; fi
-
-	return 0;
-}
-
-# -----------------------------------------------
-
-## REVERSING TEXT
-## DEBUG ID : "reversing-text"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::reversing-text";
-
-# Reverse words order of a string according to a delimiter.
-
-# Examples with the '|' and '/' delimiter:
-# animal | big | car | donut    --> donut | car | big | animal
-# /home/user/Documents          --> Documents/user/home
-function BU.Main.Text.ReverseStringWordsOrder()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};	    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
-    local p_keepd=${3:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
-    local p_init=${4:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
-
-
-    #**** Variables ****
-    # Leave this variable empty, it will store the reversed string.
-    local reversed="";
-    local line;
-
-    #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-    fi
-
-    # shellcheck disable=SC2219
-    let x="${#line[@]}-1";
-
-    while [ "${x}" -ge 0 ]; do
-        if [ "${x}" -gt 1 ]; then reversed="${reversed}${line[x]}${p_delim}"; else reversed="${reversed}${line[x]}"; fi
-
-        (( x-- ));
-    done
-
-    if     [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst) ]];              then reversed="${p_delim}${reversed}";
-    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))l?(ast) ]];               then reversed="${reversed}${p_delim}";
-    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst)?(-)l?(ast) ]];   then reversed="${p_delim}${reversed}${p_delim}"; fi
-
-    echo -e "${reversed}";
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Reverse the order of characters in a string.
-function BU.Main.Text.ReverseCharactersOrder()
-{
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-
-    #**** Code ****
-    echo "${p_string}" | rev;
-
-    return 0;
-}
-
-# -----------------------------------------------
-
-## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
-## DEBUG ID : "splitting-text"
-
-# shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::splitting-text";
-
-# String to words array.
-
-# Pass a string as argument, and after calling this function, copy the content of the generated array into another array, like this : your_array_name=("${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR[@]}")
-function BU.Main.Text.StrToWordArray()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
-
-    #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
-
-    #**** Code ****
-    if ! BU.Main.Args__Text.StrToWordArray "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
-
-    # Since the "${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR}" array is not used in this file, it's better to ignore the returned Shellcheck warning,
-    # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.
-
-    # shellcheck disable=SC2034
-    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "${p_string}";
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Words array to string.
-function BU.Main.Text.WordArrayToStr()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
-
-    #**** Parameters ****
-    # local p_array=${1:-$'\0'};
-
-    #**** Code ****
-
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
-
-# Splitting a string from a given delimiter, in order to store it in an array.
-# function BU.Main.Text.SplitStringFromDelim()
-# {
-#     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-#     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-#         "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-#         "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT}";
-#
-#     #**** Parameters ****
-#     local p_string=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-#     local p_delim=${2:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
-#     local p_order=${3:-$'\0'};        # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Splitting order (L|l = left to right, R|r = right to left).
-#     local p_iterations=${4:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of delimiters to process.
-#     local p_ignore_delim=${5:-$'\0'}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of delimiters to ignore before splitting the string.
-#
-#     #**** Code ****
-#     if [ -z "${p_iterations}" ] || [ "${p_iterations}" -eq 0 ]; then
-#         p_iterations='1';
-#     fi
-#
-#     # If the string has to be processed from left to right.
-#     if [ "${p_order^^}" == 'L|l' ]; then
-#         for ((i=0; i<{p_iterations}; i++)); do
-#             if [ -z "${p_ignore_delim}" ] || [ "${p_ignore_delim}" -eq 0 ]; then
-#                 true
-#             else
-#                 for ((j=0; j<p_ignore_delim; i++)); do
-#                     true
-#                 done
-#             fi
-#         done
-#
-#     # Else, if the string has to be processed from right to left.
-#     elif [ "${p_order^^}" == 'R|r' ]; then
-#         for ((i=0; i<p_iterations; i++)); do
-#             if [ -z "${p_ignore_delim}" ] || [ "${p_ignore_delim}" -eq 0 ]; then
-#                 true
-#             else
-#                 for ((j=0; j<p_ignore_delim; i++)); do
-#                     true
-#                 done
-#             fi
-#         done
-#
-#     # Else, if no value is passed to the order processer.
-#     elif [ -z "${p_order}" ]; then
-#         false
-#
-#     # Else, if an unsupported value is passed to the order processer.
-#     else
-#         false
-#     fi
-#
-#     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-# }
-
-# -----------------------------------------------
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-#!/usr/bin/env bash
-
-# ---------------------
-# SCRIPT'S INFORMATIONS
-
 # Name          : Files.lib
 # Module        : Main
 # Author(s)     : Dimitri OBEID
@@ -19235,6 +18402,906 @@ function BU.Main.TextFormat.SetTextFormat()
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 }
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
+# Name          : Text.lib
+# Module        : Main
+# Author(s)     : Dimitri OBEID
+# Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# Functions specially made for text processing (cutting fields / characters, ).
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
+elif [[ "${LANG}" == es_* ]]; then
+    echo -e "ATENCIÓN !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
+    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+elif [[ "${LANG}" == pt_* ]]; then
+    echo -e "ATENÇÃO !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
+    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### TEXT PROCESSING FUNCTIONS
+#### DEBUG ID : "text::text-processing-functions"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
+
+## CUTTING TEXT
+## DEBUG ID : "cutting-text"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::cutting-text";
+
+# Cut the date displayed before a string.
+function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+
+# Cut the dash written before a command option call (to be improved).
+function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+
+# Cut every part of a string after and with the delimiter, which can be both a single character or a string.
+function BU.Main.Text.CutSubStringAfterNthDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delimiter=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
+    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations.
+    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
+
+    #**** Variables ****
+    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
+
+	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
+	local v_newString="";           # VAR TYPE : String     - DESC : Let this variable empty, it is used to store the new string with every fields cut from the original string.
+	local x;                        # VAR TYPE : Int        - DESC :
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.CutSubStringAfterNthDelim "${p_string}" "${p_delimiter}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+    fi
+
+	# Getting the number of occurences of the character / string targeted as delimiter.
+	x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_delimiter}")";
+
+    for ((i=0; i<x; i++)); do
+		if [ "${i}" == "${p_iterations}" ]; then break; fi
+
+        v_fieldtmp="${p_string%%"${p_delimiter}"*}";
+		v_fieldtmp="${v_fieldtmp#*"${p_delimiter}"}";
+
+		if [ -z "${v_newString}" ]; then
+			v_newString="${v_fieldtmp}";
+		else
+			v_newString="${v_newString}${p_delimiter}${v_fieldtmp}";
+		fi
+
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
+    done
+
+	if [ "${p_count,,}" != 'count' ]; then echo -ne "${v_newString}"; else echo -ne "${v_count}"; fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Cut every part of a string before and with the delimiter, which can be both a single character or a string.
+function BU.Main.Text.CutSubStringBeforeNthDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delimiter=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
+    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations.
+    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
+
+    #**** Variables ****
+    local p_string_tmp;             # VAR TYPE : String     - DESC :
+
+    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.CutSubStringBeforeNthDelim "${p_string}" "${p_delimiter}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+    fi
+
+    for ((i=0; i<p_iterations; i++)); do
+
+        #shellcheck disable=SC2001
+        p_string="$(sed "s/^[^${p_delimiter}]*${p_delimiter}//" <<< "${p_string}")";
+
+        # This variable's purpose is to avoid assigning the "${p_string}" variable to itself, because if so, the assignment would have done nothing.
+        p_string_tmp="${p_string}";
+        p_string="${p_string_tmp}";
+
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
+    done
+
+    if [ "${p_count,,}" != 'count' ]; then echo -ne "${p_string}"; else echo -ne "${v_count}"; fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Cut the very first field of a string, before the delimiter, in order to get everything that follows the first field.
+function BU.Main.Text.CutFirstFieldBeforeDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
+
+    #**** Code ****
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+
+    echo "${p_string%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Cut the very last field of a string, in order to get everything that preceeds the last field.
+function BU.Main.Text.CutLastFieldAfterDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
+
+    #**** Code ****
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+
+    echo "${p_string#*"${p_delim}"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Deleting letters and sub-strings in a main string.
+function BU.Main.Text.DeleteLettersInString()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_chars=${2:-$'\0'};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Letters and / or strings to replace.
+    local p_occurences=${3:-one}    # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : one      - DESC : Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-' '};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : ' '      - DESC : Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+
+    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Replacing letters and sub-strings in a main string.
+function BU.Main.Text.ReplaceLettersInString()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};          # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Letters and / or strings to replace.
+    local p_occurences=${3:-one}        # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : one      - DESC : Replace one occurence (default) or every occurences (value : all)
+    local p_replacement=${4:-$'\0'};    # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Replacing the former character / sub-strings by another character / sub-string.
+
+    #**** Code ****
+    if [ "${p_occurences,,}" == 'all' ]; then
+        echo "${p_string//${p_replacement}/"${p_delim}"}";
+    else
+        echo "${p_string/${p_replacement}/"${p_delim}"}";
+    fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# -----------------------------------------------
+
+## FORMATTING TEXT
+## DEBUG ID : "formatting-text"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}.formatting-text";
+
+# Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Text.ToLowercase()" OR "BU.Main.Text.ToUppercase()") or a parameter expansion.
+# This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
+function BU.Main.Text.KeepFormatting()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
+
+	#**** Parameters ****
+#	p_string=${1:-$'\0'};           # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to display.
+#	p_old_formatting=${2:-$'\0'};   # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Former text formatting.
+
+	#**** Code ****
+# 	echo -ne &>/dev/null; echo -ne "${p_string}";
+#
+# 	if [ "${p_old_formatting,,}" == 'l' ]; then
+#         echo -ne "$(BU.Main.Text.ToLowercase "${p_string}")";
+# 	elif [ "${p_old_formatting^^}" == 'U' ]; then
+#         echo -ne "$(BU.Main.Text.ToUppercase "${p_string}")";
+# 	else
+#         echo -ne "<<|| No reformatting precised in the $(BU.Main.Text.ToLowercase "${FUNCNAME[0]}()") function ||>>";
+# 	fi
+
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Print a lowercased text.
+
+# Usage :
+#	BU.Main.Text.ToLowercase "<Text to write>"
+function BU.Main.Text.ToLowercase()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
+
+	#**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+	#**** Code ****
+	echo "${p_string}" | tr '[:upper:]' '[:lower:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Print an uppercased text.
+
+# Usage :
+#	BU.Main.Text.ToUppercase "<Text to write>"
+function BU.Main.Text.ToUppercase()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT}";
+
+	#**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+	#**** Code ****
+	echo "${p_string}" | tr '[:lower:]' '[:upper:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+## GETTING TEXT
+## DEBUG ID : "getting-text"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text";
+
+# Getting the occurences of a character in a main string.
+function BU.Main.Text.GetCharacterOccurences()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+
+    #**** Variables ****
+    local v_occurences="${p_string//[^${p_target}]}";
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetCharacterOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+
+    echo -ne "${#v_occurences}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting every characters present in a file.
+function BU.Main.Text.GetCharactersFromFile() {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}"
+
+    #*** Parameters ****
+
+    #**** Code ****
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"
+    return 0
+}
+
+# Get the very first character of a string, and cut everything that follows this character.
+function BU.Main.Text.GetFirstCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    echo "${p_string:0:1}"; return 0;
+}
+
+# Get the very first field of a string, and cut everything that follows the first delimiter.
+function BU.Main.Text.GetFirstFieldBeforeDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+
+    #**** Code ****
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    echo "${p_string%%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Get the very last character of a string, and cut the preceding characters.
+function BU.Main.Text.GetLastCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Variables ****
+    declare -i v_length;        # VAR TYPE : Int        - DESC : Storing the length of the character.
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Getting the number of characters from this string.
+    v_length="${#p_string}";
+
+    # Printing the wanted character.
+    echo "${p_string:$(( v_length - 1 )):1}"; return 0;
+}
+
+# Get the very last field of a string, and cut everything that preceeds the last delimiter.
+function BU.Main.Text.GetLastFieldAfterDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+
+    #**** Code ****
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+	echo "${p_string##*"${p_delim}"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Getting substring after a delimiter, which can be both a single character or a string.
+function BU.Main.Text.GetSubStringAfterDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL    - Delimiter
+    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1       - Iterations
+    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL    - Allow to set a counter of skipped delimiters.
+    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
+
+    #**** Variables ****
+    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
+
+    #**** Code ****
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+        if ! BU.Main.Args__Text.GetSubStringAfterDelim "${p_string}" "${p_delim}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    fi
+
+    # WARNING ! DO NOT put double quotes between the "$(seq "${p_iterations}")", or else it will not word split, and the loop will only run once !
+    for i in $(seq "${p_iterations}"); do
+        p_string="${p_string#*"${p_delim}"}";
+
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
+    done;
+
+    if [ "${p_count,,}" != 'count' ]; then echo -ne "${p_string}"; else echo -ne "${v_count}"; fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+}
+
+# Getting substring before a delimiter, which can be both a single character or a string.
+function BU.Main.Text.GetSubStringBeforeDelim()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
+    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Iterations
+    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
+    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
+
+    #**** Variables ****
+    if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
+
+	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
+	local v_newString="";           # VAR TYPE : String     - DESC : Let this variable empty, it is used to store the new string with every fields cut from the original string.
+	local x;                        # VAR TYPE : INT        - DESC :
+
+    #**** Code ****
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+        if ! BU.Main.Args__Text.GetSubStringBeforeDelim "${p_string}" "${p_delim}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+        if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsInt "${p_iterations}"; then
+            BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : this function's third argument must be an integer."; p_iterations='1';
+        fi
+    fi
+
+	# Getting the number of occurences of the character / string targeted as delimiter.
+    if [ "${p_init,,}" == '--init' ]; then
+        x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_target}" "--init")";
+	else
+        x="$(BU.Main.Text.GetSubStringOccurences "${p_string}" "${p_target}")";
+    fi
+
+    for ((i=0; i<x; i++)); do
+		if [ "${i}" == "${p_iterations}" ]; then break; fi
+
+        v_fieldtmp="${p_string##*"${p_delim}"}";
+		v_fieldtmp="${v_fieldtmp%"${p_delim}"*}";
+
+		if [ -z "${v_newString}" ]; then
+			v_newString="${v_fieldtmp}";
+		else
+			v_newString="${v_newString}${p_delim}${v_fieldtmp}";
+		fi
+
+        if [ "${p_count,,}" != 'count' ]; then v_count="$(( v_count + 1 ))"; fi
+    done
+
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+	    v_newString="$(BU.Main.Text.ReverseStringWordsOrder "${v_newString}" "${p_delim}")";
+    else
+        v_newString="$(BU.Main.Text.ReverseStringWordsOrder "${v_newString}" "${p_delim}" 'rm --first+last' '--init')";
+    fi
+
+	if [ "${p_count,,}" != 'count' ]; then echo -e "${v_newString}"; else echo "${p_count}"; fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting the occurences of a sub-string in a main string (it also works with a single character).
+function BU.Main.Text.GetSubStringOccurences()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};  # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_target=${2:-$'\0'};  # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted sub-string.
+    local p_init=${3:-$'\0'};    # ARG TYPE : String    - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringBeforeDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
+
+	#**** Variables ****
+	local tmp;      # VAR TYPE :
+	local count;    # VAR TYPE :
+
+    #**** Code ****
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+        if ! BU.Main.Args__Text.GetSubStringOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    fi
+
+	# https://stackoverflow.com/a/50601141
+
+	# This removes all occurrences of "${p_target}" from "${p_string}" and places it in tmp.
+	# Actually we're using substring replacement here with replacement string missing.
+
+	# Syntax for substring replacement is "${p_string//substring/replacement}" (this replaces all occurrences of substring with replacement).
+	tmp="${p_string//${p_target}}";
+
+	# This gives us the number of occurrences of "${p_target}" in "${p_string}".
+
+	# ${#p_string} gives string length so (${#p_string} - ${#tmp]) is length of all occurrences of "${p_target}" (remember, we removed all occurrences of "${p_target}" from "${p_string}" and placed the result in "${tmp}").
+	count="$(((${#p_string} - ${#tmp}) / ${#p_target}))";
+
+	echo -e "${count}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting the size of a string in byte.
+function BU.Main.Text.GetStringByteSize()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};  # ARG : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    echo -ne "${p_string}" | wc --bytes; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting the size of a string in characters.
+function BU.Main.Text.GetStringCharactersNumber()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};  # VAR TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    echo -ne "${p_string}" | wc --chars; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting the number of words in a string.
+function BU.Main.Text.GetStringWordsNumber()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};  # ARG : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    echo -ne "${p_string}" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+## LISTING TEXT
+## DEBUG ID : "listing-text"
+
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::listing-text";
+
+# Getting every characters present in a file.
+function BU.Main.Text.ListCharactersFromFile() {
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT}";
+
+    #*** Parameters ****
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : File to process.
+#    local p_layout=${2:-$'\0'};     # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC :
+
+    #**** Code ****
+    fold -w1 "${p_filepath}" | sort -u || {
+        local C="${?}"; BU.Main.Echo.Warning "Failed to get the list of each character from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Getting every words present in a file.
+function BU.Main.Text.ListWordsFromFile()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : File to process.
+
+    #**** Code ****
+    grep -o -E "(\w|')+" "${p_filepath}" | sed -e "s/'.*\$//" | sort -u -f || {
+        local C="${?}"; BU.Main.Echo.Warning "Failed to get the list of each words from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+## PRINTING TEXT
+## DEBUG ID : "printing-text"
+
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::printing-text";
+
+# Printing a single character or a string X times.
+function BU.Main.Text.PrintCharXTimes()
+{
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String or single character to process.
+    local p_nb=${2:-1};             # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of characters to print.
+    local p_newline=${3:-false};    # ARG TYPE : Bool       - OPTIONAL | DEFAULT VAL : false    - DESC : If true, prints a line break.
+
+	#**** Variables ****
+    local i;                        # VAR TYPE : Int    - DESC : Number of iterations.
+
+	#**** Code ****
+	for((i=0; i<p_nb; i++)); do
+		printf "%s" "${p_str}";
+	done
+
+	if [ "${p_newline,,}" == 'true' ]; then BU.Main.Echo.Newstep; fi
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+## REVERSING TEXT
+## DEBUG ID : "reversing-text"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::reversing-text";
+
+# Reverse words order of a string according to a delimiter.
+
+# Examples with the '|' and '/' delimiter:
+# animal | big | car | donut    --> donut | car | big | animal
+# /home/user/Documents          --> Documents/user/home
+function BU.Main.Text.ReverseStringWordsOrder()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+    local p_delim=${2:-$'\0'};	    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
+    local p_keepd=${3:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
+    local p_init=${4:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
+
+
+    #**** Variables ****
+    # Leave this variable empty, it will store the reversed string.
+    local reversed="";
+    local line;
+
+    #**** Code ****
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+        if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    fi
+
+    # shellcheck disable=SC2219
+    let x="${#line[@]}-1";
+
+    while [ "${x}" -ge 0 ]; do
+        if [ "${x}" -gt 1 ]; then reversed="${reversed}${line[x]}${p_delim}"; else reversed="${reversed}${line[x]}"; fi
+
+        (( x-- ));
+    done
+
+    if     [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst) ]];              then reversed="${p_delim}${reversed}";
+    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))l?(ast) ]];               then reversed="${reversed}${p_delim}";
+    elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst)?(-)l?(ast) ]];   then reversed="${p_delim}${reversed}${p_delim}"; fi
+
+    echo -e "${reversed}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Reverse the order of characters in a string.
+function BU.Main.Text.ReverseCharactersOrder()
+{
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    echo "${p_string}" | rev;
+
+    return 0;
+}
+
+# -----------------------------------------------
+
+## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
+## DEBUG ID : "splitting-text"
+
+# shellcheck disable=SC2034
+__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::splitting-text";
+
+# String to words array.
+
+# Pass a string as argument, and after calling this function, copy the content of the generated array into another array, like this : your_array_name=("${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR[@]}")
+function BU.Main.Text.StrToWordArray()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.StrToWordArray "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Since the "${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR}" array is not used in this file, it's better to ignore the returned Shellcheck warning,
+    # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.
+
+    # shellcheck disable=SC2034
+    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "${p_string}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Words array to string.
+function BU.Main.Text.WordArrayToStr()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
+
+    #**** Parameters ****
+    # local p_array=${1:-$'\0'};
+
+    #**** Code ****
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Splitting a string from a given delimiter, in order to store it in an array.
+# function BU.Main.Text.SplitStringFromDelim()
+# {
+#     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+#     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+#         "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+#         "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT}";
+#
+#     #**** Parameters ****
+#     local p_string=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+#     local p_delim=${2:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
+#     local p_order=${3:-$'\0'};        # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Splitting order (L|l = left to right, R|r = right to left).
+#     local p_iterations=${4:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of delimiters to process.
+#     local p_ignore_delim=${5:-$'\0'}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of delimiters to ignore before splitting the string.
+#
+#     #**** Code ****
+#     if [ -z "${p_iterations}" ] || [ "${p_iterations}" -eq 0 ]; then
+#         p_iterations='1';
+#     fi
+#
+#     # If the string has to be processed from left to right.
+#     if [ "${p_order^^}" == 'L|l' ]; then
+#         for ((i=0; i<{p_iterations}; i++)); do
+#             if [ -z "${p_ignore_delim}" ] || [ "${p_ignore_delim}" -eq 0 ]; then
+#                 true
+#             else
+#                 for ((j=0; j<p_ignore_delim; i++)); do
+#                     true
+#                 done
+#             fi
+#         done
+#
+#     # Else, if the string has to be processed from right to left.
+#     elif [ "${p_order^^}" == 'R|r' ]; then
+#         for ((i=0; i<p_iterations; i++)); do
+#             if [ -z "${p_ignore_delim}" ] || [ "${p_ignore_delim}" -eq 0 ]; then
+#                 true
+#             else
+#                 for ((j=0; j<p_ignore_delim; i++)); do
+#                     true
+#                 done
+#             fi
+#         done
+#
+#     # Else, if no value is passed to the order processer.
+#     elif [ -z "${p_order}" ]; then
+#         false
+#
+#     # Else, if an unsupported value is passed to the order processer.
+#     else
+#         false
+#     fi
+#
+#     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+# }
 
 # -----------------------------------------------
 
@@ -22144,6 +22211,13 @@ alias BU.GetStringWordsNumber='BU.Main.Text.GetStringWordsNumber';
 
 # -----------------------------------------------
 
+## SUB-CATEGORY : "LISTING TEXT"
+
+alias BU.ListCharactersFromFile='BU.Main.Text.ListCharactersFromFile';
+alias BU.ListWordsFromFile='BU.Main.Text.ListWordsFromFile';
+
+# -----------------------------------------------
+
 ## SUB-CATEGORY : "PRINTING TEXT"
 
 alias BU.PrintCharXTimes='BU.Main.Text.PrintCharXTimes';
@@ -22231,6 +22305,7 @@ alias BU.ColItoa='BU.Main.TextFormat.Itoa';
 # Sub-category : ""
 
 # -----------------------------------------------
+#!/usr/bin/env bash
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
@@ -23197,6 +23272,203 @@ unset ____BU_MAIN_MOD_BG_COLOR_DEF_LINENO;
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
 # shellcheck disable=SC2034
 
+# This configuration file stores every color-related global variables.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+#### RAW CODES DATA
+
+## COLOR CODES
+
+# Writing the message for the variables which store a raw color code.
+
+# shellcheck disable=SC2059,SC2154
+function BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName()
+{
+    case "${2^^}" in
+        'A')        printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_A}" "${1}";;
+        'C' | *)    printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_C}" "${1}";;
+    esac
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### OTHER FUNCTIONS
+
+## ERROR FUNCTIONS
+
+# Writing the name of the variable that could not be initialized with it's command substitution.
+
+# shellcheck disable=SC2059,SC2154
+function BU.Main.ModConfig.Colors.PrintVariableNameFailedToInitialize() {
+    # ${1} -> Variable's name | ${2} -> "$(basename "${BASH_SOURCE[0]}")" | ${3} -> LINENO (line number)
+    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${3}" 'E_BUINIT__BU_MAIN_MODCONFIG__COLOR_VAR_NOT_INIT';
+
+    case "${4^^}" in
+        'A')        printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A}\n" "${2}" "${3}" "${1}";;
+        'C' | *)    printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_C}\n" "${2}" "${3}" "${1}";;
+
+    esac
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Feel free to define any other needed resources (functions, etc...) here.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+#### COLOR ENCODING
+
+## COLOR CODES FOR TEXT ENCODING (SYSTEM)
+
+declare -i __BU_MAIN_COLOR_CODE_BLACK='0';
+declare -i __BU_MAIN_COLOR_CODE_MAROON='1';
+declare -i __BU_MAIN_COLOR_CODE_GREEN='2';
+declare -i __BU_MAIN_COLOR_CODE_OLIVE='3';
+
+declare -i __BU_MAIN_COLOR_CODE_NAVY='4';
+declare -i __BU_MAIN_COLOR_CODE_PURPLE='5';
+declare -i __BU_MAIN_COLOR_CODE_TEAL='6';
+declare -i __BU_MAIN_COLOR_CODE_SILVER='7';
+
+declare -i __BU_MAIN_COLOR_CODE_GRAY="8";
+declare -i __BU_MAIN_COLOR_CODE_RED='9';
+declare -i __BU_MAIN_COLOR_CODE_LIME='10';
+declare -i __BU_MAIN_COLOR_CODE_YELLOW='11';
+
+declare -i __BU_MAIN_COLOR_CODE_BLUE='12';
+declare -i __BU_MAIN_COLOR_CODE_FUCHSIA='13';
+declare -i __BU_MAIN_COLOR_CODE_AQUA='14';
+declare -i __BU_MAIN_COLOR_CODE_WHITE='15';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_BLACK'       "${__BU_MAIN_COLOR_CODE_BLACK}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLACK}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_MAROON'      "${__BU_MAIN_COLOR_CODE_MAROON}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_MAROON}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_GREEN'       "${__BU_MAIN_COLOR_CODE_GREEN}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GREEN}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_OLIVE'       "${__BU_MAIN_COLOR_CODE_OLIVE}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_OLIVE}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_NAVY'        "${__BU_MAIN_COLOR_CODE_NAVY}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_NAVY}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PURPLE'      "${__BU_MAIN_COLOR_CODE_PURPLE}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PURPLE}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TEAL'        "${__BU_MAIN_COLOR_CODE_TEAL}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TEAL}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SILVER'      "${__BU_MAIN_COLOR_CODE_SILVER}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SILVER}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_GRAY'        "${__BU_MAIN_COLOR_CODE_GRAY}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GRAY}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_RED'         "${__BU_MAIN_COLOR_CODE_RED}"       'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_RED}" 'C')"       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_LIME'        "${__BU_MAIN_COLOR_CODE_LIME}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_LIME}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_YELLOW'      "${__BU_MAIN_COLOR_CODE_YELLOW}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_YELLOW}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_BLUE'        "${__BU_MAIN_COLOR_CODE_BLUE}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLUE}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_FUCHSIA'     "${__BU_MAIN_COLOR_CODE_FUCHSIA}"   'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_FUCHSIA}" 'C')"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_AQUA'        "${__BU_MAIN_COLOR_CODE_AQUA}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_AQUA}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_WHITE'       "${__BU_MAIN_COLOR_CODE_WHITE}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_WHITE}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
+
+# -----------------------------------------------
+
+## COLOR CODES FOR TEXT ENCODING (OTHERS)
+
+declare -i __BU_MAIN_COLOR_CODE_CYAN='51';
+declare -i __BU_MAIN_COLOR_CODE_ORANGE='166';
+declare -i __BU_MAIN_COLOR_CODE_PINK='200';
+declare -i __BU_MAIN_COLOR_CODE_SALMON='209';
+declare -i __BU_MAIN_COLOR_CODE_TAN='180';
+declare -i __BU_MAIN_COLOR_CODE_TURQUOISE='51';
+declare -i __BU_MAIN_COLOR_CODE_VIOLET='177';
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_CYAN'        "${__BU_MAIN_COLOR_CODE_CYAN}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_CYAN}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_ORANGE'      "${__BU_MAIN_COLOR_CODE_ORANGE}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_ORANGE}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PINK'        "${__BU_MAIN_COLOR_CODE_PINK}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PINK}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SALMON'      "${__BU_MAIN_COLOR_CODE_SALMON}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SALMON}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TAN'         "${__BU_MAIN_COLOR_CODE_TAN}"       'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TAN}" 'C')"       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TURQUOISE'   "${__BU_MAIN_COLOR_CODE_TURQUOISE}" 'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TURQUOISE}" 'C')" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_VIOLET'      "${__BU_MAIN_COLOR_CODE_VIOLET}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_VIOLET}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+
+# -----------------------------------------------
+
+## COLOR CODES FOR SPECIFIC TEXT DISPLAY, PRINTED AND REDIRECTED WITH THE "BU.Main.TextFormat.SetTextColor" FUNCTIONS, THEN ENCODED WITH THE "tput" COMMAND
+
+# Commands text display color           | Default color : gray
+__BU_MAIN_COLOR_CODE_CMD="${__BU_MAIN_COLOR_CODE_GRAY}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_CMD' "${__BU_MAIN_COLOR_CODE_CMD}"               'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_CMD}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Error text display color				| Default color : Red
+__BU_MAIN_COLOR_CODE_ERROR="${__BU_MAIN_COLOR_CODE_RED}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_ERROR' "${__BU_MAIN_COLOR_CODE_ERROR}"           'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_ERROR}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Function name display color           | Default color : Purple
+__BU_MAIN_COLOR_CODE_FUNCTION="${__BU_MAIN_COLOR_CODE_PURPLE}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_FUNCTION' "${__BU_MAIN_COLOR_CODE_FUNCTION}"     'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_FUNCTION}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Highlighted text display color		| Default color : Cyan
+__BU_MAIN_COLOR_CODE_HIGHLIGHT="${__BU_MAIN_COLOR_CODE_CYAN}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_HIGHLIGHT' "${__BU_MAIN_COLOR_CODE_HIGHLIGHT}"   'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_HIGHLIGHT}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Newstep text display color            | Default color : Orange
+__BU_MAIN_COLOR_CODE_NEWSTEP="${__BU_MAIN_COLOR_CODE_ORANGE}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_NEWSTEP' "${__BU_MAIN_COLOR_CODE_NEWSTEP}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_NEWSTEP}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Directories and files paths display color     | Default color : Lime
+__BU_MAIN_COLOR_CODE_PATH="${__BU_MAIN_COLOR_CODE_LIME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PATH' "${__BU_MAIN_COLOR_CODE_PATH}"             'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_PATH}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Reset color to terminal's default text color  | Always the "$(tput sgr0)" command.
+__BU_MAIN_COLOR_CODE_RESET="$(tput sgr0)"; printf "%s" "${__BU_MAIN_COLOR_CODE_RESET}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_RESET' "${__BU_MAIN_COLOR_CODE_RESET}"           'CMD' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_RESET}" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Success text display color			| Default color : Green
+__BU_MAIN_COLOR_CODE_SUCCESS="${__BU_MAIN_COLOR_CODE_GREEN}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SUCCESS' "${__BU_MAIN_COLOR_CODE_SUCCESS}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_SUCCESS}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Variable, parameter or argument name  | Default color : Orange
+__BU_MAIN_COLOR_CODE_VAR="${__BU_MAIN_COLOR_CODE_ORANGE}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_VAR' "${__BU_MAIN_COLOR_CODE_VAR}"               'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_VAR}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# Warning text display color			| Default color : Yellow
+__BU_MAIN_COLOR_CODE_WARNING="${__BU_MAIN_COLOR_CODE_YELLOW}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_WARNING' "${__BU_MAIN_COLOR_CODE_WARNING}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_WARNING}" 'A')" \
+	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+# -----------------------------------------------
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
 # This configuration file stores every text color-related global variables.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
@@ -24145,6 +24417,37 @@ unset ____BU_MAIN_MOD_TEXT_COLOR_DEF_LINENO;
 # -----------------------------------------------
 #!/usr/bin/env bash
 
+# Debug function that displays function and file name (not used in the script and deprecated).
+function debug()
+{
+	#**** Parameters ****
+	p_function=${1:-$'\0'};
+	p_file=${2:-$'\0'};
+	p_line=${3:-$'\0'};
+
+	#**** Code ****
+	if [ "${__BU_MODULE_INIT_STAT_DEBUG}" = 'true' ]; then
+		echo -ne "${__BU_MAIN_COLOR_TXT_PINK}";
+
+		for _ in $(eval echo -e "{1..${__BU_MAIN_TXT_COLS}}"); do
+			echo -ne "+";
+		done
+
+		echo -ne "${__BU_MAIN_COLOR_TXT_RESET}"; echo -e; echo -e;
+
+		echo -e "${__BU_MAIN_COLOR_TXT_YELLOW}FUNCTION ${__BU_MAIN_COLOR_TXT_PINK}${p_function}${__BU_MAIN_COLOR_TXT_YELLOW} IN ${__BU_MAIN_COLOR_TXT_PINK}${p_file}${__BU_MAIN_COLOR_TXT_YELLOW}, ON ${__BU_MAIN_COLOR_TXT_PINK}${p_line}${__BU_MAIN_COLOR_TXT_RESET}";
+
+		echo -ne "${__BU_MAIN_COLOR_TXT_PINK}";
+
+		for _ in $(eval echo -e "{1..${__BU_MAIN_TXT_COLS}}"); do
+                        echo -ne "+";
+		done
+
+		echo -ne "${__BU_MAIN_COLOR_TXT_RESET}"; echo -e; echo -e;
+	fi
+}
+#!/usr/bin/env bash
+
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
 # shellcheck disable=SC2034
 
@@ -24423,597 +24726,6 @@ else
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" \
         "${BASH_SOURCE[0]}" "${FUNCAME[0]}" "$(( LINENO - 2 ))";
 fi
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# This configuration file stores every project-related global variables.
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-################################## DEFINING RESOURCES - FUNCTIONS #################################
-
-#### PROJECT'S VARIABLES
-
-## PROJECT'S PATHS VARIABLES
-
-# shellcheck disable=SC2059,SC2154
-function BU.Main.ModConfig.Project.GetProjectFilePath()
-{
-    #**** Variables ****
-    local v_cut="${__BU_MAIN_PROJECT_FILE_NAME##*./}";  # VAR TYPE : String     - DESC :
-    local v_get_parent;                                 # VAR TYPE : Dirpath    - DESC :
-    local find_path;                                    # VAR TYPE : Path       - DESC :
-
-    declare -i v_return_code;                           # VAR TYPE : Int        - DESC :
-
-    #**** Code ****
-    v_get_parent="$(cd "$(printf "%s" "${__BU_MAIN_PROJECT_FILE_PARENT}")" || \
-        {
-            echo >&2; "$(printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__GetProjectFilePath__UNABLE_TO_GET_THE_PARENT_DIR}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))")" >&2; echo >&2; return 1;
-        }; pwd)";
-
-    find_path="$(BU.ModuleInit.FindPath "${v_get_parent}" "${v_cut}" 'f')"; v_return_code="${?}";
-
-    [[ "${v_return_code}" -ne 0 ]] && return 1;
-
-    echo "${find_path}";
-
-	return 0;
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Feel free to define any other needed resources (functions, etc...) here.
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING VARIABLES #######################################
-
-#### PROJECT'S VARIABLES
-
-## PROJECT'S PATHS VARIABLES
-
-# Script file's informations
-__BU_MAIN_PROJECT_FILE_NAME=$(basename "${0}");                 # Project file's name.
-__BU_MAIN_PROJECT_NAME=$(basename "${0}" | cut -f 1 -d '.');    # Name of the project (project file's name without its file extension).
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_NAME' "${__BU_MAIN_PROJECT_FILE_NAME}"   'String' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_NAME__VAR}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_NAME' "${__BU_MAIN_PROJECT_NAME}"             'String' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_NAME__VAR}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
-
-# Project's temporary directory.
-__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="BASH UTILS PROJECTS";
-__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="${__BU_MODULE_INIT__TMP_DIR_PATH}/${__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME' "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}" 'Dir'	    "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" 'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
-
-if [ ! -d "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" ]; then
-    mkdir -p "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" || { echo >&2; echo "UNABLE TO CREATE THE PROJECT'S TEMPORARY FOLDER'S PARENT DIRECTORY « ${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH} » !" >&2; echo >&2; exit 1; };
-fi
-
-# Checking first if the effective user identifiant (EUID) is equal to super-user's EUID or not.
-# The folders names have to be different according to the EUID, as files and folders created by the root user belong to this user,
-# which means that a regular user won't have any write permission on these files, so nothing can be written on a log file, for example.
-
-# To remove these folders, please run the "rm -rf ${folder}" command with sudo if you're not logged as super-user.
-if [ "${EUID}" -eq 0 ]; then
-    # Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME} - ROOT"
-    __BU_MAIN_PROJECT_TMP_DIR_PATH="${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME} - ROOT";
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" 'Dirpath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-else
-    # Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME}"
-    __BU_MAIN_PROJECT_TMP_DIR_PATH="${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME}";
-
-    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" 'Dirpath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__ROOT_VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-fi
-
-# Project's file path.
-__BU_MAIN_PROJECT_FILE_PATH="$(BU.Main.ModConfig.Project.GetProjectFilePath "${__BU_MAIN_PROJECT_FILE_NAME}")" || {
-    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(LINENO - 1)" 'E_BUINIT__BU_MAIN_MODCONFIG__CANNOT_GET_PROJECT_PARENT_DIR';
-
-    BU.ModuleInit.MsgAbort;
-
-    BU.ModuleInit.AskPrintLog >&2 || {
-        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-    };
-
-    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-};
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_PATH' "${__BU_MAIN_PROJECT_FILE_PATH}" 'Filepath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_PATH__VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-echo "${__BU_MAIN_PROJECT_FILE_PATH}";
-
-
-# -------
-
-# Defining the informations of the aliases file of the project.
-# __BU_MAIN_PROJECT_ALIAS_FILE_PARENT   --> Default value : "${__BU_MODULE_INIT__ROOT}" (~/.Bash-utils)
-# __BU_MAIN_PROJECT_ALIAS_FILE_NAME     --> Default value : "Aliases.sh"
-# __BU_MAIN_PROJECT_ALIAS_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}/${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"
-
-__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="${__BU_MODULE_INIT__ROOT}";
-__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Aliases.sh";
-__BU_MAIN_PROJECT_ALIAS_FILE_PATH="${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}/${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_PARENT'      "${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_NAME'        "${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"      'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_PATH'        "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-# -------
-
-# Defining the informations of the storage file containing the background color code.
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME     --> Default value : "fgcolor.tmp"
-# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"
-
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="bgcolor.tmp";
-__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT'  "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME'    "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"      'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH'    "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-
-# -------
-
-# Defining the informations of the storage file containing the terminal background color code's raw data (generated by the color processing function which execute a command substitution to get the terminal background's color code).
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
-# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}/{__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"
-
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="bgcolor.raw";
-__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT'  "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME'    "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"      'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH'    "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-
-# -------
-
-# Defining the project's text color code storage file's informations.
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME   --> Default value : "fgcolor.tmp"
-# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"
-
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="fgcolor.tmp";
-__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT'    "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME'      "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH'      "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-
-# -------
-
-# Defining the informations of the storage file containing the terminal text color code's raw data (generated by the color processing functions which execute a command substitution to get the terminal's text color code).
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
-# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}/{__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"
-
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="fgcolor.raw";
-__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT'    "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}"  'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME'      "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"    'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH'      "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-
-# -------
-
-# Defining the project's "BU.Echo<...>()" functions debug output (to have a better view during a "bash - x" debug).
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_LOG_DIR_PATH}",    or "${__BU_MODULE_INIT__TMP_DIR_PATH}" if the project's temporary directory was not found.
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME   --> Default value : "echo_output.log",                      or "echo_output_${__BU_MAIN_PROJECT_NAME}.log", according to the last variable's path value.
-# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}/${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"
-
-if [ -d "${__BU_MAIN_PROJECT_LOG_DIR_PATH}" ]; then __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="${__BU_MAIN_PROJECT_LOG_DIR_PATH}";  else __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="${__BU_MODULE_INIT__TMP_DIR_PATH}"; fi
-if [ -d "${__BU_MAIN_PROJECT_LOG_DIR_PATH}" ]; then __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output.log";                      else __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output_${__BU_MAIN_PROJECT_NAME}.log"; fi
-__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}/${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT'    "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME'      "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH'      "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-# -------
-
-# Defining the project's log file's parent directory path.
-# __BU_MAIN_PROJECT_LOG_DIR_PARENT  --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
-# __BU_MAIN_PROJECT_LOG_DIR_NAME    --> Default value : "logs"
-# __BU_MAIN_PROJECT_LOG_DIR_PATH    --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}/${__BU_MAIN_PROJECT_LOG_DIR_NAME}"
-
-__BU_MAIN_PROJECT_LOG_DIR_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
-__BU_MAIN_PROJECT_LOG_DIR_NAME="logs";
-__BU_MAIN_PROJECT_LOG_DIR_PATH="${__BU_MAIN_PROJECT_LOG_DIR_PARENT}/${__BU_MAIN_PROJECT_LOG_DIR_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PARENT' "${__BU_MAIN_PROJECT_LOG_DIR_PARENT}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT}"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_NAME'   "${__BU_MAIN_PROJECT_LOG_DIR_NAME}"     'Dir'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME}"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PATH'   "${__BU_MAIN_PROJECT_LOG_DIR_PATH}"     'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH}"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-# -------
-
-# Defining the project's log file's path.
-# __BU_MAIN_PROJECT_LOG_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_LOG_DIR_PATH}"
-# __BU_MAIN_PROJECT_LOG_FILE_NAME   --> Default value : "${__BU_MAIN_PROJECT_NAME}.log"
-# __BU_MAIN_PROJECT_LOG_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}/${__BU_MAIN_PROJECT_LOG_FILE_NAME}"
-
-__BU_MAIN_PROJECT_LOG_FILE_PARENT="${__BU_MAIN_PROJECT_LOG_DIR_PATH}";
-__BU_MAIN_PROJECT_LOG_FILE_NAME="${__BU_MAIN_PROJECT_NAME}.log";
-__BU_MAIN_PROJECT_LOG_FILE_PATH="${__BU_MAIN_PROJECT_LOG_FILE_PARENT}/${__BU_MAIN_PROJECT_LOG_FILE_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PARENT'    "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_NAME'      "${__BU_MAIN_PROJECT_LOG_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PATH'      "${__BU_MAIN_PROJECT_LOG_FILE_PATH}"    'FilePath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-# -------
-
-# Defining the project's translations script's informations.
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT   --> Default value : "${__BU_MAIN_MODULE_LIB_LANG_DIR_PATH}"
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME     --> Default value : "SetModuleLang.pl"
-# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH     --> Default value : "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}/${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"
-
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="${__BU_MAIN_MODULE_LIB_LANG_DIR_PATH}";
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="SetModuleLang.pl";
-__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}/${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT'  "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME'    "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"	    'File'	    "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH'    "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}"	    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
-
-# -----------------------------------------------
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# These status variable can be changed anywhere in the main script, except for the following variables :
-#   - __BU_MAIN_STATUS_INITIALIZING     -> This variable is used as (...).
-
-# Their values are checked in the "Status.lib" file, located in the "Bash-utils/lib/functions/main" directory, with the "CheckSTAT_" functions (CV = Correct Value).
-
-
-# "BU.Main.Checkings.CheckProjectLogPath()" and other low level's functions authorization to call a "Decho<...>()" function in case of need.
-
-# This variable only accepts "authorize", "forbid" or "restrict" as values.
-# Default value : "forbid" (to avoid bugs during the program's initialization)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_DECHO="forbid";
-
-
-# "BU.Main.Checkings.CheckProjectLogPath()" function's authorization to call an "BU.Echo<...>()" function in case of need.
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true" (to avoid bugs and infinite loops during the initialization processus)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_ECHO="true";
-
-
-# Project's error handling
-
-# This variable only accepts "fatal" or nothing as value.
-# Default value : "fatal" (to avoid leaving bugs during the program's initialization)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_ERROR="fatal";
-
-
-# Project's initialization status checker.
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true" (DON'T change thsi value here, since the project MUST be initialized first).
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_INITIALIZING="true";
-
-
-# Project's main log file informations
-
-# This variable only accepts "true" or "false" as values.
-# Default value : "true"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_LOG="true";
-
-
-# Project's main log file redirections status.
-
-# This variable only accepts "log", "tee" or nothing as value.
-# Default value : "" (no value)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_LOG_REDIRECT="";
-
-
-# Project's authorization to operate at the root directory or one of its sub-folders.
-
-# This variable only accepts "authorized", "forbidden" or "restricted" as values.
-# Default value : "forbidden" (by security, and since there's no need to change its value during the initialization, you have to change this value manually or in your code with the "BU.Main.Status.ChangeSTAT_OPERATE_ROOT()" function).
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_OPERATE_ROOT="forbidden";
-
-
-# Project's headers messages display pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value : ".6"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TIME_HEADER="1";
-
-
-# Project's newlines pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value ".2"
-
-__BU_MAIN_STAT_TIME_NEWLINE=".2";
-
-
-# Project's text messages display pause time.
-
-# This variable only accepts any integer of floating number.
-# Default value : ".4"
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TIME_TXT=".4";
-
-
-# Project's text formatting handling (the "BU.Main.Decho.Decho<...>()" functions can format the text or not).
-
-# This variable only accepts "true" or "false" as value.
-# Default value : "true" (formatting accepted)
-
-# shellcheck disable=SC2034
-__BU_MAIN_STAT_TXT_FMT="true";
-#!/usr/bin/env bash
-#!/usr/bin/env bash
-
-# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
-# shellcheck disable=SC2034
-
-# This configuration file stores every color-related global variables.
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-################################## DEFINING RESOURCES - FUNCTIONS #################################
-
-#### RAW CODES DATA
-
-## COLOR CODES
-
-# Writing the message for the variables which store a raw color code.
-
-# shellcheck disable=SC2059,SC2154
-function BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName()
-{
-    case "${2^^}" in
-        'A')        printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_A}" "${1}";;
-        'C' | *)    printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintRawColorCodeVarsName_FNCT_C}" "${1}";;
-    esac
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### OTHER FUNCTIONS
-
-## ERROR FUNCTIONS
-
-# Writing the name of the variable that could not be initialized with it's command substitution.
-
-# shellcheck disable=SC2059,SC2154
-function BU.Main.ModConfig.Colors.PrintVariableNameFailedToInitialize() {
-    # ${1} -> Variable's name | ${2} -> "$(basename "${BASH_SOURCE[0]}")" | ${3} -> LINENO (line number)
-    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${3}" 'E_BUINIT__BU_MAIN_MODCONFIG__COLOR_VAR_NOT_INIT';
-
-    case "${4^^}" in
-        'A')        printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_A}\n" "${2}" "${3}" "${1}";;
-        'C' | *)    printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__PrintVariableNameFailedToInitialize_FNCT_C}\n" "${2}" "${3}" "${1}";;
-
-    esac
-}
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Feel free to define any other needed resources (functions, etc...) here.
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-######################################## DEFINING VARIABLES #######################################
-
-#### COLOR ENCODING
-
-## COLOR CODES FOR TEXT ENCODING (SYSTEM)
-
-declare -i __BU_MAIN_COLOR_CODE_BLACK='0';
-declare -i __BU_MAIN_COLOR_CODE_MAROON='1';
-declare -i __BU_MAIN_COLOR_CODE_GREEN='2';
-declare -i __BU_MAIN_COLOR_CODE_OLIVE='3';
-
-declare -i __BU_MAIN_COLOR_CODE_NAVY='4';
-declare -i __BU_MAIN_COLOR_CODE_PURPLE='5';
-declare -i __BU_MAIN_COLOR_CODE_TEAL='6';
-declare -i __BU_MAIN_COLOR_CODE_SILVER='7';
-
-declare -i __BU_MAIN_COLOR_CODE_GRAY="8";
-declare -i __BU_MAIN_COLOR_CODE_RED='9';
-declare -i __BU_MAIN_COLOR_CODE_LIME='10';
-declare -i __BU_MAIN_COLOR_CODE_YELLOW='11';
-
-declare -i __BU_MAIN_COLOR_CODE_BLUE='12';
-declare -i __BU_MAIN_COLOR_CODE_FUCHSIA='13';
-declare -i __BU_MAIN_COLOR_CODE_AQUA='14';
-declare -i __BU_MAIN_COLOR_CODE_WHITE='15';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_BLACK'       "${__BU_MAIN_COLOR_CODE_BLACK}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLACK}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_MAROON'      "${__BU_MAIN_COLOR_CODE_MAROON}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_MAROON}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_GREEN'       "${__BU_MAIN_COLOR_CODE_GREEN}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GREEN}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_OLIVE'       "${__BU_MAIN_COLOR_CODE_OLIVE}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_OLIVE}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_NAVY'        "${__BU_MAIN_COLOR_CODE_NAVY}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_NAVY}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PURPLE'      "${__BU_MAIN_COLOR_CODE_PURPLE}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PURPLE}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TEAL'        "${__BU_MAIN_COLOR_CODE_TEAL}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TEAL}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SILVER'      "${__BU_MAIN_COLOR_CODE_SILVER}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SILVER}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_GRAY'        "${__BU_MAIN_COLOR_CODE_GRAY}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_GRAY}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_RED'         "${__BU_MAIN_COLOR_CODE_RED}"       'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_RED}" 'C')"       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_LIME'        "${__BU_MAIN_COLOR_CODE_LIME}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_LIME}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_YELLOW'      "${__BU_MAIN_COLOR_CODE_YELLOW}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_YELLOW}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_BLUE'        "${__BU_MAIN_COLOR_CODE_BLUE}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_BLUE}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_FUCHSIA'     "${__BU_MAIN_COLOR_CODE_FUCHSIA}"   'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_FUCHSIA}" 'C')"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_AQUA'        "${__BU_MAIN_COLOR_CODE_AQUA}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_AQUA}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_WHITE'       "${__BU_MAIN_COLOR_CODE_WHITE}"     'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_WHITE}" 'C')"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 20 ))";
-
-# -----------------------------------------------
-
-## COLOR CODES FOR TEXT ENCODING (OTHERS)
-
-declare -i __BU_MAIN_COLOR_CODE_CYAN='51';
-declare -i __BU_MAIN_COLOR_CODE_ORANGE='166';
-declare -i __BU_MAIN_COLOR_CODE_PINK='200';
-declare -i __BU_MAIN_COLOR_CODE_SALMON='209';
-declare -i __BU_MAIN_COLOR_CODE_TAN='180';
-declare -i __BU_MAIN_COLOR_CODE_TURQUOISE='51';
-declare -i __BU_MAIN_COLOR_CODE_VIOLET='177';
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_CYAN'        "${__BU_MAIN_COLOR_CODE_CYAN}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_CYAN}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_ORANGE'      "${__BU_MAIN_COLOR_CODE_ORANGE}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_ORANGE}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PINK'        "${__BU_MAIN_COLOR_CODE_PINK}"      'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_PINK}" 'C')"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SALMON'      "${__BU_MAIN_COLOR_CODE_SALMON}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_SALMON}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TAN'         "${__BU_MAIN_COLOR_CODE_TAN}"       'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TAN}" 'C')"       "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_TURQUOISE'   "${__BU_MAIN_COLOR_CODE_TURQUOISE}" 'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_TURQUOISE}" 'C')" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_VIOLET'      "${__BU_MAIN_COLOR_CODE_VIOLET}"    'Int'   "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__COL_VIOLET}" 'C')"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
-
-# -----------------------------------------------
-
-## COLOR CODES FOR SPECIFIC TEXT DISPLAY, PRINTED AND REDIRECTED WITH THE "BU.Main.TextFormat.SetTextColor" FUNCTIONS, THEN ENCODED WITH THE "tput" COMMAND
-
-# Commands text display color           | Default color : gray
-__BU_MAIN_COLOR_CODE_CMD="${__BU_MAIN_COLOR_CODE_GRAY}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_CMD' "${__BU_MAIN_COLOR_CODE_CMD}"               'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_CMD}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Error text display color				| Default color : Red
-__BU_MAIN_COLOR_CODE_ERROR="${__BU_MAIN_COLOR_CODE_RED}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_ERROR' "${__BU_MAIN_COLOR_CODE_ERROR}"           'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_ERROR}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Function name display color           | Default color : Purple
-__BU_MAIN_COLOR_CODE_FUNCTION="${__BU_MAIN_COLOR_CODE_PURPLE}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_FUNCTION' "${__BU_MAIN_COLOR_CODE_FUNCTION}"     'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_FUNCTION}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Highlighted text display color		| Default color : Cyan
-__BU_MAIN_COLOR_CODE_HIGHLIGHT="${__BU_MAIN_COLOR_CODE_CYAN}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_HIGHLIGHT' "${__BU_MAIN_COLOR_CODE_HIGHLIGHT}"   'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_HIGHLIGHT}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Newstep text display color            | Default color : Orange
-__BU_MAIN_COLOR_CODE_NEWSTEP="${__BU_MAIN_COLOR_CODE_ORANGE}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_NEWSTEP' "${__BU_MAIN_COLOR_CODE_NEWSTEP}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_NEWSTEP}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Directories and files paths display color     | Default color : Lime
-__BU_MAIN_COLOR_CODE_PATH="${__BU_MAIN_COLOR_CODE_LIME}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_PATH' "${__BU_MAIN_COLOR_CODE_PATH}"             'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_PATH}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Reset color to terminal's default text color  | Always the "$(tput sgr0)" command.
-__BU_MAIN_COLOR_CODE_RESET="$(tput sgr0)"; printf "%s" "${__BU_MAIN_COLOR_CODE_RESET}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_RESET' "${__BU_MAIN_COLOR_CODE_RESET}"           'CMD' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_RESET}" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Success text display color			| Default color : Green
-__BU_MAIN_COLOR_CODE_SUCCESS="${__BU_MAIN_COLOR_CODE_GREEN}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_SUCCESS' "${__BU_MAIN_COLOR_CODE_SUCCESS}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_SUCCESS}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Variable, parameter or argument name  | Default color : Orange
-__BU_MAIN_COLOR_CODE_VAR="${__BU_MAIN_COLOR_CODE_ORANGE}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_VAR' "${__BU_MAIN_COLOR_CODE_VAR}"               'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_VAR}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# Warning text display color			| Default color : Yellow
-__BU_MAIN_COLOR_CODE_WARNING="${__BU_MAIN_COLOR_CODE_YELLOW}";
-
-BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_COLOR_CODE_WARNING' "${__BU_MAIN_COLOR_CODE_WARNING}"       'Int' "$(BU.Main.ModConfig.Colors.PrintRawColorCodeVarsName "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS__ACT_WARNING}" 'A')" \
-	"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}"            "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-# -----------------------------------------------
-#!/usr/bin/env bash
-
-# Debug function that displays function and file name (not used in the script and deprecated).
-function debug()
-{
-	#**** Parameters ****
-	p_function=${1:-$'\0'};
-	p_file=${2:-$'\0'};
-	p_line=${3:-$'\0'};
-
-	#**** Code ****
-	if [ "${__BU_MODULE_INIT_STAT_DEBUG}" = 'true' ]; then
-		echo -ne "${__BU_MAIN_COLOR_TXT_PINK}";
-
-		for _ in $(eval echo -e "{1..${__BU_MAIN_TXT_COLS}}"); do
-			echo -ne "+";
-		done
-
-		echo -ne "${__BU_MAIN_COLOR_TXT_RESET}"; echo -e; echo -e;
-
-		echo -e "${__BU_MAIN_COLOR_TXT_YELLOW}FUNCTION ${__BU_MAIN_COLOR_TXT_PINK}${p_function}${__BU_MAIN_COLOR_TXT_YELLOW} IN ${__BU_MAIN_COLOR_TXT_PINK}${p_file}${__BU_MAIN_COLOR_TXT_YELLOW}, ON ${__BU_MAIN_COLOR_TXT_PINK}${p_line}${__BU_MAIN_COLOR_TXT_RESET}";
-
-		echo -ne "${__BU_MAIN_COLOR_TXT_PINK}";
-
-		for _ in $(eval echo -e "{1..${__BU_MAIN_TXT_COLS}}"); do
-                        echo -ne "+";
-		done
-
-		echo -ne "${__BU_MAIN_COLOR_TXT_RESET}"; echo -e; echo -e;
-	fi
-}
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
@@ -26069,6 +25781,368 @@ __BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY+=("${__BU_MAIN_MODULE_CONF_FILE_EX
     "${__BU_MAIN_MODULE_CONF_FILE_TIME_PATH}");
 
 # -----------------------------------------------
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# This configuration file stores every project-related global variables.
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################## DEFINING RESOURCES - FUNCTIONS #################################
+
+#### PROJECT'S VARIABLES
+
+## PROJECT'S PATHS VARIABLES
+
+# shellcheck disable=SC2059,SC2154
+function BU.Main.ModConfig.Project.GetProjectFilePath()
+{
+    #**** Variables ****
+    local v_cut="${__BU_MAIN_PROJECT_FILE_NAME##*./}";  # VAR TYPE : String     - DESC :
+    local v_get_parent;                                 # VAR TYPE : Dirpath    - DESC :
+    local find_path;                                    # VAR TYPE : Path       - DESC :
+
+    declare -i v_return_code;                           # VAR TYPE : Int        - DESC :
+
+    #**** Code ****
+    v_get_parent="$(cd "$(printf "%s" "${__BU_MAIN_PROJECT_FILE_PARENT}")" || \
+        {
+            echo >&2; "$(printf "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__GetProjectFilePath__UNABLE_TO_GET_THE_PARENT_DIR}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))")" >&2; echo >&2; return 1;
+        }; pwd)";
+
+    find_path="$(BU.ModuleInit.FindPath "${v_get_parent}" "${v_cut}" 'f')"; v_return_code="${?}";
+
+    [[ "${v_return_code}" -ne 0 ]] && return 1;
+
+    echo "${find_path}";
+
+	return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Feel free to define any other needed resources (functions, etc...) here.
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################################## DEFINING VARIABLES #######################################
+
+#### PROJECT'S VARIABLES
+
+## PROJECT'S PATHS VARIABLES
+
+# Script file's informations
+__BU_MAIN_PROJECT_FILE_NAME=$(basename "${0}");                 # Project file's name.
+__BU_MAIN_PROJECT_NAME=$(basename "${0}" | cut -f 1 -d '.');    # Name of the project (project file's name without its file extension).
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_NAME' "${__BU_MAIN_PROJECT_FILE_NAME}"   'String' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_NAME__VAR}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_NAME' "${__BU_MAIN_PROJECT_NAME}"             'String' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_NAME__VAR}"         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
+
+# Project's temporary directory.
+__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="BASH UTILS PROJECTS";
+__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="${__BU_MODULE_INIT__TMP_DIR_PATH}/${__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME' "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}" 'Dir'	    "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" 'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 3 ))";
+
+if [ ! -d "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" ]; then
+    mkdir -p "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}" || { echo >&2; echo "UNABLE TO CREATE THE PROJECT'S TEMPORARY FOLDER'S PARENT DIRECTORY « ${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH} » !" >&2; echo >&2; exit 1; };
+fi
+
+# Checking first if the effective user identifiant (EUID) is equal to super-user's EUID or not.
+# The folders names have to be different according to the EUID, as files and folders created by the root user belong to this user,
+# which means that a regular user won't have any write permission on these files, so nothing can be written on a log file, for example.
+
+# To remove these folders, please run the "rm -rf ${folder}" command with sudo if you're not logged as super-user.
+if [ "${EUID}" -eq 0 ]; then
+    # Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME} - ROOT"
+    __BU_MAIN_PROJECT_TMP_DIR_PATH="${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME} - ROOT";
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" 'Dirpath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+else
+    # Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME}"
+    __BU_MAIN_PROJECT_TMP_DIR_PATH="${__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH}/${__BU_MAIN_PROJECT_NAME}";
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_TMP_DIR_PATH' "${__BU_MAIN_PROJECT_TMP_DIR_PATH}" 'Dirpath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__ROOT_VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+fi
+
+# Project's file path.
+__BU_MAIN_PROJECT_FILE_PATH="$(BU.Main.ModConfig.Project.GetProjectFilePath "${__BU_MAIN_PROJECT_FILE_NAME}")" || {
+    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(LINENO - 1)" 'E_BUINIT__BU_MAIN_MODCONFIG__CANNOT_GET_PROJECT_PARENT_DIR';
+
+    BU.ModuleInit.MsgAbort;
+
+    BU.ModuleInit.AskPrintLog >&2 || {
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+    };
+
+    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+};
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_FILE_PATH' "${__BU_MAIN_PROJECT_FILE_PATH}" 'Filepath' "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_PATH__VAR}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+echo "${__BU_MAIN_PROJECT_FILE_PATH}";
+
+
+# -------
+
+# Defining the informations of the aliases file of the project.
+# __BU_MAIN_PROJECT_ALIAS_FILE_PARENT   --> Default value : "${__BU_MODULE_INIT__ROOT}" (~/.Bash-utils)
+# __BU_MAIN_PROJECT_ALIAS_FILE_NAME     --> Default value : "Aliases.sh"
+# __BU_MAIN_PROJECT_ALIAS_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}/${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"
+
+__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="${__BU_MODULE_INIT__ROOT}";
+__BU_MAIN_PROJECT_ALIAS_FILE_NAME="Aliases.sh";
+__BU_MAIN_PROJECT_ALIAS_FILE_PATH="${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}/${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_PARENT'      "${__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_NAME'        "${__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"      'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ALIAS_FILE_PATH'        "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+# -------
+
+# Defining the informations of the storage file containing the background color code.
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME     --> Default value : "fgcolor.tmp"
+# __BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"
+
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="bgcolor.tmp";
+__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT'  "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME'    "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"      'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH'    "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+
+# -------
+
+# Defining the informations of the storage file containing the terminal background color code's raw data (generated by the color processing function which execute a command substitution to get the terminal background's color code).
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
+# __BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}/{__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"
+
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="bgcolor.raw";
+__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT'  "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME'    "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"      'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH'    "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}"      'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+
+# -------
+
+# Defining the project's text color code storage file's informations.
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME   --> Default value : "fgcolor.tmp"
+# __BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"
+
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="fgcolor.tmp";
+__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT'    "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME'      "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH'      "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+
+# -------
+
+# Defining the informations of the storage file containing the terminal text color code's raw data (generated by the color processing functions which execute a command substitution to get the terminal's text color code).
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT   --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME     --> Default value : "bgcolor.raw"
+# __BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH     --> Default value : "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}/{__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"
+
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="fgcolor.raw";
+__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}/${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT'    "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}"  'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME'      "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"    'File'      "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH'      "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+
+# -------
+
+# Defining the project's "BU.Echo<...>()" functions debug output (to have a better view during a "bash - x" debug).
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_LOG_DIR_PATH}",    or "${__BU_MODULE_INIT__TMP_DIR_PATH}" if the project's temporary directory was not found.
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME   --> Default value : "echo_output.log",                      or "echo_output_${__BU_MAIN_PROJECT_NAME}.log", according to the last variable's path value.
+# __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}/${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"
+
+if [ -d "${__BU_MAIN_PROJECT_LOG_DIR_PATH}" ]; then __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="${__BU_MAIN_PROJECT_LOG_DIR_PATH}";  else __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="${__BU_MODULE_INIT__TMP_DIR_PATH}"; fi
+if [ -d "${__BU_MAIN_PROJECT_LOG_DIR_PATH}" ]; then __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output.log";                      else __BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="echo_output_${__BU_MAIN_PROJECT_NAME}.log"; fi
+__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}/${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT'    "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME'      "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH'      "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}"    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+# -------
+
+# Defining the project's log file's parent directory path.
+# __BU_MAIN_PROJECT_LOG_DIR_PARENT  --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}"
+# __BU_MAIN_PROJECT_LOG_DIR_NAME    --> Default value : "logs"
+# __BU_MAIN_PROJECT_LOG_DIR_PATH    --> Default value : "${__BU_MAIN_PROJECT_TMP_DIR_PATH}/${__BU_MAIN_PROJECT_LOG_DIR_NAME}"
+
+__BU_MAIN_PROJECT_LOG_DIR_PARENT="${__BU_MAIN_PROJECT_TMP_DIR_PATH}";
+__BU_MAIN_PROJECT_LOG_DIR_NAME="logs";
+__BU_MAIN_PROJECT_LOG_DIR_PATH="${__BU_MAIN_PROJECT_LOG_DIR_PARENT}/${__BU_MAIN_PROJECT_LOG_DIR_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PARENT' "${__BU_MAIN_PROJECT_LOG_DIR_PARENT}"   'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT}"   "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_NAME'   "${__BU_MAIN_PROJECT_LOG_DIR_NAME}"     'Dir'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME}"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_DIR_PATH'   "${__BU_MAIN_PROJECT_LOG_DIR_PATH}"     'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH}"     "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+# -------
+
+# Defining the project's log file's path.
+# __BU_MAIN_PROJECT_LOG_FILE_PARENT --> Default value : "${__BU_MAIN_PROJECT_LOG_DIR_PATH}"
+# __BU_MAIN_PROJECT_LOG_FILE_NAME   --> Default value : "${__BU_MAIN_PROJECT_NAME}.log"
+# __BU_MAIN_PROJECT_LOG_FILE_PATH   --> Default value : "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}/${__BU_MAIN_PROJECT_LOG_FILE_NAME}"
+
+__BU_MAIN_PROJECT_LOG_FILE_PARENT="${__BU_MAIN_PROJECT_LOG_DIR_PATH}";
+__BU_MAIN_PROJECT_LOG_FILE_NAME="${__BU_MAIN_PROJECT_NAME}.log";
+__BU_MAIN_PROJECT_LOG_FILE_PATH="${__BU_MAIN_PROJECT_LOG_FILE_PARENT}/${__BU_MAIN_PROJECT_LOG_FILE_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PARENT'    "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"  'Dirpath'	"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT}"  "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_NAME'      "${__BU_MAIN_PROJECT_LOG_FILE_NAME}"    'File'		"${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LOG_FILE_PATH'      "${__BU_MAIN_PROJECT_LOG_FILE_PATH}"    'FilePath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+# -------
+
+# Defining the project's translations script's informations.
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT   --> Default value : "${__BU_MAIN_MODULE_LIB_LANG_DIR_PATH}"
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME     --> Default value : "SetModuleLang.pl"
+# __BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH     --> Default value : "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}/${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"
+
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="${__BU_MAIN_MODULE_LIB_LANG_DIR_PATH}";
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="SetModuleLang.pl";
+__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}/${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}";
+
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT'  "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}"    'Dirpath'   "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT}"    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME'    "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"	    'File'	    "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH'    "${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}"	    'Filepath'  "${__BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 4 ))";
+
+# -----------------------------------------------
+#!/usr/bin/env bash
+
+# Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
+# shellcheck disable=SC2034
+
+# These status variable can be changed anywhere in the main script, except for the following variables :
+#   - __BU_MAIN_STATUS_INITIALIZING     -> This variable is used as (...).
+
+# Their values are checked in the "Status.lib" file, located in the "Bash-utils/lib/functions/main" directory, with the "CheckSTAT_" functions (CV = Correct Value).
+
+
+# "BU.Main.Checkings.CheckProjectLogPath()" and other low level's functions authorization to call a "Decho<...>()" function in case of need.
+
+# This variable only accepts "authorize", "forbid" or "restrict" as values.
+# Default value : "forbid" (to avoid bugs during the program's initialization)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_DECHO="forbid";
+
+
+# "BU.Main.Checkings.CheckProjectLogPath()" function's authorization to call an "BU.Echo<...>()" function in case of need.
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true" (to avoid bugs and infinite loops during the initialization processus)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_ECHO="true";
+
+
+# Project's error handling
+
+# This variable only accepts "fatal" or nothing as value.
+# Default value : "fatal" (to avoid leaving bugs during the program's initialization)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_ERROR="fatal";
+
+
+# Project's initialization status checker.
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true" (DON'T change thsi value here, since the project MUST be initialized first).
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_INITIALIZING="true";
+
+
+# Project's main log file informations
+
+# This variable only accepts "true" or "false" as values.
+# Default value : "true"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_LOG="true";
+
+
+# Project's main log file redirections status.
+
+# This variable only accepts "log", "tee" or nothing as value.
+# Default value : "" (no value)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_LOG_REDIRECT="";
+
+
+# Project's authorization to operate at the root directory or one of its sub-folders.
+
+# This variable only accepts "authorized", "forbidden" or "restricted" as values.
+# Default value : "forbidden" (by security, and since there's no need to change its value during the initialization, you have to change this value manually or in your code with the "BU.Main.Status.ChangeSTAT_OPERATE_ROOT()" function).
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_OPERATE_ROOT="forbidden";
+
+
+# Project's headers messages display pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value : ".6"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TIME_HEADER="1";
+
+
+# Project's newlines pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value ".2"
+
+__BU_MAIN_STAT_TIME_NEWLINE=".2";
+
+
+# Project's text messages display pause time.
+
+# This variable only accepts any integer of floating number.
+# Default value : ".4"
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TIME_TXT=".4";
+
+
+# Project's text formatting handling (the "BU.Main.Decho.Decho<...>()" functions can format the text or not).
+
+# This variable only accepts "true" or "false" as value.
+# Default value : "true" (formatting accepted)
+
+# shellcheck disable=SC2034
+__BU_MAIN_STAT_TXT_FMT="true";
 #!/usr/bin/env bash
 
 # Disabling the SC2034 warning from Shellcheck (SC2034: <Variable name> appears unused. Verify use (or export if used externally)), because of the huge number of global variables declared in the configuration files, but only used in the library files.
