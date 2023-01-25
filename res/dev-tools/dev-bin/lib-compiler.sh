@@ -783,25 +783,30 @@ function CheckLangArgDelim()
 
 # Parsing the array of optional arguments given by the user.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
-    # If the user decides to display the content of each compiled file.
-    if [ "${arg}" == display ]; then
-        __vArrayVal_display='display';
-
-    # Else, if the user decided to create a stable version of the wrapped framework.
-    elif [[ "${arg}" == ?(compile?(-))stable ]]; then
+    # If the user decided to create a stable version of the wrapped framework.
+    if [[ "${arg,,}" == ?(compile?(-))stable ]]; then
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
         __vArrayVal_compile_stable='compile-stable';
+
+    # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
+    elif [[ "${arg,,}" == ?(compile?(-))unstable ]]; then
+        # As the unstable version is the one compiled by default AND before the creation of a stable one, nothing has to be done.
+        true;
+
+    # Else, if the user decides to display the content of each compiled file.
+    elif [ "${arg,,}" == display ]; then
+        __vArrayVal_display='display';
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
 
     # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-    elif [[ "${arg}" == no?(?(-)shell)?(-)check ]]; then
+    elif [[ "${arg,,}" == no?(?(-)shell)?(-)check ]]; then
         __vArrayVal_no_shellcheck='no-shellcheck';
 
-    # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
-    elif [[ "${arg}" == ?(compile?(-))unstable ]]; then
-        # As the unstable version is the one compiled by default AND bedore the creation of a stable one, nothing has to be done.
-        true;
+    # Else, if the user decides to remove the comments from the compiled file
+    # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
+    elif [[ "${arg,,}" == remove?(-)comment?(s) ]]; then
+        __vArrayVal_remove_comments='remove-comments';
 
     # --------------------------------------------------------------------------------
     # Else, if an unsupported argument is passed into the array of optional arguments.
@@ -872,7 +877,6 @@ function CompileInSingleFile()
     ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     # Converting the "${p_locale}" string into an array of ISO 639-1 codes.
-    # If the "${p_locale}" has coma delimiters.
     if [[ "${p_locale,,}" == lang=* ]]; then
         # Checking for the delimiter.
         if      CheckLangArgDelim "${p_locale}" ','; then v_locale_delim=',';
@@ -972,6 +976,9 @@ function CompileInSingleFile()
 
         # If the 'no-shellcheck' argument was passed.
         if [ -n "${__vArrayVal_no_shellcheck}" ]; then local __no_shellcheck="${__vArrayVal_no_shellcheck}"; fi
+
+        # If the 'remove-comments' argument was passed.
+        if [ -n "${__vArrayVal_remove_comments}" ]; then local __remove_comments="${__vArrayVal_remove_comments}"; fi
 
         #-------------------
         #**** Loop code ****

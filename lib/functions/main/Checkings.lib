@@ -1128,27 +1128,11 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
     fi
 
 	if [ "${p_type}" == 'f' ]; then
-		if [ -f "${v_path}" ]; then
-			if [ -s "${v_path}" ]; then
-				true > "${v_path}" || {
-                    if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
-                        BU.Main.Errors.HandleSmallErrors 'E' \
-                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") project's file --> $(BU.Main.Checkings.CheckFilePathExists "${v_path}" 'true')" 'E';
-                    else
-                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « ${__BU_MAIN_PROJECT_NAME} » project's file --> ${v_path}";
-                        BU.Main.Echo.Newline;
-                    fi
-
-                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
-                }
-			fi
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-		else
+		if [ ! -f "${v_path}" ]; then
 			if [ ! -d "${p_parent}" ]; then
-                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then echo TEST1; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then echo TEST; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
                     mkdir -p "${p_parent}" || {
@@ -1169,9 +1153,9 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 				BU.Main.Checkings.CheckDirPathWasCreated "${p_parent}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
-            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then echo TEST3; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then echo TEST4; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
             else
                 touch "${v_path}" || {
@@ -1190,6 +1174,22 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
             fi
 
 			BU.Main.Checkings.CheckFilePathWasCreated "${v_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; return 0;
+		else
+			if [ -s "${v_path}" ]; then
+				true > "${v_path}" || {
+                    if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
+                        BU.Main.Errors.HandleSmallErrors 'E' \
+                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") project's file --> $(BU.Main.Checkings.CheckFilePathExists "${v_path}" 'true')" 'E';
+                    else
+                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « ${__BU_MAIN_PROJECT_NAME} » project's file --> ${v_path}";
+                        BU.Main.Echo.Newline;
+                    fi
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                }
+			fi
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 
     elif [ "${p_type}" == 'd' ]; then
