@@ -21,7 +21,7 @@ fi
 
 # Calling the "BashUtils_InitModules()" function.
 if ! BashUtils_InitModules \
-    "module --log-display --mode-log-partial --stat-debug=false --stat-debug-bashx=file --no-aliases-include=main,hardware" \
+    "module --log-no-display --mode-log-partial --stat-debug=false --stat-debug-bashx=file --no-aliases-include=main,hardware" \
     "main --stat-debug=true stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true" \
     "Hardware";
 

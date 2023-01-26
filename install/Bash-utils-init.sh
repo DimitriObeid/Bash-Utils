@@ -625,29 +625,32 @@ function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
-    if [ -z "${#__BU_MODULE_INIT_MSG_ARRAY[@]}" ]; then
+    if [ -z "${__BU_MODULE_INIT_MSG_ARRAY[*]}" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
         echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY}";
         echo; return 0;
     fi
 
-	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != --log-shut?(-display) ]]; then
+	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" == --log?(-no)-display ]]; then
         echo;
 
 		BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY}" '#' 'echo';
+		echo;
 
 		# If the user's defined language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
 		if [ "${__BU_MODULE_INIT__USER_LANG,}" != 'en' ]; then
-            echo; echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH}";
+            echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH}";
+            echo;
 		fi
 
-		echo; read -rp "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS}" read_ask_print_log;
+		read -rp "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS}" read_ask_print_log;
+		echo;
 
 		if [ "${read_ask_print_log,,}" == 'yes' ] || [ "${read_ask_print_log^^}" == 'Y' ]; then
 			BU.ModuleInit.PrintLog || return 1;
 
 			return 0;
 		else
-			echo; echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY}"; echo; return 0;
+			echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY}"; echo; return 0;
 		fi
 	else
 		return 0;
@@ -1146,20 +1149,40 @@ function BU.ModuleInit.PrintLog()
     declare -i v_int_randomizer;    # VAR TYPE : Int        - DESC : This variable stores a random number between 3 and 6 included.
 
     local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
+    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This
+    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the
     local v_tmp_file;               # VAR TYPE : Filepath   - DESC : Path to the file which stores the content of the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
 
     #**** Code ****
+    shopt -s extglob;
+
     v_str_randomizer="$(echo "${RANDOM}" | md5sum)";
-    v_str_randomizer="${v_str_randomizer%%+( -)}";
+    v_str_randomizer="${v_str_randomizer%%+(  -)}";
 
     # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
-    v_int_randomizer="$(shuf -i 1-3 -n 1)";
+    v_int_randomizer="$(shuf -i 7-8 -n 1)";
 
     for ((i=0; i<v_int_randomizer; i++)); do
-        v_str_randomizer+="${v_str_randomizer%%+( -)}";
+        v_str_randomizer_tmp="$(echo "${RANDOM}" | md5sum)";
+        v_str_randomizer+="${v_str_randomizer_tmp%%+(  -)}";
     done
 
-    shopt -s extglob;
+    echo ${#v_str_randomizer};
+
+    # Checking if the name of the file to create is not longer than 255 characters. If so, its size is reduced.
+    if [ "${#v_str_randomizer}" -gt 255 ]; then
+        echo "Filename too long, reducing";
+
+        until [ "${#v_str_randomizer}" -eq 255 ]; do
+            v_str_randomizer_int="${#v_str_randomizer}";
+
+            echo "Current number of characters : ${v_str_randomizer_int}";
+            echo "String content : ${v_str_randomizer}";
+            echo;
+
+            v_str_randomizer="${v_str_randomizer:$(( v_str_randomizer_int - 1 )):255}";
+        done
+    fi
 
     # Removing the extra whitespace with the dash.
     v_tmp_file="$(printf "%s" "${__BU_MODULE_INIT__ROOT}/$(date +"%Y-%m-%d %H:%M:%S")")___${v_str_randomizer}.tmp"; shopt -u extglob;
@@ -1570,20 +1593,19 @@ function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
     echo >&2; echo "${__BU_MODULE_INIT_MSG__USAGE__SUPVALS}" >&2;
     echo >&2;
 
-	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-')"; echo >&2;
-
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-'; echo >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY}" >&2;
 	echo >&2;
 
-	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}" '-')"; echo >&2;
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}" '-'; echo >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL}" >&2;
 	echo >&2
 
-	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" '-')" >&2; echo >&2;
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" '-' >&2; echo >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG}" >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX}" >&2;
     echo >&2;
@@ -1865,7 +1887,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 					case "${module_args,,}" in
 
-						# Log value : --log-display (printing the initialization messages on the screen while they are appened to the "${__BU_MODULE_INIT_MSG_ARRAY" array).
+						# Log values :
+						# --log-display (printing the initialization messages on the screen while they are appened to the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array).
+						# --log-no-display (do not display the initialization messages on the screen, but log them in the "${__BU_MODULE_INIT_MSG_ARRAY[@}}" array).
 						'--log-display' | '--log-no-display')
 							# Handling the incompatibility with each other '--log-display', '--log-no-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
