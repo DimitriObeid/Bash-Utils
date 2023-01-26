@@ -103,8 +103,8 @@ __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Fin de l'exécution du scrip
 ## FONCTION : "BU.ModuleInit.AskPrintLog()"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="Aucune entrée de journal à afficher";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » ) ?";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le contenu du tableau « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION », veuillez entrer « yes » ou « Y » (aucune sensibilité à la casse)";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » ) ?";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="Pour afficher à l'écran le contenu du tableau « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} », veuillez entrer « yes » ou « Y » (aucune sensibilité à la casse)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Entrez votre réponse : ";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Le contenu du fichier de logs du script d'initialisation ne sera pas affiché sur votre écran";
 
@@ -273,7 +273,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_
 
 ## FONCTION : "BU.ModuleInit.Msg()"
 
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : LA VALEUR DE LA VARIABLE GLOBALE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » '%s' N'EST PAS SUPPORTÉE\n";
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : LA VALEUR DE LA VARIABLE GLOBALE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » '%s' N'EST PAS SUPPORTÉE\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' ou une valeur vide où vous avez (re)défini la valeur.";
 
 # --------
@@ -390,14 +390,14 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG
 
 # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="ATTENTION             : les quatre paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display      : ne pas afficher les messages d'initialisation à l'écran, mais les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display    : afficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display      : ne pas afficher les messages d'initialisation à l'écran, mais les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display    : afficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
 
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="ATTENTION             : les deux paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » TOUTES les informations sur le processus d'initialisation";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « __BU_MODULE_INIT_MSG_ARRAY » les informations essentielles uniquement";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » TOUTES les informations sur le processus d'initialisation";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » les informations essentielles uniquement";
 
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false             OU --stat-debug=true";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category    OU --stat-debug-bashx=file   OU --stat-debug-bashx=function OU --stat-debug-bashx=sub-category";
@@ -439,13 +439,13 @@ unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
 ## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
 # La même valeur pour l'option "--log-*" a été passée deux fois ou plus comme argument lors de l'appel de la fonction "BashUtils_InitModules".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : vous avez déjà passé la valeur « %s » comme argument de la valeur « module » pour la variable globale « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : vous avez déjà passé la valeur « %s » comme argument de la valeur « module » pour la variable globale « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} »";
 
 # Des valeurs différentes pour l'option "--log-*" ont été simultanément passées en argument lors de l'appel de la fonction "BashUtils_InitModules".
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="les valeurs acceptées du paramètre « module », qui sont '--log-display', 'log-no-display', '--log-shut' et '--log-shut-display', sont incompatibles entre elles";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Veuillez ne choisir qu'une seule d'entre elles";
 
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="La nouvelle valeur sera assignée à la variable globale « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION »";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="La nouvelle valeur sera assignée à la variable globale « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} »";
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL="Valeur actuellement enregistrée dans la variable de permission : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL="Nouvelle valeur : %s";
@@ -477,7 +477,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID="${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}. Comme la valeur « void » a été passée, ces fonctionnalités sont désactivées";
 
 # Si la valeur de l'argument "--stat-debug" n'est pas égale à "true".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : La valeur de la variable globale de statut « __BU_MODULE_INIT_STAT_DEBUG » doit correspondre à la valeur « true » pour pouvoir utiliser cette fonctionnalité de déboguage avancée";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : La valeur de la variable globale de statut « \${__BU_MODULE_INIT_STAT_DEBUG} » doit correspondre à la valeur « true » pour pouvoir utiliser cette fonctionnalité de déboguage avancée";
 
 # Si l'argument "--stat-*" n'est pas une valeur supportée.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : « %s » N'EST PAS UN ARGUMENT DE STATUT SUPPORTÉ PAR LE PARAMÈTRE « module »";
@@ -529,7 +529,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSIN
 
 # Premières vérifications.
 __BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="Vous avez déjà appelé la fonction %s dans votre script";
-__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME="__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT : VOUS DEVEZ PASSER UN NOM DE MODULE LORSQUE VOUS APPELEZ LA FONCTION D'INITIALISATION DE MODULES « %s »";
+__BU_MODULE_INIT_MSG__BU_IM__MUST_PASS_A_MODULE_NAME="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT} : VOUS DEVEZ PASSER UN NOM DE MODULE LORSQUE VOUS APPELEZ LA FONCTION D'INITIALISATION DE MODULES « %s »";
 
 # Liste des modules inclus.
 __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG="INITIALISATION DE CES MODULES :";

@@ -103,8 +103,8 @@ __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Exiting script";
 ## FUNCTION : "BU.ModuleInit.AskPrintLog()"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="No logs to display";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array) ? (yes / no)";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array, please type « yes » ou « Y » (no case sensibility)";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array) ? (yes / no)";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array, please type « yes » ou « Y » (no case sensibility)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Enter your answer : ";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="The initializer script's log file's content will not be displayed on your screen";
 
@@ -273,7 +273,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_
 
 ## FUNCTION : "BU.ModuleInit.Msg()"
 
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value.";
 
 # --------
@@ -390,14 +390,14 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG
 
 # List of different messages, used to better measure the space between the text and the colon.
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : do not display the initialization messages on the screen, but log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : do not display the initialization messages on the screen OR log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : do not display the initialization messages on the screen, but log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : do not display the initialization messages on the screen OR log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
 
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array EVERY informations about the initialization process";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array the essential informations only";
 
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            OR --stat-debug=true";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   OR--stat-debug-bashx=file   OR --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
@@ -439,13 +439,13 @@ unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
 ## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
 # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable when calling the « BashUtils_InitModules » function"
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules » function"
 
 # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="the « module » value's parameters '--log-display' 'log-no-display', '--log-shut' and '--log-shut-display' are incompatible with each other";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Please choose only one of these parameter values";
 
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable";
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL="Current value stored in the permission variable : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL="New value : %s";
@@ -477,7 +477,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID="${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}. As the value « void » has been passed, these features are disabled";
 
 # If the value of the argument "--stat-debug" is not equal to "true".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : The « \${__BU_MODULE_INIT_STAT_DEBUG} » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
 
 # If the "--stat-*" argument is not a supported value.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : « %s » IS NOT A SUPPORTED STATUS ARGUMENT BY THE « module » PARAMETER";
