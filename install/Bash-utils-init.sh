@@ -1147,40 +1147,42 @@ function BU.ModuleInit.PrintLog()
 {
     #**** Variables ****
     declare -i v_int_randomizer;    # VAR TYPE : Int        - DESC : This variable stores a random number between 3 and 6 included.
+    declare -i v_str_max_size;      # VAR TYPE : Int        - DESC : This variable stores the maximum size of the "${v_str_randomizer}" string.
 
     local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
-    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This
-    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the
+    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This variable stores the randomized numer of times another generated md5sum string must be added to the "${v_str_randomizer} variable".
+    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the newly generated md5sum string before it is added to the "${v_str_randomizer}" variable.
     local v_tmp_file;               # VAR TYPE : Filepath   - DESC : Path to the file which stores the content of the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
 
     #**** Code ****
+    v_str_max_size=150;
+
     shopt -s extglob;
 
     v_str_randomizer="$(echo "${RANDOM}" | md5sum)";
     v_str_randomizer="${v_str_randomizer%%+(  -)}";
 
     # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
-    v_int_randomizer="$(shuf -i 7-8 -n 1)";
+    v_int_randomizer="$(shuf -i 1-3 -n 1)" || false;
 
     for ((i=0; i<v_int_randomizer; i++)); do
         v_str_randomizer_tmp="$(echo "${RANDOM}" | md5sum)";
         v_str_randomizer+="${v_str_randomizer_tmp%%+(  -)}";
     done
 
-    echo ${#v_str_randomizer};
-
     # Checking if the name of the file to create is not longer than 255 characters. If so, its size is reduced.
-    if [ "${#v_str_randomizer}" -gt 255 ]; then
-        echo "Filename too long, reducing";
+    if [ "${#v_str_randomizer}" -gt "${v_str_max_size}" ]; then
+        echo "Filename's randomizer string too long, reducing its size to ${v_str_max_size}" >&2;
+        echo >&2;
 
-        until [ "${#v_str_randomizer}" -eq 255 ]; do
+        until [ "${#v_str_randomizer}" -eq "${v_str_max_size}" ]; do
             v_str_randomizer_int="${#v_str_randomizer}";
 
             echo "Current number of characters : ${v_str_randomizer_int}";
             echo "String content : ${v_str_randomizer}";
             echo;
 
-            v_str_randomizer="${v_str_randomizer:$(( v_str_randomizer_int - 1 )):255}";
+            v_str_randomizer="${v_str_randomizer%%+("${v_str_randomizer:$(( v_str_randomizer_int - 1 ))}")}";
         done
     fi
 
