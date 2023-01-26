@@ -620,7 +620,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-# Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
+# Asking to the user if s/he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
 function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
@@ -630,14 +630,14 @@ function BU.ModuleInit.AskPrintLog()
         echo; return 0;
     fi
 
-	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" == --log?(-no)-display ]]; then
+	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != --log-shut?(-display) ]]; then
         echo;
 
 		BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY}" '#' 'echo';
 		echo;
 
-		# If the user's defined language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
-		if [ "${__BU_MODULE_INIT__USER_LANG,}" != 'en' ]; then
+		# If the user's system language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
+		if [[ "${LANG,,}" != en_* ]]; then
             echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH}";
             echo;
 		fi
@@ -1198,11 +1198,21 @@ function BU.ModuleInit.PrintLog()
     fi
 
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-full' ]; then
-        echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE}"; echo;
+        if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG,,}" == 'true' ]; then
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM}";
+        else
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE}";
+        fi
 
     elif [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-partial' ]; then
-        echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}"; echo;
+        if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG,,}" == 'true' ]; then
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM}";
+        else
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}";
+        fi
     fi
+
+    echo;
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
     BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
@@ -1979,7 +1989,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							__BU_MODULE_INIT_MSG_ARRAY_MODE="${module_args}";
 
 							# Displaying the initialization messages already appened in the "${__BU_MODULE_INIT_MSG_ARRAY" global variable.
-							BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos;;
+							BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos
+                            
+                            # Declaring a global variable which stores the information that this logging option's value
+                            # was modified / passed as argument while calling the "module" value in the project's main file.
+                            __BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG='true';;
 
 						# Setting the "${__BU_MODULE_INIT_MSG_ARRAY_MODE" global variable to '--mode-log-partial', in order to print the essential initialization messages only (already set by default).
 						'--mode-log-partial')
@@ -1988,7 +2002,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             # Unsetting every unsused string variables in order to free up some memory.
 
                             # shellcheck disable=SC2046
-                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__")
+                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");
+
+                            # Declaring a global variable which stores the information that this logging option's value
+                            # was modified / passed as argument while calling the "module" value in the project's main file.
+                            __BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG='true';
                         ;;
 
 						# An unsupported mode argument is passed.

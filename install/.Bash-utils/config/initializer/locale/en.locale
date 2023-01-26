@@ -297,8 +297,10 @@ __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
 
 # Display initialization log informations.
 __BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
-__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full (parameter « --mode-log-full » passed during the call of the module 0 « module »)";
-__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
+__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full";
+__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM="Logging mode : full (parameter « --mode-log-full » passed during the call of the module 0 « module »)";
+__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial";
+__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
 
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND";
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="If nothing is displayed on the screen after a few seconds, please stop the script's execution by pressing CTRL + C";
