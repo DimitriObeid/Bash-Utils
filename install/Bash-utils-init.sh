@@ -625,12 +625,12 @@ function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
-    if [ -z "${__BU_MODULE_INIT_MSG_ARRAY}" ]; then
+    if [ -z "${#__BU_MODULE_INIT_MSG_ARRAY[@]}" ]; then
         echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY}";
         echo; return 0;
     fi
 
-	if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" == '--log-display' ]; then
+	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != --log-shut?(-display) ]]; then
         echo;
 
 		BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY}" '#' 'echo';
@@ -1153,7 +1153,7 @@ function BU.ModuleInit.PrintLog()
     v_str_randomizer="${v_str_randomizer%%+( -)}";
 
     # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
-    v_int_randomizer="$(shuf -i 3-6 -n 1)";
+    v_int_randomizer="$(shuf -i 1-3 -n 1)";
 
     for ((i=0; i<v_int_randomizer; i++)); do
         v_str_randomizer+="${v_str_randomizer%%+( -)}";
@@ -1565,26 +1565,30 @@ function BU.ModuleInit.SourcingFailure()
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
 # Usage function
-function BU.ModuleInit.Usage()
+function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__USAGE__SUPVALS}" >&2;
     echo >&2;
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}";
+	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-')"; echo >&2;
+
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY}" >&2;
 	echo >&2;
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}";
+	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}" '-')"; echo >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL}" >&2;
 	echo >&2
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" >&2;
+	echo "$(BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" '-')" >&2; echo >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG}" >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX}" >&2;
+    echo >&2;
+
+    BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-' >&2;
 }
 
 # Easy writing status error.
@@ -1923,7 +1927,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-							BU.ModuleInit.Usage;
+							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
 							BU.ModuleInit.MsgAbort;
 
@@ -1980,7 +1984,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-							BU.ModuleInit.Usage;
+							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
 							BU.ModuleInit.MsgAbort;
 
@@ -2013,7 +2017,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-                    BU.ModuleInit.Usage;
+                    BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
                     BU.ModuleInit.MsgAbort;
 

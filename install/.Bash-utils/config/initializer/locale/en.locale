@@ -389,11 +389,13 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG
 ## FUNCTION : "BU.ModuleInit.Usage()"
 
 # List of different messages, used to better measure the space between the text and the colon.
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : don't display the initialization messages on the screen, but log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : don't display the initialization messages on the screen OR log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
 
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
 
@@ -404,14 +406,14 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bash
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
 
 # Display of the supported values for the log redirection parameter.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="WARNING : the three following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4}";
 
 # Display of the supported values for the logging parameter.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2}";
 
@@ -421,10 +423,12 @@ __BU_MODULE_INIT_MSG__USAGE__DEBUG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_
 __BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX}";
 
 # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
-unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
+unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
+        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4 \
+        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG \
