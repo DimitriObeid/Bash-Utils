@@ -392,7 +392,7 @@ function BU.Main.Errors.HandleErrors()
             else
                 if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
                     # Calling the function that processes the given answer.
-                    BU.Main.Case.Read_Errors.HandleErrors;
+                    BU.Main.Inputs.Read_Errors.HandleErrors;
                 fi
             fi
 

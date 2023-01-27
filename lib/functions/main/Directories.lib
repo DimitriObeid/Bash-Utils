@@ -534,7 +534,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
 			BU.Main.Echo.Newline;
 
 			# Calling the function that processes the given answer.
-			if BU.Main.Case.Read_DirectoriesTriggerRootDirWarning; then
+			if BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning; then
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
