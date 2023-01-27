@@ -89,12 +89,12 @@ fi; exit 1; fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING CASE STATEMENTS BY FUNCTIONS
-#### DEBUG ID : case::reading-case-statements-by-functions
+#### DEBUG ID : "inputs::reading-case-statements-by-functions"
 
-__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="case::reading-case-statements-by-functions";
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inputs::reading-case-statements-by-functions";
 
 ## "Directories.lib" FILE
-## DEBUG ID : directories.lib-file
+## DEBUG ID : "directories.lib-file"
 
 __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
 
@@ -203,3 +203,48 @@ function BU.Main.Inputs.Read_Errors.HandleErrors()
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### READING USER'S INPUTS OUTSIDE "CASE" STATEMENTS
+#### DEBUG ID : "inputs::reading-user's-inputs-outside-case-statements"
+
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="inputs::reading-user's-inputs-outside-case-statements";
+
+## SANITIZING USER'S INPUTS BEFORE EXECUTION
+## DEBUG ID : "sanitizing-user-inputs-before-execution"
+
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}::sanitizing-user-inputs-before-execution";
+
+function BU.Main.Inputs.Sanitize()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
+
+    #**** Code ****
+    # Checking if the value does not contain dangerous commands.
+    if echo "${p_string}" | grep -E -q ';|&|\||`|>|<|$|(|)|{|}'; then
+        echo "La valeur contient des commandes dangereuses et ne peut pas être évaluée.";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    # Checking if the value does not contain potentially dangerous keywords.
+    if echo "${p_string}" | grep -E -q 'rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd'; then
+        echo "La valeur contient des mots clés potentiellement dangereux et ne peut pas être évaluée.";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    # Checking if the value does not contain special characters.
+    if echo "${p_string}" | grep -E -q '[^a-zA-Z0-9_\./-]'; then
+        echo "La valeur contient des caractères spéciaux et ne peut pas être évaluée.";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
