@@ -224,24 +224,37 @@ function BU.Main.Inputs.Sanitize()
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
 
+    #**** Variables ****
+    local v_dangerousChars=';|&|\||`|>|<|$|(|)|{|}';
+    local v_dangerousCmds='rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd';
+    local v_specialChars='[^a-zA-Z0-9_\./-]';
+
     #**** Code ****
     # Checking if the value does not contain dangerous commands.
-    if echo "${p_string}" | grep -E -q ';|&|\||`|>|<|$|(|)|{|}'; then
-        echo "La valeur contient des commandes dangereuses et ne peut pas être évaluée.";
+    if echo "${p_string}" | grep -E -q "${v_dangerousChars}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS DANGEROUS COMMANDS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use any of these characters as input to be evaluated : ${v_dangerousChars}" "" "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
     fi
 
     # Checking if the value does not contain potentially dangerous keywords.
-    if echo "${p_string}" | grep -E -q 'rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd'; then
-        echo "La valeur contient des mots clés potentiellement dangereux et ne peut pas être évaluée.";
+    if echo "${p_string}" | grep -E -q "${v_dangerousCmds}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS POTENTIALLY DANGEROUS KEYWORDS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use any of these keywords as input to be evaluated : ${v_dangerousCmds}" "" "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
     fi
 
     # Checking if the value does not contain special characters.
-    if echo "${p_string}" | grep -E -q '[^a-zA-Z0-9_\./-]'; then
-        echo "La valeur contient des caractères spéciaux et ne peut pas être évaluée.";
+    if echo "${p_string}" | grep -E -q "${v_specialChars}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE INPUT CONTAINS SPECIAL CHARACTERS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use anything else than these characters as input to be evaluated :";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
     fi
