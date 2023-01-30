@@ -253,7 +253,7 @@ function BU.Main.Inputs.Sanitize()
     # Checking if the value does not contain special characters.
     if echo "${p_string}" | grep -E -q "${v_specialChars}"; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
-            "THE INPUT CONTAINS SPECIAL CHARACTERS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS SPECIAL CHARACTERS AND THUS CANNOT BE EVALUATED !!!!!" \
             "Do not use anything else than these characters as input to be evaluated :";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";

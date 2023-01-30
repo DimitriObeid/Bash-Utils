@@ -645,6 +645,8 @@ function BU.Main.Args.Argc()
     local p_argcount=${1:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of arguments passed.
     local p_argawait=${2:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of arguments awaited.
 
+    ## IMPORTANT NOTE ABOUT THE "${p_argawait}" ARGUMENT : It is not possible to automatically get the number of declared parameters inside a function, according to ChatGPT, so you will have to provide manually the number of declared parameters).
+
     local p_filename=${3:-$'\0'};   # ARG TYPE : File       - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
     local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
     local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
@@ -2091,18 +2093,25 @@ function BU.Main.Args__Text.StrToWordArray()
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in an array of words.
+    local p_varname=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the array to create.
 
-    local p_filename=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
-    local p_funcname=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
-    local p_lineno=${4:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
+    BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     if [ -z "${p_string}" ]; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'Z' \
             "Please give as first argument a string to convert in a word array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ -z "${p_varname}" ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'Z' \
+            "Please give as second argument a string to name the array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_varname' "${p_varname}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;

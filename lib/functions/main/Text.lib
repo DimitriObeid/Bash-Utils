@@ -845,16 +845,13 @@ function BU.Main.Text.StrToWordArray()
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
     local p_varname=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the array to create.
+    local p_delim=${3:-$'\0'};      # ARG TYPE : Char       - OPTIONAL | DEFAULT VAL : NULL     - DESC : Customized delimiter, as per ChatGPT, the "$(read)" command does not support custom delimiters, but only a blank space.
 
     #**** Code ****
     if ! BU.Main.Args__Text.StrToWordArray "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    # Before evaluating the user's input, it is essential to check if the input does not contains any characters that can be used to execute a command, like $ {} ``().
-    if ! [[ "$value" =~ ^[a-zA-Z0-9_\./-]+$ ]]; then
-        BU.Main.Echo.Error "THE INPUT TO EVALUATE CONTAINS DANGEROUS CHARACTERS !!!"; BU.Main.Echo.Newline >&2;
-
-        BU.Main.Echo.Warning "The only authorized characters are $(BU.Main.Decho.Decho.Highlight "")";
-    fi
+    # Before evaluating the user's input, it is essential to check if the input does not contains any characters that can be used to execute a command.
+    if ! BU.Main.Inputs.Sanitize "${p_varname}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # If the user named the variable with empty spaces between each words, the blank spaces are removed from the string.
 
