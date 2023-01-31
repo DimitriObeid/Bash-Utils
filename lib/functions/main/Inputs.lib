@@ -226,12 +226,12 @@ function BU.Main.Inputs.Sanitize()
 
     #**** Variables ****
     local v_dangerousChars=';|&|\||`|>|<|$|(|)|{|}';
-    local v_dangerousCmds='rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd';
+    local v_dangerousCmds='rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd|shred|eval|sh|bash|dash|ksh|zsh|mkfs|unzip|uz|gunzip|7z|unrar';
     local v_specialChars='[^a-zA-Z0-9_\./-]';
 
     #**** Code ****
     # Checking if the value does not contain dangerous commands.
-    if echo "${p_string}" | grep -E -q "${v_dangerousChars}"; then
+    if ! echo "${p_string}" | grep -E -q "${v_dangerousChars}"; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
             "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS DANGEROUS COMMANDS AND THUS CANNOT BE EVALUATED !!!!!" \
             "Do not use any of these characters as input to be evaluated : ${v_dangerousChars}" "" "$(basename "${BASH_SOURCE[0]}")" \
