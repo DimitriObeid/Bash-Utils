@@ -103,10 +103,12 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local p_disable_fromUserLang=${9:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
 
     #**** Variables ****
-    local cod;		# VAR TYPE :
-    local eng;		# VAR TYPE :
-    local ori;		# VAR TYPE :
-    local usr;		# VAR TYPE :
+	local valid;		# VAR TYPE : Bool		# DESC : Storing the information to inform the post text display condition that the value passed into the "${p_dispOrder}" parameter was valid;
+
+    local cod;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's ISO 639-1 code according to the value passed into the "${p_print_code}" parameter.
+    local eng;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's English name according to the value passed into the "${p_disable_englishNamed}" parameter.
+    local ori;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in its own language according to the value passed into the "${p_disable_originalName}" parameter.
+    local usr;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in the user's system language according to the value passed into the "${p_disable_fromUserLang}" parameter.
 
 	#**** Code ****
 	# These checkings are temporary. Once the framework will definitely work with a compiled file, these checkings will be moved in the "Args.lib" library file.
@@ -114,21 +116,6 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 	# Checking if a valid ISO 639-1 code was passed as first argument.
 	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
-
-	# Checking if the display order string is correctly formatted, non-null AND non-empty.
-	if 	[ "${p_dispOrder,,}" != 'cod,eng,ori,usr' ] || \
-		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
-		[ "${p_dispOrder,,}" != 'cod,ori,eng,usr' ] || \
-		[ "${p_dispOrder,,}" != 'cod,ori,usr,eng' ] || \
-		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
-		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
-		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
-		[ "${p_dispOrder,,}" != 'eng,cod,ori,usr' ] || \
-		[ "${p_dispOrder,,}" != 'eng,cod,usr,ori' ] || \
-		[ "${p_dispOrder,,}" != 'ori,eng,usr' ] || \
-		[ "${p_dispOrder,,}" != 'ori,usr,eng' ] || \
-		[ "${p_dispOrder,,}" != 'usr,eng,ori' ] || \
-		[ "${p_dispOrder,,}" != 'usr,ori,eng' ]; then p_dispOrder='usr,eng,ori'; fi
 
 	# Checking if the name of the target language in the user's system language was passed as 4th argument.
 	if [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
@@ -155,7 +142,6 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	# Writing the code to display or not the targeted langage's name in English.
 	eng="$(echo -n "$([ "${p_disable_englishNamed,,}" == 'true' ] && printf "%s :" "${p_langNameEngl,,}" || printf '')")";
 
-
 	# Writing the code to display or not the targeted langage's name in its own language.
 	ori="$(echo -n "$([ "${p_disable_originalName,,}" == 'true' ] && printf "%s :" "${p_langNameOrig,,}" || printf '')")";
 
@@ -166,40 +152,57 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" argument.
 	if   	[[ "${p_dispOrder,,}" == c* ]]; then
-		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then echo -n "${cod} ${eng} ${ori} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then echo -n "${cod} ${eng} ${usr} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'cod,ori,eng,usr' ]; then echo -n "${cod} ${ori} ${eng} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'cod,ori usr,eng' ]; then echo -n "${cod} ${ori} ${usr} ${eng}";
-		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then echo -n "${cod} ${usr} ${eng} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then echo -n "${cod} ${usr} ${ori} ${eng}";
+		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then echo -n "${cod} ${eng} ${ori} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then echo -n "${cod} ${eng} ${usr} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori,eng,usr' ]; then echo -n "${cod} ${ori} ${eng} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori usr,eng' ]; then echo -n "${cod} ${ori} ${usr} ${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then echo -n "${cod} ${usr} ${eng} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then echo -n "${cod} ${usr} ${ori} ${eng}"; valid='true';
 		  fi
 	
 	elif 	[[ "${p_dispOrder,,}" == e* ]]; then
-		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then echo -n "${eng} ${cod} ${ori} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then echo -n "${eng} ${cod} ${usr} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'eng,ori,cod,usr' ]; then echo -n "${eng} ${ori} ${cpd} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'eng,ori,usr,cod' ]; then echo -n "${eng} ${ori} ${usr} ${cod}";
-		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then echo -n "${eng} ${usr} ${cod} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then echo -n "${eng} ${usr} ${ori} ${cod}";
+		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then echo -n "${eng} ${cod} ${ori} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then echo -n "${eng} ${cod} ${usr} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,cod,usr' ]; then echo -n "${eng} ${ori} ${cpd} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,usr,cod' ]; then echo -n "${eng} ${ori} ${usr} ${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then echo -n "${eng} ${usr} ${cod} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then echo -n "${eng} ${usr} ${ori} ${cod}"; valid='true';
 		  fi
 	
 	elif 	[[ "${p_dispOrder,,}" == o* ]]; then
-		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then echo -n "${ori} ${cod} ${eng} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then echo -n "${ori} ${cod} ${usr} ${eng}";
-		elif [ "${p_dispOrder,,}" == 'ori,eng,cod,usr' ]; then echo -n "${ori} ${eng} ${cod} ${usr}";
-		elif [ "${p_dispOrder,,}" == 'ori,eng,usr,cod' ]; then echo -n "${ori} ${eng} ${usr} ${cod}";
-		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then echo -n "${ori} ${usr} ${cod} ${eng}";
-		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then echo -n "${ori} ${usr} ${eng} ${cod}";
+		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then echo -n "${ori} ${cod} ${eng} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then echo -n "${ori} ${cod} ${usr} ${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,cod,usr' ]; then echo -n "${ori} ${eng} ${cod} ${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,usr,cod' ]; then echo -n "${ori} ${eng} ${usr} ${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then echo -n "${ori} ${usr} ${cod} ${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then echo -n "${ori} ${usr} ${eng} ${cod}"; valid='true';
 		  fi
 	
 	elif 	[[ "${p_dispOrder,,}" == u* ]]; then
-		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then echo -n "${usr} ${cod} ${eng} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then echo -n "${usr} ${cod} ${ori} ${eng}";
-		elif [ "${p_dispOrder,,}" == 'usr,eng,cod,ori' ]; then echo -n "${usr} ${eng} ${cod} ${ori}";
-		elif [ "${p_dispOrder,,}" == 'usr,eng,ori,cod' ]; then echo -n "${usr} ${eng} ${ori} ${cod}";
-		elif [ "${p_dispOrder,,}" == 'usr,ori,cod,eng' ]; then echo -n "${usr} ${ori} ${cod} ${eng}";
-		elif [ "${p_dispOrder,,}" == 'usr,ori,eng,cod' ]; then echo -n "${usr} ${ori} ${eng} ${cod}";
+		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then echo -n "${usr} ${cod} ${eng} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then echo -n "${usr} ${cod} ${ori} ${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,cod,ori' ]; then echo -n "${usr} ${eng} ${cod} ${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,ori,cod' ]; then echo -n "${usr} ${eng} ${ori} ${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,cod,eng' ]; then echo -n "${usr} ${ori} ${cod} ${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,eng,cod' ]; then echo -n "${usr} ${ori} ${eng} ${cod}"; valid='true';
 		  fi
+	fi
+
+	# If an invalid value was passed to the "${p_dispOrder}" parameter, a valid value is 
+	# automatically generated by the computer, and the current function is called again.
+	if [ "${valid,,}" != 'true' ]; then
+		p_dispOrder='cod,eng,ori,usr';
+
+		# WARNING : DO NOT EDIT THE "${p_dispOrder}" LINE IF YOU DON'T KNOW WHAT YOU ARE DOING, OR ELSE THE SCRIPT WILL ENTER INTO AN INFINITE LOOP !!!!!
+		BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
+			"${p_print_code}" \
+			"${p_dispOrder}" \
+			"${p_langNameEngl}" \
+			"${p_langNameOrig}" \
+			"${p_langNameUser}" \
+			"${p_disable_englishNamed}" \
+			"${p_disable_originalName}" \
+			"${p_disable_fromUserLang}";
 	fi
 
 	return 0;
