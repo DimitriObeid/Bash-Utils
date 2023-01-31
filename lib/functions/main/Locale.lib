@@ -77,20 +77,142 @@ fi; exit 1; fi
 # Checking if the language's code matches to a valid ISO 639-1 code.
 function BU.Main.Locale.CheckISO_639_1_ValidCode()
 {
-    [[ ${__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0; return 1;
+    [[ ${__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0;
+
+    # Since the second version of the library compiler (which does not includes any compiled files) will still be supported along the version which
+    # will ship a compiled file (in case a problem occurs with the compiled file or the remote one), the array of ISO 639-1 codes is also supported.
+    [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${1,,} ]] && return 0;
+
+    return 1;
+}
+
+# Optimizing the "BU.Main.Locale.PrintLanguageName()" function's code, in order to avoid to modify manually the code and the rendered layout for each of the 200+ supported languages.
+function BU.Main.Locale.PrintLanguageName.Optimize()
+{
+	#**** Parameters ****
+	local p_code=${1:-NULL};    # ARG TYPE : ISO 639-1 code			- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+    local p_print_code=${2:-yes};   	# ARG TYPE : Bool			- REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
+	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
+
+	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+
+    local p_disable_fromYourLang=${7:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
+    local p_disable_englishNamed=${8:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
+    local p_disable_originalName=${9:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
+
+    #**** Variables ****
+    local cod;		# VAR TYPE :
+    local eng;		# VAR TYPE :
+    local ori;		# VAR TYPE :
+    local usr;		# VAR TYPE :
+
+	#**** Code ****
+	# These checkings are temporary. Once the framework will definitely work with a compiled file, these checkings will be moved in the "Args.lib" library file.
+	if [ -z "${p_code}" ]; then echo "MISSING ISO 639-1 CODE"; return 1; fi
+
+	# Checking if a valid ISO 639-1 code was passed as first argument.
+	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
+
+	# Checking if the display order string is correctly formatted, non-null AND non-empty.
+	if 	[ "${p_dispOrder,,}" != 'cod,eng,ori,usr' ] || \
+		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
+		[ "${p_dispOrder,,}" != 'cod,ori,eng,usr' ] || \
+		[ "${p_dispOrder,,}" != 'cod,ori,usr,eng' ] || \
+		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
+		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
+		[ "${p_dispOrder,,}" != 'cod,eng,usr,ori' ] || \
+		[ "${p_dispOrder,,}" != 'eng,cod,ori,usr' ] || \
+		[ "${p_dispOrder,,}" != 'eng,cod,usr,ori' ] || \
+		[ "${p_dispOrder,,}" != 'ori,eng,usr' ] || \
+		[ "${p_dispOrder,,}" != 'ori,usr,eng' ] || \
+		[ "${p_dispOrder,,}" != 'usr,eng,ori' ] || \
+		[ "${p_dispOrder,,}" != 'usr,ori,eng' ]; then p_dispOrder='usr,eng,ori'; fi
+
+	# Checking if the name of the target language in the user's system language was passed as 4th argument.
+	if [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
+
+	# Checking if the name of the target language in English was passed as 5th argument.
+	if [ -z "${p_langNameOrig}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ENGLISH"; return 1; fi
+
+	# Checking if the name of the target language in its own language was passed as 6th argument.
+	if [ -z "${p_langNameOrig}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ITS OWN LANGUAGE"; return 1; fi
+
+	# Checking if a boolean value was passed in the "${p_disable_fromYourLang}" parameter.
+	if [ "${p_disable_fromYourLang}" != 'false' ] || [ "${p_disable_fromYourLang}" != 'true' ]; then p_disable_fromYourLang='false'; fi
+
+	# Checking if a boolean value was passed in the "${p_disable_englishNamed}" parameter.
+	if [ "${p_disable_englishNamed}" != 'false' ] || [ "${p_disable_englishNamed}" != 'true' ]; then p_disable_englishNamed='false'; fi
+
+	# Checking if a boolean value was passed in the "${p_disable_originalName}" parameter.
+	if [ "${p_disable_originalName}" != 'false' ] || [ "${p_disable_originalName}" != 'true' ]; then p_disable_originalName='false'; fi
+
+
+	# Writing the code to display or not the targeted langage's ISO 639-1 code.
+	cod="$(echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '')")";
+
+	# Writing the code to display or not the targeted language in the user's system language.
+
+	# Writing the code to display or not the targeted langage's name in English.
+
+	# Writing the code to display or not the targeted langage's name in its own language.
+	eng="$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '')";
+
+
+	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" argument.
+	if 		[ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then
+		echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afar | Afaraf";
+
+	elif 	[ "${p_dispOrder,,}" != 'eng,usr,ori' ]; then
+		echo 'Il y a 4! = 24 combinaisons différentes possibles contenant les quatre mots "cod", "eng", "ori" et "usr", tous ensemble.
+
+    cod eng ori usr
+    cod eng usr ori
+    cod ori eng usr
+    cod ori usr eng
+    cod usr eng ori
+    cod usr ori eng
+    eng cod ori usr
+    eng cod usr ori
+    eng ori cod usr
+    eng ori usr cod
+    eng usr cod ori
+    eng usr ori cod
+    ori cod eng usr
+    ori cod usr eng
+    ori eng cod usr
+    ori eng usr cod
+    ori usr cod eng
+    ori usr eng cod
+    usr cod eng ori
+    usr cod ori eng
+    usr eng cod ori
+    usr eng ori cod
+    usr ori cod eng
+    usr ori eng cod'
+
+	fi
+
+	return 0;
 }
 
 # Printing the language name in English and in its own language.
 function BU.Main.Locale.PrintLanguageName()
 {
 	#**** Parameters ****
-	local p_code=${1:-NULL};        # String    - Default : NULL    - Language in which the file must be translated.
-    local p_print_code=${2:-yes}    # String    - Default : yes     - Authorization to print the ISO 639-1 code before the language name.
+	local p_code=${1:-NULL};        # ARG TYPE : ISO 639-1 code		- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+	local p_dispOrder=${2:-NULL};	# ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
+    local p_print_code=${3:-yes};   # ARG TYPE : Bool				- OPTIONAL | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
+
+    local p_disable_fromYourLang=${4:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
+    local p_disable_englishNamed=${5:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
+    local p_disable_originalName=${6:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
 
 	#**** Code ****
 
 	# Checking if a code begins with a certain letter, in order to optimize the verification process.
-	if [[ "${p_code}" == a* ]]; then
+	if [[ "${p_code,,}" == a* ]]; then
 		  if [ "${p_code,,}" == 'aa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afar | Afaraf";
 		elif [ "${p_code,,}" == 'ab' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Abkhazian | Аҧсуа";
 		elif [ "${p_code,,}" == 'ae' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avestan | Avesta";
@@ -105,7 +227,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'az' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Azerbaijani | Azərbaycan dili";
 		  fi
 	
-	elif [[ "${p_code}" == b* ]]; then
+	elif [[ "${p_code,,}" == b* ]]; then
 	  	  if [ "${p_code,,}" == 'ba' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bashkir | башҡорт теле";
 		elif [ "${p_code,,}" == 'be' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Belarusian | Беларуская";
 		elif [ "${p_code,,}" == 'bg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bulgarian | български език";
@@ -118,7 +240,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'bs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bosnian | Bosanski jezik";
 		  fi
 
-	elif [[ "${p_code}" == c* ]]; then
+	elif [[ "${p_code,,}" == c* ]]; then
 		  if [ "${p_code,,}" == 'ca' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Catalan | Català";
 		elif [ "${p_code,,}" == 'ce' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chechen | нохчийн мотт";
 		elif [ "${p_code,,}" == 'ch' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chamorro | Chamoru";
@@ -130,14 +252,14 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'cy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Welsh | Cymraeg";
 		  fi
 
-	elif [[ "${p_code}" == d* ]]; then
+	elif [[ "${p_code,,}" == d* ]]; then
 		  if [ "${p_code,,}" == 'da' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Danish | Dansk";
 		elif [ "${p_code,,}" == 'de' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') German | Deutsch";
 		elif [ "${p_code,,}" == 'dv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Divehi | ދިވެހި";
 		elif [ "${p_code,,}" == 'dz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dzongkha | རྫོང་ཁ";
 		  fi
 
-	elif [[ "${p_code}" == e* ]]; then
+	elif [[ "${p_code,,}" == e* ]]; then
 		  if [ "${p_code,,}" == 'ee' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ewe | Ɛʋɛgbɛ";
 		elif [ "${p_code,,}" == 'el' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greek | Ελληνικά";
 		elif [ "${p_code,,}" == 'en' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') English | English";
@@ -147,7 +269,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'eu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Basque | Euskara";
 		  fi
 
-	elif [[ "${p_code}" == f* ]]; then
+	elif [[ "${p_code,,}" == f* ]]; then
 		  if [ "${p_code,,}" == 'fa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Persian | فارسی";
 		elif [ "${p_code,,}" == 'ff' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fulah | Fulfulde";
 		elif [ "${p_code,,}" == 'fi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Finnish | Suomen kieli";
@@ -157,7 +279,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'fy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Western Frisian | Frysk";
 		  fi
 
-	elif [[ "${p_code}" == g* ]]; then
+	elif [[ "${p_code,,}" == g* ]]; then
 		  if [ "${p_code,,}" == 'ga' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Irish | Gaeilge";
 		elif [ "${p_code,,}" == 'gd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Scottish Gaelic | Gàidhlig";
 		elif [ "${p_code,,}" == 'gl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Galician | Galego";
@@ -166,7 +288,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'gv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Manx | Ghaelg";
 		  fi
 
-	elif [[ "${p_code}" == h* ]]; then
+	elif [[ "${p_code,,}" == h* ]]; then
 		  if [ "${p_code,,}" == 'ha' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hausa | هَوُسَ";
 		elif [ "${p_code,,}" == 'he' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hebrew | עברית";
 		elif [ "${p_code,,}" == 'hi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hindi | हिन्दी ; हिंदी";
@@ -178,7 +300,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'hz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Herero | Otjiherero";
 		  fi
 
-	elif [[ "${p_code}" == i* ]]; then
+	elif [[ "${p_code,,}" == i* ]]; then
 		  if [ "${p_code,,}" == 'ia' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingua | Interlingua";
 		elif [ "${p_code,,}" == 'id' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Indonesian | Bahasa Indonesia";
 		elif [ "${p_code,,}" == 'ie' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingue | Interlingue";
@@ -191,12 +313,12 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'iu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inuktitut | ᐃᓄᒃᑎᑐᑦ";
 		  fi
 
-	elif [[ "${p_code}" == j* ]]; then
+	elif [[ "${p_code,,}" == j* ]]; then
 		  if [ "${p_code,,}" == 'ja' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Japanese | 日本語 (にほんご)";
 		elif [ "${p_code,,}" == 'jv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Javanese | Basa Jawa";
 		  fi
 
-	elif [[ "${p_code}" == k* ]]; then
+	elif [[ "${p_code,,}" == k* ]]; then
 		  if [ "${p_code,,}" == 'ka' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Georgian | ქართული";
 		elif [ "${p_code,,}" == 'kg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kongo | KiKongo";
 		elif [ "${p_code,,}" == 'ki' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kikuyu | Gĩkũyũ";
@@ -214,7 +336,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'ky' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirghiz | кыргыз тили";
 		fi
 
-	elif [[ "${p_code}" == l* ]]; then
+	elif [[ "${p_code,,}" == l* ]]; then
 		  if [ "${p_code,,}" == 'la' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latin | Latine ; lingua latina";
 		elif [ "${p_code,,}" == 'lb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luxembourgish | Lëtzebuergesch";
 		elif [ "${p_code,,}" == 'lg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ganda | Luganda";
@@ -226,7 +348,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'lv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latvian | Latviešu valoda";
 		  fi
 
-	elif [[ "${p_code}" == m* ]]; then
+	elif [[ "${p_code,,}" == m* ]]; then
 		  if [ "${p_code,,}" == 'mg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malagasy | Fiteny malagasy";
 		elif [ "${p_code,,}" == 'mh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marshallese | Kajin M̧ajeļ";
 		elif [ "${p_code,,}" == 'mi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Māori | Te reo Māori";
@@ -240,7 +362,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'my' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Burmese | ဗမာစာ";
 		  fi
 
-	elif [[ "${p_code}" == n* ]]; then
+	elif [[ "${p_code,,}" == n* ]]; then
 		  if [ "${p_code,,}" == 'na' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nauru | Ekakairũ Naoero";
 		elif [ "${p_code,,}" == 'nb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Bokmål | Norsk bokmål";
 		elif [ "${p_code,,}" == 'nd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') North Ndebele | isiNdebele";
@@ -254,7 +376,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'ny' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chichewa | ChiCheŵa ; chinyanja";
 		  fi
 
-	elif [[ "${p_code}" == o* ]]; then
+	elif [[ "${p_code,,}" == o* ]]; then
 		  if [ "${p_code,,}" == 'oc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Occitan | Occitan";
 		elif [ "${p_code,,}" == 'oj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ";
 		elif [ "${p_code,,}" == 'om' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oromo | Afaan Oromoo";
@@ -262,7 +384,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'os' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ossetian | Ирон ӕвзаг";
 		  fi
 
-	elif [[ "${p_code}" == p* ]] || [[ "${p_code}" == q* ]]; then
+	elif [[ "${p_code,,}" == p* ]] || [[ "${p_code}" == q* ]]; then
 		  if [ "${p_code,,}" == 'pa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Panjabi | ਪੰਜਾਬੀ ; پنجابی";
 		elif [ "${p_code,,}" == 'pi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pāli | पािऴ";
 		elif [ "${p_code,,}" == 'pl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Polish | Polski";
@@ -271,7 +393,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'qu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Quechua | Runa Simi ; Kichwa";
 		  fi
 
-	elif [[ "${p_code}" == r* ]]; then
+	elif [[ "${p_code,,}" == r* ]]; then
 		  if [ "${p_code,,}" == 'rc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Reunionese | Kréol Rénioné";
 		elif [ "${p_code,,}" == 'rm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romansh | Rumantsch grischun";
 		elif [ "${p_code,,}" == 'rn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirundi | kiRundi";
@@ -280,7 +402,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'rw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kinyarwanda | Kinyarwanda";
 		  fi
 
-	elif [[ "${p_code}" == s* ]]; then
+	elif [[ "${p_code,,}" == s* ]]; then
 		  if [ "${p_code,,}" == 'sa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sanskrit | संस्कृतम्";
 		elif [ "${p_code,,}" == 'sc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sardinian | sardu";
 		elif [ "${p_code,,}" == 'sd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sindhi | सिन्धी ; سنڌي، سندھی";
@@ -302,7 +424,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'sw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swahili | Kiswahili";
 		  fi
 
-	elif [[ "${p_code}" == t* ]]; then
+	elif [[ "${p_code,,}" == t* ]]; then
 		  if [ "${p_code,,}" == 'ta' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tamil | தமிழ்";
 		elif [ "${p_code,,}" == 'te' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Telugu | తెలుగు";
 		elif [ "${p_code,,}" == 'tg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tajik | тоҷикӣ ; toğikī ; تاجیکی";
@@ -319,31 +441,31 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'ty' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tahitian | Reo Mā\`ohi";
 		  fi
 
-	elif [[ "${p_code}" == u* ]]; then
+	elif [[ "${p_code,,}" == u* ]]; then
 		  if [ "${p_code,,}" == 'ug' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uighur | Uyƣurqə ; ئۇيغۇرچ";
 		elif [ "${p_code,,}" == 'uk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ukrainian | українська мова";
 		elif [ "${p_code,,}" == 'ur' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Urdu | اردو";
 		elif [ "${p_code,,}" == 'uz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uzbek | O'zbek ; Ўзбек ; أۇزبېك";
 		  fi
 
-	elif [[ "${p_code}" == v* ]]; then
+	elif [[ "${p_code,,}" == v* ]]; then
 		  if [ "${p_code,,}" == 've' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Venda | tshiVenḓa";
 		elif [ "${p_code,,}" == 'vi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Vietnamese | Tiếng Việt";
 		elif [ "${p_code,,}" == 'vo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Volapük | Volapük";
 		  fi
 
-	elif [[ "${p_code}" == w* ]]; then
+	elif [[ "${p_code,,}" == w* ]]; then
 		  if [ "${p_code,,}" == 'wa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Walloon | Walon";
 		elif [ "${p_code,,}" == 'wo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Wolof | Wollof";
 		  fi
 
-	elif [[ "${p_code}" == x* ]] || [[ "${p_code}" == y* ]]; then
+	elif [[ "${p_code,,}" == x* ]] || [[ "${p_code}" == y* ]]; then
 		  if [ "${p_code,,}" == 'xh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Xhosa | isiXhosa";
 		elif [ "${p_code,,}" == 'yi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yiddish | ייִדיש";
 		elif [ "${p_code,,}" == 'yo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yoruba | Yorùbá";
 		  fi
 
-	elif [[ "${p_code}" == z* ]]; then
+	elif [[ "${p_code,,}" == z* ]]; then
 		  if [ "${p_code,,}" == 'za' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zhuang | Saɯ cueŋƅ ; Saw cuengh";
 		elif [ "${p_code,,}" == 'zh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chinese | 中文, 汉语, 漢語";
 		elif [ "${p_code,,}" == 'zu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zulu | isiZulu";
