@@ -517,10 +517,11 @@ __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/init
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
-# Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
+# Sourcing the "DevTools.lib" file in order to use the "BU.Main.DevTools.ShellcheckVerif()" function.
 # shellcheck disable=SC1091
 source "${__BU_ROOT_PATH}/lib/functions/main/DevTools.lib";
 
+# Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
 # shellcheck disable=SC1091
 source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
@@ -989,7 +990,7 @@ function CompileInSingleFile()
         __compiled_file_path_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
         __compiled_file_path="${__compiled_file_path_parent_dir}/Bash-utils-${v_curr_locale}.sh";
 
-        __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'no') ]]";
+        __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'yes' 'false' 'true' 'true') ]]";
 
         __locale_print_code__error="${__locale_print_code}${__ERROR}";
         __locale_print_code__newstep="${__locale_print_code}${__NEWSTEP}";
@@ -1130,9 +1131,9 @@ function CompileInSingleFile()
         PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'LOWER';
 
         if [ -n "${__compile_stable}" ]; then
-            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'no'))")" 'FULL';
+            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
         else
-            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'no'))")" 'FULL';
+            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
         fi
 
         # --------------------------------------------------------------
@@ -1232,7 +1233,7 @@ function CompileInSingleFile()
             # Adding the newly compiled stable file in the compiled stable files list.
             __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("${__compiled_stable_file_path}");
         fi
-    done; if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'no'))")" 'FULL'; return 1; fi
+    done; if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1; fi
 
     # If the framework was compiled in a stable version.
     if [ -n "${__compile_stable}" ]; then

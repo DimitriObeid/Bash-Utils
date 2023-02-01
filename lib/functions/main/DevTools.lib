@@ -79,7 +79,7 @@ __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions'
 __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
 
 # Writing the error message if a Shellcheck verification failed.
-function BU.Main.DevTools.ShellcheckVerif()
+function BU.Main.DevTools.ShellcheckVerifFailed()
 {
     #**** Parameters ****
     local p_path=${1:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL  - DESC : Path of the file whose Shellcheck verification failed.
@@ -103,7 +103,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     if [ "${__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
         printf "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" "${p_path}"; echo;
 
-        if ! shellcheck "${p_path}"; then BU.Main.DevTools.ShellcheckVerif "${p_path}"; return 1; fi
+        if ! shellcheck "${p_path}"; then BU.Main.DevTools.ShellcheckVerifFailed "${p_path}"; return 1; fi
 
         # shellcheck disable=SC2059
         printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}" "${p_path}"; echo;
