@@ -90,17 +90,17 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	#**** Parameters ****
-	local p_code=${1:-NULL};    # ARG TYPE : ISO 639-1 code			- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
-    local p_print_code=${2:-yes};   	# ARG TYPE : Bool			- REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
-	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+    local p_print_code=${2:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
+	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
 
-	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
-	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
-	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			- REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
 
-    local p_disable_englishNamed=${7:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
-    local p_disable_originalName=${8:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
-    local p_disable_fromUserLang=${9:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
+    local p_disable_englishNamed=${7:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
+    local p_disable_originalName=${8:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
+    local p_disable_fromUserLang=${9:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
 
     #**** Variables ****
     local output;		# VAR TYPE : String		# DESC : Storing the final form of the string to display.
@@ -158,7 +158,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then output="${cod} ${usr} ${eng} ${ori}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then output="${cod} ${usr} ${ori} ${eng}"; valid='true';
 		  fi
-	
+
 	elif 	[[ "${p_dispOrder,,}" == e* ]]; then
 		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then output="${eng} ${cod} ${ori} ${usr}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then output="${eng} ${cod} ${usr} ${ori}"; valid='true';
@@ -167,7 +167,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then output="${eng} ${usr} ${cod} ${ori}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then output="${eng} ${usr} ${ori} ${cod}"; valid='true';
 		  fi
-	
+
 	elif 	[[ "${p_dispOrder,,}" == o* ]]; then
 		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then output="${ori} ${cod} ${eng} ${usr}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then output="${ori} ${cod} ${usr} ${eng}"; valid='true';
@@ -176,7 +176,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then output="${ori} ${usr} ${cod} ${eng}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then output="${ori} ${usr} ${eng} ${cod}"; valid='true';
 		  fi
-	
+
 	elif 	[[ "${p_dispOrder,,}" == u* ]]; then
 		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then output="${usr} ${cod} ${eng} ${ori}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then output="${usr} ${cod} ${ori} ${eng}"; valid='true';
@@ -187,7 +187,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 		  fi
 	fi
 
-	# If an invalid value was passed to the "${p_dispOrder}" parameter, a valid value is 
+	# If an invalid value was passed to the "${p_dispOrder}" parameter, a valid value is
 	# automatically generated by the computer, and the current function is called again.
 	if [ "${valid,,}" != 'true' ]; then
 		#**** Variables ****
@@ -265,7 +265,7 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'ay' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aymara | Aymar aru";
 		elif [ "${p_code,,}" == 'az' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Azerbaijani | Azərbaycan dili";
 		  fi
-	
+
 	elif 	[[ "${p_code,,}" == b* ]]; then
 	  	  if [ "${p_code,,}" == 'ba' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bashkir | башҡорт теле";
 		elif [ "${p_code,,}" == 'be' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Belarusian | Беларуская";
