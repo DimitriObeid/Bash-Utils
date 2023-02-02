@@ -990,7 +990,7 @@ function CompileInSingleFile()
         __compiled_file_path_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
         __compiled_file_path="${__compiled_file_path_parent_dir}/Bash-utils-${v_curr_locale}.sh";
 
-        __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'yes' 'false' 'true' 'true') ]]";
+        __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')]]";
 
         __locale_print_code__error="${__locale_print_code}${__ERROR}";
         __locale_print_code__newstep="${__locale_print_code}${__NEWSTEP}";

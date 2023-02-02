@@ -94,9 +94,9 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local p_print_code=${2:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
 	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
 
-	local p_langNameEngl=${4:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
-	local p_langNameOrig=${5:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
-	local p_langNameUser=${6:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
 
     local p_disable_englishNamed=${7:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
     local p_disable_originalName=${8:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
@@ -110,6 +110,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local eng;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's English name according to the value passed into the "${p_disable_englishNamed}" parameter.
     local ori;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in its own language according to the value passed into the "${p_disable_originalName}" parameter.
     local usr;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in the user's system language according to the value passed into the "${p_disable_fromUserLang}" parameter.
+    local tmp;          # VAR TYPE : CMD        # DESC : Storing a complex command substitution called in the previous "${usr}" variable.
 
 	#**** Code ****
 	# These checkings are temporary. Once the framework will definitely work with a compiled file, these checkings will be moved in the "Args.lib" library file.
@@ -138,52 +139,54 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 
 	# Writing the code to display or not the targeted langage's ISO 639-1 code.
-	cod="$(echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s," "${p_code,,}" || printf '')")";
+	cod="$(echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s, " "${p_code,,}" || printf '')")";
 
 	# Writing the code to display or not the targeted langage's name in English.
-	eng="$(echo -n "$([ "${p_disable_englishNamed,,}" == 'true' ] && printf "%s," "${p_langNameEngl,,}" || printf '')")";
+	eng="$(echo -n "$([ "${p_disable_englishNamed,,}" == 'false' ] && printf "%s, " "${p_langNameEngl,,}" || printf '')")";
 
 	# Writing the code to display or not the targeted langage's name in its own language.
-	ori="$(echo -n "$([ "${p_disable_originalName,,}" == 'true' ] && printf "%s," "${p_langNameOrig,,}" || printf '')")";
+	ori="$(echo -n "$([ "${p_disable_originalName,,}" == 'false' ] && printf "%s, " "${p_langNameOrig,,}" || printf '')")";
 
 	# Writing the code to display or not the targeted language in the user's system language.
-	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'true' ] && printf "%s," "${p_langNameUser,,}" || printf '')")";
+    tmp="$([ "${p_langNameUser^^}" != 'NULL' ] && "${p_langNameUser,,}" || printf "NULL")";
+
+	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'false' ] && printf "%s, " "${tmp}" || printf '')")";
 
 	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" 'Argument.
 	if   	[[ "${p_dispOrder,,}" == c* ]]; then
-		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then output="${cod} ${eng} ${ori} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then output="${cod} ${eng} ${usr} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'cod,ori,eng,usr' ]; then output="${cod} ${ori} ${eng} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'cod,ori usr,eng' ]; then output="${cod} ${ori} ${usr} ${eng}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then output="${cod} ${usr} ${eng} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then output="${cod} ${usr} ${ori} ${eng}"; valid='true';
+		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then output="${cod}${eng}${ori}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then output="${cod}${eng}${usr}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori,eng,usr' ]; then output="${cod}${ori}${eng}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori usr,eng' ]; then output="${cod}${ori}${usr}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then output="${cod}${usr}${eng}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then output="${cod}${usr}${ori}${eng}"; valid='true';
 		  fi
 
 	elif 	[[ "${p_dispOrder,,}" == e* ]]; then
-		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then output="${eng} ${cod} ${ori} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then output="${eng} ${cod} ${usr} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'eng,ori,cod,usr' ]; then output="${eng} ${ori} ${cod} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'eng,ori,usr,cod' ]; then output="${eng} ${ori} ${usr} ${cod}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then output="${eng} ${usr} ${cod} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then output="${eng} ${usr} ${ori} ${cod}"; valid='true';
+		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then output="${eng}${cod}${ori}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then output="${eng}${cod}${usr}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,cod,usr' ]; then output="${eng}${ori}${cod}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,usr,cod' ]; then output="${eng}${ori}${usr}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then output="${eng}${usr}${cod}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then output="${eng}${usr}${ori}${cod}"; valid='true';
 		  fi
 
 	elif 	[[ "${p_dispOrder,,}" == o* ]]; then
-		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then output="${ori} ${cod} ${eng} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then output="${ori} ${cod} ${usr} ${eng}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'ori,eng,cod,usr' ]; then output="${ori} ${eng} ${cod} ${usr}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'ori,eng,usr,cod' ]; then output="${ori} ${eng} ${usr} ${cod}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then output="${ori} ${usr} ${cod} ${eng}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then output="${ori} ${usr} ${eng} ${cod}"; valid='true';
+		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then output="${ori}${cod}${eng}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then output="${ori}${cod}${usr}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,cod,usr' ]; then output="${ori}${eng}${cod}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,usr,cod' ]; then output="${ori}${eng}${usr}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then output="${ori}${usr}${cod}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then output="${ori}${usr}${eng}${cod}"; valid='true';
 		  fi
 
 	elif 	[[ "${p_dispOrder,,}" == u* ]]; then
-		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then output="${usr} ${cod} ${eng} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then output="${usr} ${cod} ${ori} ${eng}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'usr,eng,cod,ori' ]; then output="${usr} ${eng} ${cod} ${ori}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'usr,eng,ori,cod' ]; then output="${usr} ${eng} ${ori} ${cod}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'usr,ori,cod,eng' ]; then output="${usr} ${ori} ${cod} ${eng}"; valid='true';
-		elif [ "${p_dispOrder,,}" == 'usr,ori,eng,cod' ]; then output="${usr} ${ori} ${eng} ${cod}"; valid='true';
+		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then output="${usr}${cod}${eng}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then output="${usr}${cod}${ori}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,cod,ori' ]; then output="${usr}${eng}${cod}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,ori,cod' ]; then output="${usr}${eng}${ori}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,cod,eng' ]; then output="${usr}${ori}${cod}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,eng,cod' ]; then output="${usr}${ori}${eng}${cod}"; valid='true';
 		  fi
 	fi
 
@@ -224,11 +227,14 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 			"${p_disable_fromUserLang}";
 	fi
 
+    # Removing the ", , " sub-string if the displaying of one of the informations is disabled by the user.
+    output="${output// , /,}";
+
+    # Removing the eventual ',,' sub-strings that can be created by the previous operation.
+    output="${output//,,/, }";
+
 	# Removing the extra blank space between two names of the targeted language (if there is more than one blank space between two words, if one of the names of the targeted language was hidden by the user).
 	output="${output//  / }";
-
-    # Removing the ", , " sub-string if the displaying of one of the informations is disabled by the user.
-    output="${output//, ,/,}";
 
 	# Removing the extra / last ', ' from the generated string.
     # shellcheck disable=SC2001
