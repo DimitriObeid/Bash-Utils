@@ -321,20 +321,20 @@ function BU.Main.Locale.PrintLanguageName()
 		  fi
 
 	elif 	[[ "${p_code,,}" == d* ]]; then
-		  if [ "${p_code,,}" == 'da' ]; then BUPLNOptimizer 'Danish'    "Dansk";
-		elif [ "${p_code,,}" == 'de' ]; then BUPLNOptimizer 'German'    "Deutsch";
-		elif [ "${p_code,,}" == 'dv' ]; then BUPLNOptimizer 'Divehi'    "ދިވެހި";
-		elif [ "${p_code,,}" == 'dz' ]; then BUPLNOptimizer 'Dzongkha'  "རྫོང་ཁ";
+		  if [ "${p_code,,}" == 'da' ]; then BUPLNOptimizer 'Danish'            "Dansk";
+		elif [ "${p_code,,}" == 'de' ]; then BUPLNOptimizer 'German'            "Deutsch";
+		elif [ "${p_code,,}" == 'dv' ]; then BUPLNOptimizer 'Divehi'            "ދިވެހި";
+		elif [ "${p_code,,}" == 'dz' ]; then BUPLNOptimizer 'Dzongkha'          "རྫོང་ཁ";
 		  fi
 
 	elif 	[[ "${p_code,,}" == e* ]]; then
-		  if [ "${p_code,,}" == 'ee' ]; then BUPLNOptimizer 'Ewe'       "Ɛʋɛgbɛ";
-		elif [ "${p_code,,}" == 'el' ]; then BUPLNOptimizer 'Greek'     "Ελληνικά";
-		elif [ "${p_code,,}" == 'en' ]; then BUPLNOptimizer 'English'   "English";
-		elif [ "${p_code,,}" == 'eo' ]; then BUPLNOptimizer 'Esperanto' "Esperanto";
-		elif [ "${p_code,,}" == 'es' ]; then BUPLNOptimizer 'Spanish'   "Español";
-		elif [ "${p_code,,}" == 'et' ]; then BUPLNOptimizer 'Estonian'  "Eesti keel";
-		elif [ "${p_code,,}" == 'eu' ]; then BUPLNOptimizer 'Basque'    "Euskara";
+		  if [ "${p_code,,}" == 'ee' ]; then BUPLNOptimizer 'Ewe'               "Ɛʋɛgbɛ";
+		elif [ "${p_code,,}" == 'el' ]; then BUPLNOptimizer 'Greek'             "Ελληνικά";
+		elif [ "${p_code,,}" == 'en' ]; then BUPLNOptimizer 'English'           "English";
+		elif [ "${p_code,,}" == 'eo' ]; then BUPLNOptimizer 'Esperanto'         "Esperanto";
+		elif [ "${p_code,,}" == 'es' ]; then BUPLNOptimizer 'Spanish'           "Español";
+		elif [ "${p_code,,}" == 'et' ]; then BUPLNOptimizer 'Estonian'          "Eesti keel";
+		elif [ "${p_code,,}" == 'eu' ]; then BUPLNOptimizer 'Basque'            "Euskara";
 		  fi
 
 	elif 	[[ "${p_code,,}" == f* ]]; then
@@ -357,28 +357,28 @@ function BU.Main.Locale.PrintLanguageName()
 		  fi
 
 	elif 	[[ "${p_code,,}" == h* ]]; then
-		  if [ "${p_code,,}" == 'ha' ]; then BUPLNOptimizer 'Hausa'     "هَوُسَ";
-		elif [ "${p_code,,}" == 'he' ]; then BUPLNOptimizer 'Hebrew'    "עברית";
-		elif [ "${p_code,,}" == 'hi' ]; then BUPLNOptimizer 'Hindi'     "हिन्दी ; हिंदी";
-		elif [ "${p_code,,}" == 'ho' ]; then BUPLNOptimizer 'Hiri Motu' "Hiri Motu";
-		elif [ "${p_code,,}" == 'hr' ]; then BUPLNOptimizer 'Croatian'  "Hrvatski";
-		elif [ "${p_code,,}" == 'ht' ]; then BUPLNOptimizer 'Haitian'   "Kreyòl ayisyen";
-		elif [ "${p_code,,}" == 'hu' ]; then BUPLNOptimizer 'Hungarian' "magyar ";
-		elif [ "${p_code,,}" == 'hy' ]; then BUPLNOptimizer 'Armenian'  "Հայերեն";
-		elif [ "${p_code,,}" == 'hz' ]; then BUPLNOptimizer 'Herero'    "Otjiherero";
+		  if [ "${p_code,,}" == 'ha' ]; then BUPLNOptimizer 'Hausa'             "هَوُسَ";
+		elif [ "${p_code,,}" == 'he' ]; then BUPLNOptimizer 'Hebrew'            "עברית";
+		elif [ "${p_code,,}" == 'hi' ]; then BUPLNOptimizer 'Hindi'             "हिन्दी ; हिंदी";
+		elif [ "${p_code,,}" == 'ho' ]; then BUPLNOptimizer 'Hiri Motu'         "Hiri Motu";
+		elif [ "${p_code,,}" == 'hr' ]; then BUPLNOptimizer 'Croatian'          "Hrvatski";
+		elif [ "${p_code,,}" == 'ht' ]; then BUPLNOptimizer 'Haitian'           "Kreyòl ayisyen";
+		elif [ "${p_code,,}" == 'hu' ]; then BUPLNOptimizer 'Hungarian'         "magyar";
+		elif [ "${p_code,,}" == 'hy' ]; then BUPLNOptimizer 'Armenian'          "Հայերեն";
+		elif [ "${p_code,,}" == 'hz' ]; then BUPLNOptimizer 'Herero'            "Otjiherero";
 		  fi
 
 	elif 	[[ "${p_code,,}" == i* ]]; then
-		  if [ "${p_code,,}" == 'ia' ]; then BUPLNOptimizer 'Interlingua'   "Interlingua";
-		elif [ "${p_code,,}" == 'id' ]; then BUPLNOptimizer 'Indonesian'    "Bahasa Indonesia";
-		elif [ "${p_code,,}" == 'ie' ]; then BUPLNOptimizer 'Interlingue'   "Interlingue";
-		elif [ "${p_code,,}" == 'ig' ]; then BUPLNOptimizer 'Igbo'          "Igbo";
-		elif [ "${p_code,,}" == 'ii' ]; then BUPLNOptimizer 'Sichuan Yi'    "ꆇꉙ";
-		elif [ "${p_code,,}" == 'ik' ]; then BUPLNOptimizer 'Inupiaq'       "Iñupiaq ; Iñupiatun";
-		elif [ "${p_code,,}" == 'io' ]; then BUPLNOptimizer 'Ido'           "Ido";
-		elif [ "${p_code,,}" == 'is' ]; then BUPLNOptimizer 'Icelandic'     "Íslenska";
-		elif [ "${p_code,,}" == 'it' ]; then BUPLNOptimizer 'Italian'       "Italiano";
-		elif [ "${p_code,,}" == 'iu' ]; then BUPLNOptimizer 'Inuktitut'     "ᐃᓄᒃᑎᑐᑦ";
+		  if [ "${p_code,,}" == 'ia' ]; then BUPLNOptimizer 'Interlingua'       "Interlingua";
+		elif [ "${p_code,,}" == 'id' ]; then BUPLNOptimizer 'Indonesian'        "Bahasa Indonesia";
+		elif [ "${p_code,,}" == 'ie' ]; then BUPLNOptimizer 'Interlingue'       "Interlingue";
+		elif [ "${p_code,,}" == 'ig' ]; then BUPLNOptimizer 'Igbo'              "Igbo";
+		elif [ "${p_code,,}" == 'ii' ]; then BUPLNOptimizer 'Sichuan Yi'        "ꆇꉙ";
+		elif [ "${p_code,,}" == 'ik' ]; then BUPLNOptimizer 'Inupiaq'           "Iñupiaq ; Iñupiatun";
+		elif [ "${p_code,,}" == 'io' ]; then BUPLNOptimizer 'Ido'               "Ido";
+		elif [ "${p_code,,}" == 'is' ]; then BUPLNOptimizer 'Icelandic'         "Íslenska";
+		elif [ "${p_code,,}" == 'it' ]; then BUPLNOptimizer 'Italian'           "Italiano";
+		elif [ "${p_code,,}" == 'iu' ]; then BUPLNOptimizer 'Inuktitut'         "ᐃᓄᒃᑎᑐᑦ";
 		  fi
 
 	elif 	[[ "${p_code,,}" == j* ]]; then
@@ -445,98 +445,98 @@ function BU.Main.Locale.PrintLanguageName()
 		  fi
 
 	elif 	[[ "${p_code,,}" == o* ]]; then
-		  if [ "${p_code,,}" == 'oc' ]; then BUPLNOptimizer 'Occitan'     "Occitan";
-		elif [ "${p_code,,}" == 'oj' ]; then BUPLNOptimizer 'Ojibwa'      "ᐊᓂᔑᓈᐯᒧᐎᓐ";
-		elif [ "${p_code,,}" == 'om' ]; then BUPLNOptimizer 'Oromo'       "Afaan Oromoo";
-		elif [ "${p_code,,}" == 'or' ]; then BUPLNOptimizer 'Oriya'       "ଓଡ଼ିଆ";
-		elif [ "${p_code,,}" == 'os' ]; then BUPLNOptimizer 'Ossetian'    "Ирон ӕвзаг";
+		  if [ "${p_code,,}" == 'oc' ]; then BUPLNOptimizer 'Occitan'           "Occitan";
+		elif [ "${p_code,,}" == 'oj' ]; then BUPLNOptimizer 'Ojibwa'            "ᐊᓂᔑᓈᐯᒧᐎᓐ";
+		elif [ "${p_code,,}" == 'om' ]; then BUPLNOptimizer 'Oromo'             "Afaan Oromoo";
+		elif [ "${p_code,,}" == 'or' ]; then BUPLNOptimizer 'Oriya'             "ଓଡ଼ିଆ";
+		elif [ "${p_code,,}" == 'os' ]; then BUPLNOptimizer 'Ossetian'          "Ирон ӕвзаг";
 		  fi
 
 	elif 	[[ "${p_code,,}" == p* ]] || [[ "${p_code}" == q* ]]; then
-		  if [ "${p_code,,}" == 'pa' ]; then BUPLNOptimizer 'Panjabi'     "ਪੰਜਾਬੀ ; پنجابی";
-		elif [ "${p_code,,}" == 'pi' ]; then BUPLNOptimizer 'Pāli'        "पािऴ";
-		elif [ "${p_code,,}" == 'pl' ]; then BUPLNOptimizer 'Polish'      "Polski";
-		elif [ "${p_code,,}" == 'ps' ]; then BUPLNOptimizer 'Pashto'      "پښتو";
-		elif [ "${p_code,,}" == 'pt' ]; then BUPLNOptimizer 'Portuguese'  "Português";
-		elif [ "${p_code,,}" == 'qu' ]; then BUPLNOptimizer 'Quechua'     "Runa Simi ; Kichwa";
+		  if [ "${p_code,,}" == 'pa' ]; then BUPLNOptimizer 'Panjabi'           "ਪੰਜਾਬੀ ; پنجابی";
+		elif [ "${p_code,,}" == 'pi' ]; then BUPLNOptimizer 'Pāli'              "पािऴ";
+		elif [ "${p_code,,}" == 'pl' ]; then BUPLNOptimizer 'Polish'            "Polski";
+		elif [ "${p_code,,}" == 'ps' ]; then BUPLNOptimizer 'Pashto'            "پښتو";
+		elif [ "${p_code,,}" == 'pt' ]; then BUPLNOptimizer 'Portuguese'        "Português";
+		elif [ "${p_code,,}" == 'qu' ]; then BUPLNOptimizer 'Quechua'           "Runa Simi ; Kichwa";
 		  fi
 
 	elif 	[[ "${p_code,,}" == r* ]]; then
-		  if [ "${p_code,,}" == 'rc' ]; then BUPLNOptimizer 'Reunionese'  "Kréol Rénioné";
-		elif [ "${p_code,,}" == 'rm' ]; then BUPLNOptimizer 'Romansh'     "Rumantsch grischun";
-		elif [ "${p_code,,}" == 'rn' ]; then BUPLNOptimizer 'Kirundi'     "kiRundi";
-		elif [ "${p_code,,}" == 'ro' ]; then BUPLNOptimizer 'Romanian'    "Română";
-		elif [ "${p_code,,}" == 'ru' ]; then BUPLNOptimizer 'Russian'     "русский язык";
-		elif [ "${p_code,,}" == 'rw' ]; then BUPLNOptimizer 'Kinyarwanda' "Kinyarwanda";
+		  if [ "${p_code,,}" == 'rc' ]; then BUPLNOptimizer 'Reunionese'        "Kréol Rénioné";
+		elif [ "${p_code,,}" == 'rm' ]; then BUPLNOptimizer 'Romansh'           "Rumantsch grischun";
+		elif [ "${p_code,,}" == 'rn' ]; then BUPLNOptimizer 'Kirundi'           "kiRundi";
+		elif [ "${p_code,,}" == 'ro' ]; then BUPLNOptimizer 'Romanian'          "Română";
+		elif [ "${p_code,,}" == 'ru' ]; then BUPLNOptimizer 'Russian'           "русский язык";
+		elif [ "${p_code,,}" == 'rw' ]; then BUPLNOptimizer 'Kinyarwanda'       "Kinyarwanda";
 		  fi
 
 	elif 	[[ "${p_code,,}" == s* ]]; then
-		  if [ "${p_code,,}" == 'sa' ]; then BUPLNOptimizer 'Sanskrit'        "संस्कृतम्";
-		elif [ "${p_code,,}" == 'sc' ]; then BUPLNOptimizer 'Sardinian'       "sardu";
-		elif [ "${p_code,,}" == 'sd' ]; then BUPLNOptimizer 'Sindhi'          "सिन्धी ; سنڌي، سندھی";
-		elif [ "${p_code,,}" == 'se' ]; then BUPLNOptimizer 'Northern Sami'   "Davvisámegiella";
-		elif [ "${p_code,,}" == 'sg' ]; then BUPLNOptimizer 'Sango'           "Yângâ tî sängö";
-		elif [ "${p_code,,}" == 'sh' ]; then BUPLNOptimizer 'Serbo-Croatian'  "srpskohrvatski jezik ; српскохрватски језик";
-		elif [ "${p_code,,}" == 'si' ]; then BUPLNOptimizer 'Sinhalese'       "සිංහල";
-		elif [ "${p_code,,}" == 'sk' ]; then BUPLNOptimizer 'Slovak'          "Slovenčina";
-		elif [ "${p_code,,}" == 'sl' ]; then BUPLNOptimizer 'Slovenian'       "Slovenščina";
-		elif [ "${p_code,,}" == 'sm' ]; then BUPLNOptimizer 'Samoan'          "Gagana fa'a Samoa";
-		elif [ "${p_code,,}" == 'sn' ]; then BUPLNOptimizer 'Shona'           "chiShona";
-		elif [ "${p_code,,}" == 'so' ]; then BUPLNOptimizer 'Somali'          "Soomaaliga ; af Soomaali";
-		elif [ "${p_code,,}" == 'sq' ]; then BUPLNOptimizer 'Albanian'        "Shqip ";
-		elif [ "${p_code,,}" == 'sr' ]; then BUPLNOptimizer 'Serbian'         "српски језик";
-		elif [ "${p_code,,}" == 'ss' ]; then BUPLNOptimizer 'Swati'           "SiSwati";
-		elif [ "${p_code,,}" == 'st' ]; then BUPLNOptimizer 'Sotho'           "seSotho";
-		elif [ "${p_code,,}" == 'su' ]; then BUPLNOptimizer 'Sundanese'       "Basa Sunda";
-		elif [ "${p_code,,}" == 'sv' ]; then BUPLNOptimizer 'Swedish'         "Svenska";
-		elif [ "${p_code,,}" == 'sw' ]; then BUPLNOptimizer 'Swahili'         "Kiswahili";
+		  if [ "${p_code,,}" == 'sa' ]; then BUPLNOptimizer 'Sanskrit'          "संस्कृतम्";
+		elif [ "${p_code,,}" == 'sc' ]; then BUPLNOptimizer 'Sardinian'         "sardu";
+		elif [ "${p_code,,}" == 'sd' ]; then BUPLNOptimizer 'Sindhi'            "सिन्धी ; سنڌي، سندھی";
+		elif [ "${p_code,,}" == 'se' ]; then BUPLNOptimizer 'Northern Sami'     "Davvisámegiella";
+		elif [ "${p_code,,}" == 'sg' ]; then BUPLNOptimizer 'Sango'             "Yângâ tî sängö";
+		elif [ "${p_code,,}" == 'sh' ]; then BUPLNOptimizer 'Serbo-Croatian'    "srpskohrvatski jezik ; српскохрватски језик";
+		elif [ "${p_code,,}" == 'si' ]; then BUPLNOptimizer 'Sinhalese'         "සිංහල";
+		elif [ "${p_code,,}" == 'sk' ]; then BUPLNOptimizer 'Slovak'            "Slovenčina";
+		elif [ "${p_code,,}" == 'sl' ]; then BUPLNOptimizer 'Slovenian'         "Slovenščina";
+		elif [ "${p_code,,}" == 'sm' ]; then BUPLNOptimizer 'Samoan'            "Gagana fa'a Samoa";
+		elif [ "${p_code,,}" == 'sn' ]; then BUPLNOptimizer 'Shona'             "chiShona";
+		elif [ "${p_code,,}" == 'so' ]; then BUPLNOptimizer 'Somali'            "Soomaaliga ; af Soomaali";
+		elif [ "${p_code,,}" == 'sq' ]; then BUPLNOptimizer 'Albanian'          "Shqip ";
+		elif [ "${p_code,,}" == 'sr' ]; then BUPLNOptimizer 'Serbian'           "српски језик";
+		elif [ "${p_code,,}" == 'ss' ]; then BUPLNOptimizer 'Swati'             "SiSwati";
+		elif [ "${p_code,,}" == 'st' ]; then BUPLNOptimizer 'Sotho'             "seSotho";
+		elif [ "${p_code,,}" == 'su' ]; then BUPLNOptimizer 'Sundanese'         "Basa Sunda";
+		elif [ "${p_code,,}" == 'sv' ]; then BUPLNOptimizer 'Swedish'           "Svenska";
+		elif [ "${p_code,,}" == 'sw' ]; then BUPLNOptimizer 'Swahili'           "Kiswahili";
 		  fi
 
 	elif 	[[ "${p_code,,}" == t* ]]; then
-		  if [ "${p_code,,}" == 'ta' ]; then BUPLNOptimizer 'Tamil'       "தமிழ்";
-		elif [ "${p_code,,}" == 'te' ]; then BUPLNOptimizer 'Telugu'      "తెలుగు";
-		elif [ "${p_code,,}" == 'tg' ]; then BUPLNOptimizer 'Tajik'       "тоҷикӣ ; toğikī ; تاجیکی";
-		elif [ "${p_code,,}" == 'th' ]; then BUPLNOptimizer 'Thai'        "ไทย";
-		elif [ "${p_code,,}" == 'ti' ]; then BUPLNOptimizer 'Tigrinya'    "ትግርኛ";
-		elif [ "${p_code,,}" == 'tk' ]; then BUPLNOptimizer 'Turkmen'     "Türkmen ; Түркмен";
-		elif [ "${p_code,,}" == 'tl' ]; then BUPLNOptimizer 'Tagalog'     "Tagalog";
-		elif [ "${p_code,,}" == 'tn' ]; then BUPLNOptimizer 'Tswana'      "seTswana";
-		elif [ "${p_code,,}" == 'to' ]; then BUPLNOptimizer 'Tonga'       "faka Tonga";
-		elif [ "${p_code,,}" == 'tr' ]; then BUPLNOptimizer 'Turkish'     "Türkçe";
-		elif [ "${p_code,,}" == 'ts' ]; then BUPLNOptimizer 'Tsonga'      "xiTsonga";
-		elif [ "${p_code,,}" == 'tt' ]; then BUPLNOptimizer 'Tatar'       "татарча ; tatarça ; تاتارچا";
-		elif [ "${p_code,,}" == 'tw' ]; then BUPLNOptimizer 'Twi'         "Twi";
-		elif [ "${p_code,,}" == 'ty' ]; then BUPLNOptimizer 'Tahitian'    'Reo Mā`ohi';
+		  if [ "${p_code,,}" == 'ta' ]; then BUPLNOptimizer 'Tamil'         "தமிழ்";
+		elif [ "${p_code,,}" == 'te' ]; then BUPLNOptimizer 'Telugu'        "తెలుగు";
+		elif [ "${p_code,,}" == 'tg' ]; then BUPLNOptimizer 'Tajik'         "тоҷикӣ ; toğikī ; تاجیکی";
+		elif [ "${p_code,,}" == 'th' ]; then BUPLNOptimizer 'Thai'          "ไทย";
+		elif [ "${p_code,,}" == 'ti' ]; then BUPLNOptimizer 'Tigrinya'      "ትግርኛ";
+		elif [ "${p_code,,}" == 'tk' ]; then BUPLNOptimizer 'Turkmen'       "Türkmen ; Түркмен";
+		elif [ "${p_code,,}" == 'tl' ]; then BUPLNOptimizer 'Tagalog'       "Tagalog";
+		elif [ "${p_code,,}" == 'tn' ]; then BUPLNOptimizer 'Tswana'        "seTswana";
+		elif [ "${p_code,,}" == 'to' ]; then BUPLNOptimizer 'Tonga'         "faka Tonga";
+		elif [ "${p_code,,}" == 'tr' ]; then BUPLNOptimizer 'Turkish'       "Türkçe";
+		elif [ "${p_code,,}" == 'ts' ]; then BUPLNOptimizer 'Tsonga'        "xiTsonga";
+		elif [ "${p_code,,}" == 'tt' ]; then BUPLNOptimizer 'Tatar'         "татарча ; tatarça ; تاتارچا";
+		elif [ "${p_code,,}" == 'tw' ]; then BUPLNOptimizer 'Twi'           "Twi";
+		elif [ "${p_code,,}" == 'ty' ]; then BUPLNOptimizer 'Tahitian'      'Reo Mā`ohi';
 		  fi
 
 	elif 	[[ "${p_code,,}" == u* ]]; then
-		  if [ "${p_code,,}" == 'ug' ]; then BUPLNOptimizer 'Uighur'      "Uyƣurqə ; ئۇيغۇرچ";
-		elif [ "${p_code,,}" == 'uk' ]; then BUPLNOptimizer 'Ukrainian'   "українська мова";
-		elif [ "${p_code,,}" == 'ur' ]; then BUPLNOptimizer 'Urdu'        "اردو";
-		elif [ "${p_code,,}" == 'uz' ]; then BUPLNOptimizer 'Uzbek'       "O'zbek ; Ўзбек; أۇزبېك";
+		  if [ "${p_code,,}" == 'ug' ]; then BUPLNOptimizer 'Uighur'        "Uyƣurqə ; ئۇيغۇرچ";
+		elif [ "${p_code,,}" == 'uk' ]; then BUPLNOptimizer 'Ukrainian'     "українська мова";
+		elif [ "${p_code,,}" == 'ur' ]; then BUPLNOptimizer 'Urdu'          "اردو";
+		elif [ "${p_code,,}" == 'uz' ]; then BUPLNOptimizer 'Uzbek'         "O'zbek ; Ўзбек; أۇزبېك";
 		  fi
 
 	elif 	[[ "${p_code,,}" == v* ]]; then
-		  if [ "${p_code,,}" == 've' ]; then BUPLNOptimizer 'Venda' "tshiVenḓa";
-		elif [ "${p_code,,}" == 'vi' ]; then BUPLNOptimizer 'Vietnamese' "Tiếng Việt";
-		elif [ "${p_code,,}" == 'vo' ]; then BUPLNOptimizer 'Volapük' "Volapük";
+		  if [ "${p_code,,}" == 've' ]; then BUPLNOptimizer 'Venda'         "tshiVenḓa";
+		elif [ "${p_code,,}" == 'vi' ]; then BUPLNOptimizer 'Vietnamese'    "Tiếng Việt";
+		elif [ "${p_code,,}" == 'vo' ]; then BUPLNOptimizer 'Volapük'       "Volapük";
 		  fi
 
 	elif 	[[ "${p_code,,}" == w* ]]; then
-		  if [ "${p_code,,}" == 'wa' ]; then BUPLNOptimizer 'Walloon' "Walon";
-		elif [ "${p_code,,}" == 'wo' ]; then BUPLNOptimizer 'Wolof' "Wollof";
+		  if [ "${p_code,,}" == 'wa' ]; then BUPLNOptimizer 'Walloon'       "Walon";
+		elif [ "${p_code,,}" == 'wo' ]; then BUPLNOptimizer 'Wolof'         "Wollof";
 		  fi
 
 	elif 	[[ "${p_code,,}" == x* ]] || [[ "${p_code}" == y* ]]; then
-		  if [ "${p_code,,}" == 'xh' ]; then BUPLNOptimizer 'Xhosa' "isiXhosa";
-		elif [ "${p_code,,}" == 'yi' ]; then BUPLNOptimizer 'Yiddish' "ייִדיש";
-		elif [ "${p_code,,}" == 'yo' ]; then BUPLNOptimizer 'Yoruba' "Yorùbá";
+		  if [ "${p_code,,}" == 'xh' ]; then BUPLNOptimizer 'Xhosa'         "isiXhosa";
+		elif [ "${p_code,,}" == 'yi' ]; then BUPLNOptimizer 'Yiddish'       "ייִדיש";
+		elif [ "${p_code,,}" == 'yo' ]; then BUPLNOptimizer 'Yoruba'        "Yorùbá";
 		  fi
 
 	elif 	[[ "${p_code,,}" == z* ]]; then
-		  if [ "${p_code,,}" == 'za' ]; then BUPLNOptimizer 'Zhuang' "Saɯ cueŋƅ ; Saw cuengh";
-		elif [ "${p_code,,}" == 'zh' ]; then BUPLNOptimizer 'Chinese' "中文, 汉语, 漢語";
-		elif [ "${p_code,,}" == 'zu' ]; then BUPLNOptimizer 'Zulu' "isiZulu";
+		  if [ "${p_code,,}" == 'za' ]; then BUPLNOptimizer 'Zhuang'        "Saɯ cueŋƅ ; Saw cuengh";
+		elif [ "${p_code,,}" == 'zh' ]; then BUPLNOptimizer 'Chinese'       "中文, 汉语, 漢語";
+		elif [ "${p_code,,}" == 'zu' ]; then BUPLNOptimizer 'Zulu'          "isiZulu";
 		  fi
 	fi;
 
