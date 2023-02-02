@@ -149,6 +149,8 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	# Writing the code to display or not the targeted language in the user's system language.
 	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'true' ] && printf "%s," "${p_langNameUser,,}" || printf '')")";
 
+    echo "Salut depuis la fonction ${FUNCNAME[0]}";
+
 	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" 'Argument.
 	if   	[[ "${p_dispOrder,,}" == c* ]]; then
 		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then output="${cod} ${eng} ${ori} ${usr}"; valid='true';
@@ -244,7 +246,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 # shellcheck disable=SC2154
 function BU.Main.Locale.PrintLanguageName()
-(
+({
 	#**** Parameters ****
 	local p_code=${1:-NULL};        # ARG TYPE : ISO 639-1 code		- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
 	local p_dispOrder=${2:-NULL};	# ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
@@ -258,12 +260,34 @@ function BU.Main.Locale.PrintLanguageName()
     # Reducing the text to write in order to call the "$(BU.Main.Locale.PrintLanguageName.Optimize)" function.
 
     # Thanks to the "BU.Main.Locale.PrintLanguageName()" function's body being written between parenthesis instead of braces, the scope of the "BUPLNOptimizer()" function is local only.
-    function BUPLNOptimizer() {
+    function BUPLNOptimizer()
+    {
         #**** Parameters ****
-        local p_langNameEngl="${1:-}";
-        local p_langNameOrig="${2:-}";
+        local p_langNameEngl="${1:-NULL}";
+        local p_langNameOrig="${2:-NULL}";
 
         #**** Code ****
+        echo; echo;
+
+        echo "${FUNCNAME[0]}() FUNCTION'S DATA :"; echo;
+        echo "LANG CODE     : ${p_code}";
+        echo "PRINT CODE    : ${p_print_code}";
+        echo "DISP ORDER    : ${p_dispOrder}";
+        echo;
+
+        echo "LANG ENG      : ${p_langNameEngl}";
+        echo "LANG ORI      : ${p_langNameOrig}";
+        echo "LANG USR      : ${!__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__$(echo "${p_langNameEngl}" | tr '[:lower:]' '[:upper:]')}";
+        echo;
+
+        echo "DIS ENG       : ${p_disable_englishNamed}";
+        echo "DIS ORI       : ${p_disable_originalName}";
+        echo "DIS SYS       : ${p_disable_fromUserLang}";
+        echo;
+
+        echo "Salut depuis la fonction ${FUNCNAME[0]}(), située dans la fonction ${FUNCNAME[1]}";
+        echo;
+
         BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
         "${p_print_code}" \
         "${p_dispOrder}" \
@@ -272,7 +296,7 @@ function BU.Main.Locale.PrintLanguageName()
         "${!__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__$(echo "${p_langNameEngl}" | tr '[:lower:]' '[:upper:]')}" \
         "${p_disable_englishNamed}" \
         "${p_disable_originalName}" \
-        "${p_disable_fromUserLang}";
+        "${p_disable_fromUserLang}" || { echo "FAILED" >&2; return 1; };
 
         return 0;
     }
@@ -541,7 +565,7 @@ function BU.Main.Locale.PrintLanguageName()
 	fi;
 
 	return 0;
-)
+})
 
 # -----------------------------------------------
 
