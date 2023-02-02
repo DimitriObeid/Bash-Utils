@@ -86,6 +86,37 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
     return 1;
 }
 
+# Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources.
+function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()
+{
+    #**** Parameters ****
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+
+	local p_langNameEngl=${2:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${3:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+
+    #**** Code ****
+	if [ "${p_code^^}" == 'NULL' ]; then echo "MISSING ISO 639-1 CODE"; return 1; fi
+
+	# Checking if a valid ISO 639-1 code was passed as first argument.
+	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
+
+	# Checking if the name of the target language in English was passed as 4th argument.
+	if [ "${p_langNameEngl^^}" == 'NULL' ]; then echo "MISSING TARGET LANGUAGE'S NAME : ENGLISH"; return 1; fi
+
+	# Checking if the name of the target language in the user's system language was passed as 5th argument.
+	if [ "${p_langNameOrig^^}" == 'NULL' ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
+
+
+
+
+
+	# Checking if the name of the target language in its own language was passed as 6th argument (only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources).
+	if [[ "${0,,}" != ?(./)*lib-compiler.?(ba)sh ]] && [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ITS OWN LANGUAGE"; echo "FILE : ${0,,}"; return 1; fi
+
+    return 0;
+}
+
 # Optimizing the "BU.Main.Locale.PrintLanguageName()" function's code, in order to avoid to modify manually the code and the rendered layout for each of the 200+ supported languages.
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
@@ -113,20 +144,11 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local tmp;          # VAR TYPE : CMD        # DESC : Storing a complex command substitution called in the previous "${usr}" variable.
 
 	#**** Code ****
-	# These checkings are temporary. Once the framework will definitely work with a compiled file, these checkings will be moved in the "Args.lib" library file.
-	if [ -z "${p_code}" ]; then echo "MISSING ISO 639-1 CODE"; return 1; fi
-
-	# Checking if a valid ISO 639-1 code was passed as first argument.
-	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
-
-	# Checking if the name of the target language in English was passed as 4th argument.
-	if [ -z "${p_langNameEngl}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ENGLISH"; return 1; fi
-
-	# Checking if the name of the target language in the user's system language was passed as 5th argument.
-	if [ -z "${p_langNameOrig}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
-
-	# Checking if the name of the target language in its own language was passed as 6th argument (only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources).
-	if [[ "${0,,}" != ?(./)*lib-compiler.?(ba)sh ]] && [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ITS OWN LANGUAGE"; echo "FILE : ${0,,}"; return 1; fi
+    if [[ "${0,,}" != ?(./)*lib-compiler.?(ba)sh ]]; then
+        if ! BU.Main.Args__Locale.PrintLanguageName.Optimize "${p_code}" "${p_langNameEngl}" "${p_langNameOrig}" "${p_langNameUser}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))"; then local C="${?}"; return "${C}"; fi
+    else
+        BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler "${p_code}" "${p_langNameEngl}" "${p_langNameOrig}" || { local C="${?}"; return "${C}"; };
+    fi
 
 	# Checking if a boolean value was passed in the "${p_disable_fromUserLang}" parameter.
 	if [ "${p_disable_fromUserLang}" != 'false' ] && [ "${p_disable_fromUserLang}" != 'true' ]; then p_disable_fromUserLang='false'; fi

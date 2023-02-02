@@ -1751,12 +1751,54 @@ function BU.Main.Args__Filesystem.ChownRec()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### MAIN MODULE'S "" FILE'S FUNCTIONS
+
+## CATEGORY :
+
+# "BU.Main.Locale.PrintLanguageName.Optimize()" function.
+function BU.Main.Args__Locale.PrintLanguageName.Optimize()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+	local p_langNameEngl=${2:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${3:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+
+    local p_filename=${5:-$'\0'};       # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${6:-$'\0'};       # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${7:-$'\0'};         # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
+
+    #**** Code ****
+    BU.Main.Args.GetArgc-FFL "${#}" '7' "${p_filename}" "${p_funcname}" "${p_lineno}";
+
+    if [ "${p_code^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then local lineno="${LINENO}";
+        false;
+    fi
+
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### MAIN MODULE'S "Text.lib" FILE'S FUNCTIONS
 
 ## MULTI-CATEGORY FUNCTIONS :
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# Functions :
+# Supported functions :
 #	- BU.Main.Text.CutFirstFieldBeforeDelim()
 #	- BU.Main.Text.CutLastFieldAfterDelim()
 #	- BU.Main.Text.GetFirstFieldBeforeDelim()
