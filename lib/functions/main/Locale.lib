@@ -94,9 +94,9 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local p_print_code=${2:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
 	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
 
-	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
-	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
-	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+	local p_langNameEngl=${4:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${5:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${6:-$'\0'};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
 
     local p_disable_englishNamed=${7:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
     local p_disable_originalName=${8:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
@@ -118,14 +118,14 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	# Checking if a valid ISO 639-1 code was passed as first argument.
 	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
 
-	# Checking if the name of the target language in the user's system language was passed as 4th argument.
-	if [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
-
-	# Checking if the name of the target language in English was passed as 5th argument.
+	# Checking if the name of the target language in English was passed as 4th argument.
 	if [ -z "${p_langNameEngl}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ENGLISH"; return 1; fi
 
+	# Checking if the name of the target language in the user's system language was passed as 5th argument.
+	if [ -z "${p_langNameOrig}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
+
 	# Checking if the name of the target language in its own language was passed as 6th argument (only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources).
-	if [[ "${0}" != ?(./)lib-compiler.sh ]] && [ -z "${p_langNameOrig}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ITS OWN LANGUAGE"; return 1; fi
+	if [[ "${0,,}" != ?(./)*lib-compiler.?(ba)sh ]] && [ -z "${p_langNameUser}" ]; then echo "MISSING TARGET LANGUAGE'S NAME : ITS OWN LANGUAGE"; echo "FILE : ${0,,}"; return 1; fi
 
 	# Checking if a boolean value was passed in the "${p_disable_fromUserLang}" parameter.
 	if [ "${p_disable_fromUserLang}" != 'false' ] && [ "${p_disable_fromUserLang}" != 'true' ]; then p_disable_fromUserLang='false'; fi
@@ -148,8 +148,6 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 	# Writing the code to display or not the targeted language in the user's system language.
 	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'true' ] && printf "%s," "${p_langNameUser,,}" || printf '')")";
-
-    echo "Salut depuis la fonction ${FUNCNAME[0]}";
 
 	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" 'Argument.
 	if   	[[ "${p_dispOrder,,}" == c* ]]; then
@@ -229,6 +227,9 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	# Removing the extra blank space between two names of the targeted language (if there is more than one blank space between two words, if one of the names of the targeted language was hidden by the user).
 	output="${output//  / }";
 
+    # Removing the ", , " sub-string if the displaying of one of the informations is disabled by the user.
+    output="${output//, ,/,}";
+
 	# Removing the extra / last ', ' from the generated string.
     # shellcheck disable=SC2001
 	output="$(echo "${output}" | sed 's/, $//')";
@@ -249,7 +250,7 @@ function BU.Main.Locale.PrintLanguageName()
 ({
 	#**** Parameters ****
 	local p_code=${1:-NULL};        # ARG TYPE : ISO 639-1 code		- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
-	local p_dispOrder=${2:-NULL};	# ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
+	local p_dispOrder=${2:-$'\0'};  # ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
     local p_print_code=${3:-yes};   # ARG TYPE : Bool				- OPTIONAL | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
 
     local p_disable_englishNamed=${4:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
@@ -266,34 +267,45 @@ function BU.Main.Locale.PrintLanguageName()
         local p_langNameEngl="${1:-NULL}";
         local p_langNameOrig="${2:-NULL}";
 
+        #**** Variables ****
+        local v_varnameBase="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__";
+        local v_varNameFull="${v_varnameBase}${p_langNameEngl^^}";
+
         #**** Code ****
-        echo; echo;
+        # The following commented lines are used as test / debug procedures.
+        # Please leave them commented if you are not debugging the code of the "BU.Main.Locale.PrintLanguageName/.Optimize()" and "BUPLNOptimizer()" functions.
 
-        echo "${FUNCNAME[0]}() FUNCTION'S DATA :"; echo;
-        echo "LANG CODE     : ${p_code}";
-        echo "PRINT CODE    : ${p_print_code}";
-        echo "DISP ORDER    : ${p_dispOrder}";
-        echo;
-
-        echo "LANG ENG      : ${p_langNameEngl}";
-        echo "LANG ORI      : ${p_langNameOrig}";
-        echo "LANG USR      : ${!__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__$(echo "${p_langNameEngl}" | tr '[:lower:]' '[:upper:]')}";
-        echo;
-
-        echo "DIS ENG       : ${p_disable_englishNamed}";
-        echo "DIS ORI       : ${p_disable_originalName}";
-        echo "DIS SYS       : ${p_disable_fromUserLang}";
-        echo;
-
-        echo "Salut depuis la fonction ${FUNCNAME[0]}(), située dans la fonction ${FUNCNAME[1]}";
-        echo;
+        # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value,
+        # since the main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
+#         __BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__FRENCH="FRANÇAISE";
+#
+#         echo; echo;
+#
+#         echo "${FUNCNAME[0]}() FUNCTION'S DATA :"; echo;
+#         echo "LANG CODE     : ${p_code}";
+#         echo "PRINT CODE    : ${p_print_code}";
+#         echo "DISP ORDER    : ${p_dispOrder}";
+#         echo;
+#
+#         echo "LANG ENG      : ${p_langNameEngl}";
+#         echo "LANG ORI      : ${p_langNameOrig}";
+#         echo "LANG USR      : ${!v_varNameFull}";
+#         echo;
+#
+#         echo "DIS ENG       : ${p_disable_englishNamed}";
+#         echo "DIS ORI       : ${p_disable_originalName}";
+#         echo "DIS SYS       : ${p_disable_fromUserLang}";
+#         echo;
+#
+#         echo "Salut depuis la fonction ${FUNCNAME[0]}(), située dans la fonction ${FUNCNAME[1]}";
+#         echo;
 
         BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
         "${p_print_code}" \
         "${p_dispOrder}" \
         "${p_langNameEngl}" \
         "${p_langNameOrig}" \
-        "${!__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__$(echo "${p_langNameEngl}" | tr '[:lower:]' '[:upper:]')}" \
+        "${!v_varNameFull}" \
         "${p_disable_englishNamed}" \
         "${p_disable_originalName}" \
         "${p_disable_fromUserLang}" || { echo "FAILED" >&2; return 1; };
