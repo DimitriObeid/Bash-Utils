@@ -165,7 +165,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     # Else, if the value passed as argument is not an alphabetic character.
-    elif [ "${p_option,,}" == '!alphachar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)char ]]; then
         BU.Main.Errors.HandleErrors '1' \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -175,7 +175,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string.
-    elif [ "${p_option,,}" == '!alphastr' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)str?(ing) ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -185,7 +185,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string OR character.
-    elif [ "${p_option,,}" == '!alphastrchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)str?(ing)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -195,7 +195,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric character.
-    elif [ "${p_option,,}" == '!alphanumchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -205,7 +205,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
-    elif [ "${p_option,,}" == '!alphanumstr' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)str ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -215,9 +215,19 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string OR character.
-    elif [ "${p_option,,}" == '!alphanumstrchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)str?(ing)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+
+    # Else, if the value passed as argument is not a boolean.
+    elif [ "${p_option,,}" == '!bool' ]; then
+        BU.Main.Errors.HandleErrors "1" \
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A BOOLEAN" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -235,7 +245,7 @@ function BU.Main.Args.PrintBadOption()
         return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
-    elif [ "${p_option,,}" == '!d' ]; then
+    elif [[ "${p_option,,}" == !d?(ir?(ectory)) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -245,7 +255,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_DIR}";
 
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
-    elif [ "${p_option,,}" == '!df' ]; then
+    elif [[ "${p_option,,}" == !d?(ir?(ectory))f?(file) ]] || [[ "${p_option}" != p?(ath) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -255,7 +265,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}";
 
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
-    elif [ "${p_option,,}" == '!f' ]; then
+    elif [[ "${p_option,,}" == !f?(ile) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -319,6 +329,16 @@ function BU.Main.Args.PrintBadOption()
     elif [ "${p_option,,}" == '!intpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+
+    # Else, if the value passed as argument is not a valid ISO 639-1 code.
+    elif [[ "${p_option,,}" == !?(ISO?([[:space:]]))'639-1' ]]; then
+        BU.Main.Errors.HandleErrors "1" \
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID ISO 639-1 CODE" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -1776,12 +1796,32 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 
     if [ "${p_code^^}" == 'NULL' ]; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'z' \
-            "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            "Please give an ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then local lineno="${LINENO}";
-        false;
+        BU.Main.Args.PrintBadOption '!639-1' \
+            "Please give a valid ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ "${p_langNameEngl^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in English (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ "${p_langNameOrig^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in its own language (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+   fi
+
+    if [ "${p_langNameUser^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in the language used on your operating system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
