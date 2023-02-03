@@ -14,7 +14,7 @@ __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE="
 
 # -------------------------------------------------------------------------------------------------------------------
 # Verifying if the "keep-raw-document-layout", "keep-exec-safeguard" and "keep-comments" values were passed together.
-__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} AND ${__HIGHLIGHT}%s${__WARNING} VALUES MUST NOT BE USED TOGETHER${__RESET}";
+__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} WAS PASSED WITH ONE OF THESE VALUES : ${__HIGHLIGHT}%s${__WARNING} OR ${__HIGHLIGHT}%s${__RESET}";
 __BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to optimize the code of the compiled file, the ${__HIGHLIGHT}%s${__WARNING} value must not be used with the ${__HIGHLIGHT}%s${__WARNING} and ${__HIGHLIGHT}%s${__WARNING} values${__RESET}";
 
 # --------------------------------

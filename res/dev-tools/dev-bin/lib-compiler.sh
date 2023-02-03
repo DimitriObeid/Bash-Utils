@@ -377,7 +377,7 @@ function EraseSafeguardExecLines()
 #   - and the pieces of code which prevent the direct execution of their host files.
 function WriteCommentCode()
 {
-cat << EOF > nom_du_fichier.sh
+cat << EOF > "${__compiled_file_path}"
 #!/usr/bin/env bash
 
 # ------------------------
@@ -507,8 +507,8 @@ function WriteBU()
 	v_content="$(cat "${p_filepath}")";
 
     #**** Code ****
-    if      [ "${p_display,,}" == 'display' ]; then echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    else                                            echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    else                                                                echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     fi
 }
 
@@ -634,11 +634,20 @@ function CheckLangArgDelim()
 
 ## PARSING THE ARRAY OF OPTIONAL ARGUMENTS GIVEN BY THE USER
 
+# Defining the values of the arguments, in order to use them in the appropriate information messages.
+_____value_of__compile_stable='--compile-stable';
+_____value_of__display='display';
+_____value_of__keep_comments='--keep-comments';
+_____value_of__keep_exec_safeguards='--keep-exec-safeguards';
+_____value_of__keep_raw_document_layout='--keep-raw-document-layout';
+_____value_of__no_shellcheck='--no-shellcheck';
+
+# Looping through the array of optional arguments.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # If the user decided to create a stable version of the compiled framework.
     if [[ "${arg,,}" == --?(compile?(-))stable ]]; then
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
-        __vArrayVal_compile_stable='compile-stable';
+        __vArrayVal_compile_stable="${_____value_of__compile_stable}";
 
     # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
     elif [[ "${arg,,}" == --?(compile?(-))unstable ]]; then
@@ -647,31 +656,33 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
     # Else, if the user decides to display the content of each compiled file.
     elif [ "${arg,,}" == --display ]; then
-        __vArrayVal_display='display';
-
-    # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
-    elif [[ "${arg,,}" == --keep-exec-safeguard ]]; then
-        __vArrayVal_keep_exec_safeguard='keep-exec-safeguard';
-
-    # Else, if the user decides to keep the raw layout of the compiled file.
-    elif [[ "${arg,,}" == --keep-raw-doc?(ument)-layout ]]; then
-        __vArrayVal_keep_raw_document_layout='keep-raw-document-layout';
-
-    # Else, if the user decides to prevent the execution of the 'shellcheck' command.
-    # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-    elif [[ "${arg,,}" == --no?(-)shellcheck ]]; then
-        __vArrayVal_no_shellcheck='no-shellcheck';
+        __vArrayVal_display="${_____value_of__display}";
 
     # Else, if the user decides to remove the comments from the compiled file
     # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
     elif [[ "${arg,,}" == --keep?(-)comments ]]; then
-        __vArrayVal_keep_comments='keep-comments';
+        __vArrayVal_keep_comments="${_____value_of__keep_comments}";
+
+    # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
+    elif [[ "${arg,,}" == --keep-exec-safeguards ]]; then
+        __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
+
+    # Else, if the user decides to keep the raw layout of the compiled file.
+    elif [[ "${arg,,}" == --keep-raw-doc?(ument)-layout ]]; then
+        __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
+
+    # Else, if the user decides to prevent the execution of the 'shellcheck' command.
+    # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
+    elif [[ "${arg,,}" == --no?(-)shellcheck ]]; then
+        __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
 
     # --------------------------------------------------------------------------------
     # Else, if an unsupported argument is passed into the array of optional arguments.
     else
         PrintErrorLine "${__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY}" 'FULL';
-        echo "${__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE}" "${arg}" >&2;
+
+        # shellcheck disable=SC2059
+        printf "${__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE}\n" "${arg}" >&2;
         echo >&2;
 
         PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
@@ -685,7 +696,7 @@ done
 ## CHECKING FOR ANY INCOMPATIBLE VALUES
 
 # Verifying if the "${__vArrayVal_no_shellcheck}" and the "${__vArrayVal_compile_stable}" values were passed together.
-if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}") ]]; then
+if [[ (-n "${__vArrayVal_compile_stable}") && (-n "${__vArrayVal_no_shellcheck}") ]]; then
     # shellcheck disable=SC2059
     PrintWarningLine "$(printf "${__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER}\n\n" "${__vArrayVal_compile_stable}" "${__vArrayVal_no_shellcheck}")" 'FULL' >&2;
     echo "${__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE}" >&2;
@@ -696,11 +707,14 @@ if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}")
     exit 1;
 fi
 
-# Verifying if the "${__vArrayVal_keep_raw_document_layout}" and the "${__vArrayVal_keep_exec_safeguard}" values were passed together.
-if [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_exec_safeguard}") ]]; then
+# Verifying if the "${__vArrayVal_keep_raw_document_layout}" value was passed with the "${__vArrayVal_keep_exec_safeguards}" or the "${__vArrayVal_keep_comments}" values.
+if [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_comments}") ]] || \
+    [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_exec_safeguards}") ]]; then
     # shellcheck disable=SC2059
-    PrintWarningLine "$(Printf "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER}\n\n")" "${__vArrayVal_keep_raw_document_layout}" "${__vArrayVal_keep_exec_safeguard}" 'FULL' >&2;
-    echo "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER__ADVICE}" >&2;
+    PrintWarningLine "$(Printf "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER}\n\n" "${_____value_of__keep_raw_document_layout}" "${_____value_of__keep_comments}" "${_____value_of__keep_exec_safeguards}")" 'FULL' >&2;
+
+    # shellcheck disable=SC2059
+    printf "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER__ADVICE}" "${_____value_of__keep_raw_document_layout}" "${_____value_of__keep_comments}" "${_____value_of__keep_exec_safeguards}" >&2;
     echo >&2;
 
     PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
@@ -714,7 +728,7 @@ fi
 
 # REMEMBER ! It's not recommended to disable the checkings of each file, unless you know what you are doing.
 
-# At this point, declaring this condition is safe, since the presence of the 'compile-stable' argument value was done before.
+# At this point, declaring this condition is safe, since the presence of the "${_____value_of__compile_stable}" argument value was done before.
 if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}") ]]; then
     PrintWarningLine "${__BU_COMPILE__SHELLCHECK__DISABLED}" 'FULL';
 
@@ -849,7 +863,7 @@ function CompileInSingleFile()
         local __locale_print_code__success;
         local __locale_print_code__warning;
 
-        # If the 'compile-stable' argument was passed.
+        # If the "${_____value_of__compile_stable}" value was passed in the array of optional arguments.
         if [ -n "${__vArrayVal_compile_stable}" ]; then
             local __compiled_stable_file_parent_dir;
             local __compiled_stable_file_path;
@@ -857,7 +871,7 @@ function CompileInSingleFile()
             __compiled_stable_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/stable";
         fi
 
-        # If the 'no-shellcheck' argument was passed.
+        # If the "${_____value_of__no_shellcheck}" value was passed in the array of optional arguments.
         if [ -n "${__vArrayVal_no_shellcheck}" ]; then local __no_shellcheck="${__vArrayVal_no_shellcheck}"; fi
 
         #-------------------
@@ -1019,7 +1033,7 @@ function CompileInSingleFile()
         # If the user did not decided to keep the original layout of the compiled file, optimizations are being done to the compiled file.
         if [ -z "$__vArrayVal_keep_raw_document_layout" ]; then
             # Erasing every pieces of code which prevent the direct execution of their host files
-            if [ -z "${__vArrayVal_keep_exec_safeguard}" ]; then
+            if [ -z "${__vArrayVal_keep_exec_safeguards}" ]; then
                 EraseSafeguardExecLines;
 
                 # If the user decides to keep the comments in the compiled file, then the "WriteCommentCode()" function is called.
