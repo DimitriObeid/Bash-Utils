@@ -6,7 +6,7 @@
 # Name          : lib-compiler.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 2.0
-# Beta version  : NONE
+# Beta version  : 2.1
 
 # ------------------
 # FILE DESCRIPTION :
@@ -659,8 +659,8 @@ function WriteBU()
 	v_content="$(cat "${p_filepath}")";
 
     #**** Code ****
-    if      [ "${p_display,,}" == 'yes' ]; then echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    else                                        echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    if      [ "${p_display,,}" == 'display' ]; then echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    else                                            echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     fi
 }
 
@@ -859,7 +859,6 @@ function CompileInSingleFile()
 {
     #**** Parameters ****
     local p_locale=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Language in which the file must be translated.
-    local p_display=${2:-no};   # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
     #**** Variables ****
     local v_locale_str;         # VAR TYPE : String     - DESC :
@@ -921,7 +920,7 @@ function CompileInSingleFile()
         if [ "${p_locale,,}" == 'all' ]; then
             PrintWarningLine "${__HIGHLIGHT}${p_locale}${__WARNING} | ${__HIGHLIGHT}lang=all${__WARNING} : FEATURE NOT YET FULLY IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
 
-            for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("${langs}"); done;
+            # for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("${langs}"); done;
 
         # Else, if the "all-supported" or "supported" value is passed as the first argument.
         elif [[ "${p_locale,,}" == ?(all?(-))supported ]]; then
@@ -967,19 +966,14 @@ function CompileInSingleFile()
 
         # If the 'compile-stable' argument was passed.
         if [ -n "${__vArrayVal_compile_stable}" ]; then
-            local __compile_stable;
             local __compiled_stable_file_parent_dir;
             local __compiled_stable_file_path;
 
-            __compile_stable="${__vArrayVal_compile_stable}";
             __compiled_stable_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/stable";
         fi
 
         # If the 'no-shellcheck' argument was passed.
         if [ -n "${__vArrayVal_no_shellcheck}" ]; then local __no_shellcheck="${__vArrayVal_no_shellcheck}"; fi
-
-        # If the 'remove-comments' argument was passed.
-        if [ -n "${__vArrayVal_remove_comments}" ]; then local __remove_comments="${__vArrayVal_remove_comments}"; fi
 
         #-------------------
         #**** Loop code ****
@@ -1018,9 +1012,9 @@ function CompileInSingleFile()
 
             if [ ! -f "${__locale_file_path_en}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
             else
-                BU.Main.DevTools.ShellcheckVerif "${__locale_file_path_en}" "${__compile_stable}" || local __err="error";
+                BU.Main.DevTools.ShellcheckVerif "${__locale_file_path_en}" "${__vArrayVal_compile_stable}" || local __err="error";
 
-                WriteBU "${__locale_file_path_en}" "${p_display}" || local ____err="error";
+                WriteBU "${__locale_file_path_en}" "${__vArrayVal_display}" || local ____err="error";
             fi
 
             [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1037,7 +1031,7 @@ function CompileInSingleFile()
         else
             BU.Main.DevTools.ShellcheckVerif "${__locale_file_path}" || local __err="error";
 
-            WriteBU "${__locale_file_path}" "${p_display}" || local ____err="error";
+            WriteBU "${__locale_file_path}" "${__vArrayVal_display}" || local ____err="error";
         fi
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1051,7 +1045,7 @@ function CompileInSingleFile()
         for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-            WriteBU "${i}" "${p_display}" || { local ____err="error"; break; };
+            WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1067,7 +1061,7 @@ function CompileInSingleFile()
         else
             BU.Main.DevTools.ShellcheckVerif "${__BU_INITIALIZER_SCRIPT_PATH}" || local __err="error";
 
-            WriteBU "${__BU_INITIALIZER_SCRIPT_PATH}" "${p_display}";
+            WriteBU "${__BU_INITIALIZER_SCRIPT_PATH}" "${__vArrayVal_display}";
         fi
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1081,7 +1075,7 @@ function CompileInSingleFile()
         for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-            WriteBU "${i}" "${p_display}" || { local ____err="error"; break; };
+            WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1095,7 +1089,7 @@ function CompileInSingleFile()
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/config/modules/main/"*.conf; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-            WriteBU "${i}" "${p_display}" || { local ____err="error"; break; };
+            WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1109,7 +1103,7 @@ function CompileInSingleFile()
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/modules/main/"*; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
-            WriteBU "${i}" "${p_display}" || { local ____err="error"; break; };
+            WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
         [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
@@ -1130,10 +1124,28 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'LOWER';
 
-        if [ -n "${__compile_stable}" ]; then
+        if [ -n "${__vArrayVal_compile_stable}" ]; then
             PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
         else
             PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+        fi
+
+        # Removing every comments from the newly created compiled file if the 'remove-comments' value was passed for the execution of this compiler.
+        if [ -n "${__vArrayVal_remove_comments}" ]; then
+            if [ -n "${__vArrayVal_display}" ]; then awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" | tee "${__compiled_file_path}.tmp";
+            else
+                awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
+            fi
+
+            cat "${__compiled_file_path}.tmp" > "${__compiled_file_path}";
+
+            # Erasing the extra blank lines from the compiled file.
+            sed '/^$/N;/\n$/D' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
+
+            cat "${__compiled_file_path}.tmp" > "${__compiled_file_path}";
+
+            # Deleting the temporary file.
+            rm "${__compiled_file_path}.tmp";
         fi
 
         # --------------------------------------------------------------
@@ -1150,7 +1162,7 @@ function CompileInSingleFile()
         # Adding the newly compiled file in the compiled files list.
         __BU_ARRAY__COMPILED_FILES_LIST+=("${__compiled_file_path}");
 
-        if [ -n "${__compile_stable}" ]; then
+        if [ -n "${__vArrayVal_compile_stable}" ]; then
             # Assigning values to the "${__compiled_stable_file_path}" variables.
             __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-${v_curr_locale}.sh";
 
@@ -1159,7 +1171,7 @@ function CompileInSingleFile()
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
 
             # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
-            if ! BU.Main.DevTools.ShellcheckVerif "${__compiled_file_path}" "${__compile_stable}"; then
+            if ! BU.Main.DevTools.ShellcheckVerif "${__compiled_file_path}" "${__vArrayVal_compile_stable}"; then
                 PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR}" "${__compiled_file_path}")" 'FULL';
 
                 ____loop_error='error'; break;
@@ -1236,7 +1248,7 @@ function CompileInSingleFile()
     done; if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1; fi
 
     # If the framework was compiled in a stable version.
-    if [ -n "${__compile_stable}" ]; then
+    if [ -n "${__vArrayVal_compile_stable}" ]; then
         # If one or more stable files were not successsfully "chmoded".
         if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
             # If only one file was not "chmoded".

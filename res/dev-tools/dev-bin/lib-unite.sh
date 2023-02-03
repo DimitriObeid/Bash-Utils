@@ -316,7 +316,7 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
     echo;
 
     if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-        cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}";
+        cat "${__BU_MAIN_FULL_FILE_PATH}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}";
 
         rm "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}";
 
@@ -337,7 +337,7 @@ if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
     echo;
 
     if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" ]; then
-        cat "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" | sed '/^#/d' < "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}";
+        cat "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}";
 
         rm "${__BU_MAIN_FULL_FILE_PATH}";
 
