@@ -179,27 +179,32 @@ fi
 ## MESSAGE TRANSLATIONS
 
 # Path to the locale files.
-_____path_to_locale_files="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler"
+_____bu_compiler_path_to_locale_files="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/msg";
 
 # FRENCH - FRANÇAIS
 if [[ "${LANG}" == fr_* ]]; then
     # shellcheck disable=SC1091
-    source "${_____path_to_locale_files}/fr.locale" || {
-        echo "${__WARNING}IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS EN FRANÇAIS !!!!!${__RESET}" >&2;
+    if ! source "${_____bu_compiler_path_to_locale_files}/fr.locale"; then
+        echo "${__WARNING}IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS EN FRANÇAIS !!!!!${__RESET}" >&2; echo >&2;
         echo "${__WARNING}Le compilateur utilisera les ressources de traduction pour la langue anglaise${__RESET}" >&2;
         echo >&2;
-    };
 
+        ____unable_to_include_lang='true';
+    else
+        ____lang_included='true';
+    fi
+fi
 # -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
 # -------------------------------------------------------------------------------
-else
+
+if [ -n "${____unable_to_include_lang}" ] || [ -z "${____lang_included}" ]; then
     # shellcheck disable=SC1091
-    source "${_____path_to_locale_files}/en.locale" || {
-        echo >&2;
+    source "${_____bu_compiler_path_to_locale_files}/en.locale" || {
+        echo >&2; echo >&2;
 
         echo "${__ERROR}UNABLE TO INCLUDE THE ENGLISH TRANSLATION FILES !!!!!${__RESET}" >&2; echo >&2;
-        echo "${__WARNING}Without the inclusion of any translation file, no messages can be returned, thus you cannot know the current compilation step or if an error occured and if you must react by typing an input${__RESET}" >&2;
+        echo "${__WARNING}Without the inclusion of any translation file, no messages can be returned, thus you cannot know the current compilation step or if an error occured and you must react by typing an input${__RESET}" >&2;
         echo >&2; echo >&2;
 
         echo "${__ERROR}STOPPING THE EXECUTION OF THE COMPILER, NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!${__RESET}" >&2;
@@ -208,6 +213,10 @@ else
         exit 1;
     };
 fi
+
+# Unsetting the "${____unable_to_include_lang}" and the "${____lang_included}" variables.
+[ -n "${____unable_to_include_lang}" ]  && unset ____unable_to_include_lang;
+[ -n "${____lang_included}" ]           && unset ____lang_included;
 
 # -----------------------------------------------
 
@@ -361,13 +370,7 @@ function PrintFilesWhichWereNotChmoded()
 # Erasing every pieces of code which prevent the direct execution of their host files, since a new one is written in the "WriteCommentCode()" function.
 function EraseSafeguardExecLines()
 {
-    sed "/if \[ \"\${0##\/*}\" == \"\${BASH_SOURCE[0]##\/*}\" \]; then/,/fi; exit 1; fi/d" "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
-
-    # Returning the modified content of the "${__compiled_file_path}.tmp" to its original file.
-    cat "${__compiled_file_path}.tmp" > "${__compiled_file_path}";
-
-    # Deleting the temporary file.
-    rm "${__compiled_file_path}.tmp";
+    sed -i "/if \[ \"\${0##\/*}\" == \"\${BASH_SOURCE[0]##\/*}\" \]; then/,/fi; exit 1; fi/d" "${__compiled_file_path}";
 
     return 0;
 }
@@ -377,7 +380,7 @@ function EraseSafeguardExecLines()
 #   - and the pieces of code which prevent the direct execution of their host files.
 function WriteCommentCode()
 {
-cat << EOF > "${__compiled_file_path}"
+sed -i '1s/^/'"$(cat <<-EOF
 #!/usr/bin/env bash
 
 # ------------------------
@@ -463,6 +466,7 @@ fi; exit 1; fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 EOF
+)"'\n/' "${__compiled_file_path}" 
 
     return 0;
 }
@@ -470,28 +474,19 @@ EOF
 # Erasing the comments from the targeted compiled file.
 function EraseComments()
 {
-    if [ -n "${__vArrayVal_display}" ]; then 
-        awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" | tee "${__compiled_file_path}.tmp";
-    else
-        awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
-    fi
+    #**** Variables ****
+    local __awk_output; # VAR TYPE : CMD    - DESC : This string stores the content of the output of the following "$(awk)" command.
 
-    # Returning the modified content of the "${__compiled_file_path}.tmp" to its original file.
-    cat "${__compiled_file_path}.tmp" > "${__compiled_file_path}";
+    #**** Code ****
+    __awk_output="$(awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}')";
+
+    echo "CONTENT : ${__awk_output}";
+
+    # Erasing every commented lines, except the ones with the "shellcheck" directive.
+    echo "${__awk_output}" > "${__compiled_file_path}";
 
     # Erasing the extra blank lines from the compiled file.
-    sed '/^$/N;/\n$/D' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
-
-    # Erasing the compiled file's content by redirecting an empty string.
-    echo '' > "${__compiled_file_path}";
-
-    # Calling the "()" function in order to write the description of the compiled file at its very beginning.
-    WriteCommentCode;
-
-    cat "${__compiled_file_path}.tmp" >> "${__compiled_file_path}";
-
-    # Deleting the temporary file.
-    rm "${__compiled_file_path}.tmp";
+    sed -i '/^$/N;/\n$/D' "${__compiled_file_path}";
 }
 
 # Writing the target file's content into the file to generate.
@@ -1030,21 +1025,17 @@ function CompileInSingleFile()
             PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
         fi
 
+        # --------------------------------------------------------------------------------------------------------------------------------
         # If the user did not decided to keep the original layout of the compiled file, optimizations are being done to the compiled file.
         if [ -z "$__vArrayVal_keep_raw_document_layout" ]; then
             # Erasing every pieces of code which prevent the direct execution of their host files
-            if [ -z "${__vArrayVal_keep_exec_safeguards}" ]; then
-                EraseSafeguardExecLines;
-
-                # If the user decides to keep the comments in the compiled file, then the "WriteCommentCode()" function is called.
-                if [ -n "${__vArrayVal_keep_comments}" ]; then WriteCommentCode; fi
-            fi
+            if [ -z "${__vArrayVal_keep_exec_safeguards}" ]; then EraseSafeguardExecLines; fi
 
             # Erasing every comments from the newly created compiled file if the "${__vArrayVal_keep_comments}" value was passed for the execution of this compiler.
-            # The "WriteCommentCode()" function is called into the "EraseComments()" function.
-            if [ -z "${__vArrayVal_keep_comments}" ] && [ -z "${__vArrayVal_compile_stable}" ]; then
-                EraseComments;
-            fi
+            if [ -z "${__vArrayVal_compile_stable}" ]; then EraseComments; fi
+
+            # Calling the "()" function in order to write the description of the compiled file at its very beginning.
+            if [ -z "${__vArrayVal_keep_comments}" ]; then WriteCommentCode; fi
         fi
 
         # --------------------------------------------------------------

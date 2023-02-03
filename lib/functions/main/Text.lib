@@ -210,7 +210,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 
     for ((i=0; i<p_iterations; i++)); do
 
-        #shellcheck disable=SC2001
+        # shellcheck disable=SC2001
         p_string="$(sed "s/^[^${p_delimiter}]*${p_delimiter}//" <<< "${p_string}")";
 
         # This variable's purpose is to avoid assigning the "${p_string}" variable to itself, because if so, the assignment would have done nothing.

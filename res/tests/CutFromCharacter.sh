@@ -11,8 +11,8 @@ if [ "${p_iterations}" -eq 0 ]; then
 fi
 
 for ((i=0; i<p_iterations; i++)); do
-    #shellcheck disable=SC200
+    # shellcheck disable=SC200
     p_target="$(sed "s/^[^${2}]*${2}//" <<< "${p_target}")";
-    p_target="${p_target}";
+
     echo "${p_target}";
 done
