@@ -20,7 +20,7 @@ __BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE
 # ----------------------------------------------------------------------------------
 # Vérifications avec la commande Shellcheck [-----] Shellcheck command verification.
 __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
-__BU_COMPILE__SHELLCHECK__MISSING="${__RED}LA COMMANDE ${__CYAN}SHELLCHECK${__RED} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
+__BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}LA COMMANDE ${__HIGHLIGHT}SHELLCHECK${__ERROR} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
 
 # ---------------------------------------------------------------------------------------------------------
 # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
@@ -31,13 +31,13 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une 
 
 # -------------------------------------------------------------------------
 # Exécution de la commande Shellcheck [-----] Shellcheck command execution.
-__BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
-__BU_COMPILE__SHELLCHECK__FAIL="${__RED}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
-__BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
+__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
+__BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Vérification de la validité du code ISO 639-1 enregistré dans la variable "${v_curr_locale}" [-----] Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
-__BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__CYAN}CompileInSingleFile()${__RED} !${__RESET}";
+__BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__HIGHLIGHT}CompileInSingleFile()${__ERROR} !${__RESET}";
 
 # -----------------------------------------------------------------------------------------
 # Message de début de compilation du framework [-----] Framework compilation start message.
@@ -133,9 +133,9 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUC
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="MISE À JOUR DES DROITS DU FICHIER COMPILÉ ${__HIGHLIGHT}%s${__NEWSTEP} EN MODE LECTURE SEULE POUR DES RAISONS DE SÉCURITÉ";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="ATTENTION : LE FICHIER ${__HIGHLIGHT}%s${__WARNING} NE PEUT PAS ÊTRE MIS EN MODE LECTURE SEULE";
 
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="${__WARNING}Voulez-vous quitter l'exécution du script ? Si ce n'est pas le cas, veuillez exécuter la commande '${__GREY}chmod ${__HIGHLIGHT}%s${__WARNING}' après la compilation de ce fichier${__RESET}";
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Poursuite de la compilation du framework ${__CYAN}Bash Utils${__RESET}";
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Arrêt de la compilation du framework ${__CYAN}Bash Utils${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="${__WARNING}Voulez-vous quitter l'exécution du script ? Si ce n'est pas le cas, veuillez exécuter la commande '${__CMDS}chmod ${__HIGHLIGHT}%s${__WARNING}' après la compilation de ce fichier${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Poursuite de la compilation du framework ${__HIGHLIGHT}Bash Utils${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Arrêt de la compilation du framework ${__HIGHLIGHT}Bash Utils${__RESET}";
 
 
 __BU_COMPILE__COMPILED_STABLE_FILE_WAS_NOT_SET_IN_READ_ONLY_MODE="LE FICHIER STABLE COMPILÉ ${__HIGHLIGHT}%s${__WARNING} N'A PAS ÉTÉ MIS EN MODE LECTURE SEULE, VEUILLEZ LE FAIRE MANUELLEMENT APRÈS LE PROCESSUS DE COMPILATION";
@@ -152,10 +152,10 @@ __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HI
 # ----------------------------------------------------------------------------------------------------------------
 # Si le framework a été compilé dans une version stable [-----] If the framework was compiled in a stable version.
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici le fichier compilé existant dont les droits n'ont pas été modifiés :${__RESET}";
-__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Veuillez exécuter la commande '${__GREY}chmod ${__GREEN}-xw ${__HIGHLIGHT}%s${__WARNING}' pour rendre ce fichier accessible en lecture seule${__RESET}";
+__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Veuillez exécuter la commande '${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s${__WARNING}' pour rendre ce fichier accessible en lecture seule${__RESET}";
 
 __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici la liste des ${__HIGHLIGHT}%s${__WARNING} fichiers compilés existants dont les droits n'ont pas été modifiés :${__RESET}";
-__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Astuce : vous pouvez appeler la commande \"${__GREY}chmod ${__GREEN}-xw ${__HIGHLIGHT}%s*${__WARNING}\" pour changer d'un seul coup les droits de chaque fichier.${__RESET}";
+__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Astuce : vous pouvez appeler la commande \"${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s*${__WARNING}\" pour changer d'un seul coup les droits de chaque fichier.${__RESET}";
 
 
 __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="LA COMPILATION DU FRAMEWORK EST TERMINÉE";

@@ -20,7 +20,7 @@ __BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE
 # --------------------------------
 # Shellcheck command verification.
 __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
-__BU_COMPILE__SHELLCHECK__MISSING="${__RED}THE ${__CYAN}SHELLCHECK${__RED} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
+__BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}THE ${__HIGHLIGHT}SHELLCHECK${__ERROR} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
 
 # -------------------------------------------
 # If a bad value is passed as first argument.
@@ -31,13 +31,13 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIG
 
 # -----------------------------
 # Shellcheck command execution.
-__BU_COMPILE__SHELLCHECK__VERIFICATION="${__ORANGE}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
-__BU_COMPILE__SHELLCHECK__FAIL="${__RED}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
-__BU_COMPILE__SHELLCHECK__SUCCESS="${__GREEN}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
+__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
+__BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
 
 # -----------------------------------------------------------------------------
 # Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
-__BU_COMPILE__BAD_LANGUAGE_PASSED="${__RED}An unsupported language ISO 639-1 code was passed as ${__CYAN}CompileInSingleFile()${__RED} function's first argument ${__RESET}";
+__BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}An unsupported language ISO 639-1 code was passed as ${__HIGHLIGHT}CompileInSingleFile()${__ERROR} function's first argument ${__RESET}";
 
 # ------------------------------------
 # Framework compilation start message.
@@ -133,9 +133,9 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUC
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} STABLE FILE IN READ-ONLY MODE FOR SAFETY REASONS";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE CANNOT BE SET IN READ ONLY MODE";
 
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="${__WARNING}Do you want to quit the script's execution ? If not, please execute the '${__GREY}chmod ${__GREEN}-xw ${__HIGHLIGHT}%s${__YELLOW}' command after the compilation of this file${__RESET}";
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Continuing the compilation of the ${__CYAN}Bash Utils${__WARNING} framework${__RESET}";
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Ending the compilation of the ${__CYAN}Bash Utils${__ERROR} framework${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK="${__WARNING}Do you want to quit the script's execution ? If not, please execute the '${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s${__YELLOW}' command after the compilation of this file${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1="${__WARNING}Continuing the compilation of the ${__HIGHLIGHT}Bash Utils${__WARNING} framework${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2="${__ERROR}Ending the compilation of the ${__HIGHLIGHT}Bash Utils${__ERROR} framework${__RESET}";
 
 
 __BU_COMPILE__COMPILED_STABLE_FILE_WAS_NOT_SET_IN_READ_ONLY_MODE="THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE WAS NOT SET IN READ-ONLY MODE, PLEASE DO SO MANUALLY AFTER THE COMPILATION PROCESS";
@@ -152,10 +152,10 @@ __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIG
 # --------------------------------------------------
 # If the framework was compiled in a stable version.
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the existing compiled file whose rights have not been modified :${__RESET}";
-__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Please execute the '${__GREY}chmod ${__GREEN}-xw ${__HIGHLIGHT}%s${__WARNING}' command in order to set this file in read-only mode";
+__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Please execute the '${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s${__WARNING}' command in order to set this file in read-only mode";
 
 __BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the list of the ${__HIGHLIGHT}%s${__WARNING} existing compiled files whose rights have not been modified :${__RESET}";
-__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Tip, you can type the \"${__GREY}chmod ${__GREEN}-xw ${__HIGHLIGHT}%s*${__WARNING}\" command to change the rights of each file at once.${__RESET}";
+__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP="${__WARNING}Tip, you can type the \"${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s*${__WARNING}\" command to change the rights of each file at once.${__RESET}";
 
 
 __BU_COMPILE__END_OF_FRAMEWORK_COMPILATION="THE COMPILATION OF THE FRAMEWORK IS DONE";

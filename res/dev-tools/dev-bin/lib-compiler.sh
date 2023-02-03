@@ -139,6 +139,8 @@ __RESET="$(tput sgr0)";
 __YELLOW="$(tput setaf 11)";
 
 # Defining some colors for specific text decoration.
+__CMDS="${__GREY}"
+
 __ERROR="${__RED}";
 
 __HIGHLIGHT="${__CYAN}";
@@ -468,9 +470,10 @@ EOF
 # Erasing the comments from the targeted compiled file.
 function EraseComments()
 {
-    if [ -n "${__vArrayVal_display}" ]; then awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" | tee "${__compiled_file_path}.tmp";
-        else
-            awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
+    if [ -n "${__vArrayVal_display}" ]; then 
+        awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" | tee "${__compiled_file_path}.tmp";
+    else
+        awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__compiled_file_path}" > "${__compiled_file_path}.tmp";
     fi
 
     # Returning the modified content of the "${__compiled_file_path}.tmp" to its original file.
@@ -1018,9 +1021,13 @@ function CompileInSingleFile()
             # Erasing every pieces of code which prevent the direct execution of their host files
             if [ -z "${__vArrayVal_keep_exec_safeguard}" ]; then
                 EraseSafeguardExecLines;
+
+                # If the user decides to keep the comments in the compiled file, then the "WriteCommentCode()" function is called.
+                if [ -n "${__vArrayVal_keep_comments}" ]; then WriteCommentCode; fi
             fi
 
-            # Erasing every comments from the newly created compiled file if the 'remove-comments' value was passed for the execution of this compiler.
+            # Erasing every comments from the newly created compiled file if the "${__vArrayVal_keep_comments}" value was passed for the execution of this compiler.
+            # The "WriteCommentCode()" function is called into the "EraseComments()" function.
             if [ -z "${__vArrayVal_keep_comments}" ] && [ -z "${__vArrayVal_compile_stable}" ]; then
                 EraseComments;
             fi
