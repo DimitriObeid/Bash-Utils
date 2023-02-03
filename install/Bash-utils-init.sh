@@ -552,23 +552,23 @@ function BU.ModuleInit.GetModuleInitLanguage()
     if [ -z "${v_langMatch}" ]; then
 
         if [ -n "${p_lang_ISO_639_1}" ]; then
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Die von Ihnen gewählte Sprache (${p_lang_ISO_639_1,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El idioma seleccionado (${p_lang_ISO_639_1,,}) no está soportado (todavía) por el script de inicialización." >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : La langue sélectionnée (${p_lang_ISO_639_1,,}) n'est pas (encore) supportée par le script d'initialisation" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "AVISO : A sua língua seleccionada (${p_lang_ISO_639_1,,}) não é (ainda) suportada pelo guião de inicialização" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Выбранный вами язык (${p_lang_ISO_639_1,,}) не поддерживается (пока) скриптом инициализации" >&2 && v_isPrinted='true';
 
             [ "${v_isPrinted}" != 'true' ] && echo echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2;
         else
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Ihre aktuelle Sprache (${__BU_MODULE_INIT__USER_LANG,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Your current language (${__BU_MODULE_INIT__USER_LANG,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : Su idioma actual (${__BU_MODULE_INIT__USER_LANG,,}) no es (todavía) soportado por el script de inicialización." >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Votre langue actuelle (${__BU_MODULE_INIT__USER_LANG,,}) n'est pas (encore) supportée par le script d'initialisation" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "AVISO : A sua língua actual (${__BU_MODULE_INIT__USER_LANG,,}) não é (ainda) suportada pelo guião de inicialização." >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Ваш текущий язык (${__BU_MODULE_INIT__USER_LANG,,}) не поддерживается (пока) скриптом инициализации." >&2 && v_isPrinted='true';
 
             [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Your current language (${__BU_MODULE_INIT__USER_LANG,,}) is not (yet) supported by the initialisation script" >&2;
         fi; echo >&2;
@@ -576,7 +576,16 @@ function BU.ModuleInit.GetModuleInitLanguage()
         # Setting the value of the "${v_isPrinted}" variable to "false" in order to ensure that the following messages will be printed in English if one of the following messages would be missing.
         v_isPrinted='false';
 
-        echo "The initialisation script will use english as default language" >&2;
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Das Initialisierungsskript wird Englisch als Standardsprache verwenden." >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The initialisation script will use english as default language" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El script de inicialización utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
+
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le script d'initialisation utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O guião de inicialização utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "Скрипт инициализации будет использовать английский язык в качестве языка по умолчанию" >&2 && v_isPrinted='true';
+
+        [ "${v_isPrinted}" != 'true' ] &&  echo "The initialisation script will use english as default language" >&2;
+
         echo >&2;
 
         # Changing the current language to English.
